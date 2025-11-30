@@ -4,7 +4,7 @@ import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class FreelancersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async findAll() {
     const freelancers = await this.prisma.freelancer.findMany({
@@ -70,13 +70,19 @@ export class FreelancersService {
     let created = 0, updated = 0;
     for (const item of items) {
       const { id, skills, ...rest } = item;
-      const email = rest.email || `temp-${Date.now()}-${Math.random()}@studio.com`;
-      
+
+      if (!rest.email) {
+        // Skip invalid items or throw error. For batch, we'll skip and log/count error in a real app.
+        // For now, let's just continue to next iteration to avoid crashing the whole batch
+        continue;
+      }
+      const email = rest.email;
+
       const skillOps = {
-          connectOrCreate: (skills || []).map((name: string) => ({
-            where: { name },
-            create: { name }
-          }))
+        connectOrCreate: (skills || []).map((name: string) => ({
+          where: { name },
+          create: { name }
+        }))
       };
 
       try {
@@ -86,7 +92,7 @@ export class FreelancersService {
           update: { ...rest, skills: skillOps }
         });
         // Simplistic count
-        created++; 
+        created++;
       } catch (e) {
         console.error(e);
       }
