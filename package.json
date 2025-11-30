@@ -7,9 +7,9 @@
     "dev": "vite",
     "build": "nest build -p apps/api/tsconfig.app.json && vite build",
     "build:api": "nest build -p apps/api/tsconfig.app.json",
-    "start": "node dist/apps/api/src/main",
+    "start": "node build/apps/api/src/main",
     "start:dev": "nest start --watch",
-    "start:prod": "node dist/apps/api/src/main",
+    "start:prod": "node build/apps/api/src/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\""
   },
   "dependencies": {
