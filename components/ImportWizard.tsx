@@ -2,7 +2,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Upload, FileSpreadsheet, Check, X, RefreshCw, Sparkles, Briefcase, Users, AlertTriangle, FileText, ArrowRight, Cloud, AlertCircle, Database, Server, Cpu, Activity, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { read, utils } from 'xlsx';
+import * as ExcelJS from 'exceljs';
 import { GoogleGenAI, Type } from "@google/genai";
 import { FreelancerStatus, ProjectStatus, Priority } from '../types';
 import { generateContentWithRetry, api } from '../services/api';
@@ -64,9 +64,17 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
             // Actual Logic Hook
             if (uploadedFile.name.endsWith('.xlsx') || uploadedFile.name.endsWith('.csv')) {
                 const buffer = await uploadedFile.arrayBuffer();
-                const wb = read(buffer, { type: 'array' });
-                const ws = wb.Sheets[wb.SheetNames[0]];
-                const jsonData = utils.sheet_to_json(ws, { header: 1 }) as any[][];
+                const workbook = new ExcelJS.Workbook();
+                await workbook.xlsx.load(buffer);
+                const worksheet = workbook.worksheets[0];
+
+                const jsonData: any[][] = [];
+                worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
+                    // ExcelJS row.values is 1-based, index 0 is undefined. Slice it off.
+                    const rowValues = row.values as any[];
+                    jsonData.push(rowValues.slice(1));
+                });
+
                 if (jsonData.length > 0) {
                     setHeaders(jsonData[0] as string[]);
                     setRows(jsonData.slice(1));
