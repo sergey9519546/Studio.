@@ -1,8 +1,8 @@
 # Stage 1: Backend Build
-FROM node:22-alpine3.21 AS backend-builder
+FROM node:22-bookworm-slim AS backend-builder
 
 WORKDIR /app
-RUN apk update && apk upgrade
+RUN apt-get update && apt-get upgrade -y
 
 # Copy config files
 COPY package*.json ./
@@ -23,10 +23,10 @@ COPY apps/api ./apps/api
 RUN npx tsc -p apps/api/tsconfig.app.json
 
 # Stage 2: Frontend Build
-FROM node:22-alpine3.21 AS frontend-builder
+FROM node:22-bookworm-slim AS frontend-builder
 
 WORKDIR /app
-RUN apk update && apk upgrade
+RUN apt-get update && apt-get upgrade -y
 
 COPY package*.json ./
 RUN npm install --legacy-peer-deps
@@ -38,7 +38,7 @@ COPY . .
 RUN npx vite build
 
 # Stage 3: Production Runner
-FROM node:22-alpine3.21 AS runner
+FROM node:22-bookworm-slim AS runner
 
 WORKDIR /app
 COPY package*.json ./
@@ -46,8 +46,8 @@ COPY prisma ./prisma/
 COPY prisma.config.ts ./
 
 # Install production dependencies and system requirements
-RUN apk update && apk upgrade && \
-    apk add --no-cache openssl libc6-compat && \
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y openssl && \
     npm install --omit=dev --legacy-peer-deps
 
 # Generate Prisma Client (needs schema)
