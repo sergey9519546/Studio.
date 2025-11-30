@@ -3,7 +3,7 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { ICloudStorageAdapter } from './storage-adapter.interface';
 import { CloudFileDto, CloudFileType, CloudProviderType } from '../dto/cloud-storage.dto';
 import { GoogleClientFactory } from '../../../google/google-client.factory';
-import { PrismaService } from '../../../prisma/prisma.service';
+import { PrismaService } from '../../../../prisma/prisma.service';
 
 @Injectable()
 export class GoogleDriveAdapter implements ICloudStorageAdapter {
