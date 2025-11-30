@@ -59,4 +59,4 @@ COPY --from=frontend-builder /app/dist/client /app/dist/client
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "echo 'Init DB...' && ./node_modules/.bin/prisma db push --accept-data-loss && echo 'Starting App...' && node /app/build/apps/api/src/main.js"]
+CMD ["sh", "-c", "npx prisma db push --accept-data-loss && node /app/build/apps/api/src/main.js"]
