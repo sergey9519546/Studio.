@@ -9,8 +9,9 @@ export default defineConfig({
     outDir: 'dist/client',
     emptyOutDir: true,
   },
+
   define: {
-    'process.env': process.env
+    'process.env': {}
   },
   server: {
     proxy: {
