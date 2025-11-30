@@ -27,7 +27,7 @@ gcloud run deploy $SERVICE_NAME `
   --allow-unauthenticated `
   --memory 1Gi `
   --set-env-vars "NODE_ENV=production" `
-  --set-env-vars "DATABASE_URL=prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RfaWQiOjEsInNlY3VyZV9rZXkiOiJza19oQkU0RFZCTzdzMFgzb2FwNEJRdXYiLCJhcGlfa2V5IjoiMDFLQkEyRTg0QURQWFFBQ1JHSlhZNE00NVIiLCJ0ZW5hbnRfaWQiOiJkMzlmZjgwYzQ0N2RkMTE5YzA3MzRkMWE5NzVjNmE4MmEwMDM1YmI2NTE2NzliMjg0Y2E5NjcwNTNjZjQ3NDhlIiwiaW50ZXJuYWxfc2VjcmV0IjoiNWJhNmMwNWMtMDQ2Ni00MTYxLTg0NDgtYmMxYTM0OTk0MGE2In0.d-q8aPR47cBHrhOGu89QqqQuUH2L7GIV6u_OVhw-eo8" `
+  --set-env-vars "DATABASE_URL=postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RfaWQiOjEsInNlY3VyZV9rZXkiOiJza19oQkU0RFZCTzdzMFgzb2FwNEJRdXYiLCJhcGlfa2V5IjoiMDFLQkEyRTg0QURQWFFBQ1JHSlhZNE00NVIiLCJ0ZW5hbnRfaWQiOiJkMzlmZjgwYzQ0N2RkMTE5YzA3MzRkMWE5NzVjNmE4MmEwMDM1YmI2NTE2NzliMjg0Y2E5NjcwNTNjZjQ3NDhlIiwiaW50ZXJuYWxfc2VjcmV0IjoiNWJhNmMwNWMtMDQ2Ni00MTYxLTg0NDgtYmMxYTM0OTk0MGE2In0.d-q8aPR47cBHrhOGu89QqqQuUH2L7GIV6u_OVhw-eo8" `
   --set-env-vars "JWT_SECRET=super-secret-key-change-in-production" `
   --set-env-vars "API_KEY=AIzaSyC9o_kpmfdSivtVi-wVSWCI_XYqKItHkYI" `
   --set-env-vars "GCP_PROJECT_ID=$PROJECT_ID" `
