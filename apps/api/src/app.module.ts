@@ -23,6 +23,7 @@ import { HealthModule } from './health/health.module';
 import { GoogleModule } from './modules/google/google.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { AIModule } from './modules/ai/ai.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { join } from 'path';
     IntelligenceModule,
     MoodboardModule,
     AnalysisModule,
+    AIModule,
     FreelancersModule,
     ProjectsModule,
     AssignmentsModule,
