@@ -1,15 +1,15 @@
 
-import { 
-  Controller, 
-  Post, 
-  Get, 
+import {
+  Controller,
+  Post,
+  Get,
   Delete,
-  Param, 
-  Body, 
-  UseInterceptors, 
-  UploadedFile, 
-  ParseFilePipe, 
-  MaxFileSizeValidator, 
+  Param,
+  Body,
+  UseInterceptors,
+  UploadedFile,
+  ParseFilePipe,
+  MaxFileSizeValidator,
   FileTypeValidator,
   Logger
 } from '@nestjs/common';
@@ -41,8 +41,6 @@ export class AssetsController {
       new ParseFilePipe({
         validators: [
           new MaxFileSizeValidator({ maxSize: 100 * 1024 * 1024 }), // 100MB
-          // Accepting all types to prevent validation errors on specific mimetypes
-          new FileTypeValidator({ fileType: /.*/ }), 
         ],
         fileIsRequired: true,
       }),
