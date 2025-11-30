@@ -1,5 +1,5 @@
 # Stage 1: Backend Build
-FROM node:22-alpine AS backend-builder
+FROM node:22-alpine3.21 AS backend-builder
 
 WORKDIR /app
 RUN apk update && apk upgrade
@@ -23,7 +23,7 @@ COPY apps/api ./apps/api
 RUN npx tsc -p apps/api/tsconfig.app.json
 
 # Stage 2: Frontend Build
-FROM node:22-alpine AS frontend-builder
+FROM node:22-alpine3.21 AS frontend-builder
 
 WORKDIR /app
 RUN apk update && apk upgrade
@@ -38,7 +38,7 @@ COPY . .
 RUN npx vite build
 
 # Stage 3: Production Runner
-FROM node:22-alpine AS runner
+FROM node:22-alpine3.21 AS runner
 
 WORKDIR /app
 COPY package*.json ./
