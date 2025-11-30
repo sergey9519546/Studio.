@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { PrismaModule } from './prisma/prisma.module';
+import { CommonModule } from './common/guards/common.module';
 import { AssetsModule } from './modules/assets/assets.module';
 import { KnowledgeModule } from './modules/knowledge/knowledge.module';
 import { IntelligenceModule } from './modules/intelligence/intelligence.module';
@@ -32,6 +33,7 @@ import { join } from 'path';
       rootPath: join(__dirname, '../../../client'),
       exclude: ['/api/(.*)'],
     }),
+    CommonModule,
     PrismaModule,
     StorageModule,
     GoogleModule,
