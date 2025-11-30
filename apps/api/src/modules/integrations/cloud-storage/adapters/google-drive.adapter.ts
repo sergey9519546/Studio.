@@ -17,7 +17,7 @@ export class GoogleDriveAdapter implements ICloudStorageAdapter {
 
   private async getUserWithCredentials(userId: string) {
     const user = await this.prisma.user.findUnique({
-      where: { id: userId },
+      where: { id: parseInt(userId) },
       select: {
         id: true,
         email: true,
