@@ -203,9 +203,10 @@ export class StorageService implements OnModuleInit {
       };
 
     } catch (error: any) {
+      console.error(`GCS Upload Failed [${safeKey}]:`, error);
       this.logger.error(`GCS Upload Failed [${safeKey}]: ${error.message}`);
       this.eventEmitter.emit(STORAGE_EVENTS.ERROR, { operation: 'upload', key: safeKey, error: error.message });
-      throw new InternalServerErrorException('Cloud storage upload failed');
+      throw new InternalServerErrorException(`Cloud storage upload failed: ${error.message}`);
     }
   }
 
