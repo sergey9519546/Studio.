@@ -57,4 +57,4 @@ COPY --from=frontend-builder /app/dist/client /app/dist/client
 
 EXPOSE 3001
 
-CMD ["sh", "-c", "npx prisma db push --accept-data-loss && node /app/build/apps/api/src/main.js"]
+CMD ["sh", "-c", "find /app/build -name main.js && npx prisma db push --accept-data-loss && node /app/build/apps/api/src/main.js"]
