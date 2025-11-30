@@ -55,6 +55,7 @@ model Project {
     assignments      Assignment[]
     updatedAt        DateTime          @updatedAt
     createdAt        DateTime          @default(now())
+    moodboardItems   MoodboardItem[]
 }
 
 model RoleRequirement {
@@ -102,4 +103,20 @@ model Assignment {
     notes        String?
     createdAt    DateTime   @default(now())
     updatedAt    DateTime   @updatedAt
+}
+
+model MoodboardItem {
+    id        String   @id @default(uuid())
+    projectId String
+    project   Project  @relation(fields: [projectId], references: [id])
+    assetId   String?
+    type      String
+    caption   String?
+    tags      String // Stored as CSV
+    moods     String // Stored as CSV
+    colors    String // Stored as CSV
+    shotType  String?
+    url       String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }
