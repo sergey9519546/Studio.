@@ -1,7 +1,8 @@
 
 import { Controller, Get, Post, Body, Param, Patch, Delete, Query, UseGuards, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { MoodboardService, MoodboardItem } from './moodboard.service';
+import { MoodboardService } from './moodboard.service';
+import { MoodboardItem } from '@prisma/client';
 import { CreateMoodboardItemDto } from './dto/create-moodboard-item.dto';
 import { AssetsService } from '../assets/assets.service';
 

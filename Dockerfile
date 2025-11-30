@@ -1,5 +1,5 @@
 # Stage 1: Backend Build
-FROM node:22-bookworm-slim AS backend-builder
+FROM node:20-bookworm-slim AS backend-builder
 
 WORKDIR /app
 RUN apt-get update && apt-get upgrade -y
@@ -10,7 +10,7 @@ COPY nest-cli.json tsconfig*.json ./
 COPY prisma ./prisma/
 COPY prisma.config.ts ./
 
-# Install dependencies
+# Install dependencies (FULL)
 RUN npm install --legacy-peer-deps
 
 # Generate Prisma Client
@@ -19,21 +19,40 @@ RUN npx prisma generate
 # Copy ONLY backend source code
 COPY apps/api ./apps/api
 
-# Build NestJS app - output to /app/build instead of /app/dist
+# Build NestJS app
 RUN npx tsc -p apps/api/tsconfig.app.json --outDir /app/build/apps/api
 
 # Stage 2: Frontend Build
-FROM node:22-bookworm-slim AS frontend-builder
+FROM node:20-bookworm-slim AS frontend-builder
 
-# Install production dependencies and system requirements
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y openssl && \
-    npm install --omit=dev --legacy-peer-deps
+WORKDIR /app
+# Copy node_modules from backend-builder (FULL deps needed for build)
+COPY --from=backend-builder /app/node_modules ./node_modules
+COPY package*.json ./
 
-# Generate Prisma Client (needs schema)
+# Copy source code
+COPY . .
+
+# Build Vite app
+RUN npx vite build
+
+# Stage 3: Production Runner
+FROM node:20-bookworm-slim AS runner
+WORKDIR /app
+COPY package*.json ./
+COPY prisma ./prisma/
+COPY prisma.config.ts ./
+
+RUN apt-get update && apt-get upgrade -y && apt-get install -y openssl ca-certificates
+
+# Copy node_modules from backend-builder and prune for production
+COPY --from=backend-builder /app/node_modules ./node_modules
+RUN npm prune --production
+
+# Generate Prisma Client
 RUN npx prisma generate
 
-# Copy built artifacts to /app/build (NOT /app/dist which GCS mounts to!)
+# Copy built artifacts
 COPY --from=backend-builder /app/build /app/build
 COPY --from=frontend-builder /app/dist/client /app/dist/client
 
