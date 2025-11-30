@@ -6,7 +6,7 @@ import { ListFilesQueryDto } from './dto/cloud-storage.dto';
 // @UseGuards(JwtAuthGuard)
 @Controller('integrations/storage')
 export class CloudStorageController {
-  constructor(storageService: CloudStorageService) { }
+  constructor(private readonly storageService: CloudStorageService) { }
 
   @Get('options')
   async getOptions(@Req() req: any) {

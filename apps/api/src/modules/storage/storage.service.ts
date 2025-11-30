@@ -1,8 +1,8 @@
 
-import { 
-  Injectable, 
-  Logger, 
-  InternalServerErrorException, 
+import {
+  Injectable,
+  Logger,
+  InternalServerErrorException,
   OnModuleInit
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -12,7 +12,7 @@ import { Readable } from 'stream';
 
 export interface StoredObject {
   storageKey: string;
-  publicUrl?: string; 
+  publicUrl?: string;
   signedUrl?: string; // Fallback for UBLA buckets
   mimeType: string;
   sizeBytes?: number;
@@ -54,88 +54,62 @@ export class StorageService implements OnModuleInit {
     await this.initializeStorage();
 
     if (this.isConfigured) {
-        this.logger.log(`StorageService: Online (Bucket: ${this.bucketName})`);
-        if (this.connectedEmail) {
-            this.logger.log(`Storage Identity: ${this.connectedEmail}`);
-        }
-        // Async verification without blocking boot
-        this.verifyConnection().catch(e => this.logger.warn(`Lazy connection verify failed: ${e.message}`));
+      this.logger.log(`StorageService: Online (Bucket: ${this.bucketName})`);
+      if (this.connectedEmail) {
+        this.logger.log(`Storage Identity: ${this.connectedEmail}`);
+      }
+      // Async verification without blocking boot
+      this.verifyConnection().catch(e => this.logger.warn(`Lazy connection verify failed: ${e.message}`));
     } else {
-        this.logger.warn('StorageService is NOT configured. Uploads will FAIL.');
+      this.logger.warn('StorageService is NOT configured. Uploads will FAIL.');
     }
   }
 
   private async initializeStorage() {
     try {
-        // Dynamic import to prevent crash if module is missing or fails to load bindings
-        const { Storage } = await import('@google-cloud/storage');
+      // Dynamic import to prevent crash if module is missing or fails to load bindings
+      const { Storage } = await import('@google-cloud/storage');
 
-        const storageConfig: any = {
-          projectId: this.configService.get('GCP_PROJECT_ID') || this.configService.get('GOOGLE_CLOUD_PROJECT'),
-          retryOptions: {
-            autoRetry: true,
-            retryDelayMultiplier: 2,
-            totalTimeout: 600, // Increased to 600s (10 min) for large files
-            maxRetryDelay: 60,
-            maxRetries: 3,
-          },
+      const storageConfig: any = {
+        projectId: this.configService.get('GCP_PROJECT_ID') || this.configService.get('GOOGLE_CLOUD_PROJECT'),
+        retryOptions: {
+          autoRetry: true,
+          retryDelayMultiplier: 2,
+          totalTimeout: 600, // Increased to 600s (10 min) for large files
+          maxRetryDelay: 60,
+          maxRetries: 3,
+        },
+      };
+
+      let method = 'Application Default Credentials (ADC)';
+
+      // Strategy 1: Individual Vars (for local development)
+      const clientEmail = this.configService.get('GCP_CLIENT_EMAIL');
+      const privateKey = this.configService.get('GCP_PRIVATE_KEY');
+
+      if (clientEmail && privateKey) {
+        // Robust newline handling: replaces literal \n or \\n with actual newlines
+        const formattedKey = privateKey.replace(/\\n/g, '\n');
+
+        storageConfig.credentials = {
+          client_email: clientEmail,
+          private_key: formattedKey,
         };
+        this.connectedEmail = clientEmail;
+        method = 'ENV VARS (Client Email + Private Key)';
+      }
+      // If no credentials provided, use ADC (Cloud Run default service account)
+      // This is the recommended approach for Cloud Run
 
-        let method = 'None';
+      this.storage = new Storage(storageConfig);
+      this.bucket = this.storage.bucket(this.bucketName);
 
-        // Strategy 1: Full JSON string in GCP_CREDENTIALS
-        const credentialsJson = this.configService.get('GCP_CREDENTIALS');
-        if (credentialsJson) {
-          try {
-            const parsed = JSON.parse(credentialsJson);
-            storageConfig.credentials = parsed;
-            this.connectedEmail = parsed.client_email;
-            method = 'GCP_CREDENTIALS (JSON)';
-          } catch (e) {
-            this.logger.warn('Failed to parse GCP_CREDENTIALS JSON. Falling back to individual vars.');
-          }
-        } 
-        
-        // Strategy 2: Individual Vars
-        if (!storageConfig.credentials) {
-            const clientEmail = this.configService.get('GCP_CLIENT_EMAIL');
-            const privateKey = this.configService.get('GCP_PRIVATE_KEY');
-            
-            if (clientEmail && privateKey) {
-                // Robust newline handling: replaces literal \n or \\n with actual newlines
-                // This fixes the most common "PEM routine" error
-                const formattedKey = privateKey.replace(/\\n/g, '\n');
-                
-                storageConfig.credentials = {
-                    client_email: clientEmail,
-                    private_key: formattedKey,
-                };
-                this.connectedEmail = clientEmail;
-                method = 'ENV VARS (Client Email + Private Key)';
-            }
-        }
-
-        if (!storageConfig.credentials && !storageConfig.keyFilename) {
-           const keyFile = this.configService.get('GOOGLE_APPLICATION_CREDENTIALS');
-           if (keyFile) {
-             storageConfig.keyFilename = keyFile;
-             method = 'GOOGLE_APPLICATION_CREDENTIALS (File Path)';
-           }
-        }
-
-        this.storage = new Storage(storageConfig);
-        this.bucket = this.storage.bucket(this.bucketName);
-        
-        // Basic check to see if we actually have credentials
-        if (storageConfig.credentials || storageConfig.keyFilename) {
-            this.isConfigured = true;
-            this.logger.log(`Storage Credential Strategy: ${method}`);
-        } else {
-            this.logger.warn('No valid GCP credentials found (JSON, Env Vars, or Keyfile).');
-        }
+      // Always mark as configured - ADC will be used if no explicit credentials
+      this.isConfigured = true;
+      this.logger.log(`Storage Credential Strategy: ${method}`);
     } catch (e: any) {
-        this.logger.warn(`StorageService initialization failed. Reason: ${e.message}`);
-        this.isConfigured = false;
+      this.logger.warn(`StorageService initialization failed. Reason: ${e.message}`);
+      this.isConfigured = false;
     }
   }
 
@@ -150,9 +124,9 @@ export class StorageService implements OnModuleInit {
       }
     } catch (e: any) {
       if (e.code === 403) {
-         this.logger.error(`Permission Denied accessing bucket '${this.bucketName}'. Check Service Account Roles (Storage Admin / Storage Object Admin).`);
+        this.logger.error(`Permission Denied accessing bucket '${this.bucketName}'. Check Service Account Roles (Storage Admin / Storage Object Admin).`);
       } else {
-         this.logger.warn(`GCS Connectivity Check: ${e.message}`);
+        this.logger.warn(`GCS Connectivity Check: ${e.message}`);
       }
     }
   }
@@ -165,7 +139,7 @@ export class StorageService implements OnModuleInit {
     const safeKey = this.sanitizeKey(params.key);
 
     if (!this.isConfigured) {
-        throw new InternalServerErrorException('Cloud Storage is not configured. Upload rejected.');
+      throw new InternalServerErrorException('Cloud Storage is not configured. Upload rejected.');
     }
 
     const file = this.bucket.file(safeKey);
@@ -178,7 +152,7 @@ export class StorageService implements OnModuleInit {
           // Increased cache size: 2 years + immutable for optimal edge caching
           cacheControl: 'public, max-age=63072000, immutable',
         },
-        resumable: false, 
+        resumable: false,
         validation: false,
       });
 
@@ -201,19 +175,19 @@ export class StorageService implements OnModuleInit {
       // Handle Public Access
       if (params.isPublic) {
         try {
-            await file.makePublic();
-            publicUrl = `https://storage.googleapis.com/${this.bucketName}/${safeKey}`;
+          await file.makePublic();
+          publicUrl = `https://storage.googleapis.com/${this.bucketName}/${safeKey}`;
         } catch (e: any) {
-            // Check for UBLA (Uniform Bucket Level Access) error
-            if (e.code === 409 || e.code === 400) {
-               this.logger.debug(`Bucket enforces Uniform Bucket Level Access. Cannot use ACLs. Falling back to Signed URL.`);
-            } else {
-               this.logger.warn(`Could not make object public: ${e.message}`);
-            }
-            
-            // Fallback: Generate a long-lived signed URL immediately so the frontend has something to show
-            // Max duration for V4 signed URL is 7 days (604800 seconds)
-            signedUrl = await this.getSignedDownloadUrl(safeKey, 604800);
+          // Check for UBLA (Uniform Bucket Level Access) error
+          if (e.code === 409 || e.code === 400) {
+            this.logger.debug(`Bucket enforces Uniform Bucket Level Access. Cannot use ACLs. Falling back to Signed URL.`);
+          } else {
+            this.logger.warn(`Could not make object public: ${e.message}`);
+          }
+
+          // Fallback: Generate a long-lived signed URL immediately so the frontend has something to show
+          // Max duration for V4 signed URL is 7 days (604800 seconds)
+          signedUrl = await this.getSignedDownloadUrl(safeKey, 604800);
         }
       }
 
@@ -237,9 +211,9 @@ export class StorageService implements OnModuleInit {
 
   async getSignedDownloadUrl(key: string, expiresInSeconds = 3600): Promise<string> {
     if (!this.isConfigured) throw new InternalServerErrorException('Storage not configured');
-    
+
     const safeKey = this.sanitizeKey(key);
-    
+
     try {
       const [url] = await this.bucket.file(safeKey).getSignedUrl({
         version: 'v4',
