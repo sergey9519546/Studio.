@@ -77,32 +77,29 @@ export class AssetsService {
     }
 
     // 3. Save Record to DB
-    // Check if prisma asset model actually exists to avoid runtime crash if schema is outdated
-    if (this.prisma && (this.prisma as any).asset) {
-      try {
-        const asset = await (this.prisma as any).asset.create({
-          data: {
-            id: assetEntity.id,
-            fileName: file.originalname,
-            mimeType: file.mimetype,
-            sizeBytes: file.size,
-            storageKey: uploaded.storageKey,
-            publicUrl: uploaded.publicUrl, // Nullable in DB
-            projectId: projectId || null,
-          },
-        });
+    try {
+      const asset = await this.prisma.asset.create({
+        data: {
+          id: assetEntity.id,
+          fileName: file.originalname,
+          mimeType: file.mimetype,
+          sizeBytes: file.size,
+          storageKey: uploaded.storageKey,
+          publicUrl: uploaded.publicUrl, // Nullable in DB
+          projectId: projectId || null,
+        },
+      });
 
-        // Update memory store to reflect persistence (remove transient flag)
-        const index = this.memoryStore.findIndex(a => a.id === assetEntity.id);
-        if (index !== -1) {
-          this.memoryStore[index] = { ...asset, url: finalUrl, isTransient: false };
-        }
-
-        return { ...asset, url: finalUrl, isTransient: false };
-      } catch (e: any) {
-        this.logger.warn(`Database save failed (Storage successful). Asset ${assetEntity.id} kept in memory: ${e.message}`);
-        return assetEntity;
+      // Update memory store to reflect persistence (remove transient flag)
+      const index = this.memoryStore.findIndex(a => a.id === assetEntity.id);
+      if (index !== -1) {
+        this.memoryStore[index] = { ...asset, url: finalUrl, isTransient: false };
       }
+
+      return { ...asset, url: finalUrl, isTransient: false };
+    } catch (e: any) {
+      this.logger.warn(`Database save failed (Storage successful). Asset ${assetEntity.id} kept in memory: ${e.message}`);
+      return assetEntity;
     }
 
     return assetEntity;
@@ -112,17 +109,16 @@ export class AssetsService {
     let dbAssets: AssetEntity[] = [];
 
     // 1. Try DB
-    if (this.prisma && (this.prisma as any).asset) {
-      try {
-        const records = await (this.prisma as any).asset.findMany({
-          orderBy: { createdAt: 'desc' },
-          take: 1000
-        });
-        // Mark DB assets as persistent
-        dbAssets = records.map((a: any) => ({ ...a, isTransient: false }));
-      } catch (e) {
-        this.logger.warn(`Failed to list assets from DB: ${e}`);
-      }
+    // 1. Try DB
+    try {
+      const records = await this.prisma.asset.findMany({
+        orderBy: { createdAt: 'desc' },
+        take: 1000
+      });
+      // Mark DB assets as persistent
+      dbAssets = records.map((a: any) => ({ ...a, isTransient: false }));
+    } catch (e) {
+      this.logger.warn(`Failed to list assets from DB: ${e}`);
     }
 
     // 2. Merge with Memory Store
@@ -159,8 +155,7 @@ export class AssetsService {
     if (memoryAsset) return memoryAsset;
 
     // 2. Check DB
-    if (!this.prisma || !(this.prisma as any).asset) throw new NotFoundException('Asset DB unavailable');
-    const asset = await (this.prisma as any).asset.findUnique({ where: { id } });
+    const asset = await this.prisma.asset.findUnique({ where: { id } });
     if (!asset) throw new NotFoundException('Asset not found');
     return asset;
   }
@@ -183,9 +178,7 @@ export class AssetsService {
       await this.storage.deleteObject(asset.storageKey);
       this.memoryStore = this.memoryStore.filter(a => a.id !== id);
 
-      if (this.prisma && (this.prisma as any).asset) {
-        await (this.prisma as any).asset.delete({ where: { id } });
-      }
+      await this.prisma.asset.delete({ where: { id } });
     } catch (e: any) {
       this.logger.warn(`Delete failed: ${e.message}`);
     }

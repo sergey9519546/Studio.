@@ -120,3 +120,15 @@ model MoodboardItem {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
+
+model Asset {
+    id         String   @id @default(uuid())
+    projectId  String?
+    fileName   String
+    mimeType   String
+    sizeBytes  Int
+    storageKey String
+    publicUrl  String?
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+}
