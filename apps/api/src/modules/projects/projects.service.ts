@@ -6,25 +6,62 @@ import { PrismaService } from '../../prisma/prisma.service';
 export class ProjectsService {
   constructor(private prisma: PrismaService) { }
 
+  private toDto(project: any) {
+    if (!project) return null;
+    return {
+      ...project,
+      name: project.title,
+      clientName: project.client,
+      dueDate: project.endDate,
+      // Ensure arrays are present
+      roleRequirements: project.roleRequirements || [],
+      knowledgeBase: project.knowledgeBase || [],
+      moodboardItems: project.moodboardItems || []
+    };
+  }
+
   async findAll() {
-    return this.prisma.project.findMany({
+    const projects = await this.prisma.project.findMany({
       include: { roleRequirements: true, knowledgeBase: true },
       orderBy: { updatedAt: 'desc' }
     });
+    return projects.map(p => this.toDto(p));
   }
 
   async findOne(id: string) {
-    return this.prisma.project.findUnique({
+    const project = await this.prisma.project.findUnique({
       where: { id },
       include: { roleRequirements: true, knowledgeBase: true, scripts: true, assignments: true }
     });
+    return this.toDto(project);
   }
 
   async create(data: any) {
-    const { roleRequirements, knowledgeBase, ...rest } = data;
-    return this.prisma.project.create({
+    const { roleRequirements, knowledgeBase, name, clientName, budget, startDate, dueDate, ...rest } = data;
+
+    // Map frontend fields to database schema
+    const projectData = {
+      ...rest,
+      title: name,
+      client: clientName,
+      budget: budget ? parseFloat(budget) : undefined,
+      startDate: startDate ? new Date(startDate) : undefined,
+      endDate: dueDate ? new Date(dueDate) : undefined,
+      // Remove unknown fields
+      priority: undefined,
+      tags: undefined,
+      status: rest.status || 'PLANNED'
+    };
+
+    const created = await this.prisma.project.create({
       data: {
-        ...rest,
+        title: projectData.title,
+        client: projectData.client,
+        description: projectData.description,
+        status: projectData.status,
+        budget: projectData.budget,
+        startDate: projectData.startDate,
+        endDate: projectData.endDate,
         roleRequirements: {
           create: roleRequirements || []
         },
@@ -35,28 +72,35 @@ export class ProjectsService {
             title: kb.title,
             originalContent: kb.content,
             status: 'indexed',
-            summary: kb.category
+            summary: kb.category,
+            projectId: undefined // Will be connected automatically
           }))
         }
       },
       include: { roleRequirements: true }
     });
+    return this.toDto(created);
   }
 
   async update(id: string, data: any) {
-    const { roleRequirements, knowledgeBase, ...rest } = data;
+    const { roleRequirements, knowledgeBase, name, clientName, ...rest } = data;
+
+    // Map frontend fields to database schema for update
+    const updateData: any = { ...rest };
+    if (name) updateData.title = name;
+    if (clientName) updateData.client = clientName;
 
     // Simple update strategy: Update primitives directly
     const updated = await this.prisma.project.update({
       where: { id },
-      data: rest,
+      data: updateData,
       include: { roleRequirements: true }
     });
 
     // Handle Roles (Naive replacement or upsert needed for complex logic, keeping simple for now)
     // In a real app, we'd diff the roles.
 
-    return updated;
+    return this.toDto(updated);
   }
 
   async remove(id: string) {
