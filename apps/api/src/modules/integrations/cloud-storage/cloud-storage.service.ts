@@ -24,7 +24,7 @@ export class CloudStorageService {
   /**
    * Returns all available storage options and their connection status for the user.
    */
-  async getProviderOptions(userId: string): Promise<CloudProviderOptionDto[]> {
+  async getProviderOptions(userId: number): Promise<CloudProviderOptionDto[]> {
     const options: CloudProviderOptionDto[] = [];
 
     // 1. Google Drive
@@ -36,28 +36,10 @@ export class CloudStorageService {
       authUrl: await this.googleDriveAdapter.getAuthUrl(userId)
     });
 
-    // 2. Dropbox (Mock/Future)
-    options.push({
-      id: CloudProviderType.DROPBOX,
-      name: 'Dropbox',
-      iconUrl: 'https://cdn.simpleicons.org/dropbox',
-      isConnected: false,
-      authUrl: 'https://www.dropbox.com/oauth2/authorize?client_id=PLACEHOLDER...'
-    });
-
-    // 3. OneDrive (Mock/Future)
-    options.push({
-      id: CloudProviderType.ONEDRIVE,
-      name: 'OneDrive',
-      iconUrl: 'https://cdn.simpleicons.org/microsoftonedrive',
-      isConnected: false,
-      authUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=PLACEHOLDER...'
-    });
-
     return options;
   }
 
-  async listFiles(userId: string, providerId: string, folderId?: string): Promise<{ files: CloudFileDto[]; nextPageToken?: string }> {
+  async listFiles(userId: number, providerId: string, folderId?: string): Promise<{ files: CloudFileDto[]; nextPageToken?: string }> {
     const adapter = this.adapters.get(providerId);
     if (!adapter) {
       throw new BadRequestException(`Provider '${providerId}' is not supported.`);

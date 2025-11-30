@@ -15,9 +15,9 @@ export class GoogleDriveAdapter implements ICloudStorageAdapter {
     private readonly prisma: PrismaService
   ) { }
 
-  private async getUserWithCredentials(userId: string) {
+  private async getUserWithCredentials(userId: number) {
     const user = await this.prisma.user.findUnique({
-      where: { id: parseInt(userId) },
+      where: { id: userId },
       select: {
         id: true,
         email: true,
@@ -40,7 +40,7 @@ export class GoogleDriveAdapter implements ICloudStorageAdapter {
     };
   }
 
-  async isConnected(userId: string): Promise<boolean> {
+  async isConnected(userId: number): Promise<boolean> {
     try {
       const user = await this.getUserWithCredentials(userId);
       return !!user?.googleCredentials?.refreshToken;
@@ -49,11 +49,11 @@ export class GoogleDriveAdapter implements ICloudStorageAdapter {
     }
   }
 
-  async getAuthUrl(userId: string): Promise<string> {
+  async getAuthUrl(userId: number): Promise<string> {
     return `/auth/google/connect?userId=${userId}`;
   }
 
-  async listFiles(userId: string, folderId = 'root'): Promise<{ files: CloudFileDto[]; nextPageToken?: string }> {
+  async listFiles(userId: number, folderId = 'root'): Promise<{ files: CloudFileDto[]; nextPageToken?: string }> {
     try {
       const user = await this.getUserWithCredentials(userId);
       const { drive } = this.clientFactory.createDriveClientForUser(user as any);
@@ -84,7 +84,7 @@ export class GoogleDriveAdapter implements ICloudStorageAdapter {
     }
   }
 
-  async getDownloadUrl(userId: string, fileId: string): Promise<string> {
+  async getDownloadUrl(userId: number, fileId: string): Promise<string> {
     return `https://drive.google.com/uc?id=${fileId}&export=download`;
   }
 }
