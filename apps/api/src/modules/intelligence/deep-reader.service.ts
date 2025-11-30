@@ -7,7 +7,7 @@ import * as path from 'path';
 @Injectable()
 export class DeepReaderService implements OnModuleInit {
   private readonly logger = new Logger(DeepReaderService.name);
-  
+
   // 2025 Standard: Pre-compile Regex to avoid recompilation on every request
   private readonly CLEANUP_REGEX = /(\r\n|\n|\r|\t| +)/gm;
 
@@ -27,6 +27,8 @@ export class DeepReaderService implements OnModuleInit {
 
       if (this.isPdf(mimeType)) {
         content = await this.parsePdfInWorker(buffer);
+      } else if (this.isDocx(mimeType)) {
+        content = await this.parseDocxInWorker(buffer);
       } else if (this.isText(mimeType)) {
         content = buffer.toString('utf-8');
       } else {
@@ -40,7 +42,7 @@ export class DeepReaderService implements OnModuleInit {
       const end = (process as any).hrtime.bigint();
       const duration = Number(end - start) / 1e6; // ns to ms
       this.logger.log(`[DeepReader] Extraction Success: ${cleanContent.length} chars in ${duration.toFixed(2)}ms`);
-      
+
       return cleanContent;
 
     } catch (error: any) {
@@ -53,9 +55,13 @@ export class DeepReaderService implements OnModuleInit {
     return mimeType === 'application/pdf';
   }
 
+  private isDocx(mimeType: string): boolean {
+    return mimeType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+  }
+
   private isText(mimeType: string): boolean {
     return [
-      'text/plain', 'text/csv', 'text/markdown', 'text/html', 
+      'text/plain', 'text/csv', 'text/markdown', 'text/html',
       'application/json', 'application/xml'
     ].some(t => mimeType.includes(t));
   }
@@ -87,7 +93,7 @@ export class DeepReaderService implements OnModuleInit {
       `;
 
       const worker = new Worker(workerScript, { eval: true });
-      
+
       worker.on('message', (result) => {
         worker.terminate();
         if (result.status === 'success') resolve(result.text);
@@ -105,6 +111,43 @@ export class DeepReaderService implements OnModuleInit {
 
       // Zero-Copy transfer if possible (Buffer is Uint8Array), but pdf-parse needs copy usually.
       // We pass the buffer to the worker.
+      worker.postMessage(buffer);
+    });
+  }
+
+  private parseDocxInWorker(buffer: Buffer): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const workerScript = `
+        const { parentPort } = require('worker_threads');
+        const mammoth = require('mammoth');
+
+        parentPort.on('message', async (buffer) => {
+          try {
+            const result = await mammoth.extractRawText({ buffer });
+            parentPort.postMessage({ status: 'success', text: result.value });
+          } catch (e) {
+            parentPort.postMessage({ status: 'error', error: e.message });
+          }
+        });
+      `;
+
+      const worker = new Worker(workerScript, { eval: true });
+
+      worker.on('message', (result) => {
+        worker.terminate();
+        if (result.status === 'success') resolve(result.text);
+        else reject(new Error(result.error));
+      });
+
+      worker.on('error', (err) => {
+        worker.terminate();
+        reject(err);
+      });
+
+      worker.on('exit', (code) => {
+        if (code !== 0) reject(new Error(`Worker stopped with exit code ${code}`));
+      });
+
       worker.postMessage(buffer);
     });
   }

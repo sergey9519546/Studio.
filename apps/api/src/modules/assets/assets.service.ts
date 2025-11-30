@@ -101,8 +101,6 @@ export class AssetsService {
       this.logger.warn(`Database save failed (Storage successful). Asset ${assetEntity.id} kept in memory: ${e.message}`);
       return assetEntity;
     }
-
-    return assetEntity;
   }
 
   async findAll(): Promise<AssetEntity[]> {

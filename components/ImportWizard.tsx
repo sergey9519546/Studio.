@@ -1,12 +1,11 @@
 
-import React, { useState, useMemo, useEffect } from 'react';
-import { Upload, FileSpreadsheet, Check, X, RefreshCw, Sparkles, Briefcase, Users, AlertTriangle, FileText, ArrowRight, Cloud, AlertCircle, Database, Server, Cpu, Activity, Loader2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Upload, FileSpreadsheet, Check, X, RefreshCw, Sparkles, Briefcase, Users, AlertTriangle, ArrowRight, Database, Server, Cpu, Activity, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import * as ExcelJS from 'exceljs';
 import { GoogleGenAI, Type } from "@google/genai";
-import { FreelancerStatus, ProjectStatus, Priority } from '../types';
+import { FreelancerStatus, ProjectStatus } from '../types';
 import { generateContentWithRetry, api } from '../services/api';
-import { DeepReader } from '../services/intelligence';
 
 interface ImportWizardProps {
     onImport: (type: 'freelancer' | 'project', data: any[]) => void;
@@ -62,6 +61,7 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
             await simulatePipeline(50, 80, 'WORKER: PARSING BINARY DATA', 1500);
 
             // Actual Logic Hook
+            // Actual Logic Hook
             if (uploadedFile.name.endsWith('.xlsx') || uploadedFile.name.endsWith('.csv')) {
                 const buffer = await uploadedFile.arrayBuffer();
                 const workbook = new ExcelJS.Workbook();
@@ -80,18 +80,32 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
                     setRows(jsonData.slice(1));
                 }
             } else {
-                // Deep Reader Hook
-                const source = await DeepReader.ingestFile(uploadedFile);
-                await executeAIAnalysis(source.originalContent);
+                // STRONG FILE IMPORT: Use Backend DeepReader (PDF, DOCX, TXT)
+                await simulatePipeline(50, 60, 'UPLOADING TO SECURE STORAGE', 500);
+                const assetRes = await api.assets.upload(uploadedFile);
+                const asset = assetRes.data;
+
+                await simulatePipeline(60, 80, 'BACKEND: DEEP READING & OCR', 1500);
+                // Trigger Knowledge Ingestion to get extracted text
+                const knowledgeRes = await api.knowledge.createFromAsset('global', asset.id, asset);
+
+                if (knowledgeRes.data.status === 'error') {
+                    throw new Error("Text extraction failed on server.");
+                }
+
+                const extractedText = knowledgeRes.data.originalContent;
+                if (!extractedText) throw new Error("No text content extracted.");
+
+                await executeAIAnalysis(extractedText);
             }
 
             // Stage 4: Finalizing
             await simulatePipeline(80, 100, 'VALIDATING SCHEMA', 500);
             setStep(2);
 
-        } catch (e) {
+        } catch (e: any) {
             console.error(e);
-            alert("Pipeline Fractured. See logs.");
+            alert(`Import Failed: ${e.message}`);
         } finally {
             setIsProcessing(false);
         }
@@ -123,12 +137,18 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
         const schema = isFreelancer ? FREELANCER_SCHEMA : PROJECT_SCHEMA;
 
         const response = await generateContentWithRetry(ai, {
-            model: 'gemini-2.5-flash',
+            model: 'gemini-2.0-flash-exp',
             contents: `Extract data. Return strict JSON. Content: ${content.slice(0, 25000)}`,
             config: { responseMimeType: 'application/json', responseSchema: schema }
         });
 
-        const jsonResult = JSON.parse(response.text);
+        const responseText = typeof response.text === 'function' ? response.text() : response.text;
+
+        if (!responseText || typeof responseText !== 'string') {
+            throw new Error("Invalid AI response format");
+        }
+
+        const jsonResult = JSON.parse(responseText);
         const dataArray = Array.isArray(jsonResult) ? jsonResult : [];
 
         if (dataArray.length > 0) {

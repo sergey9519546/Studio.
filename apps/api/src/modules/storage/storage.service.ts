@@ -178,16 +178,23 @@ export class StorageService implements OnModuleInit {
           await file.makePublic();
           publicUrl = `https://storage.googleapis.com/${this.bucketName}/${safeKey}`;
         } catch (e: any) {
-          // Check for UBLA (Uniform Bucket Level Access) error
+          // Check for UBLA (Uniform Bucket Level Access) error or Permissions error
           if (e.code === 409 || e.code === 400) {
             this.logger.debug(`Bucket enforces Uniform Bucket Level Access. Cannot use ACLs. Falling back to Signed URL.`);
+          } else if (e.code === 403) {
+            this.logger.warn(`Permission denied making object public. Check 'storage.objects.setIamPolicy' permission. Falling back to Signed URL.`);
           } else {
             this.logger.warn(`Could not make object public: ${e.message}`);
           }
 
           // Fallback: Generate a long-lived signed URL immediately so the frontend has something to show
           // Max duration for V4 signed URL is 7 days (604800 seconds)
-          signedUrl = await this.getSignedDownloadUrl(safeKey, 604800);
+          try {
+            signedUrl = await this.getSignedDownloadUrl(safeKey, 604800);
+          } catch (signError: any) {
+            this.logger.error(`Fallback Signed URL generation failed: ${signError.message}`);
+            // We don't throw here to allow the upload to at least succeed as "private"
+          }
         }
       }
 
@@ -204,6 +211,12 @@ export class StorageService implements OnModuleInit {
 
     } catch (error: any) {
       console.error(`GCS Upload Failed [${safeKey}]:`, error);
+
+      // Specific check for the common "Service Account Token Creator" missing role
+      if (error.message?.includes('iam.serviceAccounts.signBlob')) {
+        this.logger.error(`CRITICAL PERMISSION ERROR: Service Account missing 'roles/iam.serviceAccountTokenCreator'. Cannot sign URLs.`);
+      }
+
       this.logger.error(`GCS Upload Failed [${safeKey}]: ${error.message}`);
       this.eventEmitter.emit(STORAGE_EVENTS.ERROR, { operation: 'upload', key: safeKey, error: error.message });
       throw new InternalServerErrorException(`Cloud storage upload failed: ${error.message}`);

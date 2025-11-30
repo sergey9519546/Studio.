@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
 
     define: {
       'process.env': {
-        API_KEY: JSON.stringify(env.API_KEY || ''),
+        API_KEY: JSON.stringify(process.env.API_KEY || env.API_KEY || ''),
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
       }
     },

@@ -56,7 +56,7 @@ RUN npx prisma generate
 
 # Copy built artifacts
 COPY --from=backend-builder /app/build /app/build
-COPY --from=frontend-builder /app/dist/client /app/build/client
+COPY --from=frontend-builder /app/build/client /app/build/client
 
 EXPOSE 3001
 
