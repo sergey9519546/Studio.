@@ -31,9 +31,12 @@ COPY --from=backend-builder /app/node_modules ./node_modules
 COPY package*.json ./
 
 # Copy source code
+# Copy source code
 COPY . .
 
 # Build Vite app
+ARG API_KEY
+ENV API_KEY=$API_KEY
 RUN npx vite build
 
 # Stage 3: Production Runner
