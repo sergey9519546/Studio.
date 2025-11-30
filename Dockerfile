@@ -1,5 +1,5 @@
 # Stage 1: Backend Build
-FROM node:22-alpine3.20 AS backend-builder
+FROM node:22-alpine AS backend-builder
 
 WORKDIR /app
 RUN apk update && apk upgrade
@@ -23,7 +23,7 @@ COPY apps/api ./apps/api
 RUN npx tsc -p apps/api/tsconfig.app.json
 
 # Stage 2: Frontend Build
-FROM node:22-alpine3.20 AS frontend-builder
+FROM node:22-alpine AS frontend-builder
 
 WORKDIR /app
 RUN apk update && apk upgrade
@@ -38,18 +38,17 @@ COPY . .
 RUN npx vite build
 
 # Stage 3: Production Runner
-FROM node:22-alpine3.20 AS runner
+FROM node:22-alpine AS runner
 
 WORKDIR /app
-RUN apk update && apk upgrade
-
 COPY package*.json ./
 COPY prisma ./prisma/
 COPY prisma.config.ts ./
 
 # Install production dependencies and system requirements
-RUN apk add --no-cache openssl libc6-compat
-RUN npm install --omit=dev --legacy-peer-deps
+RUN apk update && apk upgrade && \
+    apk add --no-cache openssl libc6-compat && \
+    npm install --omit=dev --legacy-peer-deps
 
 # Generate Prisma Client (needs schema)
 RUN npx prisma generate
