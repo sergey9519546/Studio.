@@ -90,17 +90,17 @@ export class GenAIService {
      * This method is "additive" and does not replace existing generation calls.
      * 
      * @param prompt - The input text prompt
-     * @param modelId - The model version (defaults to gemini-2.5-flash)
+     * @param modelId - The model version (defaults to gemini-2.0-flash-exp)
      * @param systemInstruction - Optional system prompt for context setting
      */
     public async generateEnhancedContent(
-        prompt: string, 
-        modelId: string = 'gemini-2.5-flash',
+        prompt: string,
+        modelId: string = 'gemini-2.0-flash-exp',
         systemInstruction?: string
     ): Promise<string> {
         try {
             const model = this.client.models;
-            
+
             // Configuration for high-fidelity generation
             // Reference: [16] - Generation Config
             const response = await model.generateContent({

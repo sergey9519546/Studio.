@@ -19,7 +19,7 @@ async function verifyAI() {
 
     try {
         const ai = new GoogleGenAI({ apiKey });
-        const model = 'gemini-2.5-flash';
+        const model = 'gemini-2.0-flash-exp';
 
         console.log(`Testing model: ${model}...`);
         const response = await ai.models.generateContent({

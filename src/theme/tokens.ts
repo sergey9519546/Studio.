@@ -64,6 +64,13 @@ export const typography = {
   }
 } as const;
 
+export const spacing = {
+  tight: '1rem',      // 16px - chips, badges, compact cards
+  base: '1.5rem',     // 24px - standard cards, modals
+  spacious: '2rem',   // 32px - page containers
+  hero: '3rem',       // 48px - landing sections
+} as const;
+
 export const radii = {
   sm: '6px',
   md: '12px', // Standard card radius
@@ -75,4 +82,13 @@ export const shadows = {
   subtle: '0 1px 2px rgba(0,0,0,0.04)',
   card: '0 4px 12px rgba(16, 17, 24, 0.04)',
   float: '0 12px 32px rgba(16, 17, 24, 0.08)',
+  lg: '0 10px 40px rgba(16, 17, 24, 0.1)',
+  glow: '0 0 20px rgba(36, 99, 230, 0.15)',
+} as const;
+
+export const transitions = {
+  fast: '150ms',
+  base: '200ms',
+  slow: '300ms',
+  slower: '500ms',
 } as const;

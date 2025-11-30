@@ -13,11 +13,11 @@ class VectorStore {
   // Simulating Semantic Search
   async search(query: string, limit: number = 5): Promise<KnowledgeChunk[]> {
     const queryTokens = query.toLowerCase().split(' ');
-    
+
     const scoredChunks = this.chunks.map(chunk => {
       let score = 0;
       const text = chunk.text.toLowerCase();
-      
+
       queryTokens.forEach(token => {
         if (text.includes(token)) score += 1;
       });
@@ -26,12 +26,12 @@ class VectorStore {
       if (chunk.tags.includes('tone') || chunk.tags.includes('voice')) {
         score *= 1.5;
       }
-      
+
       // External Truth gets a boost
       if (chunk.tags.includes('external_truth')) {
         score *= 1.2;
       }
-      
+
       // Lore gets a boost
       if (chunk.tags.includes('lore')) {
         score *= 1.3;
@@ -59,34 +59,34 @@ export const DeepReader = {
   async ingestFile(file: File): Promise<KnowledgeSource> {
     // 1. Image Handling (Gemini Vision)
     if (file.type.startsWith('image/') && process.env.API_KEY) {
-        return this.ingestImage(file);
+      return this.ingestImage(file);
     }
 
     // 2. Text Handling (Default fallback)
     return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = async (e) => {
-            const content = e.target?.result as string;
-            // Basic text chunking
-            const chunks = this.chunkContent(content, file.name, ['file', 'upload']);
-            
-            // Add to Vector Store
-            vectorStore.addChunks(chunks);
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const content = e.target?.result as string;
+        // Basic text chunking
+        const chunks = this.chunkContent(content, file.name, ['file', 'upload']);
 
-            resolve({
-                id: `file-${Date.now()}`,
-                type: 'file',
-                title: file.name,
-                url: '',
-                originalContent: content,
-                summary: `Imported document: ${file.name} (${Math.round(file.size / 1024)} KB)`,
-                status: 'indexed',
-                chunks,
-                createdAt: new Date().toISOString()
-            });
-        };
-        reader.onerror = (e) => reject(e);
-        reader.readAsText(file);
+        // Add to Vector Store
+        vectorStore.addChunks(chunks);
+
+        resolve({
+          id: `file-${Date.now()}`,
+          type: 'file',
+          title: file.name,
+          url: '',
+          originalContent: content,
+          summary: `Imported document: ${file.name} (${Math.round(file.size / 1024)} KB)`,
+          status: 'indexed',
+          chunks,
+          createdAt: new Date().toISOString()
+        });
+      };
+      reader.onerror = (e) => reject(e);
+      reader.readAsText(file);
     });
   },
 
@@ -103,7 +103,7 @@ export const DeepReader = {
     await new Promise(r => setTimeout(r, 1500)); // Simulate processing latency
 
     if (type === 'youtube') {
-      title = "Transcript: " + (url.length > 30 ? url.slice(0,30) + "..." : url);
+      title = "Transcript: " + (url.length > 30 ? url.slice(0, 30) + "..." : url);
       content = `[00:00] Welcome back to the channel. Today we are analyzing the core themes of this project.
 [00:15] Key takeaway: The visual style must be high-contrast and neon.
 [00:45] Lore Detail: The protagonist, 'Unit 734', cannot speak but communicates via radio waves.
@@ -122,10 +122,10 @@ Weaknesses
 - Analog tech: They cannot hack mechanical devices.`;
     } else {
       try {
-          const hostname = new URL(url).hostname;
-          title = "External Resource: " + hostname;
+        const hostname = new URL(url).hostname;
+        title = "External Resource: " + hostname;
       } catch { title = "External Link"; }
-      
+
       content = `Strategic Overview extracted from ${url}:
 1. Focus on speed and efficiency.
 2. Target audience is Gen Z gamers.
@@ -138,7 +138,7 @@ Weaknesses
     vectorStore.addChunks(chunks);
 
     return {
-      id: `source-${Date.now()}-${Math.floor(Math.random()*1000)}`,
+      id: `source-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
       type,
       title,
       url,
@@ -151,60 +151,58 @@ Weaknesses
   },
 
   async ingestImage(file: File): Promise<KnowledgeSource> {
-      const base64Data = await this.fileToBase64(file);
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
-      
-      const response = await generateContentWithRetry(ai, {
-          model: 'gemini-2.5-flash',
-          contents: {
-              parts: [
-                  { inlineData: { mimeType: file.type, data: base64Data } },
-                  { text: "Analyze this image in detail. Extract all visible text, describe visual elements, style, mood, and any technical specs provided." }
-              ]
-          }
-      });
+    const base64Data = await this.fileToBase64(file);
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
 
-      const content = response.text || "No analysis generated.";
-      const chunks = this.chunkContent(content, file.name, ['image', 'analysis']);
-      vectorStore.addChunks(chunks);
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.0-flash-exp',
+      contents: [
+        { text: "Describe this image in detail. If it contains text, extract and structure it." },
+        { inlineData: { mimeType: file.type, data: base64Data } }
+      ]
+    });
 
-      return {
-          id: `img-${Date.now()}`,
-          type: 'file', // Treat as file type for now in UI
-          title: file.name,
-          url: '',
-          originalContent: content,
-          summary: `AI Image Analysis of ${file.name}`,
-          status: 'indexed',
-          chunks,
-          createdAt: new Date().toISOString()
-      };
+    const content = response.text || "No analysis generated.";
+    const chunks = this.chunkContent(content, file.name, ['image', 'analysis']);
+    vectorStore.addChunks(chunks);
+
+    return {
+      id: `img-${Date.now()}`,
+      type: 'file', // Treat as file type for now in UI
+      title: file.name,
+      url: '',
+      originalContent: content,
+      summary: `AI Image Analysis of ${file.name}`,
+      status: 'indexed',
+      chunks,
+      createdAt: new Date().toISOString()
+    };
   },
 
   // Helper for consistent chunking
   chunkContent(content: string, sourceId: string, tags: string[] = ['general']): KnowledgeChunk[] {
-      // Split by paragraphs or roughly 500 chars to optimize for vector context window
-      const rawChunks = content.split('\n\n').flatMap(p => p.length > 500 ? p.match(/.{1,500}/g) || [] : [p]);
-      return rawChunks.map((text, idx) => ({
-          id: `chunk-${Date.now()}-${idx}`,
-          sourceId,
-          text: text.trim(),
-          tags,
-      })).filter(c => c.text.length > 0);
+    // Split by paragraphs or roughly 500 chars to optimize for vector context window
+    const rawChunks = content.split('\n\n').flatMap(p => p.length > 500 ? p.match(/.{1,500}/g) || [] : [p]);
+    return rawChunks.map((text, idx) => ({
+      id: `chunk-${Date.now()}-${idx}`,
+      sourceId,
+      text: text.trim(),
+      tags,
+    })).filter(c => c.text.length > 0);
   },
 
   fileToBase64(file: File): Promise<string> {
-      return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => {
-              const result = reader.result as string;
-              // Remove Data URL prefix
-              const base64 = result.split(',')[1];
-              resolve(base64);
-          };
-          reader.onerror = error => reject(error);
-      });
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const result = reader.result as string;
+        // Remove Data URL prefix
+        const base64 = result.split(',')[1];
+        resolve(base64);
+      };
+      reader.onerror = error => reject(error);
+    });
   }
 };
 
@@ -240,11 +238,11 @@ export const HallucinationGuard = {
         contents: prompt,
         config: { responseMimeType: 'application/json' }
       });
-      
+
       let jsonStr = response.text;
       if (jsonStr) {
-          jsonStr = jsonStr.replace(/```json/g, '').replace(/```/g, '').trim();
-          return JSON.parse(jsonStr);
+        jsonStr = jsonStr.replace(/```json/g, '').replace(/```/g, '').trim();
+        return JSON.parse(jsonStr);
       }
       return { hasViolation: false, violations: [] };
     } catch (e) {
@@ -262,9 +260,9 @@ export const RAGEngine = {
 
     // 1. Retrieve Context
     const retrievedChunks = await vectorStore.search(prompt, 8);
-    
+
     // 2. Build Context Window
-    const contextBlock = retrievedChunks.map((c, i) => `[Source ${i+1}]: ${c.text}`).join('\n\n');
+    const contextBlock = retrievedChunks.map((c, i) => `[Source ${i + 1}]: ${c.text}`).join('\n\n');
     const summaryBlock = sources.map(s => `[Summary of ${s.title}]: ${s.summary}`).join('\n');
     const constraints = (project.tags || []).join(', ');
 
@@ -286,12 +284,10 @@ export const RAGEngine = {
     `;
 
     // 4. Generate
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-    const response = await generateContentWithRetry(ai, {
-      model: 'gemini-2.5-flash',
-      contents: [
-        { role: 'user', parts: [{ text: systemPrompt + `\n\nUSER PROMPT: ${prompt}` }] }
-      ]
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.0-flash-exp',
+      contents: [{ role: 'user', parts: [{ text: systemPrompt + `\n\nUSER PROMPT: ${prompt}` }] }]
     });
 
     return response.text;

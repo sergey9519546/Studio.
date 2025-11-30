@@ -1,9 +1,9 @@
-
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Plus, Upload, Filter, Film, Image as ImageIcon, Loader2, UploadCloud, Link as LinkIcon, Check, ChevronDown, PlusCircle } from 'lucide-react';
+import { Search, Upload, Film, Image as ImageIcon, Loader2, UploadCloud, Link as LinkIcon, Check, ChevronDown, PlusCircle } from 'lucide-react';
 import { MoodboardItem, Project } from '../../types';
 import { api } from '../../services/api';
 import MoodboardDetail from './MoodboardDetail';
+import { useToast } from '../../context/ToastContext';
 
 interface MoodboardTabProps {
     projectId?: string;
@@ -21,6 +21,7 @@ const MoodboardTab: React.FC<MoodboardTabProps> = ({ projectId: propProjectId })
     const [isUploading, setIsUploading] = useState(false);
     const [dragActive, setDragActive] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const toast = useToast();
 
     // URL Import State
     const [showImportInput, setShowImportInput] = useState(false);
@@ -69,9 +70,11 @@ const MoodboardTab: React.FC<MoodboardTabProps> = ({ projectId: propProjectId })
                 newItems.push(linkRes.data);
             }
             setItems(prev => [...newItems, ...prev]);
-        } catch (e: any) {
+            toast.success(`Successfully uploaded ${files.length} items`);
+        } catch (e: unknown) {
             console.error(e);
-            alert(`Upload failed: ${e.message || 'Unknown error'}`);
+            const msg = e instanceof Error ? e.message : 'Unknown error';
+            toast.error(`Upload failed: ${msg}`);
         } finally {
             setIsUploading(false);
             if (fileInputRef.current) fileInputRef.current.value = '';
@@ -93,8 +96,10 @@ const MoodboardTab: React.FC<MoodboardTabProps> = ({ projectId: propProjectId })
             setItems(prev => [res.data, ...prev]);
             setImportUrl('');
             setShowImportInput(false);
+            toast.success("URL imported successfully");
         } catch (e) {
-            alert("Failed to import URL");
+            console.error(e);
+            toast.error("Failed to import URL");
         } finally {
             setIsUploading(false);
         }

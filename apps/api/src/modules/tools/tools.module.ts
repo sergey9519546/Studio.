@@ -1,0 +1,8 @@
+import { Module } from '@nestjs/common';
+import { ToolHandlersService } from './tool-handlers.service';
+
+@Module({
+    providers: [ToolHandlersService],
+    exports: [ToolHandlersService],
+})
+export class ToolsModule { }

@@ -4,6 +4,7 @@ import { Link2, FileText, Youtube, BookOpen, Trash2, Loader2, Plus, BrainCircuit
 import { KnowledgeSource } from '../types';
 import { DeepReader } from '../services/intelligence';
 import { api } from '../services/api';
+import { useToast } from '../context/ToastContext';
 
 interface ContextHubProps {
   sources: KnowledgeSource[];
@@ -17,6 +18,7 @@ const ContextHub: React.FC<ContextHubProps> = ({ sources, onAddSource, onRemoveS
   const [dragActive, setDragActive] = useState(false);
   const [uploadStatus, setUploadStatus] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const toast = useToast();
 
   const handleUrlIngest = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,8 +31,10 @@ const ContextHub: React.FC<ContextHubProps> = ({ sources, onAddSource, onRemoveS
       const source = await DeepReader.ingestURL(urlInput);
       onAddSource(source);
       setUrlInput('');
+      toast.success("URL ingested successfully");
     } catch (e) {
-      alert("Failed to ingest URL. Ensure it is accessible.");
+      console.error(e);
+      toast.error("Failed to ingest URL. Ensure it is accessible.");
     } finally {
       setIsProcessing(false);
       setUploadStatus('');
@@ -50,9 +54,11 @@ const ContextHub: React.FC<ContextHubProps> = ({ sources, onAddSource, onRemoveS
       setUploadStatus('Indexing...');
       const knowledgeRes = await api.knowledge.createFromAsset('global', asset.id, asset);
       onAddSource(knowledgeRes.data);
+      toast.success("File ingested and indexed");
 
-    } catch (e: any) {
-      alert(`Failed to ingest file: ${e.message}`);
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : 'Unknown error';
+      toast.error(`Failed to ingest file: ${msg}`);
       console.error(e);
     } finally {
       setIsProcessing(false);

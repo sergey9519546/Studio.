@@ -1,250 +1,187 @@
 import React from 'react';
-import { LayoutGrid, Activity, CalendarDays, CheckCircle2, Command, ArrowUpRight, Database, Zap } from 'lucide-react';
+import { LayoutGrid, Activity, CalendarDays, CheckCircle2, Command, Database } from 'lucide-react';
 import { Project, Freelancer, Assignment, Priority, ProjectStatus } from '../types';
 import { Link } from 'react-router-dom';
 import AIChat from './AIChat';
 import DriveFileBrowser from './DriveFileBrowser';
-import { Type, FunctionDeclaration } from "@google/genai";
+import DataHUD from './dashboard/DataHUD';
+import MorningBriefing from './dashboard/MorningBriefing';
+import PriorityStack from './dashboard/PriorityStack';
+import Skeleton from './ui/Skeleton';
 
 interface DashboardProps {
-  projects: Project[];
-  freelancers: Freelancer[];
-  assignments: Assignment[];
-  onCallAction: (action: string, params: any) => Promise<any>;
+    projects: Project[];
+    freelancers: Freelancer[];
+    assignments: Assignment[];
+    onCallAction: (action: string, params: unknown) => Promise<unknown>;
+    isLoading?: boolean;
 }
 
-const DataHUD = ({ label, value, trend, icon: Icon, active = false, delay = 0 }: any) => (
-    <div 
-        className={`
-            relative overflow-hidden rounded-3xl p-5 flex flex-col justify-between h-full min-h-[120px] transition-all duration-700 hover:-translate-y-1 hover:shadow-float group
-            ${active 
-                ? 'bg-ink-primary text-white shadow-card ring-1 ring-white/10' 
-                : 'bg-surface text-ink-primary shadow-soft border border-border-subtle'
-            }
-        `}
-        style={{ animationDelay: `${delay}ms` }}
-    >
-        {active && (
-            <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-edge-teal/20 to-edge-magenta/20 blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-        )}
-        
-        <div className="flex justify-between items-start relative z-10">
-            <div className={`p-2 rounded-xl ${active ? 'bg-white/10 backdrop-blur-md' : 'bg-app border border-border-subtle'}`}>
-                <Icon size={16} strokeWidth={2} className={active ? 'text-white' : 'text-ink-secondary'} />
-            </div>
-            {trend && (
-                <div className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider ${active ? 'bg-white/10 text-white' : 'bg-state-success-bg text-state-success border border-state-success/20'}`}>
-                    <ArrowUpRight size={10} /> {trend}
-                </div>
-            )}
-        </div>
-        
-        <div className="relative z-10 mt-3">
-            <div className="text-3xl font-display font-bold tracking-tighter leading-none mb-1">{value}</div>
-            <div className={`text-[9px] font-bold uppercase tracking-widest flex items-center gap-2 ${active ? 'text-white/60' : 'text-ink-tertiary'}`}>
-                {label}
-            </div>
-        </div>
-    </div>
-);
+const Dashboard: React.FC<DashboardProps> = ({ projects, freelancers, assignments, onCallAction, isLoading = false }) => {
+    const activeProjects = projects.filter(p => p.status === ProjectStatus.IN_PROGRESS).length;
+    const urgentProjects = projects.filter(p => p.priority === Priority.URGENT).length;
+    const activeAssignments = assignments.filter(a => a.status === 'Confirmed').length;
+    const utilization = Math.round((activeAssignments / (freelancers.length || 1)) * 100);
 
-const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return "Good Morning";
-    if (hour < 18) return "Good Afternoon";
-    return "Good Evening";
-};
-
-const MorningBriefing = ({ projectCount, urgentCount, assignments }: { projectCount: number, urgentCount: number, assignments: number }) => {
-    const today = new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-    const greeting = getGreeting();
-    
     return (
-        <div className="bg-surface rounded-3xl p-5 relative overflow-hidden group h-full flex flex-col border border-border-subtle shadow-card hover:shadow-float transition-shadow duration-700">
-            {/* Dynamic Background Mesh - Optimized */}
-            <div className="absolute top-0 right-0 w-[250px] h-[250px] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent opacity-60 blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-
-            {/* Top Bar: Date & Status */}
-            <div className="relative z-10 flex items-center justify-between mb-4">
-                 <div className="flex items-center gap-2">
-                    <span className="text-[9px] font-bold text-ink-secondary uppercase tracking-widest border border-border-subtle px-2.5 py-1 rounded-md bg-app/50 backdrop-blur-sm font-mono">{today}</span>
-                 </div>
-                 <span className="text-[9px] font-bold text-edge-teal uppercase tracking-widest flex items-center gap-1.5 bg-white/80 border border-border-subtle/50 px-2 py-1 rounded-md backdrop-blur-sm">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-edge-teal opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-edge-teal"></span>
-                    </span>
-                    System Optimal
-                 </span>
-            </div>
-            
-            <div className="relative z-10 flex-1 flex flex-col justify-between animate-enter">
+        <div className="h-full flex flex-col bg-canvas font-sans text-ink overflow-hidden">
+            {/* Header */}
+            <header className="flex-shrink-0 px-8 py-8 flex justify-between items-end bg-gradient-to-b from-white to-white/50 backdrop-blur-sm border-b border-mist sticky top-0 z-20">
                 <div>
-                    <h1 className="text-3xl font-display font-bold text-ink-primary tracking-tighter leading-none mb-2">
-                        {greeting}.
+                    <h1 className="text-4xl font-semibold tracking-tight text-ink flex items-center gap-3">
+                        <LayoutGrid size={28} className="text-indigo-600" /> Command Center
                     </h1>
-                    <p className="text-xs text-ink-secondary font-medium mb-4 max-w-[90%] leading-relaxed text-balance">
-                        Studio performance is nominal. You have <span className="text-ink-primary font-bold">{assignments} active assignments</span> across the roster.
+                    <p className="text-sm text-pencil font-medium mt-2 tracking-wide">
+                        Agency Overview & Intelligence
                     </p>
                 </div>
-                
-                {/* Compact Stats Grid */}
-                <div className="grid grid-cols-2 gap-3 mt-auto">
-                    <div className="flex flex-col justify-center p-3 rounded-xl bg-app/40 border border-border-subtle/60 hover:bg-white hover:border-border-hover transition-colors group/stat">
-                        <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-white border border-border-subtle flex items-center justify-center text-primary font-bold text-xs shadow-sm group-hover/stat:scale-110 transition-transform">
-                                {projectCount}
-                            </div>
-                            <div>
-                                <div className="text-xs font-bold text-ink-primary tracking-tight">Active</div>
-                                <div className="text-[9px] text-ink-tertiary uppercase tracking-widest font-semibold">Campaigns</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col justify-center p-3 rounded-xl bg-app/40 border border-border-subtle/60 hover:bg-white hover:border-border-hover transition-colors group/stat">
-                        <div className="flex items-center gap-3">
-                            <div className={`w-8 h-8 rounded-lg border border-border-subtle flex items-center justify-center font-bold text-xs shadow-sm group-hover/stat:scale-110 transition-transform ${urgentCount > 0 ? 'bg-state-danger-bg text-state-danger border-state-danger/20' : 'bg-white text-ink-tertiary'}`}>
-                                {urgentCount}
-                            </div>
-                            <div>
-                                <div className="text-xs font-bold text-ink-primary tracking-tight">Attention</div>
-                                <div className="text-[9px] text-ink-tertiary uppercase tracking-widest font-semibold">Required</div>
-                            </div>
+                <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-xl border border-mist shadow-sm">
+                            <div className={`w-2 h-2 rounded-full ${isLoading ? 'bg-amber-500' : 'bg-emerald-500'} animate-pulse`}></div>
+                            <span className="text-[10px] font-bold uppercase tracking-wide text-ink">{isLoading ? 'Syncing...' : 'System Online'}</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    );
-};
+            </header>
 
-const PriorityStack = ({ projects }: { projects: Project[] }) => {
-    const urgentProjects = projects
-        .filter(p => p.priority === Priority.URGENT || p.priority === Priority.HIGH)
-        .filter(p => p.status !== ProjectStatus.DELIVERED && p.status !== ProjectStatus.ARCHIVED)
-        .sort((a, b) => (a.dueDate && b.dueDate ? new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime() : 0))
-        .slice(0, 5);
+            {/* Main Scrollable Area */}
+            <div className="flex-1 overflow-y-auto custom-scrollbar p-8">
+                <div className="max-w-[1600px] mx-auto space-y-8">
 
-    return (
-        <div className="bg-surface rounded-3xl flex flex-col h-full overflow-hidden border border-border-subtle shadow-sm hover:shadow-card transition-shadow duration-500">
-            <div className="px-6 py-5 border-b border-border-subtle flex justify-between items-center bg-surface/50 backdrop-blur-md">
-                <h3 className="text-[10px] font-bold text-ink-secondary uppercase tracking-widest flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-state-danger animate-pulse"></div>
-                    Critical Path
-                </h3>
-                <Link to="/projects" className="text-[10px] font-bold text-ink-primary hover:text-primary uppercase tracking-widest transition-colors">View Index</Link>
-            </div>
-            
-            <div className="flex-1 overflow-y-auto p-3 space-y-2 custom-scrollbar bg-app/30">
-                {urgentProjects.length === 0 ? (
-                    <div className="h-full flex flex-col items-center justify-center text-ink-tertiary text-center opacity-60">
-                        <CheckCircle2 size={40} className="mb-4 opacity-20"/>
-                        <p className="text-[10px] font-bold uppercase tracking-widest">All Systems Normal</p>
+                    {/* Top Row: Briefing & Stats */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        {/* Morning Briefing (Spans 2 cols) */}
+                        <div className="lg:col-span-2 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                            {isLoading ? (
+                                <div className="h-full p-6 bg-white rounded-2xl border border-mist shadow-sm flex flex-col gap-4">
+                                    <Skeleton width="40%" height={32} />
+                                    <Skeleton width="60%" height={20} />
+                                    <div className="flex gap-4 mt-4">
+                                        <Skeleton width={100} height={80} />
+                                        <Skeleton width={100} height={80} />
+                                        <Skeleton width={100} height={80} />
+                                    </div>
+                                </div>
+                            ) : (
+                                <MorningBriefing
+                                    projectCount={activeProjects}
+                                    urgentCount={urgentProjects}
+                                    assignments={activeAssignments}
+                                />
+                            )}
+                        </div>
+
+                        {/* Priority Stack (Spans 1 col) */}
+                        <div className="lg:col-span-1 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
+                            {isLoading ? (
+                                <div className="h-full p-6 bg-white rounded-2xl border border-mist shadow-sm flex flex-col gap-4">
+                                    <div className="flex justify-between items-center mb-2">
+                                        <Skeleton width={120} height={20} />
+                                        <Skeleton width={24} height={24} variant="circular" />
+                                    </div>
+                                    <Skeleton height={60} />
+                                    <Skeleton height={60} />
+                                    <Skeleton height={60} />
+                                </div>
+                            ) : (
+                                <PriorityStack projects={projects} />
+                            )}
+                        </div>
                     </div>
-                ) : (
-                    urgentProjects.map(p => (
-                        <Link key={p.id} to={`/projects/${p.id}`} className="block p-4 bg-white border border-border-subtle rounded-xl hover:border-primary/50 transition-colors group shadow-sm">
-                            <div className="flex justify-between items-start mb-2">
-                                <span className="font-bold text-xs text-ink-primary line-clamp-1 group-hover:text-primary transition-colors">{p.name}</span>
-                                <span className={`text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded ${p.priority === Priority.URGENT ? 'bg-state-danger-bg text-state-danger' : 'bg-state-warning-bg text-state-warning'}`}>
-                                    {p.priority}
-                                </span>
+
+                    {/* Middle Row: Data HUD */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+                        {isLoading ? (
+                            <>
+                                {[...Array(4)].map((_, i) => (
+                                    <div key={i} className="bg-white p-6 rounded-2xl border border-mist shadow-sm">
+                                        <div className="flex justify-between items-start mb-4">
+                                            <Skeleton width={80} height={16} />
+                                            <Skeleton width={20} height={20} variant="circular" />
+                                        </div>
+                                        <Skeleton width="60%" height={32} />
+                                        <Skeleton width="40%" height={16} className="mt-2" />
+                                    </div>
+                                ))}
+                            </>
+                        ) : (
+                            <>
+                                <div className="bg-white p-6 rounded-2xl border border-mist shadow-card hover:shadow-lg hover:-translate-y-[2px] transition-all duration-200">
+                                    <DataHUD
+                                        label="Active Projects"
+                                        value={activeProjects}
+                                        trend="+12%"
+                                        icon={Activity}
+                                        active={true}
+                                        delay={0}
+                                    />
+                                </div>
+                                <div className="bg-white p-6 rounded-2xl border border-mist shadow-card hover:shadow-lg hover:-translate-y-[2px] transition-all duration-200">
+                                    <DataHUD
+                                        label="Team Utilization"
+                                        value={`${utilization}%`}
+                                        trend="+5%"
+                                        icon={CalendarDays}
+                                        delay={100}
+                                    />
+                                </div>
+                                <div className="bg-white p-6 rounded-2xl border border-mist shadow-card hover:shadow-lg hover:-translate-y-[2px] transition-all duration-200">
+                                    <DataHUD
+                                        label="Tasks Completed"
+                                        value={142}
+                                        trend="+18%"
+                                        icon={CheckCircle2}
+                                        delay={200}
+                                    />
+                                </div>
+                                <div className="bg-white p-6 rounded-2xl border border-mist shadow-card hover:shadow-lg hover:-translate-y-[2px] transition-all duration-200">
+                                    <DataHUD
+                                        label="AI Operations"
+                                        value="2.4k"
+                                        trend="+32%"
+                                        icon={Command}
+                                        delay={300}
+                                    />
+                                </div>
+                            </>
+                        )}
+                    </div>
+
+                    {/* Bottom Row: AI & Files */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-[600px] animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-300">
+                        {/* AI Chat Interface */}
+                        <div className="lg:col-span-2 bg-white rounded-2xl border border-mist shadow-sm overflow-hidden flex flex-col">
+                            <div className="p-4 border-b border-mist bg-canvas/30 flex justify-between items-center">
+                                <h3 className="text-[10px] font-bold text-pencil uppercase tracking-widest flex items-center gap-2">
+                                    <Command size={14} /> Neural Interface
+                                </h3>
                             </div>
-                            <div className="flex items-center justify-between">
-                                <span className="text-[10px] text-ink-tertiary font-medium uppercase tracking-wide">{p.clientName}</span>
-                                <span className="text-[10px] text-ink-primary font-mono font-bold flex items-center gap-1">
-                                    <CalendarDays size={10} className="text-ink-tertiary"/>
-                                    {p.dueDate ? new Date(p.dueDate).toLocaleDateString(undefined, {month:'numeric', day:'numeric'}) : 'N/A'}
-                                </span>
+                            <div className="flex-1 overflow-hidden relative">
+                                <AIChat
+                                    freelancers={freelancers}
+                                    projects={projects}
+                                    assignments={assignments}
+                                    onCallAction={onCallAction}
+                                    agentMode={true}
+                                    customTitle=" "
+                                />
                             </div>
-                        </Link>
-                    ))
-                )}
-            </div>
-        </div>
-    );
-};
+                        </div>
 
-const Dashboard: React.FC<DashboardProps> = ({ projects, freelancers, assignments, onCallAction }) => {
-    const activeAssignments = assignments.filter(a => new Date(a.endDate) >= new Date()).length;
-    const urgentProjects = projects.filter(p => p.priority === Priority.URGENT || p.priority === Priority.HIGH).length;
-    
-    // Tools definition for Dashboard Chat
-    const dashboardTools: FunctionDeclaration[] = [
-        {
-            name: "create_project",
-            description: "Create a new project in the system.",
-            parameters: {
-                type: Type.OBJECT,
-                properties: {
-                    name: { type: Type.STRING, description: "Project name" },
-                    clientName: { type: Type.STRING, description: "Client name" },
-                    description: { type: Type.STRING, description: "Brief description" }
-                },
-                required: ["name"]
-            }
-        },
-        {
-            name: "navigate",
-            description: "Navigate to a specific page.",
-            parameters: {
-                type: Type.OBJECT,
-                properties: {
-                    path: { type: Type.STRING, description: "Path to navigate to (e.g. /projects, /freelancers)" }
-                },
-                required: ["path"]
-            }
-        }
-    ];
-
-    return (
-        <div className="p-8 max-w-[1800px] mx-auto space-y-8 animate-enter pb-24 font-sans text-ink-primary">
-            {/* Header Area */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[280px]">
-                 <div className="lg:col-span-2 h-full">
-                     <MorningBriefing 
-                        projectCount={projects.length} 
-                        urgentCount={urgentProjects} 
-                        assignments={activeAssignments}
-                     />
-                 </div>
-                 <div className="h-full">
-                     <PriorityStack projects={projects} />
-                 </div>
-            </div>
-
-            {/* Stats Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <DataHUD label="Total Roster" value={freelancers.length} icon={Zap} delay={100} />
-                <DataHUD label="Active Projects" value={projects.filter(p => p.status === ProjectStatus.IN_PROGRESS).length} icon={Activity} active trend="+12%" delay={200} />
-                <DataHUD label="Utilization" value={`${Math.round((assignments.length / (freelancers.length || 1)) * 100)}%`} icon={LayoutGrid} delay={300} />
-                <DataHUD label="Data Points" value="1.2k" icon={Database} delay={400} />
-            </div>
-
-            {/* Main Workspace */}
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 h-[600px]">
-                {/* Left: AI Agent */}
-                <div className="xl:col-span-2 bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
-                    <AIChat 
-                        freelancers={freelancers} 
-                        projects={projects} 
-                        assignments={assignments} 
-                        onCallAction={onCallAction}
-                        customTitle="Studio Director AI"
-                        customSystemInstruction="You are the Studio Director AI. You can manage projects, assign freelancers, and analyze studio performance."
-                        customTools={dashboardTools}
-                    />
-                </div>
-
-                {/* Right: Quick Access / Drive */}
-                <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden flex flex-col p-6">
-                     <h3 className="font-bold text-gray-900 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                        <Command size={16} /> Quick Access
-                     </h3>
-                     <div className="flex-1 overflow-hidden">
-                        <DriveFileBrowser compact onSelect={() => {}} />
-                     </div>
+                        {/* File Browser */}
+                        <div className="lg:col-span-1 bg-white rounded-2xl border border-mist shadow-sm overflow-hidden flex flex-col">
+                            <div className="p-4 border-b border-mist bg-canvas/30 flex justify-between items-center">
+                                <h3 className="text-[10px] font-bold text-pencil uppercase tracking-widest flex items-center gap-2">
+                                    <Database size={14} /> Knowledge Base
+                                </h3>
+                                <Link to="/files" className="text-[10px] font-bold text-indigo-600 hover:text-indigo-800 uppercase tracking-wide">View All</Link>
+                            </div>
+                            <div className="flex-1 overflow-hidden p-4">
+                                <DriveFileBrowser onSelect={() => { }} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

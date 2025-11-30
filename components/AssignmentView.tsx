@@ -117,29 +117,29 @@ const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, 
     };
 
     return (
-        <div className="p-6 md:p-12 max-w-[2000px] mx-auto space-y-8 animate-enter pb-24 font-sans text-ink">
-            <div className="flex justify-between items-end px-2">
+        <div className="p-8 max-w-[2000px] mx-auto space-y-8 animate-enter pb-24 font-sans text-ink">
+            <div className="flex justify-between items-end">
                 <div>
-                    <h1 className="text-5xl font-semibold tracking-tighter text-ink leading-[0.9]">Schedule.</h1>
-                    <p className="text-pencil mt-2 text-sm font-medium tracking-wide">Allocation timeline.</p>
+                    <h1 className="text-4xl font-semibold tracking-tight text-ink">Schedule</h1>
+                    <p className="text-pencil mt-2 text-sm font-medium">Allocation timeline.</p>
                 </div>
                 <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-1 bg-white p-1.5 border border-mist rounded-xl shadow-sm">
-                        <button onClick={() => { const d = new Date(currentDate); d.setDate(d.getDate() - 7); setCurrentDate(d); }} className="p-2 hover:bg-gray-50 text-pencil transition-colors rounded-lg"><ChevronLeft size={16}/></button>
-                        <div className="flex items-center gap-2 px-6 min-w-[180px] justify-center font-bold text-ink text-xs font-mono uppercase tracking-wide">
-                            <Calendar size={14} className="text-pencil"/>
+                    <div className="flex items-center gap-2 bg-white p-2 border border-mist rounded-xl shadow-sm">
+                        <button onClick={() => { const d = new Date(currentDate); d.setDate(d.getDate() - 7); setCurrentDate(d); }} className="p-2 hover:bg-subtle rounded-lg text-pencil hover:text-ink transition-all duration-200 active:scale-95"><ChevronLeft size={18}/></button>
+                        <div className="flex items-center gap-2 px-6 min-w-[200px] justify-center font-semibold text-ink text-sm">
+                            <Calendar size={16} className="text-pencil"/>
                             {currentDate.toLocaleDateString(undefined, { month: 'long', year: 'numeric' })}
                         </div>
-                        <button onClick={() => { const d = new Date(currentDate); d.setDate(d.getDate() + 7); setCurrentDate(d); }} className="p-2 hover:bg-gray-50 text-pencil transition-colors rounded-lg"><ChevronRight size={16}/></button>
+                        <button onClick={() => { const d = new Date(currentDate); d.setDate(d.getDate() + 7); setCurrentDate(d); }} className="p-2 hover:bg-subtle rounded-lg text-pencil hover:text-ink transition-all duration-200 active:scale-95"><ChevronRight size={18}/></button>
                     </div>
                 </div>
             </div>
 
             <div className="flex flex-col xl:flex-row gap-8 pb-4 h-[700px]">
                 {/* Sidebar: Unassigned */}
-                <div className="w-full xl:w-72 flex-shrink-0 bg-white border border-mist flex flex-col h-full rounded-2xl overflow-hidden shadow-sm">
-                    <div className="p-5 border-b border-mist bg-canvas/30">
-                        <h3 className="text-[10px] font-bold text-pencil uppercase tracking-widest">Unassigned Roles</h3>
+                <div className="w-full xl:w-80 flex-shrink-0 bg-white border border-mist flex flex-col h-full rounded-2xl overflow-hidden shadow-card">
+                    <div className="p-6 border-b border-mist bg-canvas/30">
+                        <h3 className="text-xs font-bold text-pencil uppercase tracking-wide">Unassigned Roles</h3>
                     </div>
                     <div className="p-4 overflow-y-auto flex-1 space-y-3 custom-scrollbar bg-white">
                         {unassignedRoles.length === 0 ? (
@@ -153,7 +153,7 @@ const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, 
                                     key={`${item.project.id}-${item.roleId}-${idx}`}
                                     draggable
                                     onDragStart={(e) => handleDragStart(e, { projectId: item.project.id, roleName: item.roleName })}
-                                    className="bg-white border border-mist p-4 hover:border-ink cursor-grab active:cursor-grabbing transition-colors group relative rounded-xl hover:shadow-md"
+                                    className="bg-white border border-mist p-4 hover:border-ink cursor-grab active:cursor-grabbing transition-all duration-200 group relative rounded-xl hover:shadow-lg hover:-translate-y-[1px]"
                                 >
                                     <div className="flex items-center justify-between mb-2">
                                         <span className="text-[9px] font-bold text-white bg-ink px-2 py-0.5 uppercase tracking-wide rounded-md shadow-sm">{item.roleName}</span>

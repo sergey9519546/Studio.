@@ -49,10 +49,33 @@ module.exports = {
       },
       fontFamily: typography.fontFamily,
       letterSpacing: typography.letterSpacing,
-      borderRadius: radii,
-      boxShadow: shadows,
+      borderRadius: {
+        ...radii,
+        'xl': '0.75rem',
+        '2xl': '1rem',
+        '3xl': '1.5rem',
+      },
+      boxShadow: {
+        ...shadows,
+        'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        'md': '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+        'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+        'xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+      },
       backgroundImage: {
         'rival-gradient': 'linear-gradient(90deg, #2463E6 0%, #18C9AE 50%, #E14BF7 100%)',
+      },
+      transitionDuration: {
+        '200': '200ms',
+        '300': '300ms',
+      },
+      spacing: {
+        '0.5': '0.125rem',
+        '1': '0.25rem',
+        '1.5': '0.375rem',
+        '2': '0.5rem',
+        '2.5': '0.625rem',
+        '3': '0.75rem',
       }
     },
   },

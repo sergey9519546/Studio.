@@ -19,7 +19,7 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = "relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out rounded-sm disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-1";
+  const baseStyles = "relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out rounded-xl disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-1 active:scale-[0.98]";
   
   const sizeStyles = {
     sm: "px-3 py-1.5 text-xs tracking-wide",
@@ -27,18 +27,18 @@ export const Button: React.FC<ButtonProps> = ({
     lg: "px-6 py-3.5 text-base",
   };
 
-  // The Rival Design Variants
+  // The Rival Design Variants - Enhanced with better hover states
   const variants = {
-    primary: "bg-primary hover:bg-primary-hover text-ink-inverse shadow-sm focus:ring-primary/40 border border-transparent",
+    primary: "bg-primary hover:bg-primary-hover text-ink-inverse shadow-sm hover:shadow-lg hover:-translate-y-[1px] focus:ring-primary/40 border border-transparent",
     
     // Secondary: Subtle border, clean interaction
-    secondary: "bg-surface border border-border-subtle text-ink-primary hover:bg-subtle/50 hover:border-border-hover focus:ring-border-subtle shadow-sm",
+    secondary: "bg-surface border border-border-subtle text-ink-primary hover:bg-subtle/50 hover:border-border-hover hover:shadow-md focus:ring-border-subtle shadow-sm",
     
     // Ghost: For unobtrusive actions
-    ghost: "bg-transparent text-ink-secondary hover:text-ink-primary hover:bg-subtle/50",
+    ghost: "bg-transparent text-ink-secondary hover:text-ink-primary hover:bg-subtle/50 rounded-lg",
 
     // Danger: Critical actions
-    danger: "bg-state-danger text-white hover:bg-red-700 shadow-sm focus:ring-red-500/40",
+    danger: "bg-state-danger text-white hover:bg-red-700 shadow-sm hover:shadow-lg hover:-translate-y-[1px] focus:ring-red-500/40",
   };
 
   return (

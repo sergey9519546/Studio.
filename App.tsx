@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Layout from './components/Layout';
@@ -13,46 +12,77 @@ import ImportWizard from './components/ImportWizard';
 import PublicProjectView from './components/PublicProjectView';
 import CreateStudio from './components/CreateStudio';
 import MoodboardTab from './components/Moodboard/MoodboardTab';
-import { Freelancer, Project, Assignment, ActivityLog, ProjectStatus, FreelancerStatus, Priority, Script } from './types';
+import { Freelancer, Project, Assignment, ProjectStatus, FreelancerStatus, Priority, Script } from './types';
 import { api, loadFromStorage } from './services/api';
 import { RefreshCw } from 'lucide-react';
 
+import { ToastProvider, useToast } from './context/ToastContext';
+import { ToastContainer } from './components/ui/Toast';
+import { Modal } from './src/components/design/Modal';
+
 // Wrapper component to provide navigation context to Dashboard
-const DashboardWrapper = (props: any) => {
+interface DashboardWrapperProps extends Omit<React.ComponentProps<typeof Dashboard>, 'onCallAction'> {
+  onAgentAction: (action: string, params: unknown, navigate: unknown) => Promise<unknown>;
+}
+
+const DashboardWrapper: React.FC<DashboardWrapperProps> = (props) => {
   const navigate = useNavigate();
-  return <Dashboard {...props} onCallAction={(action, params) => props.onAgentAction(action, params, navigate)} />;
+  return (
+    <Dashboard
+      {...props}
+      onCallAction={(action, params) => props.onAgentAction(action, params, navigate)}
+    />
+  );
 };
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const toast = useToast();
+  const [bulkDeleteModal, setBulkDeleteModal] = useState({ isOpen: false, projectIds: [] as string[] });
 
   // Hydrate from storage immediately
   const [freelancers, setFreelancers] = useState<Freelancer[]>(() => loadFromStorage('freelancers', []));
   const [projects, setProjects] = useState<Project[]>(() => loadFromStorage('projects', []));
   const [assignments, setAssignments] = useState<Assignment[]>(() => loadFromStorage('assignments', []));
-  const [scripts, setScripts] = useState<Script[]>(() => loadFromStorage('scripts', []));
-  const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
+  // const [scripts, setScripts] = useState<Script[]>(() => loadFromStorage('scripts', []));
+  // const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
 
-  const fetchData = async () => {
+  const handleLogAction = (action: string, details: string) => {
+    // Activity logging disabled for now to fix lint unused vars
+    console.log(`[Activity] ${action}: ${details}`);
+    /*
+    const newLog: ActivityLog = {
+      id: `log-${Date.now()}`,
+      action,
+      details,
+      timestamp: 'Just now',
+      user: 'You'
+    };
+    setActivityLogs(prev => [newLog, ...prev]);
+    */
+  };
+
+  const fetchData = React.useCallback(async () => {
     // Don't set global loading here to avoid flashing if we have cached data
     try {
-      const [f, p, a, s] = await Promise.all([
+      const [f, p, a] = await Promise.all([
         api.freelancers.list({ limit: 1000 }),
         api.projects.list({ limit: 1000 }),
         api.assignments.list({ limit: 5000 }),
-        api.scripts.list({ limit: 1000 })
+        // api.scripts.list({ limit: 1000 })
       ]);
       setFreelancers(f.data || []);
       setProjects(p.data || []);
       setAssignments(a.data || []);
-      setScripts(s.data || []);
+      // setScripts(s.data || []);
     } catch (e) {
       console.error("Failed to fetch data", e);
+      toast.error("Failed to sync data with server");
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [toast]);
 
   useEffect(() => {
     const token = localStorage.getItem('studio_roster_v1_auth_token');
@@ -63,32 +93,24 @@ const App: React.FC = () => {
     } else {
       setIsLoading(false);
     }
-  }, []);
+  }, [fetchData]);
 
-  const handleLogAction = (action: string, details: string) => {
-    const newLog: ActivityLog = {
-      id: `log-${Date.now()}`,
-      action,
-      details,
-      timestamp: 'Just now',
-      user: 'You'
-    };
-    setActivityLogs(prev => [newLog, ...prev]);
-  };
-
-  const handleImport = async (type: 'freelancer' | 'project', data: any[]) => {
+  const handleImport = async (type: 'freelancer' | 'project', data: unknown[]) => {
     setIsLoading(true);
     try {
       if (type === 'freelancer') {
         const res = await api.freelancers.importBatch(data as Freelancer[]);
         handleLogAction('Import Completed', `Imported/Updated ${res.data.created + res.data.updated} freelancers.`);
+        toast.success(`Successfully imported ${res.data.created + res.data.updated} freelancers`);
       } else {
         const res = await api.projects.importBatch(data as Project[]);
         handleLogAction('Import Completed', `Imported/Updated ${res.data.created + res.data.updated} projects.`);
+        toast.success(`Successfully imported ${res.data.created + res.data.updated} projects`);
       }
       await fetchData();
     } catch (e) {
-      alert("Import Failed");
+      console.error(e);
+      toast.error("Import Failed. Please check your file format.");
     } finally {
       setIsLoading(false);
     }
@@ -98,6 +120,7 @@ const App: React.FC = () => {
     const res = await api.freelancers.update(updatedFreelancer);
     setFreelancers(prev => prev.map(f => f.id === res.data.id ? res.data : f));
     handleLogAction('Freelancer Updated', `Updated profile for ${res.data.name}`);
+    toast.success("Freelancer profile updated");
   };
 
   const handleFreelancerDelete = async (id: string) => {
@@ -105,11 +128,13 @@ const App: React.FC = () => {
     setFreelancers(prev => prev.filter(f => f.id !== id));
     setAssignments(prev => prev.filter(a => a.freelancerId !== id));
     handleLogAction('Freelancer Deleted', 'Removed freelancer from roster');
+    toast.info("Freelancer removed from roster");
   };
 
   const handleProjectUpdate = async (updatedProject: Project) => {
     const res = await api.projects.update(updatedProject);
     setProjects(prev => prev.map(p => p.id === res.data.id ? res.data : p));
+    toast.success("Project updated successfully");
   };
 
   const handleProjectDelete = async (id: string) => {
@@ -117,14 +142,25 @@ const App: React.FC = () => {
     setProjects(prev => prev.filter(p => p.id !== id));
     setAssignments(prev => prev.filter(a => a.projectId !== id));
     handleLogAction('Project Deleted', 'Deleted project and associated assignments');
+    toast.info("Project deleted");
   };
 
-  const handleBulkProjectDelete = async (ids: string[]) => {
-    if (window.confirm(`Are you sure you want to delete ${ids.length} projects? This action cannot be undone.`)) {
+  const handleBulkProjectDelete = (ids: string[]) => {
+    setBulkDeleteModal({ isOpen: true, projectIds: ids });
+  };
+
+  const confirmBulkProjectDelete = async () => {
+    const ids = bulkDeleteModal.projectIds;
+    setBulkDeleteModal({ isOpen: false, projectIds: [] });
+    try {
       await api.projects.deleteBatch(ids);
       setProjects(prev => prev.filter(p => !ids.includes(p.id)));
       setAssignments(prev => prev.filter(a => !ids.includes(a.projectId)));
       handleLogAction('Batch Delete', `Deleted ${ids.length} projects`);
+      toast.success(`Deleted ${ids.length} projects`);
+    } catch (e) {
+      console.error('Failed to delete projects', e);
+      toast.error('Failed to delete projects');
     }
   };
 
@@ -148,20 +184,24 @@ const App: React.FC = () => {
         res = await api.assignments.update(newAssignment);
         setAssignments(prev => prev.map(a => a.id === newAssignment.id ? res.data : a));
         handleLogAction('Assignment Updated', `Updated assignment details`);
+        toast.success("Assignment updated");
       } else {
         res = await api.assignments.create(newAssignment);
         setAssignments(prev => [...prev, res.data]);
         const freelancerName = freelancers.find(f => f.id === res.data.freelancerId)?.name || 'Unknown';
         const projectName = projects.find(p => p.id === res.data.projectId)?.name || 'Unknown';
         handleLogAction('Assignment Confirmed', `${freelancerName} assigned to ${projectName}`);
+        toast.success("Assignment confirmed");
 
         // Refresh projects to update fill counts
         const p = await api.projects.list({ limit: 1000 });
         setProjects(p.data);
       }
-    } catch (e: any) {
-      if (e.message === 'CONFLICT_DETECTED') {
-        alert("Server Conflict: Assignment overlaps with existing booking.");
+    } catch (e: unknown) {
+      if (e instanceof Error && e.message === 'CONFLICT_DETECTED') {
+        toast.error("Server Conflict: Assignment overlaps with existing booking.");
+      } else {
+        toast.error("Failed to save assignment");
       }
     }
   };
@@ -185,6 +225,7 @@ const App: React.FC = () => {
     const res = await api.projects.create(newProject);
     setProjects(prev => [...prev, res.data]);
     handleLogAction('Project Created', `Created new project: ${newProject.name}`);
+    toast.success("New project created");
     return res.data;
   };
 
@@ -205,18 +246,20 @@ const App: React.FC = () => {
     const res = await api.freelancers.create(newFreelancer);
     setFreelancers(prev => [...prev, res.data]);
     handleLogAction('Talent Added', `Added new freelancer: ${newFreelancer.name}`);
+    toast.success("New freelancer added to roster");
     return res.data;
   };
 
   const handleScriptCreate = async (script: Script) => {
     const res = await api.scripts.create(script);
-    setScripts(prev => {
-      const exists = prev.find(s => s.id === script.id);
-      if (exists) return prev.map(s => s.id === script.id ? res.data : s);
-      return [...prev, res.data];
-    });
+    // setScripts(prev => {
+    //   const exists = prev.find(s => s.id === script.id);
+    //   if (exists) return prev.map(s => s.id === script.id ? res.data : s);
+    //   return [...prev, res.data];
+    // });
     const projName = projects.find(p => p.id === script.projectId)?.name || 'Unknown Project';
     handleLogAction('Script Saved', `Saved "${script.title}" to ${projName}`);
+    toast.success("Script saved");
     return res.data;
   };
 
@@ -224,8 +267,10 @@ const App: React.FC = () => {
     try {
       await api.auth.login(contactInfo);
       setIsAuthenticated(true);
+      toast.success("Welcome back to Studio Roster");
     } catch (e) {
       console.error("Auth Error:", e);
+      toast.error("Authentication failed");
       throw e;
     }
   };
@@ -234,7 +279,7 @@ const App: React.FC = () => {
     switch (action) {
       case 'create_project':
         return await handleProjectCreate(params);
-      case 'update_project':
+      case 'update_project': {
         const p = projects.find(proj => proj.id === params.id);
         if (p) {
           const updated = { ...p, ...params };
@@ -242,9 +287,10 @@ const App: React.FC = () => {
           return updated;
         }
         throw new Error("Project not found");
+      }
       case 'create_freelancer':
         return await handleFreelancerCreate(params);
-      case 'assign_freelancer':
+      case 'assign_freelancer': {
         const assignParams: Assignment = {
           id: `asn-${Date.now()}`,
           projectId: params.projectId,
@@ -257,6 +303,7 @@ const App: React.FC = () => {
         };
         await handleAssignmentUpdate(assignParams);
         return { status: 'Assigned' };
+      }
       case 'navigate':
         navigate(params.path);
         return { status: 'Navigated' };
@@ -269,6 +316,7 @@ const App: React.FC = () => {
             status: info.data?.configured ? 'Connected' : 'Not Configured'
           };
         } catch (e) {
+          console.error(e);
           return { error: 'Failed to retrieve storage info' };
         }
       default:
@@ -298,9 +346,10 @@ const App: React.FC = () => {
               freelancers={freelancers}
               assignments={assignments}
               onAgentAction={handleAgentAction}
+              isLoading={isLoading}
             />
           } />
-          <Route path="projects" element={<ProjectList projects={projects} onCreate={handleProjectCreate} onUpdate={handleProjectUpdate} onDelete={handleProjectDelete} onBulkDelete={handleBulkProjectDelete} />} />
+          <Route path="projects" element={<ProjectList projects={projects} onCreate={handleProjectCreate} onUpdate={handleProjectUpdate} onDelete={handleProjectDelete} onBulkDelete={handleBulkProjectDelete} isLoading={isLoading} />} />
           <Route path="projects/:id" element={
             <ProjectDetail
               projects={projects}
@@ -322,6 +371,15 @@ const App: React.FC = () => {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </HashRouter>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <ToastProvider>
+      <AppContent />
+      <ToastContainer />
+    </ToastProvider>
   );
 };
 

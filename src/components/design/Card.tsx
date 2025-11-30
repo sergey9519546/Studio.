@@ -19,10 +19,11 @@ export const Card: React.FC<CardProps> = ({
       className={`
         bg-surface 
         border border-border-subtle 
-        rounded-md 
+        rounded-2xl 
         shadow-card
         overflow-hidden
-        ${hoverable ? 'transition-transform duration-300 hover:-translate-y-1 hover:shadow-float' : ''}
+        transition-all duration-200
+        ${hoverable ? 'hover:-translate-y-[2px] hover:shadow-lg cursor-pointer' : ''}
         ${className}
       `}
     >

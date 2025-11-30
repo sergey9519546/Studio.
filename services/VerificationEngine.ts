@@ -31,11 +31,11 @@ export class VerificationEngine {
      * @returns The verified, refined response
      */
     public async generateVerifiedContent(query: string): Promise<string> {
-        
+
         // PHASE 1: Baseline Generation
         // We generate the initial "draft" answer.
         console.log("[CoVe] Phase 1: Generating Baseline...");
-        const baseline = await withResilience(() => 
+        const baseline = await withResilience(() =>
             this.aiService.generateEnhancedContent(
                 `Answer the following question in detail:\nQuestion: ${query}`
             )
@@ -53,11 +53,11 @@ export class VerificationEngine {
             Output strictly a JSON list of strings, e.g.:
             ["What represents the X in Y?", "Is Z a valid parameter?"]
         `;
-        
-        const planRaw = await withResilience(() => 
-            this.aiService.generateEnhancedContent(planPrompt, 'gemini-2.5-flash', "You are a skeptical fact-checker.")
+
+        const planRaw = await withResilience(() =>
+            this.aiService.generateEnhancedContent(planPrompt, 'gemini-2.0-flash-exp', "You are a skeptical fact-checker.")
         );
-        
+
         const verificationQuestions = this.safeJsonParseList(planRaw);
 
         if (verificationQuestions.length === 0) {
@@ -73,7 +73,7 @@ export class VerificationEngine {
 
         // Parallel execution for performance optimization
         await Promise.all(verificationQuestions.map(async (q) => {
-            const answer = await withResilience(() => 
+            const answer = await withResilience(() =>
                 this.aiService.generateEnhancedContent(
                     `Answer this question concisely and accurately based on general knowledge.\nQuestion: ${q}`
                 )
@@ -98,7 +98,7 @@ export class VerificationEngine {
             - Do not mention "Verification Findings" in the final output.
         `;
 
-        return await withResilience(() => 
+        return await withResilience(() =>
             this.aiService.generateEnhancedContent(finalPrompt)
         );
     }

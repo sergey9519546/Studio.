@@ -19,7 +19,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     // Use window.setTimeout to enforce Browser return type (number) explicitly
     const timer = window.setTimeout(() => {
         setShowForceOption(true);
-    }, 2500); // Show manual override if stuck for 2.5s
+    }, 5000); // Show manual override if stuck for 5s
 
     return () => window.clearTimeout(timer);
   }, [loading]);
@@ -58,13 +58,13 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         <button
           onClick={() => handleEnter(false)}
           disabled={loading}
-          className="group relative px-12 py-4 bg-ink text-white rounded-xl text-[11px] font-bold uppercase tracking-[0.25em] shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-70 disabled:translate-y-0 disabled:shadow-none min-w-[200px]"
+          className="group relative px-12 py-4 bg-ink text-white rounded-xl text-xs font-bold uppercase tracking-wide shadow-lg hover:shadow-xl hover:-translate-y-[2px] transition-all duration-200 disabled:opacity-70 disabled:translate-y-0 disabled:shadow-none min-w-[200px] active:scale-[0.98]"
         >
           <span className="flex items-center justify-center gap-3">
             {loading ? (
                 <span className="animate-pulse">Authenticating...</span>
             ) : (
-                <>Enter <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 -ml-2 group-hover:ml-0" /></>
+                <>Enter <ArrowRight size={16} className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200 -ml-2 group-hover:ml-0" /></>
             )}
           </span>
         </button>

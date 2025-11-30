@@ -6,6 +6,7 @@ import * as ExcelJS from 'exceljs';
 import { GoogleGenAI, Type } from "@google/genai";
 import { FreelancerStatus, ProjectStatus } from '../types';
 import { generateContentWithRetry, api } from '../services/api';
+import { z } from 'zod';
 
 interface ImportWizardProps {
     onImport: (type: 'freelancer' | 'project', data: any[]) => void;
@@ -13,7 +14,36 @@ interface ImportWizardProps {
     existingProjects?: any[];
 }
 
-// Mock Schemas for demo
+// Zod Validation Schemas
+const FreelancerZodSchema = z.object({
+    name: z.string(),
+    contactInfo: z.string().optional(),
+    role: z.string(),
+    rate: z.number(),
+    currency: z.string().optional(),
+    skills: z.array(z.string()).optional(),
+    bio: z.string().optional(),
+    status: z.string().optional(),
+    timezone: z.string().optional(),
+});
+
+const FreelancerArraySchema = z.array(FreelancerZodSchema);
+
+const ProjectZodSchema = z.object({
+    name: z.string(),
+    clientName: z.string(),
+    description: z.string().optional(),
+    priority: z.string().optional(),
+    status: z.string().optional(),
+    budget: z.string().optional(),
+    startDate: z.string().optional(),
+    dueDate: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+});
+
+const ProjectArraySchema = z.array(ProjectZodSchema);
+
+// Gemini API Schemas (for structured output)
 const FREELANCER_SCHEMA = { type: Type.ARRAY, items: { type: Type.OBJECT, properties: { name: { type: Type.STRING }, contactInfo: { type: Type.STRING }, role: { type: Type.STRING }, rate: { type: Type.NUMBER }, currency: { type: Type.STRING }, skills: { type: Type.ARRAY, items: { type: Type.STRING } }, bio: { type: Type.STRING }, status: { type: Type.STRING }, timezone: { type: Type.STRING } }, required: ["name", "role", "rate"] } };
 const PROJECT_SCHEMA = { type: Type.ARRAY, items: { type: Type.OBJECT, properties: { name: { type: Type.STRING }, clientName: { type: Type.STRING }, description: { type: Type.STRING }, priority: { type: Type.STRING }, status: { type: Type.STRING }, budget: { type: Type.STRING }, startDate: { type: Type.STRING }, dueDate: { type: Type.STRING }, tags: { type: Type.ARRAY, items: { type: Type.STRING } } }, required: ["name", "clientName"] } };
 
@@ -32,6 +62,7 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
     const [rows, setRows] = useState<any[][]>([]);
     const [headers, setHeaders] = useState<string[]>([]);
     const [jobId, setJobId] = useState<string | null>(null);
+    const [extractionWarning, setExtractionWarning] = useState<string>('');
 
     // --- Simulated Pipeline Flow ---
     const simulatePipeline = async (startProgress: number, endProgress: number, stage: string, delayMs: number) => {
@@ -48,6 +79,7 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
         setFile(uploadedFile);
         setIsProcessing(true);
         setProgress(0);
+        setExtractionWarning('');
 
         try {
             // Stage 1: Secure Uplink (Mock S3 Multipart)
@@ -69,7 +101,7 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
                 const worksheet = workbook.worksheets[0];
 
                 const jsonData: any[][] = [];
-                worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
+                worksheet.eachRow({ includeEmpty: false }, (row, _rowNumber) => {
                     // ExcelJS row.values is 1-based, index 0 is undefined. Slice it off.
                     const rowValues = row.values as any[];
                     jsonData.push(rowValues.slice(1));
@@ -90,11 +122,11 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
                 const knowledgeRes = await api.knowledge.createFromAsset('global', asset.id, asset);
 
                 if (knowledgeRes.data.status === 'error') {
-                    throw new Error("Text extraction failed on server.");
+                    throw new Error("Text extraction failed on server. The file may be corrupted or in an unsupported format.");
                 }
 
                 const extractedText = knowledgeRes.data.originalContent;
-                if (!extractedText) throw new Error("No text content extracted.");
+                if (!extractedText) throw new Error("No text content extracted from the file. The document may be empty or unreadable.");
 
                 await executeAIAnalysis(extractedText);
             }
@@ -103,9 +135,10 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
             await simulatePipeline(80, 100, 'VALIDATING SCHEMA', 500);
             setStep(2);
 
-        } catch (e: any) {
+        } catch (e: unknown) {
             console.error(e);
-            alert(`Import Failed: ${e.message}`);
+            const errorMsg = e instanceof Error ? e.message : 'Unknown error occurred';
+            alert(`Import Failed: ${errorMsg}`);
         } finally {
             setIsProcessing(false);
         }
@@ -115,6 +148,7 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
         if (!pastedText.trim()) return;
         setIsProcessing(true);
         setProgress(0);
+        setExtractionWarning('');
 
         try {
             await simulatePipeline(0, 40, 'STREAMING TEXT TO VECTOR STORE', 1000);
@@ -122,34 +156,94 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
             await executeAIAnalysis(pastedText);
             await simulatePipeline(80, 100, 'FINALIZING', 200);
             setStep(2);
-        } catch (e) {
+        } catch (e: unknown) {
             console.error(e);
-            alert("Analysis Failed");
+            const errorMsg = e instanceof Error ? e.message : 'Unknown error occurred';
+            alert(`Analysis Failed: ${errorMsg}`);
         } finally {
             setIsProcessing(false);
         }
     };
 
     const executeAIAnalysis = async (content: string) => {
-        if (!process.env.API_KEY) throw new Error("API Key required.");
+        if (!process.env.API_KEY) throw new Error("API Key required. Please configure your environment.");
+
         const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
         const isFreelancer = importType === 'freelancer';
         const schema = isFreelancer ? FREELANCER_SCHEMA : PROJECT_SCHEMA;
+        const validationSchema = isFreelancer ? FreelancerArraySchema : ProjectArraySchema;
+
+        // Enhanced prompt with detailed instructions
+        const entityType = isFreelancer ? 'freelancer roster' : 'project';
+        const entityPlural = isFreelancer ? 'freelancers' : 'projects';
+        const entitySingular = isFreelancer ? 'person' : 'project';
+
+        const extractionPrompt = `You are a data extraction specialist.
+
+TASK: Extract ${entityType} information from the content below.
+
+RULES:
+1. Extract ALL ${entityPlural} mentioned in the document
+2. Fill in as many fields as possible from the available information
+3. If a required field is missing, use reasonable defaults:
+   ${isFreelancer ? '- role: "Unknown"\n   - rate: 0' : '- clientName: "TBD"'}
+4. Preserve original names and contact information exactly as written
+5. Return a JSON array even if only one ${entitySingular} is found
+6. Extract skills/tags as arrays when mentioned
+7. Dates should be in ISO format (YYYY-MM-DD) when possible
+
+CONTENT (first 100,000 characters):
+${content.slice(0, 100000)}
+
+${content.length > 100000 ? '\n⚠️ Note: Content was truncated. Extract as much as possible from the visible portion.' : ''}
+
+Return ONLY the JSON array, no markdown formatting.`;
 
         const response = await generateContentWithRetry(ai, {
             model: 'gemini-2.0-flash-exp',
-            contents: `Extract data. Return strict JSON. Content: ${content.slice(0, 25000)}`,
+            contents: extractionPrompt,
             config: { responseMimeType: 'application/json', responseSchema: schema }
         });
 
         const responseText = typeof response.text === 'function' ? response.text() : response.text;
 
         if (!responseText || typeof responseText !== 'string') {
-            throw new Error("Invalid AI response format");
+            throw new Error(`AI returned invalid response. Expected JSON string, got ${typeof responseText}. This may indicate an API issue or model error.`);
         }
 
-        const jsonResult = JSON.parse(responseText);
-        const dataArray = Array.isArray(jsonResult) ? jsonResult : [];
+        let jsonResult;
+        try {
+            jsonResult = JSON.parse(responseText);
+        } catch (parseError) {
+            throw new Error(`AI returned malformed JSON: ${responseText.substring(0, 200)}... Please try again or contact support.`);
+        }
+
+        // Validate with Zod
+        let validatedData;
+        try {
+            validatedData = validationSchema.parse(jsonResult);
+        } catch (zodError) {
+            console.error('Zod validation error:', zodError);
+            // Still allow data through but warn user
+            validatedData = Array.isArray(jsonResult) ? jsonResult : [];
+            if (validatedData.length > 0) {
+                setExtractionWarning('Some extracted data may not match the expected format. Please review carefully.');
+            }
+        }
+
+        const dataArray = validatedData;
+
+        if (dataArray.length === 0) {
+            throw new Error(`No ${entityPlural} found in the content. The AI may have misunderstood the format. Please check that the uploaded file contains ${entityType} data.`);
+        }
+
+        // Partial success detection
+        const estimatedCount = content.match(/(?:^|\n)\d+\./gm)?.length || 0;
+        if (estimatedCount > 0 && estimatedCount > dataArray.length * 1.5) {
+            setExtractionWarning(`⚠️ Extracted ${dataArray.length} ${entityPlural}, but document may contain ~${estimatedCount} items. Some may have been missed.`);
+        }
+
+        console.info(`✅ Successfully extracted ${dataArray.length} ${entityPlural}`);
 
         if (dataArray.length > 0) {
             const firstItem = dataArray[0];

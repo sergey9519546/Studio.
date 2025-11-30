@@ -50,8 +50,8 @@ const FreelancerList: React.FC<FreelancerListProps> = ({ freelancers, assignment
        {/* Header */}
        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
-          <h1 className="text-5xl font-display font-semibold tracking-tighter text-ink-primary leading-[0.9]">Roster.</h1>
-          <p className="text-ink-secondary mt-2 text-sm font-medium tracking-wide">Global talent index.</p>
+          <h1 className="text-4xl font-display font-semibold tracking-tight text-ink-primary">Roster</h1>
+          <p className="text-ink-secondary mt-2 text-sm font-medium">Global talent index.</p>
         </div>
         <div className="flex gap-3">
           <Button variant="primary" leftIcon={<Plus size={14} />} onClick={onCreate}>
@@ -60,26 +60,26 @@ const FreelancerList: React.FC<FreelancerListProps> = ({ freelancers, assignment
         </div>
       </div>
 
-      {/* Controls */}
-       <div className="bg-surface p-2 rounded-xl flex flex-col xl:flex-row gap-4 xl:items-center justify-between sticky top-4 z-20 shadow-card border border-border-subtle/60 backdrop-blur-md">
+       {/* Controls */}
+        <div className="bg-surface p-3 rounded-xl flex flex-col xl:flex-row gap-4 xl:items-center justify-between sticky top-4 z-20 shadow-card border border-border-subtle backdrop-blur-md">
         <div className="relative w-full xl:w-96 group">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-tertiary group-focus-within:text-primary transition-colors" size={14} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-tertiary group-focus-within:text-primary transition-colors" size={16} />
             <input
                 type="text"
                 placeholder="Search by name or skill..."
-                className="w-full pl-9 pr-4 py-2.5 bg-subtle/30 border border-transparent rounded-lg focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary text-xs transition-all font-medium placeholder-ink-tertiary text-ink-primary outline-none"
+                className="w-full pl-11 pr-4 py-3 bg-subtle/30 border border-border-subtle rounded-xl focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm transition-all font-medium placeholder-ink-tertiary text-ink-primary outline-none"
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
             />
         </div>
         
-        <div className="flex items-center gap-2 p-1">
-            <div className="flex bg-subtle/50 p-1 rounded-lg border border-border-subtle">
-                <button onClick={() => setViewMode('grid')} className={`p-1.5 rounded-md transition-all ${viewMode === 'grid' ? 'bg-white shadow-sm text-ink-primary' : 'text-ink-tertiary hover:text-ink-secondary'}`}>
-                    <LayoutGrid size={16}/>
+        <div className="flex items-center gap-2">
+            <div className="flex bg-subtle/50 p-1 rounded-xl border border-border-subtle">
+                <button onClick={() => setViewMode('grid')} className={`p-2 rounded-lg transition-all duration-200 ${viewMode === 'grid' ? 'bg-white shadow-sm text-ink-primary' : 'text-ink-tertiary hover:text-ink-secondary hover:bg-white/50'}`}>
+                    <LayoutGrid size={18}/>
                 </button>
-                <button onClick={() => setViewMode('list')} className={`p-1.5 rounded-md transition-all ${viewMode === 'list' ? 'bg-white shadow-sm text-ink-primary' : 'text-ink-tertiary hover:text-ink-secondary'}`}>
-                    <ListIcon size={16}/>
+                <button onClick={() => setViewMode('list')} className={`p-2 rounded-lg transition-all duration-200 ${viewMode === 'list' ? 'bg-white shadow-sm text-ink-primary' : 'text-ink-tertiary hover:text-ink-secondary hover:bg-white/50'}`}>
+                    <ListIcon size={18}/>
                 </button>
             </div>
         </div>
@@ -90,7 +90,7 @@ const FreelancerList: React.FC<FreelancerListProps> = ({ freelancers, assignment
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredFreelancers.map((freelancer) => (
                   <Link key={freelancer.id} to={`/freelancers/${freelancer.id}`}>
-                      <Card className="h-full flex flex-col p-6 hover:-translate-y-1 transition-transform duration-300">
+                      <Card hoverable className="h-full flex flex-col p-6">
                           <div className="flex justify-between items-start mb-5">
                                <div className="relative">
                                    <div className="w-16 h-16 rounded-2xl overflow-hidden shadow-sm ring-1 ring-black/5">
