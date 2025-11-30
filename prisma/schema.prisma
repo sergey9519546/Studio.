@@ -1,0 +1,103 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+}
+
+model User {
+    id    Int     @id @default(autoincrement())
+    email String  @unique
+    name  String?
+}
+
+model Freelancer {
+    id           String       @id @default(uuid())
+    name         String
+    email        String       @unique
+    skills       Skill[]
+    role         String?
+    rate         Float?
+    status       String?
+    bio          String?
+    phone        String?
+    location     String?
+    availability String?
+    portfolio    String?
+    notes        String?
+    createdAt    DateTime     @default(now())
+    updatedAt    DateTime     @updatedAt
+    assignments  Assignment[]
+}
+
+model Skill {
+    id          Int          @id @default(autoincrement())
+    name        String       @unique
+    freelancers Freelancer[]
+}
+
+model Project {
+    id               String            @id @default(uuid())
+    title            String?
+    description      String?
+    status           String?
+    startDate        DateTime?
+    endDate          DateTime?
+    budget           Float?
+    client           String?
+    roleRequirements RoleRequirement[]
+    knowledgeSources KnowledgeSource[]
+    knowledgeBase    KnowledgeSource[] @relation("ProjectKnowledgeBase")
+    scripts          Script[]
+    assignments      Assignment[]
+    updatedAt        DateTime          @updatedAt
+    createdAt        DateTime          @default(now())
+}
+
+model RoleRequirement {
+    id        String  @id @default(uuid())
+    role      String
+    count     Int?
+    skills    String // SQLite doesn't support scalar lists, storing as CSV
+    projectId String
+    project   Project @relation(fields: [projectId], references: [id])
+}
+
+model KnowledgeSource {
+    id              String  @id @default(uuid())
+    type            String
+    title           String
+    originalContent String?
+    status          String?
+    summary         String?
+    projectId       String
+    project         Project @relation(fields: [projectId], references: [id])
+
+    // Back-relation for knowledgeBase
+    projectKBId String?
+    projectKB   Project? @relation("ProjectKnowledgeBase", fields: [projectKBId], references: [id])
+}
+
+model Script {
+    id        String  @id @default(uuid())
+    content   String?
+    projectId String
+    project   Project @relation(fields: [projectId], references: [id])
+}
+
+model Assignment {
+    id           String     @id @default(uuid())
+    projectId    String
+    project      Project    @relation(fields: [projectId], references: [id])
+    freelancerId String
+    freelancer   Freelancer @relation(fields: [freelancerId], references: [id])
+    startDate    DateTime
+    endDate      DateTime
+    allocation   Int        @default(100)
+    role         String
+    status       String     @default("active")
+    notes        String?
+    createdAt    DateTime   @default(now())
+    updatedAt    DateTime   @updatedAt
+}
