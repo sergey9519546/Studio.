@@ -57,7 +57,7 @@ async function bootstrap() {
     app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
 
     const port = process.env.PORT || 3001;
-    await app.listen(port);
+    await app.listen(port, '0.0.0.0');
     logger.log(`🚀 Studio Roster API running on port ${port}`);
     logger.log(`🛡️  CORS allowed for: ${allowedOrigins.join(', ')}`);
   } catch (error) {

@@ -25,26 +25,6 @@ RUN npx tsc -p apps/api/tsconfig.app.json --outDir /app/build/apps/api
 # Stage 2: Frontend Build
 FROM node:22-bookworm-slim AS frontend-builder
 
-WORKDIR /app
-RUN apt-get update && apt-get upgrade -y
-
-COPY package*.json ./
-RUN npm install --legacy-peer-deps
-
-# Copy EVERYTHING for frontend build (Vite needs root src, components, etc.)
-COPY . .
-
-# Build Vite app
-RUN npx vite build
-
-# Stage 3: Production Runner
-FROM node:22-bookworm-slim AS runner
-
-WORKDIR /app
-COPY package*.json ./
-COPY prisma ./prisma/
-COPY prisma.config.ts ./
-
 # Install production dependencies and system requirements
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y openssl && \
@@ -57,6 +37,6 @@ RUN npx prisma generate
 COPY --from=backend-builder /app/build /app/build
 COPY --from=frontend-builder /app/dist/client /app/dist/client
 
-EXPOSE 3000
+EXPOSE 3001
 
 CMD ["sh", "-c", "npx prisma db push --accept-data-loss && node /app/build/apps/api/src/main.js"]
