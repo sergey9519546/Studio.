@@ -1,7 +1,11 @@
 
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './common/auth/jwt.strategy';
+import { validate } from './config/env.validation';
 import { PrismaModule } from './prisma/prisma.module';
 import { CommonModule } from './common/guards/common.module';
 import { AssetsModule } from './modules/assets/assets.module';
@@ -25,6 +29,7 @@ import { join } from 'path';
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.env.local', '.env'],
+      validate,
     }),
     EventEmitterModule.forRoot({
       global: true,
@@ -32,6 +37,15 @@ import { join } from 'path';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../../../client'),
       exclude: ['/api/(.*)'],
+    }),
+    PassportModule,
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: { expiresIn: '60m' },
+      }),
+      inject: [ConfigService],
     }),
     CommonModule,
     PrismaModule,
@@ -49,5 +63,6 @@ import { join } from 'path';
     AvailabilityModule,
     HealthModule
   ],
+  providers: [JwtStrategy],
 })
 export class AppModule { }

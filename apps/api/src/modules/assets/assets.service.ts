@@ -72,6 +72,9 @@ export class AssetsService {
 
     // 2. Save to Memory Store (Resilience)
     this.memoryStore.unshift(assetEntity);
+    if (this.memoryStore.length > 100) {
+      this.memoryStore.pop();
+    }
 
     // 3. Save Record to DB
     // Check if prisma asset model actually exists to avoid runtime crash if schema is outdated

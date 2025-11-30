@@ -54,34 +54,28 @@ export class GoogleDriveAdapter implements ICloudStorageAdapter {
   }
 
   async listFiles(userId: number, folderId = 'root'): Promise<{ files: CloudFileDto[]; nextPageToken?: string }> {
-    try {
-      const user = await this.getUserWithCredentials(userId);
-      const { drive } = this.clientFactory.createDriveClientForUser(user as any);
+    const user = await this.getUserWithCredentials(userId);
+    const { drive } = this.clientFactory.createDriveClientForUser(user as any);
 
-      const res = await drive.files.list({
-        q: `'${folderId}' in parents and trashed = false`,
-        fields: 'nextPageToken, files(id, name, mimeType, size, thumbnailLink, webViewLink, modifiedTime)',
-        pageSize: 20,
-      });
+    const res = await drive.files.list({
+      q: `'${folderId}' in parents and trashed = false`,
+      fields: 'nextPageToken, files(id, name, mimeType, size, thumbnailLink, webViewLink, modifiedTime)',
+      pageSize: 20,
+    });
 
-      const files = (res.data.files || []).map(f => ({
-        id: f.id!,
-        name: f.name!,
-        provider: CloudProviderType.GOOGLE_DRIVE,
-        type: f.mimeType === 'application/vnd.google-apps.folder' ? CloudFileType.FOLDER : CloudFileType.FILE,
-        mimeType: f.mimeType!,
-        sizeBytes: f.size ? parseInt(f.size) : undefined,
-        thumbnailUrl: f.thumbnailLink || undefined,
-        webViewUrl: f.webViewLink || undefined,
-        updatedAt: f.modifiedTime || new Date().toISOString()
-      }));
+    const files = (res.data.files || []).map(f => ({
+      id: f.id!,
+      name: f.name!,
+      provider: CloudProviderType.GOOGLE_DRIVE,
+      type: f.mimeType === 'application/vnd.google-apps.folder' ? CloudFileType.FOLDER : CloudFileType.FILE,
+      mimeType: f.mimeType!,
+      sizeBytes: f.size ? parseInt(f.size) : undefined,
+      thumbnailUrl: f.thumbnailLink || undefined,
+      webViewUrl: f.webViewLink || undefined,
+      updatedAt: f.modifiedTime || new Date().toISOString()
+    }));
 
-      return { files, nextPageToken: res.data.nextPageToken || undefined };
-    } catch (e: any) {
-      this.logger.error(`Drive List Failed: ${e.message}`);
-      // Return empty if credentials invalid or other error
-      return { files: [] };
-    }
+    return { files, nextPageToken: res.data.nextPageToken || undefined };
   }
 
   async getDownloadUrl(userId: number, fileId: string): Promise<string> {
