@@ -1,6 +1,6 @@
 
 import { plainToInstance } from 'class-transformer';
-import { IsEnum, IsNumber, IsString, validateSync } from 'class-validator';
+import { IsEnum, IsNumber, IsString, IsOptional, validateSync } from 'class-validator';
 
 enum Environment {
     Development = 'development',
@@ -21,9 +21,11 @@ class EnvironmentVariables {
     @IsString()
     GCP_PROJECT_ID: string;
 
+    @IsOptional()
     @IsString()
     GCP_CLIENT_EMAIL: string;
 
+    @IsOptional()
     @IsString()
     GCP_PRIVATE_KEY: string;
 

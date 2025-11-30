@@ -45,9 +45,8 @@ COPY prisma.config.ts ./
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y openssl ca-certificates
 
-# Copy node_modules from backend-builder and prune for production
+# Copy node_modules from backend-builder (FULL deps)
 COPY --from=backend-builder /app/node_modules ./node_modules
-RUN npm prune --production
 
 # Generate Prisma Client
 RUN npx prisma generate
