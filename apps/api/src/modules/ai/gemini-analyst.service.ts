@@ -100,7 +100,7 @@ export class GeminiAnalystService {
     contextData: string,
     userQuery: string,
     files?: Array<Express.Multer.File>
-  ): Promise<any> {
+  ): Promise<unknown> {
     if (!this.ai) {
       throw new InternalServerErrorException("AI Service is not configured (Missing API_KEY).");
     }
@@ -213,13 +213,13 @@ export class GeminiAnalystService {
 
         try {
           return JSON.parse(text);
-        } catch (_parseError) {
+        } catch {
           this.logger.error("Malformed JSON from AI", text);
           // Simple repair attempt: remove markdown fences if they slipped through
           const cleaned = text.replace(/```json/g, '').replace(/```/g, '').trim();
           try {
             return JSON.parse(cleaned);
-          } catch (_) {
+          } catch {
             throw new AIProcessingException("Failed to parse AI response. The model returned malformed JSON.", { raw_response: text });
           }
         }

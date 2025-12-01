@@ -18,7 +18,6 @@ import { RefreshCw } from 'lucide-react';
 
 import { ToastProvider, useToast } from './context/ToastContext';
 import { ToastContainer } from './components/ui/Toast';
-import { Modal } from './src/components/design/Modal';
 
 // Wrapper component to provide navigation context to Dashboard
 interface DashboardWrapperProps extends Omit<React.ComponentProps<typeof Dashboard>, 'onCallAction'> {
@@ -39,7 +38,6 @@ const AppContent: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
-  const [bulkDeleteModal, setBulkDeleteModal] = useState({ isOpen: false, projectIds: [] as string[] });
 
   // Hydrate from storage immediately
   const [freelancers, setFreelancers] = useState<Freelancer[]>(() => loadFromStorage('freelancers', []));
@@ -145,22 +143,17 @@ const AppContent: React.FC = () => {
     toast.info("Project deleted");
   };
 
-  const handleBulkProjectDelete = (ids: string[]) => {
-    setBulkDeleteModal({ isOpen: true, projectIds: ids });
-  };
-
-  const confirmBulkProjectDelete = async () => {
-    const ids = bulkDeleteModal.projectIds;
-    setBulkDeleteModal({ isOpen: false, projectIds: [] });
-    try {
-      await api.projects.deleteBatch(ids);
-      setProjects(prev => prev.filter(p => !ids.includes(p.id)));
-      setAssignments(prev => prev.filter(a => !ids.includes(a.projectId)));
-      handleLogAction('Batch Delete', `Deleted ${ids.length} projects`);
-      toast.success(`Deleted ${ids.length} projects`);
-    } catch (e) {
-      console.error('Failed to delete projects', e);
-      toast.error('Failed to delete projects');
+  const handleBulkProjectDelete = async (ids: string[]) => {
+    if (window.confirm(`Are you sure you want to delete ${ids.length} projects? This action cannot be undone.`)) {
+      try {
+        await api.projects.deleteBatch(ids);
+        setProjects(prev => prev.filter(p => !ids.includes(p.id)));
+        setAssignments(prev => prev.filter(a => !ids.includes(a.projectId)));
+        toast.success(`Deleted ${ids.length} projects`);
+      } catch (e) {
+        console.error('Failed to delete projects', e);
+        toast.error('Failed to delete projects');
+      }
     }
   };
 
@@ -275,6 +268,7 @@ const AppContent: React.FC = () => {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleAgentAction = async (action: string, params: any, navigate: any) => {
     switch (action) {
       case 'create_project':
