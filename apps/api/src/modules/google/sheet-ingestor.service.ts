@@ -7,7 +7,7 @@ export class SheetIngestorService {
   // Token conservation limit: Avoid sending massive grids to the LLM
   private readonly MAX_CELLS = 10000;
 
-  constructor(private readonly clientFactory: GoogleClientFactory) {}
+  constructor(private readonly clientFactory: GoogleClientFactory) { }
 
   /**
    * Fetches the first visible sheet from a Spreadsheet ID and converts it to a Markdown table.
@@ -23,11 +23,11 @@ export class SheetIngestorService {
       // 1. Get Spreadsheet Metadata to identify the first visible sheet
       const meta = await sheets.spreadsheets.get({ spreadsheetId: fileId });
       const visibleSheet = meta.data.sheets?.find(s => !s.properties?.hidden);
-      
+
       if (!visibleSheet?.properties?.title) {
         throw new Error('No visible sheets found in document.');
       }
-      
+
       const sheetName = visibleSheet.properties.title;
 
       // 2. Fetch Data (Values)
@@ -46,10 +46,12 @@ export class SheetIngestorService {
       // 3. Format to Markdown
       return this.rowsToMarkdown(rows);
 
-    } catch (error: any) {
-      this.logger.error(`Failed to ingest sheet ${fileId}: ${error.message}`);
+    } catch (error: unknown) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const err = error as any; // Cast to access response properties safely or use a better type guard
+      this.logger.error(`Failed to ingest sheet ${fileId}: ${err.message}`);
       // Clean up error message for frontend
-      const msg = error.response?.data?.error?.message || error.message;
+      const msg = err.response?.data?.error?.message || err.message || String(error);
       throw new BadRequestException(`Google Sheets Error: ${msg}`);
     }
   }
@@ -58,33 +60,33 @@ export class SheetIngestorService {
    * Converts a 2D array of strings into a Markdown table.
    * Includes logic to truncate data if it exceeds token limits.
    */
-  private rowsToMarkdown(rows: any[][]): string {
+  private rowsToMarkdown(rows: unknown[][]): string {
     const totalCells = rows.reduce((acc, row) => acc + row.length, 0);
-    
+
     let activeRows = rows;
     let warning = '';
-    
+
     // Optimization: Truncate if too large to ensure fast inference
     if (totalCells > this.MAX_CELLS) {
-        const avgCols = rows[0]?.length || 1;
-        const maxRows = Math.floor(this.MAX_CELLS / avgCols);
-        activeRows = rows.slice(0, maxRows);
-        warning = `\n\n*(Note: Data truncated. Analyzed top ${maxRows} rows to optimize processing speed.)*`;
+      const avgCols = rows[0]?.length || 1;
+      const maxRows = Math.floor(this.MAX_CELLS / avgCols);
+      activeRows = rows.slice(0, maxRows);
+      warning = `\n\n*(Note: Data truncated. Analyzed top ${maxRows} rows to optimize processing speed.)*`;
     }
 
     if (activeRows.length === 0) return '';
 
     // Normalize headers (Row 1)
     const headers = activeRows[0].map(cell => this.cleanCell(cell));
-    
+
     // Markdown Table Syntax construction
     const headerRow = `| ${headers.join(' | ')} |`;
     const separatorRow = `| ${headers.map(() => '---').join(' | ')} |`;
 
     const bodyRows = activeRows.slice(1).map(row => {
-        // Ensure every row has the same number of columns as the header
-        const normalized = Array.from({ length: headers.length }, (_, i) => this.cleanCell(row[i]));
-        return `| ${normalized.join(' | ')} |`;
+      // Ensure every row has the same number of columns as the header
+      const normalized = Array.from({ length: headers.length }, (_, i) => this.cleanCell(row[i]));
+      return `| ${normalized.join(' | ')} |`;
     });
 
     return `${headerRow}\n${separatorRow}\n${bodyRows.join('\n')}${warning}`;
@@ -93,13 +95,13 @@ export class SheetIngestorService {
   /**
    * Sanitizes cell data to prevent breaking Markdown formatting.
    */
-  private cleanCell(val: any): string {
+  private cleanCell(val: unknown): string {
     if (val === null || val === undefined) return '';
     let str = String(val).trim();
     // Escape pipes as they are structural elements in Markdown tables
     str = str.replace(/\|/g, '\\|');
     // Replace newlines with spaces to keep the table structure intact
-    str = str.replace(/\n/g, ' '); 
+    str = str.replace(/\n/g, ' ');
     return str;
   }
 }

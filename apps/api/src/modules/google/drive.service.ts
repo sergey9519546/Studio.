@@ -18,7 +18,7 @@ export class DriveService {
   private readonly logger = new Logger(DriveService.name);
   private readonly TEAM_FOLDER_ID = process.env.GOOGLE_TEAM_FOLDER_ID;
 
-  constructor(private readonly clientFactory: GoogleClientFactory) {}
+  constructor(private readonly clientFactory: GoogleClientFactory) { }
 
   async listTeamAssets(): Promise<DriveFileDTO[]> {
     if (!this.TEAM_FOLDER_ID) {
@@ -51,7 +51,7 @@ export class DriveService {
         modifiedTime: file.modifiedTime || null,
         size: file.size || null
       })).filter(f => f.id !== ''); // Filter out any invalid files
-    } catch (error: any) {
+    } catch (error) {
       this.logger.error(`Failed to list team assets: ${error.message}`);
       // Return empty list on failure rather than crashing endpoint
       return [];

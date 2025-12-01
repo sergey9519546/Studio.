@@ -6,7 +6,7 @@ export class DataExtractorService {
   private readonly logger = new Logger(DataExtractorService.name);
   private readonly ROW_LIMIT = 500;
 
-  constructor(private readonly clientFactory: GoogleClientFactory) {}
+  constructor(private readonly clientFactory: GoogleClientFactory) { }
 
   /**
    * Extracts data from a Google Sheet and converts it to a Markdown table string.
@@ -21,7 +21,7 @@ export class DataExtractorService {
       // but getting sheet name first is safer).
       const meta = await sheets.spreadsheets.get({ spreadsheetId: fileId });
       const sheetName = meta.data.sheets?.[0]?.properties?.title;
-      
+
       if (!sheetName) throw new Error('No sheets found');
 
       const response = await sheets.spreadsheets.values.get({
@@ -48,9 +48,10 @@ export class DataExtractorService {
       // 4. Transform to Markdown
       return this.convertToMarkdown(rows) + warningNote;
 
-    } catch (error: any) {
-      this.logger.error(`Sheet extraction failed: ${error.message}`);
-      throw new BadRequestException(`Failed to extract sheet data: ${error.message}`);
+    } catch (error: unknown) {
+      const err = error as Error;
+      this.logger.error(`Sheet extraction failed: ${err.message}`);
+      throw new BadRequestException(`Failed to extract sheet data: ${err.message}`);
     }
   }
 
@@ -81,11 +82,11 @@ export class DataExtractorService {
           element.table.tableRows?.forEach(row => {
             row.tableCells?.forEach(cell => {
               cell.content?.forEach(cellContent => {
-                 if(cellContent.paragraph?.elements) {
-                    cellContent.paragraph.elements.forEach(el => {
-                        if(el.textRun?.content) fullText += el.textRun.content + " ";
-                    });
-                 }
+                if (cellContent.paragraph?.elements) {
+                  cellContent.paragraph.elements.forEach(el => {
+                    if (el.textRun?.content) fullText += el.textRun.content + " ";
+                  });
+                }
               });
               fullText += " | ";
             });
@@ -96,13 +97,14 @@ export class DataExtractorService {
 
       return fullText.trim();
 
-    } catch (error: any) {
-       this.logger.error(`Doc extraction failed: ${error.message}`);
-       throw new BadRequestException(`Failed to extract doc text: ${error.message}`);
+    } catch (error: unknown) {
+      const err = error as Error;
+      this.logger.error(`Doc extraction failed: ${err.message}`);
+      throw new BadRequestException(`Failed to extract doc text: ${err.message}`);
     }
   }
 
-  private convertToMarkdown(rows: any[][]): string {
+  private convertToMarkdown(rows: unknown[][]): string {
     if (rows.length === 0) return '';
 
     const headers = rows[0].map(h => String(h || '').trim());
@@ -115,11 +117,11 @@ export class DataExtractorService {
       // Ensure row has same length as header, pad with empty strings
       const paddedRow = [...row];
       while (paddedRow.length < headers.length) paddedRow.push('');
-      
+
       const cells = paddedRow.slice(0, headers.length).map(cell => {
-          let str = String(cell ?? '').trim();
-          // Escape pipes to prevent breaking table
-          return str.replace(/\|/g, '\\|').replace(/\n/g, ' '); 
+        const str = String(cell ?? '').trim();
+        // Escape pipes to prevent breaking table
+        return str.replace(/\|/g, '\\|').replace(/\n/g, ' ');
       });
       return `| ${cells.join(' | ')} |`;
     });

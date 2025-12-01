@@ -188,21 +188,11 @@ export const api = {
                     localStorage.setItem('studio_roster_v1_auth_user', JSON.stringify(res.data.user));
                 }
                 return res;
-            } catch {
-                // Fallback for dev/demo if backend is unreachable (optional, but safer to remove for strict prod)
-                console.warn("Auth failed, using mock for demo purposes only");
-                const sessionUser = {
-                    id: 'u1',
-                    name: 'Studio Admin',
-                    contactInfo,
-                    role: 'Admin' as const,
-                    avatar: 'https://ui-avatars.com/api/?name=Admin&background=random'
-                };
-                localStorage.setItem('studio_roster_v1_auth_token', 'mock-jwt');
-                localStorage.setItem('studio_roster_v1_auth_user', JSON.stringify(sessionUser));
-                return { data: { accessToken: 'mock-jwt', user: sessionUser }, success: true };
+            } catch (e) {
+                console.error("Auth failed:", e);
+                throw e;
             }
-        }
+        },
     },
 
     ai: {

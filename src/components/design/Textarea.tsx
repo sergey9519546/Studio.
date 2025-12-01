@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldValues, UseControllerProps, useController } from 'react-hook-form';
 
-interface TextareaProps<T extends FieldValues = FieldValues>
+interface TextareaProps
   extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'> {
   label?: string;
   error?: string;
@@ -33,16 +33,14 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       'w-full px-4 py-2.5 border rounded-xl text-sm font-medium outline-none transition-all focus:ring-2 focus:ring-offset-1 resize-none';
 
     const variantStyles = {
-      primary: `border-border-subtle bg-surface text-ink-primary placeholder-ink-tertiary ${
-        error
+      primary: `border-border-subtle bg-surface text-ink-primary placeholder-ink-tertiary ${error
           ? 'border-state-danger focus:ring-state-danger/40 focus:border-state-danger'
           : 'focus:border-primary focus:ring-primary/40'
-      }`,
-      secondary: `border-border-subtle bg-subtle text-ink-primary placeholder-ink-tertiary ${
-        error
+        }`,
+      secondary: `border-border-subtle bg-subtle text-ink-primary placeholder-ink-tertiary ${error
           ? 'border-state-danger focus:ring-state-danger/40 focus:border-state-danger'
           : 'focus:border-primary focus:ring-primary/40'
-      }`,
+        }`,
     };
 
     const sizeStyles = {

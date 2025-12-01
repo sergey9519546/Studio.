@@ -65,10 +65,10 @@ export class AIController {
         }
 
         // Parse context
-        let parsedContext: any = {};
+        let parsedContext: Record<string, unknown> = {};
         try {
             parsedContext = typeof context === 'string' ? JSON.parse(context) : context;
-        } catch (e) {
+        } catch {
             parsedContext = {};
         }
 
@@ -114,7 +114,7 @@ ${JSON.stringify(parsedContext, null, 2)}
     @HttpCode(HttpStatus.OK)
     @UseInterceptors(FilesInterceptor('files', 5))
     async extract(
-        @Body() body: { prompt: string; schema?: any },
+        @Body() body: { prompt: string; schema?: unknown },
         @UploadedFiles() files?: Array<Express.Multer.File>,
     ) {
         if (!body.prompt && (!files || files.length === 0)) {
@@ -126,12 +126,12 @@ ${JSON.stringify(parsedContext, null, 2)}
         if (typeof schema === 'string') {
             try {
                 schema = JSON.parse(schema);
-            } catch (e) {
+            } catch {
                 // Keep as string or undefined if invalid
             }
         }
 
-        return this.aiService.extractData(body.prompt, schema, files);
+        return this.aiService.extractData(body.prompt, schema as Record<string, unknown>, files);
     }
 
     /**
@@ -161,7 +161,7 @@ ${JSON.stringify(parsedContext, null, 2)}
         userId?: string,
         projectId?: string,
         role?: string,
-        additionalContext?: any,
+        _additionalContext?: unknown,
     ): string {
         const parts: string[] = [];
 

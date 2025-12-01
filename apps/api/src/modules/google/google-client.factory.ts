@@ -22,7 +22,7 @@ export class GoogleClientFactory implements OnModuleInit {
   private serviceAccountKey: string = '';
   private isServiceAccountConfigured = false;
 
-  constructor(private readonly configService: ConfigService) {}
+  constructor(private readonly configService: ConfigService) { }
 
   onModuleInit() {
     this.initializeServiceAccount();
@@ -34,23 +34,23 @@ export class GoogleClientFactory implements OnModuleInit {
 
     // Fallback to GCP_ standardized variables (matching StorageService)
     if (!clientEmail) {
-        // Try GCP_CREDENTIALS JSON blob first
-        const jsonCreds = this.configService.get<string>('GCP_CREDENTIALS');
-        if (jsonCreds) {
-            try {
-                const parsed = JSON.parse(jsonCreds);
-                clientEmail = parsed.client_email;
-                privateKey = parsed.private_key;
-            } catch (e) {
-                this.logger.warn('Failed to parse GCP_CREDENTIALS JSON in GoogleClientFactory');
-            }
+      // Try GCP_CREDENTIALS JSON blob first
+      const jsonCreds = this.configService.get<string>('GCP_CREDENTIALS');
+      if (jsonCreds) {
+        try {
+          const parsed = JSON.parse(jsonCreds);
+          clientEmail = parsed.client_email;
+          privateKey = parsed.private_key;
+        } catch {
+          this.logger.warn('Failed to parse GCP_CREDENTIALS JSON in GoogleClientFactory');
         }
+      }
 
-        // Try individual vars if still missing
-        if (!clientEmail) {
-            clientEmail = this.configService.get<string>('GCP_CLIENT_EMAIL');
-            privateKey = this.configService.get<string>('GCP_PRIVATE_KEY');
-        }
+      // Try individual vars if still missing
+      if (!clientEmail) {
+        clientEmail = this.configService.get<string>('GCP_CLIENT_EMAIL');
+        privateKey = this.configService.get<string>('GCP_PRIVATE_KEY');
+      }
     }
 
     if (clientEmail && privateKey) {
@@ -85,8 +85,9 @@ export class GoogleClientFactory implements OnModuleInit {
       });
 
       return auth;
-    } catch (error: any) {
-      this.logger.error(`Failed to initialize OAuth client: ${error.message}`);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : String(error);
+      this.logger.error(`Failed to initialize OAuth client: ${message}`);
       throw new UnauthorizedException('Invalid Google Credentials');
     }
   }
@@ -108,9 +109,10 @@ export class GoogleClientFactory implements OnModuleInit {
         scopes: ['https://www.googleapis.com/auth/drive.readonly'],
       });
       return client;
-    } catch (error: any) {
-       this.logger.error(`Failed to initialize Service Account client: ${error.message}`);
-       throw new Error('Service Account authentication failed');
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : String(error);
+      this.logger.error(`Failed to initialize Service Account client: ${message}`);
+      throw new Error('Service Account authentication failed');
     }
   }
 
@@ -119,11 +121,11 @@ export class GoogleClientFactory implements OnModuleInit {
    */
   createClients(user: AuthenticatedUser): { sheets: sheets_v4.Sheets; docs: docs_v1.Docs } {
     if (!user.googleCredentials) {
-       throw new UnauthorizedException('User missing Google credentials');
+      throw new UnauthorizedException('User missing Google credentials');
     }
-    
+
     const auth = this.createAuth(user.googleCredentials);
-    
+
     return {
       sheets: google.sheets({ version: 'v4', auth }),
       docs: google.docs({ version: 'v1', auth }),
@@ -135,13 +137,13 @@ export class GoogleClientFactory implements OnModuleInit {
    */
   createDriveClientForUser(user: AuthenticatedUser): { drive: drive_v3.Drive } {
     if (!user.googleCredentials) {
-       throw new UnauthorizedException('User missing Google credentials');
+      throw new UnauthorizedException('User missing Google credentials');
     }
-    
+
     const auth = this.createAuth(user.googleCredentials);
-    
+
     return {
-        drive: google.drive({ version: 'v3', auth })
+      drive: google.drive({ version: 'v3', auth })
     };
   }
 
@@ -149,14 +151,14 @@ export class GoogleClientFactory implements OnModuleInit {
    * Returns a Drive client authenticated as the Service Account.
    */
   createDriveClient(): drive_v3.Drive {
-      const auth = this.createServiceAccountAuth();
-      return google.drive({ version: 'v3', auth });
+    const auth = this.createServiceAccountAuth();
+    return google.drive({ version: 'v3', auth });
   }
 
   getServiceAccountProfile() {
-      return {
-          email: this.serviceAccountEmail || 'not-configured',
-          configured: this.isServiceAccountConfigured
-      };
+    return {
+      email: this.serviceAccountEmail || 'not-configured',
+      configured: this.isServiceAccountConfigured
+    };
   }
 }
