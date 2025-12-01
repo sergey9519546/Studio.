@@ -102,7 +102,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects, onCreate
       <div className="flex flex-col md:flex-row justify-between items-end gap-6">
         <div>
           <h1 className="text-4xl font-display font-semibold tracking-tight text-ink-primary">Projects</h1>
-          <p className="text-ink-secondary mt-2 text-sm font-medium">Manage active campaigns and production schedules.</p>
+          <p className="text-ink-secondary mt-2 text-sm font-medium">Active campaigns and schedules.</p>
         </div>
         <div className="flex gap-3">
           <Link to="/imports">
@@ -116,7 +116,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects, onCreate
             leftIcon={<Plus size={14} />}
             onClick={() => { setEditingProject(undefined); setIsModalOpen(true); }}
           >
-            New Project
+            Create Project
           </Button>
         </div>
       </div>
@@ -128,7 +128,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects, onCreate
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-tertiary group-focus-within:text-primary transition-colors" size={16} />
             <input
               className="w-full pl-11 pr-10 py-3 bg-app/50 border border-border-subtle rounded-xl text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all placeholder-ink-tertiary font-medium text-ink-primary"
-              placeholder="Filter projects..."
+              placeholder="Filter projects... (Cmd+K)"
               value={searchText}
               onChange={e => setSearchText(e.target.value)}
             />
@@ -169,11 +169,11 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects, onCreate
                     {selectedIds.size > 0 ? <CheckSquare size={18} /> : <Square size={18} />}
                   </button>
                 </th>
-                <th className="px-6 py-5 text-xs font-bold text-ink-tertiary uppercase tracking-wide">Project Name</th>
-                <th className="px-6 py-5 text-xs font-bold text-ink-tertiary uppercase tracking-wide">Status</th>
-                <th className="px-6 py-5 text-xs font-bold text-ink-tertiary uppercase tracking-wide">Owner</th>
-                <th className="px-6 py-5 text-xs font-bold text-ink-tertiary uppercase tracking-wide">Timeline</th>
-                <th className="px-6 py-5 text-xs font-bold text-ink-tertiary uppercase tracking-wide">Priority</th>
+                <th className="px-6 py-5 text-xs font-semibold uppercase text-ink-tertiary tracking-wide">Project Name</th>
+                <th className="px-6 py-5 text-xs font-semibold uppercase text-ink-tertiary tracking-wide">Status</th>
+                <th className="px-6 py-5 text-xs font-semibold uppercase text-ink-tertiary tracking-wide">Owner</th>
+                <th className="px-6 py-5 text-xs font-semibold uppercase text-ink-tertiary tracking-wide">Timeline</th>
+                <th className="px-6 py-5 text-xs font-semibold uppercase text-ink-tertiary tracking-wide">Priority</th>
                 <th className="px-6 py-5 text-right"></th>
               </tr>
             </thead>
@@ -199,7 +199,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects, onCreate
                   const assigneeName = project.assignedToId ? `User ${project.assignedToId.slice(0, 4)}` : null;
                   const isSelected = selectedIds.has(project.id);
                   return (
-                    <tr key={project.id} className={`group hover:bg-subtle/30 transition-all duration-200 relative ${isSelected ? 'bg-primary-tint/30' : ''}`}>
+                    <tr key={project.id} className={`group hover:bg-ink-primary/[0.02] transition-all duration-200 relative ${isSelected ? 'bg-blue-50/50' : ''}`}>
                       <td className="px-6 py-6 text-center">
                         <button onClick={() => toggleSelectOne(project.id)} className={`transition-colors p-1 ${isSelected ? 'text-primary' : 'text-border-hover hover:text-ink-secondary'}`}>
                           {isSelected ? <CheckSquare size={18} /> : <Square size={18} />}
@@ -212,7 +212,9 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects, onCreate
                         </Link>
                       </td>
                       <td className="px-6 py-6">
-                        <Badge variant={getStatusVariant(project.status)}>{project.status}</Badge>
+                        <div className="flex justify-start">
+                          <Badge variant={getStatusVariant(project.status)}>{project.status}</Badge>
+                        </div>
                       </td>
                       <td className="px-6 py-6">
                         {assigneeName ? (
@@ -226,7 +228,9 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects, onCreate
                         <div className="text-sm font-medium text-ink-primary">{project.dueDate ? new Date(project.dueDate).toLocaleDateString() : '—'}</div>
                       </td>
                       <td className="px-6 py-6">
-                        <Badge variant={getPriorityVariant(project.priority)}>{project.priority}</Badge>
+                        <div className="flex justify-start">
+                          <Badge variant={getPriorityVariant(project.priority)}>{project.priority}</Badge>
+                        </div>
                       </td>
                       {isSelected && <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>}
                       <td className="px-6 py-6 text-right">

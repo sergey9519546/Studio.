@@ -53,7 +53,9 @@ export class AIController {
      */
     @Post('chat')
     @HttpCode(HttpStatus.OK)
-    @UseInterceptors(FilesInterceptor('files', 10))
+    @UseInterceptors(FilesInterceptor('files', 10, {
+        limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit per file
+    }))
     async chat(
         @Body() body: ChatRequest,
         @UploadedFiles() files?: Array<Express.Multer.File>,
@@ -112,7 +114,9 @@ ${JSON.stringify(parsedContext, null, 2)}
      * POST /api/ai/extract
      */
     @HttpCode(HttpStatus.OK)
-    @UseInterceptors(FilesInterceptor('files', 5))
+    @UseInterceptors(FilesInterceptor('files', 5, {
+        limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
+    }))
     async extract(
         @Body() body: { prompt: string; schema?: unknown },
         @UploadedFiles() files?: Array<Express.Multer.File>,

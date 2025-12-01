@@ -76,7 +76,13 @@ const AppContent: React.FC = () => {
       // setScripts(s.data || []);
     } catch (e) {
       console.error("Failed to fetch data", e);
-      toast.error("Failed to sync data with server");
+      if (e instanceof Error && e.message === 'Unauthorized') {
+        localStorage.removeItem('studio_roster_v1_auth_token');
+        setIsAuthenticated(false);
+        toast.error("Session expired. Please login again.");
+      } else {
+        toast.error("Failed to sync data with server");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -257,6 +263,11 @@ const AppContent: React.FC = () => {
   };
 
   const handleLogin = async (contactInfo: string) => {
+    if (contactInfo === 'FORCE_OFFLINE') {
+      setIsAuthenticated(true);
+      toast.success("Entered Offline Mode");
+      return;
+    }
     try {
       await api.auth.login(contactInfo);
       setIsAuthenticated(true);

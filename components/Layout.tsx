@@ -17,8 +17,8 @@ const Layout: React.FC = () => {
     <div className="flex h-screen bg-app font-sans text-ink-primary overflow-hidden selection:bg-primary selection:text-white">
 
       {/* Sidebar - Floating Porcelain Layer */}
-      <aside className="w-64 flex-shrink-0 hidden md:flex flex-col h-full border-r border-border-subtle bg-surface/80 backdrop-blur-xl z-50 relative transition-all duration-300">
-        <div className="h-20 flex flex-col justify-center px-6">
+      <aside className="w-64 flex-shrink-0 hidden md:flex flex-col h-full border-r border-border-subtle bg-surface/95 backdrop-blur-md z-50 relative transition-all duration-300">
+        <div className="h-24 flex flex-col justify-center px-6">
           <div className="flex items-center gap-3 group cursor-default">
             <div className="relative w-8 h-8 bg-ink-primary text-white rounded-lg flex items-center justify-center shadow-card group-hover:shadow-glow transition-all duration-500 ease-out group-hover:-translate-y-0.5 flex-shrink-0">
               <div className="absolute inset-0 bg-rival-gradient opacity-0 group-hover:opacity-20 rounded-lg transition-opacity duration-500"></div>
@@ -31,22 +31,21 @@ const Layout: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex-1 px-4 py-6 space-y-1 overflow-y-auto custom-scrollbar">
+        <div className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto custom-scrollbar">
           <div className="px-4 mb-4 text-xs font-semibold text-ink-tertiary uppercase tracking-wide opacity-60">Operations</div>
           {navItems.map((item) => (
             <NavLink
               key={item.path}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 group relative ${isActive
-                  ? 'bg-white shadow-sm text-ink-primary ring-1 ring-black/5'
+                `flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-medium transition-all duration-200 group relative ${isActive
+                  ? 'bg-ink-primary/5 text-ink-primary'
                   : 'text-ink-secondary hover:bg-subtle/60 hover:text-ink-primary'
                 }`
               }
             >
               {({ isActive }) => (
                 <>
-                  {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-1 rounded-r-full bg-ink-primary"></div>}
                   <item.icon size={20} strokeWidth={isActive ? 2.5 : 2} className={`transition-colors duration-200 ${isActive ? 'text-ink-primary' : 'text-ink-tertiary group-hover:text-ink-primary'}`} />
                   <span className="relative z-10">{item.label}</span>
                 </>
@@ -58,11 +57,11 @@ const Layout: React.FC = () => {
         <div className="p-6 mx-2 mb-2 border-t border-border-subtle/50 space-y-2">
           <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-ink-secondary hover:text-ink-primary hover:bg-subtle/50 transition-all duration-200 active:scale-[0.98]">
             <Settings size={20} strokeWidth={2} />
-            System Config
+            Settings
           </button>
           <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-ink-secondary hover:text-state-danger hover:bg-state-danger-bg/30 transition-all duration-200 active:scale-[0.98]">
             <LogOut size={20} strokeWidth={2} />
-            Disconnect
+            Sign Out
           </button>
         </div>
       </aside>
