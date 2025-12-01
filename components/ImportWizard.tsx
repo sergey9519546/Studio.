@@ -3,9 +3,7 @@ import React, { useState } from 'react';
 import { Upload, FileSpreadsheet, Check, X, RefreshCw, Sparkles, Briefcase, Users, AlertTriangle, ArrowRight, Database, Server, Cpu, Activity, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import * as ExcelJS from 'exceljs';
-import { GoogleGenAI, Type } from "@google/genai";
-import { FreelancerStatus, ProjectStatus } from '../types';
-import { generateContentWithRetry, api } from '../services/api';
+import { api } from '../services/api';
 import { z } from 'zod';
 
 interface ImportWizardProps {
@@ -43,9 +41,9 @@ const ProjectZodSchema = z.object({
 
 const ProjectArraySchema = z.array(ProjectZodSchema);
 
-// Gemini API Schemas (for structured output)
-const FREELANCER_SCHEMA = { type: Type.ARRAY, items: { type: Type.OBJECT, properties: { name: { type: Type.STRING }, contactInfo: { type: Type.STRING }, role: { type: Type.STRING }, rate: { type: Type.NUMBER }, currency: { type: Type.STRING }, skills: { type: Type.ARRAY, items: { type: Type.STRING } }, bio: { type: Type.STRING }, status: { type: Type.STRING }, timezone: { type: Type.STRING } }, required: ["name", "role", "rate"] } };
-const PROJECT_SCHEMA = { type: Type.ARRAY, items: { type: Type.OBJECT, properties: { name: { type: Type.STRING }, clientName: { type: Type.STRING }, description: { type: Type.STRING }, priority: { type: Type.STRING }, status: { type: Type.STRING }, budget: { type: Type.STRING }, startDate: { type: Type.STRING }, dueDate: { type: Type.STRING }, tags: { type: Type.ARRAY, items: { type: Type.STRING } } }, required: ["name", "clientName"] } };
+// JSON Schemas for Backend Extraction
+const FREELANCER_SCHEMA = { type: "ARRAY", items: { type: "OBJECT", properties: { name: { type: "STRING" }, contactInfo: { type: "STRING" }, role: { type: "STRING" }, rate: { type: "NUMBER" }, currency: { type: "STRING" }, skills: { type: "ARRAY", items: { type: "STRING" } }, bio: { type: "STRING" }, status: { type: "STRING" }, timezone: { type: "STRING" } }, required: ["name", "role", "rate"] } };
+const PROJECT_SCHEMA = { type: "ARRAY", items: { type: "OBJECT", properties: { name: { type: "STRING" }, clientName: { type: "STRING" }, description: { type: "STRING" }, priority: { type: "STRING" }, status: { type: "STRING" }, budget: { type: "STRING" }, startDate: { type: "STRING" }, dueDate: { type: "STRING" }, tags: { type: "ARRAY", items: { type: "STRING" } } }, required: ["name", "clientName"] } };
 
 const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelancers = [], existingProjects = [] }) => {
     const [importType, setImportType] = useState<'freelancer' | 'project'>('freelancer');
@@ -64,16 +62,7 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
     const [jobId, setJobId] = useState<string | null>(null);
     const [extractionWarning, setExtractionWarning] = useState<string>('');
 
-    // --- Simulated Pipeline Flow ---
-    const simulatePipeline = async (startProgress: number, endProgress: number, stage: string, delayMs: number) => {
-        setProcessingStage(stage);
-        const steps = 10;
-        const stepValue = (endProgress - startProgress) / steps;
-        for (let i = 0; i < steps; i++) {
-            await new Promise(r => setTimeout(r, delayMs / steps));
-            setProgress(prev => Math.min(prev + stepValue, endProgress));
-        }
-    };
+
 
     const handleFile = async (uploadedFile: File) => {
         setFile(uploadedFile);
@@ -82,58 +71,19 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
         setExtractionWarning('');
 
         try {
-            // Stage 1: Secure Uplink (Mock S3 Multipart)
-            await simulatePipeline(0, 30, 'ENCRYPTING & UPLOADING STREAM', 1200);
+            setProcessingStage('UPLOADING & PROCESSING');
 
-            // Stage 2: Job Injection
-            await simulatePipeline(30, 50, 'DISPATCHING JOB TO WORKER QUEUE', 800);
-            setJobId(`job-${Date.now().toString().slice(-6)}`);
+            // Use Backend Extraction
+            const isFreelancer = importType === 'freelancer';
+            const schema = isFreelancer ? FREELANCER_SCHEMA : PROJECT_SCHEMA;
+            const entityType = isFreelancer ? 'freelancer roster' : 'project';
 
-            // Stage 3: Deep Read (The Worker)
-            await simulatePipeline(50, 80, 'WORKER: PARSING BINARY DATA', 1500);
+            const prompt = `Extract ${entityType} information from the attached file. Return a JSON array.`;
 
-            // Actual Logic Hook
-            // Actual Logic Hook
-            if (uploadedFile.name.endsWith('.xlsx') || uploadedFile.name.endsWith('.csv')) {
-                const buffer = await uploadedFile.arrayBuffer();
-                const workbook = new ExcelJS.Workbook();
-                await workbook.xlsx.load(buffer);
-                const worksheet = workbook.worksheets[0];
+            // Call Backend
+            const dataArray = await api.ai.extract(prompt, schema, uploadedFile);
 
-                const jsonData: any[][] = [];
-                worksheet.eachRow({ includeEmpty: false }, (row, _rowNumber) => {
-                    // ExcelJS row.values is 1-based, index 0 is undefined. Slice it off.
-                    const rowValues = row.values as any[];
-                    jsonData.push(rowValues.slice(1));
-                });
-
-                if (jsonData.length > 0) {
-                    setHeaders(jsonData[0] as string[]);
-                    setRows(jsonData.slice(1));
-                }
-            } else {
-                // STRONG FILE IMPORT: Use Backend DeepReader (PDF, DOCX, TXT)
-                await simulatePipeline(50, 60, 'UPLOADING TO SECURE STORAGE', 500);
-                const assetRes = await api.assets.upload(uploadedFile);
-                const asset = assetRes.data;
-
-                await simulatePipeline(60, 80, 'BACKEND: DEEP READING & OCR', 1500);
-                // Trigger Knowledge Ingestion to get extracted text
-                const knowledgeRes = await api.knowledge.createFromAsset('global', asset.id, asset);
-
-                if (knowledgeRes.data.status === 'error') {
-                    throw new Error("Text extraction failed on server. The file may be corrupted or in an unsupported format.");
-                }
-
-                const extractedText = knowledgeRes.data.originalContent;
-                if (!extractedText) throw new Error("No text content extracted from the file. The document may be empty or unreadable.");
-
-                await executeAIAnalysis(extractedText);
-            }
-
-            // Stage 4: Finalizing
-            await simulatePipeline(80, 100, 'VALIDATING SCHEMA', 500);
-            setStep(2);
+            await processExtractedData(dataArray, isFreelancer);
 
         } catch (e: unknown) {
             console.error(e);
@@ -151,11 +101,19 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
         setExtractionWarning('');
 
         try {
-            await simulatePipeline(0, 40, 'STREAMING TEXT TO VECTOR STORE', 1000);
-            await simulatePipeline(40, 80, 'GEMINI 2.0: STRUCTURING UNSTRUCTURED DATA', 2500);
-            await executeAIAnalysis(pastedText);
-            await simulatePipeline(80, 100, 'FINALIZING', 200);
-            setStep(2);
+            setProcessingStage('ANALYZING TEXT');
+
+            const isFreelancer = importType === 'freelancer';
+            const schema = isFreelancer ? FREELANCER_SCHEMA : PROJECT_SCHEMA;
+            const entityType = isFreelancer ? 'freelancer roster' : 'project';
+
+            const prompt = `Extract ${entityType} information from the following text:\n\n${pastedText}`;
+
+            // Call Backend
+            const dataArray = await api.ai.extract(prompt, schema);
+
+            await processExtractedData(dataArray, isFreelancer);
+
         } catch (e: unknown) {
             console.error(e);
             const errorMsg = e instanceof Error ? e.message : 'Unknown error occurred';
@@ -165,97 +123,39 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
         }
     };
 
-    const executeAIAnalysis = async (content: string) => {
-        if (!process.env.API_KEY) throw new Error("API Key required. Please configure your environment.");
-
-        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-        const isFreelancer = importType === 'freelancer';
-        const schema = isFreelancer ? FREELANCER_SCHEMA : PROJECT_SCHEMA;
+    const processExtractedData = async (dataArray: any[], isFreelancer: boolean) => {
         const validationSchema = isFreelancer ? FreelancerArraySchema : ProjectArraySchema;
-
-        // Enhanced prompt with detailed instructions
-        const entityType = isFreelancer ? 'freelancer roster' : 'project';
-        const entityPlural = isFreelancer ? 'freelancers' : 'projects';
-        const entitySingular = isFreelancer ? 'person' : 'project';
-
-        const extractionPrompt = `You are a data extraction specialist.
-
-TASK: Extract ${entityType} information from the content below.
-
-RULES:
-1. Extract ALL ${entityPlural} mentioned in the document
-2. Fill in as many fields as possible from the available information
-3. If a required field is missing, use reasonable defaults:
-   ${isFreelancer ? '- role: "Unknown"\n   - rate: 0' : '- clientName: "TBD"'}
-4. Preserve original names and contact information exactly as written
-5. Return a JSON array even if only one ${entitySingular} is found
-6. Extract skills/tags as arrays when mentioned
-7. Dates should be in ISO format (YYYY-MM-DD) when possible
-
-CONTENT (first 100,000 characters):
-${content.slice(0, 100000)}
-
-${content.length > 100000 ? '\n⚠️ Note: Content was truncated. Extract as much as possible from the visible portion.' : ''}
-
-Return ONLY the JSON array, no markdown formatting.`;
-
-        const response = await generateContentWithRetry(ai, {
-            model: 'gemini-2.0-flash-exp',
-            contents: extractionPrompt,
-            config: { responseMimeType: 'application/json', responseSchema: schema }
-        });
-
-        const responseText = typeof response.text === 'function' ? response.text() : response.text;
-
-        if (!responseText || typeof responseText !== 'string') {
-            throw new Error(`AI returned invalid response. Expected JSON string, got ${typeof responseText}. This may indicate an API issue or model error.`);
-        }
-
-        let jsonResult;
-        try {
-            jsonResult = JSON.parse(responseText);
-        } catch (parseError) {
-            throw new Error(`AI returned malformed JSON: ${responseText.substring(0, 200)}... Please try again or contact support.`);
-        }
 
         // Validate with Zod
         let validatedData;
         try {
-            validatedData = validationSchema.parse(jsonResult);
+            validatedData = validationSchema.parse(dataArray);
         } catch (zodError) {
             console.error('Zod validation error:', zodError);
-            // Still allow data through but warn user
-            validatedData = Array.isArray(jsonResult) ? jsonResult : [];
+            validatedData = Array.isArray(dataArray) ? dataArray : [];
             if (validatedData.length > 0) {
                 setExtractionWarning('Some extracted data may not match the expected format. Please review carefully.');
             }
         }
 
-        const dataArray = validatedData;
-
-        if (dataArray.length === 0) {
-            throw new Error(`No ${entityPlural} found in the content. The AI may have misunderstood the format. Please check that the uploaded file contains ${entityType} data.`);
+        if (validatedData.length === 0) {
+            throw new Error(`No data found. Please check the content.`);
         }
 
-        // Partial success detection
-        const estimatedCount = content.match(/(?:^|\n)\d+\./gm)?.length || 0;
-        if (estimatedCount > 0 && estimatedCount > dataArray.length * 1.5) {
-            setExtractionWarning(`⚠️ Extracted ${dataArray.length} ${entityPlural}, but document may contain ~${estimatedCount} items. Some may have been missed.`);
-        }
-
-        console.info(`✅ Successfully extracted ${dataArray.length} ${entityPlural}`);
-
-        if (dataArray.length > 0) {
-            const firstItem = dataArray[0];
+        if (validatedData.length > 0) {
+            const firstItem = validatedData[0];
             const dynamicHeaders = Object.keys(firstItem);
             setHeaders(dynamicHeaders);
-            setRows(dataArray.map(obj => Object.values(obj)));
+            setRows(validatedData.map((obj: any) => Object.values(obj)));
+            setStep(2);
         }
     };
 
+
+
     const handleImportConfirm = async () => {
         setIsProcessing(true);
-        await simulatePipeline(0, 100, 'ATOMIC DATABASE COMMIT', 1500);
+        // await simulatePipeline(0, 100, 'ATOMIC DATABASE COMMIT', 1500);
 
         const mappedData = rows.map(row => {
             const obj: any = {};

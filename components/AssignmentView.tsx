@@ -1,7 +1,7 @@
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { ChevronLeft, ChevronRight, Calendar, GripVertical, Clock } from 'lucide-react';
-import { Freelancer, Project, Assignment } from '../types';
+import { Freelancer, Project, Assignment, ProjectStatus } from '../types';
 
 interface AssignmentViewProps {
     freelancers: Freelancer[];
@@ -13,26 +13,38 @@ interface AssignmentViewProps {
 
 const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, assignments, onAssign, checkConflict }) => {
     const [currentDate, setCurrentDate] = useState(new Date('2023-10-01'));
-    
+
     const DAYS_TO_SHOW = 21;
     const CELL_WIDTH = 54;
-    
-    const getUnassignedRoles = () => {
+
+    const unassignedRoles = useMemo(() => {
+        // O(A) - Build lookup map
+        const assignmentCounts = new Map<string, number>();
+        assignments.forEach(a => {
+            const key = `${a.projectId}-${a.role}`;
+            assignmentCounts.set(key, (assignmentCounts.get(key) || 0) + 1);
+        });
+
         const unassigned: { project: Project, roleId: string, roleName: string, count: number }[] = [];
+
+        // O(P * R) - Single pass
         projects.forEach(p => {
+            if (p.status === ProjectStatus.DELIVERED || p.status === ProjectStatus.ARCHIVED) return; // Skip inactive
+
             p.roleRequirements.forEach(r => {
-                const filled = assignments.filter(a => a.projectId === p.id && a.role === r.role).length;
+                const key = `${p.id}-${r.role}`;
+                const filled = assignmentCounts.get(key) || 0;
                 if (filled < r.count) {
                     unassigned.push({ project: p, roleId: r.id, roleName: r.role, count: r.count - filled });
                 }
             });
         });
         return unassigned;
-    };
+    }, [projects, assignments]);
 
-    const unassignedRoles = getUnassignedRoles();
 
-    const handleDragStart = (e: React.DragEvent, roleData: any) => {
+
+    const handleDragStart = (e: React.DragEvent, roleData: { projectId: string, roleName: string }) => {
         e.dataTransfer.setData('application/json', JSON.stringify(roleData));
         e.dataTransfer.effectAllowed = 'copy';
     };
@@ -42,12 +54,12 @@ const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, 
         try {
             const rawData = e.dataTransfer.getData('application/json');
             if (!rawData) return;
-            
+
             const data = JSON.parse(rawData);
             if (!data.projectId || !data.roleName) return;
 
             const project = projects.find(p => p.id === data.projectId);
-            
+
             if (project) {
                 if (project.startDate && project.dueDate && new Date(project.startDate) > new Date(project.dueDate)) {
                     alert("Cannot assign: Project start date is after due date.");
@@ -63,13 +75,13 @@ const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, 
                 if (checkConflict) {
                     const conflict = checkConflict(freelancerId, start, end);
                     if (conflict) {
-                         const confirm = window.confirm(`Scheduling Conflict detected. Create overlap?`);
-                         if (!confirm) return;
+                        const confirm = window.confirm(`Scheduling Conflict detected. Create overlap?`);
+                        if (!confirm) return;
                     }
                 }
 
                 const newAssignment: Assignment = {
-                    id: `asn-${Date.now()}`,
+                    id: `asn-${crypto.randomUUID()}`,
                     projectId: project.id,
                     freelancerId: freelancerId,
                     role: data.roleName,
@@ -102,7 +114,7 @@ const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, 
         const s = new Date(start);
         const e = new Date(end);
         const viewStart = currentDate;
-        
+
         const diffTime = Math.abs(e.getTime() - s.getTime());
         const durationDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
         const offsetTime = s.getTime() - viewStart.getTime();
@@ -125,12 +137,12 @@ const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, 
                 </div>
                 <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2 bg-white p-2 border border-mist rounded-xl shadow-sm">
-                        <button onClick={() => { const d = new Date(currentDate); d.setDate(d.getDate() - 7); setCurrentDate(d); }} className="p-2 hover:bg-subtle rounded-lg text-pencil hover:text-ink transition-all duration-200 active:scale-95"><ChevronLeft size={18}/></button>
+                        <button onClick={() => { const d = new Date(currentDate); d.setDate(d.getDate() - 7); setCurrentDate(d); }} className="p-2 hover:bg-subtle rounded-lg text-pencil hover:text-ink transition-all duration-200 active:scale-95"><ChevronLeft size={18} /></button>
                         <div className="flex items-center gap-2 px-6 min-w-[200px] justify-center font-semibold text-ink text-sm">
-                            <Calendar size={16} className="text-pencil"/>
+                            <Calendar size={16} className="text-pencil" />
                             {currentDate.toLocaleDateString(undefined, { month: 'long', year: 'numeric' })}
                         </div>
-                        <button onClick={() => { const d = new Date(currentDate); d.setDate(d.getDate() + 7); setCurrentDate(d); }} className="p-2 hover:bg-subtle rounded-lg text-pencil hover:text-ink transition-all duration-200 active:scale-95"><ChevronRight size={18}/></button>
+                        <button onClick={() => { const d = new Date(currentDate); d.setDate(d.getDate() + 7); setCurrentDate(d); }} className="p-2 hover:bg-subtle rounded-lg text-pencil hover:text-ink transition-all duration-200 active:scale-95"><ChevronRight size={18} /></button>
                     </div>
                 </div>
             </div>
@@ -144,12 +156,12 @@ const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, 
                     <div className="p-4 overflow-y-auto flex-1 space-y-3 custom-scrollbar bg-white">
                         {unassignedRoles.length === 0 ? (
                             <div className="text-center py-16 text-pencil text-xs flex flex-col items-center opacity-60">
-                                <div className="mb-3 p-3 bg-canvas rounded-xl border border-mist"><Clock size={20}/></div>
+                                <div className="mb-3 p-3 bg-canvas rounded-xl border border-mist"><Clock size={20} /></div>
                                 <span className="font-bold uppercase tracking-widest text-[10px]">All roles filled</span>
                             </div>
                         ) : (
                             unassignedRoles.map((item, idx) => (
-                                <div 
+                                <div
                                     key={`${item.project.id}-${item.roleId}-${idx}`}
                                     draggable
                                     onDragStart={(e) => handleDragStart(e, { projectId: item.project.id, roleName: item.roleName })}
@@ -162,7 +174,7 @@ const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, 
                                     <div className="text-sm font-semibold text-ink truncate tracking-tight">{item.project.name}</div>
                                     <div className="text-[10px] text-pencil mt-1.5 flex items-center gap-1.5 font-medium">
                                         <div className="w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
-                                        {item.project.startDate ? new Date(item.project.startDate).toLocaleDateString(undefined, {month:'short', day:'numeric'}) : 'TBD'}
+                                        {item.project.startDate ? new Date(item.project.startDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : 'TBD'}
                                     </div>
                                 </div>
                             ))
@@ -179,13 +191,14 @@ const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, 
                                 {calendarDays.map((date, i) => {
                                     const isToday = date.toDateString() === new Date().toDateString();
                                     return (
-                                    <div key={i} className={`flex-shrink-0 text-center border-r border-mist/50 last:border-r-0 ${isToday ? 'bg-indigo-50/20' : ''}`} style={{ width: `${CELL_WIDTH}px` }}>
-                                        <div className="text-[9px] text-pencil uppercase py-3 font-bold tracking-wider">{date.toLocaleDateString('en-US', { weekday: 'narrow' })}</div>
-                                        <div className={`text-xs font-bold pb-3 font-mono ${isToday ? 'text-indigo-600' : 'text-ink'}`}>
-                                            {date.getDate()}
+                                        <div key={i} className={`flex-shrink-0 text-center border-r border-mist/50 last:border-r-0 ${isToday ? 'bg-indigo-50/20' : ''}`} style={{ width: `${CELL_WIDTH}px` }}>
+                                            <div className="text-[9px] text-pencil uppercase py-3 font-bold tracking-wider">{date.toLocaleDateString('en-US', { weekday: 'narrow' })}</div>
+                                            <div className={`text-xs font-bold pb-3 font-mono ${isToday ? 'text-indigo-600' : 'text-ink'}`}>
+                                                {date.getDate()}
+                                            </div>
                                         </div>
-                                    </div>
-                                )})}
+                                    )
+                                })}
                             </div>
                         </div>
                     </div>
@@ -193,10 +206,10 @@ const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, 
                     <div className="flex-1 overflow-y-auto custom-scrollbar">
                         {freelancers.map(freelancer => {
                             const userAssignments = assignments.filter(a => a.freelancerId === freelancer.id);
-                            
+
                             return (
-                                <div 
-                                    key={freelancer.id} 
+                                <div
+                                    key={freelancer.id}
                                     className="flex border-b border-mist min-h-[80px] hover:bg-canvas/30 transition-colors group/row"
                                     onDragOver={handleDragOver}
                                     onDrop={(e) => handleDrop(e, freelancer.id)}
@@ -228,7 +241,7 @@ const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, 
                                             const project = projects.find(p => p.id === assign.projectId);
 
                                             return (
-                                                <div 
+                                                <div
                                                     key={assign.id}
                                                     className="absolute top-1/2 -translate-y-1/2 h-12 border border-ink bg-white overflow-hidden cursor-pointer hover:bg-ink group z-10 transition-colors rounded shadow-sm"
                                                     style={{ ...style }}
@@ -240,7 +253,7 @@ const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, 
                                                 </div>
                                             );
                                         })}
-                                        
+
                                         {userAssignments.length === 0 && (
                                             <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 pointer-events-none transition-opacity duration-300">
                                                 <span className="text-[9px] text-pencil font-bold uppercase tracking-widest border border-dashed border-mist px-3 py-1.5 bg-white rounded-lg shadow-sm">Drop to assign</span>

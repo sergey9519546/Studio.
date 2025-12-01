@@ -2,6 +2,21 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 
+export interface ProjectInput {
+  name?: string;
+  clientName?: string;
+  roleRequirements?: any[];
+  knowledgeBase?: any[];
+  budget?: string | number;
+  startDate?: string | Date;
+  dueDate?: string | Date;
+  description?: string;
+  status?: string;
+  priority?: string;
+  tags?: string[];
+  [key: string]: any;
+}
+
 @Injectable()
 export class ProjectsService {
   constructor(private prisma: PrismaService) { }
@@ -20,12 +35,28 @@ export class ProjectsService {
     };
   }
 
-  async findAll() {
-    const projects = await this.prisma.project.findMany({
-      include: { roleRequirements: true, knowledgeBase: true },
-      orderBy: { updatedAt: 'desc' }
-    });
-    return projects.map(p => this.toDto(p));
+  async findAll(page: number = 1, limit: number = 50) {
+    const skip = (page - 1) * limit;
+
+    const [total, projects] = await Promise.all([
+      this.prisma.project.count(),
+      this.prisma.project.findMany({
+        skip,
+        take: limit,
+        include: { roleRequirements: true, knowledgeBase: true },
+        orderBy: { updatedAt: 'desc' }
+      })
+    ]);
+
+    return {
+      data: projects.map(p => this.toDto(p)),
+      meta: {
+        total,
+        page,
+        lastPage: Math.ceil(total / limit),
+        limit
+      }
+    };
   }
 
   async findOne(id: string) {
@@ -36,7 +67,7 @@ export class ProjectsService {
     return this.toDto(project);
   }
 
-  async create(data: any) {
+  async create(data: ProjectInput) {
     const { roleRequirements, knowledgeBase, name, clientName, budget, startDate, dueDate, ...rest } = data;
 
     // Map frontend fields to database schema
@@ -44,7 +75,7 @@ export class ProjectsService {
       ...rest,
       title: name,
       client: clientName,
-      budget: budget ? parseFloat(budget) : undefined,
+      budget: budget ? parseFloat(budget.toString()) : undefined,
       startDate: startDate ? new Date(startDate) : undefined,
       endDate: dueDate ? new Date(dueDate) : undefined,
       // Remove unknown fields
@@ -82,8 +113,8 @@ export class ProjectsService {
     return this.toDto(created);
   }
 
-  async update(id: string, data: any) {
-    const { roleRequirements, knowledgeBase, name, clientName, ...rest } = data;
+  async update(id: string, data: ProjectInput) {
+    const { name, clientName, ...rest } = data;
 
     // Map frontend fields to database schema for update
     const updateData: any = { ...rest };
@@ -111,9 +142,9 @@ export class ProjectsService {
     return this.prisma.project.deleteMany({ where: { id: { in: ids } } });
   }
 
-  async importBatch(items: any[]) {
+  async importBatch(items: ProjectInput[]) {
     let created = 0;
-    const errors: any[] = [];
+    const errors: { item: ProjectInput, error: string }[] = [];
 
     for (const item of items) {
       try {

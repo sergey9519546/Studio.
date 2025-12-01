@@ -246,4 +246,58 @@ export class GeminiAnalystService {
     this.logger.error(`All ${maxRetries} attempts failed. Last error: ${lastError?.message}`);
     throw new InternalServerErrorException(`AI Analysis failed after ${maxRetries} attempts: ${lastError?.message || 'Unknown error'}`);
   }
+
+  async chat(context: string, _history: Array<{ role: string; content: string }>): Promise<string> {
+    if (!this.ai) throw new InternalServerErrorException("AI Service not configured");
+
+    const model = 'gemini-2.0-flash-exp';
+    try {
+      const result = await this.ai.models.generateContent({
+        model,
+        contents: [
+          { role: 'user', parts: [{ text: context }] }
+        ],
+        config: {
+          systemInstruction: AI_TEAMMATE_SYSTEM_INSTRUCTION,
+        }
+      });
+      return result.text || "I'm sorry, I couldn't generate a response.";
+    } catch (e) {
+      this.logger.error("Chat generation failed", e);
+      throw new InternalServerErrorException("Failed to generate chat response");
+    }
+  }
+
+  async extractData(prompt: string, schema: Record<string, unknown>, files?: Array<Express.Multer.File>): Promise<unknown> {
+    if (!this.ai) throw new InternalServerErrorException("AI Service not configured");
+
+    const model = 'gemini-2.0-flash-exp';
+    const contents: Part[] = [{ text: prompt }];
+
+    if (files) {
+      for (const file of files) {
+        contents.push({
+          inlineData: {
+            mimeType: file.mimetype,
+            data: file.buffer.toString('base64')
+          }
+        });
+      }
+    }
+
+    try {
+      const result = await this.ai.models.generateContent({
+        model,
+        contents: [{ role: 'user', parts: contents }],
+        config: {
+          responseMimeType: 'application/json',
+          responseSchema: schema,
+        }
+      });
+      return JSON.parse(result.text || '{}');
+    } catch (e) {
+      this.logger.error("Data extraction failed", e);
+      throw new InternalServerErrorException("Failed to extract data");
+    }
+  }
 }

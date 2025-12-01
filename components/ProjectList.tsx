@@ -7,6 +7,7 @@ import ProjectModal from './ProjectModal';
 import { Badge } from '../src/components/design/Badge';
 import { Button } from '../src/components/design/Button';
 import Skeleton from './ui/Skeleton';
+import { api } from '../services/api';
 
 interface ProjectListProps {
   projects: Project[];
@@ -17,7 +18,7 @@ interface ProjectListProps {
   isLoading?: boolean;
 }
 
-const ProjectList: React.FC<ProjectListProps> = ({ projects, onCreate, onUpdate, isLoading = false }) => {
+const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects, onCreate, onUpdate, isLoading = false }) => {
   const [searchText, setSearchText] = useState('');
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,19 +26,40 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, onCreate, onUpdate,
   const [filters, setFilters] = useState({ status: '', priority: '' });
   const [sortConfig] = useState<{ key: string, direction: 'asc' | 'desc' }>({ key: 'dueDate', direction: 'asc' });
 
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [paginatedProjects, setPaginatedProjects] = useState<Project[]>([]);
+  const [isLoadingData, setIsLoadingData] = useState(isLoading);
+
+  // Fetch paginated data
+  React.useEffect(() => {
+    const fetchProjects = async () => {
+      setIsLoadingData(true);
+      try {
+        const res = await api.projects.list({ page, limit: 10, search: searchText, filters });
+        setPaginatedProjects(res.data || []);
+        if (res.meta) {
+          setTotalPages(res.meta.totalPages);
+        }
+      } catch (e) {
+        console.error("Failed to fetch projects", e);
+      } finally {
+        setIsLoadingData(false);
+      }
+    };
+    // Debounce search
+    const timeout = setTimeout(fetchProjects, 300);
+    return () => clearTimeout(timeout);
+  }, [page, searchText, filters]);
+
   const filteredProjects = useMemo(() => {
-    return projects
-      .filter(p => {
-        const matchesText = (p.name.toLowerCase().includes(searchText.toLowerCase()) || (p.clientName || '').toLowerCase().includes(searchText.toLowerCase()));
-        const matchesStatus = filters.status ? p.status === filters.status : true;
-        return matchesText && matchesStatus;
-      })
-      .sort((a, b) => {
-        const dateA = new Date(a.dueDate || 0).getTime();
-        const dateB = new Date(b.dueDate || 0).getTime();
-        return sortConfig.direction === 'asc' ? dateA - dateB : dateB - dateA;
-      });
-  }, [projects, searchText, filters, sortConfig]);
+    // Client-side sorting of the current page
+    return paginatedProjects.sort((a, b) => {
+      const dateA = new Date(a.dueDate || 0).getTime();
+      const dateB = new Date(b.dueDate || 0).getTime();
+      return sortConfig.direction === 'asc' ? dateA - dateB : dateB - dateA;
+    });
+  }, [paginatedProjects, sortConfig]);
 
   const toggleSelectAll = () => {
     if (selectedIds.size === filteredProjects.length && filteredProjects.length > 0) setSelectedIds(new Set());
@@ -156,7 +178,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, onCreate, onUpdate,
               </tr>
             </thead>
             <tbody className="divide-y divide-border-subtle bg-surface">
-              {isLoading ? (
+              {isLoadingData ? (
                 // Skeleton Rows
                 [...Array(5)].map((_, i) => (
                   <tr key={i} className="animate-pulse">
@@ -231,8 +253,34 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, onCreate, onUpdate,
             </tbody>
           </table>
         </div>
+
+
+        {/* Pagination Controls */}
+        <div className="p-4 border-t border-border-subtle flex items-center justify-between bg-white">
+          <div className="text-xs text-ink-tertiary font-medium">
+            Page {page} of {totalPages}
+          </div>
+          <div className="flex gap-2">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => setPage(p => Math.max(1, p - 1))}
+              disabled={page === 1}
+            >
+              Previous
+            </Button>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages}
+            >
+              Next
+            </Button>
+          </div>
+        </div>
       </div>
-    </div>
+    </div >
   );
 };
 

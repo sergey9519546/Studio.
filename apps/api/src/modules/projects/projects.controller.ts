@@ -1,14 +1,17 @@
 
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ProjectsService } from './projects.service';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { ProjectsService, ProjectInput } from './projects.service';
 
 @Controller('projects')
 export class ProjectsController {
-  constructor(private readonly projectsService: ProjectsService) {}
+  constructor(private readonly projectsService: ProjectsService) { }
 
   @Get()
-  findAll() {
-    return this.projectsService.findAll();
+  async findAll(
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 50
+  ) {
+    return this.projectsService.findAll(Number(page), Number(limit));
   }
 
   @Get(':id')
@@ -17,12 +20,12 @@ export class ProjectsController {
   }
 
   @Post()
-  create(@Body() createDto: any) {
+  create(@Body() createDto: ProjectInput) {
     return this.projectsService.create(createDto);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDto: any) {
+  update(@Param('id') id: string, @Body() updateDto: ProjectInput) {
     return this.projectsService.update(id, updateDto);
   }
 
@@ -37,7 +40,7 @@ export class ProjectsController {
   }
 
   @Post('batch')
-  importBatch(@Body() items: any[]) {
+  importBatch(@Body() items: ProjectInput[]) {
     return this.projectsService.importBatch(items);
   }
 }

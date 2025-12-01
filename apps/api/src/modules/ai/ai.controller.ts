@@ -94,17 +94,44 @@ ${codeContext}
 
 ### ADDITIONAL CONTEXT:
 ${JSON.stringify(parsedContext, null, 2)}
-`.trim();
+`;
 
-        // Step 5: Call Gemini with all context
-        const result = await this.aiService.analyzeContext(enhancedContext, message, files);
+        // Step 5: Generate Response
+        const response = await this.aiService.chat(enhancedContext, messages);
 
-        // Step 6: Return structured response
         return {
-            response: typeof result === 'string' ? result : JSON.stringify(result),
+            response: response,
             conversationId: this.generateConversationId(userId, projectId),
-            codeContext: codeContextMetadata,
+            codeContext: codeContextMetadata
         };
+    }
+
+    /**
+     * Extract structured data from text/files
+     * 
+     * POST /api/ai/extract
+     */
+    @HttpCode(HttpStatus.OK)
+    @UseInterceptors(FilesInterceptor('files', 5))
+    async extract(
+        @Body() body: { prompt: string; schema?: any },
+        @UploadedFiles() files?: Array<Express.Multer.File>,
+    ) {
+        if (!body.prompt && (!files || files.length === 0)) {
+            throw new BadRequestException('Prompt or files are required');
+        }
+
+        // Parse schema if it's a string (multipart/form-data often sends JSON as string)
+        let schema = body.schema;
+        if (typeof schema === 'string') {
+            try {
+                schema = JSON.parse(schema);
+            } catch (e) {
+                // Keep as string or undefined if invalid
+            }
+        }
+
+        return this.aiService.extractData(body.prompt, schema, files);
     }
 
     /**
@@ -126,6 +153,7 @@ ${JSON.stringify(parsedContext, null, 2)}
         };
     }
 
+
     /**
      * Build user-specific context string
      */
@@ -144,13 +172,13 @@ ${JSON.stringify(parsedContext, null, 2)}
         }
 
         if (projectId) {
-            parts.push(`- Project ID: ${projectId}`);
+            parts.push(`- Project ID: ${projectId} `);
         }
 
         if (role) {
-            parts.push(`- Role: ${role}`);
+            parts.push(`- Role: ${role} `);
             if (role === 'guest') {
-                parts.push(`- Access Level: Read-only (Guest users cannot modify data)`);
+                parts.push(`- Access Level: Read - only(Guest users cannot modify data)`);
             } else {
                 parts.push(`- Access Level: Full access`);
             }
@@ -173,7 +201,7 @@ ${JSON.stringify(parsedContext, null, 2)}
 
         return messages
             .slice(-10) // Keep last 10 messages for context
-            .map((msg, i) => `${i + 1}. [${msg.role}]: ${msg.content}`)
+            .map((msg, i) => `${i + 1}.[${msg.role}]: ${msg.content} `)
             .join('\n');
     }
 
@@ -201,6 +229,6 @@ ${JSON.stringify(parsedContext, null, 2)}
         const timestamp = Date.now();
         const userPart = userId ? userId.substring(0, 8) : 'anon';
         const projectPart = projectId ? projectId.substring(0, 8) : 'global';
-        return `conv_${userPart}_${projectPart}_${timestamp}`;
+        return `conv_${userPart}_${projectPart}_${timestamp} `;
     }
 }

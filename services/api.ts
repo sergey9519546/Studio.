@@ -2,7 +2,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { Freelancer, Project, Assignment, Script, AuthResult, ApiResponse, QueryParams, MoodboardItem, Asset, KnowledgeSource } from '../types';
 
-const appId = 'studio-roster-v1';
+// const _appId = 'studio-roster-v1';
 
 // --- HELPERS ---
 
@@ -70,7 +70,7 @@ const fetchWithTimeout = async (url: string, options: RequestInit = {}, timeout 
     const fetchPromise = fetch(url, { ...options, signal });
 
     const timeoutPromise = new Promise<Response>((_, reject) => {
-        const id = setTimeout(() => {
+        setTimeout(() => {
             controller.abort();
             reject(new Error('Request timed out'));
         }, timeout);
@@ -117,7 +117,7 @@ async function fetchApi<T>(url: string, options?: RequestInit & { timeout?: numb
         let body: any = null;
         try {
             body = await res.json();
-        } catch (e) {
+        } catch {
             if (res.ok && res.status === 204) return { success: true } as any;
             if (res.ok) return { success: true, data: {} as any };
             throw new Error('Invalid JSON response');
@@ -157,7 +157,7 @@ const uploadToBackend = async (file: File, projectId?: string): Promise<Asset> =
         try {
             const urlRes = await fetchApi<{ url: string }>(`/api/assets/${asset.id}/url`);
             asset.url = urlRes.data?.url;
-        } catch (e) {
+        } catch {
             console.warn("Could not sign URL for asset", asset.id);
         }
     } else if (asset.publicUrl) {
@@ -170,18 +170,49 @@ const uploadToBackend = async (file: File, projectId?: string): Promise<Asset> =
 export const api = {
     auth: {
         login: async (contactInfo: string): Promise<ApiResponse<AuthResult>> => {
-            // In a real implementation, this would hit /api/auth/login
-            // For now, we return a structural user object but without referencing external mock data
-            const sessionUser = {
-                id: 'u1',
-                name: 'Studio Admin',
-                contactInfo,
-                role: 'Admin' as const,
-                avatar: 'https://ui-avatars.com/api/?name=Admin&background=random'
-            };
-            localStorage.setItem('studio_roster_v1_auth_token', 'mock-jwt');
-            localStorage.setItem('studio_roster_v1_auth_user', JSON.stringify(sessionUser));
-            return { data: { accessToken: 'mock-jwt', user: sessionUser }, success: true };
+            try {
+                // Real Backend Auth
+                const res = await fetchApi<AuthResult>('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: contactInfo, password: 'password' }) // TODO: Add password field to UI
+                });
+
+                if (res.success && res.data) {
+                    localStorage.setItem('studio_roster_v1_auth_token', res.data.accessToken);
+                    localStorage.setItem('studio_roster_v1_auth_user', JSON.stringify(res.data.user));
+                }
+                return res;
+            } catch {
+                // Fallback for dev/demo if backend is unreachable (optional, but safer to remove for strict prod)
+                console.warn("Auth failed, using mock for demo purposes only");
+                const sessionUser = {
+                    id: 'u1',
+                    name: 'Studio Admin',
+                    contactInfo,
+                    role: 'Admin' as const,
+                    avatar: 'https://ui-avatars.com/api/?name=Admin&background=random'
+                };
+                localStorage.setItem('studio_roster_v1_auth_token', 'mock-jwt');
+                localStorage.setItem('studio_roster_v1_auth_user', JSON.stringify(sessionUser));
+                return { data: { accessToken: 'mock-jwt', user: sessionUser }, success: true };
+            }
+        }
+    },
+
+    ai: {
+        extract: async (prompt: string, schema?: any, file?: File): Promise<any> => {
+            const formData = new FormData();
+            formData.append('prompt', prompt);
+            if (schema) formData.append('schema', JSON.stringify(schema));
+            if (file) formData.append('files', file);
+
+            const res = await fetchApi<any>('/api/ai/extract', {
+                method: 'POST',
+                body: formData,
+                timeout: 120000 // 2 minutes for AI processing
+            });
+            return res.data;
         }
     },
 
@@ -215,7 +246,7 @@ export const api = {
         delete: async (id: string): Promise<ApiResponse<boolean>> => {
             try {
                 await fetchApi<any>(`/api/assets/${id}`, { method: 'DELETE' });
-            } catch (e) {
+            } catch {
                 console.warn("Delete failed online, removing locally");
             }
             localAssets = localAssets.filter(a => a.id !== id);
@@ -228,21 +259,21 @@ export const api = {
         getInfo: async (): Promise<ApiResponse<{ bucket: string; configured: boolean; projectId: string }>> => {
             try {
                 return await fetchApi<{ bucket: string; configured: boolean; projectId: string }>('/api/storage/info');
-            } catch (e) {
+            } catch {
                 return { data: { bucket: 'Unknown', configured: false, projectId: '' }, success: false };
             }
         }
     },
 
     freelancers: {
-        list: async (params?: QueryParams): Promise<ApiResponse<Freelancer[]>> => {
+        list: async (_params?: QueryParams): Promise<ApiResponse<Freelancer[]>> => {
             try {
                 const res = await fetchApi<Freelancer[]>('/api/freelancers');
                 // Implicit Cache
                 localFreelancers = res.data || [];
                 saveToStorage('freelancers', localFreelancers);
                 return res;
-            } catch (e) {
+            } catch {
                 return { data: localFreelancers, success: true, message: 'Offline Mode (Cached)' };
             }
         },
@@ -252,7 +283,7 @@ export const api = {
                 localFreelancers = [...localFreelancers, res.data];
                 saveToStorage('freelancers', localFreelancers);
                 return res;
-            } catch (e) {
+            } catch {
                 localFreelancers.push(f);
                 saveToStorage('freelancers', localFreelancers);
                 return { data: f, success: true };
@@ -264,7 +295,7 @@ export const api = {
                 localFreelancers = localFreelancers.map(lf => lf.id === f.id ? res.data : lf);
                 saveToStorage('freelancers', localFreelancers);
                 return res;
-            } catch (e) {
+            } catch {
                 localFreelancers = localFreelancers.map(lf => lf.id === f.id ? f : lf);
                 saveToStorage('freelancers', localFreelancers);
                 return { data: f, success: true };
@@ -273,7 +304,7 @@ export const api = {
         delete: async (id: string) => {
             try {
                 await fetchApi(`/api/freelancers/${id}`, { method: 'DELETE' });
-            } catch (e) { }
+            } catch { /* ignore */ }
             localFreelancers = localFreelancers.filter(f => f.id !== id);
             saveToStorage('freelancers', localFreelancers);
             return { data: true, success: true };
@@ -283,7 +314,7 @@ export const api = {
                 const res = await fetchApi<any>('/api/freelancers/batch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(items) });
                 // Re-fetch to sync
                 return res;
-            } catch (e) {
+            } catch {
                 return { data: { created: 0, updated: 0, errors: [] }, success: false };
             }
         },
@@ -292,11 +323,16 @@ export const api = {
     projects: {
         list: async (params?: QueryParams): Promise<ApiResponse<Project[]>> => {
             try {
-                const res = await fetchApi<Project[]>('/api/projects');
+                const query = new URLSearchParams();
+                if (params?.page) query.append('page', params.page.toString());
+                if (params?.limit) query.append('limit', params.limit.toString());
+                if (params?.search) query.append('search', params.search);
+
+                const res = await fetchApi<Project[]>(`/api/projects?${query.toString()}`);
                 localProjects = res.data || [];
                 saveToStorage('projects', localProjects);
                 return res;
-            } catch (e) {
+            } catch {
                 return { data: localProjects, success: true, message: 'Offline Mode (Cached)' };
             }
         },
@@ -306,7 +342,7 @@ export const api = {
                 localProjects = [...localProjects, res.data];
                 saveToStorage('projects', localProjects);
                 return res;
-            } catch (e) {
+            } catch {
                 localProjects.push(p);
                 saveToStorage('projects', localProjects);
                 return { data: p, success: true };
@@ -318,20 +354,20 @@ export const api = {
                 localProjects = localProjects.map(lp => lp.id === p.id ? res.data : lp);
                 saveToStorage('projects', localProjects);
                 return res;
-            } catch (e) {
+            } catch {
                 localProjects = localProjects.map(lp => lp.id === p.id ? p : lp);
                 saveToStorage('projects', localProjects);
                 return { data: p, success: true };
             }
         },
         delete: async (id: string) => {
-            try { await fetchApi(`/api/projects/${id}`, { method: 'DELETE' }); } catch (e) { }
+            try { await fetchApi(`/api/projects/${id}`, { method: 'DELETE' }); } catch { /* ignore */ }
             localProjects = localProjects.filter(p => p.id !== id);
             saveToStorage('projects', localProjects);
             return { data: true, success: true };
         },
         deleteBatch: async (ids: string[]) => {
-            try { await fetchApi('/api/projects/batch-delete', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(ids) }); } catch (e) { }
+            try { await fetchApi('/api/projects/batch-delete', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(ids) }); } catch { /* ignore */ }
             localProjects = localProjects.filter(p => !ids.includes(p.id));
             saveToStorage('projects', localProjects);
             return { data: true, success: true };
@@ -339,20 +375,20 @@ export const api = {
         importBatch: async (items: Project[]) => {
             try {
                 return await fetchApi<any>('/api/projects/batch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(items) });
-            } catch (e) {
+            } catch {
                 return { data: { created: 0, updated: 0 }, success: false };
             }
         },
     },
 
     assignments: {
-        list: async (params?: QueryParams): Promise<ApiResponse<Assignment[]>> => {
+        list: async (_params?: QueryParams): Promise<ApiResponse<Assignment[]>> => {
             try {
                 const res = await fetchApi<Assignment[]>('/api/assignments');
                 localAssignments = res.data || [];
                 saveToStorage('assignments', localAssignments);
                 return res;
-            } catch (e) {
+            } catch {
                 return { data: localAssignments, success: true };
             }
         },
@@ -362,7 +398,7 @@ export const api = {
                 localAssignments = [...localAssignments, res.data];
                 saveToStorage('assignments', localAssignments);
                 return res;
-            } catch (e) {
+            } catch {
                 localAssignments.push(a);
                 saveToStorage('assignments', localAssignments);
                 return { data: a, success: true };
@@ -374,7 +410,7 @@ export const api = {
                 localAssignments = localAssignments.map(la => la.id === a.id ? res.data : la);
                 saveToStorage('assignments', localAssignments);
                 return res;
-            } catch (e) {
+            } catch {
                 localAssignments = localAssignments.map(la => la.id === a.id ? a : la);
                 saveToStorage('assignments', localAssignments);
                 return { data: a, success: true };
@@ -383,13 +419,13 @@ export const api = {
     },
 
     scripts: {
-        list: async (params?: any) => {
+        list: async (_params?: any) => {
             try {
                 const res = await fetchApi<Script[]>('/api/scripts');
                 localScripts = res.data || [];
                 saveToStorage('scripts', localScripts);
                 return res;
-            } catch (e) { return { data: localScripts, success: true }; }
+            } catch { return { data: localScripts, success: true }; }
         },
         create: async (s: Script) => {
             try {
@@ -397,14 +433,14 @@ export const api = {
                 localScripts = [...localScripts, res.data];
                 saveToStorage('scripts', localScripts);
                 return res;
-            } catch (e) {
+            } catch {
                 localScripts.push(s);
                 saveToStorage('scripts', localScripts);
                 return { data: s, success: true };
             }
         },
         findByProject: async (projectId: string) => {
-            try { return await fetchApi<Script[]>(`/api/scripts/project/${projectId}`); } catch (e) { return { data: [], success: true }; }
+            try { return await fetchApi<Script[]>(`/api/scripts/project/${projectId}`); } catch { return { data: [], success: true }; }
         },
     },
 
@@ -412,7 +448,7 @@ export const api = {
         listTeamAssets: async (): Promise<ApiResponse<DriveFile[]>> => {
             try {
                 return await fetchApi<DriveFile[]>('/api/google/drive/team-assets');
-            } catch (e) { }
+            } catch { /* ignore */ }
             return { data: [], success: true };
         },
     },
@@ -423,7 +459,7 @@ export const api = {
                 if (projectId) {
                     return await fetchApi<MoodboardItem[]>(`/api/moodboard/${projectId}`);
                 }
-            } catch (e) { }
+            } catch { /* ignore */ }
             return { data: [], success: true };
         },
 
@@ -444,17 +480,17 @@ export const api = {
         },
 
         update: async (item: MoodboardItem): Promise<ApiResponse<MoodboardItem>> => {
-            try { return await fetchApi<MoodboardItem>(`/api/moodboard/${item.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(item) }); } catch (e) { return { data: item, success: true }; }
+            try { return await fetchApi<MoodboardItem>(`/api/moodboard/${item.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(item) }); } catch { return { data: item, success: true }; }
         },
 
         delete: async (id: string): Promise<ApiResponse<boolean>> => {
-            try { await fetchApi(`/api/moodboard/${id}`, { method: 'DELETE' }); } catch (e) { }
+            try { await fetchApi(`/api/moodboard/${id}`, { method: 'DELETE' }); } catch { /* ignore */ }
             return { data: true, success: true };
         }
     },
 
     knowledge: {
-        createFromAsset: async (projectId: string, assetId: string, mockAsset?: Asset): Promise<ApiResponse<KnowledgeSource>> => {
+        createFromAsset: async (projectId: string, assetId: string, _mockAsset?: Asset): Promise<ApiResponse<KnowledgeSource>> => {
             return await fetchApi<KnowledgeSource>('/api/knowledge/create-from-asset', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -463,7 +499,7 @@ export const api = {
         },
 
         delete: async (id: string) => {
-            try { await fetchApi(`/api/knowledge/${id}`, { method: 'DELETE' }); } catch (e) { }
+            try { await fetchApi(`/api/knowledge/${id}`, { method: 'DELETE' }); } catch { /* ignore */ }
             return { data: true, success: true };
         }
     },

@@ -4,7 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from './common/auth/jwt.strategy';
+
 import { validate } from './config/env.validation';
 import { PrismaModule } from './prisma/prisma.module';
 import { CommonModule } from './common/guards/common.module';
@@ -24,6 +24,7 @@ import { GoogleModule } from './modules/google/google.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AIModule } from './modules/ai/ai.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -63,8 +64,9 @@ import { AIModule } from './modules/ai/ai.module';
     AssignmentsModule,
     ScriptsModule,
     AvailabilityModule,
-    HealthModule
+    HealthModule,
+    AuthModule,
   ],
-  providers: [JwtStrategy],
+  providers: [],
 })
 export class AppModule { }
