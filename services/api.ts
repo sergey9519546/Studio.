@@ -8,9 +8,10 @@ import { Freelancer, Project, Assignment, Script, AuthResult, ApiResponse, Query
 
 export const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-export const generateContentWithRetry = async (ai: GoogleGenAI, params: any, retries = 3): Promise<any> => {
+export const generateContentWithRetry = async (ai: GoogleGenAI, params: unknown, retries = 3): Promise<unknown> => {
     try {
-        const response = await ai.models.generateContent(params);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const response = await ai.models.generateContent(params as any);
         return response;
     } catch (e) {
         if (retries > 0) {
@@ -28,8 +29,15 @@ export interface DriveFile {
     size: number;
     url: string;
     modifiedTime: string;
-    logic: any[];
+    logic: unknown[];
     synced?: boolean;
+}
+
+export interface BatchImportResponse {
+    created: number;
+    updated: number;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    errors?: { item: any; error: string }[];
 }
 
 const STORAGE_PREFIX = 'studio_roster_v1_';
@@ -46,7 +54,7 @@ export const loadFromStorage = <T>(key: string, defaultData: T): T => {
     }
 };
 
-const saveToStorage = (key: string, data: any) => {
+const saveToStorage = (key: string, data: unknown) => {
     try {
         localStorage.setItem(STORAGE_PREFIX + key, JSON.stringify(data));
     } catch (e) {
@@ -81,62 +89,59 @@ const fetchWithTimeout = async (url: string, options: RequestInit = {}, timeout 
 
 // Allow custom timeout in options
 async function fetchApi<T>(url: string, options?: RequestInit & { timeout?: number }): Promise<ApiResponse<T>> {
-    try {
-        // Prevent browser caching of API responses to ensure we get fresh data from server
-        const headers = {
-            ...(options?.headers || {}),
-            'Cache-Control': 'no-store, no-cache, must-revalidate',
-            'Pragma': 'no-cache'
-        };
+    // Prevent browser caching of API responses to ensure we get fresh data from server
+    const headers = {
+        ...(options?.headers || {}),
+        'Cache-Control': 'no-store, no-cache, must-revalidate',
+        'Pragma': 'no-cache'
+    };
 
-        const timeout = options?.timeout || 30000; // Default 30s
-        const res = await fetchWithTimeout(url, { ...options, headers }, timeout);
+    const timeout = options?.timeout || 30000; // Default 30s
+    const res = await fetchWithTimeout(url, { ...options, headers }, timeout);
 
-        // Security: Handle Unauthorized Access
-        if (res.status === 401) {
-            console.warn('Session expired or unauthorized. Redirecting...');
-            // Optional: Dispatch a global event or clear storage
-            // window.location.href = '/login'; // Or handle via React State in App.tsx
-            throw new Error('Unauthorized');
-        }
-
-        // Check for Proxy Errors (Vite returning index.html instead of API response)
-        const contentType = res.headers.get('content-type');
-        if (contentType && contentType.includes('text/html')) {
-            throw new Error('Backend unavailable (Received HTML fallback)');
-        }
-
-        if (res.status === 404) {
-            throw new Error(`Endpoint not found: ${url}`);
-        }
-
-        if (res.status === 502 || res.status === 503 || res.status === 504) {
-            throw new Error('Backend unavailable (Gateway Error)');
-        }
-
-        let body: any = null;
-        try {
-            body = await res.json();
-        } catch {
-            if (res.ok && res.status === 204) return { success: true } as any;
-            if (res.ok) return { success: true, data: {} as any };
-            throw new Error('Invalid JSON response');
-        }
-
-        if (!res.ok) {
-            const errorObj = body?.error;
-            const message = errorObj?.message || res.statusText || 'Unknown Error';
-            throw new Error(message);
-        }
-
-        if (body.data === undefined && (Array.isArray(body) || body.id || body.email || body.name || body.bucket)) {
-            return { data: body as T, success: true };
-        }
-
-        return body as ApiResponse<T>;
-    } catch (e: any) {
-        throw e;
+    // Security: Handle Unauthorized Access
+    if (res.status === 401) {
+        console.warn('Session expired or unauthorized. Redirecting...');
+        // Optional: Dispatch a global event or clear storage
+        // window.location.href = '/login'; // Or handle via React State in App.tsx
+        throw new Error('Unauthorized');
     }
+
+    // Check for Proxy Errors (Vite returning index.html instead of API response)
+    const contentType = res.headers.get('content-type');
+    if (contentType && contentType.includes('text/html')) {
+        throw new Error('Backend unavailable (Received HTML fallback)');
+    }
+
+    if (res.status === 404) {
+        throw new Error(`Endpoint not found: ${url}`);
+    }
+
+    if (res.status === 502 || res.status === 503 || res.status === 504) {
+        throw new Error('Backend unavailable (Gateway Error)');
+    }
+
+    let body: unknown = null;
+    try {
+        body = await res.json();
+    } catch {
+        if (res.ok && res.status === 204) return { success: true } as ApiResponse<T>;
+        if (res.ok) return { success: true, data: {} as T };
+        throw new Error('Invalid JSON response');
+    }
+
+    if (!res.ok) {
+        const errorObj = (body as { error?: { message?: string } })?.error;
+        const message = errorObj?.message || res.statusText || 'Unknown Error';
+        throw new Error(message);
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if ((body as any).data === undefined && (Array.isArray(body) || (body as any).id || (body as any).email || (body as any).name || (body as any).bucket)) {
+        return { data: body as T, success: true };
+    }
+
+    return body as ApiResponse<T>;
 }
 
 const uploadToBackend = async (file: File, projectId?: string): Promise<Asset> => {
@@ -201,13 +206,13 @@ export const api = {
     },
 
     ai: {
-        extract: async (prompt: string, schema?: any, file?: File): Promise<any> => {
+        extract: async (prompt: string, schema?: unknown, file?: File): Promise<unknown> => {
             const formData = new FormData();
             formData.append('prompt', prompt);
             if (schema) formData.append('schema', JSON.stringify(schema));
             if (file) formData.append('files', file);
 
-            const res = await fetchApi<any>('/api/ai/extract', {
+            const res = await fetchApi<unknown>('/api/ai/extract', {
                 method: 'POST',
                 body: formData,
                 timeout: 120000 // 2 minutes for AI processing
@@ -238,14 +243,15 @@ export const api = {
                 localAssets = [asset, ...localAssets];
                 saveToStorage('assets', localAssets);
                 return { data: asset, success: true };
-            } catch (e: any) {
-                console.error("Upload failed:", e.message || e);
+            } catch (e) {
+                const message = e instanceof Error ? e.message : String(e);
+                console.error("Upload failed:", message);
                 throw e; // Propagate error to UI
             }
         },
         delete: async (id: string): Promise<ApiResponse<boolean>> => {
             try {
-                await fetchApi<any>(`/api/assets/${id}`, { method: 'DELETE' });
+                await fetchApi<unknown>(`/api/assets/${id}`, { method: 'DELETE' });
             } catch {
                 console.warn("Delete failed online, removing locally");
             }
@@ -309,9 +315,9 @@ export const api = {
             saveToStorage('freelancers', localFreelancers);
             return { data: true, success: true };
         },
-        importBatch: async (items: Freelancer[]) => {
+        importBatch: async (items: Freelancer[]): Promise<ApiResponse<BatchImportResponse>> => {
             try {
-                const res = await fetchApi<any>('/api/freelancers/batch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(items) });
+                const res = await fetchApi<BatchImportResponse>('/api/freelancers/batch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(items) });
                 // Re-fetch to sync
                 return res;
             } catch {
@@ -372,9 +378,9 @@ export const api = {
             saveToStorage('projects', localProjects);
             return { data: true, success: true };
         },
-        importBatch: async (items: Project[]) => {
+        importBatch: async (items: Project[]): Promise<ApiResponse<BatchImportResponse>> => {
             try {
-                return await fetchApi<any>('/api/projects/batch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(items) });
+                return await fetchApi<BatchImportResponse>('/api/projects/batch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(items) });
             } catch {
                 return { data: { created: 0, updated: 0 }, success: false };
             }
@@ -419,7 +425,7 @@ export const api = {
     },
 
     scripts: {
-        list: async (_params?: any) => {
+        list: async (_params?: unknown) => {
             try {
                 const res = await fetchApi<Script[]>('/api/scripts');
                 localScripts = res.data || [];

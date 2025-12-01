@@ -1,12 +1,13 @@
 
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 
 export interface ProjectInput {
   name?: string;
   clientName?: string;
-  roleRequirements?: any[];
-  knowledgeBase?: any[];
+  roleRequirements?: Prisma.RoleRequirementCreateWithoutProjectInput[];
+  knowledgeBase?: { title: string; content: string; category: string }[];
   budget?: string | number;
   startDate?: string | Date;
   dueDate?: string | Date;
@@ -14,14 +15,15 @@ export interface ProjectInput {
   status?: string;
   priority?: string;
   tags?: string[];
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 @Injectable()
 export class ProjectsService {
   constructor(private prisma: PrismaService) { }
 
-  private toDto(project: any) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private toDto(project: any) { // Keep explicit any here as it maps from Prisma raw result which can be complex
     if (!project) return null;
     return {
       ...project,
@@ -98,7 +100,7 @@ export class ProjectsService {
         },
         // KnowledgeBase items usually come via knowledge module, but simple text items here:
         knowledgeSources: {
-          create: (knowledgeBase || []).map((kb: any) => ({
+          create: (knowledgeBase || []).map((kb) => ({
             type: 'text',
             title: kb.title,
             originalContent: kb.content,
@@ -117,7 +119,7 @@ export class ProjectsService {
     const { name, clientName, ...rest } = data;
 
     // Map frontend fields to database schema for update
-    const updateData: any = { ...rest };
+    const updateData: Record<string, unknown> = { ...rest };
     if (name) updateData.title = name;
     if (clientName) updateData.client = clientName;
 
@@ -150,8 +152,9 @@ export class ProjectsService {
       try {
         await this.create(item);
         created++;
-      } catch (e: any) {
-        errors.push({ item, error: e.message });
+      } catch (e) {
+        const message = e instanceof Error ? e.message : 'Unknown error';
+        errors.push({ item, error: message });
       }
     }
     return { created, updated: 0, errors };
