@@ -70,7 +70,7 @@ export class ProjectsService {
   }
 
   async create(data: { title: string; description?: string; client?: string; status?: string; budget?: number; startDate?: string | Date; endDate?: string | Date; roleRequirements?: { role: string; count?: number; skills: string[] }[] }) {
-    const { roleRequirements, title: name, client: clientName, budget, startDate, endDate, ...rest } = data as any;
+    const { roleRequirements, title: name, client: clientName, budget, startDate, endDate, ...rest } = data;
 
     // Map frontend fields to database schema
     const projectData = {
@@ -93,7 +93,7 @@ export class ProjectsService {
         startDate: projectData.startDate,
         endDate: projectData.endDate,
         roleRequirements: {
-          create: (roleRequirements || []).map((rr: any) => ({
+          create: (roleRequirements || []).map((rr: { role: string; count?: number; skills: string[] | string }) => ({
             role: rr.role,
             count: rr.count || 1,
             skills: Array.isArray(rr.skills) ? rr.skills.join(',') : rr.skills // Convert array to CSV
@@ -132,22 +132,22 @@ export class ProjectsService {
     return this.prisma.project.deleteMany({ where: { id: { in: ids } } });
   }
 
-  async importBatch(items: any[]) {
+  async importBatch(items: Record<string, unknown>[]) {
     let created = 0;
-    const errors: { item: any, error: string }[] = [];
+    const errors: { item: Record<string, unknown>; error: string }[] = [];
 
     for (const item of items) {
       try {
         // Map import fields to expected DTO format
         const projectData = {
-          title: item.name || item.title,
-          description: item.description,
-          client: item.clientName || item.client,
-          status: item.status || 'PLANNED',
-          budget: item.budget,
-          startDate: item.startDate,
-          endDate: item.dueDate || item.endDate,
-          roleRequirements: item.roleRequirements
+          title: (item.name || item.title) as string,
+          description: item.description as string | undefined,
+          client: (item.clientName || item.client) as string | undefined,
+          status: (item.status || 'PLANNED') as string,
+          budget: item.budget as number | undefined,
+          startDate: item.startDate as string | Date | undefined,
+          endDate: (item.dueDate || item.endDate) as string | Date | undefined,
+          roleRequirements: item.roleRequirements as { role: string; count?: number; skills: string[] }[] | undefined
         };
         await this.create(projectData);
         created++;

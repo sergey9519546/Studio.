@@ -60,7 +60,7 @@ export class MoodboardService {
     return newItem;
   }
 
-  async findAllByProject(projectId: string): Promise<any[]> {
+  async findAllByProject(projectId: string): Promise<Array<Omit<MoodboardItem, 'tags' | 'moods' | 'colors'> & { tags: string[]; moods: string[]; colors: string[] }>> {
     const items = await this.prisma.moodboardItem.findMany({
       where: { projectId }
     });
@@ -79,7 +79,7 @@ export class MoodboardService {
           if (freshUrl) {
             url = freshUrl;
           }
-        } catch (e) {
+        } catch {
           this.logger.warn(`Failed to refresh URL for asset ${item.assetId}`);
         }
       }
@@ -87,7 +87,7 @@ export class MoodboardService {
     }));
   }
 
-  async search(projectId: string, query: string): Promise<any[]> {
+  async search(projectId: string, query: string): Promise<Array<Omit<MoodboardItem, 'tags' | 'moods' | 'colors'> & { tags: string[]; moods: string[]; colors: string[] }>> {
     const lowerQ = query.toLowerCase();
     // Perform search in memory for now as SQLite doesn't support array contains easily with CSV
     // Ideally use full text search or separate tables for tags
@@ -100,8 +100,8 @@ export class MoodboardService {
     );
   }
 
-  async update(id: string, updateData: Partial<any>): Promise<MoodboardItem> {
-    const data: any = { ...updateData };
+  async update(id: string, updateData: Partial<MoodboardItem & { tags?: string[]; moods?: string[]; colors?: string[] }>): Promise<MoodboardItem> {
+    const data: Record<string, unknown> = { ...updateData };
 
     // Convert arrays back to CSV if present
     if (Array.isArray(data.tags)) data.tags = data.tags.join(',');
@@ -113,7 +113,7 @@ export class MoodboardService {
         where: { id },
         data
       });
-    } catch (e) {
+    } catch {
       throw new NotFoundException(`Item ${id} not found`);
     }
   }
@@ -123,7 +123,7 @@ export class MoodboardService {
       await this.prisma.moodboardItem.delete({
         where: { id }
       });
-    } catch (e) {
+    } catch {
       // Ignore if already deleted
     }
   }
@@ -142,14 +142,14 @@ export class MoodboardService {
 
       await this.update(itemId, {
         caption: text.slice(0, 200), // Truncate for safety
-        tags: "AI,Analyzed,GenAI",
-        moods: "Automated,Smart"
-      });
+        tags: ["AI", "Analyzed", "GenAI"],
+        moods: ["Automated", "Smart"]
+      } as Partial<MoodboardItem & { tags?: string[]; moods?: string[]; colors?: string[] }>);
 
       this.logger.log(`AI Analysis completed for ${itemId}`);
 
-    } catch (e: any) {
-      this.logger.error("AI Analysis Failed", e);
+    } catch (error: unknown) {
+      this.logger.error("AI Analysis Failed", error instanceof Error ? error.message : String(error));
     }
   }
 }

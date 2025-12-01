@@ -1,4 +1,4 @@
-# vite.config.ts - Production Optimizations
+// vite.config.ts - Production Optimizations
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
