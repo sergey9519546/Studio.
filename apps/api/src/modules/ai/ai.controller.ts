@@ -77,9 +77,13 @@ export class AIController {
         // Step 1: Build user context
         const userContext = this.buildUserContext(userId, projectId, role, parsedContext);
 
-        // Step 2: Retrieve relevant code context using RAG
-        const codeContext = await this.rag.retrieveContext(message, 5);
-        const codeContextMetadata = this.extractCodeContextMetadata(codeContext);
+        // Step 2: Retrieve relevant code context using RAG  
+        const ragResponse = await this.rag.query(message, { topK: 5, projectId, includeContext: false });
+        const codeContext = ragResponse.sources.map((s, i) => `// Source ${i + 1}\n${s.content}`).join('\n\n');
+        const codeContextMetadata = {
+            chunks: ragResponse.sources.length,
+            files: ragResponse.sources.map((s: any) => s.metadata?.source || 'unknown')
+        };
 
         // Step 3: Build conversation history
         const conversationHistory = this.buildConversationHistory(messages);
@@ -145,15 +149,11 @@ ${JSON.stringify(parsedContext, null, 2)}
      */
     @Get('status')
     async getStatus() {
-        const status = this.rag.getIndexStatus();
+        const stats = await this.rag.getStats();
         return {
-            ...status,
-            ready: status.indexed > 0 && !status.isIndexing,
-            message: status.isIndexing
-                ? 'Indexing in progress...'
-                : status.indexed > 0
-                    ? 'Ready'
-                    : 'Not indexed',
+            ...stats,
+            ready: stats.vectorStore.totalDocuments > 0,
+            message: stats.vectorStore.totalDocuments > 0 ? 'Ready' : 'Not indexed',
         };
     }
 

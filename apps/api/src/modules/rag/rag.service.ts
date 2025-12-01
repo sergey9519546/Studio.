@@ -1,185 +1,278 @@
-import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { EmbeddingsService } from './embeddings.service';
-import { VectorStoreService, VectorDocument } from './vector-store.service';
-import * as fs from 'fs/promises';
-import * as path from 'path';
+import { VectorStoreService } from './vector-store.service';
+import { ChunkingService, DocumentChunk } from './chunking.service';
+import { VertexAIService } from '../ai/vertex-ai.service';
+
+interface RAGContext {
+    query: string;
+    relevantChunks: Array<{
+        content: string;
+        score: number;
+        metadata?: any;
+    }>;
+    context: string;
+}
+
+interface RAGResponse {
+    answer: string;
+    sources: Array<{
+        content: string;
+        score: number;
+        metadata?: any;
+    }>;
+    context: RAGContext;
+}
 
 @Injectable()
-export class RAGService implements OnModuleInit {
+export class RAGService {
     private readonly logger = new Logger(RAGService.name);
-    private isIndexing = false;
 
     constructor(
         private embeddings: EmbeddingsService,
         private vectorStore: VectorStoreService,
+        private chunking: ChunkingService,
+        private vertexAI: VertexAIService
     ) { }
 
-    async onModuleInit() {
-        // Index codebase on startup (async, don't block)
-        this.indexCodebase().catch(e => {
-            this.logger.error(`Codebase indexing failed: ${e.message}`);
+    /**
+     * Index a document for RAG retrieval
+     */
+    async indexDocument(
+        content: string,
+        metadata: {
+            source?: string;
+            projectId?: string;
+            title?: string;
+            type?: string;
+        } = {}
+    ): Promise<{ chunksIndexed: number; documentIds: string[] }> {
+        this.logger.log(`Indexing document: ${metadata.title || 'Untitled'}`);
+
+        // Chunk the document intelligently
+        const chunks = this.chunking.chunkByParagraphs(content, {
+            maxChunkSize: 800,
+            source: metadata.source,
         });
-    }
 
-    async indexCodebase(): Promise<void> {
-        if (this.isIndexing) {
-            this.logger.warn('Indexing already in progress');
-            return;
-        }
-
-        this.isIndexing = true;
-        const startTime = Date.now();
-        this.logger.log('Starting codebase indexing...');
-
-        try {
-            const filesToIndex = await this.scanRepository();
-            this.logger.log(`Found ${filesToIndex.length} files to index`);
-
-            // Index files in batches to avoid overwhelming the API
-            const batchSize = 5;
-            for (let i = 0; i < filesToIndex.length; i += batchSize) {
-                const batch = filesToIndex.slice(i, i + batchSize);
-                await Promise.all(batch.map(f => this.indexFile(f).catch(e => {
-                    this.logger.warn(`Failed to index ${f}: ${e.message}`);
-                })));
-                this.logger.debug(`Indexed batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(filesToIndex.length / batchSize)}`);
-            }
-
-            const duration = Date.now() - startTime;
-            this.logger.log(`✅ Indexed ${this.vectorStore.getDocumentCount()} chunks in ${duration}ms`);
-        } catch (e) {
-            this.logger.error(`Indexing error: ${e.message}`);
-        } finally {
-            this.isIndexing = false;
-        }
-    }
-
-    private async scanRepository(): Promise<string[]> {
-        const rootDir = process.cwd();
-        const files: string[] = [];
-
-        const walk = async (dir: string) => {
-            try {
-                const entries = await fs.readdir(dir, { withFileTypes: true });
-
-                for (const entry of entries) {
-                    const fullPath = path.join(dir, entry.name);
-
-                    // Skip node_modules, build dirs, etc.
-                    if (entry.isDirectory()) {
-                        if (!['node_modules', 'build', 'dist', '.git', '.next', 'coverage'].includes(entry.name)) {
-                            await walk(fullPath);
-                        }
-                    } else if (entry.isFile()) {
-                        const ext = path.extname(entry.name);
-                        if (['.ts', '.tsx', '.js', '.jsx'].includes(ext)) {
-                            files.push(fullPath);
-                        }
-                    }
-                }
-            } catch (e) {
-                this.logger.debug(`Skipping directory ${dir}: ${e.message}`);
-            }
-        };
-
-        // Index key directories
-        const dirsToIndex = [
-            path.join(rootDir, 'apps/api/src'),
-            path.join(rootDir, 'components'),
-            path.join(rootDir, 'services'),
-        ];
-
-        for (const dir of dirsToIndex) {
-            await walk(dir).catch(() => { });
-        }
-
-        return files;
-    }
-
-    private async indexFile(filePath: string): Promise<void> {
-        const content = await fs.readFile(filePath, 'utf-8');
-        const lines = content.split('\n');
-
-        // Only index files with meaningful content
-        if (lines.length < 10) {
-            return;
-        }
-
-        const chunks = this.chunkFile(lines, filePath);
-
-        for (const chunk of chunks) {
-            const embedding = await this.embeddings.generateEmbedding(chunk.content);
-            const doc: VectorDocument = {
-                id: `${chunk.filePath}:${chunk.lineStart}-${chunk.lineEnd}`,
+        // Store chunks in vector store
+        const documentIds = await this.vectorStore.storeBatch(
+            chunks.map(chunk => ({
                 content: chunk.content,
-                embedding,
                 metadata: {
-                    filePath: chunk.filePath,
-                    lineStart: chunk.lineStart,
-                    lineEnd: chunk.lineEnd,
-                    type: this.detectFileType(filePath),
+                    ...metadata,
+                    chunkIndex: chunk.metadata.chunkIndex,
+                    totalChunks: chunk.metadata.totalChunks,
+                },
+            }))
+        );
+
+        this.logger.log(`Indexed ${chunks.length} chunks for document`);
+
+        return {
+            chunksIndexed: chunks.length,
+            documentIds,
+        };
+    }
+
+    /**
+     * Query the RAG system
+     */
+    async query(
+        question: string,
+        options: {
+            topK?: number;
+            projectId?: string;
+            includeContext?: boolean;
+            temperature?: number;
+        } = {}
+    ): Promise<RAGResponse> {
+        const {
+            topK = 5,
+            projectId,
+            includeContext = true,
+            temperature = 0.2,
+        } = options;
+
+        this.logger.log(`RAG Query: "${question}"`);
+
+        // 1. Retrieve relevant documents using hybrid search
+        const searchFilter = projectId ? { projectId } : undefined;
+        const relevantDocs = await this.vectorStore.hybridSearch(question, {
+            topK,
+
+        });
+
+        if (relevantDocs.length === 0) {
+            this.logger.warn('No relevant documents found');
+            return {
+                answer: 'I could not find any relevant information to answer your question.',
+                sources: [],
+                context: {
+                    query: question,
+                    relevantChunks: [],
+                    context: '',
                 },
             };
-            await this.vectorStore.addDocument(doc);
+        }
+
+        this.logger.debug(`Found ${relevantDocs.length} relevant documents`);
+
+        // 2. Build context from relevant documents
+        const contextChunks = relevantDocs.map((doc, i) =>
+            `[Source ${i + 1}] (Relevance: ${(doc.score * 100).toFixed(1)}%)\n${doc.content}\n`
+        );
+
+        const context = contextChunks.join('\n---\n\n');
+
+        // 3. Generate answer using Vertex AI
+        const prompt = this.buildRAGPrompt(question, context);
+
+        try {
+            const answer = await this.vertexAI.generateContent(prompt);
+
+            const response: RAGResponse = {
+                answer: answer.trim(),
+                sources: relevantDocs.map(doc => ({
+                    content: doc.content,
+                    score: doc.score,
+                    metadata: doc.metadata,
+                })),
+                context: includeContext ? {
+                    query: question,
+                    relevantChunks: relevantDocs,
+                    context,
+                } : undefined as any,
+            };
+
+            this.logger.log('RAG query completed successfully');
+            return response;
+        } catch (error) {
+            this.logger.error('Failed to generate RAG answer', error);
+            throw error;
         }
     }
 
-    private chunkFile(lines: string[], filePath: string): Array<{ content: string; lineStart: number; lineEnd: number; filePath: string }> {
-        const chunks: Array<{ content: string; lineStart: number; lineEnd: number; filePath: string }> = [];
-        const chunkSize = 50; // lines per chunk
-        const overlap = 10; // lines overlap
+    /**
+     * Conversational RAG with chat history
+     */
+    async chat(
+        message: string,
+        options: {
+            conversationHistory?: Array<{ role: string; content: string }>;
+            projectId?: string;
+            topK?: number;
+        } = {}
+    ): Promise<RAGResponse> {
+        const { conversationHistory = [], projectId, topK = 3 } = options;
 
-        for (let i = 0; i < lines.length; i += chunkSize - overlap) {
-            const chunkLines = lines.slice(i, i + chunkSize);
-            const content = chunkLines.join('\n').trim();
+        // Retrieve relevant context
+        const searchFilter = projectId ? { projectId } : undefined;
+        const relevantDocs = await this.vectorStore.hybridSearch(message, {
+            topK,
+        });
 
-            if (content.length > 100) { // Skip tiny chunks
-                chunks.push({
-                    content,
-                    lineStart: i + 1,
-                    lineEnd: Math.min(i + chunkSize, lines.length),
-                    filePath: path.relative(process.cwd(), filePath),
-                });
-            }
-        }
+        const context = relevantDocs
+            .map((doc, i) => `[Context ${i + 1}]\n${doc.content}`)
+            .join('\n\n---\n\n');
 
-        return chunks;
-    }
+        // Build conversation with context
+        const systemPrompt = `You are a helpful AI assistant with access to relevant context. ${context ? `\n\nRelevant Context:\n${context}` : ''
+            }`;
 
-    private detectFileType(filePath: string): VectorDocument['metadata']['type'] {
-        const normalized = filePath.toLowerCase();
-        if (normalized.includes('component')) return 'component';
-        if (normalized.includes('controller')) return 'controller';
-        if (normalized.includes('service')) return 'service';
-        if (normalized.includes('schema') || normalized.includes('prisma')) return 'schema';
-        return 'config';
-    }
+        const messages = [
+            ...conversationHistory,
+            { role: 'user', content: message },
+        ];
 
-    async retrieveContext(query: string, topK: number = 5): Promise<string> {
-        const queryEmbedding = await this.embeddings.generateEmbedding(query);
-        const results = await this.vectorStore.search(queryEmbedding, topK);
+        const answer = await this.vertexAI.chat(messages, systemPrompt);
 
-        if (results.length === 0) {
-            return '// No relevant code context found in the repository.';
-        }
-
-        const contextParts = results.map((doc, i) => `
-// CONTEXT CHUNK ${i + 1}
-// File: ${doc.metadata.filePath} (Lines ${doc.metadata.lineStart}-${doc.metadata.lineEnd})
-// Type: ${doc.metadata.type}
-
-\`\`\`typescript
-${doc.content}
-\`\`\`
-`);
-
-        return contextParts.join('\n');
-    }
-
-    getIndexStatus(): { indexed: number; isIndexing: boolean } {
         return {
-            indexed: this.vectorStore.getDocumentCount(),
-            isIndexing: this.isIndexing,
+            answer,
+            sources: relevantDocs.map(doc => ({
+                content: doc.content,
+                score: doc.score,
+                metadata: doc.metadata,
+            })),
+            context: {
+                query: message,
+                relevantChunks: relevantDocs,
+                context,
+            },
         };
     }
+
+    /**
+     * Summarize multiple documents
+     */
+    async summarizeDocuments(
+        documentIds: string[],
+        options: {
+            maxLength?: number;
+        } = {}
+    ): Promise<{ summary: string; documentsProcessed: number }> {
+        this.logger.log(`Summarizing ${documentIds.length} documents`);
+
+        // Retrieve documents
+        const contents = documentIds.map(id => {
+            const vector = (this.vectorStore as any).vectorStore.get(id);
+            return vector?.content || '';
+        }).filter(c => c.length > 0);
+
+        if (contents.length === 0) {
+            throw new Error('No valid documents found');
+        }
+
+        // Combine and summarize
+        const combinedText = contents.join('\n\n---\n\n');
+        const prompt = `Please provide a comprehensive summary of the following documents. 
+Focus on key points, main ideas, and important details.
+
+Documents:
+${combinedText}
+
+Summary:`;
+
+        const summary = await this.vertexAI.generateContent(prompt);
+
+        return {
+            summary: summary.trim(),
+            documentsProcessed: contents.length,
+        };
+    }
+
+    /**
+     * Get RAG system statistics
+     */
+    async getStats(): Promise<{
+        vectorStore: any;
+        embeddingsCache: any;
+    }> {
+        return {
+            vectorStore: this.vectorStore.getStats(),
+            embeddingsCache: this.embeddings.getCacheStats(),
+        };
+    }
+
+    /**
+     * Build RAG prompt with context
+     */
+    private buildRAGPrompt(question: string, context: string): string {
+        return `You are a knowledgeable AI assistant. Answer the question based on the provided context.
+
+Context:
+${context}
+
+Question: ${question}
+
+Instructions:
+1. Answer based primarily on the provided context
+2. Be specific and cite information from the sources when possible
+3. If the context doesn't contain enough information, acknowledge this
+4. Provide a clear, concise, and helpful answer
+
+Answer:`;
+    }
 }
+
+export { RAGResponse, RAGContext };
