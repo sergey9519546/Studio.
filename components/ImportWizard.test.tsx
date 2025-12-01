@@ -13,26 +13,19 @@ vi.mock('../services/api', () => ({
     },
 }));
 
-// Mock file reader
-global.FileReader = class FileReader {
-    readAsText() {
-        if (this.onload) {
-            this.onload({ target: { result: 'mock file content' } } as any);
-        }
-    }
-} as any;
-
 describe('ImportWizard', () => {
+    const mockOnImport = vi.fn();
+
     beforeEach(() => {
         vi.clearAllMocks();
     });
 
     it('should render initial state with upload options', () => {
-        render(<ImportWizard />);
+        render(<ImportWizard onImport={mockOnImport} />);
 
-        expect(screen.getByText(/import data/i)).toBeInTheDocument();
-        expect(screen.getByText(/upload file/i)).toBeInTheDocument();
-        expect(screen.getByText(/paste text/i)).toBeInTheDocument();
+        expect(screen.getByText(/import data/i)).toBeDefined();
+        expect(screen.getByText(/upload file/i)).toBeDefined();
+        expect(screen.getByText(/paste text/i)).toBeDefined();
     });
 
     it('should handle file upload', async () => {
@@ -43,7 +36,7 @@ describe('ImportWizard', () => {
 
         vi.mocked(api.api.ai.extract).mockResolvedValue(mockExtractedData);
 
-        render(<ImportWizard />);
+        render(<ImportWizard onImport={mockOnImport} />);
 
         const file = new File(['test content'], 'test.xlsx', {
             type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -59,8 +52,8 @@ describe('ImportWizard', () => {
 
         // Check extracted data is displayed
         await waitFor(() => {
-            expect(screen.getByText('Project 1')).toBeInTheDocument();
-            expect(screen.getByText('Project 2')).toBeInTheDocument();
+            expect(screen.getByText('Project 1')).toBeDefined();
+            expect(screen.getByText('Project 2')).toBeDefined();
         });
     });
 
@@ -71,7 +64,7 @@ describe('ImportWizard', () => {
 
         vi.mocked(api.api.ai.extract).mockResolvedValue(mockExtractedData);
 
-        render(<ImportWizard />);
+        render(<ImportWizard onImport={mockOnImport} />);
 
         // Switch to paste mode
         const pasteButton = screen.getByText(/paste text/i);
@@ -85,7 +78,7 @@ describe('ImportWizard', () => {
 
         await waitFor(() => {
             expect(api.api.ai.extract).toHaveBeenCalled();
-            expect(screen.getByText('Pasted Project')).toBeInTheDocument();
+            expect(screen.getByText('Pasted Project')).toBeDefined();
         });
     });
 
@@ -94,26 +87,26 @@ describe('ImportWizard', () => {
             new Promise(() => { }) // Never resolves
         );
 
-        render(<ImportWizard />);
+        render(<ImportWizard onImport={mockOnImport} />);
 
         const file = new File(['test content'], 'test.txt', { type: 'text/plain' });
         const input = screen.getByLabelText(/upload file/i);
         await userEvent.upload(input, file);
 
-        expect(screen.getByText(/processing/i)).toBeInTheDocument();
+        expect(screen.getByText(/processing/i)).toBeDefined();
     });
 
     it('should handle extraction errors', async () => {
         vi.mocked(api.api.ai.extract).mockRejectedValue(new Error('Extraction failed'));
 
-        render(<ImportWizard />);
+        render(<ImportWizard onImport={mockOnImport} />);
 
         const file = new File(['test content'], 'test.txt', { type: 'text/plain' });
         const input = screen.getByLabelText(/upload file/i);
         await userEvent.upload(input, file);
 
         await waitFor(() => {
-            expect(screen.getByText(/error/i)).toBeInTheDocument();
+            expect(screen.getByText(/error/i)).toBeDefined();
         });
     });
 
@@ -124,7 +117,7 @@ describe('ImportWizard', () => {
 
         vi.mocked(api.api.ai.extract).mockResolvedValue(mockExtractedData);
 
-        render(<ImportWizard />);
+        render(<ImportWizard onImport={mockOnImport} />);
 
         // Upload file and extract
         const file = new File(['test content'], 'test.txt', { type: 'text/plain' });
@@ -132,20 +125,20 @@ describe('ImportWizard', () => {
         await userEvent.upload(input, file);
 
         await waitFor(() => {
-            expect(screen.getByText('Project 1')).toBeInTheDocument();
+            expect(screen.getByText('Project 1')).toBeDefined();
         });
 
         // Navigate to next step
         const nextButton = screen.getByRole('button', { name: /next/i });
         await userEvent.click(nextButton);
 
-        expect(screen.getByText(/confirm import/i)).toBeInTheDocument();
+        expect(screen.getByText(/confirm import/i)).toBeDefined();
     });
 
     it('should support different file types', async () => {
         vi.mocked(api.api.ai.extract).mockResolvedValue([]);
 
-        render(<ImportWizard />);
+        render(<ImportWizard onImport={mockOnImport} />);
 
         const fileTypes = [
             { name: 'test.xlsx', type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' },
