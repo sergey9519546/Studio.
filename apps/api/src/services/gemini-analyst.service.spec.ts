@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { GeminiAnalystService } from './gemini-analyst.service';
+import { GeminiAnalystService } from '../modules/ai/gemini-analyst.service';
 import { ConfigService } from '@nestjs/config';
 
 describe('GeminiAnalystService', () => {

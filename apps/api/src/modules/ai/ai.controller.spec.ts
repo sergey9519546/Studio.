@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BadRequestException } from '@nestjs/common';
 import { AIController } from './ai.controller';
-import { GeminiAnalystService } from '../../../services/gemini-analyst.service';
+import { GeminiAnalystService } from './gemini-analyst.service';
 
 describe('AIController', () => {
     let controller: AIController;
