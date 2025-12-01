@@ -1,5 +1,5 @@
 
-import { GoogleGenAI } from "@google/genai";
+
 import { Freelancer, Project, Assignment, Script, AuthResult, ApiResponse, QueryParams, MoodboardItem, Asset, KnowledgeSource } from '../types';
 
 // const _appId = 'studio-roster-v1';
@@ -7,20 +7,6 @@ import { Freelancer, Project, Assignment, Script, AuthResult, ApiResponse, Query
 // --- HELPERS ---
 
 export const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-
-export const generateContentWithRetry = async (ai: GoogleGenAI, params: unknown, retries = 3): Promise<unknown> => {
-    try {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const response = await ai.models.generateContent(params as any);
-        return response;
-    } catch (e) {
-        if (retries > 0) {
-            await delay(1000);
-            return generateContentWithRetry(ai, params, retries - 1);
-        }
-        throw e;
-    }
-};
 
 export interface DriveFile {
     id: string;
@@ -89,11 +75,15 @@ const fetchWithTimeout = async (url: string, options: RequestInit = {}, timeout 
 
 // Allow custom timeout in options
 async function fetchApi<T>(url: string, options?: RequestInit & { timeout?: number }): Promise<ApiResponse<T>> {
+    // Get auth token from localStorage
+    const token = localStorage.getItem('studio_roster_v1_auth_token');
+
     // Prevent browser caching of API responses to ensure we get fresh data from server
     const headers = {
         ...(options?.headers || {}),
         'Cache-Control': 'no-store, no-cache, must-revalidate',
-        'Pragma': 'no-cache'
+        'Pragma': 'no-cache',
+        ...(token && { 'Authorization': `Bearer ${token}` }) // Add JWT token
     };
 
     const timeout = options?.timeout || 30000; // Default 30s
@@ -174,13 +164,13 @@ const uploadToBackend = async (file: File, projectId?: string): Promise<Asset> =
 
 export const api = {
     auth: {
-        login: async (contactInfo: string): Promise<ApiResponse<AuthResult>> => {
+        login: async (email: string, password: string): Promise<ApiResponse<AuthResult>> => {
             try {
                 // Real Backend Auth
                 const res = await fetchApi<AuthResult>('/api/auth/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: contactInfo, password: 'password' }) // TODO: Add password field to UI
+                    body: JSON.stringify({ email, password })
                 });
 
                 if (res.success && res.data) {

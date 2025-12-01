@@ -1,10 +1,13 @@
 
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { AssignmentsService } from './assignments.service';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { CreateAssignmentDto, UpdateAssignmentDto } from './dto/assignment.dto';
 
 @Controller('assignments')
+@UseGuards(JwtAuthGuard)
 export class AssignmentsController {
-  constructor(private readonly assignmentsService: AssignmentsService) {}
+  constructor(private readonly assignmentsService: AssignmentsService) { }
 
   @Get()
   findAll() {
@@ -12,13 +15,13 @@ export class AssignmentsController {
   }
 
   @Post()
-  create(@Body() createDto: any) {
-    return this.assignmentsService.create(createDto);
+  create(@Body() createAssignmentDto: CreateAssignmentDto) {
+    return this.assignmentsService.create(createAssignmentDto);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDto: any) {
-    return this.assignmentsService.update(id, updateDto);
+  update(@Param('id') id: string, @Body() updateAssignmentDto: UpdateAssignmentDto) {
+    return this.assignmentsService.update(id, updateAssignmentDto);
   }
 
   @Delete(':id')

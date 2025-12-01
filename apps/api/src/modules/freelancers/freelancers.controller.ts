@@ -1,10 +1,13 @@
 
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { FreelancersService } from './freelancers.service';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { CreateFreelancerDto, UpdateFreelancerDto } from './dto/freelancer.dto';
 
 @Controller('freelancers')
+@UseGuards(JwtAuthGuard)
 export class FreelancersController {
-  constructor(private readonly freelancersService: FreelancersService) {}
+  constructor(private readonly freelancersService: FreelancersService) { }
 
   @Get()
   findAll() {
@@ -17,13 +20,13 @@ export class FreelancersController {
   }
 
   @Post()
-  create(@Body() createDto: any) {
-    return this.freelancersService.create(createDto);
+  create(@Body() createFreelancerDto: CreateFreelancerDto) {
+    return this.freelancersService.create(createFreelancerDto);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDto: any) {
-    return this.freelancersService.update(id, updateDto);
+  update(@Param('id') id: string, @Body() updateFreelancerDto: UpdateFreelancerDto) {
+    return this.freelancersService.update(id, updateFreelancerDto);
   }
 
   @Delete(':id')

@@ -10,6 +10,7 @@ model User {
     id                 Int     @id @default(autoincrement())
     email              String  @unique
     name               String?
+    password           String? // For password-based authentication
     googleAccessToken  String?
     googleRefreshToken String?
 }
@@ -41,9 +42,9 @@ model Skill {
 
 model Project {
     id               String            @id @default(uuid())
-    title            String?
+    title            String // Made required (removed ?)
     description      String?
-    status           String?
+    status           String            @default("PLANNED") // Added default
     startDate        DateTime?
     endDate          DateTime?
     budget           Float?
@@ -92,9 +93,9 @@ model Script {
 model Assignment {
     id           String     @id @default(uuid())
     projectId    String
-    project      Project    @relation(fields: [projectId], references: [id])
+    project      Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
     freelancerId String
-    freelancer   Freelancer @relation(fields: [freelancerId], references: [id])
+    freelancer   Freelancer @relation(fields: [freelancerId], references: [id], onDelete: Cascade)
     startDate    DateTime
     endDate      DateTime
     allocation   Int        @default(100)

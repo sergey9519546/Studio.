@@ -1,20 +1,231 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Studio Roster - Quick Start Guide
 
-# Run and deploy your AI Studio app
+## 🚀 Get Started in 3 Steps
 
-This contains everything you need to run your app locally.
+### 1. Install Dependencies
+```bash
+npm install --legacy-peer-deps
+```
 
-View your app in AI Studio: https://ai.studio/apps/drive/1HwOKyz7WFCpY9PjoXyGRgJB-F0k6foUW
+### 2. Setup Environment
+```bash
+# Generate JWT secret
+$JWT_SECRET = -join ((48..57) + (65..90) + (97..122) | Get-Random -Count 32 | % {[char]$_})
 
-## Run Locally
+# Create .env file (copy from .env.example)
+# Then update these values:
+DATABASE_URL="file:./dev.db"  # SQLite for local dev
+JWT_SECRET="your-generated-secret-here"
+ADMIN_EMAIL="admin@studio.com"
+ADMIN_PASSWORD="change-this-password"
+GCP_PROJECT_ID="your-project-id"
+```
 
-**Prerequisites:**  Node.js
+### 3. Initialize Database & Run
+```bash
+# Generate Prisma client
+npx prisma generate
 
+# Push schema to database
+npx prisma db push
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+# Start development server
+npm run dev
+```
+
+**That's it!** Visit http://localhost:5173
+
+---
+
+## 🔑 First Login
+
+The system automatically creates an admin user on first startup:
+- **Email:** Value from `ADMIN_EMAIL` in .env
+- **Password:** Value from `ADMIN_PASSWORD` in .env
+
+**⚠️ Change the default password immediately!**
+
+---
+
+## 📦 What's Included
+
+- ✅ **Secure Authentication** - Bcrypt + JWT
+- ✅ **Vertex AI Integration** - Production-ready AI
+- ✅ **Type-Safe API** - DTOs with validation
+- ✅ **Rate Limiting** - 100 req/60sec
+- ✅ **Error Handling** - ErrorBoundary component
+- ✅ **Cloud Ready** - Optimized Docker + deploy scripts
+
+---
+
+## 🏗️ Project Structure
+
+```
+studio-roster/
+├── apps/api/          # NestJS backend
+│   └── src/
+│       ├── modules/   # Feature modules
+│       ├── prisma/    # Database client
+│       └── main.ts    # Entry point
+├── components/        # React components
+├── services/          # Frontend API layer
+├── prisma/           # Database schema
+├── build/            # Production build
+└── deploy.sh         # Deployment script
+```
+
+---
+
+## 🧪 Available Scripts
+
+```bash
+# Development
+npm run dev              # Start dev server (backend + frontend)
+
+# Building
+npm run build            # Build all (API + frontend)
+npm run build:api        # Build backend only
+
+# Database
+npx prisma studio        # Visual database editor
+npx prisma db push       # Apply schema changes
+npx prisma generate      # Generate Prisma client
+
+# Testing
+npm run test:frontend    # Run frontend tests
+npm run test:api         # Run backend tests
+
+# Linting
+npm run lint            # Check code quality
+```
+
+---
+
+## 🚢 Deploy to Production
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete guide.
+
+Quick deployment to Google Cloud Run:
+```bash
+chmod +x deploy.sh
+./deploy.sh
+```
+
+---
+
+## 🔧 Configuration
+
+### Required Environment Variables
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `DATABASE_URL` | Database connection | `file:./dev.db` |
+| `JWT_SECRET` | JWT signing key | `<32-char-secret>` |
+| `GCP_PROJECT_ID` | Google Cloud project | `my-project-123` |
+| `ADMIN_EMAIL` | Initial admin email | `admin@studio.com` |
+| `ADMIN_PASSWORD` | Initial admin password | `SecurePass123!` |
+
+### Optional Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `PORT` | Server port | `3001` |
+| `NODE_ENV` | Environment | `development` |
+| `GCP_LOCATION` | Vertex AI region | `us-central1` |
+| `STORAGE_BUCKET` | GCS bucket name | - |
+| `LOG_LEVEL` | Logging level | `info` |
+
+---
+
+## 📚 Documentation
+
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Production deployment guide
+- **[.env.example](./.env.example)** - Environment template
+- **[walkthrough.md](./.gemini/antigravity/brain/.../walkthrough.md)** - Complete implementation details
+
+---
+
+## 🆘 Troubleshooting
+
+### Database Connection Error
+```bash
+# Reset database
+rm prisma/dev.db
+npx prisma db push
+```
+
+### Build Errors
+```bash
+# Clean and reinstall
+rm -rf node_modules build
+npm install --legacy-peer-deps
+npm run build
+```
+
+### Port Already in Use
+```bash
+# Change port in .env
+PORT=3002
+```
+
+### Prisma Client Error
+```bash
+# Regenerate client
+npx prisma generate
+```
+
+---
+
+## ✅ Production Checklist
+
+Before deploying:
+- [ ] Generate strong JWT_SECRET
+- [ ] Set secure ADMIN_PASSWORD  
+- [ ] Configure production DATABASE_URL
+- [ ] Set up GCP service account
+- [ ] Configure CORS for your domain
+- [ ] Test authentication flow
+- [ ] Verify Vertex AI access
+- [ ] Review security settings
+
+---
+
+## 🎯 Key Features
+
+### Authentication
+- Email/password login
+- JWT token-based sessions
+- Bcrypt password hashing
+- Auth guards on all protected routes
+
+### AI Integration
+- Vertex AI for content generation
+- Gemini 1.5 Pro model
+- Conversation history support
+- Structured data extraction
+
+### Database
+- PostgreSQL compatible (uses SQLite locally)
+- Prisma ORM
+- Type-safe queries
+- Automatic migrations
+
+### API
+- RESTful endpoints
+- DTO validation
+- Rate limiting
+- Error handling
+- Health checks
+
+---
+
+## 📖 Learn More
+
+- [NestJS Documentation](https://docs.nestjs.com)
+- [Prisma Documentation](https://www.prisma.io/docs)
+- [Vertex AI Documentation](https://cloud.google.com/vertex-ai/docs)
+- [React Documentation](https://react.dev)
+
+---
+
+**Built with ❤️ using NestJS, React, Prisma, and Vertex AI**

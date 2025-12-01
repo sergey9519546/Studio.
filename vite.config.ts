@@ -1,35 +1,52 @@
-import { defineConfig, loadEnv } from 'vite';
+# vite.config.ts - Production Optimizations
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
 
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '');
-  return {
-    plugins: [react()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, './src'),
+export default defineConfig({
+  plugins: [react()],
+
+  build: {
+    // Production optimizations
+    target: 'es2015',
+    outDir: 'build/client',
+    sourcemap: false, // Disable source maps in production
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console.log in production
+        drop_debugger: true,
       },
     },
-    root: '.',
-    build: {
-      outDir: 'build/client',
-      emptyOutDir: true,
+
+    // Code splitting for better caching
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'ui-vendor': ['lucide-react'],
+          'query-vendor': ['@tanstack/react-query'],
+        },
+      },
     },
 
-    define: {
-      'process.env': {
-        API_KEY: JSON.stringify(process.env.API_KEY || env.API_KEY || ''),
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
-      }
+    // Chunk size warnings
+    chunkSizeWarningLimit: 1000,
+  },
+
+  server: {
+    port: 5173,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
     },
-    server: {
-      proxy: {
-        '/api': {
-          target: 'http://localhost:3001',
-          changeOrigin: true,
-        }
-      }
-    }
-  }
+  },
+
+  // Resolve options
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
+  },
 });

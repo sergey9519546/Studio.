@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 import { validate } from './config/env.validation';
 import { PrismaModule } from './prisma/prisma.module';
@@ -36,6 +37,10 @@ import { AuthModule } from './modules/auth/auth.module';
     EventEmitterModule.forRoot({
       global: true,
     }),
+    ThrottlerModule.forRoot([{
+      ttl: 60000, // 60 seconds
+      limit: 100, // 100 requests per ttl window
+    }]),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../../../client'),
       exclude: ['/api/(.*)'],

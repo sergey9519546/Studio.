@@ -1,9 +1,9 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateMoodboardItemDto } from './dto/create-moodboard-item.dto';
 import { AssetsService } from '../assets/assets.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { MoodboardItem } from '@prisma/client';
+import { VertexAIService } from '../ai/vertex-ai.service';
 
 @Injectable()
 export class MoodboardService {
@@ -11,7 +11,8 @@ export class MoodboardService {
 
   constructor(
     private readonly assetsService: AssetsService,
-    private readonly prisma: PrismaService
+    private readonly prisma: PrismaService,
+    private readonly vertexAI: VertexAIService
   ) { }
 
   async create(createDto: CreateMoodboardItemDto): Promise<MoodboardItem> {
@@ -128,19 +129,8 @@ export class MoodboardService {
   }
 
   private async analyzeAsset(itemId: string, assetId: string) {
-    const apiKey = process.env.API_KEY;
-    if (!apiKey) {
-      this.logger.warn('Skipping AI analysis: No API_KEY found');
-      return;
-    }
-
     try {
       const asset = await this.assetsService.findOne(assetId);
-      // For this MVP, we are only analyzing the metadata or using a text prompt
-      // In a full implementation, we would download the image buffer and pass it to Gemini
-
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       const prompt = `Analyze this file: ${asset.fileName} (${asset.mimeType}). 
       Generate a JSON response with:
@@ -148,12 +138,7 @@ export class MoodboardService {
       - tags: 5 comma-separated keywords
       - moods: 3 comma-separated mood adjectives`;
 
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const text = response.text();
-
-      // Basic parsing (robust JSON parsing would be better in prod)
-      // Assuming the model returns somewhat structured text or we just use the text as caption
+      const text = await this.vertexAI.generateContent(prompt);
 
       await this.update(itemId, {
         caption: text.slice(0, 200), // Truncate for safety

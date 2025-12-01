@@ -262,14 +262,14 @@ const AppContent: React.FC = () => {
     return res.data;
   };
 
-  const handleLogin = async (contactInfo: string) => {
-    if (contactInfo === 'FORCE_OFFLINE') {
+  const handleLogin = async (email: string, password: string) => {
+    if (email === 'FORCE_OFFLINE') {
       setIsAuthenticated(true);
       toast.success("Entered Offline Mode");
       return;
     }
     try {
-      await api.auth.login(contactInfo);
+      await api.auth.login(email, password);
       setIsAuthenticated(true);
       toast.success("Welcome back to Studio Roster");
     } catch (e) {

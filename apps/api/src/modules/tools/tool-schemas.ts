@@ -1,15 +1,16 @@
-import { Type } from '@google/genai';
+// Type definitions for tool schemas
+// Using string constants instead of @google/genai Type enum
 
 export const AI_TOOLS = [
     {
         name: 'scanRepository',
         description: 'Scans the codebase for specific patterns, files, or components. Returns matching file paths and line numbers.',
         parameters: {
-            type: Type.OBJECT,
+            type: 'object',
             properties: {
-                query: { type: Type.STRING, description: 'Search query (file name, function name, or code pattern)' },
-                fileType: { type: Type.STRING, description: 'Optional file extension filter (e.g., "tsx", "ts")' },
-                maxResults: { type: Type.INTEGER, description: 'Maximum number of results to return (default: 10)' },
+                query: { type: 'string', description: 'Search query (file name, function name, or code pattern)' },
+                fileType: { type: 'string', description: 'Optional file extension filter (e.g., "tsx", "ts")' },
+                maxResults: { type: 'integer', description: 'Maximum number of results to return (default: 10)' },
             },
             required: ['query'],
         },
@@ -18,10 +19,10 @@ export const AI_TOOLS = [
         name: 'runTests',
         description: 'Runs tests for a specific file or module. Returns test results and any failures.',
         parameters: {
-            type: Type.OBJECT,
+            type: 'object',
             properties: {
-                testPath: { type: Type.STRING, description: 'Path to test file or pattern (e.g., "components/AIChat.test.tsx")' },
-                testName: { type: Type.STRING, description: 'Optional specific test name to run' },
+                testPath: { type: 'string', description: 'Path to test file or pattern (e.g., "components/AIChat.test.tsx")' },
+                testName: { type: 'string', description: 'Optional specific test name to run' },
             },
             required: ['testPath'],
         },
@@ -30,11 +31,11 @@ export const AI_TOOLS = [
         name: 'getFileContent',
         description: 'Retrieves the full content of a specific file from the repository.',
         parameters: {
-            type: Type.OBJECT,
+            type: 'object',
             properties: {
-                filePath: { type: Type.STRING, description: 'Relative path to the file' },
-                startLine: { type: Type.INTEGER, description: 'Optional starting line number' },
-                endLine: { type: Type.INTEGER, description: 'Optional ending line number' },
+                filePath: { type: 'string', description: 'Relative path to the file' },
+                startLine: { type: 'integer', description: 'Optional starting line number' },
+                endLine: { type: 'integer', description: 'Optional ending line number' },
             },
             required: ['filePath'],
         },
@@ -43,9 +44,9 @@ export const AI_TOOLS = [
         name: 'listDirectory',
         description: 'Lists all files and subdirectories in a given directory path.',
         parameters: {
-            type: Type.OBJECT,
+            type: 'object',
             properties: {
-                directoryPath: { type: Type.STRING, description: 'Relative path to the directory' },
+                directoryPath: { type: 'string', description: 'Relative path to the directory' },
             },
             required: ['directoryPath'],
         },

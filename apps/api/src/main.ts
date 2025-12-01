@@ -1,68 +1,46 @@
-
-import { NestFactory, HttpAdapterHost } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { Logger, ValidationPipe } from '@nestjs/common';
-import { json, urlencoded } from 'express';
+import { ValidationPipe } from '@nestjs/common';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
+import { AuthService } from './modules/auth/auth.service';
 
 async function bootstrap() {
-  const logger = new Logger('Bootstrap');
+  const app = await NestFactory.create(AppModule, {
+    logger: ['error', 'warn', 'log'],
+  });
 
-  try {
-    const app = await NestFactory.create(AppModule);
-    const httpAdapter = app.get(HttpAdapterHost);
-
-    // Global Config
-    app.setGlobalPrefix('api');
-
-    // Security: Strict CORS Policy with Dev Flexibility
-    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
-    const allowedOrigins = [
-      frontendUrl,
-      'http://localhost:5173',
-      'http://localhost:5174',
-      'http://localhost:5175',
-      'http://localhost:5176'
-    ];
-
-    app.enableCors({
-      origin: (origin, callback) => {
-        // Allow requests with no origin (like mobile apps or curl requests) or matching allowed list
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          logger.warn(`Blocked CORS request from origin: ${origin}`);
-          callback(new Error('Not allowed by CORS'));
-        }
-      },
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-      credentials: true,
-    });
-
-    // Increase body limit for file uploads and large JSON payloads
-    app.use(json({ limit: '100mb' }));
-    app.use(urlencoded({ extended: true, limit: '100mb' }));
-
-    // Security: Strict Input Validation
-    app.useGlobalPipes(new ValidationPipe({
-      transform: true,
+  // Global validation pipe
+  app.useGlobalPipes(
+    new ValidationPipe({
       whitelist: true,
-      forbidNonWhitelisted: true, // Reject requests with unknown properties
-      transformOptions: {
-        enableImplicitConversion: true,
-      },
-    }));
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
+  );
 
-    // Global Error Handling & Logging
-    app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
+  // Global exception filter
+  app.useGlobalFilters(new AllExceptionsFilter());
 
-    const port = process.env.PORT || 3001;
-    await app.listen(port, '0.0.0.0');
-    logger.log(`🚀 Studio Roster API running on port ${port}`);
-    logger.log(`🛡️  CORS allowed for: ${allowedOrigins.join(', ')}`);
+  // CORS configuration
+  app.enableCors({
+    origin: process.env.FRONTEND_URL || '*',
+    credentials: true,
+  });
+
+  // Seed admin user on startup (only if no users exist)
+  try {
+    const authService = app.get(AuthService);
+    await authService.seedAdminUser();
   } catch (error) {
-    logger.error(`Failed to start application: ${error.message}`, error.stack);
-    (process as any).exit(1);
+    console.error('Failed to seed admin user:', error);
   }
+
+  const port = process.env.PORT || 3001;
+  await app.listen(port);
+
+  console.log(`🚀 Server running on http://localhost:${port}`);
+  console.log(`📊 Health check: http://localhost:${port}/health`);
+  console.log(`🔒 Environment: ${process.env.NODE_ENV || 'development'}`);
 }
+
 bootstrap();

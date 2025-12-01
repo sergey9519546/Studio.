@@ -69,20 +69,17 @@ export class ProjectsService {
     return this.toDto(project);
   }
 
-  async create(data: ProjectInput) {
-    const { roleRequirements, knowledgeBase, name, clientName, budget, startDate, dueDate, ...rest } = data;
+  async create(data: { title: string; description?: string; client?: string; status?: string; budget?: number; startDate?: string | Date; endDate?: string | Date; roleRequirements?: { role: string; count?: number; skills: string[] }[] }) {
+    const { roleRequirements, title: name, client: clientName, budget, startDate, endDate, ...rest } = data as any;
 
     // Map frontend fields to database schema
     const projectData = {
       ...rest,
-      title: name,
-      client: clientName,
+      title: name || data.title,
+      client: clientName || data.client,
       budget: budget ? parseFloat(budget.toString()) : undefined,
       startDate: startDate ? new Date(startDate) : undefined,
-      endDate: dueDate ? new Date(dueDate) : undefined,
-      // Remove unknown fields
-      priority: undefined,
-      tags: undefined,
+      endDate: endDate ? new Date(endDate) : undefined,
       status: rest.status || 'PLANNED'
     };
 
@@ -96,42 +93,33 @@ export class ProjectsService {
         startDate: projectData.startDate,
         endDate: projectData.endDate,
         roleRequirements: {
-          create: roleRequirements || []
-        },
-        // KnowledgeBase items usually come via knowledge module, but simple text items here:
-        knowledgeSources: {
-          create: (knowledgeBase || []).map((kb) => ({
-            type: 'text',
-            title: kb.title,
-            originalContent: kb.content,
-            status: 'indexed',
-            summary: kb.category,
-            projectId: undefined // Will be connected automatically
+          create: (roleRequirements || []).map((rr: any) => ({
+            role: rr.role,
+            count: rr.count || 1,
+            skills: Array.isArray(rr.skills) ? rr.skills.join(',') : rr.skills // Convert array to CSV
           }))
-        }
+        },
       },
       include: { roleRequirements: true }
     });
     return this.toDto(created);
   }
 
-  async update(id: string, data: ProjectInput) {
-    const { name, clientName, ...rest } = data;
+  async update(id: string, data: { title?: string; description?: string; client?: string; status?: string; budget?: number; startDate?: string | Date; endDate?: string | Date }) {
+    const updateData: Record<string, unknown> = {};
+    if (data.title) updateData.title = data.title;
+    if (data.client) updateData.client = data.client;
+    if (data.description !== undefined) updateData.description = data.description;
+    if (data.status) updateData.status = data.status;
+    if (data.budget !== undefined) updateData.budget = data.budget;
+    if (data.startDate) updateData.startDate = new Date(data.startDate);
+    if (data.endDate) updateData.endDate = new Date(data.endDate);
 
-    // Map frontend fields to database schema for update
-    const updateData: Record<string, unknown> = { ...rest };
-    if (name) updateData.title = name;
-    if (clientName) updateData.client = clientName;
-
-    // Simple update strategy: Update primitives directly
     const updated = await this.prisma.project.update({
       where: { id },
       data: updateData,
       include: { roleRequirements: true }
     });
-
-    // Handle Roles (Naive replacement or upsert needed for complex logic, keeping simple for now)
-    // In a real app, we'd diff the roles.
 
     return this.toDto(updated);
   }
@@ -144,13 +132,24 @@ export class ProjectsService {
     return this.prisma.project.deleteMany({ where: { id: { in: ids } } });
   }
 
-  async importBatch(items: ProjectInput[]) {
+  async importBatch(items: any[]) {
     let created = 0;
-    const errors: { item: ProjectInput, error: string }[] = [];
+    const errors: { item: any, error: string }[] = [];
 
     for (const item of items) {
       try {
-        await this.create(item);
+        // Map import fields to expected DTO format
+        const projectData = {
+          title: item.name || item.title,
+          description: item.description,
+          client: item.clientName || item.client,
+          status: item.status || 'PLANNED',
+          budget: item.budget,
+          startDate: item.startDate,
+          endDate: item.dueDate || item.endDate,
+          roleRequirements: item.roleRequirements
+        };
+        await this.create(projectData);
         created++;
       } catch (e) {
         const message = e instanceof Error ? e.message : 'Unknown error';
