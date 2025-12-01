@@ -7,7 +7,7 @@ export class EmbeddingsService {
 
     constructor(private vertexAI: VertexAIService) { }
 
-    async generateEmbedding(text: string): Promise<number[]> {
+    async generateEmbedding(_text: string): Promise<number[]> {
         try {
             // Note: Vertex AI SDK doesn't have embedContent method yet
             // This is a placeholder - in production you would use Vertex AI Embeddings API
