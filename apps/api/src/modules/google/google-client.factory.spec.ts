@@ -4,7 +4,6 @@ import { UnauthorizedException } from '@nestjs/common';
 import { GoogleClientFactory } from './google-client.factory';
 
 describe('GoogleClientFactory', () => {
-    let factory: GoogleClientFactory;
     let configService: ConfigService;
 
     const mockConfigService = {
@@ -22,7 +21,6 @@ describe('GoogleClientFactory', () => {
             ],
         }).compile();
 
-        factory = module.get<GoogleClientFactory>(GoogleClientFactory);
         configService = module.get<ConfigService>(ConfigService);
     });
 
@@ -67,7 +65,6 @@ describe('GoogleClientFactory', () => {
         it('should warn if no credentials configured', () => {
             mockConfigService.get.mockReturnValue(undefined);
 
-            const loggerSpy = jest.spyOn(GoogleClientFactory.prototype as any, 'logger', 'get');
             const module = new GoogleClientFactory(configService);
             module.onModuleInit();
 
