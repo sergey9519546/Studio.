@@ -1,6 +1,5 @@
-import { GoogleGenAI } from "@google/genai";
 import { KnowledgeSource, KnowledgeChunk, HallucinationCheck, Project } from '../types';
-import { generateContentWithRetry } from './api';
+import { api } from './api';
 
 // --- MOCK EMBEDDING & VECTOR STORE ---
 class VectorStore {
@@ -58,7 +57,7 @@ export const vectorStore = new VectorStore();
 export const DeepReader = {
   async ingestFile(file: File): Promise<KnowledgeSource> {
     // 1. Image Handling (Gemini Vision)
-    if (file.type.startsWith('image/') && process.env.API_KEY) {
+    if (file.type.startsWith('image/')) {
       return this.ingestImage(file);
     }
 
@@ -152,17 +151,21 @@ Weaknesses
 
   async ingestImage(file: File): Promise<KnowledgeSource> {
     const base64Data = await this.fileToBase64(file);
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash-exp',
-      contents: [
-        { text: "Describe this image in detail. If it contains text, extract and structure it." },
-        { inlineData: { mimeType: file.type, data: base64Data } }
-      ]
-    });
+    let content = "No analysis generated.";
+    try {
+      const response = await api.ai.chat({
+        message: "Describe this image in detail. If it contains text, extract and structure it.",
+        image: base64Data,
+        mimeType: file.type
+      });
+      if (response.data.response) {
+        content = response.data.response;
+      }
+    } catch (e) {
+      console.error("Image analysis failed", e);
+    }
 
-    const content = response.text || "No analysis generated.";
     const chunks = this.chunkContent(content, file.name, ['image', 'analysis']);
     vectorStore.addChunks(chunks);
 
@@ -210,10 +213,9 @@ Weaknesses
 
 export const HallucinationGuard = {
   async validate(text: string, projectConstraints: string[]): Promise<HallucinationCheck> {
-    if (!process.env.API_KEY || !text) return { hasViolation: false, violations: [] };
+    if (!text) return { hasViolation: false, violations: [] };
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const prompt = `
       You are a Continuity Editor. Check the following generated text against these Constraints (Context).
       
@@ -233,13 +235,11 @@ export const HallucinationGuard = {
       }
       `;
 
-      const response = await generateContentWithRetry(ai, {
-        model: 'gemini-2.5-flash',
-        contents: prompt,
-        config: { responseMimeType: 'application/json' }
+      const response = await api.ai.chat({
+        message: prompt
       });
 
-      let jsonStr = response.text;
+      let jsonStr = response.data.response;
       if (jsonStr) {
         jsonStr = jsonStr.replace(/```json/g, '').replace(/```/g, '').trim();
         return JSON.parse(jsonStr);
@@ -256,8 +256,6 @@ export const HallucinationGuard = {
 
 export const RAGEngine = {
   async generate(prompt: string, sources: KnowledgeSource[], project: Project): Promise<string> {
-    if (!process.env.API_KEY) throw new Error("No API Key");
-
     // 1. Retrieve Context
     const retrievedChunks = await vectorStore.search(prompt, 8);
 
@@ -284,12 +282,14 @@ export const RAGEngine = {
     `;
 
     // 4. Generate
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash-exp',
-      contents: [{ role: 'user', parts: [{ text: systemPrompt + `\n\nUSER PROMPT: ${prompt}` }] }]
-    });
-
-    return response.text;
+    try {
+      const response = await api.ai.chat({
+        message: systemPrompt + `\n\nUSER PROMPT: ${prompt}`
+      });
+      return response.data.response || "Failed to generate content.";
+    } catch (e) {
+      console.error("RAG Generation failed", e);
+      throw e;
+    }
   }
 };

@@ -121,7 +121,7 @@ const CreativeStudio: React.FC<CreateStudioProps> = ({ projects, freelancers, as
         if (!scriptContent.trim()) return;
         setIsEnhancing(true);
         try {
-            const response = await api.post('/ai/chat', {
+            const response = await api.ai.chat({
                 message: `Refine and structure this creative writing. Use markdown headers and bullet points. Content: ${scriptContent}`
             });
             if (response.data.response) {

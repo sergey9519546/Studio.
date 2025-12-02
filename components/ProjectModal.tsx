@@ -82,7 +82,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
       `;
 
       // Use the backend AI endpoint instead of direct SDK calls
-      const response = await api.post('/ai/extract', {
+      const response = await api.ai.extract({
         prompt,
         schema: {
           narrative_brief: "string",

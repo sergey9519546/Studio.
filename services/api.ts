@@ -185,21 +185,7 @@ export const api = {
         },
     },
 
-    ai: {
-        extract: async (prompt: string, schema?: unknown, file?: File): Promise<unknown> => {
-            const formData = new FormData();
-            formData.append('prompt', prompt);
-            if (schema) formData.append('schema', JSON.stringify(schema));
-            if (file) formData.append('files', file);
 
-            const res = await fetchApi<unknown>('/api/ai/extract', {
-                method: 'POST',
-                body: formData,
-                timeout: 120000 // 2 minutes for AI processing
-            });
-            return res.data;
-        }
-    },
 
     assets: {
         list: async (): Promise<ApiResponse<Asset[]>> => {
@@ -487,6 +473,23 @@ export const api = {
         delete: async (id: string) => {
             try { await fetchApi(`/api/knowledge/${id}`, { method: 'DELETE' }); } catch { /* ignore */ }
             return { data: true, success: true };
+        }
+    },
+
+    ai: {
+        chat: async (payload: any): Promise<ApiResponse<any>> => {
+            return await fetchApi<any>('/api/ai/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+        },
+        extract: async (payload: any): Promise<ApiResponse<any>> => {
+            return await fetchApi<any>('/api/ai/extract', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
         }
     },
 

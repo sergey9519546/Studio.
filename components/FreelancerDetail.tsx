@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, X, Plus, Sparkles, Loader2, Trash2, Calendar } from 'lucide-react';
-import { GoogleGenAI } from "@google/genai";
 import { Freelancer, Assignment, Project, FreelancerStatus } from '../types';
-import { generateContentWithRetry } from '../services/api';
+import { api } from '../services/api';
 
 interface FreelancerDetailProps {
     freelancers: Freelancer[];
@@ -58,17 +57,18 @@ const FreelancerDetail: React.FC<FreelancerDetailProps> = ({ freelancers, projec
     };
 
     const handlePolishBio = async () => {
-        if (!freelancer.bio || !process.env.API_KEY) return;
+        if (!freelancer.bio) return;
         setIsPolishing(true);
         try {
-            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-            const response = await generateContentWithRetry(ai, {
-                model: 'gemini-2.0-flash-exp',
-                contents: `Rewrite this freelancer bio to be more professional, punchy, and highlight key strengths. Bio: "${freelancer.bio}"`
+            const response = await api.ai.chat({
+                message: `Rewrite this freelancer bio to be more professional, punchy, and highlight key strengths. Bio: "${freelancer.bio}"`
             });
-            onUpdate({ ...freelancer, bio: response.text });
+            if (response.data.response) {
+                onUpdate({ ...freelancer, bio: response.data.response });
+            }
         } catch (e) {
             console.error("Failed to polish bio", e);
+            alert('Failed to polish bio. Please try again.');
         } finally {
             setIsPolishing(false);
         }

@@ -9,14 +9,9 @@ export default defineConfig({
     // Production optimizations
     target: 'es2015',
     outDir: 'build/client',
-    sourcemap: false, // Disable source maps in production
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true, // Remove console.log in production
-        drop_debugger: true,
-      },
-    },
+    emptyOutDir: false, // Prevent file locking issues on Windows
+    sourcemap: false,
+    minify: false, // Disable minification for debugging
 
     // Code splitting for better caching
     rollupOptions: {
