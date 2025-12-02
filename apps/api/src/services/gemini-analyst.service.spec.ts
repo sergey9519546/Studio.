@@ -3,30 +3,29 @@ import { GeminiAnalystService } from '../modules/ai/gemini-analyst.service';
 import { ConfigService } from '@nestjs/config';
 import { VertexAIService } from '../modules/ai/vertex-ai.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { vi } from 'vitest';
 
 describe('GeminiAnalystService', () => {
     let service: GeminiAnalystService;
 
     const mockConfigService = {
-        get: vi.fn((key: string) => {
+        get: jest.fn((key: string) => {
             if (key === 'GEMINI_API_KEY') return 'test-api-key';
             return undefined;
         }),
     };
 
     const mockVertexAIService = {
-        chat: vi.fn(),
-        extractData: vi.fn(),
-        generateContent: vi.fn(),
+        chat: jest.fn(),
+        extractData: jest.fn(),
+        generateContent: jest.fn(),
     };
 
     const mockPrismaService = {
         project: {
-            findUnique: vi.fn(),
+            findUnique: jest.fn(),
         },
         freelancer: {
-            findUnique: vi.fn(),
+            findUnique: jest.fn(),
         },
     };
 
@@ -53,7 +52,7 @@ describe('GeminiAnalystService', () => {
     });
 
     afterEach(() => {
-        vi.clearAllMocks();
+        jest.clearAllMocks();
     });
 
     it('should be defined', () => {

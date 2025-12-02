@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
-import FreelancerCard from './FreelancerCard';
+import FreelancerCard from '../../components/FreelancerCard';
 
 const mockFreelancer = {
     id: '1',

@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import Dashboard from './Dashboard';
-import * as api from '../services/api';
+import Dashboard from '../../components/Dashboard';
+import * as api from '../../services/api';
 
-vi.mock('../services/api', () => ({
+vi.mock('../../services/api', () => ({
     api: {
         projects: {
             list: vi.fn(),

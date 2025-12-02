@@ -185,7 +185,12 @@ export class RAGService {
             { role: 'user', content: message },
         ];
 
-        const answer = await this.vertexAI.chat(messages, systemPrompt);
+        const chatResponse = await this.vertexAI.chat(messages, systemPrompt);
+
+        // Handle response - could be string or object with toolCalls
+        const answer = typeof chatResponse === 'string'
+            ? chatResponse
+            : JSON.stringify(chatResponse);
 
         return {
             answer,

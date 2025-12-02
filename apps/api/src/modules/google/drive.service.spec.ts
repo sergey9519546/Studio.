@@ -17,6 +17,9 @@ describe('DriveService', () => {
     };
 
     beforeEach(async () => {
+        // Set environment variable so service doesn't return early
+        process.env.GOOGLE_TEAM_FOLDER_ID = 'test-folder-id';
+
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 DriveService,
@@ -33,13 +36,33 @@ describe('DriveService', () => {
 
     afterEach(() => {
         jest.clearAllMocks();
+        // Clean up environment variable
+        delete process.env.GOOGLE_TEAM_FOLDER_ID;
     });
 
     describe('listTeamAssets', () => {
-        it('should return list of files from team folder', async () => {
+        it('should return list of files with DTO mapping from team folder', async () => {
             const mockFiles = [
-                { id: '1', name: 'Document.docx', mimeType: 'application/vnd.google-apps.document' },
-                { id: '2', name: 'Spreadsheet.xlsx', mimeType: 'application/vnd.google-apps.spreadsheet' },
+                {
+                    id: '1',
+                    name: 'Document.docx',
+                    mimeType: 'application/vnd.google-apps.document',
+                    thumbnailLink: 'https://thumbnail1.jpg',
+                    webViewLink: 'https://view1',
+                    iconLink: 'https://icon1',
+                    modifiedTime: '2025-01-01',
+                    size: '1024'
+                },
+                {
+                    id: '2',
+                    name: 'Spreadsheet.xlsx',
+                    mimeType: 'application/vnd.google-apps.spreadsheet',
+                    thumbnailLink: null,
+                    webViewLink: 'https://view2',
+                    iconLink: null,
+                    modifiedTime: '2025-01-02',
+                    size: '2048'
+                },
             ];
 
             mockDrive.files.list.mockResolvedValue({
@@ -51,10 +74,34 @@ describe('DriveService', () => {
             expect(clientFactory.createDriveClient).toHaveBeenCalled();
             expect(mockDrive.files.list).toHaveBeenCalledWith({
                 q: expect.stringContaining('in parents'),
-                fields: 'files(id, name, mimeType, modifiedTime, webViewLink)',
+                fields: 'files(id, name, mimeType, thumbnailLink, webViewLink, iconLink, modifiedTime, size)',
                 pageSize: 100,
+                orderBy: 'folder, modifiedTime desc',
             });
-            expect(result).toEqual(mockFiles);
+
+            // Verify DTO mapping
+            expect(result).toEqual([
+                {
+                    id: '1',
+                    name: 'Document.docx',
+                    mimeType: 'application/vnd.google-apps.document',
+                    thumbnailLink: 'https://thumbnail1.jpg',
+                    webViewLink: 'https://view1',
+                    iconLink: 'https://icon1',
+                    modifiedTime: '2025-01-01',
+                    size: '1024'
+                },
+                {
+                    id: '2',
+                    name: 'Spreadsheet.xlsx',
+                    mimeType: 'application/vnd.google-apps.spreadsheet',
+                    thumbnailLink: null,
+                    webViewLink: 'https://view2',
+                    iconLink: null,
+                    modifiedTime: '2025-01-02',
+                    size: '2048'
+                }
+            ]);
         });
 
         it('should return empty array on API error', async () => {
@@ -75,22 +122,22 @@ describe('DriveService', () => {
             expect(result).toEqual([]);
         });
 
-        it('should filter by mime type if specified', async () => {
+        it('should filter out files with empty id', async () => {
             const mockFiles = [
                 { id: '1', name: 'Document.docx', mimeType: 'application/vnd.google-apps.document' },
+                { id: '', name: 'Invalid', mimeType: 'application/octet-stream' }, // Should be filtered
+                { id: null, name: 'Also Invalid', mimeType: 'application/octet-stream' }, // Should be filtered
             ];
 
             mockDrive.files.list.mockResolvedValue({
                 data: { files: mockFiles },
             });
 
-            await service.listTeamAssets('application/vnd.google-apps.document');
+            const result = await service.listTeamAssets();
 
-            expect(mockDrive.files.list).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    q: expect.stringContaining('mimeType'),
-                })
-            );
+            // Only the file with valid id should be returned
+            expect(result).toHaveLength(1);
+            expect(result[0].id).toBe('1');
         });
     });
 });

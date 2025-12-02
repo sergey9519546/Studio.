@@ -14,6 +14,7 @@ describe('FreelancersService', () => {
             create: jest.fn(),
             update: jest.fn(),
             delete: jest.fn(),
+            upsert: jest.fn(),
         },
     };
 
@@ -37,104 +38,43 @@ describe('FreelancersService', () => {
     });
 
     describe('findAll', () => {
-        it('should return paginated freelancers with correct skip and take', async () => {
+        it('should return all freelancers with flattened skills', async () => {
             const mockFreelancers = [
-                { id: '1', name: 'John Doe', role: 'Developer', rate: 100, availability: 'AVAILABLE' },
-                { id: '2', name: 'Jane Smith', role: 'Designer', rate: 80, availability: 'BUSY' },
+                { id: '1', name: 'John Doe', email: 'john@example.com', skills: [{ name: 'React' }, { name: 'Node.js' }] },
+                { id: '2', name: 'Jane Smith', email: 'jane@example.com', skills: [{ name: 'Design' }] },
             ];
 
-            mockPrismaService.freelancer.count.mockResolvedValue(10);
             mockPrismaService.freelancer.findMany.mockResolvedValue(mockFreelancers);
 
-            const result = await service.findAll(1, 5);
+            const result = await service.findAll();
 
-            expect(prismaService.freelancer.count).toHaveBeenCalledTimes(1);
             expect(prismaService.freelancer.findMany).toHaveBeenCalledWith({
-                skip: 0,
-                take: 5,
-                orderBy: { updatedAt: 'desc' },
+                include: { skills: true },
+                orderBy: { name: 'asc' },
             });
 
-            expect(result).toEqual({
-                total: 10,
-                page: 1,
-                limit: 5,
-                data: mockFreelancers,
-            });
+            expect(result).toEqual([
+                { id: '1', name: 'John Doe', email: 'john@example.com', skills: ['React', 'Node.js'] },
+                { id: '2', name: 'Jane Smith', email: 'jane@example.com', skills: ['Design'] },
+            ]);
         });
 
         it('should handle empty results', async () => {
-            mockPrismaService.freelancer.count.mockResolvedValue(0);
             mockPrismaService.freelancer.findMany.mockResolvedValue([]);
 
-            const result = await service.findAll(1, 10);
+            const result = await service.findAll();
 
-            expect(result.data).toEqual([]);
-            expect(result.total).toBe(0);
-        });
-    });
-
-    describe('create', () => {
-        it('should create a new freelancer', async () => {
-            const createDto = {
-                name: 'Alice Johnson',
-                contactInfo: 'alice@example.com',
-                role: 'Developer',
-                rate: 120,
-            };
-
-            const mockCreatedFreelancer = {
-                id: '3',
-                ...createDto,
-                availability: 'AVAILABLE',
-                createdAt: new Date(),
-                updatedAt: new Date(),
-            };
-
-            mockPrismaService.freelancer.create.mockResolvedValue(mockCreatedFreelancer);
-
-            const result = await service.create(createDto);
-
-            expect(prismaService.freelancer.create).toHaveBeenCalledWith({
-                data: createDto,
-            });
-            expect(result).toEqual(mockCreatedFreelancer);
-        });
-    });
-
-    describe('update', () => {
-        it('should update an existing freelancer', async () => {
-            const updateDto = {
-                rate: 150,
-                availability: 'BUSY',
-            };
-
-            const mockUpdatedFreelancer = {
-                id: '1',
-                name: 'John Doe',
-                role: 'Developer',
-                ...updateDto,
-            };
-
-            mockPrismaService.freelancer.update.mockResolvedValue(mockUpdatedFreelancer);
-
-            const result = await service.update('1', updateDto);
-
-            expect(prismaService.freelancer.update).toHaveBeenCalledWith({
-                where: { id: '1' },
-                data: updateDto,
-            });
-            expect(result).toEqual(mockUpdatedFreelancer);
+            expect(result).toEqual([]);
         });
     });
 
     describe('findOne', () => {
-        it('should return a freelancer by id', async () => {
+        it('should return a freelancer by id with flattened skills', async () => {
             const mockFreelancer = {
                 id: '1',
                 name: 'John Doe',
-                role: 'Developer',
-                rate: 100,
+                email: 'john@example.com',
+                skills: [{ name: 'React' }, { name: 'TypeScript' }],
             };
 
             mockPrismaService.freelancer.findUnique.mockResolvedValue(mockFreelancer);
@@ -143,8 +83,15 @@ describe('FreelancersService', () => {
 
             expect(prismaService.freelancer.findUnique).toHaveBeenCalledWith({
                 where: { id: '1' },
+                include: { skills: true },
             });
-            expect(result).toEqual(mockFreelancer);
+
+            expect(result).toEqual({
+                id: '1',
+                name: 'John Doe',
+                email: 'john@example.com',
+                skills: ['React', 'TypeScript'],
+            });
         });
 
         it('should return null if freelancer not found', async () => {
@@ -153,6 +100,99 @@ describe('FreelancersService', () => {
             const result = await service.findOne('999');
 
             expect(result).toBeNull();
+        });
+    });
+
+    describe('create', () => {
+        it('should create a new freelancer with skills', async () => {
+            const createDto = {
+                name: 'Alice Johnson',
+                email: 'alice@example.com',
+                skills: ['React', 'Vue'],
+            };
+
+            const mockCreatedFreelancer = {
+                id: '3',
+                name: 'Alice Johnson',
+                email: 'alice@example.com',
+                skills: [{ name: 'React' }, { name: 'Vue' }],
+            };
+
+            mockPrismaService.freelancer.create.mockResolvedValue(mockCreatedFreelancer);
+
+            const result = await service.create(createDto);
+
+            expect(prismaService.freelancer.create).toHaveBeenCalledWith({
+                data: {
+                    name: 'Alice Johnson',
+                    email: 'alice@example.com',
+                    skills: {
+                        connectOrCreate: [
+                            { where: { name: 'React' }, create: { name: 'React' } },
+                            { where: { name: 'Vue' }, create: { name: 'Vue' } },
+                        ],
+                    },
+                },
+                include: { skills: true },
+            });
+
+            expect(result).toEqual(mockCreatedFreelancer);
+        });
+    });
+
+    describe('update', () => {
+        it('should update an existing freelancer and replace skills', async () => {
+            const updateDto = {
+                name: 'John Updated',
+                skills: ['Angular', 'TypeScript'],
+            };
+
+            const mockUpdatedFreelancer = {
+                id: '1',
+                name: 'John Updated',
+                email: 'john@example.com',
+                skills: [{ name: 'Angular' }, { name: 'TypeScript' }],
+            };
+
+            mockPrismaService.freelancer.update.mockResolvedValue(mockUpdatedFreelancer);
+
+            const result = await service.update('1', updateDto);
+
+            expect(prismaService.freelancer.update).toHaveBeenCalledWith({
+                where: { id: '1' },
+                data: {
+                    name: 'John Updated',
+                    skills: {
+                        set: [],
+                        connectOrCreate: [
+                            { where: { name: 'Angular' }, create: { name: 'Angular' } },
+                            { where: { name: 'TypeScript' }, create: { name: 'TypeScript' } },
+                        ],
+                    },
+                },
+                include: { skills: true },
+            });
+
+            expect(result).toEqual(mockUpdatedFreelancer);
+        });
+    });
+
+    describe('remove', () => {
+        it('should delete a freelancer', async () => {
+            const mockDeletedFreelancer = {
+                id: '1',
+                name: 'John Doe',
+            };
+
+            mockPrismaService.freelancer.delete.mockResolvedValue(mockDeletedFreelancer);
+
+            const result = await service.remove('1');
+
+            expect(prismaService.freelancer.delete).toHaveBeenCalledWith({
+                where: { id: '1' },
+            });
+
+            expect(result).toEqual(mockDeletedFreelancer);
         });
     });
 });
