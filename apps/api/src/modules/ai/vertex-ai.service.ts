@@ -84,23 +84,133 @@ export class VertexAIService {
     }
 
     /**
-     * Generate content with conversation history
+     * Generate content with conversation history and optional tools
      */
-    async chat(messages: Array<{ role: string; content: string }>, systemPrompt?: string): Promise<string> {
-        // Construct full prompt from conversation history
-        let fullPrompt = '';
+    async chat(
+        messages: Array<{ role: string; content: string }>,
+        systemPrompt?: string,
+        tools?: any[],
+    ): Promise<string | { toolCalls: any[] }> {
+        const endpoint = `projects/${this.project}/locations/${this.location}/publishers/${this.publisher}/models/gemini-1.5-pro`;
 
-        if (systemPrompt) {
-            fullPrompt += `System: ${systemPrompt}\n\n`;
+        const instances = [
+            {
+                structValue: {
+                    fields: {
+                        messages: {
+                            listValue: {
+                                values: messages.map(msg => ({
+                                    structValue: {
+                                        fields: {
+                                            role: { stringValue: msg.role },
+                                            content: { stringValue: msg.content },
+                                        },
+                                    },
+                                })),
+                            },
+                        },
+                        system_instruction: systemPrompt ? { stringValue: systemPrompt } : undefined,
+                    },
+                },
+            },
+        ];
+
+        const parameters: any = {
+            temperature: 0.7,
+            maxOutputTokens: 2048,
+            topP: 0.95,
+            topK: 40,
+        };
+
+        if (tools) {
+            parameters.tools = {
+                listValue: {
+                    values: tools.map(tool => ({
+                        structValue: {
+                            fields: {
+                                function_declarations: {
+                                    listValue: {
+                                        values: [
+                                            {
+                                                structValue: {
+                                                    fields: {
+                                                        name: { stringValue: tool.name },
+                                                        description: { stringValue: tool.description },
+                                                        parameters: {
+                                                            structValue: {
+                                                                fields: {
+                                                                    type: { stringValue: tool.parameters.type },
+                                                                    properties: {
+                                                                        structValue: {
+                                                                            fields: Object.entries(tool.parameters.properties).reduce((acc, [key, value]: [string, any]) => {
+                                                                                acc[key] = {
+                                                                                    structValue: {
+                                                                                        fields: {
+                                                                                            type: { stringValue: value.type },
+                                                                                            description: { stringValue: value.description },
+                                                                                        },
+                                                                                    },
+                                                                                };
+                                                                                return acc;
+                                                                            }, {}),
+                                                                        },
+                                                                    },
+                                                                    required: {
+                                                                        listValue: {
+                                                                            values: tool.parameters.required.map(r => ({ stringValue: r })),
+                                                                        },
+                                                                    },
+                                                                },
+                                                            },
+                                                        },
+                                                    },
+                                                },
+                                            },
+                                        ],
+                                    },
+                                },
+                            },
+                        },
+                    })),
+                },
+            };
         }
 
-        fullPrompt += messages
-            .map((msg) => `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}`)
-            .join('\n\n');
+        const request = {
+            endpoint,
+            instances,
+            parameters: {
+                structValue: {
+                    fields: parameters,
+                },
+            },
+        };
 
-        fullPrompt += '\n\nAssistant:';
+        this.logger.debug(`Chatting with model: gemini-1.5-pro`);
+        const [response] = await this.client.predict(request);
 
-        return this.generateContent(fullPrompt);
+        if (!response.predictions || response.predictions.length === 0) {
+            throw new Error('No predictions returned from Vertex AI');
+        }
+
+        const prediction = response.predictions[0];
+        const content = prediction.structValue?.fields?.candidates?.listValue?.values[0]?.structValue?.fields?.content?.structValue?.fields?.parts?.listValue?.values[0]?.structValue;
+
+        if (content?.fields?.functionCall) {
+            return {
+                toolCalls: [
+                    {
+                        name: content.fields.functionCall.structValue?.fields?.name?.stringValue,
+                        args: content.fields.functionCall.structValue?.fields?.args?.structValue?.fields,
+                    },
+                ],
+            };
+        } else if (content?.fields?.text) {
+            return content.fields.text.stringValue;
+        } else {
+            this.logger.warn('Unexpected response structure from Vertex AI', prediction);
+            throw new Error('Unable to extract text or tool calls from Vertex AI response');
+        }
     }
 
     /**

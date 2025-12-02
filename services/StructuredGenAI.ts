@@ -26,43 +26,30 @@ export class StructuredGenAI {
    * @returns The typed data object conforming to Schema T
    */
   public static async generateStructured<T>(
-    aiService: GenAIService,
+    _aiService: GenAIService,
     prompt: string,
     schema: z.ZodType<T>
   ): Promise<T> {
-
-    // 1. Augment System Instruction for JSON
-    // We explicitly instruct the model to output JSON.
-    const systemInstruction = `
-      You are a precise data extraction engine. 
-      Output ONLY valid JSON matching the user's request. 
-      Do not include markdown formatting, preambles, or explanations.
-    `;
-
-    // 2. Define the operation with validation inside
-    // We wrap the *entire* process (Generate -> Parse -> Validate) in the retry logic.
-    // This means if the model outputs bad JSON, we retry the generation.
     return await withResilience(async () => {
-
-      const rawResponse = await aiService.generateEnhancedContent(
-        prompt,
-        'gemini-2.0-flash-exp',
-        systemInstruction
-      );
-
       try {
-        // Step A: Clean response (remove potential markdown fences)
-        const cleanJson = rawResponse.replace(/```json|```/g, '').trim();
+        const response = await fetch('/api/ai/extract', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            prompt,
+            schema,
+          }),
+        });
 
-        // Step B: Parse JSON
-        const parsedObj = JSON.parse(cleanJson);
+        if (!response.ok) {
+          throw new Error('Failed to fetch response');
+        }
 
-        // Step C: Validate against Zod Schema
-        // This throws a ZodError if the shape is wrong
-        return schema.parse(parsedObj);
-
+        const data = await response.json();
+        return schema.parse(data);
       } catch (error) {
-        // We throw a specific error to trigger the retry mechanism
         throw new Error(`Structured Generation Failed: Validation Error. ${error instanceof Error ? error.message : ''}`);
       }
     });

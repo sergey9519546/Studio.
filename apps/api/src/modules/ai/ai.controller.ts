@@ -8,6 +8,7 @@ import {
     Get,
     HttpCode,
     HttpStatus,
+    Param,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import 'multer';
@@ -105,8 +106,32 @@ ${JSON.stringify(parsedContext, null, 2)}
         // Step 5: Generate Response
         const response = await this.aiService.chat(enhancedContext, messages);
 
+        if (typeof response === 'object' && response.toolCalls) {
+            const toolResults = [];
+            for (const toolCall of response.toolCalls) {
+                const result = await this.aiService.executeTool(toolCall.name, toolCall.args);
+                toolResults.push({
+                    toolCall,
+                    result,
+                });
+            }
+
+            // Send the tool results back to the model to get a final response
+            const finalResponse = await this.aiService.chat(enhancedContext, [
+                ...messages,
+                { role: 'model', content: JSON.stringify(response) },
+                { role: 'user', content: JSON.stringify(toolResults) },
+            ]);
+
+            return {
+                response: finalResponse as string,
+                conversationId: this.generateConversationId(userId, projectId),
+                codeContext: codeContextMetadata,
+            };
+        }
+
         return {
-            response: response,
+            response: response as string,
             conversationId: this.generateConversationId(userId, projectId),
             codeContext: codeContextMetadata
         };
@@ -235,4 +260,22 @@ ${JSON.stringify(parsedContext, null, 2)}
         const projectPart = projectId ? projectId.substring(0, 8) : 'global';
         return `conv_${userPart}_${projectPart}_${timestamp} `;
     }
+    @Post('analyze/project/:id')
+    @HttpCode(HttpStatus.OK)
+    async analyzeProject(@Param('id') id: string) {
+        return this.aiService.analyzeProjectProfitability(id);
+    }
+
+    @Post('analyze/freelancer/:id')
+    @HttpCode(HttpStatus.OK)
+    async analyzeFreelancer(@Param('id') id: string) {
+        return this.aiService.analyzeFreelancerPerformance(id);
+    }
+
+    @Post('generate/project-brief/:id')
+    @HttpCode(HttpStatus.OK)
+    async generateProjectBrief(@Param('id') id: string) {
+        return this.aiService.generateProjectBrief(id);
+    }
 }
+

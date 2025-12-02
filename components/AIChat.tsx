@@ -98,10 +98,40 @@ const AIChat: React.FC<AIChatProps> = ({
 
             // Handle tool calls if present
             if (data.toolCalls) {
-                // Tool call handling logic would go here
-            }
+                const toolCalls = data.toolCalls;
+                const toolResults = [];
+                for (const toolCall of toolCalls) {
+                    if (onCallAction) {
+                        const result = await onCallAction(toolCall.name, toolCall.args);
+                        toolResults.push({
+                            toolCall,
+                            result,
+                        });
+                    }
+                }
 
-            setMessages(prev => [...prev, { role: 'model', parts: [{ text: data.response }] }]);
+                // Send the tool results back to the backend to get a final response
+                const finalResponse = await fetch('/api/ai/chat', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        message: input,
+                        messages: [...messages, userMessage, { role: 'model', content: JSON.stringify(data) }],
+                        context: JSON.stringify({ freelancers, projects, assignments, additionalContext: contextData }),
+                        toolResults,
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (!finalResponse.ok) throw new Error('Failed to fetch final response');
+
+                const finalData = await finalResponse.json();
+                setMessages(prev => [...prev, { role: 'model', parts: [{ text: finalData.response }] }]);
+
+            } else {
+                setMessages(prev => [...prev, { role: 'model', parts: [{ text: data.response }] }]);
+            }
         } catch (e: unknown) {
             console.error(e);
             const errorMessage = e instanceof Error ? e.message : "I'm having trouble connecting right now.";

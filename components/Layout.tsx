@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { Users, Calendar, Briefcase, Settings, Upload, LogOut, LayoutGrid, Sparkles, Palette } from 'lucide-react';
+import { Users, Calendar, Briefcase, Settings, Upload, LogOut, LayoutGrid, Sparkles, Palette, MessageSquare } from 'lucide-react';
+import AIChat from './AIChat';
 
 const Layout: React.FC = () => {
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const navItems = [
     { icon: LayoutGrid, label: 'Dashboard', path: '/' },
     { icon: Briefcase, label: 'Projects', path: '/projects' },
@@ -40,7 +42,7 @@ const Layout: React.FC = () => {
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-medium transition-all duration-200 group relative ${isActive
                   ? 'bg-ink-primary/5 text-ink-primary'
-                  : 'text-ink-secondary hover:bg-subtle/60 hover:text-ink-primary'
+                  - : 'text-ink-secondary hover:bg-subtle/60 hover:text-ink-primary'
                 }`
               }
             >
@@ -83,6 +85,31 @@ const Layout: React.FC = () => {
           <Outlet />
         </div>
       </main>
+
+      {/* Floating Action Button */}
+      <div className="absolute bottom-8 right-8 z-50">
+        <button
+          onClick={() => setIsChatOpen(!isChatOpen)}
+          className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:bg-primary-hover transition-all"
+        >
+          <MessageSquare size={24} />
+        </button>
+      </div>
+
+      {/* AI Chat Window */}
+      {isChatOpen && (
+        <div className="absolute bottom-28 right-8 w-96 h-[600px] z-50">
+          <AIChat
+            freelancers={[]}
+            projects={[]}
+            assignments={[]}
+            onCallAction={async (action, params) => {
+              console.log('onCallAction', action, params);
+              return { success: true };
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };
