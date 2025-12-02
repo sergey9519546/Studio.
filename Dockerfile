@@ -1,5 +1,5 @@
 # Stage 1: Backend Build
-FROM node:20-bookworm-slim AS backend-builder
+FROM node:20.18.0-bookworm-slim AS backend-builder
 
 WORKDIR /app
 RUN apt-get update && apt-get upgrade -y && rm -rf /var/lib/apt/lists/*
@@ -23,7 +23,7 @@ COPY apps/api ./apps/api
 RUN npx tsc -p apps/api/tsconfig.app.json --outDir /app/build/apps/api
 
 # Stage 2: Frontend Build
-FROM node:20-bookworm-slim AS frontend-builder
+FROM node:20.18.0-bookworm-slim AS frontend-builder
 
 WORKDIR /app
 
@@ -39,7 +39,7 @@ ENV NODE_ENV=production
 RUN npx vite build
 
 # Stage 3: Production Runtime
-FROM node:20-bookworm-slim AS runner
+FROM node:20.18.0-bookworm-slim AS runner
 
 WORKDIR /app
 

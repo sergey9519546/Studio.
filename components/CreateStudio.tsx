@@ -4,8 +4,7 @@ import { Project, Freelancer, Assignment, Script, KnowledgeSource } from '../typ
 import { Save, PanelRight, Sparkles, Loader2, ShieldCheck, AlertTriangle, CheckCircle, Database, UploadCloud } from 'lucide-react';
 import { RAGEngine, HallucinationGuard, DeepReader } from '../services/intelligence';
 import { useSearchParams } from 'react-router-dom';
-import { GoogleGenAI } from "@google/genai";
-import { generateContentWithRetry } from '../services/api';
+import { api } from '../services/api';
 
 interface CreateStudioProps {
     projects: Project[];
@@ -119,17 +118,22 @@ const CreativeStudio: React.FC<CreateStudioProps> = ({ projects, freelancers, as
     };
 
     const handleEnhance = async () => {
-        if (!scriptContent.trim() || !process.env.API_KEY) return;
+        if (!scriptContent.trim()) return;
         setIsEnhancing(true);
         try {
-            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-            const prompt = `Refine and structure this creative writing. Use markdown headers and bullet points. Content: ${scriptContent}`;
-            const response = await generateContentWithRetry(ai, { model: 'gemini-2.0-flash-exp', contents: prompt });
-            if (response.text) {
-                setScriptContent(response.text);
-                setTimeout(() => runHallucinationGuard(response.text), 500);
+            const response = await api.post('/ai/chat', {
+                message: `Refine and structure this creative writing. Use markdown headers and bullet points. Content: ${scriptContent}`
+            });
+            if (response.data.response) {
+                setScriptContent(response.data.response);
+                setTimeout(() => runHallucinationGuard(response.data.response), 500);
             }
-        } catch (e) { console.error(e); } finally { setIsEnhancing(false); }
+        } catch (e) {
+            console.error(e);
+            alert('AI enhancement failed. Please try again.');
+        } finally {
+            setIsEnhancing(false);
+        }
     };
 
     const handleSave = async () => {

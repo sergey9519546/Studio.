@@ -19,9 +19,18 @@ dist-ssr
 .DS_Store
 *.suo
 *.ntvs*
-*.njsproj
+*.njsproj*
 *.sln
 *.sw?
+
+# ⚠️ CRITICAL: Environment files (NEVER commit these!)
+.env
+.env.local
+.env.production
+.env.*.local
+service-account-key.json
+*.pem
+*.key
 
 # Google Cloud credentials
 GOOGLE_APPLICATION_CREDENTIALS.json
@@ -30,6 +39,10 @@ GOOGLE_APPLICATION_CREDENTIALS.json
 # SQLite databases
 *.db
 *.db-journal
+prisma/dev.db
+
+# Build outputs
+build/
 
 # Debug logs
 *_logs.json

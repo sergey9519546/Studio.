@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Sparkles, Trash2, Loader2, User, FileText, BrainCircuit, Tag, AlertTriangle, Plus } from 'lucide-react';
 import { Project, RoleRequirement, Priority, ProjectStatus } from '../types';
-import { GoogleGenAI } from "@google/genai";
-import { generateContentWithRetry } from '../services/api';
+import { api } from '../services/api';
 
 interface ProjectModalProps {
   isOpen: boolean;
@@ -59,14 +58,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
   }, [isOpen, initialData]);
 
   const handleGenerateAI = async () => {
-    if (!process.env.API_KEY || (!formData.name && !rawContext)) {
+    if (!formData.name && !rawContext) {
       alert("Please enter a Project Name or provide Source Material.");
       return;
     }
 
     setIsGenerating(true);
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const prompt = `
         Role: Creative Producer AI.
         Task: Analyze the context and structure a project.
@@ -83,14 +81,18 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
         }
       `;
 
-      const response = await generateContentWithRetry(ai, {
-        model: 'gemini-2.0-flash-exp',
-        contents: prompt,
-        config: { responseMimeType: 'application/json' }
+      // Use the backend AI endpoint instead of direct SDK calls
+      const response = await api.post('/ai/extract', {
+        prompt,
+        schema: {
+          narrative_brief: "string",
+          production_constraints: "string",
+          stylistic_tags: "array",
+          suggested_roles: "array"
+        }
       });
 
-      const cleanJson = response.text.replace(/```json/g, '').replace(/```/g, '').trim();
-      const result = JSON.parse(cleanJson);
+      const result = response.data;
 
       const newRoles: RoleRequirement[] = (result.suggested_roles || []).map((r: RoleRequirement, idx: number) => ({
         id: `role-${Date.now()}-${idx}`,
@@ -112,6 +114,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
 
     } catch (e) {
       console.error("AI Generation failed", e);
+      alert("AI generation failed. Please try again or fill in manually.");
     } finally {
       setIsGenerating(false);
     }

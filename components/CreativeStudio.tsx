@@ -6,8 +6,7 @@ import { Project, Freelancer, Assignment, Script, KnowledgeSource } from '../typ
 import { Save, PanelRight, PanelLeft, Sparkles, Loader2, ShieldCheck, AlertTriangle, CheckCircle, Database, UploadCloud, Type, LayoutTemplate } from 'lucide-react';
 import { RAGEngine, HallucinationGuard, DeepReader } from '../services/intelligence';
 import { useSearchParams } from 'react-router-dom';
-import { GoogleGenAI } from "@google/genai";
-import { generateContentWithRetry } from '../services/api';
+import { api } from '../services/api';
 
 interface CreateStudioProps {
     projects: Project[];
