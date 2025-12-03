@@ -2,7 +2,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { FreelancersService } from './freelancers.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
-import { CreateFreelancerDto, UpdateFreelancerDto } from './dto/freelancer.dto';
+import { CreateFreelancerDto, UpdateFreelancerDto, ImportFreelancerDto } from './dto/freelancer.dto';
 
 @Controller('freelancers')
 @UseGuards(JwtAuthGuard)
@@ -35,7 +35,7 @@ export class FreelancersController {
   }
 
   @Post('batch')
-  importBatch(@Body() items: any[]) {
+  importBatch(@Body() items: ImportFreelancerDto[]) {
     return this.freelancersService.createBatch(items);
   }
 }

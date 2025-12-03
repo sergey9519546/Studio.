@@ -1,6 +1,7 @@
 
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { CreateFreelancerDto, UpdateFreelancerDto, ImportFreelancerDto } from './dto/freelancer.dto';
 
 @Injectable()
 export class FreelancersService {
@@ -27,7 +28,7 @@ export class FreelancersService {
     return { ...f, skills: f.skills.map(s => s.name) };
   }
 
-  async create(data: any) {
+  async create(data: CreateFreelancerDto) {
     const { skills, ...rest } = data;
     return this.prisma.freelancer.create({
       data: {
@@ -43,7 +44,7 @@ export class FreelancersService {
     });
   }
 
-  async update(id: string, data: any) {
+  async update(id: string, data: UpdateFreelancerDto) {
     const { skills, ...rest } = data;
     return this.prisma.freelancer.update({
       where: { id },
@@ -65,7 +66,7 @@ export class FreelancersService {
     return this.prisma.freelancer.delete({ where: { id } });
   }
 
-  async createBatch(items: any[]) {
+  async createBatch(items: ImportFreelancerDto[]) {
     // Sequential execution to handle connectOrCreate correctly
     let created = 0, updated = 0;
     for (const item of items) {

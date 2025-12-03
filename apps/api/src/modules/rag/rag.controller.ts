@@ -1,4 +1,5 @@
 import { Controller, Post, Body, Get, UseGuards, Logger } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { RAGService } from './rag.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 
@@ -41,6 +42,7 @@ export class RAGController {
      * Query the RAG system
      */
     @Post('query')
+    @Throttle({ default: { limit: 10, ttl: 60000 } }) // 10 requests per minute
     async query(
         @Body() data: {
             question: string;
@@ -67,6 +69,7 @@ export class RAGController {
      * Chat with RAG (conversational)
      */
     @Post('chat')
+    @Throttle({ default: { limit: 10, ttl: 60000 } }) // 10 requests per minute
     async chat(
         @Body() data: {
             message: string;

@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../../prisma/prisma.service';
 import { User } from '@prisma/client';
@@ -8,6 +8,8 @@ const SALT_ROUNDS = 10;
 
 @Injectable()
 export class AuthService {
+    private readonly logger = new Logger(AuthService.name);
+
     constructor(
         private prisma: PrismaService,
         private jwtService: JwtService,
@@ -96,12 +98,12 @@ export class AuthService {
         // Check if any users exist
         const userCount = await this.prisma.user.count();
         if (userCount > 0) {
-            console.log('Users already exist. Skipping admin seed.');
+            this.logger.log('Users already exist. Skipping admin seed.');
             return;
         }
 
         // Create admin user
         await this.register(adminEmail, adminPassword, 'Studio Admin');
-        console.log(`Admin user created: ${adminEmail}`);
+        this.logger.log(`Admin user created: ${adminEmail}`);
     }
 }

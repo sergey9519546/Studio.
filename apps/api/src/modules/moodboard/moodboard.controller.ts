@@ -1,9 +1,11 @@
 
 import { Controller, Get, Post, Body, Param, Patch, Delete, Query, UseGuards, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { Throttle } from '@nestjs/throttler';
 import { MoodboardService } from './moodboard.service';
 import { MoodboardItem } from '@prisma/client';
 import { CreateMoodboardItemDto } from './dto/create-moodboard-item.dto';
+import { UpdateMoodboardItemDto } from './dto/update-moodboard-item.dto';
 import { AssetsService } from '../assets/assets.service';
 
 @Controller('moodboard')
@@ -14,8 +16,9 @@ export class MoodboardController {
   ) { }
 
   @Post(':projectId/upload')
+  @Throttle({ default: { limit: 3, ttl: 60000 } }) // 3 uploads per minute
   @UseInterceptors(FileInterceptor('file'))
-  async uploadFile(@Param('projectId') projectId: string, @UploadedFile() file: any) { // Type 'any' used for mock Express.Multer.File
+  async uploadFile(@Param('projectId') projectId: string, @UploadedFile() file: Express.Multer.File) {
     // 1. Upload to Cloud Storage via AssetsService
     const asset = await this.assetsService.create(file, projectId);
 
@@ -55,7 +58,7 @@ export class MoodboardController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateData: any) {
+  async update(@Param('id') id: string, @Body() updateData: UpdateMoodboardItemDto) {
     return this.moodboardService.update(id, updateData);
   }
 

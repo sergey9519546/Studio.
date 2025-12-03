@@ -1,4 +1,3 @@
-
 import {
   Injectable,
   Logger,
@@ -9,6 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Buffer } from 'buffer';
 import { Readable } from 'stream';
+import { Storage, Bucket } from '@google-cloud/storage';
 
 export interface StoredObject {
   storageKey: string;
@@ -36,8 +36,8 @@ export const STORAGE_EVENTS = {
 @Injectable()
 export class StorageService implements OnModuleInit {
   private readonly logger = new Logger(StorageService.name);
-  private storage: any;
-  private bucket: any;
+  private storage: Storage;
+  private bucket: Bucket;
   private readonly bucketName: string;
   private isConfigured = false;
   private connectedEmail = '';
@@ -70,7 +70,7 @@ export class StorageService implements OnModuleInit {
       // Dynamic import to prevent crash if module is missing or fails to load bindings
       const { Storage } = await import('@google-cloud/storage');
 
-      const storageConfig: any = {
+      const storageConfig: Record<string, unknown> = {
         projectId: this.configService.get('GCP_PROJECT_ID') || this.configService.get('GOOGLE_CLOUD_PROJECT'),
         retryOptions: {
           autoRetry: true,
@@ -107,8 +107,9 @@ export class StorageService implements OnModuleInit {
       // Always mark as configured - ADC will be used if no explicit credentials
       this.isConfigured = true;
       this.logger.log(`Storage Credential Strategy: ${method}`);
-    } catch (e: any) {
-      this.logger.warn(`StorageService initialization failed. Reason: ${e.message}`);
+    } catch (e: unknown) {
+      const error = e as Error;
+      this.logger.warn(`StorageService initialization failed. Reason: ${error.message}`);
       this.isConfigured = false;
     }
   }
@@ -122,11 +123,12 @@ export class StorageService implements OnModuleInit {
       } else {
         this.logger.log(`Bucket '${this.bucketName}' connected successfully.`);
       }
-    } catch (e: any) {
-      if (e.code === 403) {
+    } catch (e: unknown) {
+      const error = e as { code?: number; message: string };
+      if (error.code === 403) {
         this.logger.error(`Permission Denied accessing bucket '${this.bucketName}'. Check Service Account Roles (Storage Admin / Storage Object Admin).`);
       } else {
-        this.logger.warn(`GCS Connectivity Check: ${e.message}`);
+        this.logger.warn(`GCS Connectivity Check: ${error.message}`);
       }
     }
   }
@@ -177,22 +179,24 @@ export class StorageService implements OnModuleInit {
         try {
           await file.makePublic();
           publicUrl = `https://storage.googleapis.com/${this.bucketName}/${safeKey}`;
-        } catch (e: any) {
+        } catch (e: unknown) {
+          const error = e as { code?: number; message: string };
           // Check for UBLA (Uniform Bucket Level Access) error or Permissions error
-          if (e.code === 409 || e.code === 400) {
+          if (error.code === 409 || error.code === 400) {
             this.logger.debug(`Bucket enforces Uniform Bucket Level Access. Cannot use ACLs. Falling back to Signed URL.`);
-          } else if (e.code === 403) {
+          } else if (error.code === 403) {
             this.logger.warn(`Permission denied making object public. Check 'storage.objects.setIamPolicy' permission. Falling back to Signed URL.`);
           } else {
-            this.logger.warn(`Could not make object public: ${e.message}`);
+            this.logger.warn(`Could not make object public: ${error.message}`);
           }
 
           // Fallback: Generate a long-lived signed URL immediately so the frontend has something to show
           // Max duration for V4 signed URL is 7 days (604800 seconds)
           try {
             signedUrl = await this.getSignedDownloadUrl(safeKey, 604800);
-          } catch (signError: any) {
-            this.logger.error(`Fallback Signed URL generation failed: ${signError.message}`);
+          } catch (signError: unknown) {
+            const error = signError as Error;
+            this.logger.error(`Fallback Signed URL generation failed: ${error.message}`);
             // We don't throw here to allow the upload to at least succeed as "private"
           }
         }
@@ -209,17 +213,18 @@ export class StorageService implements OnModuleInit {
         sizeBytes: Buffer.isBuffer(params.body) ? params.body.length : undefined
       };
 
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const err = error as { message?: string };
       console.error(`GCS Upload Failed [${safeKey}]:`, error);
 
       // Specific check for the common "Service Account Token Creator" missing role
-      if (error.message?.includes('iam.serviceAccounts.signBlob')) {
+      if (err.message?.includes('iam.serviceAccounts.signBlob')) {
         this.logger.error(`CRITICAL PERMISSION ERROR: Service Account missing 'roles/iam.serviceAccountTokenCreator'. Cannot sign URLs.`);
       }
 
-      this.logger.error(`GCS Upload Failed [${safeKey}]: ${error.message}`);
-      this.eventEmitter.emit(STORAGE_EVENTS.ERROR, { operation: 'upload', key: safeKey, error: error.message });
-      throw new InternalServerErrorException(`Cloud storage upload failed: ${error.message}`);
+      this.logger.error(`GCS Upload Failed [${safeKey}]: ${err.message}`);
+      this.eventEmitter.emit(STORAGE_EVENTS.ERROR, { operation: 'upload', key: safeKey, error: err.message });
+      throw new InternalServerErrorException(`Cloud storage upload failed: ${err.message}`);
     }
   }
 
@@ -235,8 +240,9 @@ export class StorageService implements OnModuleInit {
         expires: Date.now() + expiresInSeconds * 1000,
       });
       return url;
-    } catch (error: any) {
-      this.logger.error(`GCS Sign URL Failed [${safeKey}]: ${error.message}`);
+    } catch (error: unknown) {
+      const err = error as Error;
+      this.logger.error(`GCS Sign URL Failed [${safeKey}]: ${err.message}`);
       throw error;
     }
   }
@@ -249,9 +255,10 @@ export class StorageService implements OnModuleInit {
       await this.bucket.file(safeKey).delete();
       this.eventEmitter.emit(STORAGE_EVENTS.DELETED, { key: safeKey });
       this.logger.log(`Deleted GCS Object: ${safeKey}`);
-    } catch (error: any) {
-      if (error.code !== 404) {
-        this.logger.warn(`Delete failed: ${error.message}`);
+    } catch (error: unknown) {
+      const err = error as { code?: number; message: string };
+      if (err.code !== 404) {
+        this.logger.warn(`Delete failed: ${err.message}`);
       }
     }
   }

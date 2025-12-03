@@ -11,6 +11,7 @@ import {
     Param,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
+import { Throttle } from '@nestjs/throttler';
 import 'multer';
 import { GeminiAnalystService } from './gemini-analyst.service';
 import { RAGService } from '../rag/rag.service';

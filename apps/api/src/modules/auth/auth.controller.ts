@@ -1,4 +1,5 @@
 import { Controller, Post, Body, UnauthorizedException } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
@@ -6,6 +7,7 @@ export class AuthController {
     constructor(private authService: AuthService) { }
 
     @Post('login')
+    @Throttle({ default: { limit: 5, ttl: 60000 } }) // 5 requests per minute - prevent brute force
     async login(@Body() req: { email: string; password: string }) {
         const user = await this.authService.validateUser(req.email, req.password);
         if (!user) {
