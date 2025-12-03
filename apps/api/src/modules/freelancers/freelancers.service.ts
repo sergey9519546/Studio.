@@ -1,22 +1,43 @@
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateFreelancerDto, UpdateFreelancerDto, ImportFreelancerDto } from './dto/freelancer.dto';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class FreelancersService {
-  constructor(private prisma: PrismaService) { }
+  private readonly CACHE_KEY = 'freelancers:list';
+  private readonly CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+
+  constructor(
+    private prisma: PrismaService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+  ) { }
 
   async findAll() {
+    // Check cache first
+    const cached = await this.cacheManager.get(this.CACHE_KEY);
+    if (cached) {
+      return cached;
+    }
+
+    // Fetch from database
     const freelancers = await this.prisma.freelancer.findMany({
       include: { skills: true },
       orderBy: { name: 'asc' }
     });
+
     // Flatten skills for frontend compatibility
-    return freelancers.map(f => ({
+    const result = freelancers.map(f => ({
       ...f,
       skills: f.skills.map(s => s.name)
     }));
+
+    // Cache the result for 24 hours
+    await this.cacheManager.set(this.CACHE_KEY, result, this.CACHE_TTL);
+
+    return result;
   }
 
   async findOne(id: string) {
@@ -30,7 +51,7 @@ export class FreelancersService {
 
   async create(data: CreateFreelancerDto) {
     const { skills, ...rest } = data;
-    return this.prisma.freelancer.create({
+    const created = await this.prisma.freelancer.create({
       data: {
         ...rest,
         skills: {
@@ -42,11 +63,16 @@ export class FreelancersService {
       },
       include: { skills: true }
     });
+
+    // Invalidate cache when creating
+    await this.cacheManager.del(this.CACHE_KEY);
+
+    return created;
   }
 
   async update(id: string, data: UpdateFreelancerDto) {
     const { skills, ...rest } = data;
-    return this.prisma.freelancer.update({
+    const updated = await this.prisma.freelancer.update({
       where: { id },
       data: {
         ...rest,
@@ -60,10 +86,20 @@ export class FreelancersService {
       },
       include: { skills: true }
     });
+
+    // Invalidate cache when updating
+    await this.cacheManager.del(this.CACHE_KEY);
+
+    return updated;
   }
 
   async remove(id: string) {
-    return this.prisma.freelancer.delete({ where: { id } });
+    const deleted = await this.prisma.freelancer.delete({ where: { id } });
+
+    // Invalidate cache when deleting
+    await this.cacheManager.del(this.CACHE_KEY);
+
+    return deleted;
   }
 
   async createBatch(items: ImportFreelancerDto[]) {

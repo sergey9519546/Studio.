@@ -2,6 +2,9 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
+import { Inject } from '@nestjs/common';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 
 export interface ProjectInput {
   name?: string;
@@ -20,7 +23,13 @@ export interface ProjectInput {
 
 @Injectable()
 export class ProjectsService {
-  constructor(private prisma: PrismaService) { }
+  private readonly CACHE_KEY = 'projects:list';
+  private readonly CACHE_TTL = 2 * 60 * 60 * 1000; // 2 hours
+
+  constructor(
+    private prisma: PrismaService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+  ) { }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private toDto(project: any) { // Keep explicit any here as it maps from Prisma raw result which can be complex

@@ -1,16 +1,20 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe, Logger } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 import { AuthService } from './modules/auth/auth.service';
 import { HttpAdapterHost } from '@nestjs/core';
 import helmet from 'helmet';
+import compression from 'compression';
+import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
-  const logger = new Logger('Bootstrap');
   const app = await NestFactory.create(AppModule, {
-    logger: ['error', 'warn', 'log'],
+    bufferLogs: true, // Buffer logs until Pino is ready
   });
+
+  // Use Pino logger
+  app.useLogger(app.get(Logger));
 
   // Security: Helmet middleware for security headers
   app.use(helmet({
@@ -23,6 +27,9 @@ async function bootstrap() {
       },
     },
   }));
+
+  // Performance: Response compression
+  app.use(compression());
 
   // Global validation pipe
   app.useGlobalPipes(
@@ -48,15 +55,15 @@ async function bootstrap() {
     const authService = app.get(AuthService);
     await authService.seedAdminUser();
   } catch (error) {
-    logger.error('Failed to seed admin user:', error);
+    app.get(Logger).error('Failed to seed admin user:', error);
   }
 
   const port = process.env.PORT || 3001;
   await app.listen(port);
 
-  logger.log(`🚀 Server running on http://localhost:${port}`);
-  logger.log(`📊 Health check: http://localhost:${port}/health`);
-  logger.log(`🔒 Environment: ${process.env.NODE_ENV || 'development'}`);
+  app.get(Logger).log(`🚀 Server running on http://localhost:${port}`);
+  app.get(Logger).log(`📊 Health check: http://localhost:${port}/health`);
+  app.get(Logger).log(`🔒 Environment: ${process.env.NODE_ENV || 'development'}`);
 }
 
 bootstrap();

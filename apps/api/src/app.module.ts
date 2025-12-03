@@ -9,6 +9,8 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { validate } from './config/env.validation';
 import { PrismaModule } from './prisma/prisma.module';
 import { CommonModule } from './common/guards/common.module';
+import { CacheModule } from './common/cache/cache.module';
+import { LoggerModule } from './common/logger/logger.module';
 import { AssetsModule } from './modules/assets/assets.module';
 import { KnowledgeModule } from './modules/knowledge/knowledge.module';
 import { IntelligenceModule } from './modules/intelligence/intelligence.module';
@@ -55,6 +57,8 @@ import { AuthModule } from './modules/auth/auth.module';
       inject: [ConfigService],
     }),
     CommonModule,
+    CacheModule,
+    LoggerModule,
     PrismaModule,
     StorageModule,
     GoogleModule,
