@@ -11,7 +11,7 @@ export interface PromptTestCase {
     minQualityScore?: number;
 }
 
-interface TestResult {
+export interface TestResult {
     testName: string;
     passed: boolean;
     score: number;
