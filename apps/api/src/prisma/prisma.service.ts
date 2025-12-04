@@ -7,7 +7,8 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
 
   constructor() {
     // Prisma 7: Use accelerateUrl for database connections
-    // @ts-expect-error - Prisma 7 type definitions may not expose accelerateUrl but it works at runtime
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore - Prisma 7 requires accelerateUrl but types may not expose it
     super({ accelerateUrl: process.env.DATABASE_URL });
   }
 

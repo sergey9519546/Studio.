@@ -12,6 +12,7 @@ import { AIProviderManager } from './providers/ai-provider.manager';
 import { OptimizationController } from './optimization.controller';
 import { PrismaModule } from '../../prisma/prisma.module';
 import { MonitoringModule } from '../monitoring/monitoring.module';
+import { PromptTesterService } from './testing/prompt-tester.service';
 
 @Module({
     imports: [ConfigModule, PrismaModule, IntelligenceModule, forwardRef(() => RAGModule), MonitoringModule],
@@ -23,6 +24,7 @@ import { MonitoringModule } from '../monitoring/monitoring.module';
         StreamingService,
         VertexAIProvider,
         AIProviderManager,
+        PromptTesterService,
     ],
     exports: [
         GeminiAnalystService,
