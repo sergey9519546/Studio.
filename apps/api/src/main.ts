@@ -59,11 +59,11 @@ async function bootstrap() {
     console.error('Failed to seed admin user:', error);
   }
 
-  const port = process.env.PORT || 3001;
-  await app.listen(port);
+  const port = parseInt(process.env.PORT || '3001', 10);
+  await app.listen(port, '0.0.0.0');
 
-  console.log(`🚀 Server running on http://localhost:${port}`);
-  console.log(`📊 Health check: http://localhost:${port}/health`);
+  console.log(`🚀 Server running on http://0.0.0.0:${port}`);
+  console.log(`📊 Health check: http://0.0.0.0:${port}/health`);
   console.log(`🔒 Environment: ${process.env.NODE_ENV || 'development'}`);
 
   // Enable graceful shutdown
