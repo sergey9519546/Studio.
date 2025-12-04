@@ -25,10 +25,11 @@ export class AlertsService {
     private readonly logger = new Logger(AlertsService.name);
 
     // Configuration - can be moved to environment variables
+    // LOWERED BUDGETS: Capped at $50/month for Vertex AI
     private readonly config: AlertConfig = {
-        dailyBudget: 10, // $10/day
-        weeklyBudget: 60, // $60/week
-        monthlyBudget: 200, // $200/month
+        dailyBudget: parseFloat(process.env.AI_DAILY_BUDGET || '1.5'),   // $1.50/day
+        weeklyBudget: parseFloat(process.env.AI_WEEKLY_BUDGET || '12'),  // $12/week
+        monthlyBudget: parseFloat(process.env.AI_MONTHLY_BUDGET || '50'), // $50/month MAX
         alertThresholds: [0.5, 0.75, 0.9, 1.0], // Alert at 50%, 75%, 90%, 100%
         alertEmail: process.env.ALERT_EMAIL,
         slackWebhook: process.env.SLACK_WEBHOOK_URL,
