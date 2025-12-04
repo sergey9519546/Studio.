@@ -1,5 +1,5 @@
 # Optimized single-stage production build for Cloud Run
-FROM node:20.18.0-bookworm-slim
+FROM node:22-bookworm-slim
 
 WORKDIR /app
 
