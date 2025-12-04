@@ -141,7 +141,7 @@ export class AssetsService {
         if (a.storageKey) {
           url = await this.storage.getSignedDownloadUrl(a.storageKey);
         }
-      } catch (e) {
+      } catch {
         // Storage might be down or misconfigured, return asset without URL
       }
       return { ...a, url };
@@ -165,7 +165,7 @@ export class AssetsService {
       if (asset.url) return asset.url;
       if (asset.publicUrl) return asset.publicUrl;
       return this.storage.getSignedDownloadUrl(asset.storageKey);
-    } catch (e) {
+    } catch {
       return '';
     }
   }
