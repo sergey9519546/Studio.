@@ -73,7 +73,7 @@ export class AIProviderManager {
     /**
      * Generate content with specific provider
      */
-    async generateContent(providerName: string | undefined, prompt: string, options?: any) {
+    async generateContent(providerName: string | undefined, prompt: string, options?: Record<string, unknown>) {
         const provider = this.getProvider(providerName);
         return provider.generateContent(prompt, options);
     }
@@ -81,7 +81,7 @@ export class AIProviderManager {
     /**
      * Extract data with specific provider
      */
-    async extractData(providerName: string | undefined, prompt: string, schema?: any, options?: any) {
+    async extractData(providerName: string | undefined, prompt: string, schema?: Record<string, unknown>, options?: Record<string, unknown>) {
         const provider = this.getProvider(providerName);
         return provider.extractData(prompt, schema, options);
     }
