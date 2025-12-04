@@ -87,7 +87,9 @@ export class AIController {
         const codeContext = ragResponse.sources.map((s, i) => `// Source ${i + 1}\n${s.content}`).join('\n\n');
         const codeContextMetadata = {
             chunks: ragResponse.sources.length,
-            files: ragResponse.sources.map((s: { metadata?: Record<string, unknown> }) => (s.metadata as any)?.source || 'unknown')
+            files: ragResponse.sources.map((s: { metadata?: Record<string, unknown> }) =>
+                (s.metadata?.source as string | undefined) || 'unknown'
+            )
         };
 
         // Step 3: Build conversation history
@@ -230,10 +232,11 @@ ${JSON.stringify(parsedContext, null, 2)}
     @Get('status')
     async getStatus() {
         const stats = await this.rag.getStats();
+        const vectorStore = stats.vectorStore as unknown as { totalDocuments?: number };
         return {
             ...stats,
-            ready: (stats.vectorStore as any)?.totalDocuments > 0,
-            message: (stats.vectorStore as any)?.totalDocuments > 0 ? 'Ready' : 'Not indexed',
+            ready: (vectorStore?.totalDocuments || 0) > 0,
+            message: (vectorStore?.totalDocuments || 0) > 0 ? 'Ready' : 'Not indexed',
         };
     }
 
