@@ -104,9 +104,10 @@ export class FreelancersService {
 
   async createBatch(items: ImportFreelancerDto[]) {
     // Sequential execution to handle connectOrCreate correctly
-    let created = 0, updated = 0;
+    const created = 0;
+    const updated = 0;
     for (const item of items) {
-      const { id, skills, ...rest } = item;
+      const { skills, ...rest } = item;
 
       if (!rest.email) {
         // Skip invalid items or throw error. For batch, we'll skip and log/count error in a real app.
