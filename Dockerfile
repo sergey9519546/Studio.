@@ -5,26 +5,16 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && \
-    apt-get install -y openssl ca-certificates python3 make g++ libssl-dev && \
+    apt-get install -y openssl ca-certificates libssl-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy all source files
 COPY . .
 
 # Install dependencies (using npm install to be more lenient than npm ci)
-ENV PRISMA_SKIP_POSTINSTALL_GENERATE=true
-ENV PRISMA_CLI_BINARY_TARGETS=debian-openssl-3.0.x
-RUN npm install -g node-gyp
 RUN npm install --legacy-peer-deps
 
 # Generate Prisma client
-RUN apt-get install -y file
-RUN openssl version
-RUN ls -la node_modules/.bin/prisma
-RUN file node_modules/.bin/prisma
-# Try running via node directly if the bin is a script or symlink
-RUN node node_modules/prisma/build/index.js -v || true
-RUN ./node_modules/.bin/prisma -v || true
 RUN npx prisma generate
 
 # Build the API
