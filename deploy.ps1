@@ -1,15 +1,21 @@
 # Deploy to Google Cloud Run
 
-$PROJECT_ID = "gen-lang-client-0704991831"
-$REGION = "us-west1"
+$PROJECT_ID = $env:GCP_PROJECT_ID
+$REGION = if ($env:GCP_REGION) { $env:GCP_REGION } else { "us-west1" }
 $SERVICE_NAME = "studio-roster-api"
 $IMAGE_NAME = "gcr.io/$PROJECT_ID/$SERVICE_NAME"
 
 Write-Host "Starting Deployment to Cloud Run..." -ForegroundColor Green
 
+if (-not $PROJECT_ID) { Write-Error "GCP_PROJECT_ID environment variable not set"; exit 1 }
+if (-not $env:API_KEY) { Write-Error "API_KEY environment variable not set"; exit 1 }
+if (-not $env:DATABASE_URL) { Write-Error "DATABASE_URL environment variable not set"; exit 1 }
+if (-not $env:JWT_SECRET) { Write-Error "JWT_SECRET environment variable not set"; exit 1 }
+if (-not $env:STORAGE_BUCKET) { Write-Error "STORAGE_BUCKET environment variable not set"; exit 1 }
+
 # 1. Build Docker Image
 Write-Host "Building Docker Image..." -ForegroundColor Cyan
-docker build --build-arg API_KEY=AIzaSyC9o_kpmfdSivtVi-wVSWCI_XYqKItHkYI -t $IMAGE_NAME .
+docker build --build-arg API_KEY=$env:API_KEY -t $IMAGE_NAME .
 if ($LASTEXITCODE -ne 0) { Write-Error "Docker build failed"; exit 1 }
 
 # 2. Push to GCR
@@ -25,15 +31,14 @@ gcloud run deploy $SERVICE_NAME `
   --region $REGION `
   --allow-unauthenticated `
   --memory 1Gi `
+  --set-env-vars "PORT=8080" `
   --set-env-vars "NODE_ENV=production" `
-  --set-env-vars "DATABASE_URL=prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RfaWQiOjEsInNlY3VyZV9rZXkiOiJza19oQkU0RFZCTzdzMFgzb2FwNEJRdXYiLCJhcGlfa2V5IjoiMDFLQkEyRTg0QURQWFFBQ1JHSlhZNE00NVIiLCJ0ZW5hbnRfaWQiOiJkMzlmZjgwYzQ0N2RkMTE5YzA3MzRkMWE5NzVjNmE4MmEwMDM1YmI2NTE2NzliMjg0Y2E5NjcwNTNjZjQ3NDhlIiwiaW50ZXJuYWxfc2VjcmV0IjoiNWJhNmMwNWMtMDQ2Ni00MTYxLTg0NDgtYmMxYTM0OTk0MGE2In0.d-q8aPR47cBHrhOGu89QqqQuUH2L7GIV6u_OVhw-eo8" `
-  --set-env-vars "JWT_SECRET=super-secret-key-change-in-production" `
-  --set-env-vars "API_KEY=AIzaSyC9o_kpmfdSivtVi-wVSWCI_XYqKItHkYI" `
+  --set-env-vars "DATABASE_URL=$($env:DATABASE_URL)" `
+  --set-env-vars "JWT_SECRET=$($env:JWT_SECRET)" `
+  --set-env-vars "API_KEY=$($env:API_KEY)" `
   --set-env-vars "GCP_PROJECT_ID=$PROJECT_ID" `
-  --set-env-vars "FRONTEND_URL=https://studio-roster-api-893670545674.us-west1.run.app" `
-  --set-env-vars "STORAGE_BUCKET=ai-studio-bucket-893670545674-us-west1" `
-  --set-env-vars "GCP_CLIENT_EMAIL=service-893670545674@gen-lang-client-0704991831.iam.gserviceaccount.com" `
-  --set-env-vars "GCP_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDGhseeq1KRT0S/\nVYNIFK4aVInIpvNvg83ooL8lK4AwaxPyD55khYdMfMAJ+Sh0H+czb3IHfvSV6dP7\n2mqOjflvBu0AZkWVp6sPOOi9CdMG27HK4HhN8k21FHi4bzf1I1hyF8LHPwI5hdMK\nfP9XVoTgDs6fVmITvXpBDhMEiJ0EQyfU0/63FNclDJri0YFRWjkkmZPvDM4SnNam\n9wNfgYR7pB/Y+1ueRM1bKOIihiL9RmPI2s4hH/28sNcgZvFiIWS5fxEYjmCSXDzL\nHxU1oxrs//Zn/M/7VS0rmfjux3Ia2ltGgiyZl3T9zDhM4DiPOUmnXiRsVGv8VTCt\na6h+o0izAgMBAAECggEACIXRvQyS010pUON9atNEdCnr7lrIeaGZbeK0wgY/jxSR\nuyMThDI9UDnMzsDNDUsvVER1C0BWhLcQnC/QwkTzD+Kmuw0o8JdNny4sw6zPy+wT\nkmeXkpUT4/G4iwZvSw1U5zUA7ifU0x5dJIagOaIjuzC3ixycwkcwn+lYRKoOv5eE\n9tMLwwryPEO/f4S+5Waj25/KWVdqAMBnc3sM3rgucJGgwmlwaiYNonWRiR7Ryz61\nes9UqneF2PFbKYLXBjFHlyHI3m1hUuJaxbbRH/kT7og1D4+aTwmfDx2mtT2Juh1q\nLW+hggkfjUzWrbno7UdvjoTSW0uAU/m2/OrPmuQmwQKBgQD+lAYKiW44rbb0F0Yn\nBlJv8hZdAY7H63JLuzsyyB4HbdV51f8zl9B8BZhCtqr6JqeMNRCu7RaAG3b5KWtC\nDtzDm1e/aoyyiqkB7zBMlxS6TvUvgqDUHSiFeH27YVUXj+DccoMnHfwfcEFdySUV\niZWzbBKCxJaaR6c+utDXchdN8wKBgQDHop4he7ODpoOrI2saxNErH7WrvyeNZPTu\nYhyBUIxfu4Avcr97XSuumQPz7wf61k0/zfMGJ2r1MZAdq3YbyEDff9ez7fMk4mDH\nYv/EluUCKOzsfu9x3nQqEQnJGGlNm7/TpO0lofJy8xjYXtOZYfXylykoWunY2cEC\nxM9FLd8KQQKBgQDaBHBsA6gGGBbPUUM91ncw8ZTfT580bNl0K8MVyTWWTSR985tb\nVs8v9yafM4qXMhVYyHUiKV6UlXC9DxCRAONlDRsHjbsyh/cW9f1aCiSxLT9i0a7k\nGJiEPV0H5OIXjJsYj2TsUgyB7AO+yqzclfhDMPFlVfBX7bc3zItfhpCYqwKBgQCd\nhbNAuFrthnZek5Pvi12AqYSwACU1bHPXpZLYdrZM06ZRyjlNHjdZjWORFws04eQS\ndG9Oa8v5rSIKR0DqqxiFQlrxntA8SmQS8ArhFC+fhKtt8Lr/HoiKqOcPxjNRCZRT\na8+z4hVsnmT8VdahMKrgwGW5cgMTGL8zcBgcfhWAAQKBgD6YonabknhrboilwrB5\nlmApd1fen6Ma7VcKmkC2T4pkDZWmT31GV437V5aEIS8HcGP2Ti0qjelpCD5Kh2Cc\nY+kX8M2lOYSerYZUhVynOgqmoyWWp7uGIN8ou9sVq5w/P378ht17ozJhJEM5f1uf\n6NGN2uPO/ePuqLb4vxneO7SC\n-----END PRIVATE KEY-----\n"
+  --set-env-vars "FRONTEND_URL=$($env:FRONTEND_URL)" `
+  --set-env-vars "STORAGE_BUCKET=$($env:STORAGE_BUCKET)"
 
 if ($LASTEXITCODE -ne 0) { Write-Error "Deployment failed"; exit 1 }
 
