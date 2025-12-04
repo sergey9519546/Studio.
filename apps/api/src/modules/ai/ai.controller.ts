@@ -10,12 +10,14 @@ import {
     HttpStatus,
     Param,
     Res,
+    UseGuards,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import 'multer';
 import { GeminiAnalystService } from './gemini-analyst.service';
 import { RAGService } from '../rag/rag.service';
 import { StreamingService } from './streaming.service';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { Response } from 'express';
 
 interface ChatRequest {
@@ -36,9 +38,6 @@ interface ChatResponse {
         files: string[];
     };
 }
-
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { UseGuards } from '@nestjs/common';
 
 @Controller('ai')
 @UseGuards(JwtAuthGuard)
