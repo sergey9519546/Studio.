@@ -16,10 +16,14 @@ RUN npm install -g node-gyp
 RUN npm install --legacy-peer-deps --ignore-scripts && npm rebuild bcrypt hnswlib-node --build-from-source
 
 # Generate Prisma client
+RUN apt-get install -y file
 RUN openssl version
 RUN ls -la node_modules/.bin/prisma
-RUN ./node_modules/.bin/prisma -v
-RUN ./node_modules/.bin/prisma generate
+RUN file node_modules/.bin/prisma
+# Try running via node directly if the bin is a script or symlink
+RUN node node_modules/prisma/build/index.js -v || true
+RUN ./node_modules/.bin/prisma -v || true
+RUN npx prisma generate
 
 # Build the API
 RUN npm run build:api || npx nest build -p apps/api/tsconfig.app.json
