@@ -3,7 +3,6 @@ import { Controller, Get, Post, Body, Param, Patch, Delete, Query, UseGuards, Us
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Throttle } from '@nestjs/throttler';
 import { MoodboardService } from './moodboard.service';
-import { MoodboardItem } from '@prisma/client';
 import { CreateMoodboardItemDto } from './dto/create-moodboard-item.dto';
 import { UpdateMoodboardItemDto } from './dto/update-moodboard-item.dto';
 import { AssetsService } from '../assets/assets.service';
