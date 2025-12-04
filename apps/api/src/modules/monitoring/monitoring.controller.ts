@@ -1,9 +1,18 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { AIUsageService } from './ai-usage.service';
+import { AlertsService } from './alerts.service';
 
 @Controller('monitoring')
 export class MonitoringController {
-    constructor(private aiUsage: AIUsageService) { }
+    constructor(
+        private aiUsage: AIUsageService,
+        private alerts: AlertsService,
+    ) { }
+
+    @Get('budget/status')
+    async getBudgetStatus() {
+        return this.alerts.getAllBudgetStatus();
+    }
 
     @Get('ai-usage/today')
     async getToday() {
