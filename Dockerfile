@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && \
-    apt-get install -y openssl ca-certificates python3 make g++ && \
+    apt-get install -y openssl ca-certificates python3 make g++ libssl-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy all source files
@@ -16,6 +16,7 @@ RUN npm install -g node-gyp
 RUN npm install --legacy-peer-deps --ignore-scripts && npm rebuild bcrypt hnswlib-node --build-from-source
 
 # Generate Prisma client
+RUN npx prisma -v
 RUN npx prisma generate
 
 # Build the API
