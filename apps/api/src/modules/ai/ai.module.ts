@@ -9,11 +9,13 @@ import { VertexAIEmbeddingsService } from './vertex-ai-embeddings.service';
 import { StreamingService } from './streaming.service';
 import { VertexAIProvider } from './providers/vertex-ai.provider';
 import { AIProviderManager } from './providers/ai-provider.manager';
+import { OptimizationController } from './optimization.controller';
 import { PrismaModule } from '../../prisma/prisma.module';
+import { MonitoringModule } from '../monitoring/monitoring.module';
 
 @Module({
-    imports: [ConfigModule, PrismaModule, IntelligenceModule, RAGModule],
-    controllers: [AIController],
+    imports: [ConfigModule, PrismaModule, IntelligenceModule, RAGModule, MonitoringModule],
+    controllers: [AIController, OptimizationController],
     providers: [
         GeminiAnalystService,
         VertexAIService,
