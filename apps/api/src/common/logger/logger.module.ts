@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { LoggerModule as PinoLoggerModule } from 'nestjs-pino';
+import { Request } from 'express';
 
 @Module({
     imports: [
@@ -18,8 +19,8 @@ import { LoggerModule as PinoLoggerModule } from 'nestjs-pino';
                             },
                         }
                         : undefined,
-                customProps: (req: any) => ({
-                    userId: req.user?.id,
+                customProps: (req: Request) => ({
+                    userId: (req as any).user?.id,
                 }),
                 serializers: {
                     req: (req) => ({

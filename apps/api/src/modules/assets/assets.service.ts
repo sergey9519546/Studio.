@@ -97,8 +97,9 @@ export class AssetsService {
       }
 
       return { ...asset, url: finalUrl, isTransient: false };
-    } catch (e: any) {
-      this.logger.warn(`Database save failed (Storage successful). Asset ${assetEntity.id} kept in memory: ${e.message}`);
+    } catch (error: unknown) {
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger.warn(`Database save failed (Storage successful). Asset ${assetEntity.id} kept in memory: ${err.message}`);
       return assetEntity;
     }
   }
@@ -114,7 +115,7 @@ export class AssetsService {
         take: 1000
       });
       // Mark DB assets as persistent
-      dbAssets = records.map((a: any) => ({ ...a, isTransient: false }));
+      dbAssets = records.map((a) => ({ ...a, isTransient: false })) as AssetEntity[];
     } catch (e) {
       this.logger.warn(`Failed to list assets from DB: ${e}`);
     }
@@ -177,8 +178,9 @@ export class AssetsService {
       this.memoryStore = this.memoryStore.filter(a => a.id !== id);
 
       await this.prisma.asset.delete({ where: { id } });
-    } catch (e: any) {
-      this.logger.warn(`Delete failed: ${e.message}`);
+    } catch (error: unknown) {
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger.warn(`Delete failed: ${err.message}`);
     }
   }
 }

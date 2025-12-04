@@ -84,7 +84,7 @@ export class AIController {
         const codeContext = ragResponse.sources.map((s, i) => `// Source ${i + 1}\n${s.content}`).join('\n\n');
         const codeContextMetadata = {
             chunks: ragResponse.sources.length,
-            files: ragResponse.sources.map((s: any) => s.metadata?.source || 'unknown')
+            files: ragResponse.sources.map((s: { metadata?: Record<string, unknown> }) => (s.metadata as any)?.source || 'unknown')
         };
 
         // Step 3: Build conversation history

@@ -45,9 +45,10 @@ export class DeepReaderService implements OnModuleInit {
 
       return cleanContent;
 
-    } catch (error: any) {
-      this.logger.error(`[DeepReader] Worker Failure: ${error.message}`, error.stack);
-      throw error;
+    } catch (error: unknown) {
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger.error(`[DeepReader] Worker Failure: ${err.message}`, err.stack);
+      throw err;
     }
   }
 

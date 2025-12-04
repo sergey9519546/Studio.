@@ -115,6 +115,7 @@ export class VertexAIService {
             },
         ];
 
+        // Note: SDK requires dynamic IValue structure that doesn't fit standard TypeScript interfaces
         const parameters: any = {
             temperature: 0.7,
             maxOutputTokens: 2048,

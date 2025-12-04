@@ -109,7 +109,7 @@ export class AvailabilityService {
     const totalProjectedLoad = maxUtilization + requestedAllocation;
 
     if (totalProjectedLoad > 100) {
-      const projectNames = overlaps.map((o: any) => o.project.title).join(', ');
+      const projectNames = overlaps.map((o: { project: { title: string } }) => o.project.title).join(', ');
       return {
         isAvailable: false,
         reason: `Overloaded: Projected utilization ${totalProjectedLoad}% exceeds capacity. Conflicts with: ${projectNames}`,

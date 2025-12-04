@@ -29,7 +29,7 @@ Please provide helpful, accurate responses based on this context.`;
   /**
    * Execute a tool
    */
-  async executeTool(toolName: string, args: any) {
+  async executeTool(toolName: string, args: Record<string, unknown>) {
     const tool = this.tools.find(t => t.name === toolName);
     if (!tool) {
       throw new Error(`Tool ${toolName} not found`);

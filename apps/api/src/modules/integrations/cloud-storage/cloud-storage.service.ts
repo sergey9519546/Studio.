@@ -51,9 +51,10 @@ export class CloudStorageService {
 
     try {
       return await adapter.listFiles(userId, folderId);
-    } catch (error: any) {
-      this.logger.error(`Failed to list files for ${providerId}: ${error.message}`);
-      throw new BadRequestException(`External API Error: ${error.message}`);
+    } catch (error: unknown) {
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger.error(`Failed to list files for ${providerId}: ${err.message}`);
+      throw new BadRequestException(`External API Error: ${err.message}`);
     }
   }
 }

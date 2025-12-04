@@ -9,7 +9,7 @@ interface RAGContext {
     relevantChunks: Array<{
         content: string;
         score: number;
-        metadata?: any;
+        metadata?: Record<string, unknown>;
     }>;
     context: string;
 }
@@ -19,7 +19,7 @@ interface RAGResponse {
     sources: Array<{
         content: string;
         score: number;
-        metadata?: any;
+        metadata?: Record<string, unknown>;
     }>;
     context: RAGContext;
 }
@@ -250,8 +250,8 @@ Summary:`;
      * Get RAG system statistics
      */
     async getStats(): Promise<{
-        vectorStore: any;
-        embeddingsCache: any;
+        vectorStore: unknown;
+        embeddingsCache: unknown;
     }> {
         return {
             vectorStore: this.vectorStore.getStats(),

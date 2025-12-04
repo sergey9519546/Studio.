@@ -5,6 +5,10 @@ import { PredictionServiceClient } from '@google-cloud/aiplatform';
 
 type IValue = protos.google.protobuf.IValue;
 
+interface EmbeddingValue {
+    numberValue?: number;
+}
+
 @Injectable()
 export class VertexAIEmbeddingsService {
     private readonly logger = new Logger(VertexAIEmbeddingsService.name);
@@ -63,7 +67,7 @@ export class VertexAIEmbeddingsService {
             }
 
             // Extract number values from the embedding
-            const embeddingVector = embeddings.map((v: any) => v.numberValue || 0);
+            const embeddingVector = embeddings.map((v: EmbeddingValue) => v.numberValue || 0);
 
             this.logger.debug(`Generated embedding vector of length ${embeddingVector.length}`);
             return embeddingVector;
@@ -107,7 +111,7 @@ export class VertexAIEmbeddingsService {
                 if (!values) {
                     throw new Error('Unable to extract embeddings from response');
                 }
-                return values.map((v: any) => v.numberValue || 0);
+                return values.map((v: EmbeddingValue) => v.numberValue || 0);
             });
 
             this.logger.log(`Successfully generated ${embeddings.length} embeddings`);
