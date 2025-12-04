@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { AIController } from './ai.controller';
 import { GeminiAnalystService } from './gemini-analyst.service';
 import { ConfigModule } from '@nestjs/config';
@@ -14,7 +14,7 @@ import { PrismaModule } from '../../prisma/prisma.module';
 import { MonitoringModule } from '../monitoring/monitoring.module';
 
 @Module({
-    imports: [ConfigModule, PrismaModule, IntelligenceModule, RAGModule, MonitoringModule],
+    imports: [ConfigModule, PrismaModule, IntelligenceModule, forwardRef(() => RAGModule), MonitoringModule],
     controllers: [AIController, OptimizationController],
     providers: [
         GeminiAnalystService,

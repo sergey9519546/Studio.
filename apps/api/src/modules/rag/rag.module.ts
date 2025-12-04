@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { RAGService } from './rag.service';
 import { EmbeddingsService } from './embeddings.service';
 import { VectorStoreService } from './vector-store.service';
@@ -8,7 +8,7 @@ import { AIModule } from '../ai/ai.module';
 import { PrismaModule } from '../../prisma/prisma.module';
 
 @Module({
-    imports: [AIModule, PrismaModule],
+    imports: [forwardRef(() => AIModule), PrismaModule],
     controllers: [RAGController],
     providers: [RAGService, EmbeddingsService, VectorStoreService, ChunkingService],
     exports: [RAGService],

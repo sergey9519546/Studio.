@@ -6,8 +6,9 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
   private readonly logger = new Logger(PrismaService.name);
 
   constructor() {
-    // PrismaClient automatically uses DATABASE_URL from environment
-    super();
+    // Prisma 7: Use accelerateUrl for database connections
+    // @ts-expect-error - Prisma 7 type definitions may not expose accelerateUrl but it works at runtime
+    super({ accelerateUrl: process.env.DATABASE_URL });
   }
 
   async onModuleInit() {
@@ -19,7 +20,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
         await this.$connect();
         this.logger.log('Database connected successfully');
         return;
-      } catch (e) {
+      } catch (e: any) {
         attempts++;
         this.logger.error(`Database connection failed (Attempt ${attempts}/${maxRetries}): ${e.message}`);
         if (attempts >= maxRetries) throw e;
