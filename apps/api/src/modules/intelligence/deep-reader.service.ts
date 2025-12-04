@@ -19,7 +19,7 @@ export class DeepReaderService implements OnModuleInit {
    * Offloads heavy parsing to a Worker Thread to prevent Event Loop Blocking.
    */
   async extractText(buffer: Buffer, mimeType: string): Promise<string> {
-    const start = (process as any).hrtime.bigint();
+    const start = (process as { hrtime: { bigint: () => bigint } }).hrtime.bigint();
     this.logger.debug(`[DeepReader] Offloading ${mimeType} (${buffer.length} bytes) to Worker Pool`);
 
     try {
@@ -39,7 +39,7 @@ export class DeepReaderService implements OnModuleInit {
       // For larger strings, this too should move to the worker.
       const cleanContent = this.sanitizeText(content);
 
-      const end = (process as any).hrtime.bigint();
+      const end = (process as { hrtime: { bigint: () => bigint } }).hrtime.bigint();
       const duration = Number(end - start) / 1e6; // ns to ms
       this.logger.log(`[DeepReader] Extraction Success: ${cleanContent.length} chars in ${duration.toFixed(2)}ms`);
 
