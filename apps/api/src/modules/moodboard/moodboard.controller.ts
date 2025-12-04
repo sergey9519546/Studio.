@@ -1,5 +1,6 @@
 
-import { Controller, Get, Post, Body, Param, Patch, Delete, Query, UseGuards, UseInterceptors, UploadedFile } from '@nestjs/common';
+
+import { Controller, Get, Post, Body, Param, Patch, Delete, Query, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Throttle } from '@nestjs/throttler';
 import { MoodboardService } from './moodboard.service';
@@ -24,7 +25,7 @@ export class MoodboardController {
     // 2. Create DTO with real GCS URL
     const dto: CreateMoodboardItemDto = {
       projectId,
-      type: file.mimetype.startsWith('video') ? 'video' : 'image' as any,
+      type: (file.mimetype.startsWith('video') ? 'video' : 'image') as 'image' | 'video',
       url: asset.url || asset.publicUrl || '',
       caption: 'Processing analysis...'
     };
