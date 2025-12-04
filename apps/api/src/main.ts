@@ -6,15 +6,15 @@ import { AuthService } from './modules/auth/auth.service';
 import { HttpAdapterHost } from '@nestjs/core';
 import helmet from 'helmet';
 import compression from 'compression';
-import { Logger } from 'nestjs-pino';
+// import { Logger } from 'nestjs-pino'; // TEMPORARILY DISABLED
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    bufferLogs: true, // Buffer logs until Pino is ready
+    // bufferLogs: true, // Buffer logs until Pino is ready - TEMPORARILY DISABLED
   });
 
-  // Use Pino logger
-  app.useLogger(app.get(Logger));
+  // Use Pino logger - TEMPORARILY DISABLED to diagnose startup issue
+  // app.useLogger(app.get(Logger));
 
   // Security: Helmet middleware for security headers
   app.use(helmet({
@@ -51,34 +51,34 @@ async function bootstrap() {
   });
 
   // Seed admin user on startup (only if no users exist)
-  const pinoLogger = app.get(Logger);
+  // const pinoLogger = app.get(Logger); // TEMPORARILY DISABLED
   try {
     const authService = app.get(AuthService);
     await authService.seedAdminUser();
   } catch (error) {
-    pinoLogger.error('Failed to seed admin user:', error);
+    console.error('Failed to seed admin user:', error);
   }
 
   const port = process.env.PORT || 3001;
   await app.listen(port);
 
-  pinoLogger.log(`🚀 Server running on http://localhost:${port}`);
-  pinoLogger.log(`📊 Health check: http://localhost:${port}/health`);
-  pinoLogger.log(`🔒 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🚀 Server running on http://localhost:${port}`);
+  console.log(`📊 Health check: http://localhost:${port}/health`);
+  console.log(`🔒 Environment: ${process.env.NODE_ENV || 'development'}`);
 
   // Enable graceful shutdown
   app.enableShutdownHooks();
 
   // Handle shutdown signals
   const shutdown = async (signal: string) => {
-    pinoLogger.log(`Received ${signal}, starting graceful shutdown`);
+    console.log(`Received ${signal}, starting graceful shutdown`);
 
     try {
       await app.close();
-      pinoLogger.log('Application closed successfully');
+      console.log('Application closed successfully');
       process.exit(0);
     } catch (error) {
-      pinoLogger.error('Error during shutdown', error);
+      console.error('Error during shutdown', error);
       process.exit(1);
     }
   };

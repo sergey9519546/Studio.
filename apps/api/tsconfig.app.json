@@ -14,8 +14,10 @@
     "exclude": [
         "../../src",
         "../../components",
-        "test",
+        "test/**/*",
         "dist",
-        "**/*spec.ts"
+        "**/*spec.ts",
+        "**/*.test.ts",
+        "scripts/**/*"
     ]
 }
