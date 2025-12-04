@@ -42,7 +42,7 @@ const Layout: React.FC = () => {
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-medium transition-all duration-200 group relative ${isActive
                   ? 'bg-ink-primary/5 text-ink-primary'
-                  - : 'text-ink-secondary hover:bg-subtle/60 hover:text-ink-primary'
+                  : 'text-ink-secondary hover:bg-subtle/60 hover:text-ink-primary'
                 }`
               }
             >
