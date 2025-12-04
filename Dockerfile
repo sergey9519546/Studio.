@@ -13,7 +13,7 @@ COPY . .
 
 # Install dependencies (using npm install to be more lenient than npm ci)
 RUN npm install -g node-gyp
-RUN npm install --legacy-peer-deps --ignore-scripts && npm rebuild bcrypt hnswlib-node --build-from-source
+RUN npm install --legacy-peer-deps
 
 # Generate Prisma client
 RUN apt-get install -y file
