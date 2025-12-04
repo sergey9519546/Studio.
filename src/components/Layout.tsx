@@ -39,9 +39,9 @@ const Layout: React.FC = () => {
               key={item.path}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group relative ${isActive
-                  ? 'bg-subtle text-ink-primary shadow-sm'
-                  : 'text-ink-secondary hover:bg-subtle/50 hover:text-ink-primary'
+                `flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${isActive
+                  ? 'bg-brand text-white shadow-sm'
+                  : 'text-ink-secondary hover:bg-subtle/60 hover:text-ink-primary'
                 }`
               }
             >
