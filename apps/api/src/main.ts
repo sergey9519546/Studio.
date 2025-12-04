@@ -52,11 +52,15 @@ async function bootstrap() {
 
   // Seed admin user on startup (only if no users exist)
   // const pinoLogger = app.get(Logger); // TEMPORARILY DISABLED
+  // Seed admin user in background (don't await)
   try {
     const authService = app.get(AuthService);
-    await authService.seedAdminUser();
+    // Non-blocking: run in background
+    authService.seedAdminUser().catch(error => {
+      console.error('Failed to seed admin user in background:', error);
+    });
   } catch (error) {
-    console.error('Failed to seed admin user:', error);
+    console.error('Failed to initiate admin user seeding:', error);
   }
 
   const port = parseInt(process.env.PORT || '3001', 10);
