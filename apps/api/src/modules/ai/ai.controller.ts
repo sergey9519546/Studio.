@@ -178,8 +178,8 @@ ${JSON.stringify(parsedContext, null, 2)}
         const stats = await this.rag.getStats();
         return {
             ...stats,
-            ready: stats.vectorStore.totalDocuments > 0,
-            message: stats.vectorStore.totalDocuments > 0 ? 'Ready' : 'Not indexed',
+            ready: (stats.vectorStore as any)?.totalDocuments > 0,
+            message: (stats.vectorStore as any)?.totalDocuments > 0 ? 'Ready' : 'Not indexed',
         };
     }
 
