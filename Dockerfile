@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && \
-    apt-get install -y openssl ca-certificates python3 make g++ && \
+    apt-get install -y openssl ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy all source files

@@ -3,10 +3,10 @@ import { AuthService } from './auth.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { UnauthorizedException } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 
 // Mock bcrypt
-jest.mock('bcrypt');
+jest.mock('bcryptjs');
 
 describe('AuthService', () => {
     let service: AuthService;
