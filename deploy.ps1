@@ -15,7 +15,7 @@ if (-not $env:STORAGE_BUCKET) { $env:STORAGE_BUCKET = "$PROJECT_ID-assets" }
 
 # 1. Build Docker Image
 Write-Host "Building Docker Image..." -ForegroundColor Cyan
-docker build --build-arg API_KEY=$env:API_KEY -t $IMAGE_NAME .
+docker build --no-cache --build-arg API_KEY=$env:API_KEY -t $IMAGE_NAME .
 if ($LASTEXITCODE -ne 0) { Write-Error "Docker build failed"; exit 1 }
 
 # 2. Push to GCR
@@ -38,7 +38,8 @@ gcloud run deploy $SERVICE_NAME `
   --set-env-vars "API_KEY=$($env:API_KEY)" `
   --set-env-vars "GCP_PROJECT_ID=$PROJECT_ID" `
   --set-env-vars "FRONTEND_URL=$($env:FRONTEND_URL)" `
-  --set-env-vars "STORAGE_BUCKET=$($env:STORAGE_BUCKET)"
+  --set-env-vars "STORAGE_BUCKET=$($env:STORAGE_BUCKET)" `
+  --set-env-vars "RAG_WARMUP=false"
 
 if ($LASTEXITCODE -ne 0) { Write-Error "Deployment failed"; exit 1 }
 
