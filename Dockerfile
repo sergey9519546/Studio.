@@ -11,8 +11,8 @@ RUN apt-get update && \
 # Copy all source files
 COPY . .
 
-# Install dependencies
-RUN npm ci --legacy-peer-deps || npm install --legacy-peer-deps
+# Install dependencies (using npm install to be more lenient than npm ci)
+RUN npm install --legacy-peer-deps
 
 # Generate Prisma client
 RUN npx prisma generate
