@@ -2,7 +2,7 @@
 import { Injectable, Logger, UnsupportedMediaTypeException, OnModuleInit } from '@nestjs/common';
 import { Worker } from 'worker_threads';
 import { Buffer } from 'buffer';
-import * as path from 'path';
+// path import removed - not used
 
 @Injectable()
 export class DeepReaderService implements OnModuleInit {
