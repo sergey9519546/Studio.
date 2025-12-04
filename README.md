@@ -3,11 +3,13 @@
 ## 🚀 Get Started in 3 Steps
 
 ### 1. Install Dependencies
+
 ```bash
 npm install --legacy-peer-deps
 ```
 
 ### 2. Setup Environment
+
 ```bash
 # Generate JWT secret
 $JWT_SECRET = -join ((48..57) + (65..90) + (97..122) | Get-Random -Count 32 | % {[char]$_})
@@ -22,12 +24,11 @@ GCP_PROJECT_ID="your-project-id"
 ```
 
 ### 3. Initialize Database & Run
-```bash
-# Generate Prisma client
-npx prisma generate
 
-# Push schema to database
-npx prisma db push
+```bash
+npm install
+npx prisma generate
+npx prisma migrate dev       # Create and apply migrations for local development
 
 # Start development server
 npm run dev
@@ -40,6 +41,7 @@ npm run dev
 ## 🔑 First Login
 
 The system automatically creates an admin user on first startup:
+
 - **Email:** Value from `ADMIN_EMAIL` in .env
 - **Password:** Value from `ADMIN_PASSWORD` in .env
 
@@ -87,8 +89,8 @@ npm run build            # Build all (API + frontend)
 npm run build:api        # Build backend only
 
 # Database
-npx prisma studio        # Visual database editor
-npx prisma db push       # Apply schema changes
+npx prisma migrate dev   # Local development - create and apply migrations
+npx prisma migrate deploy # Production - apply existing migrations only
 npx prisma generate      # Generate Prisma client
 
 # Testing
@@ -106,6 +108,7 @@ npm run lint            # Check code quality
 See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete guide.
 
 Quick deployment to Google Cloud Run:
+
 ```bash
 chmod +x deploy.sh
 ./deploy.sh
@@ -117,23 +120,23 @@ chmod +x deploy.sh
 
 ### Required Environment Variables
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `DATABASE_URL` | Database connection | `file:./dev.db` |
-| `JWT_SECRET` | JWT signing key | `<32-char-secret>` |
-| `GCP_PROJECT_ID` | Google Cloud project | `my-project-123` |
-| `ADMIN_EMAIL` | Initial admin email | `admin@studio.com` |
-| `ADMIN_PASSWORD` | Initial admin password | `SecurePass123!` |
+| Variable         | Description            | Example            |
+| ---------------- | ---------------------- | ------------------ |
+| `DATABASE_URL`   | Database connection    | `file:./dev.db`    |
+| `JWT_SECRET`     | JWT signing key        | `<32-char-secret>` |
+| `GCP_PROJECT_ID` | Google Cloud project   | `my-project-123`   |
+| `ADMIN_EMAIL`    | Initial admin email    | `admin@studio.com` |
+| `ADMIN_PASSWORD` | Initial admin password | `SecurePass123!`   |
 
 ### Optional Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `PORT` | Server port | `3001` |
-| `NODE_ENV` | Environment | `development` |
-| `GCP_LOCATION` | Vertex AI region | `us-central1` |
-| `STORAGE_BUCKET` | GCS bucket name | - |
-| `LOG_LEVEL` | Logging level | `info` |
+| Variable         | Description      | Default       |
+| ---------------- | ---------------- | ------------- |
+| `PORT`           | Server port      | `3001`        |
+| `NODE_ENV`       | Environment      | `development` |
+| `GCP_LOCATION`   | Vertex AI region | `us-central1` |
+| `STORAGE_BUCKET` | GCS bucket name  | -             |
+| `LOG_LEVEL`      | Logging level    | `info`        |
 
 ---
 
@@ -148,13 +151,19 @@ chmod +x deploy.sh
 ## 🆘 Troubleshooting
 
 ### Database Connection Error
+
 ```bash
 # Reset database
 rm prisma/dev.db
-npx prisma db push
+# Development
+npx prisma migrate dev
+
+# Production
+npx prisma migrate deploy
 ```
 
 ### Build Errors
+
 ```bash
 # Clean and reinstall
 rm -rf node_modules build
@@ -163,12 +172,14 @@ npm run build
 ```
 
 ### Port Already in Use
+
 ```bash
 # Change port in .env
 PORT=3002
 ```
 
 ### Prisma Client Error
+
 ```bash
 # Regenerate client
 npx prisma generate
@@ -179,8 +190,9 @@ npx prisma generate
 ## ✅ Production Checklist
 
 Before deploying:
+
 - [ ] Generate strong JWT_SECRET
-- [ ] Set secure ADMIN_PASSWORD  
+- [ ] Set secure ADMIN_PASSWORD
 - [ ] Configure production DATABASE_URL
 - [ ] Set up GCP service account
 - [ ] Configure CORS for your domain
@@ -193,24 +205,28 @@ Before deploying:
 ## 🎯 Key Features
 
 ### Authentication
+
 - Email/password login
 - JWT token-based sessions
 - Bcrypt password hashing
 - Auth guards on all protected routes
 
 ### AI Integration
+
 - Vertex AI for content generation
 - Gemini 1.5 Pro model
 - Conversation history support
 - Structured data extraction
 
 ### Database
+
 - PostgreSQL compatible (uses SQLite locally)
 - Prisma ORM
 - Type-safe queries
 - Automatic migrations
 
 ### API
+
 - RESTful endpoints
 - DTO validation
 - Rate limiting

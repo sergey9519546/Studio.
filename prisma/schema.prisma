@@ -71,7 +71,7 @@ model RoleRequirement {
     id        String  @id @default(uuid())
     role      String
     count     Int?
-    skills    String // SQLite doesn't support scalar lists, storing as CSV
+    skills    String // PostgreSQL supports JSON, but using CSV for simplicity
     projectId String
     project   Project @relation(fields: [projectId], references: [id])
 }

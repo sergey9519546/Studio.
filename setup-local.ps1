@@ -24,12 +24,13 @@ if (-not (Test-Path .env)) {
     Write-Host "✅ .env file created with generated secrets" -ForegroundColor Green
     Write-Host ""
     Write-Host "⚠️  Important: Update the following in .env:" -ForegroundColor Yellow
-    Write-Host "  - DATABASE_URL (currently using local SQLite)"
+    Write-Host "  - DATABASE_URL (PostgreSQL connection string)"
     Write-Host "  - GCP_PROJECT_ID (your Google Cloud project)"
     Write-Host "  - STORAGE_BUCKET (your GCS bucket name)"
     Write-Host "  - ADMIN_PASSWORD (change from default)"
     Write-Host ""
-} else {
+}
+else {
     Write-Host "✅ .env file already exists" -ForegroundColor Green
 }
 
@@ -41,15 +42,15 @@ npm install --legacy-peer-deps
 Write-Host "🔨 Generating Prisma client..." -ForegroundColor Yellow
 npx prisma generate
 
-# Push database schema
-Write-Host "📊 Pushing database schema..." -ForegroundColor Yellow
-npx prisma db push
+# Apply database migrations
+Write-Host "📊 Applying database migrations..." -ForegroundColor Blue
+npx prisma migrate dev
 
 Write-Host ""
 Write-Host "✅ Setup complete!" -ForegroundColor Green
 Write-Host ""
 Write-Host "🚀 Next steps:" -ForegroundColor Cyan
-Write-Host "  1. Review and update .env file"
+Write-Host "  1. Review and update .env file with PostgreSQL connection"
 Write-Host "  2. Start development server: npm run dev"
 Write-Host "  3. Visit http://localhost:5173"
 Write-Host "  4. Default admin login: admin@studio.com (check ADMIN_PASSWORD in .env)"
