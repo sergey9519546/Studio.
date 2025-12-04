@@ -9,9 +9,11 @@ import compression from 'compression';
 // import { Logger } from 'nestjs-pino'; // TEMPORARILY DISABLED
 
 async function bootstrap() {
+  console.log('🚀 Starting bootstrap...');
   const app = await NestFactory.create(AppModule, {
     // bufferLogs: true, // Buffer logs until Pino is ready - TEMPORARILY DISABLED
   });
+  console.log('✅ NestFactory.create completed');
 
   // Use Pino logger - TEMPORARILY DISABLED to diagnose startup issue
   // app.useLogger(app.get(Logger));
