@@ -12,6 +12,8 @@ RUN apt-get update && \
 COPY . .
 
 # Install dependencies (using npm install to be more lenient than npm ci)
+ENV PRISMA_SKIP_POSTINSTALL_GENERATE=true
+ENV PRISMA_CLI_BINARY_TARGETS=debian-openssl-3.0.x
 RUN npm install -g node-gyp
 RUN npm install --legacy-peer-deps
 
