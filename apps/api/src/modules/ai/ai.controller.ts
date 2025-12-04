@@ -9,6 +9,7 @@ import {
     HttpCode,
     HttpStatus,
     Param,
+    Res,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import 'multer';
@@ -138,6 +139,57 @@ ${JSON.stringify(parsedContext, null, 2)}
             conversationId: this.generateConversationId(userId, projectId),
             codeContext: codeContextMetadata
         };
+    }
+
+    /**
+     * STREAMING CHAT (SSE)
+     * POST /api/ai/chat-stream
+     * 
+     * Real-time AI responses using Server-Sent Events
+     */
+    @Post('chat-stream')
+    @HttpCode(HttpStatus.OK)
+    async chatStream(
+        @Body() dto: ChatRequest,
+        @Res() res: Response,
+    ) {
+        res.setHeader('Content-Type', 'text/event-stream');
+        res.setHeader('Cache-Control', 'no-cache');
+        res.setHeader('Connection', 'keep-alive');
+        res.setHeader('X-Accel-Buffering', 'no'); // Disable nginx buffering
+
+        try {
+            const { message, context } = dto;
+
+            // Build enhanced context
+            const enhancedContext = context || 'No additional context provided';
+
+            // Convert to conversation history
+            const conversationHistory = dto.messages && dto.messages.length > 0
+                ? dto.messages
+                : [{ role: 'user', content: message }];
+
+            // Get streaming response
+            const stream = this.streaming.chatStreamEnhanced(enhancedContext, conversationHistory);
+
+            for await (const chunk of stream) {
+                if (chunk.error) {
+                    res.write(`data: ${JSON.stringify({ error: chunk.error })}\n\n`);
+                    break;
+                }
+
+                res.write(`data: ${JSON.stringify(chunk)}\n\n`);
+
+                if (chunk.done) {
+                    break;
+                }
+            }
+
+            res.end();
+        } catch (error) {
+            res.write(`data: ${JSON.stringify({ error: (error as Error).message, done: true })}\n\n`);
+            res.end();
+        }
     }
 
     /**

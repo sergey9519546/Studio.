@@ -28,6 +28,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AIModule } from './modules/ai/ai.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { MonitoringModule } from './modules/monitoring/monitoring.module';
 
 @Module({
   imports: [
@@ -75,6 +76,7 @@ import { AuthModule } from './modules/auth/auth.module';
     AvailabilityModule,
     HealthModule,
     AuthModule,
+    MonitoringModule,
   ],
   providers: [],
 })
