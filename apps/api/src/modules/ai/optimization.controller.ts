@@ -72,6 +72,9 @@ export class OptimizationController {
             end: new Date(),
         });
 
+        const totalCostNum = parseFloat(recentUsage.totalCost.replace('$', ''));
+        const dailyAvg = totalCostNum / 7;
+
         return {
             caching: {
                 status: recentUsage.cacheHitRate > 50 ? 'healthy' : 'needs-improvement',
@@ -81,7 +84,7 @@ export class OptimizationController {
                     : 'Cache performance is optimal',
             },
             costs: {
-                dailyAvg: recentUsage.totalCost / 7,
+                dailyAvg: `$${dailyAvg.toFixed(2)}`,
                 trend: 'stable', // Calculate from historical data
                 recommendation: 'Consider using gemini-flash for simple queries',
             },
