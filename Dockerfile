@@ -12,6 +12,7 @@ RUN apt-get update && \
 COPY . .
 
 # Install dependencies (using npm install to be more lenient than npm ci)
+RUN npm install -g node-gyp
 RUN npm install --legacy-peer-deps
 
 # Generate Prisma client
