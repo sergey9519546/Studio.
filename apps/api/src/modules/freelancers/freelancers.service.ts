@@ -104,8 +104,8 @@ export class FreelancersService {
 
   async createBatch(items: ImportFreelancerDto[]) {
     // Sequential execution to handle connectOrCreate correctly
-    const created = 0;
-    const updated = 0;
+    let created = 0;
+    let updated = 0;
     for (const item of items) {
       const { skills, ...rest } = item;
 
