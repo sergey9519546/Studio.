@@ -120,6 +120,7 @@ Please provide helpful, accurate responses based on this context.`;
     const freelancer = await this.prisma.freelancer.findUnique({
       where: { id: freelancerId },
       include: {
+        skills: true,
         assignments: {
           include: {
             project: true,

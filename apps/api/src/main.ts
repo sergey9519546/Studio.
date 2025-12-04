@@ -51,19 +51,40 @@ async function bootstrap() {
   });
 
   // Seed admin user on startup (only if no users exist)
+  const pinoLogger = app.get(Logger);
   try {
     const authService = app.get(AuthService);
     await authService.seedAdminUser();
   } catch (error) {
-    app.get(Logger).error('Failed to seed admin user:', error);
+    pinoLogger.error('Failed to seed admin user:', error);
   }
 
   const port = process.env.PORT || 3001;
   await app.listen(port);
 
-  app.get(Logger).log(`🚀 Server running on http://localhost:${port}`);
-  app.get(Logger).log(`📊 Health check: http://localhost:${port}/health`);
-  app.get(Logger).log(`🔒 Environment: ${process.env.NODE_ENV || 'development'}`);
+  pinoLogger.log(`🚀 Server running on http://localhost:${port}`);
+  pinoLogger.log(`📊 Health check: http://localhost:${port}/health`);
+  pinoLogger.log(`🔒 Environment: ${process.env.NODE_ENV || 'development'}`);
+
+  // Enable graceful shutdown
+  app.enableShutdownHooks();
+
+  // Handle shutdown signals
+  const shutdown = async (signal: string) => {
+    pinoLogger.log(`Received ${signal}, starting graceful shutdown`);
+
+    try {
+      await app.close();
+      pinoLogger.log('Application closed successfully');
+      process.exit(0);
+    } catch (error) {
+      pinoLogger.error('Error during shutdown', error);
+      process.exit(1);
+    }
+  };
+
+  process.on('SIGTERM', () => shutdown('SIGTERM'));
+  process.on('SIGINT', () => shutdown('SIGINT'));
 }
 
 bootstrap();

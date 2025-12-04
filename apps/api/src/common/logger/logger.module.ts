@@ -18,7 +18,7 @@ import { LoggerModule as PinoLoggerModule } from 'nestjs-pino';
                             },
                         }
                         : undefined,
-                customProps: (req) => ({
+                customProps: (req: any) => ({
                     userId: req.user?.id,
                 }),
                 serializers: {
