@@ -14,6 +14,8 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import 'multer';
 import { GeminiAnalystService } from './gemini-analyst.service';
 import { RAGService } from '../rag/rag.service';
+import { StreamingService } from './streaming.service';
+import { Response } from 'express';
 
 interface ChatRequest {
     userId?: string;
@@ -39,6 +41,7 @@ export class AIController {
     constructor(
         private readonly aiService: GeminiAnalystService,
         private readonly rag: RAGService,
+        private readonly streaming: StreamingService,
     ) { }
 
     /**
