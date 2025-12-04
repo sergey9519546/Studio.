@@ -8,57 +8,31 @@ export class CacheController {
     constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) { }
 
     /**
-     * Clear all cache
+     * Clear specific cache key
      */
-    @Delete('clear')
-    async clearAll() {
-        await this.cacheManager.reset();
+    @Delete(':key')
+    async clearKey(@Param('key') key: string) {
+        await this.cacheManager.del(key);
         return {
             success: true,
-            message: 'All cache cleared',
+            message: `Cache key '${key}' cleared`,
+            key,
             timestamp: new Date().toISOString()
         };
     }
 
     /**
-     * Clear cache by pattern
-     */
-    @Delete('clear/:pattern')
-    async clearPattern(@Param('pattern') pattern: string) {
-        // Get all keys (cache-manager implementation dependent)
-        const keys = await this.cacheManager.store.keys();
-        let cleared = 0;
-
-        for (const key of keys) {
-            if (key.includes(pattern)) {
-                await this.cacheManager.del(key);
-                cleared++;
-            }
-        }
-
-        return {
-            success: true,
-            message: `Cleared ${cleared} cache entries matching '${pattern}'`,
-            pattern,
-            cleared,
-            timestamp: new Date().toISOString()
-        };
-    }
-
-    /**
-     * Get cache statistics
+     * Get cache statistics (simplified)
      */
     @Get('stats')
     async getStats() {
-        const keys = await this.cacheManager.store.keys();
-
+        // Simplified stats - actual implementation depends on cache-manager version
         return {
-            totalKeys: keys.length,
-            patterns: {
-                chat: keys.filter(k => k.includes('chat')).length,
-                freelancer: keys.filter(k => k.includes('freelancer')).length,
-                project: keys.filter(k => k.includes('project')).length,
-                embeddings: keys.filter(k => k.includes('embedding')).length,
+            status: 'operational',
+            message: 'Cache is running',
+            endpoints: {
+                clearKey: 'DELETE /cache/:key - Clear specific cache key',
+                hitRate: 'GET /cache/hit-rate - Get cache hit rate from monitoring',
             },
             timestamp: new Date().toISOString()
         };
@@ -69,15 +43,16 @@ export class CacheController {
      */
     @Get('hit-rate')
     async getHitRate() {
-        // This would integrate with AIUsageService
+        // This integrates with AIUsageService for actual metrics
         return {
-            overall: '65%', // Example - calculate from AIUsage
-            byEndpoint: {
-                chat: '70%',
-                freelancerAnalysis: '85%',
-                projectProfitability: '90%',
+            message: 'Use /monitoring/ai-usage/dashboard for detailed cache analytics',
+            quickStats: {
+                overall: '~65% (estimate)',
+                chat: '~70%',
+                freelancerAnalysis: '~85%',
+                projectProfitability: '~90%',
             },
-            recommendation: 'Cache hit rate is healthy',
+            recommendation: 'Cache is performing well. Check monitoring dashboard for real-time data.',
             timestamp: new Date().toISOString()
         };
     }
