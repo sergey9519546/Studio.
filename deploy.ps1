@@ -7,11 +7,11 @@ $IMAGE_NAME = "gcr.io/$PROJECT_ID/$SERVICE_NAME"
 
 Write-Host "Starting Deployment to Cloud Run..." -ForegroundColor Green
 
-if (-not $PROJECT_ID) { Write-Error "GCP_PROJECT_ID environment variable not set"; exit 1 }
-if (-not $env:API_KEY) { Write-Error "API_KEY environment variable not set"; exit 1 }
+if (-not $PROJECT_ID) { $PROJECT_ID = "gen-lang-client-0704991831" }
+if (-not $env:API_KEY) { $env:API_KEY = "dummy-key-for-build" } # Build arg only
 if (-not $env:DATABASE_URL) { Write-Error "DATABASE_URL environment variable not set"; exit 1 }
 if (-not $env:JWT_SECRET) { Write-Error "JWT_SECRET environment variable not set"; exit 1 }
-if (-not $env:STORAGE_BUCKET) { Write-Error "STORAGE_BUCKET environment variable not set"; exit 1 }
+if (-not $env:STORAGE_BUCKET) { $env:STORAGE_BUCKET = "$PROJECT_ID-assets" }
 
 # 1. Build Docker Image
 Write-Host "Building Docker Image..." -ForegroundColor Cyan

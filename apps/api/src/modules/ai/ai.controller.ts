@@ -37,7 +37,11 @@ interface ChatResponse {
     };
 }
 
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { UseGuards } from '@nestjs/common';
+
 @Controller('ai')
+@UseGuards(JwtAuthGuard)
 export class AIController {
     constructor(
         private readonly aiService: GeminiAnalystService,

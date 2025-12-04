@@ -2,7 +2,11 @@ import { Controller, Get, Query } from '@nestjs/common';
 import { AIUsageService } from './ai-usage.service';
 import { AlertsService } from './alerts.service';
 
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+
 @Controller('monitoring')
+@UseGuards(JwtAuthGuard)
 export class MonitoringController {
     constructor(
         private aiUsage: AIUsageService,
