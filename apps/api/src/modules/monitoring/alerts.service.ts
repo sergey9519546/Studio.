@@ -11,7 +11,7 @@ interface AlertConfig {
     slackWebhook?: string;
 }
 
-interface BudgetStatus {
+export interface BudgetStatus {
     period: 'daily' | 'weekly' | 'monthly';
     cost: number;
     budget: number;

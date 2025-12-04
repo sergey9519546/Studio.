@@ -64,7 +64,11 @@ export class MonitoringController {
         };
     }
 
-    private calculateTrend(today: any, week: any, month: any) {
+    private calculateTrend(
+        today: { totalCost: string },
+        week: { totalCost: string },
+        month: { totalCost: string }
+    ) {
         const todayCost = parseFloat(today.totalCost.replace('$', ''));
         const weekCost = parseFloat(week.totalCost.replace('$', ''));
         const monthCost = parseFloat(month.totalCost.replace('$', ''));
