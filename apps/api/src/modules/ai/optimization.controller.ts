@@ -74,12 +74,15 @@ export class OptimizationController {
 
         const totalCostNum = parseFloat(recentUsage.totalCost.replace('$', ''));
         const dailyAvg = totalCostNum / 7;
+        const hitRateNum = typeof recentUsage.cacheHitRate === 'string'
+            ? parseFloat(recentUsage.cacheHitRate)
+            : recentUsage.cacheHitRate;
 
         return {
             caching: {
-                status: recentUsage.cacheHitRate > 50 ? 'healthy' : 'needs-improvement',
+                status: hitRateNum > 50 ? 'healthy' : 'needs-improvement',
                 hitRate: recentUsage.cacheHitRate,
-                recommendation: recentUsage.cacheHitRate < 50
+                recommendation: hitRateNum < 50
                     ? 'Consider increasing cache TTL or reviewing query patterns'
                     : 'Cache performance is optimal',
             },
