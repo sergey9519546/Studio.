@@ -1,29 +1,87 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject, Logger } from '@nestjs/common';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 import { VertexAIService } from './vertex-ai.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { getTools } from './tools';
+import { createHash } from 'crypto';
 
 @Injectable()
 export class GeminiAnalystService {
+  private readonly logger = new Logger(GeminiAnalystService.name);
   private tools: any[];
 
-  constructor(private vertexAI: VertexAIService, private prisma: PrismaService) {
+  constructor(
+    private vertexAI: VertexAIService,
+    private prisma: PrismaService,
+    @Inject(CACHE_MANAGER) private cache: Cache
+  ) {
     this.tools = getTools(this.prisma);
   }
 
   /**
-   * Chat with context
+   * Chat with context (cached for common queries)
    */
   async chat(context: string, messages: Array<{ role: string; content: string }> = []): Promise<string | { toolCalls: any[] }> {
-    // Build full conversation with context
-    const systemPrompt = `You are an AI analyst for a creative agency management system.
-        
+    // Create cache key from context + messages
+    const cacheKey = `ai:chat:${this.hashContent(context + JSON.stringify(messages))}`;
+
+    // Check cache for common queries (1 hour TTL)
+    const cached = await this.cache.get(cacheKey);
+    if (cached) {
+      this.logger.debug('Chat cache HIT');
+      return cached as string | { toolCalls: any[] };
+    }
+
+    this.logger.debug('Chat cache MISS');
+    const startTime = Date.now();
+
+    // Enhanced system prompt with examples
+    const systemPrompt = `You are an expert AI analyst for a creative agency management system.
+
+ROLE: Analyze freelancers, projects, workload, and provide data-driven insights.
+
+GUIDELINES:
+- Be concise and actionable
+- Cite specific data points from context
+- Use bullet points for clarity
+- Provide concrete recommendations
+
+EXAMPLE:
+User: "How is this freelancer performing?"
+You: "**Performance Summary:**
+• Completed 5 projects (100% on-time)
+• Average rating: 4.8/5
+• Specialties: Design, Branding
+• Recommendation: Excellent for high-priority creative work"
+
 Context:
 ${context}
 
-Please provide helpful, accurate responses based on this context.`;
+Respond based on the provided context.`;
 
-    return this.vertexAI.chat(messages, systemPrompt, this.tools);
+    const result = await this.vertexAI.chat(messages, systemPrompt, this.tools);
+
+    // Cache for 1 hour (common queries)
+    await this.cache.set(cacheKey, result, 3600);
+
+    // Log usage
+    const duration = Date.now() - startTime;
+    this.logger.log({
+      type: 'ai_usage',
+      endpoint: 'chat',
+      duration_ms: duration,
+      cached: false,
+    });
+
+    return result;
+  }
+
+  /**
+   * Hash content for cache key generation
+   */
+  private hashContent(content: string): string {
+    return createHash('sha256').update(content).digest('hex').substring(0, 16);
   }
 
   /**
@@ -64,9 +122,21 @@ Please provide helpful, accurate responses based on this context.`;
   }
 
   /**
-   * Analyze project profitability
+   * Analyze project profitability (cached 12h)
    */
   async analyzeProjectProfitability(projectId: string): Promise<unknown> {
+    const cacheKey = `ai:project:${projectId}`;
+
+    // Check cache first
+    const cached = await this.cache.get(cacheKey);
+    if (cached) {
+      this.logger.debug(`Cache HIT for project ${projectId}`);
+      return cached;
+    }
+
+    this.logger.debug(`Cache MISS for project ${projectId}`);
+    const startTime = Date.now();
+
     const project = await this.prisma.project.findUnique({
       where: { id: projectId },
       include: {
@@ -110,13 +180,40 @@ Please provide helpful, accurate responses based on this context.`;
       required: ['profitabilityScore', 'summary', 'recommendations'],
     };
 
-    return this.extractData(prompt, schema);
+    const result = await this.extractData(prompt, schema);
+
+    // Cache for 12 hours
+    await this.cache.set(cacheKey, result, 43200);
+
+    // Log usage
+    const duration = Date.now() - startTime;
+    this.logger.log({
+      type: 'ai_usage',
+      endpoint: 'analyzeProjectProfitability',
+      projectId,
+      duration_ms: duration,
+      cached: false,
+    });
+
+    return result;
   }
 
   /**
-   * Analyze freelancer performance
+   * Analyze freelancer performance (cached 24h)
    */
   async analyzeFreelancerPerformance(freelancerId: string): Promise<unknown> {
+    const cacheKey = `ai:freelancer:${freelancerId}`;
+
+    // Check cache first
+    const cached = await this.cache.get(cacheKey);
+    if (cached) {
+      this.logger.debug(`Cache HIT for freelancer ${freelancerId}`);
+      return cached;
+    }
+
+    this.logger.debug(`Cache MISS for freelancer ${freelancerId}`);
+    const startTime = Date.now();
+
     const freelancer = await this.prisma.freelancer.findUnique({
       where: { id: freelancerId },
       include: {
@@ -152,7 +249,22 @@ Please provide helpful, accurate responses based on this context.`;
       required: ['performanceScore', 'summary', 'recommendations'],
     };
 
-    return this.extractData(prompt, schema);
+    const result = await this.extractData(prompt, schema);
+
+    // Cache for 24 hours
+    await this.cache.set(cacheKey, result, 86400);
+
+    // Log usage
+    const duration = Date.now() - startTime;
+    this.logger.log({
+      type: 'ai_usage',
+      endpoint: 'analyzeFreelancerPerformance',
+      freelancerId,
+      duration_ms: duration,
+      cached: false,
+    });
+
+    return result;
   }
 
   /**
