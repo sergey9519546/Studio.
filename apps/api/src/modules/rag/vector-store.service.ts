@@ -20,7 +20,17 @@ export class VectorStoreService {
         private prisma: PrismaService,
         private embeddings: EmbeddingsService
     ) {
-        this.loadVectorsFromDatabase();
+        // FAST STARTUP: Only load vectors if RAG_WARMUP is explicitly enabled
+        // This prevents blocking the constructor with embedding generation
+        if (process.env.RAG_WARMUP === 'true') {
+            this.logger.log('RAG warmup enabled - loading vectors in background...');
+            // Non-blocking: run in background, don't await
+            this.loadVectorsFromDatabase().catch(err => 
+                this.logger.warn('Background vector loading failed:', err.message)
+            );
+        } else {
+            this.logger.log('RAG warmup disabled - vectors will load on first query');
+        }
     }
 
     /**

@@ -1,4 +1,4 @@
-# Single-stage production build for Cloud Run
+# Optimized single-stage production build for Cloud Run
 FROM node:20.18.0-bookworm-slim
 
 WORKDIR /app
@@ -11,7 +11,7 @@ RUN apt-get update && \
 # Copy all source files
 COPY . .
 
-# Install dependencies with all flags to avoid issues
+# Install dependencies
 RUN npm ci --legacy-peer-deps || npm install --legacy-peer-deps
 
 # Generate Prisma client
@@ -33,6 +33,6 @@ USER appuser
 # Cloud Run uses PORT 8080
 EXPOSE 8080
 
-# No Docker health check - Cloud Run uses its own startup/liveness probes
-# Start with migrations - use sh to allow env var expansion
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/apps/api/src/main.js"]
+# FAST STARTUP: No migrations on container start - run them separately
+# This ensures the container starts in seconds, not minutes
+CMD ["node", "dist/apps/api/src/main.js"]
