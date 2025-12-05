@@ -42,6 +42,10 @@
         "hash": "13357121542629593362"
       },
       {
+        "file": ".npmrc",
+        "hash": "18359608235670662366"
+      },
+      {
         "file": "App.tsx",
         "hash": "5477502084977780714"
       },
@@ -275,11 +279,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "3152961837024143585"
+        "hash": "6357042398821209406"
       },
       {
         "file": "package.json",
-        "hash": "11886364670069533758"
+        "hash": "11459743664119314686"
       },
       {
         "file": "prisma/comment_schema_addition.prisma",
@@ -1387,5 +1391,5 @@
       ]
     }
   },
-  "externalNodesHash": "1427116025479808084"
+  "externalNodesHash": "13009010701775126972"
 }
