@@ -47,9 +47,20 @@ export interface UnsplashImage {
 }
 
 /**
+ * Asset Analysis Interface
+ */
+export interface AssetAnalysis {
+  lighting?: string;
+  mood?: string[];
+  styleReferences?: string[];
+}
+
+/**
  * Generate search queries from asset analysis using AI
  */
-export async function generateSearchQueries(analysis: any): Promise<string[]> {
+export async function generateSearchQueries(
+  analysis: AssetAnalysis
+): Promise<string[]> {
   // Gemini query generation (stub implementation)
   const queries = [];
 
@@ -106,7 +117,7 @@ export async function searchSimilarImages(
  * Find images similar to an existing asset
  */
 export async function findSimilarImages(
-  assetAnalysis: any
+  assetAnalysis: AssetAnalysis
 ): Promise<UnsplashImage[]> {
   const queries = await generateSearchQueries(assetAnalysis);
 
