@@ -32,15 +32,7 @@ gcloud run deploy $SERVICE_NAME `
   --region $REGION `
   --allow-unauthenticated `
   --memory 1Gi `
-  --set-env-vars "NODE_ENV=production" `
-  --set-env-vars "DATABASE_URL=$($env:DATABASE_URL)" `
-  --set-env-vars "JWT_SECRET=$($env:JWT_SECRET)" `
-  --set-env-vars "API_KEY=$($env:API_KEY)" `
-  --set-env-vars "GCP_PROJECT_ID=$PROJECT_ID" `
-  --set-env-vars "FRONTEND_URL=$($env:FRONTEND_URL)" `
-  --set-env-vars "STORAGE_BUCKET=$($env:STORAGE_BUCKET)" `
-  --set-env-vars "RAG_WARMUP=false" `
-  --set-env-vars "RAG_WARMUP=$ragWarmup"
+  --set-env-vars "NODE_ENV=production,DATABASE_URL=$($env:DATABASE_URL),JWT_SECRET=$($env:JWT_SECRET),API_KEY=$($env:API_KEY),GCP_PROJECT_ID=$PROJECT_ID,FRONTEND_URL=$($env:FRONTEND_URL),STORAGE_BUCKET=$($env:STORAGE_BUCKET)"
 
 if ($LASTEXITCODE -ne 0) { Write-Error "Deployment failed"; exit 1 }
 
