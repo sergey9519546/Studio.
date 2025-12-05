@@ -8,7 +8,7 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Editor, EditorContext, WithEditorActions, } from '@atlaskit/editor-core';
+import { Editor, EditorContext, WithEditorActions } from '@atlaskit/editor-core';
 import { ComposableEditor } from '@atlaskit/editor-core/composable-editor';
 import { blockTypePlugin } from '@atlaskit/editor-plugin-block-type';
 import { listPlugin } from '@atlaskit/editor-plugin-list';
@@ -26,17 +26,11 @@ import { extensionHandlers, extensionPlugin } from '@atlaskit/editor-plugin-exte
 import { quickInsertPlugin } from '@atlaskit/editor-plugin-quick-insert';
 
 import { defaultSchema } from '@atlaskit/adf-schema';
-import { mentionResourceProvider } from '@atlaskit/util-data-test'; // For mentions
-import { cardProvider } from '@atlaskit/editor-core/test-utils'; // For links
+import { mentionResourceProvider } from '@atlaskit/util-data-test';
+import { cardProvider } from '@atlaskit/editor-core/test-utils';
 
 import { Button } from '@atlaskit/button';
-import { akEditorBreakoutPadding, akEditorDefaultLayoutWidth, akEditorFullWidthLayoutWidth, akEditorGutterPadding } from '@atlaskit/editor-shared-styles';
-import styled from '@emotion/styled';
 import { token } from '@atlaskit/tokens';
-import SaveIcon from '@atlaskit/icon/glyph/check';
-import SparklesIcon from '@atlaskit/icon/glyph/star';
-import MediaIcon from '@atlaskit/icon/glyph/camera';
-import { G300 } from '@atlaskit/theme/colors';
 
 /**
  * CREATIVE STUDIO EDITOR - ATLASSIAN INTEGRATION
@@ -102,7 +96,7 @@ export const AtlassianCreativeEditor: React.FC<AtlassianCreativeEditorProps> = (
     hyperlinkPlugin({
       cardProvider
     }),
-    médiasPlugin({
+    mediaPlugin({
       provider: undefined, // Configure for asset integration
       allowMediaGroup: true,
       allowMediaSingle: true,
@@ -214,7 +208,7 @@ export const AtlassianCreativeEditor: React.FC<AtlassianCreativeEditorProps> = (
         title: 'Brand-aligned heading',
         description: 'Insert heading using brand voice',
         keywords: ['heading', 'brand'],
-        action(insert, state): void {
+        action(insert: any, state: any): void {
           return insert(createBrandHeadingNode());
         }
       },
@@ -222,7 +216,7 @@ export const AtlassianCreativeEditor: React.FC<AtlassianCreativeEditorProps> = (
         title: 'Strategic statement',
         description: 'Insert brand-focused paragraph',
         keywords: ['paragraph', 'brand'],
-        action(insert, state): void {
+        action(insert: any, state: any): void {
           return insert(createStrategicStatementNode());
         }
       }
@@ -232,23 +226,46 @@ export const AtlassianCreativeEditor: React.FC<AtlassianCreativeEditorProps> = (
   };
 
   return (
-    <EditorContainer>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
+      background: 'white',
+      borderRadius: '8px',
+      border: '1px solid #e2e8f0',
+      overflow: 'hidden'
+    }}>
       {/* BRAND CONTEXT INDICATOR */}
       {brandValidationEnabled && brandValidationErrors.length > 0 && (
-        <BrandValidationAlert>
-          <Status count={brandValidationErrors.length} />
-          Brand voice optimization available
+        <div style={{
+          background: '#fef3c7',
+          border: '1px solid #f59e0b',
+          borderRadius: '8px',
+          padding: '12px',
+          margin: '8px',
+          fontSize: '14px',
+          color: '#92400e'
+        }}>
+          <div>Brand voice optimization available</div>
           {brandValidationErrors.slice(0, 2).map((error, i) => (
-            <ValidationItem key={i}>{error}</ValidationItem>
+            <div key={i} style={{ marginTop: '4px', fontSize: '12px', opacity: 0.8 }}>
+              {error}
+            </div>
           ))}
-        </BrandValidationAlert>
+        </div>
       )}
 
-      {/* ENHANCED TOOLBAR (Computational Design: Intuitive Organism) */}
-      <CreativeToolbar>
-        <ToolbarActions>
+      {/* ENHANCED TOOLBAR */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '8px 12px',
+        borderBottom: '1px solid #e2e8f0',
+        background: '#f8fafc'
+      }}>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
           <Button appearance="primary" onClick={handleSave} isLoading={isSaving}>
-            <SaveIcon label="Save" />
             Save Draft
           </Button>
 
@@ -257,7 +274,6 @@ export const AtlassianCreativeEditor: React.FC<AtlassianCreativeEditorProps> = (
             onClick={handleEnhance}
             isLoading={isEnhancing}
           >
-            <SparklesIcon label="Enhance" />
             AI Enhance
           </Button>
 
@@ -266,21 +282,20 @@ export const AtlassianCreativeEditor: React.FC<AtlassianCreativeEditorProps> = (
               appearance="subtle"
               onClick={() => setShowAssetInserter(!showAssetInserter)}
             >
-              <MediaIcon label="Assets" />
               Insert Asset
             </Button>
           )}
-        </ToolbarActions>
-      </CreativeToolbar>
+        </div>
+      </div>
 
       {/* ATLASSIAN EDITOR CORE */}
-      <EditorWrapper>
+      <div style={{ flex: 1, overflow: 'hidden' }}>
         <ComposableEditor appearance="full-page">
           <Editor
             ref={editorRef}
             placeholder={placeholder}
             defaultValue={currentContent}
-            onChange={(editorView) => {
+            onChange={(editorView: any) => {
               const content = editorView.state.doc.toJSON();
               setCurrentContent(content);
               onContentChange?.(content);
@@ -313,108 +328,41 @@ export const AtlassianCreativeEditor: React.FC<AtlassianCreativeEditorProps> = (
               'editor-toolbar-optimization': true
             }}
           >
-            {({ renderToolbar, renderEditor }) => (
+            {({ renderToolbar, renderEditor }: any) => (
               <>
                 {renderToolbar()}
-                <EditorSurface onDrop={handleAssetDrop} onDragOver={handleDragOver}>
+                <div onDrop={handleAssetDrop} onDragOver={handleDragOver} style={{ height: '100%' }}>
                   {renderEditor({})}
-                </EditorSurface>
+                </div>
               </>
             )}
           </Editor>
         </ComposableEditor>
-      </EditorWrapper>
+      </div>
 
       {/* REAL-TIME COLLABORATION INDICATOR */}
-      <CollaborationStatus>
-        <LiveIndicator />
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        padding: '8px 12px',
+        borderTop: '1px solid #e2e8f0',
+        background: '#f8fafc',
+        fontSize: '12px',
+        color: '#64748b'
+      }}>
+        <div style={{
+          width: '8px',
+          height: '8px',
+          background: '#22c55e',
+          borderRadius: '50%',
+          animation: 'pulse 2s infinite'
+        }} />
         Creative intelligence active
-      </CollaborationStatus>
-    </EditorContainer>
+      </div>
+    </div>
   );
 };
-
-// STYLED COMPONENTS (Emotion - Styled Components Applied)
-const EditorContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background: ${token('elevation.surface')};
-  border-radius: ${token('border.radius')};
-  border: 1px solid ${token('color.border')};
-  overflow: hidden;
-`;
-
-const CreativeToolbar = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: ${token('space.2')} ${token('space.3')};
-  border-bottom: 1px solid ${token('color.border')};
-  background: ${token('elevation.surface.overlay')};
-`;
-
-const ToolbarActions = styled.div`
-  display: flex;
-  gap: ${token('space.2')};
-  align-items: center;
-`;
-
-const BrandValidationAlert = styled.div`
-  background: ${token('color.background.warning')};
-  border: 1px solid ${token('color.border.warning')};
-  border-radius: ${token('border.radius')};
-  padding: ${token('space.2')} ${token('space.3')};
-  margin: ${token('space.2')} ${token('space.2')} 0;
-  font-size: 14px;
-  color: ${token('color.text.warning')};
-`;
-
-const ValidationItem = styled.div`
-  margin-top: ${token('space.1')};
-  font-size: 12px;
-  opacity: 0.8;
-`;
-
-const EditorWrapper = styled.div`
-  flex: 1;
-  overflow: hidden;
-`;
-
-const EditorSurface = styled.div`
-  height: 100%;
-  padding: ${token('space.3')};
-  overflow-y: auto;
-
-  &:focus-within {
-    outline: 2px solid ${token('color.border.focused')};
-    outline-offset: -2px;
-  }
-`;
-
-const CollaborationStatus = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${token('space.2')};
-  padding: ${token('space.2')} ${token('space.3')};
-  border-top: 1px solid ${token('color.border')};
-  background: ${token('elevation.surface.overlay')};
-  font-size: 12px;
-  color: ${token('color.text.subtle')};
-`;
-
-const LiveIndicator = styled.div`
-  width: 8px;
-  height: 8px;
-  background: ${token('color.icon.success')};
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-`;
 
 // UTILITY FUNCTIONS (Following Computational Design: Structured Logic)
 
@@ -461,7 +409,7 @@ const createStrategicStatementNode = (): any => {
 };
 
 // CONFIGURATIONS
-const defaultQuickInserts = []; // Default Atlassian inserts
+const defaultQuickInserts: any[] = []; // Default Atlassian inserts
 const contextIdentifierProvider = async () => 'creative-studio';
 const collabEditConfig = {}; // For future real-time collaboration
 
