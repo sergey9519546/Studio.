@@ -39,6 +39,7 @@ gcloud run deploy $SERVICE_NAME `
   --set-env-vars "GCP_PROJECT_ID=$PROJECT_ID" `
   --set-env-vars "FRONTEND_URL=$($env:FRONTEND_URL)" `
   --set-env-vars "STORAGE_BUCKET=$($env:STORAGE_BUCKET)" `
+  --set-env-vars "RAG_WARMUP=false" `
   --set-env-vars "RAG_WARMUP=$ragWarmup"
 
 if ($LASTEXITCODE -ne 0) { Write-Error "Deployment failed"; exit 1 }
