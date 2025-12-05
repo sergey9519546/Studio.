@@ -17,15 +17,16 @@
       }
     },
     "serve": {
-      "executor": "@nx/nest:serve",
+      "executor": "@nx/js:node",
       "defaultConfiguration": "development",
-      "options": {},
+      "options": {
+        "buildTarget": "api:build",
+        "runBuildTargetDependencies": false
+      },
       "configurations": {
-        "development": {
-          "buildTarget": "api:build"
-        },
+        "development": {},
         "production": {
-          "buildTarget": "api:build:production"
+          "buildTarget": "api:build"
         }
       }
     },

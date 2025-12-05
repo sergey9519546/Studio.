@@ -1,0 +1,53 @@
+[2J[3J[H7:10:07 AM - Starting compilation in watch mode...
+
+
+7:10:16 AM - Found 0 errors. Watching for file changes.
+[1m[31mDebugger listening on ws://localhost:9229/6f80bea6-5af9-45de-b371-6a4aad62f031[39m[22m
+[1m[31mDebugger listening on ws://localhost:9229/6f80bea6-5af9-45de-b371-6a4aad62f031[39m[22m
+[1m[31mFor help, see: https://nodejs.org/en/docs/inspector[39m[22m
+[1m[31m[39m[22m
+🚀 Starting bootstrap...
+[32m[Nest] 3624  - [39m12/05/2025, 7:10:24 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 3624  - [39m12/05/2025, 7:10:24 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +21ms[39m
+[1m[31m[31m[Nest] 3624  - [39m[31m12/05/2025, 7:10:24 AM [31m  ERROR[39m[31m [38;5;3m[ExceptionHandler] [39m[31m[31mNest can't resolve dependencies of the AssignmentsService (PrismaService, AvailabilityService, ?). Please make sure that the argument RealtimeService at index [2] is available in the AssignmentsModule context.[39m[22m
+[1m[31m[39m[22m
+[1m[31mPotential solutions:[39m[22m
+[1m[31m- Is AssignmentsModule a valid NestJS module?[39m[22m
+[1m[31m- If RealtimeService is a provider, is it part of the current AssignmentsModule?[39m[22m
+[1m[31m- If RealtimeService is exported from a separate @Module, is that module imported within AssignmentsModule?[39m[22m
+[1m[31m  @Module({[39m[22m
+[1m[31m    imports: [ /* the Module containing RealtimeService */ ][39m[22m
+[1m[31m  })[39m[22m
+[1m[31m[39m[31m[39m[22m
+[1m[31mError: Nest can't resolve dependencies of the AssignmentsService (PrismaService, AvailabilityService, ?). Please make sure that the argument RealtimeService at index [2] is available in the AssignmentsModule context.[39m[22m
+[1m[31m[39m[22m
+[1m[31mPotential solutions:[39m[22m
+[1m[31m- Is AssignmentsModule a valid NestJS module?[39m[22m
+[1m[31m- If RealtimeService is a provider, is it part of the current AssignmentsModule?[39m[22m
+[1m[31m- If RealtimeService is exported from a separate @Module, is that module imported within AssignmentsModule?[39m[22m
+[1m[31m  @Module({[39m[22m
+[1m[31m    imports: [ /* the Module containing RealtimeService */ ][39m[22m
+[1m[31m  })[39m[22m
+[1m[31m[39m[22m
+[1m[31m    at Injector.lookupComponentInParentModules (C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\node_modules\@nestjs\core\injector\injector.js:262:19)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:103:5)[39m[22m
+[1m[31m    at Injector.resolveComponentInstance (C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\node_modules\@nestjs\core\injector\injector.js:215:33)[39m[22m
+[1m[31m    at resolveParam (C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\node_modules\@nestjs\core\injector\injector.js:129:38)[39m[22m
+[1m[31m    at async Promise.all (index 2)[39m[22m
+[1m[31m    at Injector.resolveConstructorParams (C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\node_modules\@nestjs\core\injector\injector.js:144:27)[39m[22m
+[1m[31m    at Injector.loadInstance (C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\node_modules\@nestjs\core\injector\injector.js:70:13)[39m[22m
+[1m[31m    at Injector.loadProvider (C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\node_modules\@nestjs\core\injector\injector.js:98:9)[39m[22m
+[1m[31m    at C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\node_modules\@nestjs\core\injector\instance-loader.js:56:13[39m[22m
+[1m[31m    at async Promise.all (index 3)[39m[22m
+[1m[31m[39m[22m
+[32m[Nest] 3624  - [39m12/05/2025, 7:10:24 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 3624  - [39m12/05/2025, 7:10:24 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mLoggerModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 3624  - [39m12/05/2025, 7:10:24 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 3624  - [39m12/05/2025, 7:10:24 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mIntelligenceModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 3624  - [39m12/05/2025, 7:10:24 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mToolsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 3624  - [39m12/05/2025, 7:10:24 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mThrottlerModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 3624  - [39m12/05/2025, 7:10:24 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAnalysisModule dependencies initialized[39m[38;5;3m +0ms[39m
+
+[7m[1m[36m NX [39m[22m[27m [1mProcess exited with code 1, waiting for changes to restart...[22m
+
+[1m[31mWatch error: Daemon closed the connection[39m[22m

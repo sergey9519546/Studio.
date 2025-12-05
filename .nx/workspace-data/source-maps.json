@@ -88,11 +88,15 @@
       "apps/api/project.json",
       "nx/core/project-json"
     ],
-    "targets.serve.configurations.development": [
+    "targets.serve.options.buildTarget": [
       "apps/api/project.json",
       "nx/core/project-json"
     ],
-    "targets.serve.configurations.development.buildTarget": [
+    "targets.serve.options.runBuildTargetDependencies": [
+      "apps/api/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development": [
       "apps/api/project.json",
       "nx/core/project-json"
     ],
