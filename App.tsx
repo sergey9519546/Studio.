@@ -1,4 +1,5 @@
 import { RefreshCw } from "lucide-react";
+import "@atlaskit/css-reset";
 import React, { useEffect, useState } from "react";
 import {
   HashRouter,

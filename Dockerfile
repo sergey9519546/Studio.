@@ -61,15 +61,14 @@ RUN addgroup -g 1001 -S nodejs && \
 # Copy package files
 COPY package*.json ./
 
-# Install only production dependencies
-RUN npm ci --only=production --legacy-peer-deps && npm cache clean --force
+# Install ALL dependencies (Nx builds don't bundle, they need node_modules)
+RUN npm ci --legacy-peer-deps && npm cache clean --force
 
 # Copy Prisma files and generate client
 COPY --from=builder /app/prisma ./prisma
 RUN npx prisma generate
 
 # Copy built application from builder
-COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/build ./build
 
 # Set ownership to non-root user
@@ -87,4 +86,4 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
   CMD node -e "require('http').get('http://localhost:8080/api/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
 
 # Start application
-CMD ["node", "dist/apps/api/src/main.js"]
+CMD ["node", "build/apps/api/src/main.js"]

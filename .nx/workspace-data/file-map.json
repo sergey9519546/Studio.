@@ -47,7 +47,7 @@
       },
       {
         "file": "App.tsx",
-        "hash": "5477502084977780714"
+        "hash": "2035695547285691952"
       },
       {
         "file": "DEPLOYMENT.md",
@@ -59,7 +59,7 @@
       },
       {
         "file": "Dockerfile",
-        "hash": "5081479039213883669"
+        "hash": "3121120446714113370"
       },
       {
         "file": "PRODUCT_DISCOVERY_STRATEGY.md",
@@ -279,11 +279,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "15481369513271715587"
+        "hash": "2199735083051517346"
       },
       {
         "file": "package.json",
-        "hash": "14139965964437331267"
+        "hash": "4983921222356102762"
       },
       {
         "file": "prisma/comment_schema_addition.prisma",
@@ -448,10 +448,6 @@
       {
         "file": "tailwind.config.js",
         "hash": "16940617754313899931"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.7ed357ab-2fe3-4f5e-a1ff-8d895b0c5bce.json",
-        "hash": "12178908264864505738"
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.deba686d-8056-40c9-9fd8-d72705f1cdf9.json",
@@ -1399,5 +1395,5 @@
       ]
     }
   },
-  "externalNodesHash": "3159893641335658066"
+  "externalNodesHash": "7026952510883370837"
 }
