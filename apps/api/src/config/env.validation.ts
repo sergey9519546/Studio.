@@ -1,45 +1,51 @@
 
 import { plainToInstance } from 'class-transformer';
-import { IsEnum, IsNumber, IsString, IsOptional, validateSync } from 'class-validator';
+import {
+  IsEnum,
+  IsNumber,
+  IsOptional,
+  IsString,
+  validateSync,
+} from "class-validator";
 
 enum Environment {
-    Development = 'development',
-    Production = 'production',
-    Test = 'test',
+  Development = "development",
+  Production = "production",
+  Test = "test",
 }
 
 class EnvironmentVariables {
-    @IsEnum(Environment)
-    NODE_ENV: Environment = Environment.Development;
+  @IsEnum(Environment)
+  NODE_ENV: Environment = Environment.Development;
 
-    @IsString()
-    DATABASE_URL!: string;
+  @IsString()
+  DATABASE_URL: string = "";
 
-    @IsString()
-    JWT_SECRET!: string;
+  @IsString()
+  JWT_SECRET: string = "";
 
-    // GCP_PROJECT_ID is optional - can fall back to GOOGLE_CLOUD_PROJECT (set by Cloud Run)
-    @IsOptional()
-    @IsString()
-    GCP_PROJECT_ID?: string;
+  // GCP_PROJECT_ID is optional - can fall back to GOOGLE_CLOUD_PROJECT (set by Cloud Run)
+  @IsOptional()
+  @IsString()
+  GCP_PROJECT_ID?: string;
 
-    @IsOptional()
-    @IsString()
-    GCP_CLIENT_EMAIL?: string;
+  @IsOptional()
+  @IsString()
+  GCP_CLIENT_EMAIL?: string;
 
-    @IsOptional()
-    @IsString()
-    GCP_PRIVATE_KEY?: string;
+  @IsOptional()
+  @IsString()
+  GCP_PRIVATE_KEY?: string;
 
-    // STORAGE_BUCKET is optional - defaults to project-assets
-    @IsOptional()
-    @IsString()
-    STORAGE_BUCKET?: string;
+  // STORAGE_BUCKET is optional - defaults to project-assets
+  @IsOptional()
+  @IsString()
+  STORAGE_BUCKET?: string;
 
-    // PORT is optional - Cloud Run sets this to 8080
-    @IsOptional()
-    @IsNumber()
-    PORT?: number;
+  // PORT is optional - Cloud Run sets this to 8080
+  @IsOptional()
+  @IsNumber()
+  PORT?: number;
 }
 
 export function validate(config: Record<string, unknown>) {

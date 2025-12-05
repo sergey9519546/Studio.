@@ -88,11 +88,12 @@ export class PromptTesterService {
                 metrics,
             };
         } catch (error) {
+            const message = error instanceof Error ? error.message : 'Unknown test error';
             return {
                 testName: testCase.name,
                 passed: false,
                 score: 0,
-                output: `ERROR: ${error.message}`,
+                output: `ERROR: ${message}`,
                 metrics: {
                     keywordMatch: 0,
                     structureMatch: false,
