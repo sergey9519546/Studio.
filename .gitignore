@@ -51,3 +51,15 @@ coverage/
 build_log*.txt
 docker_build*.txt
 run_logs.txt
+
+# Prevent temporary file clutter
+*.tmp
+response*.txt
+response*.json
+PHASE*.txt
+projects_import.csv
+import_payload.json
+metadata.json
+kombai-instructions.txt
+test.txt
+test.svg
