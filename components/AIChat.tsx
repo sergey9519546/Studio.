@@ -34,7 +34,12 @@ const SimpleMarkdown = ({ text }: { text: string }) => {
 };
 
 const AIChat: React.FC<AIChatProps> = ({
-    freelancers, projects, assignments, contextData, agentMode, customTitle
+    freelancers = [],
+    projects = [],
+    assignments = [],
+    contextData,
+    agentMode,
+    customTitle
 }) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [messages, setMessages] = useState<any[]>([]);
@@ -45,7 +50,10 @@ const AIChat: React.FC<AIChatProps> = ({
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        const el = messagesEndRef.current;
+        if (el && typeof el.scrollIntoView === 'function') {
+            el.scrollIntoView({ behavior: 'smooth' });
+        }
     }, [messages]);
 
     const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {

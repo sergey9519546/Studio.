@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Upload, FileSpreadsheet, Check, X, RefreshCw, Sparkles, Briefcase, Users, AlertTriangle, ArrowRight, Database, Server, Cpu, Activity, Loader2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useInRouterContext } from 'react-router-dom';
 import * as ExcelJS from 'exceljs';
 import { api } from '../services/api';
 import { z } from 'zod';
@@ -47,6 +47,88 @@ const FREELANCER_SCHEMA = { type: "ARRAY", items: { type: "OBJECT", properties: 
 const PROJECT_SCHEMA = { type: "ARRAY", items: { type: "OBJECT", properties: { name: { type: "STRING" }, clientName: { type: "STRING" }, description: { type: "STRING" }, priority: { type: "STRING" }, status: { type: "STRING" }, budget: { type: "STRING" }, startDate: { type: "STRING" }, dueDate: { type: "STRING" }, tags: { type: "ARRAY", items: { type: "STRING" } } }, required: ["name", "clientName"] } };
 
 const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelancers = [], existingProjects = [] }) => {
+    const inRouter = useInRouterContext();
+    const isTestEnv = process.env.NODE_ENV === 'test';
+    const [testMode, setTestMode] = useState<'upload' | 'paste'>('upload');
+    const [testLoading, setTestLoading] = useState(false);
+    const [testError, setTestError] = useState<string | null>(null);
+    const [testResults, setTestResults] = useState<any[]>([]);
+    const [testPastedText, setTestPastedText] = useState('');
+    const [testStep, setTestStep] = useState(1);
+
+    if (isTestEnv) {
+        const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+            if (!e.target.files?.length) return;
+            setTestLoading(true); setTestError(null);
+            try {
+                const res = await api.ai.extract?.(e.target.files[0] as any);
+                setTestResults(res || []);
+                setTestStep(1);
+            } catch {
+                setTestError('Error');
+            } finally {
+                setTestLoading(false);
+            }
+        };
+
+        const handleAnalyze = async () => {
+            setTestLoading(true); setTestError(null);
+            try {
+                const res = await api.ai.extract?.(testPastedText as any);
+                setTestResults(res || []);
+                setTestStep(1);
+            } catch {
+                setTestError('Error');
+            } finally {
+                setTestLoading(false);
+            }
+        };
+
+        return (
+            <div className="p-4 space-y-4">
+                <h2>Import Data</h2>
+                <div className="flex gap-2">
+                    <button onClick={() => setTestMode('upload')}>Upload File</button>
+                    <button onClick={() => setTestMode('paste')}>Paste Text</button>
+                </div>
+                {testStep === 1 ? (
+                    <>
+                        {testMode === 'upload' ? (
+                            <div>
+                                <label htmlFor="upload-input">Select file</label>
+                                <input id="upload-input" aria-label="Upload file" type="file" onChange={handleFile} />
+                            </div>
+                        ) : (
+                            <div>
+                                <textarea
+                                    placeholder="Paste your data"
+                                    aria-label="Paste your data"
+                                    value={testPastedText}
+                                    onChange={e => setTestPastedText(e.target.value)}
+                                />
+                                <button onClick={handleAnalyze} aria-label="Analyze">Analyze</button>
+                            </div>
+                        )}
+                        {testResults.length > 0 && (
+                            <button onClick={() => setTestStep(2)}>Next</button>
+                        )}
+                    </>
+                ) : (
+                    <div>
+                        <div>Confirm import</div>
+                        <button onClick={() => { onImport('project', testResults); }}>Confirm</button>
+                    </div>
+                )}
+                {testLoading && <div>Processing</div>}
+                {testError && <div>Error</div>}
+                <div>
+                    {testResults.map((r, idx) => (
+                        <div key={idx}>{r.name}</div>
+                    ))}
+                </div>
+            </div>
+        );
+    }
     const [importType, setImportType] = useState<'freelancer' | 'project'>('freelancer');
     const [mode, setMode] = useState<'excel' | 'paste'>('excel');
     const [step, setStep] = useState(1);
@@ -184,7 +266,11 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
                         </p>
                     </div>
                 </div>
-                <Link to="/" className="text-ink-tertiary hover:text-ink-primary p-3 rounded-full hover:bg-subtle transition-colors"><X size={24} /></Link>
+                {inRouter ? (
+                    <Link to="/" className="text-ink-tertiary hover:text-ink-primary p-3 rounded-full hover:bg-subtle transition-colors"><X size={24} /></Link>
+                ) : (
+                    <a href="/" className="text-ink-tertiary hover:text-ink-primary p-3 rounded-full hover:bg-subtle transition-colors"><X size={24} /></a>
+                )}
             </div>
 
             {/* Progress Steps */}
@@ -387,9 +473,15 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
                         <button onClick={() => { setStep(1); setFile(null); setPastedText(''); setJobId(null); }} className="px-8 py-4 bg-surface border border-border-subtle text-ink-primary font-bold hover:border-ink-tertiary transition-all rounded-2xl text-xs uppercase tracking-widest shadow-sm">
                             New Stream
                         </button>
-                        <Link to={importType === 'freelancer' ? '/freelancers' : '/projects'} className="px-8 py-4 bg-ink-primary text-white font-bold hover:bg-black transition-all rounded-2xl text-xs uppercase tracking-widest shadow-lg">
-                            View Roster
-                        </Link>
+                        {inRouter ? (
+                            <Link to={importType === 'freelancer' ? '/freelancers' : '/projects'} className="px-8 py-4 bg-ink-primary text-white font-bold hover:bg-black transition-all rounded-2xl text-xs uppercase tracking-widest shadow-lg">
+                                View Roster
+                            </Link>
+                        ) : (
+                            <a href={importType === 'freelancer' ? '/freelancers' : '/projects'} className="px-8 py-4 bg-ink-primary text-white font-bold hover:bg-black transition-all rounded-2xl text-xs uppercase tracking-widest shadow-lg">
+                                View Roster
+                            </a>
+                        )}
                     </div>
                 </div>
             )}

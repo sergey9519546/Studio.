@@ -42,6 +42,11 @@ const useAssetManager = () => {
   const fetchAssets = useCallback(async () => {
     setIsSyncing(true);
     try {
+      if (!api?.assets?.list || !api?.storage?.getInfo) {
+        setFiles([]);
+        setIsSyncing(false);
+        return;
+      }
       const [assetsRes, configRes] = await Promise.all([
         api.assets.list(),
         api.storage.getInfo()

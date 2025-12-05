@@ -497,6 +497,15 @@
         "hash": "sha512-ARDJmphmdvUk6Glw7y9DQ2bFkKBHwQHLi2lsaH6PPmz/Ka9sFOBsBluozhDltWmnv9u/cF6Rt87znRTPV+yp/A=="
       }
     },
+    "npm:@atlaskit/adf-utils": {
+      "type": "npm",
+      "name": "npm:@atlaskit/adf-utils",
+      "data": {
+        "version": "19.26.4",
+        "packageName": "@atlaskit/adf-utils",
+        "hash": "sha512-AD2/IQK9jtM1LUGlkdKljsDy//MYfgbCNISIi7HJdTmwtncxnRGZPn/8Qw3MiI9owRfY+mvTKj9SzYSezd8JuA=="
+      }
+    },
     "npm:@atlaskit/afm-i18n-platform-ai-mate-rovo-agent-components": {
       "type": "npm",
       "name": "npm:@atlaskit/afm-i18n-platform-ai-mate-rovo-agent-components",
@@ -657,6 +666,15 @@
         "version": "5.1.8",
         "packageName": "@atlaskit/analytics-gas-types",
         "hash": "sha512-TIHAiPZjlDhFCBxlvL98g1CLoWXOgsfB/v+/chKnJDWJyAyUNAwweh9EiuOKDJVquYaOhUtQIB2QM9s/oYbZEg=="
+      }
+    },
+    "npm:@atlaskit/analytics-listeners": {
+      "type": "npm",
+      "name": "npm:@atlaskit/analytics-listeners",
+      "data": {
+        "version": "9.1.0",
+        "packageName": "@atlaskit/analytics-listeners",
+        "hash": "sha512-RajiLGtxbzXiDg/fOAn75P8J9JUiOSOJ7lxMCObKejXBWNnq+mFX17Q70HPbOjYnvkUCg0jPXMuLDVy0D+HYZw=="
       }
     },
     "npm:@atlaskit/analytics-namespaced-context": {
@@ -857,6 +875,15 @@
         "hash": "sha512-rl3YVvSS+tgKKAsUnTHiCxsFyfUFHeImIF0KNaaJIbFJqO6b1Cn+FBfRR6A+ya8ek2wkBX0tduFRmz5Xkd9xuA=="
       }
     },
+    "npm:@atlaskit/custom-steps": {
+      "type": "npm",
+      "name": "npm:@atlaskit/custom-steps",
+      "data": {
+        "version": "0.16.5",
+        "packageName": "@atlaskit/custom-steps",
+        "hash": "sha512-HsT+Wnlg9tLvnIf6h1rzCH5GrHQccxJDEmfHgfkaFUpwLH4BQYdwZ+Qq6/sAGunU9kU0s11cwfAkz/v0dtDj7w=="
+      }
+    },
     "npm:@atlaskit/datetime-picker": {
       "type": "npm",
       "name": "npm:@atlaskit/datetime-picker",
@@ -909,51 +936,6 @@
         "version": "110.39.1",
         "packageName": "@atlaskit/editor-common",
         "hash": "sha512-aQumIEL1ZIAxNNckzKdwckKmNhxPUXeY1mh8BELBFVYFp3ECFKsTU0L63lJQryiCw3DOFRYGt7c5Q0PuGvzWMA=="
-      }
-    },
-    "npm:@atlaskit/adf-utils@19.26.4": {
-      "type": "npm",
-      "name": "npm:@atlaskit/adf-utils@19.26.4",
-      "data": {
-        "version": "19.26.4",
-        "packageName": "@atlaskit/adf-utils",
-        "hash": "sha512-AD2/IQK9jtM1LUGlkdKljsDy//MYfgbCNISIi7HJdTmwtncxnRGZPn/8Qw3MiI9owRfY+mvTKj9SzYSezd8JuA=="
-      }
-    },
-    "npm:@atlaskit/analytics-listeners@9.1.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/analytics-listeners@9.1.0",
-      "data": {
-        "version": "9.1.0",
-        "packageName": "@atlaskit/analytics-listeners",
-        "hash": "sha512-RajiLGtxbzXiDg/fOAn75P8J9JUiOSOJ7lxMCObKejXBWNnq+mFX17Q70HPbOjYnvkUCg0jPXMuLDVy0D+HYZw=="
-      }
-    },
-    "npm:@atlaskit/custom-steps@0.16.5": {
-      "type": "npm",
-      "name": "npm:@atlaskit/custom-steps@0.16.5",
-      "data": {
-        "version": "0.16.5",
-        "packageName": "@atlaskit/custom-steps",
-        "hash": "sha512-HsT+Wnlg9tLvnIf6h1rzCH5GrHQccxJDEmfHgfkaFUpwLH4BQYdwZ+Qq6/sAGunU9kU0s11cwfAkz/v0dtDj7w=="
-      }
-    },
-    "npm:@atlaskit/editor-palette@2.1.17": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-palette@2.1.17",
-      "data": {
-        "version": "2.1.17",
-        "packageName": "@atlaskit/editor-palette",
-        "hash": "sha512-gSKr0rR0dkIoOT9/LsKvT2/8BrUVBDeKsutPzxBow10VrcusYR6EnZbHw8mzMbO7rM9JTOdeKZXQqHfI5aettw=="
-      }
-    },
-    "npm:@atlaskit/status@3.0.25": {
-      "type": "npm",
-      "name": "npm:@atlaskit/status@3.0.25",
-      "data": {
-        "version": "3.0.25",
-        "packageName": "@atlaskit/status",
-        "hash": "sha512-9oFUIRhkUcV9I5L+DgxqISs7YFBXjP9oi2GieJ/jg6AFiWJeKzCvMjmvb2sIB3CN3HjDUTgiQicDpP1cqCVOdQ=="
       }
     },
     "npm:clipboard-polyfill@4.0.1": {
@@ -1080,6 +1062,15 @@
         "version": "5.20.4",
         "packageName": "@atlaskit/editor-markdown-transformer",
         "hash": "sha512-V8WV/ZmwxV5zceze4ka5Wd01Qr9jP+YnXc4gpKjRyorEfFjwcGOsLxWT99fLufqbimBlKYJGHIm1Q63IkmAyVg=="
+      }
+    },
+    "npm:@atlaskit/editor-palette": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-palette",
+      "data": {
+        "version": "2.1.17",
+        "packageName": "@atlaskit/editor-palette",
+        "hash": "sha512-gSKr0rR0dkIoOT9/LsKvT2/8BrUVBDeKsutPzxBow10VrcusYR6EnZbHw8mzMbO7rM9JTOdeKZXQqHfI5aettw=="
       }
     },
     "npm:@atlaskit/editor-performance-metrics": {
@@ -1215,15 +1206,6 @@
         "version": "10.2.20",
         "packageName": "@atlaskit/editor-plugin-block-type",
         "hash": "sha512-WDpGjXBqwsm7dc+x1VZpgS9QATAayXdUhR1SPDJCPAXN3yzDuiCPaAl0MgUURIXds9cOyIZzQNypoIhTSI4wYQ=="
-      }
-    },
-    "npm:@atlaskit/prosemirror-input-rules@3.6.6": {
-      "type": "npm",
-      "name": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-      "data": {
-        "version": "3.6.6",
-        "packageName": "@atlaskit/prosemirror-input-rules",
-        "hash": "sha512-3eejrcRQ8VL/yciFOaAzlhEZr/chLhT2VXu7hwUTHD7LAegyzmcj9jeCddEHxcHq9EWcM/OMWUgl9mQqmp7IIQ=="
       }
     },
     "npm:@atlaskit/editor-plugin-border": {
@@ -2031,9 +2013,9 @@
       "type": "npm",
       "name": "npm:@atlaskit/platform-feature-flags",
       "data": {
-        "version": "1.1.0",
+        "version": "1.1.2",
         "packageName": "@atlaskit/platform-feature-flags",
-        "hash": "sha512-6g8uflI4gG3EClkxxGDmxQLnfgtW9lv9Aa1ocRWh95ui5t7rE4oCMRQvk15RwzBnlu6xPf4k8GV6PuKKPYc0iA=="
+        "hash": "sha512-PM+fVkV4Yn4/0keiN6ioAap2Y+odTyw1Z4uf+TA0zMmg3/lp/rVNJEc4a24dvd8DfVs5m9bxa/hbO1qJarhCBw=="
       }
     },
     "npm:prosemirror-commands@1.6.2": {
@@ -3449,6 +3431,15 @@
         "hash": "sha512-SWduuuAoUph8Oa+Gy8K0PTE7CWnQ5df28ghFHtvyATrMBWEMMWu3IMDVgobBIW8tVSuVEi6l48W+BkppngsIZg=="
       }
     },
+    "npm:@atlaskit/prosemirror-input-rules": {
+      "type": "npm",
+      "name": "npm:@atlaskit/prosemirror-input-rules",
+      "data": {
+        "version": "3.6.6",
+        "packageName": "@atlaskit/prosemirror-input-rules",
+        "hash": "sha512-3eejrcRQ8VL/yciFOaAzlhEZr/chLhT2VXu7hwUTHD7LAegyzmcj9jeCddEHxcHq9EWcM/OMWUgl9mQqmp7IIQ=="
+      }
+    },
     "npm:@atlaskit/radio": {
       "type": "npm",
       "name": "npm:@atlaskit/radio",
@@ -3564,6 +3555,15 @@
         "version": "19.0.7",
         "packageName": "@atlaskit/spinner",
         "hash": "sha512-Z4tzPbLMrJ8CleHWaDTD6e+G0dq2WA1PHzsDBm5A1BxCYUKt7ZCgJp9gabr9KL/hcMd5xpmz3N1ney7RDi/t1Q=="
+      }
+    },
+    "npm:@atlaskit/status": {
+      "type": "npm",
+      "name": "npm:@atlaskit/status",
+      "data": {
+        "version": "3.0.25",
+        "packageName": "@atlaskit/status",
+        "hash": "sha512-9oFUIRhkUcV9I5L+DgxqISs7YFBXjP9oi2GieJ/jg6AFiWJeKzCvMjmvb2sIB3CN3HjDUTgiQicDpP1cqCVOdQ=="
       }
     },
     "npm:@atlaskit/tabs": {
@@ -7674,9 +7674,9 @@
       "type": "npm",
       "name": "npm:typescript",
       "data": {
-        "version": "5.9.2",
+        "version": "5.9.3",
         "packageName": "typescript",
-        "hash": "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="
+        "hash": "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="
       }
     },
     "npm:webpack@5.97.1": {
@@ -9695,42 +9695,6 @@
         "hash": "sha512-/DiOQ5xBxgdYRC8LNk7U+RWat0S3qRLeIw3ZIkMQ9kkVlRmwD/Eg8k8CqIpD6GW7u20JIUOfMKbxtiLutpjQ4g=="
       }
     },
-    "npm:aria-query@5.1.3": {
-      "type": "npm",
-      "name": "npm:aria-query@5.1.3",
-      "data": {
-        "version": "5.1.3",
-        "packageName": "aria-query",
-        "hash": "sha512-R5iJ5lkuHybztUfuOAznmboyjWq8O6sqNqtK7CLOqdydi54VNbORp49mb14KbWgG1QD3JFO9hJdZ+y4KutfdOQ=="
-      }
-    },
-    "npm:aria-query": {
-      "type": "npm",
-      "name": "npm:aria-query",
-      "data": {
-        "version": "5.3.0",
-        "packageName": "aria-query",
-        "hash": "sha512-b0P0sZPKtyu8HkeRAfCq0IfURZK+SuwMjY1UXGBU27wpAiTwQAIlq56IbIO+ytk/JjS1fMR14ee5WBBfKi5J6A=="
-      }
-    },
-    "npm:deep-equal@2.2.3": {
-      "type": "npm",
-      "name": "npm:deep-equal@2.2.3",
-      "data": {
-        "version": "2.2.3",
-        "packageName": "deep-equal",
-        "hash": "sha512-ZIwpnevOurS8bpT4192sqAowWM76JDKSHYzMLty3BZGSswgq6pBaH3DhCSW5xVAZICZyKdOBPjwww5wfgT/6PA=="
-      }
-    },
-    "npm:deep-equal": {
-      "type": "npm",
-      "name": "npm:deep-equal",
-      "data": {
-        "version": "1.1.2",
-        "packageName": "deep-equal",
-        "hash": "sha512-5tdhKF6DbU7iIzrIOa1AOUt39ZRm13cmL1cGEh//aqR8x9+tNfbywRf0n5FD/18OKMdo7DNEtrX2t22ZAkI+eg=="
-      }
-    },
     "npm:@testing-library/jest-dom": {
       "type": "npm",
       "name": "npm:@testing-library/jest-dom",
@@ -11333,6 +11297,33 @@
         "hash": "sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA=="
       }
     },
+    "npm:aria-query": {
+      "type": "npm",
+      "name": "npm:aria-query",
+      "data": {
+        "version": "5.1.3",
+        "packageName": "aria-query",
+        "hash": "sha512-R5iJ5lkuHybztUfuOAznmboyjWq8O6sqNqtK7CLOqdydi54VNbORp49mb14KbWgG1QD3JFO9hJdZ+y4KutfdOQ=="
+      }
+    },
+    "npm:deep-equal@2.2.3": {
+      "type": "npm",
+      "name": "npm:deep-equal@2.2.3",
+      "data": {
+        "version": "2.2.3",
+        "packageName": "deep-equal",
+        "hash": "sha512-ZIwpnevOurS8bpT4192sqAowWM76JDKSHYzMLty3BZGSswgq6pBaH3DhCSW5xVAZICZyKdOBPjwww5wfgT/6PA=="
+      }
+    },
+    "npm:deep-equal": {
+      "type": "npm",
+      "name": "npm:deep-equal",
+      "data": {
+        "version": "1.1.2",
+        "packageName": "deep-equal",
+        "hash": "sha512-5tdhKF6DbU7iIzrIOa1AOUt39ZRm13cmL1cGEh//aqR8x9+tNfbywRf0n5FD/18OKMdo7DNEtrX2t22ZAkI+eg=="
+      }
+    },
     "npm:array-buffer-byte-length": {
       "type": "npm",
       "name": "npm:array-buffer-byte-length",
@@ -12924,15 +12915,6 @@
         "version": "2.0.0",
         "packageName": "depd",
         "hash": "sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw=="
-      }
-    },
-    "npm:dequal": {
-      "type": "npm",
-      "name": "npm:dequal",
-      "data": {
-        "version": "2.0.3",
-        "packageName": "dequal",
-        "hash": "sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA=="
       }
     },
     "npm:destr": {
@@ -20908,6 +20890,23 @@
         "type": "static"
       }
     ],
+    "npm:@atlaskit/adf-utils": [
+      {
+        "source": "npm:@atlaskit/adf-utils",
+        "target": "npm:@atlaskit/adf-schema",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/adf-utils",
+        "target": "npm:@atlaskit/platform-feature-flags",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/adf-utils",
+        "target": "npm:@babel/runtime",
+        "type": "static"
+      }
+    ],
     "npm:@atlaskit/analytics-gas-types": [
       {
         "source": "npm:@atlaskit/analytics-gas-types",
@@ -20917,6 +20916,38 @@
       {
         "source": "npm:@atlaskit/analytics-gas-types",
         "target": "npm:@babel/runtime",
+        "type": "static"
+      }
+    ],
+    "npm:@atlaskit/analytics-listeners": [
+      {
+        "source": "npm:@atlaskit/analytics-listeners",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/analytics-listeners",
+        "target": "npm:@atlaskit/analytics-gas-types",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/analytics-listeners",
+        "target": "npm:@atlaskit/analytics-namespaced-context",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/analytics-listeners",
+        "target": "npm:@atlaskit/analytics-next",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/analytics-listeners",
+        "target": "npm:@babel/runtime",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/analytics-listeners",
+        "target": "npm:lodash",
         "type": "static"
       }
     ],
@@ -21598,6 +21629,33 @@
         "type": "static"
       }
     ],
+    "npm:@atlaskit/custom-steps": [
+      {
+        "source": "npm:@atlaskit/custom-steps",
+        "target": "npm:@atlaskit/adf-schema",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/custom-steps",
+        "target": "npm:@atlaskit/editor-prosemirror",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/custom-steps",
+        "target": "npm:@atlaskit/editor-tables",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/custom-steps",
+        "target": "npm:@babel/runtime",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/custom-steps",
+        "target": "npm:memoize-one",
+        "type": "static"
+      }
+    ],
     "npm:@atlaskit/datetime-picker": [
       {
         "source": "npm:@atlaskit/datetime-picker",
@@ -21939,7 +21997,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-common",
-        "target": "npm:@atlaskit/adf-utils@19.26.4",
+        "target": "npm:@atlaskit/adf-utils",
         "type": "static"
       },
       {
@@ -21949,7 +22007,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-common",
-        "target": "npm:@atlaskit/analytics-listeners@9.1.0",
+        "target": "npm:@atlaskit/analytics-listeners",
         "type": "static"
       },
       {
@@ -21984,7 +22042,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-common",
-        "target": "npm:@atlaskit/custom-steps@0.16.5",
+        "target": "npm:@atlaskit/custom-steps",
         "type": "static"
       },
       {
@@ -21999,7 +22057,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-common",
-        "target": "npm:@atlaskit/editor-palette@2.1.17",
+        "target": "npm:@atlaskit/editor-palette",
         "type": "static"
       },
       {
@@ -22169,7 +22227,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-common",
-        "target": "npm:@atlaskit/status@3.0.25",
+        "target": "npm:@atlaskit/status",
         "type": "static"
       },
       {
@@ -22335,176 +22393,6 @@
       {
         "source": "npm:@atlaskit/editor-common",
         "target": "npm:w3c-keyname",
-        "type": "static"
-      }
-    ],
-    "npm:@atlaskit/adf-utils@19.26.4": [
-      {
-        "source": "npm:@atlaskit/adf-utils@19.26.4",
-        "target": "npm:@atlaskit/adf-schema",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/adf-utils@19.26.4",
-        "target": "npm:@atlaskit/platform-feature-flags",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/adf-utils@19.26.4",
-        "target": "npm:@babel/runtime",
-        "type": "static"
-      }
-    ],
-    "npm:@atlaskit/analytics-listeners@9.1.0": [
-      {
-        "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-        "target": "npm:@atlaskit/analytics-gas-types",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-        "target": "npm:@atlaskit/analytics-namespaced-context",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-        "target": "npm:@atlaskit/analytics-next",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-        "target": "npm:@babel/runtime",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-        "target": "npm:lodash",
-        "type": "static"
-      }
-    ],
-    "npm:@atlaskit/custom-steps@0.16.5": [
-      {
-        "source": "npm:@atlaskit/custom-steps@0.16.5",
-        "target": "npm:@atlaskit/adf-schema",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/custom-steps@0.16.5",
-        "target": "npm:@atlaskit/editor-prosemirror",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/custom-steps@0.16.5",
-        "target": "npm:@atlaskit/editor-tables",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/custom-steps@0.16.5",
-        "target": "npm:@babel/runtime",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/custom-steps@0.16.5",
-        "target": "npm:memoize-one",
-        "type": "static"
-      }
-    ],
-    "npm:@atlaskit/editor-palette@2.1.17": [
-      {
-        "source": "npm:@atlaskit/editor-palette@2.1.17",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/editor-palette@2.1.17",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/editor-palette@2.1.17",
-        "target": "npm:@atlaskit/tmp-editor-statsig",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/editor-palette@2.1.17",
-        "target": "npm:@atlaskit/tokens",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/editor-palette@2.1.17",
-        "target": "npm:@babel/runtime",
-        "type": "static"
-      }
-    ],
-    "npm:@atlaskit/status@3.0.25": [
-      {
-        "source": "npm:@atlaskit/status@3.0.25",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/status@3.0.25",
-        "target": "npm:react-intl-next",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/status@3.0.25",
-        "target": "npm:@atlaskit/afm-i18n-platform-elements-status",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/status@3.0.25",
-        "target": "npm:@atlaskit/analytics-next",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/status@3.0.25",
-        "target": "npm:@atlaskit/icon",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/status@3.0.25",
-        "target": "npm:@atlaskit/lozenge",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/status@3.0.25",
-        "target": "npm:@atlaskit/platform-feature-flags",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/status@3.0.25",
-        "target": "npm:@atlaskit/platform-feature-flags-react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/status@3.0.25",
-        "target": "npm:@atlaskit/primitives",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/status@3.0.25",
-        "target": "npm:@atlaskit/textfield",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/status@3.0.25",
-        "target": "npm:@atlaskit/tokens",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/status@3.0.25",
-        "target": "npm:@babel/runtime",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/status@3.0.25",
-        "target": "npm:@compiled/react",
         "type": "static"
       }
     ],
@@ -22789,7 +22677,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-json-transformer",
-        "target": "npm:@atlaskit/adf-utils@19.26.4",
+        "target": "npm:@atlaskit/adf-utils",
         "type": "static"
       },
       {
@@ -22832,6 +22720,33 @@
       {
         "source": "npm:@atlaskit/editor-markdown-transformer",
         "target": "npm:markdown-it-table",
+        "type": "static"
+      }
+    ],
+    "npm:@atlaskit/editor-palette": [
+      {
+        "source": "npm:@atlaskit/editor-palette",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-palette",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-palette",
+        "target": "npm:@atlaskit/tmp-editor-statsig",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-palette",
+        "target": "npm:@atlaskit/tokens",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-palette",
+        "target": "npm:@babel/runtime",
         "type": "static"
       }
     ],
@@ -23026,7 +22941,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-analytics",
-        "target": "npm:@atlaskit/analytics-listeners@9.1.0",
+        "target": "npm:@atlaskit/analytics-listeners",
         "type": "static"
       },
       {
@@ -23819,7 +23734,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-block-type",
-        "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+        "target": "npm:@atlaskit/prosemirror-input-rules",
         "type": "static"
       },
       {
@@ -23845,28 +23760,6 @@
       {
         "source": "npm:@atlaskit/editor-plugin-block-type",
         "target": "npm:@emotion/react",
-        "type": "static"
-      }
-    ],
-    "npm:@atlaskit/prosemirror-input-rules@3.6.6": [
-      {
-        "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-        "target": "npm:@atlaskit/editor-prosemirror",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-        "target": "npm:@atlaskit/prosemirror-history",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-        "target": "npm:@atlaskit/tmp-editor-statsig",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-        "target": "npm:@babel/runtime",
         "type": "static"
       }
     ],
@@ -24099,7 +23992,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-card",
-        "target": "npm:@atlaskit/custom-steps@0.16.5",
+        "target": "npm:@atlaskit/custom-steps",
         "type": "static"
       },
       {
@@ -24492,7 +24385,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-code-block",
-        "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+        "target": "npm:@atlaskit/prosemirror-input-rules",
         "type": "static"
       },
       {
@@ -24529,7 +24422,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-collab-edit",
-        "target": "npm:@atlaskit/custom-steps@0.16.5",
+        "target": "npm:@atlaskit/custom-steps",
         "type": "static"
       },
       {
@@ -25229,7 +25122,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-emoji",
-        "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+        "target": "npm:@atlaskit/prosemirror-input-rules",
         "type": "static"
       },
       {
@@ -25475,7 +25368,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-extension",
-        "target": "npm:@atlaskit/adf-utils@19.26.4",
+        "target": "npm:@atlaskit/adf-utils",
         "type": "static"
       },
       {
@@ -25903,7 +25796,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-floating-toolbar",
-        "target": "npm:@atlaskit/adf-utils@19.26.4",
+        "target": "npm:@atlaskit/adf-utils",
         "type": "static"
       },
       {
@@ -25918,7 +25811,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-floating-toolbar",
-        "target": "npm:@atlaskit/editor-palette@2.1.17",
+        "target": "npm:@atlaskit/editor-palette",
         "type": "static"
       },
       {
@@ -26350,7 +26243,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-highlight",
-        "target": "npm:@atlaskit/editor-palette@2.1.17",
+        "target": "npm:@atlaskit/editor-palette",
         "type": "static"
       },
       {
@@ -26564,7 +26457,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-hyperlink",
-        "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+        "target": "npm:@atlaskit/prosemirror-input-rules",
         "type": "static"
       },
       {
@@ -26611,7 +26504,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-image-upload",
-        "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+        "target": "npm:@atlaskit/prosemirror-input-rules",
         "type": "static"
       },
       {
@@ -27158,7 +27051,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-list",
-        "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+        "target": "npm:@atlaskit/prosemirror-input-rules",
         "type": "static"
       },
       {
@@ -27386,7 +27279,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-media",
-        "target": "npm:@atlaskit/editor-palette@2.1.17",
+        "target": "npm:@atlaskit/editor-palette",
         "type": "static"
       },
       {
@@ -27986,7 +27879,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-panel",
-        "target": "npm:@atlaskit/editor-palette@2.1.17",
+        "target": "npm:@atlaskit/editor-palette",
         "type": "static"
       },
       {
@@ -28292,7 +28185,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-placeholder",
-        "target": "npm:@atlaskit/adf-utils@19.26.4",
+        "target": "npm:@atlaskit/adf-utils",
         "type": "static"
       },
       {
@@ -28580,7 +28473,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-rule",
-        "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+        "target": "npm:@atlaskit/prosemirror-input-rules",
         "type": "static"
       },
       {
@@ -28654,7 +28547,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-scroll-into-view",
-        "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+        "target": "npm:@atlaskit/prosemirror-input-rules",
         "type": "static"
       },
       {
@@ -28733,7 +28626,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-selection-extension",
-        "target": "npm:@atlaskit/adf-utils@19.26.4",
+        "target": "npm:@atlaskit/adf-utils",
         "type": "static"
       },
       {
@@ -29181,7 +29074,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-status",
-        "target": "npm:@atlaskit/status@3.0.25",
+        "target": "npm:@atlaskit/status",
         "type": "static"
       },
       {
@@ -29417,12 +29310,12 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-table",
-        "target": "npm:@atlaskit/custom-steps@0.16.5",
+        "target": "npm:@atlaskit/custom-steps",
         "type": "static"
       },
       {
         "source": "npm:@atlaskit/editor-plugin-table",
-        "target": "npm:@atlaskit/editor-palette@2.1.17",
+        "target": "npm:@atlaskit/editor-palette",
         "type": "static"
       },
       {
@@ -29724,7 +29617,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-tasks-and-decisions",
-        "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+        "target": "npm:@atlaskit/prosemirror-input-rules",
         "type": "static"
       },
       {
@@ -29796,7 +29689,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-text-color",
-        "target": "npm:@atlaskit/editor-palette@2.1.17",
+        "target": "npm:@atlaskit/editor-palette",
         "type": "static"
       },
       {
@@ -29968,7 +29861,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-text-formatting",
-        "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+        "target": "npm:@atlaskit/prosemirror-input-rules",
         "type": "static"
       },
       {
@@ -30361,7 +30254,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-type-ahead",
-        "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+        "target": "npm:@atlaskit/prosemirror-input-rules",
         "type": "static"
       },
       {
@@ -31402,7 +31295,7 @@
       },
       {
         "source": "npm:@atlaskit/editor-synced-block-provider",
-        "target": "npm:@atlaskit/adf-utils@19.26.4",
+        "target": "npm:@atlaskit/adf-utils",
         "type": "static"
       },
       {
@@ -32544,7 +32437,7 @@
       },
       {
         "source": "npm:@atlaskit/insm",
-        "target": "npm:@atlaskit/analytics-listeners@9.1.0",
+        "target": "npm:@atlaskit/analytics-listeners",
         "type": "static"
       },
       {
@@ -36148,7 +36041,7 @@
     "npm:@atlaskit/platform-feature-flags": [
       {
         "source": "npm:@atlaskit/platform-feature-flags",
-        "target": "npm:@atlaskit/feature-gate-js-client@4.26.5",
+        "target": "npm:@atlaskit/feature-gate-js-client",
         "type": "static"
       },
       {
@@ -36723,6 +36616,28 @@
       {
         "source": "npm:@atlaskit/prosemirror-history",
         "target": "npm:rope-sequence",
+        "type": "static"
+      }
+    ],
+    "npm:@atlaskit/prosemirror-input-rules": [
+      {
+        "source": "npm:@atlaskit/prosemirror-input-rules",
+        "target": "npm:@atlaskit/editor-prosemirror",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/prosemirror-input-rules",
+        "target": "npm:@atlaskit/prosemirror-history",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/prosemirror-input-rules",
+        "target": "npm:@atlaskit/tmp-editor-statsig",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/prosemirror-input-rules",
+        "target": "npm:@babel/runtime",
         "type": "static"
       }
     ],
@@ -37737,6 +37652,73 @@
         "type": "static"
       }
     ],
+    "npm:@atlaskit/status": [
+      {
+        "source": "npm:@atlaskit/status",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/status",
+        "target": "npm:react-intl-next",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/status",
+        "target": "npm:@atlaskit/afm-i18n-platform-elements-status",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/status",
+        "target": "npm:@atlaskit/analytics-next",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/status",
+        "target": "npm:@atlaskit/icon",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/status",
+        "target": "npm:@atlaskit/lozenge",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/status",
+        "target": "npm:@atlaskit/platform-feature-flags",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/status",
+        "target": "npm:@atlaskit/platform-feature-flags-react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/status",
+        "target": "npm:@atlaskit/primitives",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/status",
+        "target": "npm:@atlaskit/textfield",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/status",
+        "target": "npm:@atlaskit/tokens",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/status",
+        "target": "npm:@babel/runtime",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/status",
+        "target": "npm:@compiled/react",
+        "type": "static"
+      }
+    ],
     "npm:@atlaskit/tabs": [
       {
         "source": "npm:@atlaskit/tabs",
@@ -37968,7 +37950,7 @@
       },
       {
         "source": "npm:@atlaskit/teams-app-internal-analytics",
-        "target": "npm:@atlaskit/analytics-listeners@9.1.0",
+        "target": "npm:@atlaskit/analytics-listeners",
         "type": "static"
       },
       {
@@ -47989,7 +47971,7 @@
       },
       {
         "source": "npm:@testing-library/dom",
-        "target": "npm:aria-query@5.1.3",
+        "target": "npm:aria-query",
         "type": "static"
       },
       {
@@ -48010,105 +47992,6 @@
       {
         "source": "npm:@testing-library/dom",
         "target": "npm:pretty-format@27.5.1",
-        "type": "static"
-      }
-    ],
-    "npm:aria-query@5.1.3": [
-      {
-        "source": "npm:aria-query@5.1.3",
-        "target": "npm:deep-equal@2.2.3",
-        "type": "static"
-      }
-    ],
-    "npm:deep-equal@2.2.3": [
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:array-buffer-byte-length",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:call-bind",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:es-get-iterator",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:get-intrinsic",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:is-arguments",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:is-array-buffer",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:is-date-object",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:is-regex",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:is-shared-array-buffer",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:isarray",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:object-is",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:object-keys",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:object.assign",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:regexp.prototype.flags",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:side-channel",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:which-boxed-primitive",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:which-collection",
-        "type": "static"
-      },
-      {
-        "source": "npm:deep-equal@2.2.3",
-        "target": "npm:which-typed-array",
         "type": "static"
       }
     ],
@@ -49680,7 +49563,99 @@
     "npm:aria-query": [
       {
         "source": "npm:aria-query",
-        "target": "npm:dequal",
+        "target": "npm:deep-equal@2.2.3",
+        "type": "static"
+      }
+    ],
+    "npm:deep-equal@2.2.3": [
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:array-buffer-byte-length",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:call-bind",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:es-get-iterator",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:get-intrinsic",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:is-arguments",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:is-array-buffer",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:is-date-object",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:is-regex",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:is-shared-array-buffer",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:isarray",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:object-is",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:object-keys",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:object.assign",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:regexp.prototype.flags",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:side-channel",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:which-boxed-primitive",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:which-collection",
+        "type": "static"
+      },
+      {
+        "source": "npm:deep-equal@2.2.3",
+        "target": "npm:which-typed-array",
         "type": "static"
       }
     ],
@@ -62135,5 +62110,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1764953910899
+  "computedAt": 1764956101123
 }

@@ -335,6 +335,21 @@
     "type": "static"
   },
   {
+    "source": "npm:@atlaskit/adf-utils",
+    "target": "npm:@atlaskit/adf-schema",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/adf-utils",
+    "target": "npm:@atlaskit/platform-feature-flags",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/adf-utils",
+    "target": "npm:@babel/runtime",
+    "type": "static"
+  },
+  {
     "source": "npm:@atlaskit/analytics-gas-types",
     "target": "npm:@atlaskit/analytics-next",
     "type": "static"
@@ -342,6 +357,36 @@
   {
     "source": "npm:@atlaskit/analytics-gas-types",
     "target": "npm:@babel/runtime",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/analytics-listeners",
+    "target": "npm:react",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/analytics-listeners",
+    "target": "npm:@atlaskit/analytics-gas-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/analytics-listeners",
+    "target": "npm:@atlaskit/analytics-namespaced-context",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/analytics-listeners",
+    "target": "npm:@atlaskit/analytics-next",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/analytics-listeners",
+    "target": "npm:@babel/runtime",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/analytics-listeners",
+    "target": "npm:lodash",
     "type": "static"
   },
   {
@@ -985,6 +1030,31 @@
     "type": "static"
   },
   {
+    "source": "npm:@atlaskit/custom-steps",
+    "target": "npm:@atlaskit/adf-schema",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/custom-steps",
+    "target": "npm:@atlaskit/editor-prosemirror",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/custom-steps",
+    "target": "npm:@atlaskit/editor-tables",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/custom-steps",
+    "target": "npm:@babel/runtime",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/custom-steps",
+    "target": "npm:memoize-one",
+    "type": "static"
+  },
+  {
     "source": "npm:@atlaskit/datetime-picker",
     "target": "npm:react",
     "type": "static"
@@ -1316,7 +1386,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-common",
-    "target": "npm:@atlaskit/adf-utils@19.26.4",
+    "target": "npm:@atlaskit/adf-utils",
     "type": "static"
   },
   {
@@ -1326,7 +1396,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-common",
-    "target": "npm:@atlaskit/analytics-listeners@9.1.0",
+    "target": "npm:@atlaskit/analytics-listeners",
     "type": "static"
   },
   {
@@ -1361,7 +1431,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-common",
-    "target": "npm:@atlaskit/custom-steps@0.16.5",
+    "target": "npm:@atlaskit/custom-steps",
     "type": "static"
   },
   {
@@ -1376,7 +1446,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-common",
-    "target": "npm:@atlaskit/editor-palette@2.1.17",
+    "target": "npm:@atlaskit/editor-palette",
     "type": "static"
   },
   {
@@ -1546,7 +1616,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-common",
-    "target": "npm:@atlaskit/status@3.0.25",
+    "target": "npm:@atlaskit/status",
     "type": "static"
   },
   {
@@ -1712,166 +1782,6 @@
   {
     "source": "npm:@atlaskit/editor-common",
     "target": "npm:w3c-keyname",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@atlaskit/adf-schema",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@atlaskit/platform-feature-flags",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@atlaskit/analytics-gas-types",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@atlaskit/analytics-namespaced-context",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@atlaskit/analytics-next",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:lodash",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@atlaskit/adf-schema",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@atlaskit/editor-prosemirror",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@atlaskit/editor-tables",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:memoize-one",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:react-dom",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@atlaskit/tokens",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:react-intl-next",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/afm-i18n-platform-elements-status",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/analytics-next",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/icon",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/lozenge",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/platform-feature-flags",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/platform-feature-flags-react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/primitives",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/textfield",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/tokens",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@compiled/react",
     "type": "static"
   },
   {
@@ -2146,7 +2056,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-json-transformer",
-    "target": "npm:@atlaskit/adf-utils@19.26.4",
+    "target": "npm:@atlaskit/adf-utils",
     "type": "static"
   },
   {
@@ -2162,21 +2072,6 @@
   {
     "source": "npm:@atlaskit/editor-json-transformer",
     "target": "npm:lodash",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@atlaskit/adf-schema",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@atlaskit/platform-feature-flags",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@babel/runtime",
     "type": "static"
   },
   {
@@ -2205,6 +2100,11 @@
     "type": "static"
   },
   {
+    "source": "npm:linkify-it@4.0.1",
+    "target": "npm:uc.micro@1.0.6",
+    "type": "static"
+  },
+  {
     "source": "npm:markdown-it@13.0.2",
     "target": "npm:argparse",
     "type": "static"
@@ -2230,8 +2130,28 @@
     "type": "static"
   },
   {
-    "source": "npm:linkify-it@4.0.1",
-    "target": "npm:uc.micro@1.0.6",
+    "source": "npm:@atlaskit/editor-palette",
+    "target": "npm:react",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/editor-palette",
+    "target": "npm:react-dom",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/editor-palette",
+    "target": "npm:@atlaskit/tmp-editor-statsig",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/editor-palette",
+    "target": "npm:@atlaskit/tokens",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/editor-palette",
+    "target": "npm:@babel/runtime",
     "type": "static"
   },
   {
@@ -2416,7 +2336,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-analytics",
-    "target": "npm:@atlaskit/analytics-listeners@9.1.0",
+    "target": "npm:@atlaskit/analytics-listeners",
     "type": "static"
   },
   {
@@ -2442,36 +2362,6 @@
   {
     "source": "npm:@atlaskit/editor-plugin-analytics",
     "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@atlaskit/analytics-gas-types",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@atlaskit/analytics-namespaced-context",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@atlaskit/analytics-next",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:lodash",
     "type": "static"
   },
   {
@@ -3241,7 +3131,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-block-type",
-    "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+    "target": "npm:@atlaskit/prosemirror-input-rules",
     "type": "static"
   },
   {
@@ -3267,26 +3157,6 @@
   {
     "source": "npm:@atlaskit/editor-plugin-block-type",
     "target": "npm:@emotion/react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/editor-prosemirror",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/prosemirror-history",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@babel/runtime",
     "type": "static"
   },
   {
@@ -3511,7 +3381,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-card",
-    "target": "npm:@atlaskit/custom-steps@0.16.5",
+    "target": "npm:@atlaskit/custom-steps",
     "type": "static"
   },
   {
@@ -3697,31 +3567,6 @@
   {
     "source": "npm:@atlaskit/editor-plugin-card",
     "target": "npm:uuid@3.4.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@atlaskit/adf-schema",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@atlaskit/editor-prosemirror",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@atlaskit/editor-tables",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:memoize-one",
     "type": "static"
   },
   {
@@ -3921,7 +3766,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-code-block",
-    "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+    "target": "npm:@atlaskit/prosemirror-input-rules",
     "type": "static"
   },
   {
@@ -3931,26 +3776,6 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-code-block",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/editor-prosemirror",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/prosemirror-history",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
     "target": "npm:@babel/runtime",
     "type": "static"
   },
@@ -3976,7 +3801,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-collab-edit",
-    "target": "npm:@atlaskit/custom-steps@0.16.5",
+    "target": "npm:@atlaskit/custom-steps",
     "type": "static"
   },
   {
@@ -4041,31 +3866,6 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-collab-edit",
-    "target": "npm:memoize-one",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@atlaskit/adf-schema",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@atlaskit/editor-prosemirror",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@atlaskit/editor-tables",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
     "target": "npm:memoize-one",
     "type": "static"
   },
@@ -4671,7 +4471,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-emoji",
-    "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+    "target": "npm:@atlaskit/prosemirror-input-rules",
     "type": "static"
   },
   {
@@ -4707,26 +4507,6 @@
   {
     "source": "npm:@atlaskit/editor-plugin-emoji",
     "target": "npm:react-loadable",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/editor-prosemirror",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/prosemirror-history",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@babel/runtime",
     "type": "static"
   },
   {
@@ -4931,7 +4711,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-extension",
-    "target": "npm:@atlaskit/adf-utils@19.26.4",
+    "target": "npm:@atlaskit/adf-utils",
     "type": "static"
   },
   {
@@ -5160,21 +4940,6 @@
     "type": "static"
   },
   {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@atlaskit/adf-schema",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@atlaskit/platform-feature-flags",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
     "source": "npm:@atlaskit/editor-plugin-feature-flags",
     "target": "npm:@atlaskit/editor-common",
     "type": "static"
@@ -5366,7 +5131,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-floating-toolbar",
-    "target": "npm:@atlaskit/adf-utils@19.26.4",
+    "target": "npm:@atlaskit/adf-utils",
     "type": "static"
   },
   {
@@ -5381,7 +5146,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-floating-toolbar",
-    "target": "npm:@atlaskit/editor-palette@2.1.17",
+    "target": "npm:@atlaskit/editor-palette",
     "type": "static"
   },
   {
@@ -5527,46 +5292,6 @@
   {
     "source": "npm:@atlaskit/editor-plugin-floating-toolbar",
     "target": "npm:react-loadable",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@atlaskit/adf-schema",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@atlaskit/platform-feature-flags",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:react-dom",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@atlaskit/tokens",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@babel/runtime",
     "type": "static"
   },
   {
@@ -5841,7 +5566,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-highlight",
-    "target": "npm:@atlaskit/editor-palette@2.1.17",
+    "target": "npm:@atlaskit/editor-palette",
     "type": "static"
   },
   {
@@ -5932,31 +5657,6 @@
   {
     "source": "npm:@atlaskit/editor-plugin-highlight",
     "target": "npm:@emotion/react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:react-dom",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@atlaskit/tokens",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@babel/runtime",
     "type": "static"
   },
   {
@@ -6076,7 +5776,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-hyperlink",
-    "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+    "target": "npm:@atlaskit/prosemirror-input-rules",
     "type": "static"
   },
   {
@@ -6097,26 +5797,6 @@
   {
     "source": "npm:@atlaskit/editor-plugin-hyperlink",
     "target": "npm:uuid@3.4.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/editor-prosemirror",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/prosemirror-history",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@babel/runtime",
     "type": "static"
   },
   {
@@ -6141,31 +5821,11 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-image-upload",
-    "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+    "target": "npm:@atlaskit/prosemirror-input-rules",
     "type": "static"
   },
   {
     "source": "npm:@atlaskit/editor-plugin-image-upload",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/editor-prosemirror",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/prosemirror-history",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
     "target": "npm:@babel/runtime",
     "type": "static"
   },
@@ -6696,7 +6356,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-list",
-    "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+    "target": "npm:@atlaskit/prosemirror-input-rules",
     "type": "static"
   },
   {
@@ -6706,26 +6366,6 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-list",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/editor-prosemirror",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/prosemirror-history",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
     "target": "npm:@babel/runtime",
     "type": "static"
   },
@@ -6936,7 +6576,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-media",
-    "target": "npm:@atlaskit/editor-palette@2.1.17",
+    "target": "npm:@atlaskit/editor-palette",
     "type": "static"
   },
   {
@@ -7265,31 +6905,6 @@
     "type": "static"
   },
   {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:react-dom",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@atlaskit/tokens",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
     "source": "npm:@atlaskit/editor-plugin-mentions",
     "target": "npm:@atlaskit/editor-common",
     "type": "static"
@@ -7551,7 +7166,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-panel",
-    "target": "npm:@atlaskit/editor-palette@2.1.17",
+    "target": "npm:@atlaskit/editor-palette",
     "type": "static"
   },
   {
@@ -7637,31 +7252,6 @@
   {
     "source": "npm:@atlaskit/editor-plugin-panel",
     "target": "npm:uuid@3.4.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:react-dom",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@atlaskit/tokens",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@babel/runtime",
     "type": "static"
   },
   {
@@ -7876,7 +7466,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-placeholder",
-    "target": "npm:@atlaskit/adf-utils@19.26.4",
+    "target": "npm:@atlaskit/adf-utils",
     "type": "static"
   },
   {
@@ -7992,21 +7582,6 @@
   {
     "source": "npm:@atlaskit/editor-plugin-placeholder-text",
     "target": "npm:@emotion/react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@atlaskit/adf-schema",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@atlaskit/platform-feature-flags",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@babel/runtime",
     "type": "static"
   },
   {
@@ -8171,31 +7746,11 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-rule",
-    "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+    "target": "npm:@atlaskit/prosemirror-input-rules",
     "type": "static"
   },
   {
     "source": "npm:@atlaskit/editor-plugin-rule",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/editor-prosemirror",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/prosemirror-history",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
     "target": "npm:@babel/runtime",
     "type": "static"
   },
@@ -8261,31 +7816,11 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-scroll-into-view",
-    "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+    "target": "npm:@atlaskit/prosemirror-input-rules",
     "type": "static"
   },
   {
     "source": "npm:@atlaskit/editor-plugin-scroll-into-view",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/editor-prosemirror",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/prosemirror-history",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
     "target": "npm:@babel/runtime",
     "type": "static"
   },
@@ -8356,7 +7891,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-selection-extension",
-    "target": "npm:@atlaskit/adf-utils@19.26.4",
+    "target": "npm:@atlaskit/adf-utils",
     "type": "static"
   },
   {
@@ -8472,21 +8007,6 @@
   {
     "source": "npm:@atlaskit/editor-plugin-selection-extension",
     "target": "npm:uuid@3.4.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@atlaskit/adf-schema",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@atlaskit/platform-feature-flags",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@babel/runtime",
     "type": "static"
   },
   {
@@ -8811,7 +8331,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-status",
-    "target": "npm:@atlaskit/status@3.0.25",
+    "target": "npm:@atlaskit/status",
     "type": "static"
   },
   {
@@ -8842,71 +8362,6 @@
   {
     "source": "npm:@atlaskit/editor-plugin-status",
     "target": "npm:@emotion/react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:react-intl-next",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/afm-i18n-platform-elements-status",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/analytics-next",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/icon",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/lozenge",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/platform-feature-flags",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/platform-feature-flags-react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/primitives",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/textfield",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@atlaskit/tokens",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/status@3.0.25",
-    "target": "npm:@compiled/react",
     "type": "static"
   },
   {
@@ -9106,12 +8561,12 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-table",
-    "target": "npm:@atlaskit/custom-steps@0.16.5",
+    "target": "npm:@atlaskit/custom-steps",
     "type": "static"
   },
   {
     "source": "npm:@atlaskit/editor-plugin-table",
-    "target": "npm:@atlaskit/editor-palette@2.1.17",
+    "target": "npm:@atlaskit/editor-palette",
     "type": "static"
   },
   {
@@ -9300,56 +8755,6 @@
     "type": "static"
   },
   {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@atlaskit/adf-schema",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@atlaskit/editor-prosemirror",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@atlaskit/editor-tables",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/custom-steps@0.16.5",
-    "target": "npm:memoize-one",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:react-dom",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@atlaskit/tokens",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
     "source": "npm:@atlaskit/editor-plugin-tasks-and-decisions",
     "target": "npm:@atlaskit/editor-common",
     "type": "static"
@@ -9461,7 +8866,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-tasks-and-decisions",
-    "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+    "target": "npm:@atlaskit/prosemirror-input-rules",
     "type": "static"
   },
   {
@@ -9492,26 +8897,6 @@
   {
     "source": "npm:@atlaskit/editor-plugin-tasks-and-decisions",
     "target": "npm:bind-event-listener",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/editor-prosemirror",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/prosemirror-history",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@babel/runtime",
     "type": "static"
   },
   {
@@ -9551,7 +8936,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-text-color",
-    "target": "npm:@atlaskit/editor-palette@2.1.17",
+    "target": "npm:@atlaskit/editor-palette",
     "type": "static"
   },
   {
@@ -9645,31 +9030,6 @@
     "type": "static"
   },
   {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:react-dom",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@atlaskit/tokens",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/editor-palette@2.1.17",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
     "source": "npm:@atlaskit/editor-plugin-text-formatting",
     "target": "npm:@atlaskit/editor-common",
     "type": "static"
@@ -9746,7 +9106,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-text-formatting",
-    "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+    "target": "npm:@atlaskit/prosemirror-input-rules",
     "type": "static"
   },
   {
@@ -9772,26 +9132,6 @@
   {
     "source": "npm:@atlaskit/editor-plugin-text-formatting",
     "target": "npm:react-intl-next",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/editor-prosemirror",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/prosemirror-history",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@babel/runtime",
     "type": "static"
   },
   {
@@ -10151,7 +9491,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-plugin-type-ahead",
-    "target": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+    "target": "npm:@atlaskit/prosemirror-input-rules",
     "type": "static"
   },
   {
@@ -10207,26 +9547,6 @@
   {
     "source": "npm:@atlaskit/editor-plugin-type-ahead",
     "target": "npm:w3c-keyname",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/editor-prosemirror",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/prosemirror-history",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@atlaskit/tmp-editor-statsig",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-    "target": "npm:@babel/runtime",
     "type": "static"
   },
   {
@@ -11196,7 +10516,7 @@
   },
   {
     "source": "npm:@atlaskit/editor-synced-block-provider",
-    "target": "npm:@atlaskit/adf-utils@19.26.4",
+    "target": "npm:@atlaskit/adf-utils",
     "type": "static"
   },
   {
@@ -11227,21 +10547,6 @@
   {
     "source": "npm:@atlaskit/editor-synced-block-provider",
     "target": "npm:uuid@3.4.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@atlaskit/adf-schema",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@atlaskit/platform-feature-flags",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/adf-utils@19.26.4",
-    "target": "npm:@babel/runtime",
     "type": "static"
   },
   {
@@ -12311,7 +11616,7 @@
   },
   {
     "source": "npm:@atlaskit/insm",
-    "target": "npm:@atlaskit/analytics-listeners@9.1.0",
+    "target": "npm:@atlaskit/analytics-listeners",
     "type": "static"
   },
   {
@@ -12332,36 +11637,6 @@
   {
     "source": "npm:@atlaskit/insm",
     "target": "npm:bowser-ultralight",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@atlaskit/analytics-gas-types",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@atlaskit/analytics-namespaced-context",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@atlaskit/analytics-next",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:lodash",
     "type": "static"
   },
   {
@@ -15866,7 +15141,7 @@
   },
   {
     "source": "npm:@atlaskit/platform-feature-flags",
-    "target": "npm:@atlaskit/feature-gate-js-client@4.26.5",
+    "target": "npm:@atlaskit/feature-gate-js-client",
     "type": "static"
   },
   {
@@ -15912,41 +15187,6 @@
   {
     "source": "npm:@atlaskit/platform-feature-flags-react",
     "target": "npm:react-magnetic-di",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/atlassian-context@0.2.0",
-    "target": "npm:react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/atlassian-context@0.2.0",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/feature-gate-js-client@4.26.5",
-    "target": "npm:@atlaskit/atlassian-context@0.2.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/feature-gate-js-client@4.26.5",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/feature-gate-js-client@4.26.5",
-    "target": "npm:@statsig/client-core",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/feature-gate-js-client@4.26.5",
-    "target": "npm:@statsig/js-client",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/feature-gate-js-client@4.26.5",
-    "target": "npm:eventemitter2@4.1.2",
     "type": "static"
   },
   {
@@ -16452,6 +15692,26 @@
   {
     "source": "npm:@atlaskit/prosemirror-history",
     "target": "npm:rope-sequence",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/prosemirror-input-rules",
+    "target": "npm:@atlaskit/editor-prosemirror",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/prosemirror-input-rules",
+    "target": "npm:@atlaskit/prosemirror-history",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/prosemirror-input-rules",
+    "target": "npm:@atlaskit/tmp-editor-statsig",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/prosemirror-input-rules",
+    "target": "npm:@babel/runtime",
     "type": "static"
   },
   {
@@ -17440,6 +16700,71 @@
     "type": "static"
   },
   {
+    "source": "npm:@atlaskit/status",
+    "target": "npm:react",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/status",
+    "target": "npm:react-intl-next",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/status",
+    "target": "npm:@atlaskit/afm-i18n-platform-elements-status",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/status",
+    "target": "npm:@atlaskit/analytics-next",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/status",
+    "target": "npm:@atlaskit/icon",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/status",
+    "target": "npm:@atlaskit/lozenge",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/status",
+    "target": "npm:@atlaskit/platform-feature-flags",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/status",
+    "target": "npm:@atlaskit/platform-feature-flags-react",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/status",
+    "target": "npm:@atlaskit/primitives",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/status",
+    "target": "npm:@atlaskit/textfield",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/status",
+    "target": "npm:@atlaskit/tokens",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/status",
+    "target": "npm:@babel/runtime",
+    "type": "static"
+  },
+  {
+    "source": "npm:@atlaskit/status",
+    "target": "npm:@compiled/react",
+    "type": "static"
+  },
+  {
     "source": "npm:@atlaskit/tabs",
     "target": "npm:react",
     "type": "static"
@@ -17661,7 +16986,7 @@
   },
   {
     "source": "npm:@atlaskit/teams-app-internal-analytics",
-    "target": "npm:@atlaskit/analytics-listeners@9.1.0",
+    "target": "npm:@atlaskit/analytics-listeners",
     "type": "static"
   },
   {
@@ -17697,36 +17022,6 @@
   {
     "source": "npm:@atlaskit/teams-app-internal-analytics",
     "target": "npm:@compiled/react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:react",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@atlaskit/analytics-gas-types",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@atlaskit/analytics-namespaced-context",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@atlaskit/analytics-next",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@atlaskit/analytics-listeners@9.1.0",
-    "target": "npm:lodash",
     "type": "static"
   },
   {
@@ -27526,7 +26821,7 @@
   },
   {
     "source": "npm:@testing-library/dom",
-    "target": "npm:aria-query@5.1.3",
+    "target": "npm:aria-query",
     "type": "static"
   },
   {
@@ -27547,101 +26842,6 @@
   {
     "source": "npm:@testing-library/dom",
     "target": "npm:pretty-format@27.5.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:aria-query@5.1.3",
-    "target": "npm:deep-equal@2.2.3",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:array-buffer-byte-length",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:call-bind",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:es-get-iterator",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:get-intrinsic",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:is-arguments",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:is-array-buffer",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:is-date-object",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:is-regex",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:is-shared-array-buffer",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:isarray",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:object-is",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:object-keys",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:object.assign",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:regexp.prototype.flags",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:side-channel",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:which-boxed-primitive",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:which-collection",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:which-typed-array",
     "type": "static"
   },
   {
@@ -29106,7 +28306,97 @@
   },
   {
     "source": "npm:aria-query",
-    "target": "npm:dequal",
+    "target": "npm:deep-equal@2.2.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:array-buffer-byte-length",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:call-bind",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:es-get-iterator",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:get-intrinsic",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:is-arguments",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:is-array-buffer",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:is-date-object",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:is-regex",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:is-shared-array-buffer",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:isarray",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:object-is",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:object-keys",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:object.assign",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:regexp.prototype.flags",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:side-channel",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:which-boxed-primitive",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:which-collection",
+    "type": "static"
+  },
+  {
+    "source": "npm:deep-equal@2.2.3",
+    "target": "npm:which-typed-array",
     "type": "static"
   },
   {

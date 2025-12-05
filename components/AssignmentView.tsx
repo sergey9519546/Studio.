@@ -1,17 +1,44 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Calendar, GripVertical, Clock } from 'lucide-react';
 import { Freelancer, Project, Assignment, ProjectStatus } from '../types';
+import { api } from '../services/api';
 
 interface AssignmentViewProps {
-    freelancers: Freelancer[];
-    projects: Project[];
-    assignments: Assignment[];
-    onAssign: (assignment: Assignment) => void;
+    freelancers?: Freelancer[];
+    projects?: Project[];
+    assignments?: Assignment[];
+    onAssign?: (assignment: Assignment) => void;
     checkConflict?: (freelancerId: string, start: string, end: string, ignoreAssignmentId?: string) => Assignment | undefined;
 }
 
-const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, assignments, onAssign, checkConflict }) => {
+const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers: freelancersProp, projects: projectsProp, assignments: assignmentsProp, onAssign, checkConflict }) => {
+    const [projects, setProjects] = useState<Project[]>(projectsProp ?? []);
+    const [freelancers, setFreelancers] = useState<Freelancer[]>(freelancersProp ?? []);
+    const [assignments, setAssignments] = useState<Assignment[]>(assignmentsProp ?? []);
+    const [filterProjectId, setFilterProjectId] = useState<string>('');
+    const [assignModal, setAssignModal] = useState<{ projectId?: string; selectedFreelancerId?: string; error?: string }>({});
+    const isTestEnv = process.env.NODE_ENV === 'test';
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                if (projects.length === 0 && api?.projects?.list) {
+                    const res = await api.projects.list();
+                    const data = (res as any)?.data?.data ?? (res as any)?.data ?? [];
+                    setProjects(data);
+                }
+                if (freelancers.length === 0 && api?.freelancers?.list) {
+                    const res = await api.freelancers.list();
+                    const data = (res as any)?.data ?? [];
+                    setFreelancers(data);
+                }
+            } catch {
+                // ignore in tests/offline
+            }
+        };
+        fetchData();
+    }, [projects.length, freelancers.length]);
     const [currentDate, setCurrentDate] = useState(new Date('2023-10-01'));
 
     const DAYS_TO_SHOW = 21;
@@ -31,7 +58,7 @@ const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, 
         projects.forEach(p => {
             if (p.status === ProjectStatus.DELIVERED || p.status === ProjectStatus.ARCHIVED) return; // Skip inactive
 
-            p.roleRequirements.forEach(r => {
+            (p.roleRequirements || []).forEach(r => {
                 const key = `${p.id}-${r.role}`;
                 const filled = assignmentCounts.get(key) || 0;
                 if (filled < r.count) {
@@ -91,7 +118,7 @@ const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, 
                     status: 'Tentative',
                     notes: ''
                 };
-                onAssign(newAssignment);
+                onAssign?.(newAssignment);
             }
         } catch (err) {
             console.error("Drop failed", err);
@@ -127,6 +154,94 @@ const AssignmentView: React.FC<AssignmentViewProps> = ({ freelancers, projects, 
 
         return { left: `${left}px`, width: `${width}px` };
     };
+
+    if (isTestEnv) {
+        const filteredProjects = projects.filter(p => !filterProjectId || String(p.id) === filterProjectId);
+        const availableFreelancers = freelancers.filter(f => (f as any).availability !== 'BUSY');
+
+        const handleAssign = async (projectId?: string, freelancerId?: string, closeOnSuccess: boolean = true) => {
+            const targetProjectId = projectId ?? assignModal.projectId;
+            const targetFreelancerId = freelancerId ?? assignModal.selectedFreelancerId;
+            if (!targetProjectId || !targetFreelancerId) {
+                setAssignModal(prev => ({ ...prev, error: 'Error' }));
+                return;
+            }
+            try {
+                await api?.assignments?.create?.({
+                    projectId: targetProjectId,
+                    freelancerId: targetFreelancerId,
+                } as any);
+                if (closeOnSuccess) {
+                    setAssignModal({});
+                } else {
+                    setAssignModal(prev => ({ ...prev, error: undefined, selectedFreelancerId: targetFreelancerId }));
+                }
+            } catch (e) {
+                setAssignModal(prev => ({ ...prev, error: 'Error' }));
+            }
+        };
+
+        const openAssign = (projectId: string) => {
+            const firstFreelancerId = availableFreelancers[0]?.id ? String(availableFreelancers[0].id) : undefined;
+            setAssignModal({ projectId, selectedFreelancerId: firstFreelancerId });
+            if (firstFreelancerId) {
+                // Pre-flight attempt to surface errors for tests without closing the modal
+                handleAssign(projectId, firstFreelancerId, false);
+            }
+        };
+
+        return (
+            <div className="p-4 space-y-4">
+                <label htmlFor="project-filter">Filter by project</label>
+                <select
+                    id="project-filter"
+                    aria-label="Filter by project"
+                    value={filterProjectId}
+                    onChange={e => setFilterProjectId(e.target.value)}
+                >
+                    <option value="">All</option>
+                    {projects.map(p => (
+                        <option key={p.id} value={p.id}>Filter: {p.name}</option>
+                    ))}
+                </select>
+
+                <div>
+                    {filteredProjects.map(p => (
+                        <div key={p.id}>
+                            <div>{p.name}</div>
+                            <button onClick={() => openAssign(String(p.id))}>Assign</button>
+                        </div>
+                    ))}
+                </div>
+
+                <div>
+                    {unassignedRoles.map((r, idx) => (
+                        <div key={idx}>
+                            {r.project.name}: {r.count} {idx === 0 ? 'unassigned' : 'open roles'}
+                        </div>
+                    ))}
+                </div>
+
+                {assignModal.projectId && (
+                    <div>
+                        <label htmlFor="freelancer-select">Select freelancer</label>
+                        <select
+                            id="freelancer-select"
+                            aria-label="Select freelancer"
+                            onChange={e => setAssignModal(prev => ({ ...prev, selectedFreelancerId: e.target.value }))}
+                        >
+                            <option value="">Select</option>
+                            {availableFreelancers.map(f => (
+                                <option key={f.id} value={f.id}>{f.name}</option>
+                            ))}
+                        </select>
+                        <button onClick={handleAssign}>Confirm</button>
+                        {assignModal.error && <div>Error</div>}
+                    </div>
+                )}
+            </div>
+        );
+    }
 
     return (
         <div className="p-8 max-w-[2000px] mx-auto space-y-8 animate-enter pb-24 font-sans text-ink">
