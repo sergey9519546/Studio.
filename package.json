@@ -21,6 +21,8 @@
   },
   "dependencies": {
     "@agentset/mcp": "^1.3.0",
+    "@atlaskit/css-reset": "^7.3.9",
+    "@atlaskit/editor-common": "^110.39.1",
     "@atlaskit/editor-core": "latest",
     "@atlaskit/editor-plugins": "^11.1.125",
     "@atlaskit/tokens": "latest",

@@ -315,15 +315,6 @@
         "hash": "sha512-dDGfp/xJpL4O5L2Xvwrgy4zOMK8CJGcv+b9Ixz0zzmgmvzJc9BC2F1yV16sbavVlw3+MyKG2cqfj8fmrsg4DYg=="
       }
     },
-    "npm:@atlaskit/adf-schema@26.4.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/adf-schema@26.4.1",
-      "data": {
-        "version": "26.4.1",
-        "packageName": "@atlaskit/adf-schema",
-        "hash": "sha512-gBok6iOXyW40UpXqGRcTMQMWewWV8IBTS4KyUskszUHptYSzfqfWceZfQyjMoWTmLL6eV6nP/bbM7vSVbW28eA=="
-      }
-    },
     "npm:@atlaskit/adf-schema@51.5.1": {
       "type": "npm",
       "name": "npm:@atlaskit/adf-schema@51.5.1",
@@ -331,6 +322,15 @@
         "version": "51.5.1",
         "packageName": "@atlaskit/adf-schema",
         "hash": "sha512-9ULclfeDlMGJb4YMz56Iln35wh5hx50KQ7nCBE/7DsBYgSUuraqRMcaEqt15HBBWo7f9Ck5Q5lrHfyEzdjA08Q=="
+      }
+    },
+    "npm:@atlaskit/adf-schema@26.4.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/adf-schema@26.4.1",
+      "data": {
+        "version": "26.4.1",
+        "packageName": "@atlaskit/adf-schema",
+        "hash": "sha512-gBok6iOXyW40UpXqGRcTMQMWewWV8IBTS4KyUskszUHptYSzfqfWceZfQyjMoWTmLL6eV6nP/bbM7vSVbW28eA=="
       }
     },
     "npm:@atlaskit/adf-schema@29.2.0": {
@@ -387,15 +387,6 @@
         "hash": "sha512-n7AcpwPINAe5rzsbOenhUaUmdj0HwgS/FZ4DSJgN5lF8Pm/smGhktXuTu3CAwg/kNstv83VlRlNI0JzpU24VfQ=="
       }
     },
-    "npm:@atlaskit/editor-palette": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-palette",
-      "data": {
-        "version": "1.3.0",
-        "packageName": "@atlaskit/editor-palette",
-        "hash": "sha512-k0/36PAxePko6m9tYqA9PGlfVZypEsMHX5jXEkj9twsTwZysuuJ8SuCVzS7K4vDpmQftSZ52hHeXKaMZy+jMug=="
-      }
-    },
     "npm:@atlaskit/editor-palette@2.1.17": {
       "type": "npm",
       "name": "npm:@atlaskit/editor-palette@2.1.17",
@@ -403,6 +394,15 @@
         "version": "2.1.17",
         "packageName": "@atlaskit/editor-palette",
         "hash": "sha512-gSKr0rR0dkIoOT9/LsKvT2/8BrUVBDeKsutPzxBow10VrcusYR6EnZbHw8mzMbO7rM9JTOdeKZXQqHfI5aettw=="
+      }
+    },
+    "npm:@atlaskit/editor-palette": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-palette",
+      "data": {
+        "version": "1.3.0",
+        "packageName": "@atlaskit/editor-palette",
+        "hash": "sha512-k0/36PAxePko6m9tYqA9PGlfVZypEsMHX5jXEkj9twsTwZysuuJ8SuCVzS7K4vDpmQftSZ52hHeXKaMZy+jMug=="
       }
     },
     "npm:@atlaskit/editor-palette@1.6.0": {
@@ -567,15 +567,6 @@
         "hash": "sha512-q7AY7vMjKYqDCeoedgUiAgrLabliXxndJuuFmcmc2+YU1SblvnOiG2WEACF2lwAZsMlfLpiAilA3L+TWlDqIsQ=="
       }
     },
-    "npm:prosemirror-model@1.14.3": {
-      "type": "npm",
-      "name": "npm:prosemirror-model@1.14.3",
-      "data": {
-        "version": "1.14.3",
-        "packageName": "prosemirror-model",
-        "hash": "sha512-yzZlBaSxfUPIIP6U5Edh5zKxJPZ5f7bwZRhiCuH3UYkWhj+P3d8swHsbuAMOu/iDatDc5J/Qs5Mb3++mZf+CvQ=="
-      }
-    },
     "npm:prosemirror-model@1.19.3": {
       "type": "npm",
       "name": "npm:prosemirror-model@1.19.3",
@@ -592,6 +583,15 @@
         "version": "1.25.4",
         "packageName": "prosemirror-model",
         "hash": "sha512-PIM7E43PBxKce8OQeezAs9j4TP+5yDpZVbuurd1h5phUxEKIu+G2a+EUZzIC5nS1mJktDJWzbqS23n1tsAf5QA=="
+      }
+    },
+    "npm:prosemirror-model@1.14.3": {
+      "type": "npm",
+      "name": "npm:prosemirror-model@1.14.3",
+      "data": {
+        "version": "1.14.3",
+        "packageName": "prosemirror-model",
+        "hash": "sha512-yzZlBaSxfUPIIP6U5Edh5zKxJPZ5f7bwZRhiCuH3UYkWhj+P3d8swHsbuAMOu/iDatDc5J/Qs5Mb3++mZf+CvQ=="
       }
     },
     "npm:prosemirror-model@1.24.1": {
@@ -693,6 +693,15 @@
         "hash": "sha512-r9TcLSNVjgz9czJ0Vh3AIbxqwtsbS13Q0+ZipMK6O4tziLSlfUhgHSeoYgKwR6NOo+Jv3JnJuuE01OblE3RsKQ=="
       }
     },
+    "npm:@atlaskit/afm-i18n-platform-editor-editor-common": {
+      "type": "npm",
+      "name": "npm:@atlaskit/afm-i18n-platform-editor-editor-common",
+      "data": {
+        "version": "2.10.0",
+        "packageName": "@atlaskit/afm-i18n-platform-editor-editor-common",
+        "hash": "sha512-UwkFEIV3wjBAIx19uQqLIaYWcRKeAaa8IsG8TqetCyBfSNLnGtc/8jCeNs13aCb+P1IUmqig3qwTslWTmtDRlQ=="
+      }
+    },
     "npm:@atlaskit/afm-i18n-platform-elements-emoji": {
       "type": "npm",
       "name": "npm:@atlaskit/afm-i18n-platform-elements-emoji",
@@ -754,6 +763,15 @@
         "version": "2.7.0",
         "packageName": "@atlaskit/afm-i18n-platform-linking-platform-link-datasource",
         "hash": "sha512-hCpzcet++PPUDtdiBIxs9XCPgRmMx+kcAHxgDvLgvf9Z9rleN5FTikLJFyWwMCwZJnTD6zdulbbL6e1Lfj3dzw=="
+      }
+    },
+    "npm:@atlaskit/afm-i18n-platform-linking-platform-link-picker": {
+      "type": "npm",
+      "name": "npm:@atlaskit/afm-i18n-platform-linking-platform-link-picker",
+      "data": {
+        "version": "2.7.0",
+        "packageName": "@atlaskit/afm-i18n-platform-linking-platform-link-picker",
+        "hash": "sha512-0slMsjPOjnWLnetwOn+Sxq834nBXXhZR3uOlnDQdZhjl8fbIghoGteJsfhUaHG/joPU3OeKZMyEYZ/6ooiZbJg=="
       }
     },
     "npm:@atlaskit/afm-i18n-platform-linking-platform-smart-card": {
@@ -900,15 +918,6 @@
         "hash": "sha512-HJBiLmEnyXZeNYFAo0EDyi+r/33SbyrYK7VwTyFPWvXr/lPvg5RMiK72Tsu6jWsaqlTy1bQWvz0Azu30hmidKA=="
       }
     },
-    "npm:@atlaskit/app-provider@0.4.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/app-provider@0.4.0",
-      "data": {
-        "version": "0.4.0",
-        "packageName": "@atlaskit/app-provider",
-        "hash": "sha512-ZvDVRSHD19rxKvx+YomWvekvtPzNbZEwYdHGXWG3QjdnP+1oBEeaVgkI9LnpWAoreunoQ8xUgmJ6g2qAYBjnoA=="
-      }
-    },
     "npm:@atlaskit/app-provider@3.2.7": {
       "type": "npm",
       "name": "npm:@atlaskit/app-provider@3.2.7",
@@ -916,6 +925,15 @@
         "version": "3.2.7",
         "packageName": "@atlaskit/app-provider",
         "hash": "sha512-pfY91mPG195hDEgTO8sQwKL1yGp9KaYymbQuQZ5mTlvevTLfZaq6L69TCEJ/PvMb8hYQ3WJm05S7iFM2kVyN6w=="
+      }
+    },
+    "npm:@atlaskit/app-provider@0.4.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/app-provider@0.4.0",
+      "data": {
+        "version": "0.4.0",
+        "packageName": "@atlaskit/app-provider",
+        "hash": "sha512-ZvDVRSHD19rxKvx+YomWvekvtPzNbZEwYdHGXWG3QjdnP+1oBEeaVgkI9LnpWAoreunoQ8xUgmJ6g2qAYBjnoA=="
       }
     },
     "npm:@atlaskit/atlassian-context": {
@@ -999,6 +1017,15 @@
         "hash": "sha512-9HWU2Wf5DX1+OQKmqAeZqUPAe2BgNhyYhIlkQm2Vo8RxzvI0BDWyjafEro4MdUK8ZYqSfegd9wgk7qzIUF9ZaQ=="
       }
     },
+    "npm:@atlaskit/theme@21.0.2": {
+      "type": "npm",
+      "name": "npm:@atlaskit/theme@21.0.2",
+      "data": {
+        "version": "21.0.2",
+        "packageName": "@atlaskit/theme",
+        "hash": "sha512-HbtaYyxdlABrUGR2NZLuqwdou12FPjuRI8YjeUx7TjJBaamhVuNTV/MRawh5qvuuFlTXRiCeqnJmS9ayqm/pOw=="
+      }
+    },
     "npm:@atlaskit/theme@14.1.0": {
       "type": "npm",
       "name": "npm:@atlaskit/theme@14.1.0",
@@ -1006,15 +1033,6 @@
         "version": "14.1.0",
         "packageName": "@atlaskit/theme",
         "hash": "sha512-jXZ5nLUOKgf3UJialhpbg0+WQV2qrWdRZ5afnYq/tW1pqmZshw129Ty1i2xcpFbPVE/KndXpkZws0DdXAfhB0A=="
-      }
-    },
-    "npm:@atlaskit/theme@12.12.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/theme@12.12.0",
-      "data": {
-        "version": "12.12.0",
-        "packageName": "@atlaskit/theme",
-        "hash": "sha512-HHJ60r+74BInccPoeOEXTNl6eAvASKLCDi+e6ScZ4WG/9KQwgv4OgXzgubY83DOu1cS2FidHSPsX6lOcIJ8fgw=="
       }
     },
     "npm:@atlaskit/theme": {
@@ -1026,13 +1044,13 @@
         "hash": "sha512-GIxzHsdGQWlfv1XfhqpdPe911rq5IZ7a/RJDjHcdRSzm40N+0gYOk1Mg3F/QFVeK6ZeQOutrNJ/sD8CerHn3SA=="
       }
     },
-    "npm:@atlaskit/theme@21.0.2": {
+    "npm:@atlaskit/theme@12.12.0": {
       "type": "npm",
-      "name": "npm:@atlaskit/theme@21.0.2",
+      "name": "npm:@atlaskit/theme@12.12.0",
       "data": {
-        "version": "21.0.2",
+        "version": "12.12.0",
         "packageName": "@atlaskit/theme",
-        "hash": "sha512-HbtaYyxdlABrUGR2NZLuqwdou12FPjuRI8YjeUx7TjJBaamhVuNTV/MRawh5qvuuFlTXRiCeqnJmS9ayqm/pOw=="
+        "hash": "sha512-HHJ60r+74BInccPoeOEXTNl6eAvASKLCDi+e6ScZ4WG/9KQwgv4OgXzgubY83DOu1cS2FidHSPsX6lOcIJ8fgw=="
       }
     },
     "npm:@atlaskit/theme@15.0.0": {
@@ -1098,15 +1116,6 @@
         "hash": "sha512-DDyBV7+D6D44HiUl3aVZSXWR/PwZI3QNUXq6N2145/4t6/SikUl194EyrsgSUDcTuSYqdOKBk3LAyK9nMrLsmw=="
       }
     },
-    "npm:@atlaskit/button@16.18.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/button@16.18.1",
-      "data": {
-        "version": "16.18.1",
-        "packageName": "@atlaskit/button",
-        "hash": "sha512-6RZCp2IUZAsgm2UFp+Ws6i3b+0uLbs2rmc6fWrhd4F0jvavDnOjivdFAPPVBcMM4pIOBrTv6QBXAgRhScec/Hw=="
-      }
-    },
     "npm:@atlaskit/button@23.6.3": {
       "type": "npm",
       "name": "npm:@atlaskit/button@23.6.3",
@@ -1114,6 +1123,15 @@
         "version": "23.6.3",
         "packageName": "@atlaskit/button",
         "hash": "sha512-ufg3aIt8A5iQgVPNFrw9/dE0F2yGVLi39wwiyX+MC0zgjq/5KSPLAzyjO3gO/OhhGI3ZBu9OfnPB2fVVoRKH9Q=="
+      }
+    },
+    "npm:@atlaskit/button@16.18.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/button@16.18.1",
+      "data": {
+        "version": "16.18.1",
+        "packageName": "@atlaskit/button",
+        "hash": "sha512-6RZCp2IUZAsgm2UFp+Ws6i3b+0uLbs2rmc6fWrhd4F0jvavDnOjivdFAPPVBcMM4pIOBrTv6QBXAgRhScec/Hw=="
       }
     },
     "npm:@atlaskit/button@17.23.0": {
@@ -1152,6 +1170,15 @@
         "hash": "sha512-KTv825ks3aDzRlC/FOPWpJb2wEvDQxPY7aR6dYRNjl3p69gWTB6Klss0bad0klB5EfQPP6IGLIF8IkN31NxrjQ=="
       }
     },
+    "npm:@atlaskit/tooltip@20.11.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/tooltip@20.11.0",
+      "data": {
+        "version": "20.11.0",
+        "packageName": "@atlaskit/tooltip",
+        "hash": "sha512-7zvRy9yDjxgL7w5PL8S/9lEihGE/RA8MxFFN3e2lD0PgO1LtI0/eoFfPx2LQLJ0+pXxCYPJO2J/dkkAB6svjTw=="
+      }
+    },
     "npm:@atlaskit/tooltip": {
       "type": "npm",
       "name": "npm:@atlaskit/tooltip",
@@ -1170,15 +1197,6 @@
         "hash": "sha512-rNH/AygzNjVXUB7uoJ6QZcgvptGMsFr5K8vYLywmXMjNuyjRIBatcvllnO8P6n7I3Rg+v4Hyn5w9xQhHTUcyZA=="
       }
     },
-    "npm:@atlaskit/tooltip@20.11.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/tooltip@20.11.0",
-      "data": {
-        "version": "20.11.0",
-        "packageName": "@atlaskit/tooltip",
-        "hash": "sha512-7zvRy9yDjxgL7w5PL8S/9lEihGE/RA8MxFFN3e2lD0PgO1LtI0/eoFfPx2LQLJ0+pXxCYPJO2J/dkkAB6svjTw=="
-      }
-    },
     "npm:@atlaskit/calendar": {
       "type": "npm",
       "name": "npm:@atlaskit/calendar",
@@ -1186,15 +1204,6 @@
         "version": "14.5.2",
         "packageName": "@atlaskit/calendar",
         "hash": "sha512-oQji9n6mz2aI6Yf52nF2dV0Y2mT5Gn8QSfrxvs/QZVshIooXEzxMbRH641P1MRvFBlU/YqaSgSJsTXo2U3MfLg=="
-      }
-    },
-    "npm:@atlaskit/calendar@13.3.3": {
-      "type": "npm",
-      "name": "npm:@atlaskit/calendar@13.3.3",
-      "data": {
-        "version": "13.3.3",
-        "packageName": "@atlaskit/calendar",
-        "hash": "sha512-oOvMCuBRwV9UICYIBRb6gkQoCiURgr3ZwVRjBpSYMSkZLIrBhQpwzvkt6o0tyEUdHR+QsDcXnXx5QaXsvkJF6A=="
       }
     },
     "npm:@atlaskit/calendar@17.1.27": {
@@ -1206,6 +1215,15 @@
         "hash": "sha512-RKWL5YXR6wbZC3jYg5YkxxGut7Dwmpp11Caavg33Mi8QT3dBz3eYZYz1/BAAZtKH6rfEJHzsDHj9nfLZmQ406g=="
       }
     },
+    "npm:@atlaskit/calendar@13.3.3": {
+      "type": "npm",
+      "name": "npm:@atlaskit/calendar@13.3.3",
+      "data": {
+        "version": "13.3.3",
+        "packageName": "@atlaskit/calendar",
+        "hash": "sha512-oOvMCuBRwV9UICYIBRb6gkQoCiURgr3ZwVRjBpSYMSkZLIrBhQpwzvkt6o0tyEUdHR+QsDcXnXx5QaXsvkJF6A=="
+      }
+    },
     "npm:@atlaskit/heading@2.4.7": {
       "type": "npm",
       "name": "npm:@atlaskit/heading@2.4.7",
@@ -1213,6 +1231,15 @@
         "version": "2.4.7",
         "packageName": "@atlaskit/heading",
         "hash": "sha512-FzIiyumkImDzlOlZqAqSYwNfJpeW5mqEfuamGuYH61/tEbJpPlAtG4zBnkYyO7uH/Qruq2pH/fuye/ECYsBh3g=="
+      }
+    },
+    "npm:@atlaskit/heading@5.2.14": {
+      "type": "npm",
+      "name": "npm:@atlaskit/heading@5.2.14",
+      "data": {
+        "version": "5.2.14",
+        "packageName": "@atlaskit/heading",
+        "hash": "sha512-cDBJZspoE/8dDB8EZkB/9tDVNX/0a/3ZkFSDcDps9PkgNi2P0q71fittaqpgxa/kmUPh//r1ZmnkyPTCukquPw=="
       }
     },
     "npm:@atlaskit/heading": {
@@ -1231,15 +1258,6 @@
         "version": "1.8.1",
         "packageName": "@atlaskit/heading",
         "hash": "sha512-yD2ZOLHVfpdYhwGd4pwT8pen/FsKxx1k+JnUC1f42cJInzReOoje8tA55TOLr1DbVmU3Jtz5SuKOPyZaEXhgbw=="
-      }
-    },
-    "npm:@atlaskit/heading@5.2.14": {
-      "type": "npm",
-      "name": "npm:@atlaskit/heading@5.2.14",
-      "data": {
-        "version": "5.2.14",
-        "packageName": "@atlaskit/heading",
-        "hash": "sha512-cDBJZspoE/8dDB8EZkB/9tDVNX/0a/3ZkFSDcDps9PkgNi2P0q71fittaqpgxa/kmUPh//r1ZmnkyPTCukquPw=="
       }
     },
     "npm:@atlaskit/heading@3.1.0": {
@@ -1269,15 +1287,6 @@
         "hash": "sha512-gpgf5NxJQ1fSgkFVFUSC1CWCIZzrp0UB7+Y4sHj0+4xE4Jw6e6jIkxQQV6Exbi8zF6Kg8p80GnctxpWOMPQbJQ=="
       }
     },
-    "npm:@atlaskit/primitives@1.20.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/primitives@1.20.0",
-      "data": {
-        "version": "1.20.0",
-        "packageName": "@atlaskit/primitives",
-        "hash": "sha512-1c8ymPQN++II0rqVLsFRqHrucmBEn+sjwte6SYT9lfDyrDGeqEulcu+F8t+qDuZzaLuLPSy3StGoIIwprluOwg=="
-      }
-    },
     "npm:@atlaskit/primitives@16.4.1": {
       "type": "npm",
       "name": "npm:@atlaskit/primitives@16.4.1",
@@ -1285,6 +1294,15 @@
         "version": "16.4.1",
         "packageName": "@atlaskit/primitives",
         "hash": "sha512-XtfCYxUocWdZk8ZFPJkKOg1ZzZooVHeSiE1Gu7ZzHqW7RELmssnrM1yla37ab4oIpJobxxRyvLxFOJsPWNycvg=="
+      }
+    },
+    "npm:@atlaskit/primitives@1.20.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/primitives@1.20.0",
+      "data": {
+        "version": "1.20.0",
+        "packageName": "@atlaskit/primitives",
+        "hash": "sha512-1c8ymPQN++II0rqVLsFRqHrucmBEn+sjwte6SYT9lfDyrDGeqEulcu+F8t+qDuZzaLuLPSy3StGoIIwprluOwg=="
       }
     },
     "npm:@atlaskit/primitives@8.2.1": {
@@ -1332,13 +1350,13 @@
         "hash": "sha512-ugCFHgSnu4oT0Oh/E1gMizlkXo5CcWl4FuZ84TmnpEn0Nj4RkPNBmT6lM1K8kvy3OkKNdJBmVDjc5ccx9+nYmA=="
       }
     },
-    "npm:@atlaskit/icon@21.12.8": {
+    "npm:@atlaskit/icon@29.0.0": {
       "type": "npm",
-      "name": "npm:@atlaskit/icon@21.12.8",
+      "name": "npm:@atlaskit/icon@29.0.0",
       "data": {
-        "version": "21.12.8",
+        "version": "29.0.0",
         "packageName": "@atlaskit/icon",
-        "hash": "sha512-cKqjg51VHZv8RTsncGhaSJAk8tWx6lrgRLM4zMexHbP3MBS1vcW7A+jZa2zggA3NOW7rsGZ3yFdbq8J6kPGT+A=="
+        "hash": "sha512-Mi+nxksnoaqPnbbaCSF8P1eXMK9WhCJrzXjwsAORi37knvxg/eN/HqKjHhM2FwT/2NMX5VKMxzQ/5GWaBRVFZA=="
       }
     },
     "npm:@atlaskit/icon": {
@@ -1350,13 +1368,13 @@
         "hash": "sha512-GIRqNs3bo93KBuaRSGaV8vXeLQKJmoYcE+FPUtTbrnWo6HL0+A3ASRDazNlo18Nojax8lsmd6+tgTpU7QHhv9Q=="
       }
     },
-    "npm:@atlaskit/icon@29.0.0": {
+    "npm:@atlaskit/icon@21.12.8": {
       "type": "npm",
-      "name": "npm:@atlaskit/icon@29.0.0",
+      "name": "npm:@atlaskit/icon@21.12.8",
       "data": {
-        "version": "29.0.0",
+        "version": "21.12.8",
         "packageName": "@atlaskit/icon",
-        "hash": "sha512-Mi+nxksnoaqPnbbaCSF8P1eXMK9WhCJrzXjwsAORi37knvxg/eN/HqKjHhM2FwT/2NMX5VKMxzQ/5GWaBRVFZA=="
+        "hash": "sha512-cKqjg51VHZv8RTsncGhaSJAk8tWx6lrgRLM4zMexHbP3MBS1vcW7A+jZa2zggA3NOW7rsGZ3yFdbq8J6kPGT+A=="
       }
     },
     "npm:@atlaskit/css@0.6.2": {
@@ -1422,15 +1440,6 @@
         "hash": "sha512-rwA6m0RiMt9GH2f1rTCTGGjO3t0oLvqcCo5S+aGlg2WPm51rwW+3hmO2iVTPKeptj2Hg6vUXBzahDOiy4Wfypw=="
       }
     },
-    "npm:@atlaskit/checkbox@12.6.11": {
-      "type": "npm",
-      "name": "npm:@atlaskit/checkbox@12.6.11",
-      "data": {
-        "version": "12.6.11",
-        "packageName": "@atlaskit/checkbox",
-        "hash": "sha512-vxHgCwdGMeHM+kwPw5gnKJhhhuk1sfx3fkoXniZfCIcrIXHttuucg7F2ikW+72JfCmfDUrSiKrVjIpA/6uaFPA=="
-      }
-    },
     "npm:@atlaskit/checkbox@17.1.23": {
       "type": "npm",
       "name": "npm:@atlaskit/checkbox@17.1.23",
@@ -1438,6 +1447,15 @@
         "version": "17.1.23",
         "packageName": "@atlaskit/checkbox",
         "hash": "sha512-7co/c+isFFol9ts+aTGlb5GDcUW7ApSGySGM4OItd7+1GtzO55rPc4Wgx2ApMHd62jYF92WL7bzhxf5wyosoKQ=="
+      }
+    },
+    "npm:@atlaskit/checkbox@12.6.11": {
+      "type": "npm",
+      "name": "npm:@atlaskit/checkbox@12.6.11",
+      "data": {
+        "version": "12.6.11",
+        "packageName": "@atlaskit/checkbox",
+        "hash": "sha512-vxHgCwdGMeHM+kwPw5gnKJhhhuk1sfx3fkoXniZfCIcrIXHttuucg7F2ikW+72JfCmfDUrSiKrVjIpA/6uaFPA=="
       }
     },
     "npm:@compiled/react@0.17.3": {
@@ -1467,15 +1485,6 @@
         "hash": "sha512-RtJEHJfEFT3lUwB3qYx7nXgGmUt4Nn7zRLUY6XYyaRMJOcqTEKxrHxVJ9Vc0QhWd6jzTT7iz8k14vDMKY1UEow=="
       }
     },
-    "npm:@atlaskit/chunkinator@4.2.4": {
-      "type": "npm",
-      "name": "npm:@atlaskit/chunkinator@4.2.4",
-      "data": {
-        "version": "4.2.4",
-        "packageName": "@atlaskit/chunkinator",
-        "hash": "sha512-tc9u6DvzN3C2J5z+lOmTA0fDBs3I6WfJk0S8O91ugpX6BTTCKkfKg0rixefpZaQSXuzI508rnOHkb9b0uof5LA=="
-      }
-    },
     "npm:@atlaskit/chunkinator@7.0.0": {
       "type": "npm",
       "name": "npm:@atlaskit/chunkinator@7.0.0",
@@ -1483,6 +1492,15 @@
         "version": "7.0.0",
         "packageName": "@atlaskit/chunkinator",
         "hash": "sha512-Htopjfo6OWpOdNdG9adSukZWaeEgwZ3z9m20jwbl6MZfHxMfdYQIwu49G+mb6pkZNu1QAiB3yHM3g0UMrwEuIA=="
+      }
+    },
+    "npm:@atlaskit/chunkinator@4.2.4": {
+      "type": "npm",
+      "name": "npm:@atlaskit/chunkinator@4.2.4",
+      "data": {
+        "version": "4.2.4",
+        "packageName": "@atlaskit/chunkinator",
+        "hash": "sha512-tc9u6DvzN3C2J5z+lOmTA0fDBs3I6WfJk0S8O91ugpX6BTTCKkfKg0rixefpZaQSXuzI508rnOHkb9b0uof5LA=="
       }
     },
     "npm:rxjs@5.5.12": {
@@ -1539,15 +1557,6 @@
         "hash": "sha512-Fo3oRYXYlC5cUJ5Ngef7ADUd6UY2OP1gkwWytFv6DX/pp0LV5oHqhk5wfnsrPkuG1rlNWUojoK19WWaniYLdkQ=="
       }
     },
-    "npm:@atlaskit/code@14.6.9": {
-      "type": "npm",
-      "name": "npm:@atlaskit/code@14.6.9",
-      "data": {
-        "version": "14.6.9",
-        "packageName": "@atlaskit/code",
-        "hash": "sha512-e0Nlses4qjGmuQyXyd1jUscxtGi1MSkYppSr1D5uszpawQPqEKKzt7+KHROZs1GzCTb8FTJZnP66RPEEDHNztQ=="
-      }
-    },
     "npm:@atlaskit/code@17.3.1": {
       "type": "npm",
       "name": "npm:@atlaskit/code@17.3.1",
@@ -1557,6 +1566,15 @@
         "hash": "sha512-BDNJV/CoFaNUSS9ek72aqgRt2Z5ZfFP5cTq0qYpY9zjVHpBeDRx0lIXCurpkRlzBgI/8KFa6Y38n3DD/oehdOQ=="
       }
     },
+    "npm:@atlaskit/code@14.6.9": {
+      "type": "npm",
+      "name": "npm:@atlaskit/code@14.6.9",
+      "data": {
+        "version": "14.6.9",
+        "packageName": "@atlaskit/code",
+        "hash": "sha512-e0Nlses4qjGmuQyXyd1jUscxtGi1MSkYppSr1D5uszpawQPqEKKzt7+KHROZs1GzCTb8FTJZnP66RPEEDHNztQ=="
+      }
+    },
     "npm:@atlaskit/codemod-utils": {
       "type": "npm",
       "name": "npm:@atlaskit/codemod-utils",
@@ -1564,6 +1582,15 @@
         "version": "4.2.5",
         "packageName": "@atlaskit/codemod-utils",
         "hash": "sha512-f7b7/BqfxbPtAfJXXgR8YfzOz9Mj912kBZB5Q/3ykKw9yvT8lQsZj6HOL7qMlHMutzPdz+uuF+duBVjybtNgCg=="
+      }
+    },
+    "npm:@atlaskit/css-reset": {
+      "type": "npm",
+      "name": "npm:@atlaskit/css-reset",
+      "data": {
+        "version": "7.3.9",
+        "packageName": "@atlaskit/css-reset",
+        "hash": "sha512-rl3YVvSS+tgKKAsUnTHiCxsFyfUFHeImIF0KNaaJIbFJqO6b1Cn+FBfRR6A+ya8ek2wkBX0tduFRmz5Xkd9xuA=="
       }
     },
     "npm:@atlaskit/custom-steps": {
@@ -1854,15 +1881,6 @@
         "hash": "sha512-AbYYLgg2h5CLARLcTtbNrMARlMwV51jTrezcJkV0NS9J4vi28+rhJ45iIWVSjCcRY209BoySDuJ58b8wIFqdmQ=="
       }
     },
-    "npm:prosemirror-view@1.23.2": {
-      "type": "npm",
-      "name": "npm:prosemirror-view@1.23.2",
-      "data": {
-        "version": "1.23.2",
-        "packageName": "prosemirror-view",
-        "hash": "sha512-iPgRw6tpcN+KH1yKmSnRmDKsJBVkWLFP6laHcz9rh/n0Ndz7YKKCDldtw6FhHBYoWmZeubbhV/rrQW0VCDG9iw=="
-      }
-    },
     "npm:prosemirror-view@1.31.6": {
       "type": "npm",
       "name": "npm:prosemirror-view@1.31.6",
@@ -1888,6 +1906,15 @@
         "version": "1.41.4",
         "packageName": "prosemirror-view",
         "hash": "sha512-WkKgnyjNncri03Gjaz3IFWvCAE94XoiEgvtr0/r2Xw7R8/IjK3sKLSiDoCHWcsXSAinVaKlGRZDvMCsF1kbzjA=="
+      }
+    },
+    "npm:prosemirror-view@1.23.2": {
+      "type": "npm",
+      "name": "npm:prosemirror-view@1.23.2",
+      "data": {
+        "version": "1.23.2",
+        "packageName": "prosemirror-view",
+        "hash": "sha512-iPgRw6tpcN+KH1yKmSnRmDKsJBVkWLFP6laHcz9rh/n0Ndz7YKKCDldtw6FhHBYoWmZeubbhV/rrQW0VCDG9iw=="
       }
     },
     "npm:prosemirror-view@1.37.1": {
@@ -1926,15 +1953,6 @@
         "hash": "sha512-3rIxdhaNdF4bBouBzdKzkYkZdF4nWPFxJe9Sr/NfmR5vhbPucZ6gtH1zCMw9QXQmcRMQ4SYhv+dkm/k4bWE0wg=="
       }
     },
-    "npm:@atlaskit/datetime-picker@12.10.6": {
-      "type": "npm",
-      "name": "npm:@atlaskit/datetime-picker@12.10.6",
-      "data": {
-        "version": "12.10.6",
-        "packageName": "@atlaskit/datetime-picker",
-        "hash": "sha512-gA3c4HK5DAVoUDsOPcP0bQgnHB/dQampsVwrhmuoRR7C63iQG8qASD8pS3YokrVhDiaaZQtAoTGdM26FsKZomw=="
-      }
-    },
     "npm:@atlaskit/datetime-picker@17.1.11": {
       "type": "npm",
       "name": "npm:@atlaskit/datetime-picker@17.1.11",
@@ -1944,6 +1962,15 @@
         "hash": "sha512-6CbqndyFPgY9X6jMX4Ina74K0GAam/TB0m3i5b4ClTLYp0b+ek4aQy8+/sRCfJ2mZWToRdt2HvYo5hGofGHFgA=="
       }
     },
+    "npm:@atlaskit/datetime-picker@12.10.6": {
+      "type": "npm",
+      "name": "npm:@atlaskit/datetime-picker@12.10.6",
+      "data": {
+        "version": "12.10.6",
+        "packageName": "@atlaskit/datetime-picker",
+        "hash": "sha512-gA3c4HK5DAVoUDsOPcP0bQgnHB/dQampsVwrhmuoRR7C63iQG8qASD8pS3YokrVhDiaaZQtAoTGdM26FsKZomw=="
+      }
+    },
     "npm:@atlaskit/layering@0.4.1": {
       "type": "npm",
       "name": "npm:@atlaskit/layering@0.4.1",
@@ -1951,6 +1978,15 @@
         "version": "0.4.1",
         "packageName": "@atlaskit/layering",
         "hash": "sha512-I1Y8Tm0BVJ6gijuAvliJO6fTvDKTA2wtnPqaGTh3pFURTbXfqFWKqjVR9DzbSbB40YyJ7C/rstoCWbcmXQ3KJg=="
+      }
+    },
+    "npm:@atlaskit/layering@3.4.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/layering@3.4.0",
+      "data": {
+        "version": "3.4.0",
+        "packageName": "@atlaskit/layering",
+        "hash": "sha512-6JkUGbkALkC/AedsbxY2m/465lRraLLvFMQ/mPN1oLMfzflMOiaHs4DLVW79R7iuR4ren8XOHAARVD36KPSflA=="
       }
     },
     "npm:@atlaskit/layering@0.2.5": {
@@ -1971,15 +2007,6 @@
         "hash": "sha512-UV9Rsng5+CRUT6NyUwoIr0k3iBa5pAteg2YsK5RVvUK1OXnG6VIxDtUqDejECTdbNiDcDYWGmlaNlMWE5PBS9w=="
       }
     },
-    "npm:@atlaskit/layering@3.4.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/layering@3.4.0",
-      "data": {
-        "version": "3.4.0",
-        "packageName": "@atlaskit/layering",
-        "hash": "sha512-6JkUGbkALkC/AedsbxY2m/465lRraLLvFMQ/mPN1oLMfzflMOiaHs4DLVW79R7iuR4ren8XOHAARVD36KPSflA=="
-      }
-    },
     "npm:@atlaskit/select@17.19.3": {
       "type": "npm",
       "name": "npm:@atlaskit/select@17.19.3",
@@ -1987,6 +2014,15 @@
         "version": "17.19.3",
         "packageName": "@atlaskit/select",
         "hash": "sha512-DzL9XnKOOamy1IfS60KRTNio3Km1qtWq6g6DmJOlOXStpL1Jr/fNGZrNyJ2UMiGdgXGHfegN5XqvWIWsy/jN/A=="
+      }
+    },
+    "npm:@atlaskit/select@21.4.2": {
+      "type": "npm",
+      "name": "npm:@atlaskit/select@21.4.2",
+      "data": {
+        "version": "21.4.2",
+        "packageName": "@atlaskit/select",
+        "hash": "sha512-Ywpg9NQZnL2Ux/n9FHui2KHhgBvK+mMA2hfHfnCvUkV/RpABCSkPUPQD7C/FHcug9ZviITyouFmfbcpODog4Rw=="
       }
     },
     "npm:@atlaskit/select": {
@@ -2007,15 +2043,6 @@
         "hash": "sha512-2VUABSaIzjqHxUdwpQCGnn/eDCZdxvUk84x+dusSm7JXdVtX7RYhoxiLYdCLftgVwKS3pjV+mCw9b7oAA8QVsA=="
       }
     },
-    "npm:@atlaskit/select@21.4.2": {
-      "type": "npm",
-      "name": "npm:@atlaskit/select@21.4.2",
-      "data": {
-        "version": "21.4.2",
-        "packageName": "@atlaskit/select",
-        "hash": "sha512-Ywpg9NQZnL2Ux/n9FHui2KHhgBvK+mMA2hfHfnCvUkV/RpABCSkPUPQD7C/FHcug9ZviITyouFmfbcpODog4Rw=="
-      }
-    },
     "npm:@atlaskit/spinner@16.3.6": {
       "type": "npm",
       "name": "npm:@atlaskit/spinner@16.3.6",
@@ -2023,6 +2050,15 @@
         "version": "16.3.6",
         "packageName": "@atlaskit/spinner",
         "hash": "sha512-H+/I0Xlnmit+kfl5ijqONHXEZAuZqXjmIl9e8TTinYtrWS8zAOTDVOuvnGaO0WPgnKRLzdlHbIg7/WEgOgywyw=="
+      }
+    },
+    "npm:@atlaskit/spinner@19.0.7": {
+      "type": "npm",
+      "name": "npm:@atlaskit/spinner@19.0.7",
+      "data": {
+        "version": "19.0.7",
+        "packageName": "@atlaskit/spinner",
+        "hash": "sha512-Z4tzPbLMrJ8CleHWaDTD6e+G0dq2WA1PHzsDBm5A1BxCYUKt7ZCgJp9gabr9KL/hcMd5xpmz3N1ney7RDi/t1Q=="
       }
     },
     "npm:@atlaskit/spinner": {
@@ -2041,15 +2077,6 @@
         "version": "15.6.1",
         "packageName": "@atlaskit/spinner",
         "hash": "sha512-PMsAF2oeIZIQ+DDiUThkDDBQxvhqNnMpMgbmAbSOEK+/MIUzmjZ1nwSMYSHRiimJ1H8pmDJZVoO+vhnUzG4pjA=="
-      }
-    },
-    "npm:@atlaskit/spinner@19.0.7": {
-      "type": "npm",
-      "name": "npm:@atlaskit/spinner@19.0.7",
-      "data": {
-        "version": "19.0.7",
-        "packageName": "@atlaskit/spinner",
-        "hash": "sha512-Z4tzPbLMrJ8CleHWaDTD6e+G0dq2WA1PHzsDBm5A1BxCYUKt7ZCgJp9gabr9KL/hcMd5xpmz3N1ney7RDi/t1Q=="
       }
     },
     "npm:@atlaskit/drawer": {
@@ -2079,15 +2106,6 @@
         "hash": "sha512-/LrzBMxx/+sTcXOd26Tt40fY7vdJhABcU5AkGWH7/QKyv7YcMidw5OaMHbhJfFbXn39MGeAwLp9e4jKX0YcK6w=="
       }
     },
-    "npm:@atlaskit/dropdown-menu@11.14.4": {
-      "type": "npm",
-      "name": "npm:@atlaskit/dropdown-menu@11.14.4",
-      "data": {
-        "version": "11.14.4",
-        "packageName": "@atlaskit/dropdown-menu",
-        "hash": "sha512-RXZxT54WXxvAR0Y60+zAlONp9r1GnTfD5Q4utpj4mzML+o/Ju5Zb8Nw+CV+47618/UEbTaBNe8bUsdb5vcvkfA=="
-      }
-    },
     "npm:@atlaskit/dropdown-menu@16.3.22": {
       "type": "npm",
       "name": "npm:@atlaskit/dropdown-menu@16.3.22",
@@ -2095,6 +2113,15 @@
         "version": "16.3.22",
         "packageName": "@atlaskit/dropdown-menu",
         "hash": "sha512-7vwADcu/z3qParW1nw1ilA4YSD+ZgJN0tZctXorUF9gtiQBMLqx7q1L7KrtAQXgOfeGEU4ifeVp/H++gYIn5Dw=="
+      }
+    },
+    "npm:@atlaskit/dropdown-menu@11.14.4": {
+      "type": "npm",
+      "name": "npm:@atlaskit/dropdown-menu@11.14.4",
+      "data": {
+        "version": "11.14.4",
+        "packageName": "@atlaskit/dropdown-menu",
+        "hash": "sha512-RXZxT54WXxvAR0Y60+zAlONp9r1GnTfD5Q4utpj4mzML+o/Ju5Zb8Nw+CV+47618/UEbTaBNe8bUsdb5vcvkfA=="
       }
     },
     "npm:@atlaskit/ds-explorations": {
@@ -2119,6 +2146,15 @@
       "type": "npm",
       "name": "npm:@atlaskit/editor-common",
       "data": {
+        "version": "110.39.1",
+        "packageName": "@atlaskit/editor-common",
+        "hash": "sha512-aQumIEL1ZIAxNNckzKdwckKmNhxPUXeY1mh8BELBFVYFp3ECFKsTU0L63lJQryiCw3DOFRYGt7c5Q0PuGvzWMA=="
+      }
+    },
+    "npm:@atlaskit/editor-common@73.0.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-common@73.0.0",
+      "data": {
         "version": "73.0.0",
         "packageName": "@atlaskit/editor-common",
         "hash": "sha512-dFOk9xdW79xD0LUWgDAcTF+sg0MZqV+01ktT8UEtesenjkMr5jKDw7pU8mIpr6u62xF4PIiNrOwSp2mh5VxGxQ=="
@@ -2142,375 +2178,6 @@
         "hash": "sha512-x3G0FdKpZ1oEd1zbRSd2yM5Y+q1rXA7u6RuuWtUh38U4qfjBFmizTysI9iwEGi9vujiW8lb0TnoUIz+ROlM3jA=="
       }
     },
-    "npm:bind-event-listener@2.1.1": {
-      "type": "npm",
-      "name": "npm:bind-event-listener@2.1.1",
-      "data": {
-        "version": "2.1.1",
-        "packageName": "bind-event-listener",
-        "hash": "sha512-O+a5c0D2se/u2VlBJmPRn45IB6R4mYMh1ok3dWxrIZ2pmLqzggBhb875mbq73508ylzofc0+hT9W41x4Y2s8lg=="
-      }
-    },
-    "npm:bind-event-listener": {
-      "type": "npm",
-      "name": "npm:bind-event-listener",
-      "data": {
-        "version": "3.0.0",
-        "packageName": "bind-event-listener",
-        "hash": "sha512-PJvH288AWQhKs2v9zyfYdPzlPqf5bXbGMmhmUIY9x4dAUGIWgomO771oBQNwJnMQSnUIXhKu6sgzpBRXTlvb8Q=="
-      }
-    },
-    "npm:@atlaskit/focus-ring@1.7.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/focus-ring@1.7.0",
-      "data": {
-        "version": "1.7.0",
-        "packageName": "@atlaskit/focus-ring",
-        "hash": "sha512-k+Ix8mat1MiB3Pn35NcNQetQSPG4oxAW/TZlJ1yaawRqvS14ymfWRP+5Rh+A3vSYHAoWBamytbd+jd4A5j33yA=="
-      }
-    },
-    "npm:@atlaskit/focus-ring": {
-      "type": "npm",
-      "name": "npm:@atlaskit/focus-ring",
-      "data": {
-        "version": "2.1.0",
-        "packageName": "@atlaskit/focus-ring",
-        "hash": "sha512-syUZ9n5fZYOZ6uHEoq4eLAtbFdEmckFJ5Mfp4Htlf7/0GlXV/0s1SKfXYoVTVPnr70y/JIp75DWJ4W67ilkTaw=="
-      }
-    },
-    "npm:@atlaskit/focus-ring@3.0.7": {
-      "type": "npm",
-      "name": "npm:@atlaskit/focus-ring@3.0.7",
-      "data": {
-        "version": "3.0.7",
-        "packageName": "@atlaskit/focus-ring",
-        "hash": "sha512-/UjZGdWOUdR3XafU4DOCXP65NOSaSMMaZ1HTrgAAUNs5kWA9FQqNC5lI4QeHSqze7sVASlhzjj63N1SUpsbe2g=="
-      }
-    },
-    "npm:@atlaskit/media-client@21.1.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-client@21.1.0",
-      "data": {
-        "version": "21.1.0",
-        "packageName": "@atlaskit/media-client",
-        "hash": "sha512-eB06HzTh6BVE9X97NEC6FsATbMGZmeXKLoqbxT8itQOdArAYQsyHSMgXEFlSLtHtUOWTCgVOKg12F55VckcbbQ=="
-      }
-    },
-    "npm:@atlaskit/media-client@24.0.3": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-client@24.0.3",
-      "data": {
-        "version": "24.0.3",
-        "packageName": "@atlaskit/media-client",
-        "hash": "sha512-i7jWs1RMlaJFCz9s8Dw7bp9EISx/VFXiPZFIr6a4ZnZVfkGdZaYyJb/Df+Kh4gsxGzNlBRsn9jn/ozwC7AS04A=="
-      }
-    },
-    "npm:@atlaskit/media-client@28.6.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-client@28.6.0",
-      "data": {
-        "version": "28.6.0",
-        "packageName": "@atlaskit/media-client",
-        "hash": "sha512-iFKDse7UsCHC4kEtKxLHLVfkQjTT/eltstSCxuMHg4IL52xA+2ySqU9/MWZmNqckOCWDEEst8zrXLl2sfXzkxw=="
-      }
-    },
-    "npm:@atlaskit/media-client@31.1.2": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-client@31.1.2",
-      "data": {
-        "version": "31.1.2",
-        "packageName": "@atlaskit/media-client",
-        "hash": "sha512-D2I/PIIORSQGA5MJwSiD9dQiPM1YYBKS/KrGMblxOyyVKt95axGgp7eO68KW05E2BwtCR9V2Lg5TlngAsxDwvA=="
-      }
-    },
-    "npm:@atlaskit/media-client@25.1.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-client@25.1.0",
-      "data": {
-        "version": "25.1.0",
-        "packageName": "@atlaskit/media-client",
-        "hash": "sha512-WSYOVk5rithqfQxkFAUJdXeRkdRCJLW6BodrOC3T9scVPtTp3ctZxve7ouxTABiz+aFluouTc0w1AjuxKvJpnA=="
-      }
-    },
-    "npm:@atlaskit/media-client@35.6.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-client@35.6.1",
-      "data": {
-        "version": "35.6.1",
-        "packageName": "@atlaskit/media-client",
-        "hash": "sha512-hGpWz9SzYbDbslkK7f11vADDQEd1gmYj6HmWRrEyY/UyZyJgdOhyUrRDioBs3RN4guZzYryQ8fDc4ykC8OyVmQ=="
-      }
-    },
-    "npm:@atlaskit/media-client@22.0.5": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-client@22.0.5",
-      "data": {
-        "version": "22.0.5",
-        "packageName": "@atlaskit/media-client",
-        "hash": "sha512-V3cgUBZdp6cFRFBGlIhsJD1d68tpjc6l5XTT2HcU7ZJaIPwoHzGNrfhOcYlFmfNQgs2ySLecO53p5APTVVwOEw=="
-      }
-    },
-    "npm:@atlaskit/media-client": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-client",
-      "data": {
-        "version": "26.3.0",
-        "packageName": "@atlaskit/media-client",
-        "hash": "sha512-BFLKVoObMSbEk9CcwpXM3jNYHRk77xk/wZQKeX1p9LEQZeLXSJbsCPKa9caT/HXmfsdZ8KRiNLXr+zpbFEc06Q=="
-      }
-    },
-    "npm:@atlaskit/media-client@27.6.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-client@27.6.1",
-      "data": {
-        "version": "27.6.1",
-        "packageName": "@atlaskit/media-client",
-        "hash": "sha512-nVorVvny8Z5H3/K3tcrYJUxInK2fZNlQt4x77yIzN7co3gOzEsMzFFRMMVCJTFMPGPVEzAj0HJsfbB2zbI93Ew=="
-      }
-    },
-    "npm:@atlaskit/mention@22.1.10": {
-      "type": "npm",
-      "name": "npm:@atlaskit/mention@22.1.10",
-      "data": {
-        "version": "22.1.10",
-        "packageName": "@atlaskit/mention",
-        "hash": "sha512-EzvsrMjrCJuAKBgSBrPn97zO1SHTY3BYDOBFveoFPApV7l1LuecU4WENZbzLYIfADjVE6DjfTYMe9wuRVEe/hg=="
-      }
-    },
-    "npm:@atlaskit/mention@24.4.3": {
-      "type": "npm",
-      "name": "npm:@atlaskit/mention@24.4.3",
-      "data": {
-        "version": "24.4.3",
-        "packageName": "@atlaskit/mention",
-        "hash": "sha512-ht5I/al8o4oH6BUPxgk5OrB733h0p3njZTNwJPdaNPBMbhlrJzkQWHHnwTUh5HzlYAwMKw4LxuNnROgD6jE42A=="
-      }
-    },
-    "npm:@atlaskit/mention": {
-      "type": "npm",
-      "name": "npm:@atlaskit/mention",
-      "data": {
-        "version": "23.11.4",
-        "packageName": "@atlaskit/mention",
-        "hash": "sha512-CrRuf9iUvnmUD2Y2Q5WL+H0fDmu9ltCR7eD8stErq/jEzyaX3iI6DkN+kRjAtuiu7eIPjZTc+R8GJtwVxSXMHQ=="
-      }
-    },
-    "npm:@atlaskit/ufo@0.2.7": {
-      "type": "npm",
-      "name": "npm:@atlaskit/ufo@0.2.7",
-      "data": {
-        "version": "0.2.7",
-        "packageName": "@atlaskit/ufo",
-        "hash": "sha512-a4Q6UTXIbAWKAy0xnh0k8+MqHA2D/A0gx5XQeuWFLiGkX3EwANmLe2KLqZ96YZ8OsWFrF/eZeQG1+mD7m+ef6w=="
-      }
-    },
-    "npm:@atlaskit/ufo@0.1.4": {
-      "type": "npm",
-      "name": "npm:@atlaskit/ufo@0.1.4",
-      "data": {
-        "version": "0.1.4",
-        "packageName": "@atlaskit/ufo",
-        "hash": "sha512-dxzTWiHXcU3l8+PuH+tg6qPJx45mOWpLAUIOGd4dGpVZQaoLkj3sCDAy0aOou3cxJ1oM94SodjsAixhtNXfnYA=="
-      }
-    },
-    "npm:@atlaskit/ufo": {
-      "type": "npm",
-      "name": "npm:@atlaskit/ufo",
-      "data": {
-        "version": "0.3.1",
-        "packageName": "@atlaskit/ufo",
-        "hash": "sha512-A8nb7Hzl8xCy3YM4cJoB/egUpiD85Ud5eGkYdpcs9AmX9Nc7gQAEs213Pqe/zZYykAxo4SPuVCJeuOVl1fi/Ew=="
-      }
-    },
-    "npm:@atlaskit/ufo@0.4.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/ufo@0.4.1",
-      "data": {
-        "version": "0.4.1",
-        "packageName": "@atlaskit/ufo",
-        "hash": "sha512-GHRP0miBb7MAzmv8iss3KDykqS3hF6MEw9odG+C/nsFuMwmsVmccYf/8mplczAUH3e7AGEMCoRX8e/yk9vC1hw=="
-      }
-    },
-    "npm:@atlaskit/menu@1.11.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/menu@1.11.1",
-      "data": {
-        "version": "1.11.1",
-        "packageName": "@atlaskit/menu",
-        "hash": "sha512-tsExGO6pvmYd01Ltz5Kc6JmZ4EW0HBgwFa+CDdiPKMkqRYHrN0NwbTCzxjjx9XMOVORiu0yY9wmrh+iSMGCPQA=="
-      }
-    },
-    "npm:@atlaskit/menu@8.4.11": {
-      "type": "npm",
-      "name": "npm:@atlaskit/menu@8.4.11",
-      "data": {
-        "version": "8.4.11",
-        "packageName": "@atlaskit/menu",
-        "hash": "sha512-Ic6Z+9lrZQnz2gQzAd7ag0NBonPXtQ2/dhomCRU3vc4XgyAWs5amnTS+WVhxV6pdfIiL3r7rp4YwHzHd8fhO/A=="
-      }
-    },
-    "npm:@atlaskit/menu": {
-      "type": "npm",
-      "name": "npm:@atlaskit/menu",
-      "data": {
-        "version": "2.14.4",
-        "packageName": "@atlaskit/menu",
-        "hash": "sha512-/b/etU4MsaeTW9+sRsSMI8O7Ez/nU+htLqc2nZVynONahhXeyfnL1PRohBgOx3f8DDvliuqTqZlAZfPJLV0fEQ=="
-      }
-    },
-    "npm:@atlaskit/motion@1.10.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/motion@1.10.0",
-      "data": {
-        "version": "1.10.0",
-        "packageName": "@atlaskit/motion",
-        "hash": "sha512-RvEvCVjKQPIyhFmQdQGuLOxnimuz2LysAmZUS0J1QFJfjg0kfGeVGdLkE76HADkEG3lrk6jzN02SoouEoLFyvw=="
-      }
-    },
-    "npm:@atlaskit/motion": {
-      "type": "npm",
-      "name": "npm:@atlaskit/motion",
-      "data": {
-        "version": "3.1.0",
-        "packageName": "@atlaskit/motion",
-        "hash": "sha512-Z8wwFjsjsNrSd/jqX0mqaPYKaUCLpcgrcfNgIAKL37bA0oeyaWZmqmg1Ru/vXmAvQMgoebTTBOPqX36OhSyySw=="
-      }
-    },
-    "npm:@atlaskit/motion@5.3.10": {
-      "type": "npm",
-      "name": "npm:@atlaskit/motion@5.3.10",
-      "data": {
-        "version": "5.3.10",
-        "packageName": "@atlaskit/motion",
-        "hash": "sha512-cERNNC2xz/knQ5BG073nffEkKiswFyFe9gBaxSp6Go+J9mc7a13879S2blSHuyMvfwFn1AuhdJCSbSY/c3mnNw=="
-      }
-    },
-    "npm:@atlaskit/in-product-testing@0.2.4": {
-      "type": "npm",
-      "name": "npm:@atlaskit/in-product-testing@0.2.4",
-      "data": {
-        "version": "0.2.4",
-        "packageName": "@atlaskit/in-product-testing",
-        "hash": "sha512-xlxD+3oBh/fslkJk3TZYJ0yEK4LmRlywlZYNfYzyjXe7IrbhwAJbVknRTWsUhnQeUeIA3QlGL4+dulg0Bjbn5w=="
-      }
-    },
-    "npm:@atlaskit/in-product-testing": {
-      "type": "npm",
-      "name": "npm:@atlaskit/in-product-testing",
-      "data": {
-        "version": "0.1.5",
-        "packageName": "@atlaskit/in-product-testing",
-        "hash": "sha512-vS6eFkQBInT0oAd9fuB1LSl4xQtQk69KVqXM1yyhHyGHLQ+T7pB9u0dnEwgUVaGxV5wSuvbz9JUGVeug1YlvWw=="
-      }
-    },
-    "npm:@atlaskit/popper@5.6.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/popper@5.6.0",
-      "data": {
-        "version": "5.6.0",
-        "packageName": "@atlaskit/popper",
-        "hash": "sha512-Xgyd/Zm91GLO6Km6+c5t2hQnWm5SICYumXetZVER/WNv53fd4yL2mM/QPl2SwIaC86fczUHwt3SzHiudOncJvg=="
-      }
-    },
-    "npm:@atlaskit/popper": {
-      "type": "npm",
-      "name": "npm:@atlaskit/popper",
-      "data": {
-        "version": "6.4.0",
-        "packageName": "@atlaskit/popper",
-        "hash": "sha512-YRRFOGnzstbcXng+il3m+4GUfmrddo3k7xBdfFG/C0OfrHacHekqi82OeR1Ct2lA45Mso86PzwMU/zBKtej7RA=="
-      }
-    },
-    "npm:@atlaskit/popper@7.1.6": {
-      "type": "npm",
-      "name": "npm:@atlaskit/popper@7.1.6",
-      "data": {
-        "version": "7.1.6",
-        "packageName": "@atlaskit/popper",
-        "hash": "sha512-Dm6GE1iBVi1w71atYgBvr/gtocOLLfKoXtiyofPsbMsw0lqbpjezeksFYWoX8s5iK0mHkdfXX/oelG7ZfuaXeA=="
-      }
-    },
-    "npm:eventemitter2@4.1.2": {
-      "type": "npm",
-      "name": "npm:eventemitter2@4.1.2",
-      "data": {
-        "version": "4.1.2",
-        "packageName": "eventemitter2",
-        "hash": "sha512-erx0niBaTi8B7ywjGAcg8ilGNRl/xs/o4MO2ZMpRlpZ62mYzjGTBlOpxxRIrPQqBs9mbXkEux6aR+Sc5vQ/wUw=="
-      }
-    },
-    "npm:eventemitter2": {
-      "type": "npm",
-      "name": "npm:eventemitter2",
-      "data": {
-        "version": "6.4.9",
-        "packageName": "eventemitter2",
-        "hash": "sha512-JEPTiaOt9f04oa6NOkc4aH+nVp5I3wEjpHbIPqfgCdD5v5bUzy7xQqwcVO2aDQgOWhI28da57HksMrzK9HlRxg=="
-      }
-    },
-    "npm:uuid@3.4.0": {
-      "type": "npm",
-      "name": "npm:uuid@3.4.0",
-      "data": {
-        "version": "3.4.0",
-        "packageName": "uuid",
-        "hash": "sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A=="
-      }
-    },
-    "npm:uuid@9.0.1": {
-      "type": "npm",
-      "name": "npm:uuid@9.0.1",
-      "data": {
-        "version": "9.0.1",
-        "packageName": "uuid",
-        "hash": "sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA=="
-      }
-    },
-    "npm:uuid": {
-      "type": "npm",
-      "name": "npm:uuid",
-      "data": {
-        "version": "8.3.2",
-        "packageName": "uuid",
-        "hash": "sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg=="
-      }
-    },
-    "npm:@atlaskit/editor-core": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-core",
-      "data": {
-        "version": "182.2.0",
-        "packageName": "@atlaskit/editor-core",
-        "hash": "sha512-nCAEPpYFciHZ/fiFHppmdmOUVDbOWtaqZUr3j/zrsk1pKM+4xLdTpBXi/rmZQ16QqN2VwoJQmFqJN1qw0BwyEQ=="
-      }
-    },
-    "npm:@atlaskit/date@0.9.12": {
-      "type": "npm",
-      "name": "npm:@atlaskit/date@0.9.12",
-      "data": {
-        "version": "0.9.12",
-        "packageName": "@atlaskit/date",
-        "hash": "sha512-sPMMicnmMgXJqzAI3T9cwspWWhozvzMdL7pqJZE2gFbZzcAn/jwLotOLhcOVjgbNrIOmPYXT7Uj6fywe0QDFyA=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-table@1.7.3": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-table@1.7.3",
-      "data": {
-        "version": "1.7.3",
-        "packageName": "@atlaskit/editor-plugin-table",
-        "hash": "sha512-aRPIlBDh7EbwDp53kz4kDOuHDl9pqoI+VUczMXZwZAvKsodITZ1/EV3Sc4ke0BwwuS4qY12pv+qe3SMtZ3yXsg=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-table": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-table",
-      "data": {
-        "version": "15.4.16",
-        "packageName": "@atlaskit/editor-plugin-table",
-        "hash": "sha512-ggzDIO5CDd8VJ1+PDCwiAs5pVuIHf6EmJv0W7RuvWuyA1ziik9I0hkYB5SJYIR7s+xOmKFeTOW4rni/ZQoi1fw=="
-      }
-    },
     "npm:@atlaskit/feature-gate-js-client@4.26.5": {
       "type": "npm",
       "name": "npm:@atlaskit/feature-gate-js-client@4.26.5",
@@ -2527,906 +2194,6 @@
         "version": "5.5.7",
         "packageName": "@atlaskit/feature-gate-js-client",
         "hash": "sha512-m2ATuJChdHLJdFxpfm5HPnBzjtg8yJFLdZmZguP24oFJI1562y7JbOSEmrRtbzyOIuuqjSUrcNA/el3+srkjrw=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-analytics@0.0.5": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-analytics@0.0.5",
-      "data": {
-        "version": "0.0.5",
-        "packageName": "@atlaskit/editor-plugin-analytics",
-        "hash": "sha512-Nw3LkiOKaFEOSCyhLuMPPR5y1VquUpym+BFCrqSiypba0JlkJCv/nqUWbbMfoUvV+tDnBTA9qqTPyTeVysnhEA=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-analytics": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-analytics",
-      "data": {
-        "version": "6.2.6",
-        "packageName": "@atlaskit/editor-plugin-analytics",
-        "hash": "sha512-NYGY6RD96fMaeWZlbmdStwj6yqnupw3Ornrzurddv+2cW0rawkH1gKoZDobZxnxVFlNfGHcbGef13Aat9ROI2A=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-content-insertion@0.0.5": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-content-insertion@0.0.5",
-      "data": {
-        "version": "0.0.5",
-        "packageName": "@atlaskit/editor-plugin-content-insertion",
-        "hash": "sha512-VARBU7kHa4mbjkcxAOLaISYUQGo8Fkl8uMzgosm7tVkL1dJ7NgPEvcrMzWF8qq5iohYX8ApjOnHTWCJqNtmGHA=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-content-insertion": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-content-insertion",
-      "data": {
-        "version": "6.0.0",
-        "packageName": "@atlaskit/editor-plugin-content-insertion",
-        "hash": "sha512-vafVO9sYbfw7tF6Uiu26SmwBY2h74Y+bnkDa2dZ7hsVbjLWfERF7sT6dPQ70EYRCMgF8tzZxR3I9HiOsP0MlMQ=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-feature-flags@0.1.9": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-feature-flags@0.1.9",
-      "data": {
-        "version": "0.1.9",
-        "packageName": "@atlaskit/editor-plugin-feature-flags",
-        "hash": "sha512-fDaXWn7WJFqRYpNKsUVaKEVOD/XphRAziMBIApV2CS2Yd7qQTQNS70p8C6MVahnS3gggzHafCLgD8JjotbKagg=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-feature-flags@5.0.2": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-feature-flags@5.0.2",
-      "data": {
-        "version": "5.0.2",
-        "packageName": "@atlaskit/editor-plugin-feature-flags",
-        "hash": "sha512-l2YNNM1xDE6+gnMxF1sZootD47Qo5Wi/RtsDr7ANkErV5YXaozSfifAFzmx8CIqQYxSI4t6EbvTbutU0GkofDg=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-feature-flags": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-feature-flags",
-      "data": {
-        "version": "0.0.4",
-        "packageName": "@atlaskit/editor-plugin-feature-flags",
-        "hash": "sha512-b55BDVrNX6OxfDkOlQl1VPBfesN1zgMxHdA1IYa+2fCuK7Bdqz6W5Re1tz1IFRuebCuQrdrZEAuls30JvP/pLA=="
-      }
-    },
-    "npm:@atlaskit/form@10.6.3": {
-      "type": "npm",
-      "name": "npm:@atlaskit/form@10.6.3",
-      "data": {
-        "version": "10.6.3",
-        "packageName": "@atlaskit/form",
-        "hash": "sha512-JEZlZjWcljIdIjaJx51PmYUqWRqWQ1+zAa/kEfEbOlS0mH0m3pPqww4bzw6azflXNGcOPka0WAWwsY8Xjmhlcw=="
-      }
-    },
-    "npm:@atlaskit/form@8.11.13": {
-      "type": "npm",
-      "name": "npm:@atlaskit/form@8.11.13",
-      "data": {
-        "version": "8.11.13",
-        "packageName": "@atlaskit/form",
-        "hash": "sha512-JFEkQEwlop9XlKAHvtFbwcgTVrJOlN+heT07H12V+7TxES0oA1lJPQlmMNgcq4f++/4p/v752p+K6IlWKXjTiw=="
-      }
-    },
-    "npm:@atlaskit/form@14.3.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/form@14.3.1",
-      "data": {
-        "version": "14.3.1",
-        "packageName": "@atlaskit/form",
-        "hash": "sha512-dWcRurtDTm2ozr3A6XD1NkCE/JHmVMBjMPShHkbejiaQV6+zqwoxkCeD2RjpqfS8lJreXpXvmN1D+B5PESV/fw=="
-      }
-    },
-    "npm:@atlaskit/form": {
-      "type": "npm",
-      "name": "npm:@atlaskit/form",
-      "data": {
-        "version": "11.2.0",
-        "packageName": "@atlaskit/form",
-        "hash": "sha512-FH9svvJt7DIEtANKWox/C1vyZQNYywhGZ1CVHyclavtK96AAQM8JTRsOfWaTJCZMtUBOylXTl44+LLA05+iF8A=="
-      }
-    },
-    "npm:@atlaskit/form@9.3.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/form@9.3.1",
-      "data": {
-        "version": "9.3.1",
-        "packageName": "@atlaskit/form",
-        "hash": "sha512-We6iqg9WMoT8tOvv/hA2v00RFeezBwJVx+U6rcdOhMqF2ylOomljwS8EmCkrreSRnXaQdiFsR6QiEWq+AYi6MA=="
-      }
-    },
-    "npm:@atlaskit/media-card@76.2.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-card@76.2.1",
-      "data": {
-        "version": "76.2.1",
-        "packageName": "@atlaskit/media-card",
-        "hash": "sha512-+O45jniBUVsNQFy7qJit/dCWSeZ3dnYg5/Mr8kzgaxgjHBtTBqR8fNCOka1HE8+j6PQBGlPqGRIkDdMKeVx7gA=="
-      }
-    },
-    "npm:@atlaskit/media-card@79.9.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-card@79.9.1",
-      "data": {
-        "version": "79.9.1",
-        "packageName": "@atlaskit/media-card",
-        "hash": "sha512-2OCd5rk/qv8Mxv5MXATKpn4sUsenVZvTBSUA8O8AJkKQAtXgczok4zEwjr7Zf7cCkf5gghReiuViRvOpVJnmEQ=="
-      }
-    },
-    "npm:@atlaskit/media-card": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-card",
-      "data": {
-        "version": "74.8.1",
-        "packageName": "@atlaskit/media-card",
-        "hash": "sha512-VapqNMtql7ekRdwjQitIMmgVzq4cLWYIFcpSGWySXOLuVl9/izA09tZfq9KFmYFedjQlZ2+oeC9treNKGGuzJw=="
-      }
-    },
-    "npm:@atlaskit/media-card@77.12.4": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-card@77.12.4",
-      "data": {
-        "version": "77.12.4",
-        "packageName": "@atlaskit/media-card",
-        "hash": "sha512-VrVg4SRifoTim6C1nAwBsFMEvo+irmXkuXTZsunhg6Qx3ranXMc+JU7kWEfGtghvAWyPPWLt1YlPpv2hfnSsqg=="
-      }
-    },
-    "npm:@atlaskit/media-common@9.0.3": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-common@9.0.3",
-      "data": {
-        "version": "9.0.3",
-        "packageName": "@atlaskit/media-common",
-        "hash": "sha512-uBJMZOk0CoE8DhDNrHdFyxLE/eS9vKcW5WQ86roE8z3FnbwD7JIvzm0an2BiSC5O9ufylgfDOk7Al5RLjFmqHw=="
-      }
-    },
-    "npm:@atlaskit/media-common@11.8.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-common@11.8.1",
-      "data": {
-        "version": "11.8.1",
-        "packageName": "@atlaskit/media-common",
-        "hash": "sha512-hqBS9s9rk+DfVibO4KJfRtQBm07TBpIp7+JvmVMU/a2izyESJRYDGe7JeiZi/PP2xUTZt0DWe/DW/J5ty4Gsug=="
-      }
-    },
-    "npm:@atlaskit/media-common@12.3.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-common@12.3.1",
-      "data": {
-        "version": "12.3.1",
-        "packageName": "@atlaskit/media-common",
-        "hash": "sha512-UoNhGc3cmv0X7lU1QX6o+wd1oYeppGbNwe9eVWhWfoVxEqWnobZOq9RICkI0qsedmYwUgjy+82z9spPZYGLfog=="
-      }
-    },
-    "npm:@atlaskit/media-common@5.0.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-common@5.0.0",
-      "data": {
-        "version": "5.0.0",
-        "packageName": "@atlaskit/media-common",
-        "hash": "sha512-P/A/CeYSbkoLvMTuYMWsPb5hlauavPBJ/6gUR3WjvtLt1pCz/LbjAv8HtJahx9D0065GOt8kzjxijpiJs5rGRg=="
-      }
-    },
-    "npm:@atlaskit/media-common": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-common",
-      "data": {
-        "version": "4.1.2",
-        "packageName": "@atlaskit/media-common",
-        "hash": "sha512-pwMCElC2R2kVPez3Q+q9m3Zq7F0ppwXBGQm1fxA9hktcnfwYSvTfmkRJqlC9LMLjPtmvxrW+DRv9jq0M5PaDaw=="
-      }
-    },
-    "npm:@atlaskit/media-picker@66.7.5": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-picker@66.7.5",
-      "data": {
-        "version": "66.7.5",
-        "packageName": "@atlaskit/media-picker",
-        "hash": "sha512-ksXBmif0IKxqHPyb2I3u/zGHka8vI+jD+xrnON85/QZwTQg7seb1nDdj46TlAjZRBu6o4AkIEg5CehDSGUY2qQ=="
-      }
-    },
-    "npm:@atlaskit/media-picker@70.1.3": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-picker@70.1.3",
-      "data": {
-        "version": "70.1.3",
-        "packageName": "@atlaskit/media-picker",
-        "hash": "sha512-UIGnLo0l5/z9akJ8pXTbQhYuvWkbYq+PnfYZ8JjpFHTQco4bSuqfCKVea0DDduETBNLqixoSluJnCztX9TH7dw=="
-      }
-    },
-    "npm:@atlaskit/media-picker": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-picker",
-      "data": {
-        "version": "64.4.0",
-        "packageName": "@atlaskit/media-picker",
-        "hash": "sha512-oGdK5BoxokSyvklGgM8eZs73Ub9curDFOaJ7YKeRhPaXbmg3ZB8fJ3uqf54I+fQ8fCmOQ9fHlF/1N/lrlmNp9g=="
-      }
-    },
-    "npm:@atlaskit/media-client-react@2.7.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-client-react@2.7.0",
-      "data": {
-        "version": "2.7.0",
-        "packageName": "@atlaskit/media-client-react",
-        "hash": "sha512-uoWglGwnuYTUmiWAedBbVcVSiek/c5GEXKKWItX56/XIX0sUV5nTxrwqeI+FFfbvGPaMUGtzYORPwkhWVwEMQA=="
-      }
-    },
-    "npm:@atlaskit/media-client-react@1.4.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-client-react@1.4.0",
-      "data": {
-        "version": "1.4.0",
-        "packageName": "@atlaskit/media-client-react",
-        "hash": "sha512-PHTda5sHHXSQJTUMHB89hH2UbaddkwqUyHbvS0AVd/tC7LOIokkzQhCCgLfi7Bi4X6pYyx1BYcMh3dc2cz2w9g=="
-      }
-    },
-    "npm:@atlaskit/media-client-react@4.1.2": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-client-react@4.1.2",
-      "data": {
-        "version": "4.1.2",
-        "packageName": "@atlaskit/media-client-react",
-        "hash": "sha512-TyMyYQgmmcpcgZS2kTNIiBy76mishCPKJiXSZbdxopckOqNkF1VhBiK9cxYUVim2tOhbMfI//v4DormMYTVcwQ=="
-      }
-    },
-    "npm:@atlaskit/media-client-react": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-client-react",
-      "data": {
-        "version": "3.0.1",
-        "packageName": "@atlaskit/media-client-react",
-        "hash": "sha512-NbYFsAoS5F3FkpK9YrmMbQT6EowqtBKVwr/r1Mvl1Wa4PT2xDps7g2Gl+WR7POTs6RKRrpUlCH8cPvlh13AcYw=="
-      }
-    },
-    "npm:@atlaskit/media-ui@26.2.6": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-ui@26.2.6",
-      "data": {
-        "version": "26.2.6",
-        "packageName": "@atlaskit/media-ui",
-        "hash": "sha512-HnYPGKdRrjMYdJda8dENEpiEPTioXeu2JRBeaJ841fGHhh8eifJFKN7uAgYmsKhk5/KtYtqyubadduF1m82HAA=="
-      }
-    },
-    "npm:@atlaskit/media-ui@24.0.3": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-ui@24.0.3",
-      "data": {
-        "version": "24.0.3",
-        "packageName": "@atlaskit/media-ui",
-        "hash": "sha512-87r5L24jYyAFxSudL1E17jVUuTGarO1IjiDqQnI6tWvC99076Ak0/uVhxqoNBTLWSn7+rD4qTPcLfaEe1j6zDg=="
-      }
-    },
-    "npm:@atlaskit/media-ui@25.16.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-ui@25.16.1",
-      "data": {
-        "version": "25.16.1",
-        "packageName": "@atlaskit/media-ui",
-        "hash": "sha512-DF9NAVg94iqTCoaAviWxl8Rtom3OhZDgnELWFjtVgKxi18n3YdYSEzO9ictfOj9Bcw/ieq3Fd/6YmfQE0DNRUw=="
-      }
-    },
-    "npm:@atlaskit/media-ui@28.7.17": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-ui@28.7.17",
-      "data": {
-        "version": "28.7.17",
-        "packageName": "@atlaskit/media-ui",
-        "hash": "sha512-IpXGK3YCVz8KAQb3TfQkjnDXeRJpACq6/qxi+jII5vHLMSm1aJ253eMfCB5CAFrIcZSInCVfOVaKGeBNrIUcwg=="
-      }
-    },
-    "npm:@atlaskit/media-ui": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-ui",
-      "data": {
-        "version": "22.4.1",
-        "packageName": "@atlaskit/media-ui",
-        "hash": "sha512-Vczrxr1JN+noPQXnsJ1P39wDgSs17Cs3md1crBqz5vSbV0egDm0Dv49ztA+yTvotqvccCNeJzjUNLxfvnB4E8Q=="
-      }
-    },
-    "npm:@atlaskit/section-message@7.0.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/section-message@7.0.0",
-      "data": {
-        "version": "7.0.0",
-        "packageName": "@atlaskit/section-message",
-        "hash": "sha512-gq1irGZNGda+eArPTVI4KAhpSimnsDhF3sstr+Z5cGRPK57esVYWL6hBdRXHqXggC0dqGi3fOBX1VCuyJattRg=="
-      }
-    },
-    "npm:@atlaskit/section-message@8.9.4": {
-      "type": "npm",
-      "name": "npm:@atlaskit/section-message@8.9.4",
-      "data": {
-        "version": "8.9.4",
-        "packageName": "@atlaskit/section-message",
-        "hash": "sha512-z1HTuwZBjXSWgH7gVk+r9YLgo+MmL3E58HjZ1CtrshlFs9GHld8DMdpArQr9p/IFAsZA8Nt4m+7F2lQmcQW/Og=="
-      }
-    },
-    "npm:@atlaskit/section-message": {
-      "type": "npm",
-      "name": "npm:@atlaskit/section-message",
-      "data": {
-        "version": "6.9.4",
-        "packageName": "@atlaskit/section-message",
-        "hash": "sha512-zGRpX2C+vvLDDWs8DghiyF3YKaVVNoM9pjU7zvWKOuhNXX28JgZrCh+HC8hlx5rHJ0NHVRuirEz1MBN4/MAsyQ=="
-      }
-    },
-    "npm:@atlaskit/media-viewer@48.10.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-viewer@48.10.1",
-      "data": {
-        "version": "48.10.1",
-        "packageName": "@atlaskit/media-viewer",
-        "hash": "sha512-7a0Ffx3hzjwwoxIa+h8FeYErYw69csqWeC/HSb3r9iroAs37+cKv3bb8enCaeUDKAZmbz+lkkarxTFzkWcQXHQ=="
-      }
-    },
-    "npm:@atlaskit/media-viewer@52.5.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-viewer@52.5.0",
-      "data": {
-        "version": "52.5.0",
-        "packageName": "@atlaskit/media-viewer",
-        "hash": "sha512-ptIlWljtJ145+eMSKoeaOh3rwqZz67W5oX/HMaOF4DN+93ECTmQvWbnN+izaaySqeJqpsdVe8zyfKyc1cxqdHg=="
-      }
-    },
-    "npm:@atlaskit/media-viewer": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-viewer",
-      "data": {
-        "version": "47.6.1",
-        "packageName": "@atlaskit/media-viewer",
-        "hash": "sha512-yyqfRUZU839Hi7ZK9Qr6ZoDsjfj0SHQdyB4dOu9grlLauSHWlBC/PFSTuoxOkKyHXY/ekv+XpBgo3c5FxD462A=="
-      }
-    },
-    "npm:@atlaskit/media-viewer@48.5.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-viewer@48.5.0",
-      "data": {
-        "version": "48.5.0",
-        "packageName": "@atlaskit/media-viewer",
-        "hash": "sha512-BL9daY+3cdk+iu5knjkyirmRkgr7fk3egSZba1Lt1PBKOXH+RQDf6HF+tmx+K9bWTMp3j305/VGCfXN9gZ0FcQ=="
-      }
-    },
-    "npm:@atlaskit/textfield@6.8.3": {
-      "type": "npm",
-      "name": "npm:@atlaskit/textfield@6.8.3",
-      "data": {
-        "version": "6.8.3",
-        "packageName": "@atlaskit/textfield",
-        "hash": "sha512-j2ApATx6N5tQICu61YTKYn8EtV/Qq01N/L6fM1UROaxaK97VFEyhBMy+7PhM3xCkDYIJPYrqkpEascJHL4A9Gw=="
-      }
-    },
-    "npm:@atlaskit/textfield@5.6.8": {
-      "type": "npm",
-      "name": "npm:@atlaskit/textfield@5.6.8",
-      "data": {
-        "version": "5.6.8",
-        "packageName": "@atlaskit/textfield",
-        "hash": "sha512-kUlbZIMn2/VrN83KGAAgJNjFjzVF4GB9Ifn+uXLSXXW1hq0D4q7b1f5Yy05crv2R68JXm88/+tjy29uAJ7v9Hw=="
-      }
-    },
-    "npm:@atlaskit/textfield@8.1.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/textfield@8.1.0",
-      "data": {
-        "version": "8.1.0",
-        "packageName": "@atlaskit/textfield",
-        "hash": "sha512-UXUiocK4J6vjWR606sOM0AEVKZ0TNdpYKuP1NQseXSNkPrWoPZNpSrFzOYwF/56qTdmVWmftc8ubqfksUOj8mQ=="
-      }
-    },
-    "npm:@atlaskit/textfield@6.3.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/textfield@6.3.0",
-      "data": {
-        "version": "6.3.0",
-        "packageName": "@atlaskit/textfield",
-        "hash": "sha512-WmDa/CUnAxFz1qjNrjU9n80QKurK8XRUbbTNOorFvAdzK/lwUM+1YecBbPy2byE1saE+URvo3ISx6Fqt8CU8pQ=="
-      }
-    },
-    "npm:@atlaskit/textfield": {
-      "type": "npm",
-      "name": "npm:@atlaskit/textfield",
-      "data": {
-        "version": "7.0.0",
-        "packageName": "@atlaskit/textfield",
-        "hash": "sha512-a/gL4kGNd5u+dEu7jFU7auCnsesNmeAuqKEPMOZ09jgmA46XQqc0sh/x+SCHm/WcUJouE7WcRgHHxD1w61KLkA=="
-      }
-    },
-    "npm:prosemirror-dropcursor@1.7.0": {
-      "type": "npm",
-      "name": "npm:prosemirror-dropcursor@1.7.0",
-      "data": {
-        "version": "1.7.0",
-        "packageName": "prosemirror-dropcursor",
-        "hash": "sha512-vzab/iPd3CjWILFv6WJz4+BlOwCywOcAGhvY5G/66OYPcaZehN8IVbGtHCV3oyhXk2yAA67nwMv/oNMvBV9k1A=="
-      }
-    },
-    "npm:prosemirror-dropcursor@1.3.5": {
-      "type": "npm",
-      "name": "npm:prosemirror-dropcursor@1.3.5",
-      "data": {
-        "version": "1.3.5",
-        "packageName": "prosemirror-dropcursor",
-        "hash": "sha512-tNUwcF2lPAkwKBZPZRtbxpwljnODRNZ3eiYloN1DSUqDjMT1nBZm0nejaEMS1TvNQ+3amibUSAiV4hX+jpASFA=="
-      }
-    },
-    "npm:prosemirror-dropcursor": {
-      "type": "npm",
-      "name": "npm:prosemirror-dropcursor",
-      "data": {
-        "version": "1.8.1",
-        "packageName": "prosemirror-dropcursor",
-        "hash": "sha512-M30WJdJZLyXHi3N8vxN6Zh5O8ZBbQCz0gURTfPmTIBNQ5pxrdU7A58QkNqfa98YEjSAL1HUyyU34f6Pm5xBSGw=="
-      }
-    },
-    "npm:@atlaskit/legacy-custom-icons@0.20.3": {
-      "type": "npm",
-      "name": "npm:@atlaskit/legacy-custom-icons@0.20.3",
-      "data": {
-        "version": "0.20.3",
-        "packageName": "@atlaskit/legacy-custom-icons",
-        "hash": "sha512-cuWADfpS4FmGgX8A7WAGGnjF1gUngyF1ApkYvpsC0rxeJTSCv+YbcsxtjYXgEjv+ch719Ke/Dw2AjzIF2jfDeA=="
-      }
-    },
-    "npm:@atlaskit/legacy-custom-icons@0.22.17": {
-      "type": "npm",
-      "name": "npm:@atlaskit/legacy-custom-icons@0.22.17",
-      "data": {
-        "version": "0.22.17",
-        "packageName": "@atlaskit/legacy-custom-icons",
-        "hash": "sha512-/WRBYA0deaeh1G2tA2xdWBV7hGujulI/d/97o/jQvARe4XRy4j8OF2wMiTRcls2p9Ta4vwXcIBrz9idn47uOEg=="
-      }
-    },
-    "npm:@atlaskit/legacy-custom-icons": {
-      "type": "npm",
-      "name": "npm:@atlaskit/legacy-custom-icons",
-      "data": {
-        "version": "0.21.2",
-        "packageName": "@atlaskit/legacy-custom-icons",
-        "hash": "sha512-ioe43n/SM5k+jBlZF4LGkH7Qo9W++ssa3cLdbXyZl+WoEfuqjBC5R9b5fx/Sw0LqqRLzWeev4fbSNiJGO+HudA=="
-      }
-    },
-    "npm:@atlaskit/link-analytics@7.0.5": {
-      "type": "npm",
-      "name": "npm:@atlaskit/link-analytics@7.0.5",
-      "data": {
-        "version": "7.0.5",
-        "packageName": "@atlaskit/link-analytics",
-        "hash": "sha512-MhsFLT85TTU/Pw1ypKdn5jEKmFgidqZilWbGgvE95k61Ctte3Egn5gTMu7f7DkE/vw3YxNgWEfpFHMQjbNc9PA=="
-      }
-    },
-    "npm:@atlaskit/link-analytics@11.0.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/link-analytics@11.0.1",
-      "data": {
-        "version": "11.0.1",
-        "packageName": "@atlaskit/link-analytics",
-        "hash": "sha512-kXnxDnPjGnv+XqYSQBZylB/3IYI7wWkn3SKhwRLBZJTM3Lq2ZmrX001mbMGJwhrlctwZf19nBYu7d5i5UjSxqQ=="
-      }
-    },
-    "npm:@atlaskit/link-analytics": {
-      "type": "npm",
-      "name": "npm:@atlaskit/link-analytics",
-      "data": {
-        "version": "8.7.1",
-        "packageName": "@atlaskit/link-analytics",
-        "hash": "sha512-k06bUO+TTOYc3diwi4+3ILvps6yh0tkN9Gv34LHsgW+btLWvh+MyOW5u/cyi+N2dheSIBChyjg9rS2DisVP+Xw=="
-      }
-    },
-    "npm:@atlaskit/linking-common@2.15.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/linking-common@2.15.0",
-      "data": {
-        "version": "2.15.0",
-        "packageName": "@atlaskit/linking-common",
-        "hash": "sha512-Me3vc+fl3wuZkVIJ0pwEOaTfYvEj1zy+dQI1rw7wKqHl+5g5B1gi6+/dgiN5hqwhRQooWmz7N56ymPwzJ+oMug=="
-      }
-    },
-    "npm:@atlaskit/linking-common@9.9.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/linking-common@9.9.0",
-      "data": {
-        "version": "9.9.0",
-        "packageName": "@atlaskit/linking-common",
-        "hash": "sha512-U7l/WWb6WKPBUd7m/dQkwZZ9u3q30TsP3E2OxENFWO82PwxdyggVXqHsP8ak5NspnNMWPqVs4R3cerQ++BvXIA=="
-      }
-    },
-    "npm:@atlaskit/linking-common@5.12.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/linking-common@5.12.0",
-      "data": {
-        "version": "5.12.0",
-        "packageName": "@atlaskit/linking-common",
-        "hash": "sha512-eOtoUsrQdI1IaXFhFV07o76rrnt3+c3m4CWWw+bImBGkKXm819ivgeZbrXky9Y3wQh7d4cRuiVklwUqYFQ58Og=="
-      }
-    },
-    "npm:@atlaskit/linking-common": {
-      "type": "npm",
-      "name": "npm:@atlaskit/linking-common",
-      "data": {
-        "version": "7.1.0",
-        "packageName": "@atlaskit/linking-common",
-        "hash": "sha512-xrE498OrrU1CUAeuIE/DQ/rsmL2iUBE8D//fIYAUs/YNqJEZzlGgIvbcZOlrD+KCzc3hMKHcg5YD2Iw+Z7MGnA=="
-      }
-    },
-    "npm:@atlaskit/logo@13.17.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/logo@13.17.0",
-      "data": {
-        "version": "13.17.0",
-        "packageName": "@atlaskit/logo",
-        "hash": "sha512-W55RUzrjdEsi+SxpIEb4wDnX6OM8rEY6Io5bH4nPrGpyGWtRqPpRwQP73lBTQJczuLauq4yJsuDVi5xcx4xc4g=="
-      }
-    },
-    "npm:@atlaskit/logo@19.9.5": {
-      "type": "npm",
-      "name": "npm:@atlaskit/logo@19.9.5",
-      "data": {
-        "version": "19.9.5",
-        "packageName": "@atlaskit/logo",
-        "hash": "sha512-TgZgtmkVv3PlEaCeUqXUdAI6N2uu80sMO3szj7S2X2UmFGOSLXJ6X1RJgcYBlRA2B81WWZzTcNCK6oO7iJNJmA=="
-      }
-    },
-    "npm:@atlaskit/logo": {
-      "type": "npm",
-      "name": "npm:@atlaskit/logo",
-      "data": {
-        "version": "15.4.0",
-        "packageName": "@atlaskit/logo",
-        "hash": "sha512-YOh3Fduy0/jDPbFfQL0i4+wC2TtRwEHNuGYbKzbLGVZSJQOCl80xV3hZ8dcz9iH2+j2PCOsJLZLynTwgzu7K3A=="
-      }
-    },
-    "npm:@atlaskit/media-filmstrip@46.1.7": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-filmstrip@46.1.7",
-      "data": {
-        "version": "46.1.7",
-        "packageName": "@atlaskit/media-filmstrip",
-        "hash": "sha512-vvy6yfxJuwZMTIrZNfj0FtRCeNUTStK94C5XoDNwDbBWEqf20w/pyFjqtBGyeltg+Tsci+eUc10278RHPRYUjQ=="
-      }
-    },
-    "npm:@atlaskit/media-filmstrip": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-filmstrip",
-      "data": {
-        "version": "51.1.4",
-        "packageName": "@atlaskit/media-filmstrip",
-        "hash": "sha512-y6v8o9EEoVQzJ3ilX+JGseXA72Hk/RbQ9xDQWGJo6nEEKDbCo1DFtMM4mPa7j+tJCQCG4CbhQKGKMIq8nQBn/Q=="
-      }
-    },
-    "npm:@atlaskit/media-svg@0.2.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-svg@0.2.1",
-      "data": {
-        "version": "0.2.1",
-        "packageName": "@atlaskit/media-svg",
-        "hash": "sha512-poDx658xwVf4/QOp3FRRlu/L89mNfh+0O4zOZlFORfZ7BrDE2MneM6y9/9i27J7akw5h91MaYPbl29Q9ee0HVQ=="
-      }
-    },
-    "npm:@atlaskit/media-svg@2.1.13": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-svg@2.1.13",
-      "data": {
-        "version": "2.1.13",
-        "packageName": "@atlaskit/media-svg",
-        "hash": "sha512-vls+9sTVv0dLT9LGt7dtjizE+eRLIV1/tu6ox0mqz5L4Daimy7P+KccdbdF4QPtF3uU/FaNUjtB4/iXB9BT8QA=="
-      }
-    },
-    "npm:@atlaskit/media-svg": {
-      "type": "npm",
-      "name": "npm:@atlaskit/media-svg",
-      "data": {
-        "version": "0.1.10",
-        "packageName": "@atlaskit/media-svg",
-        "hash": "sha512-s1F2fg/GI9Su4NnsUA+e3mm3wp2KsLpYHl7cLPqAuvEoeupnvJ2UP1rEu5RTKn0ktit/iYVIzqRv+EOI9Lw+Kw=="
-      }
-    },
-    "npm:@atlaskit/radio@5.6.10": {
-      "type": "npm",
-      "name": "npm:@atlaskit/radio@5.6.10",
-      "data": {
-        "version": "5.6.10",
-        "packageName": "@atlaskit/radio",
-        "hash": "sha512-gEo+xZ+mxyhaUaZDyipzEAzLeK1Y4Nj2B5wTkUjdDe8vsOEn3oa/h6QWnm39gi8OodDpdsmXZp6+Od0dqFXo0Q=="
-      }
-    },
-    "npm:@atlaskit/radio": {
-      "type": "npm",
-      "name": "npm:@atlaskit/radio",
-      "data": {
-        "version": "8.3.13",
-        "packageName": "@atlaskit/radio",
-        "hash": "sha512-RnN2u5btlG+Q1dPjvTqYDV3H4dF/jHuUO8N9kY8OoYP0P6ksuNOge9snGAhK6Jom+ZDOW3+P/BsxVMaTSl7mUQ=="
-      }
-    },
-    "npm:@atlaskit/tabs@13.4.9": {
-      "type": "npm",
-      "name": "npm:@atlaskit/tabs@13.4.9",
-      "data": {
-        "version": "13.4.9",
-        "packageName": "@atlaskit/tabs",
-        "hash": "sha512-8Fu7HQWbdkfMRnQ1ICFw6zvgiaR2rtrUNwYmnyHcqZg7fLyqv6jeclVLqtsq50fodJnFTWX8FvljmbDoiYUqDA=="
-      }
-    },
-    "npm:@atlaskit/tabs@18.2.4": {
-      "type": "npm",
-      "name": "npm:@atlaskit/tabs@18.2.4",
-      "data": {
-        "version": "18.2.4",
-        "packageName": "@atlaskit/tabs",
-        "hash": "sha512-uLWTR/KhFNlXf3KqBT0cKUJuFq18v1ngiqPg9ZqZB2/jGJQhe7KulwDTEF7WahYHrfgmxKOAu7lQd6quFihkIQ=="
-      }
-    },
-    "npm:@atlaskit/tabs": {
-      "type": "npm",
-      "name": "npm:@atlaskit/tabs",
-      "data": {
-        "version": "17.3.0",
-        "packageName": "@atlaskit/tabs",
-        "hash": "sha512-cT5DzCuAX1VrVGRPZJyxhEAliP6DsN4sypTc2b698pOxHKAAStkrdKNCXKshg4JhMQmzT9QtJXO+Wra92Fs7UQ=="
-      }
-    },
-    "npm:@atlaskit/textarea@4.7.7": {
-      "type": "npm",
-      "name": "npm:@atlaskit/textarea@4.7.7",
-      "data": {
-        "version": "4.7.7",
-        "packageName": "@atlaskit/textarea",
-        "hash": "sha512-KZZDhbhj5UkmfJewci8kWhpUVEbL/lx6/DwxUnTqc0GFprciIc4u4RxjtcB/KzDDyFBYwFAY515VmirqDncGQQ=="
-      }
-    },
-    "npm:@atlaskit/textarea@8.1.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/textarea@8.1.0",
-      "data": {
-        "version": "8.1.0",
-        "packageName": "@atlaskit/textarea",
-        "hash": "sha512-KLug3FmPMUsqAxowyC4DCFwU8ogW8q8MUt+knO9DX/JJ0hIoDFEBvdtd1XmxiJZdQSyVg3NVT9Ssd0HlKyn41Q=="
-      }
-    },
-    "npm:@atlaskit/textarea": {
-      "type": "npm",
-      "name": "npm:@atlaskit/textarea",
-      "data": {
-        "version": "5.8.2",
-        "packageName": "@atlaskit/textarea",
-        "hash": "sha512-6yw1q98K6b/7YHY6D2sMVpZBAjO+XfMdGaCvKkbgm5yoom/YX41n+GcEn2InkJv+5hF+cW7mXFrgdGqGVgWJmg=="
-      }
-    },
-    "npm:@atlaskit/toggle@12.6.11": {
-      "type": "npm",
-      "name": "npm:@atlaskit/toggle@12.6.11",
-      "data": {
-        "version": "12.6.11",
-        "packageName": "@atlaskit/toggle",
-        "hash": "sha512-IQfz33BKXai9gxbLIQsNRoGrQNHCU4g7eWdFkmJTDKuUjmX8u3+Kt4zWq45re9mh6YFVrupk4aegenpxK5tpCw=="
-      }
-    },
-    "npm:@atlaskit/toggle": {
-      "type": "npm",
-      "name": "npm:@atlaskit/toggle",
-      "data": {
-        "version": "15.1.15",
-        "packageName": "@atlaskit/toggle",
-        "hash": "sha512-m+g3zNXWLybYO4HXGb/fmRm0D1t8vsOWSWxZ2wSpSEMXQVa5waqGjDupYuxWxCWvL+L+vJrZEjvKtvJ6E4C7cw=="
-      }
-    },
-    "npm:entities@2.1.0": {
-      "type": "npm",
-      "name": "npm:entities@2.1.0",
-      "data": {
-        "version": "2.1.0",
-        "packageName": "entities",
-        "hash": "sha512-hCx1oky9PFrJ611mf0ifBLBRW8lUUVRlFolb5gWRfIELabBlbp9xZvrqZLZAs+NxFnbfQoeGd8wDkygjg7U85w=="
-      }
-    },
-    "npm:entities@3.0.1": {
-      "type": "npm",
-      "name": "npm:entities@3.0.1",
-      "data": {
-        "version": "3.0.1",
-        "packageName": "entities",
-        "hash": "sha512-WiyBqoomrwMdFG1e0kqvASYfnlb0lp8M5o5Fw2OFq1hNZxxcNk8Ik0Xm7LxzBhuidnZB/UtBqVCgUz3kBOP51Q=="
-      }
-    },
-    "npm:entities@4.5.0": {
-      "type": "npm",
-      "name": "npm:entities@4.5.0",
-      "data": {
-        "version": "4.5.0",
-        "packageName": "entities",
-        "hash": "sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw=="
-      }
-    },
-    "npm:entities": {
-      "type": "npm",
-      "name": "npm:entities",
-      "data": {
-        "version": "6.0.1",
-        "packageName": "entities",
-        "hash": "sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g=="
-      }
-    },
-    "npm:json-ld-types@3.7.0": {
-      "type": "npm",
-      "name": "npm:json-ld-types@3.7.0",
-      "data": {
-        "version": "3.7.0",
-        "packageName": "json-ld-types",
-        "hash": "sha512-UJBaBgCsA7NG8nc1xm4IFHgEsmz+Bcb+NoJ2JuV1zqI0Ue+DFgApNNgVgU4FIJyIbjRCpw/fg6mJDrUEm3h0vw=="
-      }
-    },
-    "npm:json-ld-types": {
-      "type": "npm",
-      "name": "npm:json-ld-types",
-      "data": {
-        "version": "4.1.3",
-        "packageName": "json-ld-types",
-        "hash": "sha512-0b4ZhXPINZXvbMXzs1EJIVOtmpbPh2pIunRPvshaRbODxhVIc3bLEmzFicITd1zV7lIBGMXSGiT9Q2Sm2uPueA=="
-      }
-    },
-    "npm:markdown-it@12.3.2": {
-      "type": "npm",
-      "name": "npm:markdown-it@12.3.2",
-      "data": {
-        "version": "12.3.2",
-        "packageName": "markdown-it",
-        "hash": "sha512-TchMembfxfNVpHkbtriWltGWc+m3xszaRD0CZup7GFFhzIgQqxIfn3eGj1yZpfuflzPvfkt611B2Q/Bsk1YnGg=="
-      }
-    },
-    "npm:markdown-it@13.0.2": {
-      "type": "npm",
-      "name": "npm:markdown-it@13.0.2",
-      "data": {
-        "version": "13.0.2",
-        "packageName": "markdown-it",
-        "hash": "sha512-FtwnEuuK+2yVU7goGn/MJ0WBZMM9ZPgU9spqlFs7/A/pDIUNSOQZhUgOqYCficIuR2QaFnrt8LHqBWsbTAoI5w=="
-      }
-    },
-    "npm:markdown-it": {
-      "type": "npm",
-      "name": "npm:markdown-it",
-      "data": {
-        "version": "14.1.0",
-        "packageName": "markdown-it",
-        "hash": "sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg=="
-      }
-    },
-    "npm:mdurl@1.0.1": {
-      "type": "npm",
-      "name": "npm:mdurl@1.0.1",
-      "data": {
-        "version": "1.0.1",
-        "packageName": "mdurl",
-        "hash": "sha512-/sKlQJCBYVY9Ers9hqzKou4H6V5UWc/M59TH2dvkt+84itfnq7uFOMLpOiOS4ujvHP4etln18fmIxA5R5fll0g=="
-      }
-    },
-    "npm:mdurl": {
-      "type": "npm",
-      "name": "npm:mdurl",
-      "data": {
-        "version": "2.0.0",
-        "packageName": "mdurl",
-        "hash": "sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w=="
-      }
-    },
-    "npm:mime@2.6.0": {
-      "type": "npm",
-      "name": "npm:mime@2.6.0",
-      "data": {
-        "version": "2.6.0",
-        "packageName": "mime",
-        "hash": "sha512-USPkMeET31rOMiarsBNIHZKLGgvKc/LrjofAnBlOttf5ajRvqiRA8QsenbcooctK6d6Ts6aqZXBA+XbkKthiQg=="
-      }
-    },
-    "npm:mime@1.6.0": {
-      "type": "npm",
-      "name": "npm:mime@1.6.0",
-      "data": {
-        "version": "1.6.0",
-        "packageName": "mime",
-        "hash": "sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg=="
-      }
-    },
-    "npm:mime": {
-      "type": "npm",
-      "name": "npm:mime",
-      "data": {
-        "version": "3.0.0",
-        "packageName": "mime",
-        "hash": "sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A=="
-      }
-    },
-    "npm:@atlaskit/editor-json-transformer": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-json-transformer",
-      "data": {
-        "version": "8.31.4",
-        "packageName": "@atlaskit/editor-json-transformer",
-        "hash": "sha512-ubZ8yJTwsZc9qz45hZGyVQ1gC1OsHA2HFVNoPReJ+ALSUAZ2LhVZBHMzjH3nENlmzEmAlsFxeo+UIsV/lQzdZg=="
-      }
-    },
-    "npm:@atlaskit/editor-markdown-transformer": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-markdown-transformer",
-      "data": {
-        "version": "5.20.4",
-        "packageName": "@atlaskit/editor-markdown-transformer",
-        "hash": "sha512-V8WV/ZmwxV5zceze4ka5Wd01Qr9jP+YnXc4gpKjRyorEfFjwcGOsLxWT99fLufqbimBlKYJGHIm1Q63IkmAyVg=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-accessibility-utils": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-accessibility-utils",
-      "data": {
-        "version": "6.0.1",
-        "packageName": "@atlaskit/editor-plugin-accessibility-utils",
-        "hash": "sha512-pB5wtSjGnke25OPIM/HsWPySjmo03WQMg4rW41+VPWkinn9vQWv0Jc++2ZijcyVQ3gQIkiYzkhq/jBcKp0rNBw=="
-      }
-    },
-    "npm:@atlaskit/tmp-editor-statsig@13.44.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/tmp-editor-statsig@13.44.0",
-      "data": {
-        "version": "13.44.0",
-        "packageName": "@atlaskit/tmp-editor-statsig",
-        "hash": "sha512-JXRehuecwRvSrclryNAOps0jpPeQM5Sjx9TpuGs/lxEZjRF6abDlpJl4DnbiL7j0QB3+7AZzyRkvK1wvicInkg=="
-      }
-    },
-    "npm:@atlaskit/tmp-editor-statsig": {
-      "type": "npm",
-      "name": "npm:@atlaskit/tmp-editor-statsig",
-      "data": {
-        "version": "14.8.0",
-        "packageName": "@atlaskit/tmp-editor-statsig",
-        "hash": "sha512-IFGRHBlpCwAYKmjPwkXJpBzW497AXd2pl65ZNnJDtugA8phE/77X5wNao/EpWMKWXun3COFF4GRUMGRmOLHZ3w=="
-      }
-    },
-    "npm:@atlaskit/visually-hidden@3.0.3": {
-      "type": "npm",
-      "name": "npm:@atlaskit/visually-hidden@3.0.3",
-      "data": {
-        "version": "3.0.3",
-        "packageName": "@atlaskit/visually-hidden",
-        "hash": "sha512-tU2KX0Hdn4DTL0DejO5j27RuySBdWRQQNVEvmNs20F5YnVQla/wGt1a85Y0widuBOn3H/RgTRuHPsChk9fimHg=="
-      }
-    },
-    "npm:@atlaskit/visually-hidden": {
-      "type": "npm",
-      "name": "npm:@atlaskit/visually-hidden",
-      "data": {
-        "version": "1.6.0",
-        "packageName": "@atlaskit/visually-hidden",
-        "hash": "sha512-czJDoFENmVAhy0ZUDhBkjS/SdO3q5e6qSvlueBgZf0Nf6AV7niStZUAt56Kd+OujM7O+pscIdaME7Mks5D5sJQ=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-alignment": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-alignment",
-      "data": {
-        "version": "7.1.12",
-        "packageName": "@atlaskit/editor-plugin-alignment",
-        "hash": "sha512-j8xQeA7ktTLOD2dQN7VP2N//oxv9fDQc3WkGuFrO6O8wC8fbxTRKkIzrObTMDeREAzJXyFVI1/u50IOX6I0Sxw=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-annotation": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-annotation",
-      "data": {
-        "version": "6.3.0",
-        "packageName": "@atlaskit/editor-plugin-annotation",
-        "hash": "sha512-CK+kqVwOwKzpl6sXlX/8kzn3XfKzL6jp/oYCPUlEX0AFrZXnqwvIpgAS50NA4rwT6WHKcMpU4PvT53LVzQd7yg=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-avatar-group": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-avatar-group",
-      "data": {
-        "version": "7.0.4",
-        "packageName": "@atlaskit/editor-plugin-avatar-group",
-        "hash": "sha512-K6DDoNXESPsplyHOrBfnwRs+7nBOIF5V4PEw1zr7fw8vaUexg/UMMGTbQz0I/yqXqDsk2TX6RqHIq+i7mzzNtg=="
       }
     },
     "npm:@atlaskit/editor-shared-styles@3.10.2": {
@@ -3447,211 +2214,22 @@
         "hash": "sha512-SlnHvC/78y02zlTe3shL0njuVy4bwzgnzsqwr1H8/0gzBbPa7t+2v2D0bTvbVDM+Bl/uDmwyAAFQqznZhQOSYA=="
       }
     },
-    "npm:@atlaskit/popup@4.6.4": {
+    "npm:@atlaskit/emoji@69.9.0": {
       "type": "npm",
-      "name": "npm:@atlaskit/popup@4.6.4",
+      "name": "npm:@atlaskit/emoji@69.9.0",
       "data": {
-        "version": "4.6.4",
-        "packageName": "@atlaskit/popup",
-        "hash": "sha512-ISZv0G6ZP1VQqIhJ3/CGRi66spZzsO1GOMQueyX3vUo6vFl94jYmJsP05WiwkB/ibf1slAKxEc1ailhda13HVg=="
+        "version": "69.9.0",
+        "packageName": "@atlaskit/emoji",
+        "hash": "sha512-0KJCQR/E1dhLzigA324xytQzo2AJluxnz5Y2exDROSpc9RXDwKmHR1fSRGdWmzl60JiKZpwYXj+eeDPOy12LYw=="
       }
     },
-    "npm:@atlaskit/popup": {
+    "npm:@atlaskit/emoji": {
       "type": "npm",
-      "name": "npm:@atlaskit/popup",
+      "name": "npm:@atlaskit/emoji",
       "data": {
-        "version": "1.32.0",
-        "packageName": "@atlaskit/popup",
-        "hash": "sha512-sarQ84k+0Ifc9ZnuaNvu2T14CUbcMfMMC2WivF1nQfjebdRr1NGdRD3THXt+U/+KhjUyrWh1Dl1giX0J1Ub9vg=="
-      }
-    },
-    "npm:@atlaskit/portal@5.1.8": {
-      "type": "npm",
-      "name": "npm:@atlaskit/portal@5.1.8",
-      "data": {
-        "version": "5.1.8",
-        "packageName": "@atlaskit/portal",
-        "hash": "sha512-MwvhwnJfWQvdrVu9JKdqfhWhRNHLPfMF8zrCz6rhlUr3YDZMy8XcYDgnGg/p3zxbFycgXr2fvP3ra8a73F37bQ=="
-      }
-    },
-    "npm:@atlaskit/portal": {
-      "type": "npm",
-      "name": "npm:@atlaskit/portal",
-      "data": {
-        "version": "4.11.3",
-        "packageName": "@atlaskit/portal",
-        "hash": "sha512-AGxSyV7UAkGdos5MzJ2HShev1F8u+b3E8zS5uzI0N00hfnj8xGAhFtHij/sfmwremEE1hyYJCbVFAMxybs1ziQ=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-base": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-base",
-      "data": {
-        "version": "7.2.7",
-        "packageName": "@atlaskit/editor-plugin-base",
-        "hash": "sha512-eGtSHY1M9k+xmoeO4O9n/oj4WfYG/xGjpyPRqyKkgWGFfYdWurx0R3dPW5cYtzObTOo4bwNf59bVjYC/HmK6sw=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-batch-attribute-updates": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-batch-attribute-updates",
-      "data": {
-        "version": "6.1.4",
-        "packageName": "@atlaskit/editor-plugin-batch-attribute-updates",
-        "hash": "sha512-ctIkSEuB/FCnTs8qQfQPQe9K6mjWRuxke3YIDgrrlCvWVTLioq0KzmFtTwpDbIZR2FL6RL6KA6+QpSHv/oz3cQ=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-before-primary-toolbar": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-before-primary-toolbar",
-      "data": {
-        "version": "6.0.2",
-        "packageName": "@atlaskit/editor-plugin-before-primary-toolbar",
-        "hash": "sha512-jwHwVwji3kEz5OMhkNp9J+wBHzgcsHHxIoWSQm/y+qmkB9DN1zWC6bhGCrHwBrryQgvaXB6+RivLowBA0z5dhw=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-better-type-history": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-better-type-history",
-      "data": {
-        "version": "6.1.2",
-        "packageName": "@atlaskit/editor-plugin-better-type-history",
-        "hash": "sha512-tLUWVQj11mFinro5LLidozc//qRaWqszlBhxrY5WYKizUKbqca+Xikc3klGoXNNKMSJEpNMwIRIIPl7kPkH9OA=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-block-controls": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-block-controls",
-      "data": {
-        "version": "7.13.0",
-        "packageName": "@atlaskit/editor-plugin-block-controls",
-        "hash": "sha512-wVdqQC8JKXRcg8rq75pZyCcjgTXwWokorqd9MPO0pN9uLF8OuVS5Rd81SWWvwW3OqinXYiuz7AdQayY6ZBkNXQ=="
-      }
-    },
-    "npm:@atlaskit/pragmatic-drag-and-drop-react-drop-indicator@3.2.9": {
-      "type": "npm",
-      "name": "npm:@atlaskit/pragmatic-drag-and-drop-react-drop-indicator@3.2.9",
-      "data": {
-        "version": "3.2.9",
-        "packageName": "@atlaskit/pragmatic-drag-and-drop-react-drop-indicator",
-        "hash": "sha512-cD0fnwQ5B4EdVLyA/+iWyDqj9CisbjHZEnwLcaUcr7IfKUuawLqhK7sKZ0N9LjIFCJJLngYTwPgKvj1S1rjsTQ=="
-      }
-    },
-    "npm:@atlaskit/pragmatic-drag-and-drop-react-drop-indicator": {
-      "type": "npm",
-      "name": "npm:@atlaskit/pragmatic-drag-and-drop-react-drop-indicator",
-      "data": {
-        "version": "1.2.0",
-        "packageName": "@atlaskit/pragmatic-drag-and-drop-react-drop-indicator",
-        "hash": "sha512-WQSuS2xi5SCivF+gLdnfGRxWOgdE9Bx/KQYsZuTqYApJ1kdoxuGO2r9hIlXU6LiyYFGzoTRVNnhz23PQPQqyOQ=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-block-menu": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-block-menu",
-      "data": {
-        "version": "5.1.7",
-        "packageName": "@atlaskit/editor-plugin-block-menu",
-        "hash": "sha512-X2s3W9CwY4wUFV6m5fkOPLfFGl5BJFZdj2+bsF1p0HYFez4w/CbisDIu+J94oGh/U4SM1jlkACa6G82gt8kqQg=="
-      }
-    },
-    "npm:@atlaskit/flag@17.5.8": {
-      "type": "npm",
-      "name": "npm:@atlaskit/flag@17.5.8",
-      "data": {
-        "version": "17.5.8",
-        "packageName": "@atlaskit/flag",
-        "hash": "sha512-VFm3fWvfKH9VLdO/5B3iNZMflYRRqqxpmWsf7/6vRlSqY5uzbJT8R1b+mMu8w6UbiWPDtZalA9brhPLELOHfCA=="
-      }
-    },
-    "npm:@atlaskit/flag": {
-      "type": "npm",
-      "name": "npm:@atlaskit/flag",
-      "data": {
-        "version": "15.9.4",
-        "packageName": "@atlaskit/flag",
-        "hash": "sha512-SERNebLJAp2ZHZyAf2LgVmpCUDJzrcUDPRFy1i3p00os37J8X+YpySwJcbWAz8qkyoasSJrKe/RSft/p02P8nQ=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-block-type": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-block-type",
-      "data": {
-        "version": "10.2.20",
-        "packageName": "@atlaskit/editor-plugin-block-type",
-        "hash": "sha512-WDpGjXBqwsm7dc+x1VZpgS9QATAayXdUhR1SPDJCPAXN3yzDuiCPaAl0MgUURIXds9cOyIZzQNypoIhTSI4wYQ=="
-      }
-    },
-    "npm:@atlaskit/icon-lab@5.12.1": {
-      "type": "npm",
-      "name": "npm:@atlaskit/icon-lab@5.12.1",
-      "data": {
-        "version": "5.12.1",
-        "packageName": "@atlaskit/icon-lab",
-        "hash": "sha512-mgnt4An16fkxWSS7jfoIGw+Tzt7zXsG6DOyKCnS7znmp8om5uAL3lQeKdh0XQuAqZ3I2xEsZzSv/YxQb+lq/1A=="
-      }
-    },
-    "npm:@atlaskit/icon-lab": {
-      "type": "npm",
-      "name": "npm:@atlaskit/icon-lab",
-      "data": {
-        "version": "2.8.0",
-        "packageName": "@atlaskit/icon-lab",
-        "hash": "sha512-3niWzuMAXRkISgkOWNkr9DekCP4V6BWyw69L5SWCV7Fitypssg00DRVEBs2gjeAorRmwgCJIEtPZg6+C1FDB6w=="
-      }
-    },
-    "npm:@atlaskit/prosemirror-input-rules@3.6.6": {
-      "type": "npm",
-      "name": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
-      "data": {
-        "version": "3.6.6",
-        "packageName": "@atlaskit/prosemirror-input-rules",
-        "hash": "sha512-3eejrcRQ8VL/yciFOaAzlhEZr/chLhT2VXu7hwUTHD7LAegyzmcj9jeCddEHxcHq9EWcM/OMWUgl9mQqmp7IIQ=="
-      }
-    },
-    "npm:@atlaskit/prosemirror-input-rules": {
-      "type": "npm",
-      "name": "npm:@atlaskit/prosemirror-input-rules",
-      "data": {
-        "version": "2.4.6",
-        "packageName": "@atlaskit/prosemirror-input-rules",
-        "hash": "sha512-GByJkWrYEUfKFatFWdf/PYRgYgfIOqaLi0MEVS+cr84Y8zjFgEYfZ1bhwL51VUqf6d9IHXJ2tHpemESUkaKwdQ=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-border": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-border",
-      "data": {
-        "version": "6.1.4",
-        "packageName": "@atlaskit/editor-plugin-border",
-        "hash": "sha512-wk9yF6KF6ANdf2Gpg77LTDvtKiFa9JStwQ9nE10MeK65HKg+T3YV7zRUG17d/11cjXBeujV1dkXlemusevZZWQ=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-breakout": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-breakout",
-      "data": {
-        "version": "6.2.3",
-        "packageName": "@atlaskit/editor-plugin-breakout",
-        "hash": "sha512-iBCAg2pbt63K2iFjpmi2PY+BuY3yqZ6d9BrIAThrDUhrcueq6BY9MkzA6jU3a8iERigedMAe4iubYh6CDC0H8Q=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-caption": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-caption",
-      "data": {
-        "version": "6.1.4",
-        "packageName": "@atlaskit/editor-plugin-caption",
-        "hash": "sha512-l9UvBmGq7hz3IqKG+HZAeez9Nt7XjS5pkd6IvvWwRjWWidVBqzXWnPKl1aUcuejdDHGhAV+azGSMIaD/gcEiUg=="
-      }
-    },
-    "npm:@atlaskit/editor-plugin-card": {
-      "type": "npm",
-      "name": "npm:@atlaskit/editor-plugin-card",
-      "data": {
-        "version": "11.5.10",
-        "packageName": "@atlaskit/editor-plugin-card",
-        "hash": "sha512-w47c6nziWcNizGEJPuji6hwx/K/Ofy/NhQcTsOYtYbYobugVPOwUh9bUSriv+cr1GgzditZwvhb9BjWfYcdnPA=="
+        "version": "67.14.4",
+        "packageName": "@atlaskit/emoji",
+        "hash": "sha512-MFunrAfxN4nqySPZY4sOuvKS6QFuuBIaBK6fvntq2WaI9AUIm0UW9Qa4FhJrmfdXKqGyq45cl1pV//FZzr5T9A=="
       }
     },
     "npm:@atlaskit/empty-state@10.1.9": {
@@ -3672,6 +2250,96 @@
         "hash": "sha512-3WHw2g8Q6agremXFMRaFTb9ZaPjTUSWwYCPmbu0gb2QUbqjEi3m7RPSUWnzyH2Df5febkTHXU/L225S9mKmUgw=="
       }
     },
+    "npm:@atlaskit/flag@17.5.8": {
+      "type": "npm",
+      "name": "npm:@atlaskit/flag@17.5.8",
+      "data": {
+        "version": "17.5.8",
+        "packageName": "@atlaskit/flag",
+        "hash": "sha512-VFm3fWvfKH9VLdO/5B3iNZMflYRRqqxpmWsf7/6vRlSqY5uzbJT8R1b+mMu8w6UbiWPDtZalA9brhPLELOHfCA=="
+      }
+    },
+    "npm:@atlaskit/flag": {
+      "type": "npm",
+      "name": "npm:@atlaskit/flag",
+      "data": {
+        "version": "15.9.4",
+        "packageName": "@atlaskit/flag",
+        "hash": "sha512-SERNebLJAp2ZHZyAf2LgVmpCUDJzrcUDPRFy1i3p00os37J8X+YpySwJcbWAz8qkyoasSJrKe/RSft/p02P8nQ=="
+      }
+    },
+    "npm:@atlaskit/focus-ring@3.0.7": {
+      "type": "npm",
+      "name": "npm:@atlaskit/focus-ring@3.0.7",
+      "data": {
+        "version": "3.0.7",
+        "packageName": "@atlaskit/focus-ring",
+        "hash": "sha512-/UjZGdWOUdR3XafU4DOCXP65NOSaSMMaZ1HTrgAAUNs5kWA9FQqNC5lI4QeHSqze7sVASlhzjj63N1SUpsbe2g=="
+      }
+    },
+    "npm:@atlaskit/focus-ring": {
+      "type": "npm",
+      "name": "npm:@atlaskit/focus-ring",
+      "data": {
+        "version": "2.1.0",
+        "packageName": "@atlaskit/focus-ring",
+        "hash": "sha512-syUZ9n5fZYOZ6uHEoq4eLAtbFdEmckFJ5Mfp4Htlf7/0GlXV/0s1SKfXYoVTVPnr70y/JIp75DWJ4W67ilkTaw=="
+      }
+    },
+    "npm:@atlaskit/focus-ring@1.7.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/focus-ring@1.7.0",
+      "data": {
+        "version": "1.7.0",
+        "packageName": "@atlaskit/focus-ring",
+        "hash": "sha512-k+Ix8mat1MiB3Pn35NcNQetQSPG4oxAW/TZlJ1yaawRqvS14ymfWRP+5Rh+A3vSYHAoWBamytbd+jd4A5j33yA=="
+      }
+    },
+    "npm:@atlaskit/form@14.3.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/form@14.3.1",
+      "data": {
+        "version": "14.3.1",
+        "packageName": "@atlaskit/form",
+        "hash": "sha512-dWcRurtDTm2ozr3A6XD1NkCE/JHmVMBjMPShHkbejiaQV6+zqwoxkCeD2RjpqfS8lJreXpXvmN1D+B5PESV/fw=="
+      }
+    },
+    "npm:@atlaskit/form@10.6.3": {
+      "type": "npm",
+      "name": "npm:@atlaskit/form@10.6.3",
+      "data": {
+        "version": "10.6.3",
+        "packageName": "@atlaskit/form",
+        "hash": "sha512-JEZlZjWcljIdIjaJx51PmYUqWRqWQ1+zAa/kEfEbOlS0mH0m3pPqww4bzw6azflXNGcOPka0WAWwsY8Xjmhlcw=="
+      }
+    },
+    "npm:@atlaskit/form@8.11.13": {
+      "type": "npm",
+      "name": "npm:@atlaskit/form@8.11.13",
+      "data": {
+        "version": "8.11.13",
+        "packageName": "@atlaskit/form",
+        "hash": "sha512-JFEkQEwlop9XlKAHvtFbwcgTVrJOlN+heT07H12V+7TxES0oA1lJPQlmMNgcq4f++/4p/v752p+K6IlWKXjTiw=="
+      }
+    },
+    "npm:@atlaskit/form": {
+      "type": "npm",
+      "name": "npm:@atlaskit/form",
+      "data": {
+        "version": "11.2.0",
+        "packageName": "@atlaskit/form",
+        "hash": "sha512-FH9svvJt7DIEtANKWox/C1vyZQNYywhGZ1CVHyclavtK96AAQM8JTRsOfWaTJCZMtUBOylXTl44+LLA05+iF8A=="
+      }
+    },
+    "npm:@atlaskit/form@9.3.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/form@9.3.1",
+      "data": {
+        "version": "9.3.1",
+        "packageName": "@atlaskit/form",
+        "hash": "sha512-We6iqg9WMoT8tOvv/hA2v00RFeezBwJVx+U6rcdOhMqF2ylOomljwS8EmCkrreSRnXaQdiFsR6QiEWq+AYi6MA=="
+      }
+    },
     "npm:@atlaskit/frontend-utilities@3.2.2": {
       "type": "npm",
       "name": "npm:@atlaskit/frontend-utilities@3.2.2",
@@ -3690,6 +2358,24 @@
         "hash": "sha512-HBIcmpsCfistTRnZRe2XDKDkpv6WdfS4mJr9YXYKEqQn7wTGpQ2ihzT7Hl1U6zLBR9ah/f9d23FWDnai1nVrWA=="
       }
     },
+    "npm:@atlaskit/give-kudos@4.4.8": {
+      "type": "npm",
+      "name": "npm:@atlaskit/give-kudos@4.4.8",
+      "data": {
+        "version": "4.4.8",
+        "packageName": "@atlaskit/give-kudos",
+        "hash": "sha512-ESZu/9PAAMCaiD+qCtLycDPsP/SYC2Ohgo65Kf2jCiF1Gy3KpgotliJnQTurHkHcLORRy/vouPKcaMFSwB/SuA=="
+      }
+    },
+    "npm:@atlaskit/give-kudos": {
+      "type": "npm",
+      "name": "npm:@atlaskit/give-kudos",
+      "data": {
+        "version": "2.3.2",
+        "packageName": "@atlaskit/give-kudos",
+        "hash": "sha512-mBKMwDLs/cjQVeyDN6SMEQfIq47P7Y/XX48N2cwVVWuYsiPKVXELdzN4cc30buRKTl4NR0yD6JC6KBRgrDpIoA=="
+      }
+    },
     "npm:@atlaskit/icon-file-type@7.0.7": {
       "type": "npm",
       "name": "npm:@atlaskit/icon-file-type@7.0.7",
@@ -3706,6 +2392,24 @@
         "version": "6.9.0",
         "packageName": "@atlaskit/icon-file-type",
         "hash": "sha512-t1SQiHEDvA6NgP/UJD5rnDPCJi5c0806smHXoUrUElkjJXtuIcsQrCQKRSXPdFHf6hJ6+EexIprvuhq0GnXiww=="
+      }
+    },
+    "npm:@atlaskit/icon-lab@5.12.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/icon-lab@5.12.1",
+      "data": {
+        "version": "5.12.1",
+        "packageName": "@atlaskit/icon-lab",
+        "hash": "sha512-mgnt4An16fkxWSS7jfoIGw+Tzt7zXsG6DOyKCnS7znmp8om5uAL3lQeKdh0XQuAqZ3I2xEsZzSv/YxQb+lq/1A=="
+      }
+    },
+    "npm:@atlaskit/icon-lab": {
+      "type": "npm",
+      "name": "npm:@atlaskit/icon-lab",
+      "data": {
+        "version": "2.8.0",
+        "packageName": "@atlaskit/icon-lab",
+        "hash": "sha512-3niWzuMAXRkISgkOWNkr9DekCP4V6BWyw69L5SWCV7Fitypssg00DRVEBs2gjeAorRmwgCJIEtPZg6+C1FDB6w=="
       }
     },
     "npm:@atlaskit/icon-object@7.3.2": {
@@ -3816,6 +2520,60 @@
         "hash": "sha512-qMaBpdnsEfziZxmuWcS8rh5u3elXEQebvJWU4hBZVrb8Xo1AD/VrMe+Msne4MWAfQkTZrLRZGVLA/brI+/DiIg=="
       }
     },
+    "npm:@atlaskit/legacy-custom-icons@0.22.17": {
+      "type": "npm",
+      "name": "npm:@atlaskit/legacy-custom-icons@0.22.17",
+      "data": {
+        "version": "0.22.17",
+        "packageName": "@atlaskit/legacy-custom-icons",
+        "hash": "sha512-/WRBYA0deaeh1G2tA2xdWBV7hGujulI/d/97o/jQvARe4XRy4j8OF2wMiTRcls2p9Ta4vwXcIBrz9idn47uOEg=="
+      }
+    },
+    "npm:@atlaskit/legacy-custom-icons@0.20.3": {
+      "type": "npm",
+      "name": "npm:@atlaskit/legacy-custom-icons@0.20.3",
+      "data": {
+        "version": "0.20.3",
+        "packageName": "@atlaskit/legacy-custom-icons",
+        "hash": "sha512-cuWADfpS4FmGgX8A7WAGGnjF1gUngyF1ApkYvpsC0rxeJTSCv+YbcsxtjYXgEjv+ch719Ke/Dw2AjzIF2jfDeA=="
+      }
+    },
+    "npm:@atlaskit/legacy-custom-icons": {
+      "type": "npm",
+      "name": "npm:@atlaskit/legacy-custom-icons",
+      "data": {
+        "version": "0.21.2",
+        "packageName": "@atlaskit/legacy-custom-icons",
+        "hash": "sha512-ioe43n/SM5k+jBlZF4LGkH7Qo9W++ssa3cLdbXyZl+WoEfuqjBC5R9b5fx/Sw0LqqRLzWeev4fbSNiJGO+HudA=="
+      }
+    },
+    "npm:@atlaskit/link-analytics@11.0.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/link-analytics@11.0.1",
+      "data": {
+        "version": "11.0.1",
+        "packageName": "@atlaskit/link-analytics",
+        "hash": "sha512-kXnxDnPjGnv+XqYSQBZylB/3IYI7wWkn3SKhwRLBZJTM3Lq2ZmrX001mbMGJwhrlctwZf19nBYu7d5i5UjSxqQ=="
+      }
+    },
+    "npm:@atlaskit/link-analytics@7.0.5": {
+      "type": "npm",
+      "name": "npm:@atlaskit/link-analytics@7.0.5",
+      "data": {
+        "version": "7.0.5",
+        "packageName": "@atlaskit/link-analytics",
+        "hash": "sha512-MhsFLT85TTU/Pw1ypKdn5jEKmFgidqZilWbGgvE95k61Ctte3Egn5gTMu7f7DkE/vw3YxNgWEfpFHMQjbNc9PA=="
+      }
+    },
+    "npm:@atlaskit/link-analytics": {
+      "type": "npm",
+      "name": "npm:@atlaskit/link-analytics",
+      "data": {
+        "version": "8.7.1",
+        "packageName": "@atlaskit/link-analytics",
+        "hash": "sha512-k06bUO+TTOYc3diwi4+3ILvps6yh0tkN9Gv34LHsgW+btLWvh+MyOW5u/cyi+N2dheSIBChyjg9rS2DisVP+Xw=="
+      }
+    },
     "npm:@atlaskit/link-client-extension@6.0.0": {
       "type": "npm",
       "name": "npm:@atlaskit/link-client-extension@6.0.0",
@@ -3888,6 +2646,60 @@
         "hash": "sha512-sJiSXxleWbo9xU34rqNeHyEeWwjIePl3RHL2Gfr0l3b5n481sPhqbS/mj5ACUgiu6mNSk6v4Q/EYS4etUNeZ5A=="
       }
     },
+    "npm:@atlaskit/link-picker@4.0.3": {
+      "type": "npm",
+      "name": "npm:@atlaskit/link-picker@4.0.3",
+      "data": {
+        "version": "4.0.3",
+        "packageName": "@atlaskit/link-picker",
+        "hash": "sha512-o8sybIPdbxwWxoQKiN9uTwLkgkCdT7Iv7vgxGZQlhKeDto1jZim2zk3tJ9bF8Vacy65z04kca1ixNJY1LqXKMw=="
+      }
+    },
+    "npm:@atlaskit/link-picker": {
+      "type": "npm",
+      "name": "npm:@atlaskit/link-picker",
+      "data": {
+        "version": "1.50.0",
+        "packageName": "@atlaskit/link-picker",
+        "hash": "sha512-wcMLiBHh5RlClBOTP/GTj4s51kE89O8KuiV4TxqK/dHCzeGG7gSXfWAMPc+OZ/2ith8vpLi5VqRSGkF47RtcOw=="
+      }
+    },
+    "npm:@atlaskit/linking-common@9.9.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/linking-common@9.9.0",
+      "data": {
+        "version": "9.9.0",
+        "packageName": "@atlaskit/linking-common",
+        "hash": "sha512-U7l/WWb6WKPBUd7m/dQkwZZ9u3q30TsP3E2OxENFWO82PwxdyggVXqHsP8ak5NspnNMWPqVs4R3cerQ++BvXIA=="
+      }
+    },
+    "npm:@atlaskit/linking-common@2.15.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/linking-common@2.15.0",
+      "data": {
+        "version": "2.15.0",
+        "packageName": "@atlaskit/linking-common",
+        "hash": "sha512-Me3vc+fl3wuZkVIJ0pwEOaTfYvEj1zy+dQI1rw7wKqHl+5g5B1gi6+/dgiN5hqwhRQooWmz7N56ymPwzJ+oMug=="
+      }
+    },
+    "npm:@atlaskit/linking-common@5.12.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/linking-common@5.12.0",
+      "data": {
+        "version": "5.12.0",
+        "packageName": "@atlaskit/linking-common",
+        "hash": "sha512-eOtoUsrQdI1IaXFhFV07o76rrnt3+c3m4CWWw+bImBGkKXm819ivgeZbrXky9Y3wQh7d4cRuiVklwUqYFQ58Og=="
+      }
+    },
+    "npm:@atlaskit/linking-common": {
+      "type": "npm",
+      "name": "npm:@atlaskit/linking-common",
+      "data": {
+        "version": "7.1.0",
+        "packageName": "@atlaskit/linking-common",
+        "hash": "sha512-xrE498OrrU1CUAeuIE/DQ/rsmL2iUBE8D//fIYAUs/YNqJEZzlGgIvbcZOlrD+KCzc3hMKHcg5YD2Iw+Z7MGnA=="
+      }
+    },
     "npm:@atlaskit/linking-types@14.2.0": {
       "type": "npm",
       "name": "npm:@atlaskit/linking-types@14.2.0",
@@ -3942,6 +2754,33 @@
         "hash": "sha512-VA3mhIZ/vFd108ZPYkBQf6ztSbVccYIxL3e3IWGyrgdH/BO294UB2ItDmUSEz5iOxr4bCHtkErTSS35qJu1djg=="
       }
     },
+    "npm:@atlaskit/logo@19.9.5": {
+      "type": "npm",
+      "name": "npm:@atlaskit/logo@19.9.5",
+      "data": {
+        "version": "19.9.5",
+        "packageName": "@atlaskit/logo",
+        "hash": "sha512-TgZgtmkVv3PlEaCeUqXUdAI6N2uu80sMO3szj7S2X2UmFGOSLXJ6X1RJgcYBlRA2B81WWZzTcNCK6oO7iJNJmA=="
+      }
+    },
+    "npm:@atlaskit/logo@13.17.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/logo@13.17.0",
+      "data": {
+        "version": "13.17.0",
+        "packageName": "@atlaskit/logo",
+        "hash": "sha512-W55RUzrjdEsi+SxpIEb4wDnX6OM8rEY6Io5bH4nPrGpyGWtRqPpRwQP73lBTQJczuLauq4yJsuDVi5xcx4xc4g=="
+      }
+    },
+    "npm:@atlaskit/logo": {
+      "type": "npm",
+      "name": "npm:@atlaskit/logo",
+      "data": {
+        "version": "15.4.0",
+        "packageName": "@atlaskit/logo",
+        "hash": "sha512-YOh3Fduy0/jDPbFfQL0i4+wC2TtRwEHNuGYbKzbLGVZSJQOCl80xV3hZ8dcz9iH2+j2PCOsJLZLynTwgzu7K3A=="
+      }
+    },
     "npm:@atlaskit/lozenge@13.1.2": {
       "type": "npm",
       "name": "npm:@atlaskit/lozenge@13.1.2",
@@ -3958,6 +2797,393 @@
         "version": "11.14.0",
         "packageName": "@atlaskit/lozenge",
         "hash": "sha512-A8yzotfiForMT1EljXv5TYVNr7AuYkQXuA/59BLYxl47PiVh2q4Ahs3oHfNW7murtN33/7qyY7ypocR+RXgMRQ=="
+      }
+    },
+    "npm:@atlaskit/media-card@79.9.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-card@79.9.1",
+      "data": {
+        "version": "79.9.1",
+        "packageName": "@atlaskit/media-card",
+        "hash": "sha512-2OCd5rk/qv8Mxv5MXATKpn4sUsenVZvTBSUA8O8AJkKQAtXgczok4zEwjr7Zf7cCkf5gghReiuViRvOpVJnmEQ=="
+      }
+    },
+    "npm:@atlaskit/media-card@76.2.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-card@76.2.1",
+      "data": {
+        "version": "76.2.1",
+        "packageName": "@atlaskit/media-card",
+        "hash": "sha512-+O45jniBUVsNQFy7qJit/dCWSeZ3dnYg5/Mr8kzgaxgjHBtTBqR8fNCOka1HE8+j6PQBGlPqGRIkDdMKeVx7gA=="
+      }
+    },
+    "npm:@atlaskit/media-card": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-card",
+      "data": {
+        "version": "74.8.1",
+        "packageName": "@atlaskit/media-card",
+        "hash": "sha512-VapqNMtql7ekRdwjQitIMmgVzq4cLWYIFcpSGWySXOLuVl9/izA09tZfq9KFmYFedjQlZ2+oeC9treNKGGuzJw=="
+      }
+    },
+    "npm:@atlaskit/media-card@77.12.4": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-card@77.12.4",
+      "data": {
+        "version": "77.12.4",
+        "packageName": "@atlaskit/media-card",
+        "hash": "sha512-VrVg4SRifoTim6C1nAwBsFMEvo+irmXkuXTZsunhg6Qx3ranXMc+JU7kWEfGtghvAWyPPWLt1YlPpv2hfnSsqg=="
+      }
+    },
+    "npm:@atlaskit/media-client@35.6.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-client@35.6.1",
+      "data": {
+        "version": "35.6.1",
+        "packageName": "@atlaskit/media-client",
+        "hash": "sha512-hGpWz9SzYbDbslkK7f11vADDQEd1gmYj6HmWRrEyY/UyZyJgdOhyUrRDioBs3RN4guZzYryQ8fDc4ykC8OyVmQ=="
+      }
+    },
+    "npm:@atlaskit/media-client@24.0.3": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-client@24.0.3",
+      "data": {
+        "version": "24.0.3",
+        "packageName": "@atlaskit/media-client",
+        "hash": "sha512-i7jWs1RMlaJFCz9s8Dw7bp9EISx/VFXiPZFIr6a4ZnZVfkGdZaYyJb/Df+Kh4gsxGzNlBRsn9jn/ozwC7AS04A=="
+      }
+    },
+    "npm:@atlaskit/media-client@28.6.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-client@28.6.0",
+      "data": {
+        "version": "28.6.0",
+        "packageName": "@atlaskit/media-client",
+        "hash": "sha512-iFKDse7UsCHC4kEtKxLHLVfkQjTT/eltstSCxuMHg4IL52xA+2ySqU9/MWZmNqckOCWDEEst8zrXLl2sfXzkxw=="
+      }
+    },
+    "npm:@atlaskit/media-client@31.1.2": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-client@31.1.2",
+      "data": {
+        "version": "31.1.2",
+        "packageName": "@atlaskit/media-client",
+        "hash": "sha512-D2I/PIIORSQGA5MJwSiD9dQiPM1YYBKS/KrGMblxOyyVKt95axGgp7eO68KW05E2BwtCR9V2Lg5TlngAsxDwvA=="
+      }
+    },
+    "npm:@atlaskit/media-client@21.1.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-client@21.1.0",
+      "data": {
+        "version": "21.1.0",
+        "packageName": "@atlaskit/media-client",
+        "hash": "sha512-eB06HzTh6BVE9X97NEC6FsATbMGZmeXKLoqbxT8itQOdArAYQsyHSMgXEFlSLtHtUOWTCgVOKg12F55VckcbbQ=="
+      }
+    },
+    "npm:@atlaskit/media-client@25.1.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-client@25.1.0",
+      "data": {
+        "version": "25.1.0",
+        "packageName": "@atlaskit/media-client",
+        "hash": "sha512-WSYOVk5rithqfQxkFAUJdXeRkdRCJLW6BodrOC3T9scVPtTp3ctZxve7ouxTABiz+aFluouTc0w1AjuxKvJpnA=="
+      }
+    },
+    "npm:@atlaskit/media-client@22.0.5": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-client@22.0.5",
+      "data": {
+        "version": "22.0.5",
+        "packageName": "@atlaskit/media-client",
+        "hash": "sha512-V3cgUBZdp6cFRFBGlIhsJD1d68tpjc6l5XTT2HcU7ZJaIPwoHzGNrfhOcYlFmfNQgs2ySLecO53p5APTVVwOEw=="
+      }
+    },
+    "npm:@atlaskit/media-client": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-client",
+      "data": {
+        "version": "26.3.0",
+        "packageName": "@atlaskit/media-client",
+        "hash": "sha512-BFLKVoObMSbEk9CcwpXM3jNYHRk77xk/wZQKeX1p9LEQZeLXSJbsCPKa9caT/HXmfsdZ8KRiNLXr+zpbFEc06Q=="
+      }
+    },
+    "npm:@atlaskit/media-client@27.6.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-client@27.6.1",
+      "data": {
+        "version": "27.6.1",
+        "packageName": "@atlaskit/media-client",
+        "hash": "sha512-nVorVvny8Z5H3/K3tcrYJUxInK2fZNlQt4x77yIzN7co3gOzEsMzFFRMMVCJTFMPGPVEzAj0HJsfbB2zbI93Ew=="
+      }
+    },
+    "npm:@atlaskit/media-client-react@4.1.2": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-client-react@4.1.2",
+      "data": {
+        "version": "4.1.2",
+        "packageName": "@atlaskit/media-client-react",
+        "hash": "sha512-TyMyYQgmmcpcgZS2kTNIiBy76mishCPKJiXSZbdxopckOqNkF1VhBiK9cxYUVim2tOhbMfI//v4DormMYTVcwQ=="
+      }
+    },
+    "npm:@atlaskit/media-client-react@2.7.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-client-react@2.7.0",
+      "data": {
+        "version": "2.7.0",
+        "packageName": "@atlaskit/media-client-react",
+        "hash": "sha512-uoWglGwnuYTUmiWAedBbVcVSiek/c5GEXKKWItX56/XIX0sUV5nTxrwqeI+FFfbvGPaMUGtzYORPwkhWVwEMQA=="
+      }
+    },
+    "npm:@atlaskit/media-client-react@1.4.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-client-react@1.4.0",
+      "data": {
+        "version": "1.4.0",
+        "packageName": "@atlaskit/media-client-react",
+        "hash": "sha512-PHTda5sHHXSQJTUMHB89hH2UbaddkwqUyHbvS0AVd/tC7LOIokkzQhCCgLfi7Bi4X6pYyx1BYcMh3dc2cz2w9g=="
+      }
+    },
+    "npm:@atlaskit/media-client-react": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-client-react",
+      "data": {
+        "version": "3.0.1",
+        "packageName": "@atlaskit/media-client-react",
+        "hash": "sha512-NbYFsAoS5F3FkpK9YrmMbQT6EowqtBKVwr/r1Mvl1Wa4PT2xDps7g2Gl+WR7POTs6RKRrpUlCH8cPvlh13AcYw=="
+      }
+    },
+    "npm:@atlaskit/media-common@12.3.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-common@12.3.1",
+      "data": {
+        "version": "12.3.1",
+        "packageName": "@atlaskit/media-common",
+        "hash": "sha512-UoNhGc3cmv0X7lU1QX6o+wd1oYeppGbNwe9eVWhWfoVxEqWnobZOq9RICkI0qsedmYwUgjy+82z9spPZYGLfog=="
+      }
+    },
+    "npm:@atlaskit/media-common@9.0.3": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-common@9.0.3",
+      "data": {
+        "version": "9.0.3",
+        "packageName": "@atlaskit/media-common",
+        "hash": "sha512-uBJMZOk0CoE8DhDNrHdFyxLE/eS9vKcW5WQ86roE8z3FnbwD7JIvzm0an2BiSC5O9ufylgfDOk7Al5RLjFmqHw=="
+      }
+    },
+    "npm:@atlaskit/media-common@11.8.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-common@11.8.1",
+      "data": {
+        "version": "11.8.1",
+        "packageName": "@atlaskit/media-common",
+        "hash": "sha512-hqBS9s9rk+DfVibO4KJfRtQBm07TBpIp7+JvmVMU/a2izyESJRYDGe7JeiZi/PP2xUTZt0DWe/DW/J5ty4Gsug=="
+      }
+    },
+    "npm:@atlaskit/media-common@5.0.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-common@5.0.0",
+      "data": {
+        "version": "5.0.0",
+        "packageName": "@atlaskit/media-common",
+        "hash": "sha512-P/A/CeYSbkoLvMTuYMWsPb5hlauavPBJ/6gUR3WjvtLt1pCz/LbjAv8HtJahx9D0065GOt8kzjxijpiJs5rGRg=="
+      }
+    },
+    "npm:@atlaskit/media-common": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-common",
+      "data": {
+        "version": "4.1.2",
+        "packageName": "@atlaskit/media-common",
+        "hash": "sha512-pwMCElC2R2kVPez3Q+q9m3Zq7F0ppwXBGQm1fxA9hktcnfwYSvTfmkRJqlC9LMLjPtmvxrW+DRv9jq0M5PaDaw=="
+      }
+    },
+    "npm:@atlaskit/media-picker@70.1.3": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-picker@70.1.3",
+      "data": {
+        "version": "70.1.3",
+        "packageName": "@atlaskit/media-picker",
+        "hash": "sha512-UIGnLo0l5/z9akJ8pXTbQhYuvWkbYq+PnfYZ8JjpFHTQco4bSuqfCKVea0DDduETBNLqixoSluJnCztX9TH7dw=="
+      }
+    },
+    "npm:@atlaskit/media-picker@66.7.5": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-picker@66.7.5",
+      "data": {
+        "version": "66.7.5",
+        "packageName": "@atlaskit/media-picker",
+        "hash": "sha512-ksXBmif0IKxqHPyb2I3u/zGHka8vI+jD+xrnON85/QZwTQg7seb1nDdj46TlAjZRBu6o4AkIEg5CehDSGUY2qQ=="
+      }
+    },
+    "npm:@atlaskit/media-picker": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-picker",
+      "data": {
+        "version": "64.4.0",
+        "packageName": "@atlaskit/media-picker",
+        "hash": "sha512-oGdK5BoxokSyvklGgM8eZs73Ub9curDFOaJ7YKeRhPaXbmg3ZB8fJ3uqf54I+fQ8fCmOQ9fHlF/1N/lrlmNp9g=="
+      }
+    },
+    "npm:@atlaskit/media-svg@2.1.13": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-svg@2.1.13",
+      "data": {
+        "version": "2.1.13",
+        "packageName": "@atlaskit/media-svg",
+        "hash": "sha512-vls+9sTVv0dLT9LGt7dtjizE+eRLIV1/tu6ox0mqz5L4Daimy7P+KccdbdF4QPtF3uU/FaNUjtB4/iXB9BT8QA=="
+      }
+    },
+    "npm:@atlaskit/media-svg@0.2.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-svg@0.2.1",
+      "data": {
+        "version": "0.2.1",
+        "packageName": "@atlaskit/media-svg",
+        "hash": "sha512-poDx658xwVf4/QOp3FRRlu/L89mNfh+0O4zOZlFORfZ7BrDE2MneM6y9/9i27J7akw5h91MaYPbl29Q9ee0HVQ=="
+      }
+    },
+    "npm:@atlaskit/media-svg": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-svg",
+      "data": {
+        "version": "0.1.10",
+        "packageName": "@atlaskit/media-svg",
+        "hash": "sha512-s1F2fg/GI9Su4NnsUA+e3mm3wp2KsLpYHl7cLPqAuvEoeupnvJ2UP1rEu5RTKn0ktit/iYVIzqRv+EOI9Lw+Kw=="
+      }
+    },
+    "npm:@atlaskit/media-ui@28.7.17": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-ui@28.7.17",
+      "data": {
+        "version": "28.7.17",
+        "packageName": "@atlaskit/media-ui",
+        "hash": "sha512-IpXGK3YCVz8KAQb3TfQkjnDXeRJpACq6/qxi+jII5vHLMSm1aJ253eMfCB5CAFrIcZSInCVfOVaKGeBNrIUcwg=="
+      }
+    },
+    "npm:@atlaskit/media-ui@26.2.6": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-ui@26.2.6",
+      "data": {
+        "version": "26.2.6",
+        "packageName": "@atlaskit/media-ui",
+        "hash": "sha512-HnYPGKdRrjMYdJda8dENEpiEPTioXeu2JRBeaJ841fGHhh8eifJFKN7uAgYmsKhk5/KtYtqyubadduF1m82HAA=="
+      }
+    },
+    "npm:@atlaskit/media-ui@24.0.3": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-ui@24.0.3",
+      "data": {
+        "version": "24.0.3",
+        "packageName": "@atlaskit/media-ui",
+        "hash": "sha512-87r5L24jYyAFxSudL1E17jVUuTGarO1IjiDqQnI6tWvC99076Ak0/uVhxqoNBTLWSn7+rD4qTPcLfaEe1j6zDg=="
+      }
+    },
+    "npm:@atlaskit/media-ui@25.16.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-ui@25.16.1",
+      "data": {
+        "version": "25.16.1",
+        "packageName": "@atlaskit/media-ui",
+        "hash": "sha512-DF9NAVg94iqTCoaAviWxl8Rtom3OhZDgnELWFjtVgKxi18n3YdYSEzO9ictfOj9Bcw/ieq3Fd/6YmfQE0DNRUw=="
+      }
+    },
+    "npm:@atlaskit/media-ui": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-ui",
+      "data": {
+        "version": "22.4.1",
+        "packageName": "@atlaskit/media-ui",
+        "hash": "sha512-Vczrxr1JN+noPQXnsJ1P39wDgSs17Cs3md1crBqz5vSbV0egDm0Dv49ztA+yTvotqvccCNeJzjUNLxfvnB4E8Q=="
+      }
+    },
+    "npm:@atlaskit/media-viewer@52.5.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-viewer@52.5.0",
+      "data": {
+        "version": "52.5.0",
+        "packageName": "@atlaskit/media-viewer",
+        "hash": "sha512-ptIlWljtJ145+eMSKoeaOh3rwqZz67W5oX/HMaOF4DN+93ECTmQvWbnN+izaaySqeJqpsdVe8zyfKyc1cxqdHg=="
+      }
+    },
+    "npm:@atlaskit/media-viewer@48.10.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-viewer@48.10.1",
+      "data": {
+        "version": "48.10.1",
+        "packageName": "@atlaskit/media-viewer",
+        "hash": "sha512-7a0Ffx3hzjwwoxIa+h8FeYErYw69csqWeC/HSb3r9iroAs37+cKv3bb8enCaeUDKAZmbz+lkkarxTFzkWcQXHQ=="
+      }
+    },
+    "npm:@atlaskit/media-viewer": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-viewer",
+      "data": {
+        "version": "47.6.1",
+        "packageName": "@atlaskit/media-viewer",
+        "hash": "sha512-yyqfRUZU839Hi7ZK9Qr6ZoDsjfj0SHQdyB4dOu9grlLauSHWlBC/PFSTuoxOkKyHXY/ekv+XpBgo3c5FxD462A=="
+      }
+    },
+    "npm:@atlaskit/media-viewer@48.5.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-viewer@48.5.0",
+      "data": {
+        "version": "48.5.0",
+        "packageName": "@atlaskit/media-viewer",
+        "hash": "sha512-BL9daY+3cdk+iu5knjkyirmRkgr7fk3egSZba1Lt1PBKOXH+RQDf6HF+tmx+K9bWTMp3j305/VGCfXN9gZ0FcQ=="
+      }
+    },
+    "npm:@atlaskit/mention@24.4.3": {
+      "type": "npm",
+      "name": "npm:@atlaskit/mention@24.4.3",
+      "data": {
+        "version": "24.4.3",
+        "packageName": "@atlaskit/mention",
+        "hash": "sha512-ht5I/al8o4oH6BUPxgk5OrB733h0p3njZTNwJPdaNPBMbhlrJzkQWHHnwTUh5HzlYAwMKw4LxuNnROgD6jE42A=="
+      }
+    },
+    "npm:@atlaskit/mention@22.1.10": {
+      "type": "npm",
+      "name": "npm:@atlaskit/mention@22.1.10",
+      "data": {
+        "version": "22.1.10",
+        "packageName": "@atlaskit/mention",
+        "hash": "sha512-EzvsrMjrCJuAKBgSBrPn97zO1SHTY3BYDOBFveoFPApV7l1LuecU4WENZbzLYIfADjVE6DjfTYMe9wuRVEe/hg=="
+      }
+    },
+    "npm:@atlaskit/mention": {
+      "type": "npm",
+      "name": "npm:@atlaskit/mention",
+      "data": {
+        "version": "23.11.4",
+        "packageName": "@atlaskit/mention",
+        "hash": "sha512-CrRuf9iUvnmUD2Y2Q5WL+H0fDmu9ltCR7eD8stErq/jEzyaX3iI6DkN+kRjAtuiu7eIPjZTc+R8GJtwVxSXMHQ=="
+      }
+    },
+    "npm:@atlaskit/menu@8.4.11": {
+      "type": "npm",
+      "name": "npm:@atlaskit/menu@8.4.11",
+      "data": {
+        "version": "8.4.11",
+        "packageName": "@atlaskit/menu",
+        "hash": "sha512-Ic6Z+9lrZQnz2gQzAd7ag0NBonPXtQ2/dhomCRU3vc4XgyAWs5amnTS+WVhxV6pdfIiL3r7rp4YwHzHd8fhO/A=="
+      }
+    },
+    "npm:@atlaskit/menu@1.11.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/menu@1.11.1",
+      "data": {
+        "version": "1.11.1",
+        "packageName": "@atlaskit/menu",
+        "hash": "sha512-tsExGO6pvmYd01Ltz5Kc6JmZ4EW0HBgwFa+CDdiPKMkqRYHrN0NwbTCzxjjx9XMOVORiu0yY9wmrh+iSMGCPQA=="
+      }
+    },
+    "npm:@atlaskit/menu": {
+      "type": "npm",
+      "name": "npm:@atlaskit/menu",
+      "data": {
+        "version": "2.14.4",
+        "packageName": "@atlaskit/menu",
+        "hash": "sha512-/b/etU4MsaeTW9+sRsSMI8O7Ez/nU+htLqc2nZVynONahhXeyfnL1PRohBgOx3f8DDvliuqTqZlAZfPJLV0fEQ=="
       }
     },
     "npm:@atlaskit/modal-dialog@14.7.2": {
@@ -3978,6 +3204,51 @@
         "hash": "sha512-E91cREeUtFWW7G+e/BMgm/Xa8FJBPW6fk2LEETGWP6UUelcrwpYBNuWie5a6zjox//Drv5q09ZJ4Z212CB6cWw=="
       }
     },
+    "npm:@atlaskit/motion@5.3.10": {
+      "type": "npm",
+      "name": "npm:@atlaskit/motion@5.3.10",
+      "data": {
+        "version": "5.3.10",
+        "packageName": "@atlaskit/motion",
+        "hash": "sha512-cERNNC2xz/knQ5BG073nffEkKiswFyFe9gBaxSp6Go+J9mc7a13879S2blSHuyMvfwFn1AuhdJCSbSY/c3mnNw=="
+      }
+    },
+    "npm:@atlaskit/motion": {
+      "type": "npm",
+      "name": "npm:@atlaskit/motion",
+      "data": {
+        "version": "3.1.0",
+        "packageName": "@atlaskit/motion",
+        "hash": "sha512-Z8wwFjsjsNrSd/jqX0mqaPYKaUCLpcgrcfNgIAKL37bA0oeyaWZmqmg1Ru/vXmAvQMgoebTTBOPqX36OhSyySw=="
+      }
+    },
+    "npm:@atlaskit/motion@1.10.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/motion@1.10.0",
+      "data": {
+        "version": "1.10.0",
+        "packageName": "@atlaskit/motion",
+        "hash": "sha512-RvEvCVjKQPIyhFmQdQGuLOxnimuz2LysAmZUS0J1QFJfjg0kfGeVGdLkE76HADkEG3lrk6jzN02SoouEoLFyvw=="
+      }
+    },
+    "npm:@atlaskit/onboarding@14.4.14": {
+      "type": "npm",
+      "name": "npm:@atlaskit/onboarding@14.4.14",
+      "data": {
+        "version": "14.4.14",
+        "packageName": "@atlaskit/onboarding",
+        "hash": "sha512-JcPhp7A7n1a5taMwlusnYn8ftecDO7CELPqt5oMjaCOtgwA6NSSjtpMAv7dmt2phA/teitKiEF5bqOcZnPxtkg=="
+      }
+    },
+    "npm:@atlaskit/onboarding": {
+      "type": "npm",
+      "name": "npm:@atlaskit/onboarding",
+      "data": {
+        "version": "12.3.6",
+        "packageName": "@atlaskit/onboarding",
+        "hash": "sha512-gBREHbzz9imYDGlJMapM46I+PbAmIt9hI0MkNpDTa0uBNasSunt1lSCrBTz5XUpvTBLzE8ngiAE98HuGyiHHSg=="
+      }
+    },
     "npm:@atlaskit/people-teams-ui-public@3.7.0": {
       "type": "npm",
       "name": "npm:@atlaskit/people-teams-ui-public@3.7.0",
@@ -3994,6 +3265,69 @@
         "version": "2.1.0",
         "packageName": "@atlaskit/people-teams-ui-public",
         "hash": "sha512-WaNQF6L0uXm+QNSI0T++fK1aCEBIhzwdz940uuvZUd1qlm74WZgpq8QLKIxrYqi+bqKc8gJRcOyT/xbWgfHV7Q=="
+      }
+    },
+    "npm:@atlaskit/popper@7.1.6": {
+      "type": "npm",
+      "name": "npm:@atlaskit/popper@7.1.6",
+      "data": {
+        "version": "7.1.6",
+        "packageName": "@atlaskit/popper",
+        "hash": "sha512-Dm6GE1iBVi1w71atYgBvr/gtocOLLfKoXtiyofPsbMsw0lqbpjezeksFYWoX8s5iK0mHkdfXX/oelG7ZfuaXeA=="
+      }
+    },
+    "npm:@atlaskit/popper@5.6.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/popper@5.6.0",
+      "data": {
+        "version": "5.6.0",
+        "packageName": "@atlaskit/popper",
+        "hash": "sha512-Xgyd/Zm91GLO6Km6+c5t2hQnWm5SICYumXetZVER/WNv53fd4yL2mM/QPl2SwIaC86fczUHwt3SzHiudOncJvg=="
+      }
+    },
+    "npm:@atlaskit/popper": {
+      "type": "npm",
+      "name": "npm:@atlaskit/popper",
+      "data": {
+        "version": "6.4.0",
+        "packageName": "@atlaskit/popper",
+        "hash": "sha512-YRRFOGnzstbcXng+il3m+4GUfmrddo3k7xBdfFG/C0OfrHacHekqi82OeR1Ct2lA45Mso86PzwMU/zBKtej7RA=="
+      }
+    },
+    "npm:@atlaskit/popup@4.6.4": {
+      "type": "npm",
+      "name": "npm:@atlaskit/popup@4.6.4",
+      "data": {
+        "version": "4.6.4",
+        "packageName": "@atlaskit/popup",
+        "hash": "sha512-ISZv0G6ZP1VQqIhJ3/CGRi66spZzsO1GOMQueyX3vUo6vFl94jYmJsP05WiwkB/ibf1slAKxEc1ailhda13HVg=="
+      }
+    },
+    "npm:@atlaskit/popup": {
+      "type": "npm",
+      "name": "npm:@atlaskit/popup",
+      "data": {
+        "version": "1.32.0",
+        "packageName": "@atlaskit/popup",
+        "hash": "sha512-sarQ84k+0Ifc9ZnuaNvu2T14CUbcMfMMC2WivF1nQfjebdRr1NGdRD3THXt+U/+KhjUyrWh1Dl1giX0J1Ub9vg=="
+      }
+    },
+    "npm:@atlaskit/portal@5.1.8": {
+      "type": "npm",
+      "name": "npm:@atlaskit/portal@5.1.8",
+      "data": {
+        "version": "5.1.8",
+        "packageName": "@atlaskit/portal",
+        "hash": "sha512-MwvhwnJfWQvdrVu9JKdqfhWhRNHLPfMF8zrCz6rhlUr3YDZMy8XcYDgnGg/p3zxbFycgXr2fvP3ra8a73F37bQ=="
+      }
+    },
+    "npm:@atlaskit/portal": {
+      "type": "npm",
+      "name": "npm:@atlaskit/portal",
+      "data": {
+        "version": "4.11.3",
+        "packageName": "@atlaskit/portal",
+        "hash": "sha512-AGxSyV7UAkGdos5MzJ2HShev1F8u+b3E8zS5uzI0N00hfnj8xGAhFtHij/sfmwremEE1hyYJCbVFAMxybs1ziQ=="
       }
     },
     "npm:@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-autoscroll@2.0.1": {
@@ -4014,6 +3348,60 @@
         "hash": "sha512-6mQeAHXJuc35SKrDRI0wes/rCqpno2PgEdgkUSuBl0ge/hrrScqAVhIO7d8mL+q+gxSJxGlug01WcsPOiHlqog=="
       }
     },
+    "npm:@atlaskit/pragmatic-drag-and-drop-react-drop-indicator@3.2.9": {
+      "type": "npm",
+      "name": "npm:@atlaskit/pragmatic-drag-and-drop-react-drop-indicator@3.2.9",
+      "data": {
+        "version": "3.2.9",
+        "packageName": "@atlaskit/pragmatic-drag-and-drop-react-drop-indicator",
+        "hash": "sha512-cD0fnwQ5B4EdVLyA/+iWyDqj9CisbjHZEnwLcaUcr7IfKUuawLqhK7sKZ0N9LjIFCJJLngYTwPgKvj1S1rjsTQ=="
+      }
+    },
+    "npm:@atlaskit/pragmatic-drag-and-drop-react-drop-indicator": {
+      "type": "npm",
+      "name": "npm:@atlaskit/pragmatic-drag-and-drop-react-drop-indicator",
+      "data": {
+        "version": "1.2.0",
+        "packageName": "@atlaskit/pragmatic-drag-and-drop-react-drop-indicator",
+        "hash": "sha512-WQSuS2xi5SCivF+gLdnfGRxWOgdE9Bx/KQYsZuTqYApJ1kdoxuGO2r9hIlXU6LiyYFGzoTRVNnhz23PQPQqyOQ=="
+      }
+    },
+    "npm:@atlaskit/profilecard@24.24.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/profilecard@24.24.0",
+      "data": {
+        "version": "24.24.0",
+        "packageName": "@atlaskit/profilecard",
+        "hash": "sha512-8PW+XMi6my/2emVAc3gbHzhPEYdgP9Bdva6S0CjPQmdjtHA4HdVEJCzT/PNv3f9nwYSmtArWU/0rNwxRskREaA=="
+      }
+    },
+    "npm:@atlaskit/profilecard": {
+      "type": "npm",
+      "name": "npm:@atlaskit/profilecard",
+      "data": {
+        "version": "19.28.1",
+        "packageName": "@atlaskit/profilecard",
+        "hash": "sha512-UkvsL/KdsvveiD/YjRddEV5Dq3DbXVWd+RJHvAoArGY6LWj6nPXSOzwMgOgVQToUAUH/2TS6ldVfxAUx28FkMw=="
+      }
+    },
+    "npm:@atlaskit/range@9.2.15": {
+      "type": "npm",
+      "name": "npm:@atlaskit/range@9.2.15",
+      "data": {
+        "version": "9.2.15",
+        "packageName": "@atlaskit/range",
+        "hash": "sha512-x0Q9B7uojxS/3Ocjrr3PHp7jOgvLOxrsSq0BjoJqz7qDWwmPGOYJBKbEIeMQUJVtzchAmEmYeVLjUaXEVMas6Q=="
+      }
+    },
+    "npm:@atlaskit/range": {
+      "type": "npm",
+      "name": "npm:@atlaskit/range",
+      "data": {
+        "version": "7.4.5",
+        "packageName": "@atlaskit/range",
+        "hash": "sha512-ao+M557YALzlpXG+4ejMiD13+TLnE4v/UFVulj73nKtRf99Xf5OT+8SNfDdap1qdJ9gQQ7waQ2nghJ9RJUiigg=="
+      }
+    },
     "npm:@atlaskit/react-select@3.9.1": {
       "type": "npm",
       "name": "npm:@atlaskit/react-select@3.9.1",
@@ -4030,6 +3418,96 @@
         "version": "1.7.5",
         "packageName": "@atlaskit/react-select",
         "hash": "sha512-8J08M8gY4aBd5keUgxYpTuQkg6vf81rOlm9hsa8gs17Nvc2DP5YIfzsfVYHQAMjTLJlq4HZf6tMQu5ytQZLzhw=="
+      }
+    },
+    "npm:@atlaskit/rovo-agent-components@3.15.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/rovo-agent-components@3.15.0",
+      "data": {
+        "version": "3.15.0",
+        "packageName": "@atlaskit/rovo-agent-components",
+        "hash": "sha512-ZgekjwO7bsQjtTz5vxrLF010Fs/r3Rlqb7pvQ9Nad5eWeIRKTzktNvg5z3S64FM8J1RjDLXTybj4zsQGaWdQrw=="
+      }
+    },
+    "npm:@atlaskit/rovo-agent-components": {
+      "type": "npm",
+      "name": "npm:@atlaskit/rovo-agent-components",
+      "data": {
+        "version": "1.19.0",
+        "packageName": "@atlaskit/rovo-agent-components",
+        "hash": "sha512-Du+UxKVdsrAGXAakrbG1gkb6XWCogZnkoXx8/DGfGQObP3pxNZHFDrKdmPujl6SYADGDz5W1baLuY9Y2Qj7AfQ=="
+      }
+    },
+    "npm:@atlaskit/section-message@8.9.4": {
+      "type": "npm",
+      "name": "npm:@atlaskit/section-message@8.9.4",
+      "data": {
+        "version": "8.9.4",
+        "packageName": "@atlaskit/section-message",
+        "hash": "sha512-z1HTuwZBjXSWgH7gVk+r9YLgo+MmL3E58HjZ1CtrshlFs9GHld8DMdpArQr9p/IFAsZA8Nt4m+7F2lQmcQW/Og=="
+      }
+    },
+    "npm:@atlaskit/section-message@7.0.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/section-message@7.0.0",
+      "data": {
+        "version": "7.0.0",
+        "packageName": "@atlaskit/section-message",
+        "hash": "sha512-gq1irGZNGda+eArPTVI4KAhpSimnsDhF3sstr+Z5cGRPK57esVYWL6hBdRXHqXggC0dqGi3fOBX1VCuyJattRg=="
+      }
+    },
+    "npm:@atlaskit/section-message": {
+      "type": "npm",
+      "name": "npm:@atlaskit/section-message",
+      "data": {
+        "version": "6.9.4",
+        "packageName": "@atlaskit/section-message",
+        "hash": "sha512-zGRpX2C+vvLDDWs8DghiyF3YKaVVNoM9pjU7zvWKOuhNXX28JgZrCh+HC8hlx5rHJ0NHVRuirEz1MBN4/MAsyQ=="
+      }
+    },
+    "npm:@atlaskit/side-navigation@11.0.28": {
+      "type": "npm",
+      "name": "npm:@atlaskit/side-navigation@11.0.28",
+      "data": {
+        "version": "11.0.28",
+        "packageName": "@atlaskit/side-navigation",
+        "hash": "sha512-TnuHjcLWjnt5QPFZlPUfXhXdiAx52cMKPDBwHZlo5galgKHWpLJSHoLdpnZIB3SCZw8J/By65ouDEoNoJuR3zA=="
+      }
+    },
+    "npm:@atlaskit/side-navigation@1.10.4": {
+      "type": "npm",
+      "name": "npm:@atlaskit/side-navigation@1.10.4",
+      "data": {
+        "version": "1.10.4",
+        "packageName": "@atlaskit/side-navigation",
+        "hash": "sha512-8x1pLttDyv8yh6DG4hED93U0c6mzhrgiwR4ztAQcaafUii92pN9jcmFVJTIMF8b2I/Ds+5FLGMak1Ojj82BXOQ=="
+      }
+    },
+    "npm:@atlaskit/side-navigation": {
+      "type": "npm",
+      "name": "npm:@atlaskit/side-navigation",
+      "data": {
+        "version": "3.6.8",
+        "packageName": "@atlaskit/side-navigation",
+        "hash": "sha512-yBX5w4j2HuMFYejE4hOaquysZPIeXZlLZjz+Ks4N+XsVfLGFqH64zKdvqoH+ltiA5YoeONBsnqrFAf/lYz1y3w=="
+      }
+    },
+    "npm:@atlaskit/skeleton@2.1.4": {
+      "type": "npm",
+      "name": "npm:@atlaskit/skeleton@2.1.4",
+      "data": {
+        "version": "2.1.4",
+        "packageName": "@atlaskit/skeleton",
+        "hash": "sha512-DjfCz9TLGw45fuqkrFRiKKoTwyyx6xI2SIefAr3C5XlVRRdjiL/31pOJ5q8YyFuBmByglFGVjYKCMhiBXpIRog=="
+      }
+    },
+    "npm:@atlaskit/skeleton": {
+      "type": "npm",
+      "name": "npm:@atlaskit/skeleton",
+      "data": {
+        "version": "1.2.0",
+        "packageName": "@atlaskit/skeleton",
+        "hash": "sha512-yZvSmFBWBOwFpTpRWQW7HxeJ53wZoHRfWk3+dymWF2mPCcoZfHkDmfLxtxcumw7ieeAfuepUGblvozX7e2dUOw=="
       }
     },
     "npm:@atlaskit/smart-card@43.14.0": {
@@ -4077,6 +3555,51 @@
         "hash": "sha512-PA0BIj6fTpDVZo3au8AQuXBzCW0mu4GQY65Ub3eX83xzW8Vx27IeIUPbdCCVfHLZE4uvA+l/gYgUtfx4RFWeJQ=="
       }
     },
+    "npm:@atlaskit/status@3.0.25": {
+      "type": "npm",
+      "name": "npm:@atlaskit/status@3.0.25",
+      "data": {
+        "version": "3.0.25",
+        "packageName": "@atlaskit/status",
+        "hash": "sha512-9oFUIRhkUcV9I5L+DgxqISs7YFBXjP9oi2GieJ/jg6AFiWJeKzCvMjmvb2sIB3CN3HjDUTgiQicDpP1cqCVOdQ=="
+      }
+    },
+    "npm:@atlaskit/status": {
+      "type": "npm",
+      "name": "npm:@atlaskit/status",
+      "data": {
+        "version": "1.9.4",
+        "packageName": "@atlaskit/status",
+        "hash": "sha512-8dzEy/oXuq6zkgaIOCDkikFCNAo+R+pyqbAT0fhs0mHOG+SNZWQ8Wk0IewPKJR3VDdJD6uJfAvIuE7MLuafP5w=="
+      }
+    },
+    "npm:@atlaskit/tabs@18.2.4": {
+      "type": "npm",
+      "name": "npm:@atlaskit/tabs@18.2.4",
+      "data": {
+        "version": "18.2.4",
+        "packageName": "@atlaskit/tabs",
+        "hash": "sha512-uLWTR/KhFNlXf3KqBT0cKUJuFq18v1ngiqPg9ZqZB2/jGJQhe7KulwDTEF7WahYHrfgmxKOAu7lQd6quFihkIQ=="
+      }
+    },
+    "npm:@atlaskit/tabs@13.4.9": {
+      "type": "npm",
+      "name": "npm:@atlaskit/tabs@13.4.9",
+      "data": {
+        "version": "13.4.9",
+        "packageName": "@atlaskit/tabs",
+        "hash": "sha512-8Fu7HQWbdkfMRnQ1ICFw6zvgiaR2rtrUNwYmnyHcqZg7fLyqv6jeclVLqtsq50fodJnFTWX8FvljmbDoiYUqDA=="
+      }
+    },
+    "npm:@atlaskit/tabs": {
+      "type": "npm",
+      "name": "npm:@atlaskit/tabs",
+      "data": {
+        "version": "17.3.0",
+        "packageName": "@atlaskit/tabs",
+        "hash": "sha512-cT5DzCuAX1VrVGRPZJyxhEAliP6DsN4sypTc2b698pOxHKAAStkrdKNCXKshg4JhMQmzT9QtJXO+Wra92Fs7UQ=="
+      }
+    },
     "npm:@atlaskit/tag@14.1.16": {
       "type": "npm",
       "name": "npm:@atlaskit/tag@14.1.16",
@@ -4093,6 +3616,24 @@
         "version": "12.7.1",
         "packageName": "@atlaskit/tag",
         "hash": "sha512-SZ7/xWNZS8QL7N73YSgY0SoHk2JiT68UfShOh/PBpvvAo+gcdvC1eX3493Deqj8Wrr1UucQ1uITymY4b8V7n3w=="
+      }
+    },
+    "npm:@atlaskit/task-decision@19.2.15": {
+      "type": "npm",
+      "name": "npm:@atlaskit/task-decision@19.2.15",
+      "data": {
+        "version": "19.2.15",
+        "packageName": "@atlaskit/task-decision",
+        "hash": "sha512-x/ej7vJoQES/9klqFbJdIVI5QFdcmxKIPffLT8ALgCxu0FiwHov013Gwvd4ws38LN5pJWmXNvPnEc+K8XB+sPQ=="
+      }
+    },
+    "npm:@atlaskit/task-decision": {
+      "type": "npm",
+      "name": "npm:@atlaskit/task-decision",
+      "data": {
+        "version": "17.12.2",
+        "packageName": "@atlaskit/task-decision",
+        "hash": "sha512-IMLYYews/38nm7cBtZ6c/nG4zZMxSu9drTrBUoWEXr9GOLQRDA1L7ExogfyIJ0lwGJazomABnxr5K67l22N+tw=="
       }
     },
     "npm:@atlaskit/teams-avatar@2.4.4": {
@@ -4113,6 +3654,114 @@
         "hash": "sha512-QVAKPMUA0KXsVWHEPuPG8oPNPSBV+hZPsV82TXZfURvsMYyl6/t1pyPyTYXquu9Ut31lUIzvFeMXv5VNgGuyog=="
       }
     },
+    "npm:@atlaskit/textarea@8.1.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/textarea@8.1.0",
+      "data": {
+        "version": "8.1.0",
+        "packageName": "@atlaskit/textarea",
+        "hash": "sha512-KLug3FmPMUsqAxowyC4DCFwU8ogW8q8MUt+knO9DX/JJ0hIoDFEBvdtd1XmxiJZdQSyVg3NVT9Ssd0HlKyn41Q=="
+      }
+    },
+    "npm:@atlaskit/textarea@4.7.7": {
+      "type": "npm",
+      "name": "npm:@atlaskit/textarea@4.7.7",
+      "data": {
+        "version": "4.7.7",
+        "packageName": "@atlaskit/textarea",
+        "hash": "sha512-KZZDhbhj5UkmfJewci8kWhpUVEbL/lx6/DwxUnTqc0GFprciIc4u4RxjtcB/KzDDyFBYwFAY515VmirqDncGQQ=="
+      }
+    },
+    "npm:@atlaskit/textarea": {
+      "type": "npm",
+      "name": "npm:@atlaskit/textarea",
+      "data": {
+        "version": "5.8.2",
+        "packageName": "@atlaskit/textarea",
+        "hash": "sha512-6yw1q98K6b/7YHY6D2sMVpZBAjO+XfMdGaCvKkbgm5yoom/YX41n+GcEn2InkJv+5hF+cW7mXFrgdGqGVgWJmg=="
+      }
+    },
+    "npm:@atlaskit/textfield@8.1.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/textfield@8.1.0",
+      "data": {
+        "version": "8.1.0",
+        "packageName": "@atlaskit/textfield",
+        "hash": "sha512-UXUiocK4J6vjWR606sOM0AEVKZ0TNdpYKuP1NQseXSNkPrWoPZNpSrFzOYwF/56qTdmVWmftc8ubqfksUOj8mQ=="
+      }
+    },
+    "npm:@atlaskit/textfield@6.8.3": {
+      "type": "npm",
+      "name": "npm:@atlaskit/textfield@6.8.3",
+      "data": {
+        "version": "6.8.3",
+        "packageName": "@atlaskit/textfield",
+        "hash": "sha512-j2ApATx6N5tQICu61YTKYn8EtV/Qq01N/L6fM1UROaxaK97VFEyhBMy+7PhM3xCkDYIJPYrqkpEascJHL4A9Gw=="
+      }
+    },
+    "npm:@atlaskit/textfield@5.6.8": {
+      "type": "npm",
+      "name": "npm:@atlaskit/textfield@5.6.8",
+      "data": {
+        "version": "5.6.8",
+        "packageName": "@atlaskit/textfield",
+        "hash": "sha512-kUlbZIMn2/VrN83KGAAgJNjFjzVF4GB9Ifn+uXLSXXW1hq0D4q7b1f5Yy05crv2R68JXm88/+tjy29uAJ7v9Hw=="
+      }
+    },
+    "npm:@atlaskit/textfield@6.3.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/textfield@6.3.0",
+      "data": {
+        "version": "6.3.0",
+        "packageName": "@atlaskit/textfield",
+        "hash": "sha512-WmDa/CUnAxFz1qjNrjU9n80QKurK8XRUbbTNOorFvAdzK/lwUM+1YecBbPy2byE1saE+URvo3ISx6Fqt8CU8pQ=="
+      }
+    },
+    "npm:@atlaskit/textfield": {
+      "type": "npm",
+      "name": "npm:@atlaskit/textfield",
+      "data": {
+        "version": "7.0.0",
+        "packageName": "@atlaskit/textfield",
+        "hash": "sha512-a/gL4kGNd5u+dEu7jFU7auCnsesNmeAuqKEPMOZ09jgmA46XQqc0sh/x+SCHm/WcUJouE7WcRgHHxD1w61KLkA=="
+      }
+    },
+    "npm:@atlaskit/ufo@0.4.1": {
+      "type": "npm",
+      "name": "npm:@atlaskit/ufo@0.4.1",
+      "data": {
+        "version": "0.4.1",
+        "packageName": "@atlaskit/ufo",
+        "hash": "sha512-GHRP0miBb7MAzmv8iss3KDykqS3hF6MEw9odG+C/nsFuMwmsVmccYf/8mplczAUH3e7AGEMCoRX8e/yk9vC1hw=="
+      }
+    },
+    "npm:@atlaskit/ufo@0.1.4": {
+      "type": "npm",
+      "name": "npm:@atlaskit/ufo@0.1.4",
+      "data": {
+        "version": "0.1.4",
+        "packageName": "@atlaskit/ufo",
+        "hash": "sha512-dxzTWiHXcU3l8+PuH+tg6qPJx45mOWpLAUIOGd4dGpVZQaoLkj3sCDAy0aOou3cxJ1oM94SodjsAixhtNXfnYA=="
+      }
+    },
+    "npm:@atlaskit/ufo": {
+      "type": "npm",
+      "name": "npm:@atlaskit/ufo",
+      "data": {
+        "version": "0.3.1",
+        "packageName": "@atlaskit/ufo",
+        "hash": "sha512-A8nb7Hzl8xCy3YM4cJoB/egUpiD85Ud5eGkYdpcs9AmX9Nc7gQAEs213Pqe/zZYykAxo4SPuVCJeuOVl1fi/Ew=="
+      }
+    },
+    "npm:@atlaskit/ufo@0.2.7": {
+      "type": "npm",
+      "name": "npm:@atlaskit/ufo@0.2.7",
+      "data": {
+        "version": "0.2.7",
+        "packageName": "@atlaskit/ufo",
+        "hash": "sha512-a4Q6UTXIbAWKAy0xnh0k8+MqHA2D/A0gx5XQeuWFLiGkX3EwANmLe2KLqZ96YZ8OsWFrF/eZeQG1+mD7m+ef6w=="
+      }
+    },
     "npm:@atlaskit/user-picker@11.17.0": {
       "type": "npm",
       "name": "npm:@atlaskit/user-picker@11.17.0",
@@ -4131,6 +3780,24 @@
         "hash": "sha512-oznm4dqjjOY8iBOa3MH29OaB9qhD76S9et6q+tfTigkIcdJgd8zRhQtKE27rZ8pBKQBq0kCRj11z5OjjqfRmJw=="
       }
     },
+    "npm:@atlaskit/visually-hidden@3.0.3": {
+      "type": "npm",
+      "name": "npm:@atlaskit/visually-hidden@3.0.3",
+      "data": {
+        "version": "3.0.3",
+        "packageName": "@atlaskit/visually-hidden",
+        "hash": "sha512-tU2KX0Hdn4DTL0DejO5j27RuySBdWRQQNVEvmNs20F5YnVQla/wGt1a85Y0widuBOn3H/RgTRuHPsChk9fimHg=="
+      }
+    },
+    "npm:@atlaskit/visually-hidden": {
+      "type": "npm",
+      "name": "npm:@atlaskit/visually-hidden",
+      "data": {
+        "version": "1.6.0",
+        "packageName": "@atlaskit/visually-hidden",
+        "hash": "sha512-czJDoFENmVAhy0ZUDhBkjS/SdO3q5e6qSvlueBgZf0Nf6AV7niStZUAt56Kd+OujM7O+pscIdaME7Mks5D5sJQ=="
+      }
+    },
     "npm:@atlaskit/width-detector@5.0.5": {
       "type": "npm",
       "name": "npm:@atlaskit/width-detector@5.0.5",
@@ -4147,6 +3814,618 @@
         "version": "4.4.0",
         "packageName": "@atlaskit/width-detector",
         "hash": "sha512-9OGNhk3thNG0c2V03MgqZqjlVWwnVEKYs4HVcyWe4b0mXFV7Vg+wF2/nagiQeDKzE8RMZ6EYGyG0aGBoOSNuug=="
+      }
+    },
+    "npm:clipboard-polyfill@4.0.1": {
+      "type": "npm",
+      "name": "npm:clipboard-polyfill@4.0.1",
+      "data": {
+        "version": "4.0.1",
+        "packageName": "clipboard-polyfill",
+        "hash": "sha512-oOxooaJd9dzy78jk1fw4IL+J0SiBn+W24KqUYUwsr0OWEsb5aZlKAWglr9Fg/XEFQMT3ZmJ2AnRoRMZZOMcOQQ=="
+      }
+    },
+    "npm:clipboard-polyfill": {
+      "type": "npm",
+      "name": "npm:clipboard-polyfill",
+      "data": {
+        "version": "2.4.3",
+        "packageName": "clipboard-polyfill",
+        "hash": "sha512-vjuybtmpcSltn0UtQLOiTz0dUliZp8M82KtMiWAgm+XtyvHJLLCtJK8b+6g5mgKjfYFaYx46avBTwcifDbyjbw=="
+      }
+    },
+    "npm:entities@3.0.1": {
+      "type": "npm",
+      "name": "npm:entities@3.0.1",
+      "data": {
+        "version": "3.0.1",
+        "packageName": "entities",
+        "hash": "sha512-WiyBqoomrwMdFG1e0kqvASYfnlb0lp8M5o5Fw2OFq1hNZxxcNk8Ik0Xm7LxzBhuidnZB/UtBqVCgUz3kBOP51Q=="
+      }
+    },
+    "npm:entities@2.1.0": {
+      "type": "npm",
+      "name": "npm:entities@2.1.0",
+      "data": {
+        "version": "2.1.0",
+        "packageName": "entities",
+        "hash": "sha512-hCx1oky9PFrJ611mf0ifBLBRW8lUUVRlFolb5gWRfIELabBlbp9xZvrqZLZAs+NxFnbfQoeGd8wDkygjg7U85w=="
+      }
+    },
+    "npm:entities@4.5.0": {
+      "type": "npm",
+      "name": "npm:entities@4.5.0",
+      "data": {
+        "version": "4.5.0",
+        "packageName": "entities",
+        "hash": "sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw=="
+      }
+    },
+    "npm:entities": {
+      "type": "npm",
+      "name": "npm:entities",
+      "data": {
+        "version": "6.0.1",
+        "packageName": "entities",
+        "hash": "sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g=="
+      }
+    },
+    "npm:eventemitter2@4.1.2": {
+      "type": "npm",
+      "name": "npm:eventemitter2@4.1.2",
+      "data": {
+        "version": "4.1.2",
+        "packageName": "eventemitter2",
+        "hash": "sha512-erx0niBaTi8B7ywjGAcg8ilGNRl/xs/o4MO2ZMpRlpZ62mYzjGTBlOpxxRIrPQqBs9mbXkEux6aR+Sc5vQ/wUw=="
+      }
+    },
+    "npm:eventemitter2": {
+      "type": "npm",
+      "name": "npm:eventemitter2",
+      "data": {
+        "version": "6.4.9",
+        "packageName": "eventemitter2",
+        "hash": "sha512-JEPTiaOt9f04oa6NOkc4aH+nVp5I3wEjpHbIPqfgCdD5v5bUzy7xQqwcVO2aDQgOWhI28da57HksMrzK9HlRxg=="
+      }
+    },
+    "npm:graphql@15.10.1": {
+      "type": "npm",
+      "name": "npm:graphql@15.10.1",
+      "data": {
+        "version": "15.10.1",
+        "packageName": "graphql",
+        "hash": "sha512-BL/Xd/T9baO6NFzoMpiMD7YUZ62R6viR5tp/MULVEnbYJXZA//kRNW7J0j1w/wXArgL0sCxhDfK5dczSKn3+cg=="
+      }
+    },
+    "npm:graphql": {
+      "type": "npm",
+      "name": "npm:graphql",
+      "data": {
+        "version": "16.12.0",
+        "packageName": "graphql",
+        "hash": "sha512-DKKrynuQRne0PNpEbzuEdHlYOMksHSUI8Zc9Unei5gTsMNA2/vMpoMz/yKba50pejK56qj98qM0SjYxAKi13gQ=="
+      }
+    },
+    "npm:markdown-it@13.0.2": {
+      "type": "npm",
+      "name": "npm:markdown-it@13.0.2",
+      "data": {
+        "version": "13.0.2",
+        "packageName": "markdown-it",
+        "hash": "sha512-FtwnEuuK+2yVU7goGn/MJ0WBZMM9ZPgU9spqlFs7/A/pDIUNSOQZhUgOqYCficIuR2QaFnrt8LHqBWsbTAoI5w=="
+      }
+    },
+    "npm:markdown-it@12.3.2": {
+      "type": "npm",
+      "name": "npm:markdown-it@12.3.2",
+      "data": {
+        "version": "12.3.2",
+        "packageName": "markdown-it",
+        "hash": "sha512-TchMembfxfNVpHkbtriWltGWc+m3xszaRD0CZup7GFFhzIgQqxIfn3eGj1yZpfuflzPvfkt611B2Q/Bsk1YnGg=="
+      }
+    },
+    "npm:markdown-it": {
+      "type": "npm",
+      "name": "npm:markdown-it",
+      "data": {
+        "version": "14.1.0",
+        "packageName": "markdown-it",
+        "hash": "sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg=="
+      }
+    },
+    "npm:mdurl@1.0.1": {
+      "type": "npm",
+      "name": "npm:mdurl@1.0.1",
+      "data": {
+        "version": "1.0.1",
+        "packageName": "mdurl",
+        "hash": "sha512-/sKlQJCBYVY9Ers9hqzKou4H6V5UWc/M59TH2dvkt+84itfnq7uFOMLpOiOS4ujvHP4etln18fmIxA5R5fll0g=="
+      }
+    },
+    "npm:mdurl": {
+      "type": "npm",
+      "name": "npm:mdurl",
+      "data": {
+        "version": "2.0.0",
+        "packageName": "mdurl",
+        "hash": "sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w=="
+      }
+    },
+    "npm:mime@2.6.0": {
+      "type": "npm",
+      "name": "npm:mime@2.6.0",
+      "data": {
+        "version": "2.6.0",
+        "packageName": "mime",
+        "hash": "sha512-USPkMeET31rOMiarsBNIHZKLGgvKc/LrjofAnBlOttf5ajRvqiRA8QsenbcooctK6d6Ts6aqZXBA+XbkKthiQg=="
+      }
+    },
+    "npm:mime@1.6.0": {
+      "type": "npm",
+      "name": "npm:mime@1.6.0",
+      "data": {
+        "version": "1.6.0",
+        "packageName": "mime",
+        "hash": "sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg=="
+      }
+    },
+    "npm:mime": {
+      "type": "npm",
+      "name": "npm:mime",
+      "data": {
+        "version": "3.0.0",
+        "packageName": "mime",
+        "hash": "sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A=="
+      }
+    },
+    "npm:uuid@3.4.0": {
+      "type": "npm",
+      "name": "npm:uuid@3.4.0",
+      "data": {
+        "version": "3.4.0",
+        "packageName": "uuid",
+        "hash": "sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A=="
+      }
+    },
+    "npm:uuid@9.0.1": {
+      "type": "npm",
+      "name": "npm:uuid@9.0.1",
+      "data": {
+        "version": "9.0.1",
+        "packageName": "uuid",
+        "hash": "sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA=="
+      }
+    },
+    "npm:uuid": {
+      "type": "npm",
+      "name": "npm:uuid",
+      "data": {
+        "version": "8.3.2",
+        "packageName": "uuid",
+        "hash": "sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg=="
+      }
+    },
+    "npm:@atlaskit/editor-core": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-core",
+      "data": {
+        "version": "182.2.0",
+        "packageName": "@atlaskit/editor-core",
+        "hash": "sha512-nCAEPpYFciHZ/fiFHppmdmOUVDbOWtaqZUr3j/zrsk1pKM+4xLdTpBXi/rmZQ16QqN2VwoJQmFqJN1qw0BwyEQ=="
+      }
+    },
+    "npm:@atlaskit/date@0.9.12": {
+      "type": "npm",
+      "name": "npm:@atlaskit/date@0.9.12",
+      "data": {
+        "version": "0.9.12",
+        "packageName": "@atlaskit/date",
+        "hash": "sha512-sPMMicnmMgXJqzAI3T9cwspWWhozvzMdL7pqJZE2gFbZzcAn/jwLotOLhcOVjgbNrIOmPYXT7Uj6fywe0QDFyA=="
+      }
+    },
+    "npm:bind-event-listener": {
+      "type": "npm",
+      "name": "npm:bind-event-listener",
+      "data": {
+        "version": "3.0.0",
+        "packageName": "bind-event-listener",
+        "hash": "sha512-PJvH288AWQhKs2v9zyfYdPzlPqf5bXbGMmhmUIY9x4dAUGIWgomO771oBQNwJnMQSnUIXhKu6sgzpBRXTlvb8Q=="
+      }
+    },
+    "npm:bind-event-listener@2.1.1": {
+      "type": "npm",
+      "name": "npm:bind-event-listener@2.1.1",
+      "data": {
+        "version": "2.1.1",
+        "packageName": "bind-event-listener",
+        "hash": "sha512-O+a5c0D2se/u2VlBJmPRn45IB6R4mYMh1ok3dWxrIZ2pmLqzggBhb875mbq73508ylzofc0+hT9W41x4Y2s8lg=="
+      }
+    },
+    "npm:@atlaskit/in-product-testing": {
+      "type": "npm",
+      "name": "npm:@atlaskit/in-product-testing",
+      "data": {
+        "version": "0.1.5",
+        "packageName": "@atlaskit/in-product-testing",
+        "hash": "sha512-vS6eFkQBInT0oAd9fuB1LSl4xQtQk69KVqXM1yyhHyGHLQ+T7pB9u0dnEwgUVaGxV5wSuvbz9JUGVeug1YlvWw=="
+      }
+    },
+    "npm:@atlaskit/in-product-testing@0.2.4": {
+      "type": "npm",
+      "name": "npm:@atlaskit/in-product-testing@0.2.4",
+      "data": {
+        "version": "0.2.4",
+        "packageName": "@atlaskit/in-product-testing",
+        "hash": "sha512-xlxD+3oBh/fslkJk3TZYJ0yEK4LmRlywlZYNfYzyjXe7IrbhwAJbVknRTWsUhnQeUeIA3QlGL4+dulg0Bjbn5w=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-table@1.7.3": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-table@1.7.3",
+      "data": {
+        "version": "1.7.3",
+        "packageName": "@atlaskit/editor-plugin-table",
+        "hash": "sha512-aRPIlBDh7EbwDp53kz4kDOuHDl9pqoI+VUczMXZwZAvKsodITZ1/EV3Sc4ke0BwwuS4qY12pv+qe3SMtZ3yXsg=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-table": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-table",
+      "data": {
+        "version": "15.4.16",
+        "packageName": "@atlaskit/editor-plugin-table",
+        "hash": "sha512-ggzDIO5CDd8VJ1+PDCwiAs5pVuIHf6EmJv0W7RuvWuyA1ziik9I0hkYB5SJYIR7s+xOmKFeTOW4rni/ZQoi1fw=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-analytics@0.0.5": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-analytics@0.0.5",
+      "data": {
+        "version": "0.0.5",
+        "packageName": "@atlaskit/editor-plugin-analytics",
+        "hash": "sha512-Nw3LkiOKaFEOSCyhLuMPPR5y1VquUpym+BFCrqSiypba0JlkJCv/nqUWbbMfoUvV+tDnBTA9qqTPyTeVysnhEA=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-analytics": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-analytics",
+      "data": {
+        "version": "6.2.6",
+        "packageName": "@atlaskit/editor-plugin-analytics",
+        "hash": "sha512-NYGY6RD96fMaeWZlbmdStwj6yqnupw3Ornrzurddv+2cW0rawkH1gKoZDobZxnxVFlNfGHcbGef13Aat9ROI2A=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-content-insertion@0.0.5": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-content-insertion@0.0.5",
+      "data": {
+        "version": "0.0.5",
+        "packageName": "@atlaskit/editor-plugin-content-insertion",
+        "hash": "sha512-VARBU7kHa4mbjkcxAOLaISYUQGo8Fkl8uMzgosm7tVkL1dJ7NgPEvcrMzWF8qq5iohYX8ApjOnHTWCJqNtmGHA=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-content-insertion": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-content-insertion",
+      "data": {
+        "version": "6.0.0",
+        "packageName": "@atlaskit/editor-plugin-content-insertion",
+        "hash": "sha512-vafVO9sYbfw7tF6Uiu26SmwBY2h74Y+bnkDa2dZ7hsVbjLWfERF7sT6dPQ70EYRCMgF8tzZxR3I9HiOsP0MlMQ=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-feature-flags@0.1.9": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-feature-flags@0.1.9",
+      "data": {
+        "version": "0.1.9",
+        "packageName": "@atlaskit/editor-plugin-feature-flags",
+        "hash": "sha512-fDaXWn7WJFqRYpNKsUVaKEVOD/XphRAziMBIApV2CS2Yd7qQTQNS70p8C6MVahnS3gggzHafCLgD8JjotbKagg=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-feature-flags@5.0.2": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-feature-flags@5.0.2",
+      "data": {
+        "version": "5.0.2",
+        "packageName": "@atlaskit/editor-plugin-feature-flags",
+        "hash": "sha512-l2YNNM1xDE6+gnMxF1sZootD47Qo5Wi/RtsDr7ANkErV5YXaozSfifAFzmx8CIqQYxSI4t6EbvTbutU0GkofDg=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-feature-flags": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-feature-flags",
+      "data": {
+        "version": "0.0.4",
+        "packageName": "@atlaskit/editor-plugin-feature-flags",
+        "hash": "sha512-b55BDVrNX6OxfDkOlQl1VPBfesN1zgMxHdA1IYa+2fCuK7Bdqz6W5Re1tz1IFRuebCuQrdrZEAuls30JvP/pLA=="
+      }
+    },
+    "npm:prosemirror-dropcursor@1.7.0": {
+      "type": "npm",
+      "name": "npm:prosemirror-dropcursor@1.7.0",
+      "data": {
+        "version": "1.7.0",
+        "packageName": "prosemirror-dropcursor",
+        "hash": "sha512-vzab/iPd3CjWILFv6WJz4+BlOwCywOcAGhvY5G/66OYPcaZehN8IVbGtHCV3oyhXk2yAA67nwMv/oNMvBV9k1A=="
+      }
+    },
+    "npm:prosemirror-dropcursor@1.3.5": {
+      "type": "npm",
+      "name": "npm:prosemirror-dropcursor@1.3.5",
+      "data": {
+        "version": "1.3.5",
+        "packageName": "prosemirror-dropcursor",
+        "hash": "sha512-tNUwcF2lPAkwKBZPZRtbxpwljnODRNZ3eiYloN1DSUqDjMT1nBZm0nejaEMS1TvNQ+3amibUSAiV4hX+jpASFA=="
+      }
+    },
+    "npm:prosemirror-dropcursor": {
+      "type": "npm",
+      "name": "npm:prosemirror-dropcursor",
+      "data": {
+        "version": "1.8.1",
+        "packageName": "prosemirror-dropcursor",
+        "hash": "sha512-M30WJdJZLyXHi3N8vxN6Zh5O8ZBbQCz0gURTfPmTIBNQ5pxrdU7A58QkNqfa98YEjSAL1HUyyU34f6Pm5xBSGw=="
+      }
+    },
+    "npm:@atlaskit/media-filmstrip@46.1.7": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-filmstrip@46.1.7",
+      "data": {
+        "version": "46.1.7",
+        "packageName": "@atlaskit/media-filmstrip",
+        "hash": "sha512-vvy6yfxJuwZMTIrZNfj0FtRCeNUTStK94C5XoDNwDbBWEqf20w/pyFjqtBGyeltg+Tsci+eUc10278RHPRYUjQ=="
+      }
+    },
+    "npm:@atlaskit/media-filmstrip": {
+      "type": "npm",
+      "name": "npm:@atlaskit/media-filmstrip",
+      "data": {
+        "version": "51.1.4",
+        "packageName": "@atlaskit/media-filmstrip",
+        "hash": "sha512-y6v8o9EEoVQzJ3ilX+JGseXA72Hk/RbQ9xDQWGJo6nEEKDbCo1DFtMM4mPa7j+tJCQCG4CbhQKGKMIq8nQBn/Q=="
+      }
+    },
+    "npm:@atlaskit/radio@5.6.10": {
+      "type": "npm",
+      "name": "npm:@atlaskit/radio@5.6.10",
+      "data": {
+        "version": "5.6.10",
+        "packageName": "@atlaskit/radio",
+        "hash": "sha512-gEo+xZ+mxyhaUaZDyipzEAzLeK1Y4Nj2B5wTkUjdDe8vsOEn3oa/h6QWnm39gi8OodDpdsmXZp6+Od0dqFXo0Q=="
+      }
+    },
+    "npm:@atlaskit/radio": {
+      "type": "npm",
+      "name": "npm:@atlaskit/radio",
+      "data": {
+        "version": "8.3.13",
+        "packageName": "@atlaskit/radio",
+        "hash": "sha512-RnN2u5btlG+Q1dPjvTqYDV3H4dF/jHuUO8N9kY8OoYP0P6ksuNOge9snGAhK6Jom+ZDOW3+P/BsxVMaTSl7mUQ=="
+      }
+    },
+    "npm:@atlaskit/toggle@12.6.11": {
+      "type": "npm",
+      "name": "npm:@atlaskit/toggle@12.6.11",
+      "data": {
+        "version": "12.6.11",
+        "packageName": "@atlaskit/toggle",
+        "hash": "sha512-IQfz33BKXai9gxbLIQsNRoGrQNHCU4g7eWdFkmJTDKuUjmX8u3+Kt4zWq45re9mh6YFVrupk4aegenpxK5tpCw=="
+      }
+    },
+    "npm:@atlaskit/toggle": {
+      "type": "npm",
+      "name": "npm:@atlaskit/toggle",
+      "data": {
+        "version": "15.1.15",
+        "packageName": "@atlaskit/toggle",
+        "hash": "sha512-m+g3zNXWLybYO4HXGb/fmRm0D1t8vsOWSWxZ2wSpSEMXQVa5waqGjDupYuxWxCWvL+L+vJrZEjvKtvJ6E4C7cw=="
+      }
+    },
+    "npm:json-ld-types@3.7.0": {
+      "type": "npm",
+      "name": "npm:json-ld-types@3.7.0",
+      "data": {
+        "version": "3.7.0",
+        "packageName": "json-ld-types",
+        "hash": "sha512-UJBaBgCsA7NG8nc1xm4IFHgEsmz+Bcb+NoJ2JuV1zqI0Ue+DFgApNNgVgU4FIJyIbjRCpw/fg6mJDrUEm3h0vw=="
+      }
+    },
+    "npm:json-ld-types": {
+      "type": "npm",
+      "name": "npm:json-ld-types",
+      "data": {
+        "version": "4.1.3",
+        "packageName": "json-ld-types",
+        "hash": "sha512-0b4ZhXPINZXvbMXzs1EJIVOtmpbPh2pIunRPvshaRbODxhVIc3bLEmzFicITd1zV7lIBGMXSGiT9Q2Sm2uPueA=="
+      }
+    },
+    "npm:@atlaskit/editor-json-transformer": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-json-transformer",
+      "data": {
+        "version": "8.31.4",
+        "packageName": "@atlaskit/editor-json-transformer",
+        "hash": "sha512-ubZ8yJTwsZc9qz45hZGyVQ1gC1OsHA2HFVNoPReJ+ALSUAZ2LhVZBHMzjH3nENlmzEmAlsFxeo+UIsV/lQzdZg=="
+      }
+    },
+    "npm:@atlaskit/editor-markdown-transformer": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-markdown-transformer",
+      "data": {
+        "version": "5.20.4",
+        "packageName": "@atlaskit/editor-markdown-transformer",
+        "hash": "sha512-V8WV/ZmwxV5zceze4ka5Wd01Qr9jP+YnXc4gpKjRyorEfFjwcGOsLxWT99fLufqbimBlKYJGHIm1Q63IkmAyVg=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-accessibility-utils": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-accessibility-utils",
+      "data": {
+        "version": "6.0.1",
+        "packageName": "@atlaskit/editor-plugin-accessibility-utils",
+        "hash": "sha512-pB5wtSjGnke25OPIM/HsWPySjmo03WQMg4rW41+VPWkinn9vQWv0Jc++2ZijcyVQ3gQIkiYzkhq/jBcKp0rNBw=="
+      }
+    },
+    "npm:@atlaskit/tmp-editor-statsig@13.44.0": {
+      "type": "npm",
+      "name": "npm:@atlaskit/tmp-editor-statsig@13.44.0",
+      "data": {
+        "version": "13.44.0",
+        "packageName": "@atlaskit/tmp-editor-statsig",
+        "hash": "sha512-JXRehuecwRvSrclryNAOps0jpPeQM5Sjx9TpuGs/lxEZjRF6abDlpJl4DnbiL7j0QB3+7AZzyRkvK1wvicInkg=="
+      }
+    },
+    "npm:@atlaskit/tmp-editor-statsig": {
+      "type": "npm",
+      "name": "npm:@atlaskit/tmp-editor-statsig",
+      "data": {
+        "version": "14.8.0",
+        "packageName": "@atlaskit/tmp-editor-statsig",
+        "hash": "sha512-IFGRHBlpCwAYKmjPwkXJpBzW497AXd2pl65ZNnJDtugA8phE/77X5wNao/EpWMKWXun3COFF4GRUMGRmOLHZ3w=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-alignment": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-alignment",
+      "data": {
+        "version": "7.1.12",
+        "packageName": "@atlaskit/editor-plugin-alignment",
+        "hash": "sha512-j8xQeA7ktTLOD2dQN7VP2N//oxv9fDQc3WkGuFrO6O8wC8fbxTRKkIzrObTMDeREAzJXyFVI1/u50IOX6I0Sxw=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-annotation": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-annotation",
+      "data": {
+        "version": "6.3.0",
+        "packageName": "@atlaskit/editor-plugin-annotation",
+        "hash": "sha512-CK+kqVwOwKzpl6sXlX/8kzn3XfKzL6jp/oYCPUlEX0AFrZXnqwvIpgAS50NA4rwT6WHKcMpU4PvT53LVzQd7yg=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-avatar-group": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-avatar-group",
+      "data": {
+        "version": "7.0.4",
+        "packageName": "@atlaskit/editor-plugin-avatar-group",
+        "hash": "sha512-K6DDoNXESPsplyHOrBfnwRs+7nBOIF5V4PEw1zr7fw8vaUexg/UMMGTbQz0I/yqXqDsk2TX6RqHIq+i7mzzNtg=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-base": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-base",
+      "data": {
+        "version": "7.2.7",
+        "packageName": "@atlaskit/editor-plugin-base",
+        "hash": "sha512-eGtSHY1M9k+xmoeO4O9n/oj4WfYG/xGjpyPRqyKkgWGFfYdWurx0R3dPW5cYtzObTOo4bwNf59bVjYC/HmK6sw=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-batch-attribute-updates": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-batch-attribute-updates",
+      "data": {
+        "version": "6.1.4",
+        "packageName": "@atlaskit/editor-plugin-batch-attribute-updates",
+        "hash": "sha512-ctIkSEuB/FCnTs8qQfQPQe9K6mjWRuxke3YIDgrrlCvWVTLioq0KzmFtTwpDbIZR2FL6RL6KA6+QpSHv/oz3cQ=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-before-primary-toolbar": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-before-primary-toolbar",
+      "data": {
+        "version": "6.0.2",
+        "packageName": "@atlaskit/editor-plugin-before-primary-toolbar",
+        "hash": "sha512-jwHwVwji3kEz5OMhkNp9J+wBHzgcsHHxIoWSQm/y+qmkB9DN1zWC6bhGCrHwBrryQgvaXB6+RivLowBA0z5dhw=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-better-type-history": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-better-type-history",
+      "data": {
+        "version": "6.1.2",
+        "packageName": "@atlaskit/editor-plugin-better-type-history",
+        "hash": "sha512-tLUWVQj11mFinro5LLidozc//qRaWqszlBhxrY5WYKizUKbqca+Xikc3klGoXNNKMSJEpNMwIRIIPl7kPkH9OA=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-block-controls": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-block-controls",
+      "data": {
+        "version": "7.13.0",
+        "packageName": "@atlaskit/editor-plugin-block-controls",
+        "hash": "sha512-wVdqQC8JKXRcg8rq75pZyCcjgTXwWokorqd9MPO0pN9uLF8OuVS5Rd81SWWvwW3OqinXYiuz7AdQayY6ZBkNXQ=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-block-menu": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-block-menu",
+      "data": {
+        "version": "5.1.7",
+        "packageName": "@atlaskit/editor-plugin-block-menu",
+        "hash": "sha512-X2s3W9CwY4wUFV6m5fkOPLfFGl5BJFZdj2+bsF1p0HYFez4w/CbisDIu+J94oGh/U4SM1jlkACa6G82gt8kqQg=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-block-type": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-block-type",
+      "data": {
+        "version": "10.2.20",
+        "packageName": "@atlaskit/editor-plugin-block-type",
+        "hash": "sha512-WDpGjXBqwsm7dc+x1VZpgS9QATAayXdUhR1SPDJCPAXN3yzDuiCPaAl0MgUURIXds9cOyIZzQNypoIhTSI4wYQ=="
+      }
+    },
+    "npm:@atlaskit/prosemirror-input-rules@3.6.6": {
+      "type": "npm",
+      "name": "npm:@atlaskit/prosemirror-input-rules@3.6.6",
+      "data": {
+        "version": "3.6.6",
+        "packageName": "@atlaskit/prosemirror-input-rules",
+        "hash": "sha512-3eejrcRQ8VL/yciFOaAzlhEZr/chLhT2VXu7hwUTHD7LAegyzmcj9jeCddEHxcHq9EWcM/OMWUgl9mQqmp7IIQ=="
+      }
+    },
+    "npm:@atlaskit/prosemirror-input-rules": {
+      "type": "npm",
+      "name": "npm:@atlaskit/prosemirror-input-rules",
+      "data": {
+        "version": "2.4.6",
+        "packageName": "@atlaskit/prosemirror-input-rules",
+        "hash": "sha512-GByJkWrYEUfKFatFWdf/PYRgYgfIOqaLi0MEVS+cr84Y8zjFgEYfZ1bhwL51VUqf6d9IHXJ2tHpemESUkaKwdQ=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-border": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-border",
+      "data": {
+        "version": "6.1.4",
+        "packageName": "@atlaskit/editor-plugin-border",
+        "hash": "sha512-wk9yF6KF6ANdf2Gpg77LTDvtKiFa9JStwQ9nE10MeK65HKg+T3YV7zRUG17d/11cjXBeujV1dkXlemusevZZWQ=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-breakout": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-breakout",
+      "data": {
+        "version": "6.2.3",
+        "packageName": "@atlaskit/editor-plugin-breakout",
+        "hash": "sha512-iBCAg2pbt63K2iFjpmi2PY+BuY3yqZ6d9BrIAThrDUhrcueq6BY9MkzA6jU3a8iERigedMAe4iubYh6CDC0H8Q=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-caption": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-caption",
+      "data": {
+        "version": "6.1.4",
+        "packageName": "@atlaskit/editor-plugin-caption",
+        "hash": "sha512-l9UvBmGq7hz3IqKG+HZAeez9Nt7XjS5pkd6IvvWwRjWWidVBqzXWnPKl1aUcuejdDHGhAV+azGSMIaD/gcEiUg=="
+      }
+    },
+    "npm:@atlaskit/editor-plugin-card": {
+      "type": "npm",
+      "name": "npm:@atlaskit/editor-plugin-card",
+      "data": {
+        "version": "11.5.10",
+        "packageName": "@atlaskit/editor-plugin-card",
+        "hash": "sha512-w47c6nziWcNizGEJPuji6hwx/K/Ofy/NhQcTsOYtYbYobugVPOwUh9bUSriv+cr1GgzditZwvhb9BjWfYcdnPA=="
       }
     },
     "npm:@atlaskit/editor-plugin-clear-marks-on-empty-doc": {
@@ -4327,24 +4606,6 @@
         "version": "7.7.4",
         "packageName": "@atlaskit/editor-plugin-emoji",
         "hash": "sha512-07XkEqSrm3YBQop0xx0VTC5sxae1C6ZRfd2aUHoTGcnwxAXJmyFaKtpkRYDytArBMQEapc3QcMW1RMq3xE1taA=="
-      }
-    },
-    "npm:@atlaskit/emoji@69.9.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/emoji@69.9.0",
-      "data": {
-        "version": "69.9.0",
-        "packageName": "@atlaskit/emoji",
-        "hash": "sha512-0KJCQR/E1dhLzigA324xytQzo2AJluxnz5Y2exDROSpc9RXDwKmHR1fSRGdWmzl60JiKZpwYXj+eeDPOy12LYw=="
-      }
-    },
-    "npm:@atlaskit/emoji": {
-      "type": "npm",
-      "name": "npm:@atlaskit/emoji",
-      "data": {
-        "version": "67.14.4",
-        "packageName": "@atlaskit/emoji",
-        "hash": "sha512-MFunrAfxN4nqySPZY4sOuvKS6QFuuBIaBK6fvntq2WaI9AUIm0UW9Qa4FhJrmfdXKqGyq45cl1pV//FZzr5T9A=="
       }
     },
     "npm:@atlaskit/editor-plugin-engagement-platform": {
@@ -4581,51 +4842,6 @@
         "hash": "sha512-hu3+NqIAFMfn+oERPtuGRNuLxlobduyRTT8t02HXpVAaSjYmC9FlWLTm1jeOAeW4LoPaTmd6ZO7NqLHgaq2ehg=="
       }
     },
-    "npm:@atlaskit/range@9.2.15": {
-      "type": "npm",
-      "name": "npm:@atlaskit/range@9.2.15",
-      "data": {
-        "version": "9.2.15",
-        "packageName": "@atlaskit/range",
-        "hash": "sha512-x0Q9B7uojxS/3Ocjrr3PHp7jOgvLOxrsSq0BjoJqz7qDWwmPGOYJBKbEIeMQUJVtzchAmEmYeVLjUaXEVMas6Q=="
-      }
-    },
-    "npm:@atlaskit/range": {
-      "type": "npm",
-      "name": "npm:@atlaskit/range",
-      "data": {
-        "version": "7.4.5",
-        "packageName": "@atlaskit/range",
-        "hash": "sha512-ao+M557YALzlpXG+4ejMiD13+TLnE4v/UFVulj73nKtRf99Xf5OT+8SNfDdap1qdJ9gQQ7waQ2nghJ9RJUiigg=="
-      }
-    },
-    "npm:@atlaskit/side-navigation@11.0.28": {
-      "type": "npm",
-      "name": "npm:@atlaskit/side-navigation@11.0.28",
-      "data": {
-        "version": "11.0.28",
-        "packageName": "@atlaskit/side-navigation",
-        "hash": "sha512-TnuHjcLWjnt5QPFZlPUfXhXdiAx52cMKPDBwHZlo5galgKHWpLJSHoLdpnZIB3SCZw8J/By65ouDEoNoJuR3zA=="
-      }
-    },
-    "npm:@atlaskit/side-navigation@1.10.4": {
-      "type": "npm",
-      "name": "npm:@atlaskit/side-navigation@1.10.4",
-      "data": {
-        "version": "1.10.4",
-        "packageName": "@atlaskit/side-navigation",
-        "hash": "sha512-8x1pLttDyv8yh6DG4hED93U0c6mzhrgiwR4ztAQcaafUii92pN9jcmFVJTIMF8b2I/Ds+5FLGMak1Ojj82BXOQ=="
-      }
-    },
-    "npm:@atlaskit/side-navigation": {
-      "type": "npm",
-      "name": "npm:@atlaskit/side-navigation",
-      "data": {
-        "version": "3.6.8",
-        "packageName": "@atlaskit/side-navigation",
-        "hash": "sha512-yBX5w4j2HuMFYejE4hOaquysZPIeXZlLZjz+Ks4N+XsVfLGFqH64zKdvqoH+ltiA5YoeONBsnqrFAf/lYz1y3w=="
-      }
-    },
     "npm:@atlaskit/editor-plugin-mentions": {
       "type": "npm",
       "name": "npm:@atlaskit/editor-plugin-mentions",
@@ -4633,96 +4849,6 @@
         "version": "8.2.18",
         "packageName": "@atlaskit/editor-plugin-mentions",
         "hash": "sha512-S9Uh/N2qmZ6NWBcE4G+QbM0yydC5OZJYibG1PH92IAKcEdmZar1gyjkFwGsU/kN6RzSqX8zssqXc58iohU4YtA=="
-      }
-    },
-    "npm:@atlaskit/give-kudos@4.4.8": {
-      "type": "npm",
-      "name": "npm:@atlaskit/give-kudos@4.4.8",
-      "data": {
-        "version": "4.4.8",
-        "packageName": "@atlaskit/give-kudos",
-        "hash": "sha512-ESZu/9PAAMCaiD+qCtLycDPsP/SYC2Ohgo65Kf2jCiF1Gy3KpgotliJnQTurHkHcLORRy/vouPKcaMFSwB/SuA=="
-      }
-    },
-    "npm:@atlaskit/give-kudos": {
-      "type": "npm",
-      "name": "npm:@atlaskit/give-kudos",
-      "data": {
-        "version": "2.3.2",
-        "packageName": "@atlaskit/give-kudos",
-        "hash": "sha512-mBKMwDLs/cjQVeyDN6SMEQfIq47P7Y/XX48N2cwVVWuYsiPKVXELdzN4cc30buRKTl4NR0yD6JC6KBRgrDpIoA=="
-      }
-    },
-    "npm:@atlaskit/profilecard@24.24.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/profilecard@24.24.0",
-      "data": {
-        "version": "24.24.0",
-        "packageName": "@atlaskit/profilecard",
-        "hash": "sha512-8PW+XMi6my/2emVAc3gbHzhPEYdgP9Bdva6S0CjPQmdjtHA4HdVEJCzT/PNv3f9nwYSmtArWU/0rNwxRskREaA=="
-      }
-    },
-    "npm:@atlaskit/profilecard": {
-      "type": "npm",
-      "name": "npm:@atlaskit/profilecard",
-      "data": {
-        "version": "19.28.1",
-        "packageName": "@atlaskit/profilecard",
-        "hash": "sha512-UkvsL/KdsvveiD/YjRddEV5Dq3DbXVWd+RJHvAoArGY6LWj6nPXSOzwMgOgVQToUAUH/2TS6ldVfxAUx28FkMw=="
-      }
-    },
-    "npm:@atlaskit/rovo-agent-components@3.15.0": {
-      "type": "npm",
-      "name": "npm:@atlaskit/rovo-agent-components@3.15.0",
-      "data": {
-        "version": "3.15.0",
-        "packageName": "@atlaskit/rovo-agent-components",
-        "hash": "sha512-ZgekjwO7bsQjtTz5vxrLF010Fs/r3Rlqb7pvQ9Nad5eWeIRKTzktNvg5z3S64FM8J1RjDLXTybj4zsQGaWdQrw=="
-      }
-    },
-    "npm:@atlaskit/rovo-agent-components": {
-      "type": "npm",
-      "name": "npm:@atlaskit/rovo-agent-components",
-      "data": {
-        "version": "1.19.0",
-        "packageName": "@atlaskit/rovo-agent-components",
-        "hash": "sha512-Du+UxKVdsrAGXAakrbG1gkb6XWCogZnkoXx8/DGfGQObP3pxNZHFDrKdmPujl6SYADGDz5W1baLuY9Y2Qj7AfQ=="
-      }
-    },
-    "npm:@atlaskit/skeleton@2.1.4": {
-      "type": "npm",
-      "name": "npm:@atlaskit/skeleton@2.1.4",
-      "data": {
-        "version": "2.1.4",
-        "packageName": "@atlaskit/skeleton",
-        "hash": "sha512-DjfCz9TLGw45fuqkrFRiKKoTwyyx6xI2SIefAr3C5XlVRRdjiL/31pOJ5q8YyFuBmByglFGVjYKCMhiBXpIRog=="
-      }
-    },
-    "npm:@atlaskit/skeleton": {
-      "type": "npm",
-      "name": "npm:@atlaskit/skeleton",
-      "data": {
-        "version": "1.2.0",
-        "packageName": "@atlaskit/skeleton",
-        "hash": "sha512-yZvSmFBWBOwFpTpRWQW7HxeJ53wZoHRfWk3+dymWF2mPCcoZfHkDmfLxtxcumw7ieeAfuepUGblvozX7e2dUOw=="
-      }
-    },
-    "npm:graphql@15.10.1": {
-      "type": "npm",
-      "name": "npm:graphql@15.10.1",
-      "data": {
-        "version": "15.10.1",
-        "packageName": "graphql",
-        "hash": "sha512-BL/Xd/T9baO6NFzoMpiMD7YUZ62R6viR5tp/MULVEnbYJXZA//kRNW7J0j1w/wXArgL0sCxhDfK5dczSKn3+cg=="
-      }
-    },
-    "npm:graphql": {
-      "type": "npm",
-      "name": "npm:graphql",
-      "data": {
-        "version": "16.12.0",
-        "packageName": "graphql",
-        "hash": "sha512-DKKrynuQRne0PNpEbzuEdHlYOMksHSUI8Zc9Unei5gTsMNA2/vMpoMz/yKba50pejK56qj98qM0SjYxAKi13gQ=="
       }
     },
     "npm:@atlaskit/editor-plugin-metrics": {
@@ -4887,24 +5013,6 @@
         "hash": "sha512-Y3seDPAk9I9y3kUGNmOiuAtoducGHdBcSBdyXOu3+q6EVmQ2fzw0C5ABzTQBqahQ6ufOoCjNLzshxdiAeBmuyQ=="
       }
     },
-    "npm:@atlaskit/status@3.0.25": {
-      "type": "npm",
-      "name": "npm:@atlaskit/status@3.0.25",
-      "data": {
-        "version": "3.0.25",
-        "packageName": "@atlaskit/status",
-        "hash": "sha512-9oFUIRhkUcV9I5L+DgxqISs7YFBXjP9oi2GieJ/jg6AFiWJeKzCvMjmvb2sIB3CN3HjDUTgiQicDpP1cqCVOdQ=="
-      }
-    },
-    "npm:@atlaskit/status": {
-      "type": "npm",
-      "name": "npm:@atlaskit/status",
-      "data": {
-        "version": "1.9.4",
-        "packageName": "@atlaskit/status",
-        "hash": "sha512-8dzEy/oXuq6zkgaIOCDkikFCNAo+R+pyqbAT0fhs0mHOG+SNZWQ8Wk0IewPKJR3VDdJD6uJfAvIuE7MLuafP5w=="
-      }
-    },
     "npm:@atlaskit/editor-plugin-submit-editor": {
       "type": "npm",
       "name": "npm:@atlaskit/editor-plugin-submit-editor",
@@ -4930,24 +5038,6 @@
         "version": "9.1.19",
         "packageName": "@atlaskit/editor-plugin-tasks-and-decisions",
         "hash": "sha512-d4/Lfe64Q3x2TSewxTpYT3wk8aDdG/seNM/yF1dxEopm+jDE6ujeBKnqbym0Tfr8VSI38q197FjuX2TYkgOLRw=="
-      }
-    },
-    "npm:@atlaskit/task-decision@19.2.15": {
-      "type": "npm",
-      "name": "npm:@atlaskit/task-decision@19.2.15",
-      "data": {
-        "version": "19.2.15",
-        "packageName": "@atlaskit/task-decision",
-        "hash": "sha512-x/ej7vJoQES/9klqFbJdIVI5QFdcmxKIPffLT8ALgCxu0FiwHov013Gwvd4ws38LN5pJWmXNvPnEc+K8XB+sPQ=="
-      }
-    },
-    "npm:@atlaskit/task-decision": {
-      "type": "npm",
-      "name": "npm:@atlaskit/task-decision",
-      "data": {
-        "version": "17.12.2",
-        "packageName": "@atlaskit/task-decision",
-        "hash": "sha512-IMLYYews/38nm7cBtZ6c/nG4zZMxSu9drTrBUoWEXr9GOLQRDA1L7ExogfyIJ0lwGJazomABnxr5K67l22N+tw=="
       }
     },
     "npm:@atlaskit/editor-plugin-text-color": {
@@ -5254,15 +5344,6 @@
         "version": "0.23.2",
         "packageName": "scheduler",
         "hash": "sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ=="
-      }
-    },
-    "npm:@atlaskit/link-picker": {
-      "type": "npm",
-      "name": "npm:@atlaskit/link-picker",
-      "data": {
-        "version": "1.50.0",
-        "packageName": "@atlaskit/link-picker",
-        "hash": "sha512-wcMLiBHh5RlClBOTP/GTj4s51kE89O8KuiV4TxqK/dHCzeGG7gSXfWAMPc+OZ/2ith8vpLi5VqRSGkF47RtcOw=="
       }
     },
     "npm:@atlaskit/link-provider": {
@@ -5830,15 +5911,6 @@
         "version": "1.0.4",
         "packageName": "@atlaskit/object",
         "hash": "sha512-OczabUmDMZB6eidePDPAtXsdGVywO2GV6cy4akTbnyBfopqoHjt94Wkt+jknq/O+A339O+WPkN4kVXJjkVXBMQ=="
-      }
-    },
-    "npm:@atlaskit/onboarding": {
-      "type": "npm",
-      "name": "npm:@atlaskit/onboarding",
-      "data": {
-        "version": "12.3.6",
-        "packageName": "@atlaskit/onboarding",
-        "hash": "sha512-gBREHbzz9imYDGlJMapM46I+PbAmIt9hI0MkNpDTa0uBNasSunt1lSCrBTz5XUpvTBLzE8ngiAE98HuGyiHHSg=="
       }
     },
     "npm:@atlaskit/outbound-auth-flow-client": {
@@ -14625,15 +14697,6 @@
         "hash": "sha512-+W/5efTR7y5HRD7gACw9yQjqMVvEMLBHmboM/kPWam+H+Hmyrgjh6YncVKK122YZkXrLudzTuAukUw9FnMf7IQ=="
       }
     },
-    "npm:clipboard-polyfill": {
-      "type": "npm",
-      "name": "npm:clipboard-polyfill",
-      "data": {
-        "version": "2.4.3",
-        "packageName": "clipboard-polyfill",
-        "hash": "sha512-vjuybtmpcSltn0UtQLOiTz0dUliZp8M82KtMiWAgm+XtyvHJLLCtJK8b+6g5mgKjfYFaYx46avBTwcifDbyjbw=="
-      }
-    },
     "npm:cliui": {
       "type": "npm",
       "name": "npm:cliui",
@@ -23074,6 +23137,7 @@
     "node_modules/@atlaskit/adf-schema/node_modules/uc.micro": "npm:uc.micro@1.0.6",
     "node_modules/@atlaskit/adf-utils": "npm:@atlaskit/adf-utils",
     "node_modules/@atlaskit/afm-i18n-platform-ai-mate-rovo-agent-components": "npm:@atlaskit/afm-i18n-platform-ai-mate-rovo-agent-components",
+    "node_modules/@atlaskit/afm-i18n-platform-editor-editor-common": "npm:@atlaskit/afm-i18n-platform-editor-editor-common",
     "node_modules/@atlaskit/afm-i18n-platform-elements-emoji": "npm:@atlaskit/afm-i18n-platform-elements-emoji",
     "node_modules/@atlaskit/afm-i18n-platform-elements-mention": "npm:@atlaskit/afm-i18n-platform-elements-mention",
     "node_modules/@atlaskit/afm-i18n-platform-elements-status": "npm:@atlaskit/afm-i18n-platform-elements-status",
@@ -23081,6 +23145,7 @@
     "node_modules/@atlaskit/afm-i18n-platform-elements-user-picker": "npm:@atlaskit/afm-i18n-platform-elements-user-picker",
     "node_modules/@atlaskit/afm-i18n-platform-jql-jql-editor": "npm:@atlaskit/afm-i18n-platform-jql-jql-editor",
     "node_modules/@atlaskit/afm-i18n-platform-linking-platform-link-datasource": "npm:@atlaskit/afm-i18n-platform-linking-platform-link-datasource",
+    "node_modules/@atlaskit/afm-i18n-platform-linking-platform-link-picker": "npm:@atlaskit/afm-i18n-platform-linking-platform-link-picker",
     "node_modules/@atlaskit/afm-i18n-platform-linking-platform-smart-card": "npm:@atlaskit/afm-i18n-platform-linking-platform-smart-card",
     "node_modules/@atlaskit/afm-i18n-platform-media-media-ui": "npm:@atlaskit/afm-i18n-platform-media-media-ui",
     "node_modules/@atlaskit/afm-i18n-platform-people-and-teams-profilecard": "npm:@atlaskit/afm-i18n-platform-people-and-teams-profilecard",
@@ -23163,6 +23228,10 @@
     "node_modules/@atlaskit/code/node_modules/@atlaskit/tooltip": "npm:@atlaskit/tooltip@19.2.0",
     "node_modules/@atlaskit/codemod-utils": "npm:@atlaskit/codemod-utils",
     "node_modules/@atlaskit/css": "npm:@atlaskit/css",
+    "node_modules/@atlaskit/css-reset": "npm:@atlaskit/css-reset",
+    "node_modules/@atlaskit/css-reset/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib@5.3.0",
+    "node_modules/@atlaskit/css-reset/node_modules/@atlaskit/theme": "npm:@atlaskit/theme@21.0.2",
+    "node_modules/@atlaskit/css-reset/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens@8.4.0",
     "node_modules/@atlaskit/custom-steps": "npm:@atlaskit/custom-steps",
     "node_modules/@atlaskit/custom-steps/node_modules/@atlaskit/adf-schema": "npm:@atlaskit/adf-schema@36.18.3",
     "node_modules/@atlaskit/custom-steps/node_modules/@atlaskit/editor-prosemirror": "npm:@atlaskit/editor-prosemirror@4.0.1",
@@ -23220,76 +23289,118 @@
     "node_modules/@atlaskit/ds-explorations/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens@1.61.0",
     "node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib",
     "node_modules/@atlaskit/editor-common": "npm:@atlaskit/editor-common",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/analytics-next": "npm:@atlaskit/analytics-next@9.3.4",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/app-provider": "npm:@atlaskit/app-provider@0.4.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/app-provider/node_modules/bind-event-listener": "npm:bind-event-listener@2.1.1",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/button": "npm:@atlaskit/button@16.18.1",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/button/node_modules/@atlaskit/icon": "npm:@atlaskit/icon@22.28.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/button/node_modules/@atlaskit/icon/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/button/node_modules/@atlaskit/icon/node_modules/@atlaskit/ds-lib/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@1.1.2",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/button/node_modules/@atlaskit/icon/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@0.3.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/button/node_modules/@atlaskit/icon/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens@2.5.1",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/button/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@0.2.6",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/chunkinator": "npm:@atlaskit/chunkinator@4.2.4",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/code": "npm:@atlaskit/code@14.6.9",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/code/node_modules/@atlaskit/analytics-next": "npm:@atlaskit/analytics-next@10.3.1",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/code/node_modules/@atlaskit/analytics-next/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@1.1.2",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/code/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/code/node_modules/@atlaskit/ds-lib/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@1.1.2",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/code/node_modules/@atlaskit/tooltip": "npm:@atlaskit/tooltip",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/code/node_modules/@atlaskit/tooltip/node_modules/@atlaskit/theme": "npm:@atlaskit/theme@14.1.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/code/node_modules/@atlaskit/tooltip/node_modules/@atlaskit/theme/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@1.1.2",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/code/node_modules/@atlaskit/tooltip/node_modules/@atlaskit/theme/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/code/node_modules/@atlaskit/tooltip/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens@2.5.1",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib@2.7.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/focus-ring": "npm:@atlaskit/focus-ring@1.7.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/focus-ring/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/focus-ring/node_modules/@atlaskit/ds-lib/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@1.1.2",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/focus-ring/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens@2.5.1",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/icon": "npm:@atlaskit/icon@21.12.8",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/interaction-context": "npm:@atlaskit/interaction-context@2.6.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/media-client": "npm:@atlaskit/media-client@21.1.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/mention": "npm:@atlaskit/mention@22.1.10",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/mention/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/mention/node_modules/@atlaskit/ds-lib/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@1.1.2",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/mention/node_modules/@atlaskit/icon": "npm:@atlaskit/icon@22.28.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/mention/node_modules/@atlaskit/icon/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens@2.5.1",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/mention/node_modules/@atlaskit/tooltip": "npm:@atlaskit/tooltip",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/mention/node_modules/@atlaskit/tooltip/node_modules/@atlaskit/analytics-next": "npm:@atlaskit/analytics-next@10.3.1",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/mention/node_modules/@atlaskit/tooltip/node_modules/@atlaskit/analytics-next/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@1.1.2",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/mention/node_modules/@atlaskit/tooltip/node_modules/@atlaskit/theme": "npm:@atlaskit/theme@14.1.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/mention/node_modules/@atlaskit/tooltip/node_modules/@atlaskit/theme/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@1.1.2",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/mention/node_modules/@atlaskit/tooltip/node_modules/@atlaskit/theme/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/mention/node_modules/@atlaskit/tooltip/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens@2.5.1",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/mention/node_modules/@atlaskit/ufo": "npm:@atlaskit/ufo@0.2.7",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/menu": "npm:@atlaskit/menu@1.11.1",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/menu/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@0.2.6",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/motion": "npm:@atlaskit/motion@1.10.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/motion/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/motion/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@1.1.2",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@0.3.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/primitives": "npm:@atlaskit/primitives@1.20.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/primitives/node_modules/bind-event-listener": "npm:bind-event-listener@2.1.1",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/spinner": "npm:@atlaskit/spinner@16.3.6",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/spinner/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/spinner/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@1.1.2",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/spinner/node_modules/@atlaskit/theme": "npm:@atlaskit/theme@14.1.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/spinner/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/theme": "npm:@atlaskit/theme@12.12.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens@1.61.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/tooltip": "npm:@atlaskit/tooltip@17.8.10",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/tooltip/node_modules/@atlaskit/in-product-testing": "npm:@atlaskit/in-product-testing@0.2.4",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/tooltip/node_modules/@atlaskit/popper": "npm:@atlaskit/popper@5.6.0",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/tooltip/node_modules/bind-event-listener": "npm:bind-event-listener@2.1.1",
-    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/ufo": "npm:@atlaskit/ufo@0.1.4",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/adf-schema": "npm:@atlaskit/adf-schema@51.5.1",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/adf-schema/node_modules/@atlaskit/atlassian-context": "npm:@atlaskit/atlassian-context@0.2.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/adf-schema/node_modules/@atlaskit/feature-gate-js-client": "npm:@atlaskit/feature-gate-js-client@4.26.5",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/adf-schema/node_modules/linkify-it": "npm:linkify-it@2.2.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/adf-utils": "npm:@atlaskit/adf-utils@19.26.4",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/analytics-listeners": "npm:@atlaskit/analytics-listeners@9.1.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/analytics-namespaced-context": "npm:@atlaskit/analytics-namespaced-context@7.2.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/app-provider": "npm:@atlaskit/app-provider@3.2.7",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/atlassian-context": "npm:@atlaskit/atlassian-context@0.6.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/avatar": "npm:@atlaskit/avatar@25.5.5",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/avatar-group": "npm:@atlaskit/avatar-group@12.4.3",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/badge": "npm:@atlaskit/badge@18.2.4",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/blanket": "npm:@atlaskit/blanket@15.0.19",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/button": "npm:@atlaskit/button@23.6.3",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/calendar": "npm:@atlaskit/calendar@17.1.27",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/checkbox": "npm:@atlaskit/checkbox@17.1.23",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/chunkinator": "npm:@atlaskit/chunkinator@7.0.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/code": "npm:@atlaskit/code@17.3.1",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/css": "npm:@atlaskit/css@0.17.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/custom-steps": "npm:@atlaskit/custom-steps@0.16.5",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/datetime-picker": "npm:@atlaskit/datetime-picker@17.1.11",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/drawer": "npm:@atlaskit/drawer@11.0.19",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/dropdown-menu": "npm:@atlaskit/dropdown-menu@16.3.22",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib@5.3.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/editor-palette": "npm:@atlaskit/editor-palette@2.1.17",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/editor-shared-styles": "npm:@atlaskit/editor-shared-styles@3.10.2",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/emoji": "npm:@atlaskit/emoji@69.9.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/empty-state": "npm:@atlaskit/empty-state@10.1.9",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/flag": "npm:@atlaskit/flag@17.5.8",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/focus-ring": "npm:@atlaskit/focus-ring@3.0.7",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/form": "npm:@atlaskit/form@14.3.1",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/frontend-utilities": "npm:@atlaskit/frontend-utilities@3.2.2",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/give-kudos": "npm:@atlaskit/give-kudos@4.4.8",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/heading": "npm:@atlaskit/heading@5.2.14",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/icon": "npm:@atlaskit/icon@29.0.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/icon-file-type": "npm:@atlaskit/icon-file-type@7.0.7",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/icon-lab": "npm:@atlaskit/icon-lab@5.12.1",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/icon-object": "npm:@atlaskit/icon-object@7.3.2",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/image": "npm:@atlaskit/image@3.0.4",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/intl-messages-provider": "npm:@atlaskit/intl-messages-provider@2.0.1",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/jql-editor": "npm:@atlaskit/jql-editor@5.9.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/jql-editor-autocomplete-rest": "npm:@atlaskit/jql-editor-autocomplete-rest@3.0.2",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/jql-editor-common": "npm:@atlaskit/jql-editor-common@3.0.2",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/layering": "npm:@atlaskit/layering@3.4.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/legacy-custom-icons": "npm:@atlaskit/legacy-custom-icons@0.22.17",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/link-analytics": "npm:@atlaskit/link-analytics@11.0.1",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/link-client-extension": "npm:@atlaskit/link-client-extension@6.0.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/link-datasource": "npm:@atlaskit/link-datasource@4.30.10",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/link-extractors": "npm:@atlaskit/link-extractors@2.4.6",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/link-picker": "npm:@atlaskit/link-picker@4.0.3",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/linking-common": "npm:@atlaskit/linking-common@9.9.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/linking-types": "npm:@atlaskit/linking-types@14.2.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/locale": "npm:@atlaskit/locale@3.0.3",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/logo": "npm:@atlaskit/logo@19.9.5",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/lozenge": "npm:@atlaskit/lozenge@13.1.2",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/media-card": "npm:@atlaskit/media-card@79.9.1",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/media-client": "npm:@atlaskit/media-client@35.6.1",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/media-client-react": "npm:@atlaskit/media-client-react@4.1.2",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/media-common": "npm:@atlaskit/media-common@12.3.1",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/media-picker": "npm:@atlaskit/media-picker@70.1.3",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/media-svg": "npm:@atlaskit/media-svg@2.1.13",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/media-ui": "npm:@atlaskit/media-ui@28.7.17",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/media-viewer": "npm:@atlaskit/media-viewer@52.5.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/mention": "npm:@atlaskit/mention@24.4.3",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/menu": "npm:@atlaskit/menu@8.4.11",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/modal-dialog": "npm:@atlaskit/modal-dialog@14.7.2",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/motion": "npm:@atlaskit/motion@5.3.10",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/onboarding": "npm:@atlaskit/onboarding@14.4.14",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/people-teams-ui-public": "npm:@atlaskit/people-teams-ui-public@3.7.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/popper": "npm:@atlaskit/popper@7.1.6",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/popup": "npm:@atlaskit/popup@4.6.4",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/portal": "npm:@atlaskit/portal@5.1.8",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-autoscroll": "npm:@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-autoscroll@2.0.1",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/pragmatic-drag-and-drop-react-drop-indicator": "npm:@atlaskit/pragmatic-drag-and-drop-react-drop-indicator@3.2.9",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/primitives": "npm:@atlaskit/primitives@16.4.1",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/profilecard": "npm:@atlaskit/profilecard@24.24.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/range": "npm:@atlaskit/range@9.2.15",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/react-select": "npm:@atlaskit/react-select@3.9.1",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/rovo-agent-components": "npm:@atlaskit/rovo-agent-components@3.15.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/section-message": "npm:@atlaskit/section-message@8.9.4",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/select": "npm:@atlaskit/select@21.4.2",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/side-navigation": "npm:@atlaskit/side-navigation@11.0.28",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/skeleton": "npm:@atlaskit/skeleton@2.1.4",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/smart-card": "npm:@atlaskit/smart-card@43.14.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/smart-user-picker": "npm:@atlaskit/smart-user-picker@8.5.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/spinner": "npm:@atlaskit/spinner@19.0.7",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/status": "npm:@atlaskit/status@3.0.25",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/tabs": "npm:@atlaskit/tabs@18.2.4",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/tag": "npm:@atlaskit/tag@14.1.16",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/task-decision": "npm:@atlaskit/task-decision@19.2.15",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/teams-avatar": "npm:@atlaskit/teams-avatar@2.4.4",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/textarea": "npm:@atlaskit/textarea@8.1.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/textfield": "npm:@atlaskit/textfield@8.1.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/theme": "npm:@atlaskit/theme@21.0.2",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens@8.4.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/tooltip": "npm:@atlaskit/tooltip@20.11.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/ufo": "npm:@atlaskit/ufo@0.4.1",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/user-picker": "npm:@atlaskit/user-picker@11.17.0",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/visually-hidden": "npm:@atlaskit/visually-hidden@3.0.3",
+    "node_modules/@atlaskit/editor-common/node_modules/@atlaskit/width-detector": "npm:@atlaskit/width-detector@5.0.5",
+    "node_modules/@atlaskit/editor-common/node_modules/clipboard-polyfill": "npm:clipboard-polyfill@4.0.1",
+    "node_modules/@atlaskit/editor-common/node_modules/entities": "npm:entities@3.0.1",
     "node_modules/@atlaskit/editor-common/node_modules/eventemitter2": "npm:eventemitter2@4.1.2",
-    "node_modules/@atlaskit/editor-common/node_modules/orderedmap": "npm:orderedmap@1.1.8",
-    "node_modules/@atlaskit/editor-common/node_modules/prosemirror-model": "npm:prosemirror-model@1.14.3",
-    "node_modules/@atlaskit/editor-common/node_modules/prosemirror-state": "npm:prosemirror-state@1.3.4",
-    "node_modules/@atlaskit/editor-common/node_modules/prosemirror-transform": "npm:prosemirror-transform@1.3.2",
-    "node_modules/@atlaskit/editor-common/node_modules/prosemirror-view": "npm:prosemirror-view@1.23.2",
+    "node_modules/@atlaskit/editor-common/node_modules/graphql": "npm:graphql@15.10.1",
+    "node_modules/@atlaskit/editor-common/node_modules/linkify-it": "npm:linkify-it@3.0.3",
+    "node_modules/@atlaskit/editor-common/node_modules/markdown-it": "npm:markdown-it@13.0.2",
+    "node_modules/@atlaskit/editor-common/node_modules/markdown-it/node_modules/linkify-it": "npm:linkify-it@4.0.1",
+    "node_modules/@atlaskit/editor-common/node_modules/mdurl": "npm:mdurl@1.0.1",
+    "node_modules/@atlaskit/editor-common/node_modules/mime": "npm:mime@2.6.0",
     "node_modules/@atlaskit/editor-common/node_modules/rxjs": "npm:rxjs@5.5.12",
     "node_modules/@atlaskit/editor-common/node_modules/symbol-observable": "npm:symbol-observable@1.0.1",
+    "node_modules/@atlaskit/editor-common/node_modules/uc.micro": "npm:uc.micro@1.0.6",
     "node_modules/@atlaskit/editor-common/node_modules/uuid": "npm:uuid@3.4.0",
     "node_modules/@atlaskit/editor-core": "npm:@atlaskit/editor-core",
     "node_modules/@atlaskit/editor-core/node_modules/@atlaskit/analytics-next": "npm:@atlaskit/analytics-next@9.3.4",
@@ -23399,6 +23510,9 @@
     "node_modules/@atlaskit/editor-core/node_modules/@atlaskit/dropdown-menu/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@0.2.6",
     "node_modules/@atlaskit/editor-core/node_modules/@atlaskit/dropdown-menu/node_modules/bind-event-listener": "npm:bind-event-listener@2.1.1",
     "node_modules/@atlaskit/editor-core/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib@2.7.0",
+    "node_modules/@atlaskit/editor-core/node_modules/@atlaskit/editor-common": "npm:@atlaskit/editor-common@73.0.0",
+    "node_modules/@atlaskit/editor-core/node_modules/@atlaskit/editor-common/node_modules/@atlaskit/in-product-testing": "npm:@atlaskit/in-product-testing",
+    "node_modules/@atlaskit/editor-core/node_modules/@atlaskit/editor-common/node_modules/@atlaskit/ufo": "npm:@atlaskit/ufo@0.1.4",
     "node_modules/@atlaskit/editor-core/node_modules/@atlaskit/editor-plugin-table": "npm:@atlaskit/editor-plugin-table@1.7.3",
     "node_modules/@atlaskit/editor-core/node_modules/@atlaskit/editor-plugin-table/node_modules/@atlaskit/adf-schema": "npm:@atlaskit/adf-schema@26.4.1",
     "node_modules/@atlaskit/editor-core/node_modules/@atlaskit/editor-plugin-table/node_modules/@atlaskit/adf-utils": "npm:@atlaskit/adf-utils@19.26.4",
@@ -24200,7 +24314,62 @@
     "node_modules/@atlaskit/editor-plugin-extension/node_modules/uc.micro": "npm:uc.micro@1.0.6",
     "node_modules/@atlaskit/editor-plugin-extension/node_modules/uuid": "npm:uuid@3.4.0",
     "node_modules/@atlaskit/editor-plugin-feature-flags": "npm:@atlaskit/editor-plugin-feature-flags",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/analytics-next": "npm:@atlaskit/analytics-next@9.3.4",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/app-provider": "npm:@atlaskit/app-provider@0.4.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/app-provider/node_modules/bind-event-listener": "npm:bind-event-listener@2.1.1",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/button": "npm:@atlaskit/button@16.18.1",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/button/node_modules/@atlaskit/icon": "npm:@atlaskit/icon@22.28.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/button/node_modules/@atlaskit/icon/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/button/node_modules/@atlaskit/icon/node_modules/@atlaskit/ds-lib/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@1.1.2",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/button/node_modules/@atlaskit/icon/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@0.3.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/button/node_modules/@atlaskit/icon/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens@2.5.1",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/button/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@0.2.6",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/chunkinator": "npm:@atlaskit/chunkinator@4.2.4",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/code": "npm:@atlaskit/code@14.6.9",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib@2.7.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/editor-common": "npm:@atlaskit/editor-common@73.0.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/editor-common/node_modules/@atlaskit/tooltip": "npm:@atlaskit/tooltip@17.8.10",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/editor-common/node_modules/bind-event-listener": "npm:bind-event-listener@2.1.1",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/focus-ring": "npm:@atlaskit/focus-ring@1.7.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/focus-ring/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/focus-ring/node_modules/@atlaskit/ds-lib/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@1.1.2",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/focus-ring/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens@2.5.1",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/icon": "npm:@atlaskit/icon@21.12.8",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/interaction-context": "npm:@atlaskit/interaction-context@2.6.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/media-client": "npm:@atlaskit/media-client@21.1.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/mention": "npm:@atlaskit/mention@22.1.10",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/mention/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/mention/node_modules/@atlaskit/ds-lib/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@1.1.2",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/mention/node_modules/@atlaskit/icon": "npm:@atlaskit/icon@22.28.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/mention/node_modules/@atlaskit/icon/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens@2.5.1",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/mention/node_modules/@atlaskit/ufo": "npm:@atlaskit/ufo@0.2.7",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/menu": "npm:@atlaskit/menu@1.11.1",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/menu/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@0.2.6",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/motion": "npm:@atlaskit/motion@1.10.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/motion/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/motion/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@1.1.2",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@0.3.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/popper": "npm:@atlaskit/popper@5.6.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/popper/node_modules/@atlaskit/in-product-testing": "npm:@atlaskit/in-product-testing@0.2.4",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/primitives": "npm:@atlaskit/primitives@1.20.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/primitives/node_modules/bind-event-listener": "npm:bind-event-listener@2.1.1",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/spinner": "npm:@atlaskit/spinner@16.3.6",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/spinner/node_modules/@atlaskit/ds-lib": "npm:@atlaskit/ds-lib",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/spinner/node_modules/@atlaskit/platform-feature-flags": "npm:@atlaskit/platform-feature-flags@1.1.2",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/spinner/node_modules/@atlaskit/theme": "npm:@atlaskit/theme@14.1.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/spinner/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/theme": "npm:@atlaskit/theme@12.12.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/tokens": "npm:@atlaskit/tokens@1.61.0",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/@atlaskit/ufo": "npm:@atlaskit/ufo@0.1.4",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/eventemitter2": "npm:eventemitter2@4.1.2",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/orderedmap": "npm:orderedmap@1.1.8",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/prosemirror-model": "npm:prosemirror-model@1.14.3",
     "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/prosemirror-state": "npm:prosemirror-state@1.3.4",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/prosemirror-transform": "npm:prosemirror-transform@1.3.2",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/prosemirror-view": "npm:prosemirror-view@1.23.2",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/rxjs": "npm:rxjs@5.5.12",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/symbol-observable": "npm:symbol-observable@1.0.1",
+    "node_modules/@atlaskit/editor-plugin-feature-flags/node_modules/uuid": "npm:uuid@3.4.0",
     "node_modules/@atlaskit/editor-plugin-feedback-dialog": "npm:@atlaskit/editor-plugin-feedback-dialog",
     "node_modules/@atlaskit/editor-plugin-find-replace": "npm:@atlaskit/editor-plugin-find-replace",
     "node_modules/@atlaskit/editor-plugin-find-replace/node_modules/@atlaskit/app-provider": "npm:@atlaskit/app-provider@3.2.7",
