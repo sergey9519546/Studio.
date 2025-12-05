@@ -28,9 +28,10 @@ type Project = {
 };
 
 // --- GEMINI API HELPERS ---
-const apiKey = typeof import.meta !== 'undefined'
-  ? import.meta.env.VITE_GEMINI_API_KEY || ''
-  : '';
+const apiKey =
+  (typeof process !== 'undefined' && process.env.VITE_GEMINI_API_KEY) ||
+  (globalThis as any)?.VITE_GEMINI_API_KEY ||
+  '';
 
 const callGemini = async (
   prompt: string,
@@ -449,7 +450,7 @@ const GuardianRoom = ({ project, onBack }: GuardianRoomProps) => {
 
   const send = async () => {
     if (!input.trim()) return;
-    const newMsg = { role: 'user', text: input };
+    const newMsg: Message = { role: 'user', text: input };
     setMessages((p) => [...p, newMsg]);
     setInput('');
     const res = await callGemini(

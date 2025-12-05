@@ -14,7 +14,7 @@ interface DashboardProps {
     projects?: Project[];
     freelancers?: Freelancer[];
     assignments?: Assignment[];
-    onCallAction: (action: string, params: unknown) => Promise<unknown>;
+    onCallAction?: (action: string, params: unknown) => Promise<unknown>;
     isLoading?: boolean;
 }
 
@@ -51,10 +51,19 @@ const Dashboard: React.FC<DashboardProps> = ({
                     (api as any)?.freelancers?.list?.(),
                     (api as any)?.assignments?.list?.(),
                 ]);
+                const projectTotal =
+                    (p as any)?.data?.total ??
+                    (p as any)?.meta?.total ??
+                    (Array.isArray((p as any)?.data) ? (p as any)?.data?.length : (p as any)?.data?.data?.length) ??
+                    0;
+                const freelancerTotal =
+                    (f as any)?.data?.length ?? (f as any)?.meta?.total ?? 0;
+                const assignmentTotal =
+                    (a as any)?.data?.length ?? (a as any)?.meta?.total ?? 0;
                 setStats({
-                    projects: (p as any)?.data?.total ?? ((p as any)?.data?.data?.length ?? 0),
-                    freelancers: (f as any)?.data?.length ?? 0,
-                    assignments: (a as any)?.data?.length ?? 0,
+                    projects: projectTotal,
+                    freelancers: freelancerTotal,
+                    assignments: assignmentTotal,
                 });
                 setError(null);
             } catch {

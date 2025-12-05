@@ -8,6 +8,7 @@ interface DGlassEffectContainerProps {
   blurred?: boolean;
   morphingEnabled?: boolean;
   onMorphStateChange?: (isMorphed: boolean) => void;
+  style?: React.CSSProperties;
 }
 
 interface ChildRect {
@@ -36,6 +37,7 @@ export const DGlassEffectContainer: React.FC<DGlassEffectContainerProps> = ({
   blurred = true,
   morphingEnabled = true,
   onMorphStateChange,
+  style,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const childRefsMap = useRef<Map<string, HTMLElement>>(new Map());
@@ -151,6 +153,7 @@ export const DGlassEffectContainer: React.FC<DGlassEffectContainerProps> = ({
       `}
       style={{
         backgroundColor: blurred ? 'rgba(255, 255, 255, 0.75)' : undefined,
+        ...style,
       }}
     >
       {/* Morphed overlay (visible when elements merge) */}

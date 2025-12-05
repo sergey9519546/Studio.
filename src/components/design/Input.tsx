@@ -106,11 +106,17 @@ interface InputFieldProps<T extends FieldValues = FieldValues> extends UseContro
 export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
   ({ label, helperText, icon, variant, size, inputProps, ...fieldProps }, ref) => {
     const { field, fieldState } = useController(fieldProps);
+    const { ref: fieldRef, ...restField } = field;
+    const setRef = (instance: HTMLInputElement | null) => {
+      if (typeof ref === 'function') ref(instance);
+      else if (ref) (ref as React.MutableRefObject<HTMLInputElement | null>).current = instance;
+      fieldRef(instance);
+    };
 
     return (
       <Input
-        ref={ref}
-        {...field}
+        ref={setRef}
+        {...restField}
         {...inputProps}
         label={label}
         error={fieldState.error?.message}

@@ -6,6 +6,7 @@ interface CardProps {
   noPadding?: boolean;
   hoverable?: boolean;
   glass?: boolean;
+  onClick?: () => void;
 }
 
 export const Card: React.FC<CardProps> = ({ 
@@ -14,6 +15,7 @@ export const Card: React.FC<CardProps> = ({
   noPadding = false,
   hoverable = false,
   glass = false,
+  onClick,
 }) => {
   return (
     <div 
@@ -27,6 +29,7 @@ export const Card: React.FC<CardProps> = ({
         ${hoverable ? 'hover:-translate-y-0.5 hover:shadow-float cursor-pointer' : ''}
         ${className}
       `}
+      onClick={onClick}
     >
       <div className={noPadding ? '' : 'p-6'}>
         {children}

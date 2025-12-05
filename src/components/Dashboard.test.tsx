@@ -24,18 +24,19 @@ describe('Dashboard', () => {
 
         vi.mocked(api.api.projects.list).mockResolvedValue({
             success: true,
-            data: { total: 12, data: [] },
-        });
+            data: [],
+            meta: { total: 12, page: 1, limit: 10, totalPages: 2 },
+        } as any);
 
         vi.mocked(api.api.freelancers.list).mockResolvedValue({
             success: true,
             data: Array(25).fill({}),
-        });
+        } as any);
 
         vi.mocked(api.api.assignments.list).mockResolvedValue({
             success: true,
             data: Array(8).fill({}),
-        });
+        } as any);
     });
 
     it('should render dashboard statistics', async () => {

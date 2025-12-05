@@ -133,11 +133,17 @@ interface SelectFieldProps<T extends FieldValues = FieldValues> extends UseContr
 export const SelectField = React.forwardRef<HTMLSelectElement, SelectFieldProps>(
   ({ label, helperText, options, placeholder, variant, size, selectProps, ...fieldProps }, ref) => {
     const { field, fieldState } = useController(fieldProps);
+    const { ref: fieldRef, ...restField } = field;
+    const setRef = (instance: HTMLSelectElement | null) => {
+      if (typeof ref === 'function') ref(instance);
+      else if (ref) (ref as React.MutableRefObject<HTMLSelectElement | null>).current = instance;
+      fieldRef(instance);
+    };
 
     return (
       <Select
-        ref={ref}
-        {...field}
+        ref={setRef}
+        {...restField}
         {...selectProps}
         label={label}
         error={fieldState.error?.message}

@@ -99,11 +99,17 @@ interface TextareaFieldProps<T extends FieldValues = FieldValues> extends UseCon
 export const TextareaField = React.forwardRef<HTMLTextAreaElement, TextareaFieldProps>(
   ({ label, helperText, variant, size, rows, textareaProps, ...fieldProps }, ref) => {
     const { field, fieldState } = useController(fieldProps);
+    const { ref: fieldRef, ...restField } = field;
+    const setRef = (instance: HTMLTextAreaElement | null) => {
+      if (typeof ref === 'function') ref(instance);
+      else if (ref) (ref as React.MutableRefObject<HTMLTextAreaElement | null>).current = instance;
+      fieldRef(instance);
+    };
 
     return (
       <Textarea
-        ref={ref}
-        {...field}
+        ref={setRef}
+        {...restField}
         {...textareaProps}
         label={label}
         error={fieldState.error?.message}

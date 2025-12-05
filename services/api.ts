@@ -252,9 +252,10 @@ export const api = {
         create: async (f: Freelancer) => {
             try {
                 const res = await fetchApi<Freelancer>('/api/freelancers', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(f) });
-                localFreelancers = [...localFreelancers, res.data];
+                const createdFreelancer = res.data ?? f;
+                localFreelancers = [...localFreelancers, createdFreelancer];
                 saveToStorage('freelancers', localFreelancers);
-                return res;
+                return { ...res, data: createdFreelancer };
             } catch {
                 localFreelancers.push(f);
                 saveToStorage('freelancers', localFreelancers);
@@ -264,7 +265,8 @@ export const api = {
         update: async (f: Freelancer) => {
             try {
                 const res = await fetchApi<Freelancer>(`/api/freelancers/${f.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(f) });
-                localFreelancers = localFreelancers.map(lf => lf.id === f.id ? res.data : lf);
+                const updatedFreelancer = res.data ?? f;
+                localFreelancers = localFreelancers.map(lf => lf.id === f.id ? updatedFreelancer : lf);
                 saveToStorage('freelancers', localFreelancers);
                 return res;
             } catch {
@@ -311,9 +313,10 @@ export const api = {
         create: async (p: Project) => {
             try {
                 const res = await fetchApi<Project>('/api/projects', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) });
-                localProjects = [...localProjects, res.data];
+                const createdProject = res.data ?? p;
+                localProjects = [...localProjects, createdProject];
                 saveToStorage('projects', localProjects);
-                return res;
+                return { ...res, data: createdProject };
             } catch {
                 localProjects.push(p);
                 saveToStorage('projects', localProjects);
@@ -323,7 +326,8 @@ export const api = {
         update: async (p: Project) => {
             try {
                 const res = await fetchApi<Project>(`/api/projects/${p.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) });
-                localProjects = localProjects.map(lp => lp.id === p.id ? res.data : lp);
+                const updatedProject = res.data ?? p;
+                localProjects = localProjects.map(lp => lp.id === p.id ? updatedProject : lp);
                 saveToStorage('projects', localProjects);
                 return res;
             } catch {
@@ -367,9 +371,10 @@ export const api = {
         create: async (a: Assignment) => {
             try {
                 const res = await fetchApi<Assignment>('/api/assignments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(a) });
-                localAssignments = [...localAssignments, res.data];
+                const createdAssignment = res.data ?? a;
+                localAssignments = [...localAssignments, createdAssignment];
                 saveToStorage('assignments', localAssignments);
-                return res;
+                return { ...res, data: createdAssignment };
             } catch {
                 localAssignments.push(a);
                 saveToStorage('assignments', localAssignments);
@@ -379,7 +384,8 @@ export const api = {
         update: async (a: Assignment) => {
             try {
                 const res = await fetchApi<Assignment>(`/api/assignments/${a.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(a) });
-                localAssignments = localAssignments.map(la => la.id === a.id ? res.data : la);
+                const updatedAssignment = res.data ?? a;
+                localAssignments = localAssignments.map(la => la.id === a.id ? updatedAssignment : la);
                 saveToStorage('assignments', localAssignments);
                 return res;
             } catch {
@@ -402,9 +408,10 @@ export const api = {
         create: async (s: Script) => {
             try {
                 const res = await fetchApi<Script>('/api/scripts', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(s) });
-                localScripts = [...localScripts, res.data];
+                const createdScript = res.data ?? s;
+                localScripts = [...localScripts, createdScript];
                 saveToStorage('scripts', localScripts);
-                return res;
+                return { ...res, data: createdScript };
             } catch {
                 localScripts.push(s);
                 saveToStorage('scripts', localScripts);

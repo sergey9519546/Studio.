@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import ProjectList from '../../components/ProjectList';
 import * as api from '../../services/api';
+import { ApiResponse, Project, ProjectStatus, Priority } from '../../types';
 
 // Mock the API module
 vi.mock('../../services/api', () => ({
@@ -14,14 +15,15 @@ vi.mock('../../services/api', () => ({
     },
 }));
 
-const mockProjects = {
-    total: 25,
-    page: 1,
-    limit: 10,
-    data: [
-        { id: 1, name: 'Project Alpha', clientName: 'Client A', dueDate: '2025-12-31', roleRequirements: [] },
-        { id: 2, name: 'Project Beta', clientName: 'Client B', dueDate: '2025-11-30', roleRequirements: [] },
-    ],
+const mockProjects: Project[] = [
+    { id: '1', name: 'Project Alpha', clientName: 'Client A', dueDate: '2025-12-31', roleRequirements: [], status: ProjectStatus.PLANNED, priority: Priority.NORMAL },
+    { id: '2', name: 'Project Beta', clientName: 'Client B', dueDate: '2025-11-30', roleRequirements: [], status: ProjectStatus.IN_PROGRESS, priority: Priority.HIGH },
+];
+
+const mockProjectsResponse: ApiResponse<Project[]> = {
+    success: true,
+    data: mockProjects,
+    meta: { total: 25, page: 1, limit: 10, totalPages: 3 },
 };
 
 describe('ProjectList', () => {
@@ -30,7 +32,7 @@ describe('ProjectList', () => {
     });
 
     it('should render project list with data', async () => {
-        vi.mocked(api.api.projects.list).mockResolvedValue({ success: true, data: mockProjects });
+        vi.mocked(api.api.projects.list).mockResolvedValue(mockProjectsResponse as any);
 
         render(
             <BrowserRouter>
@@ -63,7 +65,7 @@ describe('ProjectList', () => {
     });
 
     it('should handle pagination controls', async () => {
-        vi.mocked(api.api.projects.list).mockResolvedValue({ success: true, data: mockProjects });
+        vi.mocked(api.api.projects.list).mockResolvedValue(mockProjectsResponse as any);
 
         render(
             <BrowserRouter>
@@ -105,8 +107,9 @@ describe('ProjectList', () => {
     it('should display empty state when no projects', async () => {
         vi.mocked(api.api.projects.list).mockResolvedValue({
             success: true,
-            data: { total: 0, page: 1, limit: 10, data: [] },
-        });
+            data: [],
+            meta: { total: 0, page: 1, limit: 10, totalPages: 1 },
+        } as any);
 
         render(
             <BrowserRouter>
@@ -120,7 +123,7 @@ describe('ProjectList', () => {
     });
 
     it('should navigate to project details on click', async () => {
-        vi.mocked(api.api.projects.list).mockResolvedValue({ success: true, data: mockProjects });
+        vi.mocked(api.api.projects.list).mockResolvedValue(mockProjectsResponse as any);
 
         render(
             <BrowserRouter>
