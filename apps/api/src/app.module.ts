@@ -29,6 +29,7 @@ import { MoodboardModule } from "./modules/moodboard/moodboard.module";
 import { ProjectsModule } from "./modules/projects/projects.module";
 import { ScriptsModule } from "./modules/scripts/scripts.module";
 import { StorageModule } from "./modules/storage/storage.module";
+import { IntegrationsModule } from './modules/integrations/integrations.module';
 import { PrismaModule } from "./prisma/prisma.module";
 
 // Resolve the frontend build directory robustly across build outputs (dist/build)

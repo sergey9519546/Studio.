@@ -97,12 +97,17 @@ export class EmbeddingsService {
             throw new Error('Failed to generate query embedding');
         }
 
-        const similarities = docEmbeddings.map((docEmb, index) => {
+        if (docEmbeddings.length !== documents.length) {
+            throw new Error('Mismatch between documents and embeddings count');
+        }
+
+        const similarities = documents.map((docText, index) => {
+            const docEmb = docEmbeddings[index];
             if (!docEmb || docEmb.length === 0) {
                 this.logger.warn(`Invalid embedding for document at index ${index}`);
                 return null;
             }
-            const documentText = documents[index];
+            const documentText = docText;
             if (!documentText) {
                 this.logger.warn(`Missing document text at index ${index}`);
                 return null;
@@ -113,7 +118,7 @@ export class EmbeddingsService {
                 return null;
             }
             return {
-                text: documentText!,
+                text: documentText,
                 score: this.vertexEmbeddings.cosineSimilarity(queryEmbedding as number[], docEmb as number[]),
                 index,
             };
