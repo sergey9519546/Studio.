@@ -2,11 +2,11 @@
 # This script runs a one-off job to apply migrations
 
 $PROJECT_ID = $env:GCP_PROJECT_ID
+if (-not $PROJECT_ID) { $PROJECT_ID = "gen-lang-client-0704991831" }
+
 $REGION = if ($env:GCP_REGION) { $env:GCP_REGION } else { "us-west1" }
 $SERVICE_NAME = "studio-roster-api"
 $IMAGE_NAME = "gcr.io/$PROJECT_ID/$SERVICE_NAME"
-
-if (-not $PROJECT_ID) { $PROJECT_ID = "gen-lang-client-0704991831" }
 if (-not $env:DATABASE_URL) { Write-Error "DATABASE_URL environment variable not set"; exit 1 }
 
 Write-Host "Running Database Migrations..." -ForegroundColor Cyan
