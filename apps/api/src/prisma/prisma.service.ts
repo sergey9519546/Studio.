@@ -5,8 +5,8 @@ import { Pool } from 'pg';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
-  private readonly logger = new Logger(PrismaService.name);
-  private pool: Pool | null = null;
+  private readonly logger: Logger;
+  private _pool?: Pool;
 
   constructor() {
     const connectionString = process.env.DATABASE_URL;
@@ -15,13 +15,15 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
       // Prisma 7: Use pg driver adapter for direct PostgreSQL connection
       const pool = new Pool({ connectionString });
       const adapter = new PrismaPg(pool);
-      // @ts-ignore - Prisma 7 adapter type
+      // @ts-expect-error - Prisma 7 adapter type not yet in official types
       super({ adapter });
+      this.logger = new Logger(PrismaService.name);
       // Store pool reference for cleanup
-      (this as any)._pool = pool;
+      this._pool = pool;
     } else {
       // Fallback for environments without DATABASE_URL
       super();
+      this.logger = new Logger(PrismaService.name);
     }
   }
 
@@ -39,8 +41,8 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
   async onModuleDestroy() {
     await this.$disconnect();
     // Clean up pool if exists
-    if ((this as any)._pool) {
-      await (this as any)._pool.end();
+    if (this._pool) {
+      await this._pool.end();
     }
   }
 }

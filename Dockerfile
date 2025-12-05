@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && \
-    apt-get install -y openssl ca-certificates libssl-dev && \
+    apt-get install -y OpenSSL ca-certificates libssl-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy all source files
