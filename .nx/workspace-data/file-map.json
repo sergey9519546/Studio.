@@ -18,6 +18,10 @@
         "hash": "16678704584218741735"
       },
       {
+        "file": ".agent/workflows/lifesaver.md",
+        "hash": "16678704584218741735"
+      },
+      {
         "file": ".dockerignore",
         "hash": "14849129328461547574"
       },
@@ -271,7 +275,7 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "4374068905367133515"
+        "hash": "3152961837024143585"
       },
       {
         "file": "package.json",
@@ -1383,5 +1387,5 @@
       ]
     }
   },
-  "externalNodesHash": "2041355142557683077"
+  "externalNodesHash": "1427116025479808084"
 }
