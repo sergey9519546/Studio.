@@ -102,7 +102,7 @@ export class EmbeddingsService {
         }
 
         const similarities = documents.map((docText, index) => {
-            const docEmb = docEmbeddings[index];
+            const docEmb = docEmbeddings[index]!;
             if (!docEmb || docEmb.length === 0) {
                 this.logger.warn(`Invalid embedding for document at index ${index}`);
                 return null;
@@ -137,7 +137,7 @@ export class EmbeddingsService {
     private cacheEmbedding(text: string, embedding: number[]): void {
         // Implement LRU-like behavior: remove oldest if cache is full
         if (this.cache.size >= this.MAX_CACHE_SIZE) {
-            const oldestKey = this.cache.keys().next().value;
+            const oldestKey = this.cache.keys().next().value!;
             this.cache.delete(oldestKey);
         }
 
