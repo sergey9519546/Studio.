@@ -58,13 +58,14 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white rounded-full blur-3xl opacity-60 pointer-events-none"></div>
 
       <div className="relative z-10 flex flex-col items-center animate-enter">
-        <div className="flex items-center gap-3 mb-12">
+        <header className="flex items-center gap-3 mb-12">
           <h1 className="text-6xl font-semibold tracking-tighter text-ink">Studio.</h1>
           <div className="w-20 h-20 bg-ink text-white rounded-3xl flex items-center justify-center shadow-elevation transition-transform duration-500 hover:scale-105 cursor-default">
             <div className="w-5 h-5 bg-white rounded-full shadow-sm"></div>
           </div>
-        </div>
+        </header>
 
+        <main>
         <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4">
           <div>
             <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wide text-ink/60 mb-2">
@@ -129,12 +130,13 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
             </button>
           )}
         </form>
+        </main>
       </div>
 
-      <div className="absolute bottom-12 flex flex-col items-center gap-2 opacity-30">
+      <footer className="absolute bottom-12 flex flex-col items-center gap-2 opacity-30">
         <div className="h-8 w-px bg-ink"></div>
         <span className="text-[9px] font-bold text-ink uppercase tracking-widest">System Ready</span>
-      </div>
+      </footer>
     </div>
   );
 };
