@@ -149,11 +149,7 @@ export class AlertsService {
     }) {
         const message = this.formatAlertMessage(data);
 
-        this.logger.warn('🚨 BUDGET ALERT', {
-            daily: `${data.daily.percentage.toFixed(1)}%`,
-            weekly: `${data.weekly.percentage.toFixed(1)}%`,
-            monthly: `${data.monthly.percentage.toFixed(1)}%`,
-        });
+        this.logger.warn('🚨 BUDGET ALERT', message);
 
         // Future: Send email notification
         // if (this.config.alertEmail) {
