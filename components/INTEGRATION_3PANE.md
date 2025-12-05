@@ -1,17 +1,23 @@
-/**
- * Optional: 3-Pane Studio Route
- * Add this to App.tsx for the full split-pane experience
- */
+# Optional: 3-Pane Studio Route
 
-// In App.tsx imports:
+Add this to App.tsx for the full split-pane experience.
+
+## In App.tsx imports:
+
+```tsx
 import CSSSplitStudio from './components/CSSSplitStudio';
+```
 
-// Add this route alongside the existing studio route:
-<Route 
-  path="studio-pro" 
+## Add this route alongside the existing studio route:
+
+```tsx
+<Route
+  path="studio-pro"
   element={
     <CSSSplitStudio
       projects={projects}
+      freelancers={freelancers}
+      assignments={assignments}
       selectedProjectId={selectedProjectId}
       onSelectProject={setSelectedProjectId}
       scriptContent={scriptContent}
@@ -19,10 +25,13 @@ import CSSSplitStudio from './components/CSSSplitStudio';
       onSave={handleSave}
       onEnhance={handleEnhance}
     />
-  } 
+  }
 />
+```
 
-// Note: You'll need to add these state variables at the top of App component:
+## Note: You'll need to add these state variables at the top of App component:
+
+```tsx
 const [selectedProjectId, setSelectedProjectId] = useState<string | undefined>();
 const [scriptContent, setScriptContent] = useState('');
 
@@ -50,3 +59,4 @@ const handleEnhance = async (content: string): Promise<string> => {
     return content;
   }
 };
+```

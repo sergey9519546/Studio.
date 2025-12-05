@@ -82,9 +82,9 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
             const prompt = `Extract ${entityType} information from the attached file. Return a JSON array.`;
 
             // Call Backend
-            const dataArray = await api.ai.extract(prompt, schema, uploadedFile);
+            const dataArray = await api.ai.extract({ prompt, schema, file: uploadedFile });
 
-            await processExtractedData(dataArray, isFreelancer);
+            await processExtractedData(dataArray.data || [], isFreelancer);
 
         } catch (e: unknown) {
             console.error(e);
@@ -111,9 +111,9 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
             const prompt = `Extract ${entityType} information from the following text:\n\n${pastedText}`;
 
             // Call Backend
-            const dataArray = await api.ai.extract(prompt, schema);
+            const dataArray = await api.ai.extract({ prompt, schema, text: pastedText });
 
-            await processExtractedData(dataArray, isFreelancer);
+            await processExtractedData(dataArray.data || [], isFreelancer);
 
         } catch (e: unknown) {
             console.error(e);

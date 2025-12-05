@@ -6,11 +6,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ProseMirrorEditor from './editor/ProseMirrorEditor';
 import AIChat from './AIChat';
-import { Project } from '../types';
+import { Project, Freelancer, Assignment } from '../types';
 import { FileText, Sparkles, Users, Database, LayoutList, GripVertical } from 'lucide-react';
 
 interface CSSplitStudioProps {
   projects: Project[];
+  freelancers: Freelancer[];
+  assignments: Assignment[];
  selectedProjectId?: string;
   onSelectProject: (id: string) => void;
   scriptContent: string;
@@ -21,6 +23,8 @@ interface CSSplitStudioProps {
 
 export const CSSSplitStudio: React.FC<CSSplitStudioProps> = ({
   projects,
+  freelancers,
+  assignments,
   selectedProjectId,
   onSelectProject,
   scriptContent,
@@ -79,7 +83,7 @@ export const CSSSplitStudio: React.FC<CSSplitStudioProps> = ({
         >
           <option value="">Select Project</option>
           {projects.map(p => (
-            <option key={p.id} value={p.id}>{p.title}</option>
+            <option key={p.id} value={p.id}>{p.name}</option>
           ))}
         </select>
       </div>
@@ -139,7 +143,7 @@ export const CSSSplitStudio: React.FC<CSSplitStudioProps> = ({
           className="h-full overflow-hidden border-l border-border-subtle bg-white"
           style={{ width: `${rightWidth}%` }}
         >
-          <AIChat projectId={selectedProjectId} />
+          <AIChat freelancers={freelancers} projects={projects} assignments={assignments} />
         </div>
       </div>
     </div>
@@ -192,7 +196,7 @@ const ProjectContextPanel: React.FC<{ project?: Project }> = ({ project }) => {
                 className="p-3 bg-white rounded-lg border border-border-subtle text-xs"
               >
                 <div className="font-semibold text-ink-primary mb-1">{kb.title}</div>
-                <div className="text-ink-tertiary">{kb.type}</div>
+                <div className="text-ink-tertiary">{kb.category}</div>
               </div>
             ))}
           </div>
@@ -210,7 +214,7 @@ const ProjectContextPanel: React.FC<{ project?: Project }> = ({ project }) => {
           </h3>
         </div>
         <p className="text-xs text-ink-tertiary">
-          {project.client || 'No client'}
+          {project.clientName || 'No client'}
         </p>
       </section>
 

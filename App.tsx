@@ -107,12 +107,12 @@ const AppContent: React.FC = () => {
     try {
       if (type === 'freelancer') {
         const res = await api.freelancers.importBatch(data as Freelancer[]);
-        handleLogAction('Import Completed', `Imported/Updated ${res.data.created + res.data.updated} freelancers.`);
-        toast.success(`Successfully imported ${res.data.created + res.data.updated} freelancers`);
+        handleLogAction('Import Completed', `Imported/Updated ${(res.data?.created || 0) + (res.data?.updated || 0)} freelancers.`);
+        toast.success(`Successfully imported ${(res.data?.created || 0) + (res.data?.updated || 0)} freelancers`);
       } else {
         const res = await api.projects.importBatch(data as Project[]);
-        handleLogAction('Import Completed', `Imported/Updated ${res.data.created + res.data.updated} projects.`);
-        toast.success(`Successfully imported ${res.data.created + res.data.updated} projects`);
+        handleLogAction('Import Completed', `Imported/Updated ${(res.data?.created || 0) + (res.data?.updated || 0)} projects.`);
+        toast.success(`Successfully imported ${(res.data?.created || 0) + (res.data?.updated || 0)} projects`);
       }
       await fetchData();
     } catch (e) {
@@ -126,8 +126,8 @@ const AppContent: React.FC = () => {
   const handleFreelancerUpdate = async (updatedFreelancer: Freelancer) => {
     const res = await api.freelancers.update(updatedFreelancer);
     if (res.data) {
-      setFreelancers(prev => prev.map(f => f.id === res.data.id ? res.data : f));
-      handleLogAction('Freelancer Updated', `Updated profile for ${res.data.name}`);
+      setFreelancers(prev => prev.map(f => f.id === res.data!.id ? res.data! : f));
+      handleLogAction('Freelancer Updated', `Updated profile for ${res.data!.name}`);
       toast.success("Freelancer profile updated");
     }
   };
@@ -143,7 +143,7 @@ const AppContent: React.FC = () => {
   const handleProjectUpdate = async (updatedProject: Project) => {
     const res = await api.projects.update(updatedProject);
     if (res.data) {
-      setProjects(prev => prev.map(p => p.id === res.data.id ? res.data : p));
+      setProjects(prev => prev.map(p => p.id === res.data!.id ? res.data! : p));
       toast.success("Project updated successfully");
     }
   };
@@ -189,16 +189,16 @@ const AppContent: React.FC = () => {
       if (existing) {
         res = await api.assignments.update(newAssignment);
         if (res.data) {
-          setAssignments(prev => prev.map(a => a.id === newAssignment.id ? res.data : a));
+          setAssignments(prev => prev.map(a => a.id === newAssignment.id ? res.data! : a));
         }
         handleLogAction('Assignment Updated', `Updated assignment details`);
         toast.success("Assignment updated");
       } else {
         res = await api.assignments.create(newAssignment);
         if (res.data) {
-          setAssignments(prev => [...prev, res.data]);
-          const freelancerName = freelancers.find(f => f.id === res.data.freelancerId)?.name || 'Unknown';
-          const projectName = projects.find(p => p.id === res.data.projectId)?.name || 'Unknown';
+          setAssignments(prev => [...prev, res.data!]);
+          const freelancerName = freelancers.find(f => f.id === res.data!.freelancerId)?.name || 'Unknown';
+          const projectName = projects.find(p => p.id === res.data!.projectId)?.name || 'Unknown';
           handleLogAction('Assignment Confirmed', `${freelancerName} assigned to ${projectName}`);
           toast.success("Assignment confirmed");
         }
@@ -235,7 +235,7 @@ const AppContent: React.FC = () => {
       createdAt: new Date().toISOString()
     };
     const res = await api.projects.create(newProject);
-    setProjects(prev => [...prev, res.data]);
+    setProjects(prev => [...prev, res.data!]);
     handleLogAction('Project Created', `Created new project: ${newProject.name}`);
     toast.success("New project created");
     return res.data;
@@ -256,7 +256,7 @@ const AppContent: React.FC = () => {
       avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(overrides?.name || 'New Talent')}&background=random`
     };
     const res = await api.freelancers.create(newFreelancer);
-    setFreelancers(prev => [...prev, res.data]);
+    setFreelancers(prev => [...prev, res.data!]);
     handleLogAction('Talent Added', `Added new freelancer: ${newFreelancer.name}`);
     toast.success("New freelancer added to roster");
     return res.data;
