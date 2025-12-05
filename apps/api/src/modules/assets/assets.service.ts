@@ -96,7 +96,7 @@ export class AssetsService {
         this.memoryStore[index] = { ...asset, url: finalUrl, isTransient: false };
       }
 
-      return { ...asset, url: finalUrl, isTransient: false };
+      return { ...asset, url: finalUrl, isTransient: false, projectId: asset.projectId ?? undefined };
     } catch (error: unknown) {
       const err = error instanceof Error ? error : new Error(String(error));
       this.logger.warn(`Database save failed (Storage successful). Asset ${assetEntity.id} kept in memory: ${err.message}`);

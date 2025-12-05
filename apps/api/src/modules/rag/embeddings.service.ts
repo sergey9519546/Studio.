@@ -107,9 +107,14 @@ export class EmbeddingsService {
                 this.logger.warn(`Missing document text at index ${index}`);
                 return null;
             }
+            // Ensure both embeddings are valid arrays
+            if (!Array.isArray(queryEmbedding) || !Array.isArray(docEmb) || queryEmbedding.length === 0 || docEmb.length === 0) {
+                this.logger.warn(`Invalid embedding arrays at index ${index}`);
+                return null;
+            }
             return {
-                text: documentText,
-                score: this.vertexEmbeddings.cosineSimilarity(queryEmbedding!, docEmb!),
+                text: documentText!,
+                score: this.vertexEmbeddings.cosineSimilarity(queryEmbedding as number[], docEmb as number[]),
                 index,
             };
         }).filter((item): item is { text: string; score: number; index: number } => item !== null);

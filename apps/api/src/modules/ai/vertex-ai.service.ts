@@ -98,6 +98,65 @@ export class VertexAIService {
   }
 
   /**
+   * Safely extract content from Vertex AI prediction response
+   */
+  private extractPredictionContent(prediction: any): string | { toolCalls: any[] } | null {
+    try {
+      const content = this.safeGet(prediction, [
+        'structValue',
+        'fields',
+        'candidates',
+        'listValue',
+        'values',
+        0,
+        'structValue',
+        'fields',
+        'content',
+        'structValue',
+        'fields',
+        'parts',
+        'listValue',
+        'values',
+        0,
+        'structValue'
+      ]);
+
+      if (!content) return null;
+
+      // Check for function calls
+      const functionCall = this.safeGet(content, ['fields', 'functionCall', 'structValue', 'fields']);
+      if (functionCall) {
+        return {
+          toolCalls: [{
+            name: this.safeGet(functionCall, ['name', 'stringValue']) || 'unknown_function',
+            args: this.safeGet(functionCall, ['args', 'structValue', 'fields']) || {}
+          }]
+        };
+      }
+
+      // Check for text content
+      const text = this.safeGet(content, ['fields', 'text', 'stringValue']);
+      if (text) {
+        return text as string;
+      }
+
+      return null;
+    } catch (error) {
+      this.logger.warn('Failed to extract prediction content safely');
+      return null;
+    }
+  }
+
+  /**
+   * Safely access deeply nested object properties
+   */
+  private safeGet(obj: any, path: (string | number)[]): any {
+    return path.reduce((current, key) => {
+      return current && typeof current === 'object' ? current[key] : undefined;
+    }, obj);
+  }
+
+  /**
    * Generate content with conversation history and optional tools
    */
   async chat(
@@ -233,29 +292,13 @@ export class VertexAIService {
     }
 
     const prediction = response.predictions[0];
-    const content =
-      prediction.structValue?.fields?.candidates?.listValue?.values[0]
-        ?.structValue?.fields?.content?.structValue?.fields?.parts?.listValue
-        ?.values[0]?.structValue;
+    const content = this.extractPredictionContent(prediction);
 
-    if (content?.fields?.functionCall) {
-      return {
-        toolCalls: [
-          {
-            name: content.fields.functionCall.structValue?.fields?.name
-              ?.stringValue,
-            args: content.fields.functionCall.structValue?.fields?.args
-              ?.structValue?.fields,
-          },
-        ],
-      };
-    } else if (content?.fields?.text) {
-      return content.fields.text.stringValue;
+    if (content) {
+      return content;
     } else {
-      this.logger.warn("Unexpected response structure from Vertex AI");
-      throw new Error(
-        "Unable to extract text or tool calls from Vertex AI response"
-      );
+      this.logger.warn("Unexpected response structure from Vertex AI", prediction);
+      throw new Error("Unable to extract text or tool calls from Vertex AI response");
     }
   }
 

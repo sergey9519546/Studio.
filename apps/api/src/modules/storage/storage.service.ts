@@ -157,6 +157,12 @@ export class StorageService implements OnModuleInit {
       );
     }
 
+    if (!this.bucket) {
+      throw new InternalServerErrorException(
+        "Cloud Storage is not configured. Upload rejected."
+      );
+    }
+
     const file = this.bucket.file(safeKey);
 
     try {
@@ -268,6 +274,10 @@ export class StorageService implements OnModuleInit {
 
     const safeKey = this.sanitizeKey(key);
 
+    if (!this.bucket) {
+      throw new InternalServerErrorException("Storage not configured");
+    }
+
     try {
       const [url] = await this.bucket.file(safeKey).getSignedUrl({
         version: "v4",
@@ -283,7 +293,7 @@ export class StorageService implements OnModuleInit {
   }
 
   async deleteObject(key: string): Promise<void> {
-    if (!this.isConfigured) return;
+    if (!this.isConfigured || !this.bucket) return;
 
     const safeKey = this.sanitizeKey(key);
     try {
