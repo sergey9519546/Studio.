@@ -71,6 +71,10 @@ RUN npx prisma generate
 # Copy built application from builder
 COPY --from=builder /app/build ./build
 
+# Copy service account key if it exists
+COPY service-account-key.json /app/service-account-key.json
+
+
 # Set ownership to non-root user
 RUN chown -R nodejs:nodejs /app
 
