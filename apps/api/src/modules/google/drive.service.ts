@@ -41,18 +41,22 @@ export class DriveService {
         return [];
       }
 
-      return response.data.files.map(file => ({
-        id: file.id || '',
-        name: file.name || 'Untitled',
-        mimeType: file.mimeType || 'application/octet-stream',
-        thumbnailLink: file.thumbnailLink || null,
-        webViewLink: file.webViewLink || null,
-        iconLink: file.iconLink || null,
-        modifiedTime: file.modifiedTime || null,
-        size: file.size || null
-      })).filter(f => f.id !== ''); // Filter out any invalid files
+      return response.data.files
+        .map((file) => ({
+          id: file.id || "",
+          name: file.name || "Untitled",
+          mimeType: file.mimeType || "application/octet-stream",
+          thumbnailLink: file.thumbnailLink ?? undefined,
+          webViewLink: file.webViewLink ?? undefined,
+          iconLink: file.iconLink ?? undefined,
+          modifiedTime: file.modifiedTime ?? undefined,
+          size: file.size ?? undefined,
+        }))
+        .filter((f) => f.id !== ""); // Filter out any invalid files
     } catch (error) {
-      this.logger.error(`Failed to list team assets: ${error.message}`);
+      const message =
+        error instanceof Error ? error.message : "Unknown Drive error";
+      this.logger.error(`Failed to list team assets: ${message}`);
       // Return empty list on failure rather than crashing endpoint
       return [];
     }

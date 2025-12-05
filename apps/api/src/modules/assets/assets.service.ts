@@ -1,18 +1,18 @@
 
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { StorageService } from '../storage/storage.service';
-import { PrismaService } from '../../prisma/prisma.service';
+import { Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { randomUUID } from 'crypto';
 import { extname } from 'path';
+import { PrismaService } from "../../prisma/prisma.service";
+import { StorageService } from "../storage/storage.service";
 
 export interface AssetEntity {
   id: string;
-  projectId?: string;
+  projectId?: string | null;
   fileName: string;
   mimeType: string;
   sizeBytes: number;
   storageKey: string;
-  publicUrl?: string;
+  publicUrl?: string | null;
   createdAt: Date;
   isTransient?: boolean;
   url?: string; // Virtual field for frontend convenience
