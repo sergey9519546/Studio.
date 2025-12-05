@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import AIChat from './AIChat';
 import AssetLibrary, { DriveFile } from './DriveFileBrowser';
+import SimpleEditor from './editor/SimpleEditor';
 import { Project, Freelancer, Assignment, Script, KnowledgeSource } from '../types';
 import { Save, PanelRight, PanelLeft, Sparkles, Loader2, ShieldCheck, AlertTriangle, CheckCircle, Database, UploadCloud, Type, LayoutTemplate } from 'lucide-react';
 import { RAGEngine, HallucinationGuard, DeepReader } from '../services/intelligence';
@@ -96,18 +97,25 @@ const CreativeStudio: React.FC<CreateStudioProps> = ({ projects, freelancers, as
         setIsGuarding(false);
     };
 
-    const handleEnhance = async () => {
-        if (!scriptContent.trim() || !process.env.API_KEY) return;
+    const handleEnhance = async (content?: string): Promise<string> => {
+        const textToEnhance = content || scriptContent;
+        if (!textToEnhance.trim()) return textToEnhance;
+
         setIsEnhancing(true);
         try {
             const response = await api.ai.chat({
-                message: `Refine and structure this creative writing. Use markdown headers and bullet points. Content: ${scriptContent}`
+                message: `Refine and structure this creative writing. Use markdown headers and bullet points. Content: ${textToEnhance}`
             });
-            if (response.data.response) {
-                setScriptContent(response.data.response);
-                setTimeout(() => runHallucinationGuard(response.data.response), 500);
-            }
-        } catch (e) { console.error(e); } finally { setIsEnhancing(false); }
+            const enhancedContent = response.data?.response || textToEnhance;
+            setScriptContent(enhancedContent);
+            setTimeout(() => runHallucinationGuard(enhancedContent), 500);
+            return enhancedContent;
+        } catch (e) {
+            console.error(e);
+            return textToEnhance;
+        } finally {
+            setIsEnhancing(false);
+        }
     };
 
     const handleSave = async () => {
@@ -219,7 +227,7 @@ const CreativeStudio: React.FC<CreateStudioProps> = ({ projects, freelancers, as
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <button onClick={handleEnhance} disabled={isEnhancing} className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors disabled:opacity-50 group" title="AI Refine">
+                        <button onClick={() => handleEnhance()} disabled={isEnhancing} className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors disabled:opacity-50 group" title="AI Refine">
                             {isEnhancing ? <Loader2 size={18} className="animate-spin" /> : <Sparkles size={18} className="group-hover:scale-110 transition-transform" />}
                         </button>
                         <button onClick={handleSave} className="bg-gray-900 text-white px-5 py-2 rounded-xl text-[10px] font-bold hover:bg-black transition-all flex items-center gap-2 shadow-lg shadow-gray-200 uppercase tracking-widest active:scale-95">
@@ -234,18 +242,22 @@ const CreativeStudio: React.FC<CreateStudioProps> = ({ projects, freelancers, as
 
                 {/* Editor Area */}
                 <div className="flex-1 relative overflow-hidden group">
-                    {!selectedProjectId && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-gray-50/50 z-20 pointer-events-none backdrop-blur-[2px]">
-                            <div className="text-center p-8 bg-white/80 rounded-3xl shadow-card border border-white/50 backdrop-blur-md">
-                                <LayoutTemplate size={32} className="text-gray-300 mx-auto mb-3" />
-                                <p className="text-sm text-gray-500 font-medium tracking-tight">Select a project to enable AI tools</p>
-                            </div>
+                    <SimpleEditor
+                        initialContent={scriptContent}
+                        onContentChange={setScriptContent}
+                        onSave={handleSave}
+                        onEnhance={handleEnhance}
+                        placeholder="Start creating your masterpiece..."
+                        brandValidationEnabled={!!selectedProjectId}
+                        assetDraggingEnabled={!!selectedProjectId}
+                        readOnly={!selectedProjectId}
+                    />
+
+                    {selectedProjectId && (
+                        <div className="absolute top-4 right-4 text-xs bg-blue-50 border border-blue-200 text-blue-700 px-2 py-1 rounded">
+                            AI Context Active
                         </div>
                     )}
-                    <textarea
-                        className="absolute inset-0 w-full h-full p-10 resize-none focus:outline-none font-mono text-sm leading-8 text-gray-800 z-10 bg-transparent custom-scrollbar selection:bg-indigo-100 selection:text-indigo-900"
-                        value={scriptContent} onChange={(e) => setScriptContent(e.target.value)} spellCheck={false} placeholder="Start writing or drop a file from the asset library..."
-                    />
                 </div>
 
                 {/* Status Bar */}

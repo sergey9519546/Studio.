@@ -68,11 +68,10 @@ const AppContent: React.FC = () => {
         api.freelancers.list({ limit: 1000 }),
         api.projects.list({ limit: 1000 }),
         api.assignments.list({ limit: 5000 }),
-        // api.scripts.list({ limit: 1000 })
       ]);
-      setFreelancers(f.data || []);
-      setProjects(p.data || []);
-      setAssignments(a.data || []);
+      setFreelancers((f.data || []).filter((item): item is Freelancer => item !== undefined));
+      setProjects((p.data || []).filter((item): item is Project => item !== undefined));
+      setAssignments((a.data || []).filter((item): item is Assignment => item !== undefined));
       // setScripts(s.data || []);
     } catch (e) {
       console.error("Failed to fetch data", e);
