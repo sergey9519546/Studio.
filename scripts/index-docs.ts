@@ -192,8 +192,10 @@ Studio Roster is designed for deployment on Google Cloud Run.
 
             // Small delay to avoid rate limiting
             await new Promise(resolve => setTimeout(resolve, 500));
-        } catch (error: any) {
-            console.error(`   ✗ Failed: ${error.response?.data?.message || error.message}`);
+        } catch (error: unknown) {
+            const message = error instanceof Error ? error.message : 'Unknown error';
+            const responseMessage = (error as { response?: { data?: { message?: string } } })?.response?.data?.message;
+            console.error(`   ✗ Failed: ${responseMessage || message}`);
         }
     }
 
@@ -213,8 +215,10 @@ async function main() {
         console.log('   - Check stats: GET /api/rag/stats');
         console.log('   - Try chat: POST /api/rag/chat');
 
-    } catch (error: any) {
-        console.error('\n❌ Indexing failed:', error.response?.data || error.message);
+    } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : 'Unknown error';
+        const responseData = (error as { response?: { data?: unknown } })?.response?.data;
+        console.error('\n❌ Indexing failed:', responseData || message);
         process.exit(1);
     }
 }

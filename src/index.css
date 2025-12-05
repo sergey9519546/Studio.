@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom base styles */
+@layer base {
+  body {
+    @apply bg-app text-ink-primary;
+  }
+}
+
+/* Custom component styles */
+@layer components {
+  /* Add your custom component classes here */
+}
+
+/* Custom utility styles */
+@layer utilities {
+  /* Add your custom utility classes here */
+}

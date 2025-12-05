@@ -23,8 +23,20 @@ async function bootstrap() {
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        styleSrc: ["'self'", "'unsafe-inline'"],
-        scriptSrc: ["'self'"],
+        styleSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          'https://fonts.googleapis.com',
+        ],
+        fontSrc: [
+          "'self'",
+          'https://fonts.gstatic.com',
+          'data:',
+        ],
+        scriptSrc: [
+          "'self'",
+          'https://cdn.tailwindcss.com',
+        ],
         imgSrc: ["'self'", 'data:', 'https:'],
       },
     },
