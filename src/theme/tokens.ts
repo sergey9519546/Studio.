@@ -12,10 +12,12 @@ export const colors = {
     app: '#F5F5F7',      // System Mist. The infinite void.
     surface: '#FFFFFF',  // Porcelain. Cards sit *on* the mist.
     subtle: '#F9F9FB',   // Subdued backgrounds for container nesting.
+    sidebar: '#FBFBFD', // Slightly distinct from main bg
   },
   border: {
     subtle: '#E5E5EA',   // Delicate structural lines (use sparingly).
     hover: '#D1D1D6',    // Slightly darker for interactions.
+    subtleAlpha: 'rgba(0,0,0,0.04)', // Subtle definition for borders
   },
   text: {
     primary: '#1D1D1F',  // Obsidian. Primary data.
@@ -76,13 +78,16 @@ export const radii = {
   lg: '16px',
   xl: '24px',         // Squircles. The preferred radius.
   pill: '9999px',
+  btn: '14px',
 } as const;
 
 export const shadows = {
   ambient: '0px 10px 40px rgba(0,0,0,0.04)', // Ambient Levitation. Primary shadow.
   subtle: '0px 1px 2px rgba(0,0,0,0.05)',
   card: '0px 4px 12px rgba(0,0,0,0.06)',
-  float: '0px 12px 32px rgba(0,0,0,0.08)',
+  float: '0px 20px 40px rgba(0,0,0,0.08)',
+  soft: '0px 4px 24px rgba(0,0,0,0.02)',
+  inner: 'inset 0px 1px 4px rgba(0,0,0,0.02)',
   glow: '0px 0px 20px rgba(36, 99, 230, 0.15)',
 } as const;
 

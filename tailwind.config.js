@@ -5,6 +5,7 @@ module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -13,11 +14,13 @@ module.exports = {
         app: colors.bg.app,
         surface: colors.bg.surface,
         subtle: colors.bg.subtle,
+        sidebar: colors.bg.sidebar,
         
         // Borders
         border: {
           subtle: colors.border.subtle,
           hover: colors.border.hover,
+          'subtle-alpha': colors.border.subtleAlpha,
         },
 
         // Typography
@@ -54,16 +57,9 @@ module.exports = {
       letterSpacing: typography.letterSpacing,
       borderRadius: {
         ...radii,
-        'xl': '0.75rem',
-        '2xl': '1rem',
-        '3xl': '1.5rem',
       },
       boxShadow: {
-        ambient: shadows.ambient,
-        subtle: shadows.subtle,
-        card: shadows.card,
-        float: shadows.float,
-        glow: shadows.glow,
+        ...shadows,
       },
       backgroundImage: {
         'rival-gradient': colors.edge.gradient,
