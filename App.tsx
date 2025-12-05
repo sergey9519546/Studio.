@@ -13,7 +13,7 @@ import PublicProjectView from './components/PublicProjectView';
 import CreateStudio from './components/CreateStudio';
 import MoodboardTab from './components/Moodboard/MoodboardTab';
 import { Freelancer, Project, Assignment, ProjectStatus, FreelancerStatus, Priority, Script } from './types';
-import { api, loadFromStorage } from './services/api';
+import { api, loadFromStorage, type BatchImportResponse } from './services/api';
 import { RefreshCw } from 'lucide-react';
 
 import { ToastProvider, useToast } from './context/ToastContext';
@@ -272,7 +272,10 @@ const AppContent: React.FC = () => {
     const projName = projects.find(p => p.id === script.projectId)?.name || 'Unknown Project';
     handleLogAction('Script Saved', `Saved "${script.title}" to ${projName}`);
     toast.success("Script saved");
-    return res.data;
+    if (res.data) {
+      return res.data;
+    }
+    throw new Error("Failed to create script");
   };
 
   const handleLogin = async (email: string, password: string) => {

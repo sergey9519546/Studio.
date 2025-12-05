@@ -1,8 +1,8 @@
-# Optional: 3-Pane Studio Route
+# Optional 3-Pane Studio Route
 
 Add this to App.tsx for the full split-pane experience.
 
-## In App.tsx imports:
+## In App.tsx imports
 
 ```tsx
 import CSSSplitStudio from './components/CSSSplitStudio';
@@ -29,7 +29,7 @@ import CSSSplitStudio from './components/CSSSplitStudio';
 />
 ```
 
-## Note: You'll need to add these state variables at the top of App component:
+## Note You'll need to add these state variables at the top of App component
 
 ```tsx
 const [selectedProjectId, setSelectedProjectId] = useState<string | undefined>();
