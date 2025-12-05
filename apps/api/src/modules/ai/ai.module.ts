@@ -2,10 +2,7 @@ import { Module, forwardRef } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { PrismaModule } from "../../prisma/prisma.module";
 import { IntelligenceModule } from "../intelligence/intelligence.module";
-import {
-  MonitoringModule,
-  MonitoringModule,
-} from "../monitoring/monitoring.module";
+import { MonitoringModule } from "../monitoring/monitoring.module";
 import { RAGModule } from "../rag/rag.module";
 import { ToolsModule } from "../tools/tools.module";
 import { AIController } from "./ai.controller";
