@@ -1,4 +1,3 @@
-
 import {
   Briefcase,
   Calendar,
@@ -24,6 +23,7 @@ const Layout: React.FC = () => {
     { icon: Users, label: 'Roster', path: '/freelancers' },
     { icon: Calendar, label: 'Schedule', path: '/assignments' },
     { icon: Upload, label: 'Import', path: '/imports' },
+    { icon: Layers, label: 'Design', path: '/design' },
   ];
 
   return (
