@@ -36,8 +36,8 @@ export const STORAGE_EVENTS = {
 @Injectable()
 export class StorageService implements OnModuleInit {
   private readonly logger = new Logger(StorageService.name);
-  private storage: Storage;
-  private bucket: Bucket;
+  private storage!: Storage;
+  private bucket!: Bucket;
   private readonly bucketName: string;
   private isConfigured = false;
   private connectedEmail = '';

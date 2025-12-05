@@ -24,8 +24,9 @@ export class ToolHandlersService {
                 count: files.length,
             };
         } catch (e) {
-            this.logger.error(`Scan error: ${e.message}`);
-            return { matches: [], count: 0, error: e.message };
+            const message = e instanceof Error ? e.message : 'Unknown scan error';
+            this.logger.error(`Scan error: ${message}`);
+            return { matches: [], count: 0, error: message };
         }
     }
 
@@ -76,10 +77,11 @@ export class ToolHandlersService {
                 errors: stderr,
             };
         } catch (e) {
+            const message = e instanceof Error ? e.message : 'Unknown test execution error';
             return {
                 success: false,
                 output: '',
-                errors: e.message,
+                errors: message,
             };
         }
     }
@@ -106,8 +108,9 @@ export class ToolHandlersService {
                 filePath,
             };
         } catch (e) {
+            const message = e instanceof Error ? e.message : 'Unknown file read error';
             return {
-                error: `Failed to read file: ${e.message}`,
+                error: `Failed to read file: ${message}`,
             };
         }
     }
@@ -134,8 +137,9 @@ export class ToolHandlersService {
                 totalCount: entries.length,
             };
         } catch (e) {
+            const message = e instanceof Error ? e.message : 'Unknown directory listing error';
             return {
-                error: `Failed to list directory: ${e.message}`,
+                error: `Failed to list directory: ${message}`,
             };
         }
     }
