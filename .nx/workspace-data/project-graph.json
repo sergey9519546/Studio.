@@ -20468,12 +20468,17 @@
       },
       {
         "source": "api",
+        "target": "npm:compression",
+        "type": "static"
+      },
+      {
+        "source": "api",
         "target": "npm:helmet",
         "type": "static"
       },
       {
         "source": "api",
-        "target": "npm:compression",
+        "target": "npm:reflect-metadata",
         "type": "static"
       },
       {
@@ -62130,5 +62135,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1764951508174
+  "computedAt": 1764953910899
 }

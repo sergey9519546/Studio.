@@ -1,12 +1,12 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
+import compression from 'compression';
+import helmet from 'helmet';
+import { Logger } from 'nestjs-pino';
+import 'reflect-metadata';
+import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 import { AuthService } from './modules/auth/auth.service';
-import { HttpAdapterHost } from '@nestjs/core';
-import helmet from 'helmet';
-import compression from 'compression';
-import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
   console.log('🚀 Starting bootstrap...');

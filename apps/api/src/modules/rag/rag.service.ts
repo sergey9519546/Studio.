@@ -1,8 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { VertexAIService } from '../ai/vertex-ai.service';
+import { ChunkingService } from './chunking.service';
 import { EmbeddingsService } from './embeddings.service';
 import { VectorStoreService } from './vector-store.service';
-import { ChunkingService, DocumentChunk } from './chunking.service';
-import { VertexAIService } from '../ai/vertex-ai.service';
 
 interface RAGContext {
     query: string;
@@ -280,4 +280,4 @@ Answer:`;
     }
 }
 
-export { RAGResponse, RAGContext };
+export type { RAGContext, RAGResponse };

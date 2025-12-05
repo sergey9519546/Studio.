@@ -216,4 +216,4 @@ export class ChunkingService {
     }
 }
 
-export { DocumentChunk };
+export type { DocumentChunk };
