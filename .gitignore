@@ -43,6 +43,8 @@ prisma/dev.db
 
 # Build outputs
 build/
+coverage/
+**/coverage/
 
 # Debug logs
 *_logs.json
