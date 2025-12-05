@@ -15,9 +15,9 @@ Write-Host "Running Database Migrations..." -ForegroundColor Cyan
 gcloud run jobs create migrate-db `
     --image $IMAGE_NAME `
     --region $REGION `
-    --set-env-vars "DATABASE_URL=$($env:DATABASE_URL)" `
-    --command "npx" `
-    --args "prisma", "migrate", "deploy" `
+    --set-env-vars "DATABASE_URL=$($env:DATABASE_URL),RAG_WARMUP=false" `
+    --command "/app/node_modules/.bin/prisma" `
+    --args "migrate,deploy" `
     --execute-now `
     --wait
 
@@ -26,9 +26,9 @@ if ($LASTEXITCODE -ne 0) {
     gcloud run jobs update migrate-db `
         --image $IMAGE_NAME `
         --region $REGION `
-        --set-env-vars "DATABASE_URL=$($env:DATABASE_URL)" `
-        --command "npx" `
-        --args "prisma", "migrate", "deploy"
+        --set-env-vars "DATABASE_URL=$($env:DATABASE_URL),RAG_WARMUP=false" `
+        --command "/app/node_modules/.bin/prisma" `
+        --args "migrate,deploy"
     
     gcloud run jobs execute migrate-db --region $REGION --wait
 }

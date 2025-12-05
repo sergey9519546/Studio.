@@ -26,9 +26,19 @@ import { HealthModule } from './health/health.module';
 import { GoogleModule } from './modules/google/google.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { existsSync } from 'fs';
 import { AIModule } from './modules/ai/ai.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { MonitoringModule } from './modules/monitoring/monitoring.module';
+
+// Resolve the frontend build directory robustly across build outputs (dist/build)
+const staticCandidates = [
+  join(process.cwd(), 'build/client'),
+  join(process.cwd(), 'dist/client'),
+  join(__dirname, '../../../client'),
+  join(__dirname, '../../client'),
+];
+const staticRoot = staticCandidates.find(p => existsSync(p));
 
 @Module({
   imports: [
@@ -44,10 +54,10 @@ import { MonitoringModule } from './modules/monitoring/monitoring.module';
       ttl: 60000, // 60 seconds
       limit: 100, // 100 requests per ttl window
     }]),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../../../client'),
+    ...(staticRoot ? [ServeStaticModule.forRoot({
+      rootPath: staticRoot,
       exclude: ['/api/(.*)'],
-    }),
+    })] : []),
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
