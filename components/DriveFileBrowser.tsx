@@ -231,7 +231,14 @@ const FileCard = React.memo(({ file, viewMode, onSelect, isSelected, compact }: 
     >
       <div className={`${isList ? 'w-8 h-8' : 'aspect-square'} flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden relative border border-gray-50 group-hover:border-gray-100 transition-colors`}>
         {file.mimeType.includes('image') && file.url ? (
-          <img src={file.url} className="w-full h-full object-cover" loading="lazy" />
+          <img 
+            src={file.url} 
+            alt={file.name}
+            className="w-full h-full object-cover" 
+            loading="lazy"
+            width={isList ? "32" : undefined}
+            height={isList ? "32" : undefined}
+          />
         ) : null}
         <div className={`absolute inset-0 flex items-center justify-center -z-10 bg-gray-50 ${file.mimeType.includes('image') ? 'opacity-0 group-hover:opacity-10' : ''}`}>
           {getIcon(file.mimeType)}

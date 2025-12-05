@@ -94,7 +94,14 @@ const FreelancerList: React.FC<FreelancerListProps> = ({ freelancers, assignment
                           <div className="flex justify-between items-start mb-5">
                                <div className="relative">
                                    <div className="w-16 h-16 rounded-2xl overflow-hidden shadow-sm ring-1 ring-black/5">
-                                      <img src={freelancer.avatar} alt={freelancer.name} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
+                                      <img 
+                                        src={freelancer.avatar} 
+                                        alt={freelancer.name} 
+                                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                                        width="64"
+                                        height="64"
+                                        loading="lazy"
+                                      />
                                    </div>
                                </div>
                                <div className="text-right flex flex-col items-end gap-1">

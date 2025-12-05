@@ -332,7 +332,9 @@ const AppContent: React.FC = () => {
   if (isLoading) {
     return (
       <div className="h-screen flex items-center justify-center bg-[#F6F6FA]">
-        <RefreshCw className="animate-spin text-gray-400" />
+        <div className="w-8 h-8 flex items-center justify-center">
+          <RefreshCw className="animate-spin text-gray-400" size={32} />
+        </div>
       </div>
     );
   }

@@ -7,14 +7,50 @@
   body {
     @apply bg-app text-ink-primary;
   }
+  
+  /* Prevent CLS from images */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Reserve space for lazy-loaded content */
+  [loading="lazy"] {
+    min-height: 1px;
+  }
 }
 
 /* Custom component styles */
 @layer components {
-  /* Add your custom component classes here */
+  /* Skeleton loading states to prevent CLS */
+  .skeleton {
+    @apply animate-pulse bg-gray-200 rounded;
+  }
+  
+  /* Fixed aspect ratios to prevent layout shift */
+  .aspect-ratio-square {
+    aspect-ratio: 1 / 1;
+  }
+  
+  .aspect-ratio-video {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .aspect-ratio-portrait {
+    aspect-ratio: 3 / 4;
+  }
 }
 
 /* Custom utility styles */
 @layer utilities {
-  /* Add your custom utility classes here */
+  /* Content visibility for performance */
+  .content-visibility-auto {
+    content-visibility: auto;
+  }
+  
+  /* Prevent layout shift on hover transforms */
+  .transform-gpu {
+    transform: translateZ(0);
+    will-change: transform;
+  }
 }

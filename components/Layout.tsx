@@ -86,19 +86,19 @@ const Layout: React.FC = () => {
         </div>
       </main>
 
-      {/* Floating Action Button */}
-      <div className="absolute bottom-8 right-8 z-50">
+      {/* Floating Action Button - Fixed dimensions to prevent CLS */}
+      <div className="fixed bottom-8 right-8 z-50 w-16 h-16">
         <button
           onClick={() => setIsChatOpen(!isChatOpen)}
-          className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:bg-primary-hover transition-all"
+          className="w-full h-full bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:bg-primary-hover transition-all"
         >
           <MessageSquare size={24} />
         </button>
       </div>
 
-      {/* AI Chat Window */}
+      {/* AI Chat Window - Fixed dimensions to prevent CLS */}
       {isChatOpen && (
-        <div className="absolute bottom-28 right-8 w-96 h-[600px] z-50">
+        <div className="fixed bottom-28 right-8 w-96 h-[600px] z-50">
           <AIChat
             freelancers={[]}
             projects={[]}

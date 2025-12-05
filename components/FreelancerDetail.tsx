@@ -90,7 +90,14 @@ const FreelancerDetail: React.FC<FreelancerDetailProps> = ({ freelancers, projec
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8">
                     <div className="flex items-center gap-6">
                         <div className="w-20 h-20 bg-white border border-mist p-1 rounded-2xl overflow-hidden shadow-sm">
-                            <img src={freelancer.avatar} className="w-full h-full object-cover grayscale rounded-xl" />
+                            <img 
+                              src={freelancer.avatar} 
+                              alt={freelancer.name}
+                              className="w-full h-full object-cover grayscale rounded-xl"
+                              width="80"
+                              height="80"
+                              loading="eager"
+                            />
                         </div>
                         <div>
                             <h1 className="text-4xl font-semibold text-ink tracking-tight mb-2">{freelancer.name}</h1>

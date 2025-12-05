@@ -10,6 +10,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      /* Prevent FOUT/FOIT - Font Loading Strategy */
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+    </style>
     <script>
       tailwind.config = {
         theme: {
@@ -51,12 +57,41 @@
       }
     </script>
     <style>
+      /* Critical CSS for CLS Prevention */
+      * {
+        box-sizing: border-box;
+      }
+      
       body {
-        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         background-color: #F6F6FA;
         color: #101118;
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
+      }
+      
+      /* Prevent layout shift from root element */
+      #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      /* Reserve space for images to prevent CLS */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      
+      /* Aspect ratio containers for images */
+      .aspect-square {
+        aspect-ratio: 1 / 1;
+      }
+      
+      .aspect-video {
+        aspect-ratio: 16 / 9;
       }
       
       .glass-panel {

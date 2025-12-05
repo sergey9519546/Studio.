@@ -11,9 +11,17 @@ export default defineConfig({
     outDir: 'build/client',
     emptyOutDir: false, // Prevent file locking issues on Windows
     sourcemap: false,
-    minify: false, // Disable minification for debugging
+    minify: 'terser', // Enable minification for production
+    
+    // Terser options for better optimization
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
 
-    // Code splitting for better caching
+    // Code splitting for better caching and CLS prevention
     rollupOptions: {
       output: {
         manualChunks: {
@@ -21,11 +29,16 @@ export default defineConfig({
           'ui-vendor': ['lucide-react'],
           'query-vendor': ['@tanstack/react-query'],
         },
+        // Optimize chunk loading
+        inlineDynamicImports: false,
       },
     },
 
     // Chunk size warnings
     chunkSizeWarningLimit: 1000,
+    
+    // CSS code splitting
+    cssCodeSplit: true,
   },
 
   server: {
