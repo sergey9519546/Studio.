@@ -12715,6 +12715,31 @@
     "type": "static"
   },
   {
+    "source": "npm:framer-motion",
+    "target": "npm:react",
+    "type": "static"
+  },
+  {
+    "source": "npm:framer-motion",
+    "target": "npm:react-dom",
+    "type": "static"
+  },
+  {
+    "source": "npm:framer-motion",
+    "target": "npm:motion-dom",
+    "type": "static"
+  },
+  {
+    "source": "npm:framer-motion",
+    "target": "npm:motion-utils",
+    "type": "static"
+  },
+  {
+    "source": "npm:framer-motion",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
     "source": "npm:front-matter",
     "target": "npm:js-yaml@3.14.2",
     "type": "static"
@@ -16630,6 +16655,11 @@
     "type": "static"
   },
   {
+    "source": "npm:motion-dom",
+    "target": "npm:motion-utils",
+    "type": "static"
+  },
+  {
     "source": "npm:multer",
     "target": "npm:append-field",
     "type": "static"
@@ -18025,6 +18055,11 @@
     "type": "static"
   },
   {
+    "source": "npm:react-masonry-css",
+    "target": "npm:react",
+    "type": "static"
+  },
+  {
     "source": "npm:react-router",
     "target": "npm:react",
     "type": "static"
@@ -18052,6 +18087,21 @@
   {
     "source": "npm:react-router-dom",
     "target": "npm:react-router",
+    "type": "static"
+  },
+  {
+    "source": "npm:react-split",
+    "target": "npm:react",
+    "type": "static"
+  },
+  {
+    "source": "npm:react-split",
+    "target": "npm:prop-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:react-split",
+    "target": "npm:split.js",
     "type": "static"
   },
   {

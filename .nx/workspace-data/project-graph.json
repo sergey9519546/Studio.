@@ -15,7 +15,7 @@
         ],
         "targets": {
           "build": {
-            "executor": "@nx/nest:build",
+            "executor": "@nx/js:tsc",
             "outputs": [
               "{options.outputPath}"
             ],
@@ -9469,6 +9469,15 @@
         "hash": "sha512-1X1NTtiJphryn/uLQz3whtY6jK3fTqoE3ohKs0tT+Ujr1W59oopxmoEh7Lu5p6vBaPbgoM0bzveAW4Qi5RyWDQ=="
       }
     },
+    "npm:framer-motion": {
+      "type": "npm",
+      "name": "npm:framer-motion",
+      "data": {
+        "version": "12.23.25",
+        "packageName": "framer-motion",
+        "hash": "sha512-gUHGl2e4VG66jOcH0JHhuJQr6ZNwrET9g31ZG0xdXzT0CznP7fHX4P8Bcvuc4MiUB90ysNnWX2ukHRIggkl6hQ=="
+      }
+    },
     "npm:front-matter": {
       "type": "npm",
       "name": "npm:front-matter",
@@ -11548,6 +11557,24 @@
         "hash": "sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw=="
       }
     },
+    "npm:motion-dom": {
+      "type": "npm",
+      "name": "npm:motion-dom",
+      "data": {
+        "version": "12.23.23",
+        "packageName": "motion-dom",
+        "hash": "sha512-n5yolOs0TQQBRUFImrRfs/+6X4p3Q4n1dUEqt/H58Vx7OW6RF+foWEgmTVDhIWJIMXOuNNL0apKH2S16en9eiA=="
+      }
+    },
+    "npm:motion-utils": {
+      "type": "npm",
+      "name": "npm:motion-utils",
+      "data": {
+        "version": "12.23.6",
+        "packageName": "motion-utils",
+        "hash": "sha512-eAWoPgr4eFEOFfg2WjIsMoqJTW6Z8MTUCgn/GZ3VRpClWBdnbjryiA3ZSNLyxCTmCQx4RmYX6jX1iWHbenUPNQ=="
+      }
+    },
     "npm:multer": {
       "type": "npm",
       "name": "npm:multer",
@@ -12772,6 +12799,15 @@
         "hash": "sha512-E55EOwKJHHIT/I6J9DmQbCWToAYSw9nN5R57MZw9rMtjh+YQreMDxRLfdjfxQbiJ3/qbg3Z02wGzBX4M+5fMtQ=="
       }
     },
+    "npm:react-masonry-css": {
+      "type": "npm",
+      "name": "npm:react-masonry-css",
+      "data": {
+        "version": "1.0.16",
+        "packageName": "react-masonry-css",
+        "hash": "sha512-KSW0hR2VQmltt/qAa3eXOctQDyOu7+ZBevtKgpNDSzT7k5LA/0XntNa9z9HKCdz3QlxmJHglTZ18e4sX4V8zZQ=="
+      }
+    },
     "npm:react-refresh": {
       "type": "npm",
       "name": "npm:react-refresh",
@@ -12797,6 +12833,15 @@
         "version": "6.30.2",
         "packageName": "react-router-dom",
         "hash": "sha512-l2OwHn3UUnEVUqc6/1VMmR1cvZryZ3j3NzapC2eUXO1dB0sYp5mvwdjiXhpUbRb21eFow3qSxpP8Yv6oAU824Q=="
+      }
+    },
+    "npm:react-split": {
+      "type": "npm",
+      "name": "npm:react-split",
+      "data": {
+        "version": "2.0.14",
+        "packageName": "react-split",
+        "hash": "sha512-bKWydgMgaKTg/2JGQnaJPg51T6dmumTWZppFgEbbY0Fbme0F5TuatAScCLaqommbGQQf/ZT1zaejuPDriscISA=="
       }
     },
     "npm:read-cache": {
@@ -13292,6 +13337,15 @@
         "version": "1.2.1",
         "packageName": "source-map-js",
         "hash": "sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA=="
+      }
+    },
+    "npm:split.js": {
+      "type": "npm",
+      "name": "npm:split.js",
+      "data": {
+        "version": "1.6.5",
+        "packageName": "split.js",
+        "hash": "sha512-mPTnGCiS/RiuTNsVhCm9De9cCAUsrNFFviRbADdKiiV+Kk8HKp/0fWu7Kr8pi3/yBmsqLFHuXGT9UUZ+CNLwFw=="
       }
     },
     "npm:split2": {
@@ -27326,6 +27380,33 @@
         "type": "static"
       }
     ],
+    "npm:framer-motion": [
+      {
+        "source": "npm:framer-motion",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:framer-motion",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:framer-motion",
+        "target": "npm:motion-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:framer-motion",
+        "target": "npm:motion-utils",
+        "type": "static"
+      },
+      {
+        "source": "npm:framer-motion",
+        "target": "npm:tslib",
+        "type": "static"
+      }
+    ],
     "npm:front-matter": [
       {
         "source": "npm:front-matter",
@@ -30263,6 +30344,13 @@
         "type": "static"
       }
     ],
+    "npm:motion-dom": [
+      {
+        "source": "npm:motion-dom",
+        "target": "npm:motion-utils",
+        "type": "static"
+      }
+    ],
     "npm:multer": [
       {
         "source": "npm:multer",
@@ -31745,6 +31833,13 @@
         "type": "static"
       }
     ],
+    "npm:react-masonry-css": [
+      {
+        "source": "npm:react-masonry-css",
+        "target": "npm:react",
+        "type": "static"
+      }
+    ],
     "npm:react-router": [
       {
         "source": "npm:react-router",
@@ -31776,6 +31871,23 @@
       {
         "source": "npm:react-router-dom",
         "target": "npm:react-router",
+        "type": "static"
+      }
+    ],
+    "npm:react-split": [
+      {
+        "source": "npm:react-split",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:react-split",
+        "target": "npm:prop-types",
+        "type": "static"
+      },
+      {
+        "source": "npm:react-split",
+        "target": "npm:split.js",
         "type": "static"
       }
     ],
@@ -34884,5 +34996,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1764927849764
+  "computedAt": 1764935457587
 }
