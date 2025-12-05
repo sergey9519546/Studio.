@@ -18,8 +18,6 @@ RUN npm install --legacy-peer-deps
 RUN npx prisma generate
 
 # Build the API
-COPY apps/api/src/modules/auth/guards/jwt-auth.guard.ts apps/api/src/modules/auth/guards/jwt-auth.guard.ts
-RUN cat apps/api/src/modules/auth/guards/jwt-auth.guard.ts
 RUN npm run build:api || npx nest build -p apps/api/tsconfig.app.json
 
 # Build the frontend (Vite)
