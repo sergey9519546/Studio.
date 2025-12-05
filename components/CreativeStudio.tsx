@@ -1,13 +1,35 @@
 
-import React, { useState, useEffect } from 'react';
+import {
+  AlertTriangle,
+  CheckCircle,
+  Database,
+  Loader2,
+  PanelLeft,
+  PanelRight,
+  Save,
+  ShieldCheck,
+  Sparkles,
+  Type,
+  UploadCloud,
+} from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { api } from "../services/api";
+import {
+  DeepReader,
+  HallucinationGuard,
+  RAGEngine,
+} from "../services/intelligence";
+import {
+  Assignment,
+  Freelancer,
+  KnowledgeSource,
+  Project,
+  Script,
+} from "../types";
 import AIChat from './AIChat';
-import AssetLibrary, { DriveFile } from './DriveFileBrowser';
-import SimpleEditor from './editor/SimpleEditor';
-import { Project, Freelancer, Assignment, Script, KnowledgeSource } from '../types';
-import { Save, PanelRight, PanelLeft, Sparkles, Loader2, ShieldCheck, AlertTriangle, CheckCircle, Database, UploadCloud, Type, LayoutTemplate } from 'lucide-react';
-import { RAGEngine, HallucinationGuard, DeepReader } from '../services/intelligence';
-import { useSearchParams } from 'react-router-dom';
-import { api } from '../services/api';
+import AssetLibrary, { DriveFile } from "./DriveFileBrowser";
+import ProseMirrorEditor from "./editor/ProseMirrorEditor";
 
 interface CreateStudioProps {
     projects: Project[];
@@ -172,119 +194,188 @@ const CreativeStudio: React.FC<CreateStudioProps> = ({ projects, freelancers, as
     };
 
     return (
-        <div className="flex h-[calc(100vh-64px)] min-h-[600px] bg-[#F5F5F7] font-sans text-gray-900 overflow-hidden">
-
-            {/* LEFT PANEL: ASSETS (Levitation Layer) */}
-            <div className={`flex-shrink-0 border-r border-gray-100 bg-white z-20 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${showLeftPanel ? 'w-72 translate-x-0' : 'w-0 -translate-x-full opacity-0 overflow-hidden'}`}>
-                <div className="w-72 h-full">
-                    <AssetLibrary compact />
-                </div>
-            </div>
-
-            {/* CENTER: EDITOR */}
-            <div
-                className="flex-1 flex flex-col relative bg-white shadow-soft z-10 mx-6 my-6 rounded-2xl border border-gray-100 overflow-hidden transition-all duration-500"
-                onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
-                onDragLeave={() => setDragActive(false)}
-                onDrop={handleDrop}
-            >
-                {dragActive && (
-                    <div className="absolute inset-0 z-50 bg-white/80 backdrop-blur-md flex flex-col items-center justify-center animate-in fade-in duration-200">
-                        <div className="p-6 rounded-3xl border border-indigo-100 bg-white shadow-float flex flex-col items-center gap-3 scale-110">
-                            <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 shadow-sm animate-bounce">
-                                <UploadCloud size={32} />
-                            </div>
-                            <div className="text-center">
-                                <h3 className="text-sm font-bold text-indigo-900 tracking-tight">Drop to Insert</h3>
-                                <p className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest">Embeds Reference</p>
-                            </div>
-                        </div>
-                    </div>
-                )}
-
-                {/* Toolbar - Floating Porcelain */}
-                <div className="h-16 border-b border-gray-100 bg-white/90 backdrop-blur-xl flex items-center justify-between px-6 sticky top-0 z-30">
-                    <div className="flex items-center gap-4">
-                        <button onClick={() => setShowLeftPanel(!showLeftPanel)} className={`p-2 rounded-xl transition-all duration-300 ${showLeftPanel ? 'bg-indigo-50 text-indigo-600 shadow-sm' : 'text-gray-400 hover:text-gray-900 hover:bg-gray-50'}`}>
-                            <PanelLeft size={20} strokeWidth={2} />
-                        </button>
-                        <div className="h-6 w-px bg-gray-100"></div>
-                        <select
-                            value={selectedProjectId}
-                            onChange={(e) => { setSelectedProjectId(e.target.value); setSearchParams(prev => { prev.set('project', e.target.value); return prev; }); }}
-                            className="bg-transparent text-xs font-bold text-gray-700 focus:outline-none cursor-pointer hover:bg-gray-50 px-3 py-2 rounded-lg transition-colors border border-transparent hover:border-gray-100 uppercase tracking-wide"
-                        >
-                            <option value="">Select Context...</option>
-                            {projects.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
-                        </select>
-                    </div>
-
-                    <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300 group/title">
-                        <input
-                            type="text" value={scriptTitle} onChange={(e) => setScriptTitle(e.target.value)} placeholder="Untitled Script"
-                            className="text-center text-sm font-semibold text-gray-900 focus:outline-none placeholder-gray-300 bg-transparent group-hover/title:bg-gray-50 rounded-lg px-4 py-1.5 transition-colors tracking-tight"
-                        />
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                        <button onClick={() => handleEnhance()} disabled={isEnhancing} className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors disabled:opacity-50 group" title="AI Refine">
-                            {isEnhancing ? <Loader2 size={18} className="animate-spin" /> : <Sparkles size={18} className="group-hover:scale-110 transition-transform" />}
-                        </button>
-                        <button onClick={handleSave} className="bg-gray-900 text-white px-5 py-2 rounded-xl text-[10px] font-bold hover:bg-black transition-all flex items-center gap-2 shadow-lg shadow-gray-200 uppercase tracking-widest active:scale-95">
-                            <Save size={14} /> Save
-                        </button>
-                        <div className="h-6 w-px bg-gray-100 mx-1"></div>
-                        <button onClick={() => setShowRightPanel(!showRightPanel)} className={`p-2 rounded-xl transition-colors ${showRightPanel ? 'bg-indigo-50 text-indigo-600 shadow-sm' : 'text-gray-400 hover:text-gray-900 hover:bg-gray-50'}`}>
-                            <PanelRight size={20} strokeWidth={2} />
-                        </button>
-                    </div>
-                </div>
-
-                {/* Editor Area */}
-                <div className="flex-1 relative overflow-hidden group">
-                    <SimpleEditor
-                        initialContent={scriptContent}
-                        onContentChange={setScriptContent}
-                        onSave={handleSave}
-                        onEnhance={handleEnhance}
-                        placeholder="Start creating your masterpiece..."
-                        brandValidationEnabled={!!selectedProjectId}
-                        assetDraggingEnabled={!!selectedProjectId}
-                        readOnly={!selectedProjectId}
-                    />
-
-                    {selectedProjectId && (
-                        <div className="absolute top-4 right-4 text-xs bg-blue-50 border border-blue-200 text-blue-700 px-2 py-1 rounded">
-                            AI Context Active
-                        </div>
-                    )}
-                </div>
-
-                {/* Status Bar */}
-                <div className="h-10 border-t border-gray-100 bg-white/50 flex items-center justify-between px-6 text-[9px] text-gray-400 font-bold uppercase tracking-widest backdrop-blur-sm">
-                    <div className="flex items-center gap-6">
-                        <span className="flex items-center gap-2"><Type size={12} className="text-gray-300" /> {scriptContent.length} chars</span>
-                        <span className="flex items-center gap-2"><Database size={12} className="text-gray-300" /> {sources.length} active sources</span>
-                    </div>
-                    <div>
-                        {isGuarding ? <span className="text-amber-500 flex items-center gap-2"><ShieldCheck size={14} className="animate-pulse" /> Scanning Content...</span> :
-                            hallucinations.length > 0 ? <span className="text-rose-500 flex items-center gap-2"><AlertTriangle size={14} /> {hallucinations.length} Issues Detected</span> :
-                                <span className="text-emerald-600 flex items-center gap-2"><CheckCircle size={14} /> Guard Active</span>}
-                    </div>
-                </div>
-            </div>
-
-            {/* RIGHT PANEL: AI AGENT */}
-            <div className={`flex-shrink-0 border-l border-gray-100 bg-white z-20 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${showRightPanel ? 'w-[420px] translate-x-0' : 'w-0 translate-x-full opacity-0 overflow-hidden'}`}>
-                <div className="w-[420px] h-full">
-                    <AIChat
-                        key={selectedProjectId || 'default'}
-                        freelancers={freelancers} projects={projects} assignments={assignments} onCallAction={handleAgentAction}
-                        agentMode={true} customTitle="Creative Assistant" contextData={contextData}
-                    />
-                </div>
-            </div>
+      <div className="flex h-[calc(100vh-64px)] min-h-[600px] bg-[#F5F5F7] font-sans text-gray-900 overflow-hidden">
+        {/* LEFT PANEL: ASSETS (Levitation Layer) */}
+        <div
+          className={`flex-shrink-0 border-r border-gray-100 bg-white z-20 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${showLeftPanel ? "w-72 translate-x-0" : "w-0 -translate-x-full opacity-0 overflow-hidden"}`}
+        >
+          <div className="w-72 h-full">
+            <AssetLibrary compact />
+          </div>
         </div>
+
+        {/* CENTER: EDITOR */}
+        <div
+          className="flex-1 flex flex-col relative bg-white shadow-soft z-10 mx-6 my-6 rounded-2xl border border-gray-100 overflow-hidden transition-all duration-500"
+          onDragOver={(e) => {
+            e.preventDefault();
+            setDragActive(true);
+          }}
+          onDragLeave={() => setDragActive(false)}
+          onDrop={handleDrop}
+        >
+          {dragActive && (
+            <div className="absolute inset-0 z-50 bg-white/80 backdrop-blur-md flex flex-col items-center justify-center animate-in fade-in duration-200">
+              <div className="p-6 rounded-3xl border border-indigo-100 bg-white shadow-float flex flex-col items-center gap-3 scale-110">
+                <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 shadow-sm animate-bounce">
+                  <UploadCloud size={32} />
+                </div>
+                <div className="text-center">
+                  <h3 className="text-sm font-bold text-indigo-900 tracking-tight">
+                    Drop to Insert
+                  </h3>
+                  <p className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest">
+                    Embeds Reference
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Toolbar - Floating Porcelain */}
+          <div className="h-16 border-b border-gray-100 bg-white/90 backdrop-blur-xl flex items-center justify-between px-6 sticky top-0 z-30">
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => setShowLeftPanel(!showLeftPanel)}
+                className={`p-2 rounded-xl transition-all duration-300 ${showLeftPanel ? "bg-indigo-50 text-indigo-600 shadow-sm" : "text-gray-400 hover:text-gray-900 hover:bg-gray-50"}`}
+              >
+                <PanelLeft size={20} strokeWidth={2} />
+              </button>
+              <div className="h-6 w-px bg-gray-100"></div>
+              <select
+                value={selectedProjectId}
+                onChange={(e) => {
+                  setSelectedProjectId(e.target.value);
+                  setSearchParams((prev) => {
+                    prev.set("project", e.target.value);
+                    return prev;
+                  });
+                }}
+                className="bg-transparent text-xs font-bold text-gray-700 focus:outline-none cursor-pointer hover:bg-gray-50 px-3 py-2 rounded-lg transition-colors border border-transparent hover:border-gray-100 uppercase tracking-wide"
+              >
+                <option value="">Select Context...</option>
+                {projects.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300 group/title">
+              <input
+                type="text"
+                value={scriptTitle}
+                onChange={(e) => setScriptTitle(e.target.value)}
+                placeholder="Untitled Script"
+                className="text-center text-sm font-semibold text-gray-900 focus:outline-none placeholder-gray-300 bg-transparent group-hover/title:bg-gray-50 rounded-lg px-4 py-1.5 transition-colors tracking-tight"
+              />
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => handleEnhance()}
+                disabled={isEnhancing}
+                className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors disabled:opacity-50 group"
+                title="AI Refine"
+              >
+                {isEnhancing ? (
+                  <Loader2 size={18} className="animate-spin" />
+                ) : (
+                  <Sparkles
+                    size={18}
+                    className="group-hover:scale-110 transition-transform"
+                  />
+                )}
+              </button>
+              <button
+                onClick={handleSave}
+                className="bg-gray-900 text-white px-5 py-2 rounded-xl text-[10px] font-bold hover:bg-black transition-all flex items-center gap-2 shadow-lg shadow-gray-200 uppercase tracking-widest active:scale-95"
+              >
+                <Save size={14} /> Save
+              </button>
+              <div className="h-6 w-px bg-gray-100 mx-1"></div>
+              <button
+                onClick={() => setShowRightPanel(!showRightPanel)}
+                className={`p-2 rounded-xl transition-colors ${showRightPanel ? "bg-indigo-50 text-indigo-600 shadow-sm" : "text-gray-400 hover:text-gray-900 hover:bg-gray-50"}`}
+              >
+                <PanelRight size={20} strokeWidth={2} />
+              </button>
+            </div>
+          </div>
+
+          {/* Editor Area */}
+          <div className="flex-1 relative overflow-hidden group">
+            <ProseMirrorEditor
+              initialContent={scriptContent}
+              onContentChange={setScriptContent}
+              onSave={async () => await handleSave()}
+              onEnhance={handleEnhance}
+              placeholder="Start creating your masterpiece..."
+              brandValidationEnabled={!!selectedProjectId}
+              readOnly={!selectedProjectId}
+            />
+
+            {selectedProjectId && (
+              <div className="absolute top-4 right-4 text-xs bg-primary-tint border border-primary/20 text-primary px-2 py-1 rounded">
+                <span className="flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+                  AI Context Active
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* Status Bar */}
+          <div className="h-10 border-t border-gray-100 bg-white/50 flex items-center justify-between px-6 text-[9px] text-gray-400 font-bold uppercase tracking-widest backdrop-blur-sm">
+            <div className="flex items-center gap-6">
+              <span className="flex items-center gap-2">
+                <Type size={12} className="text-gray-300" />{" "}
+                {scriptContent.length} chars
+              </span>
+              <span className="flex items-center gap-2">
+                <Database size={12} className="text-gray-300" />{" "}
+                {sources.length} active sources
+              </span>
+            </div>
+            <div>
+              {isGuarding ? (
+                <span className="text-amber-500 flex items-center gap-2">
+                  <ShieldCheck size={14} className="animate-pulse" /> Scanning
+                  Content...
+                </span>
+              ) : hallucinations.length > 0 ? (
+                <span className="text-rose-500 flex items-center gap-2">
+                  <AlertTriangle size={14} /> {hallucinations.length} Issues
+                  Detected
+                </span>
+              ) : (
+                <span className="text-emerald-600 flex items-center gap-2">
+                  <CheckCircle size={14} /> Guard Active
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT PANEL: AI AGENT */}
+        <div
+          className={`flex-shrink-0 border-l border-gray-100 bg-white z-20 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${showRightPanel ? "w-[420px] translate-x-0" : "w-0 translate-x-full opacity-0 overflow-hidden"}`}
+        >
+          <div className="w-[420px] h-full">
+            <AIChat
+              key={selectedProjectId || "default"}
+              freelancers={freelancers}
+              projects={projects}
+              assignments={assignments}
+              onCallAction={handleAgentAction}
+              agentMode={true}
+              customTitle="Creative Assistant"
+              contextData={contextData}
+            />
+          </div>
+        </div>
+      </div>
     );
 };
 

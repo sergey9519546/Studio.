@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import * as ExcelJS from 'exceljs';
 import { api } from '../services/api';
 import { z } from 'zod';
+import { ProjectStatus, FreelancerStatus } from '../types';
 
 interface ImportWizardProps {
     onImport: (type: 'freelancer' | 'project', data: any[]) => void;

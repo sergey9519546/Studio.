@@ -69,9 +69,13 @@ const AppContent: React.FC = () => {
         api.projects.list({ limit: 1000 }),
         api.assignments.list({ limit: 5000 }),
       ]);
-      setFreelancers((f.data || []).filter((item): item is Freelancer => item !== undefined));
-      setProjects((p.data || []).filter((item): item is Project => item !== undefined));
-      setAssignments((a.data || []).filter((item): item is Assignment => item !== undefined));
+      const freelancersData = f.data || [];
+      const projectsData = p.data || [];
+      const assignmentsData = a.data || [];
+
+      setFreelancers(freelancersData.filter((item): item is Freelancer => item !== undefined && item !== null));
+      setProjects(projectsData.filter((item): item is Project => item !== undefined && item !== null));
+      setAssignments(assignmentsData.filter((item): item is Assignment => item !== undefined && item !== null));
       // setScripts(s.data || []);
     } catch (e) {
       console.error("Failed to fetch data", e);
@@ -121,9 +125,11 @@ const AppContent: React.FC = () => {
 
   const handleFreelancerUpdate = async (updatedFreelancer: Freelancer) => {
     const res = await api.freelancers.update(updatedFreelancer);
-    setFreelancers(prev => prev.map(f => f.id === res.data.id ? res.data : f));
-    handleLogAction('Freelancer Updated', `Updated profile for ${res.data.name}`);
-    toast.success("Freelancer profile updated");
+    if (res.data) {
+      setFreelancers(prev => prev.map(f => f.id === res.data.id ? res.data : f));
+      handleLogAction('Freelancer Updated', `Updated profile for ${res.data.name}`);
+      toast.success("Freelancer profile updated");
+    }
   };
 
   const handleFreelancerDelete = async (id: string) => {
@@ -136,8 +142,10 @@ const AppContent: React.FC = () => {
 
   const handleProjectUpdate = async (updatedProject: Project) => {
     const res = await api.projects.update(updatedProject);
-    setProjects(prev => prev.map(p => p.id === res.data.id ? res.data : p));
-    toast.success("Project updated successfully");
+    if (res.data) {
+      setProjects(prev => prev.map(p => p.id === res.data.id ? res.data : p));
+      toast.success("Project updated successfully");
+    }
   };
 
   const handleProjectDelete = async (id: string) => {
@@ -180,20 +188,26 @@ const AppContent: React.FC = () => {
       let res;
       if (existing) {
         res = await api.assignments.update(newAssignment);
-        setAssignments(prev => prev.map(a => a.id === newAssignment.id ? res.data : a));
+        if (res.data) {
+          setAssignments(prev => prev.map(a => a.id === newAssignment.id ? res.data : a));
+        }
         handleLogAction('Assignment Updated', `Updated assignment details`);
         toast.success("Assignment updated");
       } else {
         res = await api.assignments.create(newAssignment);
-        setAssignments(prev => [...prev, res.data]);
-        const freelancerName = freelancers.find(f => f.id === res.data.freelancerId)?.name || 'Unknown';
-        const projectName = projects.find(p => p.id === res.data.projectId)?.name || 'Unknown';
-        handleLogAction('Assignment Confirmed', `${freelancerName} assigned to ${projectName}`);
-        toast.success("Assignment confirmed");
+        if (res.data) {
+          setAssignments(prev => [...prev, res.data]);
+          const freelancerName = freelancers.find(f => f.id === res.data.freelancerId)?.name || 'Unknown';
+          const projectName = projects.find(p => p.id === res.data.projectId)?.name || 'Unknown';
+          handleLogAction('Assignment Confirmed', `${freelancerName} assigned to ${projectName}`);
+          toast.success("Assignment confirmed");
+        }
 
         // Refresh projects to update fill counts
         const p = await api.projects.list({ limit: 1000 });
-        setProjects(p.data);
+        if (p.data) {
+          setProjects(p.data.filter((item): item is Project => item !== undefined && item !== null));
+        }
       }
     } catch (e: unknown) {
       if (e instanceof Error && e.message === 'CONFLICT_DETECTED') {
@@ -371,7 +385,7 @@ const AppContent: React.FC = () => {
           <Route path="assignments" element={<AssignmentView freelancers={freelancers} projects={projects} assignments={assignments} onAssign={handleAssignmentUpdate} checkConflict={checkConflict} />} />
           <Route path="studio" element={<CreateStudio projects={projects} freelancers={freelancers} assignments={assignments} onSaveScript={handleScriptCreate} />} />
           <Route path="moodboard" element={<MoodboardTab />} />
-          <Route path="imports" element={<ImportWizard onImport={handleImport} />} />
+          {/* <Route path="imports" element={<ImportWizard onImport={handleImport} />} /> */}
         </Route>
         <Route path="/public/projects/:token" element={<PublicProjectView projects={projects} assignments={assignments} freelancers={freelancers} />} />
         <Route path="*" element={<Navigate to="/" replace />} />

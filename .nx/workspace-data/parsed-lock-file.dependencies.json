@@ -4126,7 +4126,7 @@
   },
   {
     "source": "npm:@modelcontextprotocol/sdk",
-    "target": "npm:express@5.2.1",
+    "target": "npm:express",
     "type": "static"
   },
   {
@@ -4160,16 +4160,6 @@
     "type": "static"
   },
   {
-    "source": "npm:accepts@2.0.0",
-    "target": "npm:mime-types@3.0.2",
-    "type": "static"
-  },
-  {
-    "source": "npm:accepts@2.0.0",
-    "target": "npm:negotiator@1.0.0",
-    "type": "static"
-  },
-  {
     "source": "npm:ajv@8.17.1",
     "target": "npm:fast-deep-equal",
     "type": "static"
@@ -4197,221 +4187,6 @@
   {
     "source": "npm:ajv-formats@3.0.1",
     "target": "npm:ajv@8.17.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:body-parser@2.2.1",
-    "target": "npm:bytes",
-    "type": "static"
-  },
-  {
-    "source": "npm:body-parser@2.2.1",
-    "target": "npm:content-type",
-    "type": "static"
-  },
-  {
-    "source": "npm:body-parser@2.2.1",
-    "target": "npm:debug",
-    "type": "static"
-  },
-  {
-    "source": "npm:body-parser@2.2.1",
-    "target": "npm:http-errors@2.0.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:body-parser@2.2.1",
-    "target": "npm:iconv-lite@0.7.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:body-parser@2.2.1",
-    "target": "npm:on-finished",
-    "type": "static"
-  },
-  {
-    "source": "npm:body-parser@2.2.1",
-    "target": "npm:qs@6.14.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:body-parser@2.2.1",
-    "target": "npm:raw-body@3.0.2",
-    "type": "static"
-  },
-  {
-    "source": "npm:body-parser@2.2.1",
-    "target": "npm:type-is@2.0.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:accepts@2.0.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:body-parser@2.2.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:content-disposition@1.0.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:content-type",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:cookie",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:cookie-signature@1.2.2",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:debug",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:depd",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:encodeurl",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:escape-html",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:etag",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:finalhandler@2.1.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:fresh@2.0.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:http-errors@2.0.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:merge-descriptors@2.0.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:mime-types@3.0.2",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:on-finished",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:once",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:parseurl",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:proxy-addr",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:qs@6.14.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:range-parser",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:router",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:send@1.2.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:serve-static@2.2.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:statuses@2.0.2",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:type-is@2.0.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:vary",
-    "type": "static"
-  },
-  {
-    "source": "npm:finalhandler@2.1.1",
-    "target": "npm:debug",
-    "type": "static"
-  },
-  {
-    "source": "npm:finalhandler@2.1.1",
-    "target": "npm:encodeurl",
-    "type": "static"
-  },
-  {
-    "source": "npm:finalhandler@2.1.1",
-    "target": "npm:escape-html",
-    "type": "static"
-  },
-  {
-    "source": "npm:finalhandler@2.1.1",
-    "target": "npm:on-finished",
-    "type": "static"
-  },
-  {
-    "source": "npm:finalhandler@2.1.1",
-    "target": "npm:parseurl",
-    "type": "static"
-  },
-  {
-    "source": "npm:finalhandler@2.1.1",
-    "target": "npm:statuses@2.0.2",
     "type": "static"
   },
   {
@@ -4445,16 +4220,6 @@
     "type": "static"
   },
   {
-    "source": "npm:mime-types@3.0.2",
-    "target": "npm:mime-db@1.54.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:qs@6.14.0",
-    "target": "npm:side-channel",
-    "type": "static"
-  },
-  {
     "source": "npm:raw-body@3.0.2",
     "target": "npm:bytes",
     "type": "static"
@@ -4472,96 +4237,6 @@
   {
     "source": "npm:raw-body@3.0.2",
     "target": "npm:unpipe",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:debug",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:encodeurl",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:escape-html",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:etag",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:fresh@2.0.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:http-errors@2.0.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:mime-types@3.0.2",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:ms",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:on-finished",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:range-parser",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:statuses@2.0.2",
-    "type": "static"
-  },
-  {
-    "source": "npm:serve-static@2.2.0",
-    "target": "npm:encodeurl",
-    "type": "static"
-  },
-  {
-    "source": "npm:serve-static@2.2.0",
-    "target": "npm:escape-html",
-    "type": "static"
-  },
-  {
-    "source": "npm:serve-static@2.2.0",
-    "target": "npm:parseurl",
-    "type": "static"
-  },
-  {
-    "source": "npm:serve-static@2.2.0",
-    "target": "npm:send@1.2.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:type-is@2.0.1",
-    "target": "npm:content-type",
-    "type": "static"
-  },
-  {
-    "source": "npm:type-is@2.0.1",
-    "target": "npm:media-typer@1.1.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:type-is@2.0.1",
-    "target": "npm:mime-types@3.0.2",
     "type": "static"
   },
   {
@@ -5351,22 +5026,12 @@
   },
   {
     "source": "npm:@nestjs/serve-static",
-    "target": "npm:@nestjs/common",
-    "type": "static"
-  },
-  {
-    "source": "npm:@nestjs/serve-static",
-    "target": "npm:@nestjs/core",
-    "type": "static"
-  },
-  {
-    "source": "npm:@nestjs/serve-static",
     "target": "npm:express",
     "type": "static"
   },
   {
     "source": "npm:@nestjs/serve-static",
-    "target": "npm:path-to-regexp@0.2.5",
+    "target": "npm:path-to-regexp@8.3.0",
     "type": "static"
   },
   {
@@ -7401,7 +7066,7 @@
   },
   {
     "source": "npm:@pact-foundation/pact",
-    "target": "npm:express@5.2.1",
+    "target": "npm:express",
     "type": "static"
   },
   {
@@ -7520,16 +7185,6 @@
     "type": "static"
   },
   {
-    "source": "npm:accepts@2.0.0",
-    "target": "npm:mime-types@3.0.2",
-    "type": "static"
-  },
-  {
-    "source": "npm:accepts@2.0.0",
-    "target": "npm:negotiator@1.0.0",
-    "type": "static"
-  },
-  {
     "source": "npm:body-parser@2.2.1",
     "target": "npm:bytes",
     "type": "static"
@@ -7572,176 +7227,6 @@
   {
     "source": "npm:body-parser@2.2.1",
     "target": "npm:type-is@2.0.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:accepts@2.0.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:body-parser@2.2.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:content-disposition@1.0.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:content-type",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:cookie",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:cookie-signature@1.2.2",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:debug",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:depd",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:encodeurl",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:escape-html",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:etag",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:finalhandler@2.1.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:fresh@2.0.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:http-errors@2.0.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:merge-descriptors@2.0.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:mime-types@3.0.2",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:on-finished",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:once",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:parseurl",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:proxy-addr",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:qs@6.14.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:range-parser",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:router",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:send@1.2.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:serve-static@2.2.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:statuses@2.0.2",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:type-is@2.0.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:express@5.2.1",
-    "target": "npm:vary",
-    "type": "static"
-  },
-  {
-    "source": "npm:finalhandler@2.1.1",
-    "target": "npm:debug",
-    "type": "static"
-  },
-  {
-    "source": "npm:finalhandler@2.1.1",
-    "target": "npm:encodeurl",
-    "type": "static"
-  },
-  {
-    "source": "npm:finalhandler@2.1.1",
-    "target": "npm:escape-html",
-    "type": "static"
-  },
-  {
-    "source": "npm:finalhandler@2.1.1",
-    "target": "npm:on-finished",
-    "type": "static"
-  },
-  {
-    "source": "npm:finalhandler@2.1.1",
-    "target": "npm:parseurl",
-    "type": "static"
-  },
-  {
-    "source": "npm:finalhandler@2.1.1",
-    "target": "npm:statuses@2.0.2",
     "type": "static"
   },
   {
@@ -7802,81 +7287,6 @@
   {
     "source": "npm:raw-body@3.0.2",
     "target": "npm:unpipe",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:debug",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:encodeurl",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:escape-html",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:etag",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:fresh@2.0.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:http-errors@2.0.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:mime-types@3.0.2",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:ms",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:on-finished",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:range-parser",
-    "type": "static"
-  },
-  {
-    "source": "npm:send@1.2.0",
-    "target": "npm:statuses@2.0.2",
-    "type": "static"
-  },
-  {
-    "source": "npm:serve-static@2.2.0",
-    "target": "npm:encodeurl",
-    "type": "static"
-  },
-  {
-    "source": "npm:serve-static@2.2.0",
-    "target": "npm:escape-html",
-    "type": "static"
-  },
-  {
-    "source": "npm:serve-static@2.2.0",
-    "target": "npm:parseurl",
-    "type": "static"
-  },
-  {
-    "source": "npm:serve-static@2.2.0",
-    "target": "npm:send@1.2.0",
     "type": "static"
   },
   {
@@ -8155,46 +7565,6 @@
     "type": "static"
   },
   {
-    "source": "npm:@testing-library/dom",
-    "target": "npm:@babel/code-frame",
-    "type": "static"
-  },
-  {
-    "source": "npm:@testing-library/dom",
-    "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@testing-library/dom",
-    "target": "npm:@types/aria-query",
-    "type": "static"
-  },
-  {
-    "source": "npm:@testing-library/dom",
-    "target": "npm:aria-query",
-    "type": "static"
-  },
-  {
-    "source": "npm:@testing-library/dom",
-    "target": "npm:dom-accessibility-api",
-    "type": "static"
-  },
-  {
-    "source": "npm:@testing-library/dom",
-    "target": "npm:lz-string",
-    "type": "static"
-  },
-  {
-    "source": "npm:@testing-library/dom",
-    "target": "npm:picocolors",
-    "type": "static"
-  },
-  {
-    "source": "npm:@testing-library/dom",
-    "target": "npm:pretty-format",
-    "type": "static"
-  },
-  {
     "source": "npm:@testing-library/jest-dom",
     "target": "npm:@adobe/css-tools",
     "type": "static"
@@ -8226,11 +7596,6 @@
   },
   {
     "source": "npm:@testing-library/react",
-    "target": "npm:@testing-library/dom",
-    "type": "static"
-  },
-  {
-    "source": "npm:@testing-library/react",
     "target": "npm:@types/react",
     "type": "static"
   },
@@ -8252,11 +7617,6 @@
   {
     "source": "npm:@testing-library/react",
     "target": "npm:@babel/runtime",
-    "type": "static"
-  },
-  {
-    "source": "npm:@testing-library/user-event",
-    "target": "npm:@testing-library/dom",
     "type": "static"
   },
   {
@@ -8477,6 +7837,16 @@
   {
     "source": "npm:@types/jsonwebtoken",
     "target": "npm:@types/node",
+    "type": "static"
+  },
+  {
+    "source": "npm:@types/markdown-it",
+    "target": "npm:@types/linkify-it",
+    "type": "static"
+  },
+  {
+    "source": "npm:@types/markdown-it",
+    "target": "npm:@types/mdurl",
     "type": "static"
   },
   {
@@ -9307,11 +8677,6 @@
   {
     "source": "npm:accepts",
     "target": "npm:negotiator",
-    "type": "static"
-  },
-  {
-    "source": "npm:acorn-import-phases",
-    "target": "npm:acorn",
     "type": "static"
   },
   {
@@ -12201,22 +11566,17 @@
   },
   {
     "source": "npm:express",
-    "target": "npm:accepts",
+    "target": "npm:accepts@2.0.0",
     "type": "static"
   },
   {
     "source": "npm:express",
-    "target": "npm:array-flatten",
+    "target": "npm:body-parser@2.2.1",
     "type": "static"
   },
   {
     "source": "npm:express",
-    "target": "npm:body-parser",
-    "type": "static"
-  },
-  {
-    "source": "npm:express",
-    "target": "npm:content-disposition",
+    "target": "npm:content-disposition@1.0.1",
     "type": "static"
   },
   {
@@ -12236,7 +11596,7 @@
   },
   {
     "source": "npm:express",
-    "target": "npm:debug@2.6.9",
+    "target": "npm:debug",
     "type": "static"
   },
   {
@@ -12266,22 +11626,22 @@
   },
   {
     "source": "npm:express",
-    "target": "npm:fresh",
+    "target": "npm:fresh@2.0.0",
     "type": "static"
   },
   {
     "source": "npm:express",
-    "target": "npm:http-errors",
+    "target": "npm:http-errors@2.0.1",
     "type": "static"
   },
   {
     "source": "npm:express",
-    "target": "npm:merge-descriptors",
+    "target": "npm:merge-descriptors@2.0.0",
     "type": "static"
   },
   {
     "source": "npm:express",
-    "target": "npm:methods",
+    "target": "npm:mime-types@3.0.2",
     "type": "static"
   },
   {
@@ -12291,12 +11651,12 @@
   },
   {
     "source": "npm:express",
-    "target": "npm:parseurl",
+    "target": "npm:once",
     "type": "static"
   },
   {
     "source": "npm:express",
-    "target": "npm:path-to-regexp@0.1.12",
+    "target": "npm:parseurl",
     "type": "static"
   },
   {
@@ -12316,7 +11676,7 @@
   },
   {
     "source": "npm:express",
-    "target": "npm:safe-buffer",
+    "target": "npm:router",
     "type": "static"
   },
   {
@@ -12326,27 +11686,17 @@
   },
   {
     "source": "npm:express",
-    "target": "npm:serve-static",
+    "target": "npm:serve-static@2.2.0",
     "type": "static"
   },
   {
     "source": "npm:express",
-    "target": "npm:setprototypeof",
+    "target": "npm:statuses@2.0.2",
     "type": "static"
   },
   {
     "source": "npm:express",
-    "target": "npm:statuses",
-    "type": "static"
-  },
-  {
-    "source": "npm:express",
-    "target": "npm:type-is",
-    "type": "static"
-  },
-  {
-    "source": "npm:express",
-    "target": "npm:utils-merge",
+    "target": "npm:type-is@2.0.1",
     "type": "static"
   },
   {
@@ -12360,13 +11710,153 @@
     "type": "static"
   },
   {
-    "source": "npm:debug@2.6.9",
-    "target": "npm:ms@2.0.0",
+    "source": "npm:accepts@2.0.0",
+    "target": "npm:mime-types@3.0.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:accepts@2.0.0",
+    "target": "npm:negotiator@1.0.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:body-parser@2.2.1",
+    "target": "npm:bytes",
+    "type": "static"
+  },
+  {
+    "source": "npm:body-parser@2.2.1",
+    "target": "npm:content-type",
+    "type": "static"
+  },
+  {
+    "source": "npm:body-parser@2.2.1",
+    "target": "npm:debug",
+    "type": "static"
+  },
+  {
+    "source": "npm:body-parser@2.2.1",
+    "target": "npm:http-errors@2.0.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:body-parser@2.2.1",
+    "target": "npm:iconv-lite@0.7.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:body-parser@2.2.1",
+    "target": "npm:on-finished",
+    "type": "static"
+  },
+  {
+    "source": "npm:body-parser@2.2.1",
+    "target": "npm:qs@6.14.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:body-parser@2.2.1",
+    "target": "npm:raw-body@3.0.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:body-parser@2.2.1",
+    "target": "npm:type-is@2.0.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:http-errors@2.0.1",
+    "target": "npm:depd",
+    "type": "static"
+  },
+  {
+    "source": "npm:http-errors@2.0.1",
+    "target": "npm:inherits",
+    "type": "static"
+  },
+  {
+    "source": "npm:http-errors@2.0.1",
+    "target": "npm:setprototypeof",
+    "type": "static"
+  },
+  {
+    "source": "npm:http-errors@2.0.1",
+    "target": "npm:statuses@2.0.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:http-errors@2.0.1",
+    "target": "npm:toidentifier",
+    "type": "static"
+  },
+  {
+    "source": "npm:iconv-lite@0.7.0",
+    "target": "npm:safer-buffer",
+    "type": "static"
+  },
+  {
+    "source": "npm:mime-types@3.0.2",
+    "target": "npm:mime-db@1.54.0",
     "type": "static"
   },
   {
     "source": "npm:qs@6.14.0",
     "target": "npm:side-channel",
+    "type": "static"
+  },
+  {
+    "source": "npm:raw-body@3.0.2",
+    "target": "npm:bytes",
+    "type": "static"
+  },
+  {
+    "source": "npm:raw-body@3.0.2",
+    "target": "npm:http-errors@2.0.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:raw-body@3.0.2",
+    "target": "npm:iconv-lite@0.7.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:raw-body@3.0.2",
+    "target": "npm:unpipe",
+    "type": "static"
+  },
+  {
+    "source": "npm:serve-static@2.2.0",
+    "target": "npm:encodeurl",
+    "type": "static"
+  },
+  {
+    "source": "npm:serve-static@2.2.0",
+    "target": "npm:escape-html",
+    "type": "static"
+  },
+  {
+    "source": "npm:serve-static@2.2.0",
+    "target": "npm:parseurl",
+    "type": "static"
+  },
+  {
+    "source": "npm:serve-static@2.2.0",
+    "target": "npm:send",
+    "type": "static"
+  },
+  {
+    "source": "npm:type-is@2.0.1",
+    "target": "npm:content-type",
+    "type": "static"
+  },
+  {
+    "source": "npm:type-is@2.0.1",
+    "target": "npm:media-typer@1.1.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:type-is@2.0.1",
+    "target": "npm:mime-types@3.0.2",
     "type": "static"
   },
   {
@@ -12511,7 +12001,7 @@
   },
   {
     "source": "npm:finalhandler",
-    "target": "npm:debug@2.6.9",
+    "target": "npm:debug",
     "type": "static"
   },
   {
@@ -12536,17 +12026,7 @@
   },
   {
     "source": "npm:finalhandler",
-    "target": "npm:statuses@2.0.2",
-    "type": "static"
-  },
-  {
-    "source": "npm:finalhandler",
-    "target": "npm:unpipe",
-    "type": "static"
-  },
-  {
-    "source": "npm:debug@2.6.9",
-    "target": "npm:ms@2.0.0",
+    "target": "npm:statuses",
     "type": "static"
   },
   {
@@ -12597,11 +12077,6 @@
   {
     "source": "npm:fork-ts-checker-webpack-plugin",
     "target": "npm:typescript",
-    "type": "static"
-  },
-  {
-    "source": "npm:fork-ts-checker-webpack-plugin",
-    "target": "npm:webpack",
     "type": "static"
   },
   {
@@ -16480,6 +15955,11 @@
     "type": "static"
   },
   {
+    "source": "npm:linkify-it",
+    "target": "npm:uc.micro",
+    "type": "static"
+  },
+  {
     "source": "npm:locate-path",
     "target": "npm:p-locate",
     "type": "static"
@@ -16622,6 +16102,36 @@
   {
     "source": "npm:argparse@1.0.10",
     "target": "npm:sprintf-js",
+    "type": "static"
+  },
+  {
+    "source": "npm:markdown-it",
+    "target": "npm:argparse",
+    "type": "static"
+  },
+  {
+    "source": "npm:markdown-it",
+    "target": "npm:entities@4.5.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:markdown-it",
+    "target": "npm:linkify-it",
+    "type": "static"
+  },
+  {
+    "source": "npm:markdown-it",
+    "target": "npm:mdurl",
+    "type": "static"
+  },
+  {
+    "source": "npm:markdown-it",
+    "target": "npm:punycode.js",
+    "type": "static"
+  },
+  {
+    "source": "npm:markdown-it",
+    "target": "npm:uc.micro",
     "type": "static"
   },
   {
@@ -17785,21 +17295,6 @@
     "type": "static"
   },
   {
-    "source": "npm:pretty-format",
-    "target": "npm:ansi-regex",
-    "type": "static"
-  },
-  {
-    "source": "npm:pretty-format",
-    "target": "npm:ansi-styles@5.2.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:pretty-format",
-    "target": "npm:react-is",
-    "type": "static"
-  },
-  {
     "source": "npm:prisma",
     "target": "npm:typescript",
     "type": "static"
@@ -17892,6 +17387,146 @@
   {
     "source": "npm:proper-lockfile",
     "target": "npm:signal-exit@3.0.7",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-commands",
+    "target": "npm:prosemirror-model",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-commands",
+    "target": "npm:prosemirror-state",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-commands",
+    "target": "npm:prosemirror-transform",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-history",
+    "target": "npm:prosemirror-state",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-history",
+    "target": "npm:prosemirror-transform",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-history",
+    "target": "npm:prosemirror-view",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-history",
+    "target": "npm:rope-sequence",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-keymap",
+    "target": "npm:prosemirror-state",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-keymap",
+    "target": "npm:w3c-keyname",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-markdown",
+    "target": "npm:@types/markdown-it",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-markdown",
+    "target": "npm:markdown-it",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-markdown",
+    "target": "npm:prosemirror-model",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-menu",
+    "target": "npm:crelt",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-menu",
+    "target": "npm:prosemirror-commands",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-menu",
+    "target": "npm:prosemirror-history",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-menu",
+    "target": "npm:prosemirror-state",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-model",
+    "target": "npm:orderedmap",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-schema-basic",
+    "target": "npm:prosemirror-model",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-schema-list",
+    "target": "npm:prosemirror-model",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-schema-list",
+    "target": "npm:prosemirror-state",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-schema-list",
+    "target": "npm:prosemirror-transform",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-state",
+    "target": "npm:prosemirror-model",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-state",
+    "target": "npm:prosemirror-transform",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-state",
+    "target": "npm:prosemirror-view",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-transform",
+    "target": "npm:prosemirror-model",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-view",
+    "target": "npm:prosemirror-model",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-view",
+    "target": "npm:prosemirror-state",
+    "type": "static"
+  },
+  {
+    "source": "npm:prosemirror-view",
+    "target": "npm:prosemirror-transform",
     "type": "static"
   },
   {
@@ -18606,17 +18241,7 @@
   },
   {
     "source": "npm:send",
-    "target": "npm:debug@2.6.9",
-    "type": "static"
-  },
-  {
-    "source": "npm:send",
-    "target": "npm:depd",
-    "type": "static"
-  },
-  {
-    "source": "npm:send",
-    "target": "npm:destroy",
+    "target": "npm:debug",
     "type": "static"
   },
   {
@@ -18636,7 +18261,7 @@
   },
   {
     "source": "npm:send",
-    "target": "npm:fresh",
+    "target": "npm:fresh@2.0.0",
     "type": "static"
   },
   {
@@ -18646,7 +18271,7 @@
   },
   {
     "source": "npm:send",
-    "target": "npm:mime@1.6.0",
+    "target": "npm:mime-types@3.0.2",
     "type": "static"
   },
   {
@@ -18670,8 +18295,8 @@
     "type": "static"
   },
   {
-    "source": "npm:debug@2.6.9",
-    "target": "npm:ms@2.0.0",
+    "source": "npm:mime-types@3.0.2",
+    "target": "npm:mime-db@1.54.0",
     "type": "static"
   },
   {
@@ -19516,11 +19141,6 @@
   },
   {
     "source": "npm:terser-webpack-plugin",
-    "target": "npm:webpack",
-    "type": "static"
-  },
-  {
-    "source": "npm:terser-webpack-plugin",
     "target": "npm:@jridgewell/trace-mapping",
     "type": "static"
   },
@@ -19777,11 +19397,6 @@
   {
     "source": "npm:ts-loader",
     "target": "npm:typescript",
-    "type": "static"
-  },
-  {
-    "source": "npm:ts-loader",
-    "target": "npm:webpack",
     "type": "static"
   },
   {
@@ -20677,161 +20292,6 @@
   {
     "source": "npm:wcwidth",
     "target": "npm:defaults",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:@types/eslint-scope",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:@types/estree",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:@types/json-schema",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:@webassemblyjs/ast",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:@webassemblyjs/wasm-edit",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:@webassemblyjs/wasm-parser",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:acorn",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:acorn-import-phases",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:browserslist",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:chrome-trace-event",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:enhanced-resolve",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:es-module-lexer",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:eslint-scope@5.1.1",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:events",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:glob-to-regexp",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:graceful-fs",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:json-parse-even-better-errors",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:loader-runner",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:mime-types",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:neo-async",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:schema-utils@4.3.3",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:tapable",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:terser-webpack-plugin",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:watchpack",
-    "type": "static"
-  },
-  {
-    "source": "npm:webpack",
-    "target": "npm:webpack-sources",
-    "type": "static"
-  },
-  {
-    "source": "npm:eslint-scope@5.1.1",
-    "target": "npm:esrecurse",
-    "type": "static"
-  },
-  {
-    "source": "npm:eslint-scope@5.1.1",
-    "target": "npm:estraverse@4.3.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:schema-utils@4.3.3",
-    "target": "npm:@types/json-schema",
-    "type": "static"
-  },
-  {
-    "source": "npm:schema-utils@4.3.3",
-    "target": "npm:ajv",
-    "type": "static"
-  },
-  {
-    "source": "npm:schema-utils@4.3.3",
-    "target": "npm:ajv-formats",
-    "type": "static"
-  },
-  {
-    "source": "npm:schema-utils@4.3.3",
-    "target": "npm:ajv-keywords",
     "type": "static"
   },
   {
