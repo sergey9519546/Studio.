@@ -9,13 +9,13 @@ interface InputProps<T extends FieldValues = FieldValues>
   icon?: React.ReactNode;
   variant?: 'primary' | 'secondary';
   size?: 'sm' | 'md' | 'lg';
-  control?: any; // React Hook Form control object (if used with useController)
-  name?: string; // If using with React Hook Form
+  control?: any;
+  name?: string;
 }
 
 /**
- * Input component with optional React Hook Form integration
- * Can be used standalone or with useController from react-hook-form
+ * Input component with Liquid Glass aesthetic
+ * No borders. Separation via luminance and spacing.
  */
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
@@ -33,23 +33,23 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ref,
   ) => {
     const baseStyles =
-      'w-full px-4 py-2.5 border rounded-xl text-sm font-medium outline-none transition-all focus:ring-2 focus:ring-offset-1';
+      'w-full rounded-[24px] text-sm font-medium outline-none transition-all focus:ring-2 focus:ring-offset-2 focus:ring-primary/40';
 
     const variantStyles = {
-      primary: `border-border-subtle bg-surface text-ink-primary placeholder-ink-tertiary ${
+      primary: `bg-surface text-ink-primary placeholder-ink-tertiary ${
         error
-          ? 'border-state-danger focus:ring-state-danger/40 focus:border-state-danger'
-          : 'focus:border-primary focus:ring-primary/40'
+          ? 'focus:ring-state-danger/40 focus:bg-danger-bg'
+          : 'focus:bg-subtle focus:ring-primary/40'
       }`,
-      secondary: `border-border-subtle bg-subtle text-ink-primary placeholder-ink-tertiary ${
+      secondary: `bg-subtle text-ink-primary placeholder-ink-tertiary ${
         error
-          ? 'border-state-danger focus:ring-state-danger/40 focus:border-state-danger'
-          : 'focus:border-primary focus:ring-primary/40'
+          ? 'focus:ring-state-danger/40'
+          : 'focus:bg-surface focus:ring-primary/40'
       }`,
     };
 
     const sizeStyles = {
-      sm: 'px-3 py-1.5 text-xs',
+      sm: 'px-3 py-2 text-xs',
       md: 'px-4 py-2.5 text-sm',
       lg: 'px-5 py-3.5 text-base',
     };
@@ -59,7 +59,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const inputClasses = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${disabledStyle} ${className}`;
 
     return (
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         {label && (
           <label className="text-xs font-bold text-ink-secondary uppercase tracking-wide">
             {label}
@@ -67,7 +67,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           </label>
         )}
         <div className="relative flex items-center">
-          {icon && <div className="absolute left-3 text-ink-tertiary pointer-events-none">{icon}</div>}
+          {icon && <div className="absolute left-4 text-ink-tertiary pointer-events-none">{icon}</div>}
           <input
             ref={ref}
             className={`${inputClasses} ${icon ? 'pl-10' : ''}`}
@@ -94,10 +94,6 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
 Input.displayName = 'Input';
 
-/**
- * Input component wrapper for React Hook Form integration
- * Usage: <InputField control={control} name="email" label="Email" rules={{required: "Email is required"}} />
- */
 interface InputFieldProps<T extends FieldValues = FieldValues> extends UseControllerProps<T> {
   label?: string;
   helperText?: string;

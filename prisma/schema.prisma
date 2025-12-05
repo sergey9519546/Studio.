@@ -46,9 +46,9 @@ model Skill {
 
 model Project {
     id               String            @id @default(uuid())
-    title            String // Made required (removed ?)
+    title            String
     description      String?
-    status           String            @default("PLANNED") // Added default
+    status           String            @default("PLANNED")
     startDate        DateTime?
     endDate          DateTime?
     budget           Float?
@@ -58,9 +58,10 @@ model Project {
     knowledgeBase    KnowledgeSource[] @relation("ProjectKnowledgeBase")
     scripts          Script[]
     assignments      Assignment[]
+    moodboardItems   MoodboardItem[]
+    brief            ProjectBrief?
     updatedAt        DateTime          @updatedAt
     createdAt        DateTime          @default(now())
-    moodboardItems   MoodboardItem[]
 
     @@index([status])
     @@index([startDate, endDate])
@@ -166,4 +167,37 @@ model AIUsage {
     @@index([userId])
     @@index([projectId])
     @@map("ai_usage")
+}
+
+// Embeddings for semantic search and RAG
+model Embedding {
+    id            String   @id @default(uuid())
+    type          String   // "moodboard", "brief", "content", etc.
+    sourceId      String   // ID of the source object (MoodboardItem, Project, etc.)
+    projectId     String
+    text          String   // Original text used for embedding
+    embedding     String   // Vector stored as JSON array (pgvector when available)
+    metadata      String?  // Additional metadata as JSON
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    @@index([projectId])
+    @@index([type])
+    @@index([sourceId])
+}
+
+// Project brief with enhanced metadata
+model ProjectBrief {
+    id          String   @id @default(uuid())
+    projectId   String   @unique
+    project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+    content     String   // The actual brief
+    tone        String?  // Brand tone/voice
+    guidelines  String?  // Design/brand guidelines
+    embedding   String?  // Vector embedding for semantic search
+    tags        String?  // Stored as CSV
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    @@index([projectId])
 }

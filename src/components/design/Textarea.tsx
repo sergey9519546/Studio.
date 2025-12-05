@@ -11,8 +11,8 @@ interface TextareaProps
 }
 
 /**
- * Textarea component with optional React Hook Form integration
- * Can be used standalone or with useController from react-hook-form
+ * Textarea component with Liquid Glass aesthetic
+ * No borders. Separation via luminance and spacing.
  */
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
@@ -30,23 +30,23 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     ref,
   ) => {
     const baseStyles =
-      'w-full px-4 py-2.5 border rounded-xl text-sm font-medium outline-none transition-all focus:ring-2 focus:ring-offset-1 resize-none';
+      'w-full rounded-[24px] text-sm font-medium outline-none transition-all focus:ring-2 focus:ring-offset-2 focus:ring-primary/40 resize-none';
 
     const variantStyles = {
-      primary: `border-border-subtle bg-surface text-ink-primary placeholder-ink-tertiary ${error
-          ? 'border-state-danger focus:ring-state-danger/40 focus:border-state-danger'
-          : 'focus:border-primary focus:ring-primary/40'
+      primary: `bg-surface text-ink-primary placeholder-ink-tertiary ${error
+          ? 'focus:ring-state-danger/40 focus:bg-danger-bg'
+          : 'focus:bg-subtle focus:ring-primary/40'
         }`,
-      secondary: `border-border-subtle bg-subtle text-ink-primary placeholder-ink-tertiary ${error
-          ? 'border-state-danger focus:ring-state-danger/40 focus:border-state-danger'
-          : 'focus:border-primary focus:ring-primary/40'
+      secondary: `bg-subtle text-ink-primary placeholder-ink-tertiary ${error
+          ? 'focus:ring-state-danger/40'
+          : 'focus:bg-surface focus:ring-primary/40'
         }`,
     };
 
     const sizeStyles = {
-      sm: 'px-3 py-1.5 text-xs',
-      md: 'px-4 py-2.5 text-sm',
-      lg: 'px-5 py-3.5 text-base',
+      sm: 'px-3 py-2 text-xs',
+      md: 'px-4 py-3 text-sm',
+      lg: 'px-5 py-4 text-base',
     };
 
     const disabledStyle = disabled ? 'opacity-50 cursor-not-allowed bg-subtle' : '';
@@ -54,7 +54,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     const textareaClasses = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${disabledStyle} ${className}`;
 
     return (
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         {label && (
           <label className="text-xs font-bold text-ink-secondary uppercase tracking-wide">
             {label}
@@ -87,10 +87,6 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
 Textarea.displayName = 'Textarea';
 
-/**
- * Textarea component wrapper for React Hook Form integration
- * Usage: <TextareaField control={control} name="description" label="Description" rules={{required: "Description is required"}} />
- */
 interface TextareaFieldProps<T extends FieldValues = FieldValues> extends UseControllerProps<T> {
   label?: string;
   helperText?: string;

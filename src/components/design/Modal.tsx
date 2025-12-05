@@ -23,7 +23,7 @@ interface ModalProps {
 
 /**
  * Modal component for confirmations, alerts, and important user actions
- * Replaces window.confirm() and window.alert()
+ * Liquid Glass aesthetic: no borders, separation via luminance
  */
 export const Modal: React.FC<ModalProps> = ({
   isOpen,
@@ -36,7 +36,6 @@ export const Modal: React.FC<ModalProps> = ({
   icon,
   closeOnBackdropClick = true,
 }) => {
-  // Handle Escape key to close modal
   useEffect(() => {
     if (!isOpen) return;
 
@@ -50,7 +49,6 @@ export const Modal: React.FC<ModalProps> = ({
     return () => window.removeEventListener('keydown', handleEscape);
   }, [isOpen, onClose]);
 
-  // Determine icon and styling based on variant
   const variantConfig = {
     confirm: {
       icon: <CheckCircle size={24} className="text-primary" />,
@@ -72,36 +70,31 @@ export const Modal: React.FC<ModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
         onClick={() => closeOnBackdropClick && onClose()}
       />
 
-      {/* Modal */}
-      <div className="relative z-10 w-full max-w-md bg-surface rounded-2xl shadow-lg border border-border-subtle overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-        {/* Header */}
+      <div className="relative z-10 w-full max-w-md bg-surface rounded-[24px] shadow-ambient overflow-hidden animate-in fade-in zoom-in-95 duration-200">
         <div className={`px-6 py-5 flex items-center gap-4 ${headerClass}`}>
           {icon || variantIcon}
           <h2 className="text-lg font-semibold text-ink-primary">{title}</h2>
           <button
             onClick={onClose}
-            className="ml-auto p-1 hover:bg-white/10 rounded-lg transition-colors text-ink-primary"
+            className="ml-auto p-1 hover:bg-white/10 rounded-[16px] transition-colors text-ink-primary"
             aria-label="Close modal"
           >
             <X size={20} strokeWidth={2} />
           </button>
         </div>
 
-        {/* Body */}
         {description && (
           <div className="px-6 py-4">
             <p className="text-sm text-ink-secondary leading-relaxed">{description}</p>
           </div>
         )}
 
-        {/* Actions */}
-        <div className="px-6 py-4 border-t border-border-subtle flex gap-3 justify-end">
+        <div className="px-6 py-4 bg-subtle flex gap-3 justify-end rounded-b-[24px]">
           {secondaryAction && (
             <Button
               variant={secondaryAction.variant || 'secondary'}

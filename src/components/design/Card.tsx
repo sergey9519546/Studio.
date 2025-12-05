@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface CardProps {
@@ -6,24 +5,26 @@ interface CardProps {
   className?: string;
   noPadding?: boolean;
   hoverable?: boolean;
+  glass?: boolean;
 }
 
 export const Card: React.FC<CardProps> = ({ 
   children, 
   className = '', 
   noPadding = false,
-  hoverable = false
+  hoverable = false,
+  glass = false,
 }) => {
   return (
     <div 
       className={`
-        bg-surface 
-        border border-border-subtle 
-        rounded-2xl 
-        shadow-card
+        bg-surface
+        rounded-[24px]
+        shadow-ambient
         overflow-hidden
         transition-all duration-200
-        ${hoverable ? 'hover:-translate-y-[2px] hover:shadow-lg cursor-pointer' : ''}
+        ${glass ? 'glass' : ''}
+        ${hoverable ? 'hover:-translate-y-0.5 hover:shadow-float cursor-pointer' : ''}
         ${className}
       `}
     >

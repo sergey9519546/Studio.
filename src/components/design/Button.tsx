@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Loader2 } from 'lucide-react';
 
@@ -19,26 +18,22 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = "relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out rounded-xl disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-1 active:scale-[0.98]";
+  const baseStyles = "relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out rounded-[24px] disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98]";
   
   const sizeStyles = {
-    sm: "px-3 py-1.5 text-xs tracking-wide",
-    md: "px-5 py-2.5 text-sm",
-    lg: "px-6 py-3.5 text-base",
+    sm: "px-4 py-2 text-sm",
+    md: "px-6 py-2.5 text-sm",
+    lg: "px-8 py-3 text-base",
   };
 
-  // The Rival Design Variants - Enhanced with better hover states
   const variants = {
-    primary: "bg-primary hover:bg-primary-hover text-ink-inverse shadow-sm hover:shadow-lg hover:-translate-y-[1px] focus:ring-primary/40 border border-transparent",
+    primary: "bg-primary hover:bg-primary-hover text-ink-inverse shadow-ambient hover:shadow-float hover:-translate-y-0.5 focus:ring-primary/40",
     
-    // Secondary: Subtle border, clean interaction
-    secondary: "bg-surface border border-border-subtle text-ink-primary hover:bg-subtle/50 hover:border-border-hover hover:shadow-md focus:ring-border-subtle shadow-sm",
+    secondary: "bg-surface text-ink-primary hover:bg-subtle shadow-ambient hover:shadow-float focus:ring-primary/20",
     
-    // Ghost: For unobtrusive actions
-    ghost: "bg-transparent text-ink-secondary hover:text-ink-primary hover:bg-subtle/50 rounded-lg",
+    ghost: "bg-transparent text-ink-secondary hover:text-ink-primary hover:bg-subtle rounded-[24px]",
 
-    // Danger: Critical actions
-    danger: "bg-state-danger text-white hover:bg-red-700 shadow-sm hover:shadow-lg hover:-translate-y-[1px] focus:ring-red-500/40",
+    danger: "bg-state-danger text-white hover:bg-red-700 shadow-ambient hover:shadow-float hover:-translate-y-0.5 focus:ring-red-500/40",
   };
 
   return (

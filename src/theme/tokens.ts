@@ -1,94 +1,106 @@
-
 /**
- * RIVAL DESIGN SYSTEM TOKENS
- * "Apple's cooler, slightly more dangerous cousin."
+ * LIQUID GLASS DESIGN SYSTEM
+ * "Weightless. Luminous. Reductionist."
  * 
- * Aesthetic: Ultra-clean light mode. 90% Neutral, 10% Accent.
- * Editorial typography, subtle gradients, high-end feel.
+ * Aesthetic: Swiss International + Apple precision. Ultra-high luminance.
+ * The interface is engineered as a state of flow.
  */
 
 export const colors = {
-  // Neutrals (Light Mode)
+  // THE CANVAS (Luminance)
   bg: {
-    app: '#F6F6FA',      // The main canvas. Not pure white.
-    surface: '#FFFFFF',  // Cards, sheets, modals.
-    subtle: '#ECEEF5',   // Sidebars, muted blocks.
+    app: '#F5F5F7',      // System Mist. The infinite void.
+    surface: '#FFFFFF',  // Porcelain. Cards sit *on* the mist.
+    subtle: '#F9F9FB',   // Subdued backgrounds for container nesting.
   },
   border: {
-    subtle: '#D6D8E2',   // The delicate structural line.
-    hover: '#B0B5C8',    // Slightly darker for interactions.
+    subtle: '#E5E5EA',   // Delicate structural lines (use sparingly).
+    hover: '#D1D1D6',    // Slightly darker for interactions.
   },
   text: {
-    primary: '#101118',  // Near black, softer than #000.
-    secondary: '#5D6070',// High readability gray.
-    tertiary: '#8F93A3', // Placeholders, disabled.
-    inverse: '#FFFFFF',  // Text on primary actions.
+    primary: '#1D1D1F',  // Obsidian. Primary data.
+    secondary: '#86868B', // Slate. Metadata, secondary information.
+    tertiary: '#A2A2A7', // Tertiary. Placeholders, disabled.
+    inverse: '#FFFFFF',  // Inverse text on primary actions.
   },
 
-  // Primary Accent (Rival Blue)
+  // PRIMARY ACCENT (Rival Blue)
   accent: {
     primary: '#2463E6',      // Main brand color.
     primaryHover: '#1E4EC8', // Interaction state.
     tint: '#E1EBFF',         // Subtlety (chips, active backgrounds).
   },
 
-  // The "Dangerous Edge" (Gradients & Highlights)
+  // THE "DANGEROUS EDGE" (Gradients & Highlights)
   edge: {
     teal: '#18C9AE',    // Intelligence, Freshness
     magenta: '#E14BF7', // Creative spark, AI
     gradient: 'linear-gradient(90deg, #2463E6 0%, #18C9AE 50%, #E14BF7 100%)',
   },
 
-  // Semantic States
+  // SEMANTIC STATES
   state: {
-    success: '#16A34A',
-    successBg: '#E6F9EC',
-    warning: '#D97706',
-    warningBg: '#FFF4DE',
-    danger: '#DC2626',
-    dangerBg: '#FDE4E4',
+    success: '#34C759',
+    successBg: '#E8F5E9',
+    warning: '#FF9500',
+    warningBg: '#FFF3E0',
+    danger: '#FF3B30',
+    dangerBg: '#FFEBEE',
   }
 } as const;
 
 export const typography = {
   fontFamily: {
     sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-    display: ['SF Pro Display', 'Inter', 'sans-serif'], // Use Space Grotesk if available
+    display: ['SF Pro Display', 'Inter', 'sans-serif'],
     mono: ['SF Mono', 'IBM Plex Mono', 'monospace'],
   },
   letterSpacing: {
     tight: '-0.02em',
     tighter: '-0.04em',
     wide: '0.02em',
-    widest: '0.08em', // For uppercase labels
+    widest: '0.08em',
   }
 } as const;
 
 export const spacing = {
-  tight: '1rem',      // 16px - chips, badges, compact cards
-  base: '1.5rem',     // 24px - standard cards, modals
-  spacious: '2rem',   // 32px - page containers
-  hero: '3rem',       // 48px - landing sections
+  tight: '1rem',      // 16px
+  base: '1.5rem',     // 24px
+  spacious: '2rem',   // 32px
+  hero: '3rem',       // 48px
 } as const;
 
 export const radii = {
-  sm: '6px',
-  md: '12px', // Standard card radius
-  lg: '16px', // Modal radius
+  sm: '8px',
+  md: '12px',
+  lg: '16px',
+  xl: '24px',         // Squircles. The preferred radius.
   pill: '9999px',
 } as const;
 
 export const shadows = {
-  subtle: '0 1px 2px rgba(0,0,0,0.04)',
-  card: '0 4px 12px rgba(16, 17, 24, 0.04)',
-  float: '0 12px 32px rgba(16, 17, 24, 0.08)',
-  lg: '0 10px 40px rgba(16, 17, 24, 0.1)',
-  glow: '0 0 20px rgba(36, 99, 230, 0.15)',
+  ambient: '0px 10px 40px rgba(0,0,0,0.04)', // Ambient Levitation. Primary shadow.
+  subtle: '0px 1px 2px rgba(0,0,0,0.05)',
+  card: '0px 4px 12px rgba(0,0,0,0.06)',
+  float: '0px 12px 32px rgba(0,0,0,0.08)',
+  glow: '0px 0px 20px rgba(36, 99, 230, 0.15)',
 } as const;
 
 export const transitions = {
-  fast: '150ms',
-  base: '200ms',
-  slow: '300ms',
-  slower: '500ms',
+  fast: '150ms cubic-bezier(0.16, 1, 0.3, 1)',
+  base: '200ms cubic-bezier(0.16, 1, 0.3, 1)',
+  slow: '300ms cubic-bezier(0.16, 1, 0.3, 1)',
+  slower: '500ms cubic-bezier(0.16, 1, 0.3, 1)',
+} as const;
+
+// LIQUID GLASS MATERIAL
+export const glass = {
+  backdrop: {
+    filter: 'blur(20px) saturate(180%)',
+    background: 'rgba(255, 255, 255, 0.75)',
+  },
+  backdropDark: {
+    filter: 'blur(20px) saturate(150%)',
+    background: 'rgba(29, 29, 31, 0.7)',
+  },
 } as const;

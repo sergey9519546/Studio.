@@ -1,6 +1,5 @@
-
 /** @type {import('tailwindcss').Config} */
-const { colors, typography, radii, shadows } = require('./src/theme/tokens'); // Adjust path if necessary based on build
+const { colors, typography, radii, shadows, glass } = require('./src/theme/tokens');
 
 module.exports = {
   content: [
@@ -10,16 +9,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Mapping tokens to Tailwind classes
+        // App structure
         app: colors.bg.app,
         surface: colors.bg.surface,
         subtle: colors.bg.subtle,
         
+        // Borders
         border: {
           subtle: colors.border.subtle,
           hover: colors.border.hover,
         },
 
+        // Typography
         ink: {
           primary: colors.text.primary,
           secondary: colors.text.secondary,
@@ -27,6 +28,7 @@ module.exports = {
           inverse: colors.text.inverse,
         },
 
+        // Accents
         primary: {
           DEFAULT: colors.accent.primary,
           hover: colors.accent.primaryHover,
@@ -38,6 +40,7 @@ module.exports = {
           magenta: colors.edge.magenta,
         },
 
+        // Semantic states
         state: {
           success: colors.state.success,
           'success-bg': colors.state.successBg,
@@ -56,14 +59,14 @@ module.exports = {
         '3xl': '1.5rem',
       },
       boxShadow: {
-        ...shadows,
-        'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-        'md': '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-        'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
-        'xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+        ambient: shadows.ambient,
+        subtle: shadows.subtle,
+        card: shadows.card,
+        float: shadows.float,
+        glow: shadows.glow,
       },
       backgroundImage: {
-        'rival-gradient': 'linear-gradient(90deg, #2463E6 0%, #18C9AE 50%, #E14BF7 100%)',
+        'rival-gradient': colors.edge.gradient,
       },
       transitionDuration: {
         '200': '200ms',
@@ -76,8 +79,44 @@ module.exports = {
         '2': '0.5rem',
         '2.5': '0.625rem',
         '3': '0.75rem',
-      }
+      },
+      backdropFilter: {
+        'glass': 'blur(20px) saturate(180%)',
+      },
+      backgroundColor: {
+        'glass': glass.backdrop.background,
+        'glass-dark': glass.backdropDark.background,
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.glass': {
+          backdropFilter: glass.backdrop.filter,
+          backgroundColor: glass.backdrop.background,
+          borderRadius: radii.xl,
+        },
+        '.glass-dark': {
+          backdropFilter: glass.backdropDark.filter,
+          backgroundColor: glass.backdropDark.background,
+          borderRadius: radii.xl,
+        },
+        '.glass-sm': {
+          backdropFilter: glass.backdrop.filter,
+          backgroundColor: glass.backdrop.background,
+          borderRadius: radii.md,
+        },
+        '.text-primary': {
+          color: colors.text.primary,
+        },
+        '.text-secondary': {
+          color: colors.text.secondary,
+        },
+        '.text-tertiary': {
+          color: colors.text.tertiary,
+        },
+      });
+    },
+  ],
 }
