@@ -1,20 +1,20 @@
-import { IsString, IsOptional, IsUUID } from 'class-validator';
+import { IsOptional, IsString, IsUUID } from "class-validator";
 
 // Script schema only has: id, content, projectId (no title or tags)
 export class CreateScriptDto {
-    @IsString()
-    content: string;
+  @IsString()
+  content!: string;
 
-    @IsUUID()
-    projectId: string;
+  @IsUUID()
+  projectId!: string;
 }
 
 export class UpdateScriptDto {
-    @IsOptional()
-    @IsString()
-    content?: string;
+  @IsOptional()
+  @IsString()
+  content?: string;
 
-    @IsOptional()
-    @IsUUID()
-    projectId?: string;
+  @IsOptional()
+  @IsUUID()
+  projectId?: string;
 }

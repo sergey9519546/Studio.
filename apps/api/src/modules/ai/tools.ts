@@ -13,7 +13,7 @@ export const getTools = (prisma: PrismaService) => [
       },
       required: ['title', 'description', 'budget'],
     },
-    function: async ({ title, description, budget }) => {
+    function: async ({ title, description, budget }: { title: string; description: string; budget: number }) => {
       const project = await prisma.project.create({
         data: {
           title,
@@ -36,7 +36,7 @@ export const getTools = (prisma: PrismaService) => [
       },
       required: ['projectId', 'freelancerId', 'role'],
     },
-    function: async ({ projectId, freelancerId, role }) => {
+    function: async ({ projectId, freelancerId, role }: { projectId: string; freelancerId: string; role: string }) => {
       const assignment = await prisma.assignment.create({
         data: {
           projectId,

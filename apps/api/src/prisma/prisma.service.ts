@@ -15,7 +15,6 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
       // Prisma 7: Use pg driver adapter for direct PostgreSQL connection
       const pool = new Pool({ connectionString });
       const adapter = new PrismaPg(pool);
-      // @ts-expect-error - Prisma 7 adapter type not yet in official types
       super({ adapter });
       this.logger = new Logger(PrismaService.name);
       // Store pool reference for cleanup

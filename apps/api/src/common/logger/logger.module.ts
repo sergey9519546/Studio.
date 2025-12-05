@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { LoggerModule as PinoLoggerModule } from 'nestjs-pino';
-import { Request } from 'express';
+import { IncomingMessage, ServerResponse } from 'http';
 
 @Module({
     imports: [
@@ -19,15 +19,15 @@ import { Request } from 'express';
                             },
                         }
                         : undefined,
-                customProps: (req: Request) => ({
+                customProps: (req: IncomingMessage, res: ServerResponse) => ({
                     userId: (req as any).user?.id,
                 }),
                 serializers: {
                     req: (req) => ({
                         method: req.method,
                         url: req.url,
-                        params: req.params,
-                        query: req.query,
+                        params: (req as any).params,
+                        query: (req as any).query,
                     }),
                     res: (res) => ({
                         statusCode: res.statusCode,

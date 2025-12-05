@@ -2,19 +2,19 @@ import { IsString, IsDateString, IsEnum, IsNumber, IsOptional, Min, Max } from '
 
 export class CreateAssignmentDto {
     @IsString()
-    projectId: string;
+    projectId!: string;
 
     @IsString()
-    freelancerId: string;
+    freelancerId!: string;
 
     @IsString()
-    role: string;
+    role!: string;
 
     @IsDateString()
-    startDate: string;
+    startDate!: string;
 
     @IsDateString()
-    endDate: string;
+    endDate!: string;
 
     @IsOptional()
     @IsNumber()

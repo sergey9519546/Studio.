@@ -1,5 +1,12 @@
 
-import { IsEnum, IsString, IsUrl, IsOptional, IsNumber, IsBoolean } from 'class-validator';
+import {
+  IsBoolean,
+  IsEnum,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUrl,
+} from "class-validator";
 
 export enum CloudProviderType {
   GOOGLE_DRIVE = 'google_drive',
@@ -15,16 +22,16 @@ export enum CloudFileType {
 
 export class CloudProviderOptionDto {
   @IsEnum(CloudProviderType)
-  id: CloudProviderType;
+  id!: CloudProviderType;
 
   @IsString()
-  name: string;
+  name!: string;
 
   @IsUrl()
-  iconUrl: string;
+  iconUrl!: string;
 
   @IsBoolean()
-  isConnected: boolean;
+  isConnected!: boolean;
 
   @IsOptional()
   @IsUrl()
@@ -33,19 +40,19 @@ export class CloudProviderOptionDto {
 
 export class CloudFileDto {
   @IsString()
-  id: string;
+  id!: string;
 
   @IsString()
-  name: string;
+  name!: string;
 
   @IsEnum(CloudFileType)
-  type: CloudFileType;
+  type!: CloudFileType;
 
   @IsString()
-  provider: CloudProviderType;
+  provider!: CloudProviderType;
 
   @IsString()
-  mimeType: string;
+  mimeType!: string;
 
   @IsOptional()
   @IsNumber()
@@ -60,7 +67,7 @@ export class CloudFileDto {
   webViewUrl?: string;
 
   @IsString()
-  updatedAt: string;
+  updatedAt!: string;
 }
 
 export class ListFilesQueryDto {

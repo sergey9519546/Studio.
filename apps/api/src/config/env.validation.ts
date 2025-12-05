@@ -13,10 +13,10 @@ class EnvironmentVariables {
     NODE_ENV: Environment = Environment.Development;
 
     @IsString()
-    DATABASE_URL: string;
+    DATABASE_URL!: string;
 
     @IsString()
-    JWT_SECRET: string;
+    JWT_SECRET!: string;
 
     // GCP_PROJECT_ID is optional - can fall back to GOOGLE_CLOUD_PROJECT (set by Cloud Run)
     @IsOptional()

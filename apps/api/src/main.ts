@@ -6,7 +6,7 @@ import { AuthService } from './modules/auth/auth.service';
 import { HttpAdapterHost } from '@nestjs/core';
 import helmet from 'helmet';
 import compression from 'compression';
-// import { Logger } from 'nestjs-pino'; // TEMPORARILY DISABLED
+import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
   console.log('🚀 Starting bootstrap...');
@@ -15,31 +15,50 @@ async function bootstrap() {
   });
   console.log('✅ NestFactory.create completed');
 
-  // Use Pino logger - TEMPORARILY DISABLED to diagnose startup issue
-  // app.useLogger(app.get(Logger));
+  // Use Pino logger for structured logging
+  app.useLogger(app.get(Logger));
 
-  // Security: Helmet middleware for security headers
+  // Security: Helmet middleware for security headers with STRICT CSP
   app.use(helmet({
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
         styleSrc: [
           "'self'",
-          "'unsafe-inline'",
-          'https://fonts.googleapis.com',
+          "'unsafe-inline'", // Required for some UI frameworks - REVIEW AND REMOVE IF POSSIBLE
+          'https://fonts.googleapis.com', // Required for Google Fonts
         ],
         fontSrc: [
           "'self'",
-          'https://fonts.gstatic.com',
-          'data:',
+          'https://fonts.gstatic.com', // Required for Google Fonts
+          'data:', // Required for base64 encoded fonts
         ],
         scriptSrc: [
           "'self'",
-          'https://cdn.tailwindcss.com',
+          // Remove unsafe external CDNs for production
+          ...(process.env.NODE_ENV !== 'production' ? ['https://cdn.tailwindcss.com'] : []),
         ],
-        imgSrc: ["'self'", 'data:', 'https:'],
+        imgSrc: [
+          "'self'",
+          'data:', // Required for base64 images
+          'https:', // Required for external images (profiles, assets, etc.)
+        ],
+        connectSrc: [
+          "'self'",
+          // Add any external APIs your app needs to connect to
+          'https://*.googleapis.com', // For Google APIs
+        ],
+        upgradeInsecureRequests: [], // Force HTTPS in production
       },
     },
+    hsts: {
+      maxAge: 31536000, // 1 year
+      includeSubDomains: true,
+      preload: true,
+    },
+    noSniff: true,
+    xssFilter: true,
+    referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
   }));
 
   // Performance: Response compression
@@ -58,10 +77,17 @@ async function bootstrap() {
   const httpAdapterHost = app.get(HttpAdapterHost);
   app.useGlobalFilters(new AllExceptionsFilter(httpAdapterHost));
 
-  // CORS configuration
+  // CORS configuration - STRICT MODE: Only allow specific origins in production
+  const corsOrigins = process.env.NODE_ENV === 'production'
+    ? (process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [])
+    : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:8080'];
+
   app.enableCors({
-    origin: process.env.FRONTEND_URL || '*',
+    origin: corsOrigins,
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    maxAge: 86400, // 24 hours
   });
 
   // Seed admin user on startup (only if no users exist)

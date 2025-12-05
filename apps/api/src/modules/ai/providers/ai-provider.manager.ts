@@ -96,7 +96,8 @@ export class AIProviderManager {
             try {
                 costs[name] = provider.estimateCost(inputTokens, outputTokens);
             } catch (error) {
-                this.logger.warn(`Cost estimation failed for ${name}: ${error.message}`);
+                const message = error instanceof Error ? error.message : 'Unknown error';
+                this.logger.warn(`Cost estimation failed for ${name}: ${message}`);
             }
         }
 

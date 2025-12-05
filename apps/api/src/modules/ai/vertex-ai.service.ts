@@ -78,7 +78,8 @@ export class VertexAIService {
 
             return textValue;
         } catch (error) {
-            this.logger.error(`Vertex AI generation failed: ${error.message}`, error.stack);
+            const message = error instanceof Error ? error.message : 'Unknown Vertex AI error';
+            this.logger.error(`Vertex AI generation failed: ${message}`, error instanceof Error ? error.stack : undefined);
             throw error;
         }
     }

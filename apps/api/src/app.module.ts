@@ -50,10 +50,33 @@ const staticRoot = staticCandidates.find(p => existsSync(p));
     EventEmitterModule.forRoot({
       global: true,
     }),
-    ThrottlerModule.forRoot([{
-      ttl: 60000, // 60 seconds
-      limit: 100, // 100 requests per ttl window
-    }]),
+    // STRENGTHENED RATE LIMITING: Progressive tiers for different auth levels
+    ThrottlerModule.forRoot([
+      {
+        // Global fallback: strict limits for unauthenticated users
+        name: 'global',
+        ttl: 60000, // 60 seconds
+        limit: 30, // 30 requests per minute (from 100)
+      },
+      {
+        // Tier 1: Registered users get higher limits
+        name: 'authenticated',
+        ttl: 60000,
+        limit: 50, // 50 requests per minute
+      },
+      {
+        // Tier 2: Premium users (if implemented later)
+        name: 'premium',
+        ttl: 60000,
+        limit: 100,
+      },
+      {
+        // Special tier: Very restrictive for AI operations
+        name: 'ai-operations',
+        ttl: 60000,
+        limit: 20, // Very restrictive for costly AI calls
+      }
+    ]),
     ...(staticRoot ? [ServeStaticModule.forRoot({
       rootPath: staticRoot,
       exclude: ['/api/(.*)'],

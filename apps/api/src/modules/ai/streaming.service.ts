@@ -44,8 +44,9 @@ export class StreamingService {
                 yield { text: JSON.stringify(response), done: true };
             }
         } catch (error) {
-            this.logger.error(`Streaming error: ${error.message}`);
-            yield { text: '', done: true, error: error.message };
+            const message = error instanceof Error ? error.message : 'Unknown streaming error';
+            this.logger.error(`Streaming error: ${message}`);
+            yield { text: '', done: true, error: message };
         }
     }
 
