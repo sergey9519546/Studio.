@@ -6,6 +6,11 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { getTools } from './tools';
 import { createHash } from 'crypto';
 
+export interface ToolCall {
+  name: string;
+  args: Record<string, unknown>;
+}
+
 @Injectable()
 export class GeminiAnalystService {
   private readonly logger = new Logger(GeminiAnalystService.name);
@@ -22,7 +27,7 @@ export class GeminiAnalystService {
   /**
    * Chat with context (cached for common queries)
    */
-  async chat(context: string, messages: Array<{ role: string; content: string }> = []): Promise<string | { toolCalls: any[] }> {
+  async chat(context: string, messages: Array<{ role: string; content: string }> = []): Promise<string | { toolCalls: ToolCall[] }> {
     // Create cache key from context + messages
     const cacheKey = `ai:chat:${this.hashContent(context + JSON.stringify(messages))}`;
 
@@ -30,7 +35,7 @@ export class GeminiAnalystService {
     const cached = await this.cache.get(cacheKey);
     if (cached) {
       this.logger.debug('Chat cache HIT');
-      return cached as string | { toolCalls: any[] };
+      return cached as string | { toolCalls: ToolCall[] };
     }
 
     this.logger.debug('Chat cache MISS');

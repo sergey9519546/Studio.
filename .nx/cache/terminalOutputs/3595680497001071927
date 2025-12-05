@@ -1,0 +1,267 @@
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+ts-jest[config] (WARN) 
+    The "ts-jest" config option "isolatedModules" is deprecated and will be removed in v30.0.0. Please use "isolatedModules: true" in C:/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules
+  
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+ts-jest[config] (WARN) 
+    The "ts-jest" config option "isolatedModules" is deprecated and will be removed in v30.0.0. Please use "isolatedModules: true" in C:/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules
+  
+ts-jest[config] (WARN) 
+    The "ts-jest" config option "isolatedModules" is deprecated and will be removed in v30.0.0. Please use "isolatedModules: true" in C:/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules
+  
+ts-jest[config] (WARN) 
+    The "ts-jest" config option "isolatedModules" is deprecated and will be removed in v30.0.0. Please use "isolatedModules: true" in C:/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules
+  
+ts-jest[config] (WARN) 
+    The "ts-jest" config option "isolatedModules" is deprecated and will be removed in v30.0.0. Please use "isolatedModules: true" in C:/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules
+  
+ts-jest[config] (WARN) 
+    The "ts-jest" config option "isolatedModules" is deprecated and will be removed in v30.0.0. Please use "isolatedModules: true" in C:/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules
+  
+ts-jest[config] (WARN) 
+    The "ts-jest" config option "isolatedModules" is deprecated and will be removed in v30.0.0. Please use "isolatedModules: true" in C:/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules
+  
+ts-jest[config] (WARN) 
+    The "ts-jest" config option "isolatedModules" is deprecated and will be removed in v30.0.0. Please use "isolatedModules: true" in C:/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules
+  
+ts-jest[config] (WARN) 
+    The "ts-jest" config option "isolatedModules" is deprecated and will be removed in v30.0.0. Please use "isolatedModules: true" in C:/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules
+  
+ts-jest[config] (WARN) 
+    The "ts-jest" config option "isolatedModules" is deprecated and will be removed in v30.0.0. Please use "isolatedModules: true" in C:/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules
+  
+ts-jest[config] (WARN) 
+    The "ts-jest" config option "isolatedModules" is deprecated and will be removed in v30.0.0. Please use "isolatedModules: true" in C:/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules
+  
+ts-jest[config] (WARN) 
+    The "ts-jest" config option "isolatedModules" is deprecated and will be removed in v30.0.0. Please use "isolatedModules: true" in C:/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules
+  
+ts-jest[config] (WARN) 
+    The "ts-jest" config option "isolatedModules" is deprecated and will be removed in v30.0.0. Please use "isolatedModules: true" in C:/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/tsconfig.json instead, see https://www.typescriptlang.org/tsconfig/#isolatedModules
+  
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/freelancers/[22m[1mfreelancers.service.spec.ts[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/prisma/[22m[1mprisma.service.spec.ts[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/projects/[22m[1mprojects.service.spec.ts[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/auth/[22m[1mauth.service.spec.ts[22m
+[31m[Nest] 45716  - [39m12/05/2025, 1:29:54 AM [31m  ERROR[39m [38;5;3m[EmbeddingsService] [39m[31mFailed to generate embedding[39m
+[31m[Nest] 45716  - [39m12/05/2025, 1:29:54 AM [31m  ERROR[39m [38;5;3m[EmbeddingsService] [39m[31mError: boom[39m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/rag/[22m[1membeddings.service.spec.ts[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/services/[22m[1mgemini-analyst.service.spec.ts[22m
+[31m[Nest] 20500  - [39m12/05/2025, 1:29:54 AM [31m  ERROR[39m [38;5;3m[DataExtractorService] [39m[31mDoc extraction failed: API Error[39m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/google/[22m[1mdata-extractor.service.spec.ts[22m
+[31m[Nest] 33552  - [39m12/05/2025, 1:29:54 AM [31m  ERROR[39m [38;5;3m[DriveService] [39m[31mFailed to list team assets: Drive API error[39m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/google/[22m[1mdrive.service.spec.ts[22m
+[31m[Nest] 45928  - [39m12/05/2025, 1:29:54 AM [31m  ERROR[39m [38;5;3m[GoogleClientFactory] [39m[31mAttempted to use Service Account but it is not configured.[39m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/google/[22m[1mgoogle-client.factory.spec.ts[22m
+[31m[Nest] 19832  - [39m12/05/2025, 1:29:54 AM [31m  ERROR[39m [38;5;3m[SheetIngestorService] [39m[31mFailed to ingest sheet file-123: No visible sheets found in document.[39m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/google/[22m[1msheet-ingestor.service.spec.ts[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/ai/[22m[1mai.controller.spec.ts[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/integrations/cloud-storage/[22m[1mcloud-storage.spec.ts[22m
+[0m[7m[1m[31m FAIL [39m[22m[27m[0m [2mapps/api/src/modules/ai/[22m[1mai.controller.contract.spec.ts[22m
+[1m[31m  [1m● [22m[1mAI API Contract Tests (NestJS) › Version 1 Endpoints › POST /v1/ai/status - contract validation[39m[22m
+
+    TypeError: Cannot read properties of undefined (reading '__internal')
+[2m[22m
+[2m    [0m [90m 22 |[39m     } [36melse[39m {[22m
+[2m     [90m 23 |[39m       [90m// Fallback for environments without DATABASE_URL[39m[22m
+[2m    [31m[1m>[22m[2m[39m[90m 24 |[39m       [36msuper[39m()[33m;[39m[22m
+[2m     [90m    |[39m       [31m[1m^[22m[2m[39m[22m
+[2m     [90m 25 |[39m       [36mthis[39m[33m.[39mlogger [33m=[39m [36mnew[39m [33mLogger[39m([33mPrismaService[39m[33m.[39mname)[33m;[39m[22m
+[2m     [90m 26 |[39m     }[22m
+[2m     [90m 27 |[39m   }[0m[22m
+[2m[22m
+[2m      [2mat new t ([22m[2m../../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts[2m:239:27)[22m[2m[22m
+[2m      [2mat new PrismaService ([22m[2mprisma/prisma.service.ts[2m:24:7)[22m[2m[22m
+[2m      [2mat TestingInjector.instantiateClass ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:373:19)[22m[2m[22m
+[2m      [2mat callback ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:65:45)[22m[2m[22m
+[2m      [2mat TestingInjector.resolveConstructorParams ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:145:24)[22m[2m[22m
+[2m      [2mat TestingInjector.loadInstance ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:70:13)[22m[2m[22m
+[2m      [2mat TestingInjector.loadProvider ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:98:9)[22m[2m[22m
+[2m      [2mat [22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:56:13[22m[2m[22m
+[2m          at async Promise.all (index 3)[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfProviders ([22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:55:9)[22m[2m[22m
+[2m      [2mat [22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:40:13[22m[2m[22m
+[2m          at async Promise.all (index 17)[22m
+[2m      [2mat TestingInstanceLoader.createInstances ([22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:39:9)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:22:13)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../../node_modules/@nestjs/testing/testing-instance-loader.js[2m:9:9)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.createInstancesOfDependencies ([22m[2m../../../node_modules/@nestjs/testing/testing-module.builder.js[2m:118:9)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.compile ([22m[2m../../../node_modules/@nestjs/testing/testing-module.builder.js[2m:74:9)[22m[2m[22m
+[2m      [2mat Object.<anonymous> ([22m[2m[0m[36mmodules/ai/ai.controller.contract.spec.ts[39m[0m[2m:11:42)[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mAI API Contract Tests (NestJS) › Version 1 Endpoints › POST /v1/ai/chat - contract validation[39m[22m
+
+    TypeError: Cannot read properties of undefined (reading '__internal')
+[2m[22m
+[2m    [0m [90m 22 |[39m     } [36melse[39m {[22m
+[2m     [90m 23 |[39m       [90m// Fallback for environments without DATABASE_URL[39m[22m
+[2m    [31m[1m>[22m[2m[39m[90m 24 |[39m       [36msuper[39m()[33m;[39m[22m
+[2m     [90m    |[39m       [31m[1m^[22m[2m[39m[22m
+[2m     [90m 25 |[39m       [36mthis[39m[33m.[39mlogger [33m=[39m [36mnew[39m [33mLogger[39m([33mPrismaService[39m[33m.[39mname)[33m;[39m[22m
+[2m     [90m 26 |[39m     }[22m
+[2m     [90m 27 |[39m   }[0m[22m
+[2m[22m
+[2m      [2mat new t ([22m[2m../../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts[2m:239:27)[22m[2m[22m
+[2m      [2mat new PrismaService ([22m[2mprisma/prisma.service.ts[2m:24:7)[22m[2m[22m
+[2m      [2mat TestingInjector.instantiateClass ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:373:19)[22m[2m[22m
+[2m      [2mat callback ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:65:45)[22m[2m[22m
+[2m      [2mat TestingInjector.resolveConstructorParams ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:145:24)[22m[2m[22m
+[2m      [2mat TestingInjector.loadInstance ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:70:13)[22m[2m[22m
+[2m      [2mat TestingInjector.loadProvider ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:98:9)[22m[2m[22m
+[2m      [2mat [22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:56:13[22m[2m[22m
+[2m          at async Promise.all (index 3)[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfProviders ([22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:55:9)[22m[2m[22m
+[2m      [2mat [22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:40:13[22m[2m[22m
+[2m          at async Promise.all (index 17)[22m
+[2m      [2mat TestingInstanceLoader.createInstances ([22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:39:9)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:22:13)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../../node_modules/@nestjs/testing/testing-instance-loader.js[2m:9:9)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.createInstancesOfDependencies ([22m[2m../../../node_modules/@nestjs/testing/testing-module.builder.js[2m:118:9)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.compile ([22m[2m../../../node_modules/@nestjs/testing/testing-module.builder.js[2m:74:9)[22m[2m[22m
+[2m      [2mat Object.<anonymous> ([22m[2m[0m[36mmodules/ai/ai.controller.contract.spec.ts[39m[0m[2m:11:42)[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mAI API Contract Tests (NestJS) › API Versioning Infrastructure › Versioning middleware enabled[39m[22m
+
+    TypeError: Cannot read properties of undefined (reading '__internal')
+[2m[22m
+[2m    [0m [90m 22 |[39m     } [36melse[39m {[22m
+[2m     [90m 23 |[39m       [90m// Fallback for environments without DATABASE_URL[39m[22m
+[2m    [31m[1m>[22m[2m[39m[90m 24 |[39m       [36msuper[39m()[33m;[39m[22m
+[2m     [90m    |[39m       [31m[1m^[22m[2m[39m[22m
+[2m     [90m 25 |[39m       [36mthis[39m[33m.[39mlogger [33m=[39m [36mnew[39m [33mLogger[39m([33mPrismaService[39m[33m.[39mname)[33m;[39m[22m
+[2m     [90m 26 |[39m     }[22m
+[2m     [90m 27 |[39m   }[0m[22m
+[2m[22m
+[2m      [2mat new t ([22m[2m../../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts[2m:239:27)[22m[2m[22m
+[2m      [2mat new PrismaService ([22m[2mprisma/prisma.service.ts[2m:24:7)[22m[2m[22m
+[2m      [2mat TestingInjector.instantiateClass ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:373:19)[22m[2m[22m
+[2m      [2mat callback ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:65:45)[22m[2m[22m
+[2m      [2mat TestingInjector.resolveConstructorParams ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:145:24)[22m[2m[22m
+[2m      [2mat TestingInjector.loadInstance ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:70:13)[22m[2m[22m
+[2m      [2mat TestingInjector.loadProvider ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:98:9)[22m[2m[22m
+[2m      [2mat [22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:56:13[22m[2m[22m
+[2m          at async Promise.all (index 3)[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfProviders ([22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:55:9)[22m[2m[22m
+[2m      [2mat [22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:40:13[22m[2m[22m
+[2m          at async Promise.all (index 17)[22m
+[2m      [2mat TestingInstanceLoader.createInstances ([22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:39:9)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:22:13)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../../node_modules/@nestjs/testing/testing-instance-loader.js[2m:9:9)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.createInstancesOfDependencies ([22m[2m../../../node_modules/@nestjs/testing/testing-module.builder.js[2m:118:9)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.compile ([22m[2m../../../node_modules/@nestjs/testing/testing-module.builder.js[2m:74:9)[22m[2m[22m
+[2m      [2mat Object.<anonymous> ([22m[2m[0m[36mmodules/ai/ai.controller.contract.spec.ts[39m[0m[2m:11:42)[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mAI API Contract Tests (NestJS) › API Versioning Infrastructure › Default version fallback[39m[22m
+
+    TypeError: Cannot read properties of undefined (reading '__internal')
+[2m[22m
+[2m    [0m [90m 22 |[39m     } [36melse[39m {[22m
+[2m     [90m 23 |[39m       [90m// Fallback for environments without DATABASE_URL[39m[22m
+[2m    [31m[1m>[22m[2m[39m[90m 24 |[39m       [36msuper[39m()[33m;[39m[22m
+[2m     [90m    |[39m       [31m[1m^[22m[2m[39m[22m
+[2m     [90m 25 |[39m       [36mthis[39m[33m.[39mlogger [33m=[39m [36mnew[39m [33mLogger[39m([33mPrismaService[39m[33m.[39mname)[33m;[39m[22m
+[2m     [90m 26 |[39m     }[22m
+[2m     [90m 27 |[39m   }[0m[22m
+[2m[22m
+[2m      [2mat new t ([22m[2m../../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts[2m:239:27)[22m[2m[22m
+[2m      [2mat new PrismaService ([22m[2mprisma/prisma.service.ts[2m:24:7)[22m[2m[22m
+[2m      [2mat TestingInjector.instantiateClass ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:373:19)[22m[2m[22m
+[2m      [2mat callback ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:65:45)[22m[2m[22m
+[2m      [2mat TestingInjector.resolveConstructorParams ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:145:24)[22m[2m[22m
+[2m      [2mat TestingInjector.loadInstance ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:70:13)[22m[2m[22m
+[2m      [2mat TestingInjector.loadProvider ([22m[2m../../../node_modules/@nestjs/core/injector/injector.js[2m:98:9)[22m[2m[22m
+[2m      [2mat [22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:56:13[22m[2m[22m
+[2m          at async Promise.all (index 3)[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfProviders ([22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:55:9)[22m[2m[22m
+[2m      [2mat [22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:40:13[22m[2m[22m
+[2m          at async Promise.all (index 17)[22m
+[2m      [2mat TestingInstanceLoader.createInstances ([22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:39:9)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../../node_modules/@nestjs/core/injector/instance-loader.js[2m:22:13)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../../node_modules/@nestjs/testing/testing-instance-loader.js[2m:9:9)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.createInstancesOfDependencies ([22m[2m../../../node_modules/@nestjs/testing/testing-module.builder.js[2m:118:9)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.compile ([22m[2m../../../node_modules/@nestjs/testing/testing-module.builder.js[2m:74:9)[22m[2m[22m
+[2m      [2mat Object.<anonymous> ([22m[2m[0m[36mmodules/ai/ai.controller.contract.spec.ts[39m[0m[2m:11:42)[22m[2m[22m
+
+
+  [1m● [22mTest suite failed to run
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   afterAll([36masync[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 20 |[39m     [36mawait[39m app[33m.[39mclose()[33m;[39m
+     [90m    |[39m               [31m[1m^[22m[39m
+     [90m 21 |[39m   })[33m;[39m
+     [90m 22 |[39m
+     [90m 23 |[39m   describe([32m'Version 1 Endpoints'[39m[33m,[39m () [33m=>[39m {[0m
+
+      [2mat Object.<anonymous> ([22mmodules/ai/ai.controller.contract.spec.ts[2m:20:15)[22m
+
+[1mTest Suites: [22m[1m[31m1 failed[39m[22m, [1m[32m12 passed[39m[22m, 13 total
+[1mTests:       [22m[1m[31m4 failed[39m[22m, [1m[32m65 passed[39m[22m, 69 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5.665 s
+[2mRan all test suites[22m[2m matching [22m/c|o|n|t|r|a|c|t/i[2m.[22m

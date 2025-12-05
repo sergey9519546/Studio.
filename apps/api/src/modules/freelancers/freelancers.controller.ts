@@ -4,7 +4,7 @@ import { FreelancersService } from './freelancers.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { CreateFreelancerDto, UpdateFreelancerDto, ImportFreelancerDto } from './dto/freelancer.dto';
 
-@Controller('freelancers')
+@Controller({ path: 'freelancers', version: '1' })
 @UseGuards(JwtAuthGuard)
 export class FreelancersController {
   constructor(private readonly freelancersService: FreelancersService) { }

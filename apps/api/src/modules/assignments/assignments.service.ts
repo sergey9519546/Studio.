@@ -2,6 +2,7 @@
 import { Injectable, ConflictException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { AvailabilityService } from '../availability/availability.service';
+import { RealtimeService } from '../realtime/realtime.service';
 import { CreateAssignmentDto } from './dto/assignment.dto';
 import { UpdateAssignmentDto } from './dto/update-assignment.dto';
 
@@ -9,7 +10,8 @@ import { UpdateAssignmentDto } from './dto/update-assignment.dto';
 export class AssignmentsService {
   constructor(
     private prisma: PrismaService,
-    private availabilityService: AvailabilityService
+    private availabilityService: AvailabilityService,
+    private realtimeService: RealtimeService
   ) { }
 
   async findAll() {
@@ -31,7 +33,16 @@ export class AssignmentsService {
       throw new ConflictException('CONFLICT_DETECTED');
     }
 
-    return this.prisma.assignment.create({ data });
+    const result = await this.prisma.assignment.create({ data });
+
+    // Broadcast real-time update
+    this.realtimeService.broadcast({
+      type: 'assignment_created',
+      data: result,
+      entityId: result.id
+    });
+
+    return result;
   }
 
   async update(id: string, data: UpdateAssignmentDto) {
@@ -50,13 +61,31 @@ export class AssignmentsService {
       }
     }
 
-    return this.prisma.assignment.update({
+    const result = await this.prisma.assignment.update({
       where: { id },
       data
     });
+
+    // Broadcast real-time update
+    this.realtimeService.broadcast({
+      type: 'assignment_updated',
+      data: result,
+      entityId: id
+    });
+
+    return result;
   }
 
   async remove(id: string) {
-    return this.prisma.assignment.delete({ where: { id } });
+    const result = await this.prisma.assignment.delete({ where: { id } });
+
+    // Broadcast real-time update
+    this.realtimeService.broadcast({
+      type: 'assignment_deleted',
+      data: result,
+      entityId: id
+    });
+
+    return result;
   }
 }

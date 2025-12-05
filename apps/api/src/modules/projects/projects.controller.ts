@@ -4,7 +4,7 @@ import { ProjectsService, ProjectInput } from './projects.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { CreateProjectDto, UpdateProjectDto } from './dto/project.dto';
 
-@Controller('projects')
+@Controller({ path: 'projects', version: '1' })
 @UseGuards(JwtAuthGuard)
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) { }

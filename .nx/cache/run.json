@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "nx test api --testNamePattern=contract",
+    "startTime": "2025-12-05T09:35:55.203Z",
+    "endTime": "2025-12-05T09:35:59.679Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "api:test",
+      "target": "test",
+      "projectName": "api",
+      "hash": "2992421713546786924",
+      "startTime": "2025-12-05T09:35:55.220Z",
+      "endTime": "2025-12-05T09:35:59.675Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    }
+  ]
+}

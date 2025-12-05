@@ -14,6 +14,7 @@ import { CommonModule } from "./common/guards/common.module";
 import { LoggerModule } from './common/logger/logger.module';
 import { validate } from "./config/env.validation";
 import { HealthModule } from "./health/health.module";
+import { RealtimeModule } from "./modules/realtime/realtime.module";
 import { AIModule } from "./modules/ai/ai.module";
 import { AnalysisModule } from "./modules/analysis/analysis.module";
 import { AssetsModule } from "./modules/assets/assets.module";
@@ -113,6 +114,7 @@ const staticRoot = staticCandidates.find(p => existsSync(p));
     ScriptsModule,
     AvailabilityModule,
     HealthModule,
+    RealtimeModule,
     AuthModule,
     MonitoringModule,
     IntegrationsModule,

@@ -43,64 +43,65 @@ describe('DriveService', () => {
     describe('listTeamAssets', () => {
         it('should return list of files with DTO mapping from team folder', async () => {
             const mockFiles = [
-                {
-                    id: '1',
-                    name: 'Document.docx',
-                    mimeType: 'application/vnd.google-apps.document',
-                    thumbnailLink: 'https://thumbnail1.jpg',
-                    webViewLink: 'https://view1',
-                    iconLink: 'https://icon1',
-                    modifiedTime: '2025-01-01',
-                    size: '1024'
-                },
-                {
-                    id: '2',
-                    name: 'Spreadsheet.xlsx',
-                    mimeType: 'application/vnd.google-apps.spreadsheet',
-                    thumbnailLink: null,
-                    webViewLink: 'https://view2',
-                    iconLink: null,
-                    modifiedTime: '2025-01-02',
-                    size: '2048'
-                },
+              {
+                id: "1",
+                name: "Document.docx",
+                mimeType: "application/vnd.google-apps.document",
+                thumbnailLink: "https://thumbnail1.jpg",
+                webViewLink: "https://view1",
+                iconLink: "https://icon1",
+                modifiedTime: "2025-01-01",
+                size: "1024",
+              },
+              {
+                id: "2",
+                name: "Spreadsheet.xlsx",
+                mimeType: "application/vnd.google-apps.spreadsheet",
+                thumbnailLink: undefined,
+                webViewLink: "https://view2",
+                iconLink: undefined,
+                modifiedTime: "2025-01-02",
+                size: "2048",
+              },
             ];
 
             mockDrive.files.list.mockResolvedValue({
-                data: { files: mockFiles },
+              data: { files: mockFiles },
             });
 
             const result = await service.listTeamAssets();
 
             expect(clientFactory.createDriveClient).toHaveBeenCalled();
             expect(mockDrive.files.list).toHaveBeenCalledWith({
-                q: expect.stringContaining('in parents'),
-                fields: 'files(id, name, mimeType, thumbnailLink, webViewLink, iconLink, modifiedTime, size)',
-                pageSize: 100,
-                orderBy: 'folder, modifiedTime desc',
+              q: expect.stringContaining("in parents"),
+              fields:
+                "files(id, name, mimeType, thumbnailLink, webViewLink, iconLink, modifiedTime, size)",
+              pageSize: 100,
+              orderBy: "folder, modifiedTime desc",
             });
 
             // Verify DTO mapping
             expect(result).toEqual([
-                {
-                    id: '1',
-                    name: 'Document.docx',
-                    mimeType: 'application/vnd.google-apps.document',
-                    thumbnailLink: 'https://thumbnail1.jpg',
-                    webViewLink: 'https://view1',
-                    iconLink: 'https://icon1',
-                    modifiedTime: '2025-01-01',
-                    size: '1024'
-                },
-                {
-                    id: '2',
-                    name: 'Spreadsheet.xlsx',
-                    mimeType: 'application/vnd.google-apps.spreadsheet',
-                    thumbnailLink: null,
-                    webViewLink: 'https://view2',
-                    iconLink: null,
-                    modifiedTime: '2025-01-02',
-                    size: '2048'
-                }
+              {
+                id: "1",
+                name: "Document.docx",
+                mimeType: "application/vnd.google-apps.document",
+                thumbnailLink: "https://thumbnail1.jpg",
+                webViewLink: "https://view1",
+                iconLink: "https://icon1",
+                modifiedTime: "2025-01-01",
+                size: "1024",
+              },
+              {
+                id: "2",
+                name: "Spreadsheet.xlsx",
+                mimeType: "application/vnd.google-apps.spreadsheet",
+                thumbnailLink: undefined,
+                webViewLink: "https://view2",
+                iconLink: undefined,
+                modifiedTime: "2025-01-02",
+                size: "2048",
+              },
             ]);
         });
 

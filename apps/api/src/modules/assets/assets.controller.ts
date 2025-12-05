@@ -17,7 +17,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { AssetsService, MulterFile } from './assets.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 
-@Controller('assets')
+@Controller({ path: 'assets', version: '1' })
 @UseGuards(JwtAuthGuard)
 export class AssetsController {
   private readonly logger = new Logger(AssetsController.name);

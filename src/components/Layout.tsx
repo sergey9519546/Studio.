@@ -1,7 +1,19 @@
 
+import {
+  Briefcase,
+  Calendar,
+  Layers,
+  LayoutGrid,
+  LogOut,
+  Palette,
+  Settings,
+  Sparkles,
+  Upload,
+  Users,
+} from "lucide-react";
 import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import { Users, Calendar, Briefcase, Settings, Upload, LogOut, Layers, LayoutGrid, Sparkles, Palette } from 'lucide-react';
+import { NavLink, Outlet } from "react-router-dom";
+import MobileNav from "./MobileNav";
 
 const Layout: React.FC = () => {
   const navItems = [
@@ -17,6 +29,13 @@ const Layout: React.FC = () => {
   return (
     // APP SHELL: Uses bg-app (#F6F6FA) for that premium off-white feel
     <div className="flex h-screen bg-app font-sans text-ink-primary overflow-hidden selection:bg-primary selection:text-white">
+      {/* Skip to content link for accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
 
       {/* Sidebar - Floating Surface */}
       <aside className="w-72 flex-shrink-0 hidden md:flex flex-col h-full border-r border-border-subtle bg-surface z-50 relative">
@@ -26,29 +45,42 @@ const Layout: React.FC = () => {
               <Layers size={20} strokeWidth={2} />
             </div>
             <div>
-              <span className="font-display font-semibold text-lg tracking-tight text-ink-primary block leading-none">Studio.</span>
-              <span className="font-mono font-medium text-[10px] text-ink-tertiary uppercase tracking-widest block mt-1.5">OS v2.4</span>
+              <span className="font-display font-semibold text-lg tracking-tight text-ink-primary block leading-none">
+                Studio.
+              </span>
+              <span className="font-mono font-medium text-[10px] text-ink-tertiary uppercase tracking-widest block mt-1.5">
+                OS v2.4
+              </span>
             </div>
           </div>
         </div>
 
         <div className="flex-1 px-4 py-8 space-y-1 overflow-y-auto custom-scrollbar">
-          <div className="px-3 mb-4 text-[10px] font-bold text-ink-tertiary uppercase tracking-widest opacity-80">Operations</div>
+          <div className="px-3 mb-4 text-[10px] font-bold text-ink-tertiary uppercase tracking-widest opacity-80">
+            Operations
+          </div>
           {navItems.map((item) => (
             <NavLink
               key={item.path}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${isActive
-                  ? 'bg-brand text-white shadow-sm'
-                  : 'text-ink-secondary hover:bg-subtle/60 hover:text-ink-primary'
+                `flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
+                  isActive
+                    ? "bg-brand text-white shadow-sm"
+                    : "text-ink-secondary hover:bg-subtle/60 hover:text-ink-primary"
                 }`
               }
             >
               {({ isActive }) => (
                 <>
-                  <item.icon size={18} strokeWidth={2} className={`transition-colors duration-200 ${isActive ? 'text-primary' : 'text-ink-tertiary group-hover:text-ink-secondary'}`} />
-                  <span className="relative z-10 tracking-tight">{item.label}</span>
+                  <item.icon
+                    size={18}
+                    strokeWidth={2}
+                    className={`transition-colors duration-200 ${isActive ? "text-primary" : "text-ink-tertiary group-hover:text-ink-secondary"}`}
+                  />
+                  <span className="relative z-10 tracking-tight">
+                    {item.label}
+                  </span>
                 </>
               )}
             </NavLink>
@@ -73,17 +105,27 @@ const Layout: React.FC = () => {
           <div className="w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center">
             <Layers size={18} />
           </div>
-          <span className="font-display font-semibold text-lg tracking-tight text-ink-primary">Studio.</span>
+          <span className="font-display font-semibold text-lg tracking-tight text-ink-primary">
+            Studio.
+          </span>
         </div>
-        <button className="p-2 text-ink-tertiary"><Settings size={20} /></button>
+        <button className="p-2 text-ink-tertiary">
+          <Settings size={20} />
+        </button>
       </div>
 
       {/* Main Content */}
-      <main className="flex-1 h-full overflow-y-auto overflow-x-hidden relative scroll-smooth -ml-[1px]">
+      <main
+        id="main-content"
+        className="flex-1 h-full overflow-y-auto overflow-x-hidden relative scroll-smooth -ml-[1px]"
+      >
         <div className="min-h-full pb-24 md:pb-12 pt-20 md:pt-0">
           <Outlet />
         </div>
       </main>
+
+      {/* Mobile Bottom Navigation */}
+      <MobileNav />
     </div>
   );
 };

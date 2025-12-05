@@ -4,7 +4,7 @@ import { AssignmentsService } from './assignments.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { CreateAssignmentDto, UpdateAssignmentDto } from './dto/assignment.dto';
 
-@Controller('assignments')
+@Controller({ path: 'assignments', version: '1' })
 @UseGuards(JwtAuthGuard)
 export class AssignmentsController {
   constructor(private readonly assignmentsService: AssignmentsService) { }

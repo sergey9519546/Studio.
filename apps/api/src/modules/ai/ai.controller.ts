@@ -25,7 +25,7 @@ interface ChatRequest {
     projectId?: string;
     role?: 'owner' | 'guest';
     message: string;
-    messages?: Array<{ role: string; content: string }>;
+    messages?: Array<{ role: 'user' | 'assistant' | 'system'; content: string }>;
     context?: string;
 }
 
@@ -39,7 +39,7 @@ interface ChatResponse {
     };
 }
 
-@Controller('ai')
+@Controller({ path: 'ai', version: '1' })
 @UseGuards(JwtAuthGuard)
 export class AIController {
     constructor(
@@ -339,4 +339,3 @@ ${JSON.stringify(parsedContext, null, 2)}
         return this.aiService.generateProjectBrief(id);
     }
 }
-
