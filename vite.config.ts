@@ -1,14 +1,178 @@
 // vite.config.ts - Production Optimizations
 import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import fs from "fs";
 import { resolve } from "path";
+import { defineConfig } from "vite";
 
-const iconCorePath = resolve(__dirname, "node_modules/@atlaskit/icon/core");
-const iconEsmPath = resolve(__dirname, "node_modules/@atlaskit/icon/dist/esm");
-const iconGlyphPath = resolve(__dirname, "node_modules/@atlaskit/icon/glyph");
+const iconBase = resolve(__dirname, "node_modules/@atlaskit/icon");
+const iconDist = resolve(iconBase, "dist/esm");
+const iconCore = resolve(iconBase, "core");
+const iconGlyph = resolve(iconBase, "glyph");
+const logoComponentsPath = resolve(
+  __dirname,
+  "node_modules/@atlaskit/logo/dist/esm/artifacts/logo-components"
+);
+const logoLegacyPath = resolve(
+  __dirname,
+  "node_modules/@atlaskit/logo/dist/esm/legacy-logos"
+);
+const glyphFileCache = new Map<string, string | null>();
+
+const searchGlyphFile = (dir: string, target: string): string | null => {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = resolve(dir, entry.name);
+    if (entry.isFile() && entry.name === target) {
+      return fullPath;
+    }
+    if (entry.isDirectory()) {
+      const found = searchGlyphFile(fullPath, target);
+      if (found) {
+        return found;
+      }
+    }
+  }
+  return null;
+};
+
+const resolveGlyphFallback = (target: string) => {
+  const direct = resolve(iconGlyph, target);
+  if (fs.existsSync(direct)) {
+    return direct;
+  }
+  if (glyphFileCache.has(target)) {
+    return glyphFileCache.get(target);
+  }
+  const found = searchGlyphFile(iconGlyph, target);
+  glyphFileCache.set(target, found);
+  return found;
+};
+const resolveAtlaskitIcon = (source: string) => {
+  if (!source.startsWith("@atlaskit/icon")) {
+    return null;
+  }
+
+  const normalized = source.replace("@atlaskit/icon", "").replace(/^\/+/, "");
+  let candidate: string | null = null;
+
+  if (!normalized || normalized === "utility") {
+    candidate = resolve(iconDist, "index.js");
+  } else if (normalized.startsWith("utility/migration/")) {
+    const rest = normalized.replace("utility/migration/", "");
+    const attemptPaths = [
+      resolve(iconCore, "migration", `${rest}.js`),
+      resolve(iconGlyph, "migration", `${rest}.js`),
+    ];
+    candidate = attemptPaths.find((p) => fs.existsSync(p)) || null;
+  } else if (normalized.startsWith("utility/")) {
+    const rest = normalized.replace("utility/", "");
+    const attemptPaths = [
+      resolve(iconDist, `${rest}.js`),
+      resolveGlyphFallback(`${rest}.js`),
+      resolve(iconCore, `${rest}.js`),
+    ];
+    candidate = attemptPaths.find((p) => fs.existsSync(p)) || null;
+  } else if (normalized.startsWith("core/")) {
+    const rest = normalized.replace("core/", "");
+    const attemptPaths = [
+      resolve(iconCore, `${rest}.js`),
+      resolveGlyphFallback(`${rest}.js`),
+    ];
+    candidate = attemptPaths.find((p) => fs.existsSync(p)) || null;
+  } else if (normalized.startsWith("glyph/")) {
+    const rest = normalized.replace("glyph/", "");
+    candidate = resolve(iconGlyph, `${rest}.js`);
+  } else if (normalized.startsWith("dist/esm/")) {
+    const rest = normalized.replace("dist/esm/", "");
+    candidate = resolve(iconDist, `${rest}.js`);
+  } else {
+    const attemptPaths = [
+      resolve(iconDist, `${normalized}.js`),
+      resolveGlyphFallback(`${normalized}.js`),
+      resolve(iconCore, `${normalized}.js`),
+    ];
+    candidate = attemptPaths.find((p) => fs.existsSync(p)) || null;
+  }
+
+  if (candidate && fs.existsSync(candidate)) {
+    return candidate;
+  }
+
+  return null;
+};
+
+const resolveAtlaskitLogo = (source: string) => {
+  const prefix =
+    "@atlaskit/logo/dist/esm/artifacts/logo-components/";
+  if (source.startsWith(prefix)) {
+    const after = source.replace(prefix, "");
+    if (after.endsWith("/icon")) {
+      const component = after.replace("/icon", "");
+      const resolved = resolve(logoComponentsPath, component, "logo.js");
+      if (fs.existsSync(resolved)) {
+        return resolved;
+      }
+    }
+  }
+  return null;
+};
+
+const resolveCommonLogoIcon = (source: string, importer?: string | null) => {
+  if (!importer || !source.startsWith("./")) {
+    return null;
+  }
+
+  const importerDir = resolve(importer, "..");
+  const baseTarget = source.replace("./", "");
+  const variants = new Set<string>([baseTarget]);
+  if (baseTarget === "icon") {
+    variants.add("logo");
+  } else if (baseTarget === "logo") {
+    variants.add("icon");
+  }
+  variants.add("logo-cs");
+
+  const candidatePaths: string[] = [];
+  for (const variant of variants) {
+    candidatePaths.push(resolve(importerDir, `${variant}.js`));
+    candidatePaths.push(resolve(importerDir, `${variant}.jsx`));
+  }
+
+  const existing = candidatePaths.find((p) => fs.existsSync(p));
+  if (existing) {
+    return existing;
+  }
+
+  return null;
+};
+
+const resolveLegacyCustomIcon = (source: string, importer?: string | null) => {
+  if (!source.startsWith("./ui/") || !importer) {
+    return null;
+  }
+
+  if (!importer.includes("legacy-custom-icons/dist/esm/index.js")) {
+    return null;
+  }
+
+  return resolve(__dirname, "shims/legacy-custom-icon-fallback.js");
+};
+
+const atlaskitIconResolver = () => ({
+  name: "atlaskit-icon-resolver",
+  resolveId(source: string, importer?: string | null) {
+    return (
+      resolveAtlaskitIcon(source) ||
+      resolveAtlaskitLogo(source) ||
+      resolveCommonLogoIcon(source, importer)
+      ||
+      resolveLegacyCustomIcon(source, importer)
+    );
+  },
+});
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), atlaskitIconResolver()],
 
   build: {
     // Production optimizations
@@ -57,30 +221,6 @@ export default defineConfig({
   // Resolve options
   resolve: {
     alias: [
-      {
-        find: "@atlaskit/icon/utility/migration/cross-circle",
-        replacement: `${iconCorePath}/migration/cross-circle.js`,
-      },
-      {
-        find: "@atlaskit/icon/utility/migration",
-        replacement: `${iconCorePath}/migration`,
-      },
-      {
-        find: "@atlaskit/icon/utility",
-        replacement: iconEsmPath,
-      },
-      {
-        find: "@atlaskit/icon/dist/esm/add",
-        replacement: "/shims/atlaskit-icon-add.js",
-      },
-      {
-        find: /^@atlaskit\/icon\/dist\/esm\/(.+)/,
-        replacement: `${iconEsmPath}/$1.js`,
-      },
-      {
-        find: "@atlaskit/icon/core/issue",
-        replacement: `${iconGlyphPath}/issue.js`,
-      },
       {
         find: "@atlaskit/editor-core/node_modules/@atlaskit/adf-schema/dist/esm/schema/inline-nodes",
         replacement: "/shims/atlaskit-inline-nodes.js",

@@ -49,8 +49,8 @@ describe('AssignmentView', () => {
         render(<AssignmentView assignments={mockAssignments} />);
 
         await waitFor(() => {
-            expect(screen.getByText('Project Alpha')).toBeInTheDocument();
-            expect(screen.getByText('Project Beta')).toBeInTheDocument();
+            expect(screen.getAllByText('Project Alpha').length).toBeGreaterThan(0);
+            expect(screen.getAllByText('Project Beta').length).toBeGreaterThan(0);
         });
     });
 
@@ -59,7 +59,7 @@ describe('AssignmentView', () => {
 
         await waitFor(() => {
             // Project Alpha needs 2 Developers, has 1 assigned, so 1 unassigned
-            expect(screen.getByText(/1.*unassigned/i)).toBeInTheDocument();
+            expect(screen.getByText('Project Alpha: 1 unassigned')).toBeInTheDocument();
         });
     });
 
@@ -73,7 +73,7 @@ describe('AssignmentView', () => {
         const filterSelect = screen.getByLabelText(/filter by project/i);
         await userEvent.selectOptions(filterSelect, '1');
 
-        expect(screen.getByText('Project Alpha')).toBeInTheDocument();
+        expect(screen.getAllByText('Project Alpha')[0]).toBeInTheDocument();
         expect(screen.queryByText('Project Beta')).not.toBeInTheDocument();
     });
 
@@ -89,7 +89,7 @@ describe('AssignmentView', () => {
             expect(screen.getByText('Project Beta')).toBeInTheDocument();
         });
 
-        const assignButton = screen.getAllByRole('button', { name: /assign/i })[0];
+        const assignButton = screen.getByText('Assign');
         await userEvent.click(assignButton);
 
         // Select freelancer from dropdown
@@ -116,8 +116,8 @@ describe('AssignmentView', () => {
         render(<AssignmentView assignments={mockAssignments} />);
 
         await waitFor(() => {
-            const assignButton = screen.getAllByRole('button', { name: /assign/i })[0];
-            userEvent.click(assignButton);
+            const assignButton = screen.getByText('Assign');
+            await userEvent.click(assignButton);
         });
 
         await waitFor(() => {
@@ -135,8 +135,8 @@ describe('AssignmentView', () => {
         render(<AssignmentView assignments={mockAssignments} />);
 
         await waitFor(() => {
-            const assignButton = screen.getAllByRole('button', { name: /assign/i })[0];
-            userEvent.click(assignButton);
+            const assignButton = screen.getByText('Assign');
+            await userEvent.click(assignButton);
         });
 
         // Complete assignment flow
