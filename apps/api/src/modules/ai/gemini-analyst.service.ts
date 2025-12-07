@@ -13,7 +13,7 @@ export interface ToolCall {
 
 export interface Tool {
   name: string;
-  function: (args: Record<string, unknown>) => unknown;
+  function: (...args: any[]) => any;
 }
 
 @Injectable()
@@ -70,7 +70,7 @@ ${context}
 
 Respond based on the provided context.`;
 
-    const result = await this.vertexAI.chat(messages, systemPrompt, this.tools);
+    const result = await this.vertexAI.chat(messages, systemPrompt, this.tools as any);
 
     // Cache for 1 hour (common queries)
     await this.cache.set(cacheKey, result, 3600);
@@ -84,7 +84,7 @@ Respond based on the provided context.`;
       cached: false,
     });
 
-    return result;
+    return result as any;
   }
 
   /**

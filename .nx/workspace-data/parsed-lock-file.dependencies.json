@@ -22130,6 +22130,121 @@
     "type": "static"
   },
   {
+    "source": "npm:@google/genai",
+    "target": "npm:@modelcontextprotocol/sdk",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google/genai",
+    "target": "npm:google-auth-library@10.5.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google/genai",
+    "target": "npm:ws",
+    "type": "static"
+  },
+  {
+    "source": "npm:gaxios@7.1.3",
+    "target": "npm:extend",
+    "type": "static"
+  },
+  {
+    "source": "npm:gaxios@7.1.3",
+    "target": "npm:https-proxy-agent",
+    "type": "static"
+  },
+  {
+    "source": "npm:gaxios@7.1.3",
+    "target": "npm:node-fetch@3.3.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:gaxios@7.1.3",
+    "target": "npm:rimraf@5.0.10",
+    "type": "static"
+  },
+  {
+    "source": "npm:gcp-metadata@8.1.2",
+    "target": "npm:gaxios@7.1.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:gcp-metadata@8.1.2",
+    "target": "npm:google-logging-utils@1.1.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:gcp-metadata@8.1.2",
+    "target": "npm:json-bigint",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library@10.5.0",
+    "target": "npm:base64-js",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library@10.5.0",
+    "target": "npm:ecdsa-sig-formatter",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library@10.5.0",
+    "target": "npm:gaxios@7.1.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library@10.5.0",
+    "target": "npm:gcp-metadata@8.1.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library@10.5.0",
+    "target": "npm:google-logging-utils@1.1.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library@10.5.0",
+    "target": "npm:gtoken@8.0.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library@10.5.0",
+    "target": "npm:jws",
+    "type": "static"
+  },
+  {
+    "source": "npm:gtoken@8.0.0",
+    "target": "npm:gaxios@7.1.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:gtoken@8.0.0",
+    "target": "npm:jws",
+    "type": "static"
+  },
+  {
+    "source": "npm:node-fetch@3.3.2",
+    "target": "npm:data-uri-to-buffer",
+    "type": "static"
+  },
+  {
+    "source": "npm:node-fetch@3.3.2",
+    "target": "npm:fetch-blob",
+    "type": "static"
+  },
+  {
+    "source": "npm:node-fetch@3.3.2",
+    "target": "npm:formdata-polyfill",
+    "type": "static"
+  },
+  {
+    "source": "npm:rimraf@5.0.10",
+    "target": "npm:glob",
+    "type": "static"
+  },
+  {
     "source": "npm:@grpc/grpc-js",
     "target": "npm:@grpc/proto-loader",
     "type": "static"

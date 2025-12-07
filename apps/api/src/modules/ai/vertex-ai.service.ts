@@ -153,7 +153,7 @@ export class VertexAIService {
   private safeGet(obj: Record<string, unknown>, path: (string | number)[]): unknown {
     return path.reduce((current, key) => {
       return current && typeof current === 'object' ? (current as Record<string, unknown>)[key] : undefined;
-    }, obj);
+    }, obj as any);
   }
 
   /**

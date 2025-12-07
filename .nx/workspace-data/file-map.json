@@ -169,7 +169,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini-analyst.service.ts",
-          "hash": "9140971881954758037",
+          "hash": "17158604581237351959",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/cache-manager",
@@ -265,7 +265,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai.service.ts",
-          "hash": "8922554248081093379",
+          "hash": "14423702648862929170",
           "deps": [
             "npm:@google-cloud/aiplatform",
             "npm:@nestjs/common",
@@ -525,7 +525,7 @@
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/adapters/google-drive.adapter.ts",
-          "hash": "8995918489246479688",
+          "hash": "3172197687972796955",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -595,7 +595,7 @@
         },
         {
           "file": "apps/api/src/modules/knowledge/knowledge.controller.ts",
-          "hash": "11007902068025244753",
+          "hash": "14075177399763283619",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1265,11 +1265,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "11638958966703916979"
+        "hash": "18146646890311729136"
       },
       {
         "file": "package.json",
-        "hash": "14386747547587804592"
+        "hash": "1615966989588641901"
       },
       {
         "file": "prisma/comment_schema_addition.prisma",
@@ -1585,5 +1585,5 @@
       }
     ]
   },
-  "externalNodesHash": "2154769639997350384"
+  "externalNodesHash": "9640687042438195611"
 }

@@ -15,8 +15,8 @@ export class KnowledgeController {
   }
 
   @Get(':projectId')
-  async findAll(@Param('projectId') projectId: string) {
-      return this.knowledgeService.findAll(projectId);
+  async findAll() {
+      return this.knowledgeService.findAll();
   }
 
   @Delete(':id')
