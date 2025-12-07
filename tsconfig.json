@@ -23,7 +23,8 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "paths": {
-      "@app/*": ["apps/api/src/*"]
+      "@app/*": ["apps/api/src/*"],
+      "@/*": ["src/*"]
     }
   },
   "include": ["apps/**/*", "src/**/*", "index.tsx", "vite.config.ts"],

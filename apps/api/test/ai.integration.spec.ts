@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { AppModule } from '../src/app.module';
-import { GeminiAnalystService } from '../src/services/gemini-analyst.service';
+import { GeminiAnalystService } from '../src/modules/ai/gemini-analyst.service';
 
 describe('AI Extraction API (Integration)', () => {
     let app: INestApplication;

@@ -11,7 +11,7 @@
     "start": "node build/apps/api/src/main",
     "start:dev": "nx serve api",
     "start:prod": "node build/apps/api/src/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\"",
     "test": "prisma generate && jest --config apps/api/jest.config.ts --max-workers=2",
     "test:watch": "jest --config apps/api/jest.config.ts --watch",
     "test:cov": "jest --config apps/api/jest.config.ts --coverage",

@@ -8,7 +8,7 @@ import { Cache } from 'cache-manager';
 @Injectable()
 export class FreelancersService {
   private readonly CACHE_KEY = 'freelancers:list';
-  private readonly CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+  private readonly CACHE_TTL = 24 * 60 * 60; // 24 hours in seconds
 
   constructor(
     private prisma: PrismaService,

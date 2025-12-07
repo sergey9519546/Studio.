@@ -24,7 +24,7 @@ export interface ProjectInput {
 @Injectable()
 export class ProjectsService {
   private readonly CACHE_KEY = 'projects:list';
-  private readonly CACHE_TTL = 2 * 60 * 60 * 1000; // 2 hours
+  private readonly CACHE_TTL = 2 * 60 * 60; // 2 hours in seconds
 
   constructor(
     private prisma: PrismaService,

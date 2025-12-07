@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Main from "./main";
 import "./src/index.css";
@@ -9,11 +9,11 @@ if (!rootElement) {
   throw new Error("Could not find root element to mount to");
 }
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(rootElement);
+root.render(
   <React.StrictMode>
     <ErrorBoundary>
       <Main />
     </ErrorBoundary>
-  </React.StrictMode>,
-  rootElement
+  </React.StrictMode>
 );
