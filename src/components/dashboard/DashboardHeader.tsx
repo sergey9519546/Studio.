@@ -1,5 +1,7 @@
 import { Bell } from "lucide-react";
 import React from "react";
+import StatusBadge from "./StatusBadge";
+import "./DashboardHeader.css";
 
 interface DashboardHeaderProps {
   onNotificationsClick?: () => void;
@@ -10,16 +12,11 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   onNotificationsClick,
   onNewProjectClick,
 }) => {
-  const accentColor = "var(--dashboard-accent, #2463E6)";
-
   return (
     <header className="mb-12 flex justify-between items-end">
       <div>
         <div className="flex items-center gap-3 mb-4">
-          <span className="px-3 py-1 bg-surface border border-border-subtle rounded-lg text-[11px] font-bold uppercase tracking-widest text-ink-secondary shadow-sm flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: accentColor }} />{" "}
-            Studio Online
-          </span>
+          <StatusBadge text="Studio Online" />
         </div>
         <h1 className="text-6xl md:text-7xl font-bold tracking-tighter text-ink-primary mb-3 kinetic-text">
           Good Morning.
@@ -37,17 +34,12 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           onClick={onNotificationsClick}
           aria-label="View notifications"
         >
-          <span className="sr-only">View notifications</span>
           <Bell size={18} />
         </button>
         <button
-          className="h-10 px-5 rounded-full bg-ink-primary text-white text-xs font-bold uppercase tracking-wider hover:shadow-lg transition-shadow"
+          className="h-10 px-5 rounded-full text-white text-xs font-bold uppercase tracking-wider transition-shadow new-project-button"
           onClick={onNewProjectClick}
           aria-label="Create a new project"
-          style={{
-            backgroundColor: accentColor,
-            boxShadow: "0 10px 30px rgba(36, 99, 230, 0.25)",
-          }}
         >
           New Project
         </button>

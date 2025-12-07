@@ -1,243 +1,275 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
+  provider = "postgresql"
 }
 
 model User {
-    id                 Int     @id @default(autoincrement())
-    email              String  @unique
-    name               String?
-    password           String? // For password-based authentication
-    googleAccessToken  String?
-    googleRefreshToken String?
+  id                 Int     @id @default(autoincrement())
+  email              String  @unique
+  name               String?
+  password           String? // For password-based authentication
+  googleAccessToken  String?
+  googleRefreshToken String?
 }
 
 model Freelancer {
-    id           String       @id @default(uuid())
-    name         String
-    email        String       @unique
-    skills       Skill[]
-    role         String?
-    rate         Float?
-    status       String?
-    bio          String?
-    phone        String?
-    location     String?
-    availability String?
-    portfolio    String?
-    notes        String?
-    createdAt    DateTime     @default(now())
-    updatedAt    DateTime     @updatedAt
-    assignments  Assignment[]
+  id           String       @id @default(uuid())
+  name         String
+  email        String       @unique
+  skills       Skill[]
+  role         String?
+  rate         Float?
+  status       String?
+  bio          String?
+  phone        String?
+  location     String?
+  availability String?
+  portfolio    String?
+  notes        String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  assignments  Assignment[]
 
-    @@index([email])
-    @@index([status])
-    @@index([availability])
+  @@index([email])
+  @@index([status])
+  @@index([availability])
 }
 
 model Skill {
-    id          Int          @id @default(autoincrement())
-    name        String       @unique
-    freelancers Freelancer[]
+  id          Int          @id @default(autoincrement())
+  name        String       @unique
+  freelancers Freelancer[]
 }
 
 model Project {
-    id               String            @id @default(uuid())
-    title            String
-    description      String?
-    status           String            @default("PLANNED")
-    startDate        DateTime?
-    endDate          DateTime?
-    budget           Float?
-    client           String?
-    roleRequirements RoleRequirement[]
-    knowledgeSources KnowledgeSource[]
-    knowledgeBase    KnowledgeSource[] @relation("ProjectKnowledgeBase")
-    scripts          Script[]
-    assignments      Assignment[]
-    moodboardItems   MoodboardItem[]
-    brief            ProjectBrief?
-    updatedAt        DateTime          @updatedAt
-    createdAt        DateTime          @default(now())
+  id                   String                @id @default(uuid())
+  title                String
+  description          String?
+  status               String                @default("PLANNED")
+  startDate            DateTime?
+  endDate              DateTime?
+  budget               Float?
+  client               String?
+  roleRequirements     RoleRequirement[]
+  knowledgeSources     KnowledgeSource[]
+  knowledgeBase        KnowledgeSource[]     @relation("ProjectKnowledgeBase")
+  scripts              Script[]
+  assignments          Assignment[]
+  moodboardItems       MoodboardItem[]
+  moodboardCollections MoodboardCollection[]
+  brief                ProjectBrief?
+  updatedAt            DateTime              @updatedAt
+  createdAt            DateTime              @default(now())
 
-    @@index([status])
-    @@index([startDate, endDate])
-    @@index([client])
+  @@index([status])
+  @@index([startDate, endDate])
+  @@index([client])
 }
 
 model RoleRequirement {
-    id        String  @id @default(uuid())
-    role      String
-    count     Int?
-    skills    String // PostgreSQL supports JSON, but using CSV for simplicity
-    projectId String
-    project   Project @relation(fields: [projectId], references: [id])
+  id        String  @id @default(uuid())
+  role      String
+  count     Int?
+  skills    String // PostgreSQL supports JSON, but using CSV for simplicity
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id])
 }
 
 model KnowledgeSource {
-    id              String  @id @default(uuid())
-    type            String
-    title           String
-    originalContent String?
-    status          String?
-    summary         String?
-    projectId       String
-    project         Project @relation(fields: [projectId], references: [id])
+  id              String  @id @default(uuid())
+  type            String
+  title           String
+  originalContent String?
+  status          String?
+  summary         String?
+  projectId       String
+  project         Project @relation(fields: [projectId], references: [id])
 
-    // Back-relation for knowledgeBase
-    projectKBId String?
-    projectKB   Project? @relation("ProjectKnowledgeBase", fields: [projectKBId], references: [id])
+  // Back-relation for knowledgeBase
+  projectKBId String?
+  projectKB   Project? @relation("ProjectKnowledgeBase", fields: [projectKBId], references: [id])
 }
 
 model Script {
-    id        String  @id @default(uuid())
-    content   String?
-    projectId String
-    project   Project @relation(fields: [projectId], references: [id])
+  id        String  @id @default(uuid())
+  content   String?
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id])
 }
 
 model Assignment {
-    id           String     @id @default(uuid())
-    projectId    String
-    project      Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
-    freelancerId String
-    freelancer   Freelancer @relation(fields: [freelancerId], references: [id], onDelete: Cascade)
-    startDate    DateTime
-    endDate      DateTime
-    allocation   Int        @default(100)
-    role         String
-    status       String     @default("active")
-    notes        String?
-    createdAt    DateTime   @default(now())
-    updatedAt    DateTime   @updatedAt
+  id           String     @id @default(uuid())
+  projectId    String
+  project      Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  freelancerId String
+  freelancer   Freelancer @relation(fields: [freelancerId], references: [id], onDelete: Cascade)
+  startDate    DateTime
+  endDate      DateTime
+  allocation   Int        @default(100)
+  role         String
+  status       String     @default("active")
+  notes        String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 
-    @@index([freelancerId])
-    @@index([projectId])
-    @@index([freelancerId, projectId])
-    @@index([startDate, endDate])
-    @@index([status])
+  @@index([freelancerId])
+  @@index([projectId])
+  @@index([freelancerId, projectId])
+  @@index([startDate, endDate])
+  @@index([status])
 }
 
 model MoodboardItem {
-    id        String   @id @default(uuid())
-    projectId String
-    project   Project  @relation(fields: [projectId], references: [id])
-    assetId   String?
-    type      String
-    caption   String?
-    tags      String // Stored as CSV
-    moods     String // Stored as CSV
-    colors    String // Stored as CSV
-    shotType  String?
-    url       String?
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        String  @id @default(uuid())
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id])
+  assetId   String?
+  type      String
+  caption   String?
+  tags      String // Stored as CSV
+  moods     String // Stored as CSV
+  colors    String // Stored as CSV
+  shotType  String?
+  url       String?
+
+  // Unsplash integration fields
+  unsplashId       String? // Unsplash photo ID
+  photographerName String? // Attribution
+  photographerUrl  String? // Profile link
+  source           String  @default("upload") // "upload" | "unsplash"
+
+  // Favorites & Collections
+  isFavorite   Boolean              @default(false)
+  collectionId String?
+  collection   MoodboardCollection? @relation(fields: [collectionId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([projectId])
+  @@index([unsplashId])
+  @@index([isFavorite])
+  @@index([collectionId])
+  @@index([source])
+}
+
+model MoodboardCollection {
+  id          String          @id @default(uuid())
+  projectId   String
+  project     Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  items       MoodboardItem[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@index([projectId])
 }
 
 model Asset {
-    id         String   @id @default(uuid())
-    projectId  String?
-    fileName   String
-    mimeType   String
-    sizeBytes  Int
-    storageKey String
-    publicUrl  String?
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
+  id         String   @id @default(uuid())
+  projectId  String?
+  fileName   String
+  mimeType   String
+  sizeBytes  Int
+  storageKey String
+  publicUrl  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model AIUsage {
-    id           String   @id @default(cuid())
-    endpoint     String
-    model        String   @default("gemini-1.5-pro")
-    inputTokens  Int      @default(0) @map("input_tokens")
-    outputTokens Int      @default(0) @map("output_tokens")
-    cost         Float    @default(0)
-    duration     Int // milliseconds
-    cached       Boolean  @default(false)
-    userId       String?  @map("user_id")
-    projectId    String?  @map("project_id")
-    timestamp    DateTime @default(now())
+  id           String   @id @default(cuid())
+  endpoint     String
+  model        String   @default("gemini-1.5-pro")
+  inputTokens  Int      @default(0) @map("input_tokens")
+  outputTokens Int      @default(0) @map("output_tokens")
+  cost         Float    @default(0)
+  duration     Int // milliseconds
+  cached       Boolean  @default(false)
+  userId       String?  @map("user_id")
+  projectId    String?  @map("project_id")
+  timestamp    DateTime @default(now())
 
-    @@index([timestamp])
-    @@index([endpoint])
-    @@index([userId])
-    @@index([projectId])
-    @@map("ai_usage")
+  @@index([timestamp])
+  @@index([endpoint])
+  @@index([userId])
+  @@index([projectId])
+  @@map("ai_usage")
 }
 
 // Embeddings for semantic search and RAG
 model Embedding {
-    id            String   @id @default(uuid())
-    type          String   // "moodboard", "brief", "content", etc.
-    sourceId      String   // ID of the source object (MoodboardItem, Project, etc.)
-    projectId     String
-    text          String   // Original text used for embedding
-    embedding     String   // Vector stored as JSON array (pgvector when available)
-    metadata      String?  // Additional metadata as JSON
-    createdAt     DateTime @default(now())
-    updatedAt     DateTime @updatedAt
+  id        String   @id @default(uuid())
+  type      String // "moodboard", "brief", "content", etc.
+  sourceId  String // ID of the source object (MoodboardItem, Project, etc.)
+  projectId String
+  text      String // Original text used for embedding
+  embedding String // Vector stored as JSON array (pgvector when available)
+  metadata  String? // Additional metadata as JSON
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    @@index([projectId])
-    @@index([type])
-    @@index([sourceId])
+  @@index([projectId])
+  @@index([type])
+  @@index([sourceId])
 }
 
 // Project brief with enhanced metadata
 model ProjectBrief {
-    id          String   @id @default(uuid())
-    projectId   String   @unique
-    project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-    content     String   // The actual brief
-    tone        String?  // Brand tone/voice
-    guidelines  String?  // Design/brand guidelines
-    embedding   String?  // Vector embedding for semantic search
-    tags        String?  // Stored as CSV
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+  id         String   @id @default(uuid())
+  projectId  String   @unique
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  content    String // The actual brief
+  tone       String? // Brand tone/voice
+  guidelines String? // Design/brand guidelines
+  embedding  String? // Vector embedding for semantic search
+  tags       String? // Stored as CSV
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-    @@index([projectId])
+  @@index([projectId])
 }
 
 // Pages Application Models
 
 // Page: Rich-text document with ADF (Atlassian Document Format) content
 model Page {
-    id          String   @id @default(uuid())
-    title       String
-    content     String   // ADF JSON stored as string (use Json type if you prefer)
-    projectId   String?  // Optional: link to project
-    createdBy   String   // User ID
-    updatedBy   String?
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
-    
-    // Metadata
-    status      String   @default("draft") // draft, published, archived
-    version     Int      @default(1)
-    
-    @@index([projectId])
-    @@index([createdBy])
-    @@index([status])
+  id        String   @id @default(uuid())
+  title     String
+  content   String // ADF JSON stored as string (use Json type if you prefer)
+  projectId String? // Optional: link to project
+  createdBy String // User ID
+  updatedBy String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Metadata
+  status  String @default("draft") // draft, published, archived
+  version Int    @default(1)
+
+  @@index([projectId])
+  @@index([createdBy])
+  @@index([status])
 }
 
 // PageMedia: Media files (images, videos, docs) uploaded via editor
 // Stored in S3, referenced by Page content via ADF media nodes
 model PageMedia {
-    id          String   @id @default(uuid())
-    filename    String
-    mimeType    String
-    size        Int
-    s3Key       String   @unique // S3 object key (path/filename)
-    mediaType   String   // 'image', 'video', 'doc', etc.
-    pageId      String?  // Optional: link to specific page
-    uploadedBy  String   // User ID
-    createdAt   DateTime @default(now())
-    
-    @@index([pageId])
-    @@index([uploadedBy])
-    @@index([mediaType])
+  id         String   @id @default(uuid())
+  filename   String
+  mimeType   String
+  size       Int
+  s3Key      String   @unique // S3 object key (path/filename)
+  mediaType  String // 'image', 'video', 'doc', etc.
+  pageId     String? // Optional: link to specific page
+  uploadedBy String // User ID
+  createdAt  DateTime @default(now())
+
+  @@index([pageId])
+  @@index([uploadedBy])
+  @@index([mediaType])
 }

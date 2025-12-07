@@ -1,5 +1,10 @@
-import { Image, Plus, Search, Trash2, X } from "lucide-react";
+import { Clock, Image, Plus, Search, Trash2, X, XCircle } from "lucide-react";
 import React, { useMemo, useState } from "react";
+import {
+  addRecentSearch,
+  getRecentSearches,
+  removeRecentSearch,
+} from "../services/recentSearches";
 import {
   searchSimilarImages,
   trackDownload,
@@ -52,10 +57,20 @@ export const Moodboard: React.FC<MoodboardProps> = ({
     string | null
   >(null);
 
+  // Recent searches state
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+
   React.useEffect(() => {
     // Keep filtered items in sync with upstream changes
     setFilteredItems(items);
   }, [items]);
+
+  // Load recent searches on mount and when tab changes to Unsplash
+  React.useEffect(() => {
+    if (activeTab === "unsplash") {
+      setRecentSearches(getRecentSearches());
+    }
+  }, [activeTab]);
 
   // Extract all unique tags from items
   const allTags = useMemo(() => {
@@ -111,11 +126,40 @@ export const Moodboard: React.FC<MoodboardProps> = ({
     try {
       const results = await searchSimilarImages(unsplashQuery, 24);
       setUnsplashResults(results);
+
+      // Add to recent searches
+      addRecentSearch(unsplashQuery);
+      setRecentSearches(getRecentSearches());
     } catch (error) {
       console.error("Unsplash search failed:", error);
     } finally {
       setIsLoadingUnsplash(false);
     }
+  };
+
+  // Search from recent searches
+  const handleRecentSearchClick = async (query: string) => {
+    setUnsplashQuery(query);
+    setIsLoadingUnsplash(true);
+    try {
+      const results = await searchSimilarImages(query, 24);
+      setUnsplashResults(results);
+
+      // Move to top of recent searches
+      addRecentSearch(query);
+      setRecentSearches(getRecentSearches());
+    } catch (error) {
+      console.error("Unsplash search failed:", error);
+    } finally {
+      setIsLoadingUnsplash(false);
+    }
+  };
+
+  // Remove from recent searches
+  const handleRemoveRecentSearch = (query: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    removeRecentSearch(query);
+    setRecentSearches(getRecentSearches());
   };
 
   // Add Unsplash image to moodboard
@@ -347,6 +391,36 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                 </a>
               </p>
             </div>
+
+            {/* Recent Searches */}
+            {recentSearches.length > 0 &&
+              unsplashResults.length === 0 &&
+              !isLoadingUnsplash && (
+                <div className="mb-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Clock size={16} className="text-ink-tertiary" />
+                    <h3 className="text-sm font-bold text-ink-secondary uppercase tracking-wide">
+                      Recent Searches
+                    </h3>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {recentSearches.map((query) => (
+                      <button
+                        key={query}
+                        onClick={() => handleRecentSearchClick(query)}
+                        className="group px-3 py-1.5 rounded-[24px] bg-subtle text-ink-secondary hover:bg-surface hover:text-ink-primary text-xs font-medium transition-all flex items-center gap-2"
+                      >
+                        <span>{query}</span>
+                        <XCircle
+                          size={14}
+                          className="opacity-0 group-hover:opacity-100 transition-opacity hover:text-state-danger"
+                          onClick={(e) => handleRemoveRecentSearch(query, e)}
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
             {/* Unsplash Results */}
             {isLoadingUnsplash && (

@@ -1,0 +1,16 @@
+/* Dashboard Header Styles */
+
+/* Status indicator pulse animation color */
+.status-indicator {
+  background-color: var(--dashboard-accent, #2463E6);
+}
+
+/* New Project button with accent color and shadow from design system */
+.new-project-button {
+  background-color: var(--dashboard-accent, #2463E6);
+  box-shadow: var(--dashboard-glow-shadow, 0px 0px 20px rgba(36, 99, 230, 0.15));
+}
+
+.new-project-button:hover {
+  box-shadow: var(--dashboard-glow-shadow-hover, 0px 0px 25px rgba(36, 99, 230, 0.25));
+}
