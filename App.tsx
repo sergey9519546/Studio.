@@ -1,7 +1,6 @@
 import { Box } from "lucide-react";
 import { useState } from "react";
 
-import { ConfluenceAuthProvider } from "./components/confluence/ConfluenceAuthProvider";
 import { PageEditor } from "./components/pages/PageEditor";
 import { Moodboard } from "./src/components/Moodboard";
 import { ProjectDashboard } from "./src/components/ProjectDashboard";
@@ -186,12 +185,7 @@ export default function App() {
       case "knowledge-base":
         return <ConfluenceView />;
       case "pages":
-        return (
-          <PageEditor
-            initialTitle="Creative OS Page"
-            status="draft"
-          />
-        );
+        return <PageEditor initialTitle="Creative OS Page" status="draft" />;
       default:
         return (
           <div className="h-full flex flex-col items-center justify-center text-ink-secondary">

@@ -16,20 +16,23 @@
  */
 
 import {
-  Body,
   Controller,
   Get,
   Logger,
   NotFoundException,
   Param,
+  Param,
+  ParseIntPipe,
   Post,
+  Query,
   UploadedFile,
   UseInterceptors,
 } from "@nestjs/common";
-import { FileInterceptor } from '@nestjs/platform-express';
-import { v4 as uuidv4 } from 'uuid';
-import { PrismaService } from '../../prisma/prisma.service';
+import { FileInterceptor } from "@nestjs/platform-express";
+import { v4 as uuidv4 } from "uuid";
+import { PrismaService } from "../../prisma/prisma.service";
 import { GCSMediaService } from "./gcs-media.service";
+import { MediaErrors } from "./media-proxy.errors";
 
 @Controller({ path: "media-proxy", version: "1" })
 export class MediaProxyController {
@@ -59,6 +62,27 @@ export class MediaProxyController {
     this.logger.log(`File upload initiated: ${file.originalname}`);
 
     try {
+      // File validation
+      const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+      const ALLOWED_TYPES = [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "image/webp",
+        "image/svg+xml",
+        "video/mp4",
+        "video/webm",
+        "application/pdf",
+      ];
+
+      if (file.size > MAX_FILE_SIZE) {
+        throw MediaErrors.fileTooLarge(file.size, MAX_FILE_SIZE);
+      }
+
+      if (!ALLOWED_TYPES.includes(file.mimetype)) {
+        throw MediaErrors.invalidType(file.mimetype, ALLOWED_TYPES);
+      }
+
       // Generate unique file ID
       const fileId = uuidv4();
 
@@ -82,31 +106,34 @@ export class MediaProxyController {
           filename: file.originalname,
           mimeType: file.mimetype,
           size: file.size,
-          s3Key: uploadResult.key, // Still named s3Key in schema for consistency
+          s3Key: uploadResult.key,
           mediaType: mediaType,
-          uploadedBy: "system", // TODO: Get from JWT token
+          uploadedBy: "public", // Public access - no auth required
         },
       });
 
       // Return MOCKED Stargate response
-      // Critical: processingStatus must be 'succeeded' immediately
-      // (no async processing delay like real Stargate)
       return {
         data: {
           id: fileId,
-          processingStatus: "succeeded", // Immediate success!
+          processingStatus: "succeeded",
           mediaType: mediaType,
           mimeType: file.mimetype,
           name: file.originalname,
           size: file.size,
-          artifacts: {}, // Will be populated on retrieval
+          artifacts: {},
           createdAt: new Date().toISOString(),
         },
       };
     } catch (error: unknown) {
       const err = error as Error;
       this.logger.error(`File upload failed: ${err.message}`, err.stack);
-      throw error;
+
+      // Re-throw media errors as-is, wrap others
+      if (err.name === "MediaProxyError") {
+        throw err;
+      }
+      throw MediaErrors.uploadFailed(err);
     }
   }
 
@@ -182,49 +209,58 @@ export class MediaProxyController {
   @Get("collection/:name/items")
   async getCollection(
     @Param("name") collectionName: string,
-    @Body() query: { limit?: number; offset?: number }
+    @Query("limit", new ParseIntPipe({ optional: true })) limit = 50,
+    @Query("offset", new ParseIntPipe({ optional: true })) offset = 0
   ) {
     this.logger.log(`Fetching collection: ${collectionName}`);
 
     try {
-      const limit = query.limit || 50;
-      const offset = query.offset || 0;
+      const safeLimit = Math.min(limit, 100); // Enforce max 100
 
-      // Fetch recent media files
-      const media = await this.prisma.pageMedia.findMany({
-        take: limit,
-        skip: offset,
-        orderBy: { createdAt: "desc" },
-      });
+      // Fetch media and total count in parallel
+      const [media, total] = await Promise.all([
+        this.prisma.pageMedia.findMany({
+          take: safeLimit,
+          skip: offset,
+          orderBy: { createdAt: "desc" },
+        }),
+        this.prisma.pageMedia.count(),
+      ]);
+
+      // Batch generate signed URLs for performance
+      const keys = media.map((m) => m.s3Key);
+      const urlMap = await this.gcsService.getSignedUrlsBatch(keys, 3600);
 
       // Transform to collection format
-      const items = await Promise.all(
-        media.map(async (m) => {
-          const signedUrl = await this.gcsService.getSignedUrl(m.s3Key, 3600);
-
-          return {
-            id: m.id,
-            type: "file",
-            details: {
-              name: m.filename,
-              size: m.size,
-              mediaType: m.mediaType,
-              mimeType: m.mimeType,
-              artifacts: {
-                [`${m.mediaType}.${this.getExtension(m.mimeType)}`]: {
-                  url: signedUrl,
-                },
+      const items = media.map((m) => {
+        const urlData = urlMap.get(m.s3Key);
+        return {
+          id: m.id,
+          type: "file" as const,
+          details: {
+            name: m.filename,
+            size: m.size,
+            mediaType: m.mediaType,
+            mimeType: m.mimeType,
+            artifacts: {
+              [`${m.mediaType}.${this.getExtension(m.mimeType)}`]: {
+                url: urlData?.url,
+                expiresAt: urlData?.expiresAt,
               },
             },
-          };
-        })
-      );
+          },
+        };
+      });
 
       return {
         data: {
           contents: items,
-          nextInclusiveStartKey:
-            offset + limit < items.length ? offset + limit : undefined,
+          pagination: {
+            limit: safeLimit,
+            offset,
+            total,
+            hasMore: offset + safeLimit < total,
+          },
         },
       };
     } catch (error: unknown) {
@@ -233,7 +269,7 @@ export class MediaProxyController {
         `Failed to fetch collection: ${err.message}`,
         err.stack
       );
-      throw error;
+      throw MediaErrors.storageError("fetch collection", err);
     }
   }
 

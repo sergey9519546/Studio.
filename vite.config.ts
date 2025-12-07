@@ -53,8 +53,8 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": "/src",
-      "@atlaskit/editor-plugin-table/commands":
-        "@atlaskit/editor-plugin-table/dist/esm/pm-plugins/commands",
+      "@atlaskit/editor-core/node_modules/@atlaskit/adf-schema/dist/esm/schema/inline-nodes":
+        "/shims/atlaskit-inline-nodes.js",
     },
   },
 });

@@ -25,6 +25,7 @@
     "@atlaskit/css-reset": "^7.3.9",
     "@atlaskit/editor-common": "^74.0.1",
     "@atlaskit/editor-core": "^182.2.0",
+    "@atlaskit/editor-plugin-table": "^1.7.3",
     "@atlaskit/editor-plugins": "^11.1.34",
     "@atlaskit/embedded-confluence": "^4.3.3",
     "@atlaskit/emoji": "^69.9.0",

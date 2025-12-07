@@ -18,7 +18,7 @@ export class GCSMediaService {
 
   /**
    * Upload file to GCS
-   * 
+   *
    * @param key - GCS object key (path/filename)
    * @param body - File buffer
    * @param contentType - MIME type
@@ -27,7 +27,7 @@ export class GCSMediaService {
   async uploadFile(
     key: string,
     body: Buffer,
-    contentType: string,
+    contentType: string
   ): Promise<{ key: string; signedUrl: string }> {
     try {
       this.logger.log(`Uploading file to GCS: ${key}`);
@@ -45,13 +45,13 @@ export class GCSMediaService {
       });
 
       // Generate signed URL (1 hour expiry)
-      const signedUrl = await this.getSignedUrl(key, 3600);
+      const { url } = await this.getSignedUrl(key, 3600);
 
       this.logger.log(`File uploaded successfully: ${key}`);
 
       return {
         key: result.storageKey,
-        signedUrl,
+        signedUrl: url,
       };
     } catch (error: unknown) {
       const err = error as Error;
@@ -65,23 +65,31 @@ export class GCSMediaService {
 
   /**
    * Generate signed URL for file access
-   * 
+   *
    * Creates a temporary URL that allows direct access to the GCS object
    * without requiring authentication. The URL expires after the specified time.
-   * 
+   *
    * @param key - GCS object key
    * @param expiresIn - Expiration time in seconds (default: 1 hour)
-   * @returns Signed URL
+   * @returns Signed URL with expiry timestamp
    */
-  async getSignedUrl(key: string, expiresIn = 3600): Promise<string> {
+  async getSignedUrl(
+    key: string,
+    expiresIn = 3600
+  ): Promise<{
+    url: string;
+    expiresAt: string;
+  }> {
     try {
-      const signedUrl = await this.storageService.getSignedDownloadUrl(
+      const url = await this.storageService.getSignedDownloadUrl(
         key,
         expiresIn
       );
 
+      const expiresAt = new Date(Date.now() + expiresIn * 1000).toISOString();
+
       this.logger.debug(`Generated signed URL for: ${key}`);
-      return signedUrl;
+      return { url, expiresAt };
     } catch (error: unknown) {
       const err = error as Error;
       this.logger.error(
@@ -93,8 +101,40 @@ export class GCSMediaService {
   }
 
   /**
+   * Batch generate signed URLs for multiple files
+   *
+   * Generates signed URLs for multiple files in parallel for better performance.
+   * Useful for collection/list endpoints.
+   *
+   * @param keys - Array of GCS object keys
+   * @param expiresIn - Expiration time in seconds (default: 1 hour)
+   * @returns Map of keys to signed URL data
+   */
+  async getSignedUrlsBatch(
+    keys: string[],
+    expiresIn = 3600
+  ): Promise<Map<string, { url: string; expiresAt: string }>> {
+    try {
+      const urlPromises = keys.map(async (key) => {
+        const result = await this.getSignedUrl(key, expiresIn);
+        return [key, result] as const;
+      });
+
+      const results = await Promise.all(urlPromises);
+      return new Map(results);
+    } catch (error: unknown) {
+      const err = error as Error;
+      this.logger.error(
+        `Failed to generate batch signed URLs: ${err.message}`,
+        err.stack
+      );
+      throw new Error(`Failed to generate batch signed URLs: ${err.message}`);
+    }
+  }
+
+  /**
    * Delete file from GCS
-   * 
+   *
    * @param key - GCS object key
    */
   async deleteFile(key: string): Promise<void> {
@@ -110,10 +150,10 @@ export class GCSMediaService {
 
   /**
    * Check if file exists in GCS
-   * 
+   *
    * Note: This is a basic implementation. For production, you might want
    * to add a method to StorageService to check file existence.
-   * 
+   *
    * @param key - GCS object key
    * @returns true if file exists (assumed), false if error
    */
@@ -129,7 +169,7 @@ export class GCSMediaService {
 
   /**
    * Get storage configuration info
-   * 
+   *
    * @returns Bucket name and configuration status
    */
   getStorageInfo() {
@@ -138,7 +178,7 @@ export class GCSMediaService {
 
   /**
    * Helper: Get bucket prefix for Pages media
-   * 
+   *
    * Recommended structure:
    * - pages/media/{uuid}/{filename} - User uploaded media
    * - pages/avatars/{userId}.jpg - User avatars (for mentions)
@@ -148,7 +188,7 @@ export class GCSMediaService {
     return `pages/media/${fileId}/${filename}`;
   }
 
-  getAvatarPath(userId: string, extension = 'jpg'): string {
+  getAvatarPath(userId: string, extension = "jpg"): string {
     return `pages/avatars/${userId}.${extension}`;
   }
 
