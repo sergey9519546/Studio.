@@ -4,10 +4,12 @@ import Card from "../../components/ui/Card";
 
 interface SparkAICardProps {
   onSubmitPrompt?: (prompt: string) => void;
+  className?: string;
 }
 
-const SparkAICard: React.FC<SparkAICardProps> = ({ onSubmitPrompt }) => {
+const SparkAICard: React.FC<SparkAICardProps> = ({ onSubmitPrompt, className = "" }) => {
   const [prompt, setPrompt] = useState("");
+  const accent = "var(--dashboard-accent, #2463E6)";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,7 +20,12 @@ const SparkAICard: React.FC<SparkAICardProps> = ({ onSubmitPrompt }) => {
   };
 
   return (
-    <Card className="col-span-2 md:col-span-1 flex flex-col justify-between bg-ink-primary text-white border-0 shadow-xl relative overflow-hidden">
+    <Card
+      className={`flex flex-col justify-between text-white border-0 shadow-xl relative overflow-hidden ${className}`}
+      style={{
+        background: `radial-gradient(120% 120% at 100% 0%, rgba(255,255,255,0.08), transparent 45%), ${accent}`,
+      }}
+    >
       <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/20 blur-3xl rounded-full pointer-events-none" />
       <div className="flex justify-between items-start z-10">
         <div className="p-2.5 bg-white/10 rounded-xl backdrop-blur-sm">

@@ -10,12 +10,14 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   onNotificationsClick,
   onNewProjectClick,
 }) => {
+  const accentColor = "var(--dashboard-accent, #2463E6)";
+
   return (
     <header className="mb-12 flex justify-between items-end">
       <div>
         <div className="flex items-center gap-3 mb-4">
           <span className="px-3 py-1 bg-surface border border-border-subtle rounded-lg text-[11px] font-bold uppercase tracking-widest text-ink-secondary shadow-sm flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />{" "}
+            <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: accentColor }} />{" "}
             Studio Online
           </span>
         </div>
@@ -41,6 +43,10 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           className="h-10 px-5 rounded-full bg-ink-primary text-white text-xs font-bold uppercase tracking-wider hover:shadow-lg transition-shadow"
           onClick={onNewProjectClick}
           aria-label="Create a new project"
+          style={{
+            backgroundColor: accentColor,
+            boxShadow: "0 10px 30px rgba(36, 99, 230, 0.25)",
+          }}
         >
           New Project
         </button>

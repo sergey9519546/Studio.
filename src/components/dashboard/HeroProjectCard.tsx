@@ -18,7 +18,7 @@ const HeroProjectCard: React.FC<HeroProjectCardProps> = ({
 }) => {
   return (
     <Card
-      className={`col-span-1 md:col-span-12 lg:col-span-6 relative overflow-hidden group border-0 shadow-2xl h-[400px] lg:h-full ${className}`}
+      className={`relative overflow-hidden group border-0 shadow-2xl min-h-[360px] ${className}`}
       noPadding
     >
       <img
