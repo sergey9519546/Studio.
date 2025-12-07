@@ -44,8 +44,20 @@ const resolveGlyphFallback = (target: string) => {
   glyphFileCache.set(target, found);
   return found;
 };
-const resolveAtlaskitIcon = (source: string) => {
+const resolveAtlaskitIcon = (source: string, importer?: string) => {
   if (!source.startsWith("@atlaskit/icon")) {
+    return null;
+  }
+
+  const normalizedImporter = importer?.replace(/\\/g, "/") || "";
+  if (
+    source === "@atlaskit/icon" &&
+    normalizedImporter.includes("/@atlaskit/icon-object/dist/esm/artifacts/glyph/")
+  ) {
+    const candidate = resolve(__dirname, "shims/atlaskit-icon-tile.js");
+    if (fs.existsSync(candidate)) {
+      return candidate;
+    }
     return null;
   }
 
@@ -167,8 +179,6 @@ const resolveAtlaskitMediaInlineImport = (
     return null;
   }
 
-  // console.log("Atlaskit media resolver check", source, importer);
-
   const normalizedImporter = importer.replace(/\\/g, "/");
   if (
     !normalizedImporter.endsWith(
@@ -184,8 +194,47 @@ const resolveAtlaskitMediaInlineImport = (
   );
 };
 
+const resolveAtlaskitIconConstants = (
+  source: string,
+  importer?: string
+) => {
+  if (source !== "./constants" || !importer) {
+    return null;
+  }
+
+  const normalizedImporter = importer.replace(/\\/g, "/");
+  if (!normalizedImporter.includes("/@atlaskit/icon/dist/esm/index.js")) {
+    return null;
+  }
+
+  const candidate = resolve(iconDist, "constants.js");
+  if (fs.existsSync(candidate)) {
+    return candidate;
+  }
+
+  return null;
+};
+
+const resolveAtlaskitBlockInsertMenuLegacy = (
+  source: string,
+  importer?: string
+) => {
+  if (
+    source !== "./block-insert-menu-legacy" ||
+    !importer ||
+    !importer.replace(/\\/g, "/").endsWith(
+      "/@atlaskit/editor-core/dist/esm/plugins/insert-block/ui/ToolbarInsertBlock/block-insert-menu.js"
+    )
+  ) {
+    return null;
+  }
+
+  return resolve(__dirname, "shims/atlaskit-block-insert-menu-legacy.js");
+};
+
 const atlaskitIconResolver = () => ({
   name: "atlaskit-icon-resolver",
+  enforce: "pre",
   resolveId(source: string, importer?: string) {
     // if (source.includes("media")) {
     //   console.log("Atlaskit resolver sees", source, importer);
@@ -193,7 +242,9 @@ const atlaskitIconResolver = () => ({
     return (
       resolveAtlaskitIcon(source) ||
       resolveAtlaskitLogo(source) ||
+      resolveAtlaskitIconConstants(source, importer) ||
       resolveAtlaskitMediaInlineImport(source, importer) ||
+      resolveAtlaskitBlockInsertMenuLegacy(source, importer) ||
       resolveCommonLogoIcon(source, importer) ||
       resolveLegacyCustomIcon(source, importer)
     );
@@ -254,14 +305,6 @@ export default defineConfig({
         find: "@atlaskit/editor-core/node_modules/@atlaskit/adf-schema/dist/esm/schema/inline-nodes",
         replacement: "/shims/atlaskit-inline-nodes.js",
       },
-      {
-        // eslint-disable-next-line no-useless-escape
-        find: /@atlaskit[\/\\]editor-core[\/\\]node_modules[\/\\]@atlaskit[\/\\]adf-schema[\/\\]dist[\/\\]esm[\/\\]schema[\/\\]nodes[\/\\]media\.js$/,
-        replacement: resolve(
-          __dirname,
-          "node_modules/@atlaskit/adf-schema/dist/esm/schema/nodes/media.js"
-        ),
-      },
       { find: "@", replacement: "/src" },
     ],
     dedupe: [
@@ -269,9 +312,8 @@ export default defineConfig({
       "@atlaskit/tokens",
       "@atlaskit/editor-common",
       "@atlaskit/adf-utils",
+      "@atlaskit/adf-schema",
       "@atlaskit/media-ui",
-      "@atlaskit/icon",
-      "@atlaskit/icon-object",
       "@atlaskit/smart-card",
     ],
   },
