@@ -53,6 +53,8 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": "/src",
+      "@atlaskit/editor-plugin-table/commands":
+        "@atlaskit/editor-plugin-table/dist/esm/pm-plugins/commands",
     },
   },
 });

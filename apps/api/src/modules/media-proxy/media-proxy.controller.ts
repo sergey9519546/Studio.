@@ -16,16 +16,16 @@
  */
 
 import {
-    Body,
-    Controller,
-    Get,
-    Logger,
-    NotFoundException,
-    Param,
-    Post,
-    UploadedFile,
-    UseInterceptors,
-} from '@nestjs/common';
+  Body,
+  Controller,
+  Get,
+  Logger,
+  NotFoundException,
+  Param,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+} from "@nestjs/common";
 import { FileInterceptor } from '@nestjs/platform-express';
 import { v4 as uuidv4 } from 'uuid';
 import { PrismaService } from '../../prisma/prisma.service';
@@ -55,10 +55,7 @@ export class MediaProxyController {
    */
   @Post("file/binary")
   @UseInterceptors(FileInterceptor("file"))
-  async uploadFile(
-    @UploadedFile() file: Express.Multer.File,
-    @Body() body: any
-  ) {
+  async uploadFile(@UploadedFile() file: Express.Multer.File) {
     this.logger.log(`File upload initiated: ${file.originalname}`);
 
     try {
@@ -106,8 +103,9 @@ export class MediaProxyController {
           createdAt: new Date().toISOString(),
         },
       };
-    } catch (error) {
-      this.logger.error(`File upload failed: ${error.message}`, error.stack);
+    } catch (error: unknown) {
+      const err = error as Error;
+      this.logger.error(`File upload failed: ${err.message}`, err.stack);
       throw error;
     }
   }
@@ -165,8 +163,9 @@ export class MediaProxyController {
           },
         },
       };
-    } catch (error) {
-      this.logger.error(`Failed to fetch file: ${error.message}`, error.stack);
+    } catch (error: unknown) {
+      const err = error as Error;
+      this.logger.error(`Failed to fetch file: ${err.message}`, err.stack);
       throw error;
     }
   }
@@ -228,10 +227,11 @@ export class MediaProxyController {
             offset + limit < items.length ? offset + limit : undefined,
         },
       };
-    } catch (error) {
+    } catch (error: unknown) {
+      const err = error as Error;
       this.logger.error(
-        `Failed to fetch collection: ${error.message}`,
-        error.stack
+        `Failed to fetch collection: ${err.message}`,
+        err.stack
       );
       throw error;
     }

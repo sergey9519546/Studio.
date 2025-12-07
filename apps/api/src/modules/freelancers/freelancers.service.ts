@@ -15,6 +15,10 @@ export class FreelancersService {
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) { }
 
+  private mapWithSkills(f: any) {
+    return { ...f, skills: f.skills.map((s: any) => s.name) };
+  }
+
   async findAll() {
     // Check cache first
     const cached = await this.cacheManager.get(this.CACHE_KEY);
@@ -29,10 +33,7 @@ export class FreelancersService {
     });
 
     // Flatten skills for frontend compatibility
-    const result = freelancers.map(f => ({
-      ...f,
-      skills: f.skills.map(s => s.name)
-    }));
+    const result = freelancers.map((f) => this.mapWithSkills(f));
 
     // Cache the result for 24 hours
     await this.cacheManager.set(this.CACHE_KEY, result, this.CACHE_TTL);
@@ -46,7 +47,7 @@ export class FreelancersService {
       include: { skills: true }
     });
     if (!f) return null;
-    return { ...f, skills: f.skills.map(s => s.name) };
+    return this.mapWithSkills(f);
   }
 
   async create(data: CreateFreelancerDto) {
@@ -100,6 +101,38 @@ export class FreelancersService {
     await this.cacheManager.del(this.CACHE_KEY);
 
     return updated;
+  }
+
+  async search(query: string, limit = 10) {
+    const q = query?.trim();
+    if (!q) {
+      return this.suggested(limit);
+    }
+
+    const results = await this.prisma.freelancer.findMany({
+      where: {
+        OR: [
+          { name: { contains: q, mode: 'insensitive' } },
+          { email: { contains: q, mode: 'insensitive' } },
+          { role: { contains: q, mode: 'insensitive' } },
+          { skills: { some: { name: { contains: q, mode: 'insensitive' } } } },
+        ],
+      },
+      include: { skills: true },
+      take: limit,
+      orderBy: { name: 'asc' },
+    });
+
+    return results.map((f) => this.mapWithSkills(f));
+  }
+
+  async suggested(limit = 5) {
+    const results = await this.prisma.freelancer.findMany({
+      include: { skills: true },
+      take: limit,
+      orderBy: { createdAt: 'desc' },
+    });
+    return results.map((f) => this.mapWithSkills(f));
   }
 
   async remove(id: string) {

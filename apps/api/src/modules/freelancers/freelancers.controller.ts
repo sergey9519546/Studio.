@@ -1,5 +1,5 @@
 
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query } from '@nestjs/common';
 import { FreelancersService } from './freelancers.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { CreateFreelancerDto, UpdateFreelancerDto, ImportFreelancerDto } from './dto/freelancer.dto';
@@ -12,6 +12,18 @@ export class FreelancersController {
   @Get()
   findAll() {
     return this.freelancersService.findAll();
+  }
+
+  @Get('search')
+  search(@Query('q') q = '', @Query('limit') limit?: string) {
+    const take = limit ? Number(limit) : 10;
+    return this.freelancersService.search(q, take);
+  }
+
+  @Get('suggested')
+  suggested(@Query('limit') limit?: string) {
+    const take = limit ? Number(limit) : 5;
+    return this.freelancersService.suggested(take);
   }
 
   @Get(':id')

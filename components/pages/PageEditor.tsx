@@ -162,7 +162,9 @@ export const PageEditor: React.FC<PageEditorProps> = ({
             quickInsert={true}
             // Providers for media/mentions/emojis through our /api/v1 proxy
             mentionProvider={createMentionProvider()}
+            // @ts-expect-error - EmojiProvider type mismatch: editor-core bundles its own @atlaskit/emoji version
             emojiProvider={createEmojiProvider()}
+            // @ts-expect-error - MediaProvider type mismatch: MediaClient vs MediaProvider interface difference
             media={mediaConfig}
             // Features - using object configs to avoid type errors
             allowTables={{ advanced: true }}

@@ -40,7 +40,7 @@ export class GCSMediaService {
         isPublic: false, // Pages media should be private with signed URLs
         metadata: {
           uploadedAt: new Date().toISOString(),
-          source: 'pages-editor',
+          source: "pages-editor",
         },
       });
 
@@ -48,14 +48,18 @@ export class GCSMediaService {
       const signedUrl = await this.getSignedUrl(key, 3600);
 
       this.logger.log(`File uploaded successfully: ${key}`);
-      
+
       return {
         key: result.storageKey,
         signedUrl,
       };
-    } catch (error: any) {
-      this.logger.error(`Failed to upload file to GCS: ${error.message}`, error.stack);
-      throw new Error(`GCS upload failed: ${error.message}`);
+    } catch (error: unknown) {
+      const err = error as Error;
+      this.logger.error(
+        `Failed to upload file to GCS: ${err.message}`,
+        err.stack
+      );
+      throw new Error(`GCS upload failed: ${err.message}`);
     }
   }
 
@@ -71,13 +75,20 @@ export class GCSMediaService {
    */
   async getSignedUrl(key: string, expiresIn = 3600): Promise<string> {
     try {
-      const signedUrl = await this.storageService.getSignedDownloadUrl(key, expiresIn);
-      
+      const signedUrl = await this.storageService.getSignedDownloadUrl(
+        key,
+        expiresIn
+      );
+
       this.logger.debug(`Generated signed URL for: ${key}`);
       return signedUrl;
-    } catch (error: any) {
-      this.logger.error(`Failed to generate signed URL: ${error.message}`, error.stack);
-      throw new Error(`Failed to generate signed URL: ${error.message}`);
+    } catch (error: unknown) {
+      const err = error as Error;
+      this.logger.error(
+        `Failed to generate signed URL: ${err.message}`,
+        err.stack
+      );
+      throw new Error(`Failed to generate signed URL: ${err.message}`);
     }
   }
 
@@ -90,9 +101,10 @@ export class GCSMediaService {
     try {
       await this.storageService.deleteObject(key);
       this.logger.log(`File deleted from GCS: ${key}`);
-    } catch (error: any) {
-      this.logger.error(`Failed to delete file: ${error.message}`, error.stack);
-      throw new Error(`Failed to delete file: ${error.message}`);
+    } catch (error: unknown) {
+      const err = error as Error;
+      this.logger.error(`Failed to delete file: ${err.message}`, err.stack);
+      throw new Error(`Failed to delete file: ${err.message}`);
     }
   }
 
@@ -110,7 +122,7 @@ export class GCSMediaService {
       // Try to get signed URL - if it fails, file doesn't exist
       await this.getSignedUrl(key, 60);
       return true;
-    } catch (error) {
+    } catch {
       return false;
     }
   }

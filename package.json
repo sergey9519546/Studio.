@@ -29,6 +29,8 @@
     "@atlaskit/embedded-confluence": "^4.3.3",
     "@atlaskit/emoji": "^69.9.0",
     "@atlaskit/media-client": "^35.6.1",
+    "@atlaskit/media-core": "^37.0.0",
+    "@atlaskit/media-state": "^1.8.0",
     "@atlaskit/mention": "^24.4.3",
     "@atlaskit/page-layout": "^4.2.21",
     "@atlaskit/tokens": "latest",

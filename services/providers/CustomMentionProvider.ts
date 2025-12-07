@@ -1,27 +1,4 @@
-/**
- * CustomMentionProvider
- * 
- * Implements the MentionProvider interface to enable @mentions
- * in the Atlassian Editor, backed by our custom user directory API.
- * 
- * Architecture: Per the architectural document, this provider
- * queries /api/v1/users/search instead of Atlassian's Bifrost service.
- */
-
-export interface MentionDescription {
-  id: string;
-  name: string;
-  mentionName: string;
-  avatarUrl?: string;
-  nickname?: string;
-  lozenge?: string;
-}
-
-export interface MentionProvider {
-  filter(query: string): Promise<MentionDescription[]>;
-  recordMentionSelection?(mention: MentionDescription): void;
-  shouldHighlightMention?(mention: MentionDescription): boolean;
-}
+import type { MentionDescription, MentionProvider } from '@atlaskit/mention';
 
 class CustomMentionProvider implements MentionProvider {
   /**
@@ -30,13 +7,22 @@ class CustomMentionProvider implements MentionProvider {
    */
   async filter(query: string): Promise<MentionDescription[]> {
     try {
+      const token = localStorage.getItem('studio_roster_v1_auth_token');
+      const headers: Record<string, string> = {};
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
       // Empty query - return recent/suggested users
       if (!query || query.trim().length === 0) {
         return this.getSuggestedUsers();
       }
 
       // Search users via our API
-      const response = await fetch(`/api/v1/users/search?q=${encodeURIComponent(query)}`);
+      const response = await fetch(
+        `/api/v1/freelancers/search?q=${encodeURIComponent(query)}`,
+        { headers }
+      );
       
       if (!response.ok) {
         console.error('Failed to fetch users for mentions:', response.status);
@@ -66,7 +52,15 @@ class CustomMentionProvider implements MentionProvider {
    */
   private async getSuggestedUsers(): Promise<MentionDescription[]> {
     try {
-      const response = await fetch('/api/v1/users/suggested');
+      const token = localStorage.getItem('studio_roster_v1_auth_token');
+      const headers: Record<string, string> = {};
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
+      const response = await fetch('/api/v1/freelancers/suggested', {
+        headers,
+      });
       
       if (!response.ok) {
         return [];

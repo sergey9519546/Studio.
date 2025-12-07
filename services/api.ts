@@ -105,7 +105,12 @@ async function fetchApi<T>(path: string, options?: RequestInit & { timeout?: num
     };
 
     const timeout = options?.timeout || 30000; // Default 30s
-    const res = await fetchWithTimeout(`${API_BASE}${path}`, { ...options, headers }, timeout);
+    const url =
+      path.startsWith("http") || path.startsWith("/api/")
+        ? path
+        : `${API_BASE}${path}`;
+
+    const res = await fetchWithTimeout(url, { ...options, headers }, timeout);
 
     // Security: Handle Unauthorized Access
     if (res.status === 401) {
