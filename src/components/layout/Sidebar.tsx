@@ -19,6 +19,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   const operations = [
     { id: "dashboard", icon: Layout, label: "Atelier" },
     { id: "projects", icon: Layers, label: "Manifests" },
+    { id: "pages", icon: FileText, label: "Pages" },
     { id: "studio", icon: Sparkles, label: "Studio AI" },
     { id: "moodboard", icon: Grid, label: "Visuals" },
     { id: "roster", icon: Users, label: "Talent" },
