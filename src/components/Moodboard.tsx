@@ -1,4 +1,4 @@
-import { Clock, Image, Plus, Search, Trash2, X, XCircle } from "lucide-react";
+import { Clock, Filter, Heart, Image, Plus, Search, Trash2, X, XCircle } from "lucide-react";
 import React, { useMemo, useState } from "react";
 import {
   toggleFavorite as apiToggleFavorite,
@@ -13,7 +13,7 @@ import {
   searchSimilarImages,
   trackDownload,
   type UnsplashImage,
-} from "../services/unsplash";
+} from "../../services/unsplash";
 import { Card } from "./design/Card";
 import { Input } from "./design/Input";
 
@@ -134,7 +134,12 @@ export const Moodboard: React.FC<MoodboardProps> = ({
 
     setIsLoadingUnsplash(true);
     try {
-      const results = await searchSimilarImages(unsplashQuery, 24);
+      const results = await searchSimilarImages(
+        unsplashQuery,
+        24,
+        unsplashFilters.color,
+        unsplashFilters.orientation
+      );
       setUnsplashResults(results);
 
       // Add to recent searches
@@ -152,7 +157,12 @@ export const Moodboard: React.FC<MoodboardProps> = ({
     setUnsplashQuery(query);
     setIsLoadingUnsplash(true);
     try {
-      const results = await searchSimilarImages(query, 24);
+      const results = await searchSimilarImages(
+        query,
+        24,
+        unsplashFilters.color,
+        unsplashFilters.orientation
+      );
       setUnsplashResults(results);
 
       // Move to top of recent searches
@@ -294,32 +304,29 @@ export const Moodboard: React.FC<MoodboardProps> = ({
             {filteredItems.length > 0 ? (
               <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6">
                 {filteredItems.map((item) => (
-                  <div
+                  <Card
                     key={item.id}
-                    className="break-inside-avoid mb-6 group cursor-pointer"
+                    className="mb-6 p-0 overflow-hidden cursor-pointer hover:shadow-2xl transition-shadow duration-300 break-inside-avoid group"
                     onClick={() => setSelectedItem(item.id)}
                   >
-                    <div className="relative rounded-[24px] overflow-hidden shadow-ambient hover:shadow-float transition-all">
+                    <div className="relative">
                       <img
                         src={item.url}
-                        alt="Moodboard"
-                        className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
                         alt={item.tags.join(", ") || "Moodboard item"}
                         className="w-full h-auto object-cover"
                       />
-                      
-                      {/* Favorites Heart Icon - P1 */}
+
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleToggleFavorite(item.id, false); // TODO: Get actual favorite status
+                          handleToggleFavorite(item.id, false);
                         }}
                         className="absolute top-2 right-2 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors opacity-0 group-hover:opacity-100"
                         aria-label="Toggle favorite"
                       >
                         <Heart size={18} className="text-white" />
                       </button>
-                      
+
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -332,9 +339,9 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                       </button>
                     </div>
 
-                      {/* Color Palette Indicator */}
+                    <div className="p-4">
                       {item.colors.length > 0 && (
-                        <div className="absolute top-4 right-4 flex gap-1">
+                        <div className="flex gap-1 mb-2">
                           {item.colors.slice(0, 3).map((color, i) => (
                             <div
                               key={i}
@@ -345,27 +352,25 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                           ))}
                         </div>
                       )}
-                    </div>
-
-                    {/* Metadata */}
-                    <div className="mt-3 space-y-2">
-                      {item.moods.length > 0 && (
-                        <div className="flex flex-wrap gap-1">
-                          {item.moods.map((mood) => (
-                            <span
-                              key={mood}
-                              className="px-2 py-0.5 rounded-[12px] bg-primary-tint text-primary text-xs font-medium"
-                            >
-                              {mood}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                      {item.shotType && (
-                        <p className="text-xs text-ink-tertiary">
-                          Shot Type: <strong>{item.shotType}</strong>
-                        </p>
-                      )}
+                      <div className="space-y-2">
+                        {item.moods.length > 0 && (
+                          <div className="flex flex-wrap gap-1">
+                            {item.moods.map((mood) => (
+                              <span
+                                key={mood}
+                                className="px-2 py-0.5 rounded-[12px] bg-primary-tint text-primary text-xs font-medium"
+                              >
+                                {mood}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                        {item.shotType && (
+                          <p className="text-xs text-ink-tertiary">
+                            Shot Type: <strong>{item.shotType}</strong>
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </Card>
                 ))}
@@ -742,6 +747,6 @@ export const Moodboard: React.FC<MoodboardProps> = ({
       </div>
     </div>
   );
-};;
+};
 
 export default Moodboard;

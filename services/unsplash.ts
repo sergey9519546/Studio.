@@ -84,7 +84,9 @@ export async function generateSearchQueries(
  */
 export async function searchSimilarImages(
   query: string,
-  perPage: number = 12
+  perPage: number = 12,
+  color?: string,
+  orientation?: string
 ): Promise<UnsplashImage[]> {
   if (!UNSPLASH_ACCESS_KEY) {
     console.warn("Unsplash API key not configured");
@@ -92,8 +94,21 @@ export async function searchSimilarImages(
   }
 
   try {
+    const params = new URLSearchParams({
+      query,
+      per_page: perPage.toString(),
+    });
+
+    if (color) {
+      params.set("color", color);
+    }
+
+    if (orientation) {
+      params.set("orientation", orientation);
+    }
+
     const response = await fetch(
-      `${UNSPLASH_API_BASE}/search/photos?query=${encodeURIComponent(query)}&per_page=${perPage}`,
+      `${UNSPLASH_API_BASE}/search/photos?${params.toString()}`,
       {
         headers: {
           Authorization: `Client-ID ${UNSPLASH_ACCESS_KEY}`,

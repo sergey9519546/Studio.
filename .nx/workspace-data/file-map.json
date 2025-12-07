@@ -713,6 +713,20 @@
           ]
         },
         {
+          "file": "apps/api/src/modules/moodboard/dto/create-collection.dto.ts",
+          "hash": "11470598149334578241",
+          "deps": [
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/moodboard/dto/create-from-unsplash.dto.ts",
+          "hash": "1890356879146999906",
+          "deps": [
+            "npm:class-validator"
+          ]
+        },
+        {
           "file": "apps/api/src/modules/moodboard/dto/create-moodboard-item.dto.ts",
           "hash": "12458527652613654313",
           "deps": [
@@ -728,7 +742,7 @@
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.controller.ts",
-          "hash": "14044953844417744443",
+          "hash": "7972732752833811312",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -744,7 +758,7 @@
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.service.ts",
-          "hash": "8368352345427536510",
+          "hash": "16046243399419064012",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client"
@@ -1357,7 +1371,7 @@
       },
       {
         "file": "prisma/schema.prisma",
-        "hash": "3024874810151977562"
+        "hash": "6233246867280128678"
       },
       {
         "file": "prisma/schema.prisma.bak",
@@ -1457,7 +1471,7 @@
       },
       {
         "file": "src/__test__/DashboardHome.test.tsx",
-        "hash": "5640792758287872547"
+        "hash": "3191469503181390403"
       },
       {
         "file": "src/__test__/useDashboardData.test.ts",
@@ -1485,7 +1499,7 @@
       },
       {
         "file": "src/components/Moodboard.tsx",
-        "hash": "933469548398273271"
+        "hash": "17196734702566717129"
       },
       {
         "file": "src/components/ProjectDashboard.tsx",
@@ -1520,8 +1534,12 @@
         "hash": "14942719160393212538"
       },
       {
+        "file": "src/components/dashboard/DashboardHeader.css",
+        "hash": "7767558322111298803"
+      },
+      {
         "file": "src/components/dashboard/DashboardHeader.tsx",
-        "hash": "17784454588738090448"
+        "hash": "865337341195493716"
       },
       {
         "file": "src/components/dashboard/HeroProjectCard.tsx",
@@ -1533,11 +1551,15 @@
       },
       {
         "file": "src/components/dashboard/RecentArtifactsCard.tsx",
-        "hash": "9116761219828461335"
+        "hash": "423603252926575082"
       },
       {
         "file": "src/components/dashboard/SparkAICard.tsx",
         "hash": "13091664991717011936"
+      },
+      {
+        "file": "src/components/dashboard/StatusBadge.tsx",
+        "hash": "14221628772765571914"
       },
       {
         "file": "src/components/dashboard/VibePaletteCard.tsx",
@@ -1636,6 +1658,14 @@
         "hash": "5605653637284748462"
       },
       {
+        "file": "src/services/moodboardApi.ts",
+        "hash": "7827123612679265221"
+      },
+      {
+        "file": "src/services/recentSearches.ts",
+        "hash": "202700734677421798"
+      },
+      {
         "file": "src/test/setup.ts",
         "hash": "7890483852430562637"
       },
@@ -1694,6 +1724,10 @@
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.89550a6e-86e2-44cf-9201-b0a81eaa776d.json",
         "hash": "12178908264864505738"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.9eeff66e-45bc-4210-8918-37fe9d9c91a1.json",
+        "hash": "12119823244770242550"
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.bddcc118-d618-4925-b826-8ac041ed9ed6.json",
