@@ -58,7 +58,9 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <label className="text-xs font-bold text-ink-secondary uppercase tracking-wide">
             {label}
-            {props.required && <span className="text-state-danger ml-1">*</span>}
+            {props.required && (
+              <span className="text-state-danger ml-1">*</span>
+            )}
           </label>
         )}
         <textarea
@@ -66,17 +68,29 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           className={textareaClasses}
           disabled={disabled}
           rows={rows}
-          aria-invalid={!!error}
-          aria-describedby={error ? `${props.name}-error` : helperText ? `${props.name}-helper` : undefined}
+          aria-invalid={error ? "true" : "false"}
+          aria-describedby={
+            error
+              ? `${props.name}-error`
+              : helperText
+                ? `${props.name}-helper`
+                : undefined
+          }
           {...props}
         />
         {error && (
-          <p id={`${props.name}-error`} className="text-xs font-medium text-state-danger">
+          <p
+            id={`${props.name}-error`}
+            className="text-xs font-medium text-state-danger"
+          >
             {error}
           </p>
         )}
         {helperText && !error && (
-          <p id={`${props.name}-helper`} className="text-xs text-ink-tertiary font-medium">
+          <p
+            id={`${props.name}-helper`}
+            className="text-xs text-ink-tertiary font-medium"
+          >
             {helperText}
           </p>
         )}

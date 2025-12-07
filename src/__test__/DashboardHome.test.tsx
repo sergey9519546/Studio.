@@ -196,9 +196,14 @@ describe("DashboardHome", () => {
       'Prompt sent: "Test prompt"',
       "success"
     );
+    const prompt = "Test prompt";
+    const expectedName = `${prompt
+      .trim()
+      .slice(0, 12)
+      .replace(/\s+/g, "_")}.png`;
     expect(mockAddArtifact).toHaveBeenCalledWith({
       id: expect.stringContaining("gen-"),
-      name: "Test_promp.png",
+      name: expectedName,
       imageSrc: "",
     });
   });

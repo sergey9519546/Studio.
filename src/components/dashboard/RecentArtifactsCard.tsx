@@ -34,7 +34,7 @@ const ArtifactItem: React.FC<ArtifactItemProps> = ({ artifact, onClick }) => {
   const hasImage = artifact.imageSrc && !imageError;
 
   return (
-    <div role="listitem">
+    <li role="gridcell">
       <button
         type="button"
         className="rounded-2xl bg-subtle border border-border-subtle relative group overflow-hidden cursor-pointer aspect-[4/3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary w-full h-full text-left"
@@ -61,7 +61,7 @@ const ArtifactItem: React.FC<ArtifactItemProps> = ({ artifact, onClick }) => {
           </div>
         </div>
       </button>
-    </div>
+    </li>
   );
 };
 
@@ -76,8 +76,8 @@ const RecentArtifactsCard: React.FC<RecentArtifactsCardProps> = ({
   const srLabel = loading
     ? "Loading recent artifacts"
     : hasArtifacts
-    ? `Showing ${artifacts.length} recent artifact${artifacts.length === 1 ? "" : "s"}`
-    : "No artifacts yet";
+      ? `Showing ${artifacts.length} recent artifact${artifacts.length === 1 ? "" : "s"}`
+      : "No artifacts yet";
 
   return (
     <Card
@@ -99,26 +99,26 @@ const RecentArtifactsCard: React.FC<RecentArtifactsCardProps> = ({
         {srLabel}
       </span>
       {loading ? (
-        <div
-          className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
+        <ul
+          className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 list-none p-0 m-0"
           aria-label="Loading artifacts"
-          role="list"
           aria-busy="true"
+          role="grid"
         >
           {[0, 1, 2, 3].map((i) => (
-            <div
+            <li
               key={i}
-              role="listitem"
+              role="gridcell"
               className="rounded-2xl bg-subtle border border-border-subtle aspect-[4/3] animate-pulse"
               aria-hidden="true"
             />
           ))}
-        </div>
+        </ul>
       ) : hasArtifacts ? (
-        <div
-          className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
+        <ul
+          className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 list-none p-0 m-0"
           aria-label="Recent artifacts"
-          role="list"
+          role="grid"
         >
           {artifacts.map((artifact) => (
             <ArtifactItem
@@ -127,7 +127,7 @@ const RecentArtifactsCard: React.FC<RecentArtifactsCardProps> = ({
               onClick={onArtifactClick}
             />
           ))}
-        </div>
+        </ul>
       ) : (
         <div
           className="flex-1 rounded-xl bg-subtle border border-border-subtle p-6 flex flex-col items-start justify-center gap-3"

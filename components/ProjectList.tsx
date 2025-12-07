@@ -89,7 +89,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects = [], onC
 
     const timeout = setTimeout(fetchProjects, 50);
     return () => clearTimeout(timeout);
-  }, [page, searchText, filters, _projects, isTestEnv]);
+  }, [page, searchText, filters, _projects]);
 
   const filteredProjects = useMemo(() => {
     const list = Array.isArray(paginatedProjects) && paginatedProjects.length > 0 ? paginatedProjects : _projects;

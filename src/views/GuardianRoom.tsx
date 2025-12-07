@@ -76,6 +76,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
         <button
           onClick={onBack}
           className="text-ink-secondary hover:text-ink-primary"
+          aria-label="Go back"
         >
           <ArrowRight className="rotate-180" size={24} />
         </button>
@@ -198,6 +199,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
               onClick={send}
               disabled={isLoading || !input.trim()}
               className="absolute right-2 top-2 p-2 bg-ink-primary text-white rounded-xl hover:scale-105 transition-transform shadow-md disabled:opacity-50 disabled:hover:scale-100"
+              aria-label="Send message"
             >
               <ArrowRight size={18} />
             </button>

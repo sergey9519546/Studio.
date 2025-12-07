@@ -1,5 +1,10 @@
 import React from 'react';
-import { FieldValues, UseControllerProps, useController, Control } from 'react-hook-form';
+import {
+  Control,
+  FieldValues,
+  UseControllerProps,
+  useController,
+} from "react-hook-form";
 
 interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
@@ -63,27 +68,45 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label className="text-xs font-bold text-ink-secondary uppercase tracking-wide">
             {label}
-            {props.required && <span className="text-state-danger ml-1">*</span>}
+            {props.required && (
+              <span className="text-state-danger ml-1">*</span>
+            )}
           </label>
         )}
         <div className="relative flex items-center">
-          {icon && <div className="absolute left-4 text-ink-tertiary pointer-events-none">{icon}</div>}
+          {icon && (
+            <div className="absolute left-4 text-ink-tertiary pointer-events-none">
+              {icon}
+            </div>
+          )}
           <input
             ref={ref}
-            className={`${inputClasses} ${icon ? 'pl-10' : ''}`}
+            className={`${inputClasses} ${icon ? "pl-10" : ""}`}
             disabled={disabled}
-            aria-invalid={!!error}
-            aria-describedby={error ? `${props.name}-error` : helperText ? `${props.name}-helper` : undefined}
+            aria-invalid={error ? "true" : "false"}
+            aria-describedby={
+              error
+                ? `${props.name}-error`
+                : helperText
+                  ? `${props.name}-helper`
+                  : undefined
+            }
             {...props}
           />
         </div>
         {error && (
-          <p id={`${props.name}-error`} className="text-xs font-medium text-state-danger">
+          <p
+            id={`${props.name}-error`}
+            className="text-xs font-medium text-state-danger"
+          >
             {error}
           </p>
         )}
         {helperText && !error && (
-          <p id={`${props.name}-helper`} className="text-xs text-ink-tertiary font-medium">
+          <p
+            id={`${props.name}-helper`}
+            className="text-xs text-ink-tertiary font-medium"
+          >
             {helperText}
           </p>
         )}
