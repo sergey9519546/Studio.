@@ -40,8 +40,10 @@ vi.mock("../components/dashboard/SparkAICard", () => ({
       <button
         onClick={() => onSubmitPrompt("Test prompt")}
         data-testid="submit-prompt-btn"
+        aria-label="Submit prompt"
       >
-        Submit
+        <span className="sr-only">Submit prompt</span>
+        <svg></svg>
       </button>
     </div>
   ),

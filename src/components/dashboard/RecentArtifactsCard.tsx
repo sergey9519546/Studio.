@@ -34,32 +34,35 @@ const ArtifactItem: React.FC<ArtifactItemProps> = ({ artifact, onClick }) => {
   const hasImage = artifact.imageSrc && !imageError;
 
   return (
-    <button
-      type="button"
-      className="rounded-2xl bg-subtle border border-border-subtle relative group overflow-hidden cursor-pointer aspect-[4/3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary w-full h-full text-left"
-      onClick={handleClick}
-      aria-label={`Open artifact ${artifact.name}`}
-    >
-      {hasImage ? (
-        <img
-          src={artifact.imageSrc}
-          alt={artifact.name}
-          className="w-full h-full object-cover"
-          loading="lazy"
-          onError={() => setImageError(true)}
-        />
-      ) : (
-        <div className="absolute inset-0 flex items-center justify-center text-ink-tertiary group-hover:scale-110 transition-transform duration-500">
-          <ImageIcon size={24} />
+    <div role="row" className="contents">
+      <button
+        type="button"
+        className="rounded-2xl bg-subtle border border-border-subtle relative group overflow-hidden cursor-pointer aspect-[4/3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary w-full h-full text-left"
+        onClick={handleClick}
+        aria-label={`Open artifact ${artifact.name}`}
+        role="gridcell"
+      >
+        {hasImage ? (
+          <img
+            src={artifact.imageSrc}
+            alt={artifact.name}
+            className="w-full h-full object-cover"
+            loading="lazy"
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center text-ink-tertiary group-hover:scale-110 transition-transform duration-500">
+            <ImageIcon size={24} />
+          </div>
+        )}
+        <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute bottom-2 left-2 right-2 bg-surface/90 backdrop-blur-md px-3 py-2 rounded-xl translate-y-full group-hover:translate-y-0 transition-transform duration-300 border border-border-subtle shadow-sm">
+          <div className="text-[10px] font-bold truncate text-ink-primary">
+            {artifact.name}
+          </div>
         </div>
-      )}
-      <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-      <div className="absolute bottom-2 left-2 right-2 bg-surface/90 backdrop-blur-md px-3 py-2 rounded-xl translate-y-full group-hover:translate-y-0 transition-transform duration-300 border border-border-subtle shadow-sm">
-        <div className="text-[10px] font-bold truncate text-ink-primary">
-          {artifact.name}
-        </div>
-      </div>
-    </button>
+      </button>
+    </div>
   );
 };
 
@@ -81,7 +84,6 @@ const RecentArtifactsCard: React.FC<RecentArtifactsCardProps> = ({
     <Card
       className={`flex flex-col shadow-md border-border-subtle bg-surface h-full ${className}`}
       aria-busy={loading}
-      aria-live="polite"
     >
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-sm font-bold uppercase tracking-widest text-ink-secondary">
@@ -94,11 +96,14 @@ const RecentArtifactsCard: React.FC<RecentArtifactsCardProps> = ({
           View Gallery
         </button>
       </div>
-      <span className="sr-only">{srLabel}</span>
+      <span className="sr-only" aria-live="polite">
+        {srLabel}
+      </span>
       {loading ? (
         <div
           className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
           aria-label="Loading artifacts"
+          role="grid"
           aria-busy="true"
         >
           {[0, 1, 2, 3].map((i) => (
@@ -113,6 +118,7 @@ const RecentArtifactsCard: React.FC<RecentArtifactsCardProps> = ({
         <div
           className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
           aria-label="Recent artifacts"
+          role="grid"
         >
           {artifacts.map((artifact) => (
             <ArtifactItem
