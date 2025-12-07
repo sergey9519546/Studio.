@@ -1,8 +1,14 @@
 
-import { Module } from '@nestjs/common';
-import { PrismaModule } from '../../prisma/prisma.module';
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
-import { Injectable } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Injectable,
+  Module,
+  Param,
+  Post,
+} from "@nestjs/common";
+import { PrismaModule } from "../../prisma/prisma.module";
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateScriptDto } from './dto/script.dto';
 
@@ -16,12 +22,18 @@ export class ScriptsService {
   async findByProject(projectId: string) { return this.prisma.script.findMany({ where: { projectId } }); }
 }
 
-@Controller('scripts')
+@Controller({ path: "scripts", version: "1" })
 export class ScriptsController {
-  constructor(private service: ScriptsService) { }
-  @Get() findAll() { return this.service.findAll(); }
-  @Post() create(@Body() dto: CreateScriptDto) { return this.service.create(dto); }
-  @Get('project/:projectId') findByProject(@Param('projectId') id: string) { return this.service.findByProject(id); }
+  constructor(private service: ScriptsService) {}
+  @Get() findAll() {
+    return this.service.findAll();
+  }
+  @Post() create(@Body() dto: CreateScriptDto) {
+    return this.service.create(dto);
+  }
+  @Get("project/:projectId") findByProject(@Param("projectId") id: string) {
+    return this.service.findByProject(id);
+  }
 }
 
 @Module({

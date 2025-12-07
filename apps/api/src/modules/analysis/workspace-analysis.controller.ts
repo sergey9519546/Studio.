@@ -1,4 +1,4 @@
 import { Controller } from '@nestjs/common';
 
-@Controller('analysis')
-export class WorkspaceAnalysisController { }
+@Controller({ path: "analysis", version: "1" })
+export class WorkspaceAnalysisController {}

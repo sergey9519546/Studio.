@@ -5,7 +5,7 @@ import { ConfluenceService } from './confluence.service';
 /**
  * Controller for Confluence integration endpoints
  */
-@Controller('confluence')
+@Controller({ path: "confluence", version: "1" })
 export class ConfluenceController {
   constructor(private readonly confluenceService: ConfluenceService) {}
 
@@ -13,7 +13,7 @@ export class ConfluenceController {
    * Health check endpoint
    * GET /api/confluence/health
    */
-  @Get('health')
+  @Get("health")
   async healthCheck() {
     return this.confluenceService.healthCheck();
   }
@@ -22,7 +22,7 @@ export class ConfluenceController {
    * Get Confluence configuration
    * GET /api/confluence/config
    */
-  @Get('config')
+  @Get("config")
   @UseGuards(JwtAuthGuard)
   async getConfig() {
     return this.confluenceService.getConfig();
@@ -32,19 +32,22 @@ export class ConfluenceController {
    * Validate page access for authenticated user
    * GET /api/confluence/pages/:pageId/access
    */
-  @Get('pages/:pageId/access')
+  @Get("pages/:pageId/access")
   @UseGuards(JwtAuthGuard)
   async validatePageAccess(
-    @Param('pageId') pageId: string,
-    @Request() req: { user?: { id: string; email: string } },
+    @Param("pageId") pageId: string,
+    @Request() req: { user?: { id: string; email: string } }
   ) {
     if (!pageId) {
-      throw new HttpException('Page ID is required', HttpStatus.BAD_REQUEST);
+      throw new HttpException("Page ID is required", HttpStatus.BAD_REQUEST);
     }
 
     const userId = req.user?.id;
     if (!userId) {
-      throw new HttpException('User not authenticated', HttpStatus.UNAUTHORIZED);
+      throw new HttpException(
+        "User not authenticated",
+        HttpStatus.UNAUTHORIZED
+      );
     }
 
     return this.confluenceService.validatePageAccess(pageId, userId);
@@ -54,11 +57,11 @@ export class ConfluenceController {
    * Get page metadata
    * GET /api/confluence/pages/:pageId
    */
-  @Get('pages/:pageId')
+  @Get("pages/:pageId")
   @UseGuards(JwtAuthGuard)
-  async getPageMetadata(@Param('pageId') pageId: string) {
+  async getPageMetadata(@Param("pageId") pageId: string) {
     if (!pageId) {
-      throw new HttpException('Page ID is required', HttpStatus.BAD_REQUEST);
+      throw new HttpException("Page ID is required", HttpStatus.BAD_REQUEST);
     }
 
     return this.confluenceService.getPageMetadata(pageId);

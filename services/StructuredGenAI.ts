@@ -32,10 +32,10 @@ export class StructuredGenAI {
   ): Promise<T> {
     return await withResilience(async () => {
       try {
-        const response = await fetch('/api/ai/extract', {
-          method: 'POST',
+        const response = await fetch("/api/v1/ai/extract", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             prompt,

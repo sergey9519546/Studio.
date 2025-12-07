@@ -36,6 +36,12 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
+      // Proxy API v1 requests to backend
+      "/api/v1": {
+        target: "http://localhost:3001",
+        changeOrigin: true,
+      },
+      // Legacy fallback for non-versioned API calls (if any remain)
       "/api": {
         target: "http://localhost:3001",
         changeOrigin: true,

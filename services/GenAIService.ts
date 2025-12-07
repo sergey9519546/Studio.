@@ -17,15 +17,15 @@ export class GenAIService {
         systemInstruction?: string
     ): Promise<string> {
         try {
-            const response = await fetch(`${GenAIService.API_BASE}/ai/chat`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    message: prompt,
-                    context: JSON.stringify({ systemInstruction }),
-                }),
+            const response = await fetch("/api/v1/ai/chat", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                message: prompt,
+                context: JSON.stringify({ systemInstruction }),
+              }),
             });
 
             if (!response.ok) {

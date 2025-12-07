@@ -1,22 +1,22 @@
 
 import { Controller, Get } from '@nestjs/common';
-import { DriveService, DriveFileDTO } from './drive.service';
+import { DriveFileDTO, DriveService } from "./drive.service";
 import { GoogleClientFactory } from './google-client.factory';
 
 // In a real app, use @UseGuards(JwtAuthGuard)
-@Controller('google/drive')
+@Controller({ path: "google/drive", version: "1" })
 export class DriveController {
   constructor(
     private readonly driveService: DriveService,
     private readonly googleFactory: GoogleClientFactory
   ) {}
 
-  @Get('team-assets')
+  @Get("team-assets")
   async getTeamAssets(): Promise<DriveFileDTO[]> {
     return await this.driveService.listTeamAssets();
   }
 
-  @Get('status')
+  @Get("status")
   getAuthStatus() {
     return this.googleFactory.getServiceAccountProfile();
   }

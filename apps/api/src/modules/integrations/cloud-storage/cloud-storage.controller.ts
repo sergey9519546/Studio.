@@ -1,28 +1,28 @@
 
-import { Controller, Get, Param, Query, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, Param, Query, Req, UseGuards } from "@nestjs/common";
 import { Request } from 'express';
+import { JwtAuthGuard } from "../../../common/guards/jwt-auth.guard";
 import { CloudStorageService } from './cloud-storage.service';
-import { ListFilesQueryDto } from './dto/cloud-storage.dto';
-import { JwtAuthGuard } from '../../../common/guards/jwt-auth.guard';
+import { ListFilesQueryDto } from "./dto/cloud-storage.dto";
 
 interface RequestWithUser extends Request {
   user: { id: string; email: string };
 }
 
 @UseGuards(JwtAuthGuard)
-@Controller('integrations/storage')
+@Controller({ path: "integrations/storage", version: "1" })
 export class CloudStorageController {
-  constructor(private readonly storageService: CloudStorageService) { }
+  constructor(private readonly storageService: CloudStorageService) {}
 
-  @Get('options')
+  @Get("options")
   async getOptions(@Req() req: RequestWithUser) {
     const userId = parseInt(req.user.id, 10);
     return this.storageService.getProviderOptions(userId);
   }
 
-  @Get(':provider/files')
+  @Get(":provider/files")
   async listFiles(
-    @Param('provider') provider: string,
+    @Param("provider") provider: string,
     @Query() query: ListFilesQueryDto,
     @Req() req: RequestWithUser
   ) {

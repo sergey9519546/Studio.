@@ -1,69 +1,94 @@
 
 
-import { Controller, Get, Post, Body, Param, Patch, Delete, Query, UseInterceptors, UploadedFile } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UploadedFile,
+  UseInterceptors,
+} from "@nestjs/common";
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Throttle } from '@nestjs/throttler';
-import { MoodboardService } from './moodboard.service';
+import { AssetsService } from "../assets/assets.service";
 import { CreateMoodboardItemDto } from './dto/create-moodboard-item.dto';
 import { UpdateMoodboardItemDto } from './dto/update-moodboard-item.dto';
-import { AssetsService } from '../assets/assets.service';
+import { MoodboardService } from "./moodboard.service";
 
-@Controller('moodboard')
+@Controller({ path: "moodboard", version: "1" })
 export class MoodboardController {
   constructor(
     private readonly moodboardService: MoodboardService,
     private readonly assetsService: AssetsService
-  ) { }
+  ) {}
 
-  @Post(':projectId/upload')
+  @Post(":projectId/upload")
   @Throttle({ default: { limit: 3, ttl: 60000 } }) // 3 uploads per minute
-  @UseInterceptors(FileInterceptor('file'))
-  async uploadFile(@Param('projectId') projectId: string, @UploadedFile() file: Express.Multer.File) {
+  @UseInterceptors(FileInterceptor("file"))
+  async uploadFile(
+    @Param("projectId") projectId: string,
+    @UploadedFile() file: Express.Multer.File
+  ) {
     // 1. Upload to Cloud Storage via AssetsService
     const asset = await this.assetsService.create(file, projectId);
 
     // 2. Create DTO with real GCS URL
     const dto: CreateMoodboardItemDto = {
       projectId,
-      type: (file.mimetype.startsWith('video') ? 'video' : 'image') as 'image' | 'video',
-      url: asset.url || asset.publicUrl || '',
-      caption: 'Processing analysis...'
+      type: (file.mimetype.startsWith("video") ? "video" : "image") as
+        | "image"
+        | "video",
+      url: asset.url || asset.publicUrl || "",
+      caption: "Processing analysis...",
     };
 
     return this.moodboardService.create(dto);
   }
 
-  @Post(':projectId/link-asset')
+  @Post(":projectId/link-asset")
   async linkAsset(
-    @Param('projectId') projectId: string,
-    @Body('assetId') assetId: string
+    @Param("projectId") projectId: string,
+    @Body("assetId") assetId: string
   ) {
     return this.moodboardService.createFromAsset(projectId, assetId);
   }
 
-  @Post(':projectId')
-  async create(@Param('projectId') projectId: string, @Body() createDto: CreateMoodboardItemDto) {
+  @Post(":projectId")
+  async create(
+    @Param("projectId") projectId: string,
+    @Body() createDto: CreateMoodboardItemDto
+  ) {
     createDto.projectId = projectId;
     return this.moodboardService.create(createDto);
   }
 
-  @Get(':projectId')
-  async findAll(@Param('projectId') projectId: string) {
+  @Get(":projectId")
+  async findAll(@Param("projectId") projectId: string) {
     return this.moodboardService.findAllByProject(projectId);
   }
 
-  @Get(':projectId/search')
-  async search(@Param('projectId') projectId: string, @Query('q') query: string) {
+  @Get(":projectId/search")
+  async search(
+    @Param("projectId") projectId: string,
+    @Query("q") query: string
+  ) {
     return this.moodboardService.search(projectId, query);
   }
 
-  @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateData: UpdateMoodboardItemDto) {
+  @Patch(":id")
+  async update(
+    @Param("id") id: string,
+    @Body() updateData: UpdateMoodboardItemDto
+  ) {
     return this.moodboardService.update(id, updateData);
   }
 
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
+  @Delete(":id")
+  async remove(@Param("id") id: string) {
     return this.moodboardService.remove(id);
   }
 }

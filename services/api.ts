@@ -1,8 +1,27 @@
 
 
-import { Freelancer, Project, Assignment, Script, AuthResult, ApiResponse, QueryParams, MoodboardItem, Asset, KnowledgeSource } from '../types';
+import {
+  ApiResponse,
+  Asset,
+  Assignment,
+  AuthResult,
+  Freelancer,
+  KnowledgeSource,
+  MoodboardItem,
+  Project,
+  QueryParams,
+  Script,
+} from "../types";
 
 // const _appId = 'studio-roster-v1';
+
+// --- API CONFIGURATION ---
+
+/**
+ * Base path for all API requests
+ * Aligned with NestJS versioning: @Controller({ version: '1' })
+ */
+const API_BASE = '/api/v1';
 
 // --- HELPERS ---
 
@@ -25,8 +44,7 @@ export interface BatchImportResponse {
     errors?: { item: Record<string, unknown>; error: string }[];
 }
 
-const STORAGE_PREFIX = 'studio_roster_v1_';
-const API_BASE = '/api/v1';
+const STORAGE_PREFIX = "studio_roster_v1_";
 
 // --- PERSISTENCE LAYER ---
 
@@ -144,23 +162,25 @@ const uploadToBackend = async (file: File, projectId?: string): Promise<Asset> =
     if (projectId) formData.append('projectId', projectId);
 
     // Set 10 minute timeout for uploads to prevent "Request timed out" on large files
-    const res = await fetchApi<Asset>('/assets/upload', {
-        method: 'POST',
-        body: formData,
-        timeout: 600000
+    const res = await fetchApi<Asset>(`${API_BASE}/assets/upload`, {
+      method: "POST",
+      body: formData,
+      timeout: 600000,
     });
 
     const asset = res.data!;
 
     if (!asset.url && !asset.publicUrl) {
-        try {
-            const urlRes = await fetchApi<{ url: string }>(`/assets/${asset.id}/url`);
-            asset.url = urlRes.data?.url;
-        } catch {
-            console.warn("Could not sign URL for asset", asset.id);
-        }
+      try {
+        const urlRes = await fetchApi<{ url: string }>(
+          `${API_BASE}/assets/${asset.id}/url`
+        );
+        asset.url = urlRes.data?.url;
+      } catch {
+        console.warn("Could not sign URL for asset", asset.id);
+      }
     } else if (asset.publicUrl) {
-        asset.url = asset.publicUrl;
+      asset.url = asset.publicUrl;
     }
 
     return asset;
@@ -171,11 +191,14 @@ export const api = {
         login: async (email: string, password: string): Promise<ApiResponse<AuthResult>> => {
             try {
                 // Real Backend Auth
-                const res = await fetchApi<AuthResult>('/auth/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
-                });
+                const res = await fetchApi<AuthResult>(
+                  `${API_BASE}/auth/login`,
+                  {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password }),
+                  }
+                );
 
                 if (res.success && res.data) {
                     localStorage.setItem('studio_roster_v1_auth_token', res.data.accessToken);
@@ -194,7 +217,7 @@ export const api = {
     assets: {
         list: async (): Promise<ApiResponse<Asset[]>> => {
             try {
-                const res = await fetchApi<Asset[]>('/assets');
+                const res = await fetchApi<Asset[]>(`${API_BASE}/assets`);
                 // Implicit Cache
                 localAssets = res.data || [];
                 saveToStorage('assets', localAssets);
@@ -221,7 +244,9 @@ export const api = {
         },
         delete: async (id: string): Promise<ApiResponse<boolean>> => {
             try {
-                await fetchApi<unknown>(`/assets/${id}`, { method: 'DELETE' });
+                await fetchApi<unknown>(`${API_BASE}/assets/${id}`, {
+                  method: "DELETE",
+                });
             } catch {
                 console.warn("Delete failed online, removing locally");
             }
@@ -234,7 +259,11 @@ export const api = {
     storage: {
         getInfo: async (): Promise<ApiResponse<{ bucket: string; configured: boolean; projectId: string }>> => {
             try {
-                return await fetchApi<{ bucket: string; configured: boolean; projectId: string }>('/storage/info');
+                return await fetchApi<{
+                  bucket: string;
+                  configured: boolean;
+                  projectId: string;
+                }>(`${API_BASE}/storage/info`);
             } catch {
                 return { data: { bucket: 'Unknown', configured: false, projectId: '' }, success: false };
             }
@@ -244,7 +273,9 @@ export const api = {
     freelancers: {
         list: async (_params?: QueryParams): Promise<ApiResponse<Freelancer[]>> => {
             try {
-                const res = await fetchApi<Freelancer[]>('/freelancers');
+                const res = await fetchApi<Freelancer[]>(
+                  `${API_BASE}/freelancers`
+                );
                 // Implicit Cache
                 localFreelancers = res.data || [];
                 saveToStorage('freelancers', localFreelancers);
@@ -255,7 +286,14 @@ export const api = {
         },
         create: async (f: Freelancer) => {
             try {
-                const res = await fetchApi<Freelancer>('/freelancers', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(f) });
+                const res = await fetchApi<Freelancer>(
+                  `${API_BASE}/freelancers`,
+                  {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(f),
+                  }
+                );
                 const createdFreelancer = res.data ?? f;
                 localFreelancers = [...localFreelancers, createdFreelancer];
                 saveToStorage('freelancers', localFreelancers);
@@ -268,7 +306,14 @@ export const api = {
         },
         update: async (f: Freelancer) => {
             try {
-                const res = await fetchApi<Freelancer>(`/freelancers/${f.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(f) });
+                const res = await fetchApi<Freelancer>(
+                  `${API_BASE}/freelancers/${f.id}`,
+                  {
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(f),
+                  }
+                );
                 const updatedFreelancer = res.data ?? f;
                 localFreelancers = localFreelancers.map(lf => lf.id === f.id ? updatedFreelancer : lf);
                 saveToStorage('freelancers', localFreelancers);
@@ -281,7 +326,9 @@ export const api = {
         },
         delete: async (id: string) => {
             try {
-                await fetchApi(`/freelancers/${id}`, { method: 'DELETE' });
+                await fetchApi(`${API_BASE}/freelancers/${id}`, {
+                  method: "DELETE",
+                });
             } catch { /* ignore */ }
             localFreelancers = localFreelancers.filter(f => f.id !== id);
             saveToStorage('freelancers', localFreelancers);
@@ -289,7 +336,14 @@ export const api = {
         },
         importBatch: async (items: Freelancer[]): Promise<ApiResponse<BatchImportResponse>> => {
             try {
-                const res = await fetchApi<BatchImportResponse>('/freelancers/batch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(items) });
+                const res = await fetchApi<BatchImportResponse>(
+                  `${API_BASE}/freelancers/batch`,
+                  {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(items),
+                  }
+                );
                 // Re-fetch to sync
                 return res;
             } catch {
@@ -306,7 +360,9 @@ export const api = {
                 if (params?.limit) query.append('limit', params.limit.toString());
                 if (params?.search) query.append('search', params.search);
 
-                const res = await fetchApi<Project[]>(`/projects?${query.toString()}`);
+                const res = await fetchApi<Project[]>(
+                  `${API_BASE}/projects?${query.toString()}`
+                );
                 localProjects = res.data || [];
                 saveToStorage('projects', localProjects);
                 return res;
