@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { VertexAIService } from '../vertex-ai.service';
-import { AIProvider, ChatOptions, GenerateOptions, ExtractOptions, ModelInfo } from './ai-provider.interface';
+import { AIProvider, ChatOptions, ModelInfo } from './ai-provider.interface';
 
 @Injectable()
 export class VertexAIProvider implements AIProvider {
@@ -41,11 +41,11 @@ export class VertexAIProvider implements AIProvider {
         return this.vertexAI.chat(messages, systemPrompt, options?.tools);
     }
 
-    async generateContent(prompt: string, options?: GenerateOptions): Promise<string> {
+    async generateContent(prompt: string): Promise<string> {
         return this.vertexAI.generateContent(prompt);
     }
 
-    async extractData(prompt: string, schema?: Record<string, unknown>, options?: ExtractOptions): Promise<unknown> {
+    async extractData(prompt: string, schema?: Record<string, unknown>): Promise<unknown> {
         return this.vertexAI.extractData(prompt, schema);
     }
 

@@ -1,12 +1,8 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
-import { EmbeddingsService } from './embeddings.service';
-
 interface StoredVector {
     id: string;
     content: string;
     embedding: number[];
-    metadata: Record<string, any>;
+    metadata: Record<string, unknown>;
     createdAt: Date;
 }
 
@@ -38,7 +34,7 @@ export class VectorStoreService {
      */
     async storeDocument(
         content: string,
-        metadata: Record<string, any> = {}
+        metadata: Record<string, unknown> = {}
     ): Promise<string> {
         const embedding = await this.embeddings.generateEmbedding(content);
         const id = this.generateId();
@@ -59,11 +55,11 @@ export class VectorStoreService {
             await this.prisma.knowledgeSource.create({
                 data: {
                     type: 'text',
-                    title: metadata.title || 'Untitled',
+                    title: metadata.title as string || 'Untitled',
                     originalContent: content,
                     status: 'indexed',
-                    summary: metadata.summary,
-                    projectId: metadata.projectId,
+                    summary: metadata.summary as string,
+                    projectId: metadata.projectId as string,
                 },
             });
         } catch (error) {
@@ -78,7 +74,7 @@ export class VectorStoreService {
      * Store multiple documents in batch
      */
     async storeBatch(
-        documents: Array<{ content: string; metadata?: Record<string, any> }>
+        documents: Array<{ content: string; metadata?: Record<string, unknown> }>
     ): Promise<string[]> {
         const contents = documents.map(d => d.content);
         const embeddings = await this.embeddings.generateBatch(contents);
@@ -111,9 +107,9 @@ export class VectorStoreService {
         options: {
             topK?: number;
             threshold?: number;
-            filter?: Record<string, any>;
+            filter?: Record<string, unknown>;
         } = {}
-    ): Promise<Array<{ id: string; content: string; score: number; metadata: Record<string, any> }>> {
+    ): Promise<Array<{ id: string; content: string; score: number; metadata: Record<string, unknown> }>> {
         const { topK = 5, threshold = 0.0, filter } = options;
 
         const queryEmbedding = await this.embeddings.generateEmbedding(query);
@@ -125,7 +121,8 @@ export class VectorStoreService {
         if (filter) {
             vectors = vectors.filter(vec => {
                 return Object.entries(filter).every(([key, value]) => {
-                    return vec.metadata[key] === value;
+                    // Safely check metadata property
+                    return Object.prototype.hasOwnProperty.call(vec.metadata, key) && vec.metadata[key] === value;
                 });
             });
         }
@@ -153,14 +150,20 @@ export class VectorStoreService {
         options: {
             topK?: number;
             semanticWeight?: number; // 0-1, how much to weight semantic vs keyword
+            projectId?: string; // Add projectId filter
         } = {}
-    ): Promise<Array<{ id: string; content: string; score: number; metadata: Record<string, any> }>> {
-        const { topK = 5, semanticWeight = 0.7 } = options;
+    ): Promise<Array<{ id: string; content: string; score: number; metadata: Record<string, unknown> }>> {
+        const { topK = 5, semanticWeight = 0.7, projectId } = options;
         const keywordWeight = 1 - semanticWeight;
 
         // Semantic search
         const queryEmbedding = await this.embeddings.generateEmbedding(query);
-        const vectors = Array.from(this.vectorStore.values());
+        let vectors = Array.from(this.vectorStore.values());
+
+        // Apply projectId filter if provided
+        if (projectId) {
+            vectors = vectors.filter(vec => vec.metadata.projectId === projectId);
+        }
 
         const results = vectors.map(vec => {
             // Semantic similarity
@@ -183,6 +186,13 @@ export class VectorStoreService {
         return results
             .sort((a, b) => b.score - a.score)
             .slice(0, topK);
+    }
+
+    /**
+     * Get document content by ID
+     */
+    getDocumentContent(id: string): string | undefined {
+        return this.vectorStore.get(id)?.content;
     }
 
     /**

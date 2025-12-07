@@ -54,9 +54,9 @@ describe('AI Extraction API (Integration)', () => {
                 .post('/api/v1/ai/extract')
                 .send({ prompt, schema })
                 .expect(200)
-                .expect((res) => {
-                    expect(Array.isArray(res.body)).toBe(true);
-                    expect(res.body.length).toBeGreaterThan(0);
+                .expect((_res) => {
+                    expect(Array.isArray(_res.body)).toBe(true);
+                    expect(_res.body.length).toBeGreaterThan(0);
                     expect(mockGeminiService.extractData).toHaveBeenCalledWith(
                         prompt,
                         schema,
@@ -74,7 +74,7 @@ describe('AI Extraction API (Integration)', () => {
                 .field('schema', JSON.stringify(schema))
                 .attach('files', Buffer.from('mock file content'), 'test.txt')
                 .expect(200)
-                .expect((res) => {
+                .expect((_res) => {
                     expect(mockGeminiService.extractData).toHaveBeenCalled();
                     const callArgs = mockGeminiService.extractData.mock.calls[0];
                     expect(callArgs[2]).toBeDefined(); // Files argument

@@ -1,7 +1,6 @@
 // Prompt Templates System - Complete Implementation
 
 export interface PromptTemplate {
-    version: string;
     systemPrompt: string;
     userPrompt: (data: unknown) => string;
 }
@@ -24,7 +23,6 @@ interface ProjectProfitabilityData {
 
 export const PROMPT_TEMPLATES: Record<string, PromptTemplate> = {
     freelancerAnalysis: {
-        version: 'v2.0',
         systemPrompt: `You are an expert HR analyst for creative agencies.
 
 **ROLE:** Analyze freelancer performance and provide actionable insights.
@@ -67,7 +65,6 @@ Recent Work: ${freelancerData.recentProjects.map((p) => p.title).join(', ')}
     },
 
     projectProfitability: {
-        version: 'v2.0',
         systemPrompt: `You are a financial analyst for creative agencies.
 
 **ROLE:** Analyze project profitability and identify optimization opportunities.
@@ -107,7 +104,6 @@ Team: ${projectData.assignments.map((a) => `${a.freelancer.name} (${a.role})`).j
     },
 
     chat: {
-        version: 'v3.0',
         systemPrompt: `You are an expert AI analyst for a creative agency management system.
 
 **ROLE:** Analyze freelancers, projects, workload, and provide data-driven insights.
@@ -135,7 +131,7 @@ Respond based on the provided context.`,
 };
 
 // Helper to get prompt with versioning support
-export function getPrompt(templateName: string, version?: string): PromptTemplate {
+export function getPrompt(templateName: string): PromptTemplate {
     const template = PROMPT_TEMPLATES[templateName];
     if (!template) {
         throw new Error(`Prompt template '${templateName}' not found`);

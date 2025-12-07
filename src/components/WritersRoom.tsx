@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Send, Loader2, Copy, Download, Book } from 'lucide-react';
-import { Card } from './design/Card';
 import { Button } from './design/Button';
 import { Textarea } from './design/Textarea';
 import { LiquidGlassContainer } from './design/LiquidGlassContainer';
@@ -11,16 +10,24 @@ interface Message {
   context?: string[];
 }
 
+interface GenerationContext {
+  projectTitle?: string;
+  brief?: string;
+  guidelines?: string;
+  assetMetadata: unknown[]; 
+  projectIntelligence: unknown[]; 
+}
+
 interface WritersRoomProps {
   projectId: string;
   projectTitle?: string;
   brief?: string;
   guidelines?: string;
-  onGenerateContent?: (prompt: string, context: any) => Promise<string>;
+  onGenerateContent?: (prompt: string, context: GenerationContext) => Promise<string>;
 }
 
 export const WritersRoom: React.FC<WritersRoomProps> = ({
-  projectId,
+  projectId: _projectId,
   projectTitle = 'Untitled Project',
   brief = '',
   guidelines = '',
@@ -29,7 +36,7 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
-  const [showContext, setShowContext] = useState(true);
+  const [showContext] = useState(true);
 
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;

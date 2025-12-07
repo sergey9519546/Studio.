@@ -1,7 +1,7 @@
 import React from 'react';
-import { FieldValues, UseControllerProps, useController } from 'react-hook-form';
+import { FieldValues, UseControllerProps, useController, Control } from 'react-hook-form';
 
-interface InputProps<T extends FieldValues = FieldValues>
+interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   label?: string;
   error?: string;
@@ -9,7 +9,7 @@ interface InputProps<T extends FieldValues = FieldValues>
   icon?: React.ReactNode;
   variant?: 'primary' | 'secondary';
   size?: 'sm' | 'md' | 'lg';
-  control?: any;
+  control?: Control<FieldValues>;
   name?: string;
 }
 

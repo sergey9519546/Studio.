@@ -40,7 +40,6 @@ export const DGlassEffectContainer: React.FC<DGlassEffectContainerProps> = ({
   style,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const childRefsMap = useRef<Map<string, HTMLElement>>(new Map());
   const [isMorphed, setIsMorphed] = useState(false);
   const [morphStyle, setMorphStyle] = useState<React.CSSProperties>({});
   const animationFrameRef = useRef<number>();

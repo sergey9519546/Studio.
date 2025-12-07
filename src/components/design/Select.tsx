@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChevronDown } from 'lucide-react';
-import { FieldValues, UseControllerProps, useController } from 'react-hook-form';
+import { UseControllerProps, useController } from 'react-hook-form';
 
 export interface SelectOption {
   value: string | number;
@@ -8,7 +8,7 @@ export interface SelectOption {
   disabled?: boolean;
 }
 
-interface SelectProps<T extends FieldValues = FieldValues>
+interface SelectProps
   extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
   label?: string;
   error?: string;
@@ -120,7 +120,7 @@ Select.displayName = 'Select';
  * Select component wrapper for React Hook Form integration
  * Usage: <SelectField control={control} name="status" label="Status" options={statusOptions} rules={{required: "Status is required"}} />
  */
-interface SelectFieldProps<T extends FieldValues = FieldValues> extends UseControllerProps<T> {
+interface SelectFieldProps extends UseControllerProps {
   label?: string;
   helperText?: string;
   options: SelectOption[];

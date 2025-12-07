@@ -26,17 +26,17 @@ describe('Dashboard', () => {
             success: true,
             data: [],
             meta: { total: 12, page: 1, limit: 10, totalPages: 2 },
-        } as any);
+        } as api.ApiResponse<api.Project[]>);
 
         vi.mocked(api.api.freelancers.list).mockResolvedValue({
             success: true,
-            data: Array(25).fill({}),
-        } as any);
+            data: Array(25).fill({}) as api.Freelancer[],
+        } as api.ApiResponse<api.Freelancer[]>);
 
         vi.mocked(api.api.assignments.list).mockResolvedValue({
             success: true,
-            data: Array(8).fill({}),
-        } as any);
+            data: Array(8).fill({}) as api.Assignment[],
+        } as api.ApiResponse<api.Assignment[]>);
     });
 
     it('should render dashboard statistics', async () => {

@@ -1,19 +1,3 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { VertexAIService } from '../ai/vertex-ai.service';
-import { ChunkingService } from './chunking.service';
-import { EmbeddingsService } from './embeddings.service';
-import { VectorStoreService } from './vector-store.service';
-
-interface RAGContext {
-    query: string;
-    relevantChunks: Array<{
-        content: string;
-        score: number;
-        metadata?: Record<string, unknown>;
-    }>;
-    context: string;
-}
-
 interface RAGResponse {
     answer: string;
     sources: Array<{
@@ -21,7 +5,7 @@ interface RAGResponse {
         score: number;
         metadata?: Record<string, unknown>;
     }>;
-    context: RAGContext;
+    context?: RAGContext;
 }
 
 @Injectable()
@@ -84,23 +68,20 @@ export class RAGService {
             topK?: number;
             projectId?: string;
             includeContext?: boolean;
-            temperature?: number;
         } = {}
     ): Promise<RAGResponse> {
         const {
             topK = 5,
             projectId,
             includeContext = true,
-            temperature = 0.2,
         } = options;
 
         this.logger.log(`RAG Query: "${question}"`);
 
         // 1. Retrieve relevant documents using hybrid search
-        const searchFilter = projectId ? { projectId } : undefined;
         const relevantDocs = await this.vectorStore.hybridSearch(question, {
             topK,
-
+            projectId, // Pass projectId to hybridSearch
         });
 
         if (relevantDocs.length === 0) {
@@ -142,7 +123,7 @@ export class RAGService {
                     query: question,
                     relevantChunks: relevantDocs,
                     context,
-                } : undefined as any,
+                } : undefined,
             };
 
             this.logger.log('RAG query completed successfully');
@@ -167,9 +148,9 @@ export class RAGService {
         const { conversationHistory = [], projectId, topK = 3 } = options;
 
         // Retrieve relevant context
-        const searchFilter = projectId ? { projectId } : undefined;
         const relevantDocs = await this.vectorStore.hybridSearch(message, {
             topK,
+            projectId, // Pass projectId to hybridSearch
         });
 
         const context = relevantDocs
@@ -212,16 +193,12 @@ export class RAGService {
      */
     async summarizeDocuments(
         documentIds: string[],
-        options: {
-            maxLength?: number;
-        } = {}
     ): Promise<{ summary: string; documentsProcessed: number }> {
         this.logger.log(`Summarizing ${documentIds.length} documents`);
 
         // Retrieve documents
         const contents = documentIds.map(id => {
-            const vector = (this.vectorStore as any).vectorStore.get(id);
-            return vector?.content || '';
+            return this.vectorStore.getDocumentContent(id) || '';
         }).filter(c => c.length > 0);
 
         if (contents.length === 0) {

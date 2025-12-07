@@ -30,8 +30,9 @@ export const useToast = (): UseToastReturn => {
   }, []);
 
   React.useEffect(() => {
+    const currentToastTimeouts = toastTimeouts.current;
     return () => {
-      Object.values(toastTimeouts.current).forEach(clearTimeout);
+      Object.values(currentToastTimeouts).forEach(clearTimeout);
     };
   }, []);
 

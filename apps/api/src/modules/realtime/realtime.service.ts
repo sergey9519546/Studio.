@@ -1,9 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { Response } from 'express';
 
 interface ConnectedClient {
   id: string;
-  res: any;
+  res: Response;
   filters?: {
     freelancerIds?: string[];
     projectIds?: string[];
@@ -17,7 +18,7 @@ export class RealtimeService {
 
   constructor(private eventEmitter: EventEmitter2) {}
 
-  addClient(clientId: string, res: any, filters?: ConnectedClient['filters']) {
+  addClient(clientId: string, res: Response, filters?: ConnectedClient['filters']) {
     this.clients.set(clientId, { id: clientId, res, filters });
 
     this.logger.log(`Client connected: ${clientId}`);
@@ -50,7 +51,7 @@ export class RealtimeService {
     type: 'assignment_created' | 'assignment_updated' | 'assignment_deleted' |
            'project_created' | 'project_updated' | 'project_deleted' |
            'freelancer_created' | 'freelancer_updated' | 'freelancer_deleted';
-    data: any;
+    data: unknown;
     entityId: string;
   }) {
     const { type, data, entityId } = eventData;
@@ -84,7 +85,6 @@ export class RealtimeService {
 
     // Extract resource type and ID from event type
     const eventParts = event.type.split('_');
-    const action = eventParts[eventParts.length - 1]; // created, updated, deleted
     const resourceType = eventParts.slice(0, -1).join('_'); // assignment, project, freelancer
 
     // Currently we don't filter by action, only by resource ID

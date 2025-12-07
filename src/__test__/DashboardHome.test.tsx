@@ -2,16 +2,39 @@ import React from "react";
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import DashboardHome from "../views/DashboardHome";
-import { useDashboardData } from "../hooks/useDashboardData";
+import { useDashboardData, DashboardData } from "../hooks/useDashboardData";
 import { useToast } from "../hooks/useToast";
+import { Artifact } from "../components/dashboard/RecentArtifactsCard";
 
 // Mock the hooks
 vi.mock("../hooks/useDashboardData");
 vi.mock("../hooks/useToast");
 
+interface MockDashboardHeaderProps {
+  onNotificationsClick: () => void;
+  onNewProjectClick: () => void;
+}
+
+interface MockHeroProjectCardProps {
+  title: string;
+  description: string;
+}
+
+interface MockSparkAICardProps {
+  onSubmitPrompt: (prompt: string) => void;
+}
+
+interface MockVibePaletteCardProps {
+  onColorSelect: (color: string) => void;
+}
+
+interface MockRecentArtifactsCardProps {
+  artifacts: Artifact[];
+}
+
 // Mock the child components
 vi.mock("../components/dashboard/DashboardHeader", () => ({
-  default: ({ onNotificationsClick, onNewProjectClick }: any) => (
+  default: ({ onNotificationsClick, onNewProjectClick }: MockDashboardHeaderProps) => (
     <div data-testid="dashboard-header">
       <button onClick={onNotificationsClick} data-testid="notifications-btn" aria-label="View notifications">
         <span className="sr-only">View notifications</span>
@@ -25,7 +48,7 @@ vi.mock("../components/dashboard/DashboardHeader", () => ({
 }));
 
 vi.mock("../components/dashboard/HeroProjectCard", () => ({
-  default: ({ title, description }: any) => (
+  default: ({ title, description }: MockHeroProjectCardProps) => (
     <div data-testid="hero-project-card">
       <h1>{title}</h1>
       <p>{description}</p>
@@ -34,7 +57,7 @@ vi.mock("../components/dashboard/HeroProjectCard", () => ({
 }));
 
 vi.mock("../components/dashboard/SparkAICard", () => ({
-  default: ({ onSubmitPrompt }: any) => (
+  default: ({ onSubmitPrompt }: MockSparkAICardProps) => (
     <div data-testid="spark-ai-card">
       <input data-testid="prompt-input" placeholder="Enter prompt" />
       <button
@@ -50,7 +73,7 @@ vi.mock("../components/dashboard/SparkAICard", () => ({
 }));
 
 vi.mock("../components/dashboard/VibePaletteCard", () => ({
-  default: ({ onColorSelect }: any) => (
+  default: ({ onColorSelect }: MockVibePaletteCardProps) => (
     <div data-testid="vibe-palette-card">
       <button
         onClick={() => onColorSelect("#FF0000")}
@@ -63,9 +86,9 @@ vi.mock("../components/dashboard/VibePaletteCard", () => ({
 }));
 
 vi.mock("../components/dashboard/RecentArtifactsCard", () => ({
-  default: ({ artifacts }: any) => (
+  default: ({ artifacts }: MockRecentArtifactsCardProps) => (
     <div data-testid="recent-artifacts-card">
-      {artifacts.map((artifact: any) => (
+      {artifacts.map((artifact: Artifact) => (
         <div key={artifact.id} data-testid={`artifact-${artifact.id}`}>
           {artifact.name}
         </div>
@@ -78,7 +101,7 @@ describe("DashboardHome", () => {
   const mockAddToast = vi.fn();
   const mockAddArtifact = vi.fn();
 
-  const mockDashboardData = {
+  const mockDashboardData: DashboardData = {
     heroProject: {
       id: "hero-1",
       imageSrc: "https://example.com/image.jpg",
@@ -103,8 +126,8 @@ describe("DashboardHome", () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    (useDashboardData as any).mockReturnValue(mockDashboardData);
-    (useToast as any).mockReturnValue({
+    (useDashboardData as vi.Mock).mockReturnValue(mockDashboardData);
+    (useToast as vi.Mock).mockReturnValue({
       toasts: [],
       addToast: mockAddToast,
     });
@@ -179,7 +202,7 @@ describe("DashboardHome", () => {
   });
 
   it("renders loading states", async () => {
-    (useDashboardData as any).mockReturnValue({
+    (useDashboardData as vi.Mock).mockReturnValue({
       ...mockDashboardData,
       loadingHero: true,
       loadingArtifacts: true,
@@ -194,7 +217,7 @@ describe("DashboardHome", () => {
   });
 
   it("renders error states", async () => {
-    (useDashboardData as any).mockReturnValue({
+    (useDashboardData as vi.Mock).mockReturnValue({
       ...mockDashboardData,
       errorHero: "Failed to load hero project",
       errorArtifacts: null,

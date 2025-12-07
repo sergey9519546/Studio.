@@ -1,6 +1,7 @@
 
 import { Injectable, Inject, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { Freelancer, Skill } from '@prisma/client';
 import { CreateFreelancerDto, UpdateFreelancerDto, ImportFreelancerDto } from './dto/freelancer.dto';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
@@ -15,8 +16,8 @@ export class FreelancersService {
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) { }
 
-  private mapWithSkills(f: any) {
-    return { ...f, skills: f.skills.map((s: any) => s.name) };
+  private mapWithSkills(f: Freelancer & { skills: Skill[] }) {
+    return { ...f, skills: f.skills.map((s: Skill) => s.name) };
   }
 
   async findAll() {

@@ -251,7 +251,6 @@ ${JSON.stringify(parsedContext, null, 2)}
         userId?: string,
         projectId?: string,
         role?: string,
-        _additionalContext?: unknown,
     ): string {
         const parts: string[] = [];
 

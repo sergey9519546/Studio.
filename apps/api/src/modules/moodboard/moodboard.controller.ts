@@ -75,7 +75,12 @@ export class MoodboardController {
     @Query("collectionId") collectionId?: string,
     @Query("source") source?: string
   ) {
-    const filters: any = {};
+    interface MoodboardFilters {
+      favorite?: boolean;
+      collectionId?: string;
+      source?: string;
+    }
+    const filters: MoodboardFilters = {};
 
     if (favorite !== undefined) {
       filters.favorite = favorite === "true";

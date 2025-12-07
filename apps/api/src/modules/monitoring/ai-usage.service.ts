@@ -68,21 +68,29 @@ export class AIUsageService {
     }
 
     private groupByEndpoint(usage: { endpoint: string; cost: number; duration: number; cached: boolean }[]) {
+        interface GroupedEndpointStats {
+            count: number;
+            cost: number | string;
+            avgDuration: number | string;
+            cached: number;
+            cacheRate?: string;
+        }
+
         const grouped = usage.reduce((acc, u) => {
             if (!acc[u.endpoint]) {
                 acc[u.endpoint] = { count: 0, cost: 0, avgDuration: 0, cached: 0 };
             }
             acc[u.endpoint].count++;
-            acc[u.endpoint].cost += u.cost;
-            acc[u.endpoint].avgDuration += u.duration;
+            (acc[u.endpoint].cost as number) += u.cost;
+            (acc[u.endpoint].avgDuration as number) += u.duration;
             if (u.cached) acc[u.endpoint].cached++;
             return acc;
-        }, {} as Record<string, { count: number; cost: number; avgDuration: number; cached: number }>);
+        }, {} as Record<string, GroupedEndpointStats>);
 
         Object.keys(grouped).forEach(key => {
-            (grouped[key] as any).avgDuration = (grouped[key].avgDuration / grouped[key].count).toFixed(0) + 'ms';
-            (grouped[key] as any).cost = '$' + grouped[key].cost.toFixed(4);
-            (grouped[key] as any).cacheRate = ((grouped[key].cached / grouped[key].count) * 100).toFixed(1) + '%';
+            grouped[key].avgDuration = ((grouped[key].avgDuration as number) / grouped[key].count).toFixed(0) + 'ms';
+            grouped[key].cost = '$' + (grouped[key].cost as number).toFixed(4);
+            grouped[key].cacheRate = (((grouped[key].cached as number) / grouped[key].count) * 100).toFixed(1) + '%';
         });
 
         return grouped;

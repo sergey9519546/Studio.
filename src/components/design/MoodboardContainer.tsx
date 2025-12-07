@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Search, Tag, Trash2 } from 'lucide-react';
 import { DGlassEffectContainer } from './DGlassEffectContainer';
-import { FluidButton } from './FluidButton';
 
 interface MoodboardItem {
   id: string;

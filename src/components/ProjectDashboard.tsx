@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Edit2, Image, FileText, Settings, Zap } from 'lucide-react';
-import { Card } from './design/Card';
+import { Edit2, Image, FileText, Zap } from 'lucide-react';
 import { Button } from './design/Button';
 import { Textarea } from './design/Textarea';
 import { Input } from './design/Input';
@@ -16,7 +15,7 @@ interface ProjectDashboardProps {
 }
 
 export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
-  projectId,
+  projectId: _projectId,
   projectTitle = 'Untitled Project',
   brief = '',
   onBriefChange,
@@ -137,7 +136,7 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
             <LiquidGlassContainer level="lg">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold text-ink-primary">Asset Library</h2>
-                <button className="p-2 hover:bg-white/10 rounded-[16px] transition-colors text-ink-tertiary">
+                <button type="button" title="Add image" className="p-2 hover:bg-white/10 rounded-[16px] transition-colors text-ink-tertiary">
                   <Image size={16} />
                 </button>
               </div>
@@ -185,7 +184,7 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
             <LiquidGlassContainer level="lg">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold text-ink-primary">Script & Shotlist</h2>
-                <button className="p-2 hover:bg-white/10 rounded-[16px] transition-colors text-ink-tertiary">
+                <button type="button" title="Add script" className="p-2 hover:bg-white/10 rounded-[16px] transition-colors text-ink-tertiary">
                   <FileText size={16} />
                 </button>
               </div>

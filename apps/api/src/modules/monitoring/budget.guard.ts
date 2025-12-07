@@ -12,7 +12,7 @@ import { AlertsService } from './alerts.service';
 export class BudgetGuard implements CanActivate {
     constructor(private alerts: AlertsService) { }
 
-    async canActivate(_context: ExecutionContext): Promise<boolean> {
+    async canActivate(_: ExecutionContext): Promise<boolean> {
         // Check daily budget
         const budgetStatus = await this.alerts.checkDailyBudget();
 

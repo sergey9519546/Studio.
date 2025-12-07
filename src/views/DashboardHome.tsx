@@ -4,20 +4,9 @@ import HeroProjectCard from "../components/dashboard/HeroProjectCard";
 import SparkAICard from "../components/dashboard/SparkAICard";
 import VibePaletteCard from "../components/dashboard/VibePaletteCard";
 import RecentArtifactsCard, { Artifact } from "../components/dashboard/RecentArtifactsCard";
-import { useToast, type Toast, type ToastKind } from "../hooks/useToast";
+import { useToast } from "../hooks/useToast";
 import { useDashboardData } from "../hooks/useDashboardData";
-import Skeleton from "../components/Skeleton";
 import "./DashboardHome.css";
-
-interface HeroProject {
-  id: string;
-  imageSrc: string;
-  priorityLabel?: string;
-  title: string;
-  description: string;
-}
-
-
 
 interface DashboardHomeProps {
   onNavigateToGallery?: () => void;
@@ -32,7 +21,6 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({ onNavigateToGallery }) =>
     loadingHero,
     loadingArtifacts,
     errorHero,
-    errorArtifacts,
     addArtifact,
   } = useDashboardData();
 

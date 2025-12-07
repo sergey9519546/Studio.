@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Search, Filter, Star, MapPin, Briefcase } from 'lucide-react';
+import { Search, Star, MapPin, Briefcase } from 'lucide-react';
 import { Card } from './design/Card';
 import { Button } from './design/Button';
 import { Input } from './design/Input';
-import { LiquidGlassContainer } from './design/LiquidGlassContainer';
 
 interface Freelancer {
   id: string;

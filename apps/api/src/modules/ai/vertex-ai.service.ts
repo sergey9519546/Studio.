@@ -141,7 +141,7 @@ export class VertexAIService {
       }
 
       return null;
-    } catch (error) {
+    } catch {
       this.logger.warn('Failed to extract prediction content safely');
       return null;
     }
@@ -151,9 +151,9 @@ export class VertexAIService {
    * Safely access deeply nested object properties
    */
   private safeGet(obj: Record<string, unknown>, path: (string | number)[]): unknown {
-    return path.reduce((current, key) => {
-      return current && typeof current === 'object' ? (current as Record<string, unknown>)[key] : undefined;
-    }, obj as any);
+    return path.reduce((current: unknown, key) => {
+      return current && typeof current === 'object' && current !== null ? (current as Record<string, unknown>)[key] : undefined;
+    }, obj as unknown);
   }
 
   /**

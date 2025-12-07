@@ -25,7 +25,7 @@ interface RequestWithUser extends IncomingMessage {
                             },
                         }
                         : undefined,
-                customProps: (req: RequestWithUser, res: ServerResponse) => ({
+                customProps: (req: RequestWithUser, _: ServerResponse) => ({
                     userId: req.user?.id,
                 }),
                 serializers: {

@@ -2,6 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaService } from './prisma.service';
 import { Logger } from '@nestjs/common';
 
+import { Pool } from 'pg';
+
 // Mock @prisma/client to avoid real Prisma runtime initialization
 jest.mock('@prisma/client', () => {
   class PrismaClient {
@@ -27,6 +29,10 @@ jest.mock('@prisma/adapter-pg', () => {
 describe('PrismaService', () => {
   const env = process.env;
 
+  interface TestPrismaService extends PrismaService {
+    _pool: Pool; // Allow access to private _pool for testing
+  }
+
   beforeEach(() => {
     jest.clearAllMocks();
     process.env = { ...env };
@@ -43,7 +49,7 @@ describe('PrismaService', () => {
       providers: [PrismaService],
     }).compile();
 
-    const service = module.get<PrismaService>(PrismaService) as any;
+    const service = module.get<PrismaService>(PrismaService) as TestPrismaService;
 
     expect(service._pool).toBeDefined();
   });
@@ -55,7 +61,7 @@ describe('PrismaService', () => {
       providers: [PrismaService],
     }).compile();
 
-    const service = module.get<PrismaService>(PrismaService) as any;
+    const service = module.get<PrismaService>(PrismaService) as TestPrismaService;
 
     expect(service._pool).toBeUndefined();
   });
@@ -63,14 +69,16 @@ describe('PrismaService', () => {
   it('onModuleInit should attempt lazy connect and log success', async () => {
     process.env.DATABASE_URL = 'postgres://user:pass@localhost:5432/db';
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const loggerLog = jest.spyOn(Logger.prototype as any, 'log').mockImplementation(() => {});
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const loggerWarn = jest.spyOn(Logger.prototype as any, 'warn').mockImplementation(() => {});
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [PrismaService],
     }).compile();
 
-    const service = module.get<PrismaService>(PrismaService) as any;
+    const service = module.get<PrismaService>(PrismaService) as TestPrismaService;
 
     service.$connect = jest.fn().mockResolvedValue(undefined);
 
@@ -88,13 +96,14 @@ describe('PrismaService', () => {
   it('onModuleInit should log a warning if connect fails but not throw', async () => {
     process.env.DATABASE_URL = 'postgres://user:pass@localhost:5432/db';
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const loggerWarn = jest.spyOn(Logger.prototype as any, 'warn').mockImplementation(() => {});
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [PrismaService],
     }).compile();
 
-    const service = module.get<PrismaService>(PrismaService) as any;
+    const service = module.get<PrismaService>(PrismaService) as TestPrismaService;
 
     const error = new Error('connection failed');
     service.$connect = jest.fn().mockRejectedValue(error);
@@ -114,7 +123,7 @@ describe('PrismaService', () => {
       providers: [PrismaService],
     }).compile();
 
-    const service = module.get<PrismaService>(PrismaService) as any;
+    const service = module.get<PrismaService>(PrismaService) as TestPrismaService;
 
     const disconnectSpy = jest.fn().mockResolvedValue(undefined);
     service.$disconnect = disconnectSpy;

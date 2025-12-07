@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Upload, FileText, MoreVertical, Trash2, Edit2, Plus } from 'lucide-react';
+import { Upload, FileText, MoreVertical, Plus } from 'lucide-react';
 import { Card } from './design/Card';
 import { Button } from './design/Button';
 import { LiquidGlassContainer } from './design/LiquidGlassContainer';

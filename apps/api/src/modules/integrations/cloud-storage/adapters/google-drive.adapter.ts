@@ -2,7 +2,7 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { ICloudStorageAdapter } from './storage-adapter.interface';
 import { CloudFileDto, CloudFileType, CloudProviderType } from '../dto/cloud-storage.dto';
-import { GoogleClientFactory } from '../../../google/google-client.factory';
+import { GoogleClientFactory, AuthenticatedUser } from '../../../google/google-client.factory';
 import { PrismaService } from '../../../../prisma/prisma.service';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class GoogleDriveAdapter implements ICloudStorageAdapter {
     private readonly prisma: PrismaService
   ) { }
 
-  private async getUserWithCredentials(userId: number) {
+  private async getUserWithCredentials(userId: number): Promise<AuthenticatedUser> {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
       select: {
@@ -34,8 +34,8 @@ export class GoogleDriveAdapter implements ICloudStorageAdapter {
       id: user.id.toString(),
       email: user.email,
       googleCredentials: {
-        accessToken: user.googleAccessToken,
-        refreshToken: user.googleRefreshToken
+        accessToken: user.googleAccessToken || undefined,
+        refreshToken: user.googleRefreshToken || undefined
       }
     };
   }
@@ -44,7 +44,7 @@ export class GoogleDriveAdapter implements ICloudStorageAdapter {
     try {
       const user = await this.getUserWithCredentials(userId);
       return !!user?.googleCredentials?.refreshToken;
-    } catch (e) {
+    } catch {
       return false;
     }
   }
@@ -54,8 +54,8 @@ export class GoogleDriveAdapter implements ICloudStorageAdapter {
   }
 
   async listFiles(userId: number, folderId = 'root'): Promise<{ files: CloudFileDto[]; nextPageToken?: string }> {
-    const user = await this.getUserWithCredentials(userId);
-    const { drive } = this.clientFactory.createDriveClientForUser(user as any);
+    const user: AuthenticatedUser = await this.getUserWithCredentials(userId);
+    const { drive } = this.clientFactory.createDriveClientForUser(user);
 
     const res = await drive.files.list({
       q: `'${folderId}' in parents and trashed = false`,

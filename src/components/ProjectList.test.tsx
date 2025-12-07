@@ -32,7 +32,7 @@ describe('ProjectList', () => {
     });
 
     it('should render project list with data', async () => {
-        vi.mocked(api.api.projects.list).mockResolvedValue(mockProjectsResponse as any);
+        vi.mocked(api.api.projects.list).mockResolvedValue(mockProjectsResponse);
 
         render(
             <BrowserRouter>
@@ -65,7 +65,7 @@ describe('ProjectList', () => {
     });
 
     it('should handle pagination controls', async () => {
-        vi.mocked(api.api.projects.list).mockResolvedValue(mockProjectsResponse as any);
+        vi.mocked(api.api.projects.list).mockResolvedValue(mockProjectsResponse);
 
         render(
             <BrowserRouter>
@@ -86,7 +86,7 @@ describe('ProjectList', () => {
 
         // Verify API was called with page 2
         await waitFor(() => {
-            expect(api.api.projects.list).toHaveBeenCalledWith(2, 10);
+            expect(api.api.projects.list).toHaveBeenCalledWith({ page: 2, limit: 10 });
         });
     });
 
@@ -109,7 +109,7 @@ describe('ProjectList', () => {
             success: true,
             data: [],
             meta: { total: 0, page: 1, limit: 10, totalPages: 1 },
-        } as any);
+        } as ApiResponse<Project[]>);
 
         render(
             <BrowserRouter>
@@ -123,7 +123,7 @@ describe('ProjectList', () => {
     });
 
     it('should navigate to project details on click', async () => {
-        vi.mocked(api.api.projects.list).mockResolvedValue(mockProjectsResponse as any);
+        vi.mocked(api.api.projects.list).mockResolvedValue(mockProjectsResponse);
 
         render(
             <BrowserRouter>

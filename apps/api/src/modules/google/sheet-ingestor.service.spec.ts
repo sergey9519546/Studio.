@@ -5,7 +5,6 @@ import { GoogleClientFactory } from './google-client.factory';
 
 describe('SheetIngestorService', () => {
     let service: SheetIngestorService;
-    let clientFactory: GoogleClientFactory;
 
     const mockSheets = {
         spreadsheets: {
@@ -41,7 +40,6 @@ describe('SheetIngestorService', () => {
         }).compile();
 
         service = module.get<SheetIngestorService>(SheetIngestorService);
-        clientFactory = module.get<GoogleClientFactory>(GoogleClientFactory);
     });
 
     afterEach(() => {

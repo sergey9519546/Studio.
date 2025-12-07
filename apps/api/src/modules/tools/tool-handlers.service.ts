@@ -6,11 +6,38 @@ import * as path from 'path';
 
 const execAsync = promisify(exec);
 
+interface ScanRepositoryResult {
+    matches: string[];
+    count: number;
+    error?: string;
+}
+
+interface RunTestsResult {
+    success: boolean;
+    output: string;
+    errors: string;
+}
+
+interface GetFileContentResult {
+    content?: string;
+    totalLines?: number;
+    filePath?: string;
+    error?: string;
+}
+
+interface ListDirectoryResult {
+    path?: string;
+    files?: string[];
+    directories?: string[];
+    totalCount?: number;
+    error?: string;
+}
+
 @Injectable()
 export class ToolHandlersService {
     private readonly logger = new Logger(ToolHandlersService.name);
 
-    async scanRepository(args: { query: string; fileType?: string; maxResults?: number }): Promise<any> {
+    async scanRepository(args: { query: string; fileType?: string; maxResults?: number }): Promise<ScanRepositoryResult> {
         const { query, fileType = '*', maxResults = 10 } = args;
         const rootDir = process.cwd();
 
@@ -56,12 +83,12 @@ export class ToolHandlersService {
                     }
                 }
             }
-        } catch (e) {
+        } catch {
             // Skip directories we can't read
         }
     }
 
-    async runTests(args: { testPath: string; testName?: string }): Promise<any> {
+    async runTests(args: { testPath: string; testName?: string }): Promise<RunTestsResult> {
         const { testPath, testName } = args;
 
         try {
@@ -86,7 +113,7 @@ export class ToolHandlersService {
         }
     }
 
-    async getFileContent(args: { filePath: string; startLine?: number; endLine?: number }): Promise<any> {
+    async getFileContent(args: { filePath: string; startLine?: number; endLine?: number }): Promise<GetFileContentResult> {
         const { filePath, startLine, endLine } = args;
         const fullPath = path.join(process.cwd(), filePath);
 
@@ -115,7 +142,7 @@ export class ToolHandlersService {
         }
     }
 
-    async listDirectory(args: { directoryPath: string }): Promise<any> {
+    async listDirectory(args: { directoryPath: string }): Promise<ListDirectoryResult> {
         const { directoryPath } = args;
         const fullPath = path.join(process.cwd(), directoryPath);
 
@@ -144,3 +171,4 @@ export class ToolHandlersService {
         }
     }
 }
+

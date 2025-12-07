@@ -110,8 +110,8 @@ export class S3MediaService {
 
       await this.s3Client.send(command);
       return true;
-    } catch (error: any) {
-      if (error.name === 'NotFound') {
+    } catch (error: unknown) {
+      if (error && typeof error === 'object' && 'name' in error && error.name === 'NotFound') {
         return false;
       }
       throw error;
@@ -142,8 +142,8 @@ export class S3MediaService {
         contentType: response.ContentType || 'application/octet-stream',
         lastModified: response.LastModified || new Date(),
       };
-    } catch (error: any) {
-      if (error.name === 'NotFound') {
+    } catch (error: unknown) {
+      if (error && typeof error === 'object' && 'name' in error && error.name === 'NotFound') {
         return null;
       }
       throw error;

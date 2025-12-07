@@ -1,6 +1,12 @@
 import { Clock, Filter, Heart, Image, Plus, Search, Trash2, X, XCircle } from "lucide-react";
 import React, { useMemo, useState } from "react";
 import {
+  searchSimilarImages,
+  trackDownload,
+  type UnsplashImage,
+} from "../../services/unsplash";
+import { useToast } from "../hooks/useToast";
+import {
   toggleFavorite as apiToggleFavorite,
   saveUnsplashImage,
 } from "../services/moodboardApi";
@@ -9,11 +15,6 @@ import {
   getRecentSearches,
   removeRecentSearch,
 } from "../services/recentSearches";
-import {
-  searchSimilarImages,
-  trackDownload,
-  type UnsplashImage,
-} from "../../services/unsplash";
 import { Card } from "./design/Card";
 import { Input } from "./design/Input";
 
@@ -23,13 +24,13 @@ interface MoodboardItem {
   tags: string[];
   moods: string[];
   colors: string[];
+  isFavorite?: boolean;
   shotType?: string;
   uploadedAt: string;
 }
 
 interface MoodboardProps {
   projectId: string;
-  projectTitle?: string;
   items?: MoodboardItem[];
   onItemDelete?: (id: string) => void;
   onSemanticSearch?: (query: string) => Promise<MoodboardItem[]>;
@@ -40,7 +41,6 @@ type TabType = "uploads" | "unsplash";
 
 export const Moodboard: React.FC<MoodboardProps> = ({
   projectId,
-  projectTitle = "Untitled Project",
   items = [],
   onItemDelete,
   onSemanticSearch,
@@ -52,6 +52,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [filteredItems, setFilteredItems] = useState(items);
   const [isSearching, setIsSearching] = useState(false);
+  const { addToast } = useToast();
 
   // Unsplash state
   const [unsplashQuery, setUnsplashQuery] = useState("");
@@ -200,7 +201,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
       console.log("Unsplash image added to moodboard");
     } catch (error) {
       console.error("Failed to add Unsplash image:", error);
-      // TODO: Show error toast
+      addToast("Failed to add Unsplash image. Please try again.");
     }
   };
 
@@ -209,10 +210,14 @@ export const Moodboard: React.FC<MoodboardProps> = ({
     itemId: string,
     currentValue: boolean
   ) => {
+    const newValue = !currentValue;
     try {
-      await apiToggleFavorite(itemId, !currentValue);
-      // Refresh items list
-      // TODO: Update local state or refetch
+      await apiToggleFavorite(itemId, newValue);
+      setFilteredItems((prev) =>
+        prev.map((item) =>
+          item.id === itemId ? { ...item, isFavorite: newValue } : item
+        )
+      );
     } catch (error) {
       console.error("Failed to toggle favorite:", error);
     }
@@ -319,12 +324,22 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleToggleFavorite(item.id, false);
+                          handleToggleFavorite(
+                            item.id,
+                            item.isFavorite ?? false
+                          );
                         }}
                         className="absolute top-2 right-2 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors opacity-0 group-hover:opacity-100"
                         aria-label="Toggle favorite"
                       >
-                        <Heart size={18} className="text-white" />
+                        <Heart
+                          size={18}
+                          className={`transition-colors ${
+                            item.isFavorite
+                              ? "text-state-danger fill-current"
+                              : "text-white"
+                          }`}
+                        />
                       </button>
 
                       <button
@@ -343,6 +358,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                       {item.colors.length > 0 && (
                         <div className="flex gap-1 mb-2">
                           {item.colors.slice(0, 3).map((color, i) => (
+                            // eslint-disable-next-line react/forbid-component-props
                             <div
                               key={i}
                               className="w-4 h-4 rounded-full shadow-lg border border-white/30"
@@ -411,14 +427,20 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                   </button>
                 </div>
               </form>
-              
+
               {/* P1: Advanced Filters */}
               <div className="flex items-center gap-3 mb-4">
                 <Filter size={16} className="text-ink-tertiary" />
                 <select
                   value={unsplashFilters.color || ""}
-                  onChange={(e) => setUnsplashFilters({ ...unsplashFilters, color: e.target.value || undefined })}
+                  onChange={(e) =>
+                    setUnsplashFilters({
+                      ...unsplashFilters,
+                      color: e.target.value || undefined,
+                    })
+                  }
                   className="px-3 py-1.5 rounded-[12px] bg-subtle border border-border-subtle text-xs font-medium text-ink-secondary hover:bg-surface transition-colors"
+                  title="Filter by color"
                 >
                   <option value="">All Colors</option>
                   <option value="black_and_white">Black & White</option>
@@ -433,18 +455,24 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                   <option value="teal">Teal</option>
                   <option value="blue">Blue</option>
                 </select>
-                
+
                 <select
                   value={unsplashFilters.orientation || ""}
-                  onChange={(e) => setUnsplashFilters({ ...unsplashFilters, orientation: e.target.value || undefined })}
+                  onChange={(e) =>
+                    setUnsplashFilters({
+                      ...unsplashFilters,
+                      orientation: e.target.value || undefined,
+                    })
+                  }
                   className="px-3 py-1.5 rounded-[12px] bg-subtle border border-border-subtle text-xs font-medium text-ink-secondary hover:bg-surface transition-colors"
+                  title="Filter by orientation"
                 >
                   <option value="">Any Orientation</option>
                   <option value="landscape">Landscape</option>
                   <option value="portrait">Portrait</option>
                   <option value="squarish">Square</option>
                 </select>
-                
+
                 {(unsplashFilters.color || unsplashFilters.orientation) && (
                   <button
                     onClick={() => setUnsplashFilters({})}

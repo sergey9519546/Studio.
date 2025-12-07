@@ -22,14 +22,12 @@ async function verifyStorage() {
     console.log(`Target Bucket: ${bucketName}`);
 
     let storage: Storage;
-    let configType = 'None';
 
     try {
         if (credentialsJson) {
             console.log('Method: GCP_CREDENTIALS (JSON)');
             const credentials = JSON.parse(credentialsJson);
             storage = new Storage({ projectId, credentials });
-            configType = 'JSON';
         } else if (clientEmail && privateKey) {
             console.log('Method: ENV VARS (Client Email + Private Key)');
             storage = new Storage({
@@ -39,15 +37,12 @@ async function verifyStorage() {
                     private_key: privateKey.replace(/\\n/g, '\n'),
                 }
             });
-            configType = 'EnvVars';
         } else if (keyFile) {
             console.log('Method: GOOGLE_APPLICATION_CREDENTIALS (File)');
             storage = new Storage({ projectId, keyFilename: keyFile });
-            configType = 'KeyFile';
         } else {
             console.log('Method: Default (ADC)');
             storage = new Storage({ projectId });
-            configType = 'ADC';
         }
 
         const bucket = storage.bucket(bucketName);
@@ -69,9 +64,10 @@ async function verifyStorage() {
             console.error(`❌ Bucket '${bucketName}' does NOT exist or is not accessible.`);
         }
 
-    } catch (error: any) {
-        console.error(`❌ Verification Failed: ${error.message}`);
-        if (error.code === 403) {
+    } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        console.error(`❌ Verification Failed: ${errorMessage}`);
+        if (error instanceof Error && 'code' in error && error.code === 403) {
             console.error('   -> Permission Denied. Check Service Account roles.');
         }
     }
