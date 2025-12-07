@@ -38,7 +38,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
       const response = (exception as HttpException).getResponse();
       // Handle both string and object responses safely
       if (typeof response === 'object' && response !== null) {
-          const respObj = response as Record<string, any>;
+          const respObj = response as Record<string, unknown>;
           errorCode = (respObj.error as string) || (HttpStatus[httpStatus] as string) || 'HTTP_ERROR';
           
           // Handle nested validation errors (class-validator array)

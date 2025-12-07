@@ -11,17 +11,22 @@ export interface ToolCall {
   args: Record<string, unknown>;
 }
 
+export interface Tool {
+  name: string;
+  function: (args: Record<string, unknown>) => unknown;
+}
+
 @Injectable()
 export class GeminiAnalystService {
   private readonly logger = new Logger(GeminiAnalystService.name);
-  private tools: any[];
+  private tools: Tool[];
 
   constructor(
     private vertexAI: VertexAIService,
     private prisma: PrismaService,
     @Inject(CACHE_MANAGER) private cache: Cache
   ) {
-    this.tools = getTools(this.prisma);
+    this.tools = getTools(this.prisma) as Tool[];
   }
 
   /**

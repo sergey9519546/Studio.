@@ -47,19 +47,16 @@ const Dashboard: React.FC<DashboardProps> = ({
             }
             try {
                 const [p, f, a] = await Promise.all([
-                    (api as any)?.projects?.list?.(),
-                    (api as any)?.freelancers?.list?.(),
-                    (api as any)?.assignments?.list?.(),
+                    api.projects.list(),
+                    api.freelancers.list(),
+                    api.assignments.list(),
                 ]);
                 const projectTotal =
-                    (p as any)?.data?.total ??
-                    (p as any)?.meta?.total ??
-                    (Array.isArray((p as any)?.data) ? (p as any)?.data?.length : (p as any)?.data?.data?.length) ??
-                    0;
+                    p?.data?.length ?? 0;
                 const freelancerTotal =
-                    (f as any)?.data?.length ?? (f as any)?.meta?.total ?? 0;
+                    f?.data?.length ?? 0;
                 const assignmentTotal =
-                    (a as any)?.data?.length ?? (a as any)?.meta?.total ?? 0;
+                    a?.data?.length ?? 0;
                 setStats({
                     projects: projectTotal,
                     freelancers: freelancerTotal,

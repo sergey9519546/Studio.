@@ -7,6 +7,7 @@ import { RAGModule } from "../rag/rag.module";
 import { ToolsModule } from "../tools/tools.module";
 import { AIController } from "./ai.controller";
 import { GeminiAnalystService } from "./gemini-analyst.service";
+import { GeminiOpenAIService } from "./gemini-openai.service";
 import { OptimizationController } from "./optimization.controller";
 import { AIProviderManager } from "./providers/ai-provider.manager";
 import { VertexAIProvider } from "./providers/vertex-ai.provider";
@@ -27,6 +28,7 @@ import { VertexAIService } from "./vertex-ai.service";
   controllers: [AIController, OptimizationController],
   providers: [
     GeminiAnalystService,
+    GeminiOpenAIService,
     VertexAIService,
     VertexAIEmbeddingsService,
     StreamingService,
@@ -36,6 +38,7 @@ import { VertexAIService } from "./vertex-ai.service";
   ],
   exports: [
     GeminiAnalystService,
+    GeminiOpenAIService,
     VertexAIService,
     VertexAIEmbeddingsService,
     StreamingService,

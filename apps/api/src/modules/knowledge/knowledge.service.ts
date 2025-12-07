@@ -79,7 +79,7 @@ export class KnowledgeService {
         return newSource;
     }
 
-    async findAll(_projectId: string): Promise<KnowledgeSourceEntity[]> {
+    async findAll(): Promise<KnowledgeSourceEntity[]> {
         return this.sources;
     }
 

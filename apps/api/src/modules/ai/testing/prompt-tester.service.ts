@@ -5,9 +5,9 @@ import { PROMPT_TEMPLATES } from '../prompts/templates';
 export interface PromptTestCase {
     name: string;
     template: string;
-    input: any;
+    input: Record<string, unknown>;
     expectedKeywords?: string[];
-    expectedStructure?: any;
+    expectedStructure?: Record<string, unknown>;
     minQualityScore?: number;
 }
 
@@ -120,7 +120,7 @@ export class PromptTesterService {
     /**
      * Validate JSON structure
      */
-    private evaluateStructure(output: string, expectedStructure?: any): boolean {
+    private evaluateStructure(output: string, expectedStructure?: Record<string, unknown>): boolean {
         if (!expectedStructure) return true;
 
         try {
@@ -134,12 +134,12 @@ export class PromptTesterService {
     /**
      * Check if object matches expected structure
      */
-    private matchesStructure(obj: any, structure: any): boolean {
+    private matchesStructure(obj: Record<string, unknown>, structure: Record<string, unknown>): boolean {
         for (const key in structure) {
             if (!(key in obj)) return false;
 
             if (typeof structure[key] === 'object' && !Array.isArray(structure[key])) {
-                if (!this.matchesStructure(obj[key], structure[key])) return false;
+                if (!this.matchesStructure(obj[key] as Record<string, unknown>, structure[key] as Record<string, unknown>)) return false;
             }
         }
         return true;
@@ -148,7 +148,7 @@ export class PromptTesterService {
     /**
      * Calculate overall quality score
      */
-    private calculateScore(metrics: any): number {
+    private calculateScore(metrics: TestResult['metrics']): number {
         return (
             metrics.keywordMatch * 0.4 +
             (metrics.structureMatch ? 1 : 0) * 0.4 +

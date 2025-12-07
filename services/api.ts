@@ -22,8 +22,7 @@ export interface DriveFile {
 export interface BatchImportResponse {
     created: number;
     updated: number;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    errors?: { item: any; error: string }[];
+    errors?: { item: Record<string, unknown>; error: string }[];
 }
 
 const STORAGE_PREFIX = 'studio_roster_v1_';
@@ -126,8 +125,12 @@ async function fetchApi<T>(url: string, options?: RequestInit & { timeout?: numb
         throw new Error(message);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if ((body as any).data === undefined && (Array.isArray(body) || (body as any).id || (body as any).email || (body as any).name || (body as any).bucket)) {
+    if (
+        body &&
+        typeof body === 'object' &&
+        'data' in body &&
+        (Array.isArray(body) || ('id' in body || 'email' in body || 'name' in body || 'bucket' in body))
+    ) {
         return { data: body as T, success: true };
     }
 
@@ -484,15 +487,15 @@ export const api = {
     },
 
     ai: {
-        chat: async (payload: any): Promise<ApiResponse<any>> => {
-            return await fetchApi<any>('/api/ai/chat', {
+        chat: async (payload: Record<string, unknown>): Promise<ApiResponse<unknown>> => {
+            return await fetchApi<unknown>('/api/ai/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
         },
-        extract: async (payload: any): Promise<ApiResponse<any>> => {
-            return await fetchApi<any>('/api/ai/extract', {
+        extract: async (payload: Record<string, unknown>): Promise<ApiResponse<unknown>> => {
+            return await fetchApi<unknown>('/api/ai/extract', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)

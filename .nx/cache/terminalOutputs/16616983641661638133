@@ -1,0 +1,172 @@
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/ai/[22m[1mai.controller.contract.spec.ts[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/prisma/[22m[1mprisma.service.spec.ts[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/freelancers/[22m[1mfreelancers.service.spec.ts[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/projects/[22m[1mprojects.service.spec.ts[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/auth/[22m[1mauth.service.spec.ts[22m
+[31m[Nest] 48240  - [39m12/07/2025, 2:13:45 AM [31m  ERROR[39m [38;5;3m[EmbeddingsService] [39m[31mFailed to generate embedding[39m
+[31m[Nest] 48240  - [39m12/07/2025, 2:13:45 AM [31m  ERROR[39m [38;5;3m[EmbeddingsService] [39m[31mError: boom[39m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/rag/[22m[1membeddings.service.spec.ts[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/services/[22m[1mgemini-analyst.service.spec.ts[22m
+[31m[Nest] 59844  - [39m12/07/2025, 2:13:45 AM [31m  ERROR[39m [38;5;3m[DriveService] [39m[31mFailed to list team assets: Drive API error[39m
+[31m[Nest] 42804  - [39m12/07/2025, 2:13:45 AM [31m  ERROR[39m [38;5;3m[GoogleClientFactory] [39m[31mAttempted to use Service Account but it is not configured.[39m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/google/[22m[1mdrive.service.spec.ts[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/google/[22m[1mgoogle-client.factory.spec.ts[22m
+[31m[Nest] 16000  - [39m12/07/2025, 2:13:45 AM [31m  ERROR[39m [38;5;3m[DataExtractorService] [39m[31mDoc extraction failed: API Error[39m
+[31m[Nest] 63764  - [39m12/07/2025, 2:13:45 AM [31m  ERROR[39m [38;5;3m[SheetIngestorService] [39m[31mFailed to ingest sheet file-123: No visible sheets found in document.[39m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/google/[22m[1msheet-ingestor.service.spec.ts[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/google/[22m[1mdata-extractor.service.spec.ts[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/integrations/cloud-storage/[22m[1mcloud-storage.spec.ts[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mapps/api/src/modules/ai/[22m[1mai.controller.spec.ts[22m
+-------------------------------------------------|---------|----------|---------|---------|--------------------------------------------
+File                                             | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                          
+-------------------------------------------------|---------|----------|---------|---------|--------------------------------------------
+[31;1mAll files                                       [0m | [31;1m  18.15[0m | [31;1m   18.02[0m | [31;1m  17.76[0m | [31;1m  17.77[0m | [31;1m                                          [0m 
+[31;1m src                                            [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  app.module.ts                                 [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-133                                     [0m 
+[31;1m src/common/auth                                [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  jwt.strategy.ts                               [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-24                                      [0m 
+[31;1m src/common/cache                               [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  cache.controller.ts                           [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-47                                      [0m 
+[31;1m  cache.module.ts                               [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m1-17                                      [0m 
+[31;1m src/common/filters                             [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  all-exceptions.filter.ts                      [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-91                                      [0m 
+[33;1m src/common/guards                              [0m | [33;1m     50[0m | [32;1m     100[0m | [32;1m    100[0m | [33;1m     50[0m | [31;1m                                          [0m 
+[31;1m  common.module.ts                              [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m1-11                                      [0m 
+[32;1m  jwt-auth.guard.ts                             [0m | [32;1m    100[0m | [32;1m     100[0m | [32;1m    100[0m | [32;1m    100[0m | [33;1m                                          [0m 
+[31;1m src/common/logger                              [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  logger.module.ts                              [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-45                                      [0m 
+[31;1m src/config                                     [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  brand.config.ts                               [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m9-33                                      [0m 
+[31;1m  env.validation.ts                             [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-74                                      [0m 
+[31;1m src/health                                     [0m | [31;1m      0[0m | [32;1m     100[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  health.controller.ts                          [0m | [31;1m      0[0m | [32;1m     100[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-9                                       [0m 
+[31;1m  health.module.ts                              [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m2-8                                       [0m 
+[31;1m src/modules/ai                                 [0m | [31;1m  12.58[0m | [31;1m   18.04[0m | [31;1m   4.34[0m | [31;1m  10.57[0m | [31;1m                                          [0m 
+[31;1m  ai.controller.ts                              [0m | [31;1m  20.19[0m | [31;1m   25.97[0m | [31;1m   6.25[0m | [31;1m  18.81[0m | [31;1m71-142,161-196,213-227,237-322,327,333,339[0m 
+[31;1m  ai.module.ts                                  [0m | [31;1m      0[0m | [32;1m     100[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-45                                      [0m 
+[31;1m  gemini-analyst.service.ts                     [0m | [31;1m  16.66[0m | [31;1m   29.62[0m | [31;1m   6.66[0m | [31;1m  14.94[0m | [31;1m32-302                                    [0m 
+[31;1m  optimization.controller.ts                    [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-124                                     [0m 
+[31;1m  streaming.service.ts                          [0m | [31;1m     20[0m | [31;1m    37.5[0m | [31;1m      0[0m | [31;1m  14.28[0m | [31;1m12-75                                     [0m 
+[31;1m  tools.ts                                      [0m | [31;1m  42.85[0m | [32;1m     100[0m | [31;1m  33.33[0m | [31;1m     20[0m | [31;1m17-49                                     [0m 
+[31;1m  vertex-ai-embeddings.service.ts               [0m | [31;1m   8.33[0m | [31;1m      10[0m | [31;1m      0[0m | [31;1m   6.06[0m | [31;1m13-177                                    [0m 
+[31;1m  vertex-ai.service.ts                          [0m | [31;1m   7.14[0m | [31;1m    8.33[0m | [31;1m      0[0m | [31;1m   4.93[0m | [31;1m9-343                                     [0m 
+[31;1m src/modules/ai/prompts                         [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  templates.ts                                  [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m9-127                                     [0m 
+[31;1m src/modules/ai/providers                       [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  ai-provider.manager.ts                        [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-104                                     [0m 
+[31;1m  vertex-ai.provider.ts                         [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-73                                      [0m 
+[31;1m src/modules/ai/testing                         [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  prompt-tester.service.ts                      [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-178                                     [0m 
+[31;1m  test-cases.ts                                 [0m | [31;1m      0[0m | [32;1m     100[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m6-130                                     [0m 
+[31;1m  testing.controller.ts                         [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-46                                      [0m 
+[31;1m  testing.module.ts                             [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m1-12                                      [0m 
+[31;1m src/modules/analysis                           [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  analysis.module.ts                            [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m1-14                                      [0m 
+[31;1m  workspace-analysis.controller.ts              [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m1-4                                       [0m 
+[31;1m src/modules/assets                             [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  assets.controller.ts                          [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-65                                      [0m 
+[31;1m  assets.module.ts                              [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m2-15                                      [0m 
+[31;1m  assets.service.ts                             [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-183                                     [0m 
+[31;1m src/modules/assignments                        [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  assignments.controller.ts                     [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-29                                      [0m 
+[31;1m  assignments.module.ts                         [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m2-14                                      [0m 
+[31;1m  assignments.service.ts                        [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-89                                      [0m 
+[31;1m src/modules/assignments/dto                    [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  assignment.dto.ts                             [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m1-67                                      [0m 
+[31;1m  update-assignment.dto.ts                      [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m1-32                                      [0m 
+[31;1m src/modules/auth                               [0m | [31;1m  35.44[0m | [31;1m   40.74[0m | [31;1m  36.36[0m | [31;1m  36.61[0m | [31;1m                                          [0m 
+[31;1m  auth.controller.ts                            [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-22                                      [0m 
+[31;1m  auth.module.ts                                [0m | [31;1m      0[0m | [32;1m     100[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-27                                      [0m 
+[33;1m  auth.service.ts                               [0m | [33;1m  71.79[0m | [33;1m    64.7[0m | [32;1m     80[0m | [33;1m  70.27[0m | [31;1m90-107                                    [0m 
+[31;1m  jwt.strategy.ts                               [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-23                                      [0m 
+[31;1m src/modules/availability                       [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  availability.module.ts                        [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m2-11                                      [0m 
+[31;1m  availability.service.ts                       [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-120                                     [0m 
+[31;1m src/modules/freelancers                        [0m | [31;1m  46.83[0m | [31;1m   27.58[0m | [33;1m     55[0m | [31;1m  45.71[0m | [31;1m                                          [0m 
+[31;1m  freelancers.controller.ts                     [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-39                                      [0m 
+[31;1m  freelancers.module.ts                         [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m2-12                                      [0m 
+[33;1m  freelancers.service.ts                        [0m | [33;1m  71.15[0m | [31;1m   47.05[0m | [32;1m  84.61[0m | [33;1m  68.08[0m | [31;1m22,107-138                                [0m 
+[31;1m src/modules/freelancers/dto                    [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  freelancer.dto.ts                             [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-159                                     [0m 
+[33;1m src/modules/google                             [0m | [33;1m  76.62[0m | [33;1m   63.46[0m | [32;1m  85.71[0m | [33;1m  78.21[0m | [31;1m                                          [0m 
+[32;1m  data-extractor.service.ts                     [0m | [32;1m  90.27[0m | [33;1m   70.83[0m | [32;1m    100[0m | [32;1m     95[0m | [31;1m52-54                                     [0m 
+[31;1m  drive.controller.ts                           [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-21                                      [0m 
+[32;1m  drive.service.ts                              [0m | [32;1m   90.9[0m | [32;1m   80.76[0m | [32;1m    100[0m | [32;1m     90[0m | [31;1m25-26                                     [0m 
+[33;1m  google-client.factory.ts                      [0m | [33;1m  72.13[0m | [33;1m   69.56[0m | [33;1m  66.66[0m | [33;1m  71.18[0m | [31;1m45,89-91,113-155                          [0m 
+[31;1m  google.module.ts                              [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m2-16                                      [0m 
+[32;1m  sheet-ingestor.service.ts                     [0m | [32;1m  88.88[0m | [33;1m   63.15[0m | [32;1m    100[0m | [32;1m  91.11[0m | [31;1m71-74                                     [0m 
+[31;1m src/modules/integrations                       [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  integrations.module.ts                        [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m1-13                                      [0m 
+[32;1m src/modules/integrations/cloud-storage         [0m | [32;1m   92.1[0m | [33;1m   68.75[0m | [32;1m    100[0m | [32;1m  91.17[0m | [31;1m                                          [0m 
+[32;1m  cloud-storage.controller.ts                   [0m | [32;1m    100[0m | [33;1m      75[0m | [32;1m    100[0m | [32;1m    100[0m | [33;1m15-26                                     [0m 
+[32;1m  cloud-storage.service.ts                      [0m | [32;1m   87.5[0m | [33;1m    62.5[0m | [32;1m    100[0m | [32;1m  86.36[0m | [31;1m55-57                                     [0m 
+[31;1m src/modules/integrations/cloud-storage/adapters[0m | [31;1m  25.92[0m | [31;1m      25[0m | [31;1m      0[0m | [31;1m  20.83[0m | [31;1m                                          [0m 
+[31;1m  google-drive.adapter.ts                       [0m | [31;1m  25.92[0m | [31;1m      25[0m | [31;1m      0[0m | [31;1m  20.83[0m | [31;1m10-82                                     [0m 
+[32;1m src/modules/integrations/cloud-storage/dto     [0m | [32;1m    100[0m | [32;1m     100[0m | [32;1m    100[0m | [32;1m    100[0m | [33;1m                                          [0m 
+[32;1m  cloud-storage.dto.ts                          [0m | [32;1m    100[0m | [32;1m     100[0m | [32;1m    100[0m | [32;1m    100[0m | [33;1m                                          [0m 
+[31;1m src/modules/intelligence                       [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  deep-reader.service.ts                        [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-152                                     [0m 
+[31;1m  intelligence.module.ts                        [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m1-8                                       [0m 
+[31;1m  vector-math.ts                                [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m19-99                                     [0m 
+[31;1m src/modules/knowledge                          [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  knowledge.controller.ts                       [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-24                                      [0m 
+[31;1m  knowledge.module.ts                           [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m2-16                                      [0m 
+[31;1m  knowledge.service.ts                          [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-87                                      [0m 
+[31;1m src/modules/monitoring                         [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  ai-usage.service.ts                           [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m3-88                                      [0m 
+[31;1m  alerts.service.ts                             [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-198                                     [0m 
+[31;1m  budget.guard.ts                               [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-32                                      [0m 
+[31;1m  monitoring.controller.ts                      [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-78                                      [0m 
+[31;1m  monitoring.module.ts                          [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m1-13                                      [0m 
+[31;1m src/modules/moodboard                          [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  moodboard.controller.ts                       [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m3-67                                      [0m 
+[31;1m  moodboard.module.ts                           [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m2-14                                      [0m 
+[31;1m  moodboard.service.ts                          [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-152                                     [0m 
+[31;1m src/modules/moodboard/dto                      [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  create-moodboard-item.dto.ts                  [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m1-35                                      [0m 
+[31;1m  update-moodboard-item.dto.ts                  [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-25                                      [0m 
+[31;1m src/modules/projects                           [0m | [31;1m     25[0m | [31;1m   15.15[0m | [31;1m  26.31[0m | [31;1m  25.71[0m | [31;1m                                          [0m 
+[31;1m  projects.controller.ts                        [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-47                                      [0m 
+[31;1m  projects.module.ts                            [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m2-12                                      [0m 
+[31;1m  projects.service.ts                           [0m | [31;1m  38.18[0m | [31;1m   19.23[0m | [31;1m  45.45[0m | [31;1m     40[0m | [31;1m82-168                                    [0m 
+[31;1m src/modules/projects/dto                       [0m | [31;1m      0[0m | [32;1m     100[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  project.dto.ts                                [0m | [31;1m      0[0m | [32;1m     100[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-97                                      [0m 
+[31;1m src/modules/rag                                [0m | [31;1m  23.76[0m | [31;1m   29.71[0m | [31;1m  20.31[0m | [31;1m  22.67[0m | [31;1m                                          [0m 
+[31;1m  chunking.service.ts                           [0m | [31;1m   5.63[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m   2.98[0m | [31;1m16-215                                    [0m 
+[32;1m  embeddings.service.ts                         [0m | [32;1m  88.88[0m | [33;1m   76.66[0m | [32;1m    100[0m | [32;1m   88.4[0m | [31;1m97,101,112-113,117-118,140-141            [0m 
+[31;1m  rag.controller.ts                             [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-125                                     [0m 
+[31;1m  rag.module.ts                                 [0m | [31;1m      0[0m | [32;1m     100[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-16                                      [0m 
+[31;1m  rag.service.ts                                [0m | [31;1m  12.69[0m | [31;1m   29.26[0m | [31;1m      0[0m | [31;1m   9.83[0m | [31;1m29-266                                    [0m 
+[31;1m  vector-store.service.ts                       [0m | [31;1m   6.06[0m | [31;1m   18.75[0m | [31;1m      0[0m | [31;1m   4.49[0m | [31;1m15-296                                    [0m 
+[31;1m src/modules/realtime                           [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  realtime.controller.ts                        [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-36                                      [0m 
+[31;1m  realtime.module.ts                            [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m1-10                                      [0m 
+[31;1m  realtime.service.ts                           [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-103                                     [0m 
+[31;1m src/modules/scripts                            [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  scripts.module.ts                             [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-32                                      [0m 
+[31;1m src/modules/scripts/dto                        [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  script.dto.ts                                 [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m1-19                                      [0m 
+[31;1m src/modules/storage                            [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  storage.controller.ts                         [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-11                                      [0m 
+[31;1m  storage.module.ts                             [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m2-13                                      [0m 
+[31;1m  storage.service.ts                            [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m2-312                                     [0m 
+[31;1m src/modules/tools                              [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  tool-handlers.service.ts                      [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m1-141                                     [0m 
+[31;1m  tool-schemas.ts                               [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m4                                         [0m 
+[31;1m  tools.module.ts                               [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m1-8                                       [0m 
+[32;1m src/prisma                                     [0m | [32;1m  81.48[0m | [32;1m     100[0m | [32;1m    100[0m | [32;1m  86.95[0m | [31;1m                                          [0m 
+[31;1m  prisma.module.ts                              [0m | [31;1m      0[0m | [32;1m     100[0m | [32;1m    100[0m | [31;1m      0[0m | [31;1m2-10                                      [0m 
+[32;1m  prisma.service.ts                             [0m | [32;1m    100[0m | [32;1m     100[0m | [32;1m    100[0m | [32;1m    100[0m | [33;1m                                          [0m 
+[31;1m src/services                                   [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m                                          [0m 
+[31;1m  gemini-analyst.service.ts                     [0m | [31;1m      0[0m | [31;1m       0[0m | [31;1m      0[0m | [31;1m      0[0m | [31;1m6-34                                      [0m 
+-------------------------------------------------|---------|----------|---------|---------|--------------------------------------------
+[1m[31mJest: "global" coverage threshold for statements (80%) not met: 18.15%[39m[22m
+[1m[31mJest: "global" coverage threshold for branches (80%) not met: 18.02%[39m[22m
+[1m[31mJest: "global" coverage threshold for lines (80%) not met: 17.77%[39m[22m
+[1m[31mJest: "global" coverage threshold for functions (80%) not met: 17.76%[39m[22m
+
+[1mTest Suites: [22m[1m[32m13 passed[39m[22m, 13 total
+[1mTests:       [22m[1m[32m70 passed[39m[22m, 70 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m6.284 s[39m[22m
+[2mRan all test suites[22m[2m.[22m

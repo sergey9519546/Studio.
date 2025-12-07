@@ -12,11 +12,11 @@ export interface AIProvider {
         messages: Array<{ role: string; content: string }>,
         systemPrompt: string,
         options?: ChatOptions
-    ): Promise<string | { toolCalls: any[] }>;
+    ): Promise<string | { toolCalls: Record<string, unknown>[] }>;
 
     generateContent(prompt: string, options?: GenerateOptions): Promise<string>;
 
-    extractData(prompt: string, schema?: any, options?: ExtractOptions): Promise<unknown>;
+    extractData(prompt: string, schema?: Record<string, unknown>, options?: ExtractOptions): Promise<unknown>;
 
     estimateCost(inputTokens: number, outputTokens: number, model?: string): number;
 }
@@ -25,7 +25,7 @@ export interface ChatOptions {
     model?: string;
     temperature?: number;
     maxTokens?: number;
-    tools?: any[];
+    tools?: Record<string, unknown>[];
 }
 
 export interface GenerateOptions {
@@ -35,7 +35,7 @@ export interface GenerateOptions {
 }
 
 export interface ExtractOptions extends GenerateOptions {
-    schema?: any;
+    schema?: Record<string, unknown>;
 }
 
 export interface ModelInfo {

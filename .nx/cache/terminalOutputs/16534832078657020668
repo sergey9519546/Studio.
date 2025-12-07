@@ -1,0 +1,70 @@
+Compiling TypeScript files for project "api"...
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/gemini-analyst.service.ts[0m:[93m29[0m:[93m18[0m - [91merror[0m[90m TS2352: [0mConversion of type '({ name: string; description: string; parameters: { type: string; properties: { title: { type: string; description: string; }; description: { type: string; description: string; }; budget: { type: string; description: string; }; projectId?: undefined; freelancerId?: undefined; role?: undefined; }; required: string[];...' to type 'Tool[]' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.[39m[22m
+[1m[31m  Type '{ name: string; description: string; parameters: { type: string; properties: { title: { type: string; description: string; }; description: { type: string; description: string; }; budget: { type: string; description: string; }; projectId?: undefined; freelancerId?: undefined; role?: undefined; }; required: string[]; ...' is not comparable to type 'Tool'.[39m[22m
+[1m[31m    Type '{ name: string; description: string; parameters: { type: string; properties: { projectId: { type: string; description: string; }; freelancerId: { type: string; description: string; }; role: { type: string; description: string; }; title?: undefined; description?: undefined; budget?: undefined; }; required: string[]; ...' is not comparable to type 'Tool'.[39m[22m
+[1m[31m      Types of property 'function' are incompatible.[39m[22m
+[1m[31m        Type '({ projectId, freelancerId, role }: { projectId: string; freelancerId: string; role: string; }) => Promise<{ id: string; projectId: string; role: string; status: string; freelancerId: string; startDate: Date; endDate: Date; updatedAt: Date; createdAt: Date; allocation: number; notes: string | null; }>' is not comparable to type '(args: Record<string, unknown>) => unknown'.[39m[22m
+[1m[31m          Types of parameters '__0' and 'args' are incompatible.[39m[22m
+[1m[31m            Type 'Record<string, unknown>' is missing the following properties from type '{ projectId: string; freelancerId: string; role: string; }': projectId, freelancerId, role[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m29[0m     this.tools = getTools(this.prisma) as Tool[];[39m[22m
+[1m[31m[7m  [0m [91m                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/gemini-analyst.service.ts[0m:[93m73[0m:[93m69[0m - [91merror[0m[90m TS2345: [0mArgument of type 'Tool[]' is not assignable to parameter of type 'Record<string, unknown>[]'.[39m[22m
+[1m[31m  Type 'Tool' is not assignable to type 'Record<string, unknown>'.[39m[22m
+[1m[31m    Index signature for type 'string' is missing in type 'Tool'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m73[0m     const result = await this.vertexAI.chat(messages, systemPrompt, this.tools);[39m[22m
+[1m[31m[7m  [0m [91m                                                                    ~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/gemini-analyst.service.ts[0m:[93m87[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType 'string | { toolCalls: Record<string, unknown>[]; }' is not assignable to type 'string | { toolCalls: ToolCall[]; }'.[39m[22m
+[1m[31m  Type '{ toolCalls: Record<string, unknown>[]; }' is not assignable to type 'string | { toolCalls: ToolCall[]; }'.[39m[22m
+[1m[31m    Type '{ toolCalls: Record<string, unknown>[]; }' is not assignable to type '{ toolCalls: ToolCall[]; }'.[39m[22m
+[1m[31m      Types of property 'toolCalls' are incompatible.[39m[22m
+[1m[31m        Type 'Record<string, unknown>[]' is not assignable to type 'ToolCall[]'.[39m[22m
+[1m[31m          Type 'Record<string, unknown>' is missing the following properties from type 'ToolCall': name, args[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m87[0m     return result;[39m[22m
+[1m[31m[7m  [0m [91m    ~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai.service.ts[0m:[93m127[0m:[93m41[0m - [91merror[0m[90m TS2345: [0mArgument of type '{}' is not assignable to parameter of type 'Record<string, unknown>'.[39m[22m
+[1m[31m  Index signature for type 'string' is missing in type '{}'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m127[0m       const functionCall = this.safeGet(content, ['fields', 'functionCall', 'structValue', 'fields']);[39m[22m
+[1m[31m[7m   [0m [91m                                        ~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai.service.ts[0m:[93m131[0m:[93m32[0m - [91merror[0m[90m TS2345: [0mArgument of type '{}' is not assignable to parameter of type 'Record<string, unknown>'.[39m[22m
+[1m[31m  Index signature for type 'string' is missing in type '{}'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m131[0m             name: this.safeGet(functionCall, ['name', 'stringValue']) || 'unknown_function',[39m[22m
+[1m[31m[7m   [0m [91m                               ~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai.service.ts[0m:[93m132[0m:[93m32[0m - [91merror[0m[90m TS2345: [0mArgument of type '{}' is not assignable to parameter of type 'Record<string, unknown>'.[39m[22m
+[1m[31m  Index signature for type 'string' is missing in type '{}'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m132[0m             args: this.safeGet(functionCall, ['args', 'structValue', 'fields']) || {}[39m[22m
+[1m[31m[7m   [0m [91m                               ~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai.service.ts[0m:[93m138[0m:[93m33[0m - [91merror[0m[90m TS2345: [0mArgument of type '{}' is not assignable to parameter of type 'Record<string, unknown>'.[39m[22m
+[1m[31m  Index signature for type 'string' is missing in type '{}'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m138[0m       const text = this.safeGet(content, ['fields', 'text', 'stringValue']);[39m[22m
+[1m[31m[7m   [0m [91m                                ~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai.service.ts[0m:[93m154[0m:[93m24[0m - [91merror[0m[90m TS2769: [0mNo overload matches this call.[39m[22m
+[1m[31m  Overload 1 of 3, '(callbackfn: (previousValue: string | number, currentValue: string | number, currentIndex: number, array: (string | number)[]) => string | number, initialValue: string | number): string | number', gave the following error.[39m[22m
+[1m[31m    Argument of type '(current: Record<string, unknown>, key: string | number) => unknown' is not assignable to parameter of type '(previousValue: string | number, currentValue: string | number, currentIndex: number, array: (string | number)[]) => string | number'.[39m[22m
+[1m[31m      Types of parameters 'current' and 'previousValue' are incompatible.[39m[22m
+[1m[31m        Type 'string | number' is not assignable to type 'Record<string, unknown>'.[39m[22m
+[1m[31m          Type 'string' is not assignable to type 'Record<string, unknown>'.[39m[22m
+[1m[31m  Overload 2 of 3, '(callbackfn: (previousValue: Record<string, unknown>, currentValue: string | number, currentIndex: number, array: (string | number)[]) => Record<string, unknown>, initialValue: Record<string, unknown>): Record<...>', gave the following error.[39m[22m
+[1m[31m    Argument of type '(current: Record<string, unknown>, key: string | number) => unknown' is not assignable to parameter of type '(previousValue: Record<string, unknown>, currentValue: string | number, currentIndex: number, array: (string | number)[]) => Record<string, unknown>'.[39m[22m
+[1m[31m      Type 'unknown' is not assignable to type 'Record<string, unknown>'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m154[0m     return path.reduce((current, key) => {[39m[22m
+[1m[31m[7m   [0m [91m                       ~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/integrations/cloud-storage/adapters/google-drive.adapter.ts[0m:[93m58[0m:[93m67[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ id: number; email: string; googleCredentials: { accessToken: string | null; refreshToken: string | null; }; }' is not assignable to parameter of type 'AuthenticatedUser'.[39m[22m
+[1m[31m  Types of property 'id' are incompatible.[39m[22m
+[1m[31m    Type 'number' is not assignable to type 'string'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m58[0m     const { drive } = this.clientFactory.createDriveClientForUser(user);[39m[22m
+[1m[31m[7m  [0m [91m                                                                  ~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/knowledge/knowledge.controller.ts[0m:[93m19[0m:[93m44[0m - [91merror[0m[90m TS2554: [0mExpected 0 arguments, but got 1.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m19[0m       return this.knowledgeService.findAll(projectId);[39m[22m
+[1m[31m[7m  [0m [91m                                           ~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m

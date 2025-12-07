@@ -3,7 +3,23 @@
 export interface PromptTemplate {
     version: string;
     systemPrompt: string;
-    userPrompt: (data: any) => string;
+    userPrompt: (data: unknown) => string;
+}
+
+interface FreelancerAnalysisData {
+    name: string;
+    projectCount: number;
+    avgRating: number;
+    skills: string[];
+    recentProjects: { title: string }[];
+}
+
+interface ProjectProfitabilityData {
+    title: string;
+    budget: number;
+    totalCost: number;
+    profit: number;
+    assignments: { freelancer: { name: string }; role: string }[];
 }
 
 export const PROMPT_TEMPLATES: Record<string, PromptTemplate> = {
@@ -37,14 +53,17 @@ Output: {
   "recommendation": "Top performer for UI/UX projects, ready for flagship work",
   "nextSteps": ["Offer advanced UX training", "Assign to high-profile Project X"]
 }`,
-        userPrompt: (data: any) => `
+        userPrompt: (data: unknown) => {
+            const freelancerData = data as FreelancerAnalysisData;
+            return `
 Analyze this freelancer:
-Name: ${data.name}
-Projects Completed: ${data.projectCount}
-Average Rating: ${data.avgRating}/5
-Skills: ${data.skills.join(', ')}
-Recent Work: ${data.recentProjects.map((p: any) => p.title).join(', ')}
-`
+Name: ${freelancerData.name}
+Projects Completed: ${freelancerData.projectCount}
+Average Rating: ${freelancerData.avgRating}/5
+Skills: ${freelancerData.skills.join(', ')}
+Recent Work: ${freelancerData.recentProjects.map((p) => p.title).join(', ')}
+`;
+        }
     },
 
     projectProfitability: {
@@ -74,14 +93,17 @@ Output: {
   "recommendations": ["Reduce freelancer overlap", "Negotiate better rates"],
   "riskFactors": ["Scope creep risk", "Timeline pressure"]
 }`,
-        userPrompt: (data: any) => `
+        userPrompt: (data: unknown) => {
+            const projectData = data as ProjectProfitabilityData;
+            return `
 Analyze this project:
-Title: ${data.title}
-Budget: $${data.budget}
-Total Cost: $${data.totalCost}
-Profit: $${data.profit}
-Team: ${data.assignments.map((a: any) => `${a.freelancer.name} (${a.role})`).join(', ')}
-`
+Title: ${projectData.title}
+Budget: $${projectData.budget}
+Total Cost: $${projectData.totalCost}
+Profit: $${projectData.profit}
+Team: ${projectData.assignments.map((a) => `${a.freelancer.name} (${a.role})`).join(', ')}
+`;
+        }
     },
 
     chat: {
@@ -108,7 +130,7 @@ You: "**Performance Summary:**
 {context}
 
 Respond based on the provided context.`,
-        userPrompt: (context: string) => context
+        userPrompt: (context: unknown) => context as string
     }
 };
 

@@ -1,5 +1,5 @@
 
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { DriveService, DriveFileDTO } from './drive.service';
 import { GoogleClientFactory } from './google-client.factory';
 

@@ -21035,6 +21035,891 @@
     "type": "static"
   },
   {
+    "source": "npm:@firebase/ai",
+    "target": "npm:@firebase/app",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/ai",
+    "target": "npm:@firebase/app-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/ai",
+    "target": "npm:@firebase/app-check-interop-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/ai",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/ai",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/ai",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/ai",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/analytics",
+    "target": "npm:@firebase/app",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/analytics",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/analytics",
+    "target": "npm:@firebase/installations",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/analytics",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/analytics",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/analytics",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/analytics-compat",
+    "target": "npm:@firebase/app-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/analytics-compat",
+    "target": "npm:@firebase/analytics",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/analytics-compat",
+    "target": "npm:@firebase/analytics-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/analytics-compat",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/analytics-compat",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/analytics-compat",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app",
+    "target": "npm:idb",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-check",
+    "target": "npm:@firebase/app",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-check",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-check",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-check",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-check",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-check-compat",
+    "target": "npm:@firebase/app-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-check-compat",
+    "target": "npm:@firebase/app-check",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-check-compat",
+    "target": "npm:@firebase/app-check-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-check-compat",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-check-compat",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-check-compat",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-check-compat",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-compat",
+    "target": "npm:@firebase/app",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-compat",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-compat",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-compat",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/app-compat",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/auth",
+    "target": "npm:@firebase/app",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/auth",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/auth",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/auth",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/auth",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/auth-compat",
+    "target": "npm:@firebase/app-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/auth-compat",
+    "target": "npm:@firebase/auth",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/auth-compat",
+    "target": "npm:@firebase/auth-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/auth-compat",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/auth-compat",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/auth-compat",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/auth-types",
+    "target": "npm:@firebase/app-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/auth-types",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/component",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/component",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/data-connect",
+    "target": "npm:@firebase/app",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/data-connect",
+    "target": "npm:@firebase/auth-interop-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/data-connect",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/data-connect",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/data-connect",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/data-connect",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database",
+    "target": "npm:@firebase/app-check-interop-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database",
+    "target": "npm:@firebase/auth-interop-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database",
+    "target": "npm:faye-websocket",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database-compat",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database-compat",
+    "target": "npm:@firebase/database",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database-compat",
+    "target": "npm:@firebase/database-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database-compat",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database-compat",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database-compat",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database-types",
+    "target": "npm:@firebase/app-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database-types",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore",
+    "target": "npm:@firebase/app",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore",
+    "target": "npm:@firebase/webchannel-wrapper",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore",
+    "target": "npm:@grpc/grpc-js@1.9.15",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore",
+    "target": "npm:@grpc/proto-loader@0.7.15",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore-compat",
+    "target": "npm:@firebase/app-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore-compat",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore-compat",
+    "target": "npm:@firebase/firestore",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore-compat",
+    "target": "npm:@firebase/firestore-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore-compat",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore-compat",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore-types",
+    "target": "npm:@firebase/app-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/firestore-types",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@grpc/grpc-js@1.9.15",
+    "target": "npm:@grpc/proto-loader@0.7.15",
+    "type": "static"
+  },
+  {
+    "source": "npm:@grpc/grpc-js@1.9.15",
+    "target": "npm:@types/node",
+    "type": "static"
+  },
+  {
+    "source": "npm:@grpc/proto-loader@0.7.15",
+    "target": "npm:lodash.camelcase",
+    "type": "static"
+  },
+  {
+    "source": "npm:@grpc/proto-loader@0.7.15",
+    "target": "npm:long",
+    "type": "static"
+  },
+  {
+    "source": "npm:@grpc/proto-loader@0.7.15",
+    "target": "npm:protobufjs",
+    "type": "static"
+  },
+  {
+    "source": "npm:@grpc/proto-loader@0.7.15",
+    "target": "npm:yargs",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/functions",
+    "target": "npm:@firebase/app",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/functions",
+    "target": "npm:@firebase/app-check-interop-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/functions",
+    "target": "npm:@firebase/auth-interop-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/functions",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/functions",
+    "target": "npm:@firebase/messaging-interop-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/functions",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/functions",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/functions-compat",
+    "target": "npm:@firebase/app-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/functions-compat",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/functions-compat",
+    "target": "npm:@firebase/functions",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/functions-compat",
+    "target": "npm:@firebase/functions-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/functions-compat",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/functions-compat",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/installations",
+    "target": "npm:@firebase/app",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/installations",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/installations",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/installations",
+    "target": "npm:idb",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/installations",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/installations-compat",
+    "target": "npm:@firebase/app-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/installations-compat",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/installations-compat",
+    "target": "npm:@firebase/installations",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/installations-compat",
+    "target": "npm:@firebase/installations-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/installations-compat",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/installations-compat",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/installations-types",
+    "target": "npm:@firebase/app-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/logger",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/messaging",
+    "target": "npm:@firebase/app",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/messaging",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/messaging",
+    "target": "npm:@firebase/installations",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/messaging",
+    "target": "npm:@firebase/messaging-interop-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/messaging",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/messaging",
+    "target": "npm:idb",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/messaging",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/messaging-compat",
+    "target": "npm:@firebase/app-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/messaging-compat",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/messaging-compat",
+    "target": "npm:@firebase/messaging",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/messaging-compat",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/messaging-compat",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/performance",
+    "target": "npm:@firebase/app",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/performance",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/performance",
+    "target": "npm:@firebase/installations",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/performance",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/performance",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/performance",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/performance",
+    "target": "npm:web-vitals",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/performance-compat",
+    "target": "npm:@firebase/app-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/performance-compat",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/performance-compat",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/performance-compat",
+    "target": "npm:@firebase/performance",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/performance-compat",
+    "target": "npm:@firebase/performance-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/performance-compat",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/performance-compat",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/remote-config",
+    "target": "npm:@firebase/app",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/remote-config",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/remote-config",
+    "target": "npm:@firebase/installations",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/remote-config",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/remote-config",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/remote-config",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/remote-config-compat",
+    "target": "npm:@firebase/app-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/remote-config-compat",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/remote-config-compat",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/remote-config-compat",
+    "target": "npm:@firebase/remote-config",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/remote-config-compat",
+    "target": "npm:@firebase/remote-config-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/remote-config-compat",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/remote-config-compat",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/storage",
+    "target": "npm:@firebase/app",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/storage",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/storage",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/storage",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/storage-compat",
+    "target": "npm:@firebase/app-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/storage-compat",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/storage-compat",
+    "target": "npm:@firebase/storage",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/storage-compat",
+    "target": "npm:@firebase/storage-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/storage-compat",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/storage-compat",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/storage-types",
+    "target": "npm:@firebase/app-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/storage-types",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/util",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
     "source": "npm:@floating-ui/core",
     "target": "npm:@floating-ui/utils",
     "type": "static"
@@ -31595,6 +32480,11 @@
     "type": "static"
   },
   {
+    "source": "npm:faye-websocket",
+    "target": "npm:websocket-driver",
+    "type": "static"
+  },
+  {
     "source": "npm:fb-watchman",
     "target": "npm:bser",
     "type": "static"
@@ -31827,6 +32717,146 @@
   {
     "source": "npm:find-up",
     "target": "npm:path-exists",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/ai",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/analytics",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/analytics-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/app",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/app-check",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/app-check-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/app-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/app-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/auth",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/auth-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/data-connect",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/database",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/database-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/firestore",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/firestore-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/functions",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/functions-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/installations",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/installations-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/messaging",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/messaging-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/performance",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/performance-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/remote-config",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/remote-config-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/storage",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/storage-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase",
+    "target": "npm:@firebase/util",
     "type": "static"
   },
   {
@@ -36575,6 +37605,16 @@
     "type": "static"
   },
   {
+    "source": "npm:openai",
+    "target": "npm:ws",
+    "type": "static"
+  },
+  {
+    "source": "npm:openai",
+    "target": "npm:zod",
+    "type": "static"
+  },
+  {
     "source": "npm:optionator",
     "target": "npm:deep-is",
     "type": "static"
@@ -40937,6 +41977,21 @@
   {
     "source": "npm:wcwidth",
     "target": "npm:defaults",
+    "type": "static"
+  },
+  {
+    "source": "npm:websocket-driver",
+    "target": "npm:http-parser-js",
+    "type": "static"
+  },
+  {
+    "source": "npm:websocket-driver",
+    "target": "npm:safe-buffer",
+    "type": "static"
+  },
+  {
+    "source": "npm:websocket-driver",
+    "target": "npm:websocket-extensions",
     "type": "static"
   },
   {

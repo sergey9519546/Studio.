@@ -5,7 +5,7 @@ import { Controller, Get } from '@nestjs/common';
 export class HealthController {
   @Get()
   check() {
-    const uptime = (process as any).uptime();
+    const uptime = (process as NodeJS.Process).uptime();
     return {
       status: 'ok',
       uptime,

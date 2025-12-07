@@ -2,6 +2,12 @@ import { Module } from '@nestjs/common';
 import { LoggerModule as PinoLoggerModule } from 'nestjs-pino';
 import { IncomingMessage, ServerResponse } from 'http';
 
+interface RequestWithUser extends IncomingMessage {
+    user?: { id: string };
+    params?: Record<string, unknown>;
+    query?: Record<string, unknown>;
+}
+
 @Module({
     imports: [
         PinoLoggerModule.forRoot({
@@ -19,15 +25,15 @@ import { IncomingMessage, ServerResponse } from 'http';
                             },
                         }
                         : undefined,
-                customProps: (req: IncomingMessage, res: ServerResponse) => ({
-                    userId: (req as any).user?.id,
+                customProps: (req: RequestWithUser, res: ServerResponse) => ({
+                    userId: req.user?.id,
                 }),
                 serializers: {
-                    req: (req) => ({
+                    req: (req: RequestWithUser) => ({
                         method: req.method,
                         url: req.url,
-                        params: (req as any).params,
-                        query: (req as any).query,
+                        params: req.params,
+                        query: req.query,
                     }),
                     res: (res) => ({
                         statusCode: res.statusCode,

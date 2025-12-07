@@ -8,580 +8,6 @@
   },
   "nxJsonPlugins": [],
   "fileMap": {
-    "nonProjectFiles": [
-      {
-        "file": "scripts/test-genai.ts",
-        "hash": "13346155852408471870"
-      },
-      {
-        "file": "components/dashboard/DataHUD.tsx",
-        "hash": "16417321958774849837"
-      },
-      {
-        "file": "compose.yaml",
-        "hash": "6971107574226544391"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.89550a6e-86e2-44cf-9201-b0a81eaa776d.json",
-        "hash": "12178908264864505738"
-      },
-      {
-        "file": "FLUID_DESIGN_GUIDE.md",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": "package.json",
-        "hash": "11257783739827192026"
-      },
-      {
-        "file": "package-lock.json",
-        "hash": "1890988244618381666"
-      },
-      {
-        "file": "DEPLOYMENT.md",
-        "hash": "4339139330958676058"
-      },
-      {
-        "file": "prisma/schema_header.txt",
-        "hash": "12276007508623322390"
-      },
-      {
-        "file": "components/Layout.tsx",
-        "hash": "17168730395333804676"
-      },
-      {
-        "file": "components/ReferenceGallery.tsx",
-        "hash": "13886045913471006847"
-      },
-      {
-        "file": "prisma/schema.prisma",
-        "hash": "2765745555787340270"
-      },
-      {
-        "file": "src/components/TalentRoster.tsx",
-        "hash": "6561355572292578744"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "13357121542629593362"
-      },
-      {
-        "file": "components/CSSSplitStudio.tsx",
-        "hash": "8886320207354234082"
-      },
-      {
-        "file": "scripts/test-rag.ts",
-        "hash": "11653260914783162787"
-      },
-      {
-        "file": "FLUID_DESIGN_README.md",
-        "hash": "6341821061864771848"
-      },
-      {
-        "file": ".github/workflows/ci.yml",
-        "hash": "4867561674071577364"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.602e4ec9-3c0e-423c-9743-dbd689ef21c1.json",
-        "hash": "12178908264864505738"
-      },
-      {
-        "file": "index.html",
-        "hash": "7751313352597883809"
-      },
-      {
-        "file": "components/ui/ImageWithPlaceholder.tsx",
-        "hash": "12678471987445005015"
-      },
-      {
-        "file": "components/ProjectDetail.tsx",
-        "hash": "12711381099747525608"
-      },
-      {
-        "file": "components/PublicProjectView.tsx",
-        "hash": "1021541302650311129"
-      },
-      {
-        "file": "src/components/Dashboard.test.tsx",
-        "hash": "1867295793777926164"
-      },
-      {
-        "file": "services/VerificationEngine.ts",
-        "hash": "6322796157363968390"
-      },
-      {
-        "file": "vitest.config.ts",
-        "hash": "7464874980788127906"
-      },
-      {
-        "file": "services/EmbeddingsService.ts",
-        "hash": "6824940127232581948"
-      },
-      {
-        "file": "components/FreelancerList.tsx",
-        "hash": "13178973591249652927"
-      },
-      {
-        "file": "components/editor/SimpleEditor.tsx",
-        "hash": "17028019006470407171"
-      },
-      {
-        "file": "App.tsx",
-        "hash": "2832108698579383315"
-      },
-      {
-        "file": "src/components/ProjectHub.tsx",
-        "hash": "4876049740322315394"
-      },
-      {
-        "file": "prisma/migrations/add_pgvector_and_embeddings/migration.sql",
-        "hash": "1581348316463511631"
-      },
-      {
-        "file": "components/editor/AtlassianEditor.tsx",
-        "hash": "7870316824275766792"
-      },
-      {
-        "file": "components/ErrorBoundary.tsx",
-        "hash": "10503169007878811521"
-      },
-      {
-        "file": "src/components/FreelancerCard.test.tsx",
-        "hash": "10902068170169858515"
-      },
-      {
-        "file": "components/CreateStudio.tsx",
-        "hash": "2044682948391067354"
-      },
-      {
-        "file": "components/Moodboard/MoodboardTab.tsx",
-        "hash": "17448917382071479194"
-      },
-      {
-        "file": "services/IntelligentContextEngine.ts",
-        "hash": "16429650695581295190"
-      },
-      {
-        "file": "components/AssignmentView.test.tsx",
-        "hash": "3261617830054130157"
-      },
-      {
-        "file": "src/components/design/MoodboardContainer.tsx",
-        "hash": "9664041750744438864"
-      },
-      {
-        "file": "src/components/UltimateBentoGrid.tsx",
-        "hash": "7460809064390200950"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.deba686d-8056-40c9-9fd8-d72705f1cdf9.json",
-        "hash": "12178908264864505738"
-      },
-      {
-        "file": "src/components/design/index.ts",
-        "hash": "10280703256071447430"
-      },
-      {
-        "file": ".builderrules",
-        "hash": "9677169200791952411"
-      },
-      {
-        "file": ".agent/workflows/lastminutesavior.md",
-        "hash": "16678704584218741735"
-      },
-      {
-        "file": "src/components/MobileNav.tsx",
-        "hash": "5004716598572149206"
-      },
-      {
-        "file": "services/OpenAIVisionService.ts",
-        "hash": "14906338135938564270"
-      },
-      {
-        "file": "index.tsx",
-        "hash": "2349530851059807088"
-      },
-      {
-        "file": "docs/CLS_OPTIMIZATION.md",
-        "hash": "2986638614304603581"
-      },
-      {
-        "file": "prisma/comment_schema_addition.prisma",
-        "hash": "3650114432106741156"
-      },
-      {
-        "file": "src/test/setup.ts",
-        "hash": "7890483852430562637"
-      },
-      {
-        "file": "nx.json",
-        "hash": "13108012552268398639"
-      },
-      {
-        "file": "FLUID_DESIGN_IMPLEMENTATION_SUMMARY.md",
-        "hash": "4805661421493112746"
-      },
-      {
-        "file": "src/components/design/FormField.tsx",
-        "hash": "51928631552137506"
-      },
-      {
-        "file": ".dockerignore",
-        "hash": "14849129328461547574"
-      },
-      {
-        "file": "PRODUCT_DISCOVERY_STRATEGY.md",
-        "hash": "7817553116608421190"
-      },
-      {
-        "file": "services/AssetIntelligenceEngine.ts",
-        "hash": "2612000924740079030"
-      },
-      {
-        "file": "components/ProjectList.tsx",
-        "hash": "14957529032407931052"
-      },
-      {
-        "file": "services/BrandContextAssembler.ts",
-        "hash": "6573694878419660252"
-      },
-      {
-        "file": "components/FreelancerCard.tsx",
-        "hash": "9160294594113578536"
-      },
-      {
-        "file": "src/components/design/Input.tsx",
-        "hash": "1452970044814179204"
-      },
-      {
-        "file": "types.ts",
-        "hash": "2610038540445278327"
-      },
-      {
-        "file": "context/ToastContext.tsx",
-        "hash": "11364685758065263369"
-      },
-      {
-        "file": "components/Login.tsx",
-        "hash": "6652691102251168624"
-      },
-      {
-        "file": "tailwind.config.js",
-        "hash": "12625755334889853188"
-      },
-      {
-        "file": "components/dashboard/PriorityStack.tsx",
-        "hash": "10395850906364942815"
-      },
-      {
-        "file": "src/components/design/EmptyState.tsx",
-        "hash": "7652142569805763424"
-      },
-      {
-        "file": "Dockerfile",
-        "hash": "9112832209795491830"
-      },
-      {
-        "file": "services/intelligence.ts",
-        "hash": "4254875570619772085"
-      },
-      {
-        "file": "services/mockData.ts",
-        "hash": "14540299495636304102"
-      },
-      {
-        "file": "services/api.ts",
-        "hash": "11046135990648866814"
-      },
-      {
-        "file": "components/dashboard/MorningBriefing.tsx",
-        "hash": "6093711406261970139"
-      },
-      {
-        "file": ".env.example",
-        "hash": "11839297236215261032"
-      },
-      {
-        "file": "eslint.config.mjs",
-        "hash": "8202087372281518628"
-      },
-      {
-        "file": "prisma/seed.ts",
-        "hash": "8040717540852340801"
-      },
-      {
-        "file": ".agent/workflows/designgenius.md",
-        "hash": "13560014299464650447"
-      },
-      {
-        "file": "components/SplitPaneStudio.tsx",
-        "hash": "12498824629626591905"
-      },
-      {
-        "file": "src/components/design/Card.tsx",
-        "hash": "14141509307166008027"
-      },
-      {
-        "file": "components/Dashboard.tsx",
-        "hash": "13189217945797457459"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.d5b52dfc-7d88-4b62-8012-abe976eb79c0.json",
-        "hash": "12178908264864505738"
-      },
-      {
-        "file": "components/FreelancerDetail.tsx",
-        "hash": "11571474374566699854"
-      },
-      {
-        "file": "migrations/add_fulltext_search.sql",
-        "hash": "3053879277148123067"
-      },
-      {
-        "file": ".github/workflows/docker-image.yml",
-        "hash": "5206607132747754828"
-      },
-      {
-        "file": "vite.config.ts",
-        "hash": "7746444253426714748"
-      },
-      {
-        "file": "components/ui/Skeleton.tsx",
-        "hash": "14950157197476677189"
-      },
-      {
-        "file": "services/StructuredGenAI.ts",
-        "hash": "17935126508065075356"
-      },
-      {
-        "file": "components/Moodboard/MoodboardDetail.tsx",
-        "hash": "6209008361183991260"
-      },
-      {
-        "file": "components/DriveFileBrowser.tsx",
-        "hash": "4198014472257386984"
-      },
-      {
-        "file": "tsconfig.json",
-        "hash": "4546352367589958424"
-      },
-      {
-        "file": "components/AssignmentView.tsx",
-        "hash": "10904210451023359699"
-      },
-      {
-        "file": "src/components/design/Select.tsx",
-        "hash": "14858598599769942375"
-      },
-      {
-        "file": "src/components/design/Modal.tsx",
-        "hash": "385651981499474447"
-      },
-      {
-        "file": "src/theme/tokens.ts",
-        "hash": "9169422088034587464"
-      },
-      {
-        "file": "src/components/design/LiquidGlassContainer.tsx",
-        "hash": "17047014570473772182"
-      },
-      {
-        "file": "RAG_SETUP.md",
-        "hash": "16888092651689317436"
-      },
-      {
-        "file": "components/ui/AspectRatioBox.tsx",
-        "hash": "181501620670895418"
-      },
-      {
-        "file": "components/ProjectModal.tsx",
-        "hash": "13193001718773027036"
-      },
-      {
-        "file": "services/GenAIService.ts",
-        "hash": "7872493889437725870"
-      },
-      {
-        "file": ".agent/workflows/lifesaver.md",
-        "hash": "16678704584218741735"
-      },
-      {
-        "file": "components/ui/Toast.tsx",
-        "hash": "12945136494847467674"
-      },
-      {
-        "file": "src/components/design/Badge.tsx",
-        "hash": "10079539784816419796"
-      },
-      {
-        "file": "prisma/migrations/migration_lock.toml",
-        "hash": "872437952673290735"
-      },
-      {
-        "file": "SECURITY.md",
-        "hash": "1247703567615508587"
-      },
-      {
-        "file": "deploy.sh",
-        "hash": "15656792088573889311"
-      },
-      {
-        "file": "components/AIChat.tsx",
-        "hash": "16237397908538491026"
-      },
-      {
-        "file": "src/components/design/Button.tsx",
-        "hash": "2204114074979782763"
-      },
-      {
-        "file": "src/components/design/Textarea.tsx",
-        "hash": "3020892983559170131"
-      },
-      {
-        "file": "src/components/design/GlassSheet.tsx",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": "components/INTEGRATION_3PANE.md",
-        "hash": "13275706790411873686"
-      },
-      {
-        "file": "scripts/index-docs.ts",
-        "hash": "3358400649290798685"
-      },
-      {
-        "file": "docs/accessibility-audit-final.md",
-        "hash": "17516706163709713174"
-      },
-      {
-        "file": "DEPLOYMENT_CHECKLIST.md",
-        "hash": "14695220234282212091"
-      },
-      {
-        "file": "services/ResilienceLayer.ts",
-        "hash": "6650077117810460973"
-      },
-      {
-        "file": "components/CreativeStudio.tsx",
-        "hash": "7359692287791774836"
-      },
-      {
-        "file": "INTEGRATION_GUIDE.md",
-        "hash": "10673789318204221778"
-      },
-      {
-        "file": "components/ToneMoodBoard.tsx",
-        "hash": "11760508184488528661"
-      },
-      {
-        "file": "prisma/schema.prisma.bak",
-        "hash": "13493496863099499486"
-      },
-      {
-        "file": "docs/accessibility-audit-initial.md",
-        "hash": "14751841814887778361"
-      },
-      {
-        "file": "README.md",
-        "hash": "2493614064700546451"
-      },
-      {
-        "file": ".npmrc",
-        "hash": "18359608235670662366"
-      },
-      {
-        "file": "src/components/WritersRoom.tsx",
-        "hash": "14942719160393212538"
-      },
-      {
-        "file": "src/components/Layout.tsx",
-        "hash": "11763301735535571154"
-      },
-      {
-        "file": "nest-cli.json",
-        "hash": "14505915785129445760"
-      },
-      {
-        "file": "src/components/design/Tabs.tsx",
-        "hash": "4068615273497901581"
-      },
-      {
-        "file": "src/components/ProjectList.test.tsx",
-        "hash": "2768358079972839014"
-      },
-      {
-        "file": "components/ContextHub.tsx",
-        "hash": "4192506026851232302"
-      },
-      {
-        "file": "src/components/Moodboard.tsx",
-        "hash": "17885490226105146176"
-      },
-      {
-        "file": "src/components/design/FloatingNavigation.tsx",
-        "hash": "10511841286298015025"
-      },
-      {
-        "file": "services/unsplash.ts",
-        "hash": "9794933858897214581"
-      },
-      {
-        "file": "src/components/FluidDesignShowcase.tsx",
-        "hash": "12684374562613267670"
-      },
-      {
-        "file": "components/ImportWizard.test.tsx",
-        "hash": "1074582511078658729"
-      },
-      {
-        "file": "src/components/design/DGlassEffectContainer.tsx",
-        "hash": "6690044341577184385"
-      },
-      {
-        "file": "prisma/prisma.config.ts",
-        "hash": "3358383459801772218"
-      },
-      {
-        "file": "prisma/models.txt",
-        "hash": "10350745335057674820"
-      },
-      {
-        "file": "src/components/ProjectDashboard.tsx",
-        "hash": "2673015548541351458"
-      },
-      {
-        "file": "compose.debug.yaml",
-        "hash": "11585421920016818527"
-      },
-      {
-        "file": "components/ImportWizard.tsx",
-        "hash": "3782311382520085296"
-      },
-      {
-        "file": "components/editor/ProseMirrorEditor.tsx",
-        "hash": "4049357775507439686"
-      },
-      {
-        "file": "src/index.css",
-        "hash": "16811544195788576263"
-      },
-      {
-        "file": "src/components/design/FluidButton.tsx",
-        "hash": "12343124716626391563"
-      },
-      {
-        "file": "src/vite-env.d.ts",
-        "hash": "5563982428927376982"
-      },
-      {
-        "file": "deploy.ps1",
-        "hash": "16519160191123086008"
-      },
-      {
-        "file": "prisma/migrations/20251204103845_initial_schema/migration.sql",
-        "hash": "8474946449556009100"
-      }
-    ],
     "projectFileMap": {
       "api": [
         {
@@ -642,7 +68,7 @@
         },
         {
           "file": "apps/api/src/common/filters/all-exceptions.filter.ts",
-          "hash": "8804544397369782713",
+          "hash": "9082443999172835446",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/core"
@@ -665,7 +91,7 @@
         },
         {
           "file": "apps/api/src/common/logger/logger.module.ts",
-          "hash": "2238061781591044073",
+          "hash": "6104245718553171146",
           "deps": [
             "npm:@nestjs/common",
             "npm:nestjs-pino"
@@ -685,7 +111,7 @@
         },
         {
           "file": "apps/api/src/health/health.controller.ts",
-          "hash": "2843669414520737737",
+          "hash": "13962662463419814852",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -735,7 +161,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/ai.module.ts",
-          "hash": "4897625150061624142",
+          "hash": "1044804844255798133",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -743,11 +169,20 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini-analyst.service.ts",
-          "hash": "102969213727468002",
+          "hash": "9140971881954758037",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/cache-manager",
             "npm:cache-manager"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/ai/gemini-openai.service.ts",
+          "hash": "8480181593307848938",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:openai"
           ]
         },
         {
@@ -759,11 +194,11 @@
         },
         {
           "file": "apps/api/src/modules/ai/prompts/templates.ts",
-          "hash": "6458246491274000932"
+          "hash": "16748409739391106777"
         },
         {
           "file": "apps/api/src/modules/ai/providers/ai-provider.interface.ts",
-          "hash": "17467624022178321231"
+          "hash": "1010004731644796013"
         },
         {
           "file": "apps/api/src/modules/ai/providers/ai-provider.manager.ts",
@@ -774,7 +209,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/providers/vertex-ai.provider.ts",
-          "hash": "16669427600384438574",
+          "hash": "1001655850900015316",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -788,18 +223,18 @@
         },
         {
           "file": "apps/api/src/modules/ai/testing/prompt-tester.service.ts",
-          "hash": "6443348550389462225",
+          "hash": "14626862852376362704",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/ai/testing/test-cases.ts",
-          "hash": "1284788029521554129"
+          "hash": "4897831912131641699"
         },
         {
           "file": "apps/api/src/modules/ai/testing/testing.controller.ts",
-          "hash": "4122475133360245442",
+          "hash": "2289044471779805794",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -830,7 +265,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai.service.ts",
-          "hash": "13734645178417463461",
+          "hash": "8922554248081093379",
           "deps": [
             "npm:@google-cloud/aiplatform",
             "npm:@nestjs/common",
@@ -1027,7 +462,7 @@
         },
         {
           "file": "apps/api/src/modules/google/drive.controller.ts",
-          "hash": "11592000603021925562",
+          "hash": "4863091384011012139",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1090,7 +525,7 @@
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/adapters/google-drive.adapter.ts",
-          "hash": "1340906061705834243",
+          "hash": "8995918489246479688",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1116,7 +551,7 @@
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.spec.ts",
-          "hash": "6268408599903052117",
+          "hash": "15031706442514318319",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/common"
@@ -1175,14 +610,14 @@
         },
         {
           "file": "apps/api/src/modules/knowledge/knowledge.service.ts",
-          "hash": "5691422963173188872",
+          "hash": "5442781991299959314",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/monitoring/ai-usage.service.ts",
-          "hash": "2481963506108089488",
+          "hash": "2514384503260129852",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1506,7 +941,649 @@
           "hash": "2156727285087824874"
         }
       ]
-    }
+    },
+    "nonProjectFiles": [
+      {
+        "file": ".agent/workflows/designgenius.md",
+        "hash": "13560014299464650447"
+      },
+      {
+        "file": ".agent/workflows/lastminutesavior.md",
+        "hash": "16678704584218741735"
+      },
+      {
+        "file": ".agent/workflows/lifesaver.md",
+        "hash": "16678704584218741735"
+      },
+      {
+        "file": ".builderrules",
+        "hash": "9677169200791952411"
+      },
+      {
+        "file": ".dockerignore",
+        "hash": "14849129328461547574"
+      },
+      {
+        "file": ".env.example",
+        "hash": "16751341595538252834"
+      },
+      {
+        "file": ".github/workflows/ci.yml",
+        "hash": "4867561674071577364"
+      },
+      {
+        "file": ".github/workflows/docker-image.yml",
+        "hash": "5206607132747754828"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "13357121542629593362"
+      },
+      {
+        "file": ".npmrc",
+        "hash": "18359608235670662366"
+      },
+      {
+        "file": "AGENTS.md",
+        "hash": "7853241679760809325"
+      },
+      {
+        "file": "App.tsx",
+        "hash": "15474441820315536734"
+      },
+      {
+        "file": "DEPLOYMENT.md",
+        "hash": "4339139330958676058"
+      },
+      {
+        "file": "DEPLOYMENT_CHECKLIST.md",
+        "hash": "14695220234282212091"
+      },
+      {
+        "file": "Dockerfile",
+        "hash": "9112832209795491830"
+      },
+      {
+        "file": "FLUID_DESIGN_GUIDE.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "FLUID_DESIGN_IMPLEMENTATION_SUMMARY.md",
+        "hash": "4805661421493112746"
+      },
+      {
+        "file": "FLUID_DESIGN_README.md",
+        "hash": "6341821061864771848"
+      },
+      {
+        "file": "INTEGRATION_GUIDE.md",
+        "hash": "10673789318204221778"
+      },
+      {
+        "file": "PRODUCT_DISCOVERY_STRATEGY.md",
+        "hash": "7817553116608421190"
+      },
+      {
+        "file": "RAG_SETUP.md",
+        "hash": "16888092651689317436"
+      },
+      {
+        "file": "README.md",
+        "hash": "2493614064700546451"
+      },
+      {
+        "file": "SECURITY.md",
+        "hash": "1247703567615508587"
+      },
+      {
+        "file": "components/AIChat.tsx",
+        "hash": "572121285747114952"
+      },
+      {
+        "file": "components/AssignmentView.test.tsx",
+        "hash": "3261617830054130157"
+      },
+      {
+        "file": "components/AssignmentView.tsx",
+        "hash": "13488549722405148959"
+      },
+      {
+        "file": "components/CSSSplitStudio.tsx",
+        "hash": "8752134297189444581"
+      },
+      {
+        "file": "components/ContextHub.tsx",
+        "hash": "15577148361761945830"
+      },
+      {
+        "file": "components/CreateStudio.tsx",
+        "hash": "1128700466676719622"
+      },
+      {
+        "file": "components/CreativeStudio.tsx",
+        "hash": "391081214413880092"
+      },
+      {
+        "file": "components/Dashboard.tsx",
+        "hash": "15844783819522915440"
+      },
+      {
+        "file": "components/DashboardHome.tsx",
+        "hash": "15526653179959761576"
+      },
+      {
+        "file": "components/DriveFileBrowser.tsx",
+        "hash": "3561032120960224652"
+      },
+      {
+        "file": "components/ErrorBoundary.tsx",
+        "hash": "10503169007878811521"
+      },
+      {
+        "file": "components/FreelancerCard.tsx",
+        "hash": "17473306985424133761"
+      },
+      {
+        "file": "components/FreelancerDetail.tsx",
+        "hash": "5369401042965043287"
+      },
+      {
+        "file": "components/FreelancerList.tsx",
+        "hash": "15584696555111465581"
+      },
+      {
+        "file": "components/GuardianRoom.tsx",
+        "hash": "3389907129162320481"
+      },
+      {
+        "file": "components/INTEGRATION_3PANE.md",
+        "hash": "14261108282407197538"
+      },
+      {
+        "file": "components/ImportWizard.test.tsx",
+        "hash": "1074582511078658729"
+      },
+      {
+        "file": "components/ImportWizard.tsx",
+        "hash": "672486685859192361"
+      },
+      {
+        "file": "components/Layout.tsx",
+        "hash": "4138999779904907598"
+      },
+      {
+        "file": "components/Login.tsx",
+        "hash": "14377696930434882661"
+      },
+      {
+        "file": "components/MobileNav.tsx",
+        "hash": "5004716598572149206"
+      },
+      {
+        "file": "components/Moodboard/MoodboardDetail.tsx",
+        "hash": "12463737275740563668"
+      },
+      {
+        "file": "components/Moodboard/MoodboardTab.tsx",
+        "hash": "12378278875291449191"
+      },
+      {
+        "file": "components/ProjectDetail.tsx",
+        "hash": "1148443947248598769"
+      },
+      {
+        "file": "components/ProjectList.tsx",
+        "hash": "11040569848374371754"
+      },
+      {
+        "file": "components/ProjectModal.tsx",
+        "hash": "1412856362135189966"
+      },
+      {
+        "file": "components/ProjectsView.tsx",
+        "hash": "4781344758221669857"
+      },
+      {
+        "file": "components/PublicProjectView.tsx",
+        "hash": "12455714111201416048"
+      },
+      {
+        "file": "components/ReferenceGallery.tsx",
+        "hash": "2193542354676825022"
+      },
+      {
+        "file": "components/SplitPaneStudio.tsx",
+        "hash": "5850514320766910406"
+      },
+      {
+        "file": "components/ToneMoodBoard.tsx",
+        "hash": "9665275177637424020"
+      },
+      {
+        "file": "components/dashboard/DataHUD.tsx",
+        "hash": "17157126818222238058"
+      },
+      {
+        "file": "components/dashboard/MorningBriefing.tsx",
+        "hash": "3700639742843839030"
+      },
+      {
+        "file": "components/dashboard/PriorityStack.tsx",
+        "hash": "9013955326416210875"
+      },
+      {
+        "file": "components/editor/AtlassianEditor.tsx",
+        "hash": "12394295115390268630"
+      },
+      {
+        "file": "components/editor/ProseMirrorEditor.tsx",
+        "hash": "17975797785490010912"
+      },
+      {
+        "file": "components/editor/SimpleEditor.tsx",
+        "hash": "3564312283204343904"
+      },
+      {
+        "file": "components/ui/AspectRatioBox.tsx",
+        "hash": "12771639351760230291"
+      },
+      {
+        "file": "components/ui/Card.tsx",
+        "hash": "2314257382348564996"
+      },
+      {
+        "file": "components/ui/ImageWithPlaceholder.tsx",
+        "hash": "12922173660239179895"
+      },
+      {
+        "file": "components/ui/Skeleton.tsx",
+        "hash": "6575817293010480234"
+      },
+      {
+        "file": "components/ui/Toast.tsx",
+        "hash": "12945136494847467674"
+      },
+      {
+        "file": "compose.debug.yaml",
+        "hash": "11585421920016818527"
+      },
+      {
+        "file": "compose.yaml",
+        "hash": "6971107574226544391"
+      },
+      {
+        "file": "context/ToastContext.tsx",
+        "hash": "11364685758065263369"
+      },
+      {
+        "file": "deploy.ps1",
+        "hash": "16519160191123086008"
+      },
+      {
+        "file": "deploy.sh",
+        "hash": "15656792088573889311"
+      },
+      {
+        "file": "docs/CLS_OPTIMIZATION.md",
+        "hash": "2986638614304603581"
+      },
+      {
+        "file": "docs/accessibility-audit-final.md",
+        "hash": "17516706163709713174"
+      },
+      {
+        "file": "docs/accessibility-audit-initial.md",
+        "hash": "14751841814887778361"
+      },
+      {
+        "file": "eslint.config.mjs",
+        "hash": "12717973149130180570"
+      },
+      {
+        "file": "index.html",
+        "hash": "7751313352597883809"
+      },
+      {
+        "file": "index.tsx",
+        "hash": "14278083561833391385"
+      },
+      {
+        "file": "main.tsx",
+        "hash": "7538871406544546811"
+      },
+      {
+        "file": "migrations/add_fulltext_search.sql",
+        "hash": "3053879277148123067"
+      },
+      {
+        "file": "nest-cli.json",
+        "hash": "14505915785129445760"
+      },
+      {
+        "file": "nx.json",
+        "hash": "13108012552268398639"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "11638958966703916979"
+      },
+      {
+        "file": "package.json",
+        "hash": "14386747547587804592"
+      },
+      {
+        "file": "prisma/comment_schema_addition.prisma",
+        "hash": "3650114432106741156"
+      },
+      {
+        "file": "prisma/migrations/20251204103845_initial_schema/migration.sql",
+        "hash": "8474946449556009100"
+      },
+      {
+        "file": "prisma/migrations/add_pgvector_and_embeddings/migration.sql",
+        "hash": "1581348316463511631"
+      },
+      {
+        "file": "prisma/migrations/migration_lock.toml",
+        "hash": "872437952673290735"
+      },
+      {
+        "file": "prisma/models.txt",
+        "hash": "10350745335057674820"
+      },
+      {
+        "file": "prisma/prisma.config.ts",
+        "hash": "3358383459801772218"
+      },
+      {
+        "file": "prisma/schema.prisma",
+        "hash": "2765745555787340270"
+      },
+      {
+        "file": "prisma/schema.prisma.bak",
+        "hash": "13493496863099499486"
+      },
+      {
+        "file": "prisma/schema_header.txt",
+        "hash": "12276007508623322390"
+      },
+      {
+        "file": "prisma/seed.ts",
+        "hash": "8040717540852340801"
+      },
+      {
+        "file": "scripts/index-docs.ts",
+        "hash": "3358400649290798685"
+      },
+      {
+        "file": "scripts/test-genai.ts",
+        "hash": "13346155852408471870"
+      },
+      {
+        "file": "scripts/test-rag.ts",
+        "hash": "11653260914783162787"
+      },
+      {
+        "file": "services/AssetIntelligenceEngine.ts",
+        "hash": "2612000924740079030"
+      },
+      {
+        "file": "services/BrandContextAssembler.ts",
+        "hash": "6573694878419660252"
+      },
+      {
+        "file": "services/EmbeddingsService.ts",
+        "hash": "6824940127232581948"
+      },
+      {
+        "file": "services/GenAIService.ts",
+        "hash": "7872493889437725870"
+      },
+      {
+        "file": "services/IntelligentContextEngine.ts",
+        "hash": "16429650695581295190"
+      },
+      {
+        "file": "services/OpenAIVisionService.ts",
+        "hash": "14906338135938564270"
+      },
+      {
+        "file": "services/ResilienceLayer.ts",
+        "hash": "6650077117810460973"
+      },
+      {
+        "file": "services/StructuredGenAI.ts",
+        "hash": "17935126508065075356"
+      },
+      {
+        "file": "services/VerificationEngine.ts",
+        "hash": "6322796157363968390"
+      },
+      {
+        "file": "services/api.ts",
+        "hash": "12503377465417341416"
+      },
+      {
+        "file": "services/intelligence.ts",
+        "hash": "4254875570619772085"
+      },
+      {
+        "file": "services/mockData.ts",
+        "hash": "14540299495636304102"
+      },
+      {
+        "file": "services/unsplash.ts",
+        "hash": "9794933858897214581"
+      },
+      {
+        "file": "src/components/Dashboard.test.tsx",
+        "hash": "8448530895799101695"
+      },
+      {
+        "file": "src/components/FluidDesignShowcase.tsx",
+        "hash": "12684374562613267670"
+      },
+      {
+        "file": "src/components/FreelancerCard.test.tsx",
+        "hash": "10902068170169858515"
+      },
+      {
+        "file": "src/components/Layout.tsx",
+        "hash": "11763301735535571154"
+      },
+      {
+        "file": "src/components/MobileNav.tsx",
+        "hash": "5004716598572149206"
+      },
+      {
+        "file": "src/components/Moodboard.tsx",
+        "hash": "17885490226105146176"
+      },
+      {
+        "file": "src/components/ProjectDashboard.tsx",
+        "hash": "2673015548541351458"
+      },
+      {
+        "file": "src/components/ProjectHub.tsx",
+        "hash": "4876049740322315394"
+      },
+      {
+        "file": "src/components/ProjectList.test.tsx",
+        "hash": "4103676153095147761"
+      },
+      {
+        "file": "src/components/TalentRoster.tsx",
+        "hash": "6561355572292578744"
+      },
+      {
+        "file": "src/components/UltimateBentoGrid.tsx",
+        "hash": "6414907138552011501"
+      },
+      {
+        "file": "src/components/WritersRoom.tsx",
+        "hash": "14942719160393212538"
+      },
+      {
+        "file": "src/components/design/Badge.tsx",
+        "hash": "10079539784816419796"
+      },
+      {
+        "file": "src/components/design/Button.tsx",
+        "hash": "2204114074979782763"
+      },
+      {
+        "file": "src/components/design/Card.tsx",
+        "hash": "17871995562668923406"
+      },
+      {
+        "file": "src/components/design/DGlassEffectContainer.tsx",
+        "hash": "12039458287511186708"
+      },
+      {
+        "file": "src/components/design/EmptyState.tsx",
+        "hash": "7652142569805763424"
+      },
+      {
+        "file": "src/components/design/FloatingNavigation.tsx",
+        "hash": "10511841286298015025"
+      },
+      {
+        "file": "src/components/design/FluidButton.tsx",
+        "hash": "12343124716626391563"
+      },
+      {
+        "file": "src/components/design/FormField.tsx",
+        "hash": "51928631552137506"
+      },
+      {
+        "file": "src/components/design/GlassSheet.tsx",
+        "hash": "2288540978573169387"
+      },
+      {
+        "file": "src/components/design/Input.tsx",
+        "hash": "2823388891394808273"
+      },
+      {
+        "file": "src/components/design/LiquidGlassContainer.tsx",
+        "hash": "17047014570473772182"
+      },
+      {
+        "file": "src/components/design/Modal.tsx",
+        "hash": "385651981499474447"
+      },
+      {
+        "file": "src/components/design/MoodboardContainer.tsx",
+        "hash": "9664041750744438864"
+      },
+      {
+        "file": "src/components/design/Select.tsx",
+        "hash": "12005628369265824200"
+      },
+      {
+        "file": "src/components/design/Tabs.tsx",
+        "hash": "4068615273497901581"
+      },
+      {
+        "file": "src/components/design/Textarea.tsx",
+        "hash": "15156271498314344461"
+      },
+      {
+        "file": "src/components/design/index.ts",
+        "hash": "10280703256071447430"
+      },
+      {
+        "file": "src/components/layout/CommandBar.tsx",
+        "hash": "350691173229571050"
+      },
+      {
+        "file": "src/components/layout/Sidebar.tsx",
+        "hash": "13653113926843142739"
+      },
+      {
+        "file": "src/components/ui/Card.tsx",
+        "hash": "2314257382348564996"
+      },
+      {
+        "file": "src/index.css",
+        "hash": "5605653637284748462"
+      },
+      {
+        "file": "src/test/setup.ts",
+        "hash": "7890483852430562637"
+      },
+      {
+        "file": "src/theme/tokens.ts",
+        "hash": "11173135175570300708"
+      },
+      {
+        "file": "src/views/DashboardHome.tsx",
+        "hash": "15526653179959761576"
+      },
+      {
+        "file": "src/views/GuardianRoom.tsx",
+        "hash": "9191865217650413047"
+      },
+      {
+        "file": "src/views/ProjectsView.tsx",
+        "hash": "4781344758221669857"
+      },
+      {
+        "file": "src/vite-env.d.ts",
+        "hash": "5563982428927376982"
+      },
+      {
+        "file": "tailwind.config.js",
+        "hash": "12914417962338293945"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.1544914e-8fc8-4afe-b098-5c9b00bcf85d.json",
+        "hash": "12178908264864505738"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.1c736353-80ee-4f98-bd02-a9a774811d62.json",
+        "hash": "12178908264864505738"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.5b89dedf-1d96-471a-ae93-8c23c521014b.json",
+        "hash": "12178908264864505738"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.602e4ec9-3c0e-423c-9743-dbd689ef21c1.json",
+        "hash": "12178908264864505738"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.89550a6e-86e2-44cf-9201-b0a81eaa776d.json",
+        "hash": "12178908264864505738"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.d5b52dfc-7d88-4b62-8012-abe976eb79c0.json",
+        "hash": "12178908264864505738"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.deba686d-8056-40c9-9fd8-d72705f1cdf9.json",
+        "hash": "12178908264864505738"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.f796959e-72a2-4454-a385-be7485d08855.json",
+        "hash": "12178908264864505738"
+      },
+      {
+        "file": "tsconfig.json",
+        "hash": "4546352367589958424"
+      },
+      {
+        "file": "types.ts",
+        "hash": "2610038540445278327"
+      },
+      {
+        "file": "vite.config.ts",
+        "hash": "7746444253426714748"
+      },
+      {
+        "file": "vitest.config.ts",
+        "hash": "7464874980788127906"
+      }
+    ]
   },
-  "externalNodesHash": "17767241691658478711"
+  "externalNodesHash": "2154769639997350384"
 }

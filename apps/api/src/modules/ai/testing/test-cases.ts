@@ -102,7 +102,7 @@ export const PROMPT_TEST_CASES: PromptTestCase[] = [
     {
         name: 'Chat - General Query',
         template: 'chat',
-        input: 'What projects are currently active?',
+        input: { context: 'What projects are currently active?' },
         expectedKeywords: ['project', 'active'],
         minQualityScore: 0.7,
     },
@@ -110,7 +110,7 @@ export const PROMPT_TEST_CASES: PromptTestCase[] = [
     {
         name: 'Chat - Freelancer Query',
         template: 'chat',
-        input: 'Who are our top performing freelancers?',
+        input: { context: 'Who are our top performing freelancers?' },
         expectedKeywords: ['freelancer', 'performance', 'top'],
         minQualityScore: 0.7,
     },

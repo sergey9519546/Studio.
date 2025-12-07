@@ -14,9 +14,12 @@ const mockGoogleDriveAdapter = {
 };
 
 // Helper to build a fake request with user
-const makeRequest = (userId: string) => ({
+interface FakeRequest {
+  user: { id: string; email: string };
+}
+const makeRequest = (userId: string): FakeRequest => ({
   user: { id: userId, email: 'test@example.com' },
-} as any);
+});
 
 describe('CloudStorageService', () => {
   let service: CloudStorageService;
@@ -134,7 +137,8 @@ describe('CloudStorageController', () => {
     (service.listFiles as jest.Mock).mockResolvedValueOnce({ files: [], nextPageToken: undefined });
 
     const req = makeRequest('7');
-    const result = await controller.listFiles('google-drive', { folderId: 'root' } as any, req);
+    const query = { folderId: 'root', pageToken: 'token' };
+    const result = await controller.listFiles('google-drive', query, req);
 
     expect(service.listFiles).toHaveBeenCalledWith(7, 'google-drive', 'root');
     expect(result).toEqual({ files: [], nextPageToken: undefined });

@@ -55,7 +55,7 @@ export class GoogleDriveAdapter implements ICloudStorageAdapter {
 
   async listFiles(userId: number, folderId = 'root'): Promise<{ files: CloudFileDto[]; nextPageToken?: string }> {
     const user = await this.getUserWithCredentials(userId);
-    const { drive } = this.clientFactory.createDriveClientForUser(user as any);
+    const { drive } = this.clientFactory.createDriveClientForUser(user);
 
     const res = await drive.files.list({
       q: `'${folderId}' in parents and trashed = false`,

@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
-import { PromptTesterService } from './prompt-tester.service';
+import { PromptTesterService, PromptTestCase } from './prompt-tester.service';
 import { PROMPT_TEST_CASES, getTestCasesForTemplate } from './test-cases';
 
 @Controller('testing')
@@ -41,7 +41,7 @@ export class TestingController {
      * Run single custom test
      */
     @Post('prompts/run-custom')
-    async runCustomTest(@Body() testCase: any) {
+    async runCustomTest(@Body() testCase: PromptTestCase) {
         const results = await this.promptTester.runTestSuite([testCase]);
         return results[0];
     }

@@ -37,7 +37,7 @@ export class VertexAIProvider implements AIProvider {
         messages: Array<{ role: string; content: string }>,
         systemPrompt: string,
         options?: ChatOptions
-    ): Promise<string | { toolCalls: any[] }> {
+    ): Promise<string | { toolCalls: Record<string, unknown>[] }> {
         return this.vertexAI.chat(messages, systemPrompt, options?.tools);
     }
 
@@ -45,7 +45,7 @@ export class VertexAIProvider implements AIProvider {
         return this.vertexAI.generateContent(prompt);
     }
 
-    async extractData(prompt: string, schema?: any, options?: ExtractOptions): Promise<unknown> {
+    async extractData(prompt: string, schema?: Record<string, unknown>, options?: ExtractOptions): Promise<unknown> {
         return this.vertexAI.extractData(prompt, schema);
     }
 

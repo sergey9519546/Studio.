@@ -22,9 +22,6 @@ export default tseslint.config(
         },
         rules: {
             ...reactHooksPlugin.configs.recommended.rules,
-            // Relaxed pre-deploy: allow any and unused vars to avoid noisy warnings
-            '@typescript-eslint/no-explicit-any': 'off',
-            '@typescript-eslint/no-unused-vars': 'off',
             'react/react-in-jsx-scope': 'off', // Not needed in React 17+
         },
         settings: {

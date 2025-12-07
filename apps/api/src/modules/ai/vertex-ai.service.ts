@@ -100,7 +100,7 @@ export class VertexAIService {
   /**
    * Safely extract content from Vertex AI prediction response
    */
-  private extractPredictionContent(prediction: any): string | { toolCalls: any[] } | null {
+  private extractPredictionContent(prediction: Record<string, unknown>): string | { toolCalls: Record<string, unknown>[] } | null {
     try {
       const content = this.safeGet(prediction, [
         'structValue',
@@ -119,17 +119,17 @@ export class VertexAIService {
         'values',
         0,
         'structValue'
-      ]);
+      ]) as Record<string, unknown>;
 
       if (!content) return null;
 
       // Check for function calls
-      const functionCall = this.safeGet(content, ['fields', 'functionCall', 'structValue', 'fields']);
+      const functionCall = this.safeGet(content, ['fields', 'functionCall', 'structValue', 'fields']) as Record<string, unknown>;
       if (functionCall) {
         return {
           toolCalls: [{
-            name: this.safeGet(functionCall, ['name', 'stringValue']) || 'unknown_function',
-            args: this.safeGet(functionCall, ['args', 'structValue', 'fields']) || {}
+            name: this.safeGet(functionCall, ['name', 'stringValue']) as string || 'unknown_function',
+            args: this.safeGet(functionCall, ['args', 'structValue', 'fields']) as Record<string, unknown> || {}
           }]
         };
       }
@@ -150,9 +150,9 @@ export class VertexAIService {
   /**
    * Safely access deeply nested object properties
    */
-  private safeGet(obj: any, path: (string | number)[]): any {
+  private safeGet(obj: Record<string, unknown>, path: (string | number)[]): unknown {
     return path.reduce((current, key) => {
-      return current && typeof current === 'object' ? current[key] : undefined;
+      return current && typeof current === 'object' ? (current as Record<string, unknown>)[key] : undefined;
     }, obj);
   }
 
@@ -162,8 +162,8 @@ export class VertexAIService {
   async chat(
     messages: Array<{ role: string; content: string }>,
     systemPrompt?: string,
-    tools?: any[]
-  ): Promise<string | { toolCalls: any[] }> {
+    tools?: Record<string, unknown>[]
+  ): Promise<string | { toolCalls: Record<string, unknown>[] }> {
     const endpoint = `projects/${this.project}/locations/${this.location}/publishers/${this.publisher}/models/gemini-1.5-pro`;
 
     const instanceFields: Record<string, IValue> = {
@@ -216,20 +216,20 @@ export class VertexAIService {
                       {
                         structValue: {
                           fields: {
-                            name: { stringValue: tool.name },
-                            description: { stringValue: tool.description },
+                            name: { stringValue: tool.name as string },
+                            description: { stringValue: tool.description as string },
                             parameters: {
                               structValue: {
                                 fields: {
-                                  type: { stringValue: tool.parameters.type },
+                                  type: { stringValue: (tool.parameters as Record<string, unknown>).type as string },
                                   properties: {
                                     structValue: {
                                       fields: Object.entries(
-                                        tool.parameters.properties
+                                        (tool.parameters as Record<string, unknown>).properties as Record<string, { type: string; description: string }>
                                       ).reduce(
                                         (
                                           acc: Record<string, IValue>,
-                                          [key, value]: [string, any]
+                                          [key, value]
                                         ) => {
                                           acc[key] = {
                                             structValue: {
@@ -252,7 +252,7 @@ export class VertexAIService {
                                   },
                                   required: {
                                     listValue: {
-                                      values: tool.parameters.required.map(
+                                      values: ((tool.parameters as Record<string, unknown>).required as string[]).map(
                                         (r: string) =>
                                           ({ stringValue: r }) as IValue
                                       ),
@@ -292,7 +292,7 @@ export class VertexAIService {
     }
 
     const prediction = response.predictions[0];
-    const content = this.extractPredictionContent(prediction);
+    const content = this.extractPredictionContent(prediction as Record<string, unknown>);
 
     if (content) {
       return content;
