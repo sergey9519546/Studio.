@@ -1,5 +1,10 @@
-import { Image, Search, Trash2, X } from "lucide-react";
+import { Image, Plus, Search, Trash2, X } from "lucide-react";
 import React, { useMemo, useState } from "react";
+import {
+  searchSimilarImages,
+  trackDownload,
+  type UnsplashImage,
+} from "../services/unsplash";
 import { Card } from "./design/Card";
 import { Input } from "./design/Input";
 
@@ -19,7 +24,10 @@ interface MoodboardProps {
   items?: MoodboardItem[];
   onItemDelete?: (id: string) => void;
   onSemanticSearch?: (query: string) => Promise<MoodboardItem[]>;
+  onAddUnsplashImage?: (image: UnsplashImage) => Promise<void>;
 }
+
+type TabType = "uploads" | "unsplash";
 
 export const Moodboard: React.FC<MoodboardProps> = ({
   projectId,
@@ -27,12 +35,22 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   items = [],
   onItemDelete,
   onSemanticSearch,
+  onAddUnsplashImage,
 }) => {
+  const [activeTab, setActiveTab] = useState<TabType>("uploads");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [filteredItems, setFilteredItems] = useState(items);
   const [isSearching, setIsSearching] = useState(false);
+
+  // Unsplash state
+  const [unsplashQuery, setUnsplashQuery] = useState("");
+  const [unsplashResults, setUnsplashResults] = useState<UnsplashImage[]>([]);
+  const [isLoadingUnsplash, setIsLoadingUnsplash] = useState(false);
+  const [selectedUnsplashImage, setSelectedUnsplashImage] = useState<
+    string | null
+  >(null);
 
   React.useEffect(() => {
     // Keep filtered items in sync with upstream changes
@@ -84,6 +102,37 @@ export const Moodboard: React.FC<MoodboardProps> = ({
     setFilteredItems(results);
   };
 
+  // Unsplash search handler
+  const handleUnsplashSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!unsplashQuery.trim()) return;
+
+    setIsLoadingUnsplash(true);
+    try {
+      const results = await searchSimilarImages(unsplashQuery, 24);
+      setUnsplashResults(results);
+    } catch (error) {
+      console.error("Unsplash search failed:", error);
+    } finally {
+      setIsLoadingUnsplash(false);
+    }
+  };
+
+  // Add Unsplash image to moodboard
+  const handleAddUnsplashImage = async (image: UnsplashImage) => {
+    try {
+      // Track download as required by Unsplash API
+      await trackDownload(image);
+
+      // Call parent handler if provided
+      if (onAddUnsplashImage) {
+        await onAddUnsplashImage(image);
+      }
+    } catch (error) {
+      console.error("Failed to add Unsplash image:", error);
+    }
+  };
+
   return (
     <div className="w-full h-full bg-app">
       <div className="max-w-7xl mx-auto p-8">
@@ -93,140 +142,303 @@ export const Moodboard: React.FC<MoodboardProps> = ({
             Moodboard
           </h1>
           <p className="text-ink-secondary">
-            Visual inspiration with AI semantic tagging
+            Visual inspiration with AI semantic tagging and Unsplash discovery
           </p>
         </div>
 
-        {/* Search & Filters */}
-        <div className="mb-8 space-y-6">
-          <Input
-            placeholder="Search visuals semantically... (e.g., 'melancholy summer' or 'cinematic blue hour')"
-            icon={<Search size={18} />}
-            value={searchQuery}
-            onChange={(e) => handleSearch(e.target.value)}
-          />
-
-          {allTags.length > 0 && (
-            <div>
-              <h3 className="text-sm font-bold text-ink-secondary uppercase tracking-wide mb-3">
-                Filter by Tags
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {allTags.map((tag) => (
-                  <button
-                    key={tag}
-                    onClick={() => toggleTag(tag)}
-                    className={`px-3 py-1.5 rounded-[24px] text-xs font-medium transition-all ${
-                      selectedTags.includes(tag)
-                        ? "bg-primary text-white"
-                        : "bg-subtle text-ink-secondary hover:bg-surface"
-                    }`}
-                  >
-                    {tag}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
+        {/* Tab Navigation */}
+        <div className="mb-6 border-b border-border-subtle">
+          <div className="flex gap-6">
+            <button
+              onClick={() => setActiveTab("uploads")}
+              className={`pb-3 px-1 font-medium transition-all ${
+                activeTab === "uploads"
+                  ? "text-primary border-b-2 border-primary"
+                  : "text-ink-secondary hover:text-ink-primary"
+              }`}
+              aria-label="View uploaded images"
+            >
+              My Images ({items.length})
+            </button>
+            <button
+              onClick={() => setActiveTab("unsplash")}
+              className={`pb-3 px-1 font-medium transition-all ${
+                activeTab === "unsplash"
+                  ? "text-primary border-b-2 border-primary"
+                  : "text-ink-secondary hover:text-ink-primary"
+              }`}
+              aria-label="Discover Unsplash images"
+            >
+              Discover
+            </button>
+          </div>
         </div>
 
-        {/* Masonry Grid */}
-        {isSearching && (
-          <p className="text-xs text-ink-tertiary mb-3">Searching visuals...</p>
-        )}
-        {filteredItems.length > 0 ? (
-          <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6">
-            {filteredItems.map((item) => (
-              <div
-                key={item.id}
-                className="break-inside-avoid mb-6 group cursor-pointer"
-                onClick={() => setSelectedItem(item.id)}
-              >
-                <div className="relative rounded-[24px] overflow-hidden shadow-ambient hover:shadow-float transition-all">
-                  <img
-                    src={item.url}
-                    alt="Moodboard"
-                    className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+        {/* Uploads Tab */}
+        {activeTab === "uploads" && (
+          <>
+            {/* Search & Filters */}
+            <div className="mb-8 space-y-6">
+              <Input
+                placeholder="Search visuals semantically... (e.g., 'melancholy summer' or 'cinematic blue hour')"
+                icon={<Search size={18} />}
+                value={searchQuery}
+                onChange={(e) => handleSearch(e.target.value)}
+              />
 
-                  {/* Overlay on Hover */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all rounded-[24px] flex items-end justify-between p-4 opacity-0 group-hover:opacity-100">
-                    <div>
-                      {item.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-1">
-                          {item.tags.slice(0, 2).map((tag) => (
-                            <span
-                              key={tag}
-                              className="px-2 py-1 rounded-[12px] bg-white/20 backdrop-blur text-white text-xs font-medium"
-                            >
-                              {tag}
-                            </span>
+              {allTags.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-bold text-ink-secondary uppercase tracking-wide mb-3">
+                    Filter by Tags
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {allTags.map((tag) => (
+                      <button
+                        key={tag}
+                        onClick={() => toggleTag(tag)}
+                        className={`px-3 py-1.5 rounded-[24px] text-xs font-medium transition-all ${
+                          selectedTags.includes(tag)
+                            ? "bg-primary text-white"
+                            : "bg-subtle text-ink-secondary hover:bg-surface"
+                        }`}
+                      >
+                        {tag}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Masonry Grid */}
+            {isSearching && (
+              <p className="text-xs text-ink-tertiary mb-3">
+                Searching visuals...
+              </p>
+            )}
+            {filteredItems.length > 0 ? (
+              <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6">
+                {filteredItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className="break-inside-avoid mb-6 group cursor-pointer"
+                    onClick={() => setSelectedItem(item.id)}
+                  >
+                    <div className="relative rounded-[24px] overflow-hidden shadow-ambient hover:shadow-float transition-all">
+                      <img
+                        src={item.url}
+                        alt="Moodboard"
+                        className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+
+                      {/* Overlay on Hover */}
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all rounded-[24px] flex items-end justify-between p-4 opacity-0 group-hover:opacity-100">
+                        <div>
+                          {item.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-1">
+                              {item.tags.slice(0, 2).map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="px-2 py-1 rounded-[12px] bg-white/20 backdrop-blur text-white text-xs font-medium"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onItemDelete?.(item.id);
+                          }}
+                          className="p-2 rounded-[12px] bg-state-danger/80 text-white hover:bg-state-danger transition-colors"
+                          aria-label="Delete image from moodboard"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+
+                      {/* Color Palette Indicator */}
+                      {item.colors.length > 0 && (
+                        <div className="absolute top-4 right-4 flex gap-1">
+                          {item.colors.slice(0, 3).map((color, i) => (
+                            <div
+                              key={i}
+                              className="w-4 h-4 rounded-full shadow-lg border border-white/30"
+                              style={{ backgroundColor: color }}
+                              title={color}
+                            />
                           ))}
                         </div>
                       )}
                     </div>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onItemDelete?.(item.id);
-                      }}
-                      className="p-2 rounded-[12px] bg-state-danger/80 text-white hover:bg-state-danger transition-colors"
-                      aria-label="Delete image from moodboard"
-                    >
-                      <Trash2 size={16} />
-                    </button>
+
+                    {/* Metadata */}
+                    <div className="mt-3 space-y-2">
+                      {item.moods.length > 0 && (
+                        <div className="flex flex-wrap gap-1">
+                          {item.moods.map((mood) => (
+                            <span
+                              key={mood}
+                              className="px-2 py-0.5 rounded-[12px] bg-primary-tint text-primary text-xs font-medium"
+                            >
+                              {mood}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      {item.shotType && (
+                        <p className="text-xs text-ink-tertiary">
+                          Shot Type: <strong>{item.shotType}</strong>
+                        </p>
+                      )}
+                    </div>
                   </div>
-
-                  {/* Color Palette Indicator */}
-                  {item.colors.length > 0 && (
-                    <div className="absolute top-4 right-4 flex gap-1">
-                      {item.colors.slice(0, 3).map((color, i) => (
-                        <div
-                          key={i}
-                          className="w-4 h-4 rounded-full shadow-lg border border-white/30"
-                          style={{ backgroundColor: color }}
-                          title={color}
-                        />
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Metadata */}
-                <div className="mt-3 space-y-2">
-                  {item.moods.length > 0 && (
-                    <div className="flex flex-wrap gap-1">
-                      {item.moods.map((mood) => (
-                        <span
-                          key={mood}
-                          className="px-2 py-0.5 rounded-[12px] bg-primary-tint text-primary text-xs font-medium"
-                        >
-                          {mood}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                  {item.shotType && (
-                    <p className="text-xs text-ink-tertiary">
-                      Shot Type: <strong>{item.shotType}</strong>
-                    </p>
-                  )}
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
-        ) : (
-          <Card className="text-center py-12">
-            <Image size={48} className="mx-auto text-ink-tertiary mb-4" />
-            <p className="text-ink-secondary">
-              {items.length === 0
-                ? "No mood board items yet. Upload images from the Project Dashboard!"
-                : "No items match your search. Try different keywords."}
-            </p>
-          </Card>
+            ) : (
+              <Card className="text-center py-12">
+                <Image size={48} className="mx-auto text-ink-tertiary mb-4" />
+                <p className="text-ink-secondary">
+                  {items.length === 0
+                    ? "No mood board items yet. Upload images from the Project Dashboard or discover from Unsplash!"
+                    : "No items match your search. Try different keywords."}
+                </p>
+              </Card>
+            )}
+          </>
         )}
 
-        {/* Detail Modal (simplified) */}
+        {/* Unsplash Tab */}
+        {activeTab === "unsplash" && (
+          <>
+            {/* Unsplash Search */}
+            <div className="mb-8">
+              <form onSubmit={handleUnsplashSearch}>
+                <div className="flex gap-3">
+                  <div className="flex-1">
+                    <Input
+                      placeholder="Search Unsplash... (e.g., 'minimalist architecture' or 'vibrant colors')"
+                      icon={<Search size={18} />}
+                      value={unsplashQuery}
+                      onChange={(e) => setUnsplashQuery(e.target.value)}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={isLoadingUnsplash || !unsplashQuery.trim()}
+                    className="px-6 py-2 bg-primary text-white rounded-[16px] font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  >
+                    {isLoadingUnsplash ? "Searching..." : "Search"}
+                  </button>
+                </div>
+              </form>
+
+              <p className="text-xs text-ink-tertiary mt-2">
+                Photos from{" "}
+                <a
+                  href="https://unsplash.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  Unsplash
+                </a>
+              </p>
+            </div>
+
+            {/* Unsplash Results */}
+            {isLoadingUnsplash && (
+              <p className="text-xs text-ink-tertiary mb-3">
+                Loading images from Unsplash...
+              </p>
+            )}
+
+            {unsplashResults.length > 0 ? (
+              <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6">
+                {unsplashResults.map((image) => (
+                  <div
+                    key={image.id}
+                    className="break-inside-avoid mb-6 group cursor-pointer"
+                    onClick={() => setSelectedUnsplashImage(image.id)}
+                  >
+                    <div className="relative rounded-[24px] overflow-hidden shadow-ambient hover:shadow-float transition-all">
+                      <img
+                        src={image.urls.regular}
+                        alt={
+                          image.alt_description ||
+                          image.description ||
+                          "Unsplash image"
+                        }
+                        className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+
+                      {/* Overlay on Hover */}
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all rounded-[24px] flex items-end justify-between p-4 opacity-0 group-hover:opacity-100">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-white text-xs mb-1 truncate">
+                            Photo by{" "}
+                            <a
+                              href={image.user.links.html}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="font-medium hover:underline"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              {image.user.name}
+                            </a>
+                          </p>
+                        </div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleAddUnsplashImage(image);
+                          }}
+                          className="p-2 rounded-[12px] bg-primary/80 text-white hover:bg-primary transition-colors ml-2"
+                          aria-label="Add to moodboard"
+                          title="Add to moodboard"
+                        >
+                          <Plus size={16} />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Attribution */}
+                    <div className="mt-2">
+                      <p className="text-xs text-ink-tertiary">
+                        by{" "}
+                        <a
+                          href={image.user.links.html}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-ink-secondary hover:text-ink-primary hover:underline"
+                        >
+                          {image.user.name}
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : !isLoadingUnsplash ? (
+              <Card className="text-center py-12">
+                <Search size={48} className="mx-auto text-ink-tertiary mb-4" />
+                <p className="text-ink-secondary mb-2">
+                  {unsplashQuery
+                    ? "No results found. Try a different search term."
+                    : "Search for inspiring images from Unsplash"}
+                </p>
+                <p className="text-xs text-ink-tertiary">
+                  Try searches like "modern workspace", "nature patterns", or
+                  "urban photography"
+                </p>
+              </Card>
+            ) : null}
+          </>
+        )}
+
+        {/* Detail Modal for Uploaded Images */}
         {selectedItem && (
           <div
             className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"
@@ -236,6 +448,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
               <button
                 onClick={() => setSelectedItem(null)}
                 className="float-right p-2 hover:bg-subtle rounded-[16px] transition-colors"
+                aria-label="Close modal"
               >
                 <X size={20} />
               </button>
@@ -286,6 +499,95 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+              )}
+            </Card>
+          </div>
+        )}
+
+        {/* Detail Modal for Unsplash Images */}
+        {selectedUnsplashImage && (
+          <div
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setSelectedUnsplashImage(null)}
+          >
+            <Card className="max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+              <button
+                onClick={() => setSelectedUnsplashImage(null)}
+                className="float-right p-2 hover:bg-subtle rounded-[16px] transition-colors"
+                aria-label="Close modal"
+              >
+                <X size={20} />
+              </button>
+              {unsplashResults.find((i) => i.id === selectedUnsplashImage) && (
+                <div>
+                  <img
+                    src={
+                      unsplashResults.find(
+                        (i) => i.id === selectedUnsplashImage
+                      )?.urls.regular
+                    }
+                    alt={
+                      unsplashResults.find(
+                        (i) => i.id === selectedUnsplashImage
+                      )?.alt_description || "Unsplash image"
+                    }
+                    className="w-full rounded-[24px] mb-6"
+                  />
+                  <div>
+                    <h3 className="text-lg font-bold text-ink-primary mb-2">
+                      {unsplashResults.find(
+                        (i) => i.id === selectedUnsplashImage
+                      )?.description ||
+                        unsplashResults.find(
+                          (i) => i.id === selectedUnsplashImage
+                        )?.alt_description ||
+                        "Untitled"}
+                    </h3>
+                    <p className="text-sm text-ink-secondary mb-4">
+                      Photo by{" "}
+                      <a
+                        href={
+                          unsplashResults.find(
+                            (i) => i.id === selectedUnsplashImage
+                          )?.user.links.html
+                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline"
+                      >
+                        {
+                          unsplashResults.find(
+                            (i) => i.id === selectedUnsplashImage
+                          )?.user.name
+                        }
+                      </a>{" "}
+                      on{" "}
+                      <a
+                        href="https://unsplash.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline"
+                      >
+                        Unsplash
+                      </a>
+                    </p>
+                    <button
+                      onClick={() => {
+                        const img = unsplashResults.find(
+                          (i) => i.id === selectedUnsplashImage
+                        );
+                        if (img) {
+                          handleAddUnsplashImage(img);
+                          setSelectedUnsplashImage(null);
+                        }
+                      }}
+                      className="px-6 py-3 bg-primary text-white rounded-[16px] font-medium hover:bg-primary/90 transition-all inline-flex items-center gap-2"
+                    >
+                      <Plus size={18} />
+                      Add to Moodboard
+                    </button>
                   </div>
                 </div>
               )}

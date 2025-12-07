@@ -4,6 +4,9 @@ import HeroProjectCard from "../components/dashboard/HeroProjectCard";
 import SparkAICard from "../components/dashboard/SparkAICard";
 import VibePaletteCard from "../components/dashboard/VibePaletteCard";
 import RecentArtifactsCard, { Artifact } from "../components/dashboard/RecentArtifactsCard";
+import { useToast, type Toast, type ToastKind } from "../hooks/useToast";
+import { useDashboardData } from "../hooks/useDashboardData";
+import Skeleton from "../components/Skeleton";
 import "./DashboardHome.css";
 
 interface HeroProject {
@@ -14,20 +17,7 @@ interface HeroProject {
   description: string;
 }
 
-type ToastKind = "info" | "success";
 
-interface Toast {
-  id: number;
-  message: string;
-  type: ToastKind;
-}
-
-// Constants for better maintainability
-const HERO_PROJECT_IMAGE =
-  "https://images.unsplash.com/photo-1492551557933-34265f7af79e?q=80&w=2670&auto=format&fit=crop";
-const HERO_PROJECT_TITLE = "Nebula Phase II";
-const HERO_PROJECT_DESCRIPTION =
-  "Comprehensive rebrand focusing on kinetic typography and zero-gravity aesthetics. Client review in 4 hours.";
 
 interface DashboardHomeProps {
   onNavigateToGallery?: () => void;
@@ -35,13 +25,18 @@ interface DashboardHomeProps {
 
 const DashboardHome: React.FC<DashboardHomeProps> = ({ onNavigateToGallery }) => {
   const [accentColor, setAccentColor] = React.useState("#2463E6");
-  const [heroProject, setHeroProject] = React.useState<HeroProject | null>(null);
-  const [artifacts, setArtifacts] = React.useState<Artifact[]>([]);
-  const [loadingHero, setLoadingHero] = React.useState(true);
-  const [loadingArtifacts, setLoadingArtifacts] = React.useState(true);
-  const [toasts, setToasts] = React.useState<Toast[]>([]);
-  const toastTimeouts = React.useRef<Record<number, ReturnType<typeof setTimeout>>>({});
+  const { toasts, addToast } = useToast();
+  const {
+    heroProject,
+    artifacts,
+    loadingHero,
+    loadingArtifacts,
+    errorHero,
+    errorArtifacts,
+    addArtifact,
+  } = useDashboardData();
 
+  // Set CSS custom property for accent color
   React.useEffect(() => {
     document.documentElement.style.setProperty("--dashboard-accent", accentColor);
     return () => {
@@ -49,106 +44,65 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({ onNavigateToGallery }) =>
     };
   }, [accentColor]);
 
-  React.useEffect(() => {
-    setLoadingHero(true);
-    setLoadingArtifacts(true);
-    const timer = setTimeout(() => {
-      setHeroProject({
-        id: "hero-1",
-        imageSrc: HERO_PROJECT_IMAGE,
-        priorityLabel: "Priority One",
-        title: HERO_PROJECT_TITLE,
-        description: HERO_PROJECT_DESCRIPTION,
-      });
-      setLoadingHero(false);
 
-      setArtifacts([
-        {
-          id: "art-1",
-          name: "Nebula_Launch.png",
-          imageSrc: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&auto=format&fit=crop",
-        },
-        {
-          id: "art-2",
-          name: "Typography_Grid.png",
-          imageSrc: "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1?w=800&auto=format&fit=crop",
-        },
-        {
-          id: "art-3",
-          name: "ZeroG_Mock.png",
-          imageSrc: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&auto=format&fit=crop",
-        },
-        {
-          id: "art-4",
-          name: "Palette_V04.png",
-          imageSrc: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&auto=format&fit=crop",
-        },
-      ]);
-      setLoadingArtifacts(false);
-    }, 350);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const addToast = React.useCallback((message: string, type: ToastKind = "info") => {
-    const id = Date.now();
-    setToasts((prev) => [...prev, { id, message, type }]);
-    const timeout = setTimeout(() => {
-      setToasts((prev) => prev.filter((toast) => toast.id !== id));
-      delete toastTimeouts.current[id];
-    }, 2800);
-    toastTimeouts.current[id] = timeout;
-  }, []);
-
-  React.useEffect(() => {
-    return () => {
-      Object.values(toastTimeouts.current).forEach(clearTimeout);
-    };
-  }, []);
-
-  const handleNotificationsClick = () => {
+  const handleNotificationsClick = React.useCallback(() => {
     addToast("Notifications panel is coming soon.", "info");
-  };
+  }, [addToast]);
 
-  const handleNewProjectClick = () => {
+  const handleNewProjectClick = React.useCallback(() => {
     addToast("New Project modal will open here.", "success");
-  };
+  }, [addToast]);
 
-  const handleSubmitPrompt = (prompt: string) => {
-    addToast(`Prompt sent: "${prompt}"`, "success");
+  const handleSubmitPrompt = React.useCallback((prompt: string) => {
     const trimmed = prompt.trim();
-    const suffix = trimmed ? trimmed.slice(0, 12) : "Concept";
-    const newArtifact: Artifact = {
+    if (!trimmed) {
+      addToast("Please enter a prompt", "info");
+      return;
+    }
+    if (trimmed.length > 1000) {
+      addToast("Prompt is too long (max 1000 characters)", "info");
+      return;
+    }
+
+    addToast(`Prompt sent: "${trimmed}"`, "success");
+    const suffix = trimmed.slice(0, 12);
+    const newArtifact = {
       id: `gen-${Date.now()}`,
       name: `${suffix.replace(/\s+/g, "_")}.png`,
+      imageSrc: "", // Would be generated by AI in real implementation
     };
-    setArtifacts((prev) => [newArtifact, ...prev].slice(0, 8));
-  };
+    addArtifact(newArtifact);
+  }, [addToast, addArtifact]);
 
-  const handleColorSelect = (color: string) => {
+  const handleColorSelect = React.useCallback((color: string) => {
     setAccentColor(color);
     addToast(`Accent updated to ${color}`, "info");
-  };
+  }, [addToast]);
 
-  const handleViewGallery = () => {
+  const handleViewGallery = React.useCallback(() => {
     addToast("Opening gallery...", "info");
     onNavigateToGallery?.();
-  };
+  }, [addToast, onNavigateToGallery]);
 
-  const handleArtifactClick = (artifact: Artifact) => {
+  const handleArtifactClick = React.useCallback((artifact: Artifact) => {
     addToast(`Opening ${artifact.name}`, "info");
-  };
+  }, [addToast]);
 
-  const accentGlow = `${accentColor}1A`;
-  const containerStyle: React.CSSProperties = {
-    ["--dashboard-accent"]: accentColor,
-    backgroundImage: `radial-gradient(120% 120% at 100% 0%, ${accentGlow}, transparent 40%)`,
-  };
+  const accentGlow = React.useMemo(() => `${accentColor}1A`, [accentColor]);
+  const containerStyle = React.useMemo(
+    (): React.CSSProperties & Record<string, string> => ({
+      "--dashboard-accent": accentColor,
+      backgroundImage: `radial-gradient(120% 120% at 100% 0%, ${accentGlow}, transparent 40%)`,
+    }),
+    [accentColor, accentGlow]
+  );
 
   return (
-    <div
+    <main
       className="animate-in fade-in duration-700 pb-32 pt-12 px-12 max-w-[1600px] mx-auto"
       style={containerStyle}
+      role="main"
+      aria-label="Dashboard home page"
     >
       <div className="fixed top-6 right-6 z-50 space-y-3">
         {toasts.map((toast) => (
@@ -179,15 +133,22 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({ onNavigateToGallery }) =>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 auto-rows-min">
         {/* 1. Hero Focus (Large) */}
         {loadingHero ? (
-          <div className="lg:col-span-6 w-full h-full">
+          <div className="lg:col-span-6 w-full h-full" aria-label="Loading hero project">
             <div className="h-[360px] lg:h-full rounded-2xl bg-subtle border border-border-subtle animate-pulse" />
+          </div>
+        ) : errorHero ? (
+          <div className="lg:col-span-6 w-full h-full flex items-center justify-center">
+            <div className="text-center p-8 rounded-2xl bg-error/10 border border-error/20">
+              <p className="text-error font-medium mb-2">Failed to load project</p>
+              <p className="text-sm text-error/70">{errorHero}</p>
+            </div>
           </div>
         ) : (
           <HeroProjectCard
-            imageSrc={heroProject?.imageSrc || HERO_PROJECT_IMAGE}
+            imageSrc={heroProject?.imageSrc ?? ""}
             priorityLabel={heroProject?.priorityLabel}
-            title={heroProject?.title || HERO_PROJECT_TITLE}
-            description={heroProject?.description || HERO_PROJECT_DESCRIPTION}
+            title={heroProject?.title ?? ""}
+            description={heroProject?.description ?? ""}
             className="lg:col-span-6 w-full h-full"
           />
         )}
@@ -214,7 +175,7 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({ onNavigateToGallery }) =>
           />
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

@@ -65,6 +65,7 @@ const SparkAICard: React.FC<SparkAICardProps> = ({ onSubmitPrompt, className = "
             disabled={!prompt.trim()}
             aria-label="Submit prompt"
           >
+            <span className="sr-only">Submit prompt</span>
             <ArrowRight size={14} />
           </button>
         </form>

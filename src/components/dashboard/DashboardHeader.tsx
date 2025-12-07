@@ -37,6 +37,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           onClick={onNotificationsClick}
           aria-label="View notifications"
         >
+          <span className="sr-only">View notifications</span>
           <Bell size={18} />
         </button>
         <button
