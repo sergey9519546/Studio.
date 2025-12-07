@@ -4,40 +4,42 @@ import { BrowserRouter } from 'react-router-dom';
 import Dashboard from '../../components/Dashboard';
 import * as api from '../../services/api';
 
+import { ApiResponse, Project, Freelancer, Assignment } from '../../types';
+
+// Mock the API service
 vi.mock('../../services/api', () => ({
-    api: {
-        projects: {
-            list: vi.fn(),
-        },
-        freelancers: {
-            list: vi.fn(),
-        },
-        assignments: {
-            list: vi.fn(),
-        },
+  api: {
+    projects: {
+      list: vi.fn(),
     },
+    freelancers: {
+      list: vi.fn(),
+    },
+    assignments: {
+      list: vi.fn(),
+    },
+  },
 }));
 
 describe('Dashboard', () => {
-    beforeEach(() => {
-        vi.clearAllMocks();
+  beforeEach(() => {
+    // Reset mocks before each test
+    vi.clearAllMocks();
 
-        vi.mocked(api.api.projects.list).mockResolvedValue({
-            success: true,
-            data: [],
-            meta: { total: 12, page: 1, limit: 10, totalPages: 2 },
-        } as api.ApiResponse<api.Project[]>);
-
-        vi.mocked(api.api.freelancers.list).mockResolvedValue({
-            success: true,
-            data: Array(25).fill({}) as api.Freelancer[],
-        } as api.ApiResponse<api.Freelancer[]>);
-
-        vi.mocked(api.api.assignments.list).mockResolvedValue({
-            success: true,
-            data: Array(8).fill({}) as api.Assignment[],
-        } as api.ApiResponse<api.Assignment[]>);
-    });
+    // Mock successful API responses
+    vi.mocked(api.api.projects.list).mockResolvedValue({
+      success: true,
+      data: Array(12).fill({}) as Project[],
+    } as ApiResponse<Project[]>);
+    vi.mocked(api.api.freelancers.list).mockResolvedValue({
+      success: true,
+      data: Array(25).fill({}) as Freelancer[],
+    } as ApiResponse<Freelancer[]>);
+    vi.mocked(api.api.assignments.list).mockResolvedValue({
+      success: true,
+      data: Array(8).fill({}) as Assignment[],
+    } as ApiResponse<Assignment[]>);
+  });
 
     it('should render dashboard statistics', async () => {
         render(

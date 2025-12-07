@@ -170,7 +170,6 @@ export default function App() {
         return (
           <Moodboard
             projectId={projects[0].id}
-            projectTitle={projects[0].title}
             items={moodboardItems}
             onItemDelete={handleMoodboardDelete}
           />

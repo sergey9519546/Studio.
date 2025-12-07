@@ -60,7 +60,7 @@ const resolveAtlaskitIcon = (source: string) => {
       resolve(iconCore, "migration", `${rest}.js`),
       resolve(iconGlyph, "migration", `${rest}.js`),
     ];
-    candidate = attemptPaths.find((p) => fs.existsSync(p)) || null;
+    candidate = attemptPaths.find((p) => p && fs.existsSync(p)) || null;
   } else if (normalized.startsWith("utility/")) {
     const rest = normalized.replace("utility/", "");
     const attemptPaths = [
@@ -68,14 +68,14 @@ const resolveAtlaskitIcon = (source: string) => {
       resolveGlyphFallback(`${rest}.js`),
       resolve(iconCore, `${rest}.js`),
     ];
-    candidate = attemptPaths.find((p) => fs.existsSync(p)) || null;
+    candidate = attemptPaths.find((p) => p && fs.existsSync(p)) || null;
   } else if (normalized.startsWith("core/")) {
     const rest = normalized.replace("core/", "");
     const attemptPaths = [
       resolve(iconCore, `${rest}.js`),
       resolveGlyphFallback(`${rest}.js`),
     ];
-    candidate = attemptPaths.find((p) => fs.existsSync(p)) || null;
+    candidate = attemptPaths.find((p) => p && fs.existsSync(p)) || null;
   } else if (normalized.startsWith("glyph/")) {
     const rest = normalized.replace("glyph/", "");
     candidate = resolve(iconGlyph, `${rest}.js`);
@@ -88,7 +88,7 @@ const resolveAtlaskitIcon = (source: string) => {
       resolveGlyphFallback(`${normalized}.js`),
       resolve(iconCore, `${normalized}.js`),
     ];
-    candidate = attemptPaths.find((p) => fs.existsSync(p)) || null;
+    candidate = attemptPaths.find((p) => p && fs.existsSync(p)) || null;
   }
 
   if (candidate && fs.existsSync(candidate)) {

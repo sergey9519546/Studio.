@@ -19,6 +19,7 @@ import {
 
 const FluidDesignShowcase: React.FC = () => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Sample moodboard data
   const moodboardItems = [

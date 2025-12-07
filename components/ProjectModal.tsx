@@ -10,6 +10,13 @@ interface ProjectModalProps {
   initialData?: Project;
 }
 
+interface AIGeneratedProjectData {
+  narrative_brief: string;
+  production_constraints: string;
+  stylistic_tags: string[];
+  suggested_roles: { role: string; count: number; skills: string[] }[];
+}
+
 const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, initialData }) => {
   const [formData, setFormData] = useState<Partial<Project>>({
     name: '',
@@ -92,14 +99,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
         }
       });
 
-      const result = response.data;
+      const result = response.data as AIGeneratedProjectData;
 
-      const newRoles: RoleRequirement[] = (result.suggested_roles || []).map((r: RoleRequirement, idx: number) => ({
+      const newRoles: RoleRequirement[] = (result.suggested_roles || []).map((r: { role: string; count: number; skills: string[] }, idx: number) => ({
         id: `role-${Date.now()}-${idx}`,
         role: r.role,
         count: r.count || 1,
         filled: 0,
-        skillsRequired: r.skillsRequired || []
+        skillsRequired: r.skills || []
       }));
 
       setFormData(prev => ({

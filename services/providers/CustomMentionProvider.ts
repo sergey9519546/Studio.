@@ -1,6 +1,18 @@
 import type { MentionDescription, MentionProvider } from '@atlaskit/mention';
 
 class CustomMentionProvider implements MentionProvider {
+  isFiltering(query: string): boolean {
+    return false;
+  }
+
+  subscribe(key: string, callback: (mentions: MentionDescription[]) => void): void {
+    // Implement subscription logic if needed
+  }
+
+  unsubscribe(key: string): void {
+    // Implement unsubscription logic if needed
+  }
+
   /**
    * Filter users based on search query
    * Called when user types @ in the editor
