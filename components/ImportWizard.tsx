@@ -345,7 +345,7 @@ const ImportWizard: React.FC<ImportWizardProps> = ({ onImport, existingFreelance
                                     onDragOver={(e) => e.preventDefault()}
                                     onDrop={(e) => { e.preventDefault(); if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); }}
                                 >
-                                    <input type="file" id="fileInput" className="hidden" onChange={(e) => { if (e.target.files?.[0]) handleFile(e.target.files[0]); }} />
+                                    <input type="file" id="fileInput" className="hidden" onChange={(e) => { if (e.target.files?.[0]) handleFile(e.target.files[0]); }} data-testid="file-input-test-id" />
                                     {file ? (
                                         <><div className="w-16 h-16 bg-state-success-bg rounded-2xl text-state-success flex items-center justify-center mb-6 shadow-sm"><FileSpreadsheet size={32} /></div><p className="font-bold text-ink-primary text-sm">{file.name}</p></>
                                     ) : (
