@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { PrismaModule } from '../../prisma/prisma.module';
-import { MediaProxyController } from './media-proxy.controller';
-import { S3MediaService } from './s3-media.service';
+import { StorageModule } from "../storage/storage.module";
+import { GCSMediaService } from "./gcs-media.service";
+import { MediaProxyController } from "./media-proxy.controller";
 
 @Module({
-  imports: [PrismaModule],
+  imports: [PrismaModule, StorageModule],
   controllers: [MediaProxyController],
-  providers: [S3MediaService],
-  exports: [S3MediaService],
+  providers: [GCSMediaService],
+  exports: [GCSMediaService],
 })
 export class MediaProxyModule {}
