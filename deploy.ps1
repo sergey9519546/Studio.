@@ -7,6 +7,7 @@ $REGION = if ($env:GCP_REGION) { $env:GCP_REGION } else { "us-west1" }
 $SERVICE_NAME = "studio-roster-api"
 $IMAGE_NAME = "gcr.io/$PROJECT_ID/$SERVICE_NAME"
 $ragWarmup = if ($env:RAG_WARMUP) { $env:RAG_WARMUP } else { "false" }
+$minInstances = if ($env:MIN_INSTANCES) { $env:MIN_INSTANCES } else { "1" }
 
 Write-Host "Starting Deployment to Cloud Run..." -ForegroundColor Green
 
@@ -32,8 +33,10 @@ gcloud run deploy $SERVICE_NAME `
   --platform managed `
   --region $REGION `
   --allow-unauthenticated `
-  --memory 1Gi `
-  --set-env-vars "NODE_ENV=production,DATABASE_URL=$($env:DATABASE_URL),JWT_SECRET=$($env:JWT_SECRET),API_KEY=$($env:API_KEY),GCP_PROJECT_ID=$PROJECT_ID,FRONTEND_URL=$($env:FRONTEND_URL),STORAGE_BUCKET=$($env:STORAGE_BUCKET),RAG_WARMUP=$ragWarmup"
+  --memory 2Gi `
+  --cpu 2 `
+  --min-instances $minInstances `
+  --set-env-vars "NODE_ENV=production,DATABASE_URL=$($env:DATABASE_URL),JWT_SECRET=$($env:JWT_SECRET),API_KEY=$($env:API_KEY),GCP_PROJECT_ID=$PROJECT_ID,FRONTEND_URL=$($env:FRONTEND_URL),STORAGE_BUCKET=$($env:STORAGE_BUCKET),RAG_WARMUP=$ragWarmup,ALLOWED_ORIGINS=$($env:ALLOWED_ORIGINS)"
 
 if ($LASTEXITCODE -ne 0) { Write-Error "Deployment failed"; exit 1 }
 
