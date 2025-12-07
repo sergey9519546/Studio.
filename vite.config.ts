@@ -70,11 +70,16 @@ export default defineConfig({
         replacement: iconEsmPath,
       },
       {
-        find: /^@atlaskit\/icon\/core\/(.+)/,
-        replacement: `${resolve(
-          __dirname,
-          "node_modules/@atlaskit/icon/glyph"
-        )}/$1.js`,
+        find: "@atlaskit/icon/dist/esm/add",
+        replacement: "/shims/atlaskit-icon-add.js",
+      },
+      {
+        find: /^@atlaskit\/icon\/dist\/esm\/(.+)/,
+        replacement: `${iconEsmPath}/$1.js`,
+      },
+      {
+        find: "@atlaskit/icon/core/issue",
+        replacement: `${iconGlyphPath}/issue.js`,
       },
       {
         find: "@atlaskit/editor-core/node_modules/@atlaskit/adf-schema/dist/esm/schema/inline-nodes",
@@ -90,6 +95,7 @@ export default defineConfig({
       "@atlaskit/media-ui",
       "@atlaskit/icon",
       "@atlaskit/icon-object",
+      "@atlaskit/smart-card",
     ],
   },
 });
