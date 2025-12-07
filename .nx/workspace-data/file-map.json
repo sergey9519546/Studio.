@@ -23,7 +23,7 @@
         },
         {
           "file": "apps/api/scripts/verify-storage.ts",
-          "hash": "1329128711497785422",
+          "hash": "121943655850596998",
           "deps": [
             "npm:@google-cloud/storage",
             "npm:dotenv"
@@ -95,7 +95,7 @@
         },
         {
           "file": "apps/api/src/common/logger/logger.module.ts",
-          "hash": "6104245718553171146",
+          "hash": "12311980230753793601",
           "deps": [
             "npm:@nestjs/common",
             "npm:nestjs-pino"
@@ -155,7 +155,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/ai.controller.ts",
-          "hash": "6371447822856933193",
+          "hash": "16944989406195217036",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -173,7 +173,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini-analyst.service.ts",
-          "hash": "17158604581237351959",
+          "hash": "5056838155179313251",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/cache-manager",
@@ -198,7 +198,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/prompts/templates.ts",
-          "hash": "16748409739391106777"
+          "hash": "4622260087833270396"
         },
         {
           "file": "apps/api/src/modules/ai/providers/ai-provider.interface.ts",
@@ -213,7 +213,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/providers/vertex-ai.provider.ts",
-          "hash": "1001655850900015316",
+          "hash": "13266490150950824336",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -269,7 +269,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai.service.ts",
-          "hash": "14423702648862929170",
+          "hash": "6807042139796205194",
           "deps": [
             "npm:@google-cloud/aiplatform",
             "npm:@nestjs/common",
@@ -463,9 +463,10 @@
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.service.ts",
-          "hash": "10440486540871943237",
+          "hash": "9005573107756257037",
           "deps": [
             "npm:@nestjs/common",
+            "npm:@prisma/client",
             "npm:@nestjs/cache-manager",
             "npm:cache-manager"
           ]
@@ -535,7 +536,7 @@
         },
         {
           "file": "apps/api/src/modules/google/sheet-ingestor.service.spec.ts",
-          "hash": "399577858358059402",
+          "hash": "18264505800684154767",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/common"
@@ -550,7 +551,7 @@
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/adapters/google-drive.adapter.ts",
-          "hash": "3172197687972796955",
+          "hash": "13279079888235052239",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -669,7 +670,7 @@
         },
         {
           "file": "apps/api/src/modules/media-proxy/s3-media.service.ts",
-          "hash": "7535776994643261824",
+          "hash": "6744271078349547427",
           "deps": [
             "npm:@aws-sdk/client-s3",
             "npm:@aws-sdk/s3-request-presigner",
@@ -678,7 +679,7 @@
         },
         {
           "file": "apps/api/src/modules/monitoring/ai-usage.service.ts",
-          "hash": "2514384503260129852",
+          "hash": "6274562720421730564",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -693,7 +694,7 @@
         },
         {
           "file": "apps/api/src/modules/monitoring/budget.guard.ts",
-          "hash": "9817979037383035491",
+          "hash": "7617301498122076441",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -742,7 +743,7 @@
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.controller.ts",
-          "hash": "7972732752833811312",
+          "hash": "6115457477180139883",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -842,10 +843,7 @@
         },
         {
           "file": "apps/api/src/modules/rag/rag.service.ts",
-          "hash": "6616910577252846151",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
+          "hash": "11257627974354370204"
         },
         {
           "file": "apps/api/src/modules/rag/types/rag.types.ts",
@@ -853,14 +851,11 @@
         },
         {
           "file": "apps/api/src/modules/rag/vector-store.service.ts",
-          "hash": "13720767590121556551",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
+          "hash": "8371973510589707940"
         },
         {
           "file": "apps/api/src/modules/realtime/realtime.controller.ts",
-          "hash": "11317176655887382427",
+          "hash": "16421148624715152996",
           "deps": [
             "npm:@nestjs/common",
             "npm:express"
@@ -875,10 +870,11 @@
         },
         {
           "file": "apps/api/src/modules/realtime/realtime.service.ts",
-          "hash": "2954908170835217609",
+          "hash": "15370102189022591274",
           "deps": [
             "npm:@nestjs/common",
-            "npm:@nestjs/event-emitter"
+            "npm:@nestjs/event-emitter",
+            "npm:express"
           ]
         },
         {
@@ -926,7 +922,7 @@
         },
         {
           "file": "apps/api/src/modules/tools/tool-handlers.service.ts",
-          "hash": "4556513650817054213",
+          "hash": "10141102964272316223",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -951,10 +947,11 @@
         },
         {
           "file": "apps/api/src/prisma/prisma.service.spec.ts",
-          "hash": "4935823431705109494",
+          "hash": "4021563595098469735",
           "deps": [
             "npm:@nestjs/testing",
-            "npm:@nestjs/common"
+            "npm:@nestjs/common",
+            "npm:pg"
           ]
         },
         {
@@ -969,7 +966,7 @@
         },
         {
           "file": "apps/api/test/ai.integration.spec.ts",
-          "hash": "9212704715523571525",
+          "hash": "11175792878027984718",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/common",
@@ -987,7 +984,7 @@
         },
         {
           "file": "apps/api/test/projects.integration.spec.ts",
-          "hash": "8889345113478515739",
+          "hash": "5810208366095635876",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/common",
@@ -1122,6 +1119,10 @@
         "hash": "391081214413880092"
       },
       {
+        "file": "components/Dashboard.tsx",
+        "hash": "4595048258405294703"
+      },
+      {
         "file": "components/DriveFileBrowser.tsx",
         "hash": "3561032120960224652"
       },
@@ -1183,7 +1184,7 @@
       },
       {
         "file": "components/ProjectList.tsx",
-        "hash": "11040569848374371754"
+        "hash": "9887220824352845913"
       },
       {
         "file": "components/ProjectModal.tsx",
@@ -1215,7 +1216,7 @@
       },
       {
         "file": "components/confluence/EmbeddedConfluencePage.tsx",
-        "hash": "3959369512664022279"
+        "hash": "8136649516576196123"
       },
       {
         "file": "components/dashboard/DataHUD.tsx",
@@ -1247,7 +1248,7 @@
       },
       {
         "file": "components/pages/PageEditor.tsx",
-        "hash": "1390341121433669996"
+        "hash": "17013738764994832534"
       },
       {
         "file": "components/ui/AspectRatioBox.tsx",
@@ -1311,7 +1312,7 @@
       },
       {
         "file": "eslint.config.mjs",
-        "hash": "12717973149130180570"
+        "hash": "10854352929320415075"
       },
       {
         "file": "index.html",
@@ -1475,7 +1476,7 @@
       },
       {
         "file": "src/__test__/DashboardHome.test.tsx",
-        "hash": "3191469503181390403"
+        "hash": "15118133624628032406"
       },
       {
         "file": "src/__test__/useDashboardData.test.ts",
@@ -1483,11 +1484,11 @@
       },
       {
         "file": "src/components/Dashboard.test.tsx",
-        "hash": "8448530895799101695"
+        "hash": "6879597916826048343"
       },
       {
         "file": "src/components/FluidDesignShowcase.tsx",
-        "hash": "12684374562613267670"
+        "hash": "6392602373445947118"
       },
       {
         "file": "src/components/FreelancerCard.test.tsx",
@@ -1503,19 +1504,19 @@
       },
       {
         "file": "src/components/Moodboard.tsx",
-        "hash": "2487625617907671071"
+        "hash": "11596370760961213151"
       },
       {
         "file": "src/components/ProjectDashboard.tsx",
-        "hash": "2673015548541351458"
+        "hash": "6211537455731412976"
       },
       {
         "file": "src/components/ProjectHub.tsx",
-        "hash": "4876049740322315394"
+        "hash": "10573695793640698028"
       },
       {
         "file": "src/components/ProjectList.test.tsx",
-        "hash": "4103676153095147761"
+        "hash": "16139870069064723005"
       },
       {
         "file": "src/components/Skeleton.css",
@@ -1527,7 +1528,7 @@
       },
       {
         "file": "src/components/TalentRoster.tsx",
-        "hash": "6561355572292578744"
+        "hash": "10111532679302466361"
       },
       {
         "file": "src/components/UltimateBentoGrid.tsx",
@@ -1535,7 +1536,7 @@
       },
       {
         "file": "src/components/WritersRoom.tsx",
-        "hash": "14942719160393212538"
+        "hash": "14006709244951627870"
       },
       {
         "file": "src/components/dashboard/DashboardHeader.css",
@@ -1555,7 +1556,7 @@
       },
       {
         "file": "src/components/dashboard/RecentArtifactsCard.tsx",
-        "hash": "423603252926575082"
+        "hash": "1497009573790661767"
       },
       {
         "file": "src/components/dashboard/SparkAICard.tsx",
@@ -1567,7 +1568,7 @@
       },
       {
         "file": "src/components/dashboard/VibePaletteCard.tsx",
-        "hash": "8748634409436830624"
+        "hash": "11718823080140850375"
       },
       {
         "file": "src/components/design/Badge.tsx",
@@ -1583,7 +1584,7 @@
       },
       {
         "file": "src/components/design/DGlassEffectContainer.tsx",
-        "hash": "12039458287511186708"
+        "hash": "18282350157018364774"
       },
       {
         "file": "src/components/design/EmptyState.tsx",
@@ -1607,7 +1608,7 @@
       },
       {
         "file": "src/components/design/Input.tsx",
-        "hash": "2823388891394808273"
+        "hash": "17960479047377833891"
       },
       {
         "file": "src/components/design/LiquidGlassContainer.tsx",
@@ -1619,11 +1620,11 @@
       },
       {
         "file": "src/components/design/MoodboardContainer.tsx",
-        "hash": "9664041750744438864"
+        "hash": "516781202444759724"
       },
       {
         "file": "src/components/design/Select.tsx",
-        "hash": "12005628369265824200"
+        "hash": "13823504636596582187"
       },
       {
         "file": "src/components/design/Tabs.tsx",
@@ -1631,7 +1632,7 @@
       },
       {
         "file": "src/components/design/Textarea.tsx",
-        "hash": "15156271498314344461"
+        "hash": "15319090513323398176"
       },
       {
         "file": "src/components/design/index.ts",
@@ -1651,11 +1652,11 @@
       },
       {
         "file": "src/hooks/useDashboardData.ts",
-        "hash": "16243230738828317619"
+        "hash": "4656749569272028531"
       },
       {
         "file": "src/hooks/useToast.ts",
-        "hash": "15003223283436571564"
+        "hash": "8251801115792104269"
       },
       {
         "file": "src/index.css",
@@ -1687,15 +1688,15 @@
       },
       {
         "file": "src/views/DashboardHome.tsx",
-        "hash": "8937141651676827096"
+        "hash": "16270276352993775538"
       },
       {
         "file": "src/views/GuardianRoom.tsx",
-        "hash": "9191865217650413047"
+        "hash": "11536769012501441634"
       },
       {
         "file": "src/views/ProjectsView.tsx",
-        "hash": "4781344758221669857"
+        "hash": "6623667520473698086"
       },
       {
         "file": "src/views/dashboardConfig.ts",
