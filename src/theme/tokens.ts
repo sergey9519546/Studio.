@@ -53,16 +53,31 @@ export const colors = {
 
 export const typography = {
   fontFamily: {
-    sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-    display: ['SF Pro Display', 'Inter', 'sans-serif'],
-    mono: ['SF Mono', 'IBM Plex Mono', 'monospace'],
+    sans: [
+      "Inter",
+      "-apple-system",
+      "BlinkMacSystemFont",
+      "Segoe UI",
+      "Roboto",
+      "sans-serif",
+    ],
+    display: ["SF Pro Display", "Inter", "sans-serif"],
+    mono: ["SF Mono", "IBM Plex Mono", "monospace"],
   },
   letterSpacing: {
-    tight: '-0.02em',
-    tighter: '-0.04em',
-    wide: '0.02em',
-    widest: '0.08em',
-  }
+    tight: "-0.02em",
+    tighter: "-0.04em",
+    kinetic: "-0.06em", // Studio OS kinetic text
+    wide: "0.02em",
+    wider: "0.04em",
+    widest: "0.08em",
+  },
+  lineHeight: {
+    kinetic: "0.9", // Studio OS kinetic line height
+    tight: "1.25",
+    normal: "1.5",
+    relaxed: "1.6",
+  },
 } as const;
 
 export const spacing = {
@@ -73,39 +88,42 @@ export const spacing = {
 } as const;
 
 export const radii = {
-  sm: '8px',
-  md: '12px',
-  lg: '16px',
-  xl: '24px',         // Squircles. The preferred radius.
-  pill: '9999px',
-  btn: '14px',
+  sm: "8px",
+  md: "12px",
+  lg: "16px",
+  xl: "24px", // Squircles. The preferred radius.
+  "2xl": "32px", // Extra large for hero cards
+  pill: "9999px",
+  btn: "14px",
+  card: "24px", // Studio OS default card radius
 } as const;
 
 export const shadows = {
-  ambient: '0px 10px 40px rgba(0,0,0,0.04)', // Ambient Levitation. Primary shadow.
-  subtle: '0px 1px 2px rgba(0,0,0,0.05)',
-  card: '0px 4px 12px rgba(0,0,0,0.06)',
-  float: '0px 20px 40px rgba(0,0,0,0.08)',
-  soft: '0px 4px 24px rgba(0,0,0,0.02)',
-  inner: 'inset 0px 1px 4px rgba(0,0,0,0.02)',
-  glow: '0px 0px 20px rgba(36, 99, 230, 0.15)',
+  ambient: "0px 10px 40px rgba(0,0,0,0.04)", // Ambient Levitation. Primary shadow.
+  subtle: "0px 1px 2px rgba(0,0,0,0.05)",
+  card: "0px 4px 12px rgba(0,0,0,0.06)",
+  float: "0px 20px 40px rgba(0,0,0,0.08)",
+  soft: "0px 4px 24px rgba(0,0,0,0.02)", // Studio OS soft shadow
+  inner: "inset 0px 1px 4px rgba(0,0,0,0.02)",
+  glow: "0px 0px 20px rgba(36, 99, 230, 0.15)",
+  "2xl": "0 20px 40px rgba(0,0,0,0.08)", // Studio OS float shadow
 } as const;
 
 export const transitions = {
-  fast: '150ms cubic-bezier(0.16, 1, 0.3, 1)',
-  base: '200ms cubic-bezier(0.16, 1, 0.3, 1)',
-  slow: '300ms cubic-bezier(0.16, 1, 0.3, 1)',
-  slower: '500ms cubic-bezier(0.16, 1, 0.3, 1)',
+  fast: "150ms cubic-bezier(0.16, 1, 0.3, 1)",
+  base: "200ms cubic-bezier(0.16, 1, 0.3, 1)",
+  slow: "300ms cubic-bezier(0.16, 1, 0.3, 1)",
+  slower: "500ms cubic-bezier(0.16, 1, 0.3, 1)",
 } as const;
 
 // LIQUID GLASS MATERIAL
 export const glass = {
   backdrop: {
-    filter: 'blur(20px) saturate(180%)',
-    background: 'rgba(255, 255, 255, 0.75)',
+    filter: "blur(20px) saturate(180%)",
+    background: "rgba(255, 255, 255, 0.75)",
   },
   backdropDark: {
-    filter: 'blur(20px) saturate(150%)',
-    background: 'rgba(29, 29, 31, 0.7)',
+    filter: "blur(20px) saturate(150%)",
+    background: "rgba(29, 29, 31, 0.7)",
   },
 } as const;
