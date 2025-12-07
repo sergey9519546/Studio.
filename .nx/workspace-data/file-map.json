@@ -1341,7 +1341,7 @@
       },
       {
         "file": "index.tsx",
-        "hash": "4604377487803404221"
+        "hash": "17324443113672166188"
       },
       {
         "file": "jest.preset.js",
@@ -1492,12 +1492,48 @@
         "hash": "16850177282705238672"
       },
       {
+        "file": "shims/atlaskit-adf-schema-steps.js",
+        "hash": "3633033731053601093"
+      },
+      {
+        "file": "shims/atlaskit-adf-schema.js",
+        "hash": "9470025859499309732"
+      },
+      {
+        "file": "shims/atlaskit-block-insert-menu-legacy.js",
+        "hash": "16834747605460581697"
+      },
+      {
+        "file": "shims/atlaskit-editor-common-ui.js",
+        "hash": "14067545865119608952"
+      },
+      {
+        "file": "shims/atlaskit-icon-tile.js",
+        "hash": "12302702482825270062"
+      },
+      {
         "file": "shims/atlaskit-inline-nodes.js",
         "hash": "627075879545763705"
       },
       {
+        "file": "shims/atlaskit-link-provider.js",
+        "hash": "18373697814741129958"
+      },
+      {
+        "file": "shims/atlaskit-logo-legacy-constants.js",
+        "hash": "14171107930634840201"
+      },
+      {
+        "file": "shims/atlaskit-media-client-get-media-client.js",
+        "hash": "3790003523994625710"
+      },
+      {
         "file": "shims/legacy-custom-icon-fallback.js",
         "hash": "15932793746200449724"
+      },
+      {
+        "file": "shims/profilecard-analytics.js",
+        "hash": "5988873148895645737"
       },
       {
         "file": "src/__test__/DashboardHome.test.tsx",
@@ -1797,7 +1833,7 @@
       },
       {
         "file": "vite.config.ts",
-        "hash": "13339976789837537800"
+        "hash": "5174033952277034263"
       },
       {
         "file": "vitest.config.ts",

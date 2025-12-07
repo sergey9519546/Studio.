@@ -455,6 +455,11 @@ export default defineConfig({
           "react-vendor": ["react", "react-dom", "react-router-dom"],
           "ui-vendor": ["lucide-react"],
           "query-vendor": ["@tanstack/react-query"],
+          "atlaskit-link": [
+            "@atlaskit/link-extractors",
+            "@atlaskit/smart-card",
+            "@atlaskit/link-provider"
+          ],
         },
         // Optimize chunk loading
         inlineDynamicImports: false,
