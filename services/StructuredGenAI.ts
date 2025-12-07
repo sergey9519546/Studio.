@@ -32,10 +32,12 @@ export class StructuredGenAI {
   ): Promise<T> {
     return await withResilience(async () => {
       try {
+        const token = localStorage.getItem('studio_roster_v1_auth_token');
         const response = await fetch("/api/v1/ai/extract", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
           },
           body: JSON.stringify({
             prompt,

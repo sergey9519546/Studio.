@@ -11,6 +11,8 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { Assignment, Freelancer, Project } from "../types";
 
+const API_BASE = "/api/v1";
+
 interface AIChatProps {
   freelancers: Freelancer[];
   projects: Project[];
@@ -65,6 +67,10 @@ const AIChat: React.FC<AIChatProps> = ({
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const getAuthHeaders = () => {
+    const token = localStorage.getItem("studio_roster_v1_auth_token");
+    return token ? { Authorization: `Bearer ${token}` } : {};
+  };
 
   useEffect(() => {
     const el = messagesEndRef.current;
@@ -119,9 +125,10 @@ const AIChat: React.FC<AIChatProps> = ({
     setSelectedFiles([]);
 
     try {
-      const response = await fetch("/api/ai/chat", {
+      const response = await fetch(`${API_BASE}/ai/chat`, {
         method: "POST",
         body: formData,
+        headers: getAuthHeaders(),
       });
 
       if (!response.ok) throw new Error("Failed to fetch response");
@@ -143,7 +150,7 @@ const AIChat: React.FC<AIChatProps> = ({
         }
 
         // Send the tool results back to the backend to get a final response
-        const finalResponse = await fetch("/api/ai/chat", {
+        const finalResponse = await fetch(`${API_BASE}/ai/chat`, {
           method: "POST",
           body: JSON.stringify({
             message: input,
@@ -162,6 +169,7 @@ const AIChat: React.FC<AIChatProps> = ({
           }),
           headers: {
             "Content-Type": "application/json",
+            ...getAuthHeaders(),
           },
         });
 

@@ -77,7 +77,7 @@ echo 'GOOGLE_APPLICATION_CREDENTIALS="./service-account-key.json"' >> .env
 npm run dev
 
 # Then in another terminal, index a document
-curl -X POST http://localhost:3001/api/rag/index \
+curl -X POST http://localhost:3001/api/v1/rag/index \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_JWT_TOKEN" \
   -d '{
@@ -98,7 +98,7 @@ Create `scripts/index-docs.ts`:
 ```typescript
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3001/api';
+const API_URL = 'http://localhost:3001/api/v1';
 
 // Login first to get JWT token
 async function getToken() {
@@ -172,7 +172,7 @@ ts-node scripts/index-docs.ts
 ```typescript
 // Query example
 const response = await axios.post(
-  'http://localhost:3001/api/rag/query',
+  'http://localhost:3001/api/v1/rag/query',
   {
     question: 'How does authentication work in this application?',
     topK: 5,
@@ -193,7 +193,7 @@ console.log('Relevance Scores:', response.data.data.sources.map(s => s.score));
 ```typescript
 // Chat with conversation history
 const chatResponse = await axios.post(
-  'http://localhost:3001/api/rag/chat',
+  'http://localhost:3001/api/v1/rag/chat',
   {
     message: 'What database do we use?',
     conversationHistory: [
@@ -215,7 +215,7 @@ console.log('Response:', chatResponse.data.data.answer);
 ```typescript
 // Summarize multiple documents
 const summaryResponse = await axios.post(
-  'http://localhost:3001/api/rag/summarize',
+  'http://localhost:3001/api/v1/rag/summarize',
   {
     documentIds: ['doc_id_1', 'doc_id_2', 'doc_id_3']
   },
@@ -233,7 +233,7 @@ console.log('Summary:', summaryResponse.data.data.summary);
 
 ```bash
 # Get system statistics
-curl http://localhost:3001/api/rag/stats \
+curl http://localhost:3001/api/v1/rag/stats \
   -H "Authorization: Bearer YOUR_JWT_TOKEN"
 
 # Response:
@@ -262,7 +262,7 @@ Create `scripts/test-rag.ts`:
 ```typescript
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3001/api';
+const API_URL = 'http://localhost:3001/api/v1';
 
 async function testRAG() {
   console.log('🧪 Testing RAG System\n');
@@ -342,8 +342,8 @@ Before deploying:
 - [ ] **GCP_PROJECT_ID** set in `.env`
 - [ ] **Vertex AI API** enabled in GCP
 - [ ] **Service account** has `roles/aiplatform.user` permission
-- [ ] **Documents indexed** via `/api/rag/index`
-- [ ] **Test queries** working via `/api/rag/query`
+- [ ] **Documents indexed** via `/api/v1/rag/index`
+- [ ] **Test queries** working via `/api/v1/rag/query`
 - [ ] **Cache statistics** showing reasonable hit rates
 - [ ] **Memory usage** acceptable for your documents
 

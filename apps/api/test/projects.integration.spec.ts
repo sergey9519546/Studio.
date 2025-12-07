@@ -22,7 +22,7 @@ describe('Projects API (Integration)', () => {
         await app.close();
     });
 
-    describe('POST /api/projects', () => {
+    describe('POST /api/v1/projects', () => {
         it('should create a new project', () => {
             const createDto = {
                 title: 'Test Project',
@@ -37,7 +37,7 @@ describe('Projects API (Integration)', () => {
             };
 
             return request(app.getHttpServer())
-                .post('/api/projects')
+                .post('/api/v1/projects')
                 .send(createDto)
                 .expect(201)
                 .expect((res) => {
@@ -49,16 +49,16 @@ describe('Projects API (Integration)', () => {
 
         it('should reject incomplete project data', () => {
             return request(app.getHttpServer())
-                .post('/api/projects')
+                .post('/api/v1/projects')
                 .send({ title: 'Incomplete' })
                 .expect(400);
         });
     });
 
-    describe('GET /api/projects', () => {
+    describe('GET /api/v1/projects', () => {
         it('should return paginated projects', () => {
             return request(app.getHttpServer())
-                .get('/api/projects?page=1&limit=10')
+                .get('/api/v1/projects?page=1&limit=10')
                 .expect(200)
                 .expect((res) => {
                     expect(res.body).toHaveProperty('total');
@@ -71,7 +71,7 @@ describe('Projects API (Integration)', () => {
 
         it('should apply pagination correctly', () => {
             return request(app.getHttpServer())
-                .get('/api/projects?page=1&limit=5')
+                .get('/api/v1/projects?page=1&limit=5')
                 .expect(200)
                 .expect((res) => {
                     expect(res.body.limit).toBe(5);
@@ -80,10 +80,10 @@ describe('Projects API (Integration)', () => {
         });
     });
 
-    describe('GET /api/projects/:id', () => {
+    describe('GET /api/v1/projects/:id', () => {
         it('should return a project by id', async () => {
             const createRes = await request(app.getHttpServer())
-                .post('/api/projects')
+                .post('/api/v1/projects')
                 .send({
                     title: 'Findable Project',
                     client: 'Test Client',
@@ -94,7 +94,7 @@ describe('Projects API (Integration)', () => {
             const projectId = createRes.body.id;
 
             return request(app.getHttpServer())
-                .get(`/api/projects/${projectId}`)
+                .get(`/api/v1/projects/${projectId}`)
                 .expect(200)
                 .expect((res) => {
                     expect(res.body.id).toBe(projectId);
@@ -104,15 +104,15 @@ describe('Projects API (Integration)', () => {
 
         it('should return 404 for non-existent project', () => {
             return request(app.getHttpServer())
-                .get('/api/projects/99999')
+                .get('/api/v1/projects/99999')
                 .expect(404);
         });
     });
 
-    describe('PUT /api/projects/:id', () => {
+    describe('PUT /api/v1/projects/:id', () => {
         it('should update an existing project', async () => {
             const createRes = await request(app.getHttpServer())
-                .post('/api/projects')
+                .post('/api/v1/projects')
                 .send({
                     title: 'Original Title',
                     client: 'Original Client',
@@ -127,7 +127,7 @@ describe('Projects API (Integration)', () => {
             };
 
             return request(app.getHttpServer())
-                .put(`/api/projects/${projectId}`)
+                .put(`/api/v1/projects/${projectId}`)
                 .send(updateDto)
                 .expect(200)
                 .expect((res) => {
@@ -137,10 +137,10 @@ describe('Projects API (Integration)', () => {
         });
     });
 
-    describe('DELETE /api/projects/:id', () => {
+    describe('DELETE /api/v1/projects/:id', () => {
         it('should delete a project', async () => {
             const createRes = await request(app.getHttpServer())
-                .post('/api/projects')
+                .post('/api/v1/projects')
                 .send({
                     title: 'To Be Deleted',
                     client: 'Test Client',
@@ -151,7 +151,7 @@ describe('Projects API (Integration)', () => {
             const projectId = createRes.body.id;
 
             return request(app.getHttpServer())
-                .delete(`/api/projects/${projectId}`)
+                .delete(`/api/v1/projects/${projectId}`)
                 .expect(200);
         });
     });

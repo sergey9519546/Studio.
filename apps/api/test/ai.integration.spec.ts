@@ -36,7 +36,7 @@ describe('AI Extraction API (Integration)', () => {
         jest.clearAllMocks();
     });
 
-    describe('POST /api/ai/extract', () => {
+    describe('POST /api/v1/ai/extract', () => {
         it('should extract data from text prompt', () => {
             const prompt = 'Extract project information from this text';
             const schema = {
@@ -51,7 +51,7 @@ describe('AI Extraction API (Integration)', () => {
             };
 
             return request(app.getHttpServer())
-                .post('/api/ai/extract')
+                .post('/api/v1/ai/extract')
                 .send({ prompt, schema })
                 .expect(200)
                 .expect((res) => {
@@ -69,7 +69,7 @@ describe('AI Extraction API (Integration)', () => {
             const schema = { type: 'ARRAY' };
 
             return request(app.getHttpServer())
-                .post('/api/ai/extract')
+                .post('/api/v1/ai/extract')
                 .field('prompt', 'Extract data from uploaded file')
                 .field('schema', JSON.stringify(schema))
                 .attach('files', Buffer.from('mock file content'), 'test.txt')
@@ -83,7 +83,7 @@ describe('AI Extraction API (Integration)', () => {
 
         it('should reject request without prompt or files', () => {
             return request(app.getHttpServer())
-                .post('/api/ai/extract')
+                .post('/api/v1/ai/extract')
                 .send({ prompt: '', schema: null })
                 .expect(400);
         });
@@ -93,7 +93,7 @@ describe('AI Extraction API (Integration)', () => {
             const schemaString = JSON.stringify({ type: 'ARRAY' });
 
             return request(app.getHttpServer())
-                .post('/api/ai/extract')
+                .post('/api/v1/ai/extract')
                 .send({ prompt, schema: schemaString })
                 .expect(200)
                 .expect(() => {
@@ -108,13 +108,13 @@ describe('AI Extraction API (Integration)', () => {
             );
 
             return request(app.getHttpServer())
-                .post('/api/ai/extract')
+                .post('/api/v1/ai/extract')
                 .send({ prompt: 'Test', schema: { type: 'ARRAY' } })
                 .expect(500);
         });
     });
 
-    describe('POST /api/ai/chat', () => {
+    describe('POST /api/v1/ai/chat', () => {
         it('should forward chat requests to Gemini service', () => {
             mockGeminiService.chat.mockResolvedValue({
                 response: 'AI response here',
@@ -122,7 +122,7 @@ describe('AI Extraction API (Integration)', () => {
             });
 
             return request(app.getHttpServer())
-                .post('/api/ai/chat')
+                .post('/api/v1/ai/chat')
                 .send({
                     message: 'What projects are available?',
                     conversationHistory: [],

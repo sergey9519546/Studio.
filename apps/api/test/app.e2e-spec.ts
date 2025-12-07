@@ -19,10 +19,10 @@ describe('AppController (e2e)', () => {
         await app.close();
     });
 
-    describe('/api/health (GET)', () => {
+    describe('/api/v1/health (GET)', () => {
         it('should return 200 OK with health status', () => {
             return request(app.getHttpServer())
-                .get('/api/health')
+                .get('/api/v1/health')
                 .expect(200)
                 .expect((res) => {
                     expect(res.body).toHaveProperty('status');
@@ -31,17 +31,17 @@ describe('AppController (e2e)', () => {
         });
     });
 
-    describe('/api/ai/extract (POST)', () => {
+    describe('/api/v1/ai/extract (POST)', () => {
         it('should reject request without prompt or files', () => {
             return request(app.getHttpServer())
-                .post('/api/ai/extract')
+                .post('/api/v1/ai/extract')
                 .send({ prompt: '', schema: null })
                 .expect(400);
         });
 
         it('should accept request with valid prompt', () => {
             return request(app.getHttpServer())
-                .post('/api/ai/extract')
+                .post('/api/v1/ai/extract')
                 .send({
                     prompt: 'Extract test data',
                     schema: { type: 'ARRAY' },

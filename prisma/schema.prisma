@@ -201,3 +201,43 @@ model ProjectBrief {
 
     @@index([projectId])
 }
+
+// Pages Application Models
+
+// Page: Rich-text document with ADF (Atlassian Document Format) content
+model Page {
+    id          String   @id @default(uuid())
+    title       String
+    content     String   // ADF JSON stored as string (use Json type if you prefer)
+    projectId   String?  // Optional: link to project
+    createdBy   String   // User ID
+    updatedBy   String?
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    
+    // Metadata
+    status      String   @default("draft") // draft, published, archived
+    version     Int      @default(1)
+    
+    @@index([projectId])
+    @@index([createdBy])
+    @@index([status])
+}
+
+// PageMedia: Media files (images, videos, docs) uploaded via editor
+// Stored in S3, referenced by Page content via ADF media nodes
+model PageMedia {
+    id          String   @id @default(uuid())
+    filename    String
+    mimeType    String
+    size        Int
+    s3Key       String   @unique // S3 object key (path/filename)
+    mediaType   String   // 'image', 'video', 'doc', etc.
+    pageId      String?  // Optional: link to specific page
+    uploadedBy  String   // User ID
+    createdAt   DateTime @default(now())
+    
+    @@index([pageId])
+    @@index([uploadedBy])
+    @@index([mediaType])
+}

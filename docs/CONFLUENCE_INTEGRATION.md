@@ -338,7 +338,7 @@ return <button onClick={logout}>Log out</button>;
 
 ### Backend Endpoints
 
-#### GET `/api/confluence/health`
+#### GET `/api/v1/confluence/health`
 Health check for Confluence integration.
 
 **Response:**
@@ -349,7 +349,7 @@ Health check for Confluence integration.
 }
 ```
 
-#### GET `/api/confluence/config`
+#### GET `/api/v1/confluence/config`
 Get Confluence configuration (requires authentication).
 
 **Response:**
@@ -360,7 +360,7 @@ Get Confluence configuration (requires authentication).
 }
 ```
 
-#### GET `/api/confluence/pages/:pageId/access`
+#### GET `/api/v1/confluence/pages/:pageId/access`
 Validate user access to a specific page (requires authentication).
 
 **Response:**
@@ -370,7 +370,7 @@ Validate user access to a specific page (requires authentication).
 }
 ```
 
-#### GET `/api/confluence/pages/:pageId`
+#### GET `/api/v1/confluence/pages/:pageId`
 Get page metadata (requires authentication).
 
 **Response:**
