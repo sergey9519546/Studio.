@@ -34,13 +34,12 @@ const ArtifactItem: React.FC<ArtifactItemProps> = ({ artifact, onClick }) => {
   const hasImage = artifact.imageSrc && !imageError;
 
   return (
-    <div role="row" className="contents">
+    <div role="listitem">
       <button
         type="button"
         className="rounded-2xl bg-subtle border border-border-subtle relative group overflow-hidden cursor-pointer aspect-[4/3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary w-full h-full text-left"
         onClick={handleClick}
         aria-label={`Open artifact ${artifact.name}`}
-        role="gridcell"
       >
         {hasImage ? (
           <img
@@ -103,12 +102,13 @@ const RecentArtifactsCard: React.FC<RecentArtifactsCardProps> = ({
         <div
           className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
           aria-label="Loading artifacts"
-          role="grid"
+          role="list"
           aria-busy="true"
         >
           {[0, 1, 2, 3].map((i) => (
             <div
               key={i}
+              role="listitem"
               className="rounded-2xl bg-subtle border border-border-subtle aspect-[4/3] animate-pulse"
               aria-hidden="true"
             />
@@ -118,7 +118,7 @@ const RecentArtifactsCard: React.FC<RecentArtifactsCardProps> = ({
         <div
           className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
           aria-label="Recent artifacts"
-          role="grid"
+          role="list"
         >
           {artifacts.map((artifact) => (
             <ArtifactItem
@@ -134,7 +134,9 @@ const RecentArtifactsCard: React.FC<RecentArtifactsCardProps> = ({
           role="status"
           aria-live="polite"
         >
-          <div className="text-sm font-medium text-ink-primary">No artifacts yet</div>
+          <div className="text-sm font-medium text-ink-primary">
+            No artifacts yet
+          </div>
           <p className="text-xs text-ink-secondary">
             Generate with Spark or upload a render to populate this space.
           </p>

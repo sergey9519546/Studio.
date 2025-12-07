@@ -123,6 +123,7 @@ export const PageEditor: React.FC<PageEditorProps> = ({
         {/* Primary Toolbar - Save/Publish buttons */}
         <PrimaryToolbar>
           <StatusBadge status={status}>{status}</StatusBadge>
+          {/* eslint-disable-next-line react/forbid-component-props -- flex spacer */}
           <div style={{ flex: 1 }}></div>
           <SaveButton onClick={handleSave} disabled={isSaving}>
             {isSaving ? "Saving..." : "Save"}

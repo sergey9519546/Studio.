@@ -54,7 +54,10 @@ const ProjectsView: React.FC<ProjectsViewProps> = ({ projects, onSelect }) => (
                 <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />{" "}
                 {p.status}
               </span>
-              <button className="text-ink-tertiary hover:text-ink-primary transition-colors">
+              <button
+                className="text-ink-tertiary hover:text-ink-primary transition-colors"
+                aria-label="More options"
+              >
                 <MoreHorizontal size={20} />
               </button>
             </div>

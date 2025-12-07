@@ -1,6 +1,6 @@
 import React from "react";
-import { useToast } from "./useToast";
 import { DASHBOARD_CONSTANTS } from "../views/dashboardConfig";
+import { useToast } from "./useToast";
 
 interface HeroProject {
   id: string;
@@ -27,6 +27,9 @@ interface UseDashboardDataReturn {
   addArtifact: (artifact: Artifact) => void;
 }
 
+// Export type for tests
+export type DashboardData = UseDashboardDataReturn;
+
 // Mock data - in real app, this would come from API
 const getMockHeroProject = (): HeroProject => ({
   id: "hero-1",
@@ -40,32 +43,40 @@ const getMockArtifacts = (): Artifact[] => [
   {
     id: "art-1",
     name: "Nebula_Launch.png",
-    imageSrc: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&auto=format&fit=crop",
+    imageSrc:
+      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&auto=format&fit=crop",
   },
   {
     id: "art-2",
     name: "Typography_Grid.png",
-    imageSrc: "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1?w=800&auto=format&fit=crop",
+    imageSrc:
+      "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1?w=800&auto=format&fit=crop",
   },
   {
     id: "art-3",
     name: "ZeroG_Mock.png",
-    imageSrc: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&auto=format&fit=crop",
+    imageSrc:
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&auto=format&fit=crop",
   },
   {
     id: "art-4",
     name: "Palette_V04.png",
-    imageSrc: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&auto=format&fit=crop",
+    imageSrc:
+      "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&auto=format&fit=crop",
   },
 ];
 
 export const useDashboardData = (): UseDashboardDataReturn => {
-  const [heroProject, setHeroProject] = React.useState<HeroProject | null>(null);
+  const [heroProject, setHeroProject] = React.useState<HeroProject | null>(
+    null
+  );
   const [artifacts, setArtifacts] = React.useState<Artifact[]>([]);
   const [loadingHero, setLoadingHero] = React.useState(true);
   const [loadingArtifacts, setLoadingArtifacts] = React.useState(true);
   const [errorHero, setErrorHero] = React.useState<string | null>(null);
-  const [errorArtifacts, setErrorArtifacts] = React.useState<string | null>(null);
+  const [errorArtifacts, setErrorArtifacts] = React.useState<string | null>(
+    null
+  );
   const { addToast } = useToast();
 
   const fetchData = React.useCallback(() => {

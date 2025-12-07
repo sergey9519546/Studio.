@@ -1,10 +1,9 @@
-import React from "react";
-import { render, screen, waitFor, fireEvent } from "@testing-library/react";
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import DashboardHome from "../views/DashboardHome";
-import { useDashboardData, DashboardData } from "../hooks/useDashboardData";
-import { useToast } from "../hooks/useToast";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
 import { Artifact } from "../components/dashboard/RecentArtifactsCard";
+import { DashboardData, useDashboardData } from "../hooks/useDashboardData";
+import { useToast } from "../hooks/useToast";
+import DashboardHome from "../views/DashboardHome";
 
 // Mock the hooks
 vi.mock("../hooks/useDashboardData");
@@ -34,13 +33,24 @@ interface MockRecentArtifactsCardProps {
 
 // Mock the child components
 vi.mock("../components/dashboard/DashboardHeader", () => ({
-  default: ({ onNotificationsClick, onNewProjectClick }: MockDashboardHeaderProps) => (
+  default: ({
+    onNotificationsClick,
+    onNewProjectClick,
+  }: MockDashboardHeaderProps) => (
     <div data-testid="dashboard-header">
-      <button onClick={onNotificationsClick} data-testid="notifications-btn" aria-label="View notifications">
+      <button
+        onClick={onNotificationsClick}
+        data-testid="notifications-btn"
+        aria-label="View notifications"
+      >
         <span className="sr-only">View notifications</span>
         <svg></svg>
       </button>
-      <button onClick={onNewProjectClick} data-testid="new-project-btn" aria-label="Create a new project">
+      <button
+        onClick={onNewProjectClick}
+        data-testid="new-project-btn"
+        aria-label="Create a new project"
+      >
         New Project
       </button>
     </div>
@@ -100,6 +110,7 @@ vi.mock("../components/dashboard/RecentArtifactsCard", () => ({
 describe("DashboardHome", () => {
   const mockAddToast = vi.fn();
   const mockAddArtifact = vi.fn();
+  const mockRefetch = vi.fn();
 
   const mockDashboardData: DashboardData = {
     heroProject: {
@@ -121,13 +132,14 @@ describe("DashboardHome", () => {
     errorHero: null,
     errorArtifacts: null,
     addArtifact: mockAddArtifact,
+    refetch: mockRefetch,
   };
 
   beforeEach(() => {
     vi.clearAllMocks();
 
-    (useDashboardData as vi.Mock).mockReturnValue(mockDashboardData);
-    (useToast as vi.Mock).mockReturnValue({
+    (useDashboardData as Mock).mockReturnValue(mockDashboardData);
+    (useToast as Mock).mockReturnValue({
       toasts: [],
       addToast: mockAddToast,
     });
@@ -145,7 +157,9 @@ describe("DashboardHome", () => {
     });
 
     expect(screen.getByText("Nebula Phase II")).toBeInTheDocument();
-    expect(screen.getByText("Comprehensive rebrand focusing on kinetic typography")).toBeInTheDocument();
+    expect(
+      screen.getByText("Comprehensive rebrand focusing on kinetic typography")
+    ).toBeInTheDocument();
   });
 
   it("handles notifications button click", async () => {
@@ -154,7 +168,10 @@ describe("DashboardHome", () => {
     const notificationsBtn = screen.getByTestId("notifications-btn");
     fireEvent.click(notificationsBtn);
 
-    expect(mockAddToast).toHaveBeenCalledWith("Notifications panel is coming soon.", "info");
+    expect(mockAddToast).toHaveBeenCalledWith(
+      "Notifications panel is coming soon.",
+      "info"
+    );
   });
 
   it("handles new project button click", async () => {
@@ -163,7 +180,10 @@ describe("DashboardHome", () => {
     const newProjectBtn = screen.getByTestId("new-project-btn");
     fireEvent.click(newProjectBtn);
 
-    expect(mockAddToast).toHaveBeenCalledWith("New Project modal will open here.", "success");
+    expect(mockAddToast).toHaveBeenCalledWith(
+      "New Project modal will open here.",
+      "success"
+    );
   });
 
   it("handles prompt submission", async () => {
@@ -172,7 +192,10 @@ describe("DashboardHome", () => {
     const submitBtn = screen.getByTestId("submit-prompt-btn");
     fireEvent.click(submitBtn);
 
-    expect(mockAddToast).toHaveBeenCalledWith('Prompt sent: "Test prompt"', "success");
+    expect(mockAddToast).toHaveBeenCalledWith(
+      'Prompt sent: "Test prompt"',
+      "success"
+    );
     expect(mockAddArtifact).toHaveBeenCalledWith({
       id: expect.stringContaining("gen-"),
       name: "Test_promp.png",
@@ -191,7 +214,10 @@ describe("DashboardHome", () => {
     const colorBtn = screen.getByTestId("color-select-btn");
     fireEvent.click(colorBtn);
 
-    expect(mockAddToast).toHaveBeenCalledWith("Accent updated to #FF0000", "info");
+    expect(mockAddToast).toHaveBeenCalledWith(
+      "Accent updated to #FF0000",
+      "info"
+    );
   });
 
   it("renders with proper accessibility attributes", async () => {
@@ -202,7 +228,7 @@ describe("DashboardHome", () => {
   });
 
   it("renders loading states", async () => {
-    (useDashboardData as vi.Mock).mockReturnValue({
+    (useDashboardData as Mock).mockReturnValue({
       ...mockDashboardData,
       loadingHero: true,
       loadingArtifacts: true,
@@ -217,7 +243,7 @@ describe("DashboardHome", () => {
   });
 
   it("renders error states", async () => {
-    (useDashboardData as vi.Mock).mockReturnValue({
+    (useDashboardData as Mock).mockReturnValue({
       ...mockDashboardData,
       errorHero: "Failed to load hero project",
       errorArtifacts: null,
@@ -227,7 +253,9 @@ describe("DashboardHome", () => {
 
     await waitFor(() => {
       expect(screen.getByText("Failed to load project")).toBeInTheDocument();
-      expect(screen.getByText("Failed to load hero project")).toBeInTheDocument();
+      expect(
+        screen.getByText("Failed to load hero project")
+      ).toBeInTheDocument();
     });
   });
 });

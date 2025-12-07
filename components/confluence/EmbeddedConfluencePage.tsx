@@ -48,6 +48,7 @@ export default function EmbeddedConfluencePage({
           onError?.(error);
         },
       });
+      setPageError(null);
     } catch (error) {
       console.error("Login failed:", error);
     }
@@ -56,6 +57,7 @@ export default function EmbeddedConfluencePage({
   const handlePageLoad = () => {
     setIsPageLoading(false);
     onLoad?.();
+    setPageError(null);
   };
 
   const handlePageError = (error: Error) => {
@@ -66,6 +68,7 @@ export default function EmbeddedConfluencePage({
   // Loading state
   if (isLoading || isPageLoading) {
     return (
+      // eslint-disable-next-line react/forbid-component-props -- dynamic height prop
       <div
         className={`confluence-page-container ${className}`}
         style={{ height }}
@@ -83,6 +86,7 @@ export default function EmbeddedConfluencePage({
   // Error state
   if (pageError) {
     return (
+      // eslint-disable-next-line react/forbid-component-props -- dynamic height prop
       <div
         className={`confluence-page-container ${className}`}
         style={{ height }}
@@ -127,6 +131,7 @@ export default function EmbeddedConfluencePage({
 
   // Render the actual Embedded Confluence component
   return (
+    // eslint-disable-next-line react/forbid-component-props -- dynamic height prop
     <div
       className={`confluence-page-container ${className}`}
       style={{ height }}

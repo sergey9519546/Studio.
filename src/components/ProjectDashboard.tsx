@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Edit2, Image, FileText, Zap } from 'lucide-react';
-import { Button } from './design/Button';
-import { Textarea } from './design/Textarea';
-import { Input } from './design/Input';
-import { LiquidGlassContainer } from './design/LiquidGlassContainer';
+import { Edit2, FileText, Image, Zap } from "lucide-react";
+import React, { useState } from "react";
+import { Button } from "./design/Button";
+import { Input } from "./design/Input";
+import { LiquidGlassContainer } from "./design/LiquidGlassContainer";
+import { Textarea } from "./design/Textarea";
 
 interface ProjectDashboardProps {
   projectId: string;
@@ -16,8 +16,8 @@ interface ProjectDashboardProps {
 
 export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
   projectId: _projectId,
-  projectTitle = 'Untitled Project',
-  brief = '',
+  projectTitle = "Untitled Project",
+  brief = "",
   onBriefChange,
   onNavigateToWritersRoom,
   onNavigateToMoodboard,
@@ -35,8 +35,12 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
       <div className="max-w-7xl mx-auto p-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-ink-primary mb-2">{projectTitle}</h1>
-          <p className="text-ink-secondary">Creative workspace and project intelligence</p>
+          <h1 className="text-4xl font-bold text-ink-primary mb-2">
+            {projectTitle}
+          </h1>
+          <p className="text-ink-secondary">
+            Creative workspace and project intelligence
+          </p>
         </div>
 
         {/* Main Grid Layout */}
@@ -46,11 +50,14 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
             {/* The Brief */}
             <LiquidGlassContainer level="lg">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold text-ink-primary">Creative Brief</h2>
+                <h2 className="text-lg font-bold text-ink-primary">
+                  Creative Brief
+                </h2>
                 {!editingBrief && (
                   <button
                     onClick={() => setEditingBrief(true)}
                     className="p-2 hover:bg-white/10 rounded-[16px] transition-colors text-ink-tertiary"
+                    aria-label="Edit brief"
                   >
                     <Edit2 size={16} />
                   </button>
@@ -89,7 +96,9 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
               ) : (
                 <div className="prose-like text-sm text-ink-secondary leading-relaxed">
                   {localBrief || (
-                    <p className="text-ink-tertiary italic">No brief yet. Click edit to add one.</p>
+                    <p className="text-ink-tertiary italic">
+                      No brief yet. Click edit to add one.
+                    </p>
                   )}
                 </div>
               )}
@@ -97,22 +106,26 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
 
             {/* The Vibe */}
             <LiquidGlassContainer level="lg">
-              <h2 className="text-lg font-bold text-ink-primary mb-4">Mood & Tone</h2>
-              
+              <h2 className="text-lg font-bold text-ink-primary mb-4">
+                Mood & Tone
+              </h2>
+
               <div className="space-y-3">
                 <div>
                   <label className="text-xs font-bold text-ink-secondary uppercase tracking-wide block mb-2">
                     Mood Tags
                   </label>
                   <div className="flex flex-wrap gap-2">
-                    {['Cinematic', 'Minimalist', 'Bold', 'Elegant'].map(tag => (
-                      <button
-                        key={tag}
-                        className="px-3 py-1.5 rounded-[24px] bg-primary-tint text-primary text-xs font-medium hover:bg-primary hover:text-white transition-colors"
-                      >
-                        {tag}
-                      </button>
-                    ))}
+                    {["Cinematic", "Minimalist", "Bold", "Elegant"].map(
+                      (tag) => (
+                        <button
+                          key={tag}
+                          className="px-3 py-1.5 rounded-[24px] bg-primary-tint text-primary text-xs font-medium hover:bg-primary hover:text-white transition-colors"
+                        >
+                          {tag}
+                        </button>
+                      )
+                    )}
                   </div>
                 </div>
 
@@ -135,8 +148,14 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
             {/* Asset Library */}
             <LiquidGlassContainer level="lg">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold text-ink-primary">Asset Library</h2>
-                <button type="button" title="Add image" className="p-2 hover:bg-white/10 rounded-[16px] transition-colors text-ink-tertiary">
+                <h2 className="text-lg font-bold text-ink-primary">
+                  Asset Library
+                </h2>
+                <button
+                  type="button"
+                  title="Add image"
+                  className="p-2 hover:bg-white/10 rounded-[16px] transition-colors text-ink-tertiary"
+                >
                   <Image size={16} />
                 </button>
               </div>
@@ -144,13 +163,17 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
               <div className="rounded-[24px] bg-subtle p-8 text-center border-2 border-dashed border-border-subtle">
                 <Image size={32} className="mx-auto text-ink-tertiary mb-3" />
                 <p className="text-sm text-ink-secondary">Drag images here</p>
-                <p className="text-xs text-ink-tertiary">AI vision analysis on upload</p>
+                <p className="text-xs text-ink-tertiary">
+                  AI vision analysis on upload
+                </p>
               </div>
             </LiquidGlassContainer>
 
             {/* Metadata */}
             <LiquidGlassContainer level="lg">
-              <h2 className="text-lg font-bold text-ink-primary mb-4">Deliverables</h2>
+              <h2 className="text-lg font-bold text-ink-primary mb-4">
+                Deliverables
+              </h2>
 
               <div className="space-y-3">
                 <div>
@@ -183,15 +206,26 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
             {/* Script Window */}
             <LiquidGlassContainer level="lg">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold text-ink-primary">Script & Shotlist</h2>
-                <button type="button" title="Add script" className="p-2 hover:bg-white/10 rounded-[16px] transition-colors text-ink-tertiary">
+                <h2 className="text-lg font-bold text-ink-primary">
+                  Script & Shotlist
+                </h2>
+                <button
+                  type="button"
+                  title="Add script"
+                  className="p-2 hover:bg-white/10 rounded-[16px] transition-colors text-ink-tertiary"
+                >
                   <FileText size={16} />
                 </button>
               </div>
 
               <div className="rounded-[24px] bg-subtle p-6 text-center border-2 border-dashed border-border-subtle">
-                <FileText size={32} className="mx-auto text-ink-tertiary mb-3" />
-                <p className="text-sm text-ink-secondary">Upload or create scripts</p>
+                <FileText
+                  size={32}
+                  className="mx-auto text-ink-tertiary mb-3"
+                />
+                <p className="text-sm text-ink-secondary">
+                  Upload or create scripts
+                </p>
                 <Button size="sm" variant="secondary" className="w-full mt-3">
                   Browse Files
                 </Button>

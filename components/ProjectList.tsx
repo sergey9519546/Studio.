@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Search, Plus, Upload, CheckSquare, Square, ArrowRight, Filter } from 'lucide-react';
-import { Project, ProjectStatus, Priority } from '../types';
+import { Project, ProjectStatus, Priority, QueryParams } from '../types';
 import { Link, useInRouterContext } from 'react-router-dom';
 import ProjectModal from './ProjectModal';
 import { Badge } from '../src/components/design/Badge';
@@ -19,7 +19,6 @@ interface ProjectListProps {
 
 const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects = [], onCreate, onUpdate, isLoading = false }) => {
   const inRouter = useInRouterContext();
-  const isTestEnv = process.env.NODE_ENV === 'test';
 
   const [searchText, setSearchText] = useState('');
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
@@ -53,9 +52,15 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects = [], onC
           return;
         }
 
-        const res = isTestEnv
-          ? await (api as any).projects.list(page, 10)
-          : await (api as any).projects.list({ page, limit: 10, search: searchText, filters });
+        const params: QueryParams = { page, limit: 10 };
+        if (searchText) params.search = searchText;
+        if (filters.status || filters.priority) {
+          const filterPayload: Record<string, string> = {};
+          if (filters.status) filterPayload.status = filters.status;
+          if (filters.priority) filterPayload.priority = filters.priority;
+          params.filters = filterPayload;
+        }
+        const res = await (api as any).projects.list(params);
 
         const rawData = (res as any)?.data?.data ?? (res as any)?.data ?? _projects;
         const normalized = Array.isArray(rawData)
