@@ -3,7 +3,7 @@ import DashboardHeader from "../components/dashboard/DashboardHeader";
 import HeroProjectCard from "../components/dashboard/HeroProjectCard";
 import SparkAICard from "../components/dashboard/SparkAICard";
 import VibePaletteCard from "../components/dashboard/VibePaletteCard";
-import RecentArtifactsCard, { Artifact } from "../components/dashboard/RecentArtifactsCard";
+import RecentArtifactsCard from "../components/dashboard/RecentArtifactsCard";
 import "./DashboardHome.css";
 
 // Constants for better maintainability
@@ -13,7 +13,20 @@ const HERO_PROJECT_TITLE = "Nebula Phase II";
 const HERO_PROJECT_DESCRIPTION =
   "Comprehensive rebrand focusing on kinetic typography and zero-gravity aesthetics. Client review in 4 hours.";
 
-const DashboardHome: React.FC = () => {
+interface DashboardHomeProps {
+  onNavigateToGallery?: () => void;
+}
+
+const DashboardHome: React.FC<DashboardHomeProps> = ({ onNavigateToGallery }) => {
+  const [accentColor, setAccentColor] = React.useState("#2463E6");
+
+  React.useEffect(() => {
+    document.documentElement.style.setProperty("--dashboard-accent", accentColor);
+    return () => {
+      document.documentElement.style.removeProperty("--dashboard-accent");
+    };
+  }, [accentColor]);
+
   const handleNotificationsClick = () => {
     console.log('Notifications clicked');
     // TODO: Open notifications panel
@@ -31,12 +44,12 @@ const DashboardHome: React.FC = () => {
 
   const handleColorSelect = (color: string) => {
     console.log('Color selected:', color);
-    // TODO: Apply color to palette or design
+    setAccentColor(color);
   };
 
   const handleViewGallery = () => {
     console.log('View gallery clicked');
-    // TODO: Navigate to gallery
+    onNavigateToGallery?.();
   };
 
   const handleArtifactClick = (artifact: any) => {
@@ -44,8 +57,15 @@ const DashboardHome: React.FC = () => {
     // TODO: Open artifact details
   };
 
+  const accentGlow = `${accentColor}1A`;
+
   return (
-    <div className="animate-in fade-in duration-700 pb-32 pt-12 px-12 max-w-[1600px] mx-auto">
+    <div
+      className="animate-in fade-in duration-700 pb-32 pt-12 px-12 max-w-[1600px] mx-auto"
+      style={{
+        backgroundImage: `radial-gradient(120% 120% at 100% 0%, ${accentGlow}, transparent 40%)`,
+      }}
+    >
       <DashboardHeader
         onNotificationsClick={handleNotificationsClick}
         onNewProjectClick={handleNewProjectClick}

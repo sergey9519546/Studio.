@@ -143,7 +143,7 @@ export default function App() {
     }
     switch (activeTab) {
       case "dashboard":
-        return <DashboardHome />;
+        return <DashboardHome onNavigateToGallery={() => setActiveTab("moodboard")} />;
       case "projects":
         return (
           <ProjectsView projects={projects} onSelect={handleProjectSelect} />
