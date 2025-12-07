@@ -13,6 +13,11 @@ const logoComponentsPath = resolve(
   "node_modules/@atlaskit/logo/dist/esm/artifacts/logo-components"
 );
 
+const adfSchemaBase = resolve(
+  __dirname,
+  "node_modules/@atlaskit/adf-schema/dist/esm"
+);
+
 const glyphFileCache = new Map<string, string | null>();
 
 const searchGlyphFile = (dir: string, target: string): string | null => {
@@ -109,6 +114,82 @@ const resolveAtlaskitIcon = (source: string, importer?: string) => {
 
   return null;
 };
+const resolveAtlaskitAdfSchema = (source: string) => {
+  if (!source.startsWith("@atlaskit/adf-schema")) {
+    return null;
+  }
+
+  const normalized = source
+    .replace("@atlaskit/adf-schema", "")
+    .replace(/^\/+/, "");
+  if (normalized === "steps") {
+    const stepsShimCandidate = resolve(
+      __dirname,
+      "shims/atlaskit-adf-schema-steps.js"
+    );
+    if (fs.existsSync(stepsShimCandidate)) {
+      return stepsShimCandidate;
+    }
+  }
+  if (!normalized) {
+    const shimCandidate = resolve(__dirname, "shims/atlaskit-adf-schema.js");
+    if (fs.existsSync(shimCandidate)) {
+      return shimCandidate;
+    }
+  }
+  const specialPaths: Record<string, string> = {
+    "schema-default": "schema/default-schema.js",
+  };
+  if (specialPaths[normalized]) {
+    const specialCandidate = resolve(adfSchemaBase, specialPaths[normalized]);
+    if (fs.existsSync(specialCandidate)) {
+      return specialCandidate;
+    }
+  }
+  const baseTarget = normalized || "index.js";
+  let candidate = resolve(adfSchemaBase, baseTarget);
+  if (candidate && fs.existsSync(candidate)) {
+    const stat = fs.statSync(candidate);
+    if (stat.isFile()) {
+      return candidate;
+    }
+    if (stat.isDirectory()) {
+      const indexFile = resolve(candidate, "index.js");
+      if (fs.existsSync(indexFile)) {
+        return indexFile;
+      }
+    }
+  }
+
+  if (normalized && !/\.[^\/]+$/.test(normalized)) {
+    candidate = resolve(adfSchemaBase, `${normalized}.js`);
+    if (candidate && fs.existsSync(candidate)) {
+      return candidate;
+    }
+  }
+
+  return null;
+};
+
+const resolveAtlaskitLinkProviderShim = (
+  source: string,
+  importer?: string
+) => {
+  if (source !== "@atlaskit/link-provider" || !importer) {
+    return null;
+  }
+
+  if (importer.includes("shims/atlaskit-link-provider.js")) {
+    return null;
+  }
+
+  const candidate = resolve(__dirname, "shims/atlaskit-link-provider.js");
+  if (fs.existsSync(candidate)) {
+    return candidate;
+  }
+
+  return null;
+};
 
 const resolveAtlaskitLogo = (source: string) => {
   const prefix = "@atlaskit/logo/dist/esm/artifacts/logo-components/";
@@ -122,6 +203,83 @@ const resolveAtlaskitLogo = (source: string) => {
       }
     }
   }
+  return null;
+};
+
+const resolveAtlaskitLogoConstantsShim = (
+  source: string,
+  importer?: string
+) => {
+  if (source !== "../../constants" || !importer) {
+    return null;
+  }
+
+  const normalizedImporter = importer.replace(/\\/g, "/");
+  if (!normalizedImporter.includes("/@atlaskit/logo/dist/esm/legacy-logos/")) {
+    return null;
+  }
+
+  const basePath = normalizedImporter.includes("/legacy-logos/")
+    ? resolve(__dirname, "shims/atlaskit-logo-legacy-constants.js")
+    : resolve(__dirname, "node_modules/@atlaskit/logo/dist/esm/constants.js");
+  const candidate = basePath;
+  if (fs.existsSync(candidate)) {
+    return candidate;
+  }
+
+  return null;
+};
+
+const resolveAtlaskitProfilecardAnalytics = (
+  source: string,
+  importer?: string
+) => {
+  if (source !== "../../util/analytics" || !importer) {
+    return null;
+  }
+
+  const normalizedImporter = importer.replace(/\\/g, "/");
+  if (!normalizedImporter.includes("/@atlaskit/profilecard/dist/esm/components/")) {
+    return null;
+  }
+
+  const candidate = resolve(__dirname, "shims/profilecard-analytics.js");
+  if (fs.existsSync(candidate)) {
+    return candidate;
+  }
+
+  return null;
+};
+
+const resolveAtlaskitMissingLogoIcon = (
+  source: string,
+  importer?: string
+) => {
+  if (!source.startsWith("./icon") || !importer) {
+    return null;
+  }
+
+  const normalizedImporter = importer.replace(/\\/g, "/");
+  const match = normalizedImporter.match(
+    /@atlaskit\/logo\/dist\/esm\/(?:artifacts\/logo-components|legacy-logos)\/([^/]+)\/index\.js$/
+  );
+  if (!match) {
+    return null;
+  }
+
+  const component = match[1];
+  const isLegacy = normalizedImporter.includes("/legacy-logos/");
+  const baseDir = resolve(
+    __dirname,
+    isLegacy
+      ? "node_modules/@atlaskit/logo/dist/esm/legacy-logos"
+      : "node_modules/@atlaskit/logo/dist/esm/artifacts/logo-components"
+  );
+  const candidate = resolve(baseDir, component, "icon.js");
+  if (fs.existsSync(candidate)) {
+    return candidate;
+  }
+
   return null;
 };
 
@@ -215,6 +373,28 @@ const resolveAtlaskitIconConstants = (
   return null;
 };
 
+const resolveAtlaskitMediaClientShim = (
+  source: string,
+  importer?: string
+) => {
+  if (source !== "@atlaskit/media-client" || !importer) {
+    return null;
+  }
+
+  const normalizedImporter = importer.replace(/\\/g, "/");
+  if (normalizedImporter.includes("/shims/")) {
+    return null;
+  }
+  if (!normalizedImporter.includes("/node_modules/")) {
+    return null;
+  }
+
+  return resolve(
+    __dirname,
+    "shims/atlaskit-media-client-get-media-client.js"
+  );
+};
+
 const resolveAtlaskitBlockInsertMenuLegacy = (
   source: string,
   importer?: string
@@ -240,11 +420,17 @@ const atlaskitIconResolver = () => ({
     //   console.log("Atlaskit resolver sees", source, importer);
     // }
     return (
-      resolveAtlaskitIcon(source) ||
+      resolveAtlaskitAdfSchema(source) ||
+      resolveAtlaskitLinkProviderShim(source, importer) ||
+      resolveAtlaskitIcon(source, importer) ||
       resolveAtlaskitLogo(source) ||
       resolveAtlaskitIconConstants(source, importer) ||
       resolveAtlaskitMediaInlineImport(source, importer) ||
       resolveAtlaskitBlockInsertMenuLegacy(source, importer) ||
+      resolveAtlaskitMediaClientShim(source, importer) ||
+      resolveAtlaskitLogoConstantsShim(source, importer) ||
+      resolveAtlaskitMissingLogoIcon(source, importer) ||
+      resolveAtlaskitProfilecardAnalytics(source, importer) ||
       resolveCommonLogoIcon(source, importer) ||
       resolveLegacyCustomIcon(source, importer)
     );
@@ -304,6 +490,17 @@ export default defineConfig({
       {
         find: "@atlaskit/editor-core/node_modules/@atlaskit/adf-schema/dist/esm/schema/inline-nodes",
         replacement: "/shims/atlaskit-inline-nodes.js",
+      },
+      {
+        find: "@atlaskit/editor-common/ui",
+        replacement: resolve(__dirname, "shims/atlaskit-editor-common-ui.js"),
+      },
+      {
+        find: "@atlaskit/platform-feature-flags",
+        replacement: resolve(
+          __dirname,
+          "node_modules/@atlaskit/platform-feature-flags/dist/esm/index.js"
+        ),
       },
       { find: "@", replacement: "/src" },
     ],
