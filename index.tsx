@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import ErrorBoundary from "./components/ErrorBoundary";
-import Main from "./main";
+import App from "./App";
 import "./src/index.css";
 
 const rootElement = document.getElementById("root");
@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
     <ErrorBoundary>
-      <Main />
+      <App />
     </ErrorBoundary>
   </React.StrictMode>
 );

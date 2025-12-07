@@ -4,6 +4,9 @@
   "pathMappings": {
     "@app/*": [
       "apps/api/src/*"
+    ],
+    "@/*": [
+      "src/*"
     ]
   },
   "nxJsonPlugins": [],
@@ -460,7 +463,7 @@
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.service.ts",
-          "hash": "6145524976870952470",
+          "hash": "13836045983238486375",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/cache-manager",
@@ -743,7 +746,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/projects.service.ts",
-          "hash": "3308937571679605479",
+          "hash": "11288978944581827811",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client",
@@ -916,7 +919,7 @@
         },
         {
           "file": "apps/api/test/ai.integration.spec.ts",
-          "hash": "761821276122872083",
+          "hash": "4972120967009507324",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/common",
@@ -1262,7 +1265,7 @@
       },
       {
         "file": "index.tsx",
-        "hash": "10184740392778675802"
+        "hash": "13598430693883929086"
       },
       {
         "file": "jest.preset.js",
@@ -1290,7 +1293,7 @@
       },
       {
         "file": "package.json",
-        "hash": "13044669143504942263"
+        "hash": "2045743418446730700"
       },
       {
         "file": "prisma/comment_schema_addition.prisma",
@@ -1602,7 +1605,7 @@
       },
       {
         "file": "tsconfig.json",
-        "hash": "4546352367589958424"
+        "hash": "3645202376550396074"
       },
       {
         "file": "types.ts",

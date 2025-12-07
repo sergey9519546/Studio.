@@ -34,6 +34,12 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [filteredItems, setFilteredItems] = useState(items);
+  const [isSearching, setIsSearching] = useState(false);
+
+  React.useEffect(() => {
+    // Keep filtered items in sync with upstream changes
+    setFilteredItems(items);
+  }, [items]);
 
   // Extract all unique tags from items
   const allTags = useMemo(() => {
@@ -48,8 +54,13 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
     if (query.trim()) {
-      const results = await onSemanticSearch?.(query) || items;
-      setFilteredItems(results);
+      setIsSearching(true);
+      try {
+        const results = (await onSemanticSearch?.(query)) || items;
+        setFilteredItems(results);
+      } finally {
+        setIsSearching(false);
+      }
     } else {
       filterItems(query, selectedTags);
     }
@@ -120,6 +131,9 @@ export const Moodboard: React.FC<MoodboardProps> = ({
         </div>
 
         {/* Masonry Grid */}
+        {isSearching && (
+          <p className="text-xs text-ink-tertiary mb-3">Searching visuals...</p>
+        )}
         {filteredItems.length > 0 ? (
           <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6">
             {filteredItems.map(item => (

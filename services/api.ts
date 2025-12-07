@@ -26,6 +26,7 @@ export interface BatchImportResponse {
 }
 
 const STORAGE_PREFIX = 'studio_roster_v1_';
+const API_BASE = '/api/v1';
 
 // --- PERSISTENCE LAYER ---
 
@@ -73,7 +74,7 @@ const fetchWithTimeout = async (url: string, options: RequestInit = {}, timeout 
 };
 
 // Allow custom timeout in options
-async function fetchApi<T>(url: string, options?: RequestInit & { timeout?: number }): Promise<ApiResponse<T>> {
+async function fetchApi<T>(path: string, options?: RequestInit & { timeout?: number }): Promise<ApiResponse<T>> {
     // Get auth token from localStorage
     const token = localStorage.getItem('studio_roster_v1_auth_token');
 
@@ -86,7 +87,7 @@ async function fetchApi<T>(url: string, options?: RequestInit & { timeout?: numb
     };
 
     const timeout = options?.timeout || 30000; // Default 30s
-    const res = await fetchWithTimeout(url, { ...options, headers }, timeout);
+    const res = await fetchWithTimeout(`${API_BASE}${path}`, { ...options, headers }, timeout);
 
     // Security: Handle Unauthorized Access
     if (res.status === 401) {
@@ -103,7 +104,7 @@ async function fetchApi<T>(url: string, options?: RequestInit & { timeout?: numb
     }
 
     if (res.status === 404) {
-        throw new Error(`Endpoint not found: ${url}`);
+        throw new Error(`Endpoint not found: ${path}`);
     }
 
     if (res.status === 502 || res.status === 503 || res.status === 504) {
@@ -143,7 +144,7 @@ const uploadToBackend = async (file: File, projectId?: string): Promise<Asset> =
     if (projectId) formData.append('projectId', projectId);
 
     // Set 10 minute timeout for uploads to prevent "Request timed out" on large files
-    const res = await fetchApi<Asset>('/api/assets/upload', {
+    const res = await fetchApi<Asset>('/assets/upload', {
         method: 'POST',
         body: formData,
         timeout: 600000
@@ -153,7 +154,7 @@ const uploadToBackend = async (file: File, projectId?: string): Promise<Asset> =
 
     if (!asset.url && !asset.publicUrl) {
         try {
-            const urlRes = await fetchApi<{ url: string }>(`/api/assets/${asset.id}/url`);
+            const urlRes = await fetchApi<{ url: string }>(`/assets/${asset.id}/url`);
             asset.url = urlRes.data?.url;
         } catch {
             console.warn("Could not sign URL for asset", asset.id);
@@ -170,7 +171,7 @@ export const api = {
         login: async (email: string, password: string): Promise<ApiResponse<AuthResult>> => {
             try {
                 // Real Backend Auth
-                const res = await fetchApi<AuthResult>('/api/auth/login', {
+                const res = await fetchApi<AuthResult>('/auth/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
@@ -193,7 +194,7 @@ export const api = {
     assets: {
         list: async (): Promise<ApiResponse<Asset[]>> => {
             try {
-                const res = await fetchApi<Asset[]>('/api/assets');
+                const res = await fetchApi<Asset[]>('/assets');
                 // Implicit Cache
                 localAssets = res.data || [];
                 saveToStorage('assets', localAssets);
@@ -220,7 +221,7 @@ export const api = {
         },
         delete: async (id: string): Promise<ApiResponse<boolean>> => {
             try {
-                await fetchApi<unknown>(`/api/assets/${id}`, { method: 'DELETE' });
+                await fetchApi<unknown>(`/assets/${id}`, { method: 'DELETE' });
             } catch {
                 console.warn("Delete failed online, removing locally");
             }
@@ -233,7 +234,7 @@ export const api = {
     storage: {
         getInfo: async (): Promise<ApiResponse<{ bucket: string; configured: boolean; projectId: string }>> => {
             try {
-                return await fetchApi<{ bucket: string; configured: boolean; projectId: string }>('/api/storage/info');
+                return await fetchApi<{ bucket: string; configured: boolean; projectId: string }>('/storage/info');
             } catch {
                 return { data: { bucket: 'Unknown', configured: false, projectId: '' }, success: false };
             }
@@ -243,7 +244,7 @@ export const api = {
     freelancers: {
         list: async (_params?: QueryParams): Promise<ApiResponse<Freelancer[]>> => {
             try {
-                const res = await fetchApi<Freelancer[]>('/api/freelancers');
+                const res = await fetchApi<Freelancer[]>('/freelancers');
                 // Implicit Cache
                 localFreelancers = res.data || [];
                 saveToStorage('freelancers', localFreelancers);
@@ -254,7 +255,7 @@ export const api = {
         },
         create: async (f: Freelancer) => {
             try {
-                const res = await fetchApi<Freelancer>('/api/freelancers', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(f) });
+                const res = await fetchApi<Freelancer>('/freelancers', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(f) });
                 const createdFreelancer = res.data ?? f;
                 localFreelancers = [...localFreelancers, createdFreelancer];
                 saveToStorage('freelancers', localFreelancers);
@@ -267,7 +268,7 @@ export const api = {
         },
         update: async (f: Freelancer) => {
             try {
-                const res = await fetchApi<Freelancer>(`/api/freelancers/${f.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(f) });
+                const res = await fetchApi<Freelancer>(`/freelancers/${f.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(f) });
                 const updatedFreelancer = res.data ?? f;
                 localFreelancers = localFreelancers.map(lf => lf.id === f.id ? updatedFreelancer : lf);
                 saveToStorage('freelancers', localFreelancers);
@@ -280,7 +281,7 @@ export const api = {
         },
         delete: async (id: string) => {
             try {
-                await fetchApi(`/api/freelancers/${id}`, { method: 'DELETE' });
+                await fetchApi(`/freelancers/${id}`, { method: 'DELETE' });
             } catch { /* ignore */ }
             localFreelancers = localFreelancers.filter(f => f.id !== id);
             saveToStorage('freelancers', localFreelancers);
@@ -288,7 +289,7 @@ export const api = {
         },
         importBatch: async (items: Freelancer[]): Promise<ApiResponse<BatchImportResponse>> => {
             try {
-                const res = await fetchApi<BatchImportResponse>('/api/freelancers/batch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(items) });
+                const res = await fetchApi<BatchImportResponse>('/freelancers/batch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(items) });
                 // Re-fetch to sync
                 return res;
             } catch {
@@ -305,7 +306,7 @@ export const api = {
                 if (params?.limit) query.append('limit', params.limit.toString());
                 if (params?.search) query.append('search', params.search);
 
-                const res = await fetchApi<Project[]>(`/api/projects?${query.toString()}`);
+                const res = await fetchApi<Project[]>(`/projects?${query.toString()}`);
                 localProjects = res.data || [];
                 saveToStorage('projects', localProjects);
                 return res;
@@ -315,7 +316,7 @@ export const api = {
         },
         create: async (p: Project) => {
             try {
-                const res = await fetchApi<Project>('/api/projects', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) });
+                const res = await fetchApi<Project>('/projects', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) });
                 const createdProject = res.data ?? p;
                 localProjects = [...localProjects, createdProject];
                 saveToStorage('projects', localProjects);
@@ -328,7 +329,7 @@ export const api = {
         },
         update: async (p: Project) => {
             try {
-                const res = await fetchApi<Project>(`/api/projects/${p.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) });
+                const res = await fetchApi<Project>(`/projects/${p.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) });
                 const updatedProject = res.data ?? p;
                 localProjects = localProjects.map(lp => lp.id === p.id ? updatedProject : lp);
                 saveToStorage('projects', localProjects);
@@ -340,20 +341,20 @@ export const api = {
             }
         },
         delete: async (id: string) => {
-            try { await fetchApi(`/api/projects/${id}`, { method: 'DELETE' }); } catch { /* ignore */ }
+            try { await fetchApi(`/projects/${id}`, { method: 'DELETE' }); } catch { /* ignore */ }
             localProjects = localProjects.filter(p => p.id !== id);
             saveToStorage('projects', localProjects);
             return { data: true, success: true };
         },
         deleteBatch: async (ids: string[]) => {
-            try { await fetchApi('/api/projects/batch-delete', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(ids) }); } catch { /* ignore */ }
+            try { await fetchApi('/projects/batch-delete', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(ids) }); } catch { /* ignore */ }
             localProjects = localProjects.filter(p => !ids.includes(p.id));
             saveToStorage('projects', localProjects);
             return { data: true, success: true };
         },
         importBatch: async (items: Project[]): Promise<ApiResponse<BatchImportResponse>> => {
             try {
-                return await fetchApi<BatchImportResponse>('/api/projects/batch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(items) });
+                return await fetchApi<BatchImportResponse>('/projects/batch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(items) });
             } catch {
                 return { data: { created: 0, updated: 0 }, success: false };
             }
@@ -363,7 +364,7 @@ export const api = {
     assignments: {
         list: async (_params?: QueryParams): Promise<ApiResponse<Assignment[]>> => {
             try {
-                const res = await fetchApi<Assignment[]>('/api/assignments');
+                const res = await fetchApi<Assignment[]>('/assignments');
                 localAssignments = res.data || [];
                 saveToStorage('assignments', localAssignments);
                 return res;
@@ -373,7 +374,7 @@ export const api = {
         },
         create: async (a: Assignment) => {
             try {
-                const res = await fetchApi<Assignment>('/api/assignments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(a) });
+                const res = await fetchApi<Assignment>('/assignments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(a) });
                 const createdAssignment = res.data ?? a;
                 localAssignments = [...localAssignments, createdAssignment];
                 saveToStorage('assignments', localAssignments);
@@ -386,7 +387,7 @@ export const api = {
         },
         update: async (a: Assignment) => {
             try {
-                const res = await fetchApi<Assignment>(`/api/assignments/${a.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(a) });
+                const res = await fetchApi<Assignment>(`/assignments/${a.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(a) });
                 const updatedAssignment = res.data ?? a;
                 localAssignments = localAssignments.map(la => la.id === a.id ? updatedAssignment : la);
                 saveToStorage('assignments', localAssignments);
@@ -402,7 +403,7 @@ export const api = {
     scripts: {
         list: async (_params?: unknown) => {
             try {
-                const res = await fetchApi<Script[]>('/api/scripts');
+                const res = await fetchApi<Script[]>('/scripts');
                 localScripts = res.data || [];
                 saveToStorage('scripts', localScripts);
                 return res;
@@ -410,7 +411,7 @@ export const api = {
         },
         create: async (s: Script) => {
             try {
-                const res = await fetchApi<Script>('/api/scripts', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(s) });
+                const res = await fetchApi<Script>('/scripts', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(s) });
                 const createdScript = res.data ?? s;
                 localScripts = [...localScripts, createdScript];
                 saveToStorage('scripts', localScripts);
@@ -422,14 +423,14 @@ export const api = {
             }
         },
         findByProject: async (projectId: string) => {
-            try { return await fetchApi<Script[]>(`/api/scripts/project/${projectId}`); } catch { return { data: [], success: true }; }
+            try { return await fetchApi<Script[]>(`/scripts/project/${projectId}`); } catch { return { data: [], success: true }; }
         },
     },
 
     drive: {
         listTeamAssets: async (): Promise<ApiResponse<DriveFile[]>> => {
             try {
-                return await fetchApi<DriveFile[]>('/api/google/drive/team-assets');
+                return await fetchApi<DriveFile[]>('/google/drive/team-assets');
             } catch { /* ignore */ }
             return { data: [], success: true };
         },
@@ -439,14 +440,14 @@ export const api = {
         list: async (projectId?: string): Promise<ApiResponse<MoodboardItem[]>> => {
             try {
                 if (projectId) {
-                    return await fetchApi<MoodboardItem[]>(`/api/moodboard/${projectId}`);
+                    return await fetchApi<MoodboardItem[]>(`/moodboard/${projectId}`);
                 }
             } catch { /* ignore */ }
             return { data: [], success: true };
         },
 
         linkAsset: async (projectId: string, assetId: string): Promise<ApiResponse<MoodboardItem>> => {
-            return await fetchApi<MoodboardItem>(`/api/moodboard/${projectId}/link-asset`, {
+            return await fetchApi<MoodboardItem>(`/moodboard/${projectId}/link-asset`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ assetId })
@@ -454,7 +455,7 @@ export const api = {
         },
 
         create: async (item: Partial<MoodboardItem>): Promise<ApiResponse<MoodboardItem>> => {
-            return await fetchApi<MoodboardItem>(`/api/moodboard/${item.projectId}`, {
+            return await fetchApi<MoodboardItem>(`/moodboard/${item.projectId}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(item)
@@ -462,18 +463,18 @@ export const api = {
         },
 
         update: async (item: MoodboardItem): Promise<ApiResponse<MoodboardItem>> => {
-            try { return await fetchApi<MoodboardItem>(`/api/moodboard/${item.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(item) }); } catch { return { data: item, success: true }; }
+            try { return await fetchApi<MoodboardItem>(`/moodboard/${item.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(item) }); } catch { return { data: item, success: true }; }
         },
 
         delete: async (id: string): Promise<ApiResponse<boolean>> => {
-            try { await fetchApi(`/api/moodboard/${id}`, { method: 'DELETE' }); } catch { /* ignore */ }
+            try { await fetchApi(`/moodboard/${id}`, { method: 'DELETE' }); } catch { /* ignore */ }
             return { data: true, success: true };
         }
     },
 
     knowledge: {
         createFromAsset: async (projectId: string, assetId: string, _mockAsset?: Asset): Promise<ApiResponse<KnowledgeSource>> => {
-            return await fetchApi<KnowledgeSource>('/api/knowledge/create-from-asset', {
+            return await fetchApi<KnowledgeSource>('/knowledge/create-from-asset', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ projectId, assetId })
@@ -481,21 +482,21 @@ export const api = {
         },
 
         delete: async (id: string) => {
-            try { await fetchApi(`/api/knowledge/${id}`, { method: 'DELETE' }); } catch { /* ignore */ }
+            try { await fetchApi(`/knowledge/${id}`, { method: 'DELETE' }); } catch { /* ignore */ }
             return { data: true, success: true };
         }
     },
 
     ai: {
         chat: async (payload: Record<string, unknown>): Promise<ApiResponse<unknown>> => {
-            return await fetchApi<unknown>('/api/ai/chat', {
+            return await fetchApi<unknown>('/ai/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
         },
         extract: async (payload: Record<string, unknown>): Promise<ApiResponse<unknown>> => {
-            return await fetchApi<unknown>('/api/ai/extract', {
+            return await fetchApi<unknown>('/ai/extract', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)

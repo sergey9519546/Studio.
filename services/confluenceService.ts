@@ -4,7 +4,7 @@
 
 import { ConfluenceError, ConfluenceErrorCode, ConfluencePageConfig } from '../types/confluence.types';
 
-const API_BASE_URL = '/api/confluence';
+const API_BASE_URL = '/api/v1/confluence';
 
 class ConfluenceService {
   /**

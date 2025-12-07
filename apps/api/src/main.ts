@@ -15,6 +15,9 @@ async function bootstrap() {
   });
   console.log('Boot: NestFactory.create completed');
 
+  // Set global API prefix so routes resolve at /api/v1/*
+  app.setGlobalPrefix('api');
+
   // Use Pino logger for structured logging
   app.useLogger(app.get(Logger));
 

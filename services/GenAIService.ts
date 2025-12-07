@@ -1,5 +1,6 @@
 export class GenAIService {
     private static instance: GenAIService;
+    private static readonly API_BASE = '/api/v1';
 
     private constructor() { }
 
@@ -16,7 +17,7 @@ export class GenAIService {
         systemInstruction?: string
     ): Promise<string> {
         try {
-            const response = await fetch('/api/ai/chat', {
+            const response = await fetch(`${GenAIService.API_BASE}/ai/chat`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
