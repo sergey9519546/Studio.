@@ -210,23 +210,18 @@ export default function App() {
   };
 
   return (
-    <ConfluenceAuthProvider
-      siteUrl="https://studiodot.atlassian.net"
-      onAuthChange={(isAuth) => console.log("Confluence auth changed:", isAuth)}
-    >
-      <div className="w-full h-screen bg-app flex relative overflow-hidden text-ink-primary">
-        <Sidebar
-          activeTab={activeTab}
-          setActiveTab={(t) => {
-            setActiveTab(t);
-            setActiveProject(null);
-          }}
-        />
-        <main className="flex-1 ml-72 h-full overflow-y-auto relative z-0">
-          {renderContent()}
-        </main>
-        <CommandBar />
-      </div>
-    </ConfluenceAuthProvider>
+    <div className="w-full h-screen bg-app flex relative overflow-hidden text-ink-primary">
+      <Sidebar
+        activeTab={activeTab}
+        setActiveTab={(t) => {
+          setActiveTab(t);
+          setActiveProject(null);
+        }}
+      />
+      <main className="flex-1 ml-72 h-full overflow-y-auto relative z-0">
+        {renderContent()}
+      </main>
+      <CommandBar />
+    </div>
   );
 }
