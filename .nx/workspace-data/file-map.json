@@ -28,9 +28,10 @@
         },
         {
           "file": "apps/api/src/app.module.ts",
-          "hash": "9388947729524943109",
+          "hash": "7805057026767277692",
           "deps": [
             "npm:@nestjs/common",
+            "npm:@nestjs/core",
             "npm:@nestjs/config",
             "npm:@nestjs/event-emitter",
             "npm:@nestjs/jwt",
@@ -60,7 +61,7 @@
         },
         {
           "file": "apps/api/src/common/cache/cache.module.ts",
-          "hash": "13982631138715874787",
+          "hash": "1539727496491235772",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/cache-manager"
@@ -125,7 +126,7 @@
         },
         {
           "file": "apps/api/src/main.ts",
-          "hash": "4932921383073860148",
+          "hash": "2655567515404690836",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/core",
@@ -430,7 +431,7 @@
         },
         {
           "file": "apps/api/src/modules/freelancers/dto/freelancer.dto.ts",
-          "hash": "952301226615439923",
+          "hash": "14219173614476471444",
           "deps": [
             "npm:class-validator"
           ]
@@ -459,7 +460,7 @@
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.service.ts",
-          "hash": "10648645525157864388",
+          "hash": "6145524976870952470",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/cache-manager",
@@ -712,7 +713,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/dto/project.dto.ts",
-          "hash": "17729209704746873293",
+          "hash": "14038147919631782969",
           "deps": [
             "npm:class-transformer",
             "npm:class-validator"
@@ -742,7 +743,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/projects.service.ts",
-          "hash": "14244764047418647405",
+          "hash": "3308937571679605479",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client",
@@ -914,23 +915,6 @@
           ]
         },
         {
-          "file": "apps/api/src/services/gemini-analyst.service.spec.ts",
-          "hash": "1196654382491150718",
-          "deps": [
-            "npm:@nestjs/cache-manager",
-            "npm:@nestjs/config",
-            "npm:@nestjs/testing"
-          ]
-        },
-        {
-          "file": "apps/api/src/services/gemini-analyst.service.ts",
-          "hash": "795223719593145604",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/config"
-          ]
-        },
-        {
           "file": "apps/api/test/ai.integration.spec.ts",
           "hash": "761821276122872083",
           "deps": [
@@ -1010,7 +994,7 @@
       },
       {
         "file": "App.tsx",
-        "hash": "3753292027392905875"
+        "hash": "3254590222915811784"
       },
       {
         "file": "DEPLOYMENT.md",
@@ -1186,7 +1170,7 @@
       },
       {
         "file": "components/confluence/EmbeddedConfluencePage.tsx",
-        "hash": "11552745809697520277"
+        "hash": "3959369512664022279"
       },
       {
         "file": "components/dashboard/DataHUD.tsx",
@@ -1278,7 +1262,11 @@
       },
       {
         "file": "index.tsx",
-        "hash": "14278083561833391385"
+        "hash": "10184740392778675802"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "10662352824051892566"
       },
       {
         "file": "main.tsx",
@@ -1298,11 +1286,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "653080789184157857"
+        "hash": "10535628752233905742"
       },
       {
         "file": "package.json",
-        "hash": "3229233926978284580"
+        "hash": "13044669143504942263"
       },
       {
         "file": "prisma/comment_schema_addition.prisma",
@@ -1534,7 +1522,7 @@
       },
       {
         "file": "src/components/layout/Sidebar.tsx",
-        "hash": "17662915176572049009"
+        "hash": "10121491929118561823"
       },
       {
         "file": "src/components/ui/Card.tsx",
@@ -1597,6 +1585,10 @@
         "hash": "12178908264864505738"
       },
       {
+        "file": "tmp/apps/api/serve/tsconfig.generated.bddcc118-d618-4925-b826-8ac041ed9ed6.json",
+        "hash": "12178908264864505738"
+      },
+      {
         "file": "tmp/apps/api/serve/tsconfig.generated.d5b52dfc-7d88-4b62-8012-abe976eb79c0.json",
         "hash": "12178908264864505738"
       },
@@ -1630,5 +1622,5 @@
       }
     ]
   },
-  "externalNodesHash": "14691350284119651960"
+  "externalNodesHash": "445846828335814348"
 }

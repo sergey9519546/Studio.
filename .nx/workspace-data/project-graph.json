@@ -3854,6 +3854,42 @@
         "hash": "sha512-iLhNcm4XceTHRaSU5o22ZGCm4YpuW5+rf4+BJFH/feBhMQLbCGBry+Jet8Q419QDI4qgARaIQzXuiNrsNWS8Yw=="
       }
     },
+    "npm:react-dom@16.14.0": {
+      "type": "npm",
+      "name": "npm:react-dom@16.14.0",
+      "data": {
+        "version": "16.14.0",
+        "packageName": "react-dom",
+        "hash": "sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw=="
+      }
+    },
+    "npm:react-dom": {
+      "type": "npm",
+      "name": "npm:react-dom",
+      "data": {
+        "version": "18.3.1",
+        "packageName": "react-dom",
+        "hash": "sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw=="
+      }
+    },
+    "npm:scheduler@0.19.1": {
+      "type": "npm",
+      "name": "npm:scheduler@0.19.1",
+      "data": {
+        "version": "0.19.1",
+        "packageName": "scheduler",
+        "hash": "sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA=="
+      }
+    },
+    "npm:scheduler": {
+      "type": "npm",
+      "name": "npm:scheduler",
+      "data": {
+        "version": "0.23.2",
+        "packageName": "scheduler",
+        "hash": "sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ=="
+      }
+    },
     "npm:@atlaskit/editor-plugin-annotation": {
       "type": "npm",
       "name": "npm:@atlaskit/editor-plugin-annotation",
@@ -4959,24 +4995,6 @@
         "version": "16.12.0",
         "packageName": "graphql",
         "hash": "sha512-DKKrynuQRne0PNpEbzuEdHlYOMksHSUI8Zc9Unei5gTsMNA2/vMpoMz/yKba50pejK56qj98qM0SjYxAKi13gQ=="
-      }
-    },
-    "npm:react-dom@18.3.1": {
-      "type": "npm",
-      "name": "npm:react-dom@18.3.1",
-      "data": {
-        "version": "18.3.1",
-        "packageName": "react-dom",
-        "hash": "sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw=="
-      }
-    },
-    "npm:react-dom": {
-      "type": "npm",
-      "name": "npm:react-dom",
-      "data": {
-        "version": "16.14.0",
-        "packageName": "react-dom",
-        "hash": "sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw=="
       }
     },
     "npm:@atlaskit/editor-plugin-metrics": {
@@ -9218,6 +9236,15 @@
         "hash": "sha512-EBikYFp2JCdIfGEb5G9dyCkTGDmC57KSHhRQOC3aYxoPWVZvfWCDjZwkGYHN7Lis/fmuWl906bnNTJifDQ3sXw=="
       }
     },
+    "npm:@formatjs/ecma402-abstract@2.3.6": {
+      "type": "npm",
+      "name": "npm:@formatjs/ecma402-abstract@2.3.6",
+      "data": {
+        "version": "2.3.6",
+        "packageName": "@formatjs/ecma402-abstract",
+        "hash": "sha512-HJnTFeRM2kVFVr5gr5kH1XP6K0JcJtE7Lzvtr3FS/so5f1kpsqqqxy5JF+FRaO6H2qmcMfAUIox7AJteieRtVw=="
+      }
+    },
     "npm:@formatjs/fast-memoize": {
       "type": "npm",
       "name": "npm:@formatjs/fast-memoize",
@@ -9225,6 +9252,15 @@
         "version": "1.2.1",
         "packageName": "@formatjs/fast-memoize",
         "hash": "sha512-Rg0e76nomkz3vF9IPlKeV+Qynok0r7YZjL6syLz4/urSg0IbjPZCB/iYUMNsYA643gh4mgrX3T7KEIFIxJBQeg=="
+      }
+    },
+    "npm:@formatjs/fast-memoize@2.2.7": {
+      "type": "npm",
+      "name": "npm:@formatjs/fast-memoize@2.2.7",
+      "data": {
+        "version": "2.2.7",
+        "packageName": "@formatjs/fast-memoize",
+        "hash": "sha512-Yabmi9nSvyOMrlSeGGWDiH7rf3a7sIwplbvo/dlz9WCIjzIQAfy1RMf4S0X3yG724n5Ghu2GmEl5NJIV6O9sZQ=="
       }
     },
     "npm:@formatjs/icu-messageformat-parser": {
@@ -9236,6 +9272,15 @@
         "hash": "sha512-Qxv/lmCN6hKpBSss2uQ8IROVnta2r9jd3ymUEIjm2UyIkUCHVcbUVRGL/KS/wv7876edvsPe+hjHVJ4z8YuVaw=="
       }
     },
+    "npm:@formatjs/icu-messageformat-parser@2.11.4": {
+      "type": "npm",
+      "name": "npm:@formatjs/icu-messageformat-parser@2.11.4",
+      "data": {
+        "version": "2.11.4",
+        "packageName": "@formatjs/icu-messageformat-parser",
+        "hash": "sha512-7kR78cRrPNB4fjGFZg3Rmj5aah8rQj9KPzuLsmcSn4ipLXQvC04keycTI1F7kJYDwIXtT2+7IDEto842CfZBtw=="
+      }
+    },
     "npm:@formatjs/icu-skeleton-parser": {
       "type": "npm",
       "name": "npm:@formatjs/icu-skeleton-parser",
@@ -9245,6 +9290,15 @@
         "hash": "sha512-I96mOxvml/YLrwU2Txnd4klA7V8fRhb6JG/4hm3VMNmeJo1F03IpV2L3wWt7EweqNLES59SZ4d6hVOPCSf80Bg=="
       }
     },
+    "npm:@formatjs/icu-skeleton-parser@1.8.16": {
+      "type": "npm",
+      "name": "npm:@formatjs/icu-skeleton-parser@1.8.16",
+      "data": {
+        "version": "1.8.16",
+        "packageName": "@formatjs/icu-skeleton-parser",
+        "hash": "sha512-H13E9Xl+PxBd8D5/6TVUluSpxGNvFSlN/b3coUp0e0JpuWXXnQDiavIpY3NnvSp4xhEMoXyyBvVfdFX8jglOHQ=="
+      }
+    },
     "npm:@formatjs/intl": {
       "type": "npm",
       "name": "npm:@formatjs/intl",
@@ -9252,6 +9306,15 @@
         "version": "2.2.1",
         "packageName": "@formatjs/intl",
         "hash": "sha512-vgvyUOOrzqVaOFYzTf2d3+ToSkH2JpR7x/4U1RyoHQLmvEaTQvXJ7A2qm1Iy3brGNXC/+/7bUlc3lpH+h/LOJA=="
+      }
+    },
+    "npm:@formatjs/intl@3.1.8": {
+      "type": "npm",
+      "name": "npm:@formatjs/intl@3.1.8",
+      "data": {
+        "version": "3.1.8",
+        "packageName": "@formatjs/intl",
+        "hash": "sha512-LWXgwI5zTMatvR8w8kCNh/priDTOF/ZssokMBHJ7ZWXFoYLVOYo0EJERD9Eajv+xsfQO1QkuAt77KWQ1OI4mOQ=="
       }
     },
     "npm:@formatjs/intl-displaynames": {
@@ -9279,6 +9342,15 @@
         "version": "0.2.25",
         "packageName": "@formatjs/intl-localematcher",
         "hash": "sha512-YmLcX70BxoSopLFdLr1Ds99NdlTI2oWoLbaUW2M406lxOIPzE1KQhRz2fPUkq34xVZQaihCoU29h0KK7An3bhA=="
+      }
+    },
+    "npm:@formatjs/intl-localematcher@0.6.2": {
+      "type": "npm",
+      "name": "npm:@formatjs/intl-localematcher@0.6.2",
+      "data": {
+        "version": "0.6.2",
+        "packageName": "@formatjs/intl-localematcher",
+        "hash": "sha512-XOMO2Hupl0wdd172Y06h6kLpBz6Dv+J4okPLl4LPtzbr8f66WbIoy4ev98EBuZ6ZK4h5ydTN6XneT4QVpD7cdA=="
       }
     },
     "npm:@formatjs/intl-utils": {
@@ -12210,32 +12282,23 @@
       "type": "npm",
       "name": "npm:@prisma/client",
       "data": {
-        "version": "7.0.1",
+        "version": "7.1.0",
         "packageName": "@prisma/client",
-        "hash": "sha512-O74T6xcfaGAq5gXwCAvfTLvI6fmC3and2g5yLRMkNjri1K8mSpEgclDNuUWs9xj5AwNEMQ88NeD3asI+sovm1g=="
+        "hash": "sha512-qf7GPYHmS/xybNiSOpzv9wBo+UwqfL2PeyX+08v+KVHDI0AlSCQIh5bBySkH3alu06NX9wy98JEnckhMHoMFfA=="
       }
     },
     "npm:@prisma/client-runtime-utils": {
       "type": "npm",
       "name": "npm:@prisma/client-runtime-utils",
       "data": {
-        "version": "7.0.1",
+        "version": "7.1.0",
         "packageName": "@prisma/client-runtime-utils",
-        "hash": "sha512-R26BVX9D/iw4toUmZKZf3jniM/9pMGHHdZN5LVP2L7HNiCQKNQQx/9LuMtjepbgRqSqQO3oHN0yzojHLnKTGEw=="
+        "hash": "sha512-39xmeBrNTN40FzF34aJMjfX1PowVCqoT3UKUWBBSP3aXV05NRqGBC3x2wCDs96ti6ZgdiVzqnRDHtbzU8X+lPQ=="
       }
     },
     "npm:@prisma/config": {
       "type": "npm",
       "name": "npm:@prisma/config",
-      "data": {
-        "version": "7.0.1",
-        "packageName": "@prisma/config",
-        "hash": "sha512-MacIjXdo+hNKxPvtMzDXykIIc8HCRWoyjQ2nguJTFqLDzJBD5L6QRaANGTLOqbGtJ3sFvLRmfXhrFg3pWoK1BA=="
-      }
-    },
-    "npm:@prisma/config@7.1.0": {
-      "type": "npm",
-      "name": "npm:@prisma/config@7.1.0",
       "data": {
         "version": "7.1.0",
         "packageName": "@prisma/config",
@@ -18560,6 +18623,15 @@
         "hash": "sha512-7sGC7QnSQGa5LZP7bXLDhVDtQOeKGeBFGHF2Y8LVBwYZoQZCgWeKoPGTa5GMG8g/TzDgeXuYJQis7Ggiw2xTOw=="
       }
     },
+    "npm:intl-messageformat@10.7.18": {
+      "type": "npm",
+      "name": "npm:intl-messageformat@10.7.18",
+      "data": {
+        "version": "10.7.18",
+        "packageName": "intl-messageformat",
+        "hash": "sha512-m3Ofv/X/tV8Y3tHXLohcuVuhWKo7BBq62cqY15etqmLxg2DZ34AGGgQDeR+SCta2+zICb1NX83af0GJmbQ1++g=="
+      }
+    },
     "npm:ip-regex": {
       "type": "npm",
       "name": "npm:ip-regex",
@@ -21408,9 +21480,9 @@
       "type": "npm",
       "name": "npm:react",
       "data": {
-        "version": "16.14.0",
+        "version": "18.3.1",
         "packageName": "react",
-        "hash": "sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g=="
+        "hash": "sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ=="
       }
     },
     "npm:react-clientside-effect": {
@@ -21429,24 +21501,6 @@
         "version": "5.6.1",
         "packageName": "react-colorful",
         "hash": "sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw=="
-      }
-    },
-    "npm:scheduler@0.19.1": {
-      "type": "npm",
-      "name": "npm:scheduler@0.19.1",
-      "data": {
-        "version": "0.19.1",
-        "packageName": "scheduler",
-        "hash": "sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA=="
-      }
-    },
-    "npm:scheduler": {
-      "type": "npm",
-      "name": "npm:scheduler",
-      "data": {
-        "version": "0.23.2",
-        "packageName": "scheduler",
-        "hash": "sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ=="
       }
     },
     "npm:react-draggable": {
@@ -21519,6 +21573,15 @@
         "version": "8.34.0",
         "packageName": "react-intersection-observer",
         "hash": "sha512-TYKh52Zc0Uptp5/b4N91XydfSGKubEhgZRtcg1rhTKABXijc4Sdr1uTp5lJ8TN27jwUsdXxjHXtHa0kPj704sw=="
+      }
+    },
+    "npm:react-intl": {
+      "type": "npm",
+      "name": "npm:react-intl",
+      "data": {
+        "version": "7.1.14",
+        "packageName": "react-intl",
+        "hash": "sha512-VE/0Wi/lHJlBC7APQpCzLUdIt3GB5B0GZrRW8Q+ACbkHI4j+Wwgg9J1TniN6zmLHmPH5gxXcMy+fkSPfw5p1WQ=="
       }
     },
     "npm:react-intl-next": {
@@ -23967,6 +24030,11 @@
       },
       {
         "source": "api",
+        "target": "npm:@nestjs/core",
+        "type": "static"
+      },
+      {
+        "source": "api",
         "target": "npm:@nestjs/config",
         "type": "static"
       },
@@ -24008,11 +24076,6 @@
       {
         "source": "api",
         "target": "npm:cache-manager",
-        "type": "static"
-      },
-      {
-        "source": "api",
-        "target": "npm:@nestjs/core",
         "type": "static"
       },
       {
@@ -24434,6 +24497,11 @@
     "npm:@atlaskit/atlassian-context@0.2.0": [
       {
         "source": "npm:@atlaskit/atlassian-context@0.2.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/atlassian-context@0.2.0",
         "target": "npm:@babel/runtime",
         "type": "static"
       }
@@ -24504,6 +24572,16 @@
     "npm:@atlaskit/analytics-next@11.1.3": [
       {
         "source": "npm:@atlaskit/analytics-next@11.1.3",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/analytics-next@11.1.3",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/analytics-next@11.1.3",
         "target": "npm:@atlaskit/analytics-next-stable-react-context",
         "type": "static"
       },
@@ -24525,11 +24603,6 @@
       {
         "source": "npm:@atlaskit/analytics-next@11.1.3",
         "target": "npm:use-memo-one",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/analytics-next@11.1.3",
-        "target": "npm:react-dom@18.3.1",
         "type": "static"
       }
     ],
@@ -24603,6 +24676,11 @@
       },
       {
         "source": "npm:@atlaskit/analytics-next@10.3.1",
+        "target": "npm:react-dom@16.14.0",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/analytics-next@10.3.1",
         "target": "npm:@atlaskit/platform-feature-flags@1.1.0",
         "type": "static"
       }
@@ -24625,11 +24703,6 @@
       }
     ],
     "npm:@atlaskit/analytics-next": [
-      {
-        "source": "npm:@atlaskit/analytics-next",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/analytics-next",
         "target": "npm:@atlaskit/analytics-next-stable-react-context",
@@ -24659,11 +24732,6 @@
     "npm:@atlaskit/analytics-next-stable-react-context": [
       {
         "source": "npm:@atlaskit/analytics-next-stable-react-context",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/analytics-next-stable-react-context",
         "target": "npm:tslib",
         "type": "static"
       }
@@ -24676,6 +24744,11 @@
       }
     ],
     "npm:@atlaskit/app-provider": [
+      {
+        "source": "npm:@atlaskit/app-provider",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/app-provider",
         "target": "npm:@atlaskit/css@0.17.0",
@@ -24705,6 +24778,11 @@
     "npm:@atlaskit/css@0.17.0": [
       {
         "source": "npm:@atlaskit/css@0.17.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/css@0.17.0",
         "target": "npm:@atlaskit/tokens",
         "type": "static"
       },
@@ -24720,6 +24798,11 @@
       }
     ],
     "npm:@atlaskit/atlassian-context": [
+      {
+        "source": "npm:@atlaskit/atlassian-context",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/atlassian-context",
         "target": "npm:@babel/runtime",
@@ -25114,6 +25197,11 @@
       },
       {
         "source": "npm:@atlaskit/menu@2.14.4",
+        "target": "npm:react-dom@16.14.0",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/menu@2.14.4",
         "target": "npm:@atlaskit/platform-feature-flags@1.1.0",
         "type": "static"
       }
@@ -25218,6 +25306,11 @@
       {
         "source": "npm:@atlaskit/portal@4.11.3",
         "target": "npm:@babel/runtime",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/portal@4.11.3",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -25427,6 +25520,11 @@
         "source": "npm:@atlaskit/tooltip@18.9.4",
         "target": "npm:bind-event-listener",
         "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/tooltip@18.9.4",
+        "target": "npm:react-dom@16.14.0",
+        "type": "static"
       }
     ],
     "npm:@atlaskit/theme@14.1.0": [
@@ -25496,6 +25594,11 @@
     "npm:@atlaskit/badge": [
       {
         "source": "npm:@atlaskit/badge",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/badge",
         "target": "npm:@atlaskit/codemod-utils",
         "type": "static"
       },
@@ -25526,6 +25629,11 @@
       }
     ],
     "npm:@atlaskit/primitives@16.4.1": [
+      {
+        "source": "npm:@atlaskit/primitives@16.4.1",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/primitives@16.4.1",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
@@ -25595,6 +25703,11 @@
     "npm:@atlaskit/visually-hidden@3.0.3": [
       {
         "source": "npm:@atlaskit/visually-hidden@3.0.3",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/visually-hidden@3.0.3",
         "target": "npm:@babel/runtime",
         "type": "static"
       },
@@ -25654,16 +25767,16 @@
     "npm:@atlaskit/browser-apis": [
       {
         "source": "npm:@atlaskit/browser-apis",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/browser-apis",
         "target": "npm:@babel/runtime",
         "type": "static"
       }
     ],
     "npm:@atlaskit/button": [
-      {
-        "source": "npm:@atlaskit/button",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/button",
         "target": "npm:@atlaskit/analytics-next",
@@ -25858,11 +25971,6 @@
     "npm:@atlaskit/calendar": [
       {
         "source": "npm:@atlaskit/calendar",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/calendar",
         "target": "npm:@atlaskit/analytics-next",
         "type": "static"
       },
@@ -25935,11 +26043,6 @@
     "npm:@atlaskit/checkbox": [
       {
         "source": "npm:@atlaskit/checkbox",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/checkbox",
         "target": "npm:@atlaskit/analytics-next",
         "type": "static"
       },
@@ -25982,11 +26085,6 @@
     "npm:@atlaskit/chunkinator": [
       {
         "source": "npm:@atlaskit/chunkinator",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/chunkinator",
         "target": "npm:@babel/runtime",
         "type": "static"
       },
@@ -26004,11 +26102,6 @@
       }
     ],
     "npm:@atlaskit/code": [
-      {
-        "source": "npm:@atlaskit/code",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/code",
         "target": "npm:@atlaskit/codemod-utils",
@@ -26065,6 +26158,11 @@
     "npm:@atlaskit/css": [
       {
         "source": "npm:@atlaskit/css",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/css",
         "target": "npm:@atlaskit/tokens",
         "type": "static"
       },
@@ -26080,6 +26178,11 @@
       }
     ],
     "npm:@atlaskit/css-reset": [
+      {
+        "source": "npm:@atlaskit/css-reset",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/css-reset",
         "target": "npm:@atlaskit/theme",
@@ -26126,11 +26229,6 @@
     "npm:@atlaskit/date": [
       {
         "source": "npm:@atlaskit/date",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/date",
         "target": "npm:@atlaskit/theme@12.12.0",
         "type": "static"
       },
@@ -26156,11 +26254,6 @@
       }
     ],
     "npm:@atlaskit/datetime-picker": [
-      {
-        "source": "npm:@atlaskit/datetime-picker",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/datetime-picker",
         "target": "npm:@atlaskit/analytics-next",
@@ -26676,6 +26769,11 @@
         "source": "npm:@atlaskit/select@17.19.3",
         "target": "npm:shallow-equal",
         "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/select@17.19.3",
+        "target": "npm:react-dom@16.14.0",
+        "type": "static"
       }
     ],
     "npm:@atlaskit/tooltip@19.2.0": [
@@ -26747,6 +26845,11 @@
       {
         "source": "npm:@atlaskit/tooltip@19.2.0",
         "target": "npm:bind-event-listener",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/tooltip@19.2.0",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       }
     ],
@@ -26860,6 +26963,16 @@
     "npm:@atlaskit/dropdown-menu": [
       {
         "source": "npm:@atlaskit/dropdown-menu",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/dropdown-menu",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/dropdown-menu",
         "target": "npm:@atlaskit/button@23.6.3",
         "type": "static"
       },
@@ -26935,6 +27048,11 @@
       }
     ],
     "npm:@atlaskit/button@23.6.3": [
+      {
+        "source": "npm:@atlaskit/button@23.6.3",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/button@23.6.3",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
@@ -27019,6 +27137,11 @@
     "npm:@atlaskit/focus-ring@3.0.7": [
       {
         "source": "npm:@atlaskit/focus-ring@3.0.7",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/focus-ring@3.0.7",
         "target": "npm:@atlaskit/tokens",
         "type": "static"
       },
@@ -27034,6 +27157,11 @@
       }
     ],
     "npm:@atlaskit/icon@29.0.0": [
+      {
+        "source": "npm:@atlaskit/icon@29.0.0",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/icon@29.0.0",
         "target": "npm:@atlaskit/platform-feature-flags",
@@ -27068,6 +27196,11 @@
     "npm:@atlaskit/layering@3.4.0": [
       {
         "source": "npm:@atlaskit/layering@3.4.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/layering@3.4.0",
         "target": "npm:@atlaskit/ds-lib",
         "type": "static"
       },
@@ -27098,6 +27231,16 @@
       }
     ],
     "npm:@atlaskit/menu@8.4.11": [
+      {
+        "source": "npm:@atlaskit/menu@8.4.11",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/menu@8.4.11",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/menu@8.4.11",
         "target": "npm:@atlaskit/app-provider",
@@ -27142,14 +27285,14 @@
         "source": "npm:@atlaskit/menu@8.4.11",
         "target": "npm:@compiled/react",
         "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/menu@8.4.11",
-        "target": "npm:react-dom@18.3.1",
-        "type": "static"
       }
     ],
     "npm:@atlaskit/popper@7.1.6": [
+      {
+        "source": "npm:@atlaskit/popper@7.1.6",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/popper@7.1.6",
         "target": "npm:@babel/runtime",
@@ -27167,6 +27310,16 @@
       }
     ],
     "npm:@atlaskit/popup@4.6.4": [
+      {
+        "source": "npm:@atlaskit/popup@4.6.4",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/popup@4.6.4",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/popup@4.6.4",
         "target": "npm:@atlaskit/css@0.17.0",
@@ -27236,14 +27389,14 @@
         "source": "npm:@atlaskit/popup@4.6.4",
         "target": "npm:tiny-invariant",
         "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/popup@4.6.4",
-        "target": "npm:react-dom@18.3.1",
-        "type": "static"
       }
     ],
     "npm:@atlaskit/spinner@19.0.7": [
+      {
+        "source": "npm:@atlaskit/spinner@19.0.7",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/spinner@19.0.7",
         "target": "npm:@atlaskit/interaction-context",
@@ -27271,6 +27424,16 @@
       }
     ],
     "npm:@atlaskit/tooltip@20.11.0": [
+      {
+        "source": "npm:@atlaskit/tooltip@20.11.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/tooltip@20.11.0",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/tooltip@20.11.0",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
@@ -27330,19 +27493,9 @@
         "source": "npm:@atlaskit/tooltip@20.11.0",
         "target": "npm:bind-event-listener",
         "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/tooltip@20.11.0",
-        "target": "npm:react-dom@18.3.1",
-        "type": "static"
       }
     ],
     "npm:@atlaskit/ds-explorations": [
-      {
-        "source": "npm:@atlaskit/ds-explorations",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/ds-explorations",
         "target": "npm:@atlaskit/tokens@1.61.0",
@@ -27365,6 +27518,11 @@
       }
     ],
     "npm:@atlaskit/ds-lib": [
+      {
+        "source": "npm:@atlaskit/ds-lib",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/ds-lib",
         "target": "npm:@atlaskit/platform-feature-flags",
@@ -27395,6 +27553,11 @@
       {
         "source": "npm:@atlaskit/editor-card-provider",
         "target": "npm:@atlaskit/link-provider",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-card-provider",
+        "target": "npm:react",
         "type": "static"
       },
       {
@@ -27461,6 +27624,11 @@
     "npm:@atlaskit/tmp-editor-statsig@14.8.0": [
       {
         "source": "npm:@atlaskit/tmp-editor-statsig@14.8.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/tmp-editor-statsig@14.8.0",
         "target": "npm:@atlaskit/feature-gate-js-client",
         "type": "static"
       },
@@ -27476,16 +27644,6 @@
       }
     ],
     "npm:@atlaskit/editor-common": [
-      {
-        "source": "npm:@atlaskit/editor-common",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/editor-common",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/editor-common",
         "target": "npm:react-intl-next",
@@ -27899,16 +28057,6 @@
       }
     ],
     "npm:@atlaskit/editor-core": [
-      {
-        "source": "npm:@atlaskit/editor-core",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/editor-core",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/editor-core",
         "target": "npm:react-intl-next",
@@ -28413,16 +28561,6 @@
     "npm:@atlaskit/dropdown-menu@11.14.4": [
       {
         "source": "npm:@atlaskit/dropdown-menu@11.14.4",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/dropdown-menu@11.14.4",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/dropdown-menu@11.14.4",
         "target": "npm:@atlaskit/button",
         "type": "static"
       },
@@ -28495,19 +28633,14 @@
         "source": "npm:@atlaskit/dropdown-menu@11.14.4",
         "target": "npm:bind-event-listener@2.1.1",
         "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/dropdown-menu@11.14.4",
+        "target": "npm:react-dom@16.14.0",
+        "type": "static"
       }
     ],
     "npm:@atlaskit/editor-common@73.0.0": [
-      {
-        "source": "npm:@atlaskit/editor-common@73.0.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/editor-common@73.0.0",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/editor-common@73.0.0",
         "target": "npm:react-intl-next",
@@ -28786,11 +28919,6 @@
     "npm:@atlaskit/link-client-extension@0.5.0": [
       {
         "source": "npm:@atlaskit/link-client-extension@0.5.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/link-client-extension@0.5.0",
         "target": "npm:@atlaskit/linking-common@2.15.0",
         "type": "static"
       },
@@ -28806,11 +28934,6 @@
       }
     ],
     "npm:@atlaskit/linking-common@2.15.0": [
-      {
-        "source": "npm:@atlaskit/linking-common@2.15.0",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/linking-common@2.15.0",
         "target": "npm:@atlaskit/analytics-next",
@@ -28939,11 +29062,6 @@
       },
       {
         "source": "npm:@atlaskit/media-client@21.1.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-client@21.1.0",
         "target": "npm:@atlaskit/chunkinator",
         "type": "static"
       },
@@ -29011,16 +29129,6 @@
     "npm:@atlaskit/media-picker@64.4.0": [
       {
         "source": "npm:@atlaskit/media-picker@64.4.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-picker@64.4.0",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-picker@64.4.0",
         "target": "npm:react-intl-next",
         "type": "static"
       },
@@ -29086,16 +29194,6 @@
       }
     ],
     "npm:@atlaskit/smart-card@25.9.5": [
-      {
-        "source": "npm:@atlaskit/smart-card@25.9.5",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/smart-card@25.9.5",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/smart-card@25.9.5",
         "target": "npm:react-intl-next",
@@ -29285,11 +29383,6 @@
     "npm:@atlaskit/spinner@15.6.1": [
       {
         "source": "npm:@atlaskit/spinner@15.6.1",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/spinner@15.6.1",
         "target": "npm:@atlaskit/interaction-context@2.6.0",
         "type": "static"
       },
@@ -29315,11 +29408,6 @@
       }
     ],
     "npm:@atlaskit/ufo@0.1.4": [
-      {
-        "source": "npm:@atlaskit/ufo@0.1.4",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/ufo@0.1.4",
         "target": "npm:@babel/runtime",
@@ -29402,6 +29490,11 @@
     "npm:@atlaskit/editor-element-browser": [
       {
         "source": "npm:@atlaskit/editor-element-browser",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-element-browser",
         "target": "npm:@atlaskit/button@23.6.3",
         "type": "static"
       },
@@ -29469,6 +29562,11 @@
     "npm:@atlaskit/heading@5.2.14": [
       {
         "source": "npm:@atlaskit/heading@5.2.14",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/heading@5.2.14",
         "target": "npm:@atlaskit/css@0.17.0",
         "type": "static"
       },
@@ -29494,6 +29592,11 @@
       }
     ],
     "npm:@atlaskit/textfield@8.1.0": [
+      {
+        "source": "npm:@atlaskit/textfield@8.1.0",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/textfield@8.1.0",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
@@ -29623,6 +29726,16 @@
     "npm:@atlaskit/editor-plugin-accessibility-utils": [
       {
         "source": "npm:@atlaskit/editor-plugin-accessibility-utils",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-accessibility-utils",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-accessibility-utils",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -29643,6 +29756,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-alignment": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-alignment",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-alignment",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-alignment",
         "target": "npm:react-intl-next",
@@ -29727,6 +29850,11 @@
     "npm:@atlaskit/analytics-listeners@9.1.0": [
       {
         "source": "npm:@atlaskit/analytics-listeners@9.1.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/analytics-listeners@9.1.0",
         "target": "npm:@atlaskit/analytics-gas-types",
         "type": "static"
       },
@@ -29754,6 +29882,11 @@
     "npm:@atlaskit/analytics-namespaced-context@7.2.0": [
       {
         "source": "npm:@atlaskit/analytics-namespaced-context@7.2.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/analytics-namespaced-context@7.2.0",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
         "type": "static"
       },
@@ -29764,6 +29897,11 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-analytics@6.2.6": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-analytics@6.2.6",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-analytics@6.2.6",
         "target": "npm:@atlaskit/adf-schema",
@@ -29815,6 +29953,11 @@
     "npm:@atlaskit/icon@28.5.4": [
       {
         "source": "npm:@atlaskit/icon@28.5.4",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/icon@28.5.4",
         "target": "npm:@atlaskit/platform-feature-flags",
         "type": "static"
       },
@@ -29845,6 +29988,11 @@
       }
     ],
     "npm:@atlaskit/tokens": [
+      {
+        "source": "npm:@atlaskit/tokens",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/tokens",
         "target": "npm:@atlaskit/ds-lib",
@@ -29879,6 +30027,11 @@
     "npm:@atlaskit/tokens@7.1.1": [
       {
         "source": "npm:@atlaskit/tokens@7.1.1",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/tokens@7.1.1",
         "target": "npm:@atlaskit/ds-lib",
         "type": "static"
       },
@@ -29909,11 +30062,6 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-analytics": [
-      {
-        "source": "npm:@atlaskit/editor-plugin-analytics",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/editor-plugin-analytics",
         "target": "npm:@atlaskit/adf-schema@26.4.1",
@@ -30119,7 +30267,7 @@
       },
       {
         "source": "npm:@atlaskit/dropdown-menu@12.26.5",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -30199,6 +30347,11 @@
       },
       {
         "source": "npm:@atlaskit/dropdown-menu@12.26.5",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/dropdown-menu@12.26.5",
         "target": "npm:@atlaskit/platform-feature-flags@1.1.0",
         "type": "static"
       }
@@ -30206,12 +30359,7 @@
     "npm:@atlaskit/editor-common@74.59.0": [
       {
         "source": "npm:@atlaskit/editor-common@74.59.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/editor-common@74.59.0",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -30991,11 +31139,6 @@
     "npm:@atlaskit/form@9.3.1": [
       {
         "source": "npm:@atlaskit/form@9.3.1",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/form@9.3.1",
         "target": "npm:@atlaskit/icon@22.28.0",
         "type": "static"
       },
@@ -31051,11 +31194,6 @@
       }
     ],
     "npm:@atlaskit/css@0.1.1": [
-      {
-        "source": "npm:@atlaskit/css@0.1.1",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/css@0.1.1",
         "target": "npm:@atlaskit/tokens@1.61.0",
@@ -31186,7 +31324,7 @@
       },
       {
         "source": "npm:@atlaskit/intl-messages-provider@1.1.0",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -31198,17 +31336,17 @@
         "source": "npm:@atlaskit/intl-messages-provider@1.1.0",
         "target": "npm:@babel/runtime",
         "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/intl-messages-provider@1.1.0",
+        "target": "npm:react-dom",
+        "type": "static"
       }
     ],
     "npm:@atlaskit/jql-editor@4.15.1": [
       {
         "source": "npm:@atlaskit/jql-editor@4.15.1",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/jql-editor@4.15.1",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -31380,12 +31518,7 @@
     "npm:@atlaskit/jql-editor-autocomplete-rest@2.2.0": [
       {
         "source": "npm:@atlaskit/jql-editor-autocomplete-rest@2.2.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/jql-editor-autocomplete-rest@2.2.0",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -31422,12 +31555,7 @@
     "npm:@atlaskit/jql-editor-common@2.2.0": [
       {
         "source": "npm:@atlaskit/jql-editor-common@2.2.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/jql-editor-common@2.2.0",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -31817,11 +31945,6 @@
     "npm:@atlaskit/link-client-extension@1.13.0": [
       {
         "source": "npm:@atlaskit/link-client-extension@1.13.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/link-client-extension@1.13.0",
         "target": "npm:@atlaskit/linking-common@5.12.0",
         "type": "static"
       },
@@ -31852,11 +31975,6 @@
       }
     ],
     "npm:@atlaskit/link-datasource@1.31.3": [
-      {
-        "source": "npm:@atlaskit/link-datasource@1.31.3",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/link-datasource@1.31.3",
         "target": "npm:react-intl-next",
@@ -32109,7 +32227,7 @@
       },
       {
         "source": "npm:@atlaskit/link-datasource@1.31.3",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -32171,11 +32289,6 @@
       }
     ],
     "npm:@atlaskit/button@17.23.0": [
-      {
-        "source": "npm:@atlaskit/button@17.23.0",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/button@17.23.0",
         "target": "npm:@atlaskit/analytics-next",
@@ -32327,11 +32440,6 @@
     "npm:@atlaskit/css@0.3.0": [
       {
         "source": "npm:@atlaskit/css@0.3.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/css@0.3.0",
         "target": "npm:@atlaskit/tokens@1.61.0",
         "type": "static"
       },
@@ -32404,11 +32512,6 @@
       }
     ],
     "npm:@atlaskit/textfield@6.3.0": [
-      {
-        "source": "npm:@atlaskit/textfield@6.3.0",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/textfield@6.3.0",
         "target": "npm:@atlaskit/analytics-next",
@@ -32626,12 +32729,7 @@
       },
       {
         "source": "npm:@atlaskit/media-card@76.2.1",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-card@76.2.1",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -32743,11 +32841,6 @@
     "npm:@atlaskit/app-provider@0.4.0": [
       {
         "source": "npm:@atlaskit/app-provider@0.4.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/app-provider@0.4.0",
         "target": "npm:@atlaskit/tokens@1.61.0",
         "type": "static"
       },
@@ -32763,11 +32856,6 @@
       }
     ],
     "npm:@atlaskit/layering": [
-      {
-        "source": "npm:@atlaskit/layering",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/layering",
         "target": "npm:@atlaskit/ds-lib@2.7.0",
@@ -32835,11 +32923,6 @@
       {
         "source": "npm:@atlaskit/media-client@24.0.3",
         "target": "npm:@emotion/react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-client@24.0.3",
-        "target": "npm:react",
         "type": "static"
       },
       {
@@ -32916,12 +32999,7 @@
       },
       {
         "source": "npm:@atlaskit/media-client-react@1.4.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-client-react@1.4.0",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -33015,12 +33093,7 @@
     "npm:@atlaskit/media-common@11.8.1": [
       {
         "source": "npm:@atlaskit/media-common@11.8.1",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-common@11.8.1",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -33124,12 +33197,7 @@
     "npm:@atlaskit/media-common@9.0.3": [
       {
         "source": "npm:@atlaskit/media-common@9.0.3",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-common@9.0.3",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -33161,12 +33229,7 @@
     "npm:@atlaskit/media-picker@66.7.5": [
       {
         "source": "npm:@atlaskit/media-picker@66.7.5",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-picker@66.7.5",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -33256,11 +33319,6 @@
       }
     ],
     "npm:@atlaskit/chunkinator@6.2.0": [
-      {
-        "source": "npm:@atlaskit/chunkinator@6.2.0",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/chunkinator@6.2.0",
         "target": "npm:@babel/runtime",
@@ -33441,12 +33499,7 @@
       },
       {
         "source": "npm:@atlaskit/media-client-react@2.7.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-client-react@2.7.0",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -33562,12 +33615,7 @@
     "npm:@atlaskit/media-ui@26.2.6": [
       {
         "source": "npm:@atlaskit/media-ui@26.2.6",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-ui@26.2.6",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -33709,7 +33757,7 @@
       },
       {
         "source": "npm:@atlaskit/select@18.10.6",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -33804,6 +33852,11 @@
       },
       {
         "source": "npm:@atlaskit/select@18.10.6",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/select@18.10.6",
         "target": "npm:@atlaskit/platform-feature-flags@1.1.0",
         "type": "static"
       }
@@ -33828,12 +33881,7 @@
     "npm:@atlaskit/media-ui@24.0.3": [
       {
         "source": "npm:@atlaskit/media-ui@24.0.3",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-ui@24.0.3",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -33950,12 +33998,7 @@
     "npm:@atlaskit/select": [
       {
         "source": "npm:@atlaskit/select",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/select",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -34058,11 +34101,6 @@
       {
         "source": "npm:@atlaskit/media-viewer@48.10.1",
         "target": "npm:@emotion/react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-viewer@48.10.1",
-        "target": "npm:react",
         "type": "static"
       },
       {
@@ -34301,12 +34339,7 @@
     "npm:@atlaskit/media-ui@25.16.1": [
       {
         "source": "npm:@atlaskit/media-ui@25.16.1",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-ui@25.16.1",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -34643,7 +34676,7 @@
       },
       {
         "source": "npm:@atlaskit/react-select@1.7.5",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -34699,6 +34732,11 @@
       {
         "source": "npm:@atlaskit/react-select@1.7.5",
         "target": "npm:use-isomorphic-layout-effect",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/react-select@1.7.5",
+        "target": "npm:react-dom",
         "type": "static"
       },
       {
@@ -34767,12 +34805,7 @@
     "npm:@atlaskit/smart-user-picker@6.9.3": [
       {
         "source": "npm:@atlaskit/smart-user-picker@6.9.3",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/smart-user-picker@6.9.3",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -35024,7 +35057,51 @@
         "type": "static"
       }
     ],
+    "npm:react-dom@16.14.0": [
+      {
+        "source": "npm:react-dom@16.14.0",
+        "target": "npm:loose-envify",
+        "type": "static"
+      },
+      {
+        "source": "npm:react-dom@16.14.0",
+        "target": "npm:object-assign",
+        "type": "static"
+      },
+      {
+        "source": "npm:react-dom@16.14.0",
+        "target": "npm:prop-types",
+        "type": "static"
+      },
+      {
+        "source": "npm:react-dom@16.14.0",
+        "target": "npm:scheduler@0.19.1",
+        "type": "static"
+      }
+    ],
+    "npm:scheduler@0.19.1": [
+      {
+        "source": "npm:scheduler@0.19.1",
+        "target": "npm:loose-envify",
+        "type": "static"
+      },
+      {
+        "source": "npm:scheduler@0.19.1",
+        "target": "npm:object-assign",
+        "type": "static"
+      }
+    ],
     "npm:@atlaskit/editor-plugin-annotation": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-annotation",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-annotation",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-annotation",
         "target": "npm:@atlaskit/adf-schema",
@@ -35114,6 +35191,11 @@
     "npm:@atlaskit/editor-plugin-avatar-group": [
       {
         "source": "npm:@atlaskit/editor-plugin-avatar-group",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-avatar-group",
         "target": "npm:@atlaskit/avatar-group@12.4.3",
         "type": "static"
       },
@@ -35196,6 +35278,11 @@
     "npm:@atlaskit/avatar@25.5.5": [
       {
         "source": "npm:@atlaskit/avatar@25.5.5",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/avatar@25.5.5",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
         "type": "static"
       },
@@ -35251,6 +35338,11 @@
       }
     ],
     "npm:@atlaskit/avatar-group@12.4.3": [
+      {
+        "source": "npm:@atlaskit/avatar-group@12.4.3",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/avatar-group@12.4.3",
         "target": "npm:@atlaskit/avatar@25.5.5",
@@ -35384,6 +35476,16 @@
     "npm:@atlaskit/editor-plugin-batch-attribute-updates": [
       {
         "source": "npm:@atlaskit/editor-plugin-batch-attribute-updates",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-batch-attribute-updates",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-batch-attribute-updates",
         "target": "npm:@atlaskit/adf-schema",
         "type": "static"
       },
@@ -35399,6 +35501,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-before-primary-toolbar": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-before-primary-toolbar",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-before-primary-toolbar",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-before-primary-toolbar",
         "target": "npm:@atlaskit/editor-plugin-primary-toolbar",
@@ -35423,6 +35535,16 @@
     "npm:@atlaskit/editor-plugin-better-type-history": [
       {
         "source": "npm:@atlaskit/editor-plugin-better-type-history",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-better-type-history",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-better-type-history",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -35438,6 +35560,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-block-controls": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-block-controls",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-block-controls",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-block-controls",
         "target": "npm:react-intl-next",
@@ -35622,6 +35754,11 @@
     "npm:@atlaskit/editor-plugin-block-menu": [
       {
         "source": "npm:@atlaskit/editor-plugin-block-menu",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-block-menu",
         "target": "npm:react-intl-next",
         "type": "static"
       },
@@ -35722,6 +35859,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-block-type": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-block-type",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-block-type",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-block-type",
         "target": "npm:react-intl-next",
@@ -35883,6 +36030,16 @@
     "npm:@atlaskit/editor-plugin-border": [
       {
         "source": "npm:@atlaskit/editor-plugin-border",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-border",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-border",
         "target": "npm:@atlaskit/adf-schema",
         "type": "static"
       },
@@ -35893,6 +36050,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-breakout": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-breakout",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-breakout",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-breakout",
         "target": "npm:react-intl-next",
@@ -36012,6 +36179,11 @@
     "npm:@atlaskit/editor-plugin-caption": [
       {
         "source": "npm:@atlaskit/editor-plugin-caption",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-caption",
         "target": "npm:@atlaskit/adf-schema",
         "type": "static"
       },
@@ -36040,6 +36212,11 @@
       {
         "source": "npm:@atlaskit/editor-plugin-card",
         "target": "npm:@atlaskit/link-provider",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-card",
+        "target": "npm:react",
         "type": "static"
       },
       {
@@ -36261,6 +36438,11 @@
     "npm:@atlaskit/blanket@15.0.19": [
       {
         "source": "npm:@atlaskit/blanket@15.0.19",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/blanket@15.0.19",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
         "type": "static"
       },
@@ -36301,6 +36483,11 @@
       }
     ],
     "npm:@atlaskit/checkbox@17.1.23": [
+      {
+        "source": "npm:@atlaskit/checkbox@17.1.23",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/checkbox@17.1.23",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
@@ -36348,6 +36535,11 @@
       }
     ],
     "npm:@atlaskit/form@14.3.1": [
+      {
+        "source": "npm:@atlaskit/form@14.3.1",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/form@14.3.1",
         "target": "npm:@atlaskit/css@0.17.0",
@@ -36407,6 +36599,11 @@
     "npm:@atlaskit/icon-file-type@7.0.7": [
       {
         "source": "npm:@atlaskit/icon-file-type@7.0.7",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/icon-file-type@7.0.7",
         "target": "npm:@atlaskit/icon@29.0.0",
         "type": "static"
       },
@@ -36417,6 +36614,11 @@
       }
     ],
     "npm:@atlaskit/icon-object@7.3.2": [
+      {
+        "source": "npm:@atlaskit/icon-object@7.3.2",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/icon-object@7.3.2",
         "target": "npm:@atlaskit/icon@29.0.0",
@@ -36447,6 +36649,11 @@
       {
         "source": "npm:@atlaskit/link-analytics@11.0.1",
         "target": "npm:@atlaskit/link-provider",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/link-analytics@11.0.1",
+        "target": "npm:react",
         "type": "static"
       },
       {
@@ -36498,6 +36705,11 @@
     "npm:@atlaskit/logo@19.9.5": [
       {
         "source": "npm:@atlaskit/logo@19.9.5",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/logo@19.9.5",
         "target": "npm:@atlaskit/css@0.17.0",
         "type": "static"
       },
@@ -36533,6 +36745,11 @@
       }
     ],
     "npm:@atlaskit/modal-dialog@14.7.2": [
+      {
+        "source": "npm:@atlaskit/modal-dialog@14.7.2",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/modal-dialog@14.7.2",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
@@ -36642,6 +36859,11 @@
     "npm:@atlaskit/section-message@8.9.4": [
       {
         "source": "npm:@atlaskit/section-message@8.9.4",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/section-message@8.9.4",
         "target": "npm:@atlaskit/button@23.6.3",
         "type": "static"
       },
@@ -36692,6 +36914,16 @@
       }
     ],
     "npm:@atlaskit/select@21.4.2": [
+      {
+        "source": "npm:@atlaskit/select@21.4.2",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/select@21.4.2",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/select@21.4.2",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
@@ -36777,6 +37009,16 @@
       {
         "source": "npm:@atlaskit/smart-card@43.14.0",
         "target": "npm:@atlaskit/link-provider",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/smart-card@43.14.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/smart-card@43.14.0",
+        "target": "npm:react-dom",
         "type": "static"
       },
       {
@@ -37098,6 +37340,11 @@
     "npm:@atlaskit/textarea@8.1.0": [
       {
         "source": "npm:@atlaskit/textarea@8.1.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/textarea@8.1.0",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
         "type": "static"
       },
@@ -37135,6 +37382,11 @@
     "npm:@atlaskit/ufo@0.4.1": [
       {
         "source": "npm:@atlaskit/ufo@0.4.1",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/ufo@0.4.1",
         "target": "npm:@babel/runtime",
         "type": "static"
       },
@@ -37147,6 +37399,16 @@
     "npm:@atlaskit/editor-plugin-clear-marks-on-empty-doc": [
       {
         "source": "npm:@atlaskit/editor-plugin-clear-marks-on-empty-doc",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-clear-marks-on-empty-doc",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-clear-marks-on-empty-doc",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -37157,6 +37419,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-clipboard": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-clipboard",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-clipboard",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-clipboard",
         "target": "npm:@atlaskit/editor-prosemirror",
@@ -37174,6 +37446,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-code-bidi-warning": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-code-bidi-warning",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-code-bidi-warning",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-code-bidi-warning",
         "target": "npm:@atlaskit/code@17.3.1",
@@ -37211,6 +37493,11 @@
       }
     ],
     "npm:@atlaskit/code@17.3.1": [
+      {
+        "source": "npm:@atlaskit/code@17.3.1",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/code@17.3.1",
         "target": "npm:@atlaskit/codemod-utils",
@@ -37268,6 +37555,11 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-code-block": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-code-block",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-code-block",
         "target": "npm:react-intl-next",
@@ -37365,6 +37657,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-collab-edit": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-collab-edit",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-collab-edit",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-collab-edit",
         "target": "npm:@atlaskit/adf-schema",
@@ -37483,6 +37785,16 @@
     "npm:@atlaskit/editor-plugin-connectivity": [
       {
         "source": "npm:@atlaskit/editor-plugin-connectivity",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-connectivity",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-connectivity",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -37498,11 +37810,6 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-content-insertion": [
-      {
-        "source": "npm:@atlaskit/editor-plugin-content-insertion",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/editor-plugin-content-insertion",
         "target": "npm:@atlaskit/editor-common@74.59.0",
@@ -37554,6 +37861,11 @@
     "npm:@atlaskit/editor-plugin-context-identifier": [
       {
         "source": "npm:@atlaskit/editor-plugin-context-identifier",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-context-identifier",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -37564,6 +37876,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-context-panel": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-context-panel",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-context-panel",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-context-panel",
         "target": "npm:@atlaskit/editor-prosemirror",
@@ -37586,6 +37908,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-copy-button": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-copy-button",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-copy-button",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-copy-button",
         "target": "npm:@atlaskit/editor-plugin-accessibility-utils",
@@ -37630,6 +37962,16 @@
     "npm:@atlaskit/editor-plugin-custom-autoformat": [
       {
         "source": "npm:@atlaskit/editor-plugin-custom-autoformat",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-custom-autoformat",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-custom-autoformat",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -37652,6 +37994,16 @@
     "npm:@atlaskit/editor-plugin-data-consumer": [
       {
         "source": "npm:@atlaskit/editor-plugin-data-consumer",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-data-consumer",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-data-consumer",
         "target": "npm:@atlaskit/adf-schema",
         "type": "static"
       },
@@ -37662,6 +38014,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-date": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-date",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-date",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-date",
         "target": "npm:@atlaskit/adf-schema",
@@ -37786,6 +38148,11 @@
     "npm:@atlaskit/calendar@17.1.27": [
       {
         "source": "npm:@atlaskit/calendar@17.1.27",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/calendar@17.1.27",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
         "type": "static"
       },
@@ -37853,6 +38220,11 @@
     "npm:@atlaskit/date@2.0.8": [
       {
         "source": "npm:@atlaskit/date@2.0.8",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/date@2.0.8",
         "target": "npm:@atlaskit/tokens",
         "type": "static"
       },
@@ -37875,6 +38247,11 @@
     "npm:@atlaskit/locale@3.0.3": [
       {
         "source": "npm:@atlaskit/locale@3.0.3",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/locale@3.0.3",
         "target": "npm:@atlaskit/select@21.4.2",
         "type": "static"
       },
@@ -37885,6 +38262,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-decorations": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-decorations",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-decorations",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-decorations",
         "target": "npm:@atlaskit/editor-prosemirror",
@@ -37919,6 +38306,16 @@
     "npm:@atlaskit/editor-plugin-editor-disabled": [
       {
         "source": "npm:@atlaskit/editor-plugin-editor-disabled",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-editor-disabled",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-editor-disabled",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -37941,6 +38338,11 @@
     "npm:@atlaskit/editor-plugin-editor-viewmode": [
       {
         "source": "npm:@atlaskit/editor-plugin-editor-viewmode",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-editor-viewmode",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -37961,6 +38363,11 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-editor-viewmode-effects": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-editor-viewmode-effects",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-editor-viewmode-effects",
         "target": "npm:@atlaskit/editor-plugin-collab-edit",
@@ -37993,6 +38400,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-emoji": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-emoji",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-emoji",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-emoji",
         "target": "npm:@atlaskit/adf-schema",
@@ -38107,6 +38524,11 @@
     "npm:@atlaskit/chunkinator@7.0.0": [
       {
         "source": "npm:@atlaskit/chunkinator@7.0.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/chunkinator@7.0.0",
         "target": "npm:@babel/runtime",
         "type": "static"
       },
@@ -38117,6 +38539,16 @@
       }
     ],
     "npm:@atlaskit/emoji@69.9.0": [
+      {
+        "source": "npm:@atlaskit/emoji@69.9.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/emoji@69.9.0",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/emoji@69.9.0",
         "target": "npm:react-intl-next",
@@ -38353,6 +38785,16 @@
     "npm:@atlaskit/media-common@12.3.1": [
       {
         "source": "npm:@atlaskit/media-common@12.3.1",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/media-common@12.3.1",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/media-common@12.3.1",
         "target": "npm:@atlaskit/analytics-gas-types",
         "type": "static"
       },
@@ -38400,6 +38842,16 @@
     "npm:@atlaskit/editor-plugin-engagement-platform": [
       {
         "source": "npm:@atlaskit/editor-plugin-engagement-platform",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-engagement-platform",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-engagement-platform",
         "target": "npm:@atlaskit/editor-plugin-analytics@6.2.6",
         "type": "static"
       },
@@ -38415,6 +38867,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-expand": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-expand",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-expand",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-expand",
         "target": "npm:react-intl-next",
@@ -38542,6 +39004,11 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-extension": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-extension",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-extension",
         "target": "npm:react-intl-next",
@@ -38786,6 +39253,11 @@
     "npm:@atlaskit/datetime-picker@17.1.11": [
       {
         "source": "npm:@atlaskit/datetime-picker@17.1.11",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/datetime-picker@17.1.11",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
         "type": "static"
       },
@@ -38873,6 +39345,11 @@
     "npm:@atlaskit/empty-state@10.1.9": [
       {
         "source": "npm:@atlaskit/empty-state@10.1.9",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/empty-state@10.1.9",
         "target": "npm:@atlaskit/button@23.6.3",
         "type": "static"
       },
@@ -38913,6 +39390,11 @@
       }
     ],
     "npm:@atlaskit/people-teams-ui-public@3.7.0": [
+      {
+        "source": "npm:@atlaskit/people-teams-ui-public@3.7.0",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/people-teams-ui-public@3.7.0",
         "target": "npm:@atlaskit/analytics-namespaced-context@7.2.0",
@@ -38977,6 +39459,11 @@
     "npm:@atlaskit/radio@8.3.13": [
       {
         "source": "npm:@atlaskit/radio@8.3.13",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/radio@8.3.13",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
         "type": "static"
       },
@@ -39017,6 +39504,16 @@
       }
     ],
     "npm:@atlaskit/smart-user-picker@8.5.0": [
+      {
+        "source": "npm:@atlaskit/smart-user-picker@8.5.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/smart-user-picker@8.5.0",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/smart-user-picker@8.5.0",
         "target": "npm:@atlaskit/afm-i18n-platform-smart-experiences-smart-user-picker",
@@ -39071,6 +39568,11 @@
     "npm:@atlaskit/tabs@18.2.4": [
       {
         "source": "npm:@atlaskit/tabs@18.2.4",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/tabs@18.2.4",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
         "type": "static"
       },
@@ -39106,6 +39608,11 @@
       }
     ],
     "npm:@atlaskit/toggle@15.1.15": [
+      {
+        "source": "npm:@atlaskit/toggle@15.1.15",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/toggle@15.1.15",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
@@ -39173,6 +39680,16 @@
       }
     ],
     "npm:@atlaskit/user-picker@11.17.0": [
+      {
+        "source": "npm:@atlaskit/user-picker@11.17.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/user-picker@11.17.0",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/user-picker@11.17.0",
         "target": "npm:react-intl-next",
@@ -39314,6 +39831,16 @@
     "npm:@atlaskit/editor-plugin-feedback-dialog": [
       {
         "source": "npm:@atlaskit/editor-plugin-feedback-dialog",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-feedback-dialog",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-feedback-dialog",
         "target": "npm:@atlaskit/editor-plugin-analytics@6.2.6",
         "type": "static"
       },
@@ -39324,6 +39851,11 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-find-replace": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-find-replace",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-find-replace",
         "target": "npm:react-intl-next",
@@ -39453,6 +39985,16 @@
     "npm:@atlaskit/mention@24.4.3": [
       {
         "source": "npm:@atlaskit/mention@24.4.3",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/mention@24.4.3",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/mention@24.4.3",
         "target": "npm:react-intl-next",
         "type": "static"
       },
@@ -39560,14 +40102,19 @@
         "source": "npm:@atlaskit/mention@24.4.3",
         "target": "npm:uuid@3.4.0",
         "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/mention@24.4.3",
-        "target": "npm:react-dom@18.3.1",
-        "type": "static"
       }
     ],
     "npm:@atlaskit/editor-plugin-floating-toolbar": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-floating-toolbar",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-floating-toolbar",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-floating-toolbar",
         "target": "npm:@atlaskit/adf-utils",
@@ -39742,6 +40289,16 @@
     "npm:@atlaskit/editor-palette@2.1.17": [
       {
         "source": "npm:@atlaskit/editor-palette@2.1.17",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-palette@2.1.17",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-palette@2.1.17",
         "target": "npm:@atlaskit/tmp-editor-statsig@14.8.0",
         "type": "static"
       },
@@ -39757,6 +40314,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-content-insertion@6.0.0": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-content-insertion@6.0.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-content-insertion@6.0.0",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-content-insertion@6.0.0",
         "target": "npm:@atlaskit/editor-plugin-analytics@6.2.6",
@@ -39779,6 +40346,11 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-extension@9.2.9": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-extension@9.2.9",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-extension@9.2.9",
         "target": "npm:react-intl-next",
@@ -40023,6 +40595,16 @@
     "npm:@atlaskit/editor-plugin-table@15.4.16": [
       {
         "source": "npm:@atlaskit/editor-plugin-table@15.4.16",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-table@15.4.16",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-table@15.4.16",
         "target": "npm:react-intl-next",
         "type": "static"
       },
@@ -40240,6 +40822,16 @@
       },
       {
         "source": "npm:@atlaskit/editor-plugin-interaction@10.0.2",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-interaction@10.0.2",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-interaction@10.0.2",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -40264,6 +40856,16 @@
     "npm:@atlaskit/editor-plugin-fragment": [
       {
         "source": "npm:@atlaskit/editor-plugin-fragment",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-fragment",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-fragment",
         "target": "npm:@atlaskit/adf-schema",
         "type": "static"
       },
@@ -40279,6 +40881,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-grid": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-grid",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-grid",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-grid",
         "target": "npm:@atlaskit/editor-plugin-width",
@@ -40318,6 +40930,16 @@
     "npm:@atlaskit/editor-plugin-guideline": [
       {
         "source": "npm:@atlaskit/editor-plugin-guideline",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-guideline",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-guideline",
         "target": "npm:@atlaskit/editor-plugin-width",
         "type": "static"
       },
@@ -40353,6 +40975,11 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-help-dialog": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-help-dialog",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-help-dialog",
         "target": "npm:@atlaskit/editor-plugin-analytics@6.2.6",
@@ -40440,6 +41067,11 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-highlight": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-highlight",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-highlight",
         "target": "npm:react-intl-next",
@@ -40559,6 +41191,11 @@
     "npm:@atlaskit/editor-plugin-history": [
       {
         "source": "npm:@atlaskit/editor-plugin-history",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-history",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -40569,6 +41206,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-hyperlink": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-hyperlink",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-hyperlink",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-hyperlink",
         "target": "npm:react-intl-next",
@@ -40678,6 +41325,16 @@
     "npm:@atlaskit/editor-plugin-image-upload": [
       {
         "source": "npm:@atlaskit/editor-plugin-image-upload",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-image-upload",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-image-upload",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -40693,6 +41350,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-indentation": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-indentation",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-indentation",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-indentation",
         "target": "npm:@atlaskit/adf-schema",
@@ -40715,6 +41382,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-insert-block": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-insert-block",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-insert-block",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-insert-block",
         "target": "npm:react-intl-next",
@@ -40959,6 +41636,16 @@
     "npm:@atlaskit/editor-plugin-interaction": [
       {
         "source": "npm:@atlaskit/editor-plugin-interaction",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-interaction",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-interaction",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -40974,6 +41661,11 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-layout": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-layout",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-layout",
         "target": "npm:react-intl-next",
@@ -41083,6 +41775,11 @@
     "npm:@atlaskit/editor-plugin-limited-mode": [
       {
         "source": "npm:@atlaskit/editor-plugin-limited-mode",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-limited-mode",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -41113,6 +41810,11 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-list": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-list",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-list",
         "target": "npm:react-intl-next",
@@ -41192,6 +41894,11 @@
     "npm:@atlaskit/editor-plugin-local-id": [
       {
         "source": "npm:@atlaskit/editor-plugin-local-id",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-local-id",
         "target": "npm:@atlaskit/adf-schema",
         "type": "static"
       },
@@ -41217,6 +41924,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-loom": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-loom",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-loom",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-loom",
         "target": "npm:react-intl-next",
@@ -41316,6 +42033,16 @@
     "npm:@atlaskit/editor-plugin-max-content-size": [
       {
         "source": "npm:@atlaskit/editor-plugin-max-content-size",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-max-content-size",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-max-content-size",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -41326,6 +42053,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-media": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-media",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-media",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-media",
         "target": "npm:react-intl-next",
@@ -41570,6 +42307,16 @@
     "npm:@atlaskit/editor-plugin-media-insert": [
       {
         "source": "npm:@atlaskit/editor-plugin-media-insert",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-media-insert",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-media-insert",
         "target": "npm:@atlaskit/adf-schema",
         "type": "static"
       },
@@ -41673,6 +42420,16 @@
       {
         "source": "npm:@atlaskit/media-card@79.9.1",
         "target": "npm:@emotion/react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/media-card@79.9.1",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/media-card@79.9.1",
+        "target": "npm:react-dom",
         "type": "static"
       },
       {
@@ -41829,6 +42586,16 @@
     "npm:@atlaskit/media-picker@70.1.3": [
       {
         "source": "npm:@atlaskit/media-picker@70.1.3",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/media-picker@70.1.3",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/media-picker@70.1.3",
         "target": "npm:react-intl-next",
         "type": "static"
       },
@@ -41926,6 +42693,11 @@
       },
       {
         "source": "npm:@atlaskit/media-svg@2.1.13",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/media-svg@2.1.13",
         "target": "npm:@atlaskit/link",
         "type": "static"
       },
@@ -41966,6 +42738,16 @@
       }
     ],
     "npm:@atlaskit/media-ui@28.7.17": [
+      {
+        "source": "npm:@atlaskit/media-ui@28.7.17",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/media-ui@28.7.17",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/media-ui@28.7.17",
         "target": "npm:react-intl-next",
@@ -42161,6 +42943,11 @@
       {
         "source": "npm:@atlaskit/media-viewer@52.5.0",
         "target": "npm:@emotion/react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/media-viewer@52.5.0",
+        "target": "npm:react",
         "type": "static"
       },
       {
@@ -42387,6 +43174,11 @@
     "npm:@atlaskit/side-navigation@11.0.28": [
       {
         "source": "npm:@atlaskit/side-navigation@11.0.28",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/side-navigation@11.0.28",
         "target": "npm:@atlaskit/css@0.17.0",
         "type": "static"
       },
@@ -42444,6 +43236,11 @@
     "npm:@atlaskit/width-detector@5.0.5": [
       {
         "source": "npm:@atlaskit/width-detector@5.0.5",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/width-detector@5.0.5",
         "target": "npm:@babel/runtime",
         "type": "static"
       },
@@ -42457,6 +43254,11 @@
       {
         "source": "npm:@atlaskit/media-filmstrip@51.1.4",
         "target": "npm:@emotion/react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/media-filmstrip@51.1.4",
+        "target": "npm:react",
         "type": "static"
       },
       {
@@ -42528,7 +43330,12 @@
     "npm:@atlaskit/editor-plugin-mentions": [
       {
         "source": "npm:@atlaskit/editor-plugin-mentions",
-        "target": "npm:react-dom@18.3.1",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-mentions",
+        "target": "npm:react-dom",
         "type": "static"
       },
       {
@@ -42660,6 +43467,11 @@
     "npm:@atlaskit/drawer@11.0.19": [
       {
         "source": "npm:@atlaskit/drawer@11.0.19",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/drawer@11.0.19",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
         "type": "static"
       },
@@ -42757,6 +43569,11 @@
     "npm:@atlaskit/give-kudos@4.4.8": [
       {
         "source": "npm:@atlaskit/give-kudos@4.4.8",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/give-kudos@4.4.8",
         "target": "npm:react-intl-next",
         "type": "static"
       },
@@ -42834,7 +43651,12 @@
     "npm:@atlaskit/profilecard@24.24.0": [
       {
         "source": "npm:@atlaskit/profilecard@24.24.0",
-        "target": "npm:react-dom@18.3.1",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/profilecard@24.24.0",
+        "target": "npm:react-dom",
         "type": "static"
       },
       {
@@ -43041,6 +43863,11 @@
     "npm:@atlaskit/rovo-agent-components@3.15.0": [
       {
         "source": "npm:@atlaskit/rovo-agent-components@3.15.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/rovo-agent-components@3.15.0",
         "target": "npm:@atlaskit/afm-i18n-platform-ai-mate-rovo-agent-components",
         "type": "static"
       },
@@ -43136,7 +43963,7 @@
       },
       {
         "source": "npm:@atlaskit/rovo-agent-components@3.15.0",
-        "target": "npm:react-dom@18.3.1",
+        "target": "npm:react-dom",
         "type": "static"
       },
       {
@@ -43153,6 +43980,11 @@
     "npm:@atlaskit/skeleton@2.1.4": [
       {
         "source": "npm:@atlaskit/skeleton@2.1.4",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/skeleton@2.1.4",
         "target": "npm:@atlaskit/tokens",
         "type": "static"
       },
@@ -43167,19 +43999,17 @@
         "type": "static"
       }
     ],
-    "npm:react-dom@18.3.1": [
+    "npm:@atlaskit/editor-plugin-metrics": [
       {
-        "source": "npm:react-dom@18.3.1",
-        "target": "npm:loose-envify",
+        "source": "npm:@atlaskit/editor-plugin-metrics",
+        "target": "npm:react",
         "type": "static"
       },
       {
-        "source": "npm:react-dom@18.3.1",
-        "target": "npm:scheduler",
+        "source": "npm:@atlaskit/editor-plugin-metrics",
+        "target": "npm:react-dom",
         "type": "static"
-      }
-    ],
-    "npm:@atlaskit/editor-plugin-metrics": [
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-metrics",
         "target": "npm:@atlaskit/adf-schema",
@@ -43224,6 +44054,11 @@
     "npm:@atlaskit/editor-plugin-ncs-step-metrics": [
       {
         "source": "npm:@atlaskit/editor-plugin-ncs-step-metrics",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-ncs-step-metrics",
         "target": "npm:@atlaskit/editor-plugin-analytics@6.2.6",
         "type": "static"
       },
@@ -43254,6 +44089,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-panel": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-panel",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-panel",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-panel",
         "target": "npm:react-intl-next",
@@ -43356,6 +44201,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-paste": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-paste",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-paste",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-paste",
         "target": "npm:@atlaskit/adf-schema",
@@ -43470,6 +44325,16 @@
     "npm:@atlaskit/editor-plugin-paste-options-toolbar": [
       {
         "source": "npm:@atlaskit/editor-plugin-paste-options-toolbar",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-paste-options-toolbar",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-paste-options-toolbar",
         "target": "npm:@atlaskit/editor-markdown-transformer",
         "type": "static"
       },
@@ -43522,6 +44387,16 @@
     "npm:@atlaskit/editor-plugin-placeholder": [
       {
         "source": "npm:@atlaskit/editor-plugin-placeholder",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-placeholder",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-placeholder",
         "target": "npm:react-intl-next",
         "type": "static"
       },
@@ -43567,6 +44442,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-placeholder-text": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-placeholder-text",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-placeholder-text",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-placeholder-text",
         "target": "npm:react-intl-next",
@@ -43631,6 +44516,11 @@
     "npm:@atlaskit/editor-plugin-primary-toolbar": [
       {
         "source": "npm:@atlaskit/editor-plugin-primary-toolbar",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-primary-toolbar",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -43656,6 +44546,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-quick-insert": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-quick-insert",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-quick-insert",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-quick-insert",
         "target": "npm:react-intl-next",
@@ -43730,6 +44630,16 @@
     "npm:@atlaskit/editor-plugin-rule": [
       {
         "source": "npm:@atlaskit/editor-plugin-rule",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-rule",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-rule",
         "target": "npm:@atlaskit/adf-schema",
         "type": "static"
       },
@@ -43762,6 +44672,11 @@
     "npm:@atlaskit/editor-plugin-save-on-enter": [
       {
         "source": "npm:@atlaskit/editor-plugin-save-on-enter",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-save-on-enter",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -43782,6 +44697,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-scroll-into-view": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-scroll-into-view",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-scroll-into-view",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-scroll-into-view",
         "target": "npm:@atlaskit/editor-prosemirror",
@@ -43809,6 +44734,11 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-selection": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-selection",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-selection",
         "target": "npm:@atlaskit/editor-json-transformer",
@@ -43856,6 +44786,11 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-selection-extension": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-selection-extension",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-selection-extension",
         "target": "npm:@atlaskit/adf-utils",
@@ -43970,6 +44905,16 @@
     "npm:@atlaskit/editor-plugin-selection-marker": [
       {
         "source": "npm:@atlaskit/editor-plugin-selection-marker",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-selection-marker",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-selection-marker",
         "target": "npm:@atlaskit/editor-plugin-decorations",
         "type": "static"
       },
@@ -44045,6 +44990,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-selection-toolbar": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-selection-toolbar",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-selection-toolbar",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-selection-toolbar",
         "target": "npm:react-intl-next",
@@ -44159,6 +45114,11 @@
     "npm:@atlaskit/editor-plugin-show-diff": [
       {
         "source": "npm:@atlaskit/editor-plugin-show-diff",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-show-diff",
         "target": "npm:@atlaskit/adf-schema",
         "type": "static"
       },
@@ -44204,6 +45164,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-status": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-status",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-status",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-status",
         "target": "npm:react-intl-next",
@@ -44283,6 +45253,11 @@
     "npm:@atlaskit/status@3.0.25": [
       {
         "source": "npm:@atlaskit/status@3.0.25",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/status@3.0.25",
         "target": "npm:react-intl-next",
         "type": "static"
       },
@@ -44345,6 +45320,11 @@
     "npm:@atlaskit/editor-plugin-submit-editor": [
       {
         "source": "npm:@atlaskit/editor-plugin-submit-editor",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-submit-editor",
         "target": "npm:@atlaskit/editor-plugin-media",
         "type": "static"
       },
@@ -44360,6 +45340,11 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-synced-block": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-synced-block",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-synced-block",
         "target": "npm:@atlaskit/adf-schema",
@@ -44474,6 +45459,11 @@
     "npm:@atlaskit/button@23.5.4": [
       {
         "source": "npm:@atlaskit/button@23.5.4",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/button@23.5.4",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
         "type": "static"
       },
@@ -44556,6 +45546,11 @@
     "npm:@atlaskit/icon@28.5.3": [
       {
         "source": "npm:@atlaskit/icon@28.5.3",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/icon@28.5.3",
         "target": "npm:@atlaskit/platform-feature-flags",
         "type": "static"
       },
@@ -44588,12 +45583,7 @@
     "npm:@atlaskit/editor-plugin-table": [
       {
         "source": "npm:@atlaskit/editor-plugin-table",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/editor-plugin-table",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -44733,6 +45723,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-tasks-and-decisions": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-tasks-and-decisions",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-tasks-and-decisions",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-tasks-and-decisions",
         "target": "npm:react-intl-next",
@@ -44877,6 +45877,16 @@
     "npm:@atlaskit/task-decision@19.2.15": [
       {
         "source": "npm:@atlaskit/task-decision@19.2.15",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/task-decision@19.2.15",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/task-decision@19.2.15",
         "target": "npm:@atlaskit/afm-i18n-platform-elements-task-decision",
         "type": "static"
       },
@@ -44937,6 +45947,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-text-color": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-text-color",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-text-color",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-text-color",
         "target": "npm:react-intl-next",
@@ -45061,6 +46081,11 @@
     "npm:@atlaskit/editor-plugin-text-formatting": [
       {
         "source": "npm:@atlaskit/editor-plugin-text-formatting",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-text-formatting",
         "target": "npm:@atlaskit/adf-schema",
         "type": "static"
       },
@@ -45158,6 +46183,11 @@
     "npm:@atlaskit/editor-plugin-toolbar": [
       {
         "source": "npm:@atlaskit/editor-plugin-toolbar",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-toolbar",
         "target": "npm:@atlaskit/browser-apis",
         "type": "static"
       },
@@ -45238,6 +46268,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-toolbar-lists-indentation": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-toolbar-lists-indentation",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-toolbar-lists-indentation",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-toolbar-lists-indentation",
         "target": "npm:react-intl-next",
@@ -45342,6 +46382,11 @@
     "npm:@atlaskit/editor-plugin-track-changes": [
       {
         "source": "npm:@atlaskit/editor-plugin-track-changes",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-track-changes",
         "target": "npm:@atlaskit/button@23.6.3",
         "type": "static"
       },
@@ -45402,6 +46447,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-type-ahead": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-type-ahead",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-type-ahead",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-type-ahead",
         "target": "npm:react-intl-next",
@@ -45546,6 +46601,11 @@
     "npm:@atlaskit/editor-plugin-ufo": [
       {
         "source": "npm:@atlaskit/editor-plugin-ufo",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-ufo",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -45571,6 +46631,11 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-undo-redo": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-undo-redo",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-undo-redo",
         "target": "npm:react-intl-next",
@@ -45645,6 +46710,16 @@
     "npm:@atlaskit/editor-plugin-unsupported-content": [
       {
         "source": "npm:@atlaskit/editor-plugin-unsupported-content",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-unsupported-content",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-unsupported-content",
         "target": "npm:@atlaskit/adf-schema",
         "type": "static"
       },
@@ -45667,6 +46742,11 @@
     "npm:@atlaskit/editor-plugin-user-intent": [
       {
         "source": "npm:@atlaskit/editor-plugin-user-intent",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-user-intent",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -45677,6 +46757,11 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-user-preferences": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-user-preferences",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-user-preferences",
         "target": "npm:@atlaskit/editor-plugin-analytics@6.2.6",
@@ -45711,6 +46796,11 @@
     "npm:@atlaskit/editor-plugin-width": [
       {
         "source": "npm:@atlaskit/editor-plugin-width",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-width",
         "target": "npm:@atlaskit/editor-prosemirror",
         "type": "static"
       },
@@ -45741,6 +46831,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugins": [
+      {
+        "source": "npm:@atlaskit/editor-plugins",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugins",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugins",
         "target": "npm:@atlaskit/editor-plugin-accessibility-utils",
@@ -46235,6 +47335,11 @@
     "npm:@atlaskit/editor-plugin-analytics@6.2.2": [
       {
         "source": "npm:@atlaskit/editor-plugin-analytics@6.2.2",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-analytics@6.2.2",
         "target": "npm:@atlaskit/adf-schema",
         "type": "static"
       },
@@ -46282,6 +47387,16 @@
       }
     ],
     "npm:@atlaskit/editor-plugin-table@15.3.10": [
+      {
+        "source": "npm:@atlaskit/editor-plugin-table@15.3.10",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-plugin-table@15.3.10",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-plugin-table@15.3.10",
         "target": "npm:react-intl-next",
@@ -46528,6 +47643,11 @@
     "npm:@atlaskit/editor-synced-block-provider": [
       {
         "source": "npm:@atlaskit/editor-synced-block-provider",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-synced-block-provider",
         "target": "npm:@atlaskit/adf-schema",
         "type": "static"
       },
@@ -46590,6 +47710,11 @@
       }
     ],
     "npm:@atlaskit/editor-toolbar": [
+      {
+        "source": "npm:@atlaskit/editor-toolbar",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/editor-toolbar",
         "target": "npm:react-intl-next",
@@ -46674,6 +47799,11 @@
     "npm:@atlaskit/editor-toolbar-model": [
       {
         "source": "npm:@atlaskit/editor-toolbar-model",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/editor-toolbar-model",
         "target": "npm:@atlaskit/css@0.17.0",
         "type": "static"
       },
@@ -46704,6 +47834,16 @@
       }
     ],
     "npm:@atlaskit/embedded-confluence": [
+      {
+        "source": "npm:@atlaskit/embedded-confluence",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/embedded-confluence",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/embedded-confluence",
         "target": "npm:@babel/runtime",
@@ -46875,16 +48015,6 @@
       },
       {
         "source": "npm:@atlaskit/media-client-react@3.0.1",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-client-react@3.0.1",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-client-react@3.0.1",
         "target": "npm:@atlaskit/media-client@31.1.2",
         "type": "static"
       },
@@ -47050,6 +48180,11 @@
     "npm:@atlaskit/flag": [
       {
         "source": "npm:@atlaskit/flag",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/flag",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
         "type": "static"
       },
@@ -47154,11 +48289,6 @@
     "npm:@atlaskit/form": [
       {
         "source": "npm:@atlaskit/form",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/form",
         "target": "npm:@atlaskit/icon",
         "type": "static"
       },
@@ -47211,6 +48341,11 @@
     "npm:@atlaskit/frontend-utilities": [
       {
         "source": "npm:@atlaskit/frontend-utilities",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/frontend-utilities",
         "target": "npm:@babel/runtime",
         "type": "static"
       },
@@ -47221,11 +48356,6 @@
       }
     ],
     "npm:@atlaskit/give-kudos": [
-      {
-        "source": "npm:@atlaskit/give-kudos",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/give-kudos",
         "target": "npm:react-intl-next",
@@ -47312,11 +48442,6 @@
     "npm:@atlaskit/icon": [
       {
         "source": "npm:@atlaskit/icon",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/icon",
         "target": "npm:@atlaskit/theme@12.12.0",
         "type": "static"
       },
@@ -47339,11 +48464,6 @@
     "npm:@atlaskit/icon-file-type": [
       {
         "source": "npm:@atlaskit/icon-file-type",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/icon-file-type",
         "target": "npm:@atlaskit/icon@23.11.0",
         "type": "static"
       },
@@ -47354,6 +48474,11 @@
       }
     ],
     "npm:@atlaskit/icon-lab": [
+      {
+        "source": "npm:@atlaskit/icon-lab",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/icon-lab",
         "target": "npm:@atlaskit/icon@29.0.0",
@@ -47412,11 +48537,6 @@
     "npm:@atlaskit/icon-priority": [
       {
         "source": "npm:@atlaskit/icon-priority",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/icon-priority",
         "target": "npm:@atlaskit/ds-lib@2.7.0",
         "type": "static"
       },
@@ -47432,6 +48552,11 @@
       }
     ],
     "npm:@atlaskit/image": [
+      {
+        "source": "npm:@atlaskit/image",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/image",
         "target": "npm:@atlaskit/app-provider",
@@ -47461,6 +48586,11 @@
       }
     ],
     "npm:@atlaskit/inline-dialog": [
+      {
+        "source": "npm:@atlaskit/inline-dialog",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/inline-dialog",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
@@ -47513,6 +48643,11 @@
       }
     ],
     "npm:@atlaskit/inline-edit": [
+      {
+        "source": "npm:@atlaskit/inline-edit",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/inline-edit",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
@@ -47592,6 +48727,11 @@
     "npm:@atlaskit/insm": [
       {
         "source": "npm:@atlaskit/insm",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/insm",
         "target": "npm:@atlaskit/analytics-listeners@9.1.0",
         "type": "static"
       },
@@ -47619,11 +48759,26 @@
     "npm:@atlaskit/interaction-context": [
       {
         "source": "npm:@atlaskit/interaction-context",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/interaction-context",
         "target": "npm:@babel/runtime",
         "type": "static"
       }
     ],
     "npm:@atlaskit/intl-messages-provider": [
+      {
+        "source": "npm:@atlaskit/intl-messages-provider",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/intl-messages-provider",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/intl-messages-provider",
         "target": "npm:react-intl-next",
@@ -47695,6 +48850,16 @@
       }
     ],
     "npm:@atlaskit/jql-editor": [
+      {
+        "source": "npm:@atlaskit/jql-editor",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/jql-editor",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/jql-editor",
         "target": "npm:@atlaskit/afm-i18n-platform-jql-jql-editor",
@@ -47884,6 +49049,16 @@
     "npm:@atlaskit/jql-editor-autocomplete-rest": [
       {
         "source": "npm:@atlaskit/jql-editor-autocomplete-rest",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/jql-editor-autocomplete-rest",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/jql-editor-autocomplete-rest",
         "target": "npm:@atlaskit/jql-editor-common",
         "type": "static"
       },
@@ -47919,6 +49094,16 @@
       }
     ],
     "npm:@atlaskit/jql-editor-common": [
+      {
+        "source": "npm:@atlaskit/jql-editor-common",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/jql-editor-common",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/jql-editor-common",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
@@ -48019,6 +49204,11 @@
     "npm:@atlaskit/legacy-custom-icons": [
       {
         "source": "npm:@atlaskit/legacy-custom-icons",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/legacy-custom-icons",
         "target": "npm:@atlaskit/icon@29.0.0",
         "type": "static"
       },
@@ -48051,6 +49241,11 @@
     "npm:@atlaskit/link": [
       {
         "source": "npm:@atlaskit/link",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/link",
         "target": "npm:@atlaskit/css@0.17.0",
         "type": "static"
       },
@@ -48081,11 +49276,6 @@
       }
     ],
     "npm:@atlaskit/link-analytics": [
-      {
-        "source": "npm:@atlaskit/link-analytics",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/link-analytics",
         "target": "npm:@atlaskit/analytics-next",
@@ -48121,6 +49311,11 @@
       {
         "source": "npm:@atlaskit/link-client-extension",
         "target": "npm:@atlaskit/link-provider",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/link-client-extension",
+        "target": "npm:react",
         "type": "static"
       },
       {
@@ -48497,6 +49692,11 @@
       }
     ],
     "npm:@atlaskit/link-extractors": [
+      {
+        "source": "npm:@atlaskit/link-extractors",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/link-extractors",
         "target": "npm:@atlaskit/json-ld-types",
@@ -48943,6 +50143,11 @@
     "npm:@atlaskit/link-provider": [
       {
         "source": "npm:@atlaskit/link-provider",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/link-provider",
         "target": "npm:@atlaskit/json-ld-types",
         "type": "static"
       },
@@ -49003,6 +50208,11 @@
       }
     ],
     "npm:@atlaskit/link-test-helpers": [
+      {
+        "source": "npm:@atlaskit/link-test-helpers",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/link-test-helpers",
         "target": "npm:@atlaskit/json-ld-types",
@@ -49177,6 +50387,16 @@
       }
     ],
     "npm:@testing-library/react@13.4.0": [
+      {
+        "source": "npm:@testing-library/react@13.4.0",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@testing-library/react@13.4.0",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@testing-library/react@13.4.0",
         "target": "npm:@babel/runtime",
@@ -49414,6 +50634,11 @@
     "npm:@atlaskit/linking-common": [
       {
         "source": "npm:@atlaskit/linking-common",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/linking-common",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
         "type": "static"
       },
@@ -49500,11 +50725,6 @@
     "npm:@atlaskit/logo": [
       {
         "source": "npm:@atlaskit/logo",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/logo",
         "target": "npm:@atlaskit/ds-lib@2.7.0",
         "type": "static"
       },
@@ -49547,6 +50767,11 @@
       }
     ],
     "npm:@atlaskit/lozenge": [
+      {
+        "source": "npm:@atlaskit/lozenge",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/lozenge",
         "target": "npm:@atlaskit/codemod-utils",
@@ -49592,16 +50817,6 @@
       {
         "source": "npm:@atlaskit/media-card",
         "target": "npm:@emotion/react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-card",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-card",
-        "target": "npm:react-dom",
         "type": "static"
       },
       {
@@ -49701,16 +50916,6 @@
       }
     ],
     "npm:@atlaskit/media-ui@22.4.1": [
-      {
-        "source": "npm:@atlaskit/media-ui@22.4.1",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-ui@22.4.1",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/media-ui@22.4.1",
         "target": "npm:react-intl-next",
@@ -49835,11 +51040,6 @@
       },
       {
         "source": "npm:@atlaskit/media-client",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-client",
         "target": "npm:@atlaskit/chunkinator",
         "type": "static"
       },
@@ -49917,6 +51117,16 @@
       },
       {
         "source": "npm:@atlaskit/media-client-react",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/media-client-react",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/media-client-react",
         "target": "npm:@atlaskit/media-client@35.6.1",
         "type": "static"
       },
@@ -49937,16 +51147,6 @@
       }
     ],
     "npm:@atlaskit/media-common@5.0.0": [
-      {
-        "source": "npm:@atlaskit/media-common@5.0.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-common@5.0.0",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/media-common@5.0.0",
         "target": "npm:@atlaskit/analytics-gas-types",
@@ -49976,16 +51176,6 @@
     "npm:@atlaskit/media-common": [
       {
         "source": "npm:@atlaskit/media-common",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-common",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-common",
         "target": "npm:@atlaskit/analytics-gas-types",
         "type": "static"
       },
@@ -50011,6 +51201,11 @@
       }
     ],
     "npm:@atlaskit/media-document-viewer": [
+      {
+        "source": "npm:@atlaskit/media-document-viewer",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/media-document-viewer",
         "target": "npm:@atlaskit/browser-apis",
@@ -50065,6 +51260,16 @@
     "npm:@atlaskit/media-file-preview": [
       {
         "source": "npm:@atlaskit/media-file-preview",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/media-file-preview",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/media-file-preview",
         "target": "npm:@atlaskit/media-client@35.6.1",
         "type": "static"
       },
@@ -50117,11 +51322,6 @@
       },
       {
         "source": "npm:@atlaskit/media-filmstrip",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-filmstrip",
         "target": "npm:@atlaskit/icon",
         "type": "static"
       },
@@ -50162,16 +51362,6 @@
       }
     ],
     "npm:@atlaskit/media-picker": [
-      {
-        "source": "npm:@atlaskit/media-picker",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-picker",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/media-picker",
         "target": "npm:react-intl-next",
@@ -50259,16 +51449,6 @@
       }
     ],
     "npm:@atlaskit/media-ui@23.3.0": [
-      {
-        "source": "npm:@atlaskit/media-ui@23.3.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-ui@23.3.0",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/media-ui@23.3.0",
         "target": "npm:react-intl-next",
@@ -50383,16 +51563,6 @@
     "npm:@atlaskit/media-common@8.2.0": [
       {
         "source": "npm:@atlaskit/media-common@8.2.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-common@8.2.0",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-common@8.2.0",
         "target": "npm:@atlaskit/analytics-gas-types",
         "type": "static"
       },
@@ -50447,11 +51617,6 @@
       },
       {
         "source": "npm:@atlaskit/media-svg",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-svg",
         "target": "npm:@atlaskit/media-client@28.6.0",
         "type": "static"
       },
@@ -50477,16 +51642,6 @@
       }
     ],
     "npm:@atlaskit/media-ui": [
-      {
-        "source": "npm:@atlaskit/media-ui",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-ui",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/media-ui",
         "target": "npm:react-intl-next",
@@ -50606,16 +51761,6 @@
     "npm:@atlaskit/media-common@2.19.2": [
       {
         "source": "npm:@atlaskit/media-common@2.19.2",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-common@2.19.2",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-common@2.19.2",
         "target": "npm:@atlaskit/analytics-gas-types",
         "type": "static"
       },
@@ -50644,11 +51789,6 @@
       {
         "source": "npm:@atlaskit/media-viewer",
         "target": "npm:@emotion/react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-viewer",
-        "target": "npm:react",
         "type": "static"
       },
       {
@@ -50765,16 +51905,6 @@
     "npm:@atlaskit/mention": [
       {
         "source": "npm:@atlaskit/mention",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/mention",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/mention",
         "target": "npm:react-intl-next",
         "type": "static"
       },
@@ -50860,16 +51990,6 @@
       }
     ],
     "npm:@atlaskit/menu": [
-      {
-        "source": "npm:@atlaskit/menu",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/menu",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/menu",
         "target": "npm:@atlaskit/ds-lib@2.7.0",
@@ -51021,6 +52141,11 @@
     "npm:@atlaskit/motion": [
       {
         "source": "npm:@atlaskit/motion",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/motion",
         "target": "npm:@atlaskit/css@0.17.0",
         "type": "static"
       },
@@ -51075,6 +52200,11 @@
     "npm:@atlaskit/object": [
       {
         "source": "npm:@atlaskit/object",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/object",
         "target": "npm:@atlaskit/css@0.17.0",
         "type": "static"
       },
@@ -51120,6 +52250,16 @@
       }
     ],
     "npm:@atlaskit/onboarding": [
+      {
+        "source": "npm:@atlaskit/onboarding",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/onboarding",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/onboarding",
         "target": "npm:@atlaskit/button@23.6.3",
@@ -51283,6 +52423,11 @@
     "npm:@atlaskit/platform-feature-flags-react": [
       {
         "source": "npm:@atlaskit/platform-feature-flags-react",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/platform-feature-flags-react",
         "target": "npm:@atlaskit/css@0.17.0",
         "type": "static"
       },
@@ -51318,11 +52463,6 @@
       }
     ],
     "npm:@atlaskit/popper": [
-      {
-        "source": "npm:@atlaskit/popper",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/popper",
         "target": "npm:@atlaskit/in-product-testing",
@@ -51439,6 +52579,16 @@
     "npm:@atlaskit/portal": [
       {
         "source": "npm:@atlaskit/portal",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/portal",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/portal",
         "target": "npm:@atlaskit/platform-feature-flags",
         "type": "static"
       },
@@ -51514,6 +52664,11 @@
     "npm:@atlaskit/pragmatic-drag-and-drop-react-drop-indicator": [
       {
         "source": "npm:@atlaskit/pragmatic-drag-and-drop-react-drop-indicator",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/pragmatic-drag-and-drop-react-drop-indicator",
         "target": "npm:@atlaskit/pragmatic-drag-and-drop",
         "type": "static"
       },
@@ -51539,16 +52694,6 @@
       }
     ],
     "npm:@atlaskit/profilecard": [
-      {
-        "source": "npm:@atlaskit/profilecard",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/profilecard",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/profilecard",
         "target": "npm:@atlaskit/analytics-next@10.3.1",
@@ -51696,11 +52841,6 @@
       }
     ],
     "npm:@atlaskit/atlassian-context@0.0.1": [
-      {
-        "source": "npm:@atlaskit/atlassian-context@0.0.1",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/atlassian-context@0.0.1",
         "target": "npm:@babel/runtime",
@@ -51889,12 +53029,7 @@
     "npm:@atlaskit/editor-common@78.37.4": [
       {
         "source": "npm:@atlaskit/editor-common@78.37.4",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/editor-common@78.37.4",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -52330,12 +53465,7 @@
       },
       {
         "source": "npm:@atlaskit/media-card@77.12.4",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-card@77.12.4",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -52698,11 +53828,6 @@
     "npm:@atlaskit/media-file-preview@0.5.2": [
       {
         "source": "npm:@atlaskit/media-file-preview@0.5.2",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-file-preview@0.5.2",
         "target": "npm:@atlaskit/media-client@27.6.1",
         "type": "static"
       },
@@ -52745,11 +53870,6 @@
       },
       {
         "source": "npm:@atlaskit/media-svg@0.1.10",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-svg@0.1.10",
         "target": "npm:@atlaskit/media-client@27.6.1",
         "type": "static"
       },
@@ -52778,11 +53898,6 @@
       {
         "source": "npm:@atlaskit/media-viewer@48.5.0",
         "target": "npm:@emotion/react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/media-viewer@48.5.0",
-        "target": "npm:react",
         "type": "static"
       },
       {
@@ -52949,7 +54064,7 @@
       },
       {
         "source": "npm:@atlaskit/mention@23.11.4",
-        "target": "npm:react-dom",
+        "target": "npm:react-dom@16.14.0",
         "type": "static"
       },
       {
@@ -53080,11 +54195,6 @@
     "npm:@atlaskit/radio": [
       {
         "source": "npm:@atlaskit/radio",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/radio",
         "target": "npm:@atlaskit/analytics-next",
         "type": "static"
       },
@@ -53122,6 +54232,11 @@
     "npm:@atlaskit/range": [
       {
         "source": "npm:@atlaskit/range",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/range",
         "target": "npm:@atlaskit/css@0.17.0",
         "type": "static"
       },
@@ -53157,6 +54272,16 @@
       }
     ],
     "npm:@atlaskit/react-select": [
+      {
+        "source": "npm:@atlaskit/react-select",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/react-select",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/react-select",
         "target": "npm:@atlaskit/ds-lib",
@@ -53219,6 +54344,11 @@
       }
     ],
     "npm:@atlaskit/react-ufo": [
+      {
+        "source": "npm:@atlaskit/react-ufo",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/react-ufo",
         "target": "npm:@atlaskit/browser-apis",
@@ -53387,6 +54517,11 @@
     "npm:@atlaskit/rovo-triggers": [
       {
         "source": "npm:@atlaskit/rovo-triggers",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/rovo-triggers",
         "target": "npm:@atlaskit/adf-schema",
         "type": "static"
       },
@@ -53461,11 +54596,6 @@
     "npm:@atlaskit/side-navigation": [
       {
         "source": "npm:@atlaskit/side-navigation",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/side-navigation",
         "target": "npm:@atlaskit/ds-explorations@2.4.0",
         "type": "static"
       },
@@ -53518,11 +54648,6 @@
     "npm:@atlaskit/ds-explorations@2.4.0": [
       {
         "source": "npm:@atlaskit/ds-explorations@2.4.0",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/ds-explorations@2.4.0",
         "target": "npm:@atlaskit/tokens@1.61.0",
         "type": "static"
       },
@@ -53565,16 +54690,6 @@
       }
     ],
     "npm:@atlaskit/smart-card": [
-      {
-        "source": "npm:@atlaskit/smart-card",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/smart-card",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/smart-card",
         "target": "npm:react-intl-next",
@@ -54112,16 +55227,6 @@
     "npm:@atlaskit/smart-user-picker": [
       {
         "source": "npm:@atlaskit/smart-user-picker",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/smart-user-picker",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/smart-user-picker",
         "target": "npm:@atlaskit/analytics-next@10.3.1",
         "type": "static"
       },
@@ -54258,11 +55363,6 @@
     "npm:@atlaskit/tabs": [
       {
         "source": "npm:@atlaskit/tabs",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/tabs",
         "target": "npm:@atlaskit/analytics-next",
         "type": "static"
       },
@@ -54303,6 +55403,11 @@
       }
     ],
     "npm:@atlaskit/tag": [
+      {
+        "source": "npm:@atlaskit/tag",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/tag",
         "target": "npm:@atlaskit/analytics-next@11.1.3",
@@ -54362,16 +55467,6 @@
     "npm:@atlaskit/task-decision": [
       {
         "source": "npm:@atlaskit/task-decision",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/task-decision",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/task-decision",
         "target": "npm:@atlaskit/analytics-namespaced-context",
         "type": "static"
       },
@@ -54419,6 +55514,11 @@
     "npm:@atlaskit/teams-app-config": [
       {
         "source": "npm:@atlaskit/teams-app-config",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/teams-app-config",
         "target": "npm:@atlaskit/atlassian-context",
         "type": "static"
       },
@@ -54459,6 +55559,11 @@
       }
     ],
     "npm:@atlaskit/teams-app-internal-analytics": [
+      {
+        "source": "npm:@atlaskit/teams-app-internal-analytics",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/teams-app-internal-analytics",
         "target": "npm:@atlaskit/analytics-listeners@9.1.0",
@@ -54503,6 +55608,11 @@
     "npm:@atlaskit/teams-app-internal-product-permissions": [
       {
         "source": "npm:@atlaskit/teams-app-internal-product-permissions",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/teams-app-internal-product-permissions",
         "target": "npm:@atlaskit/css@0.17.0",
         "type": "static"
       },
@@ -54533,6 +55643,11 @@
       }
     ],
     "npm:@atlaskit/teams-avatar": [
+      {
+        "source": "npm:@atlaskit/teams-avatar",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/teams-avatar",
         "target": "npm:@atlaskit/avatar@25.5.5",
@@ -54575,6 +55690,11 @@
       }
     ],
     "npm:@atlaskit/teams-client": [
+      {
+        "source": "npm:@atlaskit/teams-client",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/teams-client",
         "target": "npm:@atlaskit/atlassian-context",
@@ -54632,6 +55752,11 @@
       }
     ],
     "npm:@atlaskit/teams-public": [
+      {
+        "source": "npm:@atlaskit/teams-public",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/teams-public",
         "target": "npm:@atlaskit/afm-i18n-platform-people-and-teams-teams-public",
@@ -54806,11 +55931,6 @@
     "npm:@atlaskit/textarea": [
       {
         "source": "npm:@atlaskit/textarea",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/textarea",
         "target": "npm:@atlaskit/analytics-next",
         "type": "static"
       },
@@ -54841,11 +55961,6 @@
       }
     ],
     "npm:@atlaskit/textfield": [
-      {
-        "source": "npm:@atlaskit/textfield",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/textfield",
         "target": "npm:@atlaskit/analytics-next",
@@ -54880,6 +55995,11 @@
     "npm:@atlaskit/theme": [
       {
         "source": "npm:@atlaskit/theme",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/theme",
         "target": "npm:@atlaskit/codemod-utils",
         "type": "static"
       },
@@ -54900,6 +56020,11 @@
       }
     ],
     "npm:@atlaskit/tile": [
+      {
+        "source": "npm:@atlaskit/tile",
+        "target": "npm:react",
+        "type": "static"
+      },
       {
         "source": "npm:@atlaskit/tile",
         "target": "npm:@atlaskit/skeleton@2.1.4",
@@ -54924,6 +56049,11 @@
     "npm:@atlaskit/tmp-editor-statsig": [
       {
         "source": "npm:@atlaskit/tmp-editor-statsig",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@atlaskit/tmp-editor-statsig",
         "target": "npm:@atlaskit/feature-gate-js-client",
         "type": "static"
       },
@@ -54939,11 +56069,6 @@
       }
     ],
     "npm:@atlaskit/toggle": [
-      {
-        "source": "npm:@atlaskit/toggle",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/toggle",
         "target": "npm:@atlaskit/analytics-next",
@@ -54981,16 +56106,6 @@
       }
     ],
     "npm:@atlaskit/tooltip": [
-      {
-        "source": "npm:@atlaskit/tooltip",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:@atlaskit/tooltip",
-        "target": "npm:react-dom",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/tooltip",
         "target": "npm:@atlaskit/analytics-next",
@@ -55048,11 +56163,6 @@
       }
     ],
     "npm:@atlaskit/ufo": [
-      {
-        "source": "npm:@atlaskit/ufo",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:@atlaskit/ufo",
         "target": "npm:@babel/runtime",
@@ -61606,6 +62716,16 @@
       },
       {
         "source": "npm:@loomhq/lens",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@loomhq/lens",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@loomhq/lens",
         "target": "npm:@floating-ui/react-dom",
         "type": "static"
       },
@@ -61664,6 +62784,16 @@
       {
         "source": "npm:@loomhq/record-sdk",
         "target": "npm:@emotion/styled",
+        "type": "static"
+      },
+      {
+        "source": "npm:@loomhq/record-sdk",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@loomhq/record-sdk",
+        "target": "npm:react-dom",
         "type": "static"
       },
       {
@@ -65252,6 +66382,16 @@
         "source": "npm:@prisma/studio-core",
         "target": "npm:@types/react",
         "type": "static"
+      },
+      {
+        "source": "npm:@prisma/studio-core",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@prisma/studio-core",
+        "target": "npm:react-dom",
+        "type": "static"
       }
     ],
     "npm:@protobufjs/fetch": [
@@ -65451,6 +66591,11 @@
     "npm:@tanstack/react-query": [
       {
         "source": "npm:@tanstack/react-query",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@tanstack/react-query",
         "target": "npm:@tanstack/query-core",
         "type": "static"
       }
@@ -65567,6 +66712,16 @@
       {
         "source": "npm:@testing-library/react",
         "target": "npm:@types/react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@testing-library/react",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:@testing-library/react",
+        "target": "npm:react-dom",
         "type": "static"
       },
       {
@@ -71211,6 +72366,16 @@
       },
       {
         "source": "npm:framer-motion",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:framer-motion",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "npm:framer-motion",
         "target": "npm:motion-dom",
         "type": "static"
       },
@@ -75632,7 +76797,7 @@
       },
       {
         "source": "npm:prisma",
-        "target": "npm:@prisma/config@7.1.0",
+        "target": "npm:@prisma/config",
         "type": "static"
       },
       {
@@ -75658,28 +76823,6 @@
       {
         "source": "npm:prisma",
         "target": "npm:postgres",
-        "type": "static"
-      }
-    ],
-    "npm:@prisma/config@7.1.0": [
-      {
-        "source": "npm:@prisma/config@7.1.0",
-        "target": "npm:c12",
-        "type": "static"
-      },
-      {
-        "source": "npm:@prisma/config@7.1.0",
-        "target": "npm:deepmerge-ts",
-        "type": "static"
-      },
-      {
-        "source": "npm:@prisma/config@7.1.0",
-        "target": "npm:effect",
-        "type": "static"
-      },
-      {
-        "source": "npm:@prisma/config@7.1.0",
-        "target": "npm:empathic",
         "type": "static"
       }
     ],
@@ -76046,16 +77189,6 @@
         "source": "npm:react",
         "target": "npm:loose-envify",
         "type": "static"
-      },
-      {
-        "source": "npm:react",
-        "target": "npm:object-assign",
-        "type": "static"
-      },
-      {
-        "source": "npm:react",
-        "target": "npm:prop-types",
-        "type": "static"
       }
     ],
     "npm:react-clientside-effect": [
@@ -76095,29 +77228,7 @@
       },
       {
         "source": "npm:react-dom",
-        "target": "npm:object-assign",
-        "type": "static"
-      },
-      {
-        "source": "npm:react-dom",
-        "target": "npm:prop-types",
-        "type": "static"
-      },
-      {
-        "source": "npm:react-dom",
-        "target": "npm:scheduler@0.19.1",
-        "type": "static"
-      }
-    ],
-    "npm:scheduler@0.19.1": [
-      {
-        "source": "npm:scheduler@0.19.1",
-        "target": "npm:loose-envify",
-        "type": "static"
-      },
-      {
-        "source": "npm:scheduler@0.19.1",
-        "target": "npm:object-assign",
+        "target": "npm:scheduler",
         "type": "static"
       }
     ],
@@ -76270,6 +77381,58 @@
         "type": "static"
       }
     ],
+    "npm:react-intl": [
+      {
+        "source": "npm:react-intl",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "npm:react-intl",
+        "target": "npm:typescript",
+        "type": "static"
+      },
+      {
+        "source": "npm:react-intl",
+        "target": "npm:@formatjs/ecma402-abstract@2.3.6",
+        "type": "static"
+      },
+      {
+        "source": "npm:react-intl",
+        "target": "npm:@formatjs/icu-messageformat-parser@2.11.4",
+        "type": "static"
+      },
+      {
+        "source": "npm:react-intl",
+        "target": "npm:@formatjs/intl@3.1.8",
+        "type": "static"
+      },
+      {
+        "source": "npm:react-intl",
+        "target": "npm:@types/hoist-non-react-statics",
+        "type": "static"
+      },
+      {
+        "source": "npm:react-intl",
+        "target": "npm:@types/react",
+        "type": "static"
+      },
+      {
+        "source": "npm:react-intl",
+        "target": "npm:hoist-non-react-statics",
+        "type": "static"
+      },
+      {
+        "source": "npm:react-intl",
+        "target": "npm:intl-messageformat@10.7.18",
+        "type": "static"
+      },
+      {
+        "source": "npm:react-intl",
+        "target": "npm:tslib",
+        "type": "static"
+      }
+    ],
     "npm:react-intl-next": [
       {
         "source": "npm:react-intl-next",
@@ -76327,6 +77490,125 @@
         "type": "static"
       }
     ],
+    "npm:@formatjs/ecma402-abstract@2.3.6": [
+      {
+        "source": "npm:@formatjs/ecma402-abstract@2.3.6",
+        "target": "npm:@formatjs/fast-memoize@2.2.7",
+        "type": "static"
+      },
+      {
+        "source": "npm:@formatjs/ecma402-abstract@2.3.6",
+        "target": "npm:@formatjs/intl-localematcher@0.6.2",
+        "type": "static"
+      },
+      {
+        "source": "npm:@formatjs/ecma402-abstract@2.3.6",
+        "target": "npm:decimal.js",
+        "type": "static"
+      },
+      {
+        "source": "npm:@formatjs/ecma402-abstract@2.3.6",
+        "target": "npm:tslib",
+        "type": "static"
+      }
+    ],
+    "npm:@formatjs/fast-memoize@2.2.7": [
+      {
+        "source": "npm:@formatjs/fast-memoize@2.2.7",
+        "target": "npm:tslib",
+        "type": "static"
+      }
+    ],
+    "npm:@formatjs/icu-messageformat-parser@2.11.4": [
+      {
+        "source": "npm:@formatjs/icu-messageformat-parser@2.11.4",
+        "target": "npm:@formatjs/ecma402-abstract@2.3.6",
+        "type": "static"
+      },
+      {
+        "source": "npm:@formatjs/icu-messageformat-parser@2.11.4",
+        "target": "npm:@formatjs/icu-skeleton-parser@1.8.16",
+        "type": "static"
+      },
+      {
+        "source": "npm:@formatjs/icu-messageformat-parser@2.11.4",
+        "target": "npm:tslib",
+        "type": "static"
+      }
+    ],
+    "npm:@formatjs/icu-skeleton-parser@1.8.16": [
+      {
+        "source": "npm:@formatjs/icu-skeleton-parser@1.8.16",
+        "target": "npm:@formatjs/ecma402-abstract@2.3.6",
+        "type": "static"
+      },
+      {
+        "source": "npm:@formatjs/icu-skeleton-parser@1.8.16",
+        "target": "npm:tslib",
+        "type": "static"
+      }
+    ],
+    "npm:@formatjs/intl@3.1.8": [
+      {
+        "source": "npm:@formatjs/intl@3.1.8",
+        "target": "npm:typescript",
+        "type": "static"
+      },
+      {
+        "source": "npm:@formatjs/intl@3.1.8",
+        "target": "npm:@formatjs/ecma402-abstract@2.3.6",
+        "type": "static"
+      },
+      {
+        "source": "npm:@formatjs/intl@3.1.8",
+        "target": "npm:@formatjs/fast-memoize@2.2.7",
+        "type": "static"
+      },
+      {
+        "source": "npm:@formatjs/intl@3.1.8",
+        "target": "npm:@formatjs/icu-messageformat-parser@2.11.4",
+        "type": "static"
+      },
+      {
+        "source": "npm:@formatjs/intl@3.1.8",
+        "target": "npm:intl-messageformat@10.7.18",
+        "type": "static"
+      },
+      {
+        "source": "npm:@formatjs/intl@3.1.8",
+        "target": "npm:tslib",
+        "type": "static"
+      }
+    ],
+    "npm:@formatjs/intl-localematcher@0.6.2": [
+      {
+        "source": "npm:@formatjs/intl-localematcher@0.6.2",
+        "target": "npm:tslib",
+        "type": "static"
+      }
+    ],
+    "npm:intl-messageformat@10.7.18": [
+      {
+        "source": "npm:intl-messageformat@10.7.18",
+        "target": "npm:@formatjs/ecma402-abstract@2.3.6",
+        "type": "static"
+      },
+      {
+        "source": "npm:intl-messageformat@10.7.18",
+        "target": "npm:@formatjs/fast-memoize@2.2.7",
+        "type": "static"
+      },
+      {
+        "source": "npm:intl-messageformat@10.7.18",
+        "target": "npm:@formatjs/icu-messageformat-parser@2.11.4",
+        "type": "static"
+      },
+      {
+        "source": "npm:intl-messageformat@10.7.18",
+        "target": "npm:tslib",
+        "type": "static"
+      }
+    ],
     "npm:react-laag": [
       {
         "source": "npm:react-laag",
@@ -76345,11 +77627,6 @@
       }
     ],
     "npm:react-lazily-render": [
-      {
-        "source": "npm:react-lazily-render",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:react-lazily-render",
         "target": "npm:scrollparent",
@@ -76372,11 +77649,6 @@
       {
         "source": "npm:react-loosely-lazy",
         "target": "npm:@react-loosely-lazy/manifest",
-        "type": "static"
-      },
-      {
-        "source": "npm:react-loosely-lazy",
-        "target": "npm:react",
         "type": "static"
       }
     ],
@@ -76498,11 +77770,6 @@
       }
     ],
     "npm:react-scrolllock": [
-      {
-        "source": "npm:react-scrolllock",
-        "target": "npm:react",
-        "type": "static"
-      },
       {
         "source": "npm:react-scrolllock",
         "target": "npm:exenv",
@@ -76690,13 +77957,6 @@
       {
         "source": "npm:react-uid",
         "target": "npm:tslib",
-        "type": "static"
-      }
-    ],
-    "npm:react-video-renderer": [
-      {
-        "source": "npm:react-video-renderer",
-        "target": "npm:react",
         "type": "static"
       }
     ],
@@ -78615,18 +79875,6 @@
         "type": "static"
       }
     ],
-    "npm:transition-hook": [
-      {
-        "source": "npm:transition-hook",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "npm:transition-hook",
-        "target": "npm:react-dom",
-        "type": "static"
-      }
-    ],
     "npm:ts-api-utils": [
       {
         "source": "npm:ts-api-utils",
@@ -80251,5 +81499,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1765113462448
+  "computedAt": 1765116386789
 }

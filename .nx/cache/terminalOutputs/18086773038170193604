@@ -1,0 +1,50 @@
+Compiling TypeScript files for project "api"...
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m24[0m:[93m4[0m - [91merror[0m[90m TS2304: [0mCannot find name 'ValidateIf'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m24[0m   @ValidateIf((o) => !o.contactInfo)[39m[22m
+[1m[31m[7m  [0m [91m   ~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m24[0m:[93m16[0m - [91merror[0m[90m TS7006: [0mParameter 'o' implicitly has an 'any' type.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m24[0m   @ValidateIf((o) => !o.contactInfo)[39m[22m
+[1m[31m[7m  [0m [91m               ~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m29[0m:[93m4[0m - [91merror[0m[90m TS2304: [0mCannot find name 'ValidateIf'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m29[0m   @ValidateIf((o) => !o.email)[39m[22m
+[1m[31m[7m  [0m [91m   ~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m29[0m:[93m16[0m - [91merror[0m[90m TS7006: [0mParameter 'o' implicitly has an 'any' type.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m29[0m   @ValidateIf((o) => !o.email)[39m[22m
+[1m[31m[7m  [0m [91m               ~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m78[0m:[93m4[0m - [91merror[0m[90m TS2304: [0mCannot find name 'ValidateIf'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m78[0m   @ValidateIf((o) => !o.contactInfo)[39m[22m
+[1m[31m[7m  [0m [91m   ~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m78[0m:[93m16[0m - [91merror[0m[90m TS7006: [0mParameter 'o' implicitly has an 'any' type.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m78[0m   @ValidateIf((o) => !o.contactInfo)[39m[22m
+[1m[31m[7m  [0m [91m               ~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m83[0m:[93m4[0m - [91merror[0m[90m TS2304: [0mCannot find name 'ValidateIf'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m83[0m   @ValidateIf((o) => !o.email)[39m[22m
+[1m[31m[7m  [0m [91m   ~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m83[0m:[93m16[0m - [91merror[0m[90m TS7006: [0mParameter 'o' implicitly has an 'any' type.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m83[0m   @ValidateIf((o) => !o.email)[39m[22m
+[1m[31m[7m  [0m [91m               ~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m135[0m:[93m4[0m - [91merror[0m[90m TS2304: [0mCannot find name 'ValidateIf'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m135[0m   @ValidateIf((o) => !o.contactInfo)[39m[22m
+[1m[31m[7m   [0m [91m   ~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m135[0m:[93m16[0m - [91merror[0m[90m TS7006: [0mParameter 'o' implicitly has an 'any' type.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m135[0m   @ValidateIf((o) => !o.contactInfo)[39m[22m
+[1m[31m[7m   [0m [91m               ~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m140[0m:[93m4[0m - [91merror[0m[90m TS2304: [0mCannot find name 'ValidateIf'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m140[0m   @ValidateIf((o) => !o.email)[39m[22m
+[1m[31m[7m   [0m [91m   ~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m140[0m:[93m16[0m - [91merror[0m[90m TS7006: [0mParameter 'o' implicitly has an 'any' type.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m140[0m   @ValidateIf((o) => !o.email)[39m[22m
+[1m[31m[7m   [0m [91m               ~[0m[39m[22m
+[1m[31m[39m[22m
