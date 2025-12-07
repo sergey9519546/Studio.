@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
-import { PromptTesterService, PromptTestCase } from './prompt-tester.service';
+import { PromptTesterService } from './prompt-tester.service';
+import type { PromptTestCase } from './prompt-tester.service';
 import { PROMPT_TEST_CASES, getTestCasesForTemplate } from './test-cases';
 
 @Controller('testing')

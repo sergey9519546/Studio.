@@ -3,6 +3,7 @@
 export interface PromptTemplate {
     systemPrompt: string;
     userPrompt: (data: unknown) => string;
+    version?: string;
 }
 
 interface FreelancerAnalysisData {
@@ -23,6 +24,7 @@ interface ProjectProfitabilityData {
 
 export const PROMPT_TEMPLATES: Record<string, PromptTemplate> = {
     freelancerAnalysis: {
+        version: '1.0',
         systemPrompt: `You are an expert HR analyst for creative agencies.
 
 **ROLE:** Analyze freelancer performance and provide actionable insights.
@@ -65,6 +67,7 @@ Recent Work: ${freelancerData.recentProjects.map((p) => p.title).join(', ')}
     },
 
     projectProfitability: {
+        version: '1.0',
         systemPrompt: `You are a financial analyst for creative agencies.
 
 **ROLE:** Analyze project profitability and identify optimization opportunities.
@@ -104,6 +107,7 @@ Team: ${projectData.assignments.map((a) => `${a.freelancer.name} (${a.role})`).j
     },
 
     chat: {
+        version: '1.0',
         systemPrompt: `You are an expert AI analyst for a creative agency management system.
 
 **ROLE:** Analyze freelancers, projects, workload, and provide data-driven insights.

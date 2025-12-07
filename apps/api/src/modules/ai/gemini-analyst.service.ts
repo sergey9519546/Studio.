@@ -1,32 +1,23 @@
 import { Injectable, Inject, Logger } from '@nestjs/common';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Cache } from 'cache-manager';
+import type { Cache } from 'cache-manager';
 import { VertexAIService } from './vertex-ai.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { getTools } from './tools';
+import type { ToolCall, ToolDefinition } from './types';
 import { createHash } from 'crypto';
-
-export interface ToolCall {
-  name: string;
-  args: Record<string, unknown>;
-}
-
-export interface Tool {
-  name: string;
-  function: (args: Record<string, unknown>) => unknown | Promise<unknown>;
-}
 
 @Injectable()
 export class GeminiAnalystService {
   private readonly logger = new Logger(GeminiAnalystService.name);
-  private tools: Tool[];
+  private tools: ToolDefinition[];
 
   constructor(
     private vertexAI: VertexAIService,
     private prisma: PrismaService,
     @Inject(CACHE_MANAGER) private cache: Cache
   ) {
-    this.tools = getTools(this.prisma) as Tool[];
+    this.tools = getTools(this.prisma);
   }
 
   /**

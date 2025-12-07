@@ -1,6 +1,7 @@
 import { PredictionServiceClient, protos } from "@google-cloud/aiplatform";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import type { ToolCall, ToolDefinition } from "./types";
 
 type IValue = protos.google.protobuf.IValue;
 
@@ -100,7 +101,7 @@ export class VertexAIService {
   /**
    * Safely extract content from Vertex AI prediction response
    */
-  private extractPredictionContent(prediction: Record<string, unknown>): string | { toolCalls: Record<string, unknown>[] } | null {
+  private extractPredictionContent(prediction: Record<string, unknown>): string | { toolCalls: ToolCall[] } | null {
     try {
       const content = this.safeGet(prediction, [
         'structValue',
@@ -126,12 +127,12 @@ export class VertexAIService {
       // Check for function calls
       const functionCall = this.safeGet(content, ['fields', 'functionCall', 'structValue', 'fields']) as Record<string, unknown>;
       if (functionCall) {
-        return {
-          toolCalls: [{
-            name: this.safeGet(functionCall, ['name', 'stringValue']) as string || 'unknown_function',
-            args: this.safeGet(functionCall, ['args', 'structValue', 'fields']) as Record<string, unknown> || {}
-          }]
-        };
+      return {
+        toolCalls: [{
+          name: (this.safeGet(functionCall, ['name', 'stringValue']) as string) || 'unknown_function',
+          args: (this.safeGet(functionCall, ['args', 'structValue', 'fields']) as Record<string, unknown>) || {}
+        }]
+      };
       }
 
       // Check for text content
@@ -162,8 +163,8 @@ export class VertexAIService {
   async chat(
     messages: Array<{ role: string; content: string }>,
     systemPrompt?: string,
-    tools?: Record<string, unknown>[]
-  ): Promise<string | { toolCalls: Record<string, unknown>[] }> {
+    tools?: ToolDefinition[]
+  ): Promise<string | { toolCalls: ToolCall[] }> {
     const endpoint = `projects/${this.project}/locations/${this.location}/publishers/${this.publisher}/models/gemini-1.5-pro`;
 
     const instanceFields: Record<string, IValue> = {
@@ -221,11 +222,11 @@ export class VertexAIService {
                             parameters: {
                               structValue: {
                                 fields: {
-                                  type: { stringValue: (tool.parameters as Record<string, unknown>).type as string },
+                                  type: { stringValue: tool.parameters.type },
                                   properties: {
                                     structValue: {
                                       fields: Object.entries(
-                                        (tool.parameters as Record<string, unknown>).properties as Record<string, { type: string; description: string }>
+                                        tool.parameters.properties
                                       ).reduce(
                                         (
                                           acc: Record<string, IValue>,
@@ -252,9 +253,8 @@ export class VertexAIService {
                                   },
                                   required: {
                                     listValue: {
-                                      values: ((tool.parameters as Record<string, unknown>).required as string[]).map(
-                                        (r: string) =>
-                                          ({ stringValue: r }) as IValue
+                                      values: tool.parameters.required.map(
+                                        (r) => ({ stringValue: r }) as IValue
                                       ),
                                     },
                                   },

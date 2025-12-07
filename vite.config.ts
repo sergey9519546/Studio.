@@ -1,6 +1,11 @@
 // vite.config.ts - Production Optimizations
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import { resolve } from "path";
+
+const iconCorePath = resolve(__dirname, "node_modules/@atlaskit/icon/core");
+const iconEsmPath = resolve(__dirname, "node_modules/@atlaskit/icon/dist/esm");
+const iconGlyphPath = resolve(__dirname, "node_modules/@atlaskit/icon/glyph");
 
 export default defineConfig({
   plugins: [react()],
@@ -51,10 +56,40 @@ export default defineConfig({
 
   // Resolve options
   resolve: {
-    alias: {
-      "@": "/src",
-      "@atlaskit/editor-core/node_modules/@atlaskit/adf-schema/dist/esm/schema/inline-nodes":
-        "/shims/atlaskit-inline-nodes.js",
-    },
+    alias: [
+      {
+        find: "@atlaskit/icon/utility/migration/cross-circle",
+        replacement: `${iconCorePath}/migration/cross-circle.js`,
+      },
+      {
+        find: "@atlaskit/icon/utility/migration",
+        replacement: `${iconCorePath}/migration`,
+      },
+      {
+        find: "@atlaskit/icon/utility",
+        replacement: iconEsmPath,
+      },
+      {
+        find: /^@atlaskit\/icon\/core\/(.+)/,
+        replacement: `${resolve(
+          __dirname,
+          "node_modules/@atlaskit/icon/glyph"
+        )}/$1.js`,
+      },
+      {
+        find: "@atlaskit/editor-core/node_modules/@atlaskit/adf-schema/dist/esm/schema/inline-nodes",
+        replacement: "/shims/atlaskit-inline-nodes.js",
+      },
+      { find: "@", replacement: "/src" },
+    ],
+    dedupe: [
+      "@atlaskit/media-client",
+      "@atlaskit/tokens",
+      "@atlaskit/editor-common",
+      "@atlaskit/adf-utils",
+      "@atlaskit/media-ui",
+      "@atlaskit/icon",
+      "@atlaskit/icon-object",
+    ],
   },
 });

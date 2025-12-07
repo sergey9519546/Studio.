@@ -4,7 +4,7 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { Freelancer, Skill } from '@prisma/client';
 import { CreateFreelancerDto, UpdateFreelancerDto, ImportFreelancerDto } from './dto/freelancer.dto';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Cache } from 'cache-manager';
+import type { Cache } from 'cache-manager';
 
 @Injectable()
 export class FreelancersService {

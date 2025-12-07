@@ -1,0 +1,26 @@
+Compiling TypeScript files for project "api"...
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/monitoring/ai-usage.service.ts[0m:[93m38[0m:[93m11[0m - [91merror[0m[90m TS4055: [0mReturn type of public method from exported class has or is using private name 'GroupedEndpointStats'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m38[0m     async getStats(timeRange: { start: Date; end: Date }) {[39m[22m
+[1m[31m[7m  [0m [91m          ~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/monitoring/monitoring.controller.ts[0m:[93m20[0m:[93m9[0m - [91merror[0m[90m TS4053: [0mReturn type of public method from exported class has or is using name 'GroupedEndpointStats' from external module "/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/monitoring/ai-usage.service" but cannot be named.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m20[0m   async getToday() {[39m[22m
+[1m[31m[7m  [0m [91m        ~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/monitoring/monitoring.controller.ts[0m:[93m27[0m:[93m9[0m - [91merror[0m[90m TS4053: [0mReturn type of public method from exported class has or is using name 'GroupedEndpointStats' from external module "/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/monitoring/ai-usage.service" but cannot be named.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m27[0m   async getWeek() {[39m[22m
+[1m[31m[7m  [0m [91m        ~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/monitoring/monitoring.controller.ts[0m:[93m34[0m:[93m9[0m - [91merror[0m[90m TS4053: [0mReturn type of public method from exported class has or is using name 'GroupedEndpointStats' from external module "/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/monitoring/ai-usage.service" but cannot be named.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m34[0m   async getMonth() {[39m[22m
+[1m[31m[7m  [0m [91m        ~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/monitoring/monitoring.controller.ts[0m:[93m41[0m:[93m9[0m - [91merror[0m[90m TS4053: [0mReturn type of public method from exported class has or is using name 'GroupedEndpointStats' from external module "/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/monitoring/ai-usage.service" but cannot be named.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m41[0m   async getCustom(@Query("start") start: string, @Query("end") end: string) {[39m[22m
+[1m[31m[7m  [0m [91m        ~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/monitoring/monitoring.controller.ts[0m:[93m49[0m:[93m9[0m - [91merror[0m[90m TS4053: [0mReturn type of public method from exported class has or is using name 'GroupedEndpointStats' from external module "/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/monitoring/ai-usage.service" but cannot be named.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m49[0m   async getDashboard() {[39m[22m
+[1m[31m[7m  [0m [91m        ~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m

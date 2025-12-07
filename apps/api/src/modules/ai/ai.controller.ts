@@ -18,7 +18,7 @@ import { GeminiAnalystService } from './gemini-analyst.service';
 import { RAGService } from '../rag/rag.service';
 import { StreamingService } from './streaming.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
-import { Response } from 'express';
+import type { Response } from 'express';
 
 interface ChatRequest {
     userId?: string;
@@ -83,7 +83,7 @@ export class AIController {
         }
 
         // Step 1: Build user context
-        const userContext = this.buildUserContext(userId, projectId, role, parsedContext);
+        const userContext = this.buildUserContext(userId, projectId, role);
 
         // Step 2: Retrieve relevant code context using RAG  
         const ragResponse = await this.rag.query(message, { topK: 5, projectId, includeContext: false });

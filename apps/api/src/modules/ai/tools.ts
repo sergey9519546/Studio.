@@ -1,6 +1,7 @@
 import { PrismaService } from '../../prisma/prisma.service';
+import type { ToolDefinition } from './types';
 
-export const getTools = (prisma: PrismaService) => [
+export const getTools = (prisma: PrismaService): ToolDefinition[] => [
   {
     name: 'createProject',
     description: 'Create a new project',
@@ -13,7 +14,12 @@ export const getTools = (prisma: PrismaService) => [
       },
       required: ['title', 'description', 'budget'],
     },
-    function: async ({ title, description, budget }: { title: string; description: string; budget: number }) => {
+    function: async (args: Record<string, unknown>) => {
+      const { title, description, budget } = args as {
+        title: string;
+        description: string;
+        budget: number;
+      };
       const project = await prisma.project.create({
         data: {
           title,
@@ -36,7 +42,12 @@ export const getTools = (prisma: PrismaService) => [
       },
       required: ['projectId', 'freelancerId', 'role'],
     },
-    function: async ({ projectId, freelancerId, role }: { projectId: string; freelancerId: string; role: string }) => {
+    function: async (args: Record<string, unknown>) => {
+      const { projectId, freelancerId, role } = args as {
+        projectId: string;
+        freelancerId: string;
+        role: string;
+      };
       const assignment = await prisma.assignment.create({
         data: {
           projectId,

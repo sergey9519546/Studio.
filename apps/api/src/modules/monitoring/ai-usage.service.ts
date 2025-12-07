@@ -15,6 +15,25 @@ interface AIUsageRecord {
     projectId?: string;
 }
 
+export interface GroupedEndpointStats {
+    count: number;
+    cost: number | string;
+    avgDuration: number | string;
+    cached: number;
+    cacheRate?: string;
+}
+
+export interface AIUsageStats {
+    totalRequests: number;
+    cachedRequests: number;
+    uncachedRequests: number;
+    cacheHitRate: string;
+    totalCost: string;
+    costSaved: string;
+    avgDuration: string;
+    byEndpoint: Record<string, GroupedEndpointStats>;
+}
+
 @Injectable()
 export class AIUsageService {
     constructor(private prisma: PrismaService) { }
@@ -35,7 +54,7 @@ export class AIUsageService {
         });
     }
 
-    async getStats(timeRange: { start: Date; end: Date }) {
+    async getStats(timeRange: { start: Date; end: Date }): Promise<AIUsageStats> {
         const usage = await this.prisma.aIUsage.findMany({
             where: {
                 timestamp: {
@@ -67,14 +86,7 @@ export class AIUsageService {
         };
     }
 
-    private groupByEndpoint(usage: { endpoint: string; cost: number; duration: number; cached: boolean }[]) {
-        interface GroupedEndpointStats {
-            count: number;
-            cost: number | string;
-            avgDuration: number | string;
-            cached: number;
-            cacheRate?: string;
-        }
+    private groupByEndpoint(usage: { endpoint: string; cost: number; duration: number; cached: boolean }[]): Record<string, GroupedEndpointStats> {
 
         const grouped = usage.reduce((acc, u) => {
             if (!acc[u.endpoint]) {

@@ -21,7 +21,6 @@ import {
   Logger,
   NotFoundException,
   Param,
-  Param,
   ParseIntPipe,
   Post,
   Query,

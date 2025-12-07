@@ -1,0 +1,45 @@
+Compiling TypeScript files for project "api"...
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/providers/vertex-ai.provider.ts[0m:[93m41[0m:[93m9[0m - [91merror[0m[90m TS2322: [0mType 'string | { toolCalls: ToolCall[]; }' is not assignable to type 'string | { toolCalls: Record<string, unknown>[]; }'.[39m[22m
+[1m[31m  Type '{ toolCalls: ToolCall[]; }' is not assignable to type 'string | { toolCalls: Record<string, unknown>[]; }'.[39m[22m
+[1m[31m    Type '{ toolCalls: ToolCall[]; }' is not assignable to type '{ toolCalls: Record<string, unknown>[]; }'.[39m[22m
+[1m[31m      Types of property 'toolCalls' are incompatible.[39m[22m
+[1m[31m        Type 'ToolCall[]' is not assignable to type 'Record<string, unknown>[]'.[39m[22m
+[1m[31m          Type 'ToolCall' is not assignable to type 'Record<string, unknown>'.[39m[22m
+[1m[31m            Index signature for type 'string' is missing in type 'ToolCall'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m41[0m         return this.vertexAI.chat(messages, systemPrompt, options?.tools);[39m[22m
+[1m[31m[7m  [0m [91m        ~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/providers/vertex-ai.provider.ts[0m:[93m41[0m:[93m59[0m - [91merror[0m[90m TS2345: [0mArgument of type 'Record<string, unknown>[] | undefined' is not assignable to parameter of type 'ToolDefinition[] | undefined'.[39m[22m
+[1m[31m  Type 'Record<string, unknown>[]' is not assignable to type 'ToolDefinition[]'.[39m[22m
+[1m[31m    Type 'Record<string, unknown>' is missing the following properties from type 'ToolDefinition': name, description, parameters, function[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m41[0m         return this.vertexAI.chat(messages, systemPrompt, options?.tools);[39m[22m
+[1m[31m[7m  [0m [91m                                                          ~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/tools.ts[0m:[93m17[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType '({ title, description, budget }: { title: string; description: string; budget: number; }) => Promise<{ id: string; budget: number | null; client: string | null; description: string | null; status: string; title: string; startDate: Date | null; endDate: Date | null; updatedAt: Date; createdAt: Date; }>' is not assignable to type '(args: Record<string, unknown>) => unknown'.[39m[22m
+[1m[31m  Types of parameters '__0' and 'args' are incompatible.[39m[22m
+[1m[31m    Type 'Record<string, unknown>' is missing the following properties from type '{ title: string; description: string; budget: number; }': title, description, budget[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m17[0m     function: async ({ title, description, budget }: { title: string; description: string; budget: number }) => {[39m[22m
+[1m[31m[7m  [0m [91m    ~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/types.ts[0m:[93m14[0m:[93m3[0m[39m[22m
+[1m[31m    [7m14[0m   function: (args: Record<string, unknown>) => unknown | Promise<unknown>;[39m[22m
+[1m[31m    [7m  [0m [96m  ~~~~~~~~[0m[39m[22m
+[1m[31m    The expected type comes from property 'function' which is declared here on type 'ToolDefinition'[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/tools.ts[0m:[93m40[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType '({ projectId, freelancerId, role }: { projectId: string; freelancerId: string; role: string; }) => Promise<{ id: string; projectId: string; role: string; status: string; startDate: Date; endDate: Date; updatedAt: Date; createdAt: Date; freelancerId: string; allocation: number; notes: string | null; }>' is not assignable to type '(args: Record<string, unknown>) => unknown'.[39m[22m
+[1m[31m  Types of parameters '__0' and 'args' are incompatible.[39m[22m
+[1m[31m    Type 'Record<string, unknown>' is missing the following properties from type '{ projectId: string; freelancerId: string; role: string; }': projectId, freelancerId, role[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m40[0m     function: async ({ projectId, freelancerId, role }: { projectId: string; freelancerId: string; role: string }) => {[39m[22m
+[1m[31m[7m  [0m [91m    ~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/types.ts[0m:[93m14[0m:[93m3[0m[39m[22m
+[1m[31m    [7m14[0m   function: (args: Record<string, unknown>) => unknown | Promise<unknown>;[39m[22m
+[1m[31m    [7m  [0m [96m  ~~~~~~~~[0m[39m[22m
+[1m[31m    The expected type comes from property 'function' which is declared here on type 'ToolDefinition'[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/integrations/cloud-storage/adapters/google-drive.adapter.ts[0m:[93m38[0m:[93m9[0m - [91merror[0m[90m TS2322: [0mType 'string | undefined' is not assignable to type 'string'.[39m[22m
+[1m[31m  Type 'undefined' is not assignable to type 'string'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m38[0m         refreshToken: user.googleRefreshToken || undefined[39m[22m
+[1m[31m[7m  [0m [91m        ~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m

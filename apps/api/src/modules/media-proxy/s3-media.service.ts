@@ -62,9 +62,10 @@ export class S3MediaService {
       
       this.logger.log(`File uploaded successfully: ${key}`);
       return key;
-    } catch (error) {
-      this.logger.error(`Failed to upload file to S3: ${error.message}`, error.stack);
-      throw new Error(`S3 upload failed: ${error.message}`);
+    } catch (error: unknown) {
+      const err = error instanceof Error ? error : new Error('Unknown S3 upload error');
+      this.logger.error(`Failed to upload file to S3: ${err.message}`, err.stack);
+      throw new Error(`S3 upload failed: ${err.message}`);
     }
   }
 
@@ -89,9 +90,10 @@ export class S3MediaService {
       
       this.logger.debug(`Generated pre-signed URL for: ${key}`);
       return url;
-    } catch (error) {
-      this.logger.error(`Failed to generate signed URL: ${error.message}`, error.stack);
-      throw new Error(`Failed to generate signed URL: ${error.message}`);
+    } catch (error: unknown) {
+      const err = error instanceof Error ? error : new Error('Unknown signed URL error');
+      this.logger.error(`Failed to generate signed URL: ${err.message}`, err.stack);
+      throw new Error(`Failed to generate signed URL: ${err.message}`);
     }
   }
 

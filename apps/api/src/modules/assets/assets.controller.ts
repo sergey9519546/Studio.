@@ -14,7 +14,8 @@ import {
   UseGuards
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { AssetsService, MulterFile } from './assets.service';
+import { AssetsService } from './assets.service';
+import type { MulterFile } from './assets.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 
 @Controller({ path: 'assets', version: '1' })

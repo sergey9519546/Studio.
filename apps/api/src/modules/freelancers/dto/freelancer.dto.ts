@@ -6,6 +6,7 @@ import {
   IsString,
   IsUUID,
   Min,
+  ValidateIf,
 } from "class-validator";
 
 export enum AvailabilityStatus {
@@ -21,12 +22,12 @@ export class CreateFreelancerDto {
 
   // Accept either email or legacy contactInfo; one is required
   @IsOptional()
-  @ValidateIf((o) => !o.contactInfo)
+  @ValidateIf((o: CreateFreelancerDto) => !o.contactInfo)
   @IsEmail()
   email?: string;
 
   @IsOptional()
-  @ValidateIf((o) => !o.email)
+  @ValidateIf((o: CreateFreelancerDto) => !o.email)
   @IsEmail()
   contactInfo?: string;
 
@@ -75,12 +76,12 @@ export class UpdateFreelancerDto {
   name?: string;
 
   @IsOptional()
-  @ValidateIf((o) => !o.contactInfo)
+  @ValidateIf((o: UpdateFreelancerDto) => !o.contactInfo)
   @IsEmail()
   email?: string;
 
   @IsOptional()
-  @ValidateIf((o) => !o.email)
+  @ValidateIf((o: UpdateFreelancerDto) => !o.email)
   @IsEmail()
   contactInfo?: string;
 
@@ -132,12 +133,12 @@ export class ImportFreelancerDto {
   name!: string;
 
   @IsOptional()
-  @ValidateIf((o) => !o.contactInfo)
+  @ValidateIf((o: ImportFreelancerDto) => !o.contactInfo)
   @IsEmail()
   email?: string;
 
   @IsOptional()
-  @ValidateIf((o) => !o.email)
+  @ValidateIf((o: ImportFreelancerDto) => !o.email)
   @IsEmail()
   contactInfo?: string;
 

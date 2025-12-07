@@ -211,7 +211,8 @@ export class RAGService {
    * Summarize multiple documents
    */
   async summarizeDocuments(
-    documentIds: string[]
+    documentIds: string[],
+    options: { maxLength?: number } = {}
   ): Promise<{ summary: string; documentsProcessed: number }> {
     this.logger.log(`Summarizing ${documentIds.length} documents`);
 
@@ -228,8 +229,12 @@ export class RAGService {
 
     // Combine and summarize
     const combinedText = contents.join("\n\n---\n\n");
+    const lengthHint = options.maxLength
+      ? ` Please keep the summary under ${options.maxLength} tokens.`
+      : '';
+
     const prompt = `Please provide a comprehensive summary of the following documents. 
-Focus on key points, main ideas, and important details.
+Focus on key points, main ideas, and important details.${lengthHint}
 
 Documents:
 ${combinedText}

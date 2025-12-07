@@ -4,6 +4,8 @@
  * Abstraction layer for multiple AI providers (Vertex AI, OpenAI, Claude, etc.)
  */
 
+import type { ToolCall, ToolDefinition } from '../types';
+
 export interface AIProvider {
     name: string;
     models: string[];
@@ -12,7 +14,7 @@ export interface AIProvider {
         messages: Array<{ role: string; content: string }>,
         systemPrompt: string,
         options?: ChatOptions
-    ): Promise<string | { toolCalls: Record<string, unknown>[] }>;
+    ): Promise<string | { toolCalls: ToolCall[] }>;
 
     generateContent(prompt: string, options?: GenerateOptions): Promise<string>;
 
@@ -25,7 +27,7 @@ export interface ChatOptions {
     model?: string;
     temperature?: number;
     maxTokens?: number;
-    tools?: Record<string, unknown>[];
+    tools?: ToolDefinition[];
 }
 
 export interface GenerateOptions {

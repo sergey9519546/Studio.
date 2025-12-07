@@ -45,7 +45,7 @@ export class OptimizationController {
 
             results.push({
                 template: templateName,
-                currentVersion: template.version,
+                currentVersion: template.version || '1.0',
                 qualityScore: avgScore,
                 recommendations: this.generateRecommendations(avgScore),
                 estimatedImprovement: avgScore < 0.7 ? '15-20%' : '5-10%',

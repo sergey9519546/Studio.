@@ -6,7 +6,7 @@ import { OAuth2Client, JWT } from 'google-auth-library';
 
 export interface GoogleUserCredentials {
   accessToken?: string;
-  refreshToken: string;
+  refreshToken?: string;
 }
 
 export interface AuthenticatedUser {
