@@ -1,5 +1,5 @@
 import { ArrowRight, Brain } from "lucide-react";
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import Card from "../../components/ui/Card";
 
 interface SparkAICardProps {
@@ -7,14 +7,19 @@ interface SparkAICardProps {
   className?: string;
 }
 
+const MAX_PROMPT_LENGTH = 160;
+
 const SparkAICard: React.FC<SparkAICardProps> = ({ onSubmitPrompt, className = "" }) => {
   const [prompt, setPrompt] = useState("");
+  const helperId = useId();
   const accent = "var(--dashboard-accent, #2463E6)";
+  const remainingCharacters = MAX_PROMPT_LENGTH - prompt.length;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (prompt.trim()) {
-      onSubmitPrompt?.(prompt);
+    const normalizedPrompt = prompt.trim();
+    if (normalizedPrompt) {
+      onSubmitPrompt?.(normalizedPrompt);
       setPrompt("");
     }
   };
@@ -51,6 +56,8 @@ const SparkAICard: React.FC<SparkAICardProps> = ({ onSubmitPrompt, className = "
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             className="w-full bg-white/10 border border-white/5 rounded-2xl px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:bg-white/20 focus:border-white/20 transition-all pr-10"
+            maxLength={MAX_PROMPT_LENGTH}
+            aria-describedby={helperId}
           />
           <button
             type="submit"
@@ -61,6 +68,10 @@ const SparkAICard: React.FC<SparkAICardProps> = ({ onSubmitPrompt, className = "
             <ArrowRight size={14} />
           </button>
         </form>
+        <div id={helperId} className="mt-2 text-[11px] text-white/70 flex items-center justify-between">
+          <span>Anchor with concrete nouns and tone cues.</span>
+          <span aria-live="polite">{remainingCharacters} left</span>
+        </div>
       </div>
     </Card>
   );

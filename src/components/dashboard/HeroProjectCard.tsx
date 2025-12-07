@@ -16,17 +16,24 @@ const HeroProjectCard: React.FC<HeroProjectCardProps> = ({
   description,
   className = "",
 }) => {
+  const [imageFailed, setImageFailed] = React.useState(false);
+
   return (
     <Card
       className={`relative overflow-hidden group border-0 shadow-2xl min-h-[360px] ${className}`}
       noPadding
     >
-      <img
-        src={imageSrc}
-        className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
-        alt={`${title} - ${description}`}
-        loading="lazy"
-      />
+      {!imageFailed && imageSrc ? (
+        <img
+          src={imageSrc}
+          className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
+          alt={`${title} - ${description}`}
+          loading="lazy"
+          onError={() => setImageFailed(true)}
+        />
+      ) : (
+        <div className="w-full h-full bg-gradient-to-br from-ink-primary/80 via-ink-primary to-black/70" aria-hidden="true" />
+      )}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-10 flex flex-col justify-end">
         <div className="flex items-center gap-3 mb-4">
           <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold text-white uppercase tracking-wider border border-white/20">
