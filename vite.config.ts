@@ -113,7 +113,7 @@ const resolveAtlaskitLogo = (source: string) => {
   return null;
 };
 
-const resolveCommonLogoIcon = (source: string, importer?: string | null) => {
+const resolveCommonLogoIcon = (source: string, importer?: string) => {
   if (!importer || !source.startsWith("./")) {
     return null;
   }
@@ -142,7 +142,7 @@ const resolveCommonLogoIcon = (source: string, importer?: string | null) => {
   return null;
 };
 
-const resolveLegacyCustomIcon = (source: string, importer?: string | null) => {
+const resolveLegacyCustomIcon = (source: string, importer?: string) => {
   if (!source.startsWith("./ui/") || !importer) {
     return null;
   }
@@ -156,7 +156,7 @@ const resolveLegacyCustomIcon = (source: string, importer?: string | null) => {
 
 const resolveAtlaskitMediaInlineImport = (
   source: string,
-  importer?: string | null
+  importer?: string
 ) => {
   if (!importer) {
     return null;
@@ -167,7 +167,7 @@ const resolveAtlaskitMediaInlineImport = (
     return null;
   }
 
-  console.log("Atlaskit media resolver check", source, importer);
+  // console.log("Atlaskit media resolver check", source, importer);
 
   const normalizedImporter = importer.replace(/\\/g, "/");
   if (
@@ -186,10 +186,10 @@ const resolveAtlaskitMediaInlineImport = (
 
 const atlaskitIconResolver = () => ({
   name: "atlaskit-icon-resolver",
-  resolveId(source: string, importer?: string | null) {
-    if (source.includes("media")) {
-      console.log("Atlaskit resolver sees", source, importer);
-    }
+  resolveId(source: string, importer?: string) {
+    // if (source.includes("media")) {
+    //   console.log("Atlaskit resolver sees", source, importer);
+    // }
     return (
       resolveAtlaskitIcon(source) ||
       resolveAtlaskitLogo(source) ||
@@ -255,6 +255,7 @@ export default defineConfig({
         replacement: "/shims/atlaskit-inline-nodes.js",
       },
       {
+        // eslint-disable-next-line no-useless-escape
         find: /@atlaskit[\/\\]editor-core[\/\\]node_modules[\/\\]@atlaskit[\/\\]adf-schema[\/\\]dist[\/\\]esm[\/\\]schema[\/\\]nodes[\/\\]media\.js$/,
         replacement: resolve(
           __dirname,
