@@ -1,8 +1,10 @@
 import { Box } from "lucide-react";
 import { useState } from "react";
 
+import { ConfluenceAuthProvider } from "./components/confluence/ConfluenceAuthProvider";
 import CommandBar from "./src/components/layout/CommandBar";
 import Sidebar from "./src/components/layout/Sidebar";
+import ConfluenceView from "./src/views/ConfluenceView";
 import DashboardHome from "./src/views/DashboardHome";
 import GuardianRoom from "./src/views/GuardianRoom";
 import ProjectsView from "./src/views/ProjectsView";
@@ -63,6 +65,8 @@ export default function App() {
             onBack={() => setActiveTab("dashboard")}
           />
         );
+      case "knowledge-base":
+        return <ConfluenceView />;
       default:
         return (
           <div className="h-full flex flex-col items-center justify-center text-ink-secondary">
@@ -81,18 +85,23 @@ export default function App() {
   };
 
   return (
-    <div className="w-full h-screen bg-app flex relative overflow-hidden text-ink-primary">
-      <Sidebar
-        activeTab={activeTab}
-        setActiveTab={(t) => {
-          setActiveTab(t);
-          setActiveProject(null);
-        }}
-      />
-      <main className="flex-1 ml-72 h-full overflow-y-auto relative z-0">
-        {renderContent()}
-      </main>
-      <CommandBar />
-    </div>
+    <ConfluenceAuthProvider
+      siteUrl="https://studiodot.atlassian.net"
+      onAuthChange={(isAuth) => console.log("Confluence auth changed:", isAuth)}
+    >
+      <div className="w-full h-screen bg-app flex relative overflow-hidden text-ink-primary">
+        <Sidebar
+          activeTab={activeTab}
+          setActiveTab={(t) => {
+            setActiveTab(t);
+            setActiveProject(null);
+          }}
+        />
+        <main className="flex-1 ml-72 h-full overflow-y-auto relative z-0">
+          {renderContent()}
+        </main>
+        <CommandBar />
+      </div>
+    </ConfluenceAuthProvider>
   );
 }

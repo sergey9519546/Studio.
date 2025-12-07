@@ -20,6 +20,7 @@ import { AssetsModule } from "./modules/assets/assets.module";
 import { AssignmentsModule } from "./modules/assignments/assignments.module";
 import { AuthModule } from "./modules/auth/auth.module";
 import { AvailabilityModule } from "./modules/availability/availability.module";
+import { ConfluenceModule } from "./modules/confluence/confluence.module";
 import { FreelancersModule } from "./modules/freelancers/freelancers.module";
 import { GoogleModule } from "./modules/google/google.module";
 import { IntegrationsModule } from './modules/integrations/integrations.module';

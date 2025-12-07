@@ -1,4 +1,5 @@
 import {
+  BookOpen,
   FileText,
   Grid,
   Layers,
@@ -22,6 +23,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
     { id: "moodboard", icon: Grid, label: "Visuals" },
     { id: "roster", icon: Users, label: "Talent" },
     { id: "writers-room", icon: FileText, label: "Writer's Room" },
+    { id: "knowledge-base", icon: BookOpen, label: "Knowledge Base" },
   ];
 
   return (

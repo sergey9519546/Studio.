@@ -28,7 +28,7 @@
         },
         {
           "file": "apps/api/src/app.module.ts",
-          "hash": "867134276042545576",
+          "hash": "9388947729524943109",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
@@ -403,6 +403,27 @@
         {
           "file": "apps/api/src/modules/availability/availability.service.ts",
           "hash": "9422172630726990485",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/confluence/confluence.controller.ts",
+          "hash": "3549150901607089481",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/confluence/confluence.module.ts",
+          "hash": "11704278906799667960",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/confluence/confluence.service.ts",
+          "hash": "5827972615262279200",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -965,7 +986,7 @@
       },
       {
         "file": ".env.example",
-        "hash": "16751341595538252834"
+        "hash": "17686633064402291699"
       },
       {
         "file": ".github/workflows/ci.yml",
@@ -989,7 +1010,7 @@
       },
       {
         "file": "App.tsx",
-        "hash": "15474441820315536734"
+        "hash": "3753292027392905875"
       },
       {
         "file": "DEPLOYMENT.md",
@@ -1160,6 +1181,14 @@
         "hash": "9665275177637424020"
       },
       {
+        "file": "components/confluence/ConfluenceAuthProvider.tsx",
+        "hash": "274250038717095551"
+      },
+      {
+        "file": "components/confluence/EmbeddedConfluencePage.tsx",
+        "hash": "11552745809697520277"
+      },
+      {
         "file": "components/dashboard/DataHUD.tsx",
         "hash": "17157126818222238058"
       },
@@ -1228,6 +1257,10 @@
         "hash": "2986638614304603581"
       },
       {
+        "file": "docs/CONFLUENCE_INTEGRATION.md",
+        "hash": "6130835909118482823"
+      },
+      {
         "file": "docs/accessibility-audit-final.md",
         "hash": "17516706163709713174"
       },
@@ -1265,11 +1298,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "8500672747156252285"
+        "hash": "653080789184157857"
       },
       {
         "file": "package.json",
-        "hash": "13000027536963321388"
+        "hash": "3229233926978284580"
       },
       {
         "file": "prisma/comment_schema_addition.prisma",
@@ -1362,6 +1395,10 @@
       {
         "file": "services/api.ts",
         "hash": "12503377465417341416"
+      },
+      {
+        "file": "services/confluenceService.ts",
+        "hash": "12799204979756944273"
       },
       {
         "file": "services/intelligence.ts",
@@ -1497,7 +1534,7 @@
       },
       {
         "file": "src/components/layout/Sidebar.tsx",
-        "hash": "13653113926843142739"
+        "hash": "17662915176572049009"
       },
       {
         "file": "src/components/ui/Card.tsx",
@@ -1514,6 +1551,10 @@
       {
         "file": "src/theme/tokens.ts",
         "hash": "11173135175570300708"
+      },
+      {
+        "file": "src/views/ConfluenceView.tsx",
+        "hash": "9805647501343118214"
       },
       {
         "file": "src/views/DashboardHome.tsx",
@@ -1576,6 +1617,10 @@
         "hash": "2610038540445278327"
       },
       {
+        "file": "types/confluence.types.ts",
+        "hash": "6968874576227316231"
+      },
+      {
         "file": "vite.config.ts",
         "hash": "7746444253426714748"
       },
@@ -1585,5 +1630,5 @@
       }
     ]
   },
-  "externalNodesHash": "11957999243141048030"
+  "externalNodesHash": "14691350284119651960"
 }
