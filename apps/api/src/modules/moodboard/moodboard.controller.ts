@@ -15,6 +15,8 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Throttle } from '@nestjs/throttler';
 import { AssetsService } from "../assets/assets.service";
+import { CreateCollectionDto } from "./dto/create-collection.dto";
+import { CreateFromUnsplashDto } from "./dto/create-from-unsplash.dto";
 import { CreateMoodboardItemDto } from './dto/create-moodboard-item.dto';
 import { UpdateMoodboardItemDto } from './dto/update-moodboard-item.dto';
 import { MoodboardService } from "./moodboard.service";
@@ -67,8 +69,27 @@ export class MoodboardController {
   }
 
   @Get(":projectId")
-  async findAll(@Param("projectId") projectId: string) {
-    return this.moodboardService.findAllByProject(projectId);
+  async findAll(
+    @Param("projectId") projectId: string,
+    @Query("favorite") favorite?: string,
+    @Query("collectionId") collectionId?: string,
+    @Query("source") source?: string
+  ) {
+    const filters: any = {};
+
+    if (favorite !== undefined) {
+      filters.favorite = favorite === "true";
+    }
+
+    if (collectionId) {
+      filters.collectionId = collectionId;
+    }
+
+    if (source) {
+      filters.source = source;
+    }
+
+    return this.moodboardService.findAllByProject(projectId, filters);
   }
 
   @Get(":projectId/search")
@@ -90,5 +111,62 @@ export class MoodboardController {
   @Delete(":id")
   async remove(@Param("id") id: string) {
     return this.moodboardService.remove(id);
+  }
+
+  // P0: Unsplash Integration
+  @Post(":projectId/from-unsplash")
+  async createFromUnsplash(
+    @Param("projectId") projectId: string,
+    @Body() dto: CreateFromUnsplashDto
+  ) {
+    dto.projectId = projectId;
+    return this.moodboardService.createFromUnsplash(dto);
+  }
+
+  // P1: Favorites
+  @Patch(":id/favorite")
+  async toggleFavorite(
+    @Param("id") id: string,
+    @Body("isFavorite") isFavorite: boolean
+  ) {
+    return this.moodboardService.toggleFavorite(id, isFavorite);
+  }
+
+  @Get(":projectId/favorites")
+  async getFavorites(@Param("projectId") projectId: string) {
+    return this.moodboardService.findFavorites(projectId);
+  }
+
+  // P1: Collections
+  @Post(":projectId/collections")
+  async createCollection(
+    @Param("projectId") projectId: string,
+    @Body() dto: CreateCollectionDto
+  ) {
+    dto.projectId = projectId;
+    return this.moodboardService.createCollection(dto);
+  }
+
+  @Get(":projectId/collections")
+  async getCollections(@Param("projectId") projectId: string) {
+    return this.moodboardService.findCollections(projectId);
+  }
+
+  @Patch(":itemId/collection/:collectionId")
+  async addToCollection(
+    @Param("itemId") itemId: string,
+    @Param("collectionId") collectionId: string
+  ) {
+    return this.moodboardService.addToCollection(itemId, collectionId);
+  }
+
+  @Delete(":itemId/collection")
+  async removeFromCollection(@Param("itemId") itemId: string) {
+    return this.moodboardService.removeFromCollection(itemId);
+  }
+
+  @Delete("collections/:id")
+  async deleteCollection(@Param("id") id: string) {
+    return this.moodboardService.deleteCollection(id);
   }
 }

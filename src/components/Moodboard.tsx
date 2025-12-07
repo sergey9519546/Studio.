@@ -1,6 +1,10 @@
 import { Clock, Image, Plus, Search, Trash2, X, XCircle } from "lucide-react";
 import React, { useMemo, useState } from "react";
 import {
+  toggleFavorite as apiToggleFavorite,
+  saveUnsplashImage,
+} from "../services/moodboardApi";
+import {
   addRecentSearch,
   getRecentSearches,
   removeRecentSearch,
@@ -59,6 +63,12 @@ export const Moodboard: React.FC<MoodboardProps> = ({
 
   // Recent searches state
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
+
+  // Unsplash filters (P1: Advanced Filters)
+  const [unsplashFilters, setUnsplashFilters] = useState<{
+    color?: string;
+    orientation?: string;
+  }>({});
 
   React.useEffect(() => {
     // Keep filtered items in sync with upstream changes
@@ -165,15 +175,36 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   // Add Unsplash image to moodboard
   const handleAddUnsplashImage = async (image: UnsplashImage) => {
     try {
-      // Track download as required by Unsplash API
+      // Track download (API compliance)
       await trackDownload(image);
 
-      // Call parent handler if provided
+      // Save to database via API
+      await saveUnsplashImage(projectId, image);
+
+      // Call parent callback if provided
       if (onAddUnsplashImage) {
         await onAddUnsplashImage(image);
       }
+
+      // TODO: Show success toast
+      console.log("Unsplash image added to moodboard");
     } catch (error) {
       console.error("Failed to add Unsplash image:", error);
+      // TODO: Show error toast
+    }
+  };
+
+  // Toggle favorite on uploaded items
+  const handleToggleFavorite = async (
+    itemId: string,
+    currentValue: boolean
+  ) => {
+    try {
+      await apiToggleFavorite(itemId, !currentValue);
+      // Refresh items list
+      // TODO: Update local state or refetch
+    } catch (error) {
+      console.error("Failed to toggle favorite:", error);
     }
   };
 
@@ -273,35 +304,33 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                         src={item.url}
                         alt="Moodboard"
                         className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                        alt={item.tags.join(", ") || "Moodboard item"}
+                        className="w-full h-auto object-cover"
                       />
-
-                      {/* Overlay on Hover */}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all rounded-[24px] flex items-end justify-between p-4 opacity-0 group-hover:opacity-100">
-                        <div>
-                          {item.tags.length > 0 && (
-                            <div className="flex flex-wrap gap-1">
-                              {item.tags.slice(0, 2).map((tag) => (
-                                <span
-                                  key={tag}
-                                  className="px-2 py-1 rounded-[12px] bg-white/20 backdrop-blur text-white text-xs font-medium"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onItemDelete?.(item.id);
-                          }}
-                          className="p-2 rounded-[12px] bg-state-danger/80 text-white hover:bg-state-danger transition-colors"
-                          aria-label="Delete image from moodboard"
-                        >
-                          <Trash2 size={16} />
-                        </button>
-                      </div>
+                      
+                      {/* Favorites Heart Icon - P1 */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleToggleFavorite(item.id, false); // TODO: Get actual favorite status
+                        }}
+                        className="absolute top-2 right-2 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors opacity-0 group-hover:opacity-100"
+                        aria-label="Toggle favorite"
+                      >
+                        <Heart size={18} className="text-white" />
+                      </button>
+                      
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (onItemDelete) onItemDelete(item.id);
+                        }}
+                        className="absolute top-2 left-2 p-2 rounded-full bg-state-danger hover:bg-state-danger/80 transition-colors opacity-0 group-hover:opacity-100"
+                        aria-label="Delete item"
+                      >
+                        <Trash2 size={16} className="text-white" />
+                      </button>
+                    </div>
 
                       {/* Color Palette Indicator */}
                       {item.colors.length > 0 && (
@@ -338,7 +367,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                         </p>
                       )}
                     </div>
-                  </div>
+                  </Card>
                 ))}
               </div>
             ) : (
@@ -359,16 +388,15 @@ export const Moodboard: React.FC<MoodboardProps> = ({
           <>
             {/* Unsplash Search */}
             <div className="mb-8">
-              <form onSubmit={handleUnsplashSearch}>
-                <div className="flex gap-3">
-                  <div className="flex-1">
-                    <Input
-                      placeholder="Search Unsplash... (e.g., 'minimalist architecture' or 'vibrant colors')"
-                      icon={<Search size={18} />}
-                      value={unsplashQuery}
-                      onChange={(e) => setUnsplashQuery(e.target.value)}
-                    />
-                  </div>
+              <form onSubmit={handleUnsplashSearch} className="mb-4">
+                <div className="flex gap-2">
+                  <Input
+                    placeholder="Search Unsplash... (e.g., 'mountain landscape', 'minimal architecture')"
+                    icon={<Search size={18} />}
+                    value={unsplashQuery}
+                    onChange={(e) => setUnsplashQuery(e.target.value)}
+                    className="flex-1"
+                  />
                   <button
                     type="submit"
                     disabled={isLoadingUnsplash || !unsplashQuery.trim()}
@@ -378,6 +406,49 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                   </button>
                 </div>
               </form>
+              
+              {/* P1: Advanced Filters */}
+              <div className="flex items-center gap-3 mb-4">
+                <Filter size={16} className="text-ink-tertiary" />
+                <select
+                  value={unsplashFilters.color || ""}
+                  onChange={(e) => setUnsplashFilters({ ...unsplashFilters, color: e.target.value || undefined })}
+                  className="px-3 py-1.5 rounded-[12px] bg-subtle border border-border-subtle text-xs font-medium text-ink-secondary hover:bg-surface transition-colors"
+                >
+                  <option value="">All Colors</option>
+                  <option value="black_and_white">Black & White</option>
+                  <option value="black">Black</option>
+                  <option value="white">White</option>
+                  <option value="yellow">Yellow</option>
+                  <option value="orange">Orange</option>
+                  <option value="red">Red</option>
+                  <option value="purple">Purple</option>
+                  <option value="magenta">Magenta</option>
+                  <option value="green">Green</option>
+                  <option value="teal">Teal</option>
+                  <option value="blue">Blue</option>
+                </select>
+                
+                <select
+                  value={unsplashFilters.orientation || ""}
+                  onChange={(e) => setUnsplashFilters({ ...unsplashFilters, orientation: e.target.value || undefined })}
+                  className="px-3 py-1.5 rounded-[12px] bg-subtle border border-border-subtle text-xs font-medium text-ink-secondary hover:bg-surface transition-colors"
+                >
+                  <option value="">Any Orientation</option>
+                  <option value="landscape">Landscape</option>
+                  <option value="portrait">Portrait</option>
+                  <option value="squarish">Square</option>
+                </select>
+                
+                {(unsplashFilters.color || unsplashFilters.orientation) && (
+                  <button
+                    onClick={() => setUnsplashFilters({})}
+                    className="px-3 py-1.5 rounded-[12px] bg-state-danger/10 text-state-danger text-xs font-medium hover:bg-state-danger/20 transition-colors"
+                  >
+                    Clear Filters
+                  </button>
+                )}
+              </div>
 
               <p className="text-xs text-ink-tertiary mt-2">
                 Photos from{" "}
@@ -671,6 +742,6 @@ export const Moodboard: React.FC<MoodboardProps> = ({
       </div>
     </div>
   );
-};
+};;
 
 export default Moodboard;
