@@ -12,10 +12,7 @@ const logoComponentsPath = resolve(
   __dirname,
   "node_modules/@atlaskit/logo/dist/esm/artifacts/logo-components"
 );
-const logoLegacyPath = resolve(
-  __dirname,
-  "node_modules/@atlaskit/logo/dist/esm/legacy-logos"
-);
+
 const glyphFileCache = new Map<string, string | null>();
 
 const searchGlyphFile = (dir: string, target: string): string | null => {
@@ -102,8 +99,7 @@ const resolveAtlaskitIcon = (source: string) => {
 };
 
 const resolveAtlaskitLogo = (source: string) => {
-  const prefix =
-    "@atlaskit/logo/dist/esm/artifacts/logo-components/";
+  const prefix = "@atlaskit/logo/dist/esm/artifacts/logo-components/";
   if (source.startsWith(prefix)) {
     const after = source.replace(prefix, "");
     if (after.endsWith("/icon")) {
@@ -158,14 +154,47 @@ const resolveLegacyCustomIcon = (source: string, importer?: string | null) => {
   return resolve(__dirname, "shims/legacy-custom-icon-fallback.js");
 };
 
+const resolveAtlaskitMediaInlineImport = (
+  source: string,
+  importer?: string | null
+) => {
+  if (!importer) {
+    return null;
+  }
+
+  const mediaImports = new Set(["./media", "./media.js"]);
+  if (!mediaImports.has(source)) {
+    return null;
+  }
+
+  console.log("Atlaskit media resolver check", source, importer);
+
+  const normalizedImporter = importer.replace(/\\/g, "/");
+  if (
+    !normalizedImporter.endsWith(
+      "/@atlaskit/editor-core/node_modules/@atlaskit/adf-schema/dist/esm/schema/nodes/media-inline.js"
+    )
+  ) {
+    return null;
+  }
+
+  return resolve(
+    __dirname,
+    "node_modules/@atlaskit/adf-schema/dist/esm/schema/nodes/media.js"
+  );
+};
+
 const atlaskitIconResolver = () => ({
   name: "atlaskit-icon-resolver",
   resolveId(source: string, importer?: string | null) {
+    if (source.includes("media")) {
+      console.log("Atlaskit resolver sees", source, importer);
+    }
     return (
       resolveAtlaskitIcon(source) ||
       resolveAtlaskitLogo(source) ||
-      resolveCommonLogoIcon(source, importer)
-      ||
+      resolveAtlaskitMediaInlineImport(source, importer) ||
+      resolveCommonLogoIcon(source, importer) ||
       resolveLegacyCustomIcon(source, importer)
     );
   },
@@ -224,6 +253,13 @@ export default defineConfig({
       {
         find: "@atlaskit/editor-core/node_modules/@atlaskit/adf-schema/dist/esm/schema/inline-nodes",
         replacement: "/shims/atlaskit-inline-nodes.js",
+      },
+      {
+        find: /@atlaskit[\/\\]editor-core[\/\\]node_modules[\/\\]@atlaskit[\/\\]adf-schema[\/\\]dist[\/\\]esm[\/\\]schema[\/\\]nodes[\/\\]media\.js$/,
+        replacement: resolve(
+          __dirname,
+          "node_modules/@atlaskit/adf-schema/dist/esm/schema/nodes/media.js"
+        ),
       },
       { find: "@", replacement: "/src" },
     ],

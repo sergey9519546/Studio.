@@ -23,9 +23,9 @@ describe('ImportWizard', () => {
     it('should render initial state with upload options', () => {
         render(<ImportWizard onImport={mockOnImport} />);
 
-        expect(screen.getByText('Import Data')).toBeDefined();
-        expect(screen.getByText('Upload File')).toBeDefined();
-        expect(screen.getByText('Paste Text')).toBeDefined();
+        expect(screen.getByText('Data Ingestion Portal')).toBeDefined();
+        expect(screen.getByText('Upload Binary')).toBeDefined();
+        expect(screen.getByText('Raw Text Stream')).toBeDefined();
     });
 
     it('should handle file upload', async () => {
@@ -42,7 +42,7 @@ describe('ImportWizard', () => {
             type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         });
 
-        const input = screen.getByLabelText('Select file');
+        const input = await waitFor(() => screen.getByLabelText('Select file'));
         await userEvent.upload(input, file);
 
         // Verify extraction was triggered
@@ -67,13 +67,13 @@ describe('ImportWizard', () => {
         render(<ImportWizard onImport={mockOnImport} />);
 
         // Switch to paste mode
-        const pasteButton = screen.getByText('Paste Text');
+        const pasteButton = screen.getByText('Raw Text Stream');
         await userEvent.click(pasteButton);
 
-        const textarea = screen.getByPlaceholderText(/paste your data/i);
+        const textarea = screen.getByPlaceholderText('// Paste raw unstructured text here...');
         await userEvent.type(textarea, 'Sample project data');
 
-        const analyzeButton = screen.getByRole('button', { name: /analyze/i });
+        const analyzeButton = screen.getByRole('button', { name: 'Initiate Analysis' });
         await userEvent.click(analyzeButton);
 
         await waitFor(() => {
@@ -90,7 +90,7 @@ describe('ImportWizard', () => {
         render(<ImportWizard onImport={mockOnImport} />);
 
         const file = new File(['test content'], 'test.txt', { type: 'text/plain' });
-        const input = screen.getByLabelText('Select file');
+        const input = await waitFor(() => screen.getByLabelText('Select file'));
         await userEvent.upload(input, file);
 
         expect(screen.getByText(/processing/i)).toBeDefined();
@@ -102,7 +102,7 @@ describe('ImportWizard', () => {
         render(<ImportWizard onImport={mockOnImport} />);
 
         const file = new File(['test content'], 'test.txt', { type: 'text/plain' });
-        const input = screen.getByLabelText('Select file');
+        const input = await waitFor(() => screen.getByLabelText('Select file'));
         await userEvent.upload(input, file);
 
         await waitFor(() => {
@@ -121,7 +121,7 @@ describe('ImportWizard', () => {
 
         // Upload file and extract
         const file = new File(['test content'], 'test.txt', { type: 'text/plain' });
-        const input = screen.getByLabelText('Select file');
+        const input = await waitFor(() => screen.getByLabelText('Select file'));
         await userEvent.upload(input, file);
 
         await waitFor(() => {
@@ -149,7 +149,7 @@ describe('ImportWizard', () => {
         for (const fileType of fileTypes) {
             vi.clearAllMocks();
             const file = new File(['content'], fileType.name, { type: fileType.type });
-            const input = screen.getByLabelText('Select file');
+            const input = await waitFor(() => screen.getByLabelText('Select file'));
             await userEvent.upload(input, file);
 
             await waitFor(() => {

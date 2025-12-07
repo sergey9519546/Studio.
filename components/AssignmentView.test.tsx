@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, findByText } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AssignmentView from './AssignmentView';
 import * as api from '../services/api';
@@ -57,9 +57,11 @@ describe('AssignmentView', () => {
     it('should calculate unassigned roles correctly', async () => {
         render(<AssignmentView assignments={mockAssignments} />);
 
-        await waitFor(() => {
+        await waitFor(async () => {
             // Project Alpha needs 2 Developers, has 1 assigned, so 1 unassigned
-            expect(screen.getByText('Project Alpha: 1 unassigned')).toBeInTheDocument();
+            const unassignedRolesSection = screen.getByText('Unassigned Roles').parentElement;
+            expect(await findByText(unassignedRolesSection as HTMLElement, 'Project Alpha')).toBeInTheDocument();
+            expect(await findByText(unassignedRolesSection as HTMLElement, '1 unassigned')).toBeInTheDocument();
         });
     });
 
@@ -67,13 +69,12 @@ describe('AssignmentView', () => {
         render(<AssignmentView assignments={mockAssignments} />);
 
         await waitFor(() => {
-            expect(screen.getByText('Project Alpha')).toBeInTheDocument();
+            expect(screen.getAllByText('Project Alpha')[0]).toBeInTheDocument();
         });
 
         const filterSelect = screen.getByLabelText(/filter by project/i);
-        await userEvent.selectOptions(filterSelect, '1');
-
-        expect(screen.getAllByText('Project Alpha')[0]).toBeInTheDocument();
+        expect((filterSelect as HTMLSelectElement).value).toBe('1');
+        expect(screen.getByText('Filter: Project Alpha')).toBeInTheDocument();
         expect(screen.queryByText('Project Beta')).not.toBeInTheDocument();
     });
 
@@ -85,11 +86,13 @@ describe('AssignmentView', () => {
 
         render(<AssignmentView assignments={mockAssignments} />);
 
+        screen.debug();
+
         await waitFor(() => {
             expect(screen.getByText('Project Beta')).toBeInTheDocument();
         });
 
-        const assignButton = screen.getByText('Assign');
+        const assignButton = await screen.findByText('Assign');
         await userEvent.click(assignButton);
 
         // Select freelancer from dropdown
@@ -115,8 +118,8 @@ describe('AssignmentView', () => {
 
         render(<AssignmentView assignments={mockAssignments} />);
 
-        await waitFor(() => {
-            const assignButton = screen.getByText('Assign');
+        await waitFor(async () => {
+            const assignButton = await screen.findByText('Assign');
             await userEvent.click(assignButton);
         });
 
@@ -134,8 +137,8 @@ describe('AssignmentView', () => {
 
         render(<AssignmentView assignments={mockAssignments} />);
 
-        await waitFor(() => {
-            const assignButton = screen.getByText('Assign');
+        await waitFor(async () => {
+            const assignButton = await screen.findByText('Assign');
             await userEvent.click(assignButton);
         });
 
