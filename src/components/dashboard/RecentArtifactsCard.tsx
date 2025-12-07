@@ -2,7 +2,7 @@ import { ImageIcon } from "lucide-react";
 import React from "react";
 import Card from "../../components/ui/Card";
 
-interface Artifact {
+export interface Artifact {
   id: string | number;
   name: string;
   imageSrc?: string; // If actual images are available

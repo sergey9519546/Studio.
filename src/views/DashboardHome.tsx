@@ -3,7 +3,7 @@ import DashboardHeader from "../components/dashboard/DashboardHeader";
 import HeroProjectCard from "../components/dashboard/HeroProjectCard";
 import SparkAICard from "../components/dashboard/SparkAICard";
 import VibePaletteCard from "../components/dashboard/VibePaletteCard";
-import RecentArtifactsCard from "../components/dashboard/RecentArtifactsCard";
+import RecentArtifactsCard, { Artifact } from "../components/dashboard/RecentArtifactsCard";
 import "./DashboardHome.css";
 
 // Constants for better maintainability
