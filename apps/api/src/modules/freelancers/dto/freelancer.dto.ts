@@ -19,8 +19,16 @@ export class CreateFreelancerDto {
   @IsString()
   name!: string;
 
+  // Accept either email or legacy contactInfo; one is required
+  @IsOptional()
+  @ValidateIf((o) => !o.contactInfo)
   @IsEmail()
-  email!: string;
+  email?: string;
+
+  @IsOptional()
+  @ValidateIf((o) => !o.email)
+  @IsEmail()
+  contactInfo?: string;
 
   @IsOptional()
   @IsString()
@@ -67,8 +75,14 @@ export class UpdateFreelancerDto {
   name?: string;
 
   @IsOptional()
+  @ValidateIf((o) => !o.contactInfo)
   @IsEmail()
   email?: string;
+
+  @IsOptional()
+  @ValidateIf((o) => !o.email)
+  @IsEmail()
+  contactInfo?: string;
 
   @IsOptional()
   @IsString()
@@ -117,8 +131,15 @@ export class ImportFreelancerDto {
   @IsString()
   name!: string;
 
+  @IsOptional()
+  @ValidateIf((o) => !o.contactInfo)
   @IsEmail()
-  email!: string;
+  email?: string;
+
+  @IsOptional()
+  @ValidateIf((o) => !o.email)
+  @IsEmail()
+  contactInfo?: string;
 
   @IsOptional()
   @IsString()

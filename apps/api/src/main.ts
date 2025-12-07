@@ -9,21 +9,18 @@ import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 import { AuthService } from './modules/auth/auth.service';
 
 async function bootstrap() {
-  console.log("🚀 Starting bootstrap...");
+  console.log('Boot: starting Nest application...');
   const app = await NestFactory.create(AppModule, {
     // bufferLogs: true, // Buffer logs until Pino is ready - TEMPORARILY DISABLED
   });
-  console.log("✅ NestFactory.create completed");
+  console.log('Boot: NestFactory.create completed');
 
   // Use Pino logger for structured logging
   app.useLogger(app.get(Logger));
 
   // Debug: Log NODE_ENV and CSP configuration
-  console.log("🔧 NODE_ENV:", process.env.NODE_ENV);
-  console.log(
-    "🔧 CSP Development Mode:",
-    process.env.NODE_ENV !== "production"
-  );
+  console.log('Boot: NODE_ENV:', process.env.NODE_ENV);
+  console.log('Boot: CSP Development Mode:', process.env.NODE_ENV !== 'production');
 
   // Security: Helmet middleware for security headers with STRICT CSP
   app.use(
@@ -34,33 +31,29 @@ async function bootstrap() {
           styleSrc: [
             "'self'",
             "'unsafe-inline'", // Required for some UI frameworks - REVIEW AND REMOVE IF POSSIBLE
-            "https://fonts.googleapis.com", // Required for Google Fonts
+            'https://fonts.googleapis.com', // Required for Google Fonts
           ],
           fontSrc: [
             "'self'",
-            "https://fonts.gstatic.com", // Required for Google Fonts
-            "data:", // Required for base64 encoded fonts
+            'https://fonts.gstatic.com', // Required for Google Fonts
+            'data:', // Required for base64 encoded fonts
           ],
           scriptSrc: [
             "'self'",
             // Allow inline scripts and external CDNs for development (React/Vite requirement)
-            ...(process.env.NODE_ENV !== "production"
-              ? [
-                  "'unsafe-inline'",
-                  "'unsafe-eval'",
-                  "https://cdn.tailwindcss.com",
-                ]
+            ...(process.env.NODE_ENV !== 'production'
+              ? ["'unsafe-inline'", "'unsafe-eval'", 'https://cdn.tailwindcss.com']
               : []),
           ],
           imgSrc: [
             "'self'",
-            "data:", // Required for base64 images
-            "https:", // Required for external images (profiles, assets, etc.)
+            'data:', // Required for base64 images
+            'https:', // Required for external images (profiles, assets, etc.)
           ],
           connectSrc: [
             "'self'",
             // Add any external APIs your app needs to connect to
-            "https://*.googleapis.com", // For Google APIs
+            'https://*.googleapis.com', // For Google APIs
           ],
           upgradeInsecureRequests: [], // Force HTTPS in production
         },
@@ -72,8 +65,8 @@ async function bootstrap() {
       },
       noSniff: true,
       xssFilter: true,
-      referrerPolicy: { policy: "strict-origin-when-cross-origin" },
-    })
+      referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+    }),
   );
 
   // Performance: Response compression
@@ -85,7 +78,7 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
-    })
+    }),
   );
 
   // Global exception filter with httpAdapterHost
@@ -94,49 +87,53 @@ async function bootstrap() {
 
   // CORS configuration - STRICT MODE: Only allow specific origins in production
   const corsOrigins =
-    process.env.NODE_ENV === "production"
+    process.env.NODE_ENV === 'production'
       ? process.env.ALLOWED_ORIGINS
-        ? process.env.ALLOWED_ORIGINS.split(",")
+        ? process.env.ALLOWED_ORIGINS.split(',')
         : []
-      : [
-          "http://localhost:3000",
-          "http://localhost:5173",
-          "http://localhost:8080",
-        ];
+      : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:8080'];
 
   app.enableCors({
     origin: corsOrigins,
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
     maxAge: 86400, // 24 hours
   });
 
   // Enable API versioning (URI-based, e.g., /v1/endpoint)
   app.enableVersioning({
     type: VersioningType.URI,
-    defaultVersion: "1",
+    defaultVersion: '1',
   });
 
-  // Seed admin user on startup (only if no users exist)
-  // const pinoLogger = app.get(Logger); // TEMPORARILY DISABLED
-  // Seed admin user in background (don't await)
-  try {
-    const authService = app.get(AuthService);
-    // Non-blocking: run in background
-    authService.seedAdminUser().catch((error) => {
-      console.error("Failed to seed admin user in background:", error);
-    });
-  } catch (error) {
-    console.error("Failed to initiate admin user seeding:", error);
+  // Seed admin user (opt-in for production)
+  const shouldSeedAdmin =
+    process.env.SEED_ADMIN_ON_BOOT === 'true' ||
+    (process.env.NODE_ENV !== 'production' &&
+      process.env.ADMIN_PASSWORD &&
+      process.env.ADMIN_EMAIL);
+
+  if (shouldSeedAdmin) {
+    try {
+      const authService = app.get(AuthService);
+      // Non-blocking: run in background
+      authService.seedAdminUser().catch((error) => {
+        console.error('Failed to seed admin user in background:', error);
+      });
+    } catch (error) {
+      console.error('Failed to initiate admin user seeding:', error);
+    }
+  } else {
+    console.log('Admin seed skipped (production without opt-in or missing credentials).');
   }
 
-  const port = parseInt(process.env.PORT || "3001", 10);
-  await app.listen(port, "0.0.0.0");
+  const port = parseInt(process.env.PORT || '3001', 10);
+  await app.listen(port, '0.0.0.0');
 
-  console.log(`🚀 Server running on http://0.0.0.0:${port}`);
-  console.log(`📊 Health check: http://0.0.0.0:${port}/health`);
-  console.log(`🔒 Environment: ${process.env.NODE_ENV || "development"}`);
+  console.log(`Server running on http://0.0.0.0:${port}`);
+  console.log(`Health check: http://0.0.0.0:${port}/health`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 
   // Enable graceful shutdown
   app.enableShutdownHooks();
@@ -147,16 +144,16 @@ async function bootstrap() {
 
     try {
       await app.close();
-      console.log("Application closed successfully");
+      console.log('Application closed successfully');
       process.exit(0);
     } catch (error) {
-      console.error("Error during shutdown", error);
+      console.error('Error during shutdown', error);
       process.exit(1);
     }
   };
 
-  process.on("SIGTERM", () => shutdown("SIGTERM"));
-  process.on("SIGINT", () => shutdown("SIGINT"));
+  process.on('SIGTERM', () => shutdown('SIGTERM'));
+  process.on('SIGINT', () => shutdown('SIGINT'));
 }
 
 bootstrap();

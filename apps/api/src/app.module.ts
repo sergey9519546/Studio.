@@ -1,10 +1,11 @@
 
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
-import { ThrottlerModule } from "@nestjs/throttler";
+import { ThrottlerModule, ThrottlerGuard } from "@nestjs/throttler";
 
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { existsSync } from "fs";
@@ -48,7 +49,7 @@ const staticRoot = process.env.NODE_ENV === 'production'
       return staticCandidates.find(p => existsSync(p));
     })();
 
-console.log('📁 Static root:', staticRoot, '| cwd:', process.cwd(), '| __dirname:', __dirname);
+console.log('Static root:', staticRoot, '| cwd:', process.cwd(), '| __dirname:', __dirname);
 
 @Module({
   imports: [
@@ -130,6 +131,11 @@ console.log('📁 Static root:', staticRoot, '| cwd:', process.cwd(), '| __dirna
     IntegrationsModule,
     ConfluenceModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {}

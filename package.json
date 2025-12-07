@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "nx run-many -t serve",
-    "build": "nx run-many -t build",
+    "build": "npm run build:client && nx run-many -t build",
+    "build:client": "vite build",
     "build:api": "nx build api",
     "start": "node build/apps/api/src/main",
     "start:dev": "nx serve api",

@@ -25,8 +25,14 @@ export class RoleRequirementDto {
 }
 
 export class CreateProjectDto {
+  // Accept both legacy "name" and canonical "title"
+  @IsOptional()
   @IsString()
-  title!: string;
+  title?: string;
+
+  @IsOptional()
+  @IsString()
+  name?: string;
 
   @IsOptional()
   @IsString()
@@ -35,6 +41,10 @@ export class CreateProjectDto {
   @IsOptional()
   @IsString()
   client?: string;
+
+  @IsOptional()
+  @IsString()
+  clientName?: string;
 
   @IsOptional()
   @IsEnum(["PLANNED", "IN_PROGRESS", "REVIEW", "DELIVERED", "ARCHIVED"])
@@ -67,11 +77,19 @@ export class UpdateProjectDto {
 
   @IsOptional()
   @IsString()
+  name?: string;
+
+  @IsOptional()
+  @IsString()
   description?: string;
 
   @IsOptional()
   @IsString()
   client?: string;
+
+  @IsOptional()
+  @IsString()
+  clientName?: string;
 
   @IsOptional()
   @IsEnum(["PLANNED", "IN_PROGRESS", "REVIEW", "DELIVERED", "ARCHIVED"])

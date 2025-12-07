@@ -1,5 +1,5 @@
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { Inject } from '@nestjs/common';
@@ -78,14 +78,21 @@ export class ProjectsService {
     return this.toDto(project);
   }
 
-  async create(data: { title: string; description?: string; client?: string; status?: string; budget?: number; startDate?: string | Date; endDate?: string | Date; roleRequirements?: { role: string; count?: number; skills: string[] }[] }) {
-    const { roleRequirements, title: name, client: clientName, budget, startDate, endDate, ...rest } = data;
+  async create(data: { title?: string; name?: string; description?: string; client?: string; clientName?: string; status?: string; budget?: number; startDate?: string | Date; endDate?: string | Date; roleRequirements?: { role: string; count?: number; skills: string[] }[] }) {
+    const { roleRequirements, title, name, client, clientName, budget, startDate, endDate, ...rest } = data;
+
+    const resolvedTitle = title || name;
+    const resolvedClient = client || clientName;
+
+    if (!resolvedTitle) {
+      throw new BadRequestException('Project title/name is required');
+    }
 
     // Map frontend fields to database schema
     const projectData = {
       ...rest,
-      title: name || data.title,
-      client: clientName || data.client,
+      title: resolvedTitle,
+      client: resolvedClient,
       budget: budget ? parseFloat(budget.toString()) : undefined,
       startDate: startDate ? new Date(startDate) : undefined,
       endDate: endDate ? new Date(endDate) : undefined,
@@ -114,10 +121,13 @@ export class ProjectsService {
     return this.toDto(created);
   }
 
-  async update(id: string, data: { title?: string; description?: string; client?: string; status?: string; budget?: number; startDate?: string | Date; endDate?: string | Date }) {
+  async update(id: string, data: { title?: string; name?: string; description?: string; client?: string; clientName?: string; status?: string; budget?: number; startDate?: string | Date; endDate?: string | Date }) {
     const updateData: Record<string, unknown> = {};
-    if (data.title) updateData.title = data.title;
-    if (data.client) updateData.client = data.client;
+    const resolvedTitle = data.title || data.name;
+    const resolvedClient = data.client || data.clientName;
+
+    if (resolvedTitle) updateData.title = resolvedTitle;
+    if (resolvedClient) updateData.client = resolvedClient;
     if (data.description !== undefined) updateData.description = data.description;
     if (data.status) updateData.status = data.status;
     if (data.budget !== undefined) updateData.budget = data.budget;

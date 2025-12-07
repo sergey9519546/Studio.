@@ -6,7 +6,7 @@ import { CacheController } from './cache.controller';
 @Module({
     imports: [
         NestCacheModule.register({
-            ttl: 300000, // Default 5 minutes (ms)
+            ttl: 300, // 5 minutes in seconds (cache-manager expects seconds)
             max: 100, // Maximum number of items in cache
             isGlobal: true,
         }),

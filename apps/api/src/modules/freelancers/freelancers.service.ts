@@ -1,5 +1,5 @@
 
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateFreelancerDto, UpdateFreelancerDto, ImportFreelancerDto } from './dto/freelancer.dto';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
@@ -50,10 +50,17 @@ export class FreelancersService {
   }
 
   async create(data: CreateFreelancerDto) {
-    const { skills, ...rest } = data;
+    const { skills, contactInfo, email, ...rest } = data;
+    const resolvedEmail = email || contactInfo;
+
+    if (!resolvedEmail) {
+      throw new BadRequestException('Email is required for freelancer');
+    }
+
     const created = await this.prisma.freelancer.create({
       data: {
         ...rest,
+        email: resolvedEmail,
         skills: {
           connectOrCreate: (skills || []).map((name: string) => ({
             where: { name },
@@ -71,11 +78,13 @@ export class FreelancersService {
   }
 
   async update(id: string, data: UpdateFreelancerDto) {
-    const { skills, ...rest } = data;
+    const { skills, contactInfo, email, ...rest } = data;
+    const resolvedEmail = email || contactInfo;
     const updated = await this.prisma.freelancer.update({
       where: { id },
       data: {
         ...rest,
+        ...(resolvedEmail ? { email: resolvedEmail } : {}),
         skills: skills ? {
           set: [], // Clear existing
           connectOrCreate: skills.map((name: string) => ({
@@ -107,14 +116,14 @@ export class FreelancersService {
     let created = 0;
     const updated = 0;
     for (const item of items) {
-      const { skills, ...rest } = item;
+      const { skills, contactInfo, email, ...rest } = item;
 
-      if (!rest.email) {
+      const resolvedEmail = email || contactInfo;
+      if (!resolvedEmail) {
         // Skip invalid items or throw error. For batch, we'll skip and log/count error in a real app.
         // For now, let's just continue to next iteration to avoid crashing the whole batch
         continue;
       }
-      const email = rest.email;
 
       const skillOps = {
         connectOrCreate: (skills || []).map((name: string) => ({
@@ -125,9 +134,9 @@ export class FreelancersService {
 
       try {
         await this.prisma.freelancer.upsert({
-          where: { email },
-          create: { ...rest, email, skills: skillOps },
-          update: { ...rest, skills: skillOps }
+          where: { email: resolvedEmail },
+          create: { ...rest, email: resolvedEmail, skills: skillOps },
+          update: { ...rest, email: resolvedEmail, skills: skillOps }
         });
         // Simplistic count
         created++;
