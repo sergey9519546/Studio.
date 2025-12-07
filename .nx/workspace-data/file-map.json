@@ -1348,7 +1348,7 @@
       },
       {
         "file": "package.json",
-        "hash": "15316396012772551286"
+        "hash": "14920248214254129348"
       },
       {
         "file": "prisma/comment_schema_addition.prisma",
@@ -1705,6 +1705,10 @@
       {
         "file": "src/vite-env.d.ts",
         "hash": "5563982428927376982"
+      },
+      {
+        "file": "stryker.conf.js",
+        "hash": "1833119152736995619"
       },
       {
         "file": "tailwind.config.js",
