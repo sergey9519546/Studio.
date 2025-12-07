@@ -90,9 +90,9 @@ console.log('📁 Static root:', staticRoot, '| cwd:', process.cwd(), '| __dirna
       ? [
           ServeStaticModule.forRoot({
             rootPath: staticRoot,
-            serveRoot: '/',
-            renderPath: '/*', // SPA fallback so client routes don’t 404
-            exclude: ['/api/(.*)', '/v1/(.*)'], // Exclude API traffic
+            serveRoot: "/",
+            renderPath: "/*", // SPA fallback so client routes don’t 404
+            exclude: ["/api/(.*)", "/v1/(.*)"], // Exclude API traffic
           }),
         ]
       : []),
@@ -127,6 +127,7 @@ console.log('📁 Static root:', staticRoot, '| cwd:', process.cwd(), '| __dirna
     AuthModule,
     MonitoringModule,
     IntegrationsModule,
+    ConfluenceModule,
   ],
   providers: [],
 })
