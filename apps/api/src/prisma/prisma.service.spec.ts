@@ -29,10 +29,6 @@ jest.mock('@prisma/adapter-pg', () => {
 describe('PrismaService', () => {
   const env = process.env;
 
-  interface TestPrismaService extends PrismaService {
-    _pool: Pool; // Allow access to private _pool for testing
-  }
-
   beforeEach(() => {
     jest.clearAllMocks();
     process.env = { ...env };
