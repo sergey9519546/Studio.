@@ -1,0 +1,191 @@
+Compiling TypeScript files for project "api"...
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/common/cache/cache.controller.ts[0m:[93m8[0m:[93m62[0m - [91merror[0m[90m TS1272: [0mA type referenced in a decorated signature must be imported with 'import type' or a namespace import when 'isolatedModules' and 'emitDecoratorMetadata' are enabled.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m8[0m     constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) { }[39m[22m
+[1m[31m[7m [0m [91m                                                             ~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/common/cache/cache.controller.ts[0m:[93m4[0m:[93m10[0m[39m[22m
+[1m[31m    [7m4[0m import { Cache } from 'cache-manager';[39m[22m
+[1m[31m    [7m [0m [96m         ~~~~~[0m[39m[22m
+[1m[31m    'Cache' was imported here.[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/ai.controller.ts[0m:[93m86[0m:[93m76[0m - [91merror[0m[90m TS2554: [0mExpected 0-3 arguments, but got 4.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m86[0m         const userContext = this.buildUserContext(userId, projectId, role, parsedContext);[39m[22m
+[1m[31m[7m  [0m [91m                                                                           ~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/ai.controller.ts[0m:[93m159[0m:[93m21[0m - [91merror[0m[90m TS1272: [0mA type referenced in a decorated signature must be imported with 'import type' or a namespace import when 'isolatedModules' and 'emitDecoratorMetadata' are enabled.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m159[0m         @Res() res: Response,[39m[22m
+[1m[31m[7m   [0m [91m                    ~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/ai.controller.ts[0m:[93m21[0m:[93m10[0m[39m[22m
+[1m[31m    [7m21[0m import { Response } from 'express';[39m[22m
+[1m[31m    [7m  [0m [96m         ~~~~~~~~[0m[39m[22m
+[1m[31m    'Response' was imported here.[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/gemini-analyst.service.ts[0m:[93m27[0m:[93m43[0m - [91merror[0m[90m TS1272: [0mA type referenced in a decorated signature must be imported with 'import type' or a namespace import when 'isolatedModules' and 'emitDecoratorMetadata' are enabled.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m27[0m     @Inject(CACHE_MANAGER) private cache: Cache[39m[22m
+[1m[31m[7m  [0m [91m                                          ~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/gemini-analyst.service.ts[0m:[93m3[0m:[93m10[0m[39m[22m
+[1m[31m    [7m3[0m import { Cache } from 'cache-manager';[39m[22m
+[1m[31m    [7m [0m [96m         ~~~~~[0m[39m[22m
+[1m[31m    'Cache' was imported here.[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/gemini-analyst.service.ts[0m:[93m29[0m:[93m18[0m - [91merror[0m[90m TS2352: [0mConversion of type '({ name: string; description: string; parameters: { type: string; properties: { title: { type: string; description: string; }; description: { type: string; description: string; }; budget: { type: string; description: string; }; projectId?: undefined; freelancerId?: undefined; role?: undefined; }; required: string[];...' to type 'Tool[]' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.[39m[22m
+[1m[31m  Type '{ name: string; description: string; parameters: { type: string; properties: { title: { type: string; description: string; }; description: { type: string; description: string; }; budget: { type: string; description: string; }; projectId?: undefined; freelancerId?: undefined; role?: undefined; }; required: string[]; ...' is not comparable to type 'Tool'.[39m[22m
+[1m[31m    Type '{ name: string; description: string; parameters: { type: string; properties: { projectId: { type: string; description: string; }; freelancerId: { type: string; description: string; }; role: { type: string; description: string; }; title?: undefined; description?: undefined; budget?: undefined; }; required: string[]; ...' is not comparable to type 'Tool'.[39m[22m
+[1m[31m      Types of property 'function' are incompatible.[39m[22m
+[1m[31m        Type '({ projectId, freelancerId, role }: { projectId: string; freelancerId: string; role: string; }) => Promise<{ id: string; projectId: string; role: string; status: string; freelancerId: string; startDate: Date; endDate: Date; updatedAt: Date; createdAt: Date; allocation: number; notes: string | null; }>' is not comparable to type '(args: Record<string, unknown>) => unknown'.[39m[22m
+[1m[31m          Types of parameters '__0' and 'args' are incompatible.[39m[22m
+[1m[31m            Type 'Record<string, unknown>' is missing the following properties from type '{ projectId: string; freelancerId: string; role: string; }': projectId, freelancerId, role[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m29[0m     this.tools = getTools(this.prisma) as Tool[];[39m[22m
+[1m[31m[7m  [0m [91m                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/gemini-analyst.service.ts[0m:[93m73[0m:[93m69[0m - [91merror[0m[90m TS2345: [0mArgument of type 'Tool[]' is not assignable to parameter of type 'Record<string, unknown>[]'.[39m[22m
+[1m[31m  Type 'Tool' is not assignable to type 'Record<string, unknown>'.[39m[22m
+[1m[31m    Index signature for type 'string' is missing in type 'Tool'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m73[0m     const result = await this.vertexAI.chat(messages, systemPrompt, this.tools);[39m[22m
+[1m[31m[7m  [0m [91m                                                                    ~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/gemini-analyst.service.ts[0m:[93m87[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType 'string | { toolCalls: Record<string, unknown>[]; }' is not assignable to type 'string | { toolCalls: ToolCall[]; }'.[39m[22m
+[1m[31m  Type '{ toolCalls: Record<string, unknown>[]; }' is not assignable to type 'string | { toolCalls: ToolCall[]; }'.[39m[22m
+[1m[31m    Type '{ toolCalls: Record<string, unknown>[]; }' is not assignable to type '{ toolCalls: ToolCall[]; }'.[39m[22m
+[1m[31m      Types of property 'toolCalls' are incompatible.[39m[22m
+[1m[31m        Type 'Record<string, unknown>[]' is not assignable to type 'ToolCall[]'.[39m[22m
+[1m[31m          Type 'Record<string, unknown>' is missing the following properties from type 'ToolCall': name, args[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m87[0m     return result;[39m[22m
+[1m[31m[7m  [0m [91m    ~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/optimization.controller.ts[0m:[93m48[0m:[93m42[0m - [91merror[0m[90m TS2339: [0mProperty 'version' does not exist on type 'PromptTemplate'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m48[0m                 currentVersion: template.version,[39m[22m
+[1m[31m[7m  [0m [91m                                         ~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/testing/testing.controller.ts[0m:[93m44[0m:[93m43[0m - [91merror[0m[90m TS1272: [0mA type referenced in a decorated signature must be imported with 'import type' or a namespace import when 'isolatedModules' and 'emitDecoratorMetadata' are enabled.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m44[0m     async runCustomTest(@Body() testCase: PromptTestCase) {[39m[22m
+[1m[31m[7m  [0m [91m                                          ~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/testing/testing.controller.ts[0m:[93m2[0m:[93m31[0m[39m[22m
+[1m[31m    [7m2[0m import { PromptTesterService, PromptTestCase } from './prompt-tester.service';[39m[22m
+[1m[31m    [7m [0m [96m                              ~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m    'PromptTestCase' was imported here.[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/assets/assets.controller.ts[0m:[93m50[0m:[93m11[0m - [91merror[0m[90m TS1272: [0mA type referenced in a decorated signature must be imported with 'import type' or a namespace import when 'isolatedModules' and 'emitDecoratorMetadata' are enabled.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m50[0m     file: MulterFile,[39m[22m
+[1m[31m[7m  [0m [91m          ~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/assets/assets.controller.ts[0m:[93m17[0m:[93m25[0m[39m[22m
+[1m[31m    [7m17[0m import { AssetsService, MulterFile } from './assets.service';[39m[22m
+[1m[31m    [7m  [0m [96m                        ~~~~~~~~~~[0m[39m[22m
+[1m[31m    'MulterFile' was imported here.[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m24[0m:[93m4[0m - [91merror[0m[90m TS2304: [0mCannot find name 'ValidateIf'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m24[0m   @ValidateIf((o) => !o.contactInfo)[39m[22m
+[1m[31m[7m  [0m [91m   ~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m24[0m:[93m16[0m - [91merror[0m[90m TS7006: [0mParameter 'o' implicitly has an 'any' type.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m24[0m   @ValidateIf((o) => !o.contactInfo)[39m[22m
+[1m[31m[7m  [0m [91m               ~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m29[0m:[93m4[0m - [91merror[0m[90m TS2304: [0mCannot find name 'ValidateIf'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m29[0m   @ValidateIf((o) => !o.email)[39m[22m
+[1m[31m[7m  [0m [91m   ~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m29[0m:[93m16[0m - [91merror[0m[90m TS7006: [0mParameter 'o' implicitly has an 'any' type.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m29[0m   @ValidateIf((o) => !o.email)[39m[22m
+[1m[31m[7m  [0m [91m               ~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m78[0m:[93m4[0m - [91merror[0m[90m TS2304: [0mCannot find name 'ValidateIf'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m78[0m   @ValidateIf((o) => !o.contactInfo)[39m[22m
+[1m[31m[7m  [0m [91m   ~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m78[0m:[93m16[0m - [91merror[0m[90m TS7006: [0mParameter 'o' implicitly has an 'any' type.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m78[0m   @ValidateIf((o) => !o.contactInfo)[39m[22m
+[1m[31m[7m  [0m [91m               ~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m83[0m:[93m4[0m - [91merror[0m[90m TS2304: [0mCannot find name 'ValidateIf'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m83[0m   @ValidateIf((o) => !o.email)[39m[22m
+[1m[31m[7m  [0m [91m   ~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m83[0m:[93m16[0m - [91merror[0m[90m TS7006: [0mParameter 'o' implicitly has an 'any' type.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m83[0m   @ValidateIf((o) => !o.email)[39m[22m
+[1m[31m[7m  [0m [91m               ~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m135[0m:[93m4[0m - [91merror[0m[90m TS2304: [0mCannot find name 'ValidateIf'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m135[0m   @ValidateIf((o) => !o.contactInfo)[39m[22m
+[1m[31m[7m   [0m [91m   ~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m135[0m:[93m16[0m - [91merror[0m[90m TS7006: [0mParameter 'o' implicitly has an 'any' type.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m135[0m   @ValidateIf((o) => !o.contactInfo)[39m[22m
+[1m[31m[7m   [0m [91m               ~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m140[0m:[93m4[0m - [91merror[0m[90m TS2304: [0mCannot find name 'ValidateIf'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m140[0m   @ValidateIf((o) => !o.email)[39m[22m
+[1m[31m[7m   [0m [91m   ~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/dto/freelancer.dto.ts[0m:[93m140[0m:[93m16[0m - [91merror[0m[90m TS7006: [0mParameter 'o' implicitly has an 'any' type.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m140[0m   @ValidateIf((o) => !o.email)[39m[22m
+[1m[31m[7m   [0m [91m               ~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/freelancers.service.ts[0m:[93m16[0m:[93m50[0m - [91merror[0m[90m TS1272: [0mA type referenced in a decorated signature must be imported with 'import type' or a namespace import when 'isolatedModules' and 'emitDecoratorMetadata' are enabled.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m16[0m     @Inject(CACHE_MANAGER) private cacheManager: Cache,[39m[22m
+[1m[31m[7m  [0m [91m                                                 ~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/freelancers/freelancers.service.ts[0m:[93m7[0m:[93m10[0m[39m[22m
+[1m[31m    [7m7[0m import { Cache } from 'cache-manager';[39m[22m
+[1m[31m    [7m [0m [96m         ~~~~~[0m[39m[22m
+[1m[31m    'Cache' was imported here.[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/integrations/cloud-storage/adapters/google-drive.adapter.ts[0m:[93m38[0m:[93m9[0m - [91merror[0m[90m TS2322: [0mType 'string | undefined' is not assignable to type 'string'.[39m[22m
+[1m[31m  Type 'undefined' is not assignable to type 'string'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m38[0m         refreshToken: user.googleRefreshToken || undefined[39m[22m
+[1m[31m[7m  [0m [91m        ~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/media-proxy/media-proxy.controller.ts[0m:[93m23[0m:[93m3[0m - [91merror[0m[90m TS2300: [0mDuplicate identifier 'Param'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m23[0m   Param,[39m[22m
+[1m[31m[7m  [0m [91m  ~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/media-proxy/media-proxy.controller.ts[0m:[93m24[0m:[93m3[0m - [91merror[0m[90m TS2300: [0mDuplicate identifier 'Param'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m24[0m   Param,[39m[22m
+[1m[31m[7m  [0m [91m  ~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/media-proxy/s3-media.service.ts[0m:[93m66[0m:[93m57[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m66[0m       this.logger.error(`Failed to upload file to S3: ${error.message}`, error.stack);[39m[22m
+[1m[31m[7m  [0m [91m                                                        ~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/media-proxy/s3-media.service.ts[0m:[93m66[0m:[93m74[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m66[0m       this.logger.error(`Failed to upload file to S3: ${error.message}`, error.stack);[39m[22m
+[1m[31m[7m  [0m [91m                                                                         ~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/media-proxy/s3-media.service.ts[0m:[93m67[0m:[93m44[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m67[0m       throw new Error(`S3 upload failed: ${error.message}`);[39m[22m
+[1m[31m[7m  [0m [91m                                           ~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/media-proxy/s3-media.service.ts[0m:[93m93[0m:[93m59[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m93[0m       this.logger.error(`Failed to generate signed URL: ${error.message}`, error.stack);[39m[22m
+[1m[31m[7m  [0m [91m                                                          ~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/media-proxy/s3-media.service.ts[0m:[93m93[0m:[93m76[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m93[0m       this.logger.error(`Failed to generate signed URL: ${error.message}`, error.stack);[39m[22m
+[1m[31m[7m  [0m [91m                                                                           ~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/media-proxy/s3-media.service.ts[0m:[93m94[0m:[93m57[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m94[0m       throw new Error(`Failed to generate signed URL: ${error.message}`);[39m[22m
+[1m[31m[7m  [0m [91m                                                        ~~~~~[0m[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/projects/projects.service.ts[0m:[93m31[0m:[93m50[0m - [91merror[0m[90m TS1272: [0mA type referenced in a decorated signature must be imported with 'import type' or a namespace import when 'isolatedModules' and 'emitDecoratorMetadata' are enabled.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m31[0m     @Inject(CACHE_MANAGER) private cacheManager: Cache,[39m[22m
+[1m[31m[7m  [0m [91m                                                 ~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/projects/projects.service.ts[0m:[93m7[0m:[93m10[0m[39m[22m
+[1m[31m    [7m7[0m import { Cache } from 'cache-manager';[39m[22m
+[1m[31m    [7m [0m [96m         ~~~~~[0m[39m[22m
+[1m[31m    'Cache' was imported here.[39m[22m
+[1m[31m[96m/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/rag/rag.controller.ts[0m:[93m105[0m:[93m79[0m - [91merror[0m[90m TS2554: [0mExpected 1 arguments, but got 2.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m105[0m     const result = await this.ragService.summarizeDocuments(data.documentIds, {[39m[22m
+[1m[31m[7m   [0m [91m                                                                              ~[0m[39m[22m
+[1m[31m[7m106[0m       maxLength: data.maxLength,[39m[22m
+[1m[31m[7m   [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[7m107[0m     });[39m[22m
+[1m[31m[7m   [0m [91m~~~~~[0m[39m[22m
+[1m[31m[39m[22m

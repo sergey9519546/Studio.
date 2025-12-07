@@ -1,213 +1,234 @@
+import { Injectable, Logger } from "@nestjs/common";
+import { VertexAIService } from "../ai/vertex-ai.service";
+import { ChunkingService } from "./chunking.service";
+import { EmbeddingsService } from "./embeddings.service";
+import { VectorStoreService } from "./vector-store.service";
+
+interface RAGContext {
+  query: string;
+  relevantChunks: Array<{
+    id: string;
+    content: string;
+    score: number;
+    metadata: Record<string, unknown>;
+  }>;
+  context: string;
+}
+
 interface RAGResponse {
-    answer: string;
-    sources: Array<{
-        content: string;
-        score: number;
-        metadata?: Record<string, unknown>;
-    }>;
-    context?: RAGContext;
+  answer: string;
+  sources: Array<{
+    content: string;
+    score: number;
+    metadata?: Record<string, unknown>;
+  }>;
+  context?: RAGContext;
 }
 
 @Injectable()
 export class RAGService {
-    private readonly logger = new Logger(RAGService.name);
+  private readonly logger = new Logger(RAGService.name);
 
-    constructor(
-        private embeddings: EmbeddingsService,
-        private vectorStore: VectorStoreService,
-        private chunking: ChunkingService,
-        private vertexAI: VertexAIService
-    ) { }
+  constructor(
+    private embeddings: EmbeddingsService,
+    private vectorStore: VectorStoreService,
+    private chunking: ChunkingService,
+    private vertexAI: VertexAIService
+  ) {}
 
-    /**
-     * Index a document for RAG retrieval
-     */
-    async indexDocument(
-        content: string,
+  /**
+   * Index a document for RAG retrieval
+   */
+  async indexDocument(
+    content: string,
+    metadata: {
+      source?: string;
+      projectId?: string;
+      title?: string;
+      type?: string;
+    } = {}
+  ): Promise<{ chunksIndexed: number; documentIds: string[] }> {
+    this.logger.log(`Indexing document: ${metadata.title || "Untitled"}`);
+
+    // Chunk the document intelligently
+    const chunks = this.chunking.chunkByParagraphs(content, {
+      maxChunkSize: 800,
+      source: metadata.source,
+    });
+
+    // Store chunks in vector store
+    const documentIds = await this.vectorStore.storeBatch(
+      chunks.map((chunk) => ({
+        content: chunk.content,
         metadata: {
-            source?: string;
-            projectId?: string;
-            title?: string;
-            type?: string;
-        } = {}
-    ): Promise<{ chunksIndexed: number; documentIds: string[] }> {
-        this.logger.log(`Indexing document: ${metadata.title || 'Untitled'}`);
+          ...metadata,
+          chunkIndex: chunk.metadata.chunkIndex,
+          totalChunks: chunk.metadata.totalChunks,
+        },
+      }))
+    );
 
-        // Chunk the document intelligently
-        const chunks = this.chunking.chunkByParagraphs(content, {
-            maxChunkSize: 800,
-            source: metadata.source,
-        });
+    this.logger.log(`Indexed ${chunks.length} chunks for document`);
 
-        // Store chunks in vector store
-        const documentIds = await this.vectorStore.storeBatch(
-            chunks.map(chunk => ({
-                content: chunk.content,
-                metadata: {
-                    ...metadata,
-                    chunkIndex: chunk.metadata.chunkIndex,
-                    totalChunks: chunk.metadata.totalChunks,
-                },
-            }))
-        );
+    return {
+      chunksIndexed: chunks.length,
+      documentIds,
+    };
+  }
 
-        this.logger.log(`Indexed ${chunks.length} chunks for document`);
+  /**
+   * Query the RAG system
+   */
+  async query(
+    question: string,
+    options: {
+      topK?: number;
+      projectId?: string;
+      includeContext?: boolean;
+    } = {}
+  ): Promise<RAGResponse> {
+    const { topK = 5, projectId, includeContext = true } = options;
 
-        return {
-            chunksIndexed: chunks.length,
-            documentIds,
-        };
+    this.logger.log(`RAG Query: "${question}"`);
+
+    // 1. Retrieve relevant documents using hybrid search
+    const relevantDocs = await this.vectorStore.hybridSearch(question, {
+      topK,
+      projectId, // Pass projectId to hybridSearch
+    });
+
+    if (relevantDocs.length === 0) {
+      this.logger.warn("No relevant documents found");
+      return {
+        answer:
+          "I could not find any relevant information to answer your question.",
+        sources: [],
+        context: {
+          query: question,
+          relevantChunks: [],
+          context: "",
+        },
+      };
     }
 
-    /**
-     * Query the RAG system
-     */
-    async query(
-        question: string,
-        options: {
-            topK?: number;
-            projectId?: string;
-            includeContext?: boolean;
-        } = {}
-    ): Promise<RAGResponse> {
-        const {
-            topK = 5,
-            projectId,
-            includeContext = true,
-        } = options;
+    this.logger.debug(`Found ${relevantDocs.length} relevant documents`);
 
-        this.logger.log(`RAG Query: "${question}"`);
+    // 2. Build context from relevant documents
+    const contextChunks = relevantDocs.map(
+      (doc, i) =>
+        `[Source ${i + 1}] (Relevance: ${(doc.score * 100).toFixed(1)}%)\n${doc.content}\n`
+    );
 
-        // 1. Retrieve relevant documents using hybrid search
-        const relevantDocs = await this.vectorStore.hybridSearch(question, {
-            topK,
-            projectId, // Pass projectId to hybridSearch
-        });
+    const context = contextChunks.join("\n---\n\n");
 
-        if (relevantDocs.length === 0) {
-            this.logger.warn('No relevant documents found');
-            return {
-                answer: 'I could not find any relevant information to answer your question.',
-                sources: [],
-                context: {
-                    query: question,
-                    relevantChunks: [],
-                    context: '',
-                },
-            };
-        }
+    // 3. Generate answer using Vertex AI
+    const prompt = this.buildRAGPrompt(question, context);
 
-        this.logger.debug(`Found ${relevantDocs.length} relevant documents`);
+    try {
+      const answer = await this.vertexAI.generateContent(prompt);
 
-        // 2. Build context from relevant documents
-        const contextChunks = relevantDocs.map((doc, i) =>
-            `[Source ${i + 1}] (Relevance: ${(doc.score * 100).toFixed(1)}%)\n${doc.content}\n`
-        );
+      const response: RAGResponse = {
+        answer: answer.trim(),
+        sources: relevantDocs.map((doc) => ({
+          content: doc.content,
+          score: doc.score,
+          metadata: doc.metadata,
+        })),
+        context: includeContext
+          ? {
+              query: question,
+              relevantChunks: relevantDocs,
+              context,
+            }
+          : undefined,
+      };
 
-        const context = contextChunks.join('\n---\n\n');
+      this.logger.log("RAG query completed successfully");
+      return response;
+    } catch (error) {
+      this.logger.error("Failed to generate RAG answer", error);
+      throw error;
+    }
+  }
 
-        // 3. Generate answer using Vertex AI
-        const prompt = this.buildRAGPrompt(question, context);
+  /**
+   * Conversational RAG with chat history
+   */
+  async chat(
+    message: string,
+    options: {
+      conversationHistory?: Array<{ role: string; content: string }>;
+      projectId?: string;
+      topK?: number;
+    } = {}
+  ): Promise<RAGResponse> {
+    const { conversationHistory = [], projectId, topK = 3 } = options;
 
-        try {
-            const answer = await this.vertexAI.generateContent(prompt);
+    // Retrieve relevant context
+    const relevantDocs = await this.vectorStore.hybridSearch(message, {
+      topK,
+      projectId, // Pass projectId to hybridSearch
+    });
 
-            const response: RAGResponse = {
-                answer: answer.trim(),
-                sources: relevantDocs.map(doc => ({
-                    content: doc.content,
-                    score: doc.score,
-                    metadata: doc.metadata,
-                })),
-                context: includeContext ? {
-                    query: question,
-                    relevantChunks: relevantDocs,
-                    context,
-                } : undefined,
-            };
+    const context = relevantDocs
+      .map((doc, i) => `[Context ${i + 1}]\n${doc.content}`)
+      .join("\n\n---\n\n");
 
-            this.logger.log('RAG query completed successfully');
-            return response;
-        } catch (error) {
-            this.logger.error('Failed to generate RAG answer', error);
-            throw error;
-        }
+    // Build conversation with context
+    const systemPrompt = `You are a helpful AI assistant with access to relevant context. ${
+      context ? `\n\nRelevant Context:\n${context}` : ""
+    }`;
+
+    const messages = [
+      ...conversationHistory,
+      { role: "user", content: message },
+    ];
+
+    const chatResponse = await this.vertexAI.chat(messages, systemPrompt);
+
+    // Handle response - could be string or object with toolCalls
+    const answer =
+      typeof chatResponse === "string"
+        ? chatResponse
+        : JSON.stringify(chatResponse);
+
+    return {
+      answer,
+      sources: relevantDocs.map((doc) => ({
+        content: doc.content,
+        score: doc.score,
+        metadata: doc.metadata,
+      })),
+      context: {
+        query: message,
+        relevantChunks: relevantDocs,
+        context,
+      },
+    };
+  }
+
+  /**
+   * Summarize multiple documents
+   */
+  async summarizeDocuments(
+    documentIds: string[]
+  ): Promise<{ summary: string; documentsProcessed: number }> {
+    this.logger.log(`Summarizing ${documentIds.length} documents`);
+
+    // Retrieve documents
+    const contents = documentIds
+      .map((id) => {
+        return this.vectorStore.getDocumentContent(id) || "";
+      })
+      .filter((c) => c.length > 0);
+
+    if (contents.length === 0) {
+      throw new Error("No valid documents found");
     }
 
-    /**
-     * Conversational RAG with chat history
-     */
-    async chat(
-        message: string,
-        options: {
-            conversationHistory?: Array<{ role: string; content: string }>;
-            projectId?: string;
-            topK?: number;
-        } = {}
-    ): Promise<RAGResponse> {
-        const { conversationHistory = [], projectId, topK = 3 } = options;
-
-        // Retrieve relevant context
-        const relevantDocs = await this.vectorStore.hybridSearch(message, {
-            topK,
-            projectId, // Pass projectId to hybridSearch
-        });
-
-        const context = relevantDocs
-            .map((doc, i) => `[Context ${i + 1}]\n${doc.content}`)
-            .join('\n\n---\n\n');
-
-        // Build conversation with context
-        const systemPrompt = `You are a helpful AI assistant with access to relevant context. ${context ? `\n\nRelevant Context:\n${context}` : ''
-            }`;
-
-        const messages = [
-            ...conversationHistory,
-            { role: 'user', content: message },
-        ];
-
-        const chatResponse = await this.vertexAI.chat(messages, systemPrompt);
-
-        // Handle response - could be string or object with toolCalls
-        const answer = typeof chatResponse === 'string'
-            ? chatResponse
-            : JSON.stringify(chatResponse);
-
-        return {
-            answer,
-            sources: relevantDocs.map(doc => ({
-                content: doc.content,
-                score: doc.score,
-                metadata: doc.metadata,
-            })),
-            context: {
-                query: message,
-                relevantChunks: relevantDocs,
-                context,
-            },
-        };
-    }
-
-    /**
-     * Summarize multiple documents
-     */
-    async summarizeDocuments(
-        documentIds: string[],
-    ): Promise<{ summary: string; documentsProcessed: number }> {
-        this.logger.log(`Summarizing ${documentIds.length} documents`);
-
-        // Retrieve documents
-        const contents = documentIds.map(id => {
-            return this.vectorStore.getDocumentContent(id) || '';
-        }).filter(c => c.length > 0);
-
-        if (contents.length === 0) {
-            throw new Error('No valid documents found');
-        }
-
-        // Combine and summarize
-        const combinedText = contents.join('\n\n---\n\n');
-        const prompt = `Please provide a comprehensive summary of the following documents. 
+    // Combine and summarize
+    const combinedText = contents.join("\n\n---\n\n");
+    const prompt = `Please provide a comprehensive summary of the following documents. 
 Focus on key points, main ideas, and important details.
 
 Documents:
@@ -215,32 +236,32 @@ ${combinedText}
 
 Summary:`;
 
-        const summary = await this.vertexAI.generateContent(prompt);
+    const summary = await this.vertexAI.generateContent(prompt);
 
-        return {
-            summary: summary.trim(),
-            documentsProcessed: contents.length,
-        };
-    }
+    return {
+      summary: summary.trim(),
+      documentsProcessed: contents.length,
+    };
+  }
 
-    /**
-     * Get RAG system statistics
-     */
-    async getStats(): Promise<{
-        vectorStore: unknown;
-        embeddingsCache: unknown;
-    }> {
-        return {
-            vectorStore: this.vectorStore.getStats(),
-            embeddingsCache: this.embeddings.getCacheStats(),
-        };
-    }
+  /**
+   * Get RAG system statistics
+   */
+  async getStats(): Promise<{
+    vectorStore: unknown;
+    embeddingsCache: unknown;
+  }> {
+    return {
+      vectorStore: this.vectorStore.getStats(),
+      embeddingsCache: this.embeddings.getCacheStats(),
+    };
+  }
 
-    /**
-     * Build RAG prompt with context
-     */
-    private buildRAGPrompt(question: string, context: string): string {
-        return `You are a knowledgeable AI assistant. Answer the question based on the provided context.
+  /**
+   * Build RAG prompt with context
+   */
+  private buildRAGPrompt(question: string, context: string): string {
+    return `You are a knowledgeable AI assistant. Answer the question based on the provided context.
 
 Context:
 ${context}
@@ -254,7 +275,7 @@ Instructions:
 4. Provide a clear, concise, and helpful answer
 
 Answer:`;
-    }
+  }
 }
 
 export type { RAGContext, RAGResponse };

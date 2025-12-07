@@ -843,7 +843,10 @@
         },
         {
           "file": "apps/api/src/modules/rag/rag.service.ts",
-          "hash": "11257627974354370204"
+          "hash": "12674098299188768251",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/rag/types/rag.types.ts",
@@ -851,11 +854,14 @@
         },
         {
           "file": "apps/api/src/modules/rag/vector-store.service.ts",
-          "hash": "8371973510589707940"
+          "hash": "7872820977699885949",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/realtime/realtime.controller.ts",
-          "hash": "16421148624715152996",
+          "hash": "8658133494755273210",
           "deps": [
             "npm:@nestjs/common",
             "npm:express"
@@ -1735,12 +1741,8 @@
         "hash": "12178908264864505738"
       },
       {
-        "file": "tmp/apps/api/serve/tsconfig.generated.9eeff66e-45bc-4210-8918-37fe9d9c91a1.json",
+        "file": "tmp/apps/api/serve/tsconfig.generated.c441147f-83db-4a30-b0a5-c435610636f4.json",
         "hash": "12119823244770242550"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.bddcc118-d618-4925-b826-8ac041ed9ed6.json",
-        "hash": "12178908264864505738"
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.d5b52dfc-7d88-4b62-8012-abe976eb79c0.json",
