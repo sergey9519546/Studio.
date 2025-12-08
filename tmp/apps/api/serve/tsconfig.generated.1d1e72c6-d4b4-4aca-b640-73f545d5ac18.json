@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@app/*": [
+        "apps/api/src/*"
+      ],
+      "@/*": [
+        "src/*"
+      ],
+      "@google-cloud/aiplatform": [
+        "types/@google-cloud/aiplatform/index.d.ts"
+      ],
+      "googleapis": [
+        "types/googleapis/index.d.ts"
+      ]
+    }
+  },
+  "extends": "..\\..\\..\\..\\apps\\api\\tsconfig.app.json"
+}

@@ -1,6 +1,6 @@
 import { Body, Controller, Post, UnauthorizedException } from "@nestjs/common";
 import { Throttle } from "@nestjs/throttler";
-import { AuthService } from "./auth.service";
+import { AuthService } from "./auth.service.js";
 
 @Controller({ path: "auth", version: "1" })
 export class AuthController {

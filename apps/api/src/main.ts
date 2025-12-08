@@ -4,9 +4,9 @@ import compression from 'compression';
 import helmet from 'helmet';
 import { Logger } from 'nestjs-pino';
 import 'reflect-metadata';
-import { AppModule } from './app.module';
-import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
-import { AuthService } from './modules/auth/auth.service';
+import { AppModule } from './app.module.js';
+import { AllExceptionsFilter } from './common/filters/all-exceptions.filter.js';
+import { AuthService } from './modules/auth/auth.service.js';
 
 async function bootstrap() {
   const bootstrapLogger = new NestLogger('Bootstrap');
