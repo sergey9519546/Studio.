@@ -956,7 +956,7 @@
         },
         {
           "file": "apps/api/src/modules/tools/tool-handlers.service.ts",
-          "hash": "10141102964272316223",
+          "hash": "17074286325031566350",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -46359,12 +46359,24 @@
         "hash": "12119823244770242550"
       },
       {
+        "file": "tmp/apps/api/serve/tsconfig.generated.37f42c2f-53eb-471d-9aae-15ca549c5fa8.json",
+        "hash": "9564512296546428352"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.593494a1-1cff-4d81-8654-6a2ab73b0730.json",
+        "hash": "9564512296546428352"
+      },
+      {
         "file": "tmp/apps/api/serve/tsconfig.generated.5b89dedf-1d96-471a-ae93-8c23c521014b.json",
         "hash": "12178908264864505738"
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.602e4ec9-3c0e-423c-9743-dbd689ef21c1.json",
         "hash": "12178908264864505738"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.6172dee5-4af6-446e-bf39-b1564a03f64a.json",
+        "hash": "9564512296546428352"
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.6ebc14d0-72f1-4703-8df5-7a48b5ccf680.json",
