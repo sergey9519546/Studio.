@@ -1147,6 +1147,10 @@
         "hash": "18359608235670662366"
       },
       {
+        "file": ".vscode/extensions.json",
+        "hash": "16715343646543380336"
+      },
+      {
         "file": "AGENTS.md",
         "hash": "7853241679760809325"
       },
@@ -1177,6 +1181,10 @@
       {
         "file": "DEPLOYMENT_CHECKLIST.md",
         "hash": "14695220234282212091"
+      },
+      {
+        "file": "DEPLOYMENT_FIXES_README.md",
+        "hash": "8839456142501731964"
       },
       {
         "file": "Dockerfile",
@@ -16712,11 +16720,11 @@
       },
       {
         "file": "ffmpeg/libavcodec/x86/vp9dsp_init.c",
-        "hash": "5337573986143491729"
+        "hash": "11086714480559133705"
       },
       {
         "file": "ffmpeg/libavcodec/x86/vp9dsp_init.h",
-        "hash": "8416679048591784060"
+        "hash": "5223411551090099805"
       },
       {
         "file": "ffmpeg/libavcodec/x86/vp9dsp_init_10bpp.c",
@@ -16732,11 +16740,11 @@
       },
       {
         "file": "ffmpeg/libavcodec/x86/vp9dsp_init_16bpp_template.c",
-        "hash": "14101089544196804033"
+        "hash": "455661208029453062"
       },
       {
         "file": "ffmpeg/libavcodec/x86/vp9intrapred.asm",
-        "hash": "5031467956667235719"
+        "hash": "4001964611435685489"
       },
       {
         "file": "ffmpeg/libavcodec/x86/vp9intrapred_16bpp.asm",
@@ -16744,11 +16752,11 @@
       },
       {
         "file": "ffmpeg/libavcodec/x86/vp9itxfm.asm",
-        "hash": "4815342738347102580"
+        "hash": "13545647035651423067"
       },
       {
         "file": "ffmpeg/libavcodec/x86/vp9itxfm_16bpp.asm",
-        "hash": "10297602923129365884"
+        "hash": "18227040031596187546"
       },
       {
         "file": "ffmpeg/libavcodec/x86/vp9itxfm_16bpp_avx512.asm",
@@ -16776,7 +16784,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/x86/vp9mc.asm",
-        "hash": "4750995837829240313"
+        "hash": "8241943645893272219"
       },
       {
         "file": "ffmpeg/libavcodec/x86/vp9mc_16bpp.asm",
@@ -25744,11 +25752,11 @@
       },
       {
         "file": "ffmpeg/tests/checkasm/checkasm.c",
-        "hash": "18289945937500035627"
+        "hash": "15949528356928442756"
       },
       {
         "file": "ffmpeg/tests/checkasm/checkasm.h",
-        "hash": "9982511014131144749"
+        "hash": "527310997466136427"
       },
       {
         "file": "ffmpeg/tests/checkasm/dcadsp.c",
@@ -26040,7 +26048,7 @@
       },
       {
         "file": "ffmpeg/tests/checkasm/vp9dsp.c",
-        "hash": "4809923077514235124"
+        "hash": "9803137488952311138"
       },
       {
         "file": "ffmpeg/tests/checkasm/vvc_alf.c",
@@ -45672,7 +45680,7 @@
       },
       {
         "file": "firebase.json",
-        "hash": "15644516539453895030"
+        "hash": "4622512952440184838"
       },
       {
         "file": "firestore.indexes.json",
@@ -45732,7 +45740,7 @@
       },
       {
         "file": "package.json",
-        "hash": "15272223847930296168"
+        "hash": "5901103855475764958"
       },
       {
         "file": "postcss.config.js",
@@ -45793,6 +45801,10 @@
       {
         "file": "scripts/test-rag.ts",
         "hash": "15186958424465831935"
+      },
+      {
+        "file": "scripts/verify-deployment.js",
+        "hash": "14944539972200540849"
       },
       {
         "file": "services/AssetIntelligenceEngine.ts",
@@ -46301,6 +46313,10 @@
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.602e4ec9-3c0e-423c-9743-dbd689ef21c1.json",
         "hash": "12178908264864505738"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.6ebc14d0-72f1-4703-8df5-7a48b5ccf680.json",
+        "hash": "9564512296546428352"
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.89550a6e-86e2-44cf-9201-b0a81eaa776d.json",
