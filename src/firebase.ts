@@ -1,16 +1,14 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp, getApps } from "firebase/app";
-import { getAnalytics, isSupported } from "firebase/analytics";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
+import { getAuth } from "firebase/auth";
 import { getFunctions } from "firebase/functions";
+import { getAI, getGenerativeModel, VertexAIBackend } from "firebase/ai";
 
-// Firebase products that are being used
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// Updated for Firebase SDK v12.6.0+
 const firebaseConfig = {
   apiKey: "AIzaSyAONjMz5IWshDt_spZEpGI_gnNDD7izGsA",
   authDomain: "gen-lang-client-0704991831.firebaseapp.com",
@@ -23,23 +21,15 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+export const app = initializeApp(firebaseConfig);
+export const analytics = getAnalytics(app);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
+export const auth = getAuth(app);
+export const functions = getFunctions(app);
 
-// Initialize Firebase services
-let analytics: Promise<import("firebase/analytics").Analytics | null>;
-analytics = isSupported().then(() => getAnalytics(app)).catch(() => null);
+// Initialize the Vertex AI Gemini API backend service
+export const ai = getAI(app, { backend: new VertexAIBackend() });
 
-const db = getFirestore(app);
-const auth = getAuth(app);
-const storage = getStorage(app);
-const functions = getFunctions(app);
-
-export { 
-  app, 
-  analytics, 
-  db, 
-  auth, 
-  storage, 
-  functions,
-  isSupported
-};
+// Create a `GenerativeModel` instance with a model that supports your use case
+export const model = getGenerativeModel(ai, { model: "gemini-2.5-flash" });
