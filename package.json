@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "nx run-many -t serve",
     "prepare": "prisma generate",
-    "build": "npm run build:client && nx run-many -t build",
+    "build": "npm run build:client && npm run build:api",
     "build:client": "vite build",
-    "build:api": "nx build api",
+    "build:api": "npx tsc --project apps/api/tsconfig.app.json --outDir build/apps/api",
     "start": "node build/apps/api/src/main",
     "start:dev": "nx serve api",
     "start:prod": "node build/apps/api/src/main",
@@ -20,7 +20,8 @@
     "test:integration": "jest --config apps/api/jest.config.ts --testRegex '.integration.spec.ts$'",
     "test:frontend": "vitest run",
     "test:frontend:ui": "vitest --ui",
-    "mutation": "stryker run"
+    "mutation": "stryker run",
+    "verify-deployment": "node scripts/verify-deployment.js"
   },
   "dependencies": {
     "@agentset/mcp": "^1.3.0",
