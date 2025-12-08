@@ -1010,11 +1010,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "15657850741834904119"
+        "hash": "5115716410103956144"
       },
       {
         "file": "package.json",
-        "hash": "17246826341691098641"
+        "hash": "8242333361725281086"
       },
       {
         "file": "prisma/comment_schema_addition.prisma",
@@ -1483,6 +1483,14 @@
       {
         "file": "stryker.conf.js",
         "hash": "831399913437506820"
+      },
+      {
+        "file": "stubs/atlassiansox-analytics-web-client/index.js",
+        "hash": "2613863304276515625"
+      },
+      {
+        "file": "stubs/atlassiansox-analytics-web-client/package.json",
+        "hash": "8739031152355155646"
       },
       {
         "file": "tailwind.config.js",
