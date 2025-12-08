@@ -9,60 +9,30 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        // App structure
-        app: colors.bg.app,
-        surface: colors.bg.surface,
-        subtle: colors.bg.subtle,
-        sidebar: colors.bg.sidebar,
-        
-        // Borders
-        border: {
-          subtle: colors.border.subtle,
-          hover: colors.border.hover,
-          'subtle-alpha': colors.border.subtleAlpha,
-        },
-
-        // Typography
-        ink: {
-          primary: colors.text.primary,
-          secondary: colors.text.secondary,
-          tertiary: colors.text.tertiary,
-          inverse: colors.text.inverse,
-        },
-
-        // Accents
-        primary: {
-          DEFAULT: colors.accent.primary,
-          hover: colors.accent.primaryHover,
-          tint: colors.accent.tint,
-        },
-
-        edge: {
-          teal: colors.edge.teal,
-          magenta: colors.edge.magenta,
-        },
-
-        // Semantic states
-        state: {
-          success: colors.state.success,
-          'success-bg': colors.state.successBg,
-          warning: colors.state.warning,
-          'warning-bg': colors.state.warningBg,
-          danger: colors.state.danger,
-          'danger-bg': colors.state.dangerBg,
-        }
+      fontFamily: {
+        sans: ['Inter', 'SF Pro Text', '-apple-system', 'sans-serif'],
+        display: ['"Inter Tight"', 'SF Pro Display', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'SF Mono', 'monospace'],
       },
-      fontFamily: typography.fontFamily,
-      letterSpacing: typography.letterSpacing,
-      borderRadius: {
-        ...radii,
+      colors: {
+        app: '#F6F6FA',
+        surface: '#FFFFFF',
+        subtle: '#ECEEF5',
+        border: { subtle: '#E2E4EA', hover: '#B0B5C8' },
+        ink: { DEFAULT: '#101118', primary: '#101118', secondary: '#5D6070', tertiary: '#8F93A3', inverse: '#FFFFFF' },
+        primary: { DEFAULT: '#2463E6', hover: '#1E4EC8', tint: '#E1EBFF' },
+        edge: { teal: '#18C9AE', magenta: '#E14BF7' },
+        state: { success: '#16A34A', 'success-bg': '#E6F9EC', warning: '#D97706', 'warning-bg': '#FFF4DE', danger: '#DC2626', 'danger-bg': '#FDE4E4' }
       },
       boxShadow: {
-        ...shadows,
+        'soft': '0 2px 12px rgba(0,0,0,0.02)',
+        'card': '0 4px 20px rgba(16, 17, 24, 0.03)',
+        'elevation': '0 8px 30px rgba(0, 0, 0, 0.04)',
+        'float': '0 20px 40px -10px rgba(16, 17, 24, 0.08)',
+        'glow': '0 0 20px rgba(36, 99, 230, 0.15)',
       },
       backgroundImage: {
-        'rival-gradient': colors.edge.gradient,
+        'rival-gradient': 'linear-gradient(90deg, #2463E6 0%, #18C9AE 50%, #E14BF7 100%)',
       },
       transitionDuration: {
         '200': '200ms',
