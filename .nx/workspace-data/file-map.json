@@ -37,7 +37,7 @@
         },
         {
           "file": "apps/api/src/app.module.ts",
-          "hash": "18333294305703077650",
+          "hash": "10008134602452466950",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/core",
@@ -135,7 +135,7 @@
         },
         {
           "file": "apps/api/src/main.ts",
-          "hash": "6152255197989775379",
+          "hash": "16563121350992449800",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/core",
@@ -361,7 +361,7 @@
         },
         {
           "file": "apps/api/src/modules/auth/auth.controller.ts",
-          "hash": "6194155844824686561",
+          "hash": "10831137922678424832",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/throttler"
@@ -369,7 +369,7 @@
         },
         {
           "file": "apps/api/src/modules/auth/auth.module.ts",
-          "hash": "15770588914161380359",
+          "hash": "11861219993557583728",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/jwt",
@@ -389,7 +389,7 @@
         },
         {
           "file": "apps/api/src/modules/auth/auth.service.ts",
-          "hash": "649693739052457460",
+          "hash": "9822776129747636238",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/jwt",
@@ -792,7 +792,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/projects.module.ts",
-          "hash": "6110848065543290484",
+          "hash": "6603857446761298534",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1005,7 +1005,7 @@
         },
         {
           "file": "apps/api/src/prisma/prisma.module.ts",
-          "hash": "18165988975072206146",
+          "hash": "13186654315910292556",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1187,8 +1187,12 @@
         "hash": "8839456142501731964"
       },
       {
+        "file": "DEPLOYMENT_INSTRUCTIONS.md",
+        "hash": "9396828840192791421"
+      },
+      {
         "file": "Dockerfile",
-        "hash": "16052858075089674531"
+        "hash": "12898927544059431243"
       },
       {
         "file": "FIREBASE_SETUP.md",
@@ -1316,7 +1320,7 @@
       },
       {
         "file": "components/Login.tsx",
-        "hash": "7511688600397410191"
+        "hash": "16464404982975483540"
       },
       {
         "file": "components/MobileNav.tsx",
@@ -5461,6 +5465,10 @@
       {
         "file": "dataconnect/seed_data.gql",
         "hash": "15166990222291471623"
+      },
+      {
+        "file": "deploy-production.sh",
+        "hash": "13635380021780354254"
       },
       {
         "file": "deploy.ps1",
@@ -45695,6 +45703,46 @@
         "hash": "4087402685604582540"
       },
       {
+        "file": "generated/prisma/browser.ts",
+        "hash": "13104798967279898510"
+      },
+      {
+        "file": "generated/prisma/client.ts",
+        "hash": "10709198520676329636"
+      },
+      {
+        "file": "generated/prisma/commonInputTypes.ts",
+        "hash": "10012574420637074131"
+      },
+      {
+        "file": "generated/prisma/enums.ts",
+        "hash": "5520807387621116889"
+      },
+      {
+        "file": "generated/prisma/internal/class.ts",
+        "hash": "12408308649666504467"
+      },
+      {
+        "file": "generated/prisma/internal/prismaNamespace.ts",
+        "hash": "10712927775839740710"
+      },
+      {
+        "file": "generated/prisma/internal/prismaNamespaceBrowser.ts",
+        "hash": "3071886070200762331"
+      },
+      {
+        "file": "generated/prisma/models.ts",
+        "hash": "7610242996008677248"
+      },
+      {
+        "file": "generated/prisma/models/Post.ts",
+        "hash": "12334535538151795363"
+      },
+      {
+        "file": "generated/prisma/models/User.ts",
+        "hash": "12623013910527857920"
+      },
+      {
         "file": "icon_paths.txt",
         "hash": "3244421341483603138"
       },
@@ -45768,11 +45816,11 @@
       },
       {
         "file": "prisma/prisma.config.ts",
-        "hash": "3358383459801772218"
+        "hash": "10887548326924780089"
       },
       {
         "file": "prisma/schema.prisma",
-        "hash": "12254964125792838673"
+        "hash": "12196766678419863664"
       },
       {
         "file": "prisma/schema.prisma.bak",
@@ -46301,6 +46349,10 @@
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.1c736353-80ee-4f98-bd02-a9a774811d62.json",
         "hash": "12178908264864505738"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.1d1e72c6-d4b4-4aca-b640-73f545d5ac18.json",
+        "hash": "9564512296546428352"
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.24d37a49-043e-424c-9932-27d9d8f7393b.json",
