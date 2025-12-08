@@ -40,6 +40,16 @@
     "type": "static"
   },
   {
+    "source": "npm:@ampproject/remapping",
+    "target": "npm:@jridgewell/gen-mapping",
+    "type": "static"
+  },
+  {
+    "source": "npm:@ampproject/remapping",
+    "target": "npm:@jridgewell/trace-mapping",
+    "type": "static"
+  },
+  {
     "source": "npm:@angular-devkit/core",
     "target": "npm:chokidar",
     "type": "static"
@@ -138790,6 +138800,21 @@
     "type": "static"
   },
   {
+    "source": "npm:@babel/plugin-proposal-explicit-resource-management",
+    "target": "npm:@babel/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/plugin-proposal-explicit-resource-management",
+    "target": "npm:@babel/helper-plugin-utils",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/plugin-proposal-explicit-resource-management",
+    "target": "npm:@babel/plugin-transform-destructuring",
+    "type": "static"
+  },
+  {
     "source": "npm:@babel/plugin-proposal-private-property-in-object",
     "target": "npm:@babel/core",
     "type": "static"
@@ -142852,6 +142877,286 @@
   {
     "source": "npm:@img/sharp-wasm32",
     "target": "npm:@emnapi/runtime",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/checkbox",
+    "target": "npm:@inquirer/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/checkbox",
+    "target": "npm:@inquirer/figures",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/checkbox",
+    "target": "npm:@inquirer/type",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/checkbox",
+    "target": "npm:ansi-escapes",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/checkbox",
+    "target": "npm:yoctocolors-cjs",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/confirm",
+    "target": "npm:@inquirer/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/confirm",
+    "target": "npm:@inquirer/type",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/core",
+    "target": "npm:@inquirer/figures",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/core",
+    "target": "npm:@inquirer/type",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/core",
+    "target": "npm:@types/mute-stream",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/core",
+    "target": "npm:@types/node@22.19.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/core",
+    "target": "npm:@types/wrap-ansi",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/core",
+    "target": "npm:ansi-escapes",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/core",
+    "target": "npm:cli-width@4.1.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/core",
+    "target": "npm:mute-stream@1.0.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/core",
+    "target": "npm:signal-exit",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/core",
+    "target": "npm:strip-ansi",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/core",
+    "target": "npm:wrap-ansi",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/core",
+    "target": "npm:yoctocolors-cjs",
+    "type": "static"
+  },
+  {
+    "source": "npm:@types/node@22.19.1",
+    "target": "npm:undici-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/editor",
+    "target": "npm:@inquirer/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/editor",
+    "target": "npm:@inquirer/type",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/editor",
+    "target": "npm:external-editor",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/expand",
+    "target": "npm:@inquirer/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/expand",
+    "target": "npm:@inquirer/type",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/expand",
+    "target": "npm:yoctocolors-cjs",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/input",
+    "target": "npm:@inquirer/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/input",
+    "target": "npm:@inquirer/type",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/number",
+    "target": "npm:@inquirer/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/number",
+    "target": "npm:@inquirer/type",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/password",
+    "target": "npm:@inquirer/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/password",
+    "target": "npm:@inquirer/type",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/password",
+    "target": "npm:ansi-escapes",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/prompts",
+    "target": "npm:@inquirer/checkbox",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/prompts",
+    "target": "npm:@inquirer/confirm",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/prompts",
+    "target": "npm:@inquirer/editor",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/prompts",
+    "target": "npm:@inquirer/expand",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/prompts",
+    "target": "npm:@inquirer/input",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/prompts",
+    "target": "npm:@inquirer/number",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/prompts",
+    "target": "npm:@inquirer/password",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/prompts",
+    "target": "npm:@inquirer/rawlist",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/prompts",
+    "target": "npm:@inquirer/search",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/prompts",
+    "target": "npm:@inquirer/select",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/rawlist",
+    "target": "npm:@inquirer/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/rawlist",
+    "target": "npm:@inquirer/type",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/rawlist",
+    "target": "npm:yoctocolors-cjs",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/search",
+    "target": "npm:@inquirer/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/search",
+    "target": "npm:@inquirer/figures",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/search",
+    "target": "npm:@inquirer/type",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/search",
+    "target": "npm:yoctocolors-cjs",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/select",
+    "target": "npm:@inquirer/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/select",
+    "target": "npm:@inquirer/figures",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/select",
+    "target": "npm:@inquirer/type",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/select",
+    "target": "npm:ansi-escapes",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/select",
+    "target": "npm:yoctocolors-cjs",
+    "type": "static"
+  },
+  {
+    "source": "npm:@inquirer/type",
+    "target": "npm:mute-stream@1.0.0",
     "type": "static"
   },
   {
@@ -149145,6 +149450,496 @@
     "type": "static"
   },
   {
+    "source": "npm:@stryker-mutator/api",
+    "target": "npm:mutation-testing-metrics",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/api",
+    "target": "npm:mutation-testing-report-schema",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/api",
+    "target": "npm:tslib@2.7.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/api",
+    "target": "npm:typed-inject",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:@inquirer/prompts",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:@stryker-mutator/api",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:@stryker-mutator/instrumenter",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:@stryker-mutator/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:ajv@8.17.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:chalk@5.3.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:commander@12.1.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:diff-match-patch",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:emoji-regex@10.4.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:execa@9.4.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:file-url",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:lodash.groupby",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:minimatch@9.0.5",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:mutation-testing-elements",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:mutation-testing-metrics",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:mutation-testing-report-schema",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:npm-run-path@6.0.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:progress",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:rxjs",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:semver@7.7.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:source-map",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:tree-kill",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:tslib@2.7.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:typed-inject",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/core",
+    "target": "npm:typed-rest-client",
+    "type": "static"
+  },
+  {
+    "source": "npm:ajv@8.17.1",
+    "target": "npm:fast-deep-equal",
+    "type": "static"
+  },
+  {
+    "source": "npm:ajv@8.17.1",
+    "target": "npm:fast-uri",
+    "type": "static"
+  },
+  {
+    "source": "npm:ajv@8.17.1",
+    "target": "npm:json-schema-traverse",
+    "type": "static"
+  },
+  {
+    "source": "npm:ajv@8.17.1",
+    "target": "npm:require-from-string",
+    "type": "static"
+  },
+  {
+    "source": "npm:brace-expansion@2.0.2",
+    "target": "npm:balanced-match",
+    "type": "static"
+  },
+  {
+    "source": "npm:execa@9.4.1",
+    "target": "npm:@sindresorhus/merge-streams",
+    "type": "static"
+  },
+  {
+    "source": "npm:execa@9.4.1",
+    "target": "npm:cross-spawn",
+    "type": "static"
+  },
+  {
+    "source": "npm:execa@9.4.1",
+    "target": "npm:figures@6.1.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:execa@9.4.1",
+    "target": "npm:get-stream@9.0.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:execa@9.4.1",
+    "target": "npm:human-signals@8.0.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:execa@9.4.1",
+    "target": "npm:is-plain-obj@4.1.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:execa@9.4.1",
+    "target": "npm:is-stream@4.0.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:execa@9.4.1",
+    "target": "npm:npm-run-path@6.0.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:execa@9.4.1",
+    "target": "npm:pretty-ms",
+    "type": "static"
+  },
+  {
+    "source": "npm:execa@9.4.1",
+    "target": "npm:signal-exit",
+    "type": "static"
+  },
+  {
+    "source": "npm:execa@9.4.1",
+    "target": "npm:strip-final-newline@4.0.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:execa@9.4.1",
+    "target": "npm:yoctocolors",
+    "type": "static"
+  },
+  {
+    "source": "npm:figures@6.1.0",
+    "target": "npm:is-unicode-supported@2.1.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:get-stream@9.0.1",
+    "target": "npm:@sec-ant/readable-stream",
+    "type": "static"
+  },
+  {
+    "source": "npm:get-stream@9.0.1",
+    "target": "npm:is-stream@4.0.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:minimatch@9.0.5",
+    "target": "npm:brace-expansion@2.0.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:npm-run-path@6.0.0",
+    "target": "npm:path-key@4.0.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:npm-run-path@6.0.0",
+    "target": "npm:unicorn-magic",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/instrumenter",
+    "target": "npm:@babel/core@7.25.9",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/instrumenter",
+    "target": "npm:@babel/generator@7.25.9",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/instrumenter",
+    "target": "npm:@babel/parser@7.25.9",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/instrumenter",
+    "target": "npm:@babel/plugin-proposal-decorators@7.24.7",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/instrumenter",
+    "target": "npm:@babel/plugin-proposal-explicit-resource-management",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/instrumenter",
+    "target": "npm:@babel/preset-typescript@7.24.7",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/instrumenter",
+    "target": "npm:@stryker-mutator/api",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/instrumenter",
+    "target": "npm:@stryker-mutator/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/instrumenter",
+    "target": "npm:angular-html-parser",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/instrumenter",
+    "target": "npm:semver@7.6.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/instrumenter",
+    "target": "npm:weapon-regex",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/core@7.25.9",
+    "target": "npm:@ampproject/remapping",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/core@7.25.9",
+    "target": "npm:@babel/code-frame",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/core@7.25.9",
+    "target": "npm:@babel/generator@7.25.9",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/core@7.25.9",
+    "target": "npm:@babel/helper-compilation-targets",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/core@7.25.9",
+    "target": "npm:@babel/helper-module-transforms",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/core@7.25.9",
+    "target": "npm:@babel/helpers",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/core@7.25.9",
+    "target": "npm:@babel/parser@7.25.9",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/core@7.25.9",
+    "target": "npm:@babel/template",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/core@7.25.9",
+    "target": "npm:@babel/traverse",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/core@7.25.9",
+    "target": "npm:@babel/types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/core@7.25.9",
+    "target": "npm:convert-source-map",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/core@7.25.9",
+    "target": "npm:debug",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/core@7.25.9",
+    "target": "npm:gensync",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/core@7.25.9",
+    "target": "npm:json5",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/core@7.25.9",
+    "target": "npm:semver",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/generator@7.25.9",
+    "target": "npm:@babel/types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/generator@7.25.9",
+    "target": "npm:@jridgewell/gen-mapping",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/generator@7.25.9",
+    "target": "npm:@jridgewell/trace-mapping",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/generator@7.25.9",
+    "target": "npm:jsesc",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/parser@7.25.9",
+    "target": "npm:@babel/types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/plugin-proposal-decorators@7.24.7",
+    "target": "npm:@babel/core@7.25.9",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/plugin-proposal-decorators@7.24.7",
+    "target": "npm:@babel/helper-create-class-features-plugin",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/plugin-proposal-decorators@7.24.7",
+    "target": "npm:@babel/helper-plugin-utils",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/plugin-proposal-decorators@7.24.7",
+    "target": "npm:@babel/plugin-syntax-decorators",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/preset-typescript@7.24.7",
+    "target": "npm:@babel/core@7.25.9",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/preset-typescript@7.24.7",
+    "target": "npm:@babel/helper-plugin-utils",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/preset-typescript@7.24.7",
+    "target": "npm:@babel/helper-validator-option",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/preset-typescript@7.24.7",
+    "target": "npm:@babel/plugin-syntax-jsx",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/preset-typescript@7.24.7",
+    "target": "npm:@babel/plugin-transform-modules-commonjs",
+    "type": "static"
+  },
+  {
+    "source": "npm:@babel/preset-typescript@7.24.7",
+    "target": "npm:@babel/plugin-transform-typescript",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/vitest-runner",
+    "target": "npm:@stryker-mutator/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/vitest-runner",
+    "target": "npm:vitest",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/vitest-runner",
+    "target": "npm:@stryker-mutator/api",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/vitest-runner",
+    "target": "npm:@stryker-mutator/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@stryker-mutator/vitest-runner",
+    "target": "npm:tslib@2.7.0",
+    "type": "static"
+  },
+  {
     "source": "npm:@tanstack/react-query",
     "target": "npm:react",
     "type": "static"
@@ -149537,6 +150332,11 @@
   {
     "source": "npm:@types/multer",
     "target": "npm:@types/express",
+    "type": "static"
+  },
+  {
+    "source": "npm:@types/mute-stream",
+    "target": "npm:@types/node",
     "type": "static"
   },
   {
@@ -150592,6 +151392,11 @@
   {
     "source": "npm:ajv-keywords",
     "target": "npm:fast-deep-equal",
+    "type": "static"
+  },
+  {
+    "source": "npm:angular-html-parser",
+    "target": "npm:tslib",
     "type": "static"
   },
   {
@@ -152427,6 +153232,16 @@
   {
     "source": "npm:define-properties",
     "target": "npm:object-keys",
+    "type": "static"
+  },
+  {
+    "source": "npm:des.js",
+    "target": "npm:inherits",
+    "type": "static"
+  },
+  {
+    "source": "npm:des.js",
+    "target": "npm:minimalistic-assert",
     "type": "static"
   },
   {
@@ -158780,6 +159595,11 @@
     "type": "static"
   },
   {
+    "source": "npm:mutation-testing-metrics",
+    "target": "npm:mutation-testing-report-schema",
+    "type": "static"
+  },
+  {
     "source": "npm:mysql2",
     "target": "npm:aws-ssl-profiles",
     "type": "static"
@@ -159317,6 +160137,11 @@
   {
     "source": "npm:object.values",
     "target": "npm:es-object-atoms",
+    "type": "static"
+  },
+  {
+    "source": "npm:ollama",
+    "target": "npm:whatwg-fetch",
     "type": "static"
   },
   {
@@ -159972,6 +160797,11 @@
   {
     "source": "npm:pretty-format",
     "target": "npm:react-is@18.3.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:pretty-ms",
+    "target": "npm:parse-ms",
     "type": "static"
   },
   {
@@ -163542,6 +164372,31 @@
   {
     "source": "npm:typed-array-length",
     "target": "npm:reflect.getprototypeof",
+    "type": "static"
+  },
+  {
+    "source": "npm:typed-rest-client",
+    "target": "npm:des.js",
+    "type": "static"
+  },
+  {
+    "source": "npm:typed-rest-client",
+    "target": "npm:js-md4",
+    "type": "static"
+  },
+  {
+    "source": "npm:typed-rest-client",
+    "target": "npm:qs",
+    "type": "static"
+  },
+  {
+    "source": "npm:typed-rest-client",
+    "target": "npm:tunnel",
+    "type": "static"
+  },
+  {
+    "source": "npm:typed-rest-client",
+    "target": "npm:underscore",
     "type": "static"
   },
   {

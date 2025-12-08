@@ -12,7 +12,7 @@ export class OllamaEmbeddingsService implements EmbeddingsProvider, OnModuleInit
 
     constructor(private configService: ConfigService) {
         this.baseUrl = this.configService.get<string>('OLLAMA_BASE_URL') || 'http://localhost:11434';
-        this.model = this.configService.get<string>('OLLAMA_EMBEDDING_MODEL') || 'nomic-embed-text:latest';
+        this.model = this.configService.get<string>('OLLAMA_EMBEDDING_MODEL') || 'nomic-embed-text:1.5';
 
         this.client = new Ollama({ host: this.baseUrl });
 

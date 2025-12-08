@@ -7,7 +7,10 @@ async function main() {
   console.log('🌱 Seeding database with development data...');
 
   // Create admin user
-  const adminPassword = process.env.ADMIN_PASSWORD || 'SecurePass123!';
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  if (!adminPassword) {
+    throw new Error('ADMIN_PASSWORD must be provided via environment variables for seeding.');
+  }
   const hashedPassword = await hash(adminPassword, 10);
 
   const admin = await prisma.user.upsert({

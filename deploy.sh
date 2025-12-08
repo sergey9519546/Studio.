@@ -1,44 +1,35 @@
 #!/bin/bash
 # deploy.sh - Production deployment script for Google Cloud Run
+set -euo pipefail
 
-# Exit on error
-set -e
+echo "Studio Roster - Cloud Run Deployment"
+echo "===================================="
 
-echo "🚀 Studio Roster - Cloud Run Deployment"
-echo "======================================="
-
-# Configuration
-PROJECT_ID="${GCP_PROJECT_ID:-your-project-id}"
+PROJECT_ID="${GCP_PROJECT_ID:?GCP_PROJECT_ID environment variable not set}"
 REGION="${GCP_REGION:-us-central1}"
 SERVICE_NAME="studio-roster"
 IMAGE_NAME="gcr.io/${PROJECT_ID}/${SERVICE_NAME}"
+IMAGE_TAG="${IMAGE_TAG:-$(git rev-parse --short HEAD 2>/dev/null || date +%Y%m%d%H%M%S)}"
+IMAGE_URI="${IMAGE_NAME}:${IMAGE_TAG}"
 
-# Check required environment variables
-if [ -z "$GCP_PROJECT_ID" ]; then
-    echo "❌ Error: GCP_PROJECT_ID environment variable not set"
-    exit 1
-fi
-
-echo "📋 Configuration:"
+echo "Configuration:"
 echo "  Project ID: $PROJECT_ID"
 echo "  Region: $REGION"
 echo "  Service: $SERVICE_NAME"
+echo "  Image Tag: $IMAGE_TAG"
 echo ""
 
-# Step 1: Build Docker image
-echo "🔨 Step 1: Building Docker image..."
-docker build -t $IMAGE_NAME:latest .
+echo "Step 1: Building Docker image..."
+docker build -t "$IMAGE_URI" .
 
-# Step 2: Push to Google Container Registry
-echo "📤 Step 2: Pushing image to GCR..."
-docker push $IMAGE_NAME:latest
+echo "Step 2: Pushing image to GCR..."
+docker push "$IMAGE_URI"
 
-# Step 3: Deploy to Cloud Run
-echo "☁️  Step 3: Deploying to Cloud Run..."
-gcloud run deploy $SERVICE_NAME \
-  --image $IMAGE_NAME:latest \
+echo "Step 3: Deploying to Cloud Run..."
+gcloud run deploy "$SERVICE_NAME" \
+  --image "$IMAGE_URI" \
   --platform managed \
-  --region $REGION \
+  --region "$REGION" \
   --allow-unauthenticated \
   --memory 2Gi \
   --cpu 2 \
@@ -52,14 +43,12 @@ gcloud run deploy $SERVICE_NAME \
   --set-env-vars "STORAGE_BUCKET=${STORAGE_BUCKET}" \
   --set-env-vars "GOOGLE_APPLICATION_CREDENTIALS=/app/service-account-key.json"
 
-echo "✅ Deployment complete!"
+echo "Deployment complete!"
 echo ""
 
-# Get service URL
-SERVICE_URL=$(gcloud run services describe $SERVICE_NAME --region $REGION --format 'value(status.url)')
-echo "🌐 Service URL: $SERVICE_URL"
-echo ""
-echo "📊 Next steps:"
+SERVICE_URL=$(gcloud run services describe "$SERVICE_NAME" --region "$REGION" --format 'value(status.url)')
+echo "Service URL: $SERVICE_URL"
+echo "Next steps:"
 echo "  1. Visit $SERVICE_URL to verify deployment"
 echo "  2. Test authentication system"
 echo "  3. Monitor logs: gcloud run services logs read $SERVICE_NAME --region $REGION"

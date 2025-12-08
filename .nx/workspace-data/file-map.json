@@ -31,7 +31,7 @@
         },
         {
           "file": "apps/api/src/app.module.ts",
-          "hash": "7805057026767277692",
+          "hash": "14093647133567625676",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/core",
@@ -129,7 +129,7 @@
         },
         {
           "file": "apps/api/src/main.ts",
-          "hash": "12342311333359435857",
+          "hash": "6152255197989775379",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/core",
@@ -264,7 +264,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai-embeddings.service.ts",
-          "hash": "18098349642911441996",
+          "hash": "1158841907647517255",
           "deps": [
             "npm:@google-cloud/aiplatform",
             "npm:@nestjs/common",
@@ -355,7 +355,7 @@
         },
         {
           "file": "apps/api/src/modules/auth/auth.controller.ts",
-          "hash": "15985236870323065035",
+          "hash": "6194155844824686561",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/throttler"
@@ -492,7 +492,7 @@
         },
         {
           "file": "apps/api/src/modules/google/drive.controller.ts",
-          "hash": "17029458351777253918",
+          "hash": "11149018180771096449",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -625,7 +625,7 @@
         },
         {
           "file": "apps/api/src/modules/knowledge/knowledge.controller.ts",
-          "hash": "3852239816795056432",
+          "hash": "6165901589967260329",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -654,7 +654,7 @@
         },
         {
           "file": "apps/api/src/modules/media-proxy/media-proxy.controller.ts",
-          "hash": "16815527032244433674",
+          "hash": "17060076584594057791",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -747,7 +747,7 @@
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.controller.ts",
-          "hash": "6115457477180139883",
+          "hash": "5589124650828796544",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -818,16 +818,33 @@
         },
         {
           "file": "apps/api/src/modules/rag/embeddings.service.spec.ts",
-          "hash": "4252189505546120239",
+          "hash": "4880376536196131436",
           "deps": [
             "npm:@nestjs/testing"
           ]
         },
         {
           "file": "apps/api/src/modules/rag/embeddings.service.ts",
-          "hash": "15825871502621166486",
+          "hash": "11831989706630601138",
           "deps": [
             "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/rag/providers/embeddings-provider.interface.ts",
+          "hash": "17328124503036976364"
+        },
+        {
+          "file": "apps/api/src/modules/rag/providers/index.ts",
+          "hash": "583024595242334023"
+        },
+        {
+          "file": "apps/api/src/modules/rag/providers/ollama-embeddings.service.ts",
+          "hash": "2023132411771372258",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:ollama"
           ]
         },
         {
@@ -840,9 +857,10 @@
         },
         {
           "file": "apps/api/src/modules/rag/rag.module.ts",
-          "hash": "17857127632730881048",
+          "hash": "7866861799539975794",
           "deps": [
-            "npm:@nestjs/common"
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
           ]
         },
         {
@@ -858,7 +876,7 @@
         },
         {
           "file": "apps/api/src/modules/rag/vector-store.service.ts",
-          "hash": "7872820977699885949",
+          "hash": "3805107067209183502",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -903,7 +921,7 @@
         },
         {
           "file": "apps/api/src/modules/storage/storage.controller.ts",
-          "hash": "10306618425957409511",
+          "hash": "7294245360798237559",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -974,6 +992,10 @@
           ]
         },
         {
+          "file": "apps/api/src/utils/math.utils.ts",
+          "hash": "17468602552112551810"
+        },
+        {
           "file": "apps/api/test/ai.integration.spec.ts",
           "hash": "11175792878027984718",
           "deps": [
@@ -1037,7 +1059,7 @@
       },
       {
         "file": ".env.example",
-        "hash": "2001645297619356128"
+        "hash": "16673259121618227043"
       },
       {
         "file": ".env.template",
@@ -1110,6 +1132,14 @@
       {
         "file": "SECURITY.md",
         "hash": "1247703567615508587"
+      },
+      {
+        "file": "api_build_errors.txt",
+        "hash": "7854761413069493917"
+      },
+      {
+        "file": "api_build_output.txt",
+        "hash": "7053498011040669876"
       },
       {
         "file": "components/AIChat.tsx",
@@ -1237,7 +1267,7 @@
       },
       {
         "file": "components/confluence/EmbeddedConfluencePage.tsx",
-        "hash": "8136649516576196123"
+        "hash": "8798417148515579238"
       },
       {
         "file": "components/dashboard/DataHUD.tsx",
@@ -1308,6 +1338,30 @@
         "hash": "5582637843784118622"
       },
       {
+        "file": "dataconnect/dataconnect.yaml",
+        "hash": "12275818252430731841"
+      },
+      {
+        "file": "dataconnect/example/connector.yaml",
+        "hash": "5111731992355529595"
+      },
+      {
+        "file": "dataconnect/example/mutations.gql",
+        "hash": "12236426780794299504"
+      },
+      {
+        "file": "dataconnect/example/queries.gql",
+        "hash": "3881673178773734287"
+      },
+      {
+        "file": "dataconnect/schema/schema.gql",
+        "hash": "9804390411349547955"
+      },
+      {
+        "file": "dataconnect/seed_data.gql",
+        "hash": "15166990222291471623"
+      },
+      {
         "file": "deploy.ps1",
         "hash": "1216932013691605961"
       },
@@ -1376,12 +1430,16 @@
         "hash": "13108012552268398639"
       },
       {
+        "file": "ollama-test.mjs",
+        "hash": "3543150069670964313"
+      },
+      {
         "file": "package-lock.json",
-        "hash": "13270121834825498906"
+        "hash": "4469116702097108172"
       },
       {
         "file": "package.json",
-        "hash": "3062593831186661496"
+        "hash": "18058940045518108989"
       },
       {
         "file": "prisma/comment_schema_addition.prisma",
@@ -1421,7 +1479,11 @@
       },
       {
         "file": "prisma/seed.ts",
-        "hash": "8040717540852340801"
+        "hash": "17465826456208727417"
+      },
+      {
+        "file": "query",
+        "hash": "14037500887127943709"
       },
       {
         "file": "scripts/index-docs.ts",
@@ -1724,6 +1786,66 @@
         "hash": "2499832125898760970"
       },
       {
+        "file": "src/dataconnect-generated/.guides/config.json",
+        "hash": "6478345189631909518"
+      },
+      {
+        "file": "src/dataconnect-generated/.guides/setup.md",
+        "hash": "11228576384375859045"
+      },
+      {
+        "file": "src/dataconnect-generated/.guides/usage.md",
+        "hash": "9395073703261133520"
+      },
+      {
+        "file": "src/dataconnect-generated/README.md",
+        "hash": "12041750887050508514"
+      },
+      {
+        "file": "src/dataconnect-generated/esm/index.esm.js",
+        "hash": "8103665619056376340"
+      },
+      {
+        "file": "src/dataconnect-generated/esm/package.json",
+        "hash": "5013508344222362296"
+      },
+      {
+        "file": "src/dataconnect-generated/index.cjs.js",
+        "hash": "11947682604775880572"
+      },
+      {
+        "file": "src/dataconnect-generated/index.d.ts",
+        "hash": "12121625883648963937"
+      },
+      {
+        "file": "src/dataconnect-generated/package.json",
+        "hash": "4871433668348925496"
+      },
+      {
+        "file": "src/dataconnect-generated/react/README.md",
+        "hash": "15547276060913452679"
+      },
+      {
+        "file": "src/dataconnect-generated/react/esm/index.esm.js",
+        "hash": "14570083277883875313"
+      },
+      {
+        "file": "src/dataconnect-generated/react/esm/package.json",
+        "hash": "5013508344222362296"
+      },
+      {
+        "file": "src/dataconnect-generated/react/index.cjs.js",
+        "hash": "2913033731498597627"
+      },
+      {
+        "file": "src/dataconnect-generated/react/index.d.ts",
+        "hash": "498645000099755456"
+      },
+      {
+        "file": "src/dataconnect-generated/react/package.json",
+        "hash": "14551503978639113950"
+      },
+      {
         "file": "src/hooks/useDashboardData.ts",
         "hash": "4656749569272028531"
       },
@@ -1780,8 +1902,12 @@
         "hash": "5563982428927376982"
       },
       {
+        "file": "start",
+        "hash": "14037500887127943709"
+      },
+      {
         "file": "stryker.conf.js",
-        "hash": "1833119152736995619"
+        "hash": "831399913437506820"
       },
       {
         "file": "tailwind.config.js",
@@ -1853,5 +1979,5 @@
       }
     ]
   },
-  "externalNodesHash": "8706801438310878352"
+  "externalNodesHash": "10150614347200322095"
 }

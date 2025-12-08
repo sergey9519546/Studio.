@@ -1,4 +1,4 @@
-import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { Logger as NestLogger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import compression from 'compression';
 import helmet from 'helmet';
@@ -9,11 +9,12 @@ import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 import { AuthService } from './modules/auth/auth.service';
 
 async function bootstrap() {
-  console.log('Boot: starting Nest application...');
+  const bootstrapLogger = new NestLogger('Bootstrap');
+  bootstrapLogger.log('Boot: starting Nest application...');
   const app = await NestFactory.create(AppModule, {
     // bufferLogs: true, // Buffer logs until Pino is ready - TEMPORARILY DISABLED
   });
-  console.log('Boot: NestFactory.create completed');
+  bootstrapLogger.log('Boot: NestFactory.create completed');
 
   // Set global API prefix so routes resolve at /api/v1/*
   app.setGlobalPrefix('api');
@@ -22,8 +23,8 @@ async function bootstrap() {
   app.useLogger(app.get(Logger));
 
   // Debug: Log NODE_ENV and CSP configuration
-  console.log('Boot: NODE_ENV:', process.env.NODE_ENV);
-  console.log('Boot: CSP Development Mode:', process.env.NODE_ENV !== 'production');
+  bootstrapLogger.log(`Boot: NODE_ENV: ${process.env.NODE_ENV}`);
+  bootstrapLogger.log(`Boot: CSP Development Mode: ${process.env.NODE_ENV !== 'production'}`);
 
   // Security: Helmet middleware for security headers with STRICT CSP
   app.use(
@@ -122,35 +123,35 @@ async function bootstrap() {
       const authService = app.get(AuthService);
       // Non-blocking: run in background
       authService.seedAdminUser().catch((error) => {
-        console.error('Failed to seed admin user in background:', error);
+        bootstrapLogger.error('Failed to seed admin user in background:', error instanceof Error ? error.stack : String(error));
       });
     } catch (error) {
-      console.error('Failed to initiate admin user seeding:', error);
+      bootstrapLogger.error('Failed to initiate admin user seeding:', error instanceof Error ? error.stack : String(error));
     }
   } else {
-    console.log('Admin seed skipped (production without opt-in or missing credentials).');
+    bootstrapLogger.log('Admin seed skipped (production without opt-in or missing credentials).');
   }
 
   const port = parseInt(process.env.PORT || '3001', 10);
   await app.listen(port, '0.0.0.0');
 
-  console.log(`Server running on http://0.0.0.0:${port}`);
-  console.log(`Health check: http://0.0.0.0:${port}/health`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  bootstrapLogger.log(`Server running on http://0.0.0.0:${port}`);
+  bootstrapLogger.log(`Health check: http://0.0.0.0:${port}/health`);
+  bootstrapLogger.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 
   // Enable graceful shutdown
   app.enableShutdownHooks();
 
   // Handle shutdown signals
   const shutdown = async (signal: string) => {
-    console.log(`Received ${signal}, starting graceful shutdown`);
+    bootstrapLogger.log(`Received ${signal}, starting graceful shutdown`);
 
     try {
       await app.close();
-      console.log('Application closed successfully');
+      bootstrapLogger.log('Application closed successfully');
       process.exit(0);
     } catch (error) {
-      console.error('Error during shutdown', error);
+      bootstrapLogger.error('Error during shutdown', error instanceof Error ? error.stack : String(error));
       process.exit(1);
     }
   };
