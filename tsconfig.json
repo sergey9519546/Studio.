@@ -23,11 +23,14 @@
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "typeRoots": ["./types", "./node_modules/@types"],
     "paths": {
       "@app/*": ["apps/api/src/*"],
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@google-cloud/aiplatform": ["types/@google-cloud/aiplatform/index.d.ts"],
+      "googleapis": ["types/googleapis/index.d.ts"]
     }
   },
-  "include": ["apps/**/*", "src/**/*", "index.tsx", "vite.config.ts"],
+  "include": ["apps/**/*", "src/**/*", "types/**/*", "index.tsx", "vite.config.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -1,6 +1,15 @@
 import { UnsplashImage } from "../../services/unsplash";
 
-export const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000/api/v1";
+const getDefaultApiBase = () => {
+  if (typeof window !== "undefined") {
+    // Relative path works with Vite dev proxy and when served behind the API domain
+    return "/api/v1";
+  }
+  // Node/test environments fall back to the local API port
+  return "http://localhost:3001/api/v1";
+};
+
+export const API_BASE = import.meta.env.VITE_API_URL || getDefaultApiBase();
 
 // Request timeout in milliseconds
 const REQUEST_TIMEOUT = 10000;

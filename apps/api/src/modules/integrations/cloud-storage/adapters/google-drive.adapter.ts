@@ -63,7 +63,7 @@ export class GoogleDriveAdapter implements ICloudStorageAdapter {
       pageSize: 20,
     });
 
-    const files = (res.data.files || []).map(f => ({
+    const files = (res.data.files || []).map((f: any) => ({
       id: f.id!,
       name: f.name!,
       provider: CloudProviderType.GOOGLE_DRIVE,

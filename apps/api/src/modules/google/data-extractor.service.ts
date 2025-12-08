@@ -34,7 +34,9 @@ export class DataExtractorService {
 
       // 2. Intelligent Cleaning
       // Remove completely empty rows
-      rows = rows.filter(row => row.some(cell => cell !== '' && cell !== null && cell !== undefined));
+      rows = rows.filter((row: unknown[]) =>
+        row.some((cell: unknown) => cell !== "" && cell !== null && cell !== undefined)
+      );
 
       if (rows.length === 0) return 'Sheet is empty.';
 
@@ -70,20 +72,20 @@ export class DataExtractorService {
       let fullText = '';
 
       // Iterate through structural elements
-      content.forEach(element => {
+      content.forEach((element: any) => {
         if (element.paragraph) {
-          element.paragraph.elements?.forEach(el => {
+          element.paragraph.elements?.forEach((el: any) => {
             if (el.textRun?.content) {
               fullText += el.textRun.content;
             }
           });
         } else if (element.table) {
           // Rudimentary table text extraction
-          element.table.tableRows?.forEach(row => {
-            row.tableCells?.forEach(cell => {
-              cell.content?.forEach(cellContent => {
+          element.table.tableRows?.forEach((row: any) => {
+            row.tableCells?.forEach((cell: any) => {
+              cell.content?.forEach((cellContent: any) => {
                 if (cellContent.paragraph?.elements) {
-                  cellContent.paragraph.elements.forEach(el => {
+                  cellContent.paragraph.elements.forEach((el: any) => {
                     if (el.textRun?.content) fullText += el.textRun.content + " ";
                   });
                 }

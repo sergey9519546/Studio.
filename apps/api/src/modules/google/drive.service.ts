@@ -42,7 +42,7 @@ export class DriveService {
       }
 
       return response.data.files
-        .map((file) => ({
+        .map((file: any) => ({
           id: file.id || "",
           name: file.name || "Untitled",
           mimeType: file.mimeType || "application/octet-stream",
@@ -52,7 +52,7 @@ export class DriveService {
           modifiedTime: file.modifiedTime ?? undefined,
           size: file.size ?? undefined,
         }))
-        .filter((f) => f.id !== ""); // Filter out any invalid files
+        .filter((f: DriveFileDTO) => f.id !== ""); // Filter out any invalid files
     } catch (error) {
       const message =
         error instanceof Error ? error.message : "Unknown Drive error";

@@ -3,7 +3,8 @@ import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { EmbeddingsProvider } from "../rag/providers/embeddings-provider.interface";
 
-type IValue = protos.google.protobuf.IValue;
+// Vertex AI client typings are not published; use a loose type until official typings are available.
+type IValue = any;
 
 interface EmbeddingValue {
   numberValue?: number | null;
@@ -122,10 +123,10 @@ export class VertexAIEmbeddingsService implements EmbeddingsProvider {
         throw new Error("No embeddings returned from Vertex AI");
       }
 
-      const embeddings = response.predictions.map((prediction) => {
+      const predictions = (response.predictions as IValue[]) ?? [];
+      const embeddings = predictions.map((prediction: IValue) => {
         const values =
-          prediction.structValue?.fields?.embeddings?.structValue?.fields
-            ?.values?.listValue?.values;
+          prediction.structValue?.fields?.embeddings?.structValue?.fields?.values?.listValue?.values;
         if (!values) {
           throw new Error("Unable to extract embeddings from response");
         }

@@ -7,6 +7,12 @@
     ],
     "@/*": [
       "src/*"
+    ],
+    "@google-cloud/aiplatform": [
+      "types/@google-cloud/aiplatform/index.d.ts"
+    ],
+    "googleapis": [
+      "types/googleapis/index.d.ts"
     ]
   },
   "nxJsonPlugins": [],
@@ -23,39 +29,83 @@
         },
         {
           "file": "apps/api/scripts/verify-storage.ts",
-          "hash": "121943655850596998"
+          "hash": "121943655850596998",
+          "deps": [
+            "npm:@google-cloud/storage",
+            "npm:dotenv"
+          ]
         },
         {
           "file": "apps/api/src/app.module.ts",
-          "hash": "14093647133567625676"
+          "hash": "14093647133567625676",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core",
+            "npm:@nestjs/config",
+            "npm:@nestjs/event-emitter",
+            "npm:@nestjs/jwt",
+            "npm:@nestjs/passport",
+            "npm:@nestjs/throttler",
+            "npm:@nestjs/serve-static"
+          ]
         },
         {
           "file": "apps/api/src/common/auth/jwt.strategy.ts",
-          "hash": "12571748095947165367"
+          "hash": "12571748095947165367",
+          "deps": [
+            "npm:passport-jwt",
+            "npm:@nestjs/passport",
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
         },
         {
           "file": "apps/api/src/common/cache/cache.controller.ts",
-          "hash": "13743040226576555843"
+          "hash": "13743040226576555843",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/cache-manager",
+            "npm:cache-manager"
+          ]
         },
         {
           "file": "apps/api/src/common/cache/cache.module.ts",
-          "hash": "1539727496491235772"
+          "hash": "1539727496491235772",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/cache-manager"
+          ]
         },
         {
           "file": "apps/api/src/common/filters/all-exceptions.filter.ts",
-          "hash": "9082443999172835446"
+          "hash": "9082443999172835446",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
         },
         {
           "file": "apps/api/src/common/guards/common.module.ts",
-          "hash": "1241588017513126767"
+          "hash": "1241588017513126767",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/common/guards/jwt-auth.guard.ts",
-          "hash": "3423183016370227136"
+          "hash": "3423183016370227136",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/passport"
+          ]
         },
         {
           "file": "apps/api/src/common/logger/logger.module.ts",
-          "hash": "12311980230753793601"
+          "hash": "12311980230753793601",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:nestjs-pino"
+          ]
         },
         {
           "file": "apps/api/src/config/brand.config.ts",
@@ -63,47 +113,94 @@
         },
         {
           "file": "apps/api/src/config/env.validation.ts",
-          "hash": "6136306960877084114"
+          "hash": "6136306960877084114",
+          "deps": [
+            "npm:class-transformer",
+            "npm:class-validator"
+          ]
         },
         {
           "file": "apps/api/src/health/health.controller.ts",
-          "hash": "13962662463419814852"
+          "hash": "13962662463419814852",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/health/health.module.ts",
-          "hash": "6227263890606856293"
+          "hash": "6227263890606856293",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/main.ts",
-          "hash": "6152255197989775379"
+          "hash": "6152255197989775379",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core",
+            "npm:compression",
+            "npm:helmet",
+            "npm:nestjs-pino",
+            "npm:reflect-metadata"
+          ]
         },
         {
           "file": "apps/api/src/modules/ai/ai.controller.contract.spec.ts",
-          "hash": "1276710016520851779"
+          "hash": "1276710016520851779",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/ai/ai.controller.spec.ts",
-          "hash": "9049673859125040079"
+          "hash": "9049673859125040079",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
         },
         {
           "file": "apps/api/src/modules/ai/ai.controller.ts",
-          "hash": "2766706970515884744"
+          "hash": "2766706970515884744",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/platform-express",
+            "npm:multer",
+            "npm:express"
+          ]
         },
         {
           "file": "apps/api/src/modules/ai/ai.module.ts",
-          "hash": "1044804844255798133"
+          "hash": "1044804844255798133",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
         },
         {
           "file": "apps/api/src/modules/ai/gemini-analyst.service.ts",
-          "hash": "1816491216096795753"
+          "hash": "1816491216096795753",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/cache-manager",
+            "npm:cache-manager"
+          ]
         },
         {
           "file": "apps/api/src/modules/ai/gemini-openai.service.ts",
-          "hash": "8480181593307848938"
+          "hash": "8480181593307848938",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:openai"
+          ]
         },
         {
           "file": "apps/api/src/modules/ai/optimization.controller.ts",
-          "hash": "17522740203432844511"
+          "hash": "17522740203432844511",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/ai/prompts/templates.ts",
@@ -115,19 +212,31 @@
         },
         {
           "file": "apps/api/src/modules/ai/providers/ai-provider.manager.ts",
-          "hash": "3606151606402609383"
+          "hash": "3606151606402609383",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/ai/providers/vertex-ai.provider.ts",
-          "hash": "4555836034226783524"
+          "hash": "4555836034226783524",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/ai/streaming.service.ts",
-          "hash": "16729122412391767192"
+          "hash": "16729122412391767192",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/ai/testing/prompt-tester.service.ts",
-          "hash": "14626862852376362704"
+          "hash": "14626862852376362704",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/ai/testing/test-cases.ts",
@@ -135,11 +244,17 @@
         },
         {
           "file": "apps/api/src/modules/ai/testing/testing.controller.ts",
-          "hash": "1534117877754187505"
+          "hash": "1534117877754187505",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/ai/testing/testing.module.ts",
-          "hash": "4821154624755635017"
+          "hash": "4821154624755635017",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/ai/tools.ts",
@@ -155,155 +270,301 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai-embeddings.service.ts",
-          "hash": "1158841907647517255"
+          "hash": "1158841907647517255",
+          "deps": [
+            "npm:@google-cloud/aiplatform",
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai.service.ts",
-          "hash": "11528971691133047335"
+          "hash": "11528971691133047335",
+          "deps": [
+            "npm:@google-cloud/aiplatform",
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
         },
         {
           "file": "apps/api/src/modules/analysis/analysis.module.ts",
-          "hash": "16783906113665461220"
+          "hash": "16783906113665461220",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
         },
         {
           "file": "apps/api/src/modules/analysis/workspace-analysis.controller.ts",
-          "hash": "2418700602675295099"
+          "hash": "2418700602675295099",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/assets/assets.controller.ts",
-          "hash": "2912734194959062095"
+          "hash": "2912734194959062095",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/platform-express"
+          ]
         },
         {
           "file": "apps/api/src/modules/assets/assets.module.ts",
-          "hash": "6835877182483228140"
+          "hash": "6835877182483228140",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
         },
         {
           "file": "apps/api/src/modules/assets/assets.service.ts",
-          "hash": "17056052585194948890"
+          "hash": "17056052585194948890",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/assignments/assignments.controller.ts",
-          "hash": "4690416421152100378"
+          "hash": "4690416421152100378",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/assignments/assignments.module.ts",
-          "hash": "13885174137408973086"
+          "hash": "13885174137408973086",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/assignments/assignments.service.ts",
-          "hash": "332787765090824791"
+          "hash": "332787765090824791",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/assignments/dto/assignment.dto.ts",
-          "hash": "11668927093397763873"
+          "hash": "11668927093397763873",
+          "deps": [
+            "npm:class-validator"
+          ]
         },
         {
           "file": "apps/api/src/modules/assignments/dto/update-assignment.dto.ts",
-          "hash": "1308357725724232072"
+          "hash": "1308357725724232072",
+          "deps": [
+            "npm:class-validator"
+          ]
         },
         {
           "file": "apps/api/src/modules/auth/auth.controller.ts",
-          "hash": "6194155844824686561"
+          "hash": "6194155844824686561",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/throttler"
+          ]
         },
         {
           "file": "apps/api/src/modules/auth/auth.module.ts",
-          "hash": "15770588914161380359"
+          "hash": "15770588914161380359",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/jwt",
+            "npm:@nestjs/config",
+            "npm:@nestjs/passport"
+          ]
         },
         {
           "file": "apps/api/src/modules/auth/auth.service.spec.ts",
-          "hash": "6177760967430380981"
+          "hash": "6177760967430380981",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/jwt",
+            "npm:@nestjs/common",
+            "npm:bcryptjs"
+          ]
         },
         {
           "file": "apps/api/src/modules/auth/auth.service.ts",
-          "hash": "649693739052457460"
+          "hash": "649693739052457460",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/jwt",
+            "npm:@prisma/client",
+            "npm:bcryptjs"
+          ]
         },
         {
           "file": "apps/api/src/modules/auth/jwt.strategy.ts",
-          "hash": "18188382670478033667"
+          "hash": "18188382670478033667",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:@nestjs/passport",
+            "npm:passport-jwt"
+          ]
         },
         {
           "file": "apps/api/src/modules/availability/availability.module.ts",
-          "hash": "7207921090449586302"
+          "hash": "7207921090449586302",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/availability/availability.service.ts",
-          "hash": "9422172630726990485"
+          "hash": "9422172630726990485",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/confluence/confluence.controller.ts",
-          "hash": "10384734358334626878"
+          "hash": "10384734358334626878",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/confluence/confluence.module.ts",
-          "hash": "11704278906799667960"
+          "hash": "11704278906799667960",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/confluence/confluence.service.ts",
-          "hash": "5827972615262279200"
+          "hash": "5827972615262279200",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/freelancers/dto/freelancer.dto.ts",
-          "hash": "1537147164385067933"
+          "hash": "1537147164385067933",
+          "deps": [
+            "npm:class-validator"
+          ]
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.controller.ts",
-          "hash": "18035198982975238479"
+          "hash": "18035198982975238479",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.module.ts",
-          "hash": "7027175154511085463"
+          "hash": "7027175154511085463",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.service.spec.ts",
-          "hash": "2995365710923129329"
+          "hash": "2995365710923129329",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/cache-manager"
+          ]
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.service.ts",
-          "hash": "6399180933107021853"
+          "hash": "6399180933107021853",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@prisma/client",
+            "npm:@nestjs/cache-manager",
+            "npm:cache-manager"
+          ]
         },
         {
           "file": "apps/api/src/modules/google/data-extractor.service.spec.ts",
-          "hash": "4446784758003184070"
+          "hash": "4446784758003184070",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/google/data-extractor.service.ts",
-          "hash": "360486632038690125"
+          "hash": "360486632038690125",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/google/drive.controller.ts",
-          "hash": "11149018180771096449"
+          "hash": "11149018180771096449",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/google/drive.service.spec.ts",
-          "hash": "2819148740105722002"
+          "hash": "2819148740105722002",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
         },
         {
           "file": "apps/api/src/modules/google/drive.service.ts",
-          "hash": "1215344263185799097"
+          "hash": "1215344263185799097",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/google/google-client.factory.spec.ts",
-          "hash": "17831904085540054047"
+          "hash": "17831904085540054047",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/config",
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/google/google-client.factory.ts",
-          "hash": "335372560457018848"
+          "hash": "335372560457018848",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:googleapis",
+            "npm:google-auth-library"
+          ]
         },
         {
           "file": "apps/api/src/modules/google/google.module.ts",
-          "hash": "7043807876478338220"
+          "hash": "7043807876478338220",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
         },
         {
           "file": "apps/api/src/modules/google/sheet-ingestor.service.spec.ts",
-          "hash": "18264505800684154767"
+          "hash": "18264505800684154767",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/google/sheet-ingestor.service.ts",
-          "hash": "4546838628826781341"
+          "hash": "4546838628826781341",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/adapters/google-drive.adapter.ts",
-          "hash": "13279079888235052239"
+          "hash": "13279079888235052239",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/adapters/storage-adapter.interface.ts",
@@ -311,31 +572,54 @@
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.controller.ts",
-          "hash": "7173486417869740852"
+          "hash": "7173486417869740852",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:express"
+          ]
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.service.ts",
-          "hash": "17576285793773610682"
+          "hash": "17576285793773610682",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.spec.ts",
-          "hash": "16760419681428137364"
+          "hash": "16760419681428137364",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/testing"
+          ]
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/dto/cloud-storage.dto.ts",
-          "hash": "9658786719582104374"
+          "hash": "9658786719582104374",
+          "deps": [
+            "npm:class-validator"
+          ]
         },
         {
           "file": "apps/api/src/modules/integrations/integrations.module.ts",
-          "hash": "9149330406798641494"
+          "hash": "9149330406798641494",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/intelligence/deep-reader.service.ts",
-          "hash": "13979811898279438260"
+          "hash": "13979811898279438260",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/intelligence/intelligence.module.ts",
-          "hash": "7028010060474277602"
+          "hash": "7028010060474277602",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/intelligence/vector-math.ts",
@@ -347,23 +631,41 @@
         },
         {
           "file": "apps/api/src/modules/knowledge/knowledge.controller.ts",
-          "hash": "6165901589967260329"
+          "hash": "6165901589967260329",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/knowledge/knowledge.module.ts",
-          "hash": "680071960881198118"
+          "hash": "680071960881198118",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
         },
         {
           "file": "apps/api/src/modules/knowledge/knowledge.service.ts",
-          "hash": "5442781991299959314"
+          "hash": "5442781991299959314",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/media-proxy/gcs-media.service.ts",
-          "hash": "6498238992641315093"
+          "hash": "6498238992641315093",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/media-proxy/media-proxy.controller.ts",
-          "hash": "17060076584594057791"
+          "hash": "17060076584594057791",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/platform-express",
+            "npm:uuid"
+          ]
         },
         {
           "file": "apps/api/src/modules/media-proxy/media-proxy.errors.ts",
@@ -371,91 +673,168 @@
         },
         {
           "file": "apps/api/src/modules/media-proxy/media-proxy.module.ts",
-          "hash": "18237762510897154684"
+          "hash": "18237762510897154684",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/media-proxy/s3-media.service.ts",
-          "hash": "3807857821540974937"
+          "hash": "3807857821540974937",
+          "deps": [
+            "npm:@aws-sdk/client-s3",
+            "npm:@aws-sdk/s3-request-presigner",
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/monitoring/ai-usage.service.ts",
-          "hash": "7662109333371846921"
+          "hash": "7662109333371846921",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/monitoring/alerts.service.ts",
-          "hash": "15978835463092214116"
+          "hash": "15978835463092214116",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/schedule"
+          ]
         },
         {
           "file": "apps/api/src/modules/monitoring/budget.guard.ts",
-          "hash": "7617301498122076441"
+          "hash": "7617301498122076441",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/monitoring/monitoring.controller.ts",
-          "hash": "4349270408987578566"
+          "hash": "4349270408987578566",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/monitoring/monitoring.module.ts",
-          "hash": "10699250409621812444"
+          "hash": "10699250409621812444",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/moodboard/dto/create-collection.dto.ts",
-          "hash": "11470598149334578241"
+          "hash": "11470598149334578241",
+          "deps": [
+            "npm:class-validator"
+          ]
         },
         {
           "file": "apps/api/src/modules/moodboard/dto/create-from-unsplash.dto.ts",
-          "hash": "1890356879146999906"
+          "hash": "1890356879146999906",
+          "deps": [
+            "npm:class-validator"
+          ]
         },
         {
           "file": "apps/api/src/modules/moodboard/dto/create-moodboard-item.dto.ts",
-          "hash": "12458527652613654313"
+          "hash": "12458527652613654313",
+          "deps": [
+            "npm:class-validator"
+          ]
         },
         {
           "file": "apps/api/src/modules/moodboard/dto/update-moodboard-item.dto.ts",
-          "hash": "17120572235748629979"
+          "hash": "17120572235748629979",
+          "deps": [
+            "npm:class-validator"
+          ]
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.controller.ts",
-          "hash": "5589124650828796544"
+          "hash": "5589124650828796544",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/platform-express",
+            "npm:@nestjs/throttler"
+          ]
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.module.ts",
-          "hash": "4987328271758702454"
+          "hash": "4987328271758702454",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.service.ts",
-          "hash": "16046243399419064012"
+          "hash": "16046243399419064012",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@prisma/client"
+          ]
         },
         {
           "file": "apps/api/src/modules/projects/dto/project.dto.ts",
-          "hash": "14038147919631782969"
+          "hash": "14038147919631782969",
+          "deps": [
+            "npm:class-transformer",
+            "npm:class-validator"
+          ]
         },
         {
           "file": "apps/api/src/modules/projects/projects.controller.ts",
-          "hash": "7348124778374787170"
+          "hash": "7348124778374787170",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/projects/projects.module.ts",
-          "hash": "6110848065543290484"
+          "hash": "6110848065543290484",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/projects/projects.service.spec.ts",
-          "hash": "12183350598623665972"
+          "hash": "12183350598623665972",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/cache-manager"
+          ]
         },
         {
           "file": "apps/api/src/modules/projects/projects.service.ts",
-          "hash": "10090858667815697199"
+          "hash": "10090858667815697199",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@prisma/client",
+            "npm:@nestjs/cache-manager",
+            "npm:cache-manager"
+          ]
         },
         {
           "file": "apps/api/src/modules/rag/chunking.service.ts",
-          "hash": "12602239940995481921"
+          "hash": "12602239940995481921",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/rag/embeddings.service.spec.ts",
-          "hash": "4880376536196131436"
+          "hash": "4880376536196131436",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
         },
         {
           "file": "apps/api/src/modules/rag/embeddings.service.ts",
-          "hash": "11831989706630601138"
+          "hash": "11831989706630601138",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/rag/providers/embeddings-provider.interface.ts",
@@ -467,19 +846,35 @@
         },
         {
           "file": "apps/api/src/modules/rag/providers/ollama-embeddings.service.ts",
-          "hash": "16377255327611140804"
+          "hash": "16377255327611140804",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:ollama"
+          ]
         },
         {
           "file": "apps/api/src/modules/rag/rag.controller.ts",
-          "hash": "1920244578971698763"
+          "hash": "1920244578971698763",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/throttler"
+          ]
         },
         {
           "file": "apps/api/src/modules/rag/rag.module.ts",
-          "hash": "7866861799539975794"
+          "hash": "7866861799539975794",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
         },
         {
           "file": "apps/api/src/modules/rag/rag.service.ts",
-          "hash": "8849621020732669491"
+          "hash": "8849621020732669491",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/rag/types/rag.types.ts",
@@ -487,43 +882,84 @@
         },
         {
           "file": "apps/api/src/modules/rag/vector-store.service.ts",
-          "hash": "3805107067209183502"
+          "hash": "3805107067209183502",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/realtime/realtime.controller.ts",
-          "hash": "8658133494755273210"
+          "hash": "8658133494755273210",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:express"
+          ]
         },
         {
           "file": "apps/api/src/modules/realtime/realtime.module.ts",
-          "hash": "10209891059807589034"
+          "hash": "10209891059807589034",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/realtime/realtime.service.ts",
-          "hash": "15370102189022591274"
+          "hash": "15370102189022591274",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/event-emitter",
+            "npm:express"
+          ]
         },
         {
           "file": "apps/api/src/modules/scripts/dto/script.dto.ts",
-          "hash": "5665575739908196718"
+          "hash": "5665575739908196718",
+          "deps": [
+            "npm:class-validator"
+          ]
         },
         {
           "file": "apps/api/src/modules/scripts/scripts.module.ts",
-          "hash": "2581199584198523041"
+          "hash": "2581199584198523041",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/storage/storage.controller.ts",
-          "hash": "7294245360798237559"
+          "hash": "7294245360798237559",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/storage/storage.module.ts",
-          "hash": "6423625036418916438"
+          "hash": "6423625036418916438",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
         },
         {
           "file": "apps/api/src/modules/storage/storage.service.ts",
-          "hash": "17737348778993734996"
+          "hash": "17737348778993734996",
+          "deps": [
+            "npm:@google-cloud/storage",
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:@nestjs/event-emitter",
+            [
+              "npm:@google-cloud/storage",
+              "dynamic"
+            ]
+          ]
         },
         {
           "file": "apps/api/src/modules/tools/tool-handlers.service.ts",
-          "hash": "10141102964272316223"
+          "hash": "10141102964272316223",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/modules/tools/tool-schemas.ts",
@@ -531,19 +967,35 @@
         },
         {
           "file": "apps/api/src/modules/tools/tools.module.ts",
-          "hash": "6453732112665390303"
+          "hash": "6453732112665390303",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/prisma/prisma.module.ts",
-          "hash": "18165988975072206146"
+          "hash": "18165988975072206146",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
           "file": "apps/api/src/prisma/prisma.service.spec.ts",
-          "hash": "6927375946479535326"
+          "hash": "6927375946479535326",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/testing"
+          ]
         },
         {
           "file": "apps/api/src/prisma/prisma.service.ts",
-          "hash": "7356305025026923714"
+          "hash": "7356305025026923714",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@prisma/client",
+            "npm:@prisma/adapter-pg",
+            "npm:pg"
+          ]
         },
         {
           "file": "apps/api/src/utils/math.utils.ts",
@@ -551,15 +1003,30 @@
         },
         {
           "file": "apps/api/test/ai.integration.spec.ts",
-          "hash": "11175792878027984718"
+          "hash": "11175792878027984718",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/common",
+            "npm:supertest"
+          ]
         },
         {
           "file": "apps/api/test/app.e2e-spec.ts",
-          "hash": "17912321195821454344"
+          "hash": "17912321195821454344",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/common",
+            "npm:supertest"
+          ]
         },
         {
           "file": "apps/api/test/projects.integration.spec.ts",
-          "hash": "5810208366095635876"
+          "hash": "5810208366095635876",
+          "deps": [
+            "npm:@nestjs/testing",
+            "npm:@nestjs/common",
+            "npm:supertest"
+          ]
         },
         {
           "file": "apps/api/tsconfig.app.json",
@@ -1562,5 +2029,5 @@
       }
     ]
   },
-  "externalNodesHash": "10150614347200322095"
+  "externalNodesHash": "822979862247723612"
 }

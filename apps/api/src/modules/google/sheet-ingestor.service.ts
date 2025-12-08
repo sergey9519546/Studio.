@@ -22,7 +22,7 @@ export class SheetIngestorService {
     try {
       // 1. Get Spreadsheet Metadata to identify the first visible sheet
       const meta = await sheets.spreadsheets.get({ spreadsheetId: fileId });
-      const visibleSheet = meta.data.sheets?.find(s => !s.properties?.hidden);
+      const visibleSheet = meta.data.sheets?.find((s: any) => !s.properties?.hidden);
 
       if (!visibleSheet?.properties?.title) {
         throw new Error('No visible sheets found in document.');

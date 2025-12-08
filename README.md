@@ -14,23 +14,25 @@ npm install --legacy-peer-deps
 # Generate JWT secret
 $JWT_SECRET = -join ((48..57) + (65..90) + (97..122) | Get-Random -Count 32 | % {[char]$_})
 
-# Create .env file (copy from .env.example)
-# Then update these values:
-DATABASE_URL="file:./dev.db"  # SQLite for local dev
-JWT_SECRET="your-generated-secret-here"
+# Create .env file (copy from .env.example) and set:
+# Run Postgres locally (e.g. docker run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=studio_roster postgres:16)
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/studio_roster?schema=public"
+JWT_SECRET="$JWT_SECRET"
 ADMIN_EMAIL="admin@studio.com"
 ADMIN_PASSWORD="change-this-password"
 GCP_PROJECT_ID="your-project-id"
+STORAGE_BUCKET="your-project-assets"
+# Optional: only needed when the API is on a different host/port than the SPA
+VITE_API_URL="http://localhost:3001/api/v1"
 ```
 
 ### 3. Initialize Database & Run
 
 ```bash
-npm install
 npx prisma generate
-npx prisma migrate dev       # Create and apply migrations for local development
+npx prisma migrate dev       # Create and apply migrations for local development (requires the Postgres instance above)
 
-# Start development server
+# Start development server (frontend + API)
 npm run dev
 ```
 
@@ -94,8 +96,8 @@ npx prisma migrate deploy # Production - apply existing migrations only
 npx prisma generate      # Generate Prisma client
 
 # Testing
+npm run test             # Run backend tests (with Prisma client generation)
 npm run test:frontend    # Run frontend tests
-npm run test:api         # Run backend tests
 
 # Linting
 npm run lint            # Check code quality
@@ -122,7 +124,7 @@ chmod +x deploy.sh
 
 | Variable         | Description            | Example            |
 | ---------------- | ---------------------- | ------------------ |
-| `DATABASE_URL`   | Database connection    | `file:./dev.db`    |
+| `DATABASE_URL`   | Database connection    | `postgresql://postgres:postgres@localhost:5432/studio_roster?schema=public` |
 | `JWT_SECRET`     | JWT signing key        | `<32-char-secret>` |
 | `GCP_PROJECT_ID` | Google Cloud project   | `my-project-123`   |
 | `ADMIN_EMAIL`    | Initial admin email    | `admin@studio.com` |
@@ -137,6 +139,7 @@ chmod +x deploy.sh
 | `GCP_LOCATION`   | Vertex AI region | `us-central1` |
 | `STORAGE_BUCKET` | GCS bucket name  | -             |
 | `LOG_LEVEL`      | Logging level    | `info`        |
+| `VITE_API_URL`   | API base URL for SPA (set when API served from another host) | `http://localhost:3001/api/v1` |
 
 ---
 
@@ -153,13 +156,13 @@ chmod +x deploy.sh
 ### Database Connection Error
 
 ```bash
-# Reset database
-rm prisma/dev.db
-# Development
-npx prisma migrate dev
+# Verify DATABASE_URL points to a reachable Postgres instance
+# Reset local database (will drop data)
+npx prisma migrate reset
 
-# Production
-npx prisma migrate deploy
+# Apply migrations
+npx prisma migrate dev      # Development
+npx prisma migrate deploy   # Production/staging
 ```
 
 ### Build Errors
