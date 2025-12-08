@@ -1,10 +1,11 @@
 
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { DriveFileDTO, DriveService } from "./drive.service";
 import { GoogleClientFactory } from './google-client.factory';
 
-// In a real app, use @UseGuards(JwtAuthGuard)
 @Controller({ path: "google/drive", version: "1" })
+@UseGuards(JwtAuthGuard)
 export class DriveController {
   constructor(
     private readonly driveService: DriveService,

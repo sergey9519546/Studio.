@@ -1,5 +1,6 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { VertexAIEmbeddingsService } from '../ai/vertex-ai-embeddings.service';
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import type { EmbeddingsProvider } from './providers/embeddings-provider.interface';
+import { EMBEDDINGS_PROVIDER } from './providers/embeddings-provider.interface';
 
 interface CachedEmbedding {
     text: string;
@@ -14,7 +15,7 @@ export class EmbeddingsService {
     private readonly CACHE_TTL = 1000 * 60 * 60; // 1 hour
     private readonly MAX_CACHE_SIZE = 1000;
 
-    constructor(private vertexEmbeddings: VertexAIEmbeddingsService) { }
+    constructor(@Inject(EMBEDDINGS_PROVIDER) private embeddingsProvider: EmbeddingsProvider) { }
 
     /**
      * Generate embedding with caching
@@ -28,7 +29,7 @@ export class EmbeddingsService {
         }
 
         try {
-            const embedding = await this.vertexEmbeddings.generateEmbedding(text);
+            const embedding = await this.embeddingsProvider.generateEmbedding(text);
 
             // Cache the result
             this.cacheEmbedding(text, embedding);
@@ -62,7 +63,7 @@ export class EmbeddingsService {
         // Generate embeddings for uncached texts
         let newEmbeddings: number[][] = [];
         if (uncachedTexts.length > 0) {
-            newEmbeddings = await this.vertexEmbeddings.generateBatchEmbeddings(uncachedTexts);
+            newEmbeddings = await this.embeddingsProvider.generateBatchEmbeddings(uncachedTexts);
 
             // Cache new embeddings
             uncachedTexts.forEach((text, i) => {
@@ -119,7 +120,7 @@ export class EmbeddingsService {
             }
             return {
                 text: documentText,
-                score: this.vertexEmbeddings.cosineSimilarity(queryEmbedding as number[], docEmb as number[]),
+                score: this.embeddingsProvider.cosineSimilarity(queryEmbedding as number[], docEmb as number[]),
                 index,
             };
         }).filter((item): item is { text: string; score: number; index: number } => item !== null);

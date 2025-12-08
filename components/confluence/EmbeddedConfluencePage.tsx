@@ -130,22 +130,53 @@ export default function EmbeddedConfluencePage({
   const pageId = config.pageId || extractPageIdFromUrl(config.pageUrl);
 
   // Render the actual Embedded Confluence component
-  return (
-    // eslint-disable-next-line react/forbid-component-props -- dynamic height prop
-    <div
-      className={`confluence-page-container ${className}`}
-      style={{ height }}
-    >
-      <div className="w-full h-full">
-        <EmbeddedConfluence
-          contentId={pageId}
-          hostname={config.siteUrl}
-          onLoad={handlePageLoad}
-          onError={handlePageError}
-        />
+  if (isAuthenticated) {
+    return (
+      // eslint-disable-next-line react/forbid-component-props -- dynamic height prop
+      <div
+        className={`confluence-page-container ${className}`}
+        style={{ height }}
+      >
+        <div className="w-full h-full">
+          <EmbeddedConfluence
+            contentId={pageId}
+            hostname={config.siteUrl}
+            onLoad={handlePageLoad}
+            onError={handlePageError}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  // If not authenticated and not loading, display login prompt
+  if (!isLoading && !isAuthenticated) {
+    return (
+      <div
+        className={`confluence-page-container ${className}`}
+        style={{ height }}
+      >
+        <div className="flex items-center justify-center h-full">
+          <div className="text-center max-w-md p-6 bg-subtle rounded-xl">
+            <h3 className="text-lg font-bold text-ink-primary mb-2">
+              Please Log In
+            </h3>
+            <p className="text-sm text-ink-secondary mb-4">
+              You need to log in to Confluence to view this page.
+            </p>
+            <button
+              onClick={handleLoginClick}
+              className="px-4 py-2 bg-ink-primary text-white rounded-lg hover:bg-opacity-90 transition-colors"
+            >
+              Log in to Confluence
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return null; // Should not reach here if loading, error, or authenticated cases are covered
 }
 
 /**

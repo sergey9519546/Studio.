@@ -1,5 +1,6 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { PrismaService } from "../../prisma/prisma.service";
+import { cosineSimilarity } from "../../utils/math.utils";
 import { EmbeddingsService } from "./embeddings.service";
 
 interface StoredVector {
@@ -145,7 +146,7 @@ export class VectorStoreService {
     const results = vectors.map((vec) => ({
       id: vec.id,
       content: vec.content,
-      score: this.cosineSimilarity(queryEmbedding, vec.embedding),
+      score: cosineSimilarity(queryEmbedding, vec.embedding),
       metadata: vec.metadata,
     }));
 
@@ -188,10 +189,7 @@ export class VectorStoreService {
 
     const results = vectors.map((vec) => {
       // Semantic similarity
-      const semanticScore = this.cosineSimilarity(
-        queryEmbedding,
-        vec.embedding
-      );
+      const semanticScore = cosineSimilarity(queryEmbedding, vec.embedding);
 
       // Keyword matching (simple BM25-like)
       const keywordScore = this.keywordScore(
@@ -292,25 +290,7 @@ export class VectorStoreService {
     }
   }
 
-  /**
-   * Cosine similarity between two vectors
-   */
-  private cosineSimilarity(a: number[], b: number[]): number {
-    if (a.length !== b.length) return 0;
-
-    let dotProduct = 0;
-    let normA = 0;
-    let normB = 0;
-
-    for (let i = 0; i < a.length; i++) {
-      dotProduct += a[i] * b[i];
-      normA += a[i] * a[i];
-      normB += b[i] * b[i];
-    }
-
-    const denominator = Math.sqrt(normA) * Math.sqrt(normB);
-    return denominator === 0 ? 0 : dotProduct / denominator;
-  }
+  // Note: cosineSimilarity is now imported from ../../utils/math.utils
 
   /**
    * Simple keyword matching score
@@ -333,6 +313,6 @@ export class VectorStoreService {
    * Generate unique ID
    */
   private generateId(): string {
-    return `vec_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    return `vec_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
   }
 }

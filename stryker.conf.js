@@ -8,16 +8,13 @@ module.exports = function (config) {
     ],
     mutator: "typescript",
     packageManager: "npm",
-    reporters: ["progress", "clear-text", "html"],
+    reporters: ["progress", "html"],
     testRunner: "vitest",
     vitest: {
       configFile: "vitest.config.ts",
     },
     tsconfigFile: "tsconfig.json",
     coverageAnalysis: "perTest",
-    clearTextReporter: {
-      logTests: true,
-    },
     htmlReporter: {
       baseDir: "reports/stryker",
     },

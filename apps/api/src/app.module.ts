@@ -1,5 +1,5 @@
 
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
@@ -35,6 +35,8 @@ import { ScriptsModule } from "./modules/scripts/scripts.module";
 import { StorageModule } from "./modules/storage/storage.module";
 import { PrismaModule } from "./prisma/prisma.module";
 
+const appLogger = new Logger('AppModule');
+
 // Resolve the frontend build directory robustly across build outputs (dist/build)
 // In production (Docker), the path is always /app/build/client
 const staticRoot = process.env.NODE_ENV === 'production' 
@@ -49,7 +51,7 @@ const staticRoot = process.env.NODE_ENV === 'production'
       return staticCandidates.find(p => existsSync(p));
     })();
 
-console.log('Static root:', staticRoot, '| cwd:', process.cwd(), '| __dirname:', __dirname);
+appLogger.log(`Static root: ${staticRoot ?? 'not-found'} | cwd: ${process.cwd()} | __dirname: ${__dirname}`);
 
 @Module({
   imports: [

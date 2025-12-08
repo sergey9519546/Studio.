@@ -1024,6 +1024,14 @@
         "hash": "9677169200791952411"
       },
       {
+        "file": ".continue/agents/new-config-1.yaml",
+        "hash": "4163857882156651287"
+      },
+      {
+        "file": ".continue/agents/new-config.yaml",
+        "hash": "4163857882156651287"
+      },
+      {
         "file": ".dockerignore",
         "hash": "14849129328461547574"
       },
@@ -1069,7 +1077,7 @@
       },
       {
         "file": "Dockerfile",
-        "hash": "9112832209795491830"
+        "hash": "16052858075089674531"
       },
       {
         "file": "FLUID_DESIGN_GUIDE.md",
@@ -1301,7 +1309,7 @@
       },
       {
         "file": "deploy.ps1",
-        "hash": "14346719889968889122"
+        "hash": "1216932013691605961"
       },
       {
         "file": "deploy.sh",
@@ -1373,7 +1381,7 @@
       },
       {
         "file": "package.json",
-        "hash": "14920248214254129348"
+        "hash": "3062593831186661496"
       },
       {
         "file": "prisma/comment_schema_addition.prisma",

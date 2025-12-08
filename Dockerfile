@@ -4,19 +4,21 @@
 # ============================================
 # Stage 1: Dependencies
 # ============================================
-FROM node:22-alpine AS deps
+FROM node:22-slim AS deps
 
 WORKDIR /app
 
-# Install system dependencies required for Prisma
-RUN apk add --no-cache libc6-compat openssl
+# Install system dependencies for native modules
+RUN apt-get update -y && apt-get install -y --no-install-recommends \
+    openssl python3 make g++ build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy only dependency files for better layer caching
 COPY package*.json ./
 COPY prisma ./prisma/
 
-# Install dependencies (cached unless package.json changes)
-RUN npm ci --legacy-peer-deps
+# Install dependencies
+RUN npm install --legacy-peer-deps
 
 # Generate Prisma client
 RUN npx prisma generate
@@ -24,7 +26,7 @@ RUN npx prisma generate
 # ============================================
 # Stage 2: Builder
 # ============================================
-FROM node:22-alpine AS builder
+FROM node:22-slim AS builder
 
 WORKDIR /app
 
@@ -42,44 +44,37 @@ ENV NODE_ENV=production
 RUN npm run build:api || npx nest build -p apps/api/tsconfig.app.json
 
 # Build frontend (Vite)
-RUN npm run build || npx vite build
+RUN npm run build:client || npx vite build
 
 # ============================================
 # Stage 3: Production Runner
 # ============================================
-FROM node:22-alpine AS runner
+FROM node:22-slim AS runner
 
 WORKDIR /app
 
-# Install only OpenSSL for Prisma runtime
-RUN apk add --no-cache openssl
+# Install only runtime dependencies
+RUN apt-get update -y && apt-get install -y --no-install-recommends openssl \
+    && rm -rf /var/lib/apt/lists/*
 
-# Create non-root user for security
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S nodejs -u 1001
+# Copy package files first
+COPY --chown=node:node package*.json ./
 
-# Copy package files
-COPY package*.json ./
+# Copy node_modules from deps stage
+COPY --chown=node:node --from=deps /app/node_modules ./node_modules
 
-# Install ALL dependencies (Nx builds don't bundle, they need node_modules)
-RUN npm ci --legacy-peer-deps && npm cache clean --force
-
-# Copy Prisma files and generate client
-COPY --from=builder /app/prisma ./prisma
+# Copy Prisma files and regenerate client
+COPY --chown=node:node --from=builder /app/prisma ./prisma
 RUN npx prisma generate
 
 # Copy built application from builder
-COPY --from=builder /app/build ./build
+COPY --chown=node:node --from=builder /app/build ./build
 
-# Copy service account key if it exists
-COPY service-account-key.json /app/service-account-key.json
-
-
-# Set ownership to non-root user
-RUN chown -R nodejs:nodejs /app
+# Copy service account key if it exists (optional)
+COPY --chown=node:node service-account-key.jso[n] /app/
 
 # Switch to non-root user
-USER nodejs
+USER node
 
 # Cloud Run uses PORT environment variable
 ENV PORT=8080

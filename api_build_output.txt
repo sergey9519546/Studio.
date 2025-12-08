@@ -1,0 +1,5 @@
+﻿
+ NX   Could not find Nx modules at "C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main".
+
+Have you run npm/yarn install?
+

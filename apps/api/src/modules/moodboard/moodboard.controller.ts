@@ -10,10 +10,12 @@ import {
   Post,
   Query,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Throttle } from '@nestjs/throttler';
+import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
 import { AssetsService } from "../assets/assets.service";
 import { CreateCollectionDto } from "./dto/create-collection.dto";
 import { CreateFromUnsplashDto } from "./dto/create-from-unsplash.dto";
@@ -22,6 +24,7 @@ import { UpdateMoodboardItemDto } from './dto/update-moodboard-item.dto';
 import { MoodboardService } from "./moodboard.service";
 
 @Controller({ path: "moodboard", version: "1" })
+@UseGuards(JwtAuthGuard)
 export class MoodboardController {
   constructor(
     private readonly moodboardService: MoodboardService,

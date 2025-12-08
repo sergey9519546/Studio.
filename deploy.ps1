@@ -1,5 +1,25 @@
 # Deploy to Google Cloud Run
 
+
+# Load secrets from .env file if it exists
+if (Test-Path .env) {
+    Write-Host "Loading environment variables from .env..." -ForegroundColor Gray
+    foreach ($line in Get-Content .env) {
+        if ($line -match '^\s*[^#]' -and $line -match '=') {
+            try {
+                $parts = $line -split '=', 2
+                $key = $parts[0].Trim()
+                $value = $parts[1].Trim().Trim('"').Trim("'")
+                [Environment]::SetEnvironmentVariable($key, $value, "Process")
+                # Write-Host "Loaded $key" # Uncomment for debug
+            } catch {
+                Write-Warning "Failed to parse line: $line"
+            }
+        }
+    }
+}
+
+
 $PROJECT_ID = $env:GCP_PROJECT_ID
 if (-not $PROJECT_ID) { $PROJECT_ID = "gen-lang-client-0704991831" }
 
@@ -18,15 +38,22 @@ if (-not $env:STORAGE_BUCKET) { $env:STORAGE_BUCKET = "$PROJECT_ID-assets" }
 
 # 1. Build Docker Image
 Write-Host "Building Docker Image..." -ForegroundColor Cyan
-docker build --no-cache --build-arg API_KEY=$env:API_KEY -t $IMAGE_NAME .
+docker build --build-arg API_KEY=$env:API_KEY -t $IMAGE_NAME .
 if ($LASTEXITCODE -ne 0) { Write-Error "Docker build failed"; exit 1 }
 
-# 2. Push to GCR
+
+# 2. Run Prisma Migrations
+Write-Host "Running Prisma Migrations..." -ForegroundColor Cyan
+docker run --rm -e "DATABASE_URL=$env:DATABASE_URL" $IMAGE_NAME npx prisma migrate deploy
+if ($LASTEXITCODE -ne 0) { Write-Error "Prisma migration failed"; exit 1 }
+
+# 3. Push to GCR
+
 Write-Host "Pushing to Container Registry..." -ForegroundColor Cyan
 docker push $IMAGE_NAME
 if ($LASTEXITCODE -ne 0) { Write-Error "Docker push failed"; exit 1 }
 
-# 3. Deploy to Cloud Run
+# 4. Deploy to Cloud Run
 Write-Host "Deploying to Cloud Run..." -ForegroundColor Cyan
 gcloud run deploy $SERVICE_NAME `
   --image $IMAGE_NAME `

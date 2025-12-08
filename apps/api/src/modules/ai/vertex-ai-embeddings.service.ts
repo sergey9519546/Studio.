@@ -1,6 +1,7 @@
 import { PredictionServiceClient, protos } from "@google-cloud/aiplatform";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { EmbeddingsProvider } from "../rag/providers/embeddings-provider.interface";
 
 type IValue = protos.google.protobuf.IValue;
 
@@ -9,7 +10,7 @@ interface EmbeddingValue {
 }
 
 @Injectable()
-export class VertexAIEmbeddingsService {
+export class VertexAIEmbeddingsService implements EmbeddingsProvider {
   private readonly logger = new Logger(VertexAIEmbeddingsService.name);
   private client: PredictionServiceClient;
   private readonly project: string;
