@@ -12,6 +12,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [loading, setLoading] = useState(false);
   const [showForceOption, setShowForceOption] = useState(false);
   const [error, setError] = useState('');
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   useEffect(() => {
     // Cleaner effect logic: Only set timer if loading
@@ -49,6 +50,10 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     }
   };
 
+  const handleEnterClick = () => {
+    setIsFormVisible(true);
+  };
+
   return (
     <div className="min-h-screen bg-canvas flex flex-col justify-center items-center relative overflow-hidden font-sans selection:bg-ink selection:text-white">
       {/* Subtle Grid Background */}
@@ -66,70 +71,82 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         </header>
 
         <main>
-        <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4">
-          <div>
-            <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wide text-ink/60 mb-2">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@studio.com"
-              required
-              disabled={loading}
-              className="w-full px-4 py-3 bg-white border border-ink/10 rounded-xl text-sm text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-ink/20 focus:border-ink/30 transition-all disabled:opacity-50"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="password" className="block text-xs font-bold uppercase tracking-wide text-ink/60 mb-2">
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-              disabled={loading}
-              className="w-full px-4 py-3 bg-white border border-ink/10 rounded-xl text-sm text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-ink/20 focus:border-ink/30 transition-all disabled:opacity-50"
-            />
-          </div>
-
-          {error && (
-            <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-sm text-rose-600">
-              {error}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="group relative w-full px-12 py-4 bg-ink text-white rounded-xl text-xs font-bold uppercase tracking-wide shadow-lg hover:shadow-xl hover:-translate-y-[2px] transition-all duration-200 disabled:opacity-70 disabled:translate-y-0 disabled:shadow-none active:scale-[0.98]"
-          >
-            <span className="flex items-center justify-center gap-3">
-              {loading ? (
-                <span className="animate-pulse">Authenticating...</span>
-              ) : (
-                <>Sign In <ArrowRight size={16} className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200 -ml-2 group-hover:ml-0" /></>
-              )}
-            </span>
-          </button>
-
-          {/* Emergency Bypass for "Stuck" State */}
-          {showForceOption && (
+          {!isFormVisible ? (
             <button
-              type="button"
-              onClick={(e) => handleSubmit(e, true)}
-              className="w-full flex items-center justify-center gap-2 text-xs text-rose-600 hover:text-rose-800 bg-rose-50 hover:bg-rose-100 px-4 py-2 rounded-lg transition-colors font-medium animate-in fade-in slide-in-from-top-2"
+              onClick={handleEnterClick}
+              className="group relative w-full px-12 py-4 bg-ink text-white rounded-xl text-xs font-bold uppercase tracking-wide shadow-lg hover:shadow-xl hover:-translate-y-[2px] transition-all duration-200"
             >
-              <AlertCircle size={14} /> Force Offline Entry
+              <span className="flex items-center justify-center gap-3">
+                Enter
+                <ArrowRight size={16} className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200 -ml-2 group-hover:ml-0" />
+              </span>
             </button>
+          ) : (
+            <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4 animate-enter">
+              <div>
+                <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wide text-ink/60 mb-2">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@studio.com"
+                  required
+                  disabled={loading}
+                  className="w-full px-4 py-3 bg-white border border-ink/10 rounded-xl text-sm text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-ink/20 focus:border-ink/30 transition-all disabled:opacity-50"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="password" className="block text-xs font-bold uppercase tracking-wide text-ink/60 mb-2">
+                  Password
+                </label>
+                <input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  required
+                  disabled={loading}
+                  className="w-full px-4 py-3 bg-white border border-ink/10 rounded-xl text-sm text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-ink/20 focus:border-ink/30 transition-all disabled:opacity-50"
+                />
+              </div>
+
+              {error && (
+                <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-sm text-rose-600">
+                  {error}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="group relative w-full px-12 py-4 bg-ink text-white rounded-xl text-xs font-bold uppercase tracking-wide shadow-lg hover:shadow-xl hover:-translate-y-[2px] transition-all duration-200 disabled:opacity-70 disabled:translate-y-0 disabled:shadow-none active:scale-[0.98]"
+              >
+                <span className="flex items-center justify-center gap-3">
+                  {loading ? (
+                    <span className="animate-pulse">Authenticating...</span>
+                  ) : (
+                    <>Sign In <ArrowRight size={16} className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200 -ml-2 group-hover:ml-0" /></>
+                  )}
+                </span>
+              </button>
+
+              {/* Emergency Bypass for "Stuck" State */}
+              {showForceOption && (
+                <button
+                  type="button"
+                  onClick={(e) => handleSubmit(e, true)}
+                  className="w-full flex items-center justify-center gap-2 text-xs text-rose-600 hover:text-rose-800 bg-rose-50 hover:bg-rose-100 px-4 py-2 rounded-lg transition-colors font-medium animate-in fade-in slide-in-from-top-2"
+                >
+                  <AlertCircle size={14} /> Force Offline Entry
+                </button>
+              )}
+            </form>
           )}
-        </form>
         </main>
       </div>
 
