@@ -7,17 +7,23 @@
     "dev": "nx run-many -t serve",
     "prepare": "prisma generate",
     "build": "npm run build:client && nx run-many -t build",
+    "build:affected": "npm run build:client && nx affected -t build",
     "build:client": "vite build",
     "build:api": "nx build api",
     "start": "node build/apps/api/src/main",
     "start:dev": "nx serve api",
     "start:prod": "node build/apps/api/src/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\"",
-    "test": "prisma generate && jest --config apps/api/jest.config.ts --max-workers=2",
-    "test:watch": "jest --config apps/api/jest.config.ts --watch",
-    "test:cov": "jest --config apps/api/jest.config.ts --coverage",
-    "test:e2e": "jest --config apps/api/jest.config.ts --testRegex '.e2e-spec.ts$'",
-    "test:integration": "jest --config apps/api/jest.config.ts --testRegex '.integration.spec.ts$'",
+    "lint": "nx run-many -t lint",
+    "lint:fix": "nx run-many -t lint --fix",
+    "format": "nx format:write",
+    "format:check": "nx format:check",
+    "type-check": "nx run-many -t type-check",
+    "dep-graph": "nx graph",
+    "test": "prisma generate && nx test api --max-workers=2",
+    "test:watch": "nx test api --watch",
+    "test:cov": "nx test api --coverage",
+    "test:e2e": "nx e2e api",
+    "test:integration": "nx test api --testPathPattern=.integration.spec",
     "test:frontend": "vitest run",
     "test:frontend:ui": "vitest --ui",
     "mutation": "stryker run"
@@ -162,6 +168,9 @@
     "typescript-eslint": "^8.48.1",
     "vite": "^7.2.6",
     "vitest": "^4.0.15"
+  },
+  "overrides": {
+    "@atlassiansox/analytics-web-client": "file:stubs/atlassiansox-analytics-web-client"
   },
   "jest": {
     "moduleFileExtensions": [
