@@ -75,6 +75,8 @@
     "class-validator": "^0.14.0",
     "exceljs": "^4.3.0",
     "firebase": "^12.6.0",
+    "firebase-admin": "^12.2.0",
+    "@google-cloud/aiplatform": "^5.13.0",
     "framer-motion": "^12.23.25",
     "google-auth-library": "^9.0.0",
     "googleapis": "^126.0.0",
