@@ -63,3 +63,10 @@ metadata.json
 kombai-instructions.txt
 test.txt
 test.svg
+
+
+
+.nx/cache
+.nx/workspace-data
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
