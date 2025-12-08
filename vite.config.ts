@@ -443,7 +443,7 @@ const atlaskitIconResolver = () => ({
 });
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), atlaskitIconResolver()],
 
   css: {
     postcss: {
