@@ -11,6 +11,7 @@ import ConfluenceView from "./src/views/ConfluenceView";
 import DashboardHome from "./src/views/DashboardHome";
 import GuardianRoom from "./src/views/GuardianRoom";
 import ProjectsView from "./src/views/ProjectsView";
+import TranscriptsView from "./src/views/TranscriptsView";
 
 type Project = {
   id: string;
@@ -185,6 +186,8 @@ export default function App() {
         return <ConfluenceView />;
       case "pages":
         return <PageEditor initialTitle="Creative OS Page" status="draft" />;
+      case "transcripts":
+        return <TranscriptsView />;
       default:
         return (
           <div className="h-full flex flex-col items-center justify-center text-ink-secondary">

@@ -129,6 +129,7 @@ chmod +x deploy.sh
 | `GCP_PROJECT_ID` | Google Cloud project   | `my-project-123`   |
 | `ADMIN_EMAIL`    | Initial admin email    | `admin@studio.com` |
 | `ADMIN_PASSWORD` | Initial admin password | `SecurePass123!`   |
+| `SUPADATA_API_KEY` | Supadata transcription API key | `sd_xxx` |
 
 ### Optional Variables
 
@@ -140,6 +141,7 @@ chmod +x deploy.sh
 | `STORAGE_BUCKET` | GCS bucket name  | -             |
 | `LOG_LEVEL`      | Logging level    | `info`        |
 | `VITE_API_URL`   | API base URL for SPA (set when API served from another host) | `http://localhost:3001/api/v1` |
+| `SUPADATA_API_URL` | Supadata API base (optional override) | `https://api.supadata.ai` |
 
 ---
 

@@ -25,6 +25,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
     { id: "roster", icon: Users, label: "Talent" },
     { id: "writers-room", icon: FileText, label: "Writer's Room" },
     { id: "knowledge-base", icon: BookOpen, label: "Knowledge Base" }, // Confluence integration
+    { id: "transcripts", icon: FileText, label: "Transcripts" },
   ];
 
   return (

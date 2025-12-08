@@ -71,6 +71,14 @@ class EnvironmentVariables {
   @IsString()
   FRONTEND_URL?: string;
 
+  @IsOptional()
+  @IsString()
+  SUPADATA_API_KEY?: string;
+
+  @IsOptional()
+  @IsString()
+  SUPADATA_API_URL?: string;
+
   // PORT is optional - Cloud Run sets this to 8080
   @IsOptional()
   @IsNumber()

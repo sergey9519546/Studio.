@@ -34,6 +34,7 @@ import { RealtimeModule } from "./modules/realtime/realtime.module";
 import { ScriptsModule } from "./modules/scripts/scripts.module";
 import { StorageModule } from "./modules/storage/storage.module";
 import { PrismaModule } from "./prisma/prisma.module";
+import { TranscriptsModule } from "./modules/transcripts/transcripts.module";
 
 const appLogger = new Logger('AppModule');
 
@@ -132,6 +133,7 @@ appLogger.log(`Static root: ${staticRoot ?? 'not-found'} | cwd: ${process.cwd()}
     MonitoringModule,
     IntegrationsModule,
     ConfluenceModule,
+    TranscriptsModule,
   ],
   providers: [
     {
