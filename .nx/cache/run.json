@@ -1,21 +1,32 @@
 {
   "run": {
-    "command": "nx build api",
-    "startTime": "2025-12-07T23:36:15.134Z",
-    "endTime": "2025-12-07T23:36:15.333Z",
+    "command": "nx run-many -t build",
+    "startTime": "2025-12-08T07:48:10.061Z",
+    "endTime": "2025-12-08T07:48:13.769Z",
     "inner": false
   },
   "tasks": [
     {
+      "taskId": "studio-roster:build",
+      "target": "build",
+      "projectName": "studio-roster",
+      "hash": "2669201458180571029",
+      "startTime": "2025-12-08T07:48:10.072Z",
+      "endTime": "2025-12-08T07:48:11.924Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    },
+    {
       "taskId": "api:build",
       "target": "build",
       "projectName": "api",
-      "hash": "4491259245832841273",
-      "startTime": "2025-12-07T23:36:15.144Z",
-      "endTime": "2025-12-07T23:36:15.332Z",
+      "hash": "15489419036753421219",
+      "startTime": "2025-12-08T07:48:10.072Z",
+      "endTime": "2025-12-08T07:48:13.768Z",
       "params": "",
-      "cacheStatus": "local-cache-hit",
-      "status": 0
+      "cacheStatus": "cache-miss",
+      "status": 1
     }
   ]
 }

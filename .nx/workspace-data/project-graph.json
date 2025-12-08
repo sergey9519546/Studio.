@@ -89,6 +89,272 @@
         },
         "implicitDependencies": []
       }
+    },
+    "studio-roster": {
+      "name": "studio-roster",
+      "type": "app",
+      "data": {
+        "root": ".",
+        "name": "studio-roster",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {
+            "NPM Scripts": [
+              "dev",
+              "prepare",
+              "build",
+              "build:client",
+              "build:api",
+              "start",
+              "start:dev",
+              "start:prod",
+              "lint",
+              "test",
+              "test:watch",
+              "test:cov",
+              "test:e2e",
+              "test:integration",
+              "test:frontend",
+              "test:frontend:ui",
+              "mutation"
+            ]
+          },
+          "description": "AI-Native Agency Management System",
+          "js": {
+            "packageName": "studio-roster",
+            "packageVersion": "0.0.1",
+            "isInPackageManagerWorkspaces": true
+          }
+        },
+        "targets": {
+          "dev": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "dev"
+            },
+            "metadata": {
+              "scriptContent": "nx run-many -t serve",
+              "runCommand": "npm run dev"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "prepare": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "prepare"
+            },
+            "metadata": {
+              "scriptContent": "prisma generate",
+              "runCommand": "npm run prepare"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "build": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "build"
+            },
+            "metadata": {
+              "scriptContent": "npm run build:client && nx run-many -t build",
+              "runCommand": "npm run build"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "dependsOn": [
+              "^build"
+            ],
+            "inputs": [
+              "production",
+              "^production"
+            ],
+            "cache": true
+          },
+          "build:client": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "build:client"
+            },
+            "metadata": {
+              "scriptContent": "vite build",
+              "runCommand": "npm run build:client"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "build:api": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "build:api"
+            },
+            "metadata": {
+              "scriptContent": "nx build api",
+              "runCommand": "npm run build:api"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "start": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "start"
+            },
+            "metadata": {
+              "scriptContent": "node build/apps/api/src/main",
+              "runCommand": "npm run start"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "start:dev": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "start:dev"
+            },
+            "metadata": {
+              "scriptContent": "nx serve api",
+              "runCommand": "npm run start:dev"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "start:prod": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "start:prod"
+            },
+            "metadata": {
+              "scriptContent": "node build/apps/api/src/main",
+              "runCommand": "npm run start:prod"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "lint": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "lint"
+            },
+            "metadata": {
+              "scriptContent": "eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\"",
+              "runCommand": "npm run lint"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json"
+            ],
+            "cache": true
+          },
+          "test": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "test"
+            },
+            "metadata": {
+              "scriptContent": "prisma generate && jest --config apps/api/jest.config.ts --max-workers=2",
+              "runCommand": "npm run test"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "inputs": [
+              "default",
+              "^production",
+              "{workspaceRoot}/jest.preset.js"
+            ],
+            "cache": true
+          },
+          "test:watch": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "test:watch"
+            },
+            "metadata": {
+              "scriptContent": "jest --config apps/api/jest.config.ts --watch",
+              "runCommand": "npm run test:watch"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "test:cov": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "test:cov"
+            },
+            "metadata": {
+              "scriptContent": "jest --config apps/api/jest.config.ts --coverage",
+              "runCommand": "npm run test:cov"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "test:e2e": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "test:e2e"
+            },
+            "metadata": {
+              "scriptContent": "jest --config apps/api/jest.config.ts --testRegex '.e2e-spec.ts$'",
+              "runCommand": "npm run test:e2e"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "test:integration": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "test:integration"
+            },
+            "metadata": {
+              "scriptContent": "jest --config apps/api/jest.config.ts --testRegex '.integration.spec.ts$'",
+              "runCommand": "npm run test:integration"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "test:frontend": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "test:frontend"
+            },
+            "metadata": {
+              "scriptContent": "vitest run",
+              "runCommand": "npm run test:frontend"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "test:frontend:ui": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "test:frontend:ui"
+            },
+            "metadata": {
+              "scriptContent": "vitest --ui",
+              "runCommand": "npm run test:frontend:ui"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "mutation": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "mutation"
+            },
+            "metadata": {
+              "scriptContent": "stryker run",
+              "runCommand": "npm run mutation"
+            },
+            "configurations": {},
+            "parallelism": true
+          }
+        },
+        "implicitDependencies": []
+      }
     }
   },
   "externalNodes": {
@@ -25663,6 +25929,718 @@
       {
         "source": "api",
         "target": "npm:supertest",
+        "type": "static"
+      }
+    ],
+    "studio-roster": [
+      {
+        "source": "studio-roster",
+        "target": "npm:lucide-react",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:vitest",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@testing-library/react",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@testing-library/user-event",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:react-router-dom",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:exceljs",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:zod",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:react-split",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/embedded-confluence",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:prosemirror-commands",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:prosemirror-history",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:prosemirror-keymap",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:prosemirror-markdown",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:prosemirror-model",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:prosemirror-schema-basic",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:prosemirror-schema-list",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:prosemirror-state",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:prosemirror-view",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:styled-components",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/editor-core",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:uuid",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@eslint/js",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:globals",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:typescript-eslint",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:eslint-plugin-react",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:eslint-plugin-react-hooks",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/css-reset",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nx/jest",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:ollama",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nestjs/cli",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nestjs/schematics",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nestjs/testing",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nx/eslint",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nx/js",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nx/nest",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@pact-foundation/pact",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@prisma/config",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@stryker-mutator/core",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@stryker-mutator/vitest-runner",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@testing-library/jest-dom",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@types/bcryptjs",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@types/compression",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@types/express",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@types/jest",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@types/multer",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@types/node",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@types/passport-jwt",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@types/pg",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@types/react",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@types/react-dom",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@types/supertest",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@types/uuid",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@vitejs/plugin-react",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:autoprefixer",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:axios",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:compression",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:eslint",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:eslint-config-prettier",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:eslint-plugin-prettier",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:jest",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:jsdom",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:nx",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:postcss",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:prettier",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:source-map-support",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:supertest",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:tailwindcss",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:ts-jest",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:ts-loader",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:ts-node",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:tsconfig-paths",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:tsx",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:typescript",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:vite",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@agentset/mcp",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/editor-common",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/editor-plugin-table",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/editor-plugins",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/emoji",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/media-client",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/media-core",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/media-state",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/mention",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/page-layout",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/tokens",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@aws-sdk/client-s3",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@aws-sdk/s3-request-presigner",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@google-cloud/aiplatform",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@google-cloud/storage",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@google/genai",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@modelcontextprotocol/sdk",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nestjs/cache-manager",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nestjs/common",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nestjs/config",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nestjs/core",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nestjs/event-emitter",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nestjs/jwt",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nestjs/mapped-types",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nestjs/passport",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nestjs/platform-express",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nestjs/schedule",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nestjs/serve-static",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@nestjs/throttler",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@prisma/adapter-pg",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@prisma/client",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@tanstack/react-query",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@types/bcrypt",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:aria-query",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:bcryptjs",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:buffer",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:cache-manager",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:class-transformer",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:class-validator",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:firebase",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:framer-motion",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:google-auth-library",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:googleapis",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:helmet",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:mammoth",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:nestjs-pino",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:openai",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:passport",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:passport-jwt",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:pg",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:pino-http",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:pino-pretty",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:prisma",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:prosemirror-menu",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:react-hook-form",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:react-intl",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:react-masonry-css",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:reflect-metadata",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:rxjs",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:winston",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:dotenv",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/adf-schema",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/icon",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/link-provider",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/logo",
+        "type": "static"
+      },
+      {
+        "source": "studio-roster",
+        "target": "npm:@atlaskit/profilecard",
         "type": "static"
       }
     ],
@@ -86309,5 +87287,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1765177259894
+  "computedAt": 1765180633701
 }

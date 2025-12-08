@@ -507,6 +507,10 @@ export default defineConfig({
           "node_modules/@atlaskit/platform-feature-flags/dist/esm/index.js"
         ),
       },
+      {
+        find: '@atlaskit/icon',
+        replacement: resolve(__dirname, 'node_modules/@atlaskit/icon/dist/esm'),
+      },
       { find: "@", replacement: "/src" },
     ],
     dedupe: [
