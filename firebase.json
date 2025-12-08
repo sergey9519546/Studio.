@@ -28,7 +28,10 @@
     "source": "dataconnect"
   },
   "hosting": {
+    "site": "gen-lang-client-0704991831-35466",
     "public": "build/client",
+    "cleanUrls": true,
+    "trailingSlash": false,
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -49,6 +52,15 @@
             "value": "max-age=31536000"
           }
         ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
       }
     ]
   },
@@ -61,30 +73,12 @@
   },
   "functions": {
     "source": "functions",
-    "runtime": "nodejs20"
-  },
-  "apphosting": [
-    {
-      "backendId": "studiodotmanagement",
-      "rootDir": "/main",
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
-        "firebase-debug.*.log",
-        "functions"
-      ]
-    },
-    {
-      "backendId": "studiodotmanagement",
-      "rootDir": "/",
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
-        "firebase-debug.*.log",
-        "functions"
-      ]
-    }
-  ]
+    "runtime": "nodejs20",
+    "ignore": [
+      ".git",
+      "firebase-debug.log",
+      "firebase-debug.*.log",
+      "node_modules/**"
+    ]
+  }
 }
