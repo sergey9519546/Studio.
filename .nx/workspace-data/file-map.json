@@ -1155,8 +1155,20 @@
         "hash": "4476833892752008164"
       },
       {
+        "file": "AUDIT_PROGRESS.md",
+        "hash": "15394317585055926673"
+      },
+      {
+        "file": "AUDIT_TODO.md",
+        "hash": "1412412405773942366"
+      },
+      {
         "file": "App.tsx",
         "hash": "12514739880657398535"
+      },
+      {
+        "file": "COMPLETE_AUDIT_REPORT.md",
+        "hash": "13397343556836276069"
       },
       {
         "file": "DEPLOYMENT.md",
@@ -1221,6 +1233,10 @@
       {
         "file": "components/AIChat.tsx",
         "hash": "13761227655424432739"
+      },
+      {
+        "file": "components/App.test.tsx",
+        "hash": "16500757179517909607"
       },
       {
         "file": "components/AssignmentView.test.tsx",
@@ -45712,11 +45728,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "10653382051022415239"
+        "hash": "1120468458357177099"
       },
       {
         "file": "package.json",
-        "hash": "14452715706586558205"
+        "hash": "15272223847930296168"
       },
       {
         "file": "postcss.config.js",
@@ -46295,6 +46311,10 @@
         "hash": "12119823244770242550"
       },
       {
+        "file": "tmp/apps/api/serve/tsconfig.generated.ca7b9b43-9366-400f-8c06-f1871a433f7d.json",
+        "hash": "9564512296546428352"
+      },
+      {
         "file": "tmp/apps/api/serve/tsconfig.generated.d5b52dfc-7d88-4b62-8012-abe976eb79c0.json",
         "hash": "12178908264864505738"
       },
@@ -46340,5 +46360,5 @@
       }
     ]
   },
-  "externalNodesHash": "7793574033106706070"
+  "externalNodesHash": "6556807009999743464"
 }

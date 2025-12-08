@@ -9855,6 +9855,15 @@
         "hash": "sha512-5qILjQwfk4nZL5Mp/xPaJdd4GqNLB6b24ssyqK+ApGu3xW81kcDWzt0ePY8LpedNV4VEwWpa8oZWwnnswSy8ag=="
       }
     },
+    "npm:@google-cloud/functions": {
+      "type": "npm",
+      "name": "npm:@google-cloud/functions",
+      "data": {
+        "version": "4.2.1",
+        "packageName": "@google-cloud/functions",
+        "hash": "sha512-+OLsZp9rhRQTULax4fuE9QPPe612Aup3qyhYcszyld69H1621tWwiYQlzqwaMsDz239rEQmU8zf55KMlFilMxg=="
+      }
+    },
     "npm:@google-cloud/paginator": {
       "type": "npm",
       "name": "npm:@google-cloud/paginator",
@@ -16198,6 +16207,15 @@
         "version": "1.1.2",
         "packageName": "aws-ssl-profiles",
         "hash": "sha512-NZKeq9AfyQvEeNlN0zSYAaWrmBffJh3IELMZfRpJVWgrpEbtEpnjvzqBPf+mxoI287JohRDoa+/nsfqqiZmF6g=="
+      }
+    },
+    "npm:axe-core": {
+      "type": "npm",
+      "name": "npm:axe-core",
+      "data": {
+        "version": "4.11.0",
+        "packageName": "axe-core",
+        "hash": "sha512-ilYanEU8vxxBexpJd8cWM4ElSQq4QctCLKih0TSfjIfCQTeyH/6zVrmIJfLPrKTKJRbiG+cfnZbQIjAlJmF1jQ=="
       }
     },
     "npm:axios": {
@@ -24993,6 +25011,15 @@
         "hash": "sha512-n1RxDp8UJm6N0IbJLQo+yzLZ2sQCDyl1o0LeugbPWf8+8Fttp29GghsQBjYJVmWq3gBFfe9Hs1spR44vovn2wA=="
       }
     },
+    "npm:vitest-axe": {
+      "type": "npm",
+      "name": "npm:vitest-axe",
+      "data": {
+        "version": "0.1.0",
+        "packageName": "vitest-axe",
+        "hash": "sha512-jvtXxeQPg8R/2ANTY8QicA5pvvdRP4F0FsVUAHANJ46YCDASie/cuhlSzu0DGcLmZvGBSBNsNuK3HqfaeknyvA=="
+      }
+    },
     "npm:w3c-keyname": {
       "type": "npm",
       "name": "npm:w3c-keyname",
@@ -28975,6 +29002,7 @@
     "node_modules/@formatjs/intl-localematcher": "npm:@formatjs/intl-localematcher",
     "node_modules/@formatjs/intl-utils": "npm:@formatjs/intl-utils",
     "node_modules/@google-cloud/aiplatform": "npm:@google-cloud/aiplatform",
+    "node_modules/@google-cloud/functions": "npm:@google-cloud/functions",
     "node_modules/@google-cloud/paginator": "npm:@google-cloud/paginator",
     "node_modules/@google-cloud/projectify": "npm:@google-cloud/projectify",
     "node_modules/@google-cloud/promisify": "npm:@google-cloud/promisify",
@@ -29693,6 +29721,7 @@
     "node_modules/autoprefixer": "npm:autoprefixer",
     "node_modules/available-typed-arrays": "npm:available-typed-arrays",
     "node_modules/aws-ssl-profiles": "npm:aws-ssl-profiles",
+    "node_modules/axe-core": "npm:axe-core",
     "node_modules/axios": "npm:axios",
     "node_modules/babel-jest": "npm:babel-jest",
     "node_modules/babel-plugin-const-enum": "npm:babel-plugin-const-enum",
@@ -31067,6 +31096,8 @@
     "node_modules/vite": "npm:vite",
     "node_modules/vite/node_modules/picomatch": "npm:picomatch@4.0.3",
     "node_modules/vitest": "npm:vitest",
+    "node_modules/vitest-axe": "npm:vitest-axe",
+    "node_modules/vitest-axe/node_modules/chalk": "npm:chalk@5.6.2",
     "node_modules/vitest/node_modules/magic-string": "npm:magic-string@0.30.21",
     "node_modules/vitest/node_modules/picomatch": "npm:picomatch@4.0.3",
     "node_modules/vitest/node_modules/std-env": "npm:std-env@3.10.0",

@@ -114605,6 +114605,11 @@
     "type": "static"
   },
   {
+    "source": "npm:@google-cloud/functions",
+    "target": "npm:google-gax",
+    "type": "static"
+  },
+  {
     "source": "npm:@google-cloud/paginator",
     "target": "npm:arrify",
     "type": "static"
@@ -136982,6 +136987,41 @@
   {
     "source": "npm:vitest",
     "target": "npm:why-is-node-running",
+    "type": "static"
+  },
+  {
+    "source": "npm:vitest-axe",
+    "target": "npm:vitest",
+    "type": "static"
+  },
+  {
+    "source": "npm:vitest-axe",
+    "target": "npm:aria-query",
+    "type": "static"
+  },
+  {
+    "source": "npm:vitest-axe",
+    "target": "npm:axe-core",
+    "type": "static"
+  },
+  {
+    "source": "npm:vitest-axe",
+    "target": "npm:chalk@5.6.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:vitest-axe",
+    "target": "npm:dom-accessibility-api",
+    "type": "static"
+  },
+  {
+    "source": "npm:vitest-axe",
+    "target": "npm:lodash-es",
+    "type": "static"
+  },
+  {
+    "source": "npm:vitest-axe",
+    "target": "npm:redent",
     "type": "static"
   },
   {

@@ -9947,6 +9947,15 @@
         "hash": "sha512-5qILjQwfk4nZL5Mp/xPaJdd4GqNLB6b24ssyqK+ApGu3xW81kcDWzt0ePY8LpedNV4VEwWpa8oZWwnnswSy8ag=="
       }
     },
+    "npm:@google-cloud/functions": {
+      "type": "npm",
+      "name": "npm:@google-cloud/functions",
+      "data": {
+        "version": "4.2.1",
+        "packageName": "@google-cloud/functions",
+        "hash": "sha512-+OLsZp9rhRQTULax4fuE9QPPe612Aup3qyhYcszyld69H1621tWwiYQlzqwaMsDz239rEQmU8zf55KMlFilMxg=="
+      }
+    },
     "npm:@google-cloud/paginator": {
       "type": "npm",
       "name": "npm:@google-cloud/paginator",
@@ -16290,6 +16299,15 @@
         "version": "1.1.2",
         "packageName": "aws-ssl-profiles",
         "hash": "sha512-NZKeq9AfyQvEeNlN0zSYAaWrmBffJh3IELMZfRpJVWgrpEbtEpnjvzqBPf+mxoI287JohRDoa+/nsfqqiZmF6g=="
+      }
+    },
+    "npm:axe-core": {
+      "type": "npm",
+      "name": "npm:axe-core",
+      "data": {
+        "version": "4.11.0",
+        "packageName": "axe-core",
+        "hash": "sha512-ilYanEU8vxxBexpJd8cWM4ElSQq4QctCLKih0TSfjIfCQTeyH/6zVrmIJfLPrKTKJRbiG+cfnZbQIjAlJmF1jQ=="
       }
     },
     "npm:axios": {
@@ -25083,6 +25101,15 @@
         "version": "4.0.15",
         "packageName": "vitest",
         "hash": "sha512-n1RxDp8UJm6N0IbJLQo+yzLZ2sQCDyl1o0LeugbPWf8+8Fttp29GghsQBjYJVmWq3gBFfe9Hs1spR44vovn2wA=="
+      }
+    },
+    "npm:vitest-axe": {
+      "type": "npm",
+      "name": "npm:vitest-axe",
+      "data": {
+        "version": "0.1.0",
+        "packageName": "vitest-axe",
+        "hash": "sha512-jvtXxeQPg8R/2ANTY8QicA5pvvdRP4F0FsVUAHANJ46YCDASie/cuhlSzu0DGcLmZvGBSBNsNuK3HqfaeknyvA=="
       }
     },
     "npm:w3c-keyname": {
@@ -63832,6 +63859,13 @@
         "type": "static"
       }
     ],
+    "npm:@google-cloud/functions": [
+      {
+        "source": "npm:@google-cloud/functions",
+        "target": "npm:google-gax",
+        "type": "static"
+      }
+    ],
     "npm:@google-cloud/paginator": [
       {
         "source": "npm:@google-cloud/paginator",
@@ -85589,6 +85623,43 @@
         "type": "static"
       }
     ],
+    "npm:vitest-axe": [
+      {
+        "source": "npm:vitest-axe",
+        "target": "npm:vitest",
+        "type": "static"
+      },
+      {
+        "source": "npm:vitest-axe",
+        "target": "npm:aria-query",
+        "type": "static"
+      },
+      {
+        "source": "npm:vitest-axe",
+        "target": "npm:axe-core",
+        "type": "static"
+      },
+      {
+        "source": "npm:vitest-axe",
+        "target": "npm:chalk@5.6.2",
+        "type": "static"
+      },
+      {
+        "source": "npm:vitest-axe",
+        "target": "npm:dom-accessibility-api",
+        "type": "static"
+      },
+      {
+        "source": "npm:vitest-axe",
+        "target": "npm:lodash-es",
+        "type": "static"
+      },
+      {
+        "source": "npm:vitest-axe",
+        "target": "npm:redent",
+        "type": "static"
+      }
+    ],
     "npm:w3c-xmlserializer": [
       {
         "source": "npm:w3c-xmlserializer",
@@ -86133,5 +86204,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1765218556442
+  "computedAt": 1765220153653
 }
