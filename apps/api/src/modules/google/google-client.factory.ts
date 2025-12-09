@@ -119,7 +119,7 @@ export class GoogleClientFactory implements OnModuleInit {
   /**
    * Returns authenticated clients for Sheets and Docs (User Context).
    */
-  createClients(user: AuthenticatedUser): { sheets: any; docs: any } {
+  createClients(user: AuthenticatedUser): { sheets: unknown; docs: unknown } {
     if (!user.googleCredentials) {
       throw new UnauthorizedException('User missing Google credentials');
     }
@@ -135,7 +135,7 @@ export class GoogleClientFactory implements OnModuleInit {
   /**
    * Returns authenticated Drive client for User Context.
    */
-  createDriveClientForUser(user: AuthenticatedUser): { drive: any } {
+  createDriveClientForUser(user: AuthenticatedUser): { drive: unknown } {
     if (!user.googleCredentials) {
       throw new UnauthorizedException('User missing Google credentials');
     }
@@ -150,7 +150,7 @@ export class GoogleClientFactory implements OnModuleInit {
   /**
    * Returns a Drive client authenticated as the Service Account.
    */
-  createDriveClient(): any {
+  createDriveClient(): unknown {
     const auth = this.createServiceAccountAuth();
     return google.drive({ version: 'v3', auth });
   }

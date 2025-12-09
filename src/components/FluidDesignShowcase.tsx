@@ -19,7 +19,6 @@ import {
 
 const FluidDesignShowcase: React.FC = () => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
 
   // Sample moodboard data
   const moodboardItems = [
@@ -82,7 +81,6 @@ const FluidDesignShowcase: React.FC = () => {
   ];
 
   const handleSearch = (query: string) => {
-    setSearchQuery(query);
     console.log('Search query:', query);
   };
 
