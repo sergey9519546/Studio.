@@ -1,6 +1,6 @@
 import { Module, Global } from '@nestjs/common';
 import { CacheModule as NestCacheModule } from '@nestjs/cache-manager';
-import { CacheController } from './cache.controller';
+import { CacheController } from './cache.controller.js';
 
 @Global()
 @Module({

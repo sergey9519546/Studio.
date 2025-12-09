@@ -100,15 +100,15 @@ export class VertexAIService {
   }
 
   /**
-   * Safely extract content from Vertex AI prediction response
+   * Generate content with vision using Gemini model via Vertex AI
    */
-  private extractPredictionContent(prediction: Record<string, unknown>): string | { toolCalls: ToolCall[] } | null {
+  async generateContentWithVision(visionPrompt: string, model: string = "gemini-1.5-pro"): Promise<string> {
     try {
-      const content = this.safeGet(prediction, [
-        'structValue',
-        'fields',
-        'candidates',
-        'listValue',
+      const endpoint = `projects/${this.project}/locations/${this.location}/publishers/${this.publisher}/models/${model}`;
+
+      // Parse the vision prompt (assumed JSON format with image data and text)
+      const parsedPrompt = JSON.parse(visionPrompt);
+
         'values',
         0,
         'structValue',

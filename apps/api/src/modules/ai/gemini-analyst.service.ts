@@ -96,6 +96,69 @@ Respond based on the provided context.`;
     return tool.function(args);
   }
 
+  /**
+   * Analyze image using Gemini Vision
+   */
+  async analyzeImage(imageUrl: string): Promise<{
+    tags: string[];
+    moods: string[];
+    colors: string[];
+    shotType?: string;
+    description: string;
+  }> {
+    try {
+      const prompt = `Analyze this image for creative and design purposes. Respond in JSON format with the following fields:
+{
+  "tags": ["visual tag 1", "visual tag 2", ...],
+  "moods": ["mood 1", "mood 2", ...],
+  "colors": ["hex color 1", "hex color 2", ...],
+  "shotType": "shot type or framing style (optional)",
+  "description": "2-3 sentence creative description"
+}
+Be specific and creative in your analysis. Tags should describe visual elements. Moods should capture emotional tone.`;
+
+      const visionPrompt = [
+        {
+          inlineData: {
+            mimeType: "image/jpeg",
+            data: await this.fetchImageAsBase64(imageUrl),
+          },
+        },
+        {
+          text: prompt,
+        },
+      ];
+
+      const response = await this.vertexAI.generateContentWithVision(JSON.stringify(visionPrompt));
+
+      // Extract JSON from response
+      const jsonMatch = response.match(/\{[\s\S]*\}/);
+      const jsonContent = jsonMatch ? jsonMatch[0] : '{"tags":[],"moods":[],"colors":[],"description":""}';
+
+      return JSON.parse(jsonContent);
+    } catch (error) {
+      this.logger.error('Error analyzing image:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Fetch image and convert to base64
+   */
+  private async fetchImageAsBase64(imageUrl: string): Promise<string> {
+    try {
+      const response = await fetch(imageUrl);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch image: ${response.status}`);
+      }
+      const arrayBuffer = await response.arrayBuffer();
+      return Buffer.from(arrayBuffer).toString('base64');
+    } catch (error) {
+      this.logger.error('Error fetching image:', error);
+      throw error;
+    }
+  }
+
 
   /**
    * Extract structured data

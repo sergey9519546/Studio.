@@ -70,7 +70,7 @@
         },
         {
           "file": "apps/api/src/common/cache/cache.module.ts",
-          "hash": "1539727496491235772",
+          "hash": "5032930038782284213",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/cache-manager"
@@ -161,7 +161,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/ai.controller.ts",
-          "hash": "2766706970515884744",
+          "hash": "10808560398100341399",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -179,7 +179,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini-analyst.service.ts",
-          "hash": "1816491216096795753",
+          "hash": "5203620549829778270",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/cache-manager",
@@ -279,7 +279,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai.service.ts",
-          "hash": "11896133694762994634",
+          "hash": "11801921675279844071",
           "deps": [
             "npm:@google-cloud/aiplatform",
             "npm:@nestjs/common",
@@ -1087,6 +1087,14 @@
         "hash": "9677169200791952411"
       },
       {
+        "file": ".clinerules/11thhour.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": ".clinerules/workflows/11thhour.md",
+        "hash": "4055606894390288348"
+      },
+      {
         "file": ".continue/agents/new-config-1.yaml",
         "hash": "4163857882156651287"
       },
@@ -1112,7 +1120,7 @@
       },
       {
         "file": ".firebase/hosting.YnVpbGRcY2xpZW50.cache",
-        "hash": "10440410430464216357"
+        "hash": "11851555140677467387"
       },
       {
         "file": ".firebaserc",
@@ -1149,10 +1157,6 @@
       {
         "file": ".vscode/extensions.json",
         "hash": "16715343646543380336"
-      },
-      {
-        "file": "AGENTS.md",
-        "hash": "7853241679760809325"
       },
       {
         "file": "AUDIT_CHECKLIST.md",
@@ -46360,6 +46364,10 @@
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.37f42c2f-53eb-471d-9aae-15ca549c5fa8.json",
+        "hash": "9564512296546428352"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.48163b6a-69b9-4e0e-ae5e-58ae58a48d38.json",
         "hash": "9564512296546428352"
       },
       {

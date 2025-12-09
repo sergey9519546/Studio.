@@ -199,7 +199,7 @@ ${JSON.stringify(parsedContext, null, 2)}
 
     /**
      * Extract structured data from text/files
-     * 
+     *
      * POST /api/ai/extract
      */
     @HttpCode(HttpStatus.OK)
@@ -225,6 +225,46 @@ ${JSON.stringify(parsedContext, null, 2)}
         }
 
         return this.aiService.extractData(body.prompt, schema as Record<string, unknown>, files);
+    }
+
+    /**
+     * Analyze image using Google Gemini Vision
+     *
+     * POST /api/ai/vision/analyze
+     */
+    @Post('vision/analyze')
+    @HttpCode(HttpStatus.OK)
+    async analyzeImage(
+        @Body() body: { imageUrl: string },
+    ) {
+        if (!body.imageUrl) {
+            throw new BadRequestException('Image URL is required');
+        }
+
+        return this.aiService.analyzeImage(body.imageUrl);
+    }
+
+    /**
+     * Generate embeddings using Google Vertex AI
+     *
+     * POST /api/ai/embeddings/generate
+     */
+    @Post('embeddings/generate')
+    @HttpCode(HttpStatus.OK)
+    async generateEmbeddings(
+        @Body() body: { text: string },
+    ) {
+        if (!body.text) {
+            throw new BadRequestException('Text is required');
+        }
+
+        // Get the embeddings provider from the RAG service
+        const ragService = this['rag'] as any; // Access RAG service to get embeddings
+        if (!ragService || !ragService.embeddingsService) {
+            throw new BadRequestException('Embeddings service not available');
+        }
+
+        return ragService.embeddingsService.generateEmbedding(body.text);
     }
 
     /**
