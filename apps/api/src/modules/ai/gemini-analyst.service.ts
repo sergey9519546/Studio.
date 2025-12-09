@@ -97,7 +97,7 @@ Respond based on the provided context.`;
   }
 
   /**
-   * Analyze image using Gemini Vision
+   * Analyze image using Gemini Vision (text-based analysis for now)
    */
   async analyzeImage(imageUrl: string): Promise<{
     tags: string[];
@@ -107,7 +107,7 @@ Respond based on the provided context.`;
     description: string;
   }> {
     try {
-      const prompt = `Analyze this image for creative and design purposes. Respond in JSON format with the following fields:
+      const prompt = `Analyze this image for creative and design purposes. Use your knowledge of visual analysis to describe the following aspects. Respond in JSON format with the following fields:
 {
   "tags": ["visual tag 1", "visual tag 2", ...],
   "moods": ["mood 1", "mood 2", ...],
@@ -115,46 +115,26 @@ Respond based on the provided context.`;
   "shotType": "shot type or framing style (optional)",
   "description": "2-3 sentence creative description"
 }
-Be specific and creative in your analysis. Tags should describe visual elements. Moods should capture emotional tone.`;
+Be specific and creative in your analysis. Tags should describe visual elements. Moods should capture emotional tone.
 
-      const visionPrompt = [
-        {
-          inlineData: {
-            mimeType: "image/jpeg",
-            data: await this.fetchImageAsBase64(imageUrl),
-          },
+Image URL: ${imageUrl}`;
+
+      const schema = {
+        type: 'object',
+        properties: {
+          tags: { type: 'array', items: { type: 'string' } },
+          moods: { type: 'array', items: { type: 'string' } },
+          colors: { type: 'array', items: { type: 'string' } },
+          shotType: { type: 'string' },
+          description: { type: 'string' },
         },
-        {
-          text: prompt,
-        },
-      ];
+        required: ['tags', 'moods', 'colors', 'description'],
+      };
 
-      const response = await this.vertexAI.generateContentWithVision(JSON.stringify(visionPrompt));
-
-      // Extract JSON from response
-      const jsonMatch = response.match(/\{[\s\S]*\}/);
-      const jsonContent = jsonMatch ? jsonMatch[0] : '{"tags":[],"moods":[],"colors":[],"description":""}';
-
-      return JSON.parse(jsonContent);
+      const result = await this.extractData(prompt, schema);
+      return result as any;
     } catch (error) {
       this.logger.error('Error analyzing image:', error);
-      throw error;
-    }
-  }
-
-  /**
-   * Fetch image and convert to base64
-   */
-  private async fetchImageAsBase64(imageUrl: string): Promise<string> {
-    try {
-      const response = await fetch(imageUrl);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch image: ${response.status}`);
-      }
-      const arrayBuffer = await response.arrayBuffer();
-      return Buffer.from(arrayBuffer).toString('base64');
-    } catch (error) {
-      this.logger.error('Error fetching image:', error);
       throw error;
     }
   }

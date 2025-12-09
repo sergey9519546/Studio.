@@ -258,13 +258,8 @@ ${JSON.stringify(parsedContext, null, 2)}
             throw new BadRequestException('Text is required');
         }
 
-        // Get the embeddings provider from the RAG service
-        const ragService = this['rag'] as any; // Access RAG service to get embeddings
-        if (!ragService || !ragService.embeddingsService) {
-            throw new BadRequestException('Embeddings service not available');
-        }
-
-        return ragService.embeddingsService.generateEmbedding(body.text);
+        // Access the embeddings service through the RAG service's embeddings property
+        return this.rag['embeddings'].generateEmbedding(body.text);
     }
 
     /**

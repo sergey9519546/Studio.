@@ -52,7 +52,7 @@ export class FreelancersService {
   }
 
   async create(data: CreateFreelancerDto) {
-    const { skills, contactInfo, email, ...rest } = data;
+    const { skills, contactInfo, email, ...rest }: CreateFreelancerDto = data;
     const resolvedEmail = email || contactInfo;
 
     if (!resolvedEmail) {
@@ -80,7 +80,7 @@ export class FreelancersService {
   }
 
   async update(id: string, data: UpdateFreelancerDto) {
-    const { skills, contactInfo, email, ...rest } = data;
+    const { skills, contactInfo, email, ...rest }: UpdateFreelancerDto = data;
     const resolvedEmail = email || contactInfo;
     const updated = await this.prisma.freelancer.update({
       where: { id },
@@ -150,7 +150,7 @@ export class FreelancersService {
     let created = 0;
     const updated = 0;
     for (const item of items) {
-      const { skills, contactInfo, email, ...rest } = item;
+      const { skills, contactInfo, email, ...rest }: ImportFreelancerDto = item;
 
       const resolvedEmail = email || contactInfo;
       if (!resolvedEmail) {

@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import OpenAIVisionService from './OpenAIVisionService';
+import GoogleVisionService from './GoogleVisionService';
 
 interface EmbeddingData {
   type: string;
@@ -23,11 +23,11 @@ interface SemanticSearchResult {
  */
 export class EmbeddingsService {
   private prisma: PrismaClient;
-  private openAIService: typeof OpenAIVisionService;
+  private googleVisionService: typeof GoogleVisionService;
 
   constructor(prisma?: PrismaClient) {
     this.prisma = prisma || new PrismaClient();
-    this.openAIService = OpenAIVisionService;
+    this.googleVisionService = GoogleVisionService;
   }
 
   /**
@@ -35,8 +35,8 @@ export class EmbeddingsService {
    */
   async storeEmbedding(data: EmbeddingData): Promise<void> {
     try {
-      // Generate embedding using OpenAI
-      const embedding = await this.openAIService.generateEmbedding(data.text);
+      // Generate embedding using Google Vertex AI
+      const embedding = await this.googleVisionService.generateEmbedding(data.text);
 
       // Store in database
       await this.prisma.embedding.create({
@@ -66,7 +66,7 @@ export class EmbeddingsService {
       let embedding: number[] | undefined;
       
       if (data.text) {
-        embedding = await this.openAIService.generateEmbedding(data.text);
+        embedding = await this.googleVisionService.generateEmbedding(data.text);
       }
 
       await this.prisma.embedding.update({
@@ -96,7 +96,7 @@ export class EmbeddingsService {
   ): Promise<SemanticSearchResult[]> {
     try {
       // Generate embedding for the query
-      const queryEmbedding = await this.openAIService.generateEmbedding(query);
+      const queryEmbedding = await this.googleVisionService.generateEmbedding(query);
 
       // Get all embeddings for the project
       let embeddings = await this.prisma.embedding.findMany({
@@ -257,7 +257,7 @@ export class EmbeddingsService {
 
       if (existing) {
         // Update existing
-        const embedding = await this.openAIService.generateEmbedding(brief);
+        const embedding = await this.googleVisionService.generateEmbedding(brief);
         await this.prisma.projectBrief.update({
           where: { projectId },
           data: {
@@ -267,7 +267,7 @@ export class EmbeddingsService {
         });
       } else {
         // Create new
-        const embedding = await this.openAIService.generateEmbedding(brief);
+        const embedding = await this.googleVisionService.generateEmbedding(brief);
         await this.prisma.projectBrief.create({
           data: {
             projectId,

@@ -209,7 +209,7 @@ export default function App() {
     <div className="w-full h-screen bg-app flex relative overflow-hidden text-ink-primary">
       <Sidebar
         activeTab={activeTab}
-        setActiveTab={(t) => {
+        setActiveTab={(t: string) => {
           setActiveTab(t);
           setActiveProject(null);
         }}

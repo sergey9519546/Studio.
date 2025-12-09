@@ -28,7 +28,7 @@ We are not building a tool; we are engineering a state of flow. The interface mu
 * **Framework:** Next.js (App Router) + React.
 * **Styling:** Tailwind CSS (Strict config based on the Manifesto).
 * **Database:** PostgreSQL (with pgvector for AI memory).
-* **AI Engine:** OpenAI GPT-4o (Multimodal Analysis) + Vector Embeddings.
+* **AI Engine:** Google Gemini Vision (Multimodal Analysis) + Vertex AI Embeddings.
 * **State:** Tanstack Query.
 
 ---
@@ -51,7 +51,7 @@ When a project is clicked, enter the "Project Space." This is a grid-based layou
 * **Top Left (The Brief):** Editable text area for the creative brief.
 * **Mid Left (The Vibe):** Two sections: "Mood/Tone Tags" and "Do's & Don'ts."
 * **Bottom Left (Asset Library):** A grid of uploaded images/videos.
-    * **AI Vision:** When an image is uploaded, GPT-4o Vision must analyze it and generate hidden metadata tags (e.g., "Cinematic," "Blue hour," "Minimalist") to feed the Project Intelligence.
+    * **AI Vision:** When an image is uploaded, Google Gemini Vision must analyze it and generate hidden metadata tags (e.g., "Cinematic," "Blue hour," "Minimalist") to feed the Project Intelligence.
 * **Top Right (Metadata):** Deliverables specs (Resolution, Aspect Ratio, Duration).
 * **Bottom Right (The Script Window):** Upload/View shotlists. Direct link to the "Writer's Room."
 
@@ -72,6 +72,6 @@ A Pinterest-style masonry grid.
 1.  **Setup:** Initialize Next.js with the "Liquid Glass" Tailwind config.
 2.  **Schema:** Define the PostgreSQL schema (Projects, Assets, Freelancers, Embeddings).
 3.  **UI Construction:** Build the "Project Dashboard" first, ensuring the optical alignment is perfect.
-4.  **AI Integration:** Connect OpenAI API for the "Ingest Engine" (Document Parsing) and "Writer's Room" (Contextual Generation).
+4.  **AI Integration:** Connect Google AI APIs for the "Ingest Engine" (Document Parsing) and "Writer's Room" (Contextual Generation).
 
 **EXECUTE.**
