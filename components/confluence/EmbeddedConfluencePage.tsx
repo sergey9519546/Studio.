@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-// @ts-ignore - Atlaskit package may not have perfect TypeScript definitions
-import { EmbeddedConfluence } from '@atlaskit/embedded-confluence';
 import { ConfluenceError, ConfluenceErrorCode, EmbeddedPageProps } from '../../types/confluence.types';
 import { useConfluenceAuth } from './ConfluenceAuthProvider';
 
@@ -129,7 +127,7 @@ export default function EmbeddedConfluencePage({
   // Extract page ID from URL if not provided
   const pageId = config.pageId || extractPageIdFromUrl(config.pageUrl);
 
-  // Render the actual Embedded Confluence component
+  // Render the Confluence page using iframe
   if (isAuthenticated) {
     return (
       // eslint-disable-next-line react/forbid-component-props -- dynamic height prop
@@ -138,11 +136,13 @@ export default function EmbeddedConfluencePage({
         style={{ height }}
       >
         <div className="w-full h-full">
-          <EmbeddedConfluence
-            contentId={pageId}
-            hostname={config.siteUrl}
+          <iframe
+            src={config.pageUrl}
+            title="Confluence Page"
+            className="w-full h-full border-none rounded-lg"
             onLoad={handlePageLoad}
-            onError={handlePageError}
+            onError={() => handlePageError(new Error("Failed to load Confluence page"))}
+            allowFullScreen
           />
         </div>
       </div>

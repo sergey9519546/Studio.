@@ -1,114 +1,89 @@
 /**
  * CustomMediaProvider
- * 
- * Implements the "Shadow Proxy" architecture for media handling.
- * 
- * Architecture (from document):
- * - MediaClient expects to talk to Atlassian's Media API ("Stargate")
- * - We configure authProvider with a custom baseUrl pointing to our backend
- * - Our backend implements the Media API contract but stores files in S3
- * - This preserves ALL MediaClient features (resizing, cards, slash commands)
- * 
- * Critical: The legacyImageUploadProvider does NOT work with slash commands
- * or advanced media features, so we MUST use this Shadow Proxy approach.
+ *
+ * Simplified media handling for TipTap editor
+ * Uses direct file uploads to backend instead of Atlaskit MediaClient
  */
 
-import { MediaClient, MediaClientConfig } from '@atlaskit/media-client';
+import { useDropzone } from 'react-dropzone';
 
 /**
- * Auth Provider for MediaClient
- * 
- * The MediaClient expects a token-based auth system.
- * For our custom backend, we use session cookies instead,
- * so the token is a dummy value and the backend validates
- * the session from the HTTP-only cookie.
+ * Simple media upload handler
+ * Uploads files directly to our backend API
  */
-const createAuthProvider = () => {
-  return async (): Promise<{
-    clientId: string;
-    token: string;
-    baseUrl: string;
-  }> => {
-    // Return auth configuration
-    // The backend will validate actual auth via session cookies
-    return {
-      clientId: 'studio-roster-pages',
-      token: 'dummy-token', // Backend ignores this, uses session
-      baseUrl: '/api/v1/media-proxy', // OUR Shadow Proxy endpoint!
-    };
-  };
+export const uploadMedia = async (file: File): Promise<string> => {
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await fetch('/api/v1/media-upload', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        // Add auth token if available
+        ...(localStorage.getItem('studio_roster_v1_auth_token') && {
+          'Authorization': `Bearer ${localStorage.getItem('studio_roster_v1_auth_token')}`
+        })
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Media upload failed: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data.url; // Return the URL of the uploaded file
+  } catch (error) {
+    console.error('Media upload error:', error);
+    throw error;
+  }
 };
 
 /**
- * Create MediaClient Config
- * 
- * This configures the MediaClient to send all requests to our
- * custom backend instead of api.media.atlassian.com
- */
-const createMediaClientConfig = (): MediaClientConfig => {
-  return {
-    authProvider: createAuthProvider(),
-  };
-};
-
-/**
- * Create and export the Media Provider
- * 
- * This is used by the Editor's media prop:
- * media={{
- *   provider: Promise.resolve(customMediaProvider),
- *   allowMediaSingle: true,
- *   allowResizing: true,
- * }}
- */
-export const createMediaProvider = () => {
-  const config = createMediaClientConfig();
-  const mediaClient = new MediaClient(config);
-  
-  return mediaClient;
-};
-
-/**
- * Advanced: Upload State Tracking
- * 
- * The MediaClient emits events during upload.
- * You can subscribe to these for progress bars, error handling, etc.
- * 
- * Example:
- * const subscription = mediaClient.file.upload({
- *   content: file,
- *   name: file.name,
- *   collection: 'pages',
- * }).subscribe({
- *   next: (state) => {
- *     if (state.status === 'processing') {
- *       console.log('Upload progress:', state.progress);
- *     } else if (state.status === 'processed') {
- *       console.log('Upload complete:', state.id);
- *     }
- *   },
- *   error: (error) => {
- *     console.error('Upload failed:', error);
- *   },
- * });
- */
-
-/**
- * Media Configuration for Editor
- * 
- * This is the full configuration object to pass to the Editor component
+ * Media Configuration for TipTap Editor
+ *
+ * Simplified configuration for image handling
  */
 export const mediaConfig = {
-  provider: Promise.resolve(createMediaProvider()),
-  allowMediaSingle: true,       // Allow single images
-  allowMediaGroup: true,         // Allow image galleries/grids
-  allowResizing: true,           // Enable image resize handles
-  allowResizingInTables: true,   // Allow resizing images in tables
-  allowLinking: true,            // Allow wrapping images in links
-  allowAdvancedToolBarOptions: true, // Show alignment, wrapping options
-  allowAltTextOnImages: true,    // Enable alt text for accessibility
-  allowCaptions: true,           // Enable image captions
-  enableDownloadButton: true,    // Show download button on media cards
+  // TipTap uses direct image insertion via URL or base64
+  allowImageUpload: true,
+  allowImageResizing: true,
+  allowImageAlignment: true,
+  maxImageSize: 5 * 1024 * 1024, // 5MB max
+  supportedImageTypes: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
 };
 
-export default createMediaProvider;
+/**
+ * React Dropzone hook for media uploads
+ * Can be used in components for drag-and-drop file uploads
+ */
+export const useMediaUpload = () => {
+  return useDropzone({
+    accept: {
+      'image/*': ['.jpeg', '.jpg', '.png', '.gif', '.webp'],
+      'application/pdf': ['.pdf'],
+      'application/msword': ['.doc', '.docx'],
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
+    },
+    maxFiles: 1,
+    maxSize: mediaConfig.maxImageSize,
+    onDrop: async (acceptedFiles) => {
+      if (acceptedFiles.length > 0) {
+        try {
+          const file = acceptedFiles[0];
+          const url = await uploadMedia(file);
+          return { success: true, url };
+        } catch (error) {
+          return { success: false, error: error instanceof Error ? error.message : 'Upload failed' };
+        }
+      }
+      return { success: false, error: 'No files selected' };
+    },
+  });
+};
+
+export default {
+  uploadMedia,
+  mediaConfig,
+  useMediaUpload,
+};
