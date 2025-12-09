@@ -197,8 +197,8 @@ export const Moodboard: React.FC<MoodboardProps> = ({
         await onAddUnsplashImage(image);
       }
 
-      // TODO: Show success toast
-      console.log("Unsplash image added to moodboard");
+      // Show success toast
+      addToast("Unsplash image added to moodboard successfully!");
     } catch (error) {
       console.error("Failed to add Unsplash image:", error);
       addToast("Failed to add Unsplash image. Please try again.");

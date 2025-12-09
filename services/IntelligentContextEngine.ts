@@ -209,6 +209,8 @@ export class IntelligentContextEngine {
       }
     } catch (error) {
       // Use logger instead of console.warn for production
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error(`IntelligentContextEngine error in extractBriefContext: ${errorMessage}`);
     }
     
     // Fallback for development/testing
@@ -248,6 +250,8 @@ export class IntelligentContextEngine {
       }
     } catch (error) {
       // Use logger instead of console.warn for production
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error(`IntelligentContextEngine error in extractBrandGuidelines: ${errorMessage}`);
     }
     
     // Fallback for development/testing
@@ -286,6 +290,8 @@ export class IntelligentContextEngine {
       };
     } catch (error) {
       // Use logger instead of console.warn for production
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error(`IntelligentContextEngine error in generateAssetIntelligence: ${errorMessage}`);
     }
     
     // Fallback for development/testing
@@ -334,6 +340,8 @@ export class IntelligentContextEngine {
       }
     } catch (error) {
       // Use logger instead of console.warn for production
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error(`IntelligentContextEngine error in extractProjectIntelligence: ${errorMessage}`);
     }
     
     // Fallback for development/testing
