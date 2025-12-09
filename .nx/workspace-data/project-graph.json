@@ -18802,12 +18802,192 @@
       },
       {
         "source": "api",
+        "target": "npm:@tiptap/core",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/pm",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:react",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/react",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-horizontal-rule",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-image",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-table",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@floating-ui/react",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:yjs",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap-pro/provider",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:react-dom",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/starter-kit",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-mention",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-list",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-text-style",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extensions",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-collaboration",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-collaboration-caret",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-typography",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-highlight",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-superscript",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-subscript",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-text-align",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-mathematics",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap-pro/extension-ai",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-unique-id",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-emoji",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@ariakit/react",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@radix-ui/react-dropdown-menu",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@radix-ui/react-popover",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:react-textarea-autosize",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/suggestion",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:react-hotkeys-hook",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:is-hotkey",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@tiptap/extension-drag-handle-react",
+        "type": "static"
+      },
+      {
+        "source": "api",
         "target": "npm:class-transformer",
         "type": "static"
       },
       {
         "source": "api",
         "target": "npm:class-validator",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:lodash.throttle",
         "type": "static"
       },
       {
@@ -46763,5 +46943,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1765296827788
+  "computedAt": 1765297629222
 }
