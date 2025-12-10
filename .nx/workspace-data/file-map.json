@@ -101,7 +101,7 @@
         },
         {
           "file": "apps/api/src/common/logger/logger.module.ts",
-          "hash": "12311980230753793601",
+          "hash": "15078589982123595173",
           "deps": [
             "npm:@nestjs/common",
             "npm:nestjs-pino"
@@ -2764,7 +2764,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini-analyst.service.ts",
-          "hash": "3921708426606767464",
+          "hash": "9520837263384749253",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/cache-manager",
@@ -2788,7 +2788,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/prompts/templates.ts",
-          "hash": "14604891957147159477"
+          "hash": "17066254489451257531"
         },
         {
           "file": "apps/api/src/modules/ai/providers/ai-provider.interface.ts",
@@ -2803,7 +2803,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/providers/vertex-ai.provider.ts",
-          "hash": "4555836034226783524",
+          "hash": "18036401002399453913",
           "deps": [
             "npm:@nestjs/common"
           ]

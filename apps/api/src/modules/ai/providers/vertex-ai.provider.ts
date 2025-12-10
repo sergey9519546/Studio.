@@ -37,9 +37,9 @@ export class VertexAIProvider implements AIProvider {
     async chat(
         messages: Array<{ role: string; content: string }>,
         systemPrompt: string,
-        options?: ChatOptions
+        _options?: ChatOptions
     ): Promise<string | { toolCalls: ToolCall[] }> {
-        return this.vertexAI.chat(messages, systemPrompt, options?.tools);
+        return this.vertexAI.chat(messages, systemPrompt, _options?.tools);
     }
 
     async generateContent(prompt: string): Promise<string> {

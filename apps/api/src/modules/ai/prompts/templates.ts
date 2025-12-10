@@ -142,8 +142,8 @@ export function getPrompt(templateName: string): PromptTemplate {
     }
 
     // Future: Support version selection
-    // if (version && PROMPT_TEMPLATES[`${templateName}_${version}`]) {
-    //   return PROMPT_TEMPLATES[`${templateName}_${version}`];
+    // if (templateVersion && PROMPT_TEMPLATES[`${templateName}_${templateVersion}`]) {
+    //   return PROMPT_TEMPLATES[`${templateName}_${templateVersion}`];
     // }
 
     return template;

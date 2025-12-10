@@ -35,8 +35,8 @@ interface RequestWithUser extends IncomingMessage {
                         params: req.params,
                         query: req.query,
                     }),
-                    res: (res) => ({
-                        statusCode: res.statusCode,
+                    res: (_res) => ({
+                        statusCode: _res.statusCode,
                     }),
                 },
                 redact: {

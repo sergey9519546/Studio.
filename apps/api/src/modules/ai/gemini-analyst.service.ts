@@ -132,7 +132,13 @@ Image URL: ${imageUrl}`;
       };
 
       const result = await this.extractData(prompt, schema);
-      return result as any;
+      return result as {
+        tags: string[];
+        moods: string[];
+        colors: string[];
+        shotType?: string;
+        description: string;
+      };
     } catch (error) {
       this.logger.error('Error analyzing image:', error);
       throw error;
