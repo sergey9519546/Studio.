@@ -1,11 +1,11 @@
-import { Injectable, Inject, Logger } from '@nestjs/common';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import type { Cache } from 'cache-manager';
-import { VertexAIService } from './vertex-ai.service';
+import { createHash } from 'crypto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { getTools } from './tools';
 import type { ToolCall, ToolDefinition } from './types';
-import { createHash } from 'crypto';
+import { VertexAIService } from './vertex-ai.service';
 
 @Injectable()
 export class GeminiAnalystService {
@@ -15,7 +15,7 @@ export class GeminiAnalystService {
   constructor(
     private vertexAI: VertexAIService,
     private prisma: PrismaService,
-    @Inject(CACHE_MANAGER) private cache: Cache
+    @Inject(CACHE_MANAGER) private cacheManager: Cache
   ) {
     this.tools = getTools(this.prisma);
   }
@@ -28,7 +28,7 @@ export class GeminiAnalystService {
     const cacheKey = `ai:chat:${this.hashContent(context + JSON.stringify(messages))}`;
 
     // Check cache for common queries (1 hour TTL)
-    const cached = await this.cache.get(cacheKey);
+    const cached = await this.cacheManager.get(cacheKey);
     if (cached) {
       this.logger.debug('Chat cache HIT');
       return cached as string | { toolCalls: ToolCall[] };
@@ -64,7 +64,7 @@ Respond based on the provided context.`;
     const result = await this.vertexAI.chat(messages, systemPrompt, this.tools);
 
     // Cache for 1 hour (common queries)
-    await this.cache.set(cacheKey, result, 3600);
+    await this.cacheManager.set(cacheKey, result, 3600);
 
     // Log usage
     const duration = Date.now() - startTime;
@@ -178,7 +178,7 @@ Image URL: ${imageUrl}`;
     const cacheKey = `ai:project:${projectId}`;
 
     // Check cache first
-    const cached = await this.cache.get(cacheKey);
+    const cached = await this.cacheManager.get(cacheKey);
     if (cached) {
       this.logger.debug(`Cache HIT for project ${projectId}`);
       return cached;
@@ -233,7 +233,7 @@ Image URL: ${imageUrl}`;
     const result = await this.extractData(prompt, schema);
 
     // Cache for 12 hours
-    await this.cache.set(cacheKey, result, 43200);
+    await this.cacheManager.set(cacheKey, result, 43200);
 
     // Log usage
     const duration = Date.now() - startTime;
@@ -255,7 +255,7 @@ Image URL: ${imageUrl}`;
     const cacheKey = `ai:freelancer:${freelancerId}`;
 
     // Check cache first
-    const cached = await this.cache.get(cacheKey);
+    const cached = await this.cacheManager.get(cacheKey);
     if (cached) {
       this.logger.debug(`Cache HIT for freelancer ${freelancerId}`);
       return cached;
@@ -302,7 +302,7 @@ Image URL: ${imageUrl}`;
     const result = await this.extractData(prompt, schema);
 
     // Cache for 24 hours
-    await this.cache.set(cacheKey, result, 86400);
+    await this.cacheManager.set(cacheKey, result, 86400);
 
     // Log usage
     const duration = Date.now() - startTime;

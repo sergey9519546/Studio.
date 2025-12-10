@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { LoggerModule as PinoLoggerModule } from 'nestjs-pino';
 import { IncomingMessage, ServerResponse } from 'http';
+import { LoggerModule as PinoLoggerModule } from 'nestjs-pino';
 
 interface RequestWithUser extends IncomingMessage {
     user?: { id: string };
@@ -35,8 +35,8 @@ interface RequestWithUser extends IncomingMessage {
                         params: req.params,
                         query: req.query,
                     }),
-                    res: (_res) => ({
-                        statusCode: _res.statusCode,
+                    res: (res) => ({
+                        statusCode: res.statusCode,
                     }),
                 },
                 redact: {

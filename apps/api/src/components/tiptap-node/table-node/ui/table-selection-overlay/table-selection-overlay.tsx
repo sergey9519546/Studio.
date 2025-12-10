@@ -1,16 +1,16 @@
 "use client"
 
-import { useEffect, useState, useCallback, useRef } from "react"
-import type { Editor } from "@tiptap/react"
-import { CellSelection, cellAround } from "@tiptap/pm/tables"
-import type { EditorState, Selection } from "@tiptap/pm/state"
-import type { Node } from "@tiptap/pm/model"
-import type { EditorView } from "@tiptap/pm/view"
 import { FloatingPortal, useFloating } from "@floating-ui/react"
+import type { Node } from "@tiptap/pm/model"
+import type { EditorState, Selection } from "@tiptap/pm/state"
+import { CellSelection, cellAround } from "@tiptap/pm/tables"
+import type { EditorView } from "@tiptap/pm/view"
+import type { Editor } from "@tiptap/react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
 import { useResizeOverlay } from "@app/components/tiptap-node/table-node/ui/table-selection-overlay/use-resize-overlay"
+import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
 
 // --- Lib ---
 import {
@@ -262,7 +262,7 @@ export const TableSelectionOverlay: React.FC<TableSelectionOverlayProps> = ({
 
   const anchorCellRef = useRef<number | null>(null)
   const activeHandleRef = useRef<ResizeHandle>(null)
-  const containerRef = useRef<HTMLElement | null>(null)
+  const [containerElement, setContainerElement] = useState<HTMLElement | null>(null)
 
   const { refs, floatingStyles, update } = useFloating({
     placement: "top-start",
@@ -465,7 +465,7 @@ export const TableSelectionOverlay: React.FC<TableSelectionOverlayProps> = ({
     const c = tableDom?.querySelector(
       ".table-selection-overlay-container"
     ) as HTMLElement | null
-    containerRef.current = c ?? null
+    setContainerElement(c ?? null)
   }, [tableDom])
 
   if (!isVisible || !selectionRect) {
@@ -492,7 +492,7 @@ export const TableSelectionOverlay: React.FC<TableSelectionOverlayProps> = ({
   }
 
   return (
-    <FloatingPortal root={containerRef.current}>
+    <FloatingPortal root={containerElement}>
       <div
         ref={refs.setFloating}
         style={{

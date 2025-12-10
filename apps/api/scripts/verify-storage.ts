@@ -26,7 +26,7 @@ async function verifyStorage() {
     try {
         if (credentialsJson) {
             console.log('Method: GCP_CREDENTIALS (JSON)');
-            const credentials = JSON.parse(credentialsJson);
+            const credentials = JSON.parse(credentialsJson) as Record<string, unknown>;
             storage = new Storage({ projectId, credentials });
         } else if (clientEmail && privateKey) {
             console.log('Method: ENV VARS (Client Email + Private Key)');

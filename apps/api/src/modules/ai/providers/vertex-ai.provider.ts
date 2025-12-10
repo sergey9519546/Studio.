@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import type { ToolCall } from '../types';
 import { VertexAIService } from '../vertex-ai.service';
 import { AIProvider, ChatOptions, ModelInfo } from './ai-provider.interface';
-import type { ToolCall } from '../types';
 
 @Injectable()
 export class VertexAIProvider implements AIProvider {
@@ -37,9 +37,9 @@ export class VertexAIProvider implements AIProvider {
     async chat(
         messages: Array<{ role: string; content: string }>,
         systemPrompt: string,
-        _options?: ChatOptions
+        options?: ChatOptions
     ): Promise<string | { toolCalls: ToolCall[] }> {
-        return this.vertexAI.chat(messages, systemPrompt, _options?.tools);
+        return this.vertexAI.chat(messages, systemPrompt, options?.tools);
     }
 
     async generateContent(prompt: string): Promise<string> {

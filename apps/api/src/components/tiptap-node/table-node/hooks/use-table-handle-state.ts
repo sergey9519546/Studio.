@@ -1,9 +1,9 @@
 "use client"
 
-import { useEffect, useState, useCallback, useRef } from "react"
-import type { Editor } from "@tiptap/react"
 import type { TableHandlesState } from "@app/components/tiptap-node/table-node/extensions/table-handle"
 import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import type { Editor } from "@tiptap/react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 export interface UseTableHandleStateConfig {
   /**
@@ -55,9 +55,12 @@ export function useTableHandleState(config: UseTableHandleStateConfig = {}) {
 
   useEffect(() => {
     if (!editor) {
-      setState(null)
-      prevStateRef.current = null
-      onStateChange?.(null)
+      // Use requestAnimationFrame to defer state update to avoid synchronous setState in effect
+      requestAnimationFrame(() => {
+        setState(null)
+        prevStateRef.current = null
+        onStateChange?.(null)
+      })
       return
     }
 
