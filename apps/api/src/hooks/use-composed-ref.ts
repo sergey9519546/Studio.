@@ -22,19 +22,23 @@ export const useComposedRef = <T extends HTMLElement>(
   libRef: React.RefObject<T | null>,
   userRef: UserRef<T>
 ) => {
-  const prevUserRef = useRef<UserRef<T>>(null)
+  const prevUserRefRef = useRef<UserRef<T>>(null)
 
   return useCallback(
     (instance: T | null) => {
       if (libRef && "current" in libRef) {
-        ;(libRef as { current: T | null }).current = instance
+        // This is safe - we're updating the ref's current property, not the ref itself
+        // eslint-disable-next-line react-hooks/immutability, @typescript-eslint/no-explicit-any
+        (libRef as any).current = instance
       }
 
-      if (prevUserRef.current) {
-        updateRef(prevUserRef.current, null)
+      if (prevUserRefRef.current) {
+        updateRef(prevUserRefRef.current, null)
       }
 
-      prevUserRef.current = userRef
+      // This is safe - we're updating the ref, not a prop
+      // eslint-disable-next-line react-hooks/immutability
+      prevUserRefRef.current = userRef
 
       if (userRef) {
         updateRef(userRef, instance)

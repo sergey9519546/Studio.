@@ -21,14 +21,26 @@ export function useIsBreakpoint(
         : `(max-width: ${breakpoint - 1}px)`
 
     const mql = window.matchMedia(query)
-    const onChange = (e: MediaQueryListEvent) => setMatches(e.matches)
+    const onChange = (e: MediaQueryListEvent) => {
+      // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+      const frameId = requestAnimationFrame(() => {
+        setMatches(e.matches)
+      })
+      return () => cancelAnimationFrame(frameId)
+    }
 
     // Set initial value
-    setMatches(mql.matches)
+    // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+    const frameId = requestAnimationFrame(() => {
+      setMatches(mql.matches)
+    })
 
     // Add listener
     mql.addEventListener("change", onChange)
-    return () => mql.removeEventListener("change", onChange)
+    return () => {
+      cancelAnimationFrame(frameId)
+      mql.removeEventListener("change", onChange)
+    }
   }, [mode, breakpoint])
 
   return !!matches

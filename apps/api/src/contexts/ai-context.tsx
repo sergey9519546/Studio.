@@ -28,7 +28,12 @@ export const useAiToken = () => {
 
   useEffect(() => {
     const noAiParam = getUrlParam("noAi")
-    setHasAi(parseInt(noAiParam || "0") !== 1)
+
+    // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+    const frameId = requestAnimationFrame(() => {
+      setHasAi(parseInt(noAiParam || "0") !== 1)
+    })
+    return () => cancelAnimationFrame(frameId)
   }, [])
 
   useEffect(() => {

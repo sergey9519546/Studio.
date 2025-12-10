@@ -1,7 +1,7 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
 import { isNodeSelection, type Editor } from "@tiptap/react"
+import { useCallback, useEffect, useState } from "react"
 import { useHotkeys } from "react-hotkeys-hook"
 
 // --- Lib ---
@@ -11,8 +11,8 @@ import {
 } from "@app/lib/tiptap-utils"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
 import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
+import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
 
 // --- Icons ---
 import { AiSparklesIcon } from "@app/components/tiptap-icons/ai-sparkles-icon"
@@ -127,12 +127,19 @@ export function useAiAsk(config: UseAiAskConfig = {}) {
 
   useEffect(() => {
     if (!editor) {
-      setIsVisible(false)
-      return
+      // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+      const frameId = requestAnimationFrame(() => {
+        setIsVisible(false)
+      })
+      return () => cancelAnimationFrame(frameId)
     }
 
     const updateVisibility = () => {
-      setIsVisible(shouldShowButton({ editor, hideWhenUnavailable }))
+      // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+      const frameId = requestAnimationFrame(() => {
+        setIsVisible(shouldShowButton({ editor, hideWhenUnavailable }))
+      })
+      return () => cancelAnimationFrame(frameId)
     }
 
     updateVisibility()

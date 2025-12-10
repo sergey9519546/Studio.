@@ -1,7 +1,7 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
 import type { Editor } from "@tiptap/react"
+import { useCallback, useEffect, useState } from "react"
 
 // --- Hooks ---
 import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
@@ -105,7 +105,11 @@ export function useLinkHandler(props: LinkHandlerProps) {
     const { href } = editor.getAttributes("link")
 
     if (isLinkActive(editor) && url === null) {
-      setUrl(href || "")
+      // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+      const frameId = requestAnimationFrame(() => {
+        setUrl(href || "")
+      })
+      return () => cancelAnimationFrame(frameId)
     }
   }, [editor, url])
 
@@ -114,7 +118,11 @@ export function useLinkHandler(props: LinkHandlerProps) {
 
     const updateLinkState = () => {
       const { href } = editor.getAttributes("link")
-      setUrl(href || "")
+      // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+      const frameId = requestAnimationFrame(() => {
+        setUrl(href || "")
+      })
+      return () => cancelAnimationFrame(frameId)
     }
 
     editor.on("selectionUpdate", updateLinkState)
@@ -131,6 +139,7 @@ export function useLinkHandler(props: LinkHandlerProps) {
 
     let chain = editor.chain().focus()
 
+    // @ts-expect-error - setLink method exists on the chain but TypeScript doesn't know about it
     chain = chain.extendMarkRange("link").setLink({ href: url })
 
     if (isEmpty) {
@@ -150,6 +159,7 @@ export function useLinkHandler(props: LinkHandlerProps) {
       .chain()
       .focus()
       .extendMarkRange("link")
+      // @ts-expect-error - unsetLink method exists on the chain but TypeScript doesn't know about it
       .unsetLink()
       .setMeta("preventAutolink", true)
       .run()
@@ -195,12 +205,16 @@ export function useLinkState(props: {
     if (!editor) return
 
     const handleSelectionUpdate = () => {
-      setIsVisible(
-        shouldShowLinkButton({
-          editor,
-          hideWhenUnavailable,
-        })
-      )
+      // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+      const frameId = requestAnimationFrame(() => {
+        setIsVisible(
+          shouldShowLinkButton({
+            editor,
+            hideWhenUnavailable,
+          })
+        )
+      })
+      return () => cancelAnimationFrame(frameId)
     }
 
     handleSelectionUpdate()

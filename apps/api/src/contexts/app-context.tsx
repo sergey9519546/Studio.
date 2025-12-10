@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -117,7 +118,10 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     []
   )
 
-  threadBubblesRef.current = threadBubbles
+  // Use useEffect to update the ref to avoid updating during render
+  useEffect(() => {
+    threadBubblesRef.current = threadBubbles
+  }, [threadBubbles])
 
   const providerValue = useMemo(
     () => ({

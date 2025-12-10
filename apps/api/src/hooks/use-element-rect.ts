@@ -1,7 +1,7 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
 import { useThrottledCallback } from "@app/hooks/use-throttled-callback"
+import { useCallback, useEffect, useState } from "react"
 
 export type RectState = Omit<DOMRect, "toJSON">
 
@@ -105,8 +105,11 @@ export function useElementRect({
 
   useEffect(() => {
     if (!enabled || !isClientSide()) {
-      setRect(initialRect)
-      return
+      // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+      const frameId = requestAnimationFrame(() => {
+        setRect(initialRect)
+      })
+      return () => cancelAnimationFrame(frameId)
     }
 
     const targetElement = getTargetElement()

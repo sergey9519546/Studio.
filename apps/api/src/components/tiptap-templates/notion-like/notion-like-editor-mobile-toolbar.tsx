@@ -1,20 +1,36 @@
 "use client"
 
-import { cloneElement, useEffect, useMemo, useRef, useState } from "react"
 import { type Editor } from "@tiptap/react"
+import { cloneElement, useEffect, useMemo, useRef, useState } from "react"
 
 // --- Hooks ---
 import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
-import { useWindowSize } from "@app/hooks/use-window-size"
 import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useWindowSize } from "@app/hooks/use-window-size"
 
 // --- Tiptap UI ---
+import { AiAskButton } from "@app/components/tiptap-ui/ai-ask-button"
+import {
+  canColorHighlight,
+  ColorHighlightButton,
+  HIGHLIGHT_COLORS,
+} from "@app/components/tiptap-ui/color-highlight-button"
 import {
   ColorHighlightPopover,
   ColorHighlightPopoverButton,
   ColorHighlightPopoverContent,
 } from "@app/components/tiptap-ui/color-highlight-popover"
+import {
+  ColorTextButton,
+  TEXT_COLORS,
+} from "@app/components/tiptap-ui/color-text-button"
+import { useRecentColors } from "@app/components/tiptap-ui/color-text-popover"
+import { CopyAnchorLinkButton } from "@app/components/tiptap-ui/copy-anchor-link-button"
+import { CopyToClipboardButton } from "@app/components/tiptap-ui/copy-to-clipboard-button"
+import { DeleteNodeButton } from "@app/components/tiptap-ui/delete-node-button"
+import { DuplicateButton } from "@app/components/tiptap-ui/duplicate-button"
 import { ImageUploadButton } from "@app/components/tiptap-ui/image-upload-button"
+import { ImproveDropdown } from "@app/components/tiptap-ui/improve-dropdown"
 import {
   canSetLink,
   LinkButton,
@@ -22,26 +38,10 @@ import {
   LinkPopover,
 } from "@app/components/tiptap-ui/link-popover"
 import { MarkButton } from "@app/components/tiptap-ui/mark-button"
-import { TextAlignButton } from "@app/components/tiptap-ui/text-align-button"
-import { SlashCommandTriggerButton } from "@app/components/tiptap-ui/slash-command-trigger-button"
 import { ResetAllFormattingButton } from "@app/components/tiptap-ui/reset-all-formatting-button"
-import { DeleteNodeButton } from "@app/components/tiptap-ui/delete-node-button"
-import { ImproveDropdown } from "@app/components/tiptap-ui/improve-dropdown"
-import { CopyAnchorLinkButton } from "@app/components/tiptap-ui/copy-anchor-link-button"
+import { SlashCommandTriggerButton } from "@app/components/tiptap-ui/slash-command-trigger-button"
+import { TextAlignButton } from "@app/components/tiptap-ui/text-align-button"
 import { TurnIntoDropdownContent } from "@app/components/tiptap-ui/turn-into-dropdown"
-import { useRecentColors } from "@app/components/tiptap-ui/color-text-popover"
-import {
-  ColorTextButton,
-  TEXT_COLORS,
-} from "@app/components/tiptap-ui/color-text-button"
-import {
-  canColorHighlight,
-  ColorHighlightButton,
-  HIGHLIGHT_COLORS,
-} from "@app/components/tiptap-ui/color-highlight-button"
-import { AiAskButton } from "@app/components/tiptap-ui/ai-ask-button"
-import { DuplicateButton } from "@app/components/tiptap-ui/duplicate-button"
-import { CopyToClipboardButton } from "@app/components/tiptap-ui/copy-to-clipboard-button"
 
 // --- Utils ---
 import { getNodeDisplayName } from "@app/lib/tiptap-collab-utils"
@@ -51,14 +51,19 @@ import { PaintBucketIcon } from "@app/components/tiptap-icons/paint-bucket-icon"
 import { Repeat2Icon } from "@app/components/tiptap-icons/repeat-2-icon"
 
 // --- UI Primitives ---
+import { ArrowLeftIcon } from "@app/components/tiptap-icons/arrow-left-icon"
+import { ChevronRightIcon } from "@app/components/tiptap-icons/chevron-right-icon"
+import { HighlighterIcon } from "@app/components/tiptap-icons/highlighter-icon"
+import { LinkIcon } from "@app/components/tiptap-icons/link-icon"
+import { MoreVerticalIcon } from "@app/components/tiptap-icons/more-vertical-icon"
+import { ImageNodeFloating } from "@app/components/tiptap-node/image-node/image-node-floating"
+import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
 import {
   Card,
   CardBody,
   CardGroupLabel,
   CardItemGroup,
 } from "@app/components/tiptap-ui-primitive/card"
-import { Spacer } from "@app/components/tiptap-ui-primitive/spacer"
-import { Separator } from "@app/components/tiptap-ui-primitive/separator"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -69,12 +74,8 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@app/components/tiptap-ui-primitive/dropdown-menu"
-import { ArrowLeftIcon } from "@app/components/tiptap-icons/arrow-left-icon"
-import { ChevronRightIcon } from "@app/components/tiptap-icons/chevron-right-icon"
-import { HighlighterIcon } from "@app/components/tiptap-icons/highlighter-icon"
-import { LinkIcon } from "@app/components/tiptap-icons/link-icon"
-import { MoreVerticalIcon } from "@app/components/tiptap-icons/more-vertical-icon"
-import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
+import { Separator } from "@app/components/tiptap-ui-primitive/separator"
+import { Spacer } from "@app/components/tiptap-ui-primitive/spacer"
 import {
   Toolbar,
   ToolbarGroup,
@@ -82,7 +83,6 @@ import {
 } from "@app/components/tiptap-ui-primitive/toolbar"
 import { MoveNodeButton } from "@app/components/tiptap-ui/move-node-button"
 import { useCursorVisibility } from "@app/hooks/use-cursor-visibility"
-import { ImageNodeFloating } from "@app/components/tiptap-node/image-node/image-node-floating"
 
 // =============================================================================
 // Types & Constants
@@ -128,7 +128,11 @@ function useToolbarState(isMobile: boolean): ToolbarState {
 
   useEffect(() => {
     if (!isMobile && viewId !== TOOLBAR_VIEWS.MAIN) {
-      setViewId(TOOLBAR_VIEWS.MAIN)
+      // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+      const frameId = requestAnimationFrame(() => {
+        setViewId(TOOLBAR_VIEWS.MAIN)
+      })
+      return () => cancelAnimationFrame(frameId)
     }
   }, [isMobile, viewId])
 
@@ -631,6 +635,7 @@ export function MobileToolbar({ editor: providedEditor }: MobileToolbarProps) {
   const toolbarRef = useRef<HTMLDivElement>(null)
   const toolbarState = useToolbarState(isMobile)
   const toolbarViews = useMemo(() => createToolbarViewRegistry(), [])
+  const [toolbarHeight, setToolbarHeight] = useState(0)
 
   const currentView = toolbarState.isMainView
     ? null
@@ -639,9 +644,27 @@ export function MobileToolbar({ editor: providedEditor }: MobileToolbarProps) {
       ]
 
   const { height } = useWindowSize()
+
+  // Use useEffect to measure toolbar height after render to avoid accessing refs during render
+  useEffect(() => {
+    if (toolbarRef.current) {
+      const observer = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          setToolbarHeight(entry.contentRect.height)
+        }
+      })
+
+      observer.observe(toolbarRef.current)
+
+      return () => {
+        observer.disconnect()
+      }
+    }
+  }, [])
+
   const rect = useCursorVisibility({
     editor,
-    overlayHeight: toolbarRef.current?.getBoundingClientRect().height ?? 0,
+    overlayHeight: toolbarHeight,
   })
 
   if (!isMobile || !editor || !editor.isEditable) {

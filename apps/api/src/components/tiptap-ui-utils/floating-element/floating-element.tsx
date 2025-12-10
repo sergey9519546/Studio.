@@ -1,3 +1,12 @@
+import {
+  flip,
+  offset,
+  shift,
+  useMergeRefs,
+  type UseFloatingOptions,
+} from "@floating-ui/react"
+import { Selection } from "@tiptap/pm/state"
+import { type Editor } from "@tiptap/react"
 import type { HTMLAttributes } from "react"
 import {
   forwardRef,
@@ -7,19 +16,10 @@ import {
   useRef,
   useState,
 } from "react"
-import { type Editor } from "@tiptap/react"
-import {
-  flip,
-  offset,
-  shift,
-  useMergeRefs,
-  type UseFloatingOptions,
-} from "@floating-ui/react"
-import { Selection } from "@tiptap/pm/state"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
 import { useFloatingElement } from "@app/hooks/use-floating-element"
+import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
 
 // --- Lib ---
 import {
@@ -313,7 +313,12 @@ export const FloatingElement = forwardRef<HTMLDivElement, FloatingElementProps>(
 
     useEffect(() => {
       if (!editor) return
-      updateSelectionState()
+
+      // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+      const frameId = requestAnimationFrame(() => {
+        updateSelectionState()
+      })
+      return () => cancelAnimationFrame(frameId)
     }, [editor, updateSelectionState])
 
     const finalStyle = useMemo(

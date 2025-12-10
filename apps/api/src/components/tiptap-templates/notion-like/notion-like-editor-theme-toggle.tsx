@@ -4,8 +4,8 @@ import { useEffect, useState } from "react"
 import { Button } from "@app/components/tiptap-ui-primitive/button"
 
 // --- Icons ---
-import { SunIcon } from "@app/components/tiptap-icons/sun-icon"
 import { MoonStarIcon } from "@app/components/tiptap-icons/moon-star-icon"
+import { SunIcon } from "@app/components/tiptap-icons/sun-icon"
 
 export function ThemeToggle() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
@@ -21,7 +21,12 @@ export function ThemeToggle() {
     const initialDarkMode =
       !!document.querySelector('meta[name="color-scheme"][content="dark"]') ||
       window.matchMedia("(prefers-color-scheme: dark)").matches
-    setIsDarkMode(initialDarkMode)
+
+    // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+    const frameId = requestAnimationFrame(() => {
+      setIsDarkMode(initialDarkMode)
+    })
+    return () => cancelAnimationFrame(frameId)
   }, [])
 
   useEffect(() => {

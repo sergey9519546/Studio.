@@ -1,5 +1,5 @@
-import { forwardRef, useCallback, useEffect, useState } from "react"
 import type { Editor } from "@tiptap/react"
+import { forwardRef, useCallback, useEffect, useState } from "react"
 
 // --- Hooks ---
 import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
@@ -19,17 +19,17 @@ import { useLinkPopover } from "@app/components/tiptap-ui/link-popover"
 import type { ButtonProps } from "@app/components/tiptap-ui-primitive/button"
 import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@app/components/tiptap-ui-primitive/popover"
-import { Separator } from "@app/components/tiptap-ui-primitive/separator"
-import {
   Card,
   CardBody,
   CardItemGroup,
 } from "@app/components/tiptap-ui-primitive/card"
 import { Input, InputGroup } from "@app/components/tiptap-ui-primitive/input"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@app/components/tiptap-ui-primitive/popover"
+import { Separator } from "@app/components/tiptap-ui-primitive/separator"
 
 export interface LinkMainProps {
   /**
@@ -260,7 +260,11 @@ export const LinkPopover = forwardRef<HTMLButtonElement, LinkPopoverProps>(
 
     useEffect(() => {
       if (autoOpenOnLinkActive && isActive) {
-        setIsOpen(true)
+        // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+        const frameId = requestAnimationFrame(() => {
+          setIsOpen(true)
+        })
+        return () => cancelAnimationFrame(frameId)
       }
     }, [autoOpenOnLinkActive, isActive])
 

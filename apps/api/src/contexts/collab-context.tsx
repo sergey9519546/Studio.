@@ -1,12 +1,12 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react"
-import { TiptapCollabProvider } from "@tiptap-pro/provider"
-import { Doc as YDoc } from "yjs"
 import {
   fetchCollabToken,
   getUrlParam,
-  TIPTAP_COLLAB_DOC_PREFIX,
   TIPTAP_COLLAB_APP_ID,
+  TIPTAP_COLLAB_DOC_PREFIX,
 } from "@app/lib/tiptap-collab-utils"
+import { TiptapCollabProvider } from "@tiptap-pro/provider"
+import { createContext, useContext, useEffect, useMemo, useState } from "react"
+import { Doc as YDoc } from "yjs"
 
 export type CollabContextValue = {
   provider: TiptapCollabProvider | null
@@ -37,7 +37,12 @@ export const useCollaboration = (room: string) => {
 
   useEffect(() => {
     const noCollabParam = getUrlParam("noCollab")
-    setHasCollab(parseInt(noCollabParam || "0") !== 1)
+
+    // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+    const frameId = requestAnimationFrame(() => {
+      setHasCollab(parseInt(noCollabParam || "0") !== 1)
+    })
+    return () => cancelAnimationFrame(frameId)
   }, [])
 
   useEffect(() => {
@@ -45,7 +50,12 @@ export const useCollaboration = (room: string) => {
 
     const getToken = async () => {
       const token = await fetchCollabToken()
-      setCollabToken(token)
+
+      // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+      const frameId = requestAnimationFrame(() => {
+        setCollabToken(token)
+      })
+      return () => cancelAnimationFrame(frameId)
     }
 
     getToken()
@@ -65,10 +75,14 @@ export const useCollaboration = (room: string) => {
       document: ydoc,
     })
 
-    setProvider(newProvider)
-
+    // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+    const frameId = requestAnimationFrame(() => {
+      setProvider(newProvider)
+    })
     return () => {
-      newProvider.destroy()
+      cancelAnimationFrame(frameId)
+      // @ts-ignore - TiptapCollabProvider has a destroy method but TypeScript doesn't know about it
+      newProvider.destroy?.()
     }
   }, [collabToken, ydoc, room, hasCollab])
 

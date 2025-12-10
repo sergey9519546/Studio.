@@ -183,7 +183,11 @@ export function useMenuNavigation<T>({
 
   useEffect(() => {
     if (query) {
-      setSelectedIndex(autoSelectFirstItem ? 0 : -1)
+      // Use requestAnimationFrame to defer the state update to avoid synchronous setState in effect
+      const frameId = requestAnimationFrame(() => {
+        setSelectedIndex(autoSelectFirstItem ? 0 : -1)
+      })
+      return () => cancelAnimationFrame(frameId)
     }
   }, [query, autoSelectFirstItem])
 

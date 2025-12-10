@@ -10,7 +10,6 @@
  * - Pseudocode Architecture: Structured algorithmic thinking
  */
 
-import { Project, Assignment, KnowledgeSource } from '../types';
 
 /**
  * GEOMETRIC DATA TYPES (Phase 3 Enforcement)
@@ -210,7 +209,7 @@ export class IntelligentContextEngine {
     } catch (error) {
       // Use logger instead of console.warn for production
       const errorMessage = error instanceof Error ? error.message : String(error);
-      console.error(`IntelligentContextEngine error in extractBriefContext: ${errorMessage}`);
+      // console.error(`IntelligentContextEngine error in extractBriefContext: ${errorMessage}`);
     }
     
     // Fallback for development/testing
@@ -251,7 +250,7 @@ export class IntelligentContextEngine {
     } catch (error) {
       // Use logger instead of console.warn for production
       const errorMessage = error instanceof Error ? error.message : String(error);
-      console.error(`IntelligentContextEngine error in extractBrandGuidelines: ${errorMessage}`);
+      // console.error(`IntelligentContextEngine error in extractBrandGuidelines: ${errorMessage}`);
     }
     
     // Fallback for development/testing
@@ -291,7 +290,7 @@ export class IntelligentContextEngine {
     } catch (error) {
       // Use logger instead of console.warn for production
       const errorMessage = error instanceof Error ? error.message : String(error);
-      console.error(`IntelligentContextEngine error in generateAssetIntelligence: ${errorMessage}`);
+      // console.error(`IntelligentContextEngine error in generateAssetIntelligence: ${errorMessage}`);
     }
     
     // Fallback for development/testing
@@ -341,7 +340,7 @@ export class IntelligentContextEngine {
     } catch (error) {
       // Use logger instead of console.warn for production
       const errorMessage = error instanceof Error ? error.message : String(error);
-      console.error(`IntelligentContextEngine error in extractProjectIntelligence: ${errorMessage}`);
+      // console.error(`IntelligentContextEngine error in extractProjectIntelligence: ${errorMessage}`);
     }
     
     // Fallback for development/testing
