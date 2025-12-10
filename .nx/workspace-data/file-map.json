@@ -29,7 +29,7 @@
         },
         {
           "file": "apps/api/scripts/verify-storage.ts",
-          "hash": "12635285621742024092",
+          "hash": "121943655850596998",
           "deps": [
             "npm:@google-cloud/storage",
             "npm:dotenv"
@@ -101,7 +101,7 @@
         },
         {
           "file": "apps/api/src/common/logger/logger.module.ts",
-          "hash": "11282619240978407476",
+          "hash": "15078589982123595173",
           "deps": [
             "npm:@nestjs/common",
             "npm:nestjs-pino"
@@ -943,7 +943,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/hooks/use-table-handle-state.ts",
-          "hash": "14218487443616605737",
+          "hash": "3424870966697135764",
           "deps": [
             "npm:@tiptap/react",
             "npm:react"
@@ -1238,7 +1238,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-selection-overlay/table-selection-overlay.tsx",
-          "hash": "13411598276696807104",
+          "hash": "7418115328588710207",
           "deps": [
             "npm:@floating-ui/react",
             "npm:@tiptap/pm",
@@ -2764,7 +2764,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini-analyst.service.ts",
-          "hash": "2072315283957893780",
+          "hash": "9520837263384749253",
           "deps": [
             "npm:@nestjs/cache-manager",
             "npm:@nestjs/common",
@@ -2788,7 +2788,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/prompts/templates.ts",
-          "hash": "2679321650139944980"
+          "hash": "17066254489451257531"
         },
         {
           "file": "apps/api/src/modules/ai/providers/ai-provider.interface.ts",
@@ -2803,7 +2803,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/providers/vertex-ai.provider.ts",
-          "hash": "8377341439725065503",
+          "hash": "18036401002399453913",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -8260,7 +8260,7 @@
       },
       {
         "file": "ffmpeg/Makefile",
-        "hash": "16571044239389294186"
+        "hash": "7630631585905430784"
       },
       {
         "file": "ffmpeg/README.md",
@@ -8372,7 +8372,7 @@
       },
       {
         "file": "ffmpeg/configure",
-        "hash": "2167374479795051659"
+        "hash": "12122356676762360094"
       },
       {
         "file": "ffmpeg/doc/.gitignore",
@@ -8832,7 +8832,7 @@
       },
       {
         "file": "ffmpeg/ffbuild/arch.mak",
-        "hash": "11988513637590261738"
+        "hash": "4130629402766191995"
       },
       {
         "file": "ffmpeg/ffbuild/bin2c.c",
@@ -20536,7 +20536,7 @@
       },
       {
         "file": "ffmpeg/libavfilter/avfiltergraph.c",
-        "hash": "2714238839830583366"
+        "hash": "8016661491452211554"
       },
       {
         "file": "ffmpeg/libavfilter/avfilterres.rc",
@@ -24012,7 +24012,7 @@
       },
       {
         "file": "ffmpeg/libavformat/iamf_parse.c",
-        "hash": "16685160272418305709"
+        "hash": "3919980645751904288"
       },
       {
         "file": "ffmpeg/libavformat/iamf_parse.h",
@@ -24028,7 +24028,7 @@
       },
       {
         "file": "ffmpeg/libavformat/iamf_writer.c",
-        "hash": "6634963410649980816"
+        "hash": "14059128942121412914"
       },
       {
         "file": "ffmpeg/libavformat/iamf_writer.h",
@@ -25932,23 +25932,19 @@
       },
       {
         "file": "ffmpeg/libavutil/aarch64/Makefile",
-        "hash": "506512971321689154"
+        "hash": "14246757473053390428"
       },
       {
         "file": "ffmpeg/libavutil/aarch64/asm.S",
-        "hash": "6873905570583377664"
+        "hash": "8352015544671390944"
       },
       {
         "file": "ffmpeg/libavutil/aarch64/cpu.c",
-        "hash": "2517462465581725241"
+        "hash": "16692645996434059797"
       },
       {
         "file": "ffmpeg/libavutil/aarch64/cpu.h",
-        "hash": "8917891675289917952"
-      },
-      {
-        "file": "ffmpeg/libavutil/aarch64/cpu_sme.S",
-        "hash": "10467518652037586984"
+        "hash": "5655716636400301918"
       },
       {
         "file": "ffmpeg/libavutil/aarch64/cpu_sve.S",
@@ -26196,11 +26192,11 @@
       },
       {
         "file": "ffmpeg/libavutil/cpu.c",
-        "hash": "4324349220740054065"
+        "hash": "13198919855362411168"
       },
       {
         "file": "ffmpeg/libavutil/cpu.h",
-        "hash": "4146489381269825665"
+        "hash": "3950388443977757476"
       },
       {
         "file": "ffmpeg/libavutil/cpu_internal.h",
@@ -27128,7 +27124,7 @@
       },
       {
         "file": "ffmpeg/libavutil/tests/cpu.c",
-        "hash": "1889026077482669012"
+        "hash": "2010474591157728432"
       },
       {
         "file": "ffmpeg/libavutil/tests/cpu_init.c",
@@ -28424,7 +28420,7 @@
       },
       {
         "file": "ffmpeg/tests/checkasm/checkasm.c",
-        "hash": "16040485642177715778"
+        "hash": "15190615875165356236"
       },
       {
         "file": "ffmpeg/tests/checkasm/checkasm.h",
@@ -28904,7 +28900,7 @@
       },
       {
         "file": "ffmpeg/tests/fate/filter-video.mak",
-        "hash": "1380909202479827624"
+        "hash": "4672739192750831524"
       },
       {
         "file": "ffmpeg/tests/fate/fits.mak",
@@ -33849,10 +33845,6 @@
       {
         "file": "ffmpeg/tests/ref/fate/filter-rgbtestsrc-x2rgb10le",
         "hash": "12741035620467154252"
-      },
-      {
-        "file": "ffmpeg/tests/ref/fate/filter-scale-premultiply",
-        "hash": "11231313394456509513"
       },
       {
         "file": "ffmpeg/tests/ref/fate/filter-scale200",

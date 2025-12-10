@@ -1,23 +1,23 @@
-import { useCallback, useEffect, useRef, useState } from "react"
-import { type Editor } from "@tiptap/react"
+import { FloatingPortal } from "@floating-ui/react"
 import type { Node } from "@tiptap/pm/model"
 import { TableMap } from "@tiptap/pm/tables"
-import { FloatingPortal } from "@floating-ui/react"
+import { type Editor } from "@tiptap/react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
 import { useTableHandleState } from "@app/components/tiptap-node/table-node/hooks/use-table-handle-state"
+import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
 
 // --- Lib ---
 import type { Orientation } from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
 import {
   EMPTY_CELL_HEIGHT,
   EMPTY_CELL_WIDTH,
-  countEmptyRowsFromEnd,
   countEmptyColumnsFromEnd,
+  countEmptyRowsFromEnd,
   marginRound,
-  selectLastCell,
   runPreservingCursor,
+  selectLastCell,
 } from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
 import { cn } from "@app/lib/tiptap-utils"
 
@@ -226,9 +226,22 @@ export const TableExtendRowColumnButtons: React.FC<
 
   if (!state) return null
 
+  // Use useEffect to set refs after render to avoid accessing refs during render
+  const rowButtonRef = useRef<HTMLDivElement>(null)
+  const columnButtonRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (rowButtonRef.current) {
+      rowButton.ref(rowButtonRef.current)
+    }
+    if (columnButtonRef.current) {
+      columnButton.ref(columnButtonRef.current)
+    }
+  }, [rowButton.ref, columnButton.ref])
+
   return (
     <FloatingPortal root={state.widgetContainer}>
-      <div ref={rowButton.ref} style={rowButton.style}>
+      <div ref={rowButtonRef} style={rowButton.style}>
         <TableExtendRowColumnButton
           editor={editor}
           orientation="row"
@@ -238,7 +251,7 @@ export const TableExtendRowColumnButtons: React.FC<
         />
       </div>
 
-      <div ref={columnButton.ref} style={columnButton.style}>
+      <div ref={columnButtonRef} style={columnButton.style}>
         <TableExtendRowColumnButton
           editor={editor}
           orientation="column"

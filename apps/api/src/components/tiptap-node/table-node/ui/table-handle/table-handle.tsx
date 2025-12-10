@@ -1,10 +1,10 @@
 "use client"
 
-import { useCallback, useMemo, useState } from "react"
-import type { Editor } from "@tiptap/react"
-import type { ComponentType } from "react"
 import { FloatingPortal } from "@floating-ui/react"
 import type { Node } from "@tiptap/pm/model"
+import type { Editor } from "@tiptap/react"
+import type { ComponentType } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 import {
   colDragStart,
@@ -12,10 +12,10 @@ import {
 } from "@app/components/tiptap-node/table-node/extensions/table-handle"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useTableHandlePositioning } from "@app/components/tiptap-node/table-node/ui/table-handle/use-table-handle-positioning"
 import { useTableHandleState } from "@app/components/tiptap-node/table-node/hooks/use-table-handle-state"
 import { type Orientation } from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+import { useTableHandlePositioning } from "@app/components/tiptap-node/table-node/ui/table-handle/use-table-handle-positioning"
+import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
 
 // --- Components ---
 import { TableHandleMenu } from "@app/components/tiptap-node/table-node/ui/table-handle-menu"
@@ -125,10 +125,23 @@ export function TableHandle({
   const RowButton = CustomRowButton || TableHandleMenu
   const ColumnButton = CustomColumnButton || TableHandleMenu
 
+  // Use useEffect to set refs after render to avoid accessing refs during render
+  const rowHandleRef = useRef<HTMLDivElement>(null)
+  const colHandleRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (shouldShowRow && rowHandleRef.current) {
+      rowHandle.ref(rowHandleRef.current)
+    }
+    if (shouldShowColumn && colHandleRef.current) {
+      colHandle.ref(colHandleRef.current)
+    }
+  }, [shouldShowRow, shouldShowColumn, rowHandle.ref, colHandle.ref])
+
   return (
     <FloatingPortal root={state.widgetContainer}>
       {shouldShowRow && (
-        <div ref={rowHandle.ref} style={rowHandle.style}>
+        <div ref={rowHandleRef} style={rowHandle.style}>
           <RowButton
             editor={editor}
             orientation="row"
@@ -143,7 +156,7 @@ export function TableHandle({
       )}
 
       {shouldShowColumn && (
-        <div ref={colHandle.ref} style={colHandle.style}>
+        <div ref={colHandleRef} style={colHandle.style}>
           <ColumnButton
             editor={editor}
             orientation="column"
