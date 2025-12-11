@@ -3767,6 +3767,14 @@
         "hash": "4666557421536935436"
       },
       {
+        "file": "BUILD_ERRORS_ANALYSIS.md",
+        "hash": "17801214294882620259"
+      },
+      {
+        "file": "BUILD_FIXES_EXECUTION_TODO.md",
+        "hash": "6759321091844511244"
+      },
+      {
         "file": "COMPLETE_AUDIT_REPORT.md",
         "hash": "10229892917160092547"
       },
@@ -3781,6 +3789,14 @@
       {
         "file": "CRITICAL_FIXES_IMPLEMENTATION.md",
         "hash": "2030404483325209613"
+      },
+      {
+        "file": "CRITICAL_FIXES_PLAN.md",
+        "hash": "9416578702470281592"
+      },
+      {
+        "file": "CRITICAL_FIXES_TODO.md",
+        "hash": "17139121467721887948"
       },
       {
         "file": "DEEPER_ANAL",
@@ -48564,11 +48580,19 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "14381601357596609826"
+        "hash": "293638649006838425"
       },
       {
         "file": "package.json",
+        "hash": "1324479127256281663"
+      },
+      {
+        "file": "package_backup.json",
         "hash": "13276096196226656762"
+      },
+      {
+        "file": "package_clean.json",
+        "hash": "1324479127256281663"
       },
       {
         "file": "postcss.config.js",
@@ -49115,10 +49139,6 @@
         "hash": "9034808716136365019"
       },
       {
-        "file": "stryker.conf.js",
-        "hash": "831399913437506820"
-      },
-      {
         "file": "stubs/atlassiansox-analytics-web-client/index.js",
         "hash": "2613863304276515625"
       },
@@ -49232,5 +49252,5 @@
       }
     ]
   },
-  "externalNodesHash": "110545204798399473"
+  "externalNodesHash": "2746903689832553321"
 }
