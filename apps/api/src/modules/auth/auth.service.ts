@@ -1,8 +1,8 @@
-import { Injectable, UnauthorizedException, Logger } from '@nestjs/common';
+import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { PrismaService } from '../../prisma/prisma.service.js';
 import { User } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
+import { PrismaService } from '../../prisma/prisma.service';
 
 const SALT_ROUNDS = 10;
 

@@ -10430,6 +10430,11 @@
     "type": "static"
   },
   {
+    "source": "npm:@prisma/extension-accelerate",
+    "target": "npm:@prisma/client",
+    "type": "static"
+  },
+  {
     "source": "npm:@prisma/fetch-engine",
     "target": "npm:@prisma/debug",
     "type": "static"

@@ -6266,6 +6266,15 @@
         "hash": "sha512-vXSxyUgX3vm1Q70QwzwkjeYfRryIvKno1SXbIqwSptKwqKzskINnDUcx85oX+ys6ooN2ATGSD0xN2UTfg6Zcow=="
       }
     },
+    "npm:@prisma/extension-accelerate": {
+      "type": "npm",
+      "name": "npm:@prisma/extension-accelerate",
+      "data": {
+        "version": "3.0.1",
+        "packageName": "@prisma/extension-accelerate",
+        "hash": "sha512-xc+kn4AjjTzS9jsdD1JWCebB09y0Aj+C8GjjG7oUm81PF9psvmJOw5rxpl7tOEBz/8hmuNX996XL28ys/OLxVA=="
+      }
+    },
     "npm:@prisma/fetch-engine": {
       "type": "npm",
       "name": "npm:@prisma/fetch-engine",
@@ -18465,11 +18474,6 @@
       },
       {
         "source": "api",
-        "target": "npm:@google/genai",
-        "type": "static"
-      },
-      {
-        "source": "api",
         "target": "npm:@google/generative-ai",
         "type": "static"
       },
@@ -18485,12 +18489,12 @@
       },
       {
         "source": "api",
-        "target": "npm:googleapis",
+        "target": "npm:google-auth-library",
         "type": "static"
       },
       {
         "source": "api",
-        "target": "npm:google-auth-library",
+        "target": "npm:googleapis",
         "type": "static"
       },
       {
@@ -29093,6 +29097,13 @@
       {
         "source": "npm:@prisma/get-platform@7.1.0",
         "target": "npm:@prisma/debug",
+        "type": "static"
+      }
+    ],
+    "npm:@prisma/extension-accelerate": [
+      {
+        "source": "npm:@prisma/extension-accelerate",
+        "target": "npm:@prisma/client",
         "type": "static"
       }
     ],
@@ -45508,5 +45519,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1765494873128
+  "computedAt": 1765496929212
 }

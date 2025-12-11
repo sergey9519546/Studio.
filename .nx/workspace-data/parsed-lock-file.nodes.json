@@ -6174,6 +6174,15 @@
         "hash": "sha512-vXSxyUgX3vm1Q70QwzwkjeYfRryIvKno1SXbIqwSptKwqKzskINnDUcx85oX+ys6ooN2ATGSD0xN2UTfg6Zcow=="
       }
     },
+    "npm:@prisma/extension-accelerate": {
+      "type": "npm",
+      "name": "npm:@prisma/extension-accelerate",
+      "data": {
+        "version": "3.0.1",
+        "packageName": "@prisma/extension-accelerate",
+        "hash": "sha512-xc+kn4AjjTzS9jsdD1JWCebB09y0Aj+C8GjjG7oUm81PF9psvmJOw5rxpl7tOEBz/8hmuNX996XL28ys/OLxVA=="
+      }
+    },
     "npm:@prisma/fetch-engine": {
       "type": "npm",
       "name": "npm:@prisma/fetch-engine",
@@ -18645,6 +18654,7 @@
     "node_modules/@prisma/engines": "npm:@prisma/engines",
     "node_modules/@prisma/engines-version": "npm:@prisma/engines-version",
     "node_modules/@prisma/engines/node_modules/@prisma/get-platform": "npm:@prisma/get-platform@7.1.0",
+    "node_modules/@prisma/extension-accelerate": "npm:@prisma/extension-accelerate",
     "node_modules/@prisma/fetch-engine": "npm:@prisma/fetch-engine",
     "node_modules/@prisma/fetch-engine/node_modules/@prisma/get-platform": "npm:@prisma/get-platform@7.1.0",
     "node_modules/@prisma/get-platform": "npm:@prisma/get-platform",

@@ -2857,7 +2857,7 @@
           "file": "apps/api/src/modules/ai/vertex-ai-embeddings.service.ts",
           "hash": "13694288435680143409",
           "deps": [
-            "npm:@google/genai",
+            "npm:@google/generative-ai",
             "npm:@nestjs/common",
             "npm:@nestjs/config"
           ]
@@ -3117,8 +3117,8 @@
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
-            "npm:googleapis",
-            "npm:google-auth-library"
+            "npm:google-auth-library",
+            "npm:googleapis"
           ]
         },
         {
@@ -49253,5 +49253,5 @@
       }
     ]
   },
-  "externalNodesHash": "5971057217548950579"
+  "externalNodesHash": "12741124198564025095"
 }
