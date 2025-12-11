@@ -18,6 +18,10 @@ async function verifyStorage() {
     const credentialsJson = process.env.GCP_CREDENTIALS;
     const keyFile = process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
+    // Fix unused variable error
+    const configType = credentialsJson ? 'json' : (clientEmail && privateKey ? 'env' : (keyFile ? 'file' : 'default'));
+    console.log(`Configuration type detected: ${configType}`);
+
     console.log(`Project ID: ${projectId}`);
     console.log(`Target Bucket: ${bucketName}`);
 
