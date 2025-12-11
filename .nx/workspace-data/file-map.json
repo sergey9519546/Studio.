@@ -1098,7 +1098,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-extend-row-column-button/table-extend-row-column-button.tsx",
-          "hash": "2241023970724266691",
+          "hash": "13391090049268096801",
           "deps": [
             "npm:@floating-ui/react",
             "npm:@tiptap/pm",
@@ -1156,7 +1156,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-handle/table-handle.tsx",
-          "hash": "9333907964185282616",
+          "hash": "5267478283869576913",
           "deps": [
             "npm:@floating-ui/react",
             "npm:@tiptap/pm",
@@ -1238,7 +1238,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-selection-overlay/table-selection-overlay.tsx",
-          "hash": "17362921429401955153",
+          "hash": "14845862987939842696",
           "deps": [
             "npm:@floating-ui/react",
             "npm:@tiptap/pm",
@@ -1643,7 +1643,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/tooltip/tooltip.tsx",
-          "hash": "10966965630749941637",
+          "hash": "12341291402461361061",
           "deps": [
             "npm:@floating-ui/react",
             "npm:react"
@@ -2554,7 +2554,7 @@
         },
         {
           "file": "apps/api/src/contexts/collab-context.tsx",
-          "hash": "15523043513569495701",
+          "hash": "10731527518293342304",
           "deps": [
             "npm:@tiptap-pro/provider",
             "npm:react",
@@ -2854,7 +2854,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai-embeddings.service.ts",
-          "hash": "13694288435680143409",
+          "hash": "17756364553842076315",
           "deps": [
             "npm:@google-cloud/aiplatform",
             "npm:@nestjs/common",
@@ -2863,7 +2863,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai.service.ts",
-          "hash": "3786231010024908468",
+          "hash": "11801921675279844071",
           "deps": [
             "npm:@google-cloud/aiplatform",
             "npm:@nestjs/common",
@@ -48896,7 +48896,7 @@
       },
       {
         "file": "src/dataconnect-generated/.guides/usage.md",
-        "hash": "9395073703261133520"
+        "hash": "6620734942988841674"
       },
       {
         "file": "src/dataconnect-generated/README.md",
@@ -48904,7 +48904,7 @@
       },
       {
         "file": "src/dataconnect-generated/esm/index.esm.js",
-        "hash": "8103665619056376340"
+        "hash": "6110978263211776781"
       },
       {
         "file": "src/dataconnect-generated/esm/package.json",
@@ -48912,11 +48912,11 @@
       },
       {
         "file": "src/dataconnect-generated/index.cjs.js",
-        "hash": "11947682604775880572"
+        "hash": "6179164097319436544"
       },
       {
         "file": "src/dataconnect-generated/index.d.ts",
-        "hash": "12121625883648963937"
+        "hash": "12827982418421243259"
       },
       {
         "file": "src/dataconnect-generated/package.json",
@@ -48928,7 +48928,7 @@
       },
       {
         "file": "src/dataconnect-generated/react/esm/index.esm.js",
-        "hash": "14570083277883875313"
+        "hash": "12174374708228840605"
       },
       {
         "file": "src/dataconnect-generated/react/esm/package.json",
@@ -48936,11 +48936,11 @@
       },
       {
         "file": "src/dataconnect-generated/react/index.cjs.js",
-        "hash": "2913033731498597627"
+        "hash": "18430920159781452914"
       },
       {
         "file": "src/dataconnect-generated/react/index.d.ts",
-        "hash": "498645000099755456"
+        "hash": "1450360211015605153"
       },
       {
         "file": "src/dataconnect-generated/react/package.json",
