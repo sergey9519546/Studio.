@@ -6,8 +6,8 @@
 - [ ] Install Nx workspace dependencies
 
 ## Priority 2: Fix Missing Dependencies  
-- [ ] Remove or fix Stryker mutation testing dependency
-- [ ] Replace all Atlaskit and add missing dependencies to package.json
+- [ ] Remove Stryker mutation testing dependency
+- [ ] Remove all Atlaskit and Replace/add missing dependencies to package.json
 - [ ] Fix npm registry access issues
 
 ## Priority 3: Resolve TypeScript Issues
