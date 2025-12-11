@@ -2863,7 +2863,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai.service.ts",
-          "hash": "11801921675279844071",
+          "hash": "4004229039481520479",
           "deps": [
             "npm:@google-cloud/aiplatform",
             "npm:@nestjs/common",

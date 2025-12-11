@@ -121,7 +121,7 @@ export class VertexAIService {
         'values',
         0,
         'structValue'
-      ]) as Record<string, unknown>;
+      ] as Record<string, unknown>;
 
       if (!content) return null;
 
