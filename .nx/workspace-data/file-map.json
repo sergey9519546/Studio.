@@ -3772,7 +3772,7 @@
       },
       {
         "file": "BUILD_FIXES_EXECUTION_TODO.md",
-        "hash": "6759321091844511244"
+        "hash": "16262421291933645369"
       },
       {
         "file": "COMPLETE_AUDIT_REPORT.md",
@@ -13724,7 +13724,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/libjxlenc.c",
-        "hash": "5962733552798290508"
+        "hash": "13486323761604934768"
       },
       {
         "file": "ffmpeg/libavcodec/libkvazaar.c",
@@ -16464,11 +16464,11 @@
       },
       {
         "file": "ffmpeg/libavcodec/riscv/llvidencdsp_init.c",
-        "hash": "16309827568041326329"
+        "hash": "17845785254979277357"
       },
       {
         "file": "ffmpeg/libavcodec/riscv/llvidencdsp_rvv.S",
-        "hash": "11616953892897277983"
+        "hash": "18338979694901854256"
       },
       {
         "file": "ffmpeg/libavcodec/riscv/lpc_init.c",
@@ -25400,7 +25400,7 @@
       },
       {
         "file": "ffmpeg/libavformat/sierravmd.c",
-        "hash": "11367430286745313286"
+        "hash": "7156839290986412184"
       },
       {
         "file": "ffmpeg/libavformat/siff.c",
