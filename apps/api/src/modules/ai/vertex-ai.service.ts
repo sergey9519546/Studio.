@@ -103,11 +103,11 @@ export class VertexAIService {
    * Generate content with vision using Gemini model via Vertex AI
    */
   async generateContentWithVision(visionPrompt: string, model: string = "gemini-1.5-pro"): Promise<string> {
-    try {
-      const endpoint = `projects/${this.project}/locations/${this.location}/publishers/${this.publisher}/models/${model}`;
-
-      // Parse the vision prompt (assumed JSON format with image data and text)
-      const parsedPrompt = JSON.parse(visionPrompt);
+    // For now, delegate to regular content generation
+    // TODO: Implement proper vision support with image data
+    this.logger.warn('Vision content generation not fully implemented, using text-only generation');
+    return this.generateContent(visionPrompt, model);
+  }
 
         'values',
         0,
