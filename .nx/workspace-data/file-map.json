@@ -29,7 +29,7 @@
         },
         {
           "file": "apps/api/scripts/verify-storage.ts",
-          "hash": "121943655850596998",
+          "hash": "12635285621742024092",
           "deps": [
             "npm:@google-cloud/storage",
             "npm:dotenv"
@@ -101,7 +101,7 @@
         },
         {
           "file": "apps/api/src/common/logger/logger.module.ts",
-          "hash": "15078589982123595173",
+          "hash": "11282619240978407476",
           "deps": [
             "npm:@nestjs/common",
             "npm:nestjs-pino"
@@ -943,7 +943,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/hooks/use-table-handle-state.ts",
-          "hash": "3424870966697135764",
+          "hash": "14218487443616605737",
           "deps": [
             "npm:@tiptap/react",
             "npm:react"
@@ -1098,7 +1098,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-extend-row-column-button/table-extend-row-column-button.tsx",
-          "hash": "7861112325885759211",
+          "hash": "13391090049268096801",
           "deps": [
             "npm:@floating-ui/react",
             "npm:@tiptap/pm",
@@ -1156,7 +1156,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-handle/table-handle.tsx",
-          "hash": "16606307352890050000",
+          "hash": "5267478283869576913",
           "deps": [
             "npm:@floating-ui/react",
             "npm:@tiptap/pm",
@@ -1238,7 +1238,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-selection-overlay/table-selection-overlay.tsx",
-          "hash": "7418115328588710207",
+          "hash": "14845862987939842696",
           "deps": [
             "npm:@floating-ui/react",
             "npm:@tiptap/pm",
@@ -1323,7 +1323,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-templates/notion-like/notion-like-editor-mobile-toolbar.tsx",
-          "hash": "3929861918090013364",
+          "hash": "6055598904774475201",
           "deps": [
             "npm:@tiptap/react",
             "npm:react"
@@ -1331,7 +1331,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-templates/notion-like/notion-like-editor-theme-toggle.tsx",
-          "hash": "4689249521691871758",
+          "hash": "13688700009003989064",
           "deps": [
             "npm:react"
           ]
@@ -1643,7 +1643,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/tooltip/tooltip.tsx",
-          "hash": "1012271431289631827",
+          "hash": "12341291402461361061",
           "deps": [
             "npm:@floating-ui/react",
             "npm:react"
@@ -1658,7 +1658,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-utils/floating-element/floating-element.tsx",
-          "hash": "9043292834335242553",
+          "hash": "678020217120296666",
           "deps": [
             "npm:@floating-ui/react",
             "npm:@tiptap/pm",
@@ -1715,7 +1715,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-ask-button/use-ai-ask.ts",
-          "hash": "729940412371050932",
+          "hash": "1735807054112392839",
           "deps": [
             "npm:@tiptap/react",
             "npm:react",
@@ -2275,7 +2275,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/link-popover/link-popover.tsx",
-          "hash": "269716710368721914",
+          "hash": "7475793924573778367",
           "deps": [
             "npm:@tiptap/react",
             "npm:react"
@@ -2283,7 +2283,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/link-popover/use-link-popover.ts",
-          "hash": "5901447151327870594",
+          "hash": "17886361689229186440",
           "deps": [
             "npm:@tiptap/react",
             "npm:react"
@@ -2540,21 +2540,21 @@
         },
         {
           "file": "apps/api/src/contexts/ai-context.tsx",
-          "hash": "14308643011404735678",
+          "hash": "9075262910325141536",
           "deps": [
             "npm:react"
           ]
         },
         {
           "file": "apps/api/src/contexts/app-context.tsx",
-          "hash": "11348400892126001741",
+          "hash": "10289968195323857489",
           "deps": [
             "npm:react"
           ]
         },
         {
           "file": "apps/api/src/contexts/collab-context.tsx",
-          "hash": "15027732721277881068",
+          "hash": "10731527518293342304",
           "deps": [
             "npm:@tiptap-pro/provider",
             "npm:react",
@@ -2584,7 +2584,7 @@
         },
         {
           "file": "apps/api/src/hooks/use-composed-ref.ts",
-          "hash": "5242350441707443202",
+          "hash": "3347488360827534731",
           "deps": [
             "npm:react"
           ]
@@ -2599,7 +2599,7 @@
         },
         {
           "file": "apps/api/src/hooks/use-element-rect.ts",
-          "hash": "6757424579062488631",
+          "hash": "935131100149643530",
           "deps": [
             "npm:react"
           ]
@@ -2623,7 +2623,7 @@
         },
         {
           "file": "apps/api/src/hooks/use-is-breakpoint.ts",
-          "hash": "17902164026613329268",
+          "hash": "5959027553870085304",
           "deps": [
             "npm:react"
           ]
@@ -2637,7 +2637,7 @@
         },
         {
           "file": "apps/api/src/hooks/use-menu-navigation.ts",
-          "hash": "16597977484768014065",
+          "hash": "13509511227308643275",
           "deps": [
             "npm:@tiptap/react",
             "npm:react"
@@ -2682,7 +2682,7 @@
         },
         {
           "file": "apps/api/src/hooks/use-unmount.ts",
-          "hash": "457172667684461942",
+          "hash": "7828026564951602417",
           "deps": [
             "npm:react"
           ]
@@ -2764,7 +2764,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini-analyst.service.ts",
-          "hash": "9520837263384749253",
+          "hash": "2072315283957893780",
           "deps": [
             "npm:@nestjs/cache-manager",
             "npm:@nestjs/common",
@@ -2788,7 +2788,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/prompts/templates.ts",
-          "hash": "17066254489451257531"
+          "hash": "2679321650139944980"
         },
         {
           "file": "apps/api/src/modules/ai/providers/ai-provider.interface.ts",
@@ -2803,7 +2803,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/providers/vertex-ai.provider.ts",
-          "hash": "18036401002399453913",
+          "hash": "8377341439725065503",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3803,8 +3803,16 @@
         "hash": "13128984590435018799"
       },
       {
+        "file": "DEPLOYMENT_EXECUTION_PLAN.md",
+        "hash": "9055353147316872347"
+      },
+      {
         "file": "DEPLOYMENT_FIXES_README.md",
         "hash": "8839456142501731964"
+      },
+      {
+        "file": "DEPLOYMENT_GUIDE_FINAL.md",
+        "hash": "6566544303616063789"
       },
       {
         "file": "DEPLOYMENT_INSTRUCTIONS.md",
@@ -3813,6 +3821,10 @@
       {
         "file": "DEPLOYMENT_SUMMARY.md",
         "hash": "14322887641492955326"
+      },
+      {
+        "file": "DEPLOYMENT_VERIFICATION.md",
+        "hash": "15074983280526487369"
       },
       {
         "file": "Dockerfile",
@@ -3833,6 +3845,10 @@
       {
         "file": "FINAL_DEEPER_ANALYSIS_COMPLETION.md",
         "hash": "9197405532620112028"
+      },
+      {
+        "file": "FINAL_DEPLOYMENT_SUMMARY.md",
+        "hash": "9526333197071241864"
       },
       {
         "file": "FINAL_TESTING_PLAN.md",
@@ -3861,6 +3877,10 @@
       {
         "file": "PRODUCT_DISCOVERY_STRATEGY.md",
         "hash": "7817553116608421190"
+      },
+      {
+        "file": "QUICK_START_DEPLOYMENT.md",
+        "hash": "2202936299374849845"
       },
       {
         "file": "RAG_SETUP.md",
@@ -3893,6 +3913,10 @@
       {
         "file": "apphosting.yaml",
         "hash": "8627724752436180461"
+      },
+      {
+        "file": "build_and_test_frontend.js",
+        "hash": "12110789258429201965"
       },
       {
         "file": "components/AIChat.tsx",
@@ -8260,7 +8284,7 @@
       },
       {
         "file": "ffmpeg/Makefile",
-        "hash": "7630631585905430784"
+        "hash": "16571044239389294186"
       },
       {
         "file": "ffmpeg/README.md",
@@ -8372,7 +8396,7 @@
       },
       {
         "file": "ffmpeg/configure",
-        "hash": "12122356676762360094"
+        "hash": "2167374479795051659"
       },
       {
         "file": "ffmpeg/doc/.gitignore",
@@ -8832,7 +8856,7 @@
       },
       {
         "file": "ffmpeg/ffbuild/arch.mak",
-        "hash": "4130629402766191995"
+        "hash": "11988513637590261738"
       },
       {
         "file": "ffmpeg/ffbuild/bin2c.c",
@@ -20536,7 +20560,7 @@
       },
       {
         "file": "ffmpeg/libavfilter/avfiltergraph.c",
-        "hash": "8016661491452211554"
+        "hash": "2714238839830583366"
       },
       {
         "file": "ffmpeg/libavfilter/avfilterres.rc",
@@ -24012,7 +24036,7 @@
       },
       {
         "file": "ffmpeg/libavformat/iamf_parse.c",
-        "hash": "3919980645751904288"
+        "hash": "16685160272418305709"
       },
       {
         "file": "ffmpeg/libavformat/iamf_parse.h",
@@ -24028,7 +24052,7 @@
       },
       {
         "file": "ffmpeg/libavformat/iamf_writer.c",
-        "hash": "14059128942121412914"
+        "hash": "6634963410649980816"
       },
       {
         "file": "ffmpeg/libavformat/iamf_writer.h",
@@ -25932,19 +25956,23 @@
       },
       {
         "file": "ffmpeg/libavutil/aarch64/Makefile",
-        "hash": "14246757473053390428"
+        "hash": "506512971321689154"
       },
       {
         "file": "ffmpeg/libavutil/aarch64/asm.S",
-        "hash": "8352015544671390944"
+        "hash": "6873905570583377664"
       },
       {
         "file": "ffmpeg/libavutil/aarch64/cpu.c",
-        "hash": "16692645996434059797"
+        "hash": "2517462465581725241"
       },
       {
         "file": "ffmpeg/libavutil/aarch64/cpu.h",
-        "hash": "5655716636400301918"
+        "hash": "8917891675289917952"
+      },
+      {
+        "file": "ffmpeg/libavutil/aarch64/cpu_sme.S",
+        "hash": "10467518652037586984"
       },
       {
         "file": "ffmpeg/libavutil/aarch64/cpu_sve.S",
@@ -26192,11 +26220,11 @@
       },
       {
         "file": "ffmpeg/libavutil/cpu.c",
-        "hash": "13198919855362411168"
+        "hash": "4324349220740054065"
       },
       {
         "file": "ffmpeg/libavutil/cpu.h",
-        "hash": "3950388443977757476"
+        "hash": "4146489381269825665"
       },
       {
         "file": "ffmpeg/libavutil/cpu_internal.h",
@@ -27124,7 +27152,7 @@
       },
       {
         "file": "ffmpeg/libavutil/tests/cpu.c",
-        "hash": "2010474591157728432"
+        "hash": "1889026077482669012"
       },
       {
         "file": "ffmpeg/libavutil/tests/cpu_init.c",
@@ -28420,7 +28448,7 @@
       },
       {
         "file": "ffmpeg/tests/checkasm/checkasm.c",
-        "hash": "15190615875165356236"
+        "hash": "16040485642177715778"
       },
       {
         "file": "ffmpeg/tests/checkasm/checkasm.h",
@@ -28900,7 +28928,7 @@
       },
       {
         "file": "ffmpeg/tests/fate/filter-video.mak",
-        "hash": "4672739192750831524"
+        "hash": "1380909202479827624"
       },
       {
         "file": "ffmpeg/tests/fate/fits.mak",
@@ -33845,6 +33873,10 @@
       {
         "file": "ffmpeg/tests/ref/fate/filter-rgbtestsrc-x2rgb10le",
         "hash": "12741035620467154252"
+      },
+      {
+        "file": "ffmpeg/tests/ref/fate/filter-scale-premultiply",
+        "hash": "11231313394456509513"
       },
       {
         "file": "ffmpeg/tests/ref/fate/filter-scale200",
@@ -48540,7 +48572,7 @@
       },
       {
         "file": "services/IntelligentContextEngine.ts",
-        "hash": "7163528969464364554"
+        "hash": "5914972324845769824"
       },
       {
         "file": "services/OpenAIVisionService.ts",
@@ -48625,6 +48657,10 @@
       {
         "file": "shims/atlaskit-media-client-get-media-client.js",
         "hash": "3790003523994625710"
+      },
+      {
+        "file": "shims/atlaskit-media-inline-shim.js",
+        "hash": "3048887231066486565"
       },
       {
         "file": "shims/legacy-custom-icon-fallback.js",
@@ -48860,7 +48896,7 @@
       },
       {
         "file": "src/dataconnect-generated/.guides/usage.md",
-        "hash": "6620734942988841674"
+        "hash": "9395073703261133520"
       },
       {
         "file": "src/dataconnect-generated/README.md",
@@ -48868,7 +48904,7 @@
       },
       {
         "file": "src/dataconnect-generated/esm/index.esm.js",
-        "hash": "6110978263211776781"
+        "hash": "8103665619056376340"
       },
       {
         "file": "src/dataconnect-generated/esm/package.json",
@@ -48876,11 +48912,11 @@
       },
       {
         "file": "src/dataconnect-generated/index.cjs.js",
-        "hash": "6179164097319436544"
+        "hash": "11947682604775880572"
       },
       {
         "file": "src/dataconnect-generated/index.d.ts",
-        "hash": "12827982418421243259"
+        "hash": "12121625883648963937"
       },
       {
         "file": "src/dataconnect-generated/package.json",
@@ -48892,7 +48928,7 @@
       },
       {
         "file": "src/dataconnect-generated/react/esm/index.esm.js",
-        "hash": "12174374708228840605"
+        "hash": "14570083277883875313"
       },
       {
         "file": "src/dataconnect-generated/react/esm/package.json",
@@ -48900,11 +48936,11 @@
       },
       {
         "file": "src/dataconnect-generated/react/index.cjs.js",
-        "hash": "18430920159781452914"
+        "hash": "2913033731498597627"
       },
       {
         "file": "src/dataconnect-generated/react/index.d.ts",
-        "hash": "1450360211015605153"
+        "hash": "498645000099755456"
       },
       {
         "file": "src/dataconnect-generated/react/package.json",
@@ -49104,7 +49140,7 @@
       },
       {
         "file": "vite.config.ts",
-        "hash": "17906507783163415568"
+        "hash": "3168230634973458677"
       },
       {
         "file": "vitest.config.ts",
