@@ -48980,7 +48980,7 @@
       },
       {
         "file": "src/dataconnect-generated/.guides/usage.md",
-        "hash": "9395073703261133520"
+        "hash": "6620734942988841674"
       },
       {
         "file": "src/dataconnect-generated/README.md",
@@ -48988,7 +48988,7 @@
       },
       {
         "file": "src/dataconnect-generated/esm/index.esm.js",
-        "hash": "8103665619056376340"
+        "hash": "6110978263211776781"
       },
       {
         "file": "src/dataconnect-generated/esm/package.json",
@@ -48996,11 +48996,11 @@
       },
       {
         "file": "src/dataconnect-generated/index.cjs.js",
-        "hash": "11947682604775880572"
+        "hash": "6179164097319436544"
       },
       {
         "file": "src/dataconnect-generated/index.d.ts",
-        "hash": "12121625883648963937"
+        "hash": "12827982418421243259"
       },
       {
         "file": "src/dataconnect-generated/package.json",
@@ -49012,7 +49012,7 @@
       },
       {
         "file": "src/dataconnect-generated/react/esm/index.esm.js",
-        "hash": "14570083277883875313"
+        "hash": "12174374708228840605"
       },
       {
         "file": "src/dataconnect-generated/react/esm/package.json",
@@ -49020,11 +49020,11 @@
       },
       {
         "file": "src/dataconnect-generated/react/index.cjs.js",
-        "hash": "2913033731498597627"
+        "hash": "18430920159781452914"
       },
       {
         "file": "src/dataconnect-generated/react/index.d.ts",
-        "hash": "498645000099755456"
+        "hash": "1450360211015605153"
       },
       {
         "file": "src/dataconnect-generated/react/package.json",
