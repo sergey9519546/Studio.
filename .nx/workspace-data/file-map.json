@@ -1098,7 +1098,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-extend-row-column-button/table-extend-row-column-button.tsx",
-          "hash": "13391090049268096801",
+          "hash": "2241023970724266691",
           "deps": [
             "npm:@floating-ui/react",
             "npm:@tiptap/pm",
@@ -1156,7 +1156,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-handle/table-handle.tsx",
-          "hash": "5267478283869576913",
+          "hash": "9333907964185282616",
           "deps": [
             "npm:@floating-ui/react",
             "npm:@tiptap/pm",
@@ -1238,7 +1238,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-selection-overlay/table-selection-overlay.tsx",
-          "hash": "14845862987939842696",
+          "hash": "17362921429401955153",
           "deps": [
             "npm:@floating-ui/react",
             "npm:@tiptap/pm",
@@ -1643,7 +1643,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/tooltip/tooltip.tsx",
-          "hash": "12341291402461361061",
+          "hash": "10966965630749941637",
           "deps": [
             "npm:@floating-ui/react",
             "npm:react"
@@ -2554,7 +2554,7 @@
         },
         {
           "file": "apps/api/src/contexts/collab-context.tsx",
-          "hash": "10731527518293342304",
+          "hash": "15523043513569495701",
           "deps": [
             "npm:@tiptap-pro/provider",
             "npm:react",
@@ -2854,7 +2854,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai-embeddings.service.ts",
-          "hash": "17756364553842076315",
+          "hash": "13694288435680143409",
           "deps": [
             "npm:@google-cloud/aiplatform",
             "npm:@nestjs/common",
@@ -2863,7 +2863,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai.service.ts",
-          "hash": "11801921675279844071",
+          "hash": "3786231010024908468",
           "deps": [
             "npm:@google-cloud/aiplatform",
             "npm:@nestjs/common",
@@ -48399,6 +48399,14 @@
         "hash": "13104798967279898510"
       },
       {
+        "file": "generated/prisma/client.d.ts",
+        "hash": "6801102947810818358"
+      },
+      {
+        "file": "generated/prisma/client.js",
+        "hash": "11637790384250053573"
+      },
+      {
         "file": "generated/prisma/client.ts",
         "hash": "10709198520676329636"
       },
@@ -48407,8 +48415,36 @@
         "hash": "10012574420637074131"
       },
       {
+        "file": "generated/prisma/default.d.ts",
+        "hash": "6801102947810818358"
+      },
+      {
+        "file": "generated/prisma/default.js",
+        "hash": "8493047610801614176"
+      },
+      {
+        "file": "generated/prisma/edge.d.ts",
+        "hash": "11303388507078878756"
+      },
+      {
+        "file": "generated/prisma/edge.js",
+        "hash": "16055942170213151446"
+      },
+      {
         "file": "generated/prisma/enums.ts",
         "hash": "5520807387621116889"
+      },
+      {
+        "file": "generated/prisma/index-browser.js",
+        "hash": "15115479427291115169"
+      },
+      {
+        "file": "generated/prisma/index.d.ts",
+        "hash": "13720823770210804158"
+      },
+      {
+        "file": "generated/prisma/index.js",
+        "hash": "6383042668209723905"
       },
       {
         "file": "generated/prisma/internal/class.ts",
@@ -48433,6 +48469,54 @@
       {
         "file": "generated/prisma/models/User.ts",
         "hash": "12623013910527857920"
+      },
+      {
+        "file": "generated/prisma/package.json",
+        "hash": "10591426547264482506"
+      },
+      {
+        "file": "generated/prisma/query_compiler_bg.js",
+        "hash": "4709418274068484417"
+      },
+      {
+        "file": "generated/prisma/query_compiler_bg.wasm",
+        "hash": "10272818351233599188"
+      },
+      {
+        "file": "generated/prisma/query_compiler_bg.wasm-base64.js",
+        "hash": "961870225219961628"
+      },
+      {
+        "file": "generated/prisma/runtime/client.d.ts",
+        "hash": "4580627517940311542"
+      },
+      {
+        "file": "generated/prisma/runtime/client.js",
+        "hash": "1378095229812076976"
+      },
+      {
+        "file": "generated/prisma/runtime/index-browser.d.ts",
+        "hash": "17071751464809333096"
+      },
+      {
+        "file": "generated/prisma/runtime/index-browser.js",
+        "hash": "15042080154238115192"
+      },
+      {
+        "file": "generated/prisma/runtime/wasm-compiler-edge.js",
+        "hash": "14086358152811602889"
+      },
+      {
+        "file": "generated/prisma/schema.prisma",
+        "hash": "12194661427418390735"
+      },
+      {
+        "file": "generated/prisma/wasm-edge-light-loader.mjs",
+        "hash": "9322600139001879845"
+      },
+      {
+        "file": "generated/prisma/wasm-worker-loader.mjs",
+        "hash": "1611556503276336471"
       },
       {
         "file": "icon_paths.txt",
@@ -48516,7 +48600,7 @@
       },
       {
         "file": "prisma/schema.prisma",
-        "hash": "12285005772091044463"
+        "hash": "8887657023626792185"
       },
       {
         "file": "prisma/schema.prisma.bak",
