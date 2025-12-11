@@ -22300,6 +22300,16 @@
     "type": "static"
   },
   {
+    "source": "npm:openai",
+    "target": "npm:ws",
+    "type": "static"
+  },
+  {
+    "source": "npm:openai",
+    "target": "npm:zod",
+    "type": "static"
+  },
+  {
     "source": "npm:optionator",
     "target": "npm:deep-is",
     "type": "static"

@@ -2776,7 +2776,8 @@
           "hash": "8480181593307848938",
           "deps": [
             "npm:@nestjs/common",
-            "npm:@nestjs/config"
+            "npm:@nestjs/config",
+            "npm:openai"
           ]
         },
         {
@@ -2856,7 +2857,7 @@
           "file": "apps/api/src/modules/ai/vertex-ai-embeddings.service.ts",
           "hash": "13694288435680143409",
           "deps": [
-            "npm:@google-cloud/aiplatform",
+            "npm:@google/genai",
             "npm:@nestjs/common",
             "npm:@nestjs/config"
           ]
@@ -2865,9 +2866,10 @@
           "file": "apps/api/src/modules/ai/vertex-ai.service.ts",
           "hash": "3786231010024908468",
           "deps": [
-            "npm:@google-cloud/aiplatform",
+            "npm:@google/genai",
             "npm:@nestjs/common",
-            "npm:@nestjs/config"
+            "npm:@nestjs/config",
+            "npm:firebase"
           ]
         },
         {
@@ -49252,5 +49254,5 @@
       }
     ]
   },
-  "externalNodesHash": "2746903689832553321"
+  "externalNodesHash": "5971057217548950579"
 }

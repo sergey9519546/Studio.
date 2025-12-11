@@ -15,6 +15,8 @@ import { StreamingService } from "./streaming.service";
 import { PromptTesterService } from "./testing/prompt-tester.service";
 import { VertexAIEmbeddingsService } from "./vertex-ai-embeddings.service";
 import { VertexAIService } from "./vertex-ai.service";
+import { VertexAiEmbeddingsService } from './Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai-embeddings.service';
+import { VertexAiService } from './Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai.service';
 
 @Module({
   imports: [
@@ -35,6 +37,8 @@ import { VertexAIService } from "./vertex-ai.service";
     VertexAIProvider,
     AIProviderManager,
     PromptTesterService,
+    VertexAiEmbeddingsService,
+    VertexAiService,
   ],
   exports: [
     GeminiAnalystService,

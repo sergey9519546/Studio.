@@ -1,7 +1,7 @@
 import type { Attrs, Node } from "@tiptap/pm/model"
-import { findNodePosition, isValidPosition } from "@app/lib/tiptap-utils"
-import { type Editor } from "@tiptap/react"
 import { NodeSelection, TextSelection } from "@tiptap/pm/state"
+import { type Editor } from "@tiptap/react"
+import { findNodePosition, isValidPosition } from "./tiptap-utils"
 
 /**
  * Splits an array into chunks of specified size
@@ -82,7 +82,7 @@ export function getActiveMarkAttrs(
 export function findSelectionPosition(params: {
   editor: Editor
   node?: Node | null
-  nodePos?: number | null
+  nodePos?: number | null | undefined
 }): number | null {
   const { editor, node, nodePos } = params
 

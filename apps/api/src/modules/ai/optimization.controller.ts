@@ -1,7 +1,7 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AIUsageService } from '../monitoring/ai-usage.service';
-import { PromptTesterService } from './testing/prompt-tester.service';
 import { PROMPT_TEMPLATES } from './prompts/templates';
+import { PromptTesterService } from './testing/prompt-tester.service';
 
 interface OptimizationResult {
     template: string;
@@ -45,7 +45,7 @@ export class OptimizationController {
 
             results.push({
                 template: templateName,
-                currentVersion: template.version || '1.0',
+                currentVersion: '1.0',
                 qualityScore: avgScore,
                 recommendations: this.generateRecommendations(avgScore),
                 estimatedImprovement: avgScore < 0.7 ? '15-20%' : '5-10%',

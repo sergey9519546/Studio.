@@ -19,6 +19,10 @@
         "dist",
         "**/*spec.ts",
         "**/*.test.ts",
-        "scripts/**/*"
+        "scripts/**/*",
+        "src/components/**/*",
+        "src/contexts/**/*",
+        "src/hooks/**/*",
+        "**/*.tsx"
     ]
 }
