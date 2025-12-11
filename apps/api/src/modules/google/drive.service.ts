@@ -1,4 +1,3 @@
-
 import { Injectable, Logger } from '@nestjs/common';
 import { GoogleClientFactory } from './google-client.factory';
 
@@ -30,7 +29,7 @@ export class DriveService {
       // Ensure Service Account is usable before calling
       const drive = this.clientFactory.createDriveClient();
 
-      const response = await drive.files.list({
+      const response = await (drive as any).files.list({
         q: `'${this.TEAM_FOLDER_ID}' in parents and trashed = false`,
         fields: 'files(id, name, mimeType, thumbnailLink, webViewLink, iconLink, modifiedTime, size)',
         pageSize: 100,

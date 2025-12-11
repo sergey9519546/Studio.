@@ -18470,7 +18470,7 @@
       },
       {
         "source": "api",
-        "target": "npm:firebase",
+        "target": "npm:@google/generative-ai",
         "type": "static"
       },
       {
@@ -45508,5 +45508,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1765492569076
+  "computedAt": 1765494873128
 }

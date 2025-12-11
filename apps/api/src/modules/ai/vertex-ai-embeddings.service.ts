@@ -1,4 +1,4 @@
-import { GoogleGenAI, GoogleGenerativeAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { EmbeddingsProvider } from "../rag/providers/embeddings-provider.interface";
@@ -6,7 +6,7 @@ import { EmbeddingsProvider } from "../rag/providers/embeddings-provider.interfa
 @Injectable()
 export class VertexAIEmbeddingsService implements EmbeddingsProvider {
   private readonly logger = new Logger(VertexAIEmbeddingsService.name);
-  private client: GoogleGenAI;
+  private client: GoogleGenerativeAI;
   private readonly project: string;
   private readonly location: string;
   private readonly embeddingModel = "text-embedding-004";
@@ -27,7 +27,7 @@ export class VertexAIEmbeddingsService implements EmbeddingsProvider {
     this.location = this.configService.get<string>("GCP_LOCATION") || "us-central1";
 
     // Initialize Google Generative AI client
-    this.client = new GoogleGenerativeAI({ apiKey });
+    this.client = new GoogleGenerativeAI(apiKey);
 
     this.logger.log(`Vertex AI Embeddings initialized: ${this.embeddingModel}`);
   }

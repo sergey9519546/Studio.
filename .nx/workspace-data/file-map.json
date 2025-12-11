@@ -2866,10 +2866,9 @@
           "file": "apps/api/src/modules/ai/vertex-ai.service.ts",
           "hash": "3786231010024908468",
           "deps": [
-            "npm:@google/genai",
+            "npm:@google/generative-ai",
             "npm:@nestjs/common",
-            "npm:@nestjs/config",
-            "npm:firebase"
+            "npm:@nestjs/config"
           ]
         },
         {

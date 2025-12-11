@@ -1,5 +1,5 @@
-import { Injectable, Logger, BadRequestException } from '@nestjs/common';
-import { GoogleClientFactory, AuthenticatedUser } from './google-client.factory';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { AuthenticatedUser, GoogleClientFactory } from './google-client.factory';
 
 @Injectable()
 export class SheetIngestorService {
@@ -21,7 +21,7 @@ export class SheetIngestorService {
 
     try {
       // 1. Get Spreadsheet Metadata to identify the first visible sheet
-      const meta = await sheets.spreadsheets.get({ spreadsheetId: fileId });
+      const meta = await (sheets as any).spreadsheets.get({ spreadsheetId: fileId });
       const visibleSheet = meta.data.sheets?.find((s: any) => !s.properties?.hidden);
 
       if (!visibleSheet?.properties?.title) {
@@ -32,7 +32,7 @@ export class SheetIngestorService {
 
       // 2. Fetch Data (Values)
       // We rely on the API to return the "used range" if we just provide the sheet name
-      const response = await sheets.spreadsheets.values.get({
+      const response = await (sheets as any).spreadsheets.values.get({
         spreadsheetId: fileId,
         range: sheetName,
         valueRenderOption: 'FORMATTED_VALUE', // Get human-readable strings (e.g. "$100.00" instead of 100)

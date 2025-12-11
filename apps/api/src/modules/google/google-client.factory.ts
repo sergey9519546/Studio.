@@ -1,8 +1,7 @@
-
-import { Injectable, UnauthorizedException, Logger, OnModuleInit } from '@nestjs/common';
+import { Injectable, Logger, OnModuleInit, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { JWT, OAuth2Client } from 'google-auth-library';
 import { google } from 'googleapis';
-import { OAuth2Client, JWT } from 'google-auth-library';
 
 export interface GoogleUserCredentials {
   accessToken?: string;
@@ -119,7 +118,10 @@ export class GoogleClientFactory implements OnModuleInit {
   /**
    * Returns authenticated clients for Sheets and Docs (User Context).
    */
-  createClients(user: AuthenticatedUser): { sheets: unknown; docs: unknown } {
+  createClients(user: AuthenticatedUser): { 
+    sheets: any; 
+    docs: any; 
+  } {
     if (!user.googleCredentials) {
       throw new UnauthorizedException('User missing Google credentials');
     }
@@ -135,7 +137,9 @@ export class GoogleClientFactory implements OnModuleInit {
   /**
    * Returns authenticated Drive client for User Context.
    */
-  createDriveClientForUser(user: AuthenticatedUser): { drive: unknown } {
+  createDriveClientForUser(user: AuthenticatedUser): { 
+    drive: any; 
+  } {
     if (!user.googleCredentials) {
       throw new UnauthorizedException('User missing Google credentials');
     }
@@ -150,7 +154,7 @@ export class GoogleClientFactory implements OnModuleInit {
   /**
    * Returns a Drive client authenticated as the Service Account.
    */
-  createDriveClient(): unknown {
+  createDriveClient(): any {
     const auth = this.createServiceAccountAuth();
     return google.drive({ version: 'v3', auth });
   }

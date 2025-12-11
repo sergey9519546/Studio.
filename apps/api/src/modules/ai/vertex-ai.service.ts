@@ -1,8 +1,6 @@
-import { GoogleGenAI } from "@google/genai";
-import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
+import { GenerativeModel, GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { GenerativeModel } from "firebase/ai";
 import type { ToolCall, ToolDefinition } from "./types";
 
 @Injectable()
@@ -29,7 +27,7 @@ export class VertexAIService {
     this.location = this.configService.get<string>("GCP_LOCATION") || "us-central1";
 
     // Initialize Google Generative AI client
-    this.client = new GoogleGenAI({ apiKey });
+    this.client = new GoogleGenerativeAI(apiKey);
 
     this.logger.log(
       `Vertex AI initialized: project=${this.project}, location=${this.location}`
@@ -69,6 +67,8 @@ export class VertexAIService {
 
   /**
    * Generate content using Gemini model via Vertex AI
+   * 
+   * IMPROVEMENT: Added filtering of undefined values in generationConfig
    */
   async generateContent(
     prompt: string,
@@ -77,7 +77,23 @@ export class VertexAIService {
   ): Promise<string> {
     try {
       const modelInstance = this.getModel(model);
-      const result = await modelInstance.generateContent(prompt);
+      
+      // Build generation config with filtered undefined values (IMPROVEMENT)
+      const generationConfig: Record<string, any> = {};
+      if (options?.temperature !== undefined) {
+        generationConfig.temperature = options.temperature;
+      }
+      if (options?.maxTokens !== undefined) {
+        generationConfig.maxOutputTokens = options.maxTokens;
+      }
+      
+      const requestConfig = Object.keys(generationConfig).length > 0 ? { generationConfig } : {};
+
+      const result = await modelInstance.generateContent({
+        contents: [{ role: 'user', parts: [{ text: prompt }] }],
+        ...requestConfig,
+      });
+      
       const response = await result.response;
       const text = response.text();
 
@@ -109,8 +125,6 @@ export class VertexAIService {
     try {
       const modelInstance = this.getModel(model);
 
-
-
       const imagePart = {
         inlineData: {
           data: imageData.data,
@@ -141,17 +155,22 @@ export class VertexAIService {
 
   /**
    * Generate content with conversation history and optional tools
+   * 
+   * IMPROVEMENTS:
+   * 1. Added explicit model parameter with default
+   * 2. Added systemPrompt support via systemInstruction
    */
   async chat(
     messages: Array<{ role: string; content: string }>,
     systemPrompt?: string,
-    tools?: ToolDefinition[]
+    tools?: ToolDefinition[],
+    model: string = "gemini-1.5-pro"  // IMPROVEMENT: Added explicit model parameter
   ): Promise<string | { toolCalls: ToolCall[] }> {
     try {
-      const modelInstance = this.getModel("gemini-1.5-pro");
+      const modelInstance = this.getModel(model);  // IMPROVEMENT: Use parameter instead of hardcoded
 
-      // Start chat session
-      const chat = modelInstance.startChat({
+      // Build startChat configuration
+      const chatConfig: Record<string, any> = {
         history: messages.slice(0, -1).map(msg => ({
           role: msg.role === 'assistant' ? 'model' : 'user',
           parts: [{ text: msg.content }],
@@ -162,16 +181,28 @@ export class VertexAIService {
           topP: 0.95,
           topK: 40,
         },
-        ...(tools && tools.length > 0 && {
-          tools: [{
-            functionDeclarations: tools.map(tool => ({
-              name: tool.name,
-              description: tool.description,
-              parameters: tool.parameters,
-            })),
-          }],
-        }),
-      });
+      };
+
+      // IMPROVEMENT: Add system instruction if systemPrompt is provided
+      if (systemPrompt) {
+        chatConfig.systemInstruction = {
+          parts: [{ text: systemPrompt }]
+        };
+      }
+
+      // Add tools if provided
+      if (tools && tools.length > 0) {
+        chatConfig.tools = [{
+          functionDeclarations: tools.map(tool => ({
+            name: tool.name,
+            description: tool.description,
+            parameters: tool.parameters,
+          })),
+        }];
+      }
+
+      // Start chat session
+      const chat = modelInstance.startChat(chatConfig);
 
       // Send the last message
       const lastMessage = messages[messages.length - 1];
@@ -209,8 +240,10 @@ export class VertexAIService {
 
   /**
    * Extract structured data from text using Gemini
+   * 
+   * IMPROVEMENT: Changed schema parameter type from unknown to object for better type safety
    */
-  async extractData(prompt: string, schema?: unknown): Promise<unknown> {
+  async extractData(prompt: string, schema?: object): Promise<unknown> {
     let enhancedPrompt = prompt;
 
     if (schema) {

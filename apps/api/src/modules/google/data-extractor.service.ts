@@ -1,5 +1,5 @@
-import { Injectable, Logger, BadRequestException } from '@nestjs/common';
-import { GoogleClientFactory, AuthenticatedUser } from './google-client.factory';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { AuthenticatedUser, GoogleClientFactory } from './google-client.factory';
 
 @Injectable()
 export class DataExtractorService {
@@ -19,12 +19,12 @@ export class DataExtractorService {
       // 1. Fetch Data
       // Fetching all data from the first sheet by default (assuming A1 notation without sheet name gets first sheet in some contexts, 
       // but getting sheet name first is safer).
-      const meta = await sheets.spreadsheets.get({ spreadsheetId: fileId });
+      const meta = await (sheets as any).spreadsheets.get({ spreadsheetId: fileId });
       const sheetName = meta.data.sheets?.[0]?.properties?.title;
 
       if (!sheetName) throw new Error('No sheets found');
 
-      const response = await sheets.spreadsheets.values.get({
+      const response = await (sheets as any).spreadsheets.values.get({
         spreadsheetId: fileId,
         range: sheetName, // Get full range
         valueRenderOption: 'FORMATTED_VALUE',
@@ -64,7 +64,7 @@ export class DataExtractorService {
     const { docs } = this.clientFactory.createClients(user);
 
     try {
-      const doc = await docs.documents.get({ documentId: fileId });
+      const doc = await (docs as any).documents.get({ documentId: fileId });
       const content = doc.data.body?.content;
 
       if (!content) return '';

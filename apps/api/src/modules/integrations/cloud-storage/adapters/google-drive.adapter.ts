@@ -1,9 +1,8 @@
-
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { ICloudStorageAdapter } from './storage-adapter.interface';
-import { CloudFileDto, CloudFileType, CloudProviderType } from '../dto/cloud-storage.dto';
-import { GoogleClientFactory, AuthenticatedUser } from '../../../google/google-client.factory';
 import { PrismaService } from '../../../../prisma/prisma.service';
+import { AuthenticatedUser, GoogleClientFactory } from '../../../google/google-client.factory';
+import { CloudFileDto, CloudFileType, CloudProviderType } from '../dto/cloud-storage.dto';
+import { ICloudStorageAdapter } from './storage-adapter.interface';
 
 @Injectable()
 export class GoogleDriveAdapter implements ICloudStorageAdapter {
@@ -57,7 +56,7 @@ export class GoogleDriveAdapter implements ICloudStorageAdapter {
     const user: AuthenticatedUser = await this.getUserWithCredentials(userId);
     const { drive } = this.clientFactory.createDriveClientForUser(user);
 
-    const res = await drive.files.list({
+    const res = await (drive as any).files.list({
       q: `'${folderId}' in parents and trashed = false`,
       fields: 'nextPageToken, files(id, name, mimeType, size, thumbnailLink, webViewLink, modifiedTime)',
       pageSize: 20,
