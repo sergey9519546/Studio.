@@ -2,6 +2,8 @@ import { PredictionServiceClient, protos } from "@google-cloud/aiplatform";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import type { ToolCall, ToolDefinition } from "./types";
+import { number } from "framer-motion";
+import path from "path";
 
 // Vertex AI client typings are not published; use a loose type until official typings are available.
 type IValue = any;
