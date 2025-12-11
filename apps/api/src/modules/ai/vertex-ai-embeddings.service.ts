@@ -1,9 +1,10 @@
-import { PredictionServiceClient, protos } from "@google-cloud/aiplatform";
+import { PredictionServiceClient } from "@google-cloud/aiplatform";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { EmbeddingsProvider } from "../rag/providers/embeddings-provider.interface";
 
 // Vertex AI client typings are not published; use a loose type until official typings are available.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type IValue = any;
 
 interface EmbeddingValue {

@@ -109,6 +109,23 @@ export function TableHandle({
     []
   )
 
+  const rowHandleRef = useRef<HTMLDivElement>(null)
+  const colHandleRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const hasValidRowIndex = typeof state?.rowIndex === "number"
+    const hasValidColIndex = typeof state?.colIndex === "number"
+    const shouldShowRow = (isRowVisible && rowHandle.isMounted && hasValidRowIndex) || menuOpen === "row"
+    const shouldShowColumn = (isColumnVisible && colHandle.isMounted && hasValidColIndex) || menuOpen === "column"
+
+    if (shouldShowRow && rowHandleRef.current) {
+      rowHandle.ref(rowHandleRef.current)
+    }
+    if (shouldShowColumn && colHandleRef.current) {
+      colHandle.ref(colHandleRef.current)
+    }
+  }, [state?.rowIndex, state?.colIndex, isRowVisible, isColumnVisible, menuOpen, rowHandle, colHandle, rowHandle.ref, colHandle.ref])
+
   if (!editor || !state) return null
 
   const hasValidRowIndex = typeof state.rowIndex === "number"
@@ -124,19 +141,6 @@ export function TableHandle({
 
   const RowButton = CustomRowButton || TableHandleMenu
   const ColumnButton = CustomColumnButton || TableHandleMenu
-
-  // Use useEffect to set refs after render to avoid accessing refs during render
-  const rowHandleRef = useRef<HTMLDivElement>(null)
-  const colHandleRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (shouldShowRow && rowHandleRef.current) {
-      rowHandle.ref(rowHandleRef.current)
-    }
-    if (shouldShowColumn && colHandleRef.current) {
-      colHandle.ref(colHandleRef.current)
-    }
-  }, [shouldShowRow, shouldShowColumn, rowHandle.ref, colHandle.ref])
 
   return (
     <FloatingPortal root={state.widgetContainer}>

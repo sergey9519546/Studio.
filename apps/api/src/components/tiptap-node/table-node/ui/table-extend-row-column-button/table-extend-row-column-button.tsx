@@ -224,9 +224,6 @@ export const TableExtendRowColumnButtons: React.FC<
     onMouseUp?.()
   }, [editor, onMouseUp])
 
-  if (!state) return null
-
-  // Use useEffect to set refs after render to avoid accessing refs during render
   const rowButtonRef = useRef<HTMLDivElement>(null)
   const columnButtonRef = useRef<HTMLDivElement>(null)
 
@@ -237,7 +234,9 @@ export const TableExtendRowColumnButtons: React.FC<
     if (columnButtonRef.current) {
       columnButton.ref(columnButtonRef.current)
     }
-  }, [rowButton.ref, columnButton.ref])
+  }, [rowButton, columnButton, rowButton.ref, columnButton.ref])
+
+  if (!state) return null
 
   return (
     <FloatingPortal root={state.widgetContainer}>

@@ -468,6 +468,14 @@ export const TableSelectionOverlay: React.FC<TableSelectionOverlayProps> = ({
     setContainerElement(c ?? null)
   }, [tableDom])
 
+  const floatingRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (floatingRef.current) {
+      refs.setFloating(floatingRef.current)
+    }
+  }, [refs])
+
   if (!isVisible || !selectionRect) {
     return null
   }
@@ -490,15 +498,6 @@ export const TableSelectionOverlay: React.FC<TableSelectionOverlayProps> = ({
       </span>
     )
   }
-
-  // Use useEffect to set refs after render to avoid accessing refs during render
-  const floatingRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (floatingRef.current) {
-      refs.setFloating(floatingRef.current)
-    }
-  }, [refs.setFloating])
 
   return (
     <FloatingPortal root={containerElement}>

@@ -1098,7 +1098,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-extend-row-column-button/table-extend-row-column-button.tsx",
-          "hash": "13391090049268096801",
+          "hash": "2241023970724266691",
           "deps": [
             "npm:@floating-ui/react",
             "npm:@tiptap/pm",
@@ -1156,7 +1156,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-handle/table-handle.tsx",
-          "hash": "5267478283869576913",
+          "hash": "9333907964185282616",
           "deps": [
             "npm:@floating-ui/react",
             "npm:@tiptap/pm",
@@ -1238,7 +1238,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-selection-overlay/table-selection-overlay.tsx",
-          "hash": "14845862987939842696",
+          "hash": "17362921429401955153",
           "deps": [
             "npm:@floating-ui/react",
             "npm:@tiptap/pm",
@@ -1643,7 +1643,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/tooltip/tooltip.tsx",
-          "hash": "12341291402461361061",
+          "hash": "10966965630749941637",
           "deps": [
             "npm:@floating-ui/react",
             "npm:react"
@@ -2554,7 +2554,7 @@
         },
         {
           "file": "apps/api/src/contexts/collab-context.tsx",
-          "hash": "10731527518293342304",
+          "hash": "15523043513569495701",
           "deps": [
             "npm:@tiptap-pro/provider",
             "npm:react",
@@ -2854,7 +2854,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai-embeddings.service.ts",
-          "hash": "17756364553842076315",
+          "hash": "13694288435680143409",
           "deps": [
             "npm:@google-cloud/aiplatform",
             "npm:@nestjs/common",

@@ -81,7 +81,7 @@ export const useCollaboration = (room: string) => {
     })
     return () => {
       cancelAnimationFrame(frameId)
-      // @ts-ignore - TiptapCollabProvider has a destroy method but TypeScript doesn't know about it
+      // @ts-expect-error - TiptapCollabProvider has a destroy method but TypeScript doesn't know about it
       newProvider.destroy?.()
     }
   }, [collabToken, ydoc, room, hasCollab])
