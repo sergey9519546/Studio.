@@ -3741,7 +3741,7 @@
       },
       {
         "file": ".firebase/hosting.YnVpbGRcY2xpZW50.cache",
-        "hash": "16875647655519767776"
+        "hash": "16957965979838313832"
       },
       {
         "file": ".firebaserc",
@@ -3792,8 +3792,24 @@
         "hash": "446688445880863458"
       },
       {
+        "file": "App.jsx",
+        "hash": "5856152642422490044"
+      },
+      {
         "file": "App.tsx",
         "hash": "12368244372064066660"
+      },
+      {
+        "file": "BUILD_DEPLOYMENT_COMPLETE.md",
+        "hash": "14623746215293879210"
+      },
+      {
+        "file": "BUILD_DEPLOY_PLAN.md",
+        "hash": "3802501936635494716"
+      },
+      {
+        "file": "BUILD_DEPLOY_STATUS.md",
+        "hash": "10222480394791089716"
       },
       {
         "file": "BUILD_ERRORS_ANALYSIS.md",
@@ -3814,6 +3830,10 @@
       {
         "file": "COMPREHENSIVE_CODE_REVIEW_REPORT.md",
         "hash": "635758477419754910"
+      },
+      {
+        "file": "COMPREHENSIVE_CONNECTIVITY_AUDIT_REPORT.md",
+        "hash": "9368529450871422788"
       },
       {
         "file": "COMPREHENSIVE_DEEPER_ANALYSIS_REPORT.md",
@@ -3880,6 +3900,10 @@
         "hash": "9396828840192791421"
       },
       {
+        "file": "DEPLOYMENT_STATUS_REPORT.md",
+        "hash": "1527032160423493363"
+      },
+      {
         "file": "DEPLOYMENT_SUCCESS_REPORT.md",
         "hash": "11863256382317447070"
       },
@@ -3908,6 +3932,10 @@
         "hash": "5695207737007499404"
       },
       {
+        "file": "FINAL_BUILD_DEPLOY_STATUS.md",
+        "hash": "509948261554683690"
+      },
+      {
         "file": "FINAL_COMPLETION_SUMMARY.md",
         "hash": "5343902080290116765"
       },
@@ -3922,6 +3950,14 @@
       {
         "file": "FINAL_TESTING_PLAN.md",
         "hash": "10681901473355398212"
+      },
+      {
+        "file": "FIREBASE_BUILD_DEPLOY_TODO.md",
+        "hash": "14357910286849210594"
+      },
+      {
+        "file": "FIREBASE_DEPLOYMENT_SUCCESS_REPORT.md",
+        "hash": "12255414558942093555"
       },
       {
         "file": "FIREBASE_DEPLOYMENT_TODO.md",
@@ -3944,6 +3980,10 @@
         "hash": "6341821061864771848"
       },
       {
+        "file": "FULL_STACK_FIREBASE_DEPLOYMENT_REPORT.md",
+        "hash": "5074123106484243014"
+      },
+      {
         "file": "INTEGRATION_GUIDE.md",
         "hash": "10673789318204221778"
       },
@@ -3962,6 +4002,10 @@
       {
         "file": "LAYOUT_IMPROVEMENT_TODO.md",
         "hash": "14220971242329912175"
+      },
+      {
+        "file": "MANUAL_WSL_FIX.md",
+        "hash": "13273653514558772249"
       },
       {
         "file": "PRODUCTION_DEPLOYMENT_TODO.md",
@@ -3988,6 +4032,10 @@
         "hash": "10126843046893501202"
       },
       {
+        "file": "REBUILD_DEPLOY_PLAN.md",
+        "hash": "12005971687270373480"
+      },
+      {
         "file": "REDEPLOY_EXECUTION_TODO.md",
         "hash": "6146569251732562066"
       },
@@ -4004,6 +4052,10 @@
         "hash": "13870546854413487837"
       },
       {
+        "file": "RUN_WSL_FIX.md",
+        "hash": "5072472614021253419"
+      },
+      {
         "file": "SECURITY.md",
         "hash": "1247703567615508587"
       },
@@ -4016,8 +4068,16 @@
         "hash": "17540995931570651701"
       },
       {
+        "file": "TASK_PROGRESS_BUILD_DEPLOY.md",
+        "hash": "10049283393712990793"
+      },
+      {
         "file": "TYPESCRIPT_COMPILATION_FIXES_TODO.md",
         "hash": "284470283500063901"
+      },
+      {
+        "file": "UI_UX_REBUILD_COMPLETE.md",
+        "hash": "10130688091332521566"
       },
       {
         "file": "UX_UI_IMPROVEMENT_TODO.md",
@@ -4032,12 +4092,32 @@
         "hash": "16353011634018775055"
       },
       {
+        "file": "VISIONARY_IMPLEMENTATION_COMPLETE.md",
+        "hash": "3965959862487075416"
+      },
+      {
+        "file": "VISIONARY_TODO.md",
+        "hash": "16695084313422442326"
+      },
+      {
         "file": "WINDOWS_COMMAND_EQUIVALENTS.md",
         "hash": "9131387268427830947"
       },
       {
         "file": "WINDOWS_FIXES_SUMMARY.md",
         "hash": "9133183954912432113"
+      },
+      {
+        "file": "WSL_ERROR_FIX_TODO.md",
+        "hash": "7643898826471262278"
+      },
+      {
+        "file": "WSL_FIX_COMMANDS.md",
+        "hash": "9335394170704850657"
+      },
+      {
+        "file": "WSL_TROUBLESHOOTING_GUIDE.md",
+        "hash": "995736480772542916"
       },
       {
         "file": "api_build_errors.txt",
@@ -4129,7 +4209,7 @@
       },
       {
         "file": "components/Layout.tsx",
-        "hash": "6774487517564667951"
+        "hash": "4842199104006695766"
       },
       {
         "file": "components/Login.tsx",
@@ -4157,7 +4237,7 @@
       },
       {
         "file": "components/ProjectList.tsx",
-        "hash": "9887220824352845913"
+        "hash": "16156071724178333819"
       },
       {
         "file": "components/ProjectModal.tsx",
@@ -4225,11 +4305,15 @@
       },
       {
         "file": "components/ui/Card.tsx",
-        "hash": "2314257382348564996"
+        "hash": "2024448588165487131"
       },
       {
         "file": "components/ui/ImageWithPlaceholder.tsx",
-        "hash": "12922173660239179895"
+        "hash": "11885637246912031357"
+      },
+      {
+        "file": "components/ui/Input.tsx",
+        "hash": "14593071745394260422"
       },
       {
         "file": "components/ui/Skeleton.tsx",
@@ -48536,6 +48620,14 @@
         "hash": "9534991005892402123"
       },
       {
+        "file": "fix-wsl.bat",
+        "hash": "1787285501002890846"
+      },
+      {
+        "file": "fix-wsl.ps1",
+        "hash": "17000865272450398534"
+      },
+      {
         "file": "generated/prisma/browser.ts",
         "hash": "13104798967279898510"
       },
@@ -48669,7 +48761,7 @@
       },
       {
         "file": "index.css",
-        "hash": "14986602072384628756"
+        "hash": "12624841057483001572"
       },
       {
         "file": "index.html",
@@ -48677,7 +48769,7 @@
       },
       {
         "file": "index.tsx",
-        "hash": "3311358140659373119"
+        "hash": "13296383377645127495"
       },
       {
         "file": "jest.preset.js",
@@ -49129,7 +49221,7 @@
       },
       {
         "file": "src/dataconnect-generated/.guides/usage.md",
-        "hash": "9395073703261133520"
+        "hash": "6620734942988841674"
       },
       {
         "file": "src/dataconnect-generated/README.md",
@@ -49137,7 +49229,7 @@
       },
       {
         "file": "src/dataconnect-generated/esm/index.esm.js",
-        "hash": "8103665619056376340"
+        "hash": "6110978263211776781"
       },
       {
         "file": "src/dataconnect-generated/esm/package.json",
@@ -49145,11 +49237,11 @@
       },
       {
         "file": "src/dataconnect-generated/index.cjs.js",
-        "hash": "11947682604775880572"
+        "hash": "6179164097319436544"
       },
       {
         "file": "src/dataconnect-generated/index.d.ts",
-        "hash": "12121625883648963937"
+        "hash": "12827982418421243259"
       },
       {
         "file": "src/dataconnect-generated/package.json",
@@ -49161,7 +49253,7 @@
       },
       {
         "file": "src/dataconnect-generated/react/esm/index.esm.js",
-        "hash": "14570083277883875313"
+        "hash": "12174374708228840605"
       },
       {
         "file": "src/dataconnect-generated/react/esm/package.json",
@@ -49169,11 +49261,11 @@
       },
       {
         "file": "src/dataconnect-generated/react/index.cjs.js",
-        "hash": "2913033731498597627"
+        "hash": "18430920159781452914"
       },
       {
         "file": "src/dataconnect-generated/react/index.d.ts",
-        "hash": "498645000099755456"
+        "hash": "1450360211015605153"
       },
       {
         "file": "src/dataconnect-generated/react/package.json",
@@ -49290,6 +49382,10 @@
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.24d37a49-043e-424c-9932-27d9d8f7393b.json",
         "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.2eb24d6e-ecab-46ac-83e0-0d320fd3c66c.json",
+        "hash": "9564512296546428352"
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.37f42c2f-53eb-471d-9aae-15ca549c5fa8.json",
