@@ -1,7 +1,7 @@
 import { AlertTriangle, BrainCircuit, FileText, Loader2, Plus, Sparkles, Tag, Trash2, User, X } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { api } from '../services/api';
-import { FocusTrap } from '../src/components/Accessibility';
+import { FocusTrap } from '@/components/Accessibility';
 import { Priority, Project, ProjectStatus, RoleRequirement } from '../types';
 
 interface ProjectModalProps {
@@ -170,18 +170,18 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
       />
       
       <FocusTrap isActive={isOpen}>
-        <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-5xl max-h-[90vh] flex flex-col overflow-hidden border border-gray-200 animate-scale-in">
+        <div className="relative bg-surface rounded-2xl shadow-2xl w-full max-w-5xl max-h-[90vh] flex flex-col overflow-hidden border border-border-subtle animate-scale-in">
 
-          <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-white">
+          <div className="px-6 py-4 border-b border-border-subtle flex justify-between items-center bg-surface">
             <div>
-              <h2 id="project-modal-title" className="text-base font-semibold text-gray-900">
+              <h2 id="project-modal-title" className="text-base font-semibold text-ink-primary">
                 {initialData ? 'Edit Project' : 'New Project'}
               </h2>
-              <p className="text-xs text-gray-500">Configure campaign parameters.</p>
+              <p className="text-xs text-ink-secondary">Configure campaign parameters.</p>
             </div>
             <button 
               onClick={onClose} 
-              className="min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center text-ink-tertiary hover:text-ink-primary transition-colors rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
               aria-label="Close modal"
             >
               <X size={20} aria-hidden="true" />
@@ -191,13 +191,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
         <div className="flex-1 overflow-hidden flex flex-col lg:flex-row">
 
           {/* AI Sidebar */}
-          <div className="w-full lg:w-80 bg-gray-50/50 border-r border-gray-100 p-6 flex flex-col gap-6 overflow-y-auto">
+          <div className="w-full lg:w-80 bg-subtle/50 border-r border-border-subtle p-6 flex flex-col gap-6 overflow-y-auto">
             <div className="flex-1 flex flex-col">
               <label className="text-[10px] font-bold text-indigo-900 uppercase tracking-wide mb-2 flex items-center gap-2">
                 <BrainCircuit size={12} className="text-indigo-600" /> Auto-Config
               </label>
               <textarea
-                className="flex-1 w-full p-3 bg-white border border-indigo-100 rounded-lg focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none text-xs resize-none shadow-sm placeholder-indigo-200 text-gray-700 leading-relaxed font-mono"
+                className="flex-1 w-full p-3 bg-surface border border-border-subtle rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none text-xs resize-none shadow-sm placeholder-ink-tertiary text-ink-primary leading-relaxed font-mono"
                 placeholder="Paste messy notes, emails, or briefs here. AI will structure the project."
                 value={rawContext}
                 onChange={(e) => setRawContext(e.target.value)}
@@ -206,27 +206,27 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
                 type="button"
                 onClick={handleGenerateAI}
                 disabled={isGenerating || (!rawContext && !formData.name)}
-                className="mt-3 bg-indigo-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-indigo-700 shadow-sm disabled:opacity-50 transition-all flex items-center justify-center gap-2 uppercase tracking-wide"
+                className="mt-3 bg-primary text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-primary-hover shadow-sm disabled:opacity-50 transition-all flex items-center justify-center gap-2 uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
               >
                 {isGenerating ? <Loader2 size={12} className="animate-spin" /> : <Sparkles size={12} />}
                 {isGenerating ? 'Processing...' : 'Analyze & Fill'}
               </button>
             </div>
 
-            <div className="pt-6 border-t border-gray-200 space-y-4">
+            <div className="pt-6 border-t border-border-subtle space-y-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Name</label>
+                <label className="text-[10px] font-bold text-ink-secondary uppercase tracking-wide">Name</label>
                 <input
                   required
-                  className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none text-sm font-medium"
+                  className="w-full px-3 py-2 bg-surface border border-border-subtle rounded-lg focus:ring-2 focus:ring-primary/10 focus:border-primary outline-none text-sm font-medium text-ink-primary"
                   value={formData.name}
                   onChange={e => setFormData({ ...formData, name: e.target.value })}
                 />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Client</label>
+                <label className="text-[10px] font-bold text-ink-secondary uppercase tracking-wide">Client</label>
                 <input
-                  className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none text-sm"
+                  className="w-full px-3 py-2 bg-surface border border-border-subtle rounded-lg focus:ring-2 focus:ring-primary/10 focus:border-primary outline-none text-sm text-ink-primary"
                   value={formData.clientName}
                   onChange={e => setFormData({ ...formData, clientName: e.target.value })}
                 />
@@ -240,11 +240,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
 
               <div className="grid grid-cols-1 gap-6">
                 <div className="space-y-2">
-                  <label className="text-[11px] font-semibold text-gray-700 flex items-center gap-2">
-                    <FileText size={14} className="text-gray-400" /> Narrative Brief
+                  <label className="text-[11px] font-semibold text-ink-primary flex items-center gap-2">
+                    <FileText size={14} className="text-ink-tertiary" /> Narrative Brief
                   </label>
                   <textarea
-                    className="w-full p-4 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-900/5 focus:border-gray-900 outline-none text-sm leading-relaxed min-h-[120px] shadow-sm font-sans"
+                    className="w-full p-4 bg-surface border border-border-subtle rounded-lg focus:ring-2 focus:ring-primary/10 focus:border-primary outline-none text-sm leading-relaxed min-h-[120px] shadow-sm font-sans text-ink-primary"
                     placeholder="Core story..."
                     value={formData.description}
                     onChange={e => setFormData({ ...formData, description: e.target.value })}
@@ -252,11 +252,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[11px] font-semibold text-gray-700 flex items-center gap-2">
-                    <AlertTriangle size={14} className="text-gray-400" /> Constraints
+                  <label className="text-[11px] font-semibold text-ink-primary flex items-center gap-2">
+                    <AlertTriangle size={14} className="text-ink-tertiary" /> Constraints
                   </label>
                   <textarea
-                    className="w-full p-4 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-900/5 focus:border-gray-900 outline-none text-xs font-mono min-h-[80px] text-gray-600"
+                    className="w-full p-4 bg-subtle border border-border-subtle rounded-lg focus:ring-2 focus:ring-primary/10 focus:border-primary outline-none text-xs font-mono min-h-[80px] text-ink-secondary"
                     placeholder="Tech specs..."
                     value={formData.notes}
                     onChange={e => setFormData({ ...formData, notes: e.target.value })}
@@ -264,11 +264,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 rounded-xl border border-gray-100 bg-white shadow-sm">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 rounded-xl border border-border-subtle bg-surface shadow-sm">
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Status</label>
+                  <label className="text-[10px] font-bold text-ink-secondary uppercase tracking-wide">Status</label>
                   <select
-                    className="w-full px-2 py-1.5 bg-gray-50 border border-gray-200 rounded text-xs font-medium outline-none focus:border-gray-400"
+                    className="w-full px-2 py-1.5 bg-subtle border border-border-subtle rounded text-xs font-medium outline-none focus:border-primary"
                     value={formData.status}
                     onChange={e => setFormData({ ...formData, status: e.target.value as ProjectStatus })}
                   >
@@ -276,23 +276,23 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
                   </select>
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Start</label>
-                  <input type="date" className="w-full px-2 py-1.5 bg-gray-50 border border-gray-200 rounded text-xs font-medium outline-none focus:border-gray-400"
+                  <label className="text-[10px] font-bold text-ink-secondary uppercase tracking-wide">Start</label>
+                  <input type="date" className="w-full px-2 py-1.5 bg-subtle border border-border-subtle rounded text-xs font-medium outline-none focus:border-primary"
                     value={formData.startDate ? new Date(formData.startDate).toISOString().split('T')[0] : ''}
                     onChange={e => setFormData({ ...formData, startDate: e.target.value })}
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Due</label>
-                  <input type="date" className="w-full px-2 py-1.5 bg-gray-50 border border-gray-200 rounded text-xs font-medium outline-none focus:border-gray-400"
+                  <label className="text-[10px] font-bold text-ink-secondary uppercase tracking-wide">Due</label>
+                  <input type="date" className="w-full px-2 py-1.5 bg-subtle border border-border-subtle rounded text-xs font-medium outline-none focus:border-primary"
                     value={formData.dueDate ? new Date(formData.dueDate).toISOString().split('T')[0] : ''}
                     onChange={e => setFormData({ ...formData, dueDate: e.target.value })}
                   />
                 </div>
                 <div className="col-span-2 md:col-span-4 mt-2">
-                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wide flex items-center gap-1 mb-1"><Tag size={12} /> Tags</label>
+                  <label className="text-[10px] font-bold text-ink-secondary uppercase tracking-wide flex items-center gap-1 mb-1"><Tag size={12} /> Tags</label>
                   <input
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded text-xs font-medium outline-none focus:border-gray-400"
+                    className="w-full px-3 py-2 bg-subtle border border-border-subtle rounded text-xs font-medium outline-none focus:border-primary"
                     placeholder="Comma separated tags..."
                     value={tagInput}
                     onChange={e => setTagInput(e.target.value)}
@@ -302,31 +302,63 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
 
               <div>
                 <div className="flex justify-between items-center mb-3">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Staffing Plan</label>
-                  <button type="button" onClick={() => setFormData(p => ({ ...p, roleRequirements: [...(p.roleRequirements || []), { id: `role-${Date.now()}`, role: 'New', count: 1, filled: 0, skillsRequired: [] }] }))} className="text-indigo-600 hover:text-indigo-700 text-[10px] font-bold flex items-center gap-1 uppercase">
+                  <label className="text-[10px] font-bold text-ink-secondary uppercase tracking-wide">Staffing Plan</label>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setFormData(p => ({
+                        ...p,
+                        roleRequirements: [
+                          ...(p.roleRequirements || []),
+                          { id: `role-${Date.now()}`, role: 'New', count: 1, filled: 0, skillsRequired: [] },
+                        ],
+                      }))
+                    }
+                    className="text-primary hover:text-primary-hover text-[10px] font-bold flex items-center gap-1 uppercase"
+                  >
                     <Plus size={12} /> Add Role
                   </button>
                 </div>
 
                 <div className="space-y-2">
                   {formData.roleRequirements?.map((req) => (
-                    <div key={req.id} className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200 shadow-sm">
-                      <User size={14} className="text-gray-400" />
-                      <input className="w-32 bg-transparent text-xs font-bold text-gray-900 border-none focus:ring-0 p-0" value={req.role} onChange={e => {
-                        const newRoles = formData.roleRequirements?.map(r => r.id === req.id ? { ...r, role: e.target.value } : r);
-                        setFormData({ ...formData, roleRequirements: newRoles });
-                      }} />
-                      <div className="h-4 w-px bg-gray-200"></div>
-                      <input type="number" className="w-12 bg-transparent text-xs text-gray-600 border-none focus:ring-0 p-0 text-center" value={req.count} onChange={e => {
-                        const newRoles = formData.roleRequirements?.map(r => r.id === req.id ? { ...r, count: parseInt(e.target.value) } : r);
-                        setFormData({ ...formData, roleRequirements: newRoles });
-                      }} />
-                      <div className="h-4 w-px bg-gray-200"></div>
-                      <input className="flex-1 bg-transparent text-xs text-gray-500 border-none focus:ring-0 p-0" placeholder="Required Skills..." value={req.skillsRequired.join(', ')} onChange={e => {
-                        const newRoles = formData.roleRequirements?.map(r => r.id === req.id ? { ...r, skillsRequired: e.target.value.split(',') } : r);
-                        setFormData({ ...formData, roleRequirements: newRoles });
-                      }} />
-                      <button type="button" onClick={() => setFormData(p => ({ ...p, roleRequirements: p.roleRequirements?.filter(r => r.id !== req.id) }))} className="text-gray-400 hover:text-rose-500"><Trash2 size={14} /></button>
+                    <div key={req.id} className="flex items-center gap-3 p-3 bg-surface rounded-lg border border-border-subtle shadow-sm">
+                      <User size={14} className="text-ink-tertiary" />
+                      <input
+                        className="w-32 bg-transparent text-xs font-bold text-ink-primary border-none focus:ring-0 p-0"
+                        value={req.role}
+                        onChange={e => {
+                          const newRoles = formData.roleRequirements?.map(r => r.id === req.id ? { ...r, role: e.target.value } : r);
+                          setFormData({ ...formData, roleRequirements: newRoles });
+                        }}
+                      />
+                      <div className="h-4 w-px bg-border-subtle"></div>
+                      <input
+                        type="number"
+                        className="w-12 bg-transparent text-xs text-ink-secondary border-none focus:ring-0 p-0 text-center"
+                        value={req.count}
+                        onChange={e => {
+                          const newRoles = formData.roleRequirements?.map(r => r.id === req.id ? { ...r, count: parseInt(e.target.value) } : r);
+                          setFormData({ ...formData, roleRequirements: newRoles });
+                        }}
+                      />
+                      <div className="h-4 w-px bg-border-subtle"></div>
+                      <input
+                        className="flex-1 bg-transparent text-xs text-ink-secondary border-none focus:ring-0 p-0"
+                        placeholder="Required Skills..."
+                        value={req.skillsRequired.join(', ')}
+                        onChange={e => {
+                          const newRoles = formData.roleRequirements?.map(r => r.id === req.id ? { ...r, skillsRequired: e.target.value.split(',') } : r);
+                          setFormData({ ...formData, roleRequirements: newRoles });
+                        }}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setFormData(p => ({ ...p, roleRequirements: p.roleRequirements?.filter(r => r.id !== req.id) }))}
+                        className="text-ink-tertiary hover:text-state-danger transition-colors"
+                      >
+                        <Trash2 size={14} />
+                      </button>
                     </div>
                   ))}
                 </div>
@@ -335,16 +367,16 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
           </div>
         </div>
 
-        <div className="px-6 py-4 border-t border-gray-100 bg-white flex justify-end gap-3 z-10">
+        <div className="px-6 py-4 border-t border-border-subtle bg-surface flex justify-end gap-3 z-10">
           <button 
             onClick={onClose} 
-            className="min-h-[44px] px-4 py-2 text-gray-600 font-medium hover:bg-gray-100 rounded-md text-xs transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            className="min-h-[44px] px-4 py-2 text-ink-secondary font-medium hover:bg-subtle rounded-md text-xs transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
           >
             Cancel
           </button>
           <button 
             onClick={handleSave} 
-            className="min-h-[44px] px-5 py-2 bg-gray-900 text-white font-medium rounded-md text-xs hover:bg-black shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            className="min-h-[44px] px-5 py-2 bg-primary text-white font-medium rounded-md text-xs hover:bg-primary-hover shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
           >
             {initialData ? 'Update Project' : 'Create Project'}
           </button>

@@ -273,8 +273,13 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects = [], onC
                   return (
                     <tr key={project.id} className={`group hover:bg-ink-primary/[0.02] transition-all duration-200 relative ${isSelected ? 'bg-blue-50/50' : ''}`}>
                       <td className="px-6 py-6 text-center">
-                        <button onClick={() => toggleSelectOne(String(project.id))} className={`transition-colors p-1 ${isSelected ? 'text-primary' : 'text-border-hover hover:text-ink-secondary'}`}>
-                          {isSelected ? <CheckSquare size={18} /> : <Square size={18} />}
+                        <button 
+                          onClick={() => toggleSelectOne(String(project.id))} 
+                          className={`transition-colors p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 ${isSelected ? 'text-primary' : 'text-border-hover hover:text-ink-secondary'}`}
+                          aria-label={isSelected ? `Deselect project ${project.name}` : `Select project ${project.name}`}
+                          aria-pressed={isSelected}
+                        >
+                          {isSelected ? <CheckSquare size={18} aria-hidden="true" /> : <Square size={18} aria-hidden="true" />}
                         </button>
                       </td>
                       <td className="px-6 py-6">
@@ -345,16 +350,17 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects = [], onC
           </table>
         </div>
 
-        <div className="p-4 border-t border-border-subtle flex items-center justify-between bg-white">
-          <div className="text-xs text-ink-tertiary font-medium">
+        <nav className="p-4 border-t border-border-subtle flex items-center justify-between bg-white" aria-label="Projects pagination">
+          <div className="text-xs text-ink-tertiary font-medium" aria-live="polite">
             Page {page} of {totalPages}
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2" role="group" aria-label="Pagination controls">
             <Button
               variant="secondary"
               size="sm"
               onClick={() => setPage(p => Math.max(1, p - 1))}
               disabled={page === 1}
+              aria-label={`Go to previous page, page ${Math.max(1, page - 1)}`}
             >
               Previous
             </Button>
@@ -363,11 +369,12 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects = [], onC
               size="sm"
               onClick={() => setPage(p => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
+              aria-label={`Go to next page, page ${Math.min(totalPages, page + 1)}`}
             >
               Next
             </Button>
           </div>
-        </div>
+        </nav>
       </div>
     </div>
   );

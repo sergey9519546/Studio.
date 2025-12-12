@@ -1,11 +1,11 @@
 
-import React, { useState, useMemo } from 'react';
-import { Search, Plus, LayoutGrid, List as ListIcon, Clock, MapPin } from 'lucide-react';
-import { Freelancer, FreelancerStatus, Assignment } from '../types';
+import { LayoutGrid, List as ListIcon, Plus, Search } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Badge } from '../src/components/design/Badge';
 import { Button } from '../src/components/design/Button';
 import { Card } from '../src/components/design/Card';
+import { Assignment, Freelancer, FreelancerStatus } from '../types';
 
 interface FreelancerListProps {
   freelancers: Freelancer[];
@@ -63,23 +63,39 @@ const FreelancerList: React.FC<FreelancerListProps> = ({ freelancers, assignment
        {/* Controls */}
         <div className="bg-surface p-3 rounded-xl flex flex-col xl:flex-row gap-4 xl:items-center justify-between sticky top-4 z-20 shadow-card border border-border-subtle backdrop-blur-md">
         <div className="relative w-full xl:w-96 group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-tertiary group-focus-within:text-primary transition-colors" size={16} />
+            <label htmlFor="freelancer-search" className="sr-only">Search freelancers</label>
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-tertiary group-focus-within:text-primary transition-colors" size={16} aria-hidden="true" />
             <input
-                type="text"
+                id="freelancer-search"
+                type="search"
                 placeholder="Search by name or skill..."
                 className="w-full pl-11 pr-4 py-3 bg-subtle/30 border border-border-subtle rounded-xl focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm transition-all font-medium placeholder-ink-tertiary text-ink-primary outline-none"
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
+                aria-describedby="search-results-count"
             />
+            <span id="search-results-count" className="sr-only" aria-live="polite">
+                {filteredFreelancers.length} freelancers found
+            </span>
         </div>
         
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2" role="group" aria-label="View mode selection">
             <div className="flex bg-subtle/50 p-1 rounded-xl border border-border-subtle">
-                <button onClick={() => setViewMode('grid')} className={`p-2 rounded-lg transition-all duration-200 ${viewMode === 'grid' ? 'bg-white shadow-sm text-ink-primary' : 'text-ink-tertiary hover:text-ink-secondary hover:bg-white/50'}`}>
-                    <LayoutGrid size={18}/>
+                <button 
+                    onClick={() => setViewMode('grid')} 
+                    className={`p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 ${viewMode === 'grid' ? 'bg-white shadow-sm text-ink-primary' : 'text-ink-tertiary hover:text-ink-secondary hover:bg-white/50'}`}
+                    aria-pressed={viewMode === 'grid'}
+                    aria-label="Grid view"
+                >
+                    <LayoutGrid size={18} aria-hidden="true" />
                 </button>
-                <button onClick={() => setViewMode('list')} className={`p-2 rounded-lg transition-all duration-200 ${viewMode === 'list' ? 'bg-white shadow-sm text-ink-primary' : 'text-ink-tertiary hover:text-ink-secondary hover:bg-white/50'}`}>
-                    <ListIcon size={18}/>
+                <button 
+                    onClick={() => setViewMode('list')} 
+                    className={`p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 ${viewMode === 'list' ? 'bg-white shadow-sm text-ink-primary' : 'text-ink-tertiary hover:text-ink-secondary hover:bg-white/50'}`}
+                    aria-pressed={viewMode === 'list'}
+                    aria-label="List view"
+                >
+                    <ListIcon size={18} aria-hidden="true" />
                 </button>
             </div>
         </div>
@@ -87,9 +103,19 @@ const FreelancerList: React.FC<FreelancerListProps> = ({ freelancers, assignment
 
       {/* Grid View */}
       {viewMode === 'grid' && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            role="list"
+            aria-label="Freelancers grid"
+          >
               {filteredFreelancers.map((freelancer) => (
-                  <Link key={freelancer.id} to={`/freelancers/${freelancer.id}`}>
+                  <Link 
+                    key={freelancer.id} 
+                    to={`/freelancers/${freelancer.id}`}
+                    aria-label={`View ${freelancer.name}'s profile - ${freelancer.role}`}
+                    className="focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-2xl"
+                    role="listitem"
+                  >
                       <Card hoverable className="h-full flex flex-col p-6">
                           <div className="flex justify-between items-start mb-5">
                                <div className="relative">
@@ -137,21 +163,26 @@ const FreelancerList: React.FC<FreelancerListProps> = ({ freelancers, assignment
       {/* List View */}
       {viewMode === 'list' && (
       <Card noPadding className="overflow-hidden">
-        <table className="w-full text-left border-collapse">
+        <table className="w-full text-left border-collapse" aria-label="Freelancers list">
+            <caption className="sr-only">List of freelancers with their local time, rate, and status</caption>
             <thead className="bg-subtle/30 border-b border-border-subtle">
               <tr>
-                <th className="px-8 py-5 text-[10px] font-bold text-ink-tertiary uppercase tracking-widest">Talent</th>
-                <th className="px-8 py-5 text-[10px] font-bold text-ink-tertiary uppercase tracking-widest">Local Time</th>
-                <th className="px-8 py-5 text-[10px] font-bold text-ink-tertiary uppercase tracking-widest">Rate</th>
-                <th className="px-8 py-5 text-[10px] font-bold text-ink-tertiary uppercase tracking-widest">Status</th>
+                <th scope="col" className="px-8 py-5 text-[10px] font-bold text-ink-tertiary uppercase tracking-widest">Talent</th>
+                <th scope="col" className="px-8 py-5 text-[10px] font-bold text-ink-tertiary uppercase tracking-widest">Local Time</th>
+                <th scope="col" className="px-8 py-5 text-[10px] font-bold text-ink-tertiary uppercase tracking-widest">Rate</th>
+                <th scope="col" className="px-8 py-5 text-[10px] font-bold text-ink-tertiary uppercase tracking-widest">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border-subtle bg-surface">
               {filteredFreelancers.map((freelancer) => (
                 <tr key={freelancer.id} className="group hover:bg-subtle/30 transition-colors">
                   <td className="px-8 py-5">
-                    <Link to={`/freelancers/${freelancer.id}`} className="flex items-center gap-4">
-                        <img src={freelancer.avatar} className="w-10 h-10 rounded-xl grayscale group-hover:grayscale-0 transition-all border border-border-subtle object-cover" />
+                    <Link 
+                      to={`/freelancers/${freelancer.id}`} 
+                      className="flex items-center gap-4 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded-lg"
+                      aria-label={`View ${freelancer.name}'s profile`}
+                    >
+                        <img src={freelancer.avatar} alt="" className="w-10 h-10 rounded-xl grayscale group-hover:grayscale-0 transition-all border border-border-subtle object-cover" aria-hidden="true" />
                         <div>
                             <div className="text-sm font-semibold text-ink-primary tracking-tight group-hover:text-primary transition-colors">{freelancer.name}</div>
                             <div className="text-[10px] text-ink-secondary uppercase tracking-wide font-medium">{freelancer.role}</div>

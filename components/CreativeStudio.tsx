@@ -233,13 +233,14 @@ const CreativeStudio: React.FC<CreateStudioProps> = ({
         alert("Could not read file.");
       }
     }
-  };;
+  };
 
   return (
-    <div className="flex h-[calc(100vh-64px)] min-h-[600px] bg-[#F5F5F7] font-sans text-gray-900 overflow-hidden">
+    <div className="flex h-[calc(100vh-64px)] min-h-[600px] bg-app font-sans text-gray-900 overflow-hidden">
       {/* LEFT PANEL: ASSETS (Levitation Layer) */}
       <div
-        className={`flex-shrink-0 border-r border-gray-100 bg-white z-20 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${showLeftPanel ? "w-72 translate-x-0" : "w-0 -translate-x-full opacity-0 overflow-hidden"}`}
+        className={`flex-shrink-0 border-r border-gray-100 bg-white z-20 transition-all duration-500 ${showLeftPanel ? "w-72 translate-x-0" : "w-0 -translate-x-full opacity-0 overflow-hidden"}`}
+        style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
       >
         <div className="w-72 h-full">
           <AssetLibrary compact />
@@ -275,16 +276,20 @@ const CreativeStudio: React.FC<CreateStudioProps> = ({
         )}
 
         {/* Toolbar - Floating Porcelain */}
-        <div className="h-16 border-b border-gray-100 bg-white/90 backdrop-blur-xl flex items-center justify-between px-6 sticky top-0 z-30">
+        <div className="h-16 border-b border-gray-100 bg-white/90 backdrop-blur-xl flex items-center justify-between px-6 sticky top-0 z-30" role="toolbar" aria-label="Editor toolbar">
           <div className="flex items-center gap-4">
             <button
               onClick={() => setShowLeftPanel(!showLeftPanel)}
-              className={`p-2 rounded-xl transition-all duration-300 ${showLeftPanel ? "bg-indigo-50 text-indigo-600 shadow-sm" : "text-gray-400 hover:text-gray-900 hover:bg-gray-50"}`}
+              className={`p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${showLeftPanel ? "bg-indigo-50 text-indigo-600 shadow-sm" : "text-gray-400 hover:text-gray-900 hover:bg-gray-50"}`}
+              aria-expanded={showLeftPanel}
+              aria-label={showLeftPanel ? "Hide asset library panel" : "Show asset library panel"}
             >
-              <PanelLeft size={20} strokeWidth={2} />
+              <PanelLeft size={20} strokeWidth={2} aria-hidden="true" />
             </button>
-            <div className="h-6 w-px bg-gray-100"></div>
+            <div className="h-6 w-px bg-gray-100" aria-hidden="true"></div>
+            <label htmlFor="project-select" className="sr-only">Select project context</label>
             <select
+              id="project-select"
               value={selectedProjectId}
               onChange={(e) => {
                 setSelectedProjectId(e.target.value);
@@ -293,7 +298,7 @@ const CreativeStudio: React.FC<CreateStudioProps> = ({
                   return prev;
                 });
               }}
-              className="bg-transparent text-xs font-bold text-gray-700 focus:outline-none cursor-pointer hover:bg-gray-50 px-3 py-2 rounded-lg transition-colors border border-transparent hover:border-gray-100 uppercase tracking-wide"
+              className="bg-transparent text-xs font-bold text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 cursor-pointer hover:bg-gray-50 px-3 py-2 rounded-lg transition-colors border border-transparent hover:border-gray-100 uppercase tracking-wide"
             >
               <option value="">Select Context...</option>
               {projects.map((p: Project) => (
@@ -304,13 +309,15 @@ const CreativeStudio: React.FC<CreateStudioProps> = ({
             </select>
           </div>
 
-          <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300 group/title">
+          <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-2 opacity-0 hover:opacity-100 focus-within:opacity-100 transition-opacity duration-300 group/title">
+            <label htmlFor="script-title" className="sr-only">Script title</label>
             <input
+              id="script-title"
               type="text"
               value={scriptTitle}
               onChange={(e) => setScriptTitle(e.target.value)}
               placeholder="Untitled Script"
-              className="text-center text-sm font-semibold text-gray-900 focus:outline-none placeholder-gray-300 bg-transparent group-hover/title:bg-gray-50 rounded-lg px-4 py-1.5 transition-colors tracking-tight"
+              className="text-center text-sm font-semibold text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 placeholder-gray-300 bg-transparent group-hover/title:bg-gray-50 rounded-lg px-4 py-1.5 transition-colors tracking-tight"
             />
           </div>
 
@@ -318,30 +325,35 @@ const CreativeStudio: React.FC<CreateStudioProps> = ({
             <button
               onClick={() => handleEnhance()}
               disabled={isEnhancing}
-              className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors disabled:opacity-50 group"
-              title="AI Refine"
+              className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors disabled:opacity-50 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label={isEnhancing ? "Enhancing content, please wait" : "Enhance content with AI"}
+              aria-busy={isEnhancing}
             >
               {isEnhancing ? (
-                <Loader2 size={18} className="animate-spin" />
+                <Loader2 size={18} className="animate-spin" aria-hidden="true" />
               ) : (
                 <Sparkles
                   size={18}
                   className="group-hover:scale-110 transition-transform"
+                  aria-hidden="true"
                 />
               )}
             </button>
             <button
               onClick={handleSave}
-              className="bg-gray-900 text-white px-5 py-2 rounded-xl text-[10px] font-bold hover:bg-black transition-all flex items-center gap-2 shadow-lg shadow-gray-200 uppercase tracking-widest active:scale-95"
+              className="min-h-[44px] bg-gray-900 text-white px-5 py-2 rounded-xl text-[10px] font-bold hover:bg-black transition-all flex items-center gap-2 shadow-lg shadow-gray-200 uppercase tracking-widest active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Save script"
             >
-              <Save size={14} /> Save
+              <Save size={14} aria-hidden="true" /> Save
             </button>
-            <div className="h-6 w-px bg-gray-100 mx-1"></div>
+            <div className="h-6 w-px bg-gray-100 mx-1" aria-hidden="true"></div>
             <button
               onClick={() => setShowRightPanel(!showRightPanel)}
-              className={`p-2 rounded-xl transition-colors ${showRightPanel ? "bg-indigo-50 text-indigo-600 shadow-sm" : "text-gray-400 hover:text-gray-900 hover:bg-gray-50"}`}
+              className={`p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${showRightPanel ? "bg-indigo-50 text-indigo-600 shadow-sm" : "text-gray-400 hover:text-gray-900 hover:bg-gray-50"}`}
+              aria-expanded={showRightPanel}
+              aria-label={showRightPanel ? "Hide AI assistant panel" : "Show AI assistant panel"}
             >
-              <PanelRight size={20} strokeWidth={2} />
+              <PanelRight size={20} strokeWidth={2} aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -369,31 +381,35 @@ const CreativeStudio: React.FC<CreateStudioProps> = ({
         </div>
 
         {/* Status Bar */}
-        <div className="h-10 border-t border-gray-100 bg-white/50 flex items-center justify-between px-6 text-[9px] text-gray-400 font-bold uppercase tracking-widest backdrop-blur-sm">
-          <div className="flex items-center gap-6">
+        <div 
+          className="h-10 border-t border-gray-100 bg-white/50 flex items-center justify-between px-6 text-[9px] text-gray-400 font-bold uppercase tracking-widest backdrop-blur-sm"
+          role="status"
+          aria-label="Editor status"
+        >
+          <div className="flex items-center gap-6" aria-label="Document statistics">
             <span className="flex items-center gap-2">
-              <Type size={12} className="text-gray-300" />{" "}
-              {scriptContent.length} chars
+              <Type size={12} className="text-gray-300" aria-hidden="true" />{" "}
+              <span aria-label={`${scriptContent.length} characters`}>{scriptContent.length} chars</span>
             </span>
             <span className="flex items-center gap-2">
-              <Database size={12} className="text-gray-300" /> {sources.length}{" "}
-              active sources
+              <Database size={12} className="text-gray-300" aria-hidden="true" />{" "}
+              <span aria-label={`${sources.length} active sources`}>{sources.length} active sources</span>
             </span>
           </div>
-          <div>
+          <div aria-live="polite" aria-atomic="true">
             {isGuarding ? (
-              <span className="text-amber-500 flex items-center gap-2">
-                <ShieldCheck size={14} className="animate-pulse" /> Scanning
+              <span className="text-amber-500 flex items-center gap-2" role="alert">
+                <ShieldCheck size={14} className="animate-pulse" aria-hidden="true" /> Scanning
                 Content...
               </span>
             ) : hallucinations.length > 0 ? (
-              <span className="text-rose-500 flex items-center gap-2">
-                <AlertTriangle size={14} /> {hallucinations.length} Issues
+              <span className="text-rose-500 flex items-center gap-2" role="alert">
+                <AlertTriangle size={14} aria-hidden="true" /> {hallucinations.length} Issues
                 Detected
               </span>
             ) : (
               <span className="text-emerald-600 flex items-center gap-2">
-                <CheckCircle size={14} /> Guard Active
+                <CheckCircle size={14} aria-hidden="true" /> Guard Active
               </span>
             )}
           </div>
@@ -402,7 +418,8 @@ const CreativeStudio: React.FC<CreateStudioProps> = ({
 
       {/* RIGHT PANEL: AI AGENT */}
       <div
-        className={`flex-shrink-0 border-l border-gray-100 bg-white z-20 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${showRightPanel ? "w-[420px] translate-x-0" : "w-0 translate-x-full opacity-0 overflow-hidden"}`}
+        className={`flex-shrink-0 border-l border-gray-100 bg-white z-20 transition-all duration-500 ${showRightPanel ? "w-[420px] translate-x-0" : "w-0 translate-x-full opacity-0 overflow-hidden"}`}
+        style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
       >
         <div className="w-[420px] h-full">
           <AIChat
@@ -419,6 +436,6 @@ const CreativeStudio: React.FC<CreateStudioProps> = ({
       </div>
     </div>
   );
-};;
+};
 
 export default CreativeStudio;
