@@ -40,7 +40,11 @@ const Layout: React.FC = () => {
       </a>
 
       {/* Sidebar - Floating Porcelain Layer */}
-      <aside className="w-72 flex-shrink-0 hidden md:flex flex-col h-full border-r border-border-subtle bg-surface/95 backdrop-blur-md z-40 relative transition-all duration-300">
+      <aside 
+        className="w-72 flex-shrink-0 hidden md:flex flex-col h-full border-r border-border-subtle bg-surface/95 backdrop-blur-md z-40 relative transition-all duration-300"
+        role="navigation"
+        aria-label="Main navigation sidebar"
+      >
         <div className="h-24 flex flex-col justify-center px-6">
           <div className="flex items-center gap-3 group cursor-default">
             <div className="relative w-8 h-8 bg-ink-primary text-white rounded-lg flex items-center justify-center shadow-card group-hover:shadow-glow transition-all duration-500 ease-out group-hover:-translate-y-0.5 flex-shrink-0">
@@ -89,12 +93,18 @@ const Layout: React.FC = () => {
         </div>
 
         <div className="p-6 mx-2 mb-2 border-t border-border-subtle/50 space-y-2">
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-ink-secondary hover:text-ink-primary hover:bg-subtle/50 transition-all duration-200 active:scale-[0.98]">
-            <Settings size={20} strokeWidth={2} />
+          <button 
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-ink-secondary hover:text-ink-primary hover:bg-subtle/50 transition-all duration-200 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            aria-label="Open settings"
+          >
+            <Settings size={20} strokeWidth={2} aria-hidden="true" />
             Settings
           </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-ink-secondary hover:text-state-danger hover:bg-state-danger-bg/30 transition-all duration-200 active:scale-[0.98]">
-            <LogOut size={20} strokeWidth={2} />
+          <button 
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-ink-secondary hover:text-state-danger hover:bg-state-danger-bg/30 transition-all duration-200 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            aria-label="Sign out of your account"
+          >
+            <LogOut size={20} strokeWidth={2} aria-hidden="true" />
             Sign Out
           </button>
         </div>
@@ -110,8 +120,11 @@ const Layout: React.FC = () => {
             <div className="w-2 h-2 bg-white rounded-full"></div>
           </div>
         </div>
-        <button className="p-2 text-ink-tertiary">
-          <Settings size={20} />
+        <button 
+          className="p-2 text-ink-tertiary hover:text-ink-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
+          aria-label="Open settings"
+        >
+          <Settings size={20} aria-hidden="true" />
         </button>
       </div>
 
@@ -129,12 +142,15 @@ const Layout: React.FC = () => {
       <MobileNav />
 
       {/* Floating Action Button - Fixed dimensions to prevent CLS */}
-      <div className="fixed bottom-8 right-8 z-[70] w-16 h-16">
+      <div className="fixed bottom-8 right-8 z-[70] w-16 h-16 hidden md:block">
         <button
           onClick={() => setIsChatOpen(!isChatOpen)}
-          className="w-full h-full bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:bg-primary-hover transition-all"
+          className="w-full h-full bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:bg-primary-hover hover:shadow-glow hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          aria-label={isChatOpen ? "Close AI assistant chat" : "Open AI assistant chat"}
+          aria-expanded={isChatOpen}
+          aria-haspopup="dialog"
         >
-          <MessageSquare size={24} />
+          <MessageSquare size={24} aria-hidden="true" />
         </button>
       </div>
 

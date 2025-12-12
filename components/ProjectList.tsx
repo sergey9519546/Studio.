@@ -1,12 +1,12 @@
+import { ArrowRight, CheckSquare, Filter, Plus, Search, Square, Upload } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
-import { Search, Plus, Upload, CheckSquare, Square, ArrowRight, Filter } from 'lucide-react';
-import { Project, ProjectStatus, Priority, QueryParams } from '../types';
 import { Link, useInRouterContext } from 'react-router-dom';
-import ProjectModal from './ProjectModal';
+import { api } from '../services/api';
 import { Badge } from '../src/components/design/Badge';
 import { Button } from '../src/components/design/Button';
+import { Priority, Project, ProjectStatus, QueryParams } from '../types';
+import ProjectModal from './ProjectModal';
 import Skeleton from './ui/Skeleton';
-import { api } from '../services/api';
 
 interface ProjectListProps {
   projects?: Project[];
@@ -172,17 +172,26 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects = [], onC
       <div className="bg-surface rounded-2xl border border-border-subtle shadow-card overflow-hidden flex flex-col">
         <div className="p-6 border-b border-border-subtle flex items-center justify-between gap-4 bg-white">
           <div className="relative flex-1 max-w-md group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-tertiary group-focus-within:text-primary transition-colors" size={16} />
+            <label htmlFor="project-search" className="sr-only">Search projects</label>
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-tertiary group-focus-within:text-primary transition-colors" size={16} aria-hidden="true" />
             <input
+              id="project-search"
+              type="search"
               className="w-full pl-11 pr-10 py-3 bg-app/50 border border-border-subtle rounded-xl text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all placeholder-ink-tertiary font-medium text-ink-primary"
               placeholder="Filter projects... (Cmd+K)"
               value={searchText}
               onChange={e => setSearchText(e.target.value)}
+              aria-describedby="search-hint"
             />
+            <span id="search-hint" className="sr-only">Type to filter projects by name or client</span>
             {searchText && (
-              <button onClick={() => setSearchText('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-tertiary hover:text-ink-primary transition-colors">
+              <button 
+                onClick={() => setSearchText('')} 
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-tertiary hover:text-ink-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded-full"
+                aria-label="Clear search"
+              >
                 <div className="bg-subtle rounded-full p-1 hover:bg-border-subtle transition-colors">
-                  <Plus size={12} className="rotate-45" />
+                  <Plus size={12} className="rotate-45" aria-hidden="true" />
                 </div>
               </button>
             )}
@@ -206,21 +215,28 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects: _projects = [], onC
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+        <div className="overflow-x-auto" role="region" aria-label="Projects table">
+          <table className="w-full text-left border-collapse" aria-describedby="projects-table-desc">
+            <caption id="projects-table-desc" className="sr-only">
+              List of projects with their status, owner, timeline, and priority. Use arrow keys to navigate rows.
+            </caption>
             <thead className="bg-subtle/30 border-b border-border-subtle">
               <tr>
-                <th className="px-6 py-5 w-12 text-center">
-                  <button onClick={toggleSelectAll} className="text-ink-tertiary hover:text-primary transition-colors p-1">
-                    {selectedIds.size > 0 ? <CheckSquare size={18} /> : <Square size={18} />}
+                <th scope="col" className="px-6 py-5 w-12 text-center">
+                  <button 
+                    onClick={toggleSelectAll} 
+                    className="text-ink-tertiary hover:text-primary transition-colors p-1 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded"
+                    aria-label={selectedIds.size > 0 ? `Deselect all ${filteredProjects.length} projects` : `Select all ${filteredProjects.length} projects`}
+                  >
+                    {selectedIds.size > 0 ? <CheckSquare size={18} aria-hidden="true" /> : <Square size={18} aria-hidden="true" />}
                   </button>
                 </th>
-                <th className="px-6 py-5 text-xs font-semibold uppercase text-ink-tertiary tracking-wide">Project Name</th>
-                <th className="px-6 py-5 text-xs font-semibold uppercase text-ink-tertiary tracking-wide">Status</th>
-                <th className="px-6 py-5 text-xs font-semibold uppercase text-ink-tertiary tracking-wide">Owner</th>
-                <th className="px-6 py-5 text-xs font-semibold uppercase text-ink-tertiary tracking-wide">Timeline</th>
-                <th className="px-6 py-5 text-xs font-semibold uppercase text-ink-tertiary tracking-wide">Priority</th>
-                <th className="px-6 py-5 text-right"></th>
+                <th scope="col" className="px-6 py-5 text-xs font-semibold uppercase text-ink-tertiary tracking-wide">Project Name</th>
+                <th scope="col" className="px-6 py-5 text-xs font-semibold uppercase text-ink-tertiary tracking-wide">Status</th>
+                <th scope="col" className="px-6 py-5 text-xs font-semibold uppercase text-ink-tertiary tracking-wide">Owner</th>
+                <th scope="col" className="px-6 py-5 text-xs font-semibold uppercase text-ink-tertiary tracking-wide">Timeline</th>
+                <th scope="col" className="px-6 py-5 text-xs font-semibold uppercase text-ink-tertiary tracking-wide">Priority</th>
+                <th scope="col" className="px-6 py-5 text-right"><span className="sr-only">Actions</span></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border-subtle bg-surface">
