@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { X, Sparkles, Trash2, Loader2, User, FileText, BrainCircuit, Tag, AlertTriangle, Plus } from 'lucide-react';
-import { Project, RoleRequirement, Priority, ProjectStatus } from '../types';
+import { AlertTriangle, BrainCircuit, FileText, Loader2, Plus, Sparkles, Tag, Trash2, User, X } from 'lucide-react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { api } from '../services/api';
+import { FocusTrap } from '../src/components/Accessibility';
+import { Priority, Project, ProjectStatus, RoleRequirement } from '../types';
 
 interface ProjectModalProps {
   isOpen: boolean;
@@ -134,21 +135,58 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
     onClose();
   };
 
+  // Handle escape key to close modal
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  }, [onClose]);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+        document.body.style.overflow = '';
+      };
+    }
+  }, [isOpen, handleKeyDown]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/40 backdrop-blur-sm p-4 font-sans animate-in fade-in duration-200">
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-5xl max-h-[90vh] flex flex-col overflow-hidden border border-gray-200">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/40 backdrop-blur-sm p-4 font-sans animate-fade-in"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-modal-title"
+    >
+      {/* Backdrop for click-to-close */}
+      <div 
+        className="absolute inset-0" 
+        onClick={onClose}
+        aria-hidden="true"
+      />
+      
+      <FocusTrap isActive={isOpen}>
+        <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-5xl max-h-[90vh] flex flex-col overflow-hidden border border-gray-200 animate-scale-in">
 
-        <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-white">
-          <div>
-            <h2 className="text-base font-semibold text-gray-900">{initialData ? 'Edit Project' : 'New Project'}</h2>
-            <p className="text-xs text-gray-500">Configure campaign parameters.</p>
+          <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-white">
+            <div>
+              <h2 id="project-modal-title" className="text-base font-semibold text-gray-900">
+                {initialData ? 'Edit Project' : 'New Project'}
+              </h2>
+              <p className="text-xs text-gray-500">Configure campaign parameters.</p>
+            </div>
+            <button 
+              onClick={onClose} 
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Close modal"
+            >
+              <X size={20} aria-hidden="true" />
+            </button>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-900 transition-colors">
-            <X size={20} />
-          </button>
-        </div>
 
         <div className="flex-1 overflow-hidden flex flex-col lg:flex-row">
 
@@ -298,15 +336,22 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, in
         </div>
 
         <div className="px-6 py-4 border-t border-gray-100 bg-white flex justify-end gap-3 z-10">
-          <button onClick={onClose} className="px-4 py-2 text-gray-600 font-medium hover:bg-gray-100 rounded-md text-xs transition-colors">
+          <button 
+            onClick={onClose} 
+            className="min-h-[44px] px-4 py-2 text-gray-600 font-medium hover:bg-gray-100 rounded-md text-xs transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          >
             Cancel
           </button>
-          <button onClick={handleSave} className="px-5 py-2 bg-gray-900 text-white font-medium rounded-md text-xs hover:bg-black shadow-sm transition-all">
+          <button 
+            onClick={handleSave} 
+            className="min-h-[44px] px-5 py-2 bg-gray-900 text-white font-medium rounded-md text-xs hover:bg-black shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          >
             {initialData ? 'Update Project' : 'Create Project'}
           </button>
         </div>
 
-      </div>
+        </div>
+      </FocusTrap>
     </div>
   );
 };
