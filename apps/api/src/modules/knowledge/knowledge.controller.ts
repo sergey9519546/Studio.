@@ -1,6 +1,6 @@
 
 import { Body, Controller, Delete, Get, Param, Post, UseGuards } from "@nestjs/common";
-import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
 import { KnowledgeService } from './knowledge.service';
 
 @Controller({ path: "knowledge", version: "1" })

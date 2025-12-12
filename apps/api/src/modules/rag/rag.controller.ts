@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Logger, Post, UseGuards } from "@nestjs/common";
 import { Throttle } from "@nestjs/throttler";
-import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
+import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard.js";
 import { RAGService } from "./rag.service";
 
 @Controller({ path: "rag", version: "1" })

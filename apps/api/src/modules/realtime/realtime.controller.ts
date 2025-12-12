@@ -1,6 +1,6 @@
 import { Controller, Get, Query, Res, UseGuards } from "@nestjs/common";
 import type { Response } from "express";
-import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
+import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard.js";
 import { RealtimeService } from "./realtime.service";
 
 @Controller({ path: "realtime", version: "1" })

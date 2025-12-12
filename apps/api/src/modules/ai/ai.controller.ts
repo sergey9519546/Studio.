@@ -15,7 +15,7 @@ import {
 import { FilesInterceptor } from '@nestjs/platform-express';
 import type { Response } from 'express';
 import 'multer';
-import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
 import { RAGService } from '../rag/rag.service';
 import { GeminiAnalystService } from './gemini-analyst.service';
 import { StreamingService } from './streaming.service';

@@ -1,6 +1,6 @@
 
 import { Controller, Get, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
 import { DriveFileDTO, DriveService } from "./drive.service";
 import { GoogleClientFactory } from './google-client.factory';
 

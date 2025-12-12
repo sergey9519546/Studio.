@@ -1,5 +1,5 @@
 import { Controller, Get, HttpException, HttpStatus, Param, Request, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
 import { ConfluenceService } from './confluence.service';
 
 /**

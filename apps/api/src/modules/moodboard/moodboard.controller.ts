@@ -15,7 +15,7 @@ import {
 } from "@nestjs/common";
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Throttle } from '@nestjs/throttler';
-import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
+import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard.js";
 import { AssetsService } from "../assets/assets.service";
 import { CreateCollectionDto } from "./dto/create-collection.dto";
 import { CreateFromUnsplashDto } from "./dto/create-from-unsplash.dto";

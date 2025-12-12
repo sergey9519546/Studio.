@@ -1,7 +1,7 @@
 
 import { Controller, Get, Param, Query, Req, UseGuards } from "@nestjs/common";
 import { Request } from 'express';
-import { JwtAuthGuard } from "../../../common/guards/jwt-auth.guard";
+import { JwtAuthGuard } from "../../../common/guards/jwt-auth.guard.js";
 import { CloudStorageService } from './cloud-storage.service';
 import { ListFilesQueryDto } from "./dto/cloud-storage.dto";
 

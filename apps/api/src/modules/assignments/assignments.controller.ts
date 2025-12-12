@@ -1,7 +1,7 @@
 
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { AssignmentsService } from './assignments.service';
-import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
 import { CreateAssignmentDto, UpdateAssignmentDto } from './dto/assignment.dto';
 
 @Controller({ path: 'assignments', version: '1' })

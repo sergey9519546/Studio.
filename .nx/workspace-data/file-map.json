@@ -86,7 +86,7 @@
         },
         {
           "file": "apps/api/src/common/guards/common.module.ts",
-          "hash": "1241588017513126767",
+          "hash": "1436129260906170165",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -2774,7 +2774,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/ai.controller.ts",
-          "hash": "13186934160540530949",
+          "hash": "14952502184220954575",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -2916,7 +2916,7 @@
         },
         {
           "file": "apps/api/src/modules/assets/assets.controller.ts",
-          "hash": "2912734194959062095",
+          "hash": "16298505292392429860",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express"
@@ -2939,7 +2939,7 @@
         },
         {
           "file": "apps/api/src/modules/assignments/assignments.controller.ts",
-          "hash": "4690416421152100378",
+          "hash": "7871655086748410888",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3036,7 +3036,7 @@
         },
         {
           "file": "apps/api/src/modules/confluence/confluence.controller.ts",
-          "hash": "10384734358334626878",
+          "hash": "5618243180486420807",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3064,7 +3064,7 @@
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.controller.ts",
-          "hash": "18035198982975238479",
+          "hash": "6955786534776779157",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3111,7 +3111,7 @@
         },
         {
           "file": "apps/api/src/modules/google/drive.controller.ts",
-          "hash": "11149018180771096449",
+          "hash": "16796694716500183786",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3185,7 +3185,7 @@
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.controller.ts",
-          "hash": "7173486417869740852",
+          "hash": "4118984144040672332",
           "deps": [
             "npm:@nestjs/common",
             "npm:express"
@@ -3244,7 +3244,7 @@
         },
         {
           "file": "apps/api/src/modules/knowledge/knowledge.controller.ts",
-          "hash": "6165901589967260329",
+          "hash": "17007693499285977210",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3273,7 +3273,7 @@
         },
         {
           "file": "apps/api/src/modules/media-proxy/media-proxy.controller.ts",
-          "hash": "17060076584594057791",
+          "hash": "1707268448133193644",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -3324,7 +3324,7 @@
         },
         {
           "file": "apps/api/src/modules/monitoring/monitoring.controller.ts",
-          "hash": "4349270408987578566",
+          "hash": "17737823336071908230",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3366,7 +3366,7 @@
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.controller.ts",
-          "hash": "5589124650828796544",
+          "hash": "18268616255161255052",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -3398,7 +3398,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/projects.controller.ts",
-          "hash": "7348124778374787170",
+          "hash": "5749167509644346046",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3468,7 +3468,7 @@
         },
         {
           "file": "apps/api/src/modules/rag/rag.controller.ts",
-          "hash": "1920244578971698763",
+          "hash": "14747554627581056772",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/throttler"
@@ -3502,7 +3502,7 @@
         },
         {
           "file": "apps/api/src/modules/realtime/realtime.controller.ts",
-          "hash": "8658133494755273210",
+          "hash": "2341178285074318611",
           "deps": [
             "npm:@nestjs/common",
             "npm:express"
@@ -3540,7 +3540,7 @@
         },
         {
           "file": "apps/api/src/modules/storage/storage.controller.ts",
-          "hash": "7294245360798237559",
+          "hash": "12001046257139550201",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3793,7 +3793,7 @@
       },
       {
         "file": "App.jsx",
-        "hash": "5856152642422490044"
+        "hash": "3047224507107295451"
       },
       {
         "file": "App.tsx",
@@ -3820,8 +3820,12 @@
         "hash": "16112906481654877193"
       },
       {
+        "file": "COMMAND_LINE_FIXES_SUMMARY.md",
+        "hash": "15820644931736938351"
+      },
+      {
         "file": "COMMAND_LINE_FIXES_TODO.md",
-        "hash": "17707990465057475102"
+        "hash": "10611897918367231963"
       },
       {
         "file": "COMPLETE_AUDIT_REPORT.md",
@@ -3862,10 +3866,6 @@
       {
         "file": "CRITICAL_FIXES_TODO.md",
         "hash": "9442924809537466963"
-      },
-      {
-        "file": "DEEPER_ANAL",
-        "hash": "4055606894390288348"
       },
       {
         "file": "DEEPER_ANALYSIS_TODO.md",
@@ -3916,6 +3916,10 @@
         "hash": "15074983280526487369"
       },
       {
+        "file": "DESIGN_SYSTEM_GUIDE.md",
+        "hash": "8042329300998820060"
+      },
+      {
         "file": "Dockerfile",
         "hash": "12898927544059431243"
       },
@@ -3926,6 +3930,10 @@
       {
         "file": "ENVIRONMENT_REVERSION_COMPLETE.md",
         "hash": "14415733707930019718"
+      },
+      {
+        "file": "ESM_LOADER_FIX_TODO.md",
+        "hash": "903468605949287670"
       },
       {
         "file": "EXECUTION_TODO.md",
@@ -3968,10 +3976,6 @@
         "hash": "17774235917085810443"
       },
       {
-        "file": "FLUID_DESIGN_GUIDE.md",
-        "hash": "3244421341483603138"
-      },
-      {
         "file": "FLUID_DESIGN_IMPLEMENTATION_SUMMARY.md",
         "hash": "4805661421493112746"
       },
@@ -3994,6 +3998,18 @@
       {
         "file": "INTEGRATION_TESTING_TODO.md",
         "hash": "4314644189400013708"
+      },
+      {
+        "file": "LAYOUT_FIXES_COMPLETE.md",
+        "hash": "17346801947325164661"
+      },
+      {
+        "file": "LAYOUT_FIXES_IMPLEMENTATION.md",
+        "hash": "3208148363338403927"
+      },
+      {
+        "file": "LAYOUT_FIXES_TODO.md",
+        "hash": "3380882445154241881"
       },
       {
         "file": "LAYOUT_IMPROVEMENT_SUMMARY.md",
@@ -4084,6 +4100,14 @@
         "hash": "4055606894390288348"
       },
       {
+        "file": "UX_UI_UPGRADE_IMPLEMENTATION_REPORT.md",
+        "hash": "4723247675155434550"
+      },
+      {
+        "file": "UX_UI_UPGRADE_TODO.md",
+        "hash": "10473200095207590252"
+      },
+      {
         "file": "VERTEX_AI_IMPROVEMENTS_SUMMARY.md",
         "hash": "2086253961552138446"
       },
@@ -4101,7 +4125,7 @@
       },
       {
         "file": "WINDOWS_COMMAND_EQUIVALENTS.md",
-        "hash": "9131387268427830947"
+        "hash": "13827236377665864013"
       },
       {
         "file": "WINDOWS_FIXES_SUMMARY.md",
@@ -4141,7 +4165,7 @@
       },
       {
         "file": "components/App.test.tsx",
-        "hash": "16500757179517909607"
+        "hash": "5175568660604383506"
       },
       {
         "file": "components/AssignmentView.test.tsx",
@@ -4165,11 +4189,11 @@
       },
       {
         "file": "components/CreativeStudio.tsx",
-        "hash": "391081214413880092"
+        "hash": "4843901583429724284"
       },
       {
         "file": "components/Dashboard.tsx",
-        "hash": "7920925864988775838"
+        "hash": "15117280766122551721"
       },
       {
         "file": "components/DriveFileBrowser.tsx",
@@ -4189,7 +4213,7 @@
       },
       {
         "file": "components/FreelancerList.tsx",
-        "hash": "15584696555111465581"
+        "hash": "3206363076560482395"
       },
       {
         "file": "components/GuardianRoom.tsx",
@@ -4201,7 +4225,7 @@
       },
       {
         "file": "components/ImportWizard.test.tsx",
-        "hash": "5635656613297042622"
+        "hash": "4319244585619788410"
       },
       {
         "file": "components/ImportWizard.tsx",
@@ -4213,7 +4237,7 @@
       },
       {
         "file": "components/Login.tsx",
-        "hash": "16464404982975483540"
+        "hash": "2652152032987593865"
       },
       {
         "file": "components/MobileNav.tsx",
@@ -4229,7 +4253,7 @@
       },
       {
         "file": "components/ProjectDetail.tsx",
-        "hash": "1554626618384948090"
+        "hash": "4295960904140729967"
       },
       {
         "file": "components/ProjectDetailRedesigned.tsx",
@@ -4237,11 +4261,11 @@
       },
       {
         "file": "components/ProjectList.tsx",
-        "hash": "16156071724178333819"
+        "hash": "4547129720691650155"
       },
       {
         "file": "components/ProjectModal.tsx",
-        "hash": "3837990514648990771"
+        "hash": "7915450955353840657"
       },
       {
         "file": "components/ProjectsView.tsx",
@@ -8245,7 +8269,7 @@
       },
       {
         "file": "dataconnect/.dataconnect/pgliteData/pg17/global/pg_control",
-        "hash": "7451887523998612773"
+        "hash": "12875281185197348335"
       },
       {
         "file": "dataconnect/.dataconnect/pgliteData/pg17/global/pg_filenode.map",
@@ -8281,7 +8305,7 @@
       },
       {
         "file": "dataconnect/.dataconnect/pgliteData/pg17/pg_wal/000000010000000000000005",
-        "hash": "17251241381166812240"
+        "hash": "9856818708956168023"
       },
       {
         "file": "dataconnect/.dataconnect/pgliteData/pg17/pg_wal/000000010000000000000006",
@@ -8313,7 +8337,7 @@
       },
       {
         "file": "dataconnect/.dataconnect/pgliteData/pg17/postmaster.pid",
-        "hash": "10556539324143828703"
+        "hash": "4854341378457711823"
       },
       {
         "file": "dataconnect/.dataconnect/schema/main/implicit.gql",
@@ -48752,10 +48776,6 @@
         "hash": "1611556503276336471"
       },
       {
-        "file": "icon_paths.txt",
-        "hash": "3244421341483603138"
-      },
-      {
         "file": "icons.json",
         "hash": "17688469751964912452"
       },
@@ -48796,12 +48816,16 @@
         "hash": "3543150069670964313"
       },
       {
+        "file": "package",
+        "hash": "4055606894390288348"
+      },
+      {
         "file": "package-lock.json",
-        "hash": "5772889810483290666"
+        "hash": "6489625750780993217"
       },
       {
         "file": "package.json",
-        "hash": "11653596500447635359"
+        "hash": "10376957456414206787"
       },
       {
         "file": "package_backup.json",
@@ -49044,8 +49068,12 @@
         "hash": "16027225546979168090"
       },
       {
+        "file": "src/components/Accessibility.tsx",
+        "hash": "4428204295675663527"
+      },
+      {
         "file": "src/components/Dashboard.test.tsx",
-        "hash": "1960714633686277258"
+        "hash": "7533606736235011920"
       },
       {
         "file": "src/components/FluidDesignShowcase.tsx",
@@ -49053,7 +49081,7 @@
       },
       {
         "file": "src/components/FreelancerCard.test.tsx",
-        "hash": "10902068170169858515"
+        "hash": "9079194505458052282"
       },
       {
         "file": "src/components/Layout.tsx",
@@ -49077,7 +49105,7 @@
       },
       {
         "file": "src/components/ProjectList.test.tsx",
-        "hash": "16139870069064723005"
+        "hash": "9655915655952059483"
       },
       {
         "file": "src/components/Skeleton.css",
@@ -49201,7 +49229,7 @@
       },
       {
         "file": "src/components/layout/CommandBar.tsx",
-        "hash": "16271194004805881228"
+        "hash": "14030072228597460885"
       },
       {
         "file": "src/components/layout/Sidebar.tsx",
@@ -49221,7 +49249,7 @@
       },
       {
         "file": "src/dataconnect-generated/.guides/usage.md",
-        "hash": "6620734942988841674"
+        "hash": "9395073703261133520"
       },
       {
         "file": "src/dataconnect-generated/README.md",
@@ -49229,7 +49257,7 @@
       },
       {
         "file": "src/dataconnect-generated/esm/index.esm.js",
-        "hash": "6110978263211776781"
+        "hash": "8103665619056376340"
       },
       {
         "file": "src/dataconnect-generated/esm/package.json",
@@ -49237,11 +49265,11 @@
       },
       {
         "file": "src/dataconnect-generated/index.cjs.js",
-        "hash": "6179164097319436544"
+        "hash": "11947682604775880572"
       },
       {
         "file": "src/dataconnect-generated/index.d.ts",
-        "hash": "12827982418421243259"
+        "hash": "12121625883648963937"
       },
       {
         "file": "src/dataconnect-generated/package.json",
@@ -49253,7 +49281,7 @@
       },
       {
         "file": "src/dataconnect-generated/react/esm/index.esm.js",
-        "hash": "12174374708228840605"
+        "hash": "14570083277883875313"
       },
       {
         "file": "src/dataconnect-generated/react/esm/package.json",
@@ -49261,11 +49289,11 @@
       },
       {
         "file": "src/dataconnect-generated/react/index.cjs.js",
-        "hash": "18430920159781452914"
+        "hash": "2913033731498597627"
       },
       {
         "file": "src/dataconnect-generated/react/index.d.ts",
-        "hash": "1450360211015605153"
+        "hash": "498645000099755456"
       },
       {
         "file": "src/dataconnect-generated/react/package.json",
@@ -49309,7 +49337,7 @@
       },
       {
         "file": "src/test/setup.ts",
-        "hash": "7890483852430562637"
+        "hash": "12868387811487735507"
       },
       {
         "file": "src/theme/tokens.ts",
@@ -49365,7 +49393,11 @@
       },
       {
         "file": "tailwind.config.js",
-        "hash": "2827096687375605707"
+        "hash": "15390637036230227210"
+      },
+      {
+        "file": "test-commands-fixed.ps1",
+        "hash": "11525517678057778410"
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.1544914e-8fc8-4afe-b098-5c9b00bcf85d.json",
@@ -49412,12 +49444,20 @@
         "hash": "9564512296546428352"
       },
       {
+        "file": "tmp/apps/api/serve/tsconfig.generated.6d617dce-370e-4caf-951f-77ae2a6ee2e0.json",
+        "hash": "9564512296546428352"
+      },
+      {
         "file": "tmp/apps/api/serve/tsconfig.generated.6ebc14d0-72f1-4703-8df5-7a48b5ccf680.json",
         "hash": "9564512296546428352"
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.89550a6e-86e2-44cf-9201-b0a81eaa776d.json",
         "hash": "12178908264864505738"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.bf90190a-1b54-4c6a-94de-de48c7bcc95a.json",
+        "hash": "9564512296546428352"
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.c441147f-83db-4a30-b0a5-c435610636f4.json",
@@ -49462,6 +49502,10 @@
       {
         "file": "types/media.types.ts",
         "hash": "1118239756705353015"
+      },
+      {
+        "file": "unix-helpers.ps1",
+        "hash": "17022934044820927354"
       },
       {
         "file": "vite.config.ts",

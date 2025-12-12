@@ -1,6 +1,6 @@
 
 import { Controller, Get, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
 import { StorageService } from './storage.service';
 
 @Controller({ path: "storage", version: "1" })
