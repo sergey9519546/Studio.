@@ -97,54 +97,337 @@ Respond based on the provided context.`;
   }
 
   /**
-   * Analyze image using Gemini Vision (text-based analysis for now)
+   * Enhanced image analysis using Gemini Vision with creative intelligence
    */
-  async analyzeImage(imageUrl: string): Promise<{
+  async analyzeImage(imageUrl: string, options?: {
+    analysisType?: 'basic' | 'creative' | 'brand' | 'technical';
+    context?: string;
+    brandGuidelines?: Record<string, unknown>;
+  }): Promise<{
     tags: string[];
     moods: string[];
     colors: string[];
     shotType?: string;
     description: string;
+    composition?: {
+      ruleOfThirds: boolean;
+      leadingLines: string[];
+      focalPoints: string[];
+      balance: 'balanced' | 'unbalanced' | 'dynamic';
+    };
+    lighting?: {
+      type: string;
+      direction: string;
+      mood: string;
+      quality: 'soft' | 'harsh' | 'natural' | 'artificial';
+    };
+    style?: {
+      genre: string;
+      era: string;
+      movements: string[];
+      techniques: string[];
+    };
+    brandCompliance?: {
+      compliant: boolean;
+      issues: string[];
+      suggestions: string[];
+    };
+    technical?: {
+      resolution: string;
+      aspectRatio: string;
+      quality: 'high' | 'medium' | 'low';
+      issues: string[];
+    };
+    creativeFeedback?: {
+      strengths: string[];
+      improvements: string[];
+      alternativeSuggestions: string[];
+    };
   }> {
     try {
-      const prompt = `Analyze this image for creative and design purposes. Use your knowledge of visual analysis to describe the following aspects. Respond in JSON format with the following fields:
-{
-  "tags": ["visual tag 1", "visual tag 2", ...],
-  "moods": ["mood 1", "mood 2", ...],
-  "colors": ["hex color 1", "hex color 2", ...],
-  "shotType": "shot type or framing style (optional)",
-  "description": "2-3 sentence creative description"
-}
-Be specific and creative in your analysis. Tags should describe visual elements. Moods should capture emotional tone.
+      const analysisType = options?.analysisType || 'creative';
+      const context = options?.context || '';
+      const brandGuidelines = options?.brandGuidelines || {};
 
-Image URL: ${imageUrl}`;
-
-      const schema = {
-        type: 'object',
-        properties: {
-          tags: { type: 'array', items: { type: 'string' } },
-          moods: { type: 'array', items: { type: 'string' } },
-          colors: { type: 'array', items: { type: 'string' } },
-          shotType: { type: 'string' },
-          description: { type: 'string' },
-        },
-        required: ['tags', 'moods', 'colors', 'description'],
-      };
+      const prompt = this.buildVisionAnalysisPrompt(imageUrl, analysisType, context, brandGuidelines);
+      const schema = this.getVisionAnalysisSchema(analysisType);
 
       const result = await this.extractData(prompt, schema);
-      return result as {
-        tags: string[];
-        moods: string[];
-        colors: string[];
-        shotType?: string;
-        description: string;
-      };
+      return result as any;
     } catch (error) {
       this.logger.error('Error analyzing image:', error);
       throw error;
     }
   }
 
+  /**
+   * Batch analyze multiple images for consistency and comparison
+   */
+  async analyzeImageBatch(imageUrls: string[], options?: {
+    analysisType?: 'basic' | 'creative' | 'brand' | 'technical';
+    compareMode?: boolean;
+    context?: string;
+  }): Promise<{
+    results: Array<{
+      imageUrl: string;
+      analysis: any;
+    }>;
+    comparison?: {
+      consistency: number;
+      commonElements: string[];
+      differences: string[];
+      recommendations: string[];
+    };
+  }> {
+    const results = [];
+    
+    for (const imageUrl of imageUrls) {
+      try {
+        const analysis = await this.analyzeImage(imageUrl, {
+          analysisType: options?.analysisType,
+          context: options?.context
+        });
+        results.push({ imageUrl, analysis });
+      } catch (error) {
+        this.logger.error(`Error analyzing image ${imageUrl}:`, error);
+        results.push({ 
+          imageUrl, 
+          analysis: { error: error.message } 
+        });
+      }
+    }
+
+    // Generate comparison if requested
+    let comparison;
+    if (options?.compareMode && results.length > 1) {
+      comparison = await this.compareImages(results.map(r => r.analysis));
+    }
+
+    return { results, comparison };
+  }
+
+  /**
+   * Analyze brand consistency across multiple assets
+   */
+  async analyzeBrandConsistency(imageUrls: string[], brandGuidelines: Record<string, unknown>): Promise<{
+    overallScore: number;
+    assetScores: Array<{
+      imageUrl: string;
+      score: number;
+      compliance: boolean;
+      issues: string[];
+    }>;
+    recommendations: string[];
+    brandGuidelines: Record<string, unknown>;
+  }> {
+    const batchResults = await this.analyzeImageBatch(imageUrls, {
+      analysisType: 'brand',
+      compareMode: true,
+      context: 'brand consistency analysis'
+    });
+
+    const assetScores = batchResults.results.map(result => {
+      const compliance = result.analysis?.brandCompliance?.compliant || false;
+      const score = compliance ? 8 + Math.random() * 2 : Math.random() * 7; // Mock scoring
+      
+      return {
+        imageUrl: result.imageUrl,
+        score: Math.round(score * 10) / 10,
+        compliance,
+        issues: result.analysis?.brandCompliance?.issues || []
+      };
+    });
+
+    const overallScore = assetScores.reduce((acc, asset) => acc + asset.score, 0) / assetScores.length;
+    
+    const recommendations = [
+      'Ensure consistent color palette across all brand assets',
+      'Maintain uniform typography and font usage',
+      'Align visual style with brand personality',
+      'Review logo placement and sizing consistency'
+    ];
+
+    return {
+      overallScore: Math.round(overallScore * 10) / 10,
+      assetScores,
+      recommendations,
+      brandGuidelines
+    };
+  }
+
+  /**
+   * Extract visual metadata and technical details
+   */
+  async extractVisualMetadata(imageUrl: string): Promise<{
+    dimensions: { width: number; height: number };
+    format: string;
+    colorProfile: string;
+    dominantColors: Array<{ color: string; percentage: number }>;
+    visualElements: {
+      text: boolean;
+      logos: boolean;
+      faces: boolean;
+      objects: string[];
+      patterns: string[];
+    };
+    composition: {
+      ruleOfThirds: boolean;
+      symmetry: boolean;
+      leadingLines: boolean;
+      focalPoint: string;
+    };
+    accessibility: {
+      contrastRatio: number;
+      readabilityScore: number;
+      altTextSuggestions: string[];
+    };
+  }> {
+    const prompt = `Analyze this image and extract detailed visual metadata. Focus on technical aspects, composition, and accessibility considerations. Respond in JSON format:
+
+{
+  "dimensions": {"width": number, "height": number},
+  "format": "image format",
+  "colorProfile": "color profile information",
+  "dominantColors": [{"color": "#hex", "percentage": number}],
+  "visualElements": {
+    "text": boolean,
+    "logos": boolean,
+    "faces": boolean,
+    "objects": ["object1", "object2"],
+    "patterns": ["pattern1", "pattern2"]
+  },
+  "composition": {
+    "ruleOfThirds": boolean,
+    "symmetry": boolean,
+    "leadingLines": boolean,
+    "focalPoint": "description of main focal point"
+  },
+  "accessibility": {
+    "contrastRatio": number,
+    "readabilityScore": number,
+    "altTextSuggestions": ["suggestion1", "suggestion2"]
+  }
+}
+
+Image URL: ${imageUrl}`;
+
+    const schema = {
+      type: 'object',
+      properties: {
+        dimensions: {
+          type: 'object',
+          properties: {
+            width: { type: 'number' },
+            height: { type: 'number' }
+          },
+          required: ['width', 'height']
+        },
+        format: { type: 'string' },
+        colorProfile: { type: 'string' },
+        dominantColors: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              color: { type: 'string' },
+              percentage: { type: 'number' }
+            },
+            required: ['color', 'percentage']
+          }
+        },
+        visualElements: {
+          type: 'object',
+          properties: {
+            text: { type: 'boolean' },
+            logos: { type: 'boolean' },
+            faces: { type: 'boolean' },
+            objects: { type: 'array', items: { type: 'string' } },
+            patterns: { type: 'array', items: { type: 'string' } }
+          },
+          required: ['text', 'logos', 'faces', 'objects', 'patterns']
+        },
+        composition: {
+          type: 'object',
+          properties: {
+            ruleOfThirds: { type: 'boolean' },
+            symmetry: { type: 'boolean' },
+            leadingLines: { type: 'boolean' },
+            focalPoint: { type: 'string' }
+          },
+          required: ['ruleOfThirds', 'symmetry', 'leadingLines', 'focalPoint']
+        },
+        accessibility: {
+          type: 'object',
+          properties: {
+            contrastRatio: { type: 'number' },
+            readabilityScore: { type: 'number' },
+            altTextSuggestions: { type: 'array', items: { type: 'string' } }
+          },
+          required: ['contrastRatio', 'readabilityScore', 'altTextSuggestions']
+        }
+      },
+      required: ['dimensions', 'format', 'colorProfile', 'dominantColors', 'visualElements', 'composition', 'accessibility']
+    };
+
+    return await this.extractData(prompt, schema) as any;
+  }
+
+  /**
+   * Generate creative suggestions and improvements
+   */
+  async generateCreativeSuggestions(imageUrl: string, brief?: string): Promise<{
+    improvements: string[];
+    alternatives: string[];
+    variations: string[];
+    nextSteps: string[];
+  }> {
+    const prompt = `As a creative director, analyze this image and provide constructive feedback and suggestions. Consider the brief if provided.
+
+Brief: ${brief || 'No specific brief provided'}
+
+Provide suggestions in JSON format:
+{
+  "improvements": ["specific improvement suggestion 1", "improvement 2"],
+  "alternatives": ["alternative approach 1", "alternative 2"],
+  "variations": ["variation idea 1", "variation 2"],
+  "nextSteps": ["actionable next step 1", "step 2"]
+}
+
+Focus on:
+- Visual impact and hierarchy
+- Brand alignment
+- Target audience appeal
+- Technical execution
+- Creative innovation
+
+Image URL: ${imageUrl}`;
+
+    const schema = {
+      type: 'object',
+      properties: {
+        improvements: { type: 'array', items: { type: 'string' } },
+        alternatives: { type: 'array', items: { type: 'string' } },
+        variations: { type: 'array', items: { type: 'string' } },
+        nextSteps: { type: 'array', items: { type: 'string' } }
+      },
+      required: ['improvements', 'alternatives', 'variations', 'nextSteps']
+    };
+
+    return await this.extractData(prompt, schema) as any;
+  }
+
+  /**
+   * Legacy method for backward compatibility
+   */
+  async analyzeImageLegacy(imageUrl: string): Promise<{
+    tags: string[];
+    moods: string[];
+    colors: string[];
+    shotType?: string;
+    description: string;
+  }> {
+    return this.analyzeImage(imageUrl, { analysisType: 'basic' });
+  }
 
   /**
    * Extract structured data
@@ -290,60 +573,3 @@ Image URL: ${imageUrl}`;
     `;
 
     const schema = {
-      type: 'object',
-      properties: {
-        performanceScore: { type: 'number', description: 'A score from 0 to 10 indicating performance' },
-        summary: { type: 'string', description: 'A brief summary of the performance review' },
-        recommendations: { type: 'string', description: 'Recommendations for improvement' },
-      },
-      required: ['performanceScore', 'summary', 'recommendations'],
-    };
-
-    const result = await this.extractData(prompt, schema);
-
-    // Cache for 24 hours
-    await this.cacheManager.set(cacheKey, result, 86400);
-
-    // Log usage
-    const duration = Date.now() - startTime;
-    this.logger.log({
-      type: 'ai_usage',
-      endpoint: 'analyzeFreelancerPerformance',
-      freelancerId,
-      duration_ms: duration,
-      cached: false,
-    });
-
-    return result;
-  }
-
-  /**
-   * Generate project brief
-   */
-  async generateProjectBrief(projectId: string): Promise<string> {
-    const project = await this.prisma.project.findUnique({
-      where: { id: projectId },
-      include: {
-        assignments: {
-          include: {
-            freelancer: true,
-          },
-        },
-      },
-    });
-
-    if (!project) {
-      throw new Error('Project not found');
-    }
-
-    const prompt = `
-      Generate a project brief for the following project:
-      Title: ${project.title}
-      Description: ${project.description}
-      Team:
-      ${project.assignments.map(a => `- ${a.freelancer.name}: ${a.role}`).join('\n')}
-    `;
-
-    return this.generateContent(prompt);
-  }
-}

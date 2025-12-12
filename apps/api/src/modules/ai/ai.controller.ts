@@ -16,6 +16,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import type { Response } from 'express';
 import 'multer';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
+import { ConversationsService } from '../conversations/conversations.service.js';
 import { RAGService } from '../rag/rag.service.js';
 import { GeminiAnalystService } from './gemini-analyst.service.js';
 import { StreamingService } from './streaming.service.js';
@@ -23,6 +24,7 @@ import { StreamingService } from './streaming.service.js';
 interface ChatRequest {
     userId?: string;
     projectId?: string;
+    conversationId?: string;
     role?: 'owner' | 'guest';
     message: string;
     messages?: Array<{ role: 'user' | 'assistant' | 'system'; content: string }>;
@@ -46,18 +48,20 @@ export class AIController {
         private readonly aiService: GeminiAnalystService,
         private readonly rag: RAGService,
         private readonly streaming: StreamingService,
+        private readonly conversationsService: ConversationsService,
     ) { }
 
     /**
-     * Main chat endpoint with full RAG integration
+     * Main chat endpoint with full RAG integration and conversation persistence
      * 
      * POST /api/ai/chat
      * 
      * Features:
      * - Automatic code context retrieval via RAG
-     * - Conversation history support
+     * - Conversation history support with persistence
      * - File upload support
      * - Role-based context injection
+     * - Smart conversation context loading
      */
     @Post('chat')
     @HttpCode(HttpStatus.OK)
@@ -68,7 +72,7 @@ export class AIController {
         @Body() body: ChatRequest,
         @UploadedFiles() files?: Array<Express.Multer.File>,
     ): Promise<ChatResponse> {
-        const { userId, projectId, role = 'owner', message, messages = [], context = '{}' } = body;
+        const { userId, projectId, conversationId, role = 'owner', message, messages = [], context = '{}' } = body;
 
         if (!message && (!files || files.length === 0)) {
             throw new BadRequestException('Message or files are required');
@@ -85,7 +89,30 @@ export class AIController {
         // Step 1: Build user context
         const userContext = this.buildUserContext(userId, projectId, role);
 
-        // Step 2: Retrieve relevant code context using RAG  
+        // Step 2: Load conversation history if conversationId provided
+        let conversationHistory = this.buildConversationHistory(messages);
+        let actualConversationId = conversationId;
+
+        if (conversationId) {
+            try {
+                const conversation = await this.conversationsService.findById(conversationId);
+                if (conversation) {
+                    // Get recent messages from database
+                    const dbMessages = await this.conversationsService.getMessages(conversationId, 20);
+                    const dbHistory = this.buildConversationHistory(
+                        dbMessages.map(msg => ({ role: msg.role, content: msg.content }))
+                    );
+                    if (dbHistory !== '(No previous messages in this conversation)') {
+                        conversationHistory = dbHistory;
+                    }
+                }
+            } catch (error) {
+                // Continue with provided messages if database lookup fails
+                console.warn('Failed to load conversation history:', error.message);
+            }
+        }
+
+        // Step 3: Retrieve relevant code context using RAG  
         const ragResponse = await this.rag.query(message, { topK: 5, projectId, includeContext: false });
         const codeContext = ragResponse.sources.map((s, i) => `// Source ${i + 1}\n${s.content}`).join('\n\n');
         const codeContextMetadata = {
@@ -94,9 +121,6 @@ export class AIController {
                 (s.metadata?.source as string | undefined) || 'unknown'
             )
         };
-
-        // Step 3: Build conversation history
-        const conversationHistory = this.buildConversationHistory(messages);
 
         // Step 4: Assemble enhanced context
         const enhancedContext = `
@@ -115,8 +139,10 @@ ${JSON.stringify(parsedContext, null, 2)}
         // Step 5: Generate Response
         const response = await this.aiService.chat(enhancedContext, messages);
 
+        let finalResponse = response;
+        let toolResults: Array<{ toolCall: unknown; result: unknown }> = [];
+
         if (typeof response === 'object' && response.toolCalls) {
-            const toolResults: Array<{ toolCall: unknown; result: unknown }> = [];
             for (const toolCall of response.toolCalls) {
                 const result = await this.aiService.executeTool(toolCall.name, toolCall.args);
                 toolResults.push({
@@ -126,22 +152,62 @@ ${JSON.stringify(parsedContext, null, 2)}
             }
 
             // Send the tool results back to the model to get a final response
-            const finalResponse = await this.aiService.chat(enhancedContext, [
+            finalResponse = await this.aiService.chat(enhancedContext, [
                 ...messages,
                 { role: 'model', content: JSON.stringify(response) },
                 { role: 'user', content: JSON.stringify(toolResults) },
             ]);
+        }
 
-            return {
-                response: finalResponse as string,
-                conversationId: this.generateConversationId(userId, projectId),
-                codeContext: codeContextMetadata,
-            };
+        // Step 6: Persist conversation if needed
+        if (userId || projectId) {
+            try {
+                // Create or get conversation
+                if (!actualConversationId) {
+                    const newConversation = await this.conversationsService.create({
+                        title: message.substring(0, 50) + (message.length > 50 ? '...' : ''),
+                        userId,
+                        projectId,
+                        metadata: {
+                            role,
+                            context: parsedContext,
+                        }
+                    });
+                    actualConversationId = newConversation.id;
+                }
+
+                // Save user message
+                await this.conversationsService.addMessage(actualConversationId, {
+                    role: 'user',
+                    content: message,
+                    metadata: {
+                        files: files?.map(f => ({ name: f.originalname, size: f.size })) || [],
+                    }
+                });
+
+                // Save assistant response
+                await this.conversationsService.addMessage(actualConversationId, {
+                    role: 'assistant',
+                    content: finalResponse as string,
+                    metadata: {
+                        tokensUsed: this.estimateTokens(finalResponse as string),
+                        codeContext: codeContextMetadata,
+                        toolCalls: toolResults.length > 0 ? toolResults : undefined,
+                    }
+                });
+
+                // Generate context snapshot for RAG enhancement
+                await this.conversationsService.generateContextSnapshot(actualConversationId);
+
+            } catch (error) {
+                console.warn('Failed to persist conversation:', error.message);
+                // Continue without failing the request
+            }
         }
 
         return {
-            response: response as string,
-            conversationId: this.generateConversationId(userId, projectId),
+            response: finalResponse as string,
+            conversationId: actualConversationId || this.generateConversationId(userId, projectId),
             codeContext: codeContextMetadata
         };
     }
@@ -278,6 +344,23 @@ ${JSON.stringify(parsedContext, null, 2)}
         };
     }
 
+    @Post('analyze/project/:id')
+    @HttpCode(HttpStatus.OK)
+    async analyzeProject(@Param('id') id: string) {
+        return this.aiService.analyzeProjectProfitability(id);
+    }
+
+    @Post('analyze/freelancer/:id')
+    @HttpCode(HttpStatus.OK)
+    async analyzeFreelancer(@Param('id') id: string) {
+        return this.aiService.analyzeFreelancerPerformance(id);
+    }
+
+    @Post('generate/project-brief/:id')
+    @HttpCode(HttpStatus.OK)
+    async generateProjectBrief(@Param('id') id: string) {
+        return this.aiService.generateProjectBrief(id);
+    }
 
     /**
      * Build user-specific context string
@@ -296,13 +379,13 @@ ${JSON.stringify(parsedContext, null, 2)}
         }
 
         if (projectId) {
-            parts.push(`- Project ID: ${projectId} `);
+            parts.push(`- Project ID: ${projectId}`);
         }
 
         if (role) {
-            parts.push(`- Role: ${role} `);
+            parts.push(`- Role: ${role}`);
             if (role === 'guest') {
-                parts.push(`- Access Level: Read - only(Guest users cannot modify data)`);
+                parts.push(`- Access Level: Read-only (Guest users cannot modify data)`);
             } else {
                 parts.push(`- Access Level: Full access`);
             }
@@ -325,7 +408,7 @@ ${JSON.stringify(parsedContext, null, 2)}
 
         return messages
             .slice(-10) // Keep last 10 messages for context
-            .map((msg, i) => `${i + 1}.[${msg.role}]: ${msg.content} `)
+            .map((msg, i) => `${i + 1}.[${msg.role}]: ${msg.content}`)
             .join('\n');
     }
 
@@ -353,23 +436,14 @@ ${JSON.stringify(parsedContext, null, 2)}
         const timestamp = Date.now();
         const userPart = userId ? userId.substring(0, 8) : 'anon';
         const projectPart = projectId ? projectId.substring(0, 8) : 'global';
-        return `conv_${userPart}_${projectPart}_${timestamp} `;
-    }
-    @Post('analyze/project/:id')
-    @HttpCode(HttpStatus.OK)
-    async analyzeProject(@Param('id') id: string) {
-        return this.aiService.analyzeProjectProfitability(id);
+        return `conv_${userPart}_${projectPart}_${timestamp}`;
     }
 
-    @Post('analyze/freelancer/:id')
-    @HttpCode(HttpStatus.OK)
-    async analyzeFreelancer(@Param('id') id: string) {
-        return this.aiService.analyzeFreelancerPerformance(id);
-    }
-
-    @Post('generate/project-brief/:id')
-    @HttpCode(HttpStatus.OK)
-    async generateProjectBrief(@Param('id') id: string) {
-        return this.aiService.generateProjectBrief(id);
+    /**
+     * Estimate token count for response tracking
+     */
+    private estimateTokens(text: string): number {
+        // Rough estimation: 1 token ≈ 4 characters for English text
+        return Math.ceil(text.length / 4);
     }
 }

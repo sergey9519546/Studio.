@@ -68,6 +68,31 @@ export type KnowledgeSource = $Result.DefaultSelection<Prisma.$KnowledgeSourcePa
  * 
  */
 export type Transcript = $Result.DefaultSelection<Prisma.$TranscriptPayload>
+/**
+ * Model Conversation
+ * 
+ */
+export type Conversation = $Result.DefaultSelection<Prisma.$ConversationPayload>
+/**
+ * Model Message
+ * 
+ */
+export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
+/**
+ * Model ContextSnapshot
+ * 
+ */
+export type ContextSnapshot = $Result.DefaultSelection<Prisma.$ContextSnapshotPayload>
+/**
+ * Model ProjectVersion
+ * 
+ */
+export type ProjectVersion = $Result.DefaultSelection<Prisma.$ProjectVersionPayload>
+/**
+ * Model Embedding
+ * 
+ */
+export type Embedding = $Result.DefaultSelection<Prisma.$EmbeddingPayload>
 
 /**
  * Enums
@@ -112,6 +137,23 @@ export const TranscriptStatus: {
 
 export type TranscriptStatus = (typeof TranscriptStatus)[keyof typeof TranscriptStatus]
 
+
+export const ConversationStatus: {
+  ACTIVE: 'ACTIVE',
+  ARCHIVED: 'ARCHIVED',
+  STARRED: 'STARRED'
+};
+
+export type ConversationStatus = (typeof ConversationStatus)[keyof typeof ConversationStatus]
+
+
+export const MessageRole: {
+  USER: 'USER',
+  ASSISTANT: 'ASSISTANT'
+};
+
+export type MessageRole = (typeof MessageRole)[keyof typeof MessageRole]
+
 }
 
 export type ProjectStatus = $Enums.ProjectStatus
@@ -129,6 +171,14 @@ export const AssignmentStatus: typeof $Enums.AssignmentStatus
 export type TranscriptStatus = $Enums.TranscriptStatus
 
 export const TranscriptStatus: typeof $Enums.TranscriptStatus
+
+export type ConversationStatus = $Enums.ConversationStatus
+
+export const ConversationStatus: typeof $Enums.ConversationStatus
+
+export type MessageRole = $Enums.MessageRole
+
+export const MessageRole: typeof $Enums.MessageRole
 
 /**
  * ##  Prisma Client ʲˢ
@@ -356,6 +406,56 @@ export class PrismaClient<
     * ```
     */
   get transcript(): Prisma.TranscriptDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.conversation`: Exposes CRUD operations for the **Conversation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Conversations
+    * const conversations = await prisma.conversation.findMany()
+    * ```
+    */
+  get conversation(): Prisma.ConversationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.message`: Exposes CRUD operations for the **Message** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Messages
+    * const messages = await prisma.message.findMany()
+    * ```
+    */
+  get message(): Prisma.MessageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contextSnapshot`: Exposes CRUD operations for the **ContextSnapshot** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ContextSnapshots
+    * const contextSnapshots = await prisma.contextSnapshot.findMany()
+    * ```
+    */
+  get contextSnapshot(): Prisma.ContextSnapshotDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.projectVersion`: Exposes CRUD operations for the **ProjectVersion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProjectVersions
+    * const projectVersions = await prisma.projectVersion.findMany()
+    * ```
+    */
+  get projectVersion(): Prisma.ProjectVersionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.embedding`: Exposes CRUD operations for the **Embedding** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Embeddings
+    * const embeddings = await prisma.embedding.findMany()
+    * ```
+    */
+  get embedding(): Prisma.EmbeddingDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -800,7 +900,12 @@ export namespace Prisma {
     MoodboardCollectionItem: 'MoodboardCollectionItem',
     Script: 'Script',
     KnowledgeSource: 'KnowledgeSource',
-    Transcript: 'Transcript'
+    Transcript: 'Transcript',
+    Conversation: 'Conversation',
+    Message: 'Message',
+    ContextSnapshot: 'ContextSnapshot',
+    ProjectVersion: 'ProjectVersion',
+    Embedding: 'Embedding'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -816,7 +921,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "project" | "roleRequirement" | "freelancer" | "assignment" | "moodboardItem" | "moodboardCollection" | "moodboardCollectionItem" | "script" | "knowledgeSource" | "transcript"
+      modelProps: "user" | "project" | "roleRequirement" | "freelancer" | "assignment" | "moodboardItem" | "moodboardCollection" | "moodboardCollectionItem" | "script" | "knowledgeSource" | "transcript" | "conversation" | "message" | "contextSnapshot" | "projectVersion" | "embedding"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1634,6 +1739,376 @@ export namespace Prisma {
           }
         }
       }
+      Conversation: {
+        payload: Prisma.$ConversationPayload<ExtArgs>
+        fields: Prisma.ConversationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ConversationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ConversationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
+          }
+          findFirst: {
+            args: Prisma.ConversationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ConversationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
+          }
+          findMany: {
+            args: Prisma.ConversationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>[]
+          }
+          create: {
+            args: Prisma.ConversationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
+          }
+          createMany: {
+            args: Prisma.ConversationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ConversationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>[]
+          }
+          delete: {
+            args: Prisma.ConversationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
+          }
+          update: {
+            args: Prisma.ConversationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
+          }
+          deleteMany: {
+            args: Prisma.ConversationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ConversationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ConversationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>[]
+          }
+          upsert: {
+            args: Prisma.ConversationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
+          }
+          aggregate: {
+            args: Prisma.ConversationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConversation>
+          }
+          groupBy: {
+            args: Prisma.ConversationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConversationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ConversationCountArgs<ExtArgs>
+            result: $Utils.Optional<ConversationCountAggregateOutputType> | number
+          }
+        }
+      }
+      Message: {
+        payload: Prisma.$MessagePayload<ExtArgs>
+        fields: Prisma.MessageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MessageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MessageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          findFirst: {
+            args: Prisma.MessageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MessageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          findMany: {
+            args: Prisma.MessageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>[]
+          }
+          create: {
+            args: Prisma.MessageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          createMany: {
+            args: Prisma.MessageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MessageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>[]
+          }
+          delete: {
+            args: Prisma.MessageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          update: {
+            args: Prisma.MessageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          deleteMany: {
+            args: Prisma.MessageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MessageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MessageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>[]
+          }
+          upsert: {
+            args: Prisma.MessageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          aggregate: {
+            args: Prisma.MessageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMessage>
+          }
+          groupBy: {
+            args: Prisma.MessageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MessageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MessageCountArgs<ExtArgs>
+            result: $Utils.Optional<MessageCountAggregateOutputType> | number
+          }
+        }
+      }
+      ContextSnapshot: {
+        payload: Prisma.$ContextSnapshotPayload<ExtArgs>
+        fields: Prisma.ContextSnapshotFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContextSnapshotFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContextSnapshotPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContextSnapshotFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContextSnapshotPayload>
+          }
+          findFirst: {
+            args: Prisma.ContextSnapshotFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContextSnapshotPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContextSnapshotFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContextSnapshotPayload>
+          }
+          findMany: {
+            args: Prisma.ContextSnapshotFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContextSnapshotPayload>[]
+          }
+          create: {
+            args: Prisma.ContextSnapshotCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContextSnapshotPayload>
+          }
+          createMany: {
+            args: Prisma.ContextSnapshotCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContextSnapshotCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContextSnapshotPayload>[]
+          }
+          delete: {
+            args: Prisma.ContextSnapshotDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContextSnapshotPayload>
+          }
+          update: {
+            args: Prisma.ContextSnapshotUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContextSnapshotPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContextSnapshotDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContextSnapshotUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContextSnapshotUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContextSnapshotPayload>[]
+          }
+          upsert: {
+            args: Prisma.ContextSnapshotUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContextSnapshotPayload>
+          }
+          aggregate: {
+            args: Prisma.ContextSnapshotAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContextSnapshot>
+          }
+          groupBy: {
+            args: Prisma.ContextSnapshotGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContextSnapshotGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContextSnapshotCountArgs<ExtArgs>
+            result: $Utils.Optional<ContextSnapshotCountAggregateOutputType> | number
+          }
+        }
+      }
+      ProjectVersion: {
+        payload: Prisma.$ProjectVersionPayload<ExtArgs>
+        fields: Prisma.ProjectVersionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProjectVersionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectVersionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProjectVersionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectVersionPayload>
+          }
+          findFirst: {
+            args: Prisma.ProjectVersionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectVersionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProjectVersionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectVersionPayload>
+          }
+          findMany: {
+            args: Prisma.ProjectVersionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectVersionPayload>[]
+          }
+          create: {
+            args: Prisma.ProjectVersionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectVersionPayload>
+          }
+          createMany: {
+            args: Prisma.ProjectVersionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProjectVersionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectVersionPayload>[]
+          }
+          delete: {
+            args: Prisma.ProjectVersionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectVersionPayload>
+          }
+          update: {
+            args: Prisma.ProjectVersionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectVersionPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProjectVersionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProjectVersionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProjectVersionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectVersionPayload>[]
+          }
+          upsert: {
+            args: Prisma.ProjectVersionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectVersionPayload>
+          }
+          aggregate: {
+            args: Prisma.ProjectVersionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProjectVersion>
+          }
+          groupBy: {
+            args: Prisma.ProjectVersionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProjectVersionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProjectVersionCountArgs<ExtArgs>
+            result: $Utils.Optional<ProjectVersionCountAggregateOutputType> | number
+          }
+        }
+      }
+      Embedding: {
+        payload: Prisma.$EmbeddingPayload<ExtArgs>
+        fields: Prisma.EmbeddingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmbeddingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmbeddingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmbeddingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmbeddingPayload>
+          }
+          findFirst: {
+            args: Prisma.EmbeddingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmbeddingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmbeddingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmbeddingPayload>
+          }
+          findMany: {
+            args: Prisma.EmbeddingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmbeddingPayload>[]
+          }
+          create: {
+            args: Prisma.EmbeddingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmbeddingPayload>
+          }
+          createMany: {
+            args: Prisma.EmbeddingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmbeddingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmbeddingPayload>[]
+          }
+          delete: {
+            args: Prisma.EmbeddingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmbeddingPayload>
+          }
+          update: {
+            args: Prisma.EmbeddingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmbeddingPayload>
+          }
+          deleteMany: {
+            args: Prisma.EmbeddingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmbeddingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmbeddingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmbeddingPayload>[]
+          }
+          upsert: {
+            args: Prisma.EmbeddingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmbeddingPayload>
+          }
+          aggregate: {
+            args: Prisma.EmbeddingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmbedding>
+          }
+          groupBy: {
+            args: Prisma.EmbeddingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmbeddingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmbeddingCountArgs<ExtArgs>
+            result: $Utils.Optional<EmbeddingCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1753,6 +2228,11 @@ export namespace Prisma {
     script?: ScriptOmit
     knowledgeSource?: KnowledgeSourceOmit
     transcript?: TranscriptOmit
+    conversation?: ConversationOmit
+    message?: MessageOmit
+    contextSnapshot?: ContextSnapshotOmit
+    projectVersion?: ProjectVersionOmit
+    embedding?: EmbeddingOmit
   }
 
   /* Types for Logging */
@@ -1837,6 +2317,7 @@ export namespace Prisma {
     assignments: number
     scripts: number
     knowledgeSources: number
+    conversations: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1844,6 +2325,7 @@ export namespace Prisma {
     assignments?: boolean | UserCountOutputTypeCountAssignmentsArgs
     scripts?: boolean | UserCountOutputTypeCountScriptsArgs
     knowledgeSources?: boolean | UserCountOutputTypeCountKnowledgeSourcesArgs
+    conversations?: boolean | UserCountOutputTypeCountConversationsArgs
   }
 
   // Custom InputTypes
@@ -1885,6 +2367,13 @@ export namespace Prisma {
     where?: KnowledgeSourceWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationWhereInput
+  }
+
 
   /**
    * Count Type ProjectCountOutputType
@@ -1897,6 +2386,8 @@ export namespace Prisma {
     moodboardItems: number
     knowledgeSources: number
     transcripts: number
+    conversations: number
+    projectVersions: number
   }
 
   export type ProjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1906,6 +2397,8 @@ export namespace Prisma {
     moodboardItems?: boolean | ProjectCountOutputTypeCountMoodboardItemsArgs
     knowledgeSources?: boolean | ProjectCountOutputTypeCountKnowledgeSourcesArgs
     transcripts?: boolean | ProjectCountOutputTypeCountTranscriptsArgs
+    conversations?: boolean | ProjectCountOutputTypeCountConversationsArgs
+    projectVersions?: boolean | ProjectCountOutputTypeCountProjectVersionsArgs
   }
 
   // Custom InputTypes
@@ -1959,6 +2452,20 @@ export namespace Prisma {
    */
   export type ProjectCountOutputTypeCountTranscriptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TranscriptWhereInput
+  }
+
+  /**
+   * ProjectCountOutputType without action
+   */
+  export type ProjectCountOutputTypeCountConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationWhereInput
+  }
+
+  /**
+   * ProjectCountOutputType without action
+   */
+  export type ProjectCountOutputTypeCountProjectVersionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectVersionWhereInput
   }
 
 
@@ -2052,6 +2559,46 @@ export namespace Prisma {
    */
   export type MoodboardCollectionCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MoodboardCollectionItemWhereInput
+  }
+
+
+  /**
+   * Count Type ConversationCountOutputType
+   */
+
+  export type ConversationCountOutputType = {
+    messages: number
+    contextSnapshots: number
+  }
+
+  export type ConversationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    messages?: boolean | ConversationCountOutputTypeCountMessagesArgs
+    contextSnapshots?: boolean | ConversationCountOutputTypeCountContextSnapshotsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ConversationCountOutputType without action
+   */
+  export type ConversationCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationCountOutputType
+     */
+    select?: ConversationCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ConversationCountOutputType without action
+   */
+  export type ConversationCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageWhereInput
+  }
+
+  /**
+   * ConversationCountOutputType without action
+   */
+  export type ConversationCountOutputTypeCountContextSnapshotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContextSnapshotWhereInput
   }
 
 
@@ -2243,6 +2790,7 @@ export namespace Prisma {
     assignments?: boolean | User$assignmentsArgs<ExtArgs>
     scripts?: boolean | User$scriptsArgs<ExtArgs>
     knowledgeSources?: boolean | User$knowledgeSourcesArgs<ExtArgs>
+    conversations?: boolean | User$conversationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2282,6 +2830,7 @@ export namespace Prisma {
     assignments?: boolean | User$assignmentsArgs<ExtArgs>
     scripts?: boolean | User$scriptsArgs<ExtArgs>
     knowledgeSources?: boolean | User$knowledgeSourcesArgs<ExtArgs>
+    conversations?: boolean | User$conversationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2294,6 +2843,7 @@ export namespace Prisma {
       assignments: Prisma.$AssignmentPayload<ExtArgs>[]
       scripts: Prisma.$ScriptPayload<ExtArgs>[]
       knowledgeSources: Prisma.$KnowledgeSourcePayload<ExtArgs>[]
+      conversations: Prisma.$ConversationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2701,6 +3251,7 @@ export namespace Prisma {
     assignments<T extends User$assignmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     scripts<T extends User$scriptsArgs<ExtArgs> = {}>(args?: Subset<T, User$scriptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScriptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     knowledgeSources<T extends User$knowledgeSourcesArgs<ExtArgs> = {}>(args?: Subset<T, User$knowledgeSourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KnowledgeSourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    conversations<T extends User$conversationsArgs<ExtArgs> = {}>(args?: Subset<T, User$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3221,6 +3772,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.conversations
+   */
+  export type User$conversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    where?: ConversationWhereInput
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    cursor?: ConversationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3508,6 +4083,8 @@ export namespace Prisma {
     moodboardItems?: boolean | Project$moodboardItemsArgs<ExtArgs>
     knowledgeSources?: boolean | Project$knowledgeSourcesArgs<ExtArgs>
     transcripts?: boolean | Project$transcriptsArgs<ExtArgs>
+    conversations?: boolean | Project$conversationsArgs<ExtArgs>
+    projectVersions?: boolean | Project$projectVersionsArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
@@ -3570,6 +4147,8 @@ export namespace Prisma {
     moodboardItems?: boolean | Project$moodboardItemsArgs<ExtArgs>
     knowledgeSources?: boolean | Project$knowledgeSourcesArgs<ExtArgs>
     transcripts?: boolean | Project$transcriptsArgs<ExtArgs>
+    conversations?: boolean | Project$conversationsArgs<ExtArgs>
+    projectVersions?: boolean | Project$projectVersionsArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProjectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3589,6 +4168,8 @@ export namespace Prisma {
       moodboardItems: Prisma.$MoodboardItemPayload<ExtArgs>[]
       knowledgeSources: Prisma.$KnowledgeSourcePayload<ExtArgs>[]
       transcripts: Prisma.$TranscriptPayload<ExtArgs>[]
+      conversations: Prisma.$ConversationPayload<ExtArgs>[]
+      projectVersions: Prisma.$ProjectVersionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4005,6 +4586,8 @@ export namespace Prisma {
     moodboardItems<T extends Project$moodboardItemsArgs<ExtArgs> = {}>(args?: Subset<T, Project$moodboardItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodboardItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     knowledgeSources<T extends Project$knowledgeSourcesArgs<ExtArgs> = {}>(args?: Subset<T, Project$knowledgeSourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KnowledgeSourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     transcripts<T extends Project$transcriptsArgs<ExtArgs> = {}>(args?: Subset<T, Project$transcriptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TranscriptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    conversations<T extends Project$conversationsArgs<ExtArgs> = {}>(args?: Subset<T, Project$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    projectVersions<T extends Project$projectVersionsArgs<ExtArgs> = {}>(args?: Subset<T, Project$projectVersionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4603,6 +5186,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TranscriptScalarFieldEnum | TranscriptScalarFieldEnum[]
+  }
+
+  /**
+   * Project.conversations
+   */
+  export type Project$conversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    where?: ConversationWhereInput
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    cursor?: ConversationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * Project.projectVersions
+   */
+  export type Project$projectVersionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectVersion
+     */
+    select?: ProjectVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectVersion
+     */
+    omit?: ProjectVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectVersionInclude<ExtArgs> | null
+    where?: ProjectVersionWhereInput
+    orderBy?: ProjectVersionOrderByWithRelationInput | ProjectVersionOrderByWithRelationInput[]
+    cursor?: ProjectVersionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProjectVersionScalarFieldEnum | ProjectVersionScalarFieldEnum[]
   }
 
   /**
@@ -14913,6 +15544,5607 @@ export namespace Prisma {
 
 
   /**
+   * Model Conversation
+   */
+
+  export type AggregateConversation = {
+    _count: ConversationCountAggregateOutputType | null
+    _avg: ConversationAvgAggregateOutputType | null
+    _sum: ConversationSumAggregateOutputType | null
+    _min: ConversationMinAggregateOutputType | null
+    _max: ConversationMaxAggregateOutputType | null
+  }
+
+  export type ConversationAvgAggregateOutputType = {
+    messageCount: number | null
+  }
+
+  export type ConversationSumAggregateOutputType = {
+    messageCount: number | null
+  }
+
+  export type ConversationMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    topic: string | null
+    projectId: string | null
+    userId: string | null
+    status: $Enums.ConversationStatus | null
+    messageCount: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ConversationMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    topic: string | null
+    projectId: string | null
+    userId: string | null
+    status: $Enums.ConversationStatus | null
+    messageCount: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ConversationCountAggregateOutputType = {
+    id: number
+    title: number
+    topic: number
+    projectId: number
+    userId: number
+    status: number
+    messageCount: number
+    metadata: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ConversationAvgAggregateInputType = {
+    messageCount?: true
+  }
+
+  export type ConversationSumAggregateInputType = {
+    messageCount?: true
+  }
+
+  export type ConversationMinAggregateInputType = {
+    id?: true
+    title?: true
+    topic?: true
+    projectId?: true
+    userId?: true
+    status?: true
+    messageCount?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ConversationMaxAggregateInputType = {
+    id?: true
+    title?: true
+    topic?: true
+    projectId?: true
+    userId?: true
+    status?: true
+    messageCount?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ConversationCountAggregateInputType = {
+    id?: true
+    title?: true
+    topic?: true
+    projectId?: true
+    userId?: true
+    status?: true
+    messageCount?: true
+    metadata?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ConversationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Conversation to aggregate.
+     */
+    where?: ConversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Conversations to fetch.
+     */
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ConversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Conversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Conversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Conversations
+    **/
+    _count?: true | ConversationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ConversationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ConversationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ConversationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ConversationMaxAggregateInputType
+  }
+
+  export type GetConversationAggregateType<T extends ConversationAggregateArgs> = {
+        [P in keyof T & keyof AggregateConversation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateConversation[P]>
+      : GetScalarType<T[P], AggregateConversation[P]>
+  }
+
+
+
+
+  export type ConversationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationWhereInput
+    orderBy?: ConversationOrderByWithAggregationInput | ConversationOrderByWithAggregationInput[]
+    by: ConversationScalarFieldEnum[] | ConversationScalarFieldEnum
+    having?: ConversationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ConversationCountAggregateInputType | true
+    _avg?: ConversationAvgAggregateInputType
+    _sum?: ConversationSumAggregateInputType
+    _min?: ConversationMinAggregateInputType
+    _max?: ConversationMaxAggregateInputType
+  }
+
+  export type ConversationGroupByOutputType = {
+    id: string
+    title: string | null
+    topic: string | null
+    projectId: string | null
+    userId: string | null
+    status: $Enums.ConversationStatus
+    messageCount: number
+    metadata: JsonValue | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ConversationCountAggregateOutputType | null
+    _avg: ConversationAvgAggregateOutputType | null
+    _sum: ConversationSumAggregateOutputType | null
+    _min: ConversationMinAggregateOutputType | null
+    _max: ConversationMaxAggregateOutputType | null
+  }
+
+  type GetConversationGroupByPayload<T extends ConversationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ConversationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ConversationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ConversationGroupByOutputType[P]>
+            : GetScalarType<T[P], ConversationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ConversationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    topic?: boolean
+    projectId?: boolean
+    userId?: boolean
+    status?: boolean
+    messageCount?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    project?: boolean | Conversation$projectArgs<ExtArgs>
+    user?: boolean | Conversation$userArgs<ExtArgs>
+    messages?: boolean | Conversation$messagesArgs<ExtArgs>
+    contextSnapshots?: boolean | Conversation$contextSnapshotsArgs<ExtArgs>
+    _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conversation"]>
+
+  export type ConversationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    topic?: boolean
+    projectId?: boolean
+    userId?: boolean
+    status?: boolean
+    messageCount?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    project?: boolean | Conversation$projectArgs<ExtArgs>
+    user?: boolean | Conversation$userArgs<ExtArgs>
+  }, ExtArgs["result"]["conversation"]>
+
+  export type ConversationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    topic?: boolean
+    projectId?: boolean
+    userId?: boolean
+    status?: boolean
+    messageCount?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    project?: boolean | Conversation$projectArgs<ExtArgs>
+    user?: boolean | Conversation$userArgs<ExtArgs>
+  }, ExtArgs["result"]["conversation"]>
+
+  export type ConversationSelectScalar = {
+    id?: boolean
+    title?: boolean
+    topic?: boolean
+    projectId?: boolean
+    userId?: boolean
+    status?: boolean
+    messageCount?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ConversationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "topic" | "projectId" | "userId" | "status" | "messageCount" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["conversation"]>
+  export type ConversationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | Conversation$projectArgs<ExtArgs>
+    user?: boolean | Conversation$userArgs<ExtArgs>
+    messages?: boolean | Conversation$messagesArgs<ExtArgs>
+    contextSnapshots?: boolean | Conversation$contextSnapshotsArgs<ExtArgs>
+    _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ConversationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | Conversation$projectArgs<ExtArgs>
+    user?: boolean | Conversation$userArgs<ExtArgs>
+  }
+  export type ConversationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | Conversation$projectArgs<ExtArgs>
+    user?: boolean | Conversation$userArgs<ExtArgs>
+  }
+
+  export type $ConversationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Conversation"
+    objects: {
+      project: Prisma.$ProjectPayload<ExtArgs> | null
+      user: Prisma.$UserPayload<ExtArgs> | null
+      messages: Prisma.$MessagePayload<ExtArgs>[]
+      contextSnapshots: Prisma.$ContextSnapshotPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string | null
+      topic: string | null
+      projectId: string | null
+      userId: string | null
+      status: $Enums.ConversationStatus
+      messageCount: number
+      metadata: Prisma.JsonValue | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["conversation"]>
+    composites: {}
+  }
+
+  type ConversationGetPayload<S extends boolean | null | undefined | ConversationDefaultArgs> = $Result.GetResult<Prisma.$ConversationPayload, S>
+
+  type ConversationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ConversationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ConversationCountAggregateInputType | true
+    }
+
+  export interface ConversationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Conversation'], meta: { name: 'Conversation' } }
+    /**
+     * Find zero or one Conversation that matches the filter.
+     * @param {ConversationFindUniqueArgs} args - Arguments to find a Conversation
+     * @example
+     * // Get one Conversation
+     * const conversation = await prisma.conversation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ConversationFindUniqueArgs>(args: SelectSubset<T, ConversationFindUniqueArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Conversation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ConversationFindUniqueOrThrowArgs} args - Arguments to find a Conversation
+     * @example
+     * // Get one Conversation
+     * const conversation = await prisma.conversation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ConversationFindUniqueOrThrowArgs>(args: SelectSubset<T, ConversationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Conversation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationFindFirstArgs} args - Arguments to find a Conversation
+     * @example
+     * // Get one Conversation
+     * const conversation = await prisma.conversation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ConversationFindFirstArgs>(args?: SelectSubset<T, ConversationFindFirstArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Conversation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationFindFirstOrThrowArgs} args - Arguments to find a Conversation
+     * @example
+     * // Get one Conversation
+     * const conversation = await prisma.conversation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ConversationFindFirstOrThrowArgs>(args?: SelectSubset<T, ConversationFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Conversations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Conversations
+     * const conversations = await prisma.conversation.findMany()
+     * 
+     * // Get first 10 Conversations
+     * const conversations = await prisma.conversation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const conversationWithIdOnly = await prisma.conversation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ConversationFindManyArgs>(args?: SelectSubset<T, ConversationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Conversation.
+     * @param {ConversationCreateArgs} args - Arguments to create a Conversation.
+     * @example
+     * // Create one Conversation
+     * const Conversation = await prisma.conversation.create({
+     *   data: {
+     *     // ... data to create a Conversation
+     *   }
+     * })
+     * 
+     */
+    create<T extends ConversationCreateArgs>(args: SelectSubset<T, ConversationCreateArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Conversations.
+     * @param {ConversationCreateManyArgs} args - Arguments to create many Conversations.
+     * @example
+     * // Create many Conversations
+     * const conversation = await prisma.conversation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ConversationCreateManyArgs>(args?: SelectSubset<T, ConversationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Conversations and returns the data saved in the database.
+     * @param {ConversationCreateManyAndReturnArgs} args - Arguments to create many Conversations.
+     * @example
+     * // Create many Conversations
+     * const conversation = await prisma.conversation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Conversations and only return the `id`
+     * const conversationWithIdOnly = await prisma.conversation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ConversationCreateManyAndReturnArgs>(args?: SelectSubset<T, ConversationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Conversation.
+     * @param {ConversationDeleteArgs} args - Arguments to delete one Conversation.
+     * @example
+     * // Delete one Conversation
+     * const Conversation = await prisma.conversation.delete({
+     *   where: {
+     *     // ... filter to delete one Conversation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ConversationDeleteArgs>(args: SelectSubset<T, ConversationDeleteArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Conversation.
+     * @param {ConversationUpdateArgs} args - Arguments to update one Conversation.
+     * @example
+     * // Update one Conversation
+     * const conversation = await prisma.conversation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ConversationUpdateArgs>(args: SelectSubset<T, ConversationUpdateArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Conversations.
+     * @param {ConversationDeleteManyArgs} args - Arguments to filter Conversations to delete.
+     * @example
+     * // Delete a few Conversations
+     * const { count } = await prisma.conversation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ConversationDeleteManyArgs>(args?: SelectSubset<T, ConversationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Conversations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Conversations
+     * const conversation = await prisma.conversation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ConversationUpdateManyArgs>(args: SelectSubset<T, ConversationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Conversations and returns the data updated in the database.
+     * @param {ConversationUpdateManyAndReturnArgs} args - Arguments to update many Conversations.
+     * @example
+     * // Update many Conversations
+     * const conversation = await prisma.conversation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Conversations and only return the `id`
+     * const conversationWithIdOnly = await prisma.conversation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ConversationUpdateManyAndReturnArgs>(args: SelectSubset<T, ConversationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Conversation.
+     * @param {ConversationUpsertArgs} args - Arguments to update or create a Conversation.
+     * @example
+     * // Update or create a Conversation
+     * const conversation = await prisma.conversation.upsert({
+     *   create: {
+     *     // ... data to create a Conversation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Conversation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ConversationUpsertArgs>(args: SelectSubset<T, ConversationUpsertArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Conversations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationCountArgs} args - Arguments to filter Conversations to count.
+     * @example
+     * // Count the number of Conversations
+     * const count = await prisma.conversation.count({
+     *   where: {
+     *     // ... the filter for the Conversations we want to count
+     *   }
+     * })
+    **/
+    count<T extends ConversationCountArgs>(
+      args?: Subset<T, ConversationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ConversationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Conversation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ConversationAggregateArgs>(args: Subset<T, ConversationAggregateArgs>): Prisma.PrismaPromise<GetConversationAggregateType<T>>
+
+    /**
+     * Group by Conversation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ConversationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ConversationGroupByArgs['orderBy'] }
+        : { orderBy?: ConversationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ConversationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConversationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Conversation model
+   */
+  readonly fields: ConversationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Conversation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ConversationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    project<T extends Conversation$projectArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$projectArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user<T extends Conversation$userArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    messages<T extends Conversation$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    contextSnapshots<T extends Conversation$contextSnapshotsArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$contextSnapshotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContextSnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Conversation model
+   */
+  interface ConversationFieldRefs {
+    readonly id: FieldRef<"Conversation", 'String'>
+    readonly title: FieldRef<"Conversation", 'String'>
+    readonly topic: FieldRef<"Conversation", 'String'>
+    readonly projectId: FieldRef<"Conversation", 'String'>
+    readonly userId: FieldRef<"Conversation", 'String'>
+    readonly status: FieldRef<"Conversation", 'ConversationStatus'>
+    readonly messageCount: FieldRef<"Conversation", 'Int'>
+    readonly metadata: FieldRef<"Conversation", 'Json'>
+    readonly createdAt: FieldRef<"Conversation", 'DateTime'>
+    readonly updatedAt: FieldRef<"Conversation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Conversation findUnique
+   */
+  export type ConversationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter, which Conversation to fetch.
+     */
+    where: ConversationWhereUniqueInput
+  }
+
+  /**
+   * Conversation findUniqueOrThrow
+   */
+  export type ConversationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter, which Conversation to fetch.
+     */
+    where: ConversationWhereUniqueInput
+  }
+
+  /**
+   * Conversation findFirst
+   */
+  export type ConversationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter, which Conversation to fetch.
+     */
+    where?: ConversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Conversations to fetch.
+     */
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Conversations.
+     */
+    cursor?: ConversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Conversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Conversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Conversations.
+     */
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * Conversation findFirstOrThrow
+   */
+  export type ConversationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter, which Conversation to fetch.
+     */
+    where?: ConversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Conversations to fetch.
+     */
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Conversations.
+     */
+    cursor?: ConversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Conversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Conversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Conversations.
+     */
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * Conversation findMany
+   */
+  export type ConversationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter, which Conversations to fetch.
+     */
+    where?: ConversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Conversations to fetch.
+     */
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Conversations.
+     */
+    cursor?: ConversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Conversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Conversations.
+     */
+    skip?: number
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * Conversation create
+   */
+  export type ConversationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Conversation.
+     */
+    data: XOR<ConversationCreateInput, ConversationUncheckedCreateInput>
+  }
+
+  /**
+   * Conversation createMany
+   */
+  export type ConversationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Conversations.
+     */
+    data: ConversationCreateManyInput | ConversationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Conversation createManyAndReturn
+   */
+  export type ConversationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Conversations.
+     */
+    data: ConversationCreateManyInput | ConversationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Conversation update
+   */
+  export type ConversationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Conversation.
+     */
+    data: XOR<ConversationUpdateInput, ConversationUncheckedUpdateInput>
+    /**
+     * Choose, which Conversation to update.
+     */
+    where: ConversationWhereUniqueInput
+  }
+
+  /**
+   * Conversation updateMany
+   */
+  export type ConversationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Conversations.
+     */
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyInput>
+    /**
+     * Filter which Conversations to update
+     */
+    where?: ConversationWhereInput
+    /**
+     * Limit how many Conversations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Conversation updateManyAndReturn
+   */
+  export type ConversationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * The data used to update Conversations.
+     */
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyInput>
+    /**
+     * Filter which Conversations to update
+     */
+    where?: ConversationWhereInput
+    /**
+     * Limit how many Conversations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Conversation upsert
+   */
+  export type ConversationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Conversation to update in case it exists.
+     */
+    where: ConversationWhereUniqueInput
+    /**
+     * In case the Conversation found by the `where` argument doesn't exist, create a new Conversation with this data.
+     */
+    create: XOR<ConversationCreateInput, ConversationUncheckedCreateInput>
+    /**
+     * In case the Conversation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ConversationUpdateInput, ConversationUncheckedUpdateInput>
+  }
+
+  /**
+   * Conversation delete
+   */
+  export type ConversationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter which Conversation to delete.
+     */
+    where: ConversationWhereUniqueInput
+  }
+
+  /**
+   * Conversation deleteMany
+   */
+  export type ConversationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Conversations to delete
+     */
+    where?: ConversationWhereInput
+    /**
+     * Limit how many Conversations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Conversation.project
+   */
+  export type Conversation$projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Project
+     */
+    select?: ProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Project
+     */
+    omit?: ProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    where?: ProjectWhereInput
+  }
+
+  /**
+   * Conversation.user
+   */
+  export type Conversation$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Conversation.messages
+   */
+  export type Conversation$messagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    cursor?: MessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Conversation.contextSnapshots
+   */
+  export type Conversation$contextSnapshotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContextSnapshot
+     */
+    select?: ContextSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContextSnapshot
+     */
+    omit?: ContextSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContextSnapshotInclude<ExtArgs> | null
+    where?: ContextSnapshotWhereInput
+    orderBy?: ContextSnapshotOrderByWithRelationInput | ContextSnapshotOrderByWithRelationInput[]
+    cursor?: ContextSnapshotWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContextSnapshotScalarFieldEnum | ContextSnapshotScalarFieldEnum[]
+  }
+
+  /**
+   * Conversation without action
+   */
+  export type ConversationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Message
+   */
+
+  export type AggregateMessage = {
+    _count: MessageCountAggregateOutputType | null
+    _avg: MessageAvgAggregateOutputType | null
+    _sum: MessageSumAggregateOutputType | null
+    _min: MessageMinAggregateOutputType | null
+    _max: MessageMaxAggregateOutputType | null
+  }
+
+  export type MessageAvgAggregateOutputType = {
+    tokens: number | null
+  }
+
+  export type MessageSumAggregateOutputType = {
+    tokens: number | null
+  }
+
+  export type MessageMinAggregateOutputType = {
+    id: string | null
+    conversationId: string | null
+    role: $Enums.MessageRole | null
+    content: string | null
+    tokens: number | null
+    embeddingId: string | null
+    createdAt: Date | null
+  }
+
+  export type MessageMaxAggregateOutputType = {
+    id: string | null
+    conversationId: string | null
+    role: $Enums.MessageRole | null
+    content: string | null
+    tokens: number | null
+    embeddingId: string | null
+    createdAt: Date | null
+  }
+
+  export type MessageCountAggregateOutputType = {
+    id: number
+    conversationId: number
+    role: number
+    content: number
+    tokens: number
+    embeddingId: number
+    referencedSources: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type MessageAvgAggregateInputType = {
+    tokens?: true
+  }
+
+  export type MessageSumAggregateInputType = {
+    tokens?: true
+  }
+
+  export type MessageMinAggregateInputType = {
+    id?: true
+    conversationId?: true
+    role?: true
+    content?: true
+    tokens?: true
+    embeddingId?: true
+    createdAt?: true
+  }
+
+  export type MessageMaxAggregateInputType = {
+    id?: true
+    conversationId?: true
+    role?: true
+    content?: true
+    tokens?: true
+    embeddingId?: true
+    createdAt?: true
+  }
+
+  export type MessageCountAggregateInputType = {
+    id?: true
+    conversationId?: true
+    role?: true
+    content?: true
+    tokens?: true
+    embeddingId?: true
+    referencedSources?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type MessageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Message to aggregate.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Messages
+    **/
+    _count?: true | MessageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MessageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MessageSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MessageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MessageMaxAggregateInputType
+  }
+
+  export type GetMessageAggregateType<T extends MessageAggregateArgs> = {
+        [P in keyof T & keyof AggregateMessage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMessage[P]>
+      : GetScalarType<T[P], AggregateMessage[P]>
+  }
+
+
+
+
+  export type MessageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithAggregationInput | MessageOrderByWithAggregationInput[]
+    by: MessageScalarFieldEnum[] | MessageScalarFieldEnum
+    having?: MessageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MessageCountAggregateInputType | true
+    _avg?: MessageAvgAggregateInputType
+    _sum?: MessageSumAggregateInputType
+    _min?: MessageMinAggregateInputType
+    _max?: MessageMaxAggregateInputType
+  }
+
+  export type MessageGroupByOutputType = {
+    id: string
+    conversationId: string
+    role: $Enums.MessageRole
+    content: string
+    tokens: number | null
+    embeddingId: string | null
+    referencedSources: string[]
+    createdAt: Date
+    _count: MessageCountAggregateOutputType | null
+    _avg: MessageAvgAggregateOutputType | null
+    _sum: MessageSumAggregateOutputType | null
+    _min: MessageMinAggregateOutputType | null
+    _max: MessageMaxAggregateOutputType | null
+  }
+
+  type GetMessageGroupByPayload<T extends MessageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MessageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MessageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MessageGroupByOutputType[P]>
+            : GetScalarType<T[P], MessageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MessageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    conversationId?: boolean
+    role?: boolean
+    content?: boolean
+    tokens?: boolean
+    embeddingId?: boolean
+    referencedSources?: boolean
+    createdAt?: boolean
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["message"]>
+
+  export type MessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    conversationId?: boolean
+    role?: boolean
+    content?: boolean
+    tokens?: boolean
+    embeddingId?: boolean
+    referencedSources?: boolean
+    createdAt?: boolean
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["message"]>
+
+  export type MessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    conversationId?: boolean
+    role?: boolean
+    content?: boolean
+    tokens?: boolean
+    embeddingId?: boolean
+    referencedSources?: boolean
+    createdAt?: boolean
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["message"]>
+
+  export type MessageSelectScalar = {
+    id?: boolean
+    conversationId?: boolean
+    role?: boolean
+    content?: boolean
+    tokens?: boolean
+    embeddingId?: boolean
+    referencedSources?: boolean
+    createdAt?: boolean
+  }
+
+  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "conversationId" | "role" | "content" | "tokens" | "embeddingId" | "referencedSources" | "createdAt", ExtArgs["result"]["message"]>
+  export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }
+  export type MessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }
+  export type MessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }
+
+  export type $MessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Message"
+    objects: {
+      conversation: Prisma.$ConversationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      conversationId: string
+      role: $Enums.MessageRole
+      content: string
+      tokens: number | null
+      embeddingId: string | null
+      referencedSources: string[]
+      createdAt: Date
+    }, ExtArgs["result"]["message"]>
+    composites: {}
+  }
+
+  type MessageGetPayload<S extends boolean | null | undefined | MessageDefaultArgs> = $Result.GetResult<Prisma.$MessagePayload, S>
+
+  type MessageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MessageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MessageCountAggregateInputType | true
+    }
+
+  export interface MessageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Message'], meta: { name: 'Message' } }
+    /**
+     * Find zero or one Message that matches the filter.
+     * @param {MessageFindUniqueArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MessageFindUniqueArgs>(args: SelectSubset<T, MessageFindUniqueArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Message that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MessageFindUniqueOrThrowArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MessageFindUniqueOrThrowArgs>(args: SelectSubset<T, MessageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Message that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageFindFirstArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MessageFindFirstArgs>(args?: SelectSubset<T, MessageFindFirstArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Message that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageFindFirstOrThrowArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MessageFindFirstOrThrowArgs>(args?: SelectSubset<T, MessageFindFirstOrThrowArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Messages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Messages
+     * const messages = await prisma.message.findMany()
+     * 
+     * // Get first 10 Messages
+     * const messages = await prisma.message.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const messageWithIdOnly = await prisma.message.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MessageFindManyArgs>(args?: SelectSubset<T, MessageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Message.
+     * @param {MessageCreateArgs} args - Arguments to create a Message.
+     * @example
+     * // Create one Message
+     * const Message = await prisma.message.create({
+     *   data: {
+     *     // ... data to create a Message
+     *   }
+     * })
+     * 
+     */
+    create<T extends MessageCreateArgs>(args: SelectSubset<T, MessageCreateArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Messages.
+     * @param {MessageCreateManyArgs} args - Arguments to create many Messages.
+     * @example
+     * // Create many Messages
+     * const message = await prisma.message.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MessageCreateManyArgs>(args?: SelectSubset<T, MessageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Messages and returns the data saved in the database.
+     * @param {MessageCreateManyAndReturnArgs} args - Arguments to create many Messages.
+     * @example
+     * // Create many Messages
+     * const message = await prisma.message.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Messages and only return the `id`
+     * const messageWithIdOnly = await prisma.message.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MessageCreateManyAndReturnArgs>(args?: SelectSubset<T, MessageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Message.
+     * @param {MessageDeleteArgs} args - Arguments to delete one Message.
+     * @example
+     * // Delete one Message
+     * const Message = await prisma.message.delete({
+     *   where: {
+     *     // ... filter to delete one Message
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MessageDeleteArgs>(args: SelectSubset<T, MessageDeleteArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Message.
+     * @param {MessageUpdateArgs} args - Arguments to update one Message.
+     * @example
+     * // Update one Message
+     * const message = await prisma.message.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MessageUpdateArgs>(args: SelectSubset<T, MessageUpdateArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Messages.
+     * @param {MessageDeleteManyArgs} args - Arguments to filter Messages to delete.
+     * @example
+     * // Delete a few Messages
+     * const { count } = await prisma.message.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MessageDeleteManyArgs>(args?: SelectSubset<T, MessageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Messages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Messages
+     * const message = await prisma.message.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MessageUpdateManyArgs>(args: SelectSubset<T, MessageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Messages and returns the data updated in the database.
+     * @param {MessageUpdateManyAndReturnArgs} args - Arguments to update many Messages.
+     * @example
+     * // Update many Messages
+     * const message = await prisma.message.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Messages and only return the `id`
+     * const messageWithIdOnly = await prisma.message.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MessageUpdateManyAndReturnArgs>(args: SelectSubset<T, MessageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Message.
+     * @param {MessageUpsertArgs} args - Arguments to update or create a Message.
+     * @example
+     * // Update or create a Message
+     * const message = await prisma.message.upsert({
+     *   create: {
+     *     // ... data to create a Message
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Message we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MessageUpsertArgs>(args: SelectSubset<T, MessageUpsertArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Messages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageCountArgs} args - Arguments to filter Messages to count.
+     * @example
+     * // Count the number of Messages
+     * const count = await prisma.message.count({
+     *   where: {
+     *     // ... the filter for the Messages we want to count
+     *   }
+     * })
+    **/
+    count<T extends MessageCountArgs>(
+      args?: Subset<T, MessageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MessageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Message.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MessageAggregateArgs>(args: Subset<T, MessageAggregateArgs>): Prisma.PrismaPromise<GetMessageAggregateType<T>>
+
+    /**
+     * Group by Message.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MessageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MessageGroupByArgs['orderBy'] }
+        : { orderBy?: MessageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MessageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMessageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Message model
+   */
+  readonly fields: MessageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Message.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    conversation<T extends ConversationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ConversationDefaultArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Message model
+   */
+  interface MessageFieldRefs {
+    readonly id: FieldRef<"Message", 'String'>
+    readonly conversationId: FieldRef<"Message", 'String'>
+    readonly role: FieldRef<"Message", 'MessageRole'>
+    readonly content: FieldRef<"Message", 'String'>
+    readonly tokens: FieldRef<"Message", 'Int'>
+    readonly embeddingId: FieldRef<"Message", 'String'>
+    readonly referencedSources: FieldRef<"Message", 'String[]'>
+    readonly createdAt: FieldRef<"Message", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Message findUnique
+   */
+  export type MessageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message findUniqueOrThrow
+   */
+  export type MessageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message findFirst
+   */
+  export type MessageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Messages.
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Messages.
+     */
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Message findFirstOrThrow
+   */
+  export type MessageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Messages.
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Messages.
+     */
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Message findMany
+   */
+  export type MessageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Messages to fetch.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Messages.
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Message create
+   */
+  export type MessageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Message.
+     */
+    data: XOR<MessageCreateInput, MessageUncheckedCreateInput>
+  }
+
+  /**
+   * Message createMany
+   */
+  export type MessageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Messages.
+     */
+    data: MessageCreateManyInput | MessageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Message createManyAndReturn
+   */
+  export type MessageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * The data used to create many Messages.
+     */
+    data: MessageCreateManyInput | MessageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Message update
+   */
+  export type MessageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Message.
+     */
+    data: XOR<MessageUpdateInput, MessageUncheckedUpdateInput>
+    /**
+     * Choose, which Message to update.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message updateMany
+   */
+  export type MessageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Messages.
+     */
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyInput>
+    /**
+     * Filter which Messages to update
+     */
+    where?: MessageWhereInput
+    /**
+     * Limit how many Messages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Message updateManyAndReturn
+   */
+  export type MessageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * The data used to update Messages.
+     */
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyInput>
+    /**
+     * Filter which Messages to update
+     */
+    where?: MessageWhereInput
+    /**
+     * Limit how many Messages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Message upsert
+   */
+  export type MessageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Message to update in case it exists.
+     */
+    where: MessageWhereUniqueInput
+    /**
+     * In case the Message found by the `where` argument doesn't exist, create a new Message with this data.
+     */
+    create: XOR<MessageCreateInput, MessageUncheckedCreateInput>
+    /**
+     * In case the Message was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MessageUpdateInput, MessageUncheckedUpdateInput>
+  }
+
+  /**
+   * Message delete
+   */
+  export type MessageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter which Message to delete.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message deleteMany
+   */
+  export type MessageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Messages to delete
+     */
+    where?: MessageWhereInput
+    /**
+     * Limit how many Messages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Message without action
+   */
+  export type MessageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ContextSnapshot
+   */
+
+  export type AggregateContextSnapshot = {
+    _count: ContextSnapshotCountAggregateOutputType | null
+    _min: ContextSnapshotMinAggregateOutputType | null
+    _max: ContextSnapshotMaxAggregateOutputType | null
+  }
+
+  export type ContextSnapshotMinAggregateOutputType = {
+    id: string | null
+    conversationId: string | null
+    projectId: string | null
+    capturedAt: Date | null
+  }
+
+  export type ContextSnapshotMaxAggregateOutputType = {
+    id: string | null
+    conversationId: string | null
+    projectId: string | null
+    capturedAt: Date | null
+  }
+
+  export type ContextSnapshotCountAggregateOutputType = {
+    id: number
+    conversationId: number
+    projectId: number
+    briefContext: number
+    brandTensor: number
+    assetIntelligence: number
+    knowledgeSourceIds: number
+    capturedAt: number
+    _all: number
+  }
+
+
+  export type ContextSnapshotMinAggregateInputType = {
+    id?: true
+    conversationId?: true
+    projectId?: true
+    capturedAt?: true
+  }
+
+  export type ContextSnapshotMaxAggregateInputType = {
+    id?: true
+    conversationId?: true
+    projectId?: true
+    capturedAt?: true
+  }
+
+  export type ContextSnapshotCountAggregateInputType = {
+    id?: true
+    conversationId?: true
+    projectId?: true
+    briefContext?: true
+    brandTensor?: true
+    assetIntelligence?: true
+    knowledgeSourceIds?: true
+    capturedAt?: true
+    _all?: true
+  }
+
+  export type ContextSnapshotAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContextSnapshot to aggregate.
+     */
+    where?: ContextSnapshotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContextSnapshots to fetch.
+     */
+    orderBy?: ContextSnapshotOrderByWithRelationInput | ContextSnapshotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContextSnapshotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContextSnapshots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContextSnapshots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ContextSnapshots
+    **/
+    _count?: true | ContextSnapshotCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContextSnapshotMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContextSnapshotMaxAggregateInputType
+  }
+
+  export type GetContextSnapshotAggregateType<T extends ContextSnapshotAggregateArgs> = {
+        [P in keyof T & keyof AggregateContextSnapshot]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContextSnapshot[P]>
+      : GetScalarType<T[P], AggregateContextSnapshot[P]>
+  }
+
+
+
+
+  export type ContextSnapshotGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContextSnapshotWhereInput
+    orderBy?: ContextSnapshotOrderByWithAggregationInput | ContextSnapshotOrderByWithAggregationInput[]
+    by: ContextSnapshotScalarFieldEnum[] | ContextSnapshotScalarFieldEnum
+    having?: ContextSnapshotScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContextSnapshotCountAggregateInputType | true
+    _min?: ContextSnapshotMinAggregateInputType
+    _max?: ContextSnapshotMaxAggregateInputType
+  }
+
+  export type ContextSnapshotGroupByOutputType = {
+    id: string
+    conversationId: string
+    projectId: string | null
+    briefContext: JsonValue | null
+    brandTensor: JsonValue | null
+    assetIntelligence: JsonValue | null
+    knowledgeSourceIds: string[]
+    capturedAt: Date
+    _count: ContextSnapshotCountAggregateOutputType | null
+    _min: ContextSnapshotMinAggregateOutputType | null
+    _max: ContextSnapshotMaxAggregateOutputType | null
+  }
+
+  type GetContextSnapshotGroupByPayload<T extends ContextSnapshotGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContextSnapshotGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContextSnapshotGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContextSnapshotGroupByOutputType[P]>
+            : GetScalarType<T[P], ContextSnapshotGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContextSnapshotSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    conversationId?: boolean
+    projectId?: boolean
+    briefContext?: boolean
+    brandTensor?: boolean
+    assetIntelligence?: boolean
+    knowledgeSourceIds?: boolean
+    capturedAt?: boolean
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contextSnapshot"]>
+
+  export type ContextSnapshotSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    conversationId?: boolean
+    projectId?: boolean
+    briefContext?: boolean
+    brandTensor?: boolean
+    assetIntelligence?: boolean
+    knowledgeSourceIds?: boolean
+    capturedAt?: boolean
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contextSnapshot"]>
+
+  export type ContextSnapshotSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    conversationId?: boolean
+    projectId?: boolean
+    briefContext?: boolean
+    brandTensor?: boolean
+    assetIntelligence?: boolean
+    knowledgeSourceIds?: boolean
+    capturedAt?: boolean
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contextSnapshot"]>
+
+  export type ContextSnapshotSelectScalar = {
+    id?: boolean
+    conversationId?: boolean
+    projectId?: boolean
+    briefContext?: boolean
+    brandTensor?: boolean
+    assetIntelligence?: boolean
+    knowledgeSourceIds?: boolean
+    capturedAt?: boolean
+  }
+
+  export type ContextSnapshotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "conversationId" | "projectId" | "briefContext" | "brandTensor" | "assetIntelligence" | "knowledgeSourceIds" | "capturedAt", ExtArgs["result"]["contextSnapshot"]>
+  export type ContextSnapshotInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }
+  export type ContextSnapshotIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }
+  export type ContextSnapshotIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }
+
+  export type $ContextSnapshotPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ContextSnapshot"
+    objects: {
+      conversation: Prisma.$ConversationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      conversationId: string
+      projectId: string | null
+      briefContext: Prisma.JsonValue | null
+      brandTensor: Prisma.JsonValue | null
+      assetIntelligence: Prisma.JsonValue | null
+      knowledgeSourceIds: string[]
+      capturedAt: Date
+    }, ExtArgs["result"]["contextSnapshot"]>
+    composites: {}
+  }
+
+  type ContextSnapshotGetPayload<S extends boolean | null | undefined | ContextSnapshotDefaultArgs> = $Result.GetResult<Prisma.$ContextSnapshotPayload, S>
+
+  type ContextSnapshotCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContextSnapshotFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContextSnapshotCountAggregateInputType | true
+    }
+
+  export interface ContextSnapshotDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContextSnapshot'], meta: { name: 'ContextSnapshot' } }
+    /**
+     * Find zero or one ContextSnapshot that matches the filter.
+     * @param {ContextSnapshotFindUniqueArgs} args - Arguments to find a ContextSnapshot
+     * @example
+     * // Get one ContextSnapshot
+     * const contextSnapshot = await prisma.contextSnapshot.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContextSnapshotFindUniqueArgs>(args: SelectSubset<T, ContextSnapshotFindUniqueArgs<ExtArgs>>): Prisma__ContextSnapshotClient<$Result.GetResult<Prisma.$ContextSnapshotPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ContextSnapshot that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContextSnapshotFindUniqueOrThrowArgs} args - Arguments to find a ContextSnapshot
+     * @example
+     * // Get one ContextSnapshot
+     * const contextSnapshot = await prisma.contextSnapshot.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContextSnapshotFindUniqueOrThrowArgs>(args: SelectSubset<T, ContextSnapshotFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContextSnapshotClient<$Result.GetResult<Prisma.$ContextSnapshotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContextSnapshot that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContextSnapshotFindFirstArgs} args - Arguments to find a ContextSnapshot
+     * @example
+     * // Get one ContextSnapshot
+     * const contextSnapshot = await prisma.contextSnapshot.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContextSnapshotFindFirstArgs>(args?: SelectSubset<T, ContextSnapshotFindFirstArgs<ExtArgs>>): Prisma__ContextSnapshotClient<$Result.GetResult<Prisma.$ContextSnapshotPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContextSnapshot that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContextSnapshotFindFirstOrThrowArgs} args - Arguments to find a ContextSnapshot
+     * @example
+     * // Get one ContextSnapshot
+     * const contextSnapshot = await prisma.contextSnapshot.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContextSnapshotFindFirstOrThrowArgs>(args?: SelectSubset<T, ContextSnapshotFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContextSnapshotClient<$Result.GetResult<Prisma.$ContextSnapshotPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ContextSnapshots that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContextSnapshotFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ContextSnapshots
+     * const contextSnapshots = await prisma.contextSnapshot.findMany()
+     * 
+     * // Get first 10 ContextSnapshots
+     * const contextSnapshots = await prisma.contextSnapshot.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contextSnapshotWithIdOnly = await prisma.contextSnapshot.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContextSnapshotFindManyArgs>(args?: SelectSubset<T, ContextSnapshotFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContextSnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ContextSnapshot.
+     * @param {ContextSnapshotCreateArgs} args - Arguments to create a ContextSnapshot.
+     * @example
+     * // Create one ContextSnapshot
+     * const ContextSnapshot = await prisma.contextSnapshot.create({
+     *   data: {
+     *     // ... data to create a ContextSnapshot
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContextSnapshotCreateArgs>(args: SelectSubset<T, ContextSnapshotCreateArgs<ExtArgs>>): Prisma__ContextSnapshotClient<$Result.GetResult<Prisma.$ContextSnapshotPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ContextSnapshots.
+     * @param {ContextSnapshotCreateManyArgs} args - Arguments to create many ContextSnapshots.
+     * @example
+     * // Create many ContextSnapshots
+     * const contextSnapshot = await prisma.contextSnapshot.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContextSnapshotCreateManyArgs>(args?: SelectSubset<T, ContextSnapshotCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ContextSnapshots and returns the data saved in the database.
+     * @param {ContextSnapshotCreateManyAndReturnArgs} args - Arguments to create many ContextSnapshots.
+     * @example
+     * // Create many ContextSnapshots
+     * const contextSnapshot = await prisma.contextSnapshot.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ContextSnapshots and only return the `id`
+     * const contextSnapshotWithIdOnly = await prisma.contextSnapshot.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContextSnapshotCreateManyAndReturnArgs>(args?: SelectSubset<T, ContextSnapshotCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContextSnapshotPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ContextSnapshot.
+     * @param {ContextSnapshotDeleteArgs} args - Arguments to delete one ContextSnapshot.
+     * @example
+     * // Delete one ContextSnapshot
+     * const ContextSnapshot = await prisma.contextSnapshot.delete({
+     *   where: {
+     *     // ... filter to delete one ContextSnapshot
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContextSnapshotDeleteArgs>(args: SelectSubset<T, ContextSnapshotDeleteArgs<ExtArgs>>): Prisma__ContextSnapshotClient<$Result.GetResult<Prisma.$ContextSnapshotPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ContextSnapshot.
+     * @param {ContextSnapshotUpdateArgs} args - Arguments to update one ContextSnapshot.
+     * @example
+     * // Update one ContextSnapshot
+     * const contextSnapshot = await prisma.contextSnapshot.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContextSnapshotUpdateArgs>(args: SelectSubset<T, ContextSnapshotUpdateArgs<ExtArgs>>): Prisma__ContextSnapshotClient<$Result.GetResult<Prisma.$ContextSnapshotPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ContextSnapshots.
+     * @param {ContextSnapshotDeleteManyArgs} args - Arguments to filter ContextSnapshots to delete.
+     * @example
+     * // Delete a few ContextSnapshots
+     * const { count } = await prisma.contextSnapshot.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContextSnapshotDeleteManyArgs>(args?: SelectSubset<T, ContextSnapshotDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContextSnapshots.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContextSnapshotUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ContextSnapshots
+     * const contextSnapshot = await prisma.contextSnapshot.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContextSnapshotUpdateManyArgs>(args: SelectSubset<T, ContextSnapshotUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContextSnapshots and returns the data updated in the database.
+     * @param {ContextSnapshotUpdateManyAndReturnArgs} args - Arguments to update many ContextSnapshots.
+     * @example
+     * // Update many ContextSnapshots
+     * const contextSnapshot = await prisma.contextSnapshot.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ContextSnapshots and only return the `id`
+     * const contextSnapshotWithIdOnly = await prisma.contextSnapshot.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContextSnapshotUpdateManyAndReturnArgs>(args: SelectSubset<T, ContextSnapshotUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContextSnapshotPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ContextSnapshot.
+     * @param {ContextSnapshotUpsertArgs} args - Arguments to update or create a ContextSnapshot.
+     * @example
+     * // Update or create a ContextSnapshot
+     * const contextSnapshot = await prisma.contextSnapshot.upsert({
+     *   create: {
+     *     // ... data to create a ContextSnapshot
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ContextSnapshot we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContextSnapshotUpsertArgs>(args: SelectSubset<T, ContextSnapshotUpsertArgs<ExtArgs>>): Prisma__ContextSnapshotClient<$Result.GetResult<Prisma.$ContextSnapshotPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ContextSnapshots.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContextSnapshotCountArgs} args - Arguments to filter ContextSnapshots to count.
+     * @example
+     * // Count the number of ContextSnapshots
+     * const count = await prisma.contextSnapshot.count({
+     *   where: {
+     *     // ... the filter for the ContextSnapshots we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContextSnapshotCountArgs>(
+      args?: Subset<T, ContextSnapshotCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContextSnapshotCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ContextSnapshot.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContextSnapshotAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContextSnapshotAggregateArgs>(args: Subset<T, ContextSnapshotAggregateArgs>): Prisma.PrismaPromise<GetContextSnapshotAggregateType<T>>
+
+    /**
+     * Group by ContextSnapshot.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContextSnapshotGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContextSnapshotGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContextSnapshotGroupByArgs['orderBy'] }
+        : { orderBy?: ContextSnapshotGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContextSnapshotGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContextSnapshotGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ContextSnapshot model
+   */
+  readonly fields: ContextSnapshotFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ContextSnapshot.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContextSnapshotClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    conversation<T extends ConversationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ConversationDefaultArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ContextSnapshot model
+   */
+  interface ContextSnapshotFieldRefs {
+    readonly id: FieldRef<"ContextSnapshot", 'String'>
+    readonly conversationId: FieldRef<"ContextSnapshot", 'String'>
+    readonly projectId: FieldRef<"ContextSnapshot", 'String'>
+    readonly briefContext: FieldRef<"ContextSnapshot", 'Json'>
+    readonly brandTensor: FieldRef<"ContextSnapshot", 'Json'>
+    readonly assetIntelligence: FieldRef<"ContextSnapshot", 'Json'>
+    readonly knowledgeSourceIds: FieldRef<"ContextSnapshot", 'String[]'>
+    readonly capturedAt: FieldRef<"ContextSnapshot", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ContextSnapshot findUnique
+   */
+  export type ContextSnapshotFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContextSnapshot
+     */
+    select?: ContextSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContextSnapshot
+     */
+    omit?: ContextSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContextSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter, which ContextSnapshot to fetch.
+     */
+    where: ContextSnapshotWhereUniqueInput
+  }
+
+  /**
+   * ContextSnapshot findUniqueOrThrow
+   */
+  export type ContextSnapshotFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContextSnapshot
+     */
+    select?: ContextSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContextSnapshot
+     */
+    omit?: ContextSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContextSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter, which ContextSnapshot to fetch.
+     */
+    where: ContextSnapshotWhereUniqueInput
+  }
+
+  /**
+   * ContextSnapshot findFirst
+   */
+  export type ContextSnapshotFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContextSnapshot
+     */
+    select?: ContextSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContextSnapshot
+     */
+    omit?: ContextSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContextSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter, which ContextSnapshot to fetch.
+     */
+    where?: ContextSnapshotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContextSnapshots to fetch.
+     */
+    orderBy?: ContextSnapshotOrderByWithRelationInput | ContextSnapshotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContextSnapshots.
+     */
+    cursor?: ContextSnapshotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContextSnapshots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContextSnapshots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContextSnapshots.
+     */
+    distinct?: ContextSnapshotScalarFieldEnum | ContextSnapshotScalarFieldEnum[]
+  }
+
+  /**
+   * ContextSnapshot findFirstOrThrow
+   */
+  export type ContextSnapshotFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContextSnapshot
+     */
+    select?: ContextSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContextSnapshot
+     */
+    omit?: ContextSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContextSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter, which ContextSnapshot to fetch.
+     */
+    where?: ContextSnapshotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContextSnapshots to fetch.
+     */
+    orderBy?: ContextSnapshotOrderByWithRelationInput | ContextSnapshotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContextSnapshots.
+     */
+    cursor?: ContextSnapshotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContextSnapshots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContextSnapshots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContextSnapshots.
+     */
+    distinct?: ContextSnapshotScalarFieldEnum | ContextSnapshotScalarFieldEnum[]
+  }
+
+  /**
+   * ContextSnapshot findMany
+   */
+  export type ContextSnapshotFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContextSnapshot
+     */
+    select?: ContextSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContextSnapshot
+     */
+    omit?: ContextSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContextSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter, which ContextSnapshots to fetch.
+     */
+    where?: ContextSnapshotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContextSnapshots to fetch.
+     */
+    orderBy?: ContextSnapshotOrderByWithRelationInput | ContextSnapshotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ContextSnapshots.
+     */
+    cursor?: ContextSnapshotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContextSnapshots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContextSnapshots.
+     */
+    skip?: number
+    distinct?: ContextSnapshotScalarFieldEnum | ContextSnapshotScalarFieldEnum[]
+  }
+
+  /**
+   * ContextSnapshot create
+   */
+  export type ContextSnapshotCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContextSnapshot
+     */
+    select?: ContextSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContextSnapshot
+     */
+    omit?: ContextSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContextSnapshotInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ContextSnapshot.
+     */
+    data: XOR<ContextSnapshotCreateInput, ContextSnapshotUncheckedCreateInput>
+  }
+
+  /**
+   * ContextSnapshot createMany
+   */
+  export type ContextSnapshotCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ContextSnapshots.
+     */
+    data: ContextSnapshotCreateManyInput | ContextSnapshotCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContextSnapshot createManyAndReturn
+   */
+  export type ContextSnapshotCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContextSnapshot
+     */
+    select?: ContextSnapshotSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContextSnapshot
+     */
+    omit?: ContextSnapshotOmit<ExtArgs> | null
+    /**
+     * The data used to create many ContextSnapshots.
+     */
+    data: ContextSnapshotCreateManyInput | ContextSnapshotCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContextSnapshotIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContextSnapshot update
+   */
+  export type ContextSnapshotUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContextSnapshot
+     */
+    select?: ContextSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContextSnapshot
+     */
+    omit?: ContextSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContextSnapshotInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ContextSnapshot.
+     */
+    data: XOR<ContextSnapshotUpdateInput, ContextSnapshotUncheckedUpdateInput>
+    /**
+     * Choose, which ContextSnapshot to update.
+     */
+    where: ContextSnapshotWhereUniqueInput
+  }
+
+  /**
+   * ContextSnapshot updateMany
+   */
+  export type ContextSnapshotUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ContextSnapshots.
+     */
+    data: XOR<ContextSnapshotUpdateManyMutationInput, ContextSnapshotUncheckedUpdateManyInput>
+    /**
+     * Filter which ContextSnapshots to update
+     */
+    where?: ContextSnapshotWhereInput
+    /**
+     * Limit how many ContextSnapshots to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContextSnapshot updateManyAndReturn
+   */
+  export type ContextSnapshotUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContextSnapshot
+     */
+    select?: ContextSnapshotSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContextSnapshot
+     */
+    omit?: ContextSnapshotOmit<ExtArgs> | null
+    /**
+     * The data used to update ContextSnapshots.
+     */
+    data: XOR<ContextSnapshotUpdateManyMutationInput, ContextSnapshotUncheckedUpdateManyInput>
+    /**
+     * Filter which ContextSnapshots to update
+     */
+    where?: ContextSnapshotWhereInput
+    /**
+     * Limit how many ContextSnapshots to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContextSnapshotIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContextSnapshot upsert
+   */
+  export type ContextSnapshotUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContextSnapshot
+     */
+    select?: ContextSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContextSnapshot
+     */
+    omit?: ContextSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContextSnapshotInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ContextSnapshot to update in case it exists.
+     */
+    where: ContextSnapshotWhereUniqueInput
+    /**
+     * In case the ContextSnapshot found by the `where` argument doesn't exist, create a new ContextSnapshot with this data.
+     */
+    create: XOR<ContextSnapshotCreateInput, ContextSnapshotUncheckedCreateInput>
+    /**
+     * In case the ContextSnapshot was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContextSnapshotUpdateInput, ContextSnapshotUncheckedUpdateInput>
+  }
+
+  /**
+   * ContextSnapshot delete
+   */
+  export type ContextSnapshotDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContextSnapshot
+     */
+    select?: ContextSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContextSnapshot
+     */
+    omit?: ContextSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContextSnapshotInclude<ExtArgs> | null
+    /**
+     * Filter which ContextSnapshot to delete.
+     */
+    where: ContextSnapshotWhereUniqueInput
+  }
+
+  /**
+   * ContextSnapshot deleteMany
+   */
+  export type ContextSnapshotDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContextSnapshots to delete
+     */
+    where?: ContextSnapshotWhereInput
+    /**
+     * Limit how many ContextSnapshots to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContextSnapshot without action
+   */
+  export type ContextSnapshotDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContextSnapshot
+     */
+    select?: ContextSnapshotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContextSnapshot
+     */
+    omit?: ContextSnapshotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContextSnapshotInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ProjectVersion
+   */
+
+  export type AggregateProjectVersion = {
+    _count: ProjectVersionCountAggregateOutputType | null
+    _avg: ProjectVersionAvgAggregateOutputType | null
+    _sum: ProjectVersionSumAggregateOutputType | null
+    _min: ProjectVersionMinAggregateOutputType | null
+    _max: ProjectVersionMaxAggregateOutputType | null
+  }
+
+  export type ProjectVersionAvgAggregateOutputType = {
+    version: number | null
+  }
+
+  export type ProjectVersionSumAggregateOutputType = {
+    version: number | null
+  }
+
+  export type ProjectVersionMinAggregateOutputType = {
+    id: string | null
+    projectId: string | null
+    version: number | null
+    briefSnapshot: string | null
+    createdAt: Date | null
+    createdBy: string | null
+    changeDescription: string | null
+  }
+
+  export type ProjectVersionMaxAggregateOutputType = {
+    id: string | null
+    projectId: string | null
+    version: number | null
+    briefSnapshot: string | null
+    createdAt: Date | null
+    createdBy: string | null
+    changeDescription: string | null
+  }
+
+  export type ProjectVersionCountAggregateOutputType = {
+    id: number
+    projectId: number
+    version: number
+    briefSnapshot: number
+    tagsSnapshot: number
+    assetsSnapshot: number
+    createdAt: number
+    createdBy: number
+    changeDescription: number
+    _all: number
+  }
+
+
+  export type ProjectVersionAvgAggregateInputType = {
+    version?: true
+  }
+
+  export type ProjectVersionSumAggregateInputType = {
+    version?: true
+  }
+
+  export type ProjectVersionMinAggregateInputType = {
+    id?: true
+    projectId?: true
+    version?: true
+    briefSnapshot?: true
+    createdAt?: true
+    createdBy?: true
+    changeDescription?: true
+  }
+
+  export type ProjectVersionMaxAggregateInputType = {
+    id?: true
+    projectId?: true
+    version?: true
+    briefSnapshot?: true
+    createdAt?: true
+    createdBy?: true
+    changeDescription?: true
+  }
+
+  export type ProjectVersionCountAggregateInputType = {
+    id?: true
+    projectId?: true
+    version?: true
+    briefSnapshot?: true
+    tagsSnapshot?: true
+    assetsSnapshot?: true
+    createdAt?: true
+    createdBy?: true
+    changeDescription?: true
+    _all?: true
+  }
+
+  export type ProjectVersionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProjectVersion to aggregate.
+     */
+    where?: ProjectVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectVersions to fetch.
+     */
+    orderBy?: ProjectVersionOrderByWithRelationInput | ProjectVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProjectVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectVersions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProjectVersions
+    **/
+    _count?: true | ProjectVersionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProjectVersionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProjectVersionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProjectVersionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProjectVersionMaxAggregateInputType
+  }
+
+  export type GetProjectVersionAggregateType<T extends ProjectVersionAggregateArgs> = {
+        [P in keyof T & keyof AggregateProjectVersion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProjectVersion[P]>
+      : GetScalarType<T[P], AggregateProjectVersion[P]>
+  }
+
+
+
+
+  export type ProjectVersionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectVersionWhereInput
+    orderBy?: ProjectVersionOrderByWithAggregationInput | ProjectVersionOrderByWithAggregationInput[]
+    by: ProjectVersionScalarFieldEnum[] | ProjectVersionScalarFieldEnum
+    having?: ProjectVersionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProjectVersionCountAggregateInputType | true
+    _avg?: ProjectVersionAvgAggregateInputType
+    _sum?: ProjectVersionSumAggregateInputType
+    _min?: ProjectVersionMinAggregateInputType
+    _max?: ProjectVersionMaxAggregateInputType
+  }
+
+  export type ProjectVersionGroupByOutputType = {
+    id: string
+    projectId: string
+    version: number
+    briefSnapshot: string | null
+    tagsSnapshot: string[]
+    assetsSnapshot: JsonValue | null
+    createdAt: Date
+    createdBy: string | null
+    changeDescription: string | null
+    _count: ProjectVersionCountAggregateOutputType | null
+    _avg: ProjectVersionAvgAggregateOutputType | null
+    _sum: ProjectVersionSumAggregateOutputType | null
+    _min: ProjectVersionMinAggregateOutputType | null
+    _max: ProjectVersionMaxAggregateOutputType | null
+  }
+
+  type GetProjectVersionGroupByPayload<T extends ProjectVersionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProjectVersionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProjectVersionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProjectVersionGroupByOutputType[P]>
+            : GetScalarType<T[P], ProjectVersionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProjectVersionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    projectId?: boolean
+    version?: boolean
+    briefSnapshot?: boolean
+    tagsSnapshot?: boolean
+    assetsSnapshot?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    changeDescription?: boolean
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["projectVersion"]>
+
+  export type ProjectVersionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    projectId?: boolean
+    version?: boolean
+    briefSnapshot?: boolean
+    tagsSnapshot?: boolean
+    assetsSnapshot?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    changeDescription?: boolean
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["projectVersion"]>
+
+  export type ProjectVersionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    projectId?: boolean
+    version?: boolean
+    briefSnapshot?: boolean
+    tagsSnapshot?: boolean
+    assetsSnapshot?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    changeDescription?: boolean
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["projectVersion"]>
+
+  export type ProjectVersionSelectScalar = {
+    id?: boolean
+    projectId?: boolean
+    version?: boolean
+    briefSnapshot?: boolean
+    tagsSnapshot?: boolean
+    assetsSnapshot?: boolean
+    createdAt?: boolean
+    createdBy?: boolean
+    changeDescription?: boolean
+  }
+
+  export type ProjectVersionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "version" | "briefSnapshot" | "tagsSnapshot" | "assetsSnapshot" | "createdAt" | "createdBy" | "changeDescription", ExtArgs["result"]["projectVersion"]>
+  export type ProjectVersionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }
+  export type ProjectVersionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }
+  export type ProjectVersionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }
+
+  export type $ProjectVersionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProjectVersion"
+    objects: {
+      project: Prisma.$ProjectPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      projectId: string
+      version: number
+      briefSnapshot: string | null
+      tagsSnapshot: string[]
+      assetsSnapshot: Prisma.JsonValue | null
+      createdAt: Date
+      createdBy: string | null
+      changeDescription: string | null
+    }, ExtArgs["result"]["projectVersion"]>
+    composites: {}
+  }
+
+  type ProjectVersionGetPayload<S extends boolean | null | undefined | ProjectVersionDefaultArgs> = $Result.GetResult<Prisma.$ProjectVersionPayload, S>
+
+  type ProjectVersionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProjectVersionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProjectVersionCountAggregateInputType | true
+    }
+
+  export interface ProjectVersionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProjectVersion'], meta: { name: 'ProjectVersion' } }
+    /**
+     * Find zero or one ProjectVersion that matches the filter.
+     * @param {ProjectVersionFindUniqueArgs} args - Arguments to find a ProjectVersion
+     * @example
+     * // Get one ProjectVersion
+     * const projectVersion = await prisma.projectVersion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProjectVersionFindUniqueArgs>(args: SelectSubset<T, ProjectVersionFindUniqueArgs<ExtArgs>>): Prisma__ProjectVersionClient<$Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ProjectVersion that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProjectVersionFindUniqueOrThrowArgs} args - Arguments to find a ProjectVersion
+     * @example
+     * // Get one ProjectVersion
+     * const projectVersion = await prisma.projectVersion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProjectVersionFindUniqueOrThrowArgs>(args: SelectSubset<T, ProjectVersionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProjectVersionClient<$Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProjectVersion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectVersionFindFirstArgs} args - Arguments to find a ProjectVersion
+     * @example
+     * // Get one ProjectVersion
+     * const projectVersion = await prisma.projectVersion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProjectVersionFindFirstArgs>(args?: SelectSubset<T, ProjectVersionFindFirstArgs<ExtArgs>>): Prisma__ProjectVersionClient<$Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProjectVersion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectVersionFindFirstOrThrowArgs} args - Arguments to find a ProjectVersion
+     * @example
+     * // Get one ProjectVersion
+     * const projectVersion = await prisma.projectVersion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProjectVersionFindFirstOrThrowArgs>(args?: SelectSubset<T, ProjectVersionFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProjectVersionClient<$Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ProjectVersions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectVersionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProjectVersions
+     * const projectVersions = await prisma.projectVersion.findMany()
+     * 
+     * // Get first 10 ProjectVersions
+     * const projectVersions = await prisma.projectVersion.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const projectVersionWithIdOnly = await prisma.projectVersion.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProjectVersionFindManyArgs>(args?: SelectSubset<T, ProjectVersionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ProjectVersion.
+     * @param {ProjectVersionCreateArgs} args - Arguments to create a ProjectVersion.
+     * @example
+     * // Create one ProjectVersion
+     * const ProjectVersion = await prisma.projectVersion.create({
+     *   data: {
+     *     // ... data to create a ProjectVersion
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProjectVersionCreateArgs>(args: SelectSubset<T, ProjectVersionCreateArgs<ExtArgs>>): Prisma__ProjectVersionClient<$Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ProjectVersions.
+     * @param {ProjectVersionCreateManyArgs} args - Arguments to create many ProjectVersions.
+     * @example
+     * // Create many ProjectVersions
+     * const projectVersion = await prisma.projectVersion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProjectVersionCreateManyArgs>(args?: SelectSubset<T, ProjectVersionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ProjectVersions and returns the data saved in the database.
+     * @param {ProjectVersionCreateManyAndReturnArgs} args - Arguments to create many ProjectVersions.
+     * @example
+     * // Create many ProjectVersions
+     * const projectVersion = await prisma.projectVersion.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ProjectVersions and only return the `id`
+     * const projectVersionWithIdOnly = await prisma.projectVersion.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProjectVersionCreateManyAndReturnArgs>(args?: SelectSubset<T, ProjectVersionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ProjectVersion.
+     * @param {ProjectVersionDeleteArgs} args - Arguments to delete one ProjectVersion.
+     * @example
+     * // Delete one ProjectVersion
+     * const ProjectVersion = await prisma.projectVersion.delete({
+     *   where: {
+     *     // ... filter to delete one ProjectVersion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProjectVersionDeleteArgs>(args: SelectSubset<T, ProjectVersionDeleteArgs<ExtArgs>>): Prisma__ProjectVersionClient<$Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ProjectVersion.
+     * @param {ProjectVersionUpdateArgs} args - Arguments to update one ProjectVersion.
+     * @example
+     * // Update one ProjectVersion
+     * const projectVersion = await prisma.projectVersion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProjectVersionUpdateArgs>(args: SelectSubset<T, ProjectVersionUpdateArgs<ExtArgs>>): Prisma__ProjectVersionClient<$Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ProjectVersions.
+     * @param {ProjectVersionDeleteManyArgs} args - Arguments to filter ProjectVersions to delete.
+     * @example
+     * // Delete a few ProjectVersions
+     * const { count } = await prisma.projectVersion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProjectVersionDeleteManyArgs>(args?: SelectSubset<T, ProjectVersionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProjectVersions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectVersionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProjectVersions
+     * const projectVersion = await prisma.projectVersion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProjectVersionUpdateManyArgs>(args: SelectSubset<T, ProjectVersionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProjectVersions and returns the data updated in the database.
+     * @param {ProjectVersionUpdateManyAndReturnArgs} args - Arguments to update many ProjectVersions.
+     * @example
+     * // Update many ProjectVersions
+     * const projectVersion = await prisma.projectVersion.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ProjectVersions and only return the `id`
+     * const projectVersionWithIdOnly = await prisma.projectVersion.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProjectVersionUpdateManyAndReturnArgs>(args: SelectSubset<T, ProjectVersionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ProjectVersion.
+     * @param {ProjectVersionUpsertArgs} args - Arguments to update or create a ProjectVersion.
+     * @example
+     * // Update or create a ProjectVersion
+     * const projectVersion = await prisma.projectVersion.upsert({
+     *   create: {
+     *     // ... data to create a ProjectVersion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProjectVersion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProjectVersionUpsertArgs>(args: SelectSubset<T, ProjectVersionUpsertArgs<ExtArgs>>): Prisma__ProjectVersionClient<$Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ProjectVersions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectVersionCountArgs} args - Arguments to filter ProjectVersions to count.
+     * @example
+     * // Count the number of ProjectVersions
+     * const count = await prisma.projectVersion.count({
+     *   where: {
+     *     // ... the filter for the ProjectVersions we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProjectVersionCountArgs>(
+      args?: Subset<T, ProjectVersionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProjectVersionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProjectVersion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectVersionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProjectVersionAggregateArgs>(args: Subset<T, ProjectVersionAggregateArgs>): Prisma.PrismaPromise<GetProjectVersionAggregateType<T>>
+
+    /**
+     * Group by ProjectVersion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectVersionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProjectVersionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProjectVersionGroupByArgs['orderBy'] }
+        : { orderBy?: ProjectVersionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProjectVersionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProjectVersionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProjectVersion model
+   */
+  readonly fields: ProjectVersionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProjectVersion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProjectVersionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProjectVersion model
+   */
+  interface ProjectVersionFieldRefs {
+    readonly id: FieldRef<"ProjectVersion", 'String'>
+    readonly projectId: FieldRef<"ProjectVersion", 'String'>
+    readonly version: FieldRef<"ProjectVersion", 'Int'>
+    readonly briefSnapshot: FieldRef<"ProjectVersion", 'String'>
+    readonly tagsSnapshot: FieldRef<"ProjectVersion", 'String[]'>
+    readonly assetsSnapshot: FieldRef<"ProjectVersion", 'Json'>
+    readonly createdAt: FieldRef<"ProjectVersion", 'DateTime'>
+    readonly createdBy: FieldRef<"ProjectVersion", 'String'>
+    readonly changeDescription: FieldRef<"ProjectVersion", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProjectVersion findUnique
+   */
+  export type ProjectVersionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectVersion
+     */
+    select?: ProjectVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectVersion
+     */
+    omit?: ProjectVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectVersionInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectVersion to fetch.
+     */
+    where: ProjectVersionWhereUniqueInput
+  }
+
+  /**
+   * ProjectVersion findUniqueOrThrow
+   */
+  export type ProjectVersionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectVersion
+     */
+    select?: ProjectVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectVersion
+     */
+    omit?: ProjectVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectVersionInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectVersion to fetch.
+     */
+    where: ProjectVersionWhereUniqueInput
+  }
+
+  /**
+   * ProjectVersion findFirst
+   */
+  export type ProjectVersionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectVersion
+     */
+    select?: ProjectVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectVersion
+     */
+    omit?: ProjectVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectVersionInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectVersion to fetch.
+     */
+    where?: ProjectVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectVersions to fetch.
+     */
+    orderBy?: ProjectVersionOrderByWithRelationInput | ProjectVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProjectVersions.
+     */
+    cursor?: ProjectVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectVersions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProjectVersions.
+     */
+    distinct?: ProjectVersionScalarFieldEnum | ProjectVersionScalarFieldEnum[]
+  }
+
+  /**
+   * ProjectVersion findFirstOrThrow
+   */
+  export type ProjectVersionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectVersion
+     */
+    select?: ProjectVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectVersion
+     */
+    omit?: ProjectVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectVersionInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectVersion to fetch.
+     */
+    where?: ProjectVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectVersions to fetch.
+     */
+    orderBy?: ProjectVersionOrderByWithRelationInput | ProjectVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProjectVersions.
+     */
+    cursor?: ProjectVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectVersions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProjectVersions.
+     */
+    distinct?: ProjectVersionScalarFieldEnum | ProjectVersionScalarFieldEnum[]
+  }
+
+  /**
+   * ProjectVersion findMany
+   */
+  export type ProjectVersionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectVersion
+     */
+    select?: ProjectVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectVersion
+     */
+    omit?: ProjectVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectVersionInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectVersions to fetch.
+     */
+    where?: ProjectVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectVersions to fetch.
+     */
+    orderBy?: ProjectVersionOrderByWithRelationInput | ProjectVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProjectVersions.
+     */
+    cursor?: ProjectVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectVersions.
+     */
+    skip?: number
+    distinct?: ProjectVersionScalarFieldEnum | ProjectVersionScalarFieldEnum[]
+  }
+
+  /**
+   * ProjectVersion create
+   */
+  export type ProjectVersionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectVersion
+     */
+    select?: ProjectVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectVersion
+     */
+    omit?: ProjectVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectVersionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ProjectVersion.
+     */
+    data: XOR<ProjectVersionCreateInput, ProjectVersionUncheckedCreateInput>
+  }
+
+  /**
+   * ProjectVersion createMany
+   */
+  export type ProjectVersionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProjectVersions.
+     */
+    data: ProjectVersionCreateManyInput | ProjectVersionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProjectVersion createManyAndReturn
+   */
+  export type ProjectVersionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectVersion
+     */
+    select?: ProjectVersionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectVersion
+     */
+    omit?: ProjectVersionOmit<ExtArgs> | null
+    /**
+     * The data used to create many ProjectVersions.
+     */
+    data: ProjectVersionCreateManyInput | ProjectVersionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectVersionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProjectVersion update
+   */
+  export type ProjectVersionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectVersion
+     */
+    select?: ProjectVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectVersion
+     */
+    omit?: ProjectVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectVersionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ProjectVersion.
+     */
+    data: XOR<ProjectVersionUpdateInput, ProjectVersionUncheckedUpdateInput>
+    /**
+     * Choose, which ProjectVersion to update.
+     */
+    where: ProjectVersionWhereUniqueInput
+  }
+
+  /**
+   * ProjectVersion updateMany
+   */
+  export type ProjectVersionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProjectVersions.
+     */
+    data: XOR<ProjectVersionUpdateManyMutationInput, ProjectVersionUncheckedUpdateManyInput>
+    /**
+     * Filter which ProjectVersions to update
+     */
+    where?: ProjectVersionWhereInput
+    /**
+     * Limit how many ProjectVersions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProjectVersion updateManyAndReturn
+   */
+  export type ProjectVersionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectVersion
+     */
+    select?: ProjectVersionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectVersion
+     */
+    omit?: ProjectVersionOmit<ExtArgs> | null
+    /**
+     * The data used to update ProjectVersions.
+     */
+    data: XOR<ProjectVersionUpdateManyMutationInput, ProjectVersionUncheckedUpdateManyInput>
+    /**
+     * Filter which ProjectVersions to update
+     */
+    where?: ProjectVersionWhereInput
+    /**
+     * Limit how many ProjectVersions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectVersionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProjectVersion upsert
+   */
+  export type ProjectVersionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectVersion
+     */
+    select?: ProjectVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectVersion
+     */
+    omit?: ProjectVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectVersionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ProjectVersion to update in case it exists.
+     */
+    where: ProjectVersionWhereUniqueInput
+    /**
+     * In case the ProjectVersion found by the `where` argument doesn't exist, create a new ProjectVersion with this data.
+     */
+    create: XOR<ProjectVersionCreateInput, ProjectVersionUncheckedCreateInput>
+    /**
+     * In case the ProjectVersion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProjectVersionUpdateInput, ProjectVersionUncheckedUpdateInput>
+  }
+
+  /**
+   * ProjectVersion delete
+   */
+  export type ProjectVersionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectVersion
+     */
+    select?: ProjectVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectVersion
+     */
+    omit?: ProjectVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectVersionInclude<ExtArgs> | null
+    /**
+     * Filter which ProjectVersion to delete.
+     */
+    where: ProjectVersionWhereUniqueInput
+  }
+
+  /**
+   * ProjectVersion deleteMany
+   */
+  export type ProjectVersionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProjectVersions to delete
+     */
+    where?: ProjectVersionWhereInput
+    /**
+     * Limit how many ProjectVersions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProjectVersion without action
+   */
+  export type ProjectVersionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectVersion
+     */
+    select?: ProjectVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectVersion
+     */
+    omit?: ProjectVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectVersionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Embedding
+   */
+
+  export type AggregateEmbedding = {
+    _count: EmbeddingCountAggregateOutputType | null
+    _min: EmbeddingMinAggregateOutputType | null
+    _max: EmbeddingMaxAggregateOutputType | null
+  }
+
+  export type EmbeddingMinAggregateOutputType = {
+    id: string | null
+    content: string | null
+    model: string | null
+    createdAt: Date | null
+  }
+
+  export type EmbeddingMaxAggregateOutputType = {
+    id: string | null
+    content: string | null
+    model: string | null
+    createdAt: Date | null
+  }
+
+  export type EmbeddingCountAggregateOutputType = {
+    id: number
+    content: number
+    embedding: number
+    model: number
+    metadata: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type EmbeddingMinAggregateInputType = {
+    id?: true
+    content?: true
+    model?: true
+    createdAt?: true
+  }
+
+  export type EmbeddingMaxAggregateInputType = {
+    id?: true
+    content?: true
+    model?: true
+    createdAt?: true
+  }
+
+  export type EmbeddingCountAggregateInputType = {
+    id?: true
+    content?: true
+    embedding?: true
+    model?: true
+    metadata?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type EmbeddingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Embedding to aggregate.
+     */
+    where?: EmbeddingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Embeddings to fetch.
+     */
+    orderBy?: EmbeddingOrderByWithRelationInput | EmbeddingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmbeddingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Embeddings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Embeddings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Embeddings
+    **/
+    _count?: true | EmbeddingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmbeddingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmbeddingMaxAggregateInputType
+  }
+
+  export type GetEmbeddingAggregateType<T extends EmbeddingAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmbedding]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmbedding[P]>
+      : GetScalarType<T[P], AggregateEmbedding[P]>
+  }
+
+
+
+
+  export type EmbeddingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmbeddingWhereInput
+    orderBy?: EmbeddingOrderByWithAggregationInput | EmbeddingOrderByWithAggregationInput[]
+    by: EmbeddingScalarFieldEnum[] | EmbeddingScalarFieldEnum
+    having?: EmbeddingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmbeddingCountAggregateInputType | true
+    _min?: EmbeddingMinAggregateInputType
+    _max?: EmbeddingMaxAggregateInputType
+  }
+
+  export type EmbeddingGroupByOutputType = {
+    id: string
+    content: string
+    embedding: JsonValue
+    model: string
+    metadata: JsonValue | null
+    createdAt: Date
+    _count: EmbeddingCountAggregateOutputType | null
+    _min: EmbeddingMinAggregateOutputType | null
+    _max: EmbeddingMaxAggregateOutputType | null
+  }
+
+  type GetEmbeddingGroupByPayload<T extends EmbeddingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmbeddingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmbeddingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmbeddingGroupByOutputType[P]>
+            : GetScalarType<T[P], EmbeddingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmbeddingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    embedding?: boolean
+    model?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["embedding"]>
+
+  export type EmbeddingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    embedding?: boolean
+    model?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["embedding"]>
+
+  export type EmbeddingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    embedding?: boolean
+    model?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["embedding"]>
+
+  export type EmbeddingSelectScalar = {
+    id?: boolean
+    content?: boolean
+    embedding?: boolean
+    model?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+  }
+
+  export type EmbeddingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "embedding" | "model" | "metadata" | "createdAt", ExtArgs["result"]["embedding"]>
+
+  export type $EmbeddingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Embedding"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      content: string
+      embedding: Prisma.JsonValue
+      model: string
+      metadata: Prisma.JsonValue | null
+      createdAt: Date
+    }, ExtArgs["result"]["embedding"]>
+    composites: {}
+  }
+
+  type EmbeddingGetPayload<S extends boolean | null | undefined | EmbeddingDefaultArgs> = $Result.GetResult<Prisma.$EmbeddingPayload, S>
+
+  type EmbeddingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmbeddingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmbeddingCountAggregateInputType | true
+    }
+
+  export interface EmbeddingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Embedding'], meta: { name: 'Embedding' } }
+    /**
+     * Find zero or one Embedding that matches the filter.
+     * @param {EmbeddingFindUniqueArgs} args - Arguments to find a Embedding
+     * @example
+     * // Get one Embedding
+     * const embedding = await prisma.embedding.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmbeddingFindUniqueArgs>(args: SelectSubset<T, EmbeddingFindUniqueArgs<ExtArgs>>): Prisma__EmbeddingClient<$Result.GetResult<Prisma.$EmbeddingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Embedding that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmbeddingFindUniqueOrThrowArgs} args - Arguments to find a Embedding
+     * @example
+     * // Get one Embedding
+     * const embedding = await prisma.embedding.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmbeddingFindUniqueOrThrowArgs>(args: SelectSubset<T, EmbeddingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmbeddingClient<$Result.GetResult<Prisma.$EmbeddingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Embedding that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmbeddingFindFirstArgs} args - Arguments to find a Embedding
+     * @example
+     * // Get one Embedding
+     * const embedding = await prisma.embedding.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmbeddingFindFirstArgs>(args?: SelectSubset<T, EmbeddingFindFirstArgs<ExtArgs>>): Prisma__EmbeddingClient<$Result.GetResult<Prisma.$EmbeddingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Embedding that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmbeddingFindFirstOrThrowArgs} args - Arguments to find a Embedding
+     * @example
+     * // Get one Embedding
+     * const embedding = await prisma.embedding.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmbeddingFindFirstOrThrowArgs>(args?: SelectSubset<T, EmbeddingFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmbeddingClient<$Result.GetResult<Prisma.$EmbeddingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Embeddings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmbeddingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Embeddings
+     * const embeddings = await prisma.embedding.findMany()
+     * 
+     * // Get first 10 Embeddings
+     * const embeddings = await prisma.embedding.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const embeddingWithIdOnly = await prisma.embedding.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmbeddingFindManyArgs>(args?: SelectSubset<T, EmbeddingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmbeddingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Embedding.
+     * @param {EmbeddingCreateArgs} args - Arguments to create a Embedding.
+     * @example
+     * // Create one Embedding
+     * const Embedding = await prisma.embedding.create({
+     *   data: {
+     *     // ... data to create a Embedding
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmbeddingCreateArgs>(args: SelectSubset<T, EmbeddingCreateArgs<ExtArgs>>): Prisma__EmbeddingClient<$Result.GetResult<Prisma.$EmbeddingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Embeddings.
+     * @param {EmbeddingCreateManyArgs} args - Arguments to create many Embeddings.
+     * @example
+     * // Create many Embeddings
+     * const embedding = await prisma.embedding.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmbeddingCreateManyArgs>(args?: SelectSubset<T, EmbeddingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Embeddings and returns the data saved in the database.
+     * @param {EmbeddingCreateManyAndReturnArgs} args - Arguments to create many Embeddings.
+     * @example
+     * // Create many Embeddings
+     * const embedding = await prisma.embedding.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Embeddings and only return the `id`
+     * const embeddingWithIdOnly = await prisma.embedding.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmbeddingCreateManyAndReturnArgs>(args?: SelectSubset<T, EmbeddingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmbeddingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Embedding.
+     * @param {EmbeddingDeleteArgs} args - Arguments to delete one Embedding.
+     * @example
+     * // Delete one Embedding
+     * const Embedding = await prisma.embedding.delete({
+     *   where: {
+     *     // ... filter to delete one Embedding
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmbeddingDeleteArgs>(args: SelectSubset<T, EmbeddingDeleteArgs<ExtArgs>>): Prisma__EmbeddingClient<$Result.GetResult<Prisma.$EmbeddingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Embedding.
+     * @param {EmbeddingUpdateArgs} args - Arguments to update one Embedding.
+     * @example
+     * // Update one Embedding
+     * const embedding = await prisma.embedding.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmbeddingUpdateArgs>(args: SelectSubset<T, EmbeddingUpdateArgs<ExtArgs>>): Prisma__EmbeddingClient<$Result.GetResult<Prisma.$EmbeddingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Embeddings.
+     * @param {EmbeddingDeleteManyArgs} args - Arguments to filter Embeddings to delete.
+     * @example
+     * // Delete a few Embeddings
+     * const { count } = await prisma.embedding.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmbeddingDeleteManyArgs>(args?: SelectSubset<T, EmbeddingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Embeddings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmbeddingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Embeddings
+     * const embedding = await prisma.embedding.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmbeddingUpdateManyArgs>(args: SelectSubset<T, EmbeddingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Embeddings and returns the data updated in the database.
+     * @param {EmbeddingUpdateManyAndReturnArgs} args - Arguments to update many Embeddings.
+     * @example
+     * // Update many Embeddings
+     * const embedding = await prisma.embedding.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Embeddings and only return the `id`
+     * const embeddingWithIdOnly = await prisma.embedding.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmbeddingUpdateManyAndReturnArgs>(args: SelectSubset<T, EmbeddingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmbeddingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Embedding.
+     * @param {EmbeddingUpsertArgs} args - Arguments to update or create a Embedding.
+     * @example
+     * // Update or create a Embedding
+     * const embedding = await prisma.embedding.upsert({
+     *   create: {
+     *     // ... data to create a Embedding
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Embedding we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmbeddingUpsertArgs>(args: SelectSubset<T, EmbeddingUpsertArgs<ExtArgs>>): Prisma__EmbeddingClient<$Result.GetResult<Prisma.$EmbeddingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Embeddings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmbeddingCountArgs} args - Arguments to filter Embeddings to count.
+     * @example
+     * // Count the number of Embeddings
+     * const count = await prisma.embedding.count({
+     *   where: {
+     *     // ... the filter for the Embeddings we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmbeddingCountArgs>(
+      args?: Subset<T, EmbeddingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmbeddingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Embedding.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmbeddingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmbeddingAggregateArgs>(args: Subset<T, EmbeddingAggregateArgs>): Prisma.PrismaPromise<GetEmbeddingAggregateType<T>>
+
+    /**
+     * Group by Embedding.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmbeddingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmbeddingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmbeddingGroupByArgs['orderBy'] }
+        : { orderBy?: EmbeddingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmbeddingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmbeddingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Embedding model
+   */
+  readonly fields: EmbeddingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Embedding.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmbeddingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Embedding model
+   */
+  interface EmbeddingFieldRefs {
+    readonly id: FieldRef<"Embedding", 'String'>
+    readonly content: FieldRef<"Embedding", 'String'>
+    readonly embedding: FieldRef<"Embedding", 'Json'>
+    readonly model: FieldRef<"Embedding", 'String'>
+    readonly metadata: FieldRef<"Embedding", 'Json'>
+    readonly createdAt: FieldRef<"Embedding", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Embedding findUnique
+   */
+  export type EmbeddingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Embedding
+     */
+    select?: EmbeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Embedding
+     */
+    omit?: EmbeddingOmit<ExtArgs> | null
+    /**
+     * Filter, which Embedding to fetch.
+     */
+    where: EmbeddingWhereUniqueInput
+  }
+
+  /**
+   * Embedding findUniqueOrThrow
+   */
+  export type EmbeddingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Embedding
+     */
+    select?: EmbeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Embedding
+     */
+    omit?: EmbeddingOmit<ExtArgs> | null
+    /**
+     * Filter, which Embedding to fetch.
+     */
+    where: EmbeddingWhereUniqueInput
+  }
+
+  /**
+   * Embedding findFirst
+   */
+  export type EmbeddingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Embedding
+     */
+    select?: EmbeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Embedding
+     */
+    omit?: EmbeddingOmit<ExtArgs> | null
+    /**
+     * Filter, which Embedding to fetch.
+     */
+    where?: EmbeddingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Embeddings to fetch.
+     */
+    orderBy?: EmbeddingOrderByWithRelationInput | EmbeddingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Embeddings.
+     */
+    cursor?: EmbeddingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Embeddings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Embeddings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Embeddings.
+     */
+    distinct?: EmbeddingScalarFieldEnum | EmbeddingScalarFieldEnum[]
+  }
+
+  /**
+   * Embedding findFirstOrThrow
+   */
+  export type EmbeddingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Embedding
+     */
+    select?: EmbeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Embedding
+     */
+    omit?: EmbeddingOmit<ExtArgs> | null
+    /**
+     * Filter, which Embedding to fetch.
+     */
+    where?: EmbeddingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Embeddings to fetch.
+     */
+    orderBy?: EmbeddingOrderByWithRelationInput | EmbeddingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Embeddings.
+     */
+    cursor?: EmbeddingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Embeddings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Embeddings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Embeddings.
+     */
+    distinct?: EmbeddingScalarFieldEnum | EmbeddingScalarFieldEnum[]
+  }
+
+  /**
+   * Embedding findMany
+   */
+  export type EmbeddingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Embedding
+     */
+    select?: EmbeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Embedding
+     */
+    omit?: EmbeddingOmit<ExtArgs> | null
+    /**
+     * Filter, which Embeddings to fetch.
+     */
+    where?: EmbeddingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Embeddings to fetch.
+     */
+    orderBy?: EmbeddingOrderByWithRelationInput | EmbeddingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Embeddings.
+     */
+    cursor?: EmbeddingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Embeddings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Embeddings.
+     */
+    skip?: number
+    distinct?: EmbeddingScalarFieldEnum | EmbeddingScalarFieldEnum[]
+  }
+
+  /**
+   * Embedding create
+   */
+  export type EmbeddingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Embedding
+     */
+    select?: EmbeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Embedding
+     */
+    omit?: EmbeddingOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Embedding.
+     */
+    data: XOR<EmbeddingCreateInput, EmbeddingUncheckedCreateInput>
+  }
+
+  /**
+   * Embedding createMany
+   */
+  export type EmbeddingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Embeddings.
+     */
+    data: EmbeddingCreateManyInput | EmbeddingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Embedding createManyAndReturn
+   */
+  export type EmbeddingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Embedding
+     */
+    select?: EmbeddingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Embedding
+     */
+    omit?: EmbeddingOmit<ExtArgs> | null
+    /**
+     * The data used to create many Embeddings.
+     */
+    data: EmbeddingCreateManyInput | EmbeddingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Embedding update
+   */
+  export type EmbeddingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Embedding
+     */
+    select?: EmbeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Embedding
+     */
+    omit?: EmbeddingOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Embedding.
+     */
+    data: XOR<EmbeddingUpdateInput, EmbeddingUncheckedUpdateInput>
+    /**
+     * Choose, which Embedding to update.
+     */
+    where: EmbeddingWhereUniqueInput
+  }
+
+  /**
+   * Embedding updateMany
+   */
+  export type EmbeddingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Embeddings.
+     */
+    data: XOR<EmbeddingUpdateManyMutationInput, EmbeddingUncheckedUpdateManyInput>
+    /**
+     * Filter which Embeddings to update
+     */
+    where?: EmbeddingWhereInput
+    /**
+     * Limit how many Embeddings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Embedding updateManyAndReturn
+   */
+  export type EmbeddingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Embedding
+     */
+    select?: EmbeddingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Embedding
+     */
+    omit?: EmbeddingOmit<ExtArgs> | null
+    /**
+     * The data used to update Embeddings.
+     */
+    data: XOR<EmbeddingUpdateManyMutationInput, EmbeddingUncheckedUpdateManyInput>
+    /**
+     * Filter which Embeddings to update
+     */
+    where?: EmbeddingWhereInput
+    /**
+     * Limit how many Embeddings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Embedding upsert
+   */
+  export type EmbeddingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Embedding
+     */
+    select?: EmbeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Embedding
+     */
+    omit?: EmbeddingOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Embedding to update in case it exists.
+     */
+    where: EmbeddingWhereUniqueInput
+    /**
+     * In case the Embedding found by the `where` argument doesn't exist, create a new Embedding with this data.
+     */
+    create: XOR<EmbeddingCreateInput, EmbeddingUncheckedCreateInput>
+    /**
+     * In case the Embedding was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmbeddingUpdateInput, EmbeddingUncheckedUpdateInput>
+  }
+
+  /**
+   * Embedding delete
+   */
+  export type EmbeddingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Embedding
+     */
+    select?: EmbeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Embedding
+     */
+    omit?: EmbeddingOmit<ExtArgs> | null
+    /**
+     * Filter which Embedding to delete.
+     */
+    where: EmbeddingWhereUniqueInput
+  }
+
+  /**
+   * Embedding deleteMany
+   */
+  export type EmbeddingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Embeddings to delete
+     */
+    where?: EmbeddingWhereInput
+    /**
+     * Limit how many Embeddings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Embedding without action
+   */
+  export type EmbeddingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Embedding
+     */
+    select?: EmbeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Embedding
+     */
+    omit?: EmbeddingOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -15096,6 +21328,77 @@ export namespace Prisma {
   export type TranscriptScalarFieldEnum = (typeof TranscriptScalarFieldEnum)[keyof typeof TranscriptScalarFieldEnum]
 
 
+  export const ConversationScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    topic: 'topic',
+    projectId: 'projectId',
+    userId: 'userId',
+    status: 'status',
+    messageCount: 'messageCount',
+    metadata: 'metadata',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]
+
+
+  export const MessageScalarFieldEnum: {
+    id: 'id',
+    conversationId: 'conversationId',
+    role: 'role',
+    content: 'content',
+    tokens: 'tokens',
+    embeddingId: 'embeddingId',
+    referencedSources: 'referencedSources',
+    createdAt: 'createdAt'
+  };
+
+  export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+  export const ContextSnapshotScalarFieldEnum: {
+    id: 'id',
+    conversationId: 'conversationId',
+    projectId: 'projectId',
+    briefContext: 'briefContext',
+    brandTensor: 'brandTensor',
+    assetIntelligence: 'assetIntelligence',
+    knowledgeSourceIds: 'knowledgeSourceIds',
+    capturedAt: 'capturedAt'
+  };
+
+  export type ContextSnapshotScalarFieldEnum = (typeof ContextSnapshotScalarFieldEnum)[keyof typeof ContextSnapshotScalarFieldEnum]
+
+
+  export const ProjectVersionScalarFieldEnum: {
+    id: 'id',
+    projectId: 'projectId',
+    version: 'version',
+    briefSnapshot: 'briefSnapshot',
+    tagsSnapshot: 'tagsSnapshot',
+    assetsSnapshot: 'assetsSnapshot',
+    createdAt: 'createdAt',
+    createdBy: 'createdBy',
+    changeDescription: 'changeDescription'
+  };
+
+  export type ProjectVersionScalarFieldEnum = (typeof ProjectVersionScalarFieldEnum)[keyof typeof ProjectVersionScalarFieldEnum]
+
+
+  export const EmbeddingScalarFieldEnum: {
+    id: 'id',
+    content: 'content',
+    embedding: 'embedding',
+    model: 'model',
+    metadata: 'metadata',
+    createdAt: 'createdAt'
+  };
+
+  export type EmbeddingScalarFieldEnum = (typeof EmbeddingScalarFieldEnum)[keyof typeof EmbeddingScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -15110,6 +21413,13 @@ export namespace Prisma {
   };
 
   export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -15273,6 +21583,34 @@ export namespace Prisma {
    */
   export type ListEnumTranscriptStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TranscriptStatus[]'>
     
+
+
+  /**
+   * Reference to a field of type 'ConversationStatus'
+   */
+  export type EnumConversationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConversationStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ConversationStatus[]'
+   */
+  export type ListEnumConversationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConversationStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MessageRole'
+   */
+  export type EnumMessageRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'MessageRole[]'
+   */
+  export type ListEnumMessageRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageRole[]'>
+    
   /**
    * Deep Input Types
    */
@@ -15293,6 +21631,7 @@ export namespace Prisma {
     assignments?: AssignmentListRelationFilter
     scripts?: ScriptListRelationFilter
     knowledgeSources?: KnowledgeSourceListRelationFilter
+    conversations?: ConversationListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -15307,6 +21646,7 @@ export namespace Prisma {
     assignments?: AssignmentOrderByRelationAggregateInput
     scripts?: ScriptOrderByRelationAggregateInput
     knowledgeSources?: KnowledgeSourceOrderByRelationAggregateInput
+    conversations?: ConversationOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -15324,6 +21664,7 @@ export namespace Prisma {
     assignments?: AssignmentListRelationFilter
     scripts?: ScriptListRelationFilter
     knowledgeSources?: KnowledgeSourceListRelationFilter
+    conversations?: ConversationListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -15376,6 +21717,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemListRelationFilter
     knowledgeSources?: KnowledgeSourceListRelationFilter
     transcripts?: TranscriptListRelationFilter
+    conversations?: ConversationListRelationFilter
+    projectVersions?: ProjectVersionListRelationFilter
   }
 
   export type ProjectOrderByWithRelationInput = {
@@ -15399,6 +21742,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemOrderByRelationAggregateInput
     knowledgeSources?: KnowledgeSourceOrderByRelationAggregateInput
     transcripts?: TranscriptOrderByRelationAggregateInput
+    conversations?: ConversationOrderByRelationAggregateInput
+    projectVersions?: ProjectVersionOrderByRelationAggregateInput
   }
 
   export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -15425,6 +21770,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemListRelationFilter
     knowledgeSources?: KnowledgeSourceListRelationFilter
     transcripts?: TranscriptListRelationFilter
+    conversations?: ConversationListRelationFilter
+    projectVersions?: ProjectVersionListRelationFilter
   }, "id" | "name">
 
   export type ProjectOrderByWithAggregationInput = {
@@ -16184,6 +22531,373 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Transcript"> | Date | string
   }
 
+  export type ConversationWhereInput = {
+    AND?: ConversationWhereInput | ConversationWhereInput[]
+    OR?: ConversationWhereInput[]
+    NOT?: ConversationWhereInput | ConversationWhereInput[]
+    id?: StringFilter<"Conversation"> | string
+    title?: StringNullableFilter<"Conversation"> | string | null
+    topic?: StringNullableFilter<"Conversation"> | string | null
+    projectId?: StringNullableFilter<"Conversation"> | string | null
+    userId?: StringNullableFilter<"Conversation"> | string | null
+    status?: EnumConversationStatusFilter<"Conversation"> | $Enums.ConversationStatus
+    messageCount?: IntFilter<"Conversation"> | number
+    metadata?: JsonNullableFilter<"Conversation">
+    createdAt?: DateTimeFilter<"Conversation"> | Date | string
+    updatedAt?: DateTimeFilter<"Conversation"> | Date | string
+    project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    messages?: MessageListRelationFilter
+    contextSnapshots?: ContextSnapshotListRelationFilter
+  }
+
+  export type ConversationOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrderInput | SortOrder
+    topic?: SortOrderInput | SortOrder
+    projectId?: SortOrderInput | SortOrder
+    userId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    messageCount?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    project?: ProjectOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+    messages?: MessageOrderByRelationAggregateInput
+    contextSnapshots?: ContextSnapshotOrderByRelationAggregateInput
+  }
+
+  export type ConversationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ConversationWhereInput | ConversationWhereInput[]
+    OR?: ConversationWhereInput[]
+    NOT?: ConversationWhereInput | ConversationWhereInput[]
+    title?: StringNullableFilter<"Conversation"> | string | null
+    topic?: StringNullableFilter<"Conversation"> | string | null
+    projectId?: StringNullableFilter<"Conversation"> | string | null
+    userId?: StringNullableFilter<"Conversation"> | string | null
+    status?: EnumConversationStatusFilter<"Conversation"> | $Enums.ConversationStatus
+    messageCount?: IntFilter<"Conversation"> | number
+    metadata?: JsonNullableFilter<"Conversation">
+    createdAt?: DateTimeFilter<"Conversation"> | Date | string
+    updatedAt?: DateTimeFilter<"Conversation"> | Date | string
+    project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    messages?: MessageListRelationFilter
+    contextSnapshots?: ContextSnapshotListRelationFilter
+  }, "id">
+
+  export type ConversationOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrderInput | SortOrder
+    topic?: SortOrderInput | SortOrder
+    projectId?: SortOrderInput | SortOrder
+    userId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    messageCount?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ConversationCountOrderByAggregateInput
+    _avg?: ConversationAvgOrderByAggregateInput
+    _max?: ConversationMaxOrderByAggregateInput
+    _min?: ConversationMinOrderByAggregateInput
+    _sum?: ConversationSumOrderByAggregateInput
+  }
+
+  export type ConversationScalarWhereWithAggregatesInput = {
+    AND?: ConversationScalarWhereWithAggregatesInput | ConversationScalarWhereWithAggregatesInput[]
+    OR?: ConversationScalarWhereWithAggregatesInput[]
+    NOT?: ConversationScalarWhereWithAggregatesInput | ConversationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Conversation"> | string
+    title?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
+    topic?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
+    projectId?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
+    userId?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
+    status?: EnumConversationStatusWithAggregatesFilter<"Conversation"> | $Enums.ConversationStatus
+    messageCount?: IntWithAggregatesFilter<"Conversation"> | number
+    metadata?: JsonNullableWithAggregatesFilter<"Conversation">
+    createdAt?: DateTimeWithAggregatesFilter<"Conversation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Conversation"> | Date | string
+  }
+
+  export type MessageWhereInput = {
+    AND?: MessageWhereInput | MessageWhereInput[]
+    OR?: MessageWhereInput[]
+    NOT?: MessageWhereInput | MessageWhereInput[]
+    id?: StringFilter<"Message"> | string
+    conversationId?: StringFilter<"Message"> | string
+    role?: EnumMessageRoleFilter<"Message"> | $Enums.MessageRole
+    content?: StringFilter<"Message"> | string
+    tokens?: IntNullableFilter<"Message"> | number | null
+    embeddingId?: StringNullableFilter<"Message"> | string | null
+    referencedSources?: StringNullableListFilter<"Message">
+    createdAt?: DateTimeFilter<"Message"> | Date | string
+    conversation?: XOR<ConversationScalarRelationFilter, ConversationWhereInput>
+  }
+
+  export type MessageOrderByWithRelationInput = {
+    id?: SortOrder
+    conversationId?: SortOrder
+    role?: SortOrder
+    content?: SortOrder
+    tokens?: SortOrderInput | SortOrder
+    embeddingId?: SortOrderInput | SortOrder
+    referencedSources?: SortOrder
+    createdAt?: SortOrder
+    conversation?: ConversationOrderByWithRelationInput
+  }
+
+  export type MessageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MessageWhereInput | MessageWhereInput[]
+    OR?: MessageWhereInput[]
+    NOT?: MessageWhereInput | MessageWhereInput[]
+    conversationId?: StringFilter<"Message"> | string
+    role?: EnumMessageRoleFilter<"Message"> | $Enums.MessageRole
+    content?: StringFilter<"Message"> | string
+    tokens?: IntNullableFilter<"Message"> | number | null
+    embeddingId?: StringNullableFilter<"Message"> | string | null
+    referencedSources?: StringNullableListFilter<"Message">
+    createdAt?: DateTimeFilter<"Message"> | Date | string
+    conversation?: XOR<ConversationScalarRelationFilter, ConversationWhereInput>
+  }, "id">
+
+  export type MessageOrderByWithAggregationInput = {
+    id?: SortOrder
+    conversationId?: SortOrder
+    role?: SortOrder
+    content?: SortOrder
+    tokens?: SortOrderInput | SortOrder
+    embeddingId?: SortOrderInput | SortOrder
+    referencedSources?: SortOrder
+    createdAt?: SortOrder
+    _count?: MessageCountOrderByAggregateInput
+    _avg?: MessageAvgOrderByAggregateInput
+    _max?: MessageMaxOrderByAggregateInput
+    _min?: MessageMinOrderByAggregateInput
+    _sum?: MessageSumOrderByAggregateInput
+  }
+
+  export type MessageScalarWhereWithAggregatesInput = {
+    AND?: MessageScalarWhereWithAggregatesInput | MessageScalarWhereWithAggregatesInput[]
+    OR?: MessageScalarWhereWithAggregatesInput[]
+    NOT?: MessageScalarWhereWithAggregatesInput | MessageScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Message"> | string
+    conversationId?: StringWithAggregatesFilter<"Message"> | string
+    role?: EnumMessageRoleWithAggregatesFilter<"Message"> | $Enums.MessageRole
+    content?: StringWithAggregatesFilter<"Message"> | string
+    tokens?: IntNullableWithAggregatesFilter<"Message"> | number | null
+    embeddingId?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    referencedSources?: StringNullableListFilter<"Message">
+    createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
+  }
+
+  export type ContextSnapshotWhereInput = {
+    AND?: ContextSnapshotWhereInput | ContextSnapshotWhereInput[]
+    OR?: ContextSnapshotWhereInput[]
+    NOT?: ContextSnapshotWhereInput | ContextSnapshotWhereInput[]
+    id?: StringFilter<"ContextSnapshot"> | string
+    conversationId?: StringFilter<"ContextSnapshot"> | string
+    projectId?: StringNullableFilter<"ContextSnapshot"> | string | null
+    briefContext?: JsonNullableFilter<"ContextSnapshot">
+    brandTensor?: JsonNullableFilter<"ContextSnapshot">
+    assetIntelligence?: JsonNullableFilter<"ContextSnapshot">
+    knowledgeSourceIds?: StringNullableListFilter<"ContextSnapshot">
+    capturedAt?: DateTimeFilter<"ContextSnapshot"> | Date | string
+    conversation?: XOR<ConversationScalarRelationFilter, ConversationWhereInput>
+  }
+
+  export type ContextSnapshotOrderByWithRelationInput = {
+    id?: SortOrder
+    conversationId?: SortOrder
+    projectId?: SortOrderInput | SortOrder
+    briefContext?: SortOrderInput | SortOrder
+    brandTensor?: SortOrderInput | SortOrder
+    assetIntelligence?: SortOrderInput | SortOrder
+    knowledgeSourceIds?: SortOrder
+    capturedAt?: SortOrder
+    conversation?: ConversationOrderByWithRelationInput
+  }
+
+  export type ContextSnapshotWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ContextSnapshotWhereInput | ContextSnapshotWhereInput[]
+    OR?: ContextSnapshotWhereInput[]
+    NOT?: ContextSnapshotWhereInput | ContextSnapshotWhereInput[]
+    conversationId?: StringFilter<"ContextSnapshot"> | string
+    projectId?: StringNullableFilter<"ContextSnapshot"> | string | null
+    briefContext?: JsonNullableFilter<"ContextSnapshot">
+    brandTensor?: JsonNullableFilter<"ContextSnapshot">
+    assetIntelligence?: JsonNullableFilter<"ContextSnapshot">
+    knowledgeSourceIds?: StringNullableListFilter<"ContextSnapshot">
+    capturedAt?: DateTimeFilter<"ContextSnapshot"> | Date | string
+    conversation?: XOR<ConversationScalarRelationFilter, ConversationWhereInput>
+  }, "id">
+
+  export type ContextSnapshotOrderByWithAggregationInput = {
+    id?: SortOrder
+    conversationId?: SortOrder
+    projectId?: SortOrderInput | SortOrder
+    briefContext?: SortOrderInput | SortOrder
+    brandTensor?: SortOrderInput | SortOrder
+    assetIntelligence?: SortOrderInput | SortOrder
+    knowledgeSourceIds?: SortOrder
+    capturedAt?: SortOrder
+    _count?: ContextSnapshotCountOrderByAggregateInput
+    _max?: ContextSnapshotMaxOrderByAggregateInput
+    _min?: ContextSnapshotMinOrderByAggregateInput
+  }
+
+  export type ContextSnapshotScalarWhereWithAggregatesInput = {
+    AND?: ContextSnapshotScalarWhereWithAggregatesInput | ContextSnapshotScalarWhereWithAggregatesInput[]
+    OR?: ContextSnapshotScalarWhereWithAggregatesInput[]
+    NOT?: ContextSnapshotScalarWhereWithAggregatesInput | ContextSnapshotScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ContextSnapshot"> | string
+    conversationId?: StringWithAggregatesFilter<"ContextSnapshot"> | string
+    projectId?: StringNullableWithAggregatesFilter<"ContextSnapshot"> | string | null
+    briefContext?: JsonNullableWithAggregatesFilter<"ContextSnapshot">
+    brandTensor?: JsonNullableWithAggregatesFilter<"ContextSnapshot">
+    assetIntelligence?: JsonNullableWithAggregatesFilter<"ContextSnapshot">
+    knowledgeSourceIds?: StringNullableListFilter<"ContextSnapshot">
+    capturedAt?: DateTimeWithAggregatesFilter<"ContextSnapshot"> | Date | string
+  }
+
+  export type ProjectVersionWhereInput = {
+    AND?: ProjectVersionWhereInput | ProjectVersionWhereInput[]
+    OR?: ProjectVersionWhereInput[]
+    NOT?: ProjectVersionWhereInput | ProjectVersionWhereInput[]
+    id?: StringFilter<"ProjectVersion"> | string
+    projectId?: StringFilter<"ProjectVersion"> | string
+    version?: IntFilter<"ProjectVersion"> | number
+    briefSnapshot?: StringNullableFilter<"ProjectVersion"> | string | null
+    tagsSnapshot?: StringNullableListFilter<"ProjectVersion">
+    assetsSnapshot?: JsonNullableFilter<"ProjectVersion">
+    createdAt?: DateTimeFilter<"ProjectVersion"> | Date | string
+    createdBy?: StringNullableFilter<"ProjectVersion"> | string | null
+    changeDescription?: StringNullableFilter<"ProjectVersion"> | string | null
+    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
+  }
+
+  export type ProjectVersionOrderByWithRelationInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    version?: SortOrder
+    briefSnapshot?: SortOrderInput | SortOrder
+    tagsSnapshot?: SortOrder
+    assetsSnapshot?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    changeDescription?: SortOrderInput | SortOrder
+    project?: ProjectOrderByWithRelationInput
+  }
+
+  export type ProjectVersionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ProjectVersionWhereInput | ProjectVersionWhereInput[]
+    OR?: ProjectVersionWhereInput[]
+    NOT?: ProjectVersionWhereInput | ProjectVersionWhereInput[]
+    projectId?: StringFilter<"ProjectVersion"> | string
+    version?: IntFilter<"ProjectVersion"> | number
+    briefSnapshot?: StringNullableFilter<"ProjectVersion"> | string | null
+    tagsSnapshot?: StringNullableListFilter<"ProjectVersion">
+    assetsSnapshot?: JsonNullableFilter<"ProjectVersion">
+    createdAt?: DateTimeFilter<"ProjectVersion"> | Date | string
+    createdBy?: StringNullableFilter<"ProjectVersion"> | string | null
+    changeDescription?: StringNullableFilter<"ProjectVersion"> | string | null
+    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
+  }, "id">
+
+  export type ProjectVersionOrderByWithAggregationInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    version?: SortOrder
+    briefSnapshot?: SortOrderInput | SortOrder
+    tagsSnapshot?: SortOrder
+    assetsSnapshot?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    changeDescription?: SortOrderInput | SortOrder
+    _count?: ProjectVersionCountOrderByAggregateInput
+    _avg?: ProjectVersionAvgOrderByAggregateInput
+    _max?: ProjectVersionMaxOrderByAggregateInput
+    _min?: ProjectVersionMinOrderByAggregateInput
+    _sum?: ProjectVersionSumOrderByAggregateInput
+  }
+
+  export type ProjectVersionScalarWhereWithAggregatesInput = {
+    AND?: ProjectVersionScalarWhereWithAggregatesInput | ProjectVersionScalarWhereWithAggregatesInput[]
+    OR?: ProjectVersionScalarWhereWithAggregatesInput[]
+    NOT?: ProjectVersionScalarWhereWithAggregatesInput | ProjectVersionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ProjectVersion"> | string
+    projectId?: StringWithAggregatesFilter<"ProjectVersion"> | string
+    version?: IntWithAggregatesFilter<"ProjectVersion"> | number
+    briefSnapshot?: StringNullableWithAggregatesFilter<"ProjectVersion"> | string | null
+    tagsSnapshot?: StringNullableListFilter<"ProjectVersion">
+    assetsSnapshot?: JsonNullableWithAggregatesFilter<"ProjectVersion">
+    createdAt?: DateTimeWithAggregatesFilter<"ProjectVersion"> | Date | string
+    createdBy?: StringNullableWithAggregatesFilter<"ProjectVersion"> | string | null
+    changeDescription?: StringNullableWithAggregatesFilter<"ProjectVersion"> | string | null
+  }
+
+  export type EmbeddingWhereInput = {
+    AND?: EmbeddingWhereInput | EmbeddingWhereInput[]
+    OR?: EmbeddingWhereInput[]
+    NOT?: EmbeddingWhereInput | EmbeddingWhereInput[]
+    id?: StringFilter<"Embedding"> | string
+    content?: StringFilter<"Embedding"> | string
+    embedding?: JsonFilter<"Embedding">
+    model?: StringFilter<"Embedding"> | string
+    metadata?: JsonNullableFilter<"Embedding">
+    createdAt?: DateTimeFilter<"Embedding"> | Date | string
+  }
+
+  export type EmbeddingOrderByWithRelationInput = {
+    id?: SortOrder
+    content?: SortOrder
+    embedding?: SortOrder
+    model?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EmbeddingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EmbeddingWhereInput | EmbeddingWhereInput[]
+    OR?: EmbeddingWhereInput[]
+    NOT?: EmbeddingWhereInput | EmbeddingWhereInput[]
+    content?: StringFilter<"Embedding"> | string
+    embedding?: JsonFilter<"Embedding">
+    model?: StringFilter<"Embedding"> | string
+    metadata?: JsonNullableFilter<"Embedding">
+    createdAt?: DateTimeFilter<"Embedding"> | Date | string
+  }, "id">
+
+  export type EmbeddingOrderByWithAggregationInput = {
+    id?: SortOrder
+    content?: SortOrder
+    embedding?: SortOrder
+    model?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: EmbeddingCountOrderByAggregateInput
+    _max?: EmbeddingMaxOrderByAggregateInput
+    _min?: EmbeddingMinOrderByAggregateInput
+  }
+
+  export type EmbeddingScalarWhereWithAggregatesInput = {
+    AND?: EmbeddingScalarWhereWithAggregatesInput | EmbeddingScalarWhereWithAggregatesInput[]
+    OR?: EmbeddingScalarWhereWithAggregatesInput[]
+    NOT?: EmbeddingScalarWhereWithAggregatesInput | EmbeddingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Embedding"> | string
+    content?: StringWithAggregatesFilter<"Embedding"> | string
+    embedding?: JsonWithAggregatesFilter<"Embedding">
+    model?: StringWithAggregatesFilter<"Embedding"> | string
+    metadata?: JsonNullableWithAggregatesFilter<"Embedding">
+    createdAt?: DateTimeWithAggregatesFilter<"Embedding"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -16196,6 +22910,7 @@ export namespace Prisma {
     assignments?: AssignmentCreateNestedManyWithoutUserInput
     scripts?: ScriptCreateNestedManyWithoutUserInput
     knowledgeSources?: KnowledgeSourceCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -16210,6 +22925,7 @@ export namespace Prisma {
     assignments?: AssignmentUncheckedCreateNestedManyWithoutUserInput
     scripts?: ScriptUncheckedCreateNestedManyWithoutUserInput
     knowledgeSources?: KnowledgeSourceUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -16224,6 +22940,7 @@ export namespace Prisma {
     assignments?: AssignmentUpdateManyWithoutUserNestedInput
     scripts?: ScriptUpdateManyWithoutUserNestedInput
     knowledgeSources?: KnowledgeSourceUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -16238,6 +22955,7 @@ export namespace Prisma {
     assignments?: AssignmentUncheckedUpdateManyWithoutUserNestedInput
     scripts?: ScriptUncheckedUpdateManyWithoutUserNestedInput
     knowledgeSources?: KnowledgeSourceUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -16290,6 +23008,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemCreateNestedManyWithoutProjectInput
     knowledgeSources?: KnowledgeSourceCreateNestedManyWithoutProjectInput
     transcripts?: TranscriptCreateNestedManyWithoutProjectInput
+    conversations?: ConversationCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateInput = {
@@ -16312,6 +23032,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemUncheckedCreateNestedManyWithoutProjectInput
     knowledgeSources?: KnowledgeSourceUncheckedCreateNestedManyWithoutProjectInput
     transcripts?: TranscriptUncheckedCreateNestedManyWithoutProjectInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUpdateInput = {
@@ -16334,6 +23056,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemUpdateManyWithoutProjectNestedInput
     knowledgeSources?: KnowledgeSourceUpdateManyWithoutProjectNestedInput
     transcripts?: TranscriptUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateInput = {
@@ -16356,6 +23080,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemUncheckedUpdateManyWithoutProjectNestedInput
     knowledgeSources?: KnowledgeSourceUncheckedUpdateManyWithoutProjectNestedInput
     transcripts?: TranscriptUncheckedUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectCreateManyInput = {
@@ -17182,6 +23908,401 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ConversationCreateInput = {
+    id?: string
+    title?: string | null
+    topic?: string | null
+    status?: $Enums.ConversationStatus
+    messageCount?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project?: ProjectCreateNestedOneWithoutConversationsInput
+    user?: UserCreateNestedOneWithoutConversationsInput
+    messages?: MessageCreateNestedManyWithoutConversationInput
+    contextSnapshots?: ContextSnapshotCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUncheckedCreateInput = {
+    id?: string
+    title?: string | null
+    topic?: string | null
+    projectId?: string | null
+    userId?: string | null
+    status?: $Enums.ConversationStatus
+    messageCount?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+    contextSnapshots?: ContextSnapshotUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    messageCount?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneWithoutConversationsNestedInput
+    user?: UserUpdateOneWithoutConversationsNestedInput
+    messages?: MessageUpdateManyWithoutConversationNestedInput
+    contextSnapshots?: ContextSnapshotUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    messageCount?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+    contextSnapshots?: ContextSnapshotUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationCreateManyInput = {
+    id?: string
+    title?: string | null
+    topic?: string | null
+    projectId?: string | null
+    userId?: string | null
+    status?: $Enums.ConversationStatus
+    messageCount?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ConversationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    messageCount?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    messageCount?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageCreateInput = {
+    id?: string
+    role: $Enums.MessageRole
+    content: string
+    tokens?: number | null
+    embeddingId?: string | null
+    referencedSources?: MessageCreatereferencedSourcesInput | string[]
+    createdAt?: Date | string
+    conversation: ConversationCreateNestedOneWithoutMessagesInput
+  }
+
+  export type MessageUncheckedCreateInput = {
+    id?: string
+    conversationId: string
+    role: $Enums.MessageRole
+    content: string
+    tokens?: number | null
+    embeddingId?: string | null
+    referencedSources?: MessageCreatereferencedSourcesInput | string[]
+    createdAt?: Date | string
+  }
+
+  export type MessageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
+    content?: StringFieldUpdateOperationsInput | string
+    tokens?: NullableIntFieldUpdateOperationsInput | number | null
+    embeddingId?: NullableStringFieldUpdateOperationsInput | string | null
+    referencedSources?: MessageUpdatereferencedSourcesInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversation?: ConversationUpdateOneRequiredWithoutMessagesNestedInput
+  }
+
+  export type MessageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
+    content?: StringFieldUpdateOperationsInput | string
+    tokens?: NullableIntFieldUpdateOperationsInput | number | null
+    embeddingId?: NullableStringFieldUpdateOperationsInput | string | null
+    referencedSources?: MessageUpdatereferencedSourcesInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageCreateManyInput = {
+    id?: string
+    conversationId: string
+    role: $Enums.MessageRole
+    content: string
+    tokens?: number | null
+    embeddingId?: string | null
+    referencedSources?: MessageCreatereferencedSourcesInput | string[]
+    createdAt?: Date | string
+  }
+
+  export type MessageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
+    content?: StringFieldUpdateOperationsInput | string
+    tokens?: NullableIntFieldUpdateOperationsInput | number | null
+    embeddingId?: NullableStringFieldUpdateOperationsInput | string | null
+    referencedSources?: MessageUpdatereferencedSourcesInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
+    content?: StringFieldUpdateOperationsInput | string
+    tokens?: NullableIntFieldUpdateOperationsInput | number | null
+    embeddingId?: NullableStringFieldUpdateOperationsInput | string | null
+    referencedSources?: MessageUpdatereferencedSourcesInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContextSnapshotCreateInput = {
+    id?: string
+    projectId?: string | null
+    briefContext?: NullableJsonNullValueInput | InputJsonValue
+    brandTensor?: NullableJsonNullValueInput | InputJsonValue
+    assetIntelligence?: NullableJsonNullValueInput | InputJsonValue
+    knowledgeSourceIds?: ContextSnapshotCreateknowledgeSourceIdsInput | string[]
+    capturedAt?: Date | string
+    conversation: ConversationCreateNestedOneWithoutContextSnapshotsInput
+  }
+
+  export type ContextSnapshotUncheckedCreateInput = {
+    id?: string
+    conversationId: string
+    projectId?: string | null
+    briefContext?: NullableJsonNullValueInput | InputJsonValue
+    brandTensor?: NullableJsonNullValueInput | InputJsonValue
+    assetIntelligence?: NullableJsonNullValueInput | InputJsonValue
+    knowledgeSourceIds?: ContextSnapshotCreateknowledgeSourceIdsInput | string[]
+    capturedAt?: Date | string
+  }
+
+  export type ContextSnapshotUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    briefContext?: NullableJsonNullValueInput | InputJsonValue
+    brandTensor?: NullableJsonNullValueInput | InputJsonValue
+    assetIntelligence?: NullableJsonNullValueInput | InputJsonValue
+    knowledgeSourceIds?: ContextSnapshotUpdateknowledgeSourceIdsInput | string[]
+    capturedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversation?: ConversationUpdateOneRequiredWithoutContextSnapshotsNestedInput
+  }
+
+  export type ContextSnapshotUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    briefContext?: NullableJsonNullValueInput | InputJsonValue
+    brandTensor?: NullableJsonNullValueInput | InputJsonValue
+    assetIntelligence?: NullableJsonNullValueInput | InputJsonValue
+    knowledgeSourceIds?: ContextSnapshotUpdateknowledgeSourceIdsInput | string[]
+    capturedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContextSnapshotCreateManyInput = {
+    id?: string
+    conversationId: string
+    projectId?: string | null
+    briefContext?: NullableJsonNullValueInput | InputJsonValue
+    brandTensor?: NullableJsonNullValueInput | InputJsonValue
+    assetIntelligence?: NullableJsonNullValueInput | InputJsonValue
+    knowledgeSourceIds?: ContextSnapshotCreateknowledgeSourceIdsInput | string[]
+    capturedAt?: Date | string
+  }
+
+  export type ContextSnapshotUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    briefContext?: NullableJsonNullValueInput | InputJsonValue
+    brandTensor?: NullableJsonNullValueInput | InputJsonValue
+    assetIntelligence?: NullableJsonNullValueInput | InputJsonValue
+    knowledgeSourceIds?: ContextSnapshotUpdateknowledgeSourceIdsInput | string[]
+    capturedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContextSnapshotUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    briefContext?: NullableJsonNullValueInput | InputJsonValue
+    brandTensor?: NullableJsonNullValueInput | InputJsonValue
+    assetIntelligence?: NullableJsonNullValueInput | InputJsonValue
+    knowledgeSourceIds?: ContextSnapshotUpdateknowledgeSourceIdsInput | string[]
+    capturedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectVersionCreateInput = {
+    id?: string
+    version: number
+    briefSnapshot?: string | null
+    tagsSnapshot?: ProjectVersionCreatetagsSnapshotInput | string[]
+    assetsSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    createdBy?: string | null
+    changeDescription?: string | null
+    project: ProjectCreateNestedOneWithoutProjectVersionsInput
+  }
+
+  export type ProjectVersionUncheckedCreateInput = {
+    id?: string
+    projectId: string
+    version: number
+    briefSnapshot?: string | null
+    tagsSnapshot?: ProjectVersionCreatetagsSnapshotInput | string[]
+    assetsSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    createdBy?: string | null
+    changeDescription?: string | null
+  }
+
+  export type ProjectVersionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    briefSnapshot?: NullableStringFieldUpdateOperationsInput | string | null
+    tagsSnapshot?: ProjectVersionUpdatetagsSnapshotInput | string[]
+    assetsSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    changeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    project?: ProjectUpdateOneRequiredWithoutProjectVersionsNestedInput
+  }
+
+  export type ProjectVersionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    briefSnapshot?: NullableStringFieldUpdateOperationsInput | string | null
+    tagsSnapshot?: ProjectVersionUpdatetagsSnapshotInput | string[]
+    assetsSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    changeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ProjectVersionCreateManyInput = {
+    id?: string
+    projectId: string
+    version: number
+    briefSnapshot?: string | null
+    tagsSnapshot?: ProjectVersionCreatetagsSnapshotInput | string[]
+    assetsSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    createdBy?: string | null
+    changeDescription?: string | null
+  }
+
+  export type ProjectVersionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    briefSnapshot?: NullableStringFieldUpdateOperationsInput | string | null
+    tagsSnapshot?: ProjectVersionUpdatetagsSnapshotInput | string[]
+    assetsSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    changeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ProjectVersionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    briefSnapshot?: NullableStringFieldUpdateOperationsInput | string | null
+    tagsSnapshot?: ProjectVersionUpdatetagsSnapshotInput | string[]
+    assetsSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    changeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type EmbeddingCreateInput = {
+    id?: string
+    content: string
+    embedding: JsonNullValueInput | InputJsonValue
+    model: string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type EmbeddingUncheckedCreateInput = {
+    id?: string
+    content: string
+    embedding: JsonNullValueInput | InputJsonValue
+    model: string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type EmbeddingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    embedding?: JsonNullValueInput | InputJsonValue
+    model?: StringFieldUpdateOperationsInput | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmbeddingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    embedding?: JsonNullValueInput | InputJsonValue
+    model?: StringFieldUpdateOperationsInput | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmbeddingCreateManyInput = {
+    id?: string
+    content: string
+    embedding: JsonNullValueInput | InputJsonValue
+    model: string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type EmbeddingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    embedding?: JsonNullValueInput | InputJsonValue
+    model?: StringFieldUpdateOperationsInput | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmbeddingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    embedding?: JsonNullValueInput | InputJsonValue
+    model?: StringFieldUpdateOperationsInput | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -17247,6 +24368,12 @@ export namespace Prisma {
     none?: KnowledgeSourceWhereInput
   }
 
+  export type ConversationListRelationFilter = {
+    every?: ConversationWhereInput
+    some?: ConversationWhereInput
+    none?: ConversationWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -17265,6 +24392,10 @@ export namespace Prisma {
   }
 
   export type KnowledgeSourceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ConversationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17400,6 +24531,12 @@ export namespace Prisma {
     none?: TranscriptWhereInput
   }
 
+  export type ProjectVersionListRelationFilter = {
+    every?: ProjectVersionWhereInput
+    some?: ProjectVersionWhereInput
+    none?: ProjectVersionWhereInput
+  }
+
   export type RoleRequirementOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -17409,6 +24546,10 @@ export namespace Prisma {
   }
 
   export type TranscriptOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProjectVersionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18047,6 +25188,313 @@ export namespace Prisma {
     _max?: NestedEnumTranscriptStatusFilter<$PrismaModel>
   }
 
+  export type EnumConversationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConversationStatus | EnumConversationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConversationStatusFilter<$PrismaModel> | $Enums.ConversationStatus
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type MessageListRelationFilter = {
+    every?: MessageWhereInput
+    some?: MessageWhereInput
+    none?: MessageWhereInput
+  }
+
+  export type ContextSnapshotListRelationFilter = {
+    every?: ContextSnapshotWhereInput
+    some?: ContextSnapshotWhereInput
+    none?: ContextSnapshotWhereInput
+  }
+
+  export type MessageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ContextSnapshotOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ConversationCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    topic?: SortOrder
+    projectId?: SortOrder
+    userId?: SortOrder
+    status?: SortOrder
+    messageCount?: SortOrder
+    metadata?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConversationAvgOrderByAggregateInput = {
+    messageCount?: SortOrder
+  }
+
+  export type ConversationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    topic?: SortOrder
+    projectId?: SortOrder
+    userId?: SortOrder
+    status?: SortOrder
+    messageCount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConversationMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    topic?: SortOrder
+    projectId?: SortOrder
+    userId?: SortOrder
+    status?: SortOrder
+    messageCount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConversationSumOrderByAggregateInput = {
+    messageCount?: SortOrder
+  }
+
+  export type EnumConversationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConversationStatus | EnumConversationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConversationStatusWithAggregatesFilter<$PrismaModel> | $Enums.ConversationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumConversationStatusFilter<$PrismaModel>
+    _max?: NestedEnumConversationStatusFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type EnumMessageRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageRole | EnumMessageRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageRoleFilter<$PrismaModel> | $Enums.MessageRole
+  }
+
+  export type ConversationScalarRelationFilter = {
+    is?: ConversationWhereInput
+    isNot?: ConversationWhereInput
+  }
+
+  export type MessageCountOrderByAggregateInput = {
+    id?: SortOrder
+    conversationId?: SortOrder
+    role?: SortOrder
+    content?: SortOrder
+    tokens?: SortOrder
+    embeddingId?: SortOrder
+    referencedSources?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MessageAvgOrderByAggregateInput = {
+    tokens?: SortOrder
+  }
+
+  export type MessageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    conversationId?: SortOrder
+    role?: SortOrder
+    content?: SortOrder
+    tokens?: SortOrder
+    embeddingId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MessageMinOrderByAggregateInput = {
+    id?: SortOrder
+    conversationId?: SortOrder
+    role?: SortOrder
+    content?: SortOrder
+    tokens?: SortOrder
+    embeddingId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MessageSumOrderByAggregateInput = {
+    tokens?: SortOrder
+  }
+
+  export type EnumMessageRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageRole | EnumMessageRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageRoleWithAggregatesFilter<$PrismaModel> | $Enums.MessageRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageRoleFilter<$PrismaModel>
+    _max?: NestedEnumMessageRoleFilter<$PrismaModel>
+  }
+
+  export type ContextSnapshotCountOrderByAggregateInput = {
+    id?: SortOrder
+    conversationId?: SortOrder
+    projectId?: SortOrder
+    briefContext?: SortOrder
+    brandTensor?: SortOrder
+    assetIntelligence?: SortOrder
+    knowledgeSourceIds?: SortOrder
+    capturedAt?: SortOrder
+  }
+
+  export type ContextSnapshotMaxOrderByAggregateInput = {
+    id?: SortOrder
+    conversationId?: SortOrder
+    projectId?: SortOrder
+    capturedAt?: SortOrder
+  }
+
+  export type ContextSnapshotMinOrderByAggregateInput = {
+    id?: SortOrder
+    conversationId?: SortOrder
+    projectId?: SortOrder
+    capturedAt?: SortOrder
+  }
+
+  export type ProjectVersionCountOrderByAggregateInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    version?: SortOrder
+    briefSnapshot?: SortOrder
+    tagsSnapshot?: SortOrder
+    assetsSnapshot?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    changeDescription?: SortOrder
+  }
+
+  export type ProjectVersionAvgOrderByAggregateInput = {
+    version?: SortOrder
+  }
+
+  export type ProjectVersionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    version?: SortOrder
+    briefSnapshot?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    changeDescription?: SortOrder
+  }
+
+  export type ProjectVersionMinOrderByAggregateInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    version?: SortOrder
+    briefSnapshot?: SortOrder
+    createdAt?: SortOrder
+    createdBy?: SortOrder
+    changeDescription?: SortOrder
+  }
+
+  export type ProjectVersionSumOrderByAggregateInput = {
+    version?: SortOrder
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type EmbeddingCountOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    embedding?: SortOrder
+    model?: SortOrder
+    metadata?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EmbeddingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    model?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EmbeddingMinOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    model?: SortOrder
+    createdAt?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
   export type ProjectCreateNestedManyWithoutUserInput = {
     create?: XOR<ProjectCreateWithoutUserInput, ProjectUncheckedCreateWithoutUserInput> | ProjectCreateWithoutUserInput[] | ProjectUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProjectCreateOrConnectWithoutUserInput | ProjectCreateOrConnectWithoutUserInput[]
@@ -18075,6 +25523,13 @@ export namespace Prisma {
     connect?: KnowledgeSourceWhereUniqueInput | KnowledgeSourceWhereUniqueInput[]
   }
 
+  export type ConversationCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
+    createMany?: ConversationCreateManyUserInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
   export type ProjectUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ProjectCreateWithoutUserInput, ProjectUncheckedCreateWithoutUserInput> | ProjectCreateWithoutUserInput[] | ProjectUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProjectCreateOrConnectWithoutUserInput | ProjectCreateOrConnectWithoutUserInput[]
@@ -18101,6 +25556,13 @@ export namespace Prisma {
     connectOrCreate?: KnowledgeSourceCreateOrConnectWithoutUserInput | KnowledgeSourceCreateOrConnectWithoutUserInput[]
     createMany?: KnowledgeSourceCreateManyUserInputEnvelope
     connect?: KnowledgeSourceWhereUniqueInput | KnowledgeSourceWhereUniqueInput[]
+  }
+
+  export type ConversationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
+    createMany?: ConversationCreateManyUserInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -18171,6 +25633,20 @@ export namespace Prisma {
     deleteMany?: KnowledgeSourceScalarWhereInput | KnowledgeSourceScalarWhereInput[]
   }
 
+  export type ConversationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutUserInput | ConversationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConversationCreateManyUserInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutUserInput | ConversationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutUserInput | ConversationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
   export type ProjectUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ProjectCreateWithoutUserInput, ProjectUncheckedCreateWithoutUserInput> | ProjectCreateWithoutUserInput[] | ProjectUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProjectCreateOrConnectWithoutUserInput | ProjectCreateOrConnectWithoutUserInput[]
@@ -18227,6 +25703,20 @@ export namespace Prisma {
     deleteMany?: KnowledgeSourceScalarWhereInput | KnowledgeSourceScalarWhereInput[]
   }
 
+  export type ConversationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutUserInput | ConversationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConversationCreateManyUserInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutUserInput | ConversationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutUserInput | ConversationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutProjectsInput = {
     create?: XOR<UserCreateWithoutProjectsInput, UserUncheckedCreateWithoutProjectsInput>
     connectOrCreate?: UserCreateOrConnectWithoutProjectsInput
@@ -18275,6 +25765,20 @@ export namespace Prisma {
     connect?: TranscriptWhereUniqueInput | TranscriptWhereUniqueInput[]
   }
 
+  export type ConversationCreateNestedManyWithoutProjectInput = {
+    create?: XOR<ConversationCreateWithoutProjectInput, ConversationUncheckedCreateWithoutProjectInput> | ConversationCreateWithoutProjectInput[] | ConversationUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutProjectInput | ConversationCreateOrConnectWithoutProjectInput[]
+    createMany?: ConversationCreateManyProjectInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type ProjectVersionCreateNestedManyWithoutProjectInput = {
+    create?: XOR<ProjectVersionCreateWithoutProjectInput, ProjectVersionUncheckedCreateWithoutProjectInput> | ProjectVersionCreateWithoutProjectInput[] | ProjectVersionUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectVersionCreateOrConnectWithoutProjectInput | ProjectVersionCreateOrConnectWithoutProjectInput[]
+    createMany?: ProjectVersionCreateManyProjectInputEnvelope
+    connect?: ProjectVersionWhereUniqueInput | ProjectVersionWhereUniqueInput[]
+  }
+
   export type RoleRequirementUncheckedCreateNestedManyWithoutProjectInput = {
     create?: XOR<RoleRequirementCreateWithoutProjectInput, RoleRequirementUncheckedCreateWithoutProjectInput> | RoleRequirementCreateWithoutProjectInput[] | RoleRequirementUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: RoleRequirementCreateOrConnectWithoutProjectInput | RoleRequirementCreateOrConnectWithoutProjectInput[]
@@ -18315,6 +25819,20 @@ export namespace Prisma {
     connectOrCreate?: TranscriptCreateOrConnectWithoutProjectInput | TranscriptCreateOrConnectWithoutProjectInput[]
     createMany?: TranscriptCreateManyProjectInputEnvelope
     connect?: TranscriptWhereUniqueInput | TranscriptWhereUniqueInput[]
+  }
+
+  export type ConversationUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<ConversationCreateWithoutProjectInput, ConversationUncheckedCreateWithoutProjectInput> | ConversationCreateWithoutProjectInput[] | ConversationUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutProjectInput | ConversationCreateOrConnectWithoutProjectInput[]
+    createMany?: ConversationCreateManyProjectInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type ProjectVersionUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<ProjectVersionCreateWithoutProjectInput, ProjectVersionUncheckedCreateWithoutProjectInput> | ProjectVersionCreateWithoutProjectInput[] | ProjectVersionUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectVersionCreateOrConnectWithoutProjectInput | ProjectVersionCreateOrConnectWithoutProjectInput[]
+    createMany?: ProjectVersionCreateManyProjectInputEnvelope
+    connect?: ProjectVersionWhereUniqueInput | ProjectVersionWhereUniqueInput[]
   }
 
   export type EnumProjectStatusFieldUpdateOperationsInput = {
@@ -18427,6 +25945,34 @@ export namespace Prisma {
     deleteMany?: TranscriptScalarWhereInput | TranscriptScalarWhereInput[]
   }
 
+  export type ConversationUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<ConversationCreateWithoutProjectInput, ConversationUncheckedCreateWithoutProjectInput> | ConversationCreateWithoutProjectInput[] | ConversationUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutProjectInput | ConversationCreateOrConnectWithoutProjectInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutProjectInput | ConversationUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: ConversationCreateManyProjectInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutProjectInput | ConversationUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutProjectInput | ConversationUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type ProjectVersionUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<ProjectVersionCreateWithoutProjectInput, ProjectVersionUncheckedCreateWithoutProjectInput> | ProjectVersionCreateWithoutProjectInput[] | ProjectVersionUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectVersionCreateOrConnectWithoutProjectInput | ProjectVersionCreateOrConnectWithoutProjectInput[]
+    upsert?: ProjectVersionUpsertWithWhereUniqueWithoutProjectInput | ProjectVersionUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: ProjectVersionCreateManyProjectInputEnvelope
+    set?: ProjectVersionWhereUniqueInput | ProjectVersionWhereUniqueInput[]
+    disconnect?: ProjectVersionWhereUniqueInput | ProjectVersionWhereUniqueInput[]
+    delete?: ProjectVersionWhereUniqueInput | ProjectVersionWhereUniqueInput[]
+    connect?: ProjectVersionWhereUniqueInput | ProjectVersionWhereUniqueInput[]
+    update?: ProjectVersionUpdateWithWhereUniqueWithoutProjectInput | ProjectVersionUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: ProjectVersionUpdateManyWithWhereWithoutProjectInput | ProjectVersionUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: ProjectVersionScalarWhereInput | ProjectVersionScalarWhereInput[]
+  }
+
   export type RoleRequirementUncheckedUpdateManyWithoutProjectNestedInput = {
     create?: XOR<RoleRequirementCreateWithoutProjectInput, RoleRequirementUncheckedCreateWithoutProjectInput> | RoleRequirementCreateWithoutProjectInput[] | RoleRequirementUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: RoleRequirementCreateOrConnectWithoutProjectInput | RoleRequirementCreateOrConnectWithoutProjectInput[]
@@ -18509,6 +26055,34 @@ export namespace Prisma {
     update?: TranscriptUpdateWithWhereUniqueWithoutProjectInput | TranscriptUpdateWithWhereUniqueWithoutProjectInput[]
     updateMany?: TranscriptUpdateManyWithWhereWithoutProjectInput | TranscriptUpdateManyWithWhereWithoutProjectInput[]
     deleteMany?: TranscriptScalarWhereInput | TranscriptScalarWhereInput[]
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<ConversationCreateWithoutProjectInput, ConversationUncheckedCreateWithoutProjectInput> | ConversationCreateWithoutProjectInput[] | ConversationUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutProjectInput | ConversationCreateOrConnectWithoutProjectInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutProjectInput | ConversationUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: ConversationCreateManyProjectInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutProjectInput | ConversationUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutProjectInput | ConversationUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<ProjectVersionCreateWithoutProjectInput, ProjectVersionUncheckedCreateWithoutProjectInput> | ProjectVersionCreateWithoutProjectInput[] | ProjectVersionUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectVersionCreateOrConnectWithoutProjectInput | ProjectVersionCreateOrConnectWithoutProjectInput[]
+    upsert?: ProjectVersionUpsertWithWhereUniqueWithoutProjectInput | ProjectVersionUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: ProjectVersionCreateManyProjectInputEnvelope
+    set?: ProjectVersionWhereUniqueInput | ProjectVersionWhereUniqueInput[]
+    disconnect?: ProjectVersionWhereUniqueInput | ProjectVersionWhereUniqueInput[]
+    delete?: ProjectVersionWhereUniqueInput | ProjectVersionWhereUniqueInput[]
+    connect?: ProjectVersionWhereUniqueInput | ProjectVersionWhereUniqueInput[]
+    update?: ProjectVersionUpdateWithWhereUniqueWithoutProjectInput | ProjectVersionUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: ProjectVersionUpdateManyWithWhereWithoutProjectInput | ProjectVersionUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: ProjectVersionScalarWhereInput | ProjectVersionScalarWhereInput[]
   }
 
   export type RoleRequirementCreateskillsInput = {
@@ -18893,6 +26467,207 @@ export namespace Prisma {
     update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutTranscriptsInput, ProjectUpdateWithoutTranscriptsInput>, ProjectUncheckedUpdateWithoutTranscriptsInput>
   }
 
+  export type ProjectCreateNestedOneWithoutConversationsInput = {
+    create?: XOR<ProjectCreateWithoutConversationsInput, ProjectUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutConversationsInput
+    connect?: ProjectWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutConversationsInput = {
+    create?: XOR<UserCreateWithoutConversationsInput, UserUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutConversationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type MessageCreateNestedManyWithoutConversationInput = {
+    create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
+    createMany?: MessageCreateManyConversationInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type ContextSnapshotCreateNestedManyWithoutConversationInput = {
+    create?: XOR<ContextSnapshotCreateWithoutConversationInput, ContextSnapshotUncheckedCreateWithoutConversationInput> | ContextSnapshotCreateWithoutConversationInput[] | ContextSnapshotUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: ContextSnapshotCreateOrConnectWithoutConversationInput | ContextSnapshotCreateOrConnectWithoutConversationInput[]
+    createMany?: ContextSnapshotCreateManyConversationInputEnvelope
+    connect?: ContextSnapshotWhereUniqueInput | ContextSnapshotWhereUniqueInput[]
+  }
+
+  export type MessageUncheckedCreateNestedManyWithoutConversationInput = {
+    create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
+    createMany?: MessageCreateManyConversationInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type ContextSnapshotUncheckedCreateNestedManyWithoutConversationInput = {
+    create?: XOR<ContextSnapshotCreateWithoutConversationInput, ContextSnapshotUncheckedCreateWithoutConversationInput> | ContextSnapshotCreateWithoutConversationInput[] | ContextSnapshotUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: ContextSnapshotCreateOrConnectWithoutConversationInput | ContextSnapshotCreateOrConnectWithoutConversationInput[]
+    createMany?: ContextSnapshotCreateManyConversationInputEnvelope
+    connect?: ContextSnapshotWhereUniqueInput | ContextSnapshotWhereUniqueInput[]
+  }
+
+  export type EnumConversationStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ConversationStatus
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type ProjectUpdateOneWithoutConversationsNestedInput = {
+    create?: XOR<ProjectCreateWithoutConversationsInput, ProjectUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutConversationsInput
+    upsert?: ProjectUpsertWithoutConversationsInput
+    disconnect?: ProjectWhereInput | boolean
+    delete?: ProjectWhereInput | boolean
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutConversationsInput, ProjectUpdateWithoutConversationsInput>, ProjectUncheckedUpdateWithoutConversationsInput>
+  }
+
+  export type UserUpdateOneWithoutConversationsNestedInput = {
+    create?: XOR<UserCreateWithoutConversationsInput, UserUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutConversationsInput
+    upsert?: UserUpsertWithoutConversationsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutConversationsInput, UserUpdateWithoutConversationsInput>, UserUncheckedUpdateWithoutConversationsInput>
+  }
+
+  export type MessageUpdateManyWithoutConversationNestedInput = {
+    create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutConversationInput | MessageUpsertWithWhereUniqueWithoutConversationInput[]
+    createMany?: MessageCreateManyConversationInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutConversationInput | MessageUpdateWithWhereUniqueWithoutConversationInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutConversationInput | MessageUpdateManyWithWhereWithoutConversationInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type ContextSnapshotUpdateManyWithoutConversationNestedInput = {
+    create?: XOR<ContextSnapshotCreateWithoutConversationInput, ContextSnapshotUncheckedCreateWithoutConversationInput> | ContextSnapshotCreateWithoutConversationInput[] | ContextSnapshotUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: ContextSnapshotCreateOrConnectWithoutConversationInput | ContextSnapshotCreateOrConnectWithoutConversationInput[]
+    upsert?: ContextSnapshotUpsertWithWhereUniqueWithoutConversationInput | ContextSnapshotUpsertWithWhereUniqueWithoutConversationInput[]
+    createMany?: ContextSnapshotCreateManyConversationInputEnvelope
+    set?: ContextSnapshotWhereUniqueInput | ContextSnapshotWhereUniqueInput[]
+    disconnect?: ContextSnapshotWhereUniqueInput | ContextSnapshotWhereUniqueInput[]
+    delete?: ContextSnapshotWhereUniqueInput | ContextSnapshotWhereUniqueInput[]
+    connect?: ContextSnapshotWhereUniqueInput | ContextSnapshotWhereUniqueInput[]
+    update?: ContextSnapshotUpdateWithWhereUniqueWithoutConversationInput | ContextSnapshotUpdateWithWhereUniqueWithoutConversationInput[]
+    updateMany?: ContextSnapshotUpdateManyWithWhereWithoutConversationInput | ContextSnapshotUpdateManyWithWhereWithoutConversationInput[]
+    deleteMany?: ContextSnapshotScalarWhereInput | ContextSnapshotScalarWhereInput[]
+  }
+
+  export type MessageUncheckedUpdateManyWithoutConversationNestedInput = {
+    create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutConversationInput | MessageUpsertWithWhereUniqueWithoutConversationInput[]
+    createMany?: MessageCreateManyConversationInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutConversationInput | MessageUpdateWithWhereUniqueWithoutConversationInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutConversationInput | MessageUpdateManyWithWhereWithoutConversationInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type ContextSnapshotUncheckedUpdateManyWithoutConversationNestedInput = {
+    create?: XOR<ContextSnapshotCreateWithoutConversationInput, ContextSnapshotUncheckedCreateWithoutConversationInput> | ContextSnapshotCreateWithoutConversationInput[] | ContextSnapshotUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: ContextSnapshotCreateOrConnectWithoutConversationInput | ContextSnapshotCreateOrConnectWithoutConversationInput[]
+    upsert?: ContextSnapshotUpsertWithWhereUniqueWithoutConversationInput | ContextSnapshotUpsertWithWhereUniqueWithoutConversationInput[]
+    createMany?: ContextSnapshotCreateManyConversationInputEnvelope
+    set?: ContextSnapshotWhereUniqueInput | ContextSnapshotWhereUniqueInput[]
+    disconnect?: ContextSnapshotWhereUniqueInput | ContextSnapshotWhereUniqueInput[]
+    delete?: ContextSnapshotWhereUniqueInput | ContextSnapshotWhereUniqueInput[]
+    connect?: ContextSnapshotWhereUniqueInput | ContextSnapshotWhereUniqueInput[]
+    update?: ContextSnapshotUpdateWithWhereUniqueWithoutConversationInput | ContextSnapshotUpdateWithWhereUniqueWithoutConversationInput[]
+    updateMany?: ContextSnapshotUpdateManyWithWhereWithoutConversationInput | ContextSnapshotUpdateManyWithWhereWithoutConversationInput[]
+    deleteMany?: ContextSnapshotScalarWhereInput | ContextSnapshotScalarWhereInput[]
+  }
+
+  export type MessageCreatereferencedSourcesInput = {
+    set: string[]
+  }
+
+  export type ConversationCreateNestedOneWithoutMessagesInput = {
+    create?: XOR<ConversationCreateWithoutMessagesInput, ConversationUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: ConversationCreateOrConnectWithoutMessagesInput
+    connect?: ConversationWhereUniqueInput
+  }
+
+  export type EnumMessageRoleFieldUpdateOperationsInput = {
+    set?: $Enums.MessageRole
+  }
+
+  export type MessageUpdatereferencedSourcesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type ConversationUpdateOneRequiredWithoutMessagesNestedInput = {
+    create?: XOR<ConversationCreateWithoutMessagesInput, ConversationUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: ConversationCreateOrConnectWithoutMessagesInput
+    upsert?: ConversationUpsertWithoutMessagesInput
+    connect?: ConversationWhereUniqueInput
+    update?: XOR<XOR<ConversationUpdateToOneWithWhereWithoutMessagesInput, ConversationUpdateWithoutMessagesInput>, ConversationUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type ContextSnapshotCreateknowledgeSourceIdsInput = {
+    set: string[]
+  }
+
+  export type ConversationCreateNestedOneWithoutContextSnapshotsInput = {
+    create?: XOR<ConversationCreateWithoutContextSnapshotsInput, ConversationUncheckedCreateWithoutContextSnapshotsInput>
+    connectOrCreate?: ConversationCreateOrConnectWithoutContextSnapshotsInput
+    connect?: ConversationWhereUniqueInput
+  }
+
+  export type ContextSnapshotUpdateknowledgeSourceIdsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type ConversationUpdateOneRequiredWithoutContextSnapshotsNestedInput = {
+    create?: XOR<ConversationCreateWithoutContextSnapshotsInput, ConversationUncheckedCreateWithoutContextSnapshotsInput>
+    connectOrCreate?: ConversationCreateOrConnectWithoutContextSnapshotsInput
+    upsert?: ConversationUpsertWithoutContextSnapshotsInput
+    connect?: ConversationWhereUniqueInput
+    update?: XOR<XOR<ConversationUpdateToOneWithWhereWithoutContextSnapshotsInput, ConversationUpdateWithoutContextSnapshotsInput>, ConversationUncheckedUpdateWithoutContextSnapshotsInput>
+  }
+
+  export type ProjectVersionCreatetagsSnapshotInput = {
+    set: string[]
+  }
+
+  export type ProjectCreateNestedOneWithoutProjectVersionsInput = {
+    create?: XOR<ProjectCreateWithoutProjectVersionsInput, ProjectUncheckedCreateWithoutProjectVersionsInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutProjectVersionsInput
+    connect?: ProjectWhereUniqueInput
+  }
+
+  export type ProjectVersionUpdatetagsSnapshotInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type ProjectUpdateOneRequiredWithoutProjectVersionsNestedInput = {
+    create?: XOR<ProjectCreateWithoutProjectVersionsInput, ProjectUncheckedCreateWithoutProjectVersionsInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutProjectVersionsInput
+    upsert?: ProjectUpsertWithoutProjectVersionsInput
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutProjectVersionsInput, ProjectUpdateWithoutProjectVersionsInput>, ProjectUncheckedUpdateWithoutProjectVersionsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -19174,6 +26949,90 @@ export namespace Prisma {
     _max?: NestedEnumTranscriptStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumConversationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConversationStatus | EnumConversationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConversationStatusFilter<$PrismaModel> | $Enums.ConversationStatus
+  }
+
+  export type NestedEnumConversationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConversationStatus | EnumConversationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConversationStatusWithAggregatesFilter<$PrismaModel> | $Enums.ConversationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumConversationStatusFilter<$PrismaModel>
+    _max?: NestedEnumConversationStatusFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumMessageRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageRole | EnumMessageRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageRoleFilter<$PrismaModel> | $Enums.MessageRole
+  }
+
+  export type NestedEnumMessageRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageRole | EnumMessageRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageRoleWithAggregatesFilter<$PrismaModel> | $Enums.MessageRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageRoleFilter<$PrismaModel>
+    _max?: NestedEnumMessageRoleFilter<$PrismaModel>
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type ProjectCreateWithoutUserInput = {
     id?: string
     title?: string | null
@@ -19193,6 +27052,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemCreateNestedManyWithoutProjectInput
     knowledgeSources?: KnowledgeSourceCreateNestedManyWithoutProjectInput
     transcripts?: TranscriptCreateNestedManyWithoutProjectInput
+    conversations?: ConversationCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutUserInput = {
@@ -19214,6 +27075,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemUncheckedCreateNestedManyWithoutProjectInput
     knowledgeSources?: KnowledgeSourceUncheckedCreateNestedManyWithoutProjectInput
     transcripts?: TranscriptUncheckedCreateNestedManyWithoutProjectInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutUserInput = {
@@ -19325,6 +27188,44 @@ export namespace Prisma {
 
   export type KnowledgeSourceCreateManyUserInputEnvelope = {
     data: KnowledgeSourceCreateManyUserInput | KnowledgeSourceCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ConversationCreateWithoutUserInput = {
+    id?: string
+    title?: string | null
+    topic?: string | null
+    status?: $Enums.ConversationStatus
+    messageCount?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project?: ProjectCreateNestedOneWithoutConversationsInput
+    messages?: MessageCreateNestedManyWithoutConversationInput
+    contextSnapshots?: ContextSnapshotCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUncheckedCreateWithoutUserInput = {
+    id?: string
+    title?: string | null
+    topic?: string | null
+    projectId?: string | null
+    status?: $Enums.ConversationStatus
+    messageCount?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+    contextSnapshots?: ContextSnapshotUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutUserInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput>
+  }
+
+  export type ConversationCreateManyUserInputEnvelope = {
+    data: ConversationCreateManyUserInput | ConversationCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -19459,6 +27360,38 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"KnowledgeSource"> | Date | string
   }
 
+  export type ConversationUpsertWithWhereUniqueWithoutUserInput = {
+    where: ConversationWhereUniqueInput
+    update: XOR<ConversationUpdateWithoutUserInput, ConversationUncheckedUpdateWithoutUserInput>
+    create: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput>
+  }
+
+  export type ConversationUpdateWithWhereUniqueWithoutUserInput = {
+    where: ConversationWhereUniqueInput
+    data: XOR<ConversationUpdateWithoutUserInput, ConversationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ConversationUpdateManyWithWhereWithoutUserInput = {
+    where: ConversationScalarWhereInput
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ConversationScalarWhereInput = {
+    AND?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+    OR?: ConversationScalarWhereInput[]
+    NOT?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+    id?: StringFilter<"Conversation"> | string
+    title?: StringNullableFilter<"Conversation"> | string | null
+    topic?: StringNullableFilter<"Conversation"> | string | null
+    projectId?: StringNullableFilter<"Conversation"> | string | null
+    userId?: StringNullableFilter<"Conversation"> | string | null
+    status?: EnumConversationStatusFilter<"Conversation"> | $Enums.ConversationStatus
+    messageCount?: IntFilter<"Conversation"> | number
+    metadata?: JsonNullableFilter<"Conversation">
+    createdAt?: DateTimeFilter<"Conversation"> | Date | string
+    updatedAt?: DateTimeFilter<"Conversation"> | Date | string
+  }
+
   export type UserCreateWithoutProjectsInput = {
     id?: string
     email: string
@@ -19470,6 +27403,7 @@ export namespace Prisma {
     assignments?: AssignmentCreateNestedManyWithoutUserInput
     scripts?: ScriptCreateNestedManyWithoutUserInput
     knowledgeSources?: KnowledgeSourceCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProjectsInput = {
@@ -19483,6 +27417,7 @@ export namespace Prisma {
     assignments?: AssignmentUncheckedCreateNestedManyWithoutUserInput
     scripts?: ScriptUncheckedCreateNestedManyWithoutUserInput
     knowledgeSources?: KnowledgeSourceUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProjectsInput = {
@@ -19692,6 +27627,76 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ConversationCreateWithoutProjectInput = {
+    id?: string
+    title?: string | null
+    topic?: string | null
+    status?: $Enums.ConversationStatus
+    messageCount?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutConversationsInput
+    messages?: MessageCreateNestedManyWithoutConversationInput
+    contextSnapshots?: ContextSnapshotCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUncheckedCreateWithoutProjectInput = {
+    id?: string
+    title?: string | null
+    topic?: string | null
+    userId?: string | null
+    status?: $Enums.ConversationStatus
+    messageCount?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+    contextSnapshots?: ContextSnapshotUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutProjectInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutProjectInput, ConversationUncheckedCreateWithoutProjectInput>
+  }
+
+  export type ConversationCreateManyProjectInputEnvelope = {
+    data: ConversationCreateManyProjectInput | ConversationCreateManyProjectInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProjectVersionCreateWithoutProjectInput = {
+    id?: string
+    version: number
+    briefSnapshot?: string | null
+    tagsSnapshot?: ProjectVersionCreatetagsSnapshotInput | string[]
+    assetsSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    createdBy?: string | null
+    changeDescription?: string | null
+  }
+
+  export type ProjectVersionUncheckedCreateWithoutProjectInput = {
+    id?: string
+    version: number
+    briefSnapshot?: string | null
+    tagsSnapshot?: ProjectVersionCreatetagsSnapshotInput | string[]
+    assetsSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    createdBy?: string | null
+    changeDescription?: string | null
+  }
+
+  export type ProjectVersionCreateOrConnectWithoutProjectInput = {
+    where: ProjectVersionWhereUniqueInput
+    create: XOR<ProjectVersionCreateWithoutProjectInput, ProjectVersionUncheckedCreateWithoutProjectInput>
+  }
+
+  export type ProjectVersionCreateManyProjectInputEnvelope = {
+    data: ProjectVersionCreateManyProjectInput | ProjectVersionCreateManyProjectInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutProjectsInput = {
     update: XOR<UserUpdateWithoutProjectsInput, UserUncheckedUpdateWithoutProjectsInput>
     create: XOR<UserCreateWithoutProjectsInput, UserUncheckedCreateWithoutProjectsInput>
@@ -19714,6 +27719,7 @@ export namespace Prisma {
     assignments?: AssignmentUpdateManyWithoutUserNestedInput
     scripts?: ScriptUpdateManyWithoutUserNestedInput
     knowledgeSources?: KnowledgeSourceUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProjectsInput = {
@@ -19727,6 +27733,7 @@ export namespace Prisma {
     assignments?: AssignmentUncheckedUpdateManyWithoutUserNestedInput
     scripts?: ScriptUncheckedUpdateManyWithoutUserNestedInput
     knowledgeSources?: KnowledgeSourceUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RoleRequirementUpsertWithWhereUniqueWithoutProjectInput = {
@@ -19871,6 +27878,53 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Transcript"> | Date | string
   }
 
+  export type ConversationUpsertWithWhereUniqueWithoutProjectInput = {
+    where: ConversationWhereUniqueInput
+    update: XOR<ConversationUpdateWithoutProjectInput, ConversationUncheckedUpdateWithoutProjectInput>
+    create: XOR<ConversationCreateWithoutProjectInput, ConversationUncheckedCreateWithoutProjectInput>
+  }
+
+  export type ConversationUpdateWithWhereUniqueWithoutProjectInput = {
+    where: ConversationWhereUniqueInput
+    data: XOR<ConversationUpdateWithoutProjectInput, ConversationUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type ConversationUpdateManyWithWhereWithoutProjectInput = {
+    where: ConversationScalarWhereInput
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyWithoutProjectInput>
+  }
+
+  export type ProjectVersionUpsertWithWhereUniqueWithoutProjectInput = {
+    where: ProjectVersionWhereUniqueInput
+    update: XOR<ProjectVersionUpdateWithoutProjectInput, ProjectVersionUncheckedUpdateWithoutProjectInput>
+    create: XOR<ProjectVersionCreateWithoutProjectInput, ProjectVersionUncheckedCreateWithoutProjectInput>
+  }
+
+  export type ProjectVersionUpdateWithWhereUniqueWithoutProjectInput = {
+    where: ProjectVersionWhereUniqueInput
+    data: XOR<ProjectVersionUpdateWithoutProjectInput, ProjectVersionUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type ProjectVersionUpdateManyWithWhereWithoutProjectInput = {
+    where: ProjectVersionScalarWhereInput
+    data: XOR<ProjectVersionUpdateManyMutationInput, ProjectVersionUncheckedUpdateManyWithoutProjectInput>
+  }
+
+  export type ProjectVersionScalarWhereInput = {
+    AND?: ProjectVersionScalarWhereInput | ProjectVersionScalarWhereInput[]
+    OR?: ProjectVersionScalarWhereInput[]
+    NOT?: ProjectVersionScalarWhereInput | ProjectVersionScalarWhereInput[]
+    id?: StringFilter<"ProjectVersion"> | string
+    projectId?: StringFilter<"ProjectVersion"> | string
+    version?: IntFilter<"ProjectVersion"> | number
+    briefSnapshot?: StringNullableFilter<"ProjectVersion"> | string | null
+    tagsSnapshot?: StringNullableListFilter<"ProjectVersion">
+    assetsSnapshot?: JsonNullableFilter<"ProjectVersion">
+    createdAt?: DateTimeFilter<"ProjectVersion"> | Date | string
+    createdBy?: StringNullableFilter<"ProjectVersion"> | string | null
+    changeDescription?: StringNullableFilter<"ProjectVersion"> | string | null
+  }
+
   export type ProjectCreateWithoutRoleRequirementsInput = {
     id?: string
     title?: string | null
@@ -19890,6 +27944,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemCreateNestedManyWithoutProjectInput
     knowledgeSources?: KnowledgeSourceCreateNestedManyWithoutProjectInput
     transcripts?: TranscriptCreateNestedManyWithoutProjectInput
+    conversations?: ConversationCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutRoleRequirementsInput = {
@@ -19911,6 +27967,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemUncheckedCreateNestedManyWithoutProjectInput
     knowledgeSources?: KnowledgeSourceUncheckedCreateNestedManyWithoutProjectInput
     transcripts?: TranscriptUncheckedCreateNestedManyWithoutProjectInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutRoleRequirementsInput = {
@@ -19948,6 +28006,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemUpdateManyWithoutProjectNestedInput
     knowledgeSources?: KnowledgeSourceUpdateManyWithoutProjectNestedInput
     transcripts?: TranscriptUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutRoleRequirementsInput = {
@@ -19969,6 +28029,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemUncheckedUpdateManyWithoutProjectNestedInput
     knowledgeSources?: KnowledgeSourceUncheckedUpdateManyWithoutProjectNestedInput
     transcripts?: TranscriptUncheckedUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type AssignmentCreateWithoutFreelancerInput = {
@@ -20085,6 +28147,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemCreateNestedManyWithoutProjectInput
     knowledgeSources?: KnowledgeSourceCreateNestedManyWithoutProjectInput
     transcripts?: TranscriptCreateNestedManyWithoutProjectInput
+    conversations?: ConversationCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutAssignmentsInput = {
@@ -20106,6 +28170,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemUncheckedCreateNestedManyWithoutProjectInput
     knowledgeSources?: KnowledgeSourceUncheckedCreateNestedManyWithoutProjectInput
     transcripts?: TranscriptUncheckedCreateNestedManyWithoutProjectInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutAssignmentsInput = {
@@ -20124,6 +28190,7 @@ export namespace Prisma {
     projects?: ProjectCreateNestedManyWithoutUserInput
     scripts?: ScriptCreateNestedManyWithoutUserInput
     knowledgeSources?: KnowledgeSourceCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAssignmentsInput = {
@@ -20137,6 +28204,7 @@ export namespace Prisma {
     projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
     scripts?: ScriptUncheckedCreateNestedManyWithoutUserInput
     knowledgeSources?: KnowledgeSourceUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAssignmentsInput = {
@@ -20225,6 +28293,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemUpdateManyWithoutProjectNestedInput
     knowledgeSources?: KnowledgeSourceUpdateManyWithoutProjectNestedInput
     transcripts?: TranscriptUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutAssignmentsInput = {
@@ -20246,6 +28316,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemUncheckedUpdateManyWithoutProjectNestedInput
     knowledgeSources?: KnowledgeSourceUncheckedUpdateManyWithoutProjectNestedInput
     transcripts?: TranscriptUncheckedUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type UserUpsertWithoutAssignmentsInput = {
@@ -20270,6 +28342,7 @@ export namespace Prisma {
     projects?: ProjectUpdateManyWithoutUserNestedInput
     scripts?: ScriptUpdateManyWithoutUserNestedInput
     knowledgeSources?: KnowledgeSourceUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignmentsInput = {
@@ -20283,6 +28356,7 @@ export namespace Prisma {
     projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
     scripts?: ScriptUncheckedUpdateManyWithoutUserNestedInput
     knowledgeSources?: KnowledgeSourceUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProjectCreateWithoutMoodboardItemsInput = {
@@ -20304,6 +28378,8 @@ export namespace Prisma {
     scripts?: ScriptCreateNestedManyWithoutProjectInput
     knowledgeSources?: KnowledgeSourceCreateNestedManyWithoutProjectInput
     transcripts?: TranscriptCreateNestedManyWithoutProjectInput
+    conversations?: ConversationCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutMoodboardItemsInput = {
@@ -20325,6 +28401,8 @@ export namespace Prisma {
     scripts?: ScriptUncheckedCreateNestedManyWithoutProjectInput
     knowledgeSources?: KnowledgeSourceUncheckedCreateNestedManyWithoutProjectInput
     transcripts?: TranscriptUncheckedCreateNestedManyWithoutProjectInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutMoodboardItemsInput = {
@@ -20382,6 +28460,8 @@ export namespace Prisma {
     scripts?: ScriptUpdateManyWithoutProjectNestedInput
     knowledgeSources?: KnowledgeSourceUpdateManyWithoutProjectNestedInput
     transcripts?: TranscriptUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutMoodboardItemsInput = {
@@ -20403,6 +28483,8 @@ export namespace Prisma {
     scripts?: ScriptUncheckedUpdateManyWithoutProjectNestedInput
     knowledgeSources?: KnowledgeSourceUncheckedUpdateManyWithoutProjectNestedInput
     transcripts?: TranscriptUncheckedUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type MoodboardCollectionItemUpsertWithWhereUniqueWithoutItemInput = {
@@ -20621,6 +28703,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemCreateNestedManyWithoutProjectInput
     knowledgeSources?: KnowledgeSourceCreateNestedManyWithoutProjectInput
     transcripts?: TranscriptCreateNestedManyWithoutProjectInput
+    conversations?: ConversationCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutScriptsInput = {
@@ -20642,6 +28726,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemUncheckedCreateNestedManyWithoutProjectInput
     knowledgeSources?: KnowledgeSourceUncheckedCreateNestedManyWithoutProjectInput
     transcripts?: TranscriptUncheckedCreateNestedManyWithoutProjectInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutScriptsInput = {
@@ -20660,6 +28746,7 @@ export namespace Prisma {
     projects?: ProjectCreateNestedManyWithoutUserInput
     assignments?: AssignmentCreateNestedManyWithoutUserInput
     knowledgeSources?: KnowledgeSourceCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutScriptsInput = {
@@ -20673,6 +28760,7 @@ export namespace Prisma {
     projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
     assignments?: AssignmentUncheckedCreateNestedManyWithoutUserInput
     knowledgeSources?: KnowledgeSourceUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutScriptsInput = {
@@ -20710,6 +28798,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemUpdateManyWithoutProjectNestedInput
     knowledgeSources?: KnowledgeSourceUpdateManyWithoutProjectNestedInput
     transcripts?: TranscriptUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutScriptsInput = {
@@ -20731,6 +28821,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemUncheckedUpdateManyWithoutProjectNestedInput
     knowledgeSources?: KnowledgeSourceUncheckedUpdateManyWithoutProjectNestedInput
     transcripts?: TranscriptUncheckedUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type UserUpsertWithoutScriptsInput = {
@@ -20755,6 +28847,7 @@ export namespace Prisma {
     projects?: ProjectUpdateManyWithoutUserNestedInput
     assignments?: AssignmentUpdateManyWithoutUserNestedInput
     knowledgeSources?: KnowledgeSourceUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutScriptsInput = {
@@ -20768,6 +28861,7 @@ export namespace Prisma {
     projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
     assignments?: AssignmentUncheckedUpdateManyWithoutUserNestedInput
     knowledgeSources?: KnowledgeSourceUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProjectCreateWithoutKnowledgeSourcesInput = {
@@ -20789,6 +28883,8 @@ export namespace Prisma {
     scripts?: ScriptCreateNestedManyWithoutProjectInput
     moodboardItems?: MoodboardItemCreateNestedManyWithoutProjectInput
     transcripts?: TranscriptCreateNestedManyWithoutProjectInput
+    conversations?: ConversationCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutKnowledgeSourcesInput = {
@@ -20810,6 +28906,8 @@ export namespace Prisma {
     scripts?: ScriptUncheckedCreateNestedManyWithoutProjectInput
     moodboardItems?: MoodboardItemUncheckedCreateNestedManyWithoutProjectInput
     transcripts?: TranscriptUncheckedCreateNestedManyWithoutProjectInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutKnowledgeSourcesInput = {
@@ -20828,6 +28926,7 @@ export namespace Prisma {
     projects?: ProjectCreateNestedManyWithoutUserInput
     assignments?: AssignmentCreateNestedManyWithoutUserInput
     scripts?: ScriptCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutKnowledgeSourcesInput = {
@@ -20841,6 +28940,7 @@ export namespace Prisma {
     projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
     assignments?: AssignmentUncheckedCreateNestedManyWithoutUserInput
     scripts?: ScriptUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutKnowledgeSourcesInput = {
@@ -20878,6 +28978,8 @@ export namespace Prisma {
     scripts?: ScriptUpdateManyWithoutProjectNestedInput
     moodboardItems?: MoodboardItemUpdateManyWithoutProjectNestedInput
     transcripts?: TranscriptUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutKnowledgeSourcesInput = {
@@ -20899,6 +29001,8 @@ export namespace Prisma {
     scripts?: ScriptUncheckedUpdateManyWithoutProjectNestedInput
     moodboardItems?: MoodboardItemUncheckedUpdateManyWithoutProjectNestedInput
     transcripts?: TranscriptUncheckedUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type UserUpsertWithoutKnowledgeSourcesInput = {
@@ -20923,6 +29027,7 @@ export namespace Prisma {
     projects?: ProjectUpdateManyWithoutUserNestedInput
     assignments?: AssignmentUpdateManyWithoutUserNestedInput
     scripts?: ScriptUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutKnowledgeSourcesInput = {
@@ -20936,6 +29041,7 @@ export namespace Prisma {
     projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
     assignments?: AssignmentUncheckedUpdateManyWithoutUserNestedInput
     scripts?: ScriptUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProjectCreateWithoutTranscriptsInput = {
@@ -20957,6 +29063,8 @@ export namespace Prisma {
     scripts?: ScriptCreateNestedManyWithoutProjectInput
     moodboardItems?: MoodboardItemCreateNestedManyWithoutProjectInput
     knowledgeSources?: KnowledgeSourceCreateNestedManyWithoutProjectInput
+    conversations?: ConversationCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutTranscriptsInput = {
@@ -20978,6 +29086,8 @@ export namespace Prisma {
     scripts?: ScriptUncheckedCreateNestedManyWithoutProjectInput
     moodboardItems?: MoodboardItemUncheckedCreateNestedManyWithoutProjectInput
     knowledgeSources?: KnowledgeSourceUncheckedCreateNestedManyWithoutProjectInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutTranscriptsInput = {
@@ -21015,6 +29125,8 @@ export namespace Prisma {
     scripts?: ScriptUpdateManyWithoutProjectNestedInput
     moodboardItems?: MoodboardItemUpdateManyWithoutProjectNestedInput
     knowledgeSources?: KnowledgeSourceUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutTranscriptsInput = {
@@ -21036,6 +29148,560 @@ export namespace Prisma {
     scripts?: ScriptUncheckedUpdateManyWithoutProjectNestedInput
     moodboardItems?: MoodboardItemUncheckedUpdateManyWithoutProjectNestedInput
     knowledgeSources?: KnowledgeSourceUncheckedUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectCreateWithoutConversationsInput = {
+    id?: string
+    title?: string | null
+    name?: string | null
+    description?: string | null
+    client?: string | null
+    clientName?: string | null
+    status?: $Enums.ProjectStatus
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    budget?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutProjectsInput
+    roleRequirements?: RoleRequirementCreateNestedManyWithoutProjectInput
+    assignments?: AssignmentCreateNestedManyWithoutProjectInput
+    scripts?: ScriptCreateNestedManyWithoutProjectInput
+    moodboardItems?: MoodboardItemCreateNestedManyWithoutProjectInput
+    knowledgeSources?: KnowledgeSourceCreateNestedManyWithoutProjectInput
+    transcripts?: TranscriptCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectUncheckedCreateWithoutConversationsInput = {
+    id?: string
+    title?: string | null
+    name?: string | null
+    description?: string | null
+    client?: string | null
+    clientName?: string | null
+    status?: $Enums.ProjectStatus
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    budget?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
+    roleRequirements?: RoleRequirementUncheckedCreateNestedManyWithoutProjectInput
+    assignments?: AssignmentUncheckedCreateNestedManyWithoutProjectInput
+    scripts?: ScriptUncheckedCreateNestedManyWithoutProjectInput
+    moodboardItems?: MoodboardItemUncheckedCreateNestedManyWithoutProjectInput
+    knowledgeSources?: KnowledgeSourceUncheckedCreateNestedManyWithoutProjectInput
+    transcripts?: TranscriptUncheckedCreateNestedManyWithoutProjectInput
+    projectVersions?: ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectCreateOrConnectWithoutConversationsInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutConversationsInput, ProjectUncheckedCreateWithoutConversationsInput>
+  }
+
+  export type UserCreateWithoutConversationsInput = {
+    id?: string
+    email: string
+    name?: string | null
+    avatar?: string | null
+    role?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projects?: ProjectCreateNestedManyWithoutUserInput
+    assignments?: AssignmentCreateNestedManyWithoutUserInput
+    scripts?: ScriptCreateNestedManyWithoutUserInput
+    knowledgeSources?: KnowledgeSourceCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutConversationsInput = {
+    id?: string
+    email: string
+    name?: string | null
+    avatar?: string | null
+    role?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
+    assignments?: AssignmentUncheckedCreateNestedManyWithoutUserInput
+    scripts?: ScriptUncheckedCreateNestedManyWithoutUserInput
+    knowledgeSources?: KnowledgeSourceUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutConversationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutConversationsInput, UserUncheckedCreateWithoutConversationsInput>
+  }
+
+  export type MessageCreateWithoutConversationInput = {
+    id?: string
+    role: $Enums.MessageRole
+    content: string
+    tokens?: number | null
+    embeddingId?: string | null
+    referencedSources?: MessageCreatereferencedSourcesInput | string[]
+    createdAt?: Date | string
+  }
+
+  export type MessageUncheckedCreateWithoutConversationInput = {
+    id?: string
+    role: $Enums.MessageRole
+    content: string
+    tokens?: number | null
+    embeddingId?: string | null
+    referencedSources?: MessageCreatereferencedSourcesInput | string[]
+    createdAt?: Date | string
+  }
+
+  export type MessageCreateOrConnectWithoutConversationInput = {
+    where: MessageWhereUniqueInput
+    create: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput>
+  }
+
+  export type MessageCreateManyConversationInputEnvelope = {
+    data: MessageCreateManyConversationInput | MessageCreateManyConversationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ContextSnapshotCreateWithoutConversationInput = {
+    id?: string
+    projectId?: string | null
+    briefContext?: NullableJsonNullValueInput | InputJsonValue
+    brandTensor?: NullableJsonNullValueInput | InputJsonValue
+    assetIntelligence?: NullableJsonNullValueInput | InputJsonValue
+    knowledgeSourceIds?: ContextSnapshotCreateknowledgeSourceIdsInput | string[]
+    capturedAt?: Date | string
+  }
+
+  export type ContextSnapshotUncheckedCreateWithoutConversationInput = {
+    id?: string
+    projectId?: string | null
+    briefContext?: NullableJsonNullValueInput | InputJsonValue
+    brandTensor?: NullableJsonNullValueInput | InputJsonValue
+    assetIntelligence?: NullableJsonNullValueInput | InputJsonValue
+    knowledgeSourceIds?: ContextSnapshotCreateknowledgeSourceIdsInput | string[]
+    capturedAt?: Date | string
+  }
+
+  export type ContextSnapshotCreateOrConnectWithoutConversationInput = {
+    where: ContextSnapshotWhereUniqueInput
+    create: XOR<ContextSnapshotCreateWithoutConversationInput, ContextSnapshotUncheckedCreateWithoutConversationInput>
+  }
+
+  export type ContextSnapshotCreateManyConversationInputEnvelope = {
+    data: ContextSnapshotCreateManyConversationInput | ContextSnapshotCreateManyConversationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProjectUpsertWithoutConversationsInput = {
+    update: XOR<ProjectUpdateWithoutConversationsInput, ProjectUncheckedUpdateWithoutConversationsInput>
+    create: XOR<ProjectCreateWithoutConversationsInput, ProjectUncheckedCreateWithoutConversationsInput>
+    where?: ProjectWhereInput
+  }
+
+  export type ProjectUpdateToOneWithWhereWithoutConversationsInput = {
+    where?: ProjectWhereInput
+    data: XOR<ProjectUpdateWithoutConversationsInput, ProjectUncheckedUpdateWithoutConversationsInput>
+  }
+
+  export type ProjectUpdateWithoutConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    budget?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutProjectsNestedInput
+    roleRequirements?: RoleRequirementUpdateManyWithoutProjectNestedInput
+    assignments?: AssignmentUpdateManyWithoutProjectNestedInput
+    scripts?: ScriptUpdateManyWithoutProjectNestedInput
+    moodboardItems?: MoodboardItemUpdateManyWithoutProjectNestedInput
+    knowledgeSources?: KnowledgeSourceUpdateManyWithoutProjectNestedInput
+    transcripts?: TranscriptUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateWithoutConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    budget?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    roleRequirements?: RoleRequirementUncheckedUpdateManyWithoutProjectNestedInput
+    assignments?: AssignmentUncheckedUpdateManyWithoutProjectNestedInput
+    scripts?: ScriptUncheckedUpdateManyWithoutProjectNestedInput
+    moodboardItems?: MoodboardItemUncheckedUpdateManyWithoutProjectNestedInput
+    knowledgeSources?: KnowledgeSourceUncheckedUpdateManyWithoutProjectNestedInput
+    transcripts?: TranscriptUncheckedUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
+  }
+
+  export type UserUpsertWithoutConversationsInput = {
+    update: XOR<UserUpdateWithoutConversationsInput, UserUncheckedUpdateWithoutConversationsInput>
+    create: XOR<UserCreateWithoutConversationsInput, UserUncheckedCreateWithoutConversationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutConversationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutConversationsInput, UserUncheckedUpdateWithoutConversationsInput>
+  }
+
+  export type UserUpdateWithoutConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUpdateManyWithoutUserNestedInput
+    assignments?: AssignmentUpdateManyWithoutUserNestedInput
+    scripts?: ScriptUpdateManyWithoutUserNestedInput
+    knowledgeSources?: KnowledgeSourceUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
+    assignments?: AssignmentUncheckedUpdateManyWithoutUserNestedInput
+    scripts?: ScriptUncheckedUpdateManyWithoutUserNestedInput
+    knowledgeSources?: KnowledgeSourceUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type MessageUpsertWithWhereUniqueWithoutConversationInput = {
+    where: MessageWhereUniqueInput
+    update: XOR<MessageUpdateWithoutConversationInput, MessageUncheckedUpdateWithoutConversationInput>
+    create: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput>
+  }
+
+  export type MessageUpdateWithWhereUniqueWithoutConversationInput = {
+    where: MessageWhereUniqueInput
+    data: XOR<MessageUpdateWithoutConversationInput, MessageUncheckedUpdateWithoutConversationInput>
+  }
+
+  export type MessageUpdateManyWithWhereWithoutConversationInput = {
+    where: MessageScalarWhereInput
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutConversationInput>
+  }
+
+  export type MessageScalarWhereInput = {
+    AND?: MessageScalarWhereInput | MessageScalarWhereInput[]
+    OR?: MessageScalarWhereInput[]
+    NOT?: MessageScalarWhereInput | MessageScalarWhereInput[]
+    id?: StringFilter<"Message"> | string
+    conversationId?: StringFilter<"Message"> | string
+    role?: EnumMessageRoleFilter<"Message"> | $Enums.MessageRole
+    content?: StringFilter<"Message"> | string
+    tokens?: IntNullableFilter<"Message"> | number | null
+    embeddingId?: StringNullableFilter<"Message"> | string | null
+    referencedSources?: StringNullableListFilter<"Message">
+    createdAt?: DateTimeFilter<"Message"> | Date | string
+  }
+
+  export type ContextSnapshotUpsertWithWhereUniqueWithoutConversationInput = {
+    where: ContextSnapshotWhereUniqueInput
+    update: XOR<ContextSnapshotUpdateWithoutConversationInput, ContextSnapshotUncheckedUpdateWithoutConversationInput>
+    create: XOR<ContextSnapshotCreateWithoutConversationInput, ContextSnapshotUncheckedCreateWithoutConversationInput>
+  }
+
+  export type ContextSnapshotUpdateWithWhereUniqueWithoutConversationInput = {
+    where: ContextSnapshotWhereUniqueInput
+    data: XOR<ContextSnapshotUpdateWithoutConversationInput, ContextSnapshotUncheckedUpdateWithoutConversationInput>
+  }
+
+  export type ContextSnapshotUpdateManyWithWhereWithoutConversationInput = {
+    where: ContextSnapshotScalarWhereInput
+    data: XOR<ContextSnapshotUpdateManyMutationInput, ContextSnapshotUncheckedUpdateManyWithoutConversationInput>
+  }
+
+  export type ContextSnapshotScalarWhereInput = {
+    AND?: ContextSnapshotScalarWhereInput | ContextSnapshotScalarWhereInput[]
+    OR?: ContextSnapshotScalarWhereInput[]
+    NOT?: ContextSnapshotScalarWhereInput | ContextSnapshotScalarWhereInput[]
+    id?: StringFilter<"ContextSnapshot"> | string
+    conversationId?: StringFilter<"ContextSnapshot"> | string
+    projectId?: StringNullableFilter<"ContextSnapshot"> | string | null
+    briefContext?: JsonNullableFilter<"ContextSnapshot">
+    brandTensor?: JsonNullableFilter<"ContextSnapshot">
+    assetIntelligence?: JsonNullableFilter<"ContextSnapshot">
+    knowledgeSourceIds?: StringNullableListFilter<"ContextSnapshot">
+    capturedAt?: DateTimeFilter<"ContextSnapshot"> | Date | string
+  }
+
+  export type ConversationCreateWithoutMessagesInput = {
+    id?: string
+    title?: string | null
+    topic?: string | null
+    status?: $Enums.ConversationStatus
+    messageCount?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project?: ProjectCreateNestedOneWithoutConversationsInput
+    user?: UserCreateNestedOneWithoutConversationsInput
+    contextSnapshots?: ContextSnapshotCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUncheckedCreateWithoutMessagesInput = {
+    id?: string
+    title?: string | null
+    topic?: string | null
+    projectId?: string | null
+    userId?: string | null
+    status?: $Enums.ConversationStatus
+    messageCount?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contextSnapshots?: ContextSnapshotUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutMessagesInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutMessagesInput, ConversationUncheckedCreateWithoutMessagesInput>
+  }
+
+  export type ConversationUpsertWithoutMessagesInput = {
+    update: XOR<ConversationUpdateWithoutMessagesInput, ConversationUncheckedUpdateWithoutMessagesInput>
+    create: XOR<ConversationCreateWithoutMessagesInput, ConversationUncheckedCreateWithoutMessagesInput>
+    where?: ConversationWhereInput
+  }
+
+  export type ConversationUpdateToOneWithWhereWithoutMessagesInput = {
+    where?: ConversationWhereInput
+    data: XOR<ConversationUpdateWithoutMessagesInput, ConversationUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type ConversationUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    messageCount?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneWithoutConversationsNestedInput
+    user?: UserUpdateOneWithoutConversationsNestedInput
+    contextSnapshots?: ContextSnapshotUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    messageCount?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contextSnapshots?: ContextSnapshotUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationCreateWithoutContextSnapshotsInput = {
+    id?: string
+    title?: string | null
+    topic?: string | null
+    status?: $Enums.ConversationStatus
+    messageCount?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project?: ProjectCreateNestedOneWithoutConversationsInput
+    user?: UserCreateNestedOneWithoutConversationsInput
+    messages?: MessageCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUncheckedCreateWithoutContextSnapshotsInput = {
+    id?: string
+    title?: string | null
+    topic?: string | null
+    projectId?: string | null
+    userId?: string | null
+    status?: $Enums.ConversationStatus
+    messageCount?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutContextSnapshotsInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutContextSnapshotsInput, ConversationUncheckedCreateWithoutContextSnapshotsInput>
+  }
+
+  export type ConversationUpsertWithoutContextSnapshotsInput = {
+    update: XOR<ConversationUpdateWithoutContextSnapshotsInput, ConversationUncheckedUpdateWithoutContextSnapshotsInput>
+    create: XOR<ConversationCreateWithoutContextSnapshotsInput, ConversationUncheckedCreateWithoutContextSnapshotsInput>
+    where?: ConversationWhereInput
+  }
+
+  export type ConversationUpdateToOneWithWhereWithoutContextSnapshotsInput = {
+    where?: ConversationWhereInput
+    data: XOR<ConversationUpdateWithoutContextSnapshotsInput, ConversationUncheckedUpdateWithoutContextSnapshotsInput>
+  }
+
+  export type ConversationUpdateWithoutContextSnapshotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    messageCount?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneWithoutConversationsNestedInput
+    user?: UserUpdateOneWithoutConversationsNestedInput
+    messages?: MessageUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutContextSnapshotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    messageCount?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ProjectCreateWithoutProjectVersionsInput = {
+    id?: string
+    title?: string | null
+    name?: string | null
+    description?: string | null
+    client?: string | null
+    clientName?: string | null
+    status?: $Enums.ProjectStatus
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    budget?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutProjectsInput
+    roleRequirements?: RoleRequirementCreateNestedManyWithoutProjectInput
+    assignments?: AssignmentCreateNestedManyWithoutProjectInput
+    scripts?: ScriptCreateNestedManyWithoutProjectInput
+    moodboardItems?: MoodboardItemCreateNestedManyWithoutProjectInput
+    knowledgeSources?: KnowledgeSourceCreateNestedManyWithoutProjectInput
+    transcripts?: TranscriptCreateNestedManyWithoutProjectInput
+    conversations?: ConversationCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectUncheckedCreateWithoutProjectVersionsInput = {
+    id?: string
+    title?: string | null
+    name?: string | null
+    description?: string | null
+    client?: string | null
+    clientName?: string | null
+    status?: $Enums.ProjectStatus
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    budget?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
+    roleRequirements?: RoleRequirementUncheckedCreateNestedManyWithoutProjectInput
+    assignments?: AssignmentUncheckedCreateNestedManyWithoutProjectInput
+    scripts?: ScriptUncheckedCreateNestedManyWithoutProjectInput
+    moodboardItems?: MoodboardItemUncheckedCreateNestedManyWithoutProjectInput
+    knowledgeSources?: KnowledgeSourceUncheckedCreateNestedManyWithoutProjectInput
+    transcripts?: TranscriptUncheckedCreateNestedManyWithoutProjectInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectCreateOrConnectWithoutProjectVersionsInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutProjectVersionsInput, ProjectUncheckedCreateWithoutProjectVersionsInput>
+  }
+
+  export type ProjectUpsertWithoutProjectVersionsInput = {
+    update: XOR<ProjectUpdateWithoutProjectVersionsInput, ProjectUncheckedUpdateWithoutProjectVersionsInput>
+    create: XOR<ProjectCreateWithoutProjectVersionsInput, ProjectUncheckedCreateWithoutProjectVersionsInput>
+    where?: ProjectWhereInput
+  }
+
+  export type ProjectUpdateToOneWithWhereWithoutProjectVersionsInput = {
+    where?: ProjectWhereInput
+    data: XOR<ProjectUpdateWithoutProjectVersionsInput, ProjectUncheckedUpdateWithoutProjectVersionsInput>
+  }
+
+  export type ProjectUpdateWithoutProjectVersionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    budget?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutProjectsNestedInput
+    roleRequirements?: RoleRequirementUpdateManyWithoutProjectNestedInput
+    assignments?: AssignmentUpdateManyWithoutProjectNestedInput
+    scripts?: ScriptUpdateManyWithoutProjectNestedInput
+    moodboardItems?: MoodboardItemUpdateManyWithoutProjectNestedInput
+    knowledgeSources?: KnowledgeSourceUpdateManyWithoutProjectNestedInput
+    transcripts?: TranscriptUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateWithoutProjectVersionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    budget?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    roleRequirements?: RoleRequirementUncheckedUpdateManyWithoutProjectNestedInput
+    assignments?: AssignmentUncheckedUpdateManyWithoutProjectNestedInput
+    scripts?: ScriptUncheckedUpdateManyWithoutProjectNestedInput
+    moodboardItems?: MoodboardItemUncheckedUpdateManyWithoutProjectNestedInput
+    knowledgeSources?: KnowledgeSourceUncheckedUpdateManyWithoutProjectNestedInput
+    transcripts?: TranscriptUncheckedUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectCreateManyUserInput = {
@@ -21089,6 +29755,18 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type ConversationCreateManyUserInput = {
+    id?: string
+    title?: string | null
+    topic?: string | null
+    projectId?: string | null
+    status?: $Enums.ConversationStatus
+    messageCount?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ProjectUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21108,6 +29786,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemUpdateManyWithoutProjectNestedInput
     knowledgeSources?: KnowledgeSourceUpdateManyWithoutProjectNestedInput
     transcripts?: TranscriptUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutUserInput = {
@@ -21129,6 +29809,8 @@ export namespace Prisma {
     moodboardItems?: MoodboardItemUncheckedUpdateManyWithoutProjectNestedInput
     knowledgeSources?: KnowledgeSourceUncheckedUpdateManyWithoutProjectNestedInput
     transcripts?: TranscriptUncheckedUpdateManyWithoutProjectNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutProjectNestedInput
+    projectVersions?: ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateManyWithoutUserInput = {
@@ -21254,6 +29936,46 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ConversationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    messageCount?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneWithoutConversationsNestedInput
+    messages?: MessageUpdateManyWithoutConversationNestedInput
+    contextSnapshots?: ContextSnapshotUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    messageCount?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+    contextSnapshots?: ContextSnapshotUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    messageCount?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type RoleRequirementCreateManyProjectInput = {
     id?: string
     role: string
@@ -21322,6 +30044,29 @@ export namespace Prisma {
     status?: $Enums.TranscriptStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type ConversationCreateManyProjectInput = {
+    id?: string
+    title?: string | null
+    topic?: string | null
+    userId?: string | null
+    status?: $Enums.ConversationStatus
+    messageCount?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectVersionCreateManyProjectInput = {
+    id?: string
+    version: number
+    briefSnapshot?: string | null
+    tagsSnapshot?: ProjectVersionCreatetagsSnapshotInput | string[]
+    assetsSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    createdBy?: string | null
+    changeDescription?: string | null
   }
 
   export type RoleRequirementUpdateWithoutProjectInput = {
@@ -21536,6 +30281,79 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ConversationUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    messageCount?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutConversationsNestedInput
+    messages?: MessageUpdateManyWithoutConversationNestedInput
+    contextSnapshots?: ContextSnapshotUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    messageCount?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+    contextSnapshots?: ContextSnapshotUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    messageCount?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectVersionUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    briefSnapshot?: NullableStringFieldUpdateOperationsInput | string | null
+    tagsSnapshot?: ProjectVersionUpdatetagsSnapshotInput | string[]
+    assetsSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    changeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ProjectVersionUncheckedUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    briefSnapshot?: NullableStringFieldUpdateOperationsInput | string | null
+    tagsSnapshot?: ProjectVersionUpdatetagsSnapshotInput | string[]
+    assetsSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    changeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ProjectVersionUncheckedUpdateManyWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    briefSnapshot?: NullableStringFieldUpdateOperationsInput | string | null
+    tagsSnapshot?: ProjectVersionUpdatetagsSnapshotInput | string[]
+    assetsSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    changeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type AssignmentCreateManyFreelancerInput = {
     id?: string
     projectId: string
@@ -21622,6 +30440,86 @@ export namespace Prisma {
   export type MoodboardCollectionItemUncheckedUpdateManyWithoutCollectionInput = {
     id?: StringFieldUpdateOperationsInput | string
     moodboardItemId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MessageCreateManyConversationInput = {
+    id?: string
+    role: $Enums.MessageRole
+    content: string
+    tokens?: number | null
+    embeddingId?: string | null
+    referencedSources?: MessageCreatereferencedSourcesInput | string[]
+    createdAt?: Date | string
+  }
+
+  export type ContextSnapshotCreateManyConversationInput = {
+    id?: string
+    projectId?: string | null
+    briefContext?: NullableJsonNullValueInput | InputJsonValue
+    brandTensor?: NullableJsonNullValueInput | InputJsonValue
+    assetIntelligence?: NullableJsonNullValueInput | InputJsonValue
+    knowledgeSourceIds?: ContextSnapshotCreateknowledgeSourceIdsInput | string[]
+    capturedAt?: Date | string
+  }
+
+  export type MessageUpdateWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
+    content?: StringFieldUpdateOperationsInput | string
+    tokens?: NullableIntFieldUpdateOperationsInput | number | null
+    embeddingId?: NullableStringFieldUpdateOperationsInput | string | null
+    referencedSources?: MessageUpdatereferencedSourcesInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageUncheckedUpdateWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
+    content?: StringFieldUpdateOperationsInput | string
+    tokens?: NullableIntFieldUpdateOperationsInput | number | null
+    embeddingId?: NullableStringFieldUpdateOperationsInput | string | null
+    referencedSources?: MessageUpdatereferencedSourcesInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageUncheckedUpdateManyWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
+    content?: StringFieldUpdateOperationsInput | string
+    tokens?: NullableIntFieldUpdateOperationsInput | number | null
+    embeddingId?: NullableStringFieldUpdateOperationsInput | string | null
+    referencedSources?: MessageUpdatereferencedSourcesInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContextSnapshotUpdateWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    briefContext?: NullableJsonNullValueInput | InputJsonValue
+    brandTensor?: NullableJsonNullValueInput | InputJsonValue
+    assetIntelligence?: NullableJsonNullValueInput | InputJsonValue
+    knowledgeSourceIds?: ContextSnapshotUpdateknowledgeSourceIdsInput | string[]
+    capturedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContextSnapshotUncheckedUpdateWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    briefContext?: NullableJsonNullValueInput | InputJsonValue
+    brandTensor?: NullableJsonNullValueInput | InputJsonValue
+    assetIntelligence?: NullableJsonNullValueInput | InputJsonValue
+    knowledgeSourceIds?: ContextSnapshotUpdateknowledgeSourceIdsInput | string[]
+    capturedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContextSnapshotUncheckedUpdateManyWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    briefContext?: NullableJsonNullValueInput | InputJsonValue
+    brandTensor?: NullableJsonNullValueInput | InputJsonValue
+    assetIntelligence?: NullableJsonNullValueInput | InputJsonValue
+    knowledgeSourceIds?: ContextSnapshotUpdateknowledgeSourceIdsInput | string[]
+    capturedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

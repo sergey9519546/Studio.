@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx"; // Visionary React Application
-import ErrorBoundary from "./components/ErrorBoundary";
+import App from "./App.tsx"; // Enhanced Studio Roster with Router
 import "./index.css";
+import { Providers } from "./src/app/providers";
 import "./src/index.css";
 
 const rootElement = document.getElementById("root");
@@ -11,7 +11,7 @@ if (!rootElement) {
 
 const root = ReactDOM.createRoot(rootElement);
 root.render(
-  <ErrorBoundary>
+  <Providers>
     <App />
-  </ErrorBoundary>
+  </Providers>
 );

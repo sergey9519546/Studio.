@@ -261,7 +261,8 @@ model Message {
   content     String
   tokens      Int?     // Track token usage
   embeddingId String?   // Link to embedding if indexed as knowledge source
-  referencedSources String[] // JSON array of KnowledgeSource IDs cited in response
+  referencedSources String[]? // JSON array of KnowledgeSource IDs cited in response
+  feedback    MessageFeedback?
   createdAt   DateTime @default(now())
 
   // Relations
@@ -279,7 +280,7 @@ model ContextSnapshot {
   briefContext Json?    // Project brief at this point
   brandTensor  Json?    // Brand context
   assetIntelligence Json? // Asset analysis snapshot
-  knowledgeSourceIds String[] // Array of KnowledgeSource IDs active at this point
+  knowledgeSourceIds String[]? // Array of KnowledgeSource IDs active at this point
   capturedAt  DateTime @default(now())
 
   // Relations
@@ -295,7 +296,7 @@ model ProjectVersion {
   projectId   String
   version     Int
   briefSnapshot String?
-  tagsSnapshot  String[] // Array of tags
+  tagsSnapshot  String[]?
   assetsSnapshot Json?
   createdAt   DateTime @default(now())
   createdBy   String?  // userId
@@ -358,6 +359,11 @@ enum ConversationStatus {
 enum MessageRole {
   USER
   ASSISTANT
+}
+
+type MessageFeedback {
+  rating Int? // 1-5 or thumbs: -1|0|1
+  notes String?
 }
 
 // Note: Keeping the original User model for backward compatibility (removed unused Post model)

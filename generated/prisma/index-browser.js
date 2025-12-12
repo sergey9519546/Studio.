@@ -257,6 +257,62 @@ exports.Prisma.TranscriptScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ConversationScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  topic: 'topic',
+  projectId: 'projectId',
+  userId: 'userId',
+  status: 'status',
+  messageCount: 'messageCount',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  role: 'role',
+  content: 'content',
+  tokens: 'tokens',
+  embeddingId: 'embeddingId',
+  referencedSources: 'referencedSources',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ContextSnapshotScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  projectId: 'projectId',
+  briefContext: 'briefContext',
+  brandTensor: 'brandTensor',
+  assetIntelligence: 'assetIntelligence',
+  knowledgeSourceIds: 'knowledgeSourceIds',
+  capturedAt: 'capturedAt'
+};
+
+exports.Prisma.ProjectVersionScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  version: 'version',
+  briefSnapshot: 'briefSnapshot',
+  tagsSnapshot: 'tagsSnapshot',
+  assetsSnapshot: 'assetsSnapshot',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  changeDescription: 'changeDescription'
+};
+
+exports.Prisma.EmbeddingScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  embedding: 'embedding',
+  model: 'model',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -264,6 +320,10 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.NullableJsonNullValueInput = {
   DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
@@ -310,6 +370,17 @@ exports.TranscriptStatus = exports.$Enums.TranscriptStatus = {
   FAILED: 'FAILED'
 };
 
+exports.ConversationStatus = exports.$Enums.ConversationStatus = {
+  ACTIVE: 'ACTIVE',
+  ARCHIVED: 'ARCHIVED',
+  STARRED: 'STARRED'
+};
+
+exports.MessageRole = exports.$Enums.MessageRole = {
+  USER: 'USER',
+  ASSISTANT: 'ASSISTANT'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Project: 'Project',
@@ -321,7 +392,12 @@ exports.Prisma.ModelName = {
   MoodboardCollectionItem: 'MoodboardCollectionItem',
   Script: 'Script',
   KnowledgeSource: 'KnowledgeSource',
-  Transcript: 'Transcript'
+  Transcript: 'Transcript',
+  Conversation: 'Conversation',
+  Message: 'Message',
+  ContextSnapshot: 'ContextSnapshot',
+  ProjectVersion: 'ProjectVersion',
+  Embedding: 'Embedding'
 };
 
 /**

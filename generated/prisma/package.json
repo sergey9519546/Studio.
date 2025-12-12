@@ -1,5 +1,5 @@
 {
-  "name": "prisma-client-e396ef5091fd9c6b8d409b60a3a1b9ef1f0e41cf30b9f149d1ba0a62eb425c7c",
+  "name": "prisma-client-01466c7612faff3999ea3a88276331e3d0b5fa61d69c6f72e10927da9ff0850a",
   "main": "index.js",
   "types": "index.d.ts",
   "browser": "default.js",
@@ -112,7 +112,6 @@
   "version": "7.1.0",
   "sideEffects": false,
   "dependencies": {
-    "@dataconnect/generated": "file:src/dataconnect-generated",
     "@prisma/client-runtime-utils": "7.1.0"
   },
   "imports": {
