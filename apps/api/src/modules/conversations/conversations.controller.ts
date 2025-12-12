@@ -1,3 +1,4 @@
+import { JwtAuthGuard } from '@app/common/guards/jwt-auth.guard';
 import {
   Body,
   Controller,
@@ -14,7 +15,6 @@ import {
 } from '@nestjs/common';
 import { ConversationStatus } from '@prisma/client';
 import { AddMessageDto, CaptureContextSnapshotDto, ConversationsService, CreateConversationDto, UpdateConversationDto } from './conversations.service';
-import { JwtAuthGuard } from '@app/common/guards/jwt-auth.guard';
 
 @Controller('api/v1/conversations')
 @UseGuards(JwtAuthGuard)

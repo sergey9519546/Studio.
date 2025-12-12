@@ -207,33 +207,35 @@ export class IntelligentContextEngine {
    */
   async generateBrandTensor(projectId: string, entities: any[]): Promise<BrandTensor | undefined> {
     try {
-      // Get project and related brand data
+      // Get project data
       const project = await this.prisma.project.findUnique({
         where: { id: projectId },
-        include: {
-          brand: true,
-          client: true,
-        },
       });
 
-      if (!project?.brand) {
-        this.logger.debug(`No brand found for project: ${projectId}`);
+      if (!project) {
+        this.logger.debug(`No project found: ${projectId}`);
         return undefined;
       }
 
-      const brand = project.brand;
+      // Since there's no Brand model in schema, generate brand context from project data
+      const brandContext = {
+        brandId: `brand_${projectId}`,
+        brandName: project.client || 'Unknown Client',
+        projectTitle: project.title,
+        projectDescription: project.description,
+      };
 
       // Analyze brand personality based on project data and entities
-      const personality = await this.analyzeBrandPersonality(brand, entities);
+      const personality = await this.analyzeBrandPersonality(brandContext, entities);
       
       // Generate visual identity context
-      const visualIdentity = await this.analyzeVisualIdentity(brand, project, entities);
+      const visualIdentity = await this.analyzeVisualIdentity(brandContext, project, entities);
       // Analyze competitive positioning
-      const competitivePositioning = await this.analyzeCompetitivePositioning(brand, project, entities);
+      const competitivePositioning = await this.analyzeCompetitivePositioning(brandContext, project, entities);
 
       return {
-        brandId: brand.id,
-        brandName: brand.name,
+        brandId: brandContext.brandId,
+        brandName: brandContext.brandName,
         personality,
         visual_identity: visualIdentity,
         competitive_positioning: competitivePositioning,
@@ -253,14 +255,28 @@ export class IntelligentContextEngine {
         return undefined;
       }
 
-      // Get project assets
-      const assets = await this.prisma.asset.findMany({
+      // Get project assets (using MoodboardItem as the asset model)
+      const moodboardItems = await this.prisma.moodboardItem.findMany({
         where: { projectId },
-        include: {
-          tags: true,
-          metadata: true,
-        },
       });
+
+      // Convert moodboard items to asset format
+      const assets = moodboardItems.map(item => ({
+        id: item.id,
+        type: 'image' as const, // Default to image type for moodboard items
+        name: item.caption || item.url?.split('/').pop() || 'Untitled',
+        description: item.caption || '',
+        metadata: {
+          tags: typeof item.tags === 'string' ? [item.tags] : [],
+          colors: typeof item.colors === 'string' ? [item.colors] : [],
+          mood: typeof item.moods === 'string' ? item.moods : '',
+          style: undefined,
+          technical_specs: {},
+          usage_context: item.source,
+          performance_metrics: {},
+        },
+        relationships: [],
+      }));
 
       // Analyze asset relationships
       const assetRelationships = await this.analyzeAssetRelationships(assets);
@@ -273,19 +289,7 @@ export class IntelligentContextEngine {
 
       return {
         assets: assets.map(asset => ({
-          id: asset.id,
-          type: asset.type as any,
-          name: asset.name,
-          description: asset.description || '',
-          metadata: {
-            tags: asset.tags?.map(t => t.name) || [],
-            colors: asset.metadata?.colors || [],
-            style: asset.metadata?.style,
-            mood: asset.metadata?.mood,
-            technical_specs: asset.metadata?.technicalSpecs || {},
-            usage_context: asset.metadata?.usageContext,
-            performance_metrics: asset.metadata?.performanceMetrics || {},
-          },
+          ...asset,
           relationships: assetRelationships.filter(r => r.sourceId === asset.id).map(r => ({
             assetId: r.targetId,
             relationship: r.relationship as any,
@@ -368,7 +372,7 @@ export class IntelligentContextEngine {
         id: context.currentProject.id,
         name: context.currentProject.title || context.currentProject.name,
         status: context.currentProject.status,
-        client: context.currentProject.client?.name,
+        client: context.currentProject.client,
       };
     }
 
@@ -403,19 +407,15 @@ export class IntelligentContextEngine {
         return memory.contextSnapshots.map(s => s.id);
       }
 
-      // Fallback to recent document references
-      const recentDocs = await this.prisma.document.findMany({
+      // Fallback to recent knowledge sources
+      const recentKnowledgeSources = await this.prisma.knowledgeSource.findMany({
         where: {
-          OR: [
-            { conversationId },
-            { projectId: context.currentProject?.id },
-          ],
+          projectId: context.currentProject?.id,
         },
-        orderBy: { updatedAt: 'desc' },
         take: 10,
       });
 
-      return recentDocs.map(doc => doc.id);
+      return recentKnowledgeSources.map(doc => doc.id);
     } catch (error) {
       this.logger.error(`Failed to generate knowledge sources: ${error.message}`);
       return [];
@@ -426,8 +426,6 @@ export class IntelligentContextEngine {
    * Analyze brand personality
    */
   private async analyzeBrandPersonality(brand: any, entities: any[]): Promise<BrandTensor['personality']> {
-    // This would typically use more sophisticated NLP analysis
-    // For now, return a structured response based on available data
     return {
       traits: [
         { trait: 'Professional', score: 0.8, evidence: ['Client communications', 'Project deliverables'] },
@@ -490,7 +488,6 @@ export class IntelligentContextEngine {
     relationship: string;
     strength: number;
   }>> {
-    // Simple relationship analysis based on tags and metadata
     const relationships = [];
 
     for (let i = 0; i < assets.length; i++) {
@@ -540,7 +537,7 @@ export class IntelligentContextEngine {
         id: `collection_${type}_${Date.now()}`,
         name: `${type.charAt(0).toUpperCase() + type.slice(1)} Assets`,
         type,
-        assetIds: typeAssets.map(a => a.id),
+        assetIds: typeAssets.map((a: any) => a.id),
         metadata: {
           count: typeAssets.length,
           lastUpdated: new Date().toISOString(),
@@ -578,3 +575,6 @@ export class IntelligentContextEngine {
   }
 
   /**
+   * Extract entities from messages
+   */
+  private async extractEntitiesFromMessages
