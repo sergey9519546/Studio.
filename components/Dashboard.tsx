@@ -128,7 +128,7 @@ const Dashboard: React.FC = () => {
       label: "Active assignments",
       value: counts.assignments,
       hint: "Allocated shifts",
-      description: `${counts.assignments} current project assignments`,
+      description: `${counts.assignments} active assignments in progress`,
     },
   ];
 

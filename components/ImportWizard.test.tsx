@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ImportWizard from './ImportWizard';
 import * as api from '../services/api';
@@ -67,13 +67,17 @@ describe('ImportWizard', () => {
             type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         });
         const input = screen.getByLabelText('Select file');
-        await userEvent.upload(input, file);
+        await act(async () => {
+            await userEvent.upload(input, file);
+        });
 
         await waitFor(() => {
             expect(screen.getByText(/Processing/i)).toBeInTheDocument();
         });
 
-        resolve!({});
+        await act(async () => {
+            resolve!({});
+        });
     });
 
     it('should handle extraction errors', async () => {

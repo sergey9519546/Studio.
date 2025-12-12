@@ -12165,6 +12165,61 @@
     "type": "static"
   },
   {
+    "source": "npm:@testing-library/dom",
+    "target": "npm:@babel/code-frame",
+    "type": "static"
+  },
+  {
+    "source": "npm:@testing-library/dom",
+    "target": "npm:@babel/runtime",
+    "type": "static"
+  },
+  {
+    "source": "npm:@testing-library/dom",
+    "target": "npm:@types/aria-query",
+    "type": "static"
+  },
+  {
+    "source": "npm:@testing-library/dom",
+    "target": "npm:aria-query",
+    "type": "static"
+  },
+  {
+    "source": "npm:@testing-library/dom",
+    "target": "npm:dom-accessibility-api",
+    "type": "static"
+  },
+  {
+    "source": "npm:@testing-library/dom",
+    "target": "npm:lz-string",
+    "type": "static"
+  },
+  {
+    "source": "npm:@testing-library/dom",
+    "target": "npm:picocolors",
+    "type": "static"
+  },
+  {
+    "source": "npm:@testing-library/dom",
+    "target": "npm:pretty-format@27.5.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:pretty-format@27.5.1",
+    "target": "npm:ansi-regex",
+    "type": "static"
+  },
+  {
+    "source": "npm:pretty-format@27.5.1",
+    "target": "npm:ansi-styles@5.2.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:pretty-format@27.5.1",
+    "target": "npm:react-is@17.0.2",
+    "type": "static"
+  },
+  {
     "source": "npm:@testing-library/jest-dom",
     "target": "npm:@adobe/css-tools",
     "type": "static"
@@ -12196,6 +12251,11 @@
   },
   {
     "source": "npm:@testing-library/react",
+    "target": "npm:@testing-library/dom",
+    "type": "static"
+  },
+  {
+    "source": "npm:@testing-library/react",
     "target": "npm:@types/react",
     "type": "static"
   },
@@ -12217,6 +12277,11 @@
   {
     "source": "npm:@testing-library/react",
     "target": "npm:@babel/runtime",
+    "type": "static"
+  },
+  {
+    "source": "npm:@testing-library/user-event",
+    "target": "npm:@testing-library/dom",
     "type": "static"
   },
   {
@@ -14261,97 +14326,7 @@
   },
   {
     "source": "npm:aria-query",
-    "target": "npm:deep-equal@2.2.3",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:array-buffer-byte-length",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:call-bind",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:es-get-iterator",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:get-intrinsic",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:is-arguments",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:is-array-buffer",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:is-date-object",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:is-regex",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:is-shared-array-buffer",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:isarray",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:object-is",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:object-keys",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:object.assign",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:regexp.prototype.flags",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:side-channel",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:which-boxed-primitive",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:which-collection",
-    "type": "static"
-  },
-  {
-    "source": "npm:deep-equal@2.2.3",
-    "target": "npm:which-typed-array",
+    "target": "npm:dequal",
     "type": "static"
   },
   {
@@ -16212,51 +16187,6 @@
   {
     "source": "npm:es-abstract",
     "target": "npm:which-typed-array",
-    "type": "static"
-  },
-  {
-    "source": "npm:es-get-iterator",
-    "target": "npm:call-bind",
-    "type": "static"
-  },
-  {
-    "source": "npm:es-get-iterator",
-    "target": "npm:get-intrinsic",
-    "type": "static"
-  },
-  {
-    "source": "npm:es-get-iterator",
-    "target": "npm:has-symbols",
-    "type": "static"
-  },
-  {
-    "source": "npm:es-get-iterator",
-    "target": "npm:is-arguments",
-    "type": "static"
-  },
-  {
-    "source": "npm:es-get-iterator",
-    "target": "npm:is-map",
-    "type": "static"
-  },
-  {
-    "source": "npm:es-get-iterator",
-    "target": "npm:is-set",
-    "type": "static"
-  },
-  {
-    "source": "npm:es-get-iterator",
-    "target": "npm:is-string",
-    "type": "static"
-  },
-  {
-    "source": "npm:es-get-iterator",
-    "target": "npm:isarray",
-    "type": "static"
-  },
-  {
-    "source": "npm:es-get-iterator",
-    "target": "npm:stop-iteration-iterator",
     "type": "static"
   },
   {
@@ -18752,16 +18682,6 @@
   {
     "source": "npm:internal-slot",
     "target": "npm:side-channel",
-    "type": "static"
-  },
-  {
-    "source": "npm:is-arguments",
-    "target": "npm:call-bound",
-    "type": "static"
-  },
-  {
-    "source": "npm:is-arguments",
-    "target": "npm:has-tostringtag",
     "type": "static"
   },
   {
@@ -22162,16 +22082,6 @@
   {
     "source": "npm:nypm",
     "target": "npm:tinyexec",
-    "type": "static"
-  },
-  {
-    "source": "npm:object-is",
-    "target": "npm:call-bind",
-    "type": "static"
-  },
-  {
-    "source": "npm:object-is",
-    "target": "npm:define-properties",
     "type": "static"
   },
   {
