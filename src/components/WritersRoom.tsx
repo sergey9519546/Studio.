@@ -6,7 +6,7 @@ import { LiquidGlassContainer } from './design/LiquidGlassContainer';
 import { useAutoSave } from '../hooks/useAutoSave';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 import { CommandPalette } from './ui/CommandPalette';
-import { DraftService } from '../services/DraftService';
+import { draftService } from '../services/DraftService';
 import { UndoRedoService } from '../services/UndoRedoService';
 
 interface Message {
@@ -48,22 +48,32 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Auto-save functionality
-  const { 
-    autoSaveState, 
-    saveCurrentDraft, 
-    loadDraft, 
-    getDraftHistory,
-    clearDrafts 
-  } = useAutoSave({
-    draftId: `writers-room-${projectId}`,
-    autoSaveInterval: 30000, // 30 seconds
-    enableVersioning: true,
-    maxVersions: 50,
-  });
-
   // Undo/Redo service
   const undoRedoService = useRef(new UndoRedoService()).current;
+
+  // Auto-save functionality
+  const autoSave = useAutoSave(
+    `writers-room-${projectId}`,
+    'document',
+    {
+      messages,
+      inputValue,
+      timestamp: new Date(),
+    },
+    {
+      enabled: true,
+      interval: 30000, // 30 seconds
+      debounceMs: 2000,
+      enableVersioning: true,
+      maxVersions: 50,
+      onSave: (draft) => {
+        console.log('Draft saved:', draft.id);
+      },
+      onError: (error) => {
+        console.error('Auto-save error:', error);
+      }
+    }
+  );
 
   // Scroll to bottom when new messages are added
   const scrollToBottom = useCallback(() => {
@@ -74,43 +84,39 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
     scrollToBottom();
   }, [messages, scrollToBottom]);
 
-  // Handle draft auto-save
-  React.useEffect(() => {
-    const draftContent = JSON.stringify({
-      messages,
-      inputValue,
-      timestamp: new Date(),
-    });
-
-    DraftService.getInstance().saveDraft(`writers-room-${projectId}`, {
-      content: draftContent,
-      metadata: {
-        projectTitle,
-        messageCount: messages.length,
-      },
-    });
-  }, [messages, inputValue, projectId, projectTitle]);
-
   // Load draft on mount
   React.useEffect(() => {
-    const savedDraft = DraftService.getInstance().loadDraft(`writers-room-${projectId}`);
-    if (savedDraft) {
+    const savedDraft = autoSave.draft;
+    if (savedDraft && savedDraft.content) {
       try {
-        const parsed = JSON.parse(savedDraft.content);
-        if (parsed.messages) setMessages(parsed.messages);
-        if (parsed.inputValue) setInputValue(parsed.inputValue);
+        if (savedDraft.content.messages) setMessages(savedDraft.content.messages);
+        if (savedDraft.content.inputValue) setInputValue(savedDraft.content.inputValue);
       } catch (error) {
         console.warn('Failed to parse saved draft:', error);
       }
     }
-  }, [projectId]);
+  }, [autoSave.draft]);
+
+  // Update draft when messages or input change
+  React.useEffect(() => {
+    const content = {
+      messages,
+      inputValue,
+      projectTitle,
+      timestamp: new Date(),
+    };
+    autoSave.update(content, {
+      title: projectTitle,
+      projectId,
+    });
+  }, [messages, inputValue, projectTitle, projectId, autoSave]);
 
   // Keyboard shortcuts
   useKeyboardShortcuts([
     {
       key: 'k',
       modifiers: ['meta'],
-      handler: (e) => {
+      handler: (e: KeyboardEvent) => {
         e.preventDefault();
         setShowCommandPalette(true);
       },
@@ -119,32 +125,31 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
     {
       key: 's',
       modifiers: ['meta'],
-      handler: (e) => {
+      handler: (e: KeyboardEvent) => {
         e.preventDefault();
-        saveCurrentDraft();
+        autoSave.save();
       },
       description: 'Save current draft',
     },
     {
       key: 'z',
       modifiers: ['meta'],
-      handler: (e) => {
+      handler: (e: KeyboardEvent) => {
         e.preventDefault();
         if (e.shiftKey) {
           // Redo
-          const redoState = undoRedoService.redo();
-          if (redoState) {
-            setMessages(redoState.messages || []);
-            setInputValue(redoState.inputValue || '');
-          }
+          undoRedoService.redo().then((success) => {
+            if (success) {
+              console.log('Redo completed');
+            }
+          });
         } else {
           // Undo
-          const currentState = { messages, inputValue };
-          const undoState = undoRedoService.undo(currentState);
-          if (undoState) {
-            setMessages(undoState.messages || []);
-            setInputValue(undoState.inputValue || '');
-          }
+          undoRedoService.undo().then((success) => {
+            if (success) {
+              console.log('Undo completed');
+            }
+          });
         }
       },
       description: 'Undo (Shift+Meta+Z for redo)',
@@ -152,7 +157,7 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
     {
       key: 'Enter',
       modifiers: [],
-      handler: (e) => {
+      handler: (e: KeyboardEvent) => {
         if (!e.shiftKey && !isGenerating && inputValue.trim()) {
           e.preventDefault();
           handleSendMessage();
@@ -163,7 +168,7 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
     {
       key: 'Escape',
       modifiers: [],
-      handler: (e) => {
+      handler: (e: KeyboardEvent) => {
         if (showCommandPalette) {
           setShowCommandPalette(false);
         }
@@ -173,7 +178,7 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
       },
       description: 'Close panels',
     },
-  ], { enableOnInputs: true });
+  ]);
 
   // Command palette commands
   const commands = [
@@ -181,7 +186,7 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
       id: 'save-draft',
       label: 'Save Current Draft',
       icon: Save,
-      action: () => saveCurrentDraft(),
+      action: () => autoSave.save(),
       shortcut: '⌘S',
     },
     {
@@ -189,12 +194,11 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
       label: 'Undo',
       icon: Undo2,
       action: () => {
-        const currentState = { messages, inputValue };
-        const undoState = undoRedoService.undo(currentState);
-        if (undoState) {
-          setMessages(undoState.messages || []);
-          setInputValue(undoState.inputValue || '');
-        }
+        undoRedoService.undo().then((success) => {
+          if (success) {
+            console.log('Undo completed via command palette');
+          }
+        });
       },
       shortcut: '⌘Z',
     },
@@ -203,11 +207,11 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
       label: 'Redo',
       icon: Redo2,
       action: () => {
-        const redoState = undoRedoService.redo();
-        if (redoState) {
-          setMessages(redoState.messages || []);
-          setInputValue(redoState.inputValue || '');
-        }
+        undoRedoService.redo().then((success) => {
+          if (success) {
+            console.log('Redo completed via command palette');
+          }
+        });
       },
       shortcut: '⇧⌘Z',
     },
@@ -222,7 +226,9 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
       id: 'clear-drafts',
       label: 'Clear All Drafts',
       icon: Sparkles,
-      action: () => clearDrafts(),
+      action: () => {
+        autoSave.deleteDraft();
+      },
     },
   ];
 
@@ -233,7 +239,16 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
     
     // Save current state for undo/redo
     const currentState = { messages, inputValue };
-    undoRedoService.saveState(currentState);
+    undoRedoService.executeAction({
+      id: `send_message_${Date.now()}`,
+      type: 'send_message',
+      description: 'Send message',
+      timestamp: new Date(),
+      data: currentState,
+      execute: async () => {
+        // This will be handled by the main flow
+      }
+    });
 
     setInputValue('');
     
@@ -282,7 +297,7 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
   };
 
   const getAutoSaveStatus = () => {
-    switch (autoSaveState.status) {
+    switch (autoSave.status) {
       case 'saving':
         return { text: 'Saving...', icon: Loader2, className: 'text-blue-500' };
       case 'saved':
@@ -297,6 +312,15 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
   const autoSaveStatus = getAutoSaveStatus();
   const StatusIcon = autoSaveStatus.icon;
 
+  const getDraftHistory = () => {
+    return autoSave.getVersions();
+  };
+
+  const handleRestoreVersion = async (versionIndex: number) => {
+    await autoSave.restoreVersion(versionIndex);
+    setHistoryPanel(false);
+  };
+
   return (
     <div className="w-full h-full bg-app">
       <div className="max-w-7xl mx-auto p-8">
@@ -307,11 +331,11 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
             <div className="flex items-center gap-4">
               {/* Auto-save Status */}
               <div className={`flex items-center gap-2 text-sm ${autoSaveStatus.className}`}>
-                <StatusIcon size={16} className={autoSaveState.status === 'saving' ? 'animate-spin' : ''} />
+                <StatusIcon size={16} className={autoSave.status === 'saving' ? 'animate-spin' : ''} />
                 <span>{autoSaveStatus.text}</span>
-                {autoSaveState.lastSaved && (
+                {autoSave.lastSaved && (
                   <span className="text-xs text-ink-tertiary">
-                    {new Date(autoSaveState.lastSaved).toLocaleTimeString()}
+                    {autoSave.lastSaved.toLocaleTimeString()}
                   </span>
                 )}
               </div>
@@ -514,7 +538,4 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
                 </Button>
               </div>
               
-              <div className="space-y-4">
-                {getDraftHistory().map((draft, index) => (
-                  <div key={draft.id} className="border border-border-subtle rounded-lg p-4">
-                    <div className="flex items-center justify
+              <div className="

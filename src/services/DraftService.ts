@@ -57,6 +57,7 @@ export interface VersionInfo {
 }
 
 class DraftService {
+  private static instance: DraftService | null = null;
   private drafts: Map<string, DraftData> = new Map();
   private versions: Map<string, VersionInfo[]> = new Map();
   private autoSaveTimers: Map<string, NodeJS.Timeout> = new Map();
@@ -65,7 +66,7 @@ class DraftService {
   private storageKey = 'studio_roster_drafts';
   private versionStorageKey = 'studio_roster_versions';
 
-  constructor(options: DraftOptions = {}) {
+  private constructor(options: DraftOptions = {}) {
     this.options = {
       autoSaveInterval: 30000, // 30 seconds
       maxDrafts: 50,
@@ -79,6 +80,16 @@ class DraftService {
     // Load drafts from storage on initialization
     this.loadDraftsFromStorage();
     this.loadVersionsFromStorage();
+  }
+
+  /**
+   * Get singleton instance
+   */
+  static getInstance(options?: DraftOptions): DraftService {
+    if (!DraftService.instance) {
+      DraftService.instance = new DraftService(options);
+    }
+    return DraftService.instance;
   }
 
   /**
@@ -453,6 +464,21 @@ class DraftService {
     };
   }
 
+  /**
+   * Simple method to save draft (alias for compatibility)
+   */
+  async saveDraft(draftId: string, data: any): Promise<void> {
+    await this.updateDraft(draftId, data);
+  }
+
+  /**
+   * Simple method to load draft (alias for compatibility)
+   */
+  loadDraft(draftId: string): any {
+    const draft = this.getDraft(draftId);
+    return draft ? draft.content : null;
+  }
+
   // Private methods
 
   private startAutoSave(id: string): void {
@@ -596,3 +622,8 @@ class DraftService {
   }
 
   private getDraftStorage(): Record<string, any> {
+    try {
+      const stored = localStorage.getItem(this.storageKey);
+      return stored ? JSON.parse(stored) : {};
+    } catch (error) {
+      console.warn('Failed to load drafts from storage:', error);
