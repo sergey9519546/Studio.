@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
+import App from "./App.jsx"; // Visionary React Application
 import ErrorBoundary from "./components/ErrorBoundary";
+import "./index.css";
 import "./src/index.css";
 
 const rootElement = document.getElementById("root");
