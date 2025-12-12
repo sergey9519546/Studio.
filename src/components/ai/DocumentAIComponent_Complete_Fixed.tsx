@@ -480,4 +480,5 @@ async function simulateDocumentAnalysis(file: File, config: DocumentAIConfig): P
 // Mock data generators
 function generateMockDocumentContent(): DocumentContent {
   const sampleText = `This is a sample document with multiple paragraphs, headings, and structured content. 
-  The document analysis has successfully extracted text content and identified various elements including headings
+  The document analysis has successfully extracted text content and identified various elements including headings, 
+  paragraphs

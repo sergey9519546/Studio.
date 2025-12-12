@@ -543,18 +543,34 @@ function calculateAggregatedMetadata(mediaItems: MediaItem[]): AggregatedMetadat
         break;
       case 'audio':
         totalAudio++;
-        if (item.analysisResult.metadata?.duration) {
-          totalDuration += item.analysisResult.metadata.duration;
+        if (item.analysisResult.metadata && typeof item.analysisResult.metadata === 'object' && 'duration' in item.analysisResult.metadata) {
+          totalDuration += (item.analysisResult.metadata as any).duration;
         }
         break;
       case 'document':
         totalText++;
-        if (item.analysisResult.metadata?.wordCount) {
-          totalWords += item.analysisResult.metadata.wordCount;
+        if (item.analysisResult.metadata && typeof item.analysisResult.metadata === 'object' && 'wordCount' in item.analysisResult.metadata) {
+          totalWords += (item.analysisResult.metadata as any).wordCount;
         }
         break;
     }
 
     // Track time span
     const itemTime = item.timestamp;
-    if (itemTime < earliestTime)
+    if (itemTime < earliestTime) {
+      earliestTime = itemTime;
+    }
+    if (itemTime > latestTime) {
+      latestTime = itemTime;
+    }
+  });
+
+  const timeSpanDuration = latestTime.getTime() - earliestTime.getTime();
+  
+  // Calculate quality metrics
+  const totalConfidence = mediaItems.reduce((sum, item) => sum + item.confidence, 0);
+  const averageConfidence = mediaItems.length > 0 ? totalConfidence / mediaItems.length : 0;
+  const processingEfficiency = mediaItems.length > 0 
+    ? mediaItems.reduce((sum, item) => sum + (1 / (item.processingTime + 1)), 0) / mediaItems.length 
+    : 0;
+  const coverage = mediaItems.length / 10; // Assuming max 10

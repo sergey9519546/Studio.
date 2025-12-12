@@ -480,4 +480,24 @@ async function simulateDocumentAnalysis(file: File, config: DocumentAIConfig): P
 // Mock data generators
 function generateMockDocumentContent(): DocumentContent {
   const sampleText = `This is a sample document with multiple paragraphs, headings, and structured content. 
-  The document analysis has successfully extracted text content and identified various elements including headings
+  The document analysis has successfully extracted text content and identified various elements including headings, 
+  paragraphs, and metadata. The AI system can analyze document structure and provide insights.`;
+  
+  return {
+    text: sampleText,
+    extractedImages: [
+      {
+        id: 'img_1',
+        filename: 'chart.png',
+        format: 'PNG',
+        size: 102400,
+        page: 1,
+        position: { x: 100, y: 200, width: 300, height: 200 },
+        altText: 'Sample chart',
+        description: 'A bar chart showing quarterly sales data'
+      }
+    ],
+    tables: [
+      {
+        id: 'table_1',
+        data: [['Product', 'Sales', 'Revenue'], ['Widget A', '150', '$15,000'], ['Widget B', '200',

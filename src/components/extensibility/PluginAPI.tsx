@@ -23,8 +23,6 @@ import {
   Clock,
   Terminal
 } from 'lucide-react';
-import { initialize } from 'passport';
-import { config } from 'process';
 
 // Plugin API Types
 export interface PluginAPIConfig {
@@ -314,9 +312,9 @@ export const PluginAPIProvider: React.FC<PluginAPIProviderProps> = ({
   const [state, dispatch] = useReducer(pluginAPIReducer, initialState);
 
   // Initialize Plugin API
-  useEffect(()PluginAPI();
-  => {
-    initialize }, []);
+  useEffect(() => {
+    initializePluginAPI();
+  }, []);
 
   const initializePluginAPI = useCallback(async () => {
     dispatch({ type: 'SET_LOADING', payload: true });
@@ -421,8 +419,8 @@ export const PluginAPIProvider: React.FC<PluginAPIProviderProps> = ({
           {
             name: 'logging',
             type: 'logging',
-            handler:',
-            config: 'middleware.logRequest {
+            handler: 'middleware.logRequest',
+            config: {
               level: 'info',
               includeHeaders: false
             }
@@ -598,17 +596,3 @@ export const PluginAPIProvider: React.FC<PluginAPIProviderProps> = ({
         duration 
       };
     } catch (error) {
-      const duration = Date.now() - startTime;
-      const errorMessage = error instanceof Error ? error.message : 'API call failed';
-
-      const apiCall: APICall = {
-        id: callId,
-        endpoint,
-        method,
-        timestamp: new Date(),
-        duration,
-        status: 'error',
-        pluginId: pluginId || 'unknown',
-        requestSize: JSON.stringify(data || {}).length,
-        responseSize: 0,
-        userAgent: 'PluginAPI/1.
