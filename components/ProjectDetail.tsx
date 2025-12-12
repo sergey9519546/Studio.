@@ -1,13 +1,13 @@
-
-import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Clock, ChevronDown, User, Sparkles, Database, FileText, ScrollText, Layers, AlertTriangle, ArrowRight, LayoutDashboard, Grid } from 'lucide-react';
-import { Project, Freelancer, Assignment, Script, ProjectContextItem, KnowledgeSource, ActivityLog } from '../types';
+import { AlertTriangle, ArrowRight, ChevronDown, Clock, Database, FileText, Grid, Layers, LayoutDashboard, ScrollText, Sparkles, User } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { api } from '../services/api';
-import ReferenceGallery from './ReferenceGallery';
+import { ActivityLog, Assignment, Freelancer, KnowledgeSource, Project, ProjectContextItem, Script } from '../types';
 import ContextHub from './ContextHub';
-import ToneMoodBoard from './ToneMoodBoard';
 import MoodboardTab from './Moodboard/MoodboardTab';
+import ReferenceGallery from './ReferenceGallery';
+import ToneMoodBoard from './ToneMoodBoard';
+import AIChat from './AIChat';
 
 interface ProjectDetailProps {
     freelancers: Freelancer[];
@@ -53,7 +53,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects, freelancers, as
     const { id } = useParams();
     const navigate = useNavigate();
     const project = projects.find(p => p.id === id);
-    const [activeTab, setActiveTab] = useState<'overview' | 'moodboard'>('overview');
+    const [activeTab, setActiveTab] = useState<'overview' | 'moodboard' | 'ai-assistant'>('overview');
 
     const [scripts, setScripts] = useState<Script[]>([]);
     const [sources, setSources] = useState<KnowledgeSource[]>([]);
@@ -62,7 +62,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects, freelancers, as
 
     useEffect(() => {
         if (projectId) {
-            api.scripts.findByProject(projectId).then(res => setScripts(res.data)).catch(console.error);
+            api.scripts.findByProject(projectId).then(res => setScripts(res.data || [])).catch(console.error);
         }
     }, [projectId]);
 
@@ -147,12 +147,42 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects, freelancers, as
                     >
                         <Grid size={16} /> Visual Moodboard
                     </button>
+                    <button
+                        onClick={() => setActiveTab('ai-assistant')}
+                        className={`pb-3 text-sm font-semibold border-b-3 transition-all duration-200 flex items-center gap-2 ${activeTab === 'ai-assistant' ? 'border-purple-600 text-purple-600 bg-purple-50/30' : 'border-transparent text-pencil hover:text-purple-600'} px-4 -mx-4 rounded-t-lg`}
+                    >
+                        <Sparkles size={16} /> Studio AI
+                    </button>
                 </div>
             </header>
 
             {activeTab === 'moodboard' ? (
                 <div className="flex-1">
                     <MoodboardTab projectId={project.id} />
+                </div>
+            ) : activeTab === 'ai-assistant' ? (
+                <div className="flex-1 p-8">
+                    <div className="max-w-4xl mx-auto h-full">
+                        <AIChat
+                            freelancers={freelancers}
+                            projects={projects}
+                            assignments={assignments}
+                            customTitle={`Project AI Assistant - ${project.name}`}
+                            customSystemInstruction={`You are a creative AI assistant specifically for the project "${project.name}". ${project.description ? `Project Description: ${project.description}` : ''} Provide creative direction, suggest improvements, and help with project-related tasks. Be concise and focused on the project's goals.`}
+                            contextData={JSON.stringify({
+                                projectName: project.name,
+                                projectDescription: project.description,
+                                clientName: project.clientName,
+                                category: project.category,
+                                dueDate: project.dueDate,
+                                budget: project.budget,
+                                format: project.format,
+                                length: project.length,
+                                knowledgeBase: project.knowledgeBase || [],
+                                references: project.references || []
+                            })}
+                        />
+                    </div>
                 </div>
             ) : (
                 <div className="flex-1 flex flex-col lg:flex-row overflow-hidden max-w-[1800px] mx-auto w-full p-8 gap-10 animate-in fade-in slide-in-from-bottom-2 duration-300">
@@ -283,22 +313,4 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects, freelancers, as
                                     </div>
                                 ) : (
                                     scripts.map(script => (
-                                        <Link key={script.id} to={`/studio?project=${project.id}&script=${script.id}`} className="block p-4 hover:bg-canvas rounded-xl border border-mist hover:border-indigo-200 transition-all group shadow-sm hover:shadow-md">
-                                            <div className="flex justify-between items-center mb-2">
-                                                <span className="font-semibold text-xs text-ink group-hover:text-indigo-600 transition-colors truncate">{script.title}</span>
-                                                <span className="text-[9px] font-mono font-bold text-pencil bg-canvas px-1.5 py-0.5 rounded border border-mist/50 group-hover:border-indigo-100 group-hover:text-indigo-500 transition-colors">v{script.version}</span>
-                                            </div>
-                                            <div className="text-[10px] text-pencil line-clamp-2 leading-relaxed font-medium">{script.content.substring(0, 80)}...</div>
-                                        </Link>
-                                    ))
-                                )}
-                            </div>
-                        </div>
-                    </aside>
-                </div>
-            )}
-        </div>
-    );
-};
-
-export default ProjectDetail;
+                                        <Link key={script.id} to={`/studio?project=${project.id}&script=${script.id}`} className="block p-4 hover:bg-canvas rounded-xl border border-mist hover:border-indigo-200 transition-all group shadow-sm hover

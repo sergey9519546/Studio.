@@ -1,7 +1,6 @@
 import { Box } from "lucide-react";
 import { useState } from "react";
 
-import { PageEditor } from "./components/pages/PageEditor";
 import { Moodboard } from "./src/components/Moodboard";
 import { ProjectDashboard } from "./src/components/ProjectDashboard";
 import { TalentRoster } from "./src/components/TalentRoster";
@@ -184,8 +183,6 @@ export default function App() {
         );
       case "knowledge-base":
         return <ConfluenceView />;
-      case "pages":
-        return <PageEditor initialTitle="Creative OS Page" status="draft" />;
       case "transcripts":
         return <TranscriptsView />;
       default:

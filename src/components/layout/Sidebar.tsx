@@ -17,9 +17,8 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   const operations = [
-    { id: "dashboard", icon: Layout, label: "Atelier" },
-    { id: "projects", icon: Layers, label: "Manifests" },
-    { id: "pages", icon: FileText, label: "Pages" },
+    { id: "dashboard", icon: Layout, label: "Dashboard" },
+    { id: "projects", icon: Layers, label: "Projects" },
     { id: "studio", icon: Sparkles, label: "Studio AI" },
     { id: "moodboard", icon: Grid, label: "Visuals" },
     { id: "roster", icon: Users, label: "Talent" },
