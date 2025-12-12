@@ -24,7 +24,7 @@ import {
     X,
     Zap
 } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 
 // --- FIREBASE CONFIG ---
 const firebaseConfig = typeof __firebase_config !== 'undefined' 
@@ -134,6 +134,17 @@ const DS = {
   }
 };
 
+// Lightweight skeleton block for loading placeholders
+const Skeleton = ({ className = '' }) => (
+  <div
+    aria-hidden="true"
+    className={`
+      bg-gradient-to-r from-black/[0.04] via-black/[0.08] to-black/[0.04]
+      animate-pulse rounded-xl ${className}
+    `}
+  />
+);
+
 // --- MOCK DATA ---
 const mockFreelancers = [
   { id: '1', name: 'Sarah Chen', role: 'Director', tags: ['cinematic', 'narrative', 'documentary'], rating: 4.9, avatar: null },
@@ -230,26 +241,39 @@ const Textarea = ({ className = '', ...props }) => (
 // Modal Component
 const Modal = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null;
+  const titleId = useId();
   
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={titleId}
+    >
       <div 
         className="absolute inset-0 bg-black/20 backdrop-blur-sm"
         onClick={onClose}
+        aria-hidden="true"
       />
       <Card 
         className={`relative z-10 w-full max-w-2xl max-h-[90vh] overflow-auto ${DS.layout.pad}`}
         hover={false}
+        tabIndex={-1}
+        onKeyDown={(e) => e.key === 'Escape' && onClose?.()}
       >
         <div className="flex items-center justify-between mb-6">
-          <h2 className={`${DS.typography.heading} ${DS.colors.textPrimary}`}>{title}</h2>
+          <h2 id={titleId} className={`${DS.typography.heading} ${DS.colors.textPrimary}`}>{title}</h2>
           <button 
             onClick={onClose}
             className={`p-2 ${DS.layout.radiusFull} ${DS.colors.glass} hover:bg-white/90`}
+            aria-label="Close dialog"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
+        <p className="sr-only" id={`${titleId}-desc`}>
+          Press Escape or the close button to dismiss this modal.
+        </p>
         {children}
       </Card>
     </div>
@@ -258,29 +282,43 @@ const Modal = ({ isOpen, onClose, title, children }) => {
 
 // Navigation Dock (Floating Command Bar)
 const NavigationDock = ({ currentView, setCurrentView, onCreateProject }) => (
-  <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
-    <Card glass className="flex items-center gap-2 px-4 py-3" hover={false}>
+  <div className="fixed bottom-6 left-4 right-4 md:left-1/2 md:-translate-x-1/2 md:right-auto z-40 pointer-events-none">
+    <Card
+      glass
+      className="flex items-center gap-2 px-4 py-3 w-full max-w-4xl mx-auto pointer-events-auto backdrop-blur-xl border border-black/5"
+      hover={false}
+      role="navigation"
+      aria-label="Primary navigation dock"
+    >
       <button 
         onClick={() => setCurrentView('dashboard')}
-        className={`p-3 ${DS.layout.radiusFull} transition-all ${currentView === 'dashboard' ? DS.colors.obsidian + ' ' + DS.colors.porcelain : 'hover:bg-black/5'}`}
+        className={`p-3 ${DS.layout.radiusFull} transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5C5CFF] ${currentView === 'dashboard' ? DS.colors.obsidian + ' ' + DS.colors.porcelain : 'hover:bg-black/5 active:scale-95'}`}
+        aria-label="Go to dashboard"
+        aria-current={currentView === 'dashboard' ? 'page' : undefined}
       >
         <Home className="w-5 h-5" />
       </button>
       <button 
         onClick={() => setCurrentView('projects')}
-        className={`p-3 ${DS.layout.radiusFull} transition-all ${currentView === 'projects' ? DS.colors.obsidian + ' ' + DS.colors.porcelain : 'hover:bg-black/5'}`}
+        className={`p-3 ${DS.layout.radiusFull} transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5C5CFF] ${currentView === 'projects' ? DS.colors.obsidian + ' ' + DS.colors.porcelain : 'hover:bg-black/5 active:scale-95'}`}
+        aria-label="Go to projects"
+        aria-current={currentView === 'projects' ? 'page' : undefined}
       >
         <FolderKanban className="w-5 h-5" />
       </button>
       <button 
         onClick={() => setCurrentView('roster')}
-        className={`p-3 ${DS.layout.radiusFull} transition-all ${currentView === 'roster' ? DS.colors.obsidian + ' ' + DS.colors.porcelain : 'hover:bg-black/5'}`}
+        className={`p-3 ${DS.layout.radiusFull} transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5C5CFF] ${currentView === 'roster' ? DS.colors.obsidian + ' ' + DS.colors.porcelain : 'hover:bg-black/5 active:scale-95'}`}
+        aria-label="Go to talent roster"
+        aria-current={currentView === 'roster' ? 'page' : undefined}
       >
         <Users className="w-5 h-5" />
       </button>
       <button 
         onClick={() => setCurrentView('writers-room')}
-        className={`p-3 ${DS.layout.radiusFull} transition-all ${currentView === 'writers-room' ? DS.colors.obsidian + ' ' + DS.colors.porcelain : 'hover:bg-black/5'}`}
+        className={`p-3 ${DS.layout.radiusFull} transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5C5CFF] ${currentView === 'writers-room' ? DS.colors.obsidian + ' ' + DS.colors.porcelain : 'hover:bg-black/5 active:scale-95'}`}
+        aria-label="Go to writer's room"
+        aria-current={currentView === 'writers-room' ? 'page' : undefined}
       >
         <MessageSquare className="w-5 h-5" />
       </button>
@@ -290,6 +328,7 @@ const NavigationDock = ({ currentView, setCurrentView, onCreateProject }) => (
         variant="accent" 
         size="sm"
         onClick={onCreateProject}
+        aria-label="Create new project"
       >
         Create
       </Button>
@@ -472,12 +511,13 @@ Example: 'Hey team, we need a 60-second spot for the new product launch. Think A
 };
 
 // Dashboard View
-const DashboardView = ({ projects, setCurrentView, setSelectedProject }) => {
+const DashboardView = ({ projects, setCurrentView, setSelectedProject, isLoading }) => {
   const hour = new Date().getHours();
   const greeting = hour < 12 ? 'Good Morning.' : hour < 18 ? 'Good Afternoon.' : 'Good Evening.';
+  const projectCount = isLoading ? '—' : projects.length;
 
   return (
-    <div className={`min-h-screen ${DS.colors.void} p-8 pb-32`}>
+    <main className={`min-h-screen ${DS.colors.void} p-6 md:p-8 pb-32`} role="main" aria-busy={isLoading}>
       {/* Noise Overlay */}
       <div className="fixed inset-0 opacity-[0.015] pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIvPjwvc3ZnPg==')]" />
       
@@ -486,179 +526,196 @@ const DashboardView = ({ projects, setCurrentView, setSelectedProject }) => {
         <div className="mb-12">
           <h1 className={`${DS.typography.hero} ${DS.colors.textPrimary}`}>{greeting}</h1>
           <p className={`${DS.typography.subheading} ${DS.colors.textSecondary} mt-2`}>
-            {projects.length} active projects in your creative universe.
+            {projectCount} active projects in your creative universe.
           </p>
         </div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-12 gap-6">
-          {/* Stats Card - Large */}
-          <Card className={`col-span-4 ${DS.layout.pad}`}>
-            <span className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>ACTIVE PROJECTS</span>
-            <div className={`${DS.typography.hero} ${DS.colors.textPrimary} mt-2`}>{projects.length}</div>
-            <div className={`flex items-center gap-2 mt-4 ${DS.colors.accent}`}>
-              <ArrowRight className="w-4 h-4" />
-              <span className={DS.typography.caption}>View all</span>
-            </div>
-          </Card>
-
-          {/* Quick Actions */}
-          <Card className={`col-span-4 ${DS.layout.pad}`}>
-            <span className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>QUICK ACTIONS</span>
-            <div className="mt-4 space-y-3">
-              <button 
-                onClick={() => setCurrentView('projects')}
-                className={`w-full flex items-center justify-between p-3 ${DS.colors.void} ${DS.layout.radiusSm} hover:bg-[#EBEBED] transition-colors`}
-              >
-                <span className={`${DS.typography.caption} ${DS.colors.textPrimary} flex items-center gap-2`}>
-                  <FolderKanban className="w-4 h-4" /> Projects
-                </span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
-              <button 
-                onClick={() => setCurrentView('roster')}
-                className={`w-full flex items-center justify-between p-3 ${DS.colors.void} ${DS.layout.radiusSm} hover:bg-[#EBEBED] transition-colors`}
-              >
-                <span className={`${DS.typography.caption} ${DS.colors.textPrimary} flex items-center gap-2`}>
-                  <Users className="w-4 h-4" /> Talent Roster
-                </span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
-              <button 
-                onClick={() => setCurrentView('writers-room')}
-                className={`w-full flex items-center justify-between p-3 ${DS.colors.void} ${DS.layout.radiusSm} hover:bg-[#EBEBED] transition-colors`}
-              >
-                <span className={`${DS.typography.caption} ${DS.colors.textPrimary} flex items-center gap-2`}>
-                  <MessageSquare className="w-4 h-4" /> Writer's Room
-                </span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          </Card>
-
-          {/* AI Insight */}
-          <Card className={`col-span-4 ${DS.layout.pad} ${DS.colors.obsidian}`}>
-            <div className="flex items-center gap-2 mb-4">
-              <Sparkles className="w-5 h-5 text-white/60" />
-              <span className={`${DS.typography.micro} text-white/60`}>AI INSIGHT</span>
-            </div>
-            <p className={`${DS.typography.body} text-white/90`}>
-              Your projects are 23% ahead of typical timelines. Great momentum—consider assigning additional talent to "Brand Campaign" for faster delivery.
-            </p>
-          </Card>
-
-          {/* Recent Projects */}
-          <div className="col-span-8">
-            <div className="flex items-center justify-between mb-4">
-              <span className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>RECENT PROJECTS</span>
-              <button 
-                onClick={() => setCurrentView('projects')}
-                className={`${DS.typography.caption} ${DS.colors.accent} flex items-center gap-1`}
-              >
-                View All <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {projects.slice(0, 4).map(project => (
-                <Card 
-                  key={project.id} 
-                  className={DS.layout.padSm}
-                  onClick={() => {
-                    setSelectedProject(project);
-                    setCurrentView('project-detail');
-                  }}
-                >
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className={`${DS.typography.subheading} ${DS.colors.textPrimary}`}>{project.title}</h3>
-                      <p className={`${DS.typography.caption} ${DS.colors.textSecondary} mt-1`}>{project.description?.slice(0, 60)}...</p>
-                    </div>
-                    <span className={`px-3 py-1 ${DS.layout.radiusFull} bg-[#5C5CFF]/10 ${DS.colors.accent} ${DS.typography.micro}`}>
-                      {project.tone || 'creative'}
-                    </span>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* Team Preview */}
-          <Card className={`col-span-4 ${DS.layout.pad}`}>
-            <span className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>TOP TALENT</span>
-            <div className="mt-4 space-y-3">
-              {mockFreelancers.slice(0, 3).map(freelancer => (
-                <div key={freelancer.id} className="flex items-center gap-3">
-                  <div className={`w-10 h-10 ${DS.colors.void} ${DS.layout.radiusFull} flex items-center justify-center`}>
-                    <User className="w-5 h-5 text-gray-400" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className={`${DS.typography.caption} ${DS.colors.textPrimary} truncate`}>{freelancer.name}</p>
-                    <p className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>{freelancer.role}</p>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-                    <span className={`${DS.typography.caption} ${DS.colors.textPrimary}`}>{freelancer.rating}</span>
-                  </div>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6" aria-live="polite">
+          {isLoading ? (
+            <>
+              <Skeleton className="col-span-1 md:col-span-4 h-40" />
+              <Skeleton className="col-span-1 md:col-span-4 h-40" />
+              <Skeleton className="col-span-1 md:col-span-4 h-40" />
+              <Skeleton className="col-span-1 md:col-span-8 h-60" />
+              <Skeleton className="col-span-1 md:col-span-4 h-60" />
+            </>
+          ) : (
+            <>
+              {/* Stats Card - Large */}
+              <Card className={`col-span-1 md:col-span-4 ${DS.layout.pad}`}>
+                <span className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>ACTIVE PROJECTS</span>
+                <div className={`${DS.typography.hero} ${DS.colors.textPrimary} mt-2`}>{projects.length}</div>
+                <div className={`flex items-center gap-2 mt-4 ${DS.colors.accent}`}>
+                  <ArrowRight className="w-4 h-4" />
+                  <span className={DS.typography.caption}>View all</span>
                 </div>
-              ))}
-            </div>
-          </Card>
+              </Card>
+
+              {/* Quick Actions */}
+              <Card className={`col-span-1 md:col-span-4 ${DS.layout.pad}`}>
+                <span className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>QUICK ACTIONS</span>
+                <div className="mt-4 space-y-3">
+                  <button 
+                    onClick={() => setCurrentView('projects')}
+                    className={`w-full flex items-center justify-between p-3 ${DS.colors.void} ${DS.layout.radiusSm} hover:bg-[#EBEBED] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5C5CFF]`}
+                  >
+                    <span className={`${DS.typography.caption} ${DS.colors.textPrimary} flex items-center gap-2`}>
+                      <FolderKanban className="w-4 h-4" aria-hidden="true" /> Projects
+                    </span>
+                    <ChevronRight className="w-4 h-4" aria-hidden="true" />
+                  </button>
+                  <button 
+                    onClick={() => setCurrentView('roster')}
+                    className={`w-full flex items-center justify-between p-3 ${DS.colors.void} ${DS.layout.radiusSm} hover:bg-[#EBEBED] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5C5CFF]`}
+                  >
+                    <span className={`${DS.typography.caption} ${DS.colors.textPrimary} flex items-center gap-2`}>
+                      <Users className="w-4 h-4" aria-hidden="true" /> Talent Roster
+                    </span>
+                    <ChevronRight className="w-4 h-4" aria-hidden="true" />
+                  </button>
+                  <button 
+                    onClick={() => setCurrentView('writers-room')}
+                    className={`w-full flex items-center justify-between p-3 ${DS.colors.void} ${DS.layout.radiusSm} hover:bg-[#EBEBED] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5C5CFF]`}
+                  >
+                    <span className={`${DS.typography.caption} ${DS.colors.textPrimary} flex items-center gap-2`}>
+                      <MessageSquare className="w-4 h-4" aria-hidden="true" /> Writer's Room
+                    </span>
+                    <ChevronRight className="w-4 h-4" aria-hidden="true" />
+                  </button>
+                </div>
+              </Card>
+
+              {/* AI Insight */}
+              <Card className={`col-span-1 md:col-span-4 ${DS.layout.pad} ${DS.colors.obsidian}`}>
+                <div className="flex items-center gap-2 mb-4">
+                  <Sparkles className="w-5 h-5 text-white/60" aria-hidden="true" />
+                  <span className={`${DS.typography.micro} text-white/60`}>AI INSIGHT</span>
+                </div>
+                <p className={`${DS.typography.body} text-white/90`}>
+                  Your projects are 23% ahead of typical timelines. Great momentum-consider assigning additional talent to "Brand Campaign" for faster delivery.
+                </p>
+              </Card>
+
+              {/* Recent Projects */}
+              <div className="col-span-1 md:col-span-8">
+                <div className="flex items-center justify-between mb-4">
+                  <span className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>RECENT PROJECTS</span>
+                  <button 
+                    onClick={() => setCurrentView('projects')}
+                    className={`${DS.typography.caption} ${DS.colors.accent} flex items-center gap-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5C5CFF]`}
+                  >
+                    View All <ChevronRight className="w-4 h-4" aria-hidden="true" />
+                  </button>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {projects.slice(0, 4).map(project => (
+                    <Card 
+                      key={project.id} 
+                      className={`${DS.layout.padSm} transition-transform hover:-translate-y-0.5`}
+                      onClick={() => {
+                        setSelectedProject(project);
+                        setCurrentView('project-detail');
+                      }}
+                    >
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <h3 className={`${DS.typography.subheading} ${DS.colors.textPrimary}`}>{project.title}</h3>
+                          <p className={`${DS.typography.caption} ${DS.colors.textSecondary} mt-1`}>{project.description?.slice(0, 60)}...</p>
+                        </div>
+                        <span className={`px-3 py-1 ${DS.layout.radiusFull} bg-[#5C5CFF]/10 ${DS.colors.accent} ${DS.typography.micro}`}>
+                          {project.tone || 'creative'}
+                        </span>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+
+              {/* Team Preview */}
+              <Card className={`col-span-1 md:col-span-4 ${DS.layout.pad}`}>
+                <span className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>TOP TALENT</span>
+                <div className="mt-4 space-y-3">
+                  {mockFreelancers.slice(0, 3).map(freelancer => (
+                    <div key={freelancer.id} className="flex items-center gap-3">
+                      <div className={`w-10 h-10 ${DS.colors.void} ${DS.layout.radiusFull} flex items-center justify-center`}>
+                        <User className="w-5 h-5 text-gray-400" aria-hidden="true" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className={`${DS.typography.caption} ${DS.colors.textPrimary} truncate`}>{freelancer.name}</p>
+                        <p className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>{freelancer.role}</p>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Star className="w-3 h-3 text-amber-400 fill-amber-400" aria-hidden="true" />
+                        <span className={`${DS.typography.caption} ${DS.colors.textPrimary}`}>{freelancer.rating}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            </>
+          )}
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
 // Projects View
-const ProjectsView = ({ projects, setSelectedProject, setCurrentView }) => (
-  <div className={`min-h-screen ${DS.colors.void} p-8 pb-32`}>
+const ProjectsView = ({ projects, setSelectedProject, setCurrentView, isLoading }) => (
+  <main className={`min-h-screen ${DS.colors.void} p-6 md:p-8 pb-32`} aria-busy={isLoading}>
     <div className="max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className={`${DS.typography.heading} ${DS.colors.textPrimary}`}>Projects</h1>
-          <p className={`${DS.colors.textSecondary} mt-1`}>{projects.length} creative projects</p>
+          <p className={`${DS.colors.textSecondary} mt-1`}>{isLoading ? 'Loading projects…' : `${projects.length} creative projects`}</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-6">
-        {projects.map(project => (
-          <Card 
-            key={project.id} 
-            className={DS.layout.pad}
-            onClick={() => {
-              setSelectedProject(project);
-              setCurrentView('project-detail');
-            }}
-          >
-            <div className="flex items-start justify-between mb-4">
-              <span className={`px-3 py-1 ${DS.layout.radiusFull} bg-[#5C5CFF]/10 ${DS.colors.accent} ${DS.typography.micro}`}>
-                {project.tone || 'creative'}
-              </span>
-              <span className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>
-                {project.status || 'active'}
-              </span>
-            </div>
-            <h3 className={`${DS.typography.subheading} ${DS.colors.textPrimary}`}>{project.title}</h3>
-            <p className={`${DS.typography.body} ${DS.colors.textSecondary} mt-2 line-clamp-2`}>{project.description}</p>
-            
-            {(project.dos?.length > 0 || project.donts?.length > 0) && (
-              <div className="mt-4 pt-4 border-t border-black/5">
-                <div className="flex gap-2 flex-wrap">
-                  {project.dos?.slice(0, 2).map((tag, i) => (
-                    <span key={i} className={`px-2 py-1 ${DS.layout.radiusFull} bg-green-50 text-green-600 ${DS.typography.micro}`}>
-                      {tag.slice(0, 15)}...
-                    </span>
-                  ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" aria-live="polite">
+        {isLoading
+          ? Array.from({ length: 6 }).map((_, idx) => (
+              <Skeleton key={`project-skeleton-${idx}`} className="h-48" />
+            ))
+          : projects.map(project => (
+              <Card 
+                key={project.id} 
+                className={`${DS.layout.pad} transition-transform hover:-translate-y-0.5`}
+                onClick={() => {
+                  setSelectedProject(project);
+                  setCurrentView('project-detail');
+                }}
+                aria-label={`Open ${project.title}`}
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <span className={`px-3 py-1 ${DS.layout.radiusFull} bg-[#5C5CFF]/10 ${DS.colors.accent} ${DS.typography.micro}`}>
+                    {project.tone || 'creative'}
+                  </span>
+                  <span className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>
+                    {project.status || 'active'}
+                  </span>
                 </div>
-              </div>
-            )}
-          </Card>
-        ))}
+                <h3 className={`${DS.typography.subheading} ${DS.colors.textPrimary}`}>{project.title}</h3>
+                <p className={`${DS.typography.body} ${DS.colors.textSecondary} mt-2 line-clamp-2`}>{project.description}</p>
+                
+                {(project.dos?.length > 0 || project.donts?.length > 0) && (
+                  <div className="mt-4 pt-4 border-t border-black/5">
+                    <div className="flex gap-2 flex-wrap">
+                      {project.dos?.slice(0, 2).map((tag, i) => (
+                        <span key={i} className={`px-2 py-1 ${DS.layout.radiusFull} bg-green-50 text-green-600 ${DS.typography.micro}`}>
+                          {tag.slice(0, 15)}...
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </Card>
+            ))}
 
-        {projects.length === 0 && (
-          <div className="col-span-3 text-center py-24">
+        {!isLoading && projects.length === 0 && (
+          <div className="col-span-1 md:col-span-2 xl:col-span-3 text-center py-24">
             <div className={`w-20 h-20 ${DS.colors.void} ${DS.layout.radiusFull} flex items-center justify-center mx-auto mb-4`}>
-              <FolderKanban className="w-10 h-10 text-gray-300" />
+              <FolderKanban className="w-10 h-10 text-gray-300" aria-hidden="true" />
             </div>
             <h3 className={`${DS.typography.subheading} ${DS.colors.textPrimary}`}>No projects yet</h3>
             <p className={`${DS.colors.textSecondary} mt-2`}>Create your first project using the command bar below.</p>
@@ -666,7 +723,7 @@ const ProjectsView = ({ projects, setSelectedProject, setCurrentView }) => (
         )}
       </div>
     </div>
-  </div>
+  </main>
 );
 
 // Project Detail View (Bento Dashboard)
@@ -703,7 +760,7 @@ Make it creative, engaging, and aligned with the project's tone.`;
   };
 
   return (
-    <div className={`min-h-screen ${DS.colors.void} p-8 pb-32`}>
+    <main className={`min-h-screen ${DS.colors.void} p-6 md:p-8 pb-32`} aria-busy={generatingScript}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
@@ -720,9 +777,9 @@ Make it creative, engaging, and aligned with the project's tone.`;
         </div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Brief Card */}
-          <Card className={`col-span-8 ${DS.layout.pad}`} hover={false}>
+          <Card className={`lg:col-span-8 ${DS.layout.pad}`} hover={false}>
             <div className="flex items-center gap-2 mb-4">
               <Target className="w-5 h-5 text-gray-400" />
               <span className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>PROJECT BRIEF</span>
@@ -731,13 +788,13 @@ Make it creative, engaging, and aligned with the project's tone.`;
           </Card>
 
           {/* Tone Card */}
-          <Card className={`col-span-4 ${DS.layout.pad} ${DS.colors.accentBg}`} hover={false}>
+          <Card className={`lg:col-span-4 ${DS.layout.pad} ${DS.colors.accentBg}`} hover={false}>
             <span className={`${DS.typography.micro} text-white/60`}>TONE & MOOD</span>
             <div className={`text-3xl font-semibold text-white mt-4 tracking-tight`}>{project.tone}</div>
           </Card>
 
           {/* Do's */}
-          <Card className={`col-span-6 ${DS.layout.pad}`} hover={false}>
+          <Card className={`lg:col-span-6 ${DS.layout.pad}`} hover={false}>
             <div className="flex items-center gap-2 mb-4">
               <Check className="w-5 h-5 text-green-500" />
               <span className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>DO'S</span>
@@ -753,7 +810,7 @@ Make it creative, engaging, and aligned with the project's tone.`;
           </Card>
 
           {/* Don'ts */}
-          <Card className={`col-span-6 ${DS.layout.pad}`} hover={false}>
+          <Card className={`lg:col-span-6 ${DS.layout.pad}`} hover={false}>
             <div className="flex items-center gap-2 mb-4">
               <AlertCircle className="w-5 h-5 text-red-500" />
               <span className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>DON'TS</span>
@@ -769,7 +826,7 @@ Make it creative, engaging, and aligned with the project's tone.`;
           </Card>
 
           {/* Script Generator */}
-          <Card className={`col-span-12 ${DS.layout.pad}`} hover={false}>
+          <Card className={`lg:col-span-12 ${DS.layout.pad}`} hover={false} aria-live="polite">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-2">
                 <Film className="w-5 h-5 text-gray-400" />
@@ -803,7 +860,7 @@ Make it creative, engaging, and aligned with the project's tone.`;
           </Card>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
@@ -847,16 +904,18 @@ Return a JSON object with:
   };
 
   return (
-    <div className={`min-h-screen ${DS.colors.void} p-8 pb-32`}>
+    <main className={`min-h-screen ${DS.colors.void} p-6 md:p-8 pb-32`} aria-busy={loading}>
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-8">
           <div>
             <h1 className={`${DS.typography.heading} ${DS.colors.textPrimary}`}>Talent Resonance</h1>
             <p className={`${DS.colors.textSecondary} mt-1`}>AI-powered team matching</p>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <label className="sr-only" htmlFor="project-selector">Select project for team matching</label>
             <select 
-              className={`px-4 py-2 ${DS.colors.glass} ${DS.layout.radiusFull} ${DS.colors.textPrimary} focus:outline-none`}
+              id="project-selector"
+              className={`px-4 py-2 ${DS.colors.glass} ${DS.layout.radiusFull} ${DS.colors.textPrimary} focus:outline-none focus:ring-2 focus:ring-[#5C5CFF]/40`}
               value={activeProject?.id || ''}
               onChange={(e) => setActiveProject(projects.find(p => p.id === e.target.value))}
             >
@@ -877,12 +936,12 @@ Return a JSON object with:
           </div>
         </div>
 
-        <div className="grid grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6" aria-live="polite">
           {/* Recommendations Panel */}
           {recommendations && (
-            <Card className={`col-span-4 ${DS.layout.pad} ${DS.colors.obsidian}`} hover={false}>
+            <Card className={`lg:col-span-4 ${DS.layout.pad} ${DS.colors.obsidian}`} hover={false}>
               <div className="flex items-center gap-2 mb-6">
-                <Sparkles className="w-5 h-5 text-white/60" />
+                <Sparkles className="w-5 h-5 text-white/60" aria-hidden="true" />
                 <span className={`${DS.typography.micro} text-white/60`}>AI RECOMMENDATION</span>
               </div>
               <p className="text-white/80 text-sm mb-6">{recommendations.teamSynopsis}</p>
@@ -901,23 +960,30 @@ Return a JSON object with:
           )}
 
           {/* Freelancer Table */}
-          <Card className={`${recommendations ? 'col-span-8' : 'col-span-12'} overflow-hidden`} hover={false}>
-            <table className="w-full">
+          <Card className={`${recommendations ? 'lg:col-span-8' : 'lg:col-span-12'} overflow-hidden`} hover={false}>
+            <table className="w-full" role="table" aria-label="Freelancer roster">
               <thead>
                 <tr className={`${DS.colors.void} border-b border-black/5`}>
-                  <th className={`${DS.typography.micro} ${DS.colors.textSecondary} text-left px-6 py-4`}>NAME</th>
-                  <th className={`${DS.typography.micro} ${DS.colors.textSecondary} text-left px-6 py-4`}>ROLE</th>
-                  <th className={`${DS.typography.micro} ${DS.colors.textSecondary} text-left px-6 py-4`}>TAGS</th>
-                  <th className={`${DS.typography.micro} ${DS.colors.textSecondary} text-left px-6 py-4`}>RATING</th>
+                  <th scope="col" className={`${DS.typography.micro} ${DS.colors.textSecondary} text-left px-6 py-4`}>NAME</th>
+                  <th scope="col" className={`${DS.typography.micro} ${DS.colors.textSecondary} text-left px-6 py-4`}>ROLE</th>
+                  <th scope="col" className={`${DS.typography.micro} ${DS.colors.textSecondary} text-left px-6 py-4`}>TAGS</th>
+                  <th scope="col" className={`${DS.typography.micro} ${DS.colors.textSecondary} text-left px-6 py-4`}>RATING</th>
                 </tr>
               </thead>
               <tbody>
-                {mockFreelancers.map(freelancer => (
+                {loading && !recommendations && Array.from({ length: 5 }).map((_, idx) => (
+                  <tr key={`roster-skeleton-${idx}`} className="border-b border-black/5">
+                    <td className="px-6 py-4" colSpan={4}>
+                      <Skeleton className="h-6" />
+                    </td>
+                  </tr>
+                ))}
+                {!loading && mockFreelancers.map(freelancer => (
                   <tr key={freelancer.id} className="border-b border-black/5 hover:bg-black/[0.02] transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         <div className={`w-10 h-10 ${DS.colors.void} ${DS.layout.radiusFull} flex items-center justify-center`}>
-                          <User className="w-5 h-5 text-gray-400" />
+                          <User className="w-5 h-5 text-gray-400" aria-hidden="true" />
                         </div>
                         <span className={`${DS.typography.caption} ${DS.colors.textPrimary}`}>{freelancer.name}</span>
                       </div>
@@ -934,7 +1000,7 @@ Return a JSON object with:
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-1">
-                        <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
+                        <Star className="w-4 h-4 text-amber-400 fill-amber-400" aria-hidden="true" />
                         <span className={`${DS.typography.caption} ${DS.colors.textPrimary}`}>{freelancer.rating}</span>
                       </div>
                     </td>
@@ -945,7 +1011,7 @@ Return a JSON object with:
           </Card>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
@@ -992,9 +1058,9 @@ Reference specific projects when relevant to provide more targeted advice.`;
   };
 
   return (
-    <div className={`min-h-screen ${DS.colors.void} flex`}>
+    <main className={`min-h-screen ${DS.colors.void} flex flex-col md:flex-row`} role="main" aria-busy={loading}>
       {/* Context Sidebar */}
-      <div className="w-80 p-6 border-r border-black/5">
+      <div className="hidden md:block w-80 p-6 border-r border-black/5">
         <span className={`${DS.typography.micro} ${DS.colors.textSecondary}`}>ACTIVE PROJECTS</span>
         <div className="mt-4 space-y-3">
           {projects.map(project => (
@@ -1012,7 +1078,7 @@ Reference specific projects when relevant to provide more targeted advice.`;
       {/* Chat Interface */}
       <div className="flex-1 flex flex-col">
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-8 pb-32 space-y-6">
+        <div className="flex-1 overflow-y-auto p-4 md:p-8 pb-32 space-y-6" aria-live="polite">
           {messages.map((msg, i) => (
             <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               <div className={`max-w-2xl ${msg.role === 'user' 
@@ -1030,7 +1096,7 @@ Reference specific projects when relevant to provide more targeted advice.`;
             </div>
           ))}
           {loading && (
-            <div className="flex justify-start">
+            <div className="flex justify-start" role="status" aria-live="assertive">
               <div className={`${DS.colors.surface} ${DS.layout.radius} px-6 py-4 ${DS.shadows.ambient}`}>
                 <Loader2 className="w-5 h-5 animate-spin text-[#5C5CFF]" />
               </div>
@@ -1040,9 +1106,11 @@ Reference specific projects when relevant to provide more targeted advice.`;
         </div>
 
         {/* Input Bar */}
-        <div className="fixed bottom-24 left-80 right-0 px-8">
-          <Card glass className="flex items-center gap-4 px-6 py-4" hover={false}>
+        <div className="fixed bottom-28 left-4 right-4 md:left-80 md:right-8">
+          <Card glass className="flex items-center gap-4 px-6 py-4 max-w-5xl mx-auto shadow-[0_20px_60px_rgba(0,0,0,0.08)]" hover={false}>
+            <label className="sr-only" htmlFor="writers-room-input">Share an idea or ask a question</label>
             <input
+              id="writers-room-input"
               type="text"
               placeholder="Brainstorm an idea, ask for feedback, or explore concepts..."
               className="flex-1 bg-transparent focus:outline-none text-[#1D1D1F] placeholder:text-gray-400"
@@ -1062,7 +1130,7 @@ Reference specific projects when relevant to provide more targeted advice.`;
           </Card>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
@@ -1070,6 +1138,7 @@ Reference specific projects when relevant to provide more targeted advice.`;
 export default function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [projectsLoading, setProjectsLoading] = useState(true);
   const [currentView, setCurrentView] = useState('dashboard');
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -1100,6 +1169,7 @@ export default function App() {
   // Firestore Projects Subscription
   useEffect(() => {
     if (!user) return;
+    setProjectsLoading(true);
 
     const q = query(collection(db, 'projects'), orderBy('createdAt', 'desc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -1108,6 +1178,7 @@ export default function App() {
         ...doc.data()
       }));
       setProjects(projectsData);
+      setProjectsLoading(false);
     }, (error) => {
       console.error('Firestore error:', error);
       // Use demo data if Firestore fails
@@ -1131,6 +1202,7 @@ export default function App() {
           status: 'active'
         }
       ]);
+      setProjectsLoading(false);
     });
 
     return () => unsubscribe();
@@ -1160,6 +1232,7 @@ export default function App() {
           projects={projects} 
           setCurrentView={setCurrentView}
           setSelectedProject={setSelectedProject}
+          isLoading={projectsLoading}
         />
       )}
       {currentView === 'projects' && (
@@ -1167,6 +1240,7 @@ export default function App() {
           projects={projects}
           setSelectedProject={setSelectedProject}
           setCurrentView={setCurrentView}
+          isLoading={projectsLoading}
         />
       )}
       {currentView === 'project-detail' && selectedProject && (

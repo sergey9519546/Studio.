@@ -21,6 +21,14 @@ vi.mock('../../services/api', () => ({
   },
 }));
 
+const routerFuture = {
+  v7_startTransition: true,
+  v7_relativeSplatPath: true,
+};
+
+const renderWithRouter = (ui: React.ReactElement) =>
+  render(<BrowserRouter future={routerFuture}>{ui}</BrowserRouter>);
+
 describe('Dashboard', () => {
   beforeEach(() => {
     // Reset mocks before each test
@@ -42,11 +50,7 @@ describe('Dashboard', () => {
   });
 
     it('should render dashboard statistics', async () => {
-        render(
-            <BrowserRouter>
-                <Dashboard />
-            </BrowserRouter>
-        );
+        renderWithRouter(<Dashboard />);
 
         await waitFor(() => {
             expect(screen.getByText(/12.*projects/i)).toBeInTheDocument();
@@ -56,11 +60,7 @@ describe('Dashboard', () => {
     });
 
     it('should display recent activity section', async () => {
-        render(
-            <BrowserRouter>
-                <Dashboard />
-            </BrowserRouter>
-        );
+        renderWithRouter(<Dashboard />);
 
         await waitFor(() => {
             expect(screen.getByText(/recent activity/i)).toBeInTheDocument();
@@ -72,21 +72,13 @@ describe('Dashboard', () => {
             () => new Promise(() => { }) // Never resolves
         );
 
-        render(
-            <BrowserRouter>
-                <Dashboard />
-            </BrowserRouter>
-        );
+        renderWithRouter(<Dashboard />);
 
         expect(screen.getByText(/loading/i)).toBeInTheDocument();
     });
 
     it('should navigate to projects page', async () => {
-        render(
-            <BrowserRouter>
-                <Dashboard />
-            </BrowserRouter>
-        );
+        renderWithRouter(<Dashboard />);
 
         await waitFor(() => {
             const viewProjectsLink = screen.getByText(/view all projects/i);
@@ -95,11 +87,7 @@ describe('Dashboard', () => {
     });
 
     it('should navigate to freelancers page', async () => {
-        render(
-            <BrowserRouter>
-                <Dashboard />
-            </BrowserRouter>
-        );
+        renderWithRouter(<Dashboard />);
 
         await waitFor(() => {
             const viewFreelancersLink = screen.getByText(/view all freelancers/i);
@@ -109,24 +97,19 @@ describe('Dashboard', () => {
 
     it('should handle API errors gracefully', async () => {
         vi.mocked(api.api.projects.list).mockRejectedValue(new Error('API Error'));
+        const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
-        render(
-            <BrowserRouter>
-                <Dashboard />
-            </BrowserRouter>
-        );
+        renderWithRouter(<Dashboard />);
 
         await waitFor(() => {
             expect(screen.getByText(/error loading dashboard/i)).toBeInTheDocument();
         });
+
+        errorSpy.mockRestore();
     });
 
     it('should display stats cards with correct styling', async () => {
-        render(
-            <BrowserRouter>
-                <Dashboard />
-            </BrowserRouter>
-        );
+        renderWithRouter(<Dashboard />);
 
         await waitFor(() => {
             const stats = screen.getAllByRole('article');
@@ -138,11 +121,7 @@ describe('Dashboard', () => {
     });
 
     it('should show quick actions section', async () => {
-        render(
-            <BrowserRouter>
-                <Dashboard />
-            </BrowserRouter>
-        );
+        renderWithRouter(<Dashboard />);
 
         await waitFor(() => {
             expect(screen.getByText(/new project/i)).toBeInTheDocument();

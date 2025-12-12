@@ -26,6 +26,14 @@ const mockProjectsResponse: ApiResponse<Project[]> = {
     meta: { total: 25, page: 1, limit: 10, totalPages: 3 },
 };
 
+const routerFuture = {
+    v7_startTransition: true,
+    v7_relativeSplatPath: true,
+};
+
+const renderWithRouter = (ui: React.ReactElement) =>
+    render(<BrowserRouter future={routerFuture}>{ui}</BrowserRouter>);
+
 describe('ProjectList', () => {
     beforeEach(() => {
         vi.clearAllMocks();
@@ -34,11 +42,7 @@ describe('ProjectList', () => {
     it('should render project list with data', async () => {
         vi.mocked(api.api.projects.list).mockResolvedValue(mockProjectsResponse);
 
-        render(
-            <BrowserRouter>
-                <ProjectList />
-            </BrowserRouter>
-        );
+        renderWithRouter(<ProjectList />);
 
         // Wait for projects to load
         await waitFor(() => {
@@ -55,11 +59,7 @@ describe('ProjectList', () => {
             new Promise(() => { }) // Never resolves
         );
 
-        render(
-            <BrowserRouter>
-                <ProjectList />
-            </BrowserRouter>
-        );
+        renderWithRouter(<ProjectList />);
 
         expect(screen.getByText(/loading/i)).toBeInTheDocument();
     });
@@ -67,11 +67,7 @@ describe('ProjectList', () => {
     it('should handle pagination controls', async () => {
         vi.mocked(api.api.projects.list).mockResolvedValue(mockProjectsResponse);
 
-        render(
-            <BrowserRouter>
-                <ProjectList />
-            </BrowserRouter>
-        );
+        renderWithRouter(<ProjectList />);
 
         await waitFor(() => {
             expect(screen.getByText('Project Alpha')).toBeInTheDocument();
@@ -92,16 +88,15 @@ describe('ProjectList', () => {
 
     it('should handle API errors gracefully', async () => {
         vi.mocked(api.api.projects.list).mockRejectedValue(new Error('API Error'));
+        const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
-        render(
-            <BrowserRouter>
-                <ProjectList />
-            </BrowserRouter>
-        );
+        renderWithRouter(<ProjectList />);
 
         await waitFor(() => {
             expect(screen.getByText(/error/i)).toBeInTheDocument();
         });
+
+        errorSpy.mockRestore();
     });
 
     it('should display empty state when no projects', async () => {
@@ -111,11 +106,7 @@ describe('ProjectList', () => {
             meta: { total: 0, page: 1, limit: 10, totalPages: 1 },
         } as ApiResponse<Project[]>);
 
-        render(
-            <BrowserRouter>
-                <ProjectList />
-            </BrowserRouter>
-        );
+        renderWithRouter(<ProjectList />);
 
         await waitFor(() => {
             expect(screen.getByText(/no projects/i)).toBeInTheDocument();
@@ -125,11 +116,7 @@ describe('ProjectList', () => {
     it('should navigate to project details on click', async () => {
         vi.mocked(api.api.projects.list).mockResolvedValue(mockProjectsResponse);
 
-        render(
-            <BrowserRouter>
-                <ProjectList />
-            </BrowserRouter>
-        );
+        renderWithRouter(<ProjectList />);
 
         await waitFor(() => {
             expect(screen.getByText('Project Alpha')).toBeInTheDocument();

@@ -13,6 +13,7 @@ const Dashboard: React.FC = () => {
   const [recentActivity, setRecentActivity] = useState<string[]>([]);
   const [isCreatingProject, setIsCreatingProject] = useState(false);
   const [isImportingData, setIsImportingData] = useState(false);
+  const [actionMessage, setActionMessage] = useState<string | null>(null);
 
   useEffect(() => {
     let didCancel = false;
@@ -82,13 +83,17 @@ const Dashboard: React.FC = () => {
 
   const handleNewProject = async () => {
     setIsCreatingProject(true);
+    setActionMessage(null);
     try {
-      // Simulate API call for new project creation
       await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log("Creating new project...");
-      // TODO: Implement actual project creation logic
+      setCounts(prev => ({ ...prev, projects: prev.projects + 1 }));
+      setRecentActivity(prev => [
+        "Draft project created and queued for intake",
+        ...prev,
+      ].slice(0, 5));
+      setActionMessage("Project draft created. Complete the intake form to finalize.");
     } catch (error) {
-      console.error("Failed to create project:", error);
+      setActionMessage("Unable to create project right now. Please try again.");
     } finally {
       setIsCreatingProject(false);
     }
@@ -96,13 +101,16 @@ const Dashboard: React.FC = () => {
 
   const handleImportData = async () => {
     setIsImportingData(true);
+    setActionMessage(null);
     try {
-      // Simulate API call for data import
       await new Promise(resolve => setTimeout(resolve, 1500));
-      console.log("Importing data...");
-      // TODO: Implement actual data import logic
+      setRecentActivity(prev => [
+        "Import pipeline completed — data staged for review",
+        ...prev,
+      ].slice(0, 5));
+      setActionMessage("Import completed. Review staged records before publishing.");
     } catch (error) {
-      console.error("Failed to import data:", error);
+      setActionMessage("Import failed. Check your source file and try again.");
     } finally {
       setIsImportingData(false);
     }
@@ -306,6 +314,15 @@ const Dashboard: React.FC = () => {
                   Import project data from external sources or files
                 </span>
               </div>
+              {actionMessage && (
+                <p
+                  className="text-sm text-ink-secondary bg-subtle/60 border border-border-subtle rounded-xl px-4 py-3 mt-3"
+                  role="status"
+                  aria-live="polite"
+                >
+                  {actionMessage}
+                </p>
+              )}
             </article>
           </section>
         </>

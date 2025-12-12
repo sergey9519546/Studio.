@@ -14,17 +14,21 @@ const mockFreelancer = {
     email: 'john@example.com',
 };
 
+const routerFuture = {
+    v7_startTransition: true,
+    v7_relativeSplatPath: true,
+};
+
+const renderWithRouter = (ui: React.ReactElement) =>
+    render(<BrowserRouter future={routerFuture}>{ui}</BrowserRouter>);
+
 describe('FreelancerCard', () => {
     beforeEach(() => {
         vi.clearAllMocks();
     });
 
     it('should render freelancer information', () => {
-        render(
-            <BrowserRouter>
-                <FreelancerCard freelancer={mockFreelancer} />
-            </BrowserRouter>
-        );
+        renderWithRouter(<FreelancerCard freelancer={mockFreelancer} />);
 
         expect(screen.getByText('John Doe')).toBeInTheDocument();
         expect(screen.getByText('Developer')).toBeInTheDocument();
@@ -32,11 +36,7 @@ describe('FreelancerCard', () => {
     });
 
     it('should display availability status badge', () => {
-        render(
-            <BrowserRouter>
-                <FreelancerCard freelancer={mockFreelancer} />
-            </BrowserRouter>
-        );
+        renderWithRouter(<FreelancerCard freelancer={mockFreelancer} />);
 
         const badge = screen.getByText(/available/i);
         expect(badge).toBeInTheDocument();
@@ -46,22 +46,14 @@ describe('FreelancerCard', () => {
     it('should show BUSY status with appropriate styling', () => {
         const busyFreelancer = { ...mockFreelancer, availability: 'BUSY' };
 
-        render(
-            <BrowserRouter>
-                <FreelancerCard freelancer={busyFreelancer} />
-            </BrowserRouter>
-        );
+        renderWithRouter(<FreelancerCard freelancer={busyFreelancer} />);
 
         const badge = screen.getByText(/busy/i);
         expect(badge).toHaveClass('text-state-warning');
     });
 
     it('should display skills list', () => {
-        render(
-            <BrowserRouter>
-                <FreelancerCard freelancer={mockFreelancer} />
-            </BrowserRouter>
-        );
+        renderWithRouter(<FreelancerCard freelancer={mockFreelancer} />);
 
         expect(screen.getByText('React')).toBeInTheDocument();
         expect(screen.getByText('TypeScript')).toBeInTheDocument();
@@ -71,11 +63,7 @@ describe('FreelancerCard', () => {
     it('should handle click to view details', async () => {
         const mockOnClick = vi.fn();
 
-        render(
-            <BrowserRouter>
-                <FreelancerCard freelancer={mockFreelancer} onClick={mockOnClick} />
-            </BrowserRouter>
-        );
+        renderWithRouter(<FreelancerCard freelancer={mockFreelancer} onClick={mockOnClick} />);
 
         const card = screen.getByText('John Doe').closest('div');
         await userEvent.click(card!);
@@ -84,11 +72,7 @@ describe('FreelancerCard', () => {
     });
 
     it('should show contact information on hover', async () => {
-        render(
-            <BrowserRouter>
-                <FreelancerCard freelancer={mockFreelancer} showContact />
-            </BrowserRouter>
-        );
+        renderWithRouter(<FreelancerCard freelancer={mockFreelancer} showContact />);
 
         expect(screen.getByText('john@example.com')).toBeInTheDocument();
     });
@@ -96,11 +80,7 @@ describe('FreelancerCard', () => {
     it('should format rate correctly', () => {
         const expensiveFreelancer = { ...mockFreelancer, rate: 1500 };
 
-        render(
-            <BrowserRouter>
-                <FreelancerCard freelancer={expensiveFreelancer} />
-            </BrowserRouter>
-        );
+        renderWithRouter(<FreelancerCard freelancer={expensiveFreelancer} />);
 
         expect(screen.getByText(/\$1,500/)).toBeInTheDocument();
     });
@@ -108,11 +88,7 @@ describe('FreelancerCard', () => {
     it('should handle freelancer without skills', () => {
         const noSkillsFreelancer = { ...mockFreelancer, skills: [] };
 
-        render(
-            <BrowserRouter>
-                <FreelancerCard freelancer={noSkillsFreelancer} />
-            </BrowserRouter>
-        );
+        renderWithRouter(<FreelancerCard freelancer={noSkillsFreelancer} />);
 
         expect(screen.queryByText('React')).not.toBeInTheDocument();
     });

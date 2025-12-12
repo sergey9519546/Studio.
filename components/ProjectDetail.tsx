@@ -71,8 +71,29 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects, freelancers, as
     const [scripts, setScripts] = useState<Script[]>([]);
     const [sources, setSources] = useState<KnowledgeSource[]>([]);
     const [isEditing, setIsEditing] = useState(false);
+    const [isEditPanelOpen, setIsEditPanelOpen] = useState(false);
+    const [editMessage, setEditMessage] = useState<string | null>(null);
+    const [editForm, setEditForm] = useState({
+        name: "",
+        clientName: "",
+        description: "",
+        dueDate: "",
+        status: "",
+    });
 
     const projectId = project?.id;
+
+    useEffect(() => {
+        if (project) {
+            setEditForm({
+                name: project.name || "",
+                clientName: project.clientName || "",
+                description: project.description || "",
+                dueDate: project.dueDate || "",
+                status: (project as any).status || "",
+            });
+        }
+    }, [project]);
 
     useEffect(() => {
         let didCancel = false;
@@ -143,10 +164,28 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects, freelancers, as
         onUpdateProject({ ...project, ...updates });
     };
 
-    const handleEditProject = () => {
+    const handleEditProject = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!project) return;
         setIsEditing(true);
-        // TODO: Implement actual edit functionality
-        setTimeout(() => setIsEditing(false), 1000);
+        setEditMessage(null);
+
+        const updates: Partial<Project> = {
+            name: editForm.name.trim() || project.name,
+            clientName: editForm.clientName.trim() || project.clientName,
+            description: editForm.description,
+            dueDate: editForm.dueDate,
+            status: (editForm as any).status || (project as any).status,
+        };
+
+        try {
+            onUpdateProject({ ...project, ...updates });
+            setEditMessage("Project details saved.");
+        } catch (err) {
+            setEditMessage("Unable to save changes. Please retry.");
+        } finally {
+            setIsEditing(false);
+        }
     };
 
     if (!project) return (
@@ -240,12 +279,12 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects, freelancers, as
                     <div className="flex items-center gap-4">
                         <DateBadge dueDate={project.dueDate} />
                         <button 
-                            onClick={handleEditProject}
+                            onClick={() => { setIsEditPanelOpen(prev => !prev); setEditMessage(null); }}
                             disabled={isEditing}
                             className="bg-ink-primary text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wide hover:bg-ink-primary/90 hover:shadow-lg hover:-translate-y-[1px] transition-all duration-200 shadow-sm active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
                             aria-label={isEditing ? "Editing project, please wait" : "Edit project details"}
                         >
-                            {isEditing ? 'Editing...' : 'Edit Project'}
+                            {isEditing ? 'Editing...' : isEditPanelOpen ? 'Close Editor' : 'Edit Project'}
                         </button>
                     </div>
                 </div>
@@ -331,6 +370,106 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects, freelancers, as
                     className="flex-1 flex flex-col lg:flex-row overflow-hidden max-w-[1800px] mx-auto w-full p-8 gap-10 animate-in fade-in slide-in-from-bottom-2 duration-300"
                     role="main"
                 >
+                    {isEditPanelOpen && (
+                        <section className="w-full bg-surface border border-border-subtle rounded-2xl shadow-card p-6 lg:p-8 space-y-4" aria-label="Edit project form">
+                            <div className="flex items-center justify-between gap-3">
+                                <div>
+                                    <p className="text-[10px] uppercase tracking-[0.25em] text-ink-tertiary font-bold">Project Metadata</p>
+                                    <h2 className="text-lg font-semibold text-ink-primary">Quick edit</h2>
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => { setIsEditPanelOpen(false); }}
+                                    className="text-sm text-ink-secondary hover:text-ink-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg px-3 py-2"
+                                >
+                                    Close
+                                </button>
+                            </div>
+                            <form onSubmit={handleEditProject} className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                                <label className="flex flex-col gap-1 text-sm font-semibold text-ink-primary">
+                                    Project Name
+                                    <input
+                                        value={editForm.name}
+                                        onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                                        className="w-full border border-border-subtle rounded-lg px-3 py-2 text-sm text-ink-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                                        aria-label="Project name"
+                                        required
+                                    />
+                                </label>
+                                <label className="flex flex-col gap-1 text-sm font-semibold text-ink-primary">
+                                    Client
+                                    <input
+                                        value={editForm.clientName}
+                                        onChange={(e) => setEditForm({ ...editForm, clientName: e.target.value })}
+                                        className="w-full border border-border-subtle rounded-lg px-3 py-2 text-sm text-ink-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                                        aria-label="Client name"
+                                    />
+                                </label>
+                                <label className="flex flex-col gap-1 text-sm font-semibold text-ink-primary">
+                                    Due Date
+                                    <input
+                                        type="date"
+                                        value={editForm.dueDate ? editForm.dueDate.substring(0, 10) : ""}
+                                        onChange={(e) => setEditForm({ ...editForm, dueDate: e.target.value })}
+                                        className="w-full border border-border-subtle rounded-lg px-3 py-2 text-sm text-ink-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                                        aria-label="Due date"
+                                    />
+                                </label>
+                                <label className="flex flex-col gap-1 text-sm font-semibold text-ink-primary">
+                                    Status
+                                    <select
+                                        value={editForm.status}
+                                        onChange={(e) => setEditForm({ ...editForm, status: e.target.value })}
+                                        className="w-full border border-border-subtle rounded-lg px-3 py-2 text-sm text-ink-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 bg-white"
+                                        aria-label="Project status"
+                                    >
+                                        <option value="">Select status</option>
+                                        <option value="PLANNED">Planned</option>
+                                        <option value="IN_PROGRESS">In Progress</option>
+                                        <option value="COMPLETED">Completed</option>
+                                    </select>
+                                </label>
+                                <label className="flex flex-col gap-1 text-sm font-semibold text-ink-primary lg:col-span-2">
+                                    Description
+                                    <textarea
+                                        value={editForm.description}
+                                        onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
+                                        className="w-full border border-border-subtle rounded-lg px-3 py-3 text-sm text-ink-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 min-h-[100px]"
+                                        aria-label="Project description"
+                                    />
+                                </label>
+                                <div className="flex gap-3 lg:col-span-2">
+                                    <button
+                                        type="submit"
+                                        disabled={isEditing}
+                                        className="px-5 py-2.5 bg-ink-primary text-white rounded-lg text-sm font-semibold hover:bg-ink-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        aria-label={isEditing ? "Saving project changes" : "Save project changes"}
+                                    >
+                                        {isEditing ? "Saving..." : "Save changes"}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => { setEditForm({
+                                            name: project.name || "",
+                                            clientName: project.clientName || "",
+                                            description: project.description || "",
+                                            dueDate: project.dueDate || "",
+                                            status: (project as any).status || "",
+                                        }); setEditMessage(null); }}
+                                        className="px-5 py-2.5 border border-border-subtle rounded-lg text-sm font-semibold text-ink-secondary hover:text-ink-primary hover:border-ink-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                                    >
+                                        Reset
+                                    </button>
+                                    {editMessage && (
+                                        <span className="text-sm text-ink-secondary px-2 py-1" role="status" aria-live="polite">
+                                            {editMessage}
+                                        </span>
+                                    )}
+                                </div>
+                            </form>
+                        </section>
+                    )}
+
                     {/* Main Content */}
                     <main className="flex-1 flex flex-col gap-12 overflow-y-auto custom-scrollbar pr-2 pb-24" role="main">
                         {/* 1. Brief */}
