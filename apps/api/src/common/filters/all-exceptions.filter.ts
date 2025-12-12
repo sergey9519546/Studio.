@@ -1,8 +1,8 @@
 
 import {
-  ExceptionFilter,
-  Catch,
   ArgumentsHost,
+  Catch,
+  ExceptionFilter,
   HttpException,
   HttpStatus,
   Logger,
@@ -32,7 +32,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     // Extract Error Details
     let errorCode = 'INTERNAL_SERVER_ERROR';
     let errorMessage = 'An unexpected error occurred';
-    let errorDetails = undefined;
+    let errorDetails: unknown;
 
     if (exception instanceof HttpException) {
       const response = (exception as HttpException).getResponse();
@@ -48,7 +48,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
               errorMessage = (respObj.message as string) || (exception as HttpException).message;
           }
           
-          errorDetails = respObj.details || undefined;
+          errorDetails = respObj.details as unknown || undefined;
       } else {
           errorMessage = String(response);
           errorCode = (HttpStatus[httpStatus] as string) || 'HTTP_ERROR';

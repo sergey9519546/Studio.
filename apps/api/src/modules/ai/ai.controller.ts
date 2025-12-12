@@ -1,24 +1,24 @@
 import {
-    Controller,
-    Post,
-    Body,
-    UploadedFiles,
-    UseInterceptors,
     BadRequestException,
+    Body,
+    Controller,
     Get,
     HttpCode,
     HttpStatus,
     Param,
+    Post,
     Res,
+    UploadedFiles,
     UseGuards,
+    UseInterceptors,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import 'multer';
-import { GeminiAnalystService } from './gemini-analyst.service';
-import { RAGService } from '../rag/rag.service';
-import { StreamingService } from './streaming.service';
-import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import type { Response } from 'express';
+import 'multer';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { RAGService } from '../rag/rag.service';
+import { GeminiAnalystService } from './gemini-analyst.service';
+import { StreamingService } from './streaming.service';
 
 interface ChatRequest {
     userId?: string;
@@ -116,7 +116,7 @@ ${JSON.stringify(parsedContext, null, 2)}
         const response = await this.aiService.chat(enhancedContext, messages);
 
         if (typeof response === 'object' && response.toolCalls) {
-            const toolResults = [];
+            const toolResults: Array<{ toolCall: unknown; result: unknown }> = [];
             for (const toolCall of response.toolCalls) {
                 const result = await this.aiService.executeTool(toolCall.name, toolCall.args);
                 toolResults.push({

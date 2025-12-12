@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { VertexAIService } from '../vertex-ai.service';
 import { PROMPT_TEMPLATES } from '../prompts/templates';
+import { VertexAIService } from '../vertex-ai.service';
 
 export interface PromptTestCase {
     name: string;
@@ -36,7 +36,7 @@ export class PromptTesterService {
     async runTestSuite(testCases: PromptTestCase[]): Promise<TestResult[]> {
         this.logger.log(`Running ${testCases.length} prompt tests...`);
 
-        const results = [];
+        const results: TestResult[] = [];
         for (const testCase of testCases) {
             const result = await this.runTest(testCase);
             results.push(result);

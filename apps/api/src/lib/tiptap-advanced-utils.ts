@@ -247,7 +247,7 @@ export function getAllMatchingNodes(
 
   const { selection } = editor.state
   const { nodeName, isBlock = true, predicate } = options || {}
-  const matches = []
+  const matches: Array<{ node: Node; pos: number; depth: number }> = []
 
   const nodeMatches = (node: Node) => {
     const matchesName = !nodeName || node.type.name === nodeName

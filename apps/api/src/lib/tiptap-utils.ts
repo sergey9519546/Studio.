@@ -528,7 +528,7 @@ export function selectCurrentBlockContent(editor: Editor) {
   if (!selection.empty) return
 
   const $pos = selection.$from
-  let blockNode = null
+  let blockNode: PMNode | null = null
   let blockPos = -1
 
   for (let depth = $pos.depth; depth >= 0; depth--) {
