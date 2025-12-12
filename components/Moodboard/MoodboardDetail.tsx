@@ -4,6 +4,7 @@ import {
   Camera,
   Check,
   Film,
+  Heart,
   Image as ImageIcon,
   Loader2,
   Palette,
@@ -13,6 +14,7 @@ import {
   X,
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { findSimilarImages, UnsplashImage } from '../../services/unsplash';
 import { MoodboardItem } from '../../types';
 
 interface MoodboardDetailProps {
@@ -23,11 +25,15 @@ interface MoodboardDetailProps {
 }
 
 const MoodboardDetail: React.FC<MoodboardDetailProps> = ({ item, onClose, onUpdate, onDelete }) => {
-  const [editedItem, setEditedItem] = useState(item);
+  const [editedItem, setEditedItem] = useState<MoodboardItem>({ ...item, isFavorite: item.isFavorite ?? false });
   const [tagInput, setTagInput] = useState('');
   const [moodInput, setMoodInput] = useState('');
   const [similarImages, setSimilarImages] = useState<UnsplashImage[]>([]);
   const [loadingSimilar, setLoadingSimilar] = useState(false);
+
+  useEffect(() => {
+    setEditedItem({ ...item, isFavorite: item.isFavorite ?? false });
+  }, [item]);
 
   // Load similar images on mount
   useEffect(() => {
@@ -47,9 +53,13 @@ const MoodboardDetail: React.FC<MoodboardDetailProps> = ({ item, onClose, onUpda
       };
 
       const results = await findSimilarImages(analysis);
-      setSimilarImages(results);
+      const images = Array.isArray((results as any).results)
+        ? (results as any).results
+        : (results as UnsplashImage[]);
+      setSimilarImages(images);
     } catch (error) {
       console.error("Failed to load similar images:", error);
+      setSimilarImages([]);
     } finally {
       setLoadingSimilar(false);
     }
@@ -90,6 +100,27 @@ const MoodboardDetail: React.FC<MoodboardDetailProps> = ({ item, onClose, onUpda
             Asset Detail
           </h3>
           <div className="flex gap-2">
+            <button
+              onClick={() =>
+                setEditedItem((prev) => ({
+                  ...prev,
+                  isFavorite: !prev.isFavorite,
+                }))
+              }
+              className={`px-3 py-2 text-xs font-bold uppercase tracking-wide rounded-lg transition-all border ${
+                editedItem.isFavorite
+                  ? "bg-amber-100 text-amber-800 border-amber-200"
+                  : "bg-gray-50 text-gray-600 border-gray-200 hover:border-gray-300"
+              }`}
+            >
+              <Heart
+                size={14}
+                className={`mr-2 inline-block ${
+                  editedItem.isFavorite ? "fill-amber-500 text-amber-600" : ""
+                }`}
+              />
+              {editedItem.isFavorite ? "Favorited" : "Favorite"}
+            </button>
             <button
               onClick={() => {
                 onDelete(item.id);

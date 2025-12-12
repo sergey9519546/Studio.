@@ -60,6 +60,7 @@ export interface MoodboardItem {
   moods: string[];
   colors: string[]; 
   shotType?: string;
+  isFavorite?: boolean;
   status: 'processing' | 'ready' | 'error';
   createdAt: string;
   updatedAt: string;
