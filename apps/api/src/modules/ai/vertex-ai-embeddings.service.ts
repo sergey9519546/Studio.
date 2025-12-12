@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { EmbeddingsProvider } from "../rag/providers/embeddings-provider.interface";
+import { EmbeddingsProvider } from "../rag/providers/embeddings-provider.interface.js";
 
 @Injectable()
 export class VertexAIEmbeddingsService implements EmbeddingsProvider {

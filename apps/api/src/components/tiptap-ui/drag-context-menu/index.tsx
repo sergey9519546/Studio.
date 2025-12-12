@@ -1,2 +1,2 @@
-export * from "./drag-context-menu"
-export * from "./drag-context-menu-types"
+export * from "./drag-context-menu.js"
+export * from "./drag-context-menu-types.js"

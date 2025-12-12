@@ -36,12 +36,16 @@
           ]
         },
         {
+          "file": "apps/api/src/app.module",
+          "hash": "4055606894390288348"
+        },
+        {
           "file": "apps/api/src/app.module.ts",
-          "hash": "10008134602452466950",
+          "hash": "6324610360368027372",
           "deps": [
             "npm:@nestjs/common",
-            "npm:@nestjs/core",
             "npm:@nestjs/config",
+            "npm:@nestjs/core",
             "npm:@nestjs/event-emitter",
             "npm:@nestjs/jwt",
             "npm:@nestjs/passport",
@@ -896,7 +900,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/image-upload-node/index.tsx",
-          "hash": "10546202116726474314"
+          "hash": "13437978837967253175"
         },
         {
           "file": "apps/api/src/components/tiptap-node/list-node/list-node.scss",
@@ -915,7 +919,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/extensions/table-handle/index.ts",
-          "hash": "16634309287612086936"
+          "hash": "9687119669287252173"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/extensions/table-handle/table-handle-plugin.ts",
@@ -967,7 +971,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-add-row-column-button/index.tsx",
-          "hash": "4921416708200665073"
+          "hash": "12564560791081628028"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-add-row-column-button/table-add-row-column-button.tsx",
@@ -987,7 +991,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-align-cell-button/index.tsx",
-          "hash": "6976126918672995939"
+          "hash": "5127013995631034524"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-align-cell-button/table-align-cell-button.tsx",
@@ -1006,7 +1010,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-alignment-menu/index.tsx",
-          "hash": "7824170020144201814"
+          "hash": "6843426100419547841"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-alignment-menu/table-alignment-menu.tsx",
@@ -1014,7 +1018,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-cell-handle-menu/index.tsx",
-          "hash": "9307754139611006512"
+          "hash": "7254371479386824174"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-cell-handle-menu/table-cell-handle-menu.scss",
@@ -1030,7 +1034,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-clear-row-column-content-button/index.tsx",
-          "hash": "4121677177155540496"
+          "hash": "7114621445506901030"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-clear-row-column-content-button/table-clear-row-column-content-button.tsx",
@@ -1050,7 +1054,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-delete-row-column-button/index.tsx",
-          "hash": "15004039383663520769"
+          "hash": "14305481510360500625"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-delete-row-column-button/table-delete-row-column-button.tsx",
@@ -1070,7 +1074,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-duplicate-row-column-button/index.tsx",
-          "hash": "924971139005497542"
+          "hash": "17799082808399912981"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-duplicate-row-column-button/table-duplicate-row-column-button.tsx",
@@ -1090,7 +1094,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-extend-row-column-button/index.tsx",
-          "hash": "1639931460392050961"
+          "hash": "14984923873933137064"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-extend-row-column-button/table-extend-row-column-button.scss",
@@ -1116,7 +1120,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-fit-to-width-button/index.tsx",
-          "hash": "12489835294429591207"
+          "hash": "7146491358641314163"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-fit-to-width-button/table-fit-to-width-button.tsx",
@@ -1135,7 +1139,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-handle-menu/index.tsx",
-          "hash": "3147701310136354948"
+          "hash": "6745683124328831500"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-handle-menu/table-handle-menu.scss",
@@ -1152,7 +1156,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-handle/index.tsx",
-          "hash": "13909232382832716994"
+          "hash": "12928603563384048043"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-handle/table-handle.tsx",
@@ -1174,7 +1178,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-header-row-column-button/index.tsx",
-          "hash": "6834860830271718326"
+          "hash": "10875430313385012716"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-header-row-column-button/table-header-row-column-button.tsx",
@@ -1194,7 +1198,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-merge-split-cell-button/index.tsx",
-          "hash": "5045885697302751276"
+          "hash": "2376449599199740014"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-merge-split-cell-button/table-merge-split-cell-button.tsx",
@@ -1214,7 +1218,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-move-row-column-button/index.tsx",
-          "hash": "15212192315841096792"
+          "hash": "4606197996859090286"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-move-row-column-button/table-move-row-column-button.tsx",
@@ -1234,7 +1238,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-selection-overlay/index.tsx",
-          "hash": "4696458532086014977"
+          "hash": "150347146566590827"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-selection-overlay/table-selection-overlay.tsx",
@@ -1257,7 +1261,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-sort-row-column-button/index.tsx",
-          "hash": "6414826935431980164"
+          "hash": "4597793850507513640"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-sort-row-column-button/table-sort-row-column-button.tsx",
@@ -1277,7 +1281,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-trigger-button/index.tsx",
-          "hash": "8196702084180008905"
+          "hash": "14084167998291330534"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-trigger-button/table-grid-selector.scss",
@@ -1388,7 +1392,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/avatar/index.tsx",
-          "hash": "8595160155552119558"
+          "hash": "12018257512381746057"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/badge/badge-colors.scss",
@@ -1411,7 +1415,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/badge/index.tsx",
-          "hash": "17803313237747996547"
+          "hash": "14046952676275668886"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/button/button-colors.scss",
@@ -1434,7 +1438,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/button/index.tsx",
-          "hash": "12764294714494050211"
+          "hash": "3816727532389353832"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/card/card.scss",
@@ -1449,7 +1453,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/card/index.tsx",
-          "hash": "617622418637764232"
+          "hash": "3167022333798763545"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/combobox/combobox.scss",
@@ -1465,7 +1469,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/combobox/index.tsx",
-          "hash": "13246906549294327066"
+          "hash": "9822349699567254937"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/dropdown-menu/dropdown-menu.scss",
@@ -1481,11 +1485,11 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/dropdown-menu/index.tsx",
-          "hash": "9251001649340269493"
+          "hash": "8610104830000886429"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/input/index.tsx",
-          "hash": "9117979966476394290"
+          "hash": "12558102120870850026"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/input/input.scss",
@@ -1497,7 +1501,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/label/index.tsx",
-          "hash": "13928615819079196587"
+          "hash": "17563921477317838572"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/label/label.scss",
@@ -1512,7 +1516,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/menu/index.tsx",
-          "hash": "8676393971855677104"
+          "hash": "5645741174477839086"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/menu/menu-context.ts",
@@ -1555,7 +1559,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/popover/index.tsx",
-          "hash": "1909847489539993782"
+          "hash": "2598599917463767429"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/popover/popover.scss",
@@ -1570,7 +1574,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/separator/index.tsx",
-          "hash": "15260845577419745074"
+          "hash": "12768307303088019272"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/separator/separator.scss",
@@ -1585,7 +1589,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/sidebar/index.tsx",
-          "hash": "11251757420204515961"
+          "hash": "7839514975188172151"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/sidebar/sidebar.scss",
@@ -1600,7 +1604,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/spacer/index.tsx",
-          "hash": "794424124438371867"
+          "hash": "5675859104095854993"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/spacer/spacer.tsx",
@@ -1608,7 +1612,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/textarea-autosize/index.tsx",
-          "hash": "5572388042790512375"
+          "hash": "6836144803956595490"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/textarea-autosize/textarea-autosize.tsx",
@@ -1620,7 +1624,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/toolbar/index.tsx",
-          "hash": "16325670824471943558"
+          "hash": "3645659544006416182"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/toolbar/toolbar.scss",
@@ -1635,7 +1639,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/tooltip/index.tsx",
-          "hash": "10054271917021798117"
+          "hash": "17271359906305192810"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-primitive/tooltip/tooltip.scss",
@@ -1668,11 +1672,11 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-utils/floating-element/index.tsx",
-          "hash": "16780001330133257830"
+          "hash": "13802652141894223941"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-utils/suggestion-menu/index.tsx",
-          "hash": "8025784942348658086"
+          "hash": "3585351913367786389"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-utils/suggestion-menu/suggestion-menu-types.ts",
@@ -1711,7 +1715,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-ask-button/index.tsx",
-          "hash": "4868228266388893671"
+          "hash": "13522940637622682625"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-ask-button/use-ai-ask.ts",
@@ -1737,7 +1741,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu-actions/index.tsx",
-          "hash": "9394373342928802468"
+          "hash": "18298936809208811162"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu-hooks.ts",
@@ -1774,7 +1778,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu-input/index.tsx",
-          "hash": "5452300843815237199"
+          "hash": "4994529918143566603"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu-items/ai-menu-items-constants.ts",
@@ -1802,7 +1806,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu-items/index.tsx",
-          "hash": "2011017029641689109"
+          "hash": "12829444822556229140"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu-types.ts",
@@ -1832,7 +1836,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-menu/index.tsx",
-          "hash": "12706417958575074866"
+          "hash": "1152578912695041641"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/blockquote-button/blockquote-button.tsx",
@@ -1843,7 +1847,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/blockquote-button/index.tsx",
-          "hash": "17366869235071696450"
+          "hash": "7662327874875292966"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/blockquote-button/use-blockquote.ts",
@@ -1863,7 +1867,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/code-block-button/index.tsx",
-          "hash": "10685850229660261140"
+          "hash": "433695221760690944"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/code-block-button/use-code-block.ts",
@@ -1887,7 +1891,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/color-highlight-button/index.tsx",
-          "hash": "5852275376066485515"
+          "hash": "17727863365531067375"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/color-highlight-button/use-color-highlight.ts",
@@ -1908,7 +1912,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/color-highlight-popover/index.tsx",
-          "hash": "7707736026643404889"
+          "hash": "13237587038135321048"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/color-menu/color-menu.tsx",
@@ -1919,7 +1923,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/color-menu/index.tsx",
-          "hash": "876922687249574082"
+          "hash": "17011702373476999992"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/color-text-button/color-text-button.scss",
@@ -1934,7 +1938,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/color-text-button/index.tsx",
-          "hash": "14784923518919036238"
+          "hash": "17609347181557121468"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/color-text-button/use-color-text.ts",
@@ -1958,7 +1962,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/color-text-popover/index.tsx",
-          "hash": "538182274487137339"
+          "hash": "1657685227033083646"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/color-text-popover/use-color-text-popover.ts",
@@ -1977,7 +1981,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/copy-anchor-link-button/index.tsx",
-          "hash": "3552192654359145162"
+          "hash": "13709545043279100329"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/copy-anchor-link-button/use-copy-anchor-link.ts",
@@ -2006,7 +2010,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/copy-to-clipboard-button/index.tsx",
-          "hash": "1912623883044982511"
+          "hash": "12251457628088830583"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/copy-to-clipboard-button/use-copy-to-clipboard.ts",
@@ -2027,7 +2031,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/delete-node-button/index.tsx",
-          "hash": "2720493057829966821"
+          "hash": "8579163997441809187"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/delete-node-button/use-delete-node.ts",
@@ -2064,7 +2068,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/drag-context-menu/index.tsx",
-          "hash": "15262420206990957693"
+          "hash": "6484136415901266343"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/duplicate-button/duplicate-button.tsx",
@@ -2075,7 +2079,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/duplicate-button/index.tsx",
-          "hash": "14453598004900228014"
+          "hash": "17134294906416017706"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/duplicate-button/use-duplicate.ts",
@@ -2098,7 +2102,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/emoji-dropdown-menu/index.tsx",
-          "hash": "2939544169129993625"
+          "hash": "4705359063817016990"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/emoji-menu/emoji-menu-utils.ts",
@@ -2121,7 +2125,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/emoji-menu/index.tsx",
-          "hash": "4347472417643299541"
+          "hash": "3213215876147817661"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/emoji-trigger-button/emoji-trigger-button.tsx",
@@ -2132,7 +2136,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/emoji-trigger-button/index.tsx",
-          "hash": "15875649225293399516"
+          "hash": "8589070781228118914"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/emoji-trigger-button/use-emoji-trigger.ts",
@@ -2153,7 +2157,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/heading-button/index.tsx",
-          "hash": "6574948519450270733"
+          "hash": "5903659175599325009"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/heading-button/use-heading.ts",
@@ -2173,7 +2177,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/image-align-button/index.tsx",
-          "hash": "11149633474755537005"
+          "hash": "8010267431723963359"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/image-align-button/use-image-align.ts",
@@ -2194,7 +2198,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/image-caption-button/index.tsx",
-          "hash": "3067923430549887841"
+          "hash": "4587801605896583059"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/image-caption-button/use-image-caption.ts",
@@ -2214,7 +2218,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/image-download-button/index.tsx",
-          "hash": "13241645487848405913"
+          "hash": "5863195628894231349"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/image-download-button/use-image-download.ts",
@@ -2235,7 +2239,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/image-upload-button/index.tsx",
-          "hash": "10455170092665220626"
+          "hash": "4621858783482282717"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/image-upload-button/use-image-upload.ts",
@@ -2257,7 +2261,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/improve-dropdown/index.tsx",
-          "hash": "1793778642649111014"
+          "hash": "14235046143144193670"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/improve-dropdown/use-improve-dropdown.ts",
@@ -2271,7 +2275,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/link-popover/index.tsx",
-          "hash": "13658900000088728939"
+          "hash": "17584114609107909229"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/link-popover/link-popover.tsx",
@@ -2291,7 +2295,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/list-button/index.tsx",
-          "hash": "3053208816195400358"
+          "hash": "2353260947127762212"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/list-button/list-button.tsx",
@@ -2311,7 +2315,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/mark-button/index.tsx",
-          "hash": "3064025465067147404"
+          "hash": "6028474015172002626"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/mark-button/mark-button.tsx",
@@ -2330,7 +2334,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/mention-dropdown-menu/index.tsx",
-          "hash": "2596120918456385600"
+          "hash": "2642033932109532223"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/mention-dropdown-menu/mention-dropdown-menu.tsx",
@@ -2342,7 +2346,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/mention-trigger-button/index.tsx",
-          "hash": "7252517121096010157"
+          "hash": "12566784340785454175"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/mention-trigger-button/mention-trigger-button.tsx",
@@ -2363,7 +2367,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/move-node-button/index.tsx",
-          "hash": "14044351407609946213"
+          "hash": "11594092373170260676"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/move-node-button/move-node-button.tsx",
@@ -2384,7 +2388,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/reset-all-formatting-button/index.tsx",
-          "hash": "13684067480365689255"
+          "hash": "14733160608444649890"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/reset-all-formatting-button/reset-all-formatting-button.tsx",
@@ -2405,7 +2409,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/slash-command-trigger-button/index.tsx",
-          "hash": "17448323540183772588"
+          "hash": "13407528280911433980"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/slash-command-trigger-button/slash-command-trigger-button.tsx",
@@ -2426,7 +2430,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/slash-dropdown-menu/index.tsx",
-          "hash": "6427315700192246119"
+          "hash": "14865189231475669073"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/slash-dropdown-menu/slash-dropdown-menu.scss",
@@ -2449,7 +2453,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/text-align-button/index.tsx",
-          "hash": "11374041967938315931"
+          "hash": "15938116870683802497"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/text-align-button/text-align-button.tsx",
@@ -2468,7 +2472,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/text-button/index.tsx",
-          "hash": "16889418796683681247"
+          "hash": "3160409560416635746"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/text-button/text-button.tsx",
@@ -2489,7 +2493,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/turn-into-dropdown/index.tsx",
-          "hash": "11430590694410659170"
+          "hash": "18093103749429875160"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/turn-into-dropdown/turn-into-dropdown.tsx",
@@ -2509,7 +2513,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/undo-redo-button/index.tsx",
-          "hash": "5721363824638065189"
+          "hash": "1864731852787079602"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/undo-redo-button/undo-redo-button.tsx",
@@ -2577,7 +2581,7 @@
         },
         {
           "file": "apps/api/src/health/health.module.ts",
-          "hash": "6227263890606856293",
+          "hash": "8981487627228419754",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -2696,7 +2700,7 @@
         },
         {
           "file": "apps/api/src/lib/tiptap-advanced-utils.ts",
-          "hash": "4268858486446856030",
+          "hash": "3792590819177654350",
           "deps": [
             "npm:@tiptap/pm",
             "npm:@tiptap/react"
@@ -2732,7 +2736,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai-embeddings.service.spec.ts",
-          "hash": "15654690502388738112",
+          "hash": "11546289107729072920",
           "deps": [
             "npm:@nestjs/testing"
           ]
@@ -2746,7 +2750,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai.service.spec.ts",
-          "hash": "13101805223657166659",
+          "hash": "9609701531790527146",
           "deps": [
             "npm:@nestjs/testing"
           ]
@@ -2767,14 +2771,14 @@
         },
         {
           "file": "apps/api/src/modules/ai/ai.controller.spec.ts",
-          "hash": "9049673859125040079",
+          "hash": "6132562432892156264",
           "deps": [
             "npm:@nestjs/testing"
           ]
         },
         {
           "file": "apps/api/src/modules/ai/ai.controller.ts",
-          "hash": "14952502184220954575",
+          "hash": "13646736391718665827",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -2784,7 +2788,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/ai.module.ts",
-          "hash": "18191245896725586281",
+          "hash": "15366790159725943101",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -2792,7 +2796,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini-analyst.service.ts",
-          "hash": "2072315283957893780",
+          "hash": "716603600339750764",
           "deps": [
             "npm:@nestjs/cache-manager",
             "npm:@nestjs/common",
@@ -2810,7 +2814,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/optimization.controller.ts",
-          "hash": "873796883755653024",
+          "hash": "9453892816875743482",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -2821,57 +2825,57 @@
         },
         {
           "file": "apps/api/src/modules/ai/providers/ai-provider.interface.ts",
-          "hash": "12519197530071605961"
+          "hash": "3077547593399989040"
         },
         {
           "file": "apps/api/src/modules/ai/providers/ai-provider.manager.ts",
-          "hash": "3606151606402609383",
+          "hash": "13392448998679837309",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/ai/providers/vertex-ai.provider.ts",
-          "hash": "8377341439725065503",
+          "hash": "9388370784905671071",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/ai/streaming.service.ts",
-          "hash": "8145483518490312245",
+          "hash": "615645124266229897",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/ai/testing/prompt-tester.service.ts",
-          "hash": "11589334781557126707",
+          "hash": "2819578958739523303",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/ai/testing/test-cases.ts",
-          "hash": "4897831912131641699"
+          "hash": "556879506162132032"
         },
         {
           "file": "apps/api/src/modules/ai/testing/testing.controller.ts",
-          "hash": "1534117877754187505",
+          "hash": "10192911678880077847",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/ai/testing/testing.module.ts",
-          "hash": "4821154624755635017",
+          "hash": "7876521411734454196",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/ai/tools.ts",
-          "hash": "9196118706958240053"
+          "hash": "8555823102347259150"
         },
         {
           "file": "apps/api/src/modules/ai/types.ts",
@@ -2883,7 +2887,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai-embeddings.service.ts",
-          "hash": "17200868286625779389",
+          "hash": "11560915460396046704",
           "deps": [
             "npm:@google/generative-ai",
             "npm:@nestjs/common",
@@ -2892,7 +2896,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai.service.ts",
-          "hash": "18422742820568571883",
+          "hash": "2848637718071304392",
           "deps": [
             "npm:@google/generative-ai",
             "npm:@nestjs/common",
@@ -2901,7 +2905,7 @@
         },
         {
           "file": "apps/api/src/modules/analysis/analysis.module.ts",
-          "hash": "16783906113665461220",
+          "hash": "1274542318116120847",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -2916,7 +2920,7 @@
         },
         {
           "file": "apps/api/src/modules/assets/assets.controller.ts",
-          "hash": "16298505292392429860",
+          "hash": "11164590688528397300",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express"
@@ -2924,7 +2928,7 @@
         },
         {
           "file": "apps/api/src/modules/assets/assets.module.ts",
-          "hash": "6835877182483228140",
+          "hash": "2087539503059929107",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -2932,28 +2936,28 @@
         },
         {
           "file": "apps/api/src/modules/assets/assets.service.ts",
-          "hash": "17056052585194948890",
+          "hash": "5042151525691825590",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/assignments/assignments.controller.ts",
-          "hash": "7871655086748410888",
+          "hash": "12258433724051101706",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/assignments/assignments.module.ts",
-          "hash": "13885174137408973086",
+          "hash": "10981589503402036315",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/assignments/assignments.service.ts",
-          "hash": "332787765090824791",
+          "hash": "6266487598311195622",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -2992,7 +2996,7 @@
         },
         {
           "file": "apps/api/src/modules/auth/auth.service.spec.ts",
-          "hash": "6177760967430380981",
+          "hash": "11548325989505605675",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/jwt",
@@ -3002,7 +3006,7 @@
         },
         {
           "file": "apps/api/src/modules/auth/auth.service.ts",
-          "hash": "7977183336341167182",
+          "hash": "14758451420056384239",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/jwt",
@@ -3022,28 +3026,28 @@
         },
         {
           "file": "apps/api/src/modules/availability/availability.module.ts",
-          "hash": "7207921090449586302",
+          "hash": "16726673687371745941",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/availability/availability.service.ts",
-          "hash": "9422172630726990485",
+          "hash": "6321341833466292427",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/confluence/confluence.controller.ts",
-          "hash": "5618243180486420807",
+          "hash": "12872406022353546503",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/confluence/confluence.module.ts",
-          "hash": "11704278906799667960",
+          "hash": "12496224919345960642",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3064,21 +3068,21 @@
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.controller.ts",
-          "hash": "6955786534776779157",
+          "hash": "3386218241932318117",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.module.ts",
-          "hash": "7027175154511085463",
+          "hash": "17213171085934479320",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.service.spec.ts",
-          "hash": "2995365710923129329",
+          "hash": "18394256254947871977",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/cache-manager"
@@ -3086,7 +3090,7 @@
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.service.ts",
-          "hash": "17304065954561340760",
+          "hash": "9630255974746342673",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client",
@@ -3096,7 +3100,7 @@
         },
         {
           "file": "apps/api/src/modules/google/data-extractor.service.spec.ts",
-          "hash": "4446784758003184070",
+          "hash": "14398778278611206109",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/common"
@@ -3104,35 +3108,35 @@
         },
         {
           "file": "apps/api/src/modules/google/data-extractor.service.ts",
-          "hash": "1570833501738089050",
+          "hash": "385224992154432804",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/google/drive.controller.ts",
-          "hash": "16796694716500183786",
+          "hash": "7132104153768570402",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/google/drive.service.spec.ts",
-          "hash": "2819148740105722002",
+          "hash": "3570524794226188864",
           "deps": [
             "npm:@nestjs/testing"
           ]
         },
         {
           "file": "apps/api/src/modules/google/drive.service.ts",
-          "hash": "13572638345005163972",
+          "hash": "13100426858730467012",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/google/google-client.factory.spec.ts",
-          "hash": "17831904085540054047",
+          "hash": "16255824019655031051",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/config",
@@ -3151,7 +3155,7 @@
         },
         {
           "file": "apps/api/src/modules/google/google.module.ts",
-          "hash": "7043807876478338220",
+          "hash": "8375897464254430863",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -3159,7 +3163,7 @@
         },
         {
           "file": "apps/api/src/modules/google/sheet-ingestor.service.spec.ts",
-          "hash": "18264505800684154767",
+          "hash": "1217751784126406257",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/common"
@@ -3167,25 +3171,25 @@
         },
         {
           "file": "apps/api/src/modules/google/sheet-ingestor.service.ts",
-          "hash": "8568468589067278760",
+          "hash": "5564640608739356943",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/adapters/google-drive.adapter.ts",
-          "hash": "14747206466508581981",
+          "hash": "6723539658400128062",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/adapters/storage-adapter.interface.ts",
-          "hash": "15481182742424443435"
+          "hash": "10368363698762588507"
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.controller.ts",
-          "hash": "4118984144040672332",
+          "hash": "4138270984376136752",
           "deps": [
             "npm:@nestjs/common",
             "npm:express"
@@ -3193,14 +3197,14 @@
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.service.ts",
-          "hash": "17576285793773610682",
+          "hash": "12379681993957075693",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.spec.ts",
-          "hash": "16760419681428137364",
+          "hash": "4633264736148274264",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/testing"
@@ -3215,7 +3219,7 @@
         },
         {
           "file": "apps/api/src/modules/integrations/integrations.module.ts",
-          "hash": "9149330406798641494",
+          "hash": "12624295906271777970",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3229,7 +3233,7 @@
         },
         {
           "file": "apps/api/src/modules/intelligence/intelligence.module.ts",
-          "hash": "7028010060474277602",
+          "hash": "10074631116246802307",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3244,14 +3248,14 @@
         },
         {
           "file": "apps/api/src/modules/knowledge/knowledge.controller.ts",
-          "hash": "17007693499285977210",
+          "hash": "2914717301683772244",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/knowledge/knowledge.module.ts",
-          "hash": "680071960881198118",
+          "hash": "11615525868757659217",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -3259,21 +3263,21 @@
         },
         {
           "file": "apps/api/src/modules/knowledge/knowledge.service.ts",
-          "hash": "5442781991299959314",
+          "hash": "5917208986977921575",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/media-proxy/gcs-media.service.ts",
-          "hash": "6498238992641315093",
+          "hash": "13760904655673955301",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/media-proxy/media-proxy.controller.ts",
-          "hash": "1707268448133193644",
+          "hash": "14246102616915949336",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -3286,7 +3290,7 @@
         },
         {
           "file": "apps/api/src/modules/media-proxy/media-proxy.module.ts",
-          "hash": "18237762510897154684",
+          "hash": "6749932469868489107",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3302,14 +3306,14 @@
         },
         {
           "file": "apps/api/src/modules/monitoring/ai-usage.service.ts",
-          "hash": "7662109333371846921",
+          "hash": "5017403909240587318",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/monitoring/alerts.service.ts",
-          "hash": "15978835463092214116",
+          "hash": "4442211198543104338",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/schedule"
@@ -3317,21 +3321,21 @@
         },
         {
           "file": "apps/api/src/modules/monitoring/budget.guard.ts",
-          "hash": "7617301498122076441",
+          "hash": "2175895247594262838",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/monitoring/monitoring.controller.ts",
-          "hash": "17737823336071908230",
+          "hash": "7684038300428797324",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/monitoring/monitoring.module.ts",
-          "hash": "10699250409621812444",
+          "hash": "4689685787603908536",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3366,7 +3370,7 @@
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.controller.ts",
-          "hash": "18268616255161255052",
+          "hash": "10287185168265234410",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -3375,14 +3379,14 @@
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.module.ts",
-          "hash": "4987328271758702454",
+          "hash": "6644554675763299392",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.service.ts",
-          "hash": "16046243399419064012",
+          "hash": "10878636178921764081",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client"
@@ -3398,7 +3402,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/projects.controller.ts",
-          "hash": "5749167509644346046",
+          "hash": "13578838715545167983",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3412,7 +3416,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/projects.service.spec.ts",
-          "hash": "12183350598623665972",
+          "hash": "2375615166953067478",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/cache-manager"
@@ -3420,7 +3424,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/projects.service.ts",
-          "hash": "10090858667815697199",
+          "hash": "6280600247258640446",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client",
@@ -3437,14 +3441,14 @@
         },
         {
           "file": "apps/api/src/modules/rag/embeddings.service.spec.ts",
-          "hash": "4880376536196131436",
+          "hash": "16477922267036236957",
           "deps": [
             "npm:@nestjs/testing"
           ]
         },
         {
           "file": "apps/api/src/modules/rag/embeddings.service.ts",
-          "hash": "11831989706630601138",
+          "hash": "10025180204544423655",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3455,11 +3459,11 @@
         },
         {
           "file": "apps/api/src/modules/rag/providers/index.ts",
-          "hash": "583024595242334023"
+          "hash": "16118233423615933443"
         },
         {
           "file": "apps/api/src/modules/rag/providers/ollama-embeddings.service.ts",
-          "hash": "16377255327611140804",
+          "hash": "16152919940215645853",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
@@ -3468,7 +3472,7 @@
         },
         {
           "file": "apps/api/src/modules/rag/rag.controller.ts",
-          "hash": "14747554627581056772",
+          "hash": "12043553256481693089",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/throttler"
@@ -3476,7 +3480,7 @@
         },
         {
           "file": "apps/api/src/modules/rag/rag.module.ts",
-          "hash": "7866861799539975794",
+          "hash": "5914185948651734324",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -3484,7 +3488,7 @@
         },
         {
           "file": "apps/api/src/modules/rag/rag.service.ts",
-          "hash": "8849621020732669491",
+          "hash": "17430968951090943107",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3495,14 +3499,14 @@
         },
         {
           "file": "apps/api/src/modules/rag/vector-store.service.ts",
-          "hash": "3805107067209183502",
+          "hash": "2251019550706663534",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/realtime/realtime.controller.ts",
-          "hash": "2341178285074318611",
+          "hash": "10770249165150685196",
           "deps": [
             "npm:@nestjs/common",
             "npm:express"
@@ -3510,7 +3514,7 @@
         },
         {
           "file": "apps/api/src/modules/realtime/realtime.module.ts",
-          "hash": "10209891059807589034",
+          "hash": "7093575085150655265",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3533,21 +3537,21 @@
         },
         {
           "file": "apps/api/src/modules/scripts/scripts.module.ts",
-          "hash": "2581199584198523041",
+          "hash": "4215064407000741759",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/storage/storage.controller.ts",
-          "hash": "12001046257139550201",
+          "hash": "15198133815022645510",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/storage/storage.module.ts",
-          "hash": "6423625036418916438",
+          "hash": "5141844501967688119",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -3580,7 +3584,7 @@
         },
         {
           "file": "apps/api/src/modules/tools/tools.module.ts",
-          "hash": "6453732112665390303",
+          "hash": "3545000650754467216",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3594,14 +3598,14 @@
         },
         {
           "file": "apps/api/src/modules/transcripts/transcripts.controller.ts",
-          "hash": "12681258380575879686",
+          "hash": "3505272390389064052",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/transcripts/transcripts.module.ts",
-          "hash": "10183495258095236882",
+          "hash": "7117682427901965838",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -3609,7 +3613,7 @@
         },
         {
           "file": "apps/api/src/modules/transcripts/transcripts.service.ts",
-          "hash": "17183118984756666261",
+          "hash": "9848943807092541004",
           "deps": [
             "npm:axios",
             "npm:@nestjs/common",
@@ -3625,7 +3629,7 @@
         },
         {
           "file": "apps/api/src/prisma/prisma.service.spec.ts",
-          "hash": "6927375946479535326",
+          "hash": "9271288927475188863",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/testing"
@@ -3930,6 +3934,10 @@
       {
         "file": "ENVIRONMENT_REVERSION_COMPLETE.md",
         "hash": "14415733707930019718"
+      },
+      {
+        "file": "ESM_LOADER_FIX_PROGRESS.md",
+        "hash": "3982653451000772556"
       },
       {
         "file": "ESM_LOADER_FIX_TODO.md",
@@ -48634,6 +48642,14 @@
       {
         "file": "firestore.rules",
         "hash": "12557907363515400004"
+      },
+      {
+        "file": "fix-esm-imports-v2.js",
+        "hash": "13529166988516861668"
+      },
+      {
+        "file": "fix-esm-imports.js",
+        "hash": "12005680912229596878"
       },
       {
         "file": "fix-icons.js",

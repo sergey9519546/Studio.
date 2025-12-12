@@ -1,5 +1,5 @@
 
-import { CloudFileDto } from '../dto/cloud-storage.dto';
+import { CloudFileDto } from '../dto/cloud-storage.dto.js';
 
 export interface ICloudStorageAdapter {
   readonly providerId: string;

@@ -1,10 +1,10 @@
 
 import { Injectable, ConflictException } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
-import { AvailabilityService } from '../availability/availability.service';
-import { RealtimeService } from '../realtime/realtime.service';
-import { CreateAssignmentDto } from './dto/assignment.dto';
-import { UpdateAssignmentDto } from './dto/update-assignment.dto';
+import { PrismaService } from '../../prisma/prisma.service.js';
+import { AvailabilityService } from '../availability/availability.service.js';
+import { RealtimeService } from '../realtime/realtime.service.js';
+import { CreateAssignmentDto } from './dto/assignment.dto.js';
+import { UpdateAssignmentDto } from './dto/update-assignment.dto.js';
 
 @Injectable()
 export class AssignmentsService {

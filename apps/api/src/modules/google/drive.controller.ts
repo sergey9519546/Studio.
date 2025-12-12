@@ -1,8 +1,8 @@
 
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
-import { DriveFileDTO, DriveService } from "./drive.service";
-import { GoogleClientFactory } from './google-client.factory';
+import { DriveFileDTO, DriveService } from "./drive.service.js";
+import { GoogleClientFactory } from './google-client.factory.js';
 
 @Controller({ path: "google/drive", version: "1" })
 @UseGuards(JwtAuthGuard)

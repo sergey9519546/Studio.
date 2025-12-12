@@ -1,8 +1,8 @@
 import { Injectable, Logger, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
-import { AssetsService } from '../assets/assets.service';
-import { DeepReaderService } from '../intelligence/deep-reader.service';
-import { KnowledgeSourceEntity } from './interfaces/knowledge-source.interface';
-import { StorageService } from '../storage/storage.service';
+import { AssetsService } from '../assets/assets.service.js';
+import { DeepReaderService } from '../intelligence/deep-reader.service.js';
+import { KnowledgeSourceEntity } from './interfaces/knowledge-source.interface.js';
+import { StorageService } from '../storage/storage.service.js';
 import { Buffer } from 'buffer';
 
 @Injectable()

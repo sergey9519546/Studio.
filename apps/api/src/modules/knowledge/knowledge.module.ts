@@ -1,10 +1,10 @@
 
 import { Module } from '@nestjs/common';
-import { KnowledgeController } from './knowledge.controller';
-import { KnowledgeService } from './knowledge.service';
-import { AssetsModule } from '../assets/assets.module';
-import { IntelligenceModule } from '../intelligence/intelligence.module';
-import { StorageModule } from '../storage/storage.module';
+import { KnowledgeController } from './knowledge.controller.js';
+import { KnowledgeService } from './knowledge.service.js';
+import { AssetsModule } from '../assets/assets.module.js';
+import { IntelligenceModule } from '../intelligence/intelligence.module.js';
+import { StorageModule } from '../storage/storage.module.js';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({

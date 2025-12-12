@@ -18207,12 +18207,12 @@
       },
       {
         "source": "api",
-        "target": "npm:@nestjs/core",
+        "target": "npm:@nestjs/config",
         "type": "static"
       },
       {
         "source": "api",
-        "target": "npm:@nestjs/config",
+        "target": "npm:@nestjs/core",
         "type": "static"
       },
       {
@@ -45445,5 +45445,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1765517344506
+  "computedAt": 1765517642037
 }

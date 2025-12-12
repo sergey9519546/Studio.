@@ -8,7 +8,7 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { StorageService } from '../storage/storage.service';
+import { StorageService } from '../storage/storage.service.js';
 
 @Injectable()
 export class GCSMediaService {

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FreelancersService } from './freelancers.service';
-import { PrismaService } from '../../prisma/prisma.service';
+import { FreelancersService } from './freelancers.service.js';
+import { PrismaService } from '../../prisma/prisma.service.js';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 
 describe('FreelancersService', () => {

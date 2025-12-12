@@ -1,2 +1,2 @@
-export * from "./undo-redo-button"
-export * from "./use-undo-redo"
+export * from "./undo-redo-button.js"
+export * from "./use-undo-redo.js"

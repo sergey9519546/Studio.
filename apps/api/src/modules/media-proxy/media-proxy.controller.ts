@@ -31,9 +31,9 @@ import {
 import { FileInterceptor } from "@nestjs/platform-express";
 import { v4 as uuidv4 } from "uuid";
 import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard.js";
-import { PrismaService } from "../../prisma/prisma.service";
-import { GCSMediaService } from "./gcs-media.service";
-import { MediaErrors } from "./media-proxy.errors";
+import { PrismaService } from "../../prisma/prisma.service.js";
+import { GCSMediaService } from "./gcs-media.service.js";
+import { MediaErrors } from "./media-proxy.errors.js";
 
 @Controller({ path: "media-proxy", version: "1" })
 @UseGuards(JwtAuthGuard)

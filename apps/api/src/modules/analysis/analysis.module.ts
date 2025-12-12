@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { WorkspaceAnalysisController } from './workspace-analysis.controller';
-import { GoogleModule } from '../google/google.module';
-import { AIModule } from '../ai/ai.module';
+import { WorkspaceAnalysisController } from './workspace-analysis.controller.js';
+import { GoogleModule } from '../google/google.module.js';
+import { AIModule } from '../ai/ai.module.js';
 
 @Module({
   imports: [ConfigModule, GoogleModule, AIModule],

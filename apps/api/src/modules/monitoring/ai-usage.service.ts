@@ -1,7 +1,7 @@
 // Cost Monitoring Service - Complete Implementation
 
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service.js';
 
 interface AIUsageRecord {
     endpoint: string;

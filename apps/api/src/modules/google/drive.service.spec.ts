@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DriveService } from './drive.service';
-import { GoogleClientFactory } from './google-client.factory';
+import { DriveService } from './drive.service.js';
+import { GoogleClientFactory } from './google-client.factory.js';
 
 describe('DriveService', () => {
     let service: DriveService;

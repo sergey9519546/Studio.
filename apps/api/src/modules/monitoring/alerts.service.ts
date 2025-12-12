@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { AIUsageService } from './ai-usage.service';
+import { AIUsageService } from './ai-usage.service.js';
 
 interface AlertConfig {
     dailyBudget: number;

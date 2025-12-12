@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { AIUsageService } from '../monitoring/ai-usage.service';
-import { PROMPT_TEMPLATES } from './prompts/templates';
-import { PromptTesterService } from './testing/prompt-tester.service';
+import { AIUsageService } from '../monitoring/ai-usage.service.js';
+import { PROMPT_TEMPLATES } from './prompts/templates.js';
+import { PromptTesterService } from './testing/prompt-tester.service.js';
 
 interface OptimizationResult {
     template: string;

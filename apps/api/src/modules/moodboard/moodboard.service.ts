@@ -1,11 +1,11 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { MoodboardCollection, MoodboardItem } from "@prisma/client";
-import { PrismaService } from "../../prisma/prisma.service";
-import { VertexAIService } from "../ai/vertex-ai.service";
-import { AssetsService } from "../assets/assets.service";
-import { CreateCollectionDto } from "./dto/create-collection.dto";
-import { CreateFromUnsplashDto } from "./dto/create-from-unsplash.dto";
-import { CreateMoodboardItemDto } from "./dto/create-moodboard-item.dto";
+import { PrismaService } from "../../prisma/prisma.service.js";
+import { VertexAIService } from "../ai/vertex-ai.service.js";
+import { AssetsService } from "../assets/assets.service.js";
+import { CreateCollectionDto } from "./dto/create-collection.dto.js";
+import { CreateFromUnsplashDto } from "./dto/create-from-unsplash.dto.js";
+import { CreateMoodboardItemDto } from "./dto/create-moodboard-item.dto.js";
 
 @Injectable()
 export class MoodboardService {

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { DeepReaderService } from './deep-reader.service';
+import { DeepReaderService } from './deep-reader.service.js';
 
 @Module({
   providers: [DeepReaderService],

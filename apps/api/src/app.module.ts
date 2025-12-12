@@ -1,15 +1,16 @@
-
 import { Logger, Module } from '@nestjs/common';
-import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
-import { ThrottlerModule, ThrottlerGuard } from "@nestjs/throttler";
+import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { existsSync } from "fs";
-import { join } from "path";
+import { dirname, join } from "path";
+import { fileURLToPath } from 'url';
+
 import { CacheModule } from "./common/cache/cache.module.js";
 import { CommonModule } from "./common/guards/common.module.js";
 import { LoggerModule } from './common/logger/logger.module.js';
@@ -33,8 +34,12 @@ import { ProjectsModule } from "./modules/projects/projects.module.js";
 import { RealtimeModule } from "./modules/realtime/realtime.module.js";
 import { ScriptsModule } from "./modules/scripts/scripts.module.js";
 import { StorageModule } from "./modules/storage/storage.module.js";
-import { PrismaModule } from "./prisma/prisma.module.js";
 import { TranscriptsModule } from "./modules/transcripts/transcripts.module.js";
+import { PrismaModule } from "./prisma/prisma.module.js";
+
+// ESM equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const appLogger = new Logger('AppModule');
 
@@ -96,7 +101,7 @@ appLogger.log(`Static root: ${staticRoot ?? 'not-found'} | cwd: ${process.cwd()}
           ServeStaticModule.forRoot({
             rootPath: staticRoot,
             serveRoot: "/",
-            renderPath: "/*", // SPA fallback so client routes don’t 404
+            renderPath: "/*", // SPA fallback so client routes don't 404
             exclude: ["/api/(.*)", "/v1/(.*)"], // Exclude API traffic
           }),
         ]

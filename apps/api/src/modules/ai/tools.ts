@@ -1,5 +1,5 @@
-import { PrismaService } from '../../prisma/prisma.service';
-import type { ToolDefinition } from './types';
+import { PrismaService } from '../../prisma/prisma.service.js';
+import type { ToolDefinition } from './types.js';
 
 export const getTools = (prisma: PrismaService): ToolDefinition[] => [
   {

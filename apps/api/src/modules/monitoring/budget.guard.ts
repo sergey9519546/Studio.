@@ -1,5 +1,5 @@
 import { Injectable, CanActivate, ExecutionContext, ForbiddenException } from '@nestjs/common';
-import { AlertsService } from './alerts.service';
+import { AlertsService } from './alerts.service.js';
 
 /**
  * Guard to enforce AI budget limits

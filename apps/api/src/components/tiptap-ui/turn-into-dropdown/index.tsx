@@ -1,2 +1,2 @@
-export * from "./turn-into-dropdown"
-export * from "./use-turn-into-dropdown"
+export * from "./turn-into-dropdown.js"
+export * from "./use-turn-into-dropdown.js"

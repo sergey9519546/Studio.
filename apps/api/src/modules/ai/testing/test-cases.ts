@@ -1,4 +1,4 @@
-import { PromptTestCase } from './prompt-tester.service';
+import { PromptTestCase } from './prompt-tester.service.js';
 
 /**
  * Test case library for prompt quality assurance

@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { AIProvider, ChatOptions } from './ai-provider.interface';
-import { VertexAIProvider } from './vertex-ai.provider';
+import { AIProvider, ChatOptions } from './ai-provider.interface.js';
+import { VertexAIProvider } from './vertex-ai.provider.js';
 
 @Injectable()
 export class AIProviderManager {

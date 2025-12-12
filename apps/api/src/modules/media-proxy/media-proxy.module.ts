@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from '../../prisma/prisma.module';
-import { StorageModule } from "../storage/storage.module";
-import { GCSMediaService } from "./gcs-media.service";
-import { MediaProxyController } from "./media-proxy.controller";
+import { PrismaModule } from '../../prisma/prisma.module.js';
+import { StorageModule } from "../storage/storage.module.js";
+import { GCSMediaService } from "./gcs-media.service.js";
+import { MediaProxyController } from "./media-proxy.controller.js";
 
 @Module({
   imports: [PrismaModule, StorageModule],

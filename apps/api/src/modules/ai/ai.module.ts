@@ -1,22 +1,22 @@
 import { Module, forwardRef } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
-import { PrismaModule } from "../../prisma/prisma.module";
-import { IntelligenceModule } from "../intelligence/intelligence.module";
-import { MonitoringModule } from "../monitoring/monitoring.module";
-import { RAGModule } from "../rag/rag.module";
-import { ToolsModule } from "../tools/tools.module";
-import { AIController } from "./ai.controller";
-import { GeminiAnalystService } from "./gemini-analyst.service";
-import { GeminiOpenAIService } from "./gemini-openai.service";
-import { OptimizationController } from "./optimization.controller";
-import { AIProviderManager } from "./providers/ai-provider.manager";
-import { VertexAIProvider } from "./providers/vertex-ai.provider";
-import { StreamingService } from "./streaming.service";
-import { PromptTesterService } from "./testing/prompt-tester.service";
-import { VertexAIEmbeddingsService } from "./vertex-ai-embeddings.service";
-import { VertexAIService } from "./vertex-ai.service";
-import { VertexAiEmbeddingsService } from './Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai-embeddings.service';
-import { VertexAiService } from './Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai.service';
+import { PrismaModule } from "../../prisma/prisma.module.js";
+import { IntelligenceModule } from "../intelligence/intelligence.module.js";
+import { MonitoringModule } from "../monitoring/monitoring.module.js";
+import { RAGModule } from "../rag/rag.module.js";
+import { ToolsModule } from "../tools/tools.module.js";
+import { AIController } from "./ai.controller.js";
+import { GeminiAnalystService } from "./gemini-analyst.service.js";
+import { GeminiOpenAIService } from "./gemini-openai.service.js";
+import { OptimizationController } from "./optimization.controller.js";
+import { AIProviderManager } from "./providers/ai-provider.manager.js";
+import { VertexAIProvider } from "./providers/vertex-ai.provider.js";
+import { StreamingService } from "./streaming.service.js";
+import { PromptTesterService } from "./testing/prompt-tester.service.js";
+import { VertexAIEmbeddingsService } from "./vertex-ai-embeddings.service.js";
+import { VertexAIService } from "./vertex-ai.service.js";
+import { VertexAiEmbeddingsService } from './Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai-embeddings.service.js';
+import { VertexAiService } from './Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai.service.js';
 
 @Module({
   imports: [

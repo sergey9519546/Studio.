@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { RealtimeController } from './realtime.controller';
-import { RealtimeService } from './realtime.service';
+import { RealtimeController } from './realtime.controller.js';
+import { RealtimeService } from './realtime.service.js';
 
 @Module({
   controllers: [RealtimeController],

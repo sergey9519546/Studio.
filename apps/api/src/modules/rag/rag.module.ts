@@ -1,15 +1,15 @@
 import { Module, forwardRef } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { PrismaModule } from '../../prisma/prisma.module';
-import { AIModule } from '../ai/ai.module';
-import { VertexAIEmbeddingsService } from '../ai/vertex-ai-embeddings.service';
-import { ChunkingService } from './chunking.service';
-import { EmbeddingsService } from './embeddings.service';
-import { EMBEDDINGS_PROVIDER } from './providers/embeddings-provider.interface';
-import { OllamaEmbeddingsService } from './providers/ollama-embeddings.service';
-import { RAGController } from './rag.controller';
-import { RAGService } from './rag.service';
-import { VectorStoreService } from './vector-store.service';
+import { PrismaModule } from '../../prisma/prisma.module.js';
+import { AIModule } from '../ai/ai.module.js';
+import { VertexAIEmbeddingsService } from '../ai/vertex-ai-embeddings.service.js';
+import { ChunkingService } from './chunking.service.js';
+import { EmbeddingsService } from './embeddings.service.js';
+import { EMBEDDINGS_PROVIDER } from './providers/embeddings-provider.interface.js';
+import { OllamaEmbeddingsService } from './providers/ollama-embeddings.service.js';
+import { RAGController } from './rag.controller.js';
+import { RAGService } from './rag.service.js';
+import { VectorStoreService } from './vector-store.service.js';
 
 @Module({
     imports: [forwardRef(() => AIModule), PrismaModule, ConfigModule],

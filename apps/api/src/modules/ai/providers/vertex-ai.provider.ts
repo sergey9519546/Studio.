@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import type { ToolCall } from '../types';
-import { VertexAIService } from '../vertex-ai.service';
-import { AIProvider, ChatOptions, ModelInfo } from './ai-provider.interface';
+import type { ToolCall } from '../types.js';
+import { VertexAIService } from '../vertex-ai.service.js';
+import { AIProvider, ChatOptions, ModelInfo } from './ai-provider.interface.js';
 
 @Injectable()
 export class VertexAIProvider implements AIProvider {

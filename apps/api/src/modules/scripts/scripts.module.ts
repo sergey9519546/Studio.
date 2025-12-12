@@ -8,9 +8,9 @@ import {
   Param,
   Post,
 } from "@nestjs/common";
-import { PrismaModule } from "../../prisma/prisma.module";
-import { PrismaService } from '../../prisma/prisma.service';
-import { CreateScriptDto } from './dto/script.dto';
+import { PrismaModule } from "../../prisma/prisma.module.js";
+import { PrismaService } from '../../prisma/prisma.service.js';
+import { CreateScriptDto } from './dto/script.dto.js';
 
 @Injectable()
 export class ScriptsService {

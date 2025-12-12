@@ -4,7 +4,7 @@
  * Abstraction layer for multiple AI providers (Vertex AI, OpenAI, Claude, etc.)
  */
 
-import type { ToolCall, ToolDefinition } from '../types';
+import type { ToolCall, ToolDefinition } from '../types.js';
 
 export interface AIProvider {
     name: string;

@@ -1,3 +1,3 @@
-export * from "./suggestion-menu"
-export * from "./suggestion-menu-types"
-export * from "./suggestion-menu-utils"
+export * from "./suggestion-menu.js"
+export * from "./suggestion-menu-types.js"
+export * from "./suggestion-menu-utils.js"

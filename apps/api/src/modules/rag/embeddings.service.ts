@@ -1,6 +1,6 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import type { EmbeddingsProvider } from './providers/embeddings-provider.interface';
-import { EMBEDDINGS_PROVIDER } from './providers/embeddings-provider.interface';
+import type { EmbeddingsProvider } from './providers/embeddings-provider.interface.js';
+import { EMBEDDINGS_PROVIDER } from './providers/embeddings-provider.interface.js';
 
 interface CachedEmbedding {
     text: string;

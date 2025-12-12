@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { GoogleClientFactory } from './google-client.factory';
+import { GoogleClientFactory } from './google-client.factory.js';
 
 export interface DriveFileDTO {
   id: string;

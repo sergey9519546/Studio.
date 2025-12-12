@@ -2,8 +2,8 @@
 import { Controller, Get, Param, Query, Req, UseGuards } from "@nestjs/common";
 import { Request } from 'express';
 import { JwtAuthGuard } from "../../../common/guards/jwt-auth.guard.js";
-import { CloudStorageService } from './cloud-storage.service';
-import { ListFilesQueryDto } from "./dto/cloud-storage.dto";
+import { CloudStorageService } from './cloud-storage.service.js';
+import { ListFilesQueryDto } from "./dto/cloud-storage.dto.js";
 
 interface RequestWithUser extends Request {
   user: { id: string; email: string };

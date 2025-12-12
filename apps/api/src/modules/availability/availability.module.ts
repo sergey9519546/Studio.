@@ -1,7 +1,7 @@
 
 import { Module } from '@nestjs/common';
-import { AvailabilityService } from './availability.service';
-import { PrismaModule } from '../../prisma/prisma.module';
+import { AvailabilityService } from './availability.service.js';
+import { PrismaModule } from '../../prisma/prisma.module.js';
 
 @Module({
   imports: [PrismaModule],

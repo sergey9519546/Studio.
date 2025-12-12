@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { VertexAiService } from './vertex-ai.service';
+import { VertexAiService } from './vertex-ai.service.js';
 
 describe('VertexAiService', () => {
   let service: VertexAiService;

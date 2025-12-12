@@ -16,12 +16,12 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Throttle } from '@nestjs/throttler';
 import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard.js";
-import { AssetsService } from "../assets/assets.service";
-import { CreateCollectionDto } from "./dto/create-collection.dto";
-import { CreateFromUnsplashDto } from "./dto/create-from-unsplash.dto";
-import { CreateMoodboardItemDto } from './dto/create-moodboard-item.dto';
-import { UpdateMoodboardItemDto } from './dto/update-moodboard-item.dto';
-import { MoodboardService } from "./moodboard.service";
+import { AssetsService } from "../assets/assets.service.js";
+import { CreateCollectionDto } from "./dto/create-collection.dto.js";
+import { CreateFromUnsplashDto } from "./dto/create-from-unsplash.dto.js";
+import { CreateMoodboardItemDto } from './dto/create-moodboard-item.dto.js';
+import { UpdateMoodboardItemDto } from './dto/update-moodboard-item.dto.js';
+import { MoodboardService } from "./moodboard.service.js";
 
 @Controller({ path: "moodboard", version: "1" })
 @UseGuards(JwtAuthGuard)

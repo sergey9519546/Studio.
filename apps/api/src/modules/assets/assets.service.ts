@@ -2,8 +2,8 @@
 import { Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { randomUUID } from 'crypto';
 import { extname } from 'path';
-import { PrismaService } from "../../prisma/prisma.service";
-import { StorageService } from "../storage/storage.service";
+import { PrismaService } from "../../prisma/prisma.service.js";
+import { StorageService } from "../storage/storage.service.js";
 
 export interface AssetEntity {
   id: string;

@@ -1,7 +1,7 @@
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard.js";
-import { AIUsageService } from "./ai-usage.service";
-import { AlertsService } from "./alerts.service";
+import { AIUsageService } from "./ai-usage.service.js";
+import { AlertsService } from "./alerts.service.js";
 
 @Controller({ path: "monitoring", version: "1" })
 @UseGuards(JwtAuthGuard)

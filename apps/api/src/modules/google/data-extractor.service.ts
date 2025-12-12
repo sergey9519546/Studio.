@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
-import { AuthenticatedUser, GoogleClientFactory } from './google-client.factory';
+import { AuthenticatedUser, GoogleClientFactory } from './google-client.factory.js';
 
 @Injectable()
 export class DataExtractorService {

@@ -1,2 +1,2 @@
-export * from "./slash-command-trigger-button"
-export * from "./use-slash-command-trigger"
+export * from "./slash-command-trigger-button.js"
+export * from "./use-slash-command-trigger.js"

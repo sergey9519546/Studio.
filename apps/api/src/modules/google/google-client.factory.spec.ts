@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigService } from '@nestjs/config';
 import { UnauthorizedException } from '@nestjs/common';
-import { GoogleClientFactory } from './google-client.factory';
+import { GoogleClientFactory } from './google-client.factory.js';
 
 describe('GoogleClientFactory', () => {
     let configService: ConfigService;

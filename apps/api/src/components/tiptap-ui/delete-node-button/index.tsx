@@ -1,2 +1,2 @@
-export * from "./delete-node-button"
-export * from "./use-delete-node"
+export * from "./delete-node-button.js"
+export * from "./use-delete-node.js"

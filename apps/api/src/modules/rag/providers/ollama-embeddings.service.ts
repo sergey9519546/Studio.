@@ -1,7 +1,7 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Ollama } from 'ollama';
-import { EmbeddingsProvider } from './embeddings-provider.interface';
+import { EmbeddingsProvider } from './embeddings-provider.interface.js';
 
 @Injectable()
 export class OllamaEmbeddingsService implements EmbeddingsProvider, OnModuleInit {

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { CreateTranscriptDto } from "./dto/create-transcript.dto";
+import { CreateTranscriptDto } from "./dto/create-transcript.dto.js";
 
 interface SupadataTranscriptResponse {
   content?: string;

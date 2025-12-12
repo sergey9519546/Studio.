@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BadRequestException } from '@nestjs/common';
-import { SheetIngestorService } from './sheet-ingestor.service';
-import { GoogleClientFactory } from './google-client.factory';
+import { SheetIngestorService } from './sheet-ingestor.service.js';
+import { GoogleClientFactory } from './google-client.factory.js';
 
 describe('SheetIngestorService', () => {
     let service: SheetIngestorService;

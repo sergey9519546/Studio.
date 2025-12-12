@@ -1,7 +1,7 @@
 import { Injectable, Logger, BadRequestException } from '@nestjs/common';
-import { ICloudStorageAdapter } from './adapters/storage-adapter.interface';
-import { GoogleDriveAdapter } from './adapters/google-drive.adapter'; // Implementation below
-import { CloudProviderOptionDto, CloudProviderType, CloudFileDto } from './dto/cloud-storage.dto';
+import { ICloudStorageAdapter } from './adapters/storage-adapter.interface.js';
+import { GoogleDriveAdapter } from './adapters/google-drive.adapter.js'; // Implementation below
+import { CloudProviderOptionDto, CloudProviderType, CloudFileDto } from './dto/cloud-storage.dto.js';
 
 @Injectable()
 export class CloudStorageService {

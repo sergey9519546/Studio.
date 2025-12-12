@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RAGService } from "../rag/rag.service";
-import { AIController } from "./ai.controller";
-import { GeminiAnalystService } from "./gemini-analyst.service";
-import { StreamingService } from "./streaming.service";
+import { RAGService } from "../rag/rag.service.js";
+import { AIController } from "./ai.controller.js";
+import { GeminiAnalystService } from "./gemini-analyst.service.js";
+import { StreamingService } from "./streaming.service.js";
 
 describe("AIController", () => {
   let controller: AIController;

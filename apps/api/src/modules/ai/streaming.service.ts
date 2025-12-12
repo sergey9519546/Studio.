@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { VertexAIService } from './vertex-ai.service';
+import { VertexAIService } from './vertex-ai.service.js';
 
 interface StreamChunk {
     text: string;

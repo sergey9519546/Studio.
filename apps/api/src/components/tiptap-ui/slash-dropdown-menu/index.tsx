@@ -1,2 +1,2 @@
-export * from "./slash-dropdown-menu"
-export * from "./use-slash-dropdown-menu"
+export * from "./slash-dropdown-menu.js"
+export * from "./use-slash-dropdown-menu.js"

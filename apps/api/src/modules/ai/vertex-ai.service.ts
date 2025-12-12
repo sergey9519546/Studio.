@@ -1,7 +1,7 @@
 import { GenerativeModel, GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import type { ToolCall, ToolDefinition } from "./types";
+import type { ToolCall, ToolDefinition } from "./types.js";
 
 @Injectable()
 export class VertexAIService {

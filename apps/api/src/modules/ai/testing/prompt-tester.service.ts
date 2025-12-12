@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { PROMPT_TEMPLATES } from '../prompts/templates';
-import { VertexAIService } from '../vertex-ai.service';
+import { PROMPT_TEMPLATES } from '../prompts/templates.js';
+import { VertexAIService } from '../vertex-ai.service.js';
 
 export interface PromptTestCase {
     name: string;
