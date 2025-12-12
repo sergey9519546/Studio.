@@ -14,8 +14,30 @@ import {
   X,
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { findSimilarImages, UnsplashImage } from '../../services/unsplash';
-import { MoodboardItem } from '../../types';
+import { findSimilarImages, UnsplashImage } from "../../services/unsplash";
+import { MoodboardItem } from "../../types";
+
+const toArray = (value: string[] | string | undefined): string[] => {
+  if (Array.isArray(value)) return value;
+  if (typeof value === "string") {
+    return value
+      .split(",")
+      .map((part) => part.trim())
+      .filter(Boolean);
+  }
+  return [];
+};
+
+const normalizeItem = (payload: MoodboardItem): MoodboardItem => ({
+  ...payload,
+  caption: payload.caption ?? "",
+  tags: toArray((payload as unknown as { tags?: string[] | string }).tags),
+  moods: toArray((payload as unknown as { moods?: string[] | string }).moods),
+  colors: toArray(
+    (payload as unknown as { colors?: string[] | string }).colors
+  ),
+  isFavorite: payload.isFavorite ?? false,
+});
 
 interface MoodboardDetailProps {
   item: MoodboardItem;
@@ -25,14 +47,14 @@ interface MoodboardDetailProps {
 }
 
 const MoodboardDetail: React.FC<MoodboardDetailProps> = ({ item, onClose, onUpdate, onDelete }) => {
-  const [editedItem, setEditedItem] = useState<MoodboardItem>({ ...item, isFavorite: item.isFavorite ?? false });
+  const [editedItem, setEditedItem] = useState<MoodboardItem>(normalizeItem(item));
   const [tagInput, setTagInput] = useState('');
   const [moodInput, setMoodInput] = useState('');
   const [similarImages, setSimilarImages] = useState<UnsplashImage[]>([]);
   const [loadingSimilar, setLoadingSimilar] = useState(false);
 
   useEffect(() => {
-    setEditedItem({ ...item, isFavorite: item.isFavorite ?? false });
+    setEditedItem(normalizeItem(item));
   }, [item]);
 
   // Load similar images on mount
@@ -43,19 +65,17 @@ const MoodboardDetail: React.FC<MoodboardDetailProps> = ({ item, onClose, onUpda
   const loadSimilarImages = async () => {
     setLoadingSimilar(true);
     try {
+      const baseItem = normalizeItem(item);
       // Build analysis from existing item data
       const analysis = {
-        lighting: item.caption?.includes("light")
+        lighting: baseItem.caption?.includes("light")
           ? "natural lighting"
           : undefined,
-        mood: item.moods,
-        styleReferences: item.tags,
+        mood: baseItem.moods,
+        styleReferences: baseItem.tags,
       };
 
-      const results = await findSimilarImages(analysis);
-      const images = Array.isArray((results as any).results)
-        ? (results as any).results
-        : (results as UnsplashImage[]);
+      const images = await findSimilarImages(analysis);
       setSimilarImages(images);
     } catch (error) {
       console.error("Failed to load similar images:", error);

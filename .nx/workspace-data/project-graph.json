@@ -18526,6 +18526,11 @@
       },
       {
         "source": "api",
+        "target": "npm:unsplash-js",
+        "type": "static"
+      },
+      {
+        "source": "api",
         "target": "npm:uuid",
         "type": "static"
       },
@@ -45454,5 +45459,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1765526551006
+  "computedAt": 1765528140961
 }

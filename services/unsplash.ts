@@ -147,6 +147,11 @@ export async function searchSimilarImages(
 export async function findSimilarImages(
   assetAnalysis: AssetAnalysis
 ): Promise<UnsplashImage[]> {
+  if (!isUnsplashConfigured()) {
+    console.warn("Unsplash API key not configured (VITE_UNSPLASH_ACCESS_KEY)");
+    return [];
+  }
+
   const queries = await generateSearchQueries(assetAnalysis);
 
   if (queries.length === 0) {
@@ -156,7 +161,7 @@ export async function findSimilarImages(
   // Search with first query (most relevant)
   const results = await searchSimilarImages(queries[0]);
 
-  return results;
+  return results.results ?? [];
 }
 
 /**

@@ -93,72 +93,74 @@ const fetchWithTimeout = async (url: string, options: RequestInit = {}, timeout 
 
 // Allow custom timeout in options
 async function fetchApi<T>(path: string, options?: RequestInit & { timeout?: number }): Promise<ApiResponse<T>> {
-    // Get auth token from localStorage
-    const token = localStorage.getItem('studio_roster_v1_auth_token');
+  // Get auth token from localStorage
+  const token = localStorage.getItem("studio_roster_v1_auth_token");
 
-    // Prevent browser caching of API responses to ensure we get fresh data from server
-    const headers = {
-        ...(options?.headers || {}),
-        'Cache-Control': 'no-store, no-cache, must-revalidate',
-        'Pragma': 'no-cache',
-        ...(token && { 'Authorization': `Bearer ${token}` }) // Add JWT token
-    };
+  // Prevent browser caching of API responses to ensure we get fresh data from server
+  const headers = {
+    ...(options?.headers || {}),
+    "Cache-Control": "no-store, no-cache, must-revalidate",
+    Pragma: "no-cache",
+    ...(token && { Authorization: `Bearer ${token}` }), // Add JWT token
+  };
 
-    const timeout = options?.timeout || 30000; // Default 30s
-    const url =
-      path.startsWith("http") || path.startsWith("/api/")
-        ? path
-        : `${API_BASE}${path}`;
+  const timeout = options?.timeout || 30000; // Default 30s
+  const url =
+    path.startsWith("http") || path.startsWith("/api/")
+      ? path
+      : `${API_BASE}${path}`;
 
-    const res = await fetchWithTimeout(url, { ...options, headers }, timeout);
+  const res = await fetchWithTimeout(url, { ...options, headers }, timeout);
 
-    // Security: Handle Unauthorized Access
-    if (res.status === 401) {
-        console.warn('Session expired or unauthorized. Redirecting...');
-        // Optional: Dispatch a global event or clear storage
-        // window.location.href = '/login'; // Or handle via React State in App.tsx
-        throw new Error('Unauthorized');
-    }
+  // Security: Handle Unauthorized Access
+  if (res.status === 401) {
+    console.warn("Session expired or unauthorized. Redirecting...");
+    // Optional: Dispatch a global event or clear storage
+    // window.location.href = '/login'; // Or handle via React State in App.tsx
+    throw new Error("Unauthorized");
+  }
 
-    // Check for Proxy Errors (Vite returning index.html instead of API response)
-    const contentType = res.headers.get('content-type');
-    if (contentType && contentType.includes('text/html')) {
-        throw new Error('Backend unavailable (Received HTML fallback)');
-    }
+  // Check for Proxy Errors (Vite returning index.html instead of API response)
+  const contentType = res.headers.get("content-type");
+  if (contentType && contentType.includes("text/html")) {
+    throw new Error("Backend unavailable (Received HTML fallback)");
+  }
 
-    if (res.status === 404) {
-        throw new Error(`Endpoint not found: ${path}`);
-    }
+  if (res.status === 404) {
+    throw new Error(`Endpoint not found: ${path}`);
+  }
 
-    if (res.status === 502 || res.status === 503 || res.status === 504) {
-        throw new Error('Backend unavailable (Gateway Error)');
-    }
+  if (res.status === 502 || res.status === 503 || res.status === 504) {
+    throw new Error("Backend unavailable (Gateway Error)");
+  }
 
-    let body: unknown = null;
-    try {
-        body = await res.json();
-    } catch {
-        if (res.ok && res.status === 204) return { success: true } as ApiResponse<T>;
-        if (res.ok) return { success: true, data: {} as T };
-        throw new Error('Invalid JSON response');
-    }
+  let body: unknown = null;
+  try {
+    body = await res.json();
+  } catch {
+    if (res.ok && res.status === 204) return { success: true } as ApiResponse<T>;
+    if (res.ok) return { success: true, data: {} as T };
+    throw new Error("Invalid JSON response");
+  }
 
-    if (!res.ok) {
-        const errorObj = (body as { error?: { message?: string } })?.error;
-        const message = errorObj?.message || res.statusText || 'Unknown Error';
-        throw new Error(message);
-    }
+  if (!res.ok) {
+    const errorObj = (body as { error?: { message?: string } })?.error;
+    const message = errorObj?.message || res.statusText || "Unknown Error";
+    throw new Error(message);
+  }
 
-    if (
-        body &&
-        typeof body === 'object' &&
-        'data' in body &&
-        (Array.isArray(body) || ('id' in body || 'email' in body || 'name' in body || 'bucket' in body))
-    ) {
-        return { data: body as T, success: true };
-    }
+  const looksLikeEnvelope =
+    body &&
+    typeof body === "object" &&
+    !Array.isArray(body) &&
+    ("data" in body || "success" in body || "error" in body || "meta" in body);
 
-    return body as ApiResponse<T>;
+  if (looksLikeEnvelope) {
+    const response = body as ApiResponse<T>;
+    return { ...response, success: response.success ?? true };
+  }
+
+  return { data: body as T, success: true };
 }
 
 const uploadToBackend = async (file: File, projectId?: string): Promise<Asset> => {
@@ -189,6 +191,48 @@ const uploadToBackend = async (file: File, projectId?: string): Promise<Asset> =
     }
 
     return asset;
+};
+
+type MoodboardItemLike = Partial<MoodboardItem> & {
+  tags?: string[] | string;
+  moods?: string[] | string;
+  colors?: string[] | string;
+};
+
+const ensureArray = (value?: string[] | string): string[] => {
+  if (Array.isArray(value)) return value;
+  if (typeof value === "string") {
+    return value
+      .split(",")
+      .map((part) => part.trim())
+      .filter(Boolean);
+  }
+  return [];
+};
+
+const normalizeMoodboardItem = (
+  item?: MoodboardItemLike | null
+): MoodboardItem | null => {
+  if (!item) return null;
+
+  return {
+    ...(item as MoodboardItem),
+    caption: item.caption ?? "",
+    tags: ensureArray(item.tags),
+    moods: ensureArray(item.moods),
+    colors: ensureArray(item.colors),
+    isFavorite: item.isFavorite ?? false,
+    status: item.status ?? "ready",
+  };
+};
+
+const normalizeMoodboardItems = (
+  items?: Array<MoodboardItemLike | null> | null
+): MoodboardItem[] => {
+  if (!items) return [];
+  return items
+    .map((item) => normalizeMoodboardItem(item))
+    .filter(Boolean) as MoodboardItem[];
 };
 
 export const api = {
@@ -500,31 +544,48 @@ export const api = {
     moodboard: {
         list: async (projectId?: string): Promise<ApiResponse<MoodboardItem[]>> => {
             try {
-                if (projectId) {
-                    return await fetchApi<MoodboardItem[]>(`/moodboard/${projectId}`);
+                if (!projectId) {
+                    return { data: [], success: true };
                 }
+                const res = await fetchApi<MoodboardItem[]>(`/moodboard/${projectId}`);
+                return { ...res, data: normalizeMoodboardItems(res.data) };
             } catch { /* ignore */ }
             return { data: [], success: true };
         },
 
         linkAsset: async (projectId: string, assetId: string): Promise<ApiResponse<MoodboardItem>> => {
-            return await fetchApi<MoodboardItem>(`/moodboard/${projectId}/link-asset`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ assetId })
+            const res = await fetchApi<MoodboardItem>(`/moodboard/${projectId}/link-asset`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ assetId }),
             });
+            const normalizedItem =
+              normalizeMoodboardItem(res.data) ?? (res.data as MoodboardItem);
+            return { ...res, data: normalizedItem };
         },
 
         create: async (item: Partial<MoodboardItem>): Promise<ApiResponse<MoodboardItem>> => {
-            return await fetchApi<MoodboardItem>(`/moodboard/${item.projectId}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(item)
+            const res = await fetchApi<MoodboardItem>(`/moodboard/${item.projectId}`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(item),
             });
+            const normalizedItem =
+              normalizeMoodboardItem(res.data) ?? (res.data as MoodboardItem);
+            return { ...res, data: normalizedItem };
         },
 
         update: async (item: MoodboardItem): Promise<ApiResponse<MoodboardItem>> => {
-            try { return await fetchApi<MoodboardItem>(`/moodboard/${item.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(item) }); } catch { return { data: item, success: true }; }
+            try {
+                const res = await fetchApi<MoodboardItem>(`/moodboard/${item.id}`, {
+                  method: "PATCH",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(item),
+                });
+                const normalizedItem =
+                  normalizeMoodboardItem(res.data) ?? (res.data as MoodboardItem);
+                return { ...res, data: normalizedItem };
+            } catch { return { data: item, success: true }; }
         },
 
         delete: async (id: string): Promise<ApiResponse<boolean>> => {

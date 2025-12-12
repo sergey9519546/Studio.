@@ -3198,9 +3198,33 @@
         },
         {
           "file": "apps/api/src/modules/integrations/integrations.module.ts",
-          "hash": "12624295906271777970",
+          "hash": "10848511649528205583",
           "deps": [
             "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/integrations/unsplash/unsplash.controller.ts",
+          "hash": "16647802975233332323",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/integrations/unsplash/unsplash.module.ts",
+          "hash": "3953859773515803268",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/integrations/unsplash/unsplash.service.ts",
+          "hash": "4817688078345265362",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:unsplash-js"
           ]
         },
         {
@@ -3712,7 +3736,7 @@
       },
       {
         "file": ".env.example",
-        "hash": "14260113423200695113"
+        "hash": "15948273227485083106"
       },
       {
         "file": ".env.template",
@@ -3780,7 +3804,7 @@
       },
       {
         "file": "App.tsx",
-        "hash": "12368244372064066660"
+        "hash": "5908673748023796475"
       },
       {
         "file": "BUILD_DEPLOYMENT_COMPLETE.md",
@@ -3959,6 +3983,18 @@
         "hash": "10636627103315326282"
       },
       {
+        "file": "FIREBASE_PRODUCTION_DEPLOYMENT_GUIDE.md",
+        "hash": "18148625911784932030"
+      },
+      {
+        "file": "FIREBASE_PRODUCTION_PREPARATION_COMPLETE.md",
+        "hash": "10613263935540556899"
+      },
+      {
+        "file": "FIREBASE_PRODUCTION_PREP_TODO.md",
+        "hash": "10850665339289896533"
+      },
+      {
         "file": "FIREBASE_SETUP.md",
         "hash": "17774235917085810443"
       },
@@ -4081,6 +4117,30 @@
       {
         "file": "UI_UX_REBUILD_COMPLETE.md",
         "hash": "10130688091332521566"
+      },
+      {
+        "file": "UNSPLASH_API_INTEGRATION_COMPLETE.md",
+        "hash": "14703340424606025660"
+      },
+      {
+        "file": "UNSPLASH_DATABASE_SETUP_COMPLETE.md",
+        "hash": "10310783129153191761"
+      },
+      {
+        "file": "UNSPLASH_DATABASE_SETUP_GUIDE.md",
+        "hash": "11121680068062250180"
+      },
+      {
+        "file": "UNSPLASH_DATABASE_SETUP_TODO.md",
+        "hash": "13456205318585250213"
+      },
+      {
+        "file": "UNSPLASH_ENVIRONMENT_SETUP_GUIDE.md",
+        "hash": "16217375875430068174"
+      },
+      {
+        "file": "UNSPLASH_ENV_SETUP_TODO.md",
+        "hash": "17879193242970382247"
       },
       {
         "file": "UX_UI_IMPROVEMENT_TODO.md",
@@ -4232,11 +4292,11 @@
       },
       {
         "file": "components/Moodboard/MoodboardDetail.tsx",
-        "hash": "12463737275740563668"
+        "hash": "18130773340083395952"
       },
       {
         "file": "components/Moodboard/MoodboardTab.tsx",
-        "hash": "12378278875291449191"
+        "hash": "4940508735662327388"
       },
       {
         "file": "components/ProjectDetail.tsx",
@@ -4273,6 +4333,10 @@
       {
         "file": "components/ToneMoodBoard.tsx",
         "hash": "9665275177637424020"
+      },
+      {
+        "file": "components/UnsplashPhotoSearch.tsx",
+        "hash": "15516012168608533060"
       },
       {
         "file": "components/confluence/ConfluenceAuthProvider.tsx",
@@ -4345,6 +4409,10 @@
       {
         "file": "context/ToastContext.tsx",
         "hash": "11364685758065263369"
+      },
+      {
+        "file": "create_tables.sql",
+        "hash": "7118583932146484370"
       },
       {
         "file": "dashboard_components_analysis.md",
@@ -8256,7 +8324,7 @@
       },
       {
         "file": "dataconnect/.dataconnect/pgliteData/pg17/global/pg_control",
-        "hash": "12875281185197348335"
+        "hash": "11571216425247438894"
       },
       {
         "file": "dataconnect/.dataconnect/pgliteData/pg17/global/pg_filenode.map",
@@ -8324,7 +8392,7 @@
       },
       {
         "file": "dataconnect/.dataconnect/pgliteData/pg17/postmaster.pid",
-        "hash": "4854341378457711823"
+        "hash": "9762837680392243510"
       },
       {
         "file": "dataconnect/.dataconnect/schema/main/implicit.gql",
@@ -8356,7 +8424,7 @@
       },
       {
         "file": "dataconnect/example/connector.yaml",
-        "hash": "5111731992355529595"
+        "hash": "4613492266074285742"
       },
       {
         "file": "dataconnect/example/mutations.gql",
@@ -8373,6 +8441,10 @@
       {
         "file": "dataconnect/seed_data.gql",
         "hash": "15166990222291471623"
+      },
+      {
+        "file": "deploy-firebase-production.sh",
+        "hash": "1425842993667814911"
       },
       {
         "file": "deploy-production.sh",
@@ -8624,7 +8696,7 @@
       },
       {
         "file": "ffmpeg/configure",
-        "hash": "3971864677246508167"
+        "hash": "9044060323716137555"
       },
       {
         "file": "ffmpeg/doc/.gitignore",
@@ -48624,7 +48696,7 @@
       },
       {
         "file": "fix-esm-imports-v2.js",
-        "hash": "16318363240588486405"
+        "hash": "3812726740484408585"
       },
       {
         "file": "fix-esm-imports.js",
@@ -48723,6 +48795,10 @@
         "hash": "12623013910527857920"
       },
       {
+        "file": "generated/prisma/package-lock.json",
+        "hash": "7781285391675993333"
+      },
+      {
         "file": "generated/prisma/package.json",
         "hash": "10591426547264482506"
       },
@@ -48763,6 +48839,42 @@
         "hash": "12194661427418390735"
       },
       {
+        "file": "generated/prisma/src/dataconnect-generated/.guides/config.json",
+        "hash": "6478345189631909518"
+      },
+      {
+        "file": "generated/prisma/src/dataconnect-generated/.guides/setup.md",
+        "hash": "14544799170999686943"
+      },
+      {
+        "file": "generated/prisma/src/dataconnect-generated/.guides/usage.md",
+        "hash": "6734198676851408184"
+      },
+      {
+        "file": "generated/prisma/src/dataconnect-generated/README.md",
+        "hash": "7593279157572768014"
+      },
+      {
+        "file": "generated/prisma/src/dataconnect-generated/esm/index.esm.js",
+        "hash": "6110978263211776781"
+      },
+      {
+        "file": "generated/prisma/src/dataconnect-generated/esm/package.json",
+        "hash": "5013508344222362296"
+      },
+      {
+        "file": "generated/prisma/src/dataconnect-generated/index.cjs.js",
+        "hash": "6179164097319436544"
+      },
+      {
+        "file": "generated/prisma/src/dataconnect-generated/index.d.ts",
+        "hash": "12827982418421243259"
+      },
+      {
+        "file": "generated/prisma/src/dataconnect-generated/package.json",
+        "hash": "15789387530463902421"
+      },
+      {
         "file": "generated/prisma/wasm-edge-light-loader.mjs",
         "hash": "9322600139001879845"
       },
@@ -48795,6 +48907,14 @@
         "hash": "7070633196847622137"
       },
       {
+        "file": "load-data-client.sql",
+        "hash": "17232050285277561409"
+      },
+      {
+        "file": "load-data-server.sql",
+        "hash": "11631045873503067496"
+      },
+      {
         "file": "migrations/add_fulltext_search.sql",
         "hash": "3053879277148123067"
       },
@@ -48816,11 +48936,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "6489625750780993217"
+        "hash": "4211313873924658208"
       },
       {
         "file": "package.json",
-        "hash": "10376957456414206787"
+        "hash": "14570331761646674758"
       },
       {
         "file": "package_backup.json",
@@ -48964,7 +49084,7 @@
       },
       {
         "file": "services/unsplash.ts",
-        "hash": "16850177282705238672"
+        "hash": "3434977915466342217"
       },
       {
         "file": "shims/atlaskit-adf-schema-steps.js",
@@ -49088,11 +49208,11 @@
       },
       {
         "file": "src/components/Moodboard.tsx",
-        "hash": "4559136667260370919"
+        "hash": "11598325097065524403"
       },
       {
         "file": "src/components/ProjectDashboard.tsx",
-        "hash": "6211537455731412976"
+        "hash": "331208325013602081"
       },
       {
         "file": "src/components/ProjectHub.tsx",
@@ -49228,7 +49348,7 @@
       },
       {
         "file": "src/components/layout/Sidebar.tsx",
-        "hash": "3481950563385767050"
+        "hash": "11910512454797393376"
       },
       {
         "file": "src/components/ui/Card.tsx",
@@ -49352,11 +49472,11 @@
       },
       {
         "file": "src/views/GuardianRoom.tsx",
-        "hash": "11536769012501441634"
+        "hash": "16810737618155453195"
       },
       {
         "file": "src/views/ProjectsView.tsx",
-        "hash": "6623667520473698086"
+        "hash": "4429446552743901572"
       },
       {
         "file": "src/views/TranscriptsView.tsx",
@@ -49411,6 +49531,10 @@
         "hash": "12119823244770242550"
       },
       {
+        "file": "tmp/apps/api/serve/tsconfig.generated.2c999522-7954-4436-b854-196c4463a212.json",
+        "hash": "9564512296546428352"
+      },
+      {
         "file": "tmp/apps/api/serve/tsconfig.generated.2eb24d6e-ecab-46ac-83e0-0d320fd3c66c.json",
         "hash": "9564512296546428352"
       },
@@ -49439,10 +49563,6 @@
         "hash": "9564512296546428352"
       },
       {
-        "file": "tmp/apps/api/serve/tsconfig.generated.6d617dce-370e-4caf-951f-77ae2a6ee2e0.json",
-        "hash": "9564512296546428352"
-      },
-      {
         "file": "tmp/apps/api/serve/tsconfig.generated.6ebc14d0-72f1-4703-8df5-7a48b5ccf680.json",
         "hash": "9564512296546428352"
       },
@@ -49457,6 +49577,10 @@
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.c441147f-83db-4a30-b0a5-c435610636f4.json",
         "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.ca506cf9-ae08-4509-9583-db889d7b92e5.json",
+        "hash": "9564512296546428352"
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.ca7b9b43-9366-400f-8c06-f1871a433f7d.json",
@@ -49480,7 +49604,7 @@
       },
       {
         "file": "types.ts",
-        "hash": "2610038540445278327"
+        "hash": "11208913364460149634"
       },
       {
         "file": "types/@google-cloud/aiplatform/index.d.ts",
