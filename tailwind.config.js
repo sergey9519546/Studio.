@@ -85,7 +85,11 @@ module.exports = {
         subtle: colors.bg.subtle,
         border: colors.border,
         ink: colors.text,
-        primary: { DEFAULT: colors.accent.primary, hover: colors.accent.primaryHover, tint: colors.accent.tint },
+        primary: { 
+          DEFAULT: colors.accent.primary, 
+          hover: colors.accent.primaryHover, 
+          tint: colors.accent.tint 
+        },
         edge: colors.edge,
         state: colors.state,
       },
@@ -95,6 +99,10 @@ module.exports = {
         'elevation': '0px 8px 30px rgba(0, 0, 0, 0.04)',
         'float': '0px 20px 40px rgba(0,0,0,0.08)',
         'glow': '0px 0px 20px rgba(36, 99, 230, 0.15)',
+        // Accessibility focus shadows
+        'focus-ring': '0 0 0 3px rgba(36, 99, 230, 0.5)',
+        'focus-error': '0 0 0 3px rgba(255, 59, 48, 0.5)',
+        'focus-success': '0 0 0 3px rgba(52, 199, 89, 0.5)',
       },
       backgroundImage: {
         'rival-gradient': 'linear-gradient(90deg, #2463E6 0%, #18C9AE 50%, #E14BF7 100%)',
@@ -110,6 +118,9 @@ module.exports = {
         'base': '1.5rem',
         'spacious': '2rem',
         'hero': '3rem',
+        // Mobile touch targets (44px minimum)
+        'touch': '44px',
+        'touch-lg': '48px',
       },
       backdropFilter: {
         'glass': 'blur(20px) saturate(180%)',
@@ -118,26 +129,116 @@ module.exports = {
         'glass': glass.backdrop.background,
         'glass-dark': glass.backdropDark.background,
       },
+      // Animation and keyframe improvements
+      animation: {
+        'fade-in': 'fadeIn 200ms ease-out',
+        'slide-up': 'slideUp 300ms ease-out',
+        'slide-down': 'slideDown 300ms ease-out',
+        'scale-in': 'scaleIn 200ms ease-out',
+        'shimmer': 'shimmer 2s linear infinite',
+        'pulse-slow': 'pulse 3s ease-in-out infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(10px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideDown: {
+          '0%': { transform: 'translateY(-10px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        scaleIn: {
+          '0%': { transform: 'scale(0.95)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-1000px 0' },
+          '100%': { backgroundPosition: '1000px 0' },
+        },
+      },
+      // Enhanced spacing for responsive design
+      screens: {
+        'xs': '475px',
+        '3xl': '1600px',
+      },
+      minHeight: {
+        'touch': '44px',
+        'touch-lg': '48px',
+      },
+      minWidth: {
+        'touch': '44px',
+        'touch-lg': '48px',
+      },
     },
   },
   plugins: [
-    function ({ addUtilities }) {
+    function ({ addUtilities, addComponents }) {
       addUtilities({
+        // Enhanced focus utilities for accessibility
+        '.focus-ring': {
+          '&:focus': {
+            outline: '2px solid transparent',
+            'box-shadow': '0 0 0 3px rgba(36, 99, 230, 0.5)',
+          },
+        },
+        '.focus-ring-inset': {
+          '&:focus': {
+            outline: '2px solid transparent',
+            'box-shadow': 'inset 0 0 0 3px rgba(36, 99, 230, 0.5)',
+          },
+        },
+        // Screen reader utilities
+        '.sr-only': {
+          position: 'absolute',
+          width: '1px',
+          height: '1px',
+          padding: '0',
+          margin: '-1px',
+          overflow: 'hidden',
+          clip: 'rect(0, 0, 0, 0)',
+          'white-space': 'nowrap',
+          'border-width': '0',
+        },
+        '.not-sr-only': {
+          position: 'static',
+          width: 'auto',
+          height: 'auto',
+          padding: '0',
+          margin: '0',
+          overflow: 'visible',
+          clip: 'auto',
+          'white-space': 'normal',
+        },
+        // Touch-friendly interactive elements
+        '.touch-target': {
+          'min-height': '44px',
+          'min-width': '44px',
+        },
+        '.touch-target-lg': {
+          'min-height': '48px',
+          'min-width': '48px',
+        },
+        // Enhanced glass effects
         '.glass': {
-          backdropFilter: glass.backdrop.filter,
-          backgroundColor: glass.backdrop.background,
-          borderRadius: radii.xl,
+          'backdrop-filter': glass.backdrop.filter,
+          'background-color': glass.backdrop.background,
+          'border-radius': radii.xl,
         },
         '.glass-dark': {
-          backdropFilter: glass.backdropDark.filter,
-          backgroundColor: glass.backdropDark.background,
-          borderRadius: radii.xl,
+          'backdrop-filter': glass.backdropDark.filter,
+          'background-color': glass.backdropDark.background,
+          'border-radius': radii.xl,
         },
         '.glass-sm': {
-          backdropFilter: glass.backdrop.filter,
-          backgroundColor: glass.backdrop.background,
-          borderRadius: radii.md,
+          'backdrop-filter': glass.backdrop.filter,
+          'background-color': glass.backdrop.background,
+          'border-radius': radii.md,
         },
+        // Text utilities with proper contrast
         '.text-primary': {
           color: colors.text.primary,
         },
@@ -146,6 +247,94 @@ module.exports = {
         },
         '.text-tertiary': {
           color: colors.text.tertiary,
+        },
+        // Skip link for accessibility
+        '.skip-link': {
+          position: 'absolute',
+          top: '-40px',
+          left: '6px',
+          background: colors.accent.primary,
+          color: colors.text.inverse,
+          padding: '8px',
+          'border-radius': radii.md,
+          'text-decoration': 'none',
+          'z-index': '9999',
+          '&:focus': {
+            top: '6px',
+          },
+        },
+      });
+
+      addComponents({
+        // Enhanced button component with accessibility
+        '.btn': {
+          display: 'inline-flex',
+          'align-items': 'center',
+          'justify-content': 'center',
+          'min-height': '44px',
+          'min-width': '44px',
+          padding: '8px 16px',
+          'font-size': '14px',
+          'font-weight': '500',
+          'border-radius': radii.btn,
+          'border': 'none',
+          'cursor': 'pointer',
+          'transition': 'all 200ms ease-out',
+          '&:focus': {
+            outline: '2px solid transparent',
+            'box-shadow': '0 0 0 3px rgba(36, 99, 230, 0.5)',
+          },
+          '&:disabled': {
+            opacity: '0.5',
+            cursor: 'not-allowed',
+          },
+        },
+        '.btn-primary': {
+          background: colors.accent.primary,
+          color: colors.text.inverse,
+          '&:hover:not(:disabled)': {
+            'background-color': colors.accent.primaryHover,
+          },
+        },
+        '.btn-secondary': {
+          background: 'transparent',
+          color: colors.text.secondary,
+          'border': `1px solid ${colors.border.subtle}`,
+          '&:hover:not(:disabled)': {
+            'background-color': colors.bg.subtle,
+            color: colors.text.primary,
+          },
+        },
+        // Enhanced form inputs
+        '.form-input': {
+          display: 'block',
+          width: '100%',
+          'min-height': '44px',
+          padding: '12px 16px',
+          'font-size': '14px',
+          'line-height': '1.5',
+          color: colors.text.primary,
+          'background-color': colors.bg.surface,
+          'border': `1px solid ${colors.border.subtle}`,
+          'border-radius': radii.md,
+          'transition': 'border-color 200ms ease-out, box-shadow 200ms ease-out',
+          '&:focus': {
+            outline: '2px solid transparent',
+            'border-color': colors.accent.primary,
+            'box-shadow': '0 0 0 3px rgba(36, 99, 230, 0.1)',
+          },
+          '&:invalid': {
+            'border-color': colors.state.danger,
+            'box-shadow': '0 0 0 3px rgba(255, 59, 48, 0.1)',
+          },
+        },
+        // Card component with proper elevation
+        '.card': {
+          background: colors.bg.surface,
+          'border-radius': radii.xl,
+          'box-shadow': '0px 4px 12px rgba(0,0,0,0.06)',
+          border: `1px solid ${colors.border.subtle}`,
+          overflow: 'hidden',
         },
       });
     },
