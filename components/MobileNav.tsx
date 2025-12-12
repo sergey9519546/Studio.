@@ -30,14 +30,14 @@ export const MobileNav: React.FC<MobileNavProps> = ({ className = '' }) => {
         paddingBottom: 'env(safe-area-inset-bottom, 0px)',
       }}
     >
-      <div className="flex items-center justify-around h-16 px-2">
+      <div className="flex items-center justify-around h-16 px-2 safe-area-padding">
         {navItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
             aria-label={item.ariaLabel}
             className={({ isActive }) =>
-              `flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-lg transition-all duration-200 min-w-[64px] relative ${
+              `flex flex-col items-center justify-center gap-1 px-3 py-3 rounded-lg transition-all duration-200 min-w-[64px] min-h-[44px] relative focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 ${
                 isActive
                   ? 'text-primary'
                   : 'text-ink-tertiary hover:text-ink-secondary active:scale-95'

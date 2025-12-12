@@ -32,7 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
       {/* Brand */}
       <div className="px-8 mb-12 flex items-center gap-4">
         <div className="w-10 h-10 bg-ink-primary rounded-xl flex items-center justify-center text-white shadow-xl">
-          <div className="w-4 h-4 bg-white rounded-full border-2 border-ink-primary" />
+          <div className="w-4 h-4 bg-white rounded-full border-2 border-ink-primary" aria-hidden="true" />
         </div>
         <div>
           <h1 className="font-bold text-xl tracking-tight text-ink-primary">
@@ -44,8 +44,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
         </div>
       </div>
 
-      {/* Nav */}
-      <div className="flex-1 overflow-y-auto px-6 space-y-2">
+      {/* Navigation */}
+      <nav className="flex-1 overflow-y-auto px-6 space-y-2" aria-label="Main navigation">
         <div className="px-4 mb-2 text-[10px] font-bold text-ink-tertiary uppercase tracking-widest opacity-60">
           Core Modules
         </div>
@@ -53,21 +53,29 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
           <button
             key={item.id}
             onClick={() => setActiveTab(item.id)}
-            className={`nav-item w-full ${activeTab === item.id ? "active" : ""}`}
+            className={`nav-item w-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg ${activeTab === item.id ? "active" : ""}`}
+            aria-label={`Navigate to ${item.label}`}
+            aria-current={activeTab === item.id ? "page" : undefined}
+            tabIndex={0}
           >
             <item.icon
               size={18}
               strokeWidth={activeTab === item.id ? 2.5 : 2}
+              aria-hidden="true"
             />
-            {item.label}
+            <span>{item.label}</span>
           </button>
         ))}
-      </div>
+      </nav>
 
       {/* User / Settings */}
       <div className="px-6 mt-auto pt-6 border-t border-border-subtle/50 flex flex-col gap-2">
-        <button className="nav-item w-full text-sm">
-          <Settings size={18} />
+        <button 
+          className="nav-item w-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
+          aria-label="Open system configuration settings"
+          tabIndex={0}
+        >
+          <Settings size={18} aria-hidden="true" />
           System Config
         </button>
         <div className="flex items-center gap-3 p-2 mt-2 rounded-2xl border border-border-subtle bg-surface shadow-sm cursor-pointer hover:border-border-hover transition-colors">
@@ -75,7 +83,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
             <img
               src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
               className="w-full h-full object-cover"
-              alt="User avatar"
+              alt="Profile picture of Alex Director"
             />
           </div>
           <div className="flex-1 min-w-0">
