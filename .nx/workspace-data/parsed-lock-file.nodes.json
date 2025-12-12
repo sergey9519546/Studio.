@@ -17514,6 +17514,15 @@
         "hash": "sha512-bSjt9pjaEBnNiGgc9rUiHGKv5l4/TGzDmYw3RhnkJGtLhbnnA/5qJj7x3dNDCRx/PJxu774LlH8lCOlB4hEfKg=="
       }
     },
+    "npm:unsplash-js": {
+      "type": "npm",
+      "name": "npm:unsplash-js",
+      "data": {
+        "version": "7.0.20",
+        "packageName": "unsplash-js",
+        "hash": "sha512-0IzJGKbD6qHm0wg5sNndcCjhNDrtAr08/mySr9TGJ6biD7N03ZldidqXopkOvhAABaeFtRGYBrX1YkgMhKrFOQ=="
+      }
+    },
     "npm:unzipper": {
       "type": "npm",
       "name": "npm:unzipper",
@@ -20266,6 +20275,7 @@
     "node_modules/universalify": "npm:universalify",
     "node_modules/unpipe": "npm:unpipe",
     "node_modules/unrs-resolver": "npm:unrs-resolver",
+    "node_modules/unsplash-js": "npm:unsplash-js",
     "node_modules/unzipper": "npm:unzipper",
     "node_modules/unzipper/node_modules/isarray": "npm:isarray@1.0.0",
     "node_modules/unzipper/node_modules/readable-stream": "npm:readable-stream@2.3.8",

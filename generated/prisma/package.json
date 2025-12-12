@@ -112,6 +112,7 @@
   "version": "7.1.0",
   "sideEffects": false,
   "dependencies": {
+    "@dataconnect/generated": "file:src/dataconnect-generated",
     "@prisma/client-runtime-utils": "7.1.0"
   },
   "imports": {

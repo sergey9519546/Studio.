@@ -7,6 +7,10 @@
 const UNSPLASH_ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 const UNSPLASH_API_BASE = 'https://api.unsplash.com';
 
+export function isUnsplashConfigured(): boolean {
+  return Boolean(UNSPLASH_ACCESS_KEY);
+}
+
 export interface UnsplashImage {
   id: string;
   created_at: string;
@@ -45,6 +49,14 @@ export interface UnsplashImage {
     };
   };
 }
+
+export interface UnsplashSearchResponse {
+  total: number;
+  total_pages: number;
+  results: UnsplashImage[];
+}
+
+export type UnsplashOrderBy = "latest" | "oldest" | "popular";
 
 /**
  * Asset Analysis Interface
@@ -85,18 +97,19 @@ export async function generateSearchQueries(
 export async function searchSimilarImages(
   query: string,
   perPage: number = 12,
+  page: number = 1,
   color?: string,
   orientation?: string
-): Promise<UnsplashImage[]> {
+): Promise<UnsplashSearchResponse> {
   if (!UNSPLASH_ACCESS_KEY) {
-    console.warn("Unsplash API key not configured");
-    return [];
+    throw new Error("Unsplash API key not configured (VITE_UNSPLASH_ACCESS_KEY)");
   }
 
   try {
     const params = new URLSearchParams({
       query,
       per_page: perPage.toString(),
+      page: page.toString(),
     });
 
     if (color) {
@@ -117,14 +130,14 @@ export async function searchSimilarImages(
     );
 
     if (!response.ok) {
-      throw new Error(`Unsplash API error: ${response.statusText}`);
+      throw new Error(`Unsplash API error: ${response.status} ${response.statusText}`);
     }
 
-    const data = await response.json();
-    return data.results || [];
+    const data = (await response.json()) as UnsplashSearchResponse;
+    return data;
   } catch (error) {
     console.error("Failed to fetch similar images:", error);
-    return [];
+    throw error;
   }
 }
 
@@ -208,6 +221,41 @@ export interface PhotoStatistics {
 }
 
 /**
+ * Get a single photo by ID
+ */
+export async function getPhoto(photoId: string): Promise<UnsplashImage | null> {
+  if (!UNSPLASH_ACCESS_KEY) {
+    throw new Error("Unsplash API key not configured (VITE_UNSPLASH_ACCESS_KEY)");
+  }
+
+  if (!photoId) {
+    throw new Error("photoId is required to fetch an Unsplash photo");
+  }
+
+  try {
+    const response = await fetch(`${UNSPLASH_API_BASE}/photos/${photoId}`, {
+      headers: {
+        Authorization: `Client-ID ${UNSPLASH_ACCESS_KEY}`,
+      },
+    });
+
+    if (response.status === 404) {
+      return null;
+    }
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch photo: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data as UnsplashImage;
+  } catch (error) {
+    console.error("Failed to fetch Unsplash photo:", error);
+    throw error;
+  }
+}
+
+/**
  * Get photo statistics (views, downloads, likes)
  * Useful for showing popular/trending images
  */
@@ -215,8 +263,7 @@ export async function getPhotoStatistics(
   photoId: string
 ): Promise<PhotoStatistics | null> {
   if (!UNSPLASH_ACCESS_KEY) {
-    console.warn("Unsplash API key not configured");
-    return null;
+    throw new Error("Unsplash API key not configured (VITE_UNSPLASH_ACCESS_KEY)");
   }
 
   try {
@@ -237,5 +284,44 @@ export async function getPhotoStatistics(
   } catch (error) {
     console.error("Failed to fetch photo statistics:", error);
     return null;
+  }
+}
+
+/**
+ * List photos (pagination, orderable)
+ */
+export async function listPhotos(
+  page: number = 1,
+  perPage: number = 12,
+  orderBy: UnsplashOrderBy = "latest"
+): Promise<UnsplashImage[]> {
+  if (!UNSPLASH_ACCESS_KEY) {
+    throw new Error("Unsplash API key not configured (VITE_UNSPLASH_ACCESS_KEY)");
+  }
+
+  try {
+    const params = new URLSearchParams({
+      page: page.toString(),
+      per_page: perPage.toString(),
+      order_by: orderBy,
+    });
+
+    const response = await fetch(
+      `${UNSPLASH_API_BASE}/photos?${params.toString()}`,
+      {
+        headers: {
+          Authorization: `Client-ID ${UNSPLASH_ACCESS_KEY}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to list photos: ${response.status} ${response.statusText}`);
+    }
+
+    return (await response.json()) as UnsplashImage[];
+  } catch (error) {
+    console.error("Failed to list Unsplash photos:", error);
+    throw error;
   }
 }

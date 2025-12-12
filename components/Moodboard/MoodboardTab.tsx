@@ -1,9 +1,52 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Search, Upload, Film, Image as ImageIcon, Loader2, UploadCloud, Link as LinkIcon, Check, ChevronDown, PlusCircle } from 'lucide-react';
-import { MoodboardItem, Project } from '../../types';
-import { api } from '../../services/api';
-import MoodboardDetail from './MoodboardDetail';
+import { Check, ChevronDown, Film, Image as ImageIcon, Link as LinkIcon, Loader2, PlusCircle, Search, Upload, UploadCloud } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useToast } from '../../context/ToastContext';
+import { api } from '../../services/api';
+import { MoodboardItem, Project } from '../../types';
+import MoodboardDetail from './MoodboardDetail';
+import UnsplashPhotoSearch from '../UnsplashPhotoSearch';
+
+interface UnsplashPhoto {
+  id: string;
+  created_at: string;
+  width: number;
+  height: number;
+  color: string;
+  likes: number;
+  description: string | null;
+  alt_description: string | null;
+  user: {
+    id: string;
+    username: string;
+    name: string;
+    first_name: string;
+    last_name: string;
+    portfolio_url?: string;
+    profile_image: {
+      small: string;
+      medium: string;
+      large: string;
+    };
+    links: {
+      self: string;
+      html: string;
+      photos: string;
+      likes: string;
+    };
+  };
+  urls: {
+    raw: string;
+    full: string;
+    regular: string;
+    small: string;
+    thumb: string;
+  };
+  links: {
+    self: string;
+    html: string;
+    download: string;
+  };
+}
 
 interface MoodboardTabProps {
     projectId?: string;
@@ -27,10 +70,13 @@ const MoodboardTab: React.FC<MoodboardTabProps> = ({ projectId: propProjectId })
     const [showImportInput, setShowImportInput] = useState(false);
     const [importUrl, setImportUrl] = useState('');
 
+    // Unsplash Integration State
+    const [showUnsplashSearch, setShowUnsplashSearch] = useState(false);
+
     // 1. Initial Logic: If prop is missing, fetch projects
     useEffect(() => {
         if (!propProjectId) {
-            api.projects.list().then(res => setProjects(res.data));
+            api.projects.list().then(res => setProjects(res.data || []));
         } else {
             setSelectedProjectId(propProjectId);
         }
@@ -48,7 +94,11 @@ const MoodboardTab: React.FC<MoodboardTabProps> = ({ projectId: propProjectId })
 
         api.moodboard.list(selectedProjectId).then(res => {
             if (mounted) {
-                setItems(res.data);
+                setItems(res.data || []);
+                setLoading(false);
+            }
+        }).catch(() => {
+            if (mounted) {
                 setLoading(false);
             }
         });
@@ -61,13 +111,17 @@ const MoodboardTab: React.FC<MoodboardTabProps> = ({ projectId: propProjectId })
         setIsUploading(true);
 
         try {
-            const newItems = [];
+            const newItems: MoodboardItem[] = [];
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
                 const assetRes = await api.assets.upload(file, selectedProjectId);
                 const asset = assetRes.data;
-                const linkRes = await api.moodboard.linkAsset(selectedProjectId, asset.id);
-                newItems.push(linkRes.data);
+                if (asset) {
+                    const linkRes = await api.moodboard.linkAsset(selectedProjectId, asset.id);
+                    if (linkRes.data) {
+                        newItems.push(linkRes.data);
+                    }
+                }
             }
             setItems(prev => [...newItems, ...prev]);
             toast.success(`Successfully uploaded ${files.length} items`);
@@ -93,10 +147,12 @@ const MoodboardTab: React.FC<MoodboardTabProps> = ({ projectId: propProjectId })
                 url: importUrl.trim(),
                 caption: 'Imported from URL'
             });
-            setItems(prev => [res.data, ...prev]);
-            setImportUrl('');
-            setShowImportInput(false);
-            toast.success("URL imported successfully");
+            if (res.data) {
+                setItems(prev => [res.data, ...prev]);
+                setImportUrl('');
+                setShowImportInput(false);
+                toast.success("URL imported successfully");
+            }
         } catch (e) {
             console.error(e);
             toast.error("Failed to import URL");
@@ -129,6 +185,31 @@ const MoodboardTab: React.FC<MoodboardTabProps> = ({ projectId: propProjectId })
     const handleDelete = async (id: string) => {
         await api.moodboard.delete(id);
         setItems(prev => prev.filter(i => i.id !== id));
+    };
+
+    // Unsplash Integration Functions
+    const handleUnsplashPhotoSelect = async (photo: UnsplashPhoto) => {
+        if (!selectedProjectId) return;
+
+        try {
+            const caption = photo.description || photo.alt_description || `Photo by ${photo.user.name}`;
+            const newItem = await api.moodboard.create({
+                projectId: selectedProjectId,
+                type: 'image',
+                url: photo.urls.regular,
+                caption: caption,
+                tags: [photo.user.username, 'unsplash', 'high-quality'],
+                moods: ['professional', 'stock-photo']
+            });
+
+            if (newItem.data) {
+                setItems(prev => [newItem.data, ...prev]);
+                toast.success('Photo added from Unsplash');
+            }
+        } catch (error) {
+            console.error('Error adding Unsplash photo:', error);
+            toast.error('Failed to add photo from Unsplash');
+        }
     };
 
     const filteredItems = items.filter(item => {
@@ -230,6 +311,15 @@ const MoodboardTab: React.FC<MoodboardTabProps> = ({ projectId: propProjectId })
                                 )}
                             </div>
 
+                            {/* Unsplash Search Button */}
+                            <button
+                                onClick={() => setShowUnsplashSearch(true)}
+                                className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg shadow-purple-300/50 flex items-center gap-2"
+                            >
+                                <Search size={16} />
+                                Search Photos
+                            </button>
+
                             <button
                                 onClick={() => fileInputRef.current?.click()}
                                 disabled={isUploading}
@@ -261,7 +351,7 @@ const MoodboardTab: React.FC<MoodboardTabProps> = ({ projectId: propProjectId })
                     </div>
                     <p className="text-sm font-medium text-gray-500">Board is empty</p>
                     <p className="text-xs mt-2 text-gray-400 max-w-xs text-center leading-relaxed">
-                        Upload images or paste a URL to start building your visual moodboard.
+                        Upload images, search for photos, or paste a URL to start building your visual moodboard.
                     </p>
                 </div>
             ) : (
@@ -289,42 +379,3 @@ const MoodboardTab: React.FC<MoodboardTabProps> = ({ projectId: propProjectId })
                                         )}
                                     </div>
                                     {item.status === 'ready' && (
-                                        <div className="flex flex-wrap gap-1">
-                                            {item.moods.slice(0, 3).map(m => (
-                                                <span key={m} className="px-2 py-0.5 bg-white/20 backdrop-blur-md text-white text-[9px] font-bold rounded-md uppercase tracking-wide border border-white/30">{m}</span>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-
-                                {/* Type Icon */}
-                                <div className="absolute top-3 right-3 bg-black/20 backdrop-blur-md p-1.5 rounded-lg text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                                    {item.type === 'video' ? <Film size={12} /> : <ImageIcon size={12} />}
-                                </div>
-                            </div>
-
-                            {/* Color Strip */}
-                            {item.colors.length > 0 && (
-                                <div className="h-1.5 flex w-full">
-                                    {item.colors.map(c => <div key={c} style={{ backgroundColor: c }} className="flex-1"></div>)}
-                                </div>
-                            )}
-                        </div>
-                    ))}
-                </div>
-            )}
-
-            {/* Detail Panel */}
-            {selectedItem && (
-                <MoodboardDetail
-                    item={selectedItem}
-                    onClose={() => setSelectedItem(null)}
-                    onUpdate={handleUpdate}
-                    onDelete={handleDelete}
-                />
-            )}
-        </div>
-    );
-};
-
-export default MoodboardTab;

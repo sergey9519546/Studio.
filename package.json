@@ -118,6 +118,7 @@
     "lucide-react": "^0.260.0",
     "mammoth": "^1.11.0",
     "nestjs-pino": "^4.5.0",
+    "node-fetch": "^2.7.0",
     "ollama": "^0.6.3",
     "openai": "^6.10.0",
     "passport": "^0.7.0",
@@ -141,6 +142,7 @@
     "rxjs": "^7.8.1",
     "styled-components": "^6.1.19",
     "tiptap": "^1.32.2",
+    "unsplash-js": "^7.0.20",
     "winston": "^3.18.3",
     "yjs": "^13.6.27",
     "zod": "^3.25.76"

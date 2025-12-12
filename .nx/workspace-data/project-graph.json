@@ -17606,6 +17606,15 @@
         "hash": "sha512-bSjt9pjaEBnNiGgc9rUiHGKv5l4/TGzDmYw3RhnkJGtLhbnnA/5qJj7x3dNDCRx/PJxu774LlH8lCOlB4hEfKg=="
       }
     },
+    "npm:unsplash-js": {
+      "type": "npm",
+      "name": "npm:unsplash-js",
+      "data": {
+        "version": "7.0.20",
+        "packageName": "unsplash-js",
+        "hash": "sha512-0IzJGKbD6qHm0wg5sNndcCjhNDrtAr08/mySr9TGJ6biD7N03ZldidqXopkOvhAABaeFtRGYBrX1YkgMhKrFOQ=="
+      }
+    },
     "npm:unzipper": {
       "type": "npm",
       "name": "npm:unzipper",
@@ -45445,5 +45454,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1765521948489
+  "computedAt": 1765525506968
 }

@@ -3,6 +3,8 @@ import React, { useMemo, useState } from "react";
 import {
   searchSimilarImages,
   trackDownload,
+  isUnsplashConfigured,
+  type UnsplashSearchResponse,
   type UnsplashImage,
 } from "../../services/unsplash";
 import { useToast } from "../hooks/useToast";
@@ -61,6 +63,13 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   const [selectedUnsplashImage, setSelectedUnsplashImage] = useState<
     string | null
   >(null);
+  const [unsplashError, setUnsplashError] = useState<string | null>(null);
+  const [unsplashMeta, setUnsplashMeta] = useState<{
+    total: number;
+    total_pages: number;
+    page: number;
+    per_page: number;
+  }>({ total: 0, total_pages: 0, page: 1, per_page: 24 });
 
   // Recent searches state
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
@@ -129,48 +138,96 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   };
 
   // Unsplash search handler
-  const handleUnsplashSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const runUnsplashSearch = async (page = 1) => {
     if (!unsplashQuery.trim()) return;
 
+    if (!isUnsplashConfigured()) {
+      const message =
+        "Unsplash search is disabled: add VITE_UNSPLASH_ACCESS_KEY to your environment.";
+      setUnsplashError(message);
+      addToast(message);
+      return;
+    }
+
     setIsLoadingUnsplash(true);
+    setUnsplashError(null);
     try {
       const results = await searchSimilarImages(
         unsplashQuery,
-        24,
+        unsplashMeta.per_page,
+        page,
         unsplashFilters.color,
         unsplashFilters.orientation
       );
-      setUnsplashResults(results);
+      setUnsplashResults(results.results);
+      setUnsplashMeta({
+        total: results.total,
+        total_pages: results.total_pages,
+        page,
+        per_page: unsplashMeta.per_page,
+      });
 
       // Add to recent searches
       addRecentSearch(unsplashQuery);
       setRecentSearches(getRecentSearches());
-    } catch (error) {
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Unsplash search failed. Check API key or network.";
       console.error("Unsplash search failed:", error);
+      setUnsplashError(message);
+      addToast(message);
     } finally {
       setIsLoadingUnsplash(false);
     }
+  };
+
+  const handleUnsplashSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await runUnsplashSearch(1);
   };
 
   // Search from recent searches
   const handleRecentSearchClick = async (query: string) => {
     setUnsplashQuery(query);
     setIsLoadingUnsplash(true);
+    setUnsplashError(null);
+    if (!isUnsplashConfigured()) {
+      const message =
+        "Unsplash search is disabled: add VITE_UNSPLASH_ACCESS_KEY to your environment.";
+      setUnsplashError(message);
+      addToast(message);
+      setIsLoadingUnsplash(false);
+      return;
+    }
     try {
       const results = await searchSimilarImages(
         query,
-        24,
+        unsplashMeta.per_page,
+        1,
         unsplashFilters.color,
         unsplashFilters.orientation
       );
-      setUnsplashResults(results);
+      setUnsplashResults(results.results);
+      setUnsplashMeta({
+        total: results.total,
+        total_pages: results.total_pages,
+        page: 1,
+        per_page: unsplashMeta.per_page,
+      });
 
       // Move to top of recent searches
       addRecentSearch(query);
       setRecentSearches(getRecentSearches());
-    } catch (error) {
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Unsplash search failed. Check API key or network.";
       console.error("Unsplash search failed:", error);
+      setUnsplashError(message);
+      addToast(message);
     } finally {
       setIsLoadingUnsplash(false);
     }
@@ -409,6 +466,13 @@ export const Moodboard: React.FC<MoodboardProps> = ({
           <>
             {/* Unsplash Search */}
             <div className="mb-8">
+              {!isUnsplashConfigured() && (
+                <Card className="mb-4 bg-amber-50 border-amber-200 text-amber-900">
+                  <p className="text-sm font-medium">
+                    Unsplash is not configured. Set <code>VITE_UNSPLASH_ACCESS_KEY</code> in your environment to enable search and downloads.
+                  </p>
+                </Card>
+              )}
               <form onSubmit={handleUnsplashSearch} className="mb-4">
                 <div className="flex gap-2">
                   <Input
@@ -420,7 +484,11 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                   />
                   <button
                     type="submit"
-                    disabled={isLoadingUnsplash || !unsplashQuery.trim()}
+                    disabled={
+                      isLoadingUnsplash ||
+                      !unsplashQuery.trim() ||
+                      !isUnsplashConfigured()
+                    }
                     className="px-6 py-2 bg-primary text-white rounded-[16px] font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                   >
                     {isLoadingUnsplash ? "Searching..." : "Search"}
@@ -494,6 +562,9 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                   Unsplash
                 </a>
               </p>
+              {unsplashError && (
+                <p className="text-xs text-state-danger mt-2">{unsplashError}</p>
+              )}
             </div>
 
             {/* Recent Searches */}
@@ -534,71 +605,109 @@ export const Moodboard: React.FC<MoodboardProps> = ({
             )}
 
             {unsplashResults.length > 0 ? (
-              <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6">
-                {unsplashResults.map((image) => (
-                  <div
-                    key={image.id}
-                    className="break-inside-avoid mb-6 group cursor-pointer"
-                    onClick={() => setSelectedUnsplashImage(image.id)}
-                  >
-                    <div className="relative rounded-[24px] overflow-hidden shadow-ambient hover:shadow-float transition-all">
-                      <img
-                        src={image.urls.regular}
-                        alt={
-                          image.alt_description ||
-                          image.description ||
-                          "Unsplash image"
-                        }
-                        className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
+              <>
+                <div className="flex items-center justify-between mb-4 text-sm text-ink-secondary">
+                  <span>
+                    Page {unsplashMeta.page} of {unsplashMeta.total_pages} • {unsplashMeta.total} results
+                  </span>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => runUnsplashSearch(Math.max(1, unsplashMeta.page - 1))}
+                      disabled={isLoadingUnsplash || unsplashMeta.page <= 1}
+                      className="px-3 py-1.5 rounded-[12px] border border-border-subtle text-xs font-semibold disabled:opacity-50"
+                    >
+                      Prev
+                    </button>
+                    <button
+                      onClick={() =>
+                        runUnsplashSearch(
+                          Math.min(unsplashMeta.total_pages || 1, unsplashMeta.page + 1)
+                        )
+                      }
+                      disabled={
+                        isLoadingUnsplash ||
+                        !unsplashMeta.total_pages ||
+                        unsplashMeta.page >= unsplashMeta.total_pages
+                      }
+                      className="px-3 py-1.5 rounded-[12px] border border-border-subtle text-xs font-semibold disabled:opacity-50"
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
+                <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6">
+                  {unsplashResults.map((image) => (
+                    <div
+                      key={image.id}
+                      className="break-inside-avoid mb-6 group cursor-pointer"
+                      onClick={() => setSelectedUnsplashImage(image.id)}
+                    >
+                      <div className="relative rounded-[24px] overflow-hidden shadow-ambient hover:shadow-float transition-all">
+                        <img
+                          src={image.urls.regular}
+                          alt={
+                            image.alt_description ||
+                            image.description ||
+                            "Unsplash image"
+                          }
+                          className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
 
-                      {/* Overlay on Hover */}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all rounded-[24px] flex items-end justify-between p-4 opacity-0 group-hover:opacity-100">
-                        <div className="flex-1 min-w-0">
-                          <p className="text-white text-xs mb-1 truncate">
-                            Photo by{" "}
-                            <a
-                              href={image.user.links.html}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="font-medium hover:underline"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              {image.user.name}
-                            </a>
-                          </p>
+                        {/* Overlay on Hover */}
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all rounded-[24px] flex items-end justify-between p-4 opacity-0 group-hover:opacity-100">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-white text-xs mb-1 truncate">
+                              Photo by{" "}
+                              <a
+                                href={image.user.links.html}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-medium hover:underline"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                {image.user.name}
+                              </a>
+                            </p>
+                          </div>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleAddUnsplashImage(image);
+                            }}
+                            className="p-2 rounded-[12px] bg-primary/80 text-white hover:bg-primary transition-colors ml-2"
+                            aria-label="Add to moodboard"
+                            title="Add to moodboard"
+                          >
+                            <Plus size={16} />
+                          </button>
                         </div>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleAddUnsplashImage(image);
-                          }}
-                          className="p-2 rounded-[12px] bg-primary/80 text-white hover:bg-primary transition-colors ml-2"
-                          aria-label="Add to moodboard"
-                          title="Add to moodboard"
-                        >
-                          <Plus size={16} />
-                        </button>
+                      </div>
+
+                      {/* Attribution */}
+                      <div className="mt-2">
+                        <p className="text-xs text-ink-tertiary">
+                          by{" "}
+                          <a
+                            href={image.user.links.html}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-ink-secondary hover:text-ink-primary hover:underline"
+                          >
+                            {image.user.name}
+                          </a>
+                        </p>
                       </div>
                     </div>
-
-                    {/* Attribution */}
-                    <div className="mt-2">
-                      <p className="text-xs text-ink-tertiary">
-                        by{" "}
-                        <a
-                          href={image.user.links.html}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-ink-secondary hover:text-ink-primary hover:underline"
-                        >
-                          {image.user.name}
-                        </a>
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              </>
+            ) : !isLoadingUnsplash && unsplashMeta.total_pages > 0 ? (
+              <Card className="text-center py-12">
+                <Search size={48} className="mx-auto text-ink-tertiary mb-4" />
+                <p className="text-ink-secondary mb-2">
+                  No results on this page. Try another page or new search.
+                </p>
+              </Card>
             ) : !isLoadingUnsplash ? (
               <Card className="text-center py-12">
                 <Search size={48} className="mx-auto text-ink-tertiary mb-4" />
