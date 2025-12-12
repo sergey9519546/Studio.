@@ -140,7 +140,7 @@ ${JSON.stringify(parsedContext, null, 2)}
         const response = await this.aiService.chat(enhancedContext, messages);
 
         let finalResponse = response;
-        let toolResults: Array<{ toolCall: unknown; result: unknown }> = [];
+        const toolResults: Array<{ toolCall: unknown; result: unknown }> = [];
 
         if (typeof response === 'object' && response.toolCalls) {
             for (const toolCall of response.toolCalls) {

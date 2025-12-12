@@ -23,6 +23,8 @@ import {
   Clock,
   Terminal
 } from 'lucide-react';
+import { initialize } from 'passport';
+import { config } from 'process';
 
 // Plugin API Types
 export interface PluginAPIConfig {
@@ -312,9 +314,9 @@ export const PluginAPIProvider: React.FC<PluginAPIProviderProps> = ({
   const [state, dispatch] = useReducer(pluginAPIReducer, initialState);
 
   // Initialize Plugin API
-  useEffect(() => {
-    initializePluginAPI();
-  }, []);
+  useEffect(()PluginAPI();
+  => {
+    initialize }, []);
 
   const initializePluginAPI = useCallback(async () => {
     dispatch({ type: 'SET_LOADING', payload: true });
@@ -419,8 +421,8 @@ export const PluginAPIProvider: React.FC<PluginAPIProviderProps> = ({
           {
             name: 'logging',
             type: 'logging',
-            handler: 'middleware.logRequest',
-            config: {
+            handler:',
+            config: 'middleware.logRequest {
               level: 'info',
               includeHeaders: false
             }
@@ -566,4 +568,47 @@ export const PluginAPIProvider: React.FC<PluginAPIProviderProps> = ({
 
     try {
       // Simulate API call
-      await new
+      await new Promise(resolve => setTimeout(resolve, 200 + Math.random() * 800));
+
+      const duration = Date.now() - startTime;
+      const success = Math.random() > 0.1; // 90% success rate
+
+      const apiCall: APICall = {
+        id: callId,
+        endpoint,
+        method,
+        timestamp: new Date(),
+        duration,
+        status: success ? 'success' : 'error',
+        pluginId: pluginId || 'unknown',
+        requestSize: JSON.stringify(data || {}).length,
+        responseSize: Math.floor(Math.random() * 5000) + 500,
+        userAgent: 'PluginAPI/1.0.0'
+      };
+
+      dispatch({ type: 'ADD_API_CALL', payload: apiCall });
+
+      if (!success) {
+        throw new Error('API call failed');
+      }
+
+      return { 
+        data: { message: 'API call successful', endpoint, method }, 
+        status: 200,
+        duration 
+      };
+    } catch (error) {
+      const duration = Date.now() - startTime;
+      const errorMessage = error instanceof Error ? error.message : 'API call failed';
+
+      const apiCall: APICall = {
+        id: callId,
+        endpoint,
+        method,
+        timestamp: new Date(),
+        duration,
+        status: 'error',
+        pluginId: pluginId || 'unknown',
+        requestSize: JSON.stringify(data || {}).length,
+        responseSize: 0,
+        userAgent: 'PluginAPI/1.
