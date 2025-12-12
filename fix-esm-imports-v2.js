@@ -29,21 +29,20 @@ function fixImportsInFile(filePath) {
     let content = fs.readFileSync(filePath, 'utf8');
     let modified = false;
     
-    // Pattern to match relative imports without .js extensions
-    // Matches: from './path/to/file' or from "../path/to/file" (without .js)
-    const importPattern = /from\s+['"]([.][^'"]*)['"](?!\s*['"]\.js['"])/g;
-    
-    let match;
-    while ((match = importPattern.exec(content)) !== null) {
-      const importPath = match[1];
-      // Only fix relative imports that don't already have .js
-      if (importPath.startsWith('.') && !importPath.endsWith('.js') && !importPath.endsWith('.ts') && !importPath.endsWith('.tsx')) {
-        const newImport = `${match[0].replace(importPath, importPath + '.js')}`;
-        content = content.replace(match[0], newImport);
-        modified = true;
-        console.log(`  Found import: ${match[0]} -> ${newImport}`);
+    // Pattern to match relative imports without explicit extensions
+    const importPattern = /(from\\s+['"])(\\.{1,2}[^'"]+)(['"])/g;
+
+    content = content.replace(importPattern, (fullMatch, prefix, importPath, suffix) => {
+      // Skip if already has an extension
+      if (/\\.[a-z0-9]+$/i.test(importPath)) {
+        return fullMatch;
       }
-    }
+
+      modified = true;
+      const updated = `${prefix}${importPath}.js${suffix}`;
+      console.log(`  Updated import in ${filePath}: ${importPath} -> ${importPath}.js`);
+      return updated;
+    });
     
     if (modified) {
       fs.writeFileSync(filePath, content, 'utf8');
@@ -59,7 +58,7 @@ function fixImportsInFile(filePath) {
 
 // Main execution
 function main() {
-  console.log('🔧 Fixing ESM import statements...');
+  console.log('Fixing ESM import statements...');
   
   const srcDir = path.join(__dirname, 'apps', 'api', 'src');
   const files = findTypeScriptFiles(srcDir);
@@ -73,8 +72,8 @@ function main() {
     }
   }
   
-  console.log(`✅ Fixed imports in ${fixedCount} files`);
-  console.log('🎯 Please rebuild and test the application');
+  console.log(`Fixed imports in ${fixedCount} files`);
+  console.log('Please rebuild and test the application');
 }
 
 if (require.main === module) {

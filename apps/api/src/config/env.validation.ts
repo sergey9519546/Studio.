@@ -105,8 +105,6 @@ export function validate(config: Record<string, unknown>) {
   const missingRequired: string[] = [];
   if (!validatedConfig.DATABASE_URL) missingRequired.push("DATABASE_URL");
   if (!validatedConfig.JWT_SECRET) missingRequired.push("JWT_SECRET");
-  if (!validatedConfig.ADMIN_EMAIL) missingRequired.push("ADMIN_EMAIL");
-  if (!validatedConfig.ADMIN_PASSWORD) missingRequired.push("ADMIN_PASSWORD");
   if (!projectId)
     missingRequired.push("GCP_PROJECT_ID or GOOGLE_CLOUD_PROJECT");
 

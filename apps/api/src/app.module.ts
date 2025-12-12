@@ -22,7 +22,6 @@ import { AssetsModule } from "./modules/assets/assets.module.js";
 import { AssignmentsModule } from "./modules/assignments/assignments.module.js";
 import { AuthModule } from "./modules/auth/auth.module.js";
 import { AvailabilityModule } from "./modules/availability/availability.module.js";
-import { ConfluenceModule } from "./modules/confluence/confluence.module.js";
 import { FreelancersModule } from "./modules/freelancers/freelancers.module.js";
 import { GoogleModule } from "./modules/google/google.module.js";
 import { IntegrationsModule } from './modules/integrations/integrations.module.js';
@@ -137,7 +136,6 @@ appLogger.log(`Static root: ${staticRoot ?? 'not-found'} | cwd: ${process.cwd()}
     AuthModule,
     MonitoringModule,
     IntegrationsModule,
-    ConfluenceModule,
     TranscriptsModule,
   ],
   providers: [

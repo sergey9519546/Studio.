@@ -12,7 +12,7 @@ export class OllamaEmbeddingsService implements EmbeddingsProvider, OnModuleInit
 
     constructor(private configService: ConfigService) {
         this.baseUrl = this.configService.get<string>('OLLAMA_BASE_URL') || 'http://localhost:11434';
-        this.model = this.configService.get<string>('OLLAMA_EMBEDDING_MODEL') || 'nomic-embed-text:1.5';
+        this.model = this.configService.get<string>('OLLAMA_EMBEDDING_MODEL') || 'nomic-embed-text';
 
         this.client = new Ollama({ host: this.baseUrl });
 
@@ -31,7 +31,7 @@ export class OllamaEmbeddingsService implements EmbeddingsProvider, OnModuleInit
                 this.logger.warn(`Model ${this.model} not found locally. Available models: ${models.models.map(m => m.name).join(', ')}`);
                 this.logger.warn(`Run 'ollama pull ${this.model}' to download the model.`);
             } else {
-                this.logger.log(`✓ Model ${this.model} is available`);
+                this.logger.log(`Model ${this.model} is available`);
             }
         } catch (error) {
             this.logger.warn(`Could not verify Ollama model availability: ${error instanceof Error ? error.message : 'Unknown error'}`);

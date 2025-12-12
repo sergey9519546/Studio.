@@ -4,18 +4,19 @@
 The application is failing with ESM loader errors due to missing `.js` extensions in import statements. Node.js ESM requires explicit file extensions for relative imports when using file:// URLs.
 
 ## Current Status
-- ✅ Identified the root cause: Missing `.js` extensions in import statements
-- ✅ Analyzed the codebase: Found 300+ import statements, some with `.js`, some without
-- ✅ Updated common.module.ts to include `.js` extension
-- ❌ Need systematic fix for all imports
+- Identified the root cause: Missing `.js` extensions in import statements
+- Analyzed the codebase: Found mixed usage of `.js` and bare imports
+- Updated `common.module.ts` to include `.js` extension
+- Automated fix applied for `jwt-auth.guard` imports; broader pass still pending
 
 ## Implementation Plan
 
 ### Phase 1: Import Resolution Strategy
-- [ ] 1.1 Create a script to automatically add .js extensions to relative imports
-- [ ] 1.2 Fix all imports in src/ directory systematically
-- [ ] 1.3 Rebuild the application
-- [ ] 1.4 Test the fix
+- [x] 1.1 Create a script to automatically add .js extensions to relative imports (`fix-esm-imports-v2.js`)
+- [x] 1.2 Fix `jwt-auth.guard` imports in `apps/api/src/**`
+- [ ] 1.3 Run the script across remaining imports (as needed)
+- [ ] 1.4 Rebuild the application
+- [ ] 1.5 Test the fix
 
 ### Phase 2: Alternative Approach (if needed)
 - [ ] 2.1 Consider switching to CommonJS module system
@@ -28,4 +29,5 @@ The application is failing with ESM loader errors due to missing `.js` extension
 - [ ] 3.3 Verify all modules load correctly
 
 ## Next Steps
-Start with Phase 1 - create an automated script to fix all imports.
+- Decide whether to run `fix-esm-imports-v2.js` across all relative imports
+- Rebuild the API and run it to confirm the loader error is resolved
