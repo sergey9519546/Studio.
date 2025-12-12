@@ -10,6 +10,7 @@ interface MobileNavProps {
  * Mobile Bottom Navigation
  * Follows iOS/Android convention for primary navigation on mobile devices
  * Addresses Jakob's Law compliance for mobile UX
+ * Fixed layout inconsistencies and improved accessibility
  */
 export const MobileNav: React.FC<MobileNavProps> = ({ className = '' }) => {
   const navItems = [
@@ -22,9 +23,12 @@ export const MobileNav: React.FC<MobileNavProps> = ({ className = '' }) => {
 
   return (
     <nav
-      className={`md:hidden fixed bottom-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-xl border-t border-border-subtle safe-area-pb ${className}`}
+      className={`md:hidden fixed bottom-0 left-0 right-0 z-[50] bg-surface/95 backdrop-blur-xl border-t border-border-subtle ${className}`}
       role="navigation"
       aria-label="Primary mobile navigation"
+      style={{
+        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+      }}
     >
       <div className="flex items-center justify-around h-16 px-2">
         {navItems.map((item) => (
@@ -33,7 +37,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ className = '' }) => {
             to={item.path}
             aria-label={item.ariaLabel}
             className={({ isActive }) =>
-              `flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-lg transition-all min-w-[64px] ${
+              `flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-lg transition-all duration-200 min-w-[64px] relative ${
                 isActive
                   ? 'text-primary'
                   : 'text-ink-tertiary hover:text-ink-secondary active:scale-95'
@@ -44,8 +48,8 @@ export const MobileNav: React.FC<MobileNavProps> = ({ className = '' }) => {
               <>
                 <item.icon 
                   size={20} 
-                  strokeWidth={2} 
-                  className={`transition-colors ${isActive ? 'text-primary' : ''}`}
+                  strokeWidth={isActive ? 2.5 : 2}
+                  className={`transition-colors duration-200 ${isActive ? 'text-primary' : 'text-ink-tertiary'}`}
                   aria-hidden="true"
                 />
                 <span 
@@ -55,10 +59,10 @@ export const MobileNav: React.FC<MobileNavProps> = ({ className = '' }) => {
                 >
                   {item.label}
                 </span>
-                {/* Active indicator */}
+                {/* Active indicator - fixed positioning issue */}
                 {isActive && (
                   <div 
-                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full"
+                    className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary rounded-full"
                     aria-hidden="true"
                   />
                 )}
@@ -67,13 +71,6 @@ export const MobileNav: React.FC<MobileNavProps> = ({ className = '' }) => {
           </NavLink>
         ))}
       </div>
-      
-      {/* iOS safe area support */}
-      <style>{`
-        .safe-area-pb {
-          padding-bottom: env(safe-area-inset-bottom);
-        }
-      `}</style>
     </nav>
   );
 };

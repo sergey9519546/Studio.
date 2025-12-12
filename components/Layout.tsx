@@ -38,7 +38,7 @@ const Layout: React.FC = () => {
       </a>
 
       {/* Sidebar - Floating Porcelain Layer */}
-      <aside className="w-72 flex-shrink-0 hidden md:flex flex-col h-full border-r border-border-subtle bg-surface/95 backdrop-blur-md z-50 relative transition-all duration-300">
+      <aside className="w-72 flex-shrink-0 hidden md:flex flex-col h-full border-r border-border-subtle bg-surface/95 backdrop-blur-md z-40 relative transition-all duration-300">
         <div className="h-24 flex flex-col justify-center px-6">
           <div className="flex items-center gap-3 group cursor-default">
             <div className="relative w-8 h-8 bg-ink-primary text-white rounded-lg flex items-center justify-center shadow-card group-hover:shadow-glow transition-all duration-500 ease-out group-hover:-translate-y-0.5 flex-shrink-0">
@@ -99,7 +99,7 @@ const Layout: React.FC = () => {
       </aside>
 
       {/* Mobile Header */}
-      <div className="md:hidden fixed top-0 w-full bg-surface/90 backdrop-blur-xl border-b border-border-subtle h-16 z-50 flex items-center px-6 justify-between">
+      <div className="md:hidden fixed top-0 w-full bg-surface/90 backdrop-blur-xl border-b border-border-subtle h-16 z-[60] flex items-center px-6 justify-between">
         <div className="flex items-center gap-2">
           <span className="font-display font-bold text-lg tracking-tight text-ink-primary">
             Studio.
@@ -116,7 +116,7 @@ const Layout: React.FC = () => {
       {/* Main Content */}
       <main
         id="main-content"
-        className="flex-1 h-full overflow-y-auto overflow-x-hidden relative scroll-smooth -ml-[1px]"
+        className="flex-1 h-full overflow-y-auto overflow-x-hidden relative scroll-smooth"
       >
         <div className="min-h-full pb-24 md:pb-12 pt-20 md:pt-0">
           <Outlet />
@@ -127,7 +127,7 @@ const Layout: React.FC = () => {
       <MobileNav />
 
       {/* Floating Action Button - Fixed dimensions to prevent CLS */}
-      <div className="fixed bottom-8 right-8 z-50 w-16 h-16">
+      <div className="fixed bottom-8 right-8 z-[70] w-16 h-16">
         <button
           onClick={() => setIsChatOpen(!isChatOpen)}
           className="w-full h-full bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:bg-primary-hover transition-all"
@@ -138,7 +138,7 @@ const Layout: React.FC = () => {
 
       {/* AI Chat Window - Fixed dimensions to prevent CLS */}
       {isChatOpen && (
-        <div className="fixed bottom-28 right-8 w-96 h-[600px] z-50">
+        <div className="fixed bottom-28 right-8 w-96 h-[600px] z-[80]">
           <AIChat
             freelancers={[]}
             projects={[]}

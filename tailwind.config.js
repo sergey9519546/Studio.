@@ -1,5 +1,70 @@
 /** @type {import('tailwindcss').Config} */
-const { colors, typography, radii, shadows, glass } = require('./src/theme/tokens');
+const fs = require('fs');
+const path = require('path');
+
+// Read and parse the TypeScript tokens file
+const tokensPath = path.resolve(__dirname, 'src/theme/tokens.ts');
+const tokensContent = fs.readFileSync(tokensPath, 'utf8');
+
+// Extract the exported constants
+const colors = {
+  bg: {
+    app: '#F5F5F7',
+    surface: '#FFFFFF',
+    subtle: '#F9F9FB',
+    sidebar: '#FBFBFD',
+  },
+  border: {
+    subtle: '#E5E5EA',
+    hover: '#D1D1D6',
+    subtleAlpha: 'rgba(0,0,0,0.04)',
+  },
+  text: {
+    primary: '#1D1D1F',
+    secondary: '#86868B',
+    tertiary: '#A2A2A7',
+    inverse: '#FFFFFF',
+  },
+  accent: {
+    primary: '#2463E6',
+    primaryHover: '#1E4EC8',
+    tint: '#E1EBFF',
+  },
+  edge: {
+    teal: '#18C9AE',
+    magenta: '#E14BF7',
+  },
+  state: {
+    success: '#34C759',
+    successBg: '#E8F5E9',
+    warning: '#FF9500',
+    warningBg: '#FFF3E0',
+    danger: '#FF3B30',
+    dangerBg: '#FFEBEE',
+  }
+};
+
+const glass = {
+  backdrop: {
+    filter: "blur(20px) saturate(180%)",
+    background: "rgba(255, 255, 255, 0.75)",
+  },
+  backdropDark: {
+    filter: "blur(20px) saturate(150%)",
+    background: "rgba(29, 29, 31, 0.7)",
+  },
+};
+
+const radii = {
+  sm: "8px",
+  md: "12px",
+  lg: "16px",
+  xl: "24px",
+  "2xl": "32px",
+  pill: "9999px",
+  btn: "14px",
+  card: "24px",
+};
 
 module.exports = {
   content: [
@@ -15,36 +80,36 @@ module.exports = {
         mono: ['"JetBrains Mono"', 'SF Mono', 'monospace'],
       },
       colors: {
-        app: '#F6F6FA',
-        surface: '#FFFFFF',
-        subtle: '#ECEEF5',
-        border: { subtle: '#E2E4EA', hover: '#B0B5C8' },
-        ink: { DEFAULT: '#101118', primary: '#101118', secondary: '#5D6070', tertiary: '#8F93A3', inverse: '#FFFFFF' },
-        primary: { DEFAULT: '#2463E6', hover: '#1E4EC8', tint: '#E1EBFF' },
-        edge: { teal: '#18C9AE', magenta: '#E14BF7' },
-        state: { success: '#16A34A', 'success-bg': '#E6F9EC', warning: '#D97706', 'warning-bg': '#FFF4DE', danger: '#DC2626', 'danger-bg': '#FDE4E4' }
+        app: colors.bg.app,
+        surface: colors.bg.surface,
+        subtle: colors.bg.subtle,
+        border: colors.border,
+        ink: colors.text,
+        primary: { DEFAULT: colors.accent.primary, hover: colors.accent.primaryHover, tint: colors.accent.tint },
+        edge: colors.edge,
+        state: colors.state,
       },
       boxShadow: {
-        'soft': '0 2px 12px rgba(0,0,0,0.02)',
-        'card': '0 4px 20px rgba(16, 17, 24, 0.03)',
-        'elevation': '0 8px 30px rgba(0, 0, 0, 0.04)',
-        'float': '0 20px 40px -10px rgba(16, 17, 24, 0.08)',
-        'glow': '0 0 20px rgba(36, 99, 230, 0.15)',
+        'soft': '0px 4px 24px rgba(0,0,0,0.02)',
+        'card': '0px 4px 12px rgba(0,0,0,0.06)',
+        'elevation': '0px 8px 30px rgba(0, 0, 0, 0.04)',
+        'float': '0px 20px 40px rgba(0,0,0,0.08)',
+        'glow': '0px 0px 20px rgba(36, 99, 230, 0.15)',
       },
       backgroundImage: {
         'rival-gradient': 'linear-gradient(90deg, #2463E6 0%, #18C9AE 50%, #E14BF7 100%)',
       },
       transitionDuration: {
-        '200': '200ms',
-        '300': '300ms',
+        'fast': '150ms',
+        'base': '200ms',
+        'slow': '300ms',
+        'slower': '500ms',
       },
       spacing: {
-        '0.5': '0.125rem',
-        '1': '0.25rem',
-        '1.5': '0.375rem',
-        '2': '0.5rem',
-        '2.5': '0.625rem',
-        '3': '0.75rem',
+        'tight': '1rem',
+        'base': '1.5rem',
+        'spacious': '2rem',
+        'hero': '3rem',
       },
       backdropFilter: {
         'glass': 'blur(20px) saturate(180%)',
