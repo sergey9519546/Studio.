@@ -295,7 +295,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects, freelancers, as
                             </div>
                         </div>
 
-                        {/* Scripts (Positioned below Specs) */}
+                        {/* Scripts */}
                         <div className="bg-white rounded-2xl border border-mist p-8 shadow-sm flex flex-col h-96">
                             <div className="flex justify-between items-center mb-6">
                                 <h3 className="text-[10px] font-bold text-pencil uppercase tracking-widest flex items-center gap-2">
@@ -313,4 +313,4 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects, freelancers, as
                                     </div>
                                 ) : (
                                     scripts.map(script => (
-                                        <Link key={script.id} to={`/studio?project=${project.id}&script=${script.id}`} className="block p-4 hover:bg-canvas rounded-xl border border-mist hover:border-indigo-200 transition-all group shadow-sm hover
+                                        <Link key={script.id} to={`/studio?project=${project.id}&script=${script
