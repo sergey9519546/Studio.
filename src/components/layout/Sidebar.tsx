@@ -5,7 +5,6 @@ import {
   Layers,
   Layout,
   Settings,
-  Sparkles,
   Users,
 } from "lucide-react";
 import React from "react";
@@ -19,7 +18,6 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   const operations = [
     { id: "dashboard", icon: Layout, label: "Dashboard" },
     { id: "projects", icon: Layers, label: "Projects" },
-    { id: "studio", icon: Sparkles, label: "Studio AI" },
     { id: "moodboard", icon: Grid, label: "Visuals" },
     { id: "roster", icon: Users, label: "Talent" },
     { id: "writers-room", icon: FileText, label: "Writer's Room" },

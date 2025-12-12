@@ -35,12 +35,39 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
       <div className="max-w-7xl mx-auto p-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-ink-primary mb-2">
-            {projectTitle}
-          </h1>
-          <p className="text-ink-secondary">
-            Creative workspace and project intelligence
-          </p>
+          <div className="flex items-center gap-2 text-xs text-ink-tertiary uppercase font-bold tracking-widest mb-2">
+            <span>Dashboard</span>
+            <span>/</span>
+            <span>Projects</span>
+            <span>/</span>
+            <span className="text-ink-primary">{projectTitle}</span>
+          </div>
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <div>
+              <h1 className="text-4xl font-bold text-ink-primary mb-1">
+                {projectTitle}
+              </h1>
+              <div className="flex flex-wrap gap-2 text-sm text-ink-secondary">
+                <span className="px-3 py-1 rounded-full bg-subtle border border-border-subtle font-semibold text-ink-primary">
+                  Status: Active
+                </span>
+                <span className="px-3 py-1 rounded-full bg-subtle border border-border-subtle text-ink-primary">
+                  Due: TBD
+                </span>
+                <span className="px-3 py-1 rounded-full bg-subtle border border-border-subtle text-ink-primary">
+                  Owner: Creative
+                </span>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Button size="sm" variant="secondary" onClick={onNavigateToMoodboard}>
+                View Moodboard
+              </Button>
+              <Button size="sm" variant="primary" onClick={onNavigateToWritersRoom}>
+                Open Writer&apos;s Room
+              </Button>
+            </div>
+          </div>
         </div>
 
         {/* Main Grid Layout */}
@@ -141,6 +168,33 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
                 </div>
               </div>
             </LiquidGlassContainer>
+
+            <LiquidGlassContainer level="lg">
+              <h2 className="text-lg font-bold text-ink-primary mb-3">
+                Risks & Blockers
+              </h2>
+              <ul className="space-y-2 text-sm text-ink-secondary">
+                <li className="flex items-start gap-2">
+                  <span className="mt-1 w-2 h-2 rounded-full bg-amber-500" />
+                  Clarify deliverable scope and final runtime.
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1 w-2 h-2 rounded-full bg-amber-500" />
+                  Secure reference assets for visual direction.
+                </li>
+              </ul>
+            </LiquidGlassContainer>
+
+            <LiquidGlassContainer level="lg">
+              <h2 className="text-lg font-bold text-ink-primary mb-3">
+                Next Actions
+              </h2>
+              <ol className="list-decimal list-inside space-y-2 text-sm text-ink-secondary">
+                <li>Draft shot list outline.</li>
+                <li>Upload three mood references.</li>
+                <li>Confirm deliverable specs with client.</li>
+              </ol>
+            </LiquidGlassContainer>
           </div>
 
           {/* MIDDLE COLUMN: Assets + Metadata */}
@@ -203,6 +257,41 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
 
           {/* RIGHT COLUMN: Script Window + Quick Actions */}
           <div className="lg:col-span-1 space-y-6">
+            <LiquidGlassContainer level="lg">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-lg font-bold text-ink-primary">
+                  AI Quick Actions
+                </h2>
+                <Zap size={16} className="text-ink-tertiary" />
+              </div>
+              <div className="grid grid-cols-1 gap-2">
+                <Button
+                  variant="secondary"
+                  className="w-full justify-start"
+                  leftIcon={<Zap size={16} />}
+                  onClick={onNavigateToWritersRoom}
+                >
+                  Draft script outline
+                </Button>
+                <Button
+                  variant="secondary"
+                  className="w-full justify-start"
+                  leftIcon={<Zap size={16} />}
+                  onClick={onNavigateToWritersRoom}
+                >
+                  Generate shot list
+                </Button>
+                <Button
+                  variant="secondary"
+                  className="w-full justify-start"
+                  leftIcon={<Zap size={16} />}
+                  onClick={onNavigateToMoodboard}
+                >
+                  Suggest moodboard tags
+                </Button>
+              </div>
+            </LiquidGlassContainer>
+
             {/* Script Window */}
             <LiquidGlassContainer level="lg">
               <div className="flex items-center justify-between mb-4">

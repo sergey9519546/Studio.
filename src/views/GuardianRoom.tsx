@@ -32,12 +32,15 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
   const endRef = useRef<HTMLDivElement>(null);
   const genAIService = GenAIService.getInstance();
 
-  const send = async () => {
-    if (!input.trim() || isLoading) return;
-    const newMsg: Message = { role: "user", text: input };
+  const sendMessage = async (overrideText?: string) => {
+    const messageToSend = overrideText ?? input;
+    if (!messageToSend.trim() || isLoading) return;
+
+    const newMsg: Message = { role: "user", text: messageToSend };
     setMessages((p) => [...p, newMsg]);
-    const currentInput = input;
-    setInput("");
+    if (!overrideText) {
+      setInput("");
+    }
     setIsLoading(true);
 
     try {
@@ -46,7 +49,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
         : "You are Lumina, a creative AI director. Keep responses concise and focused on film/design direction.";
 
       const res = await genAIService.generateEnhancedContent(
-        currentInput,
+        messageToSend,
         undefined,
         systemInstruction
       );
@@ -64,6 +67,12 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
       setIsLoading(false);
     }
   };
+
+  const promptStarters = [
+    "Draft a scene outline based on this brief.",
+    "Turn the brief into a 10-shot storyboard list.",
+    "Write a 30-second VO read with a cinematic tone.",
+  ];
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -154,6 +163,19 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
           </button>
         </div>
 
+        {/* Prompt starters */}
+        <div className="px-6 pb-2 pt-4 flex flex-wrap gap-2 border-b border-border-subtle">
+          {promptStarters.map((prompt) => (
+            <button
+              key={prompt}
+              onClick={() => sendMessage(prompt)}
+              className="px-3 py-2 bg-subtle text-xs font-semibold text-ink-primary rounded-full border border-border-subtle hover:border-ink-primary transition-colors"
+            >
+              {prompt}
+            </button>
+          ))}
+        </div>
+
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-8 space-y-8 bg-app">
           {messages.map((m, i) => (
@@ -190,13 +212,13 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && send()}
+              onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
               placeholder="Message Lumina..."
               disabled={isLoading}
               className="w-full bg-subtle border border-transparent focus:border-border-subtle focus:bg-surface rounded-2xl px-6 py-4 text-sm outline-none transition-all pl-6 pr-14 font-medium placeholder:text-ink-tertiary text-ink-primary disabled:opacity-50"
             />
             <button
-              onClick={send}
+              onClick={() => sendMessage()}
               disabled={isLoading || !input.trim()}
               className="absolute right-2 top-2 p-2 bg-ink-primary text-white rounded-xl hover:scale-105 transition-transform shadow-md disabled:opacity-50 disabled:hover:scale-100"
               aria-label="Send message"

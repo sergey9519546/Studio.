@@ -110,11 +110,61 @@ export default function App() {
 
   const handleProjectSelect = (p: Project) => {
     setActiveProject(p);
-    setWriterMode(true); // Direct to writers room for demo flow
+    setActiveTab("projects");
+    setWriterMode(false);
   };
 
   const handleMoodboardDelete = (id: string) => {
     setMoodboardItems((items) => items.filter((item) => item.id !== id));
+  };
+
+  const ProjectContextHeader = () => {
+    if (!activeProject) return null;
+
+    const status = activeProject.status || "Active";
+    const statusColor =
+      status === "In Progress"
+        ? "bg-blue-100 text-blue-700"
+        : status === "Blocked"
+          ? "bg-amber-100 text-amber-700"
+          : "bg-emerald-100 text-emerald-700";
+
+    return (
+      <div className="sticky top-0 z-10 bg-app/95 backdrop-blur border-b border-border-subtle px-10 py-4 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-2xl bg-ink-primary text-white flex items-center justify-center font-bold">
+            {activeProject.title.slice(0, 2).toUpperCase()}
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-semibold text-ink-tertiary uppercase">
+                Project Context
+              </span>
+              <span className={`text-[11px] px-2 py-1 rounded-full font-semibold ${statusColor}`}>
+                {status}
+              </span>
+            </div>
+            <div className="text-lg font-bold text-ink-primary">
+              {activeProject.title}
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            className="px-3 py-2 text-sm rounded-xl border border-border-subtle hover:border-ink-primary transition-colors"
+            onClick={() => setWriterMode(true)}
+          >
+            Open Writer&apos;s Room
+          </button>
+          <button
+            className="px-3 py-2 text-sm rounded-xl border border-border-subtle hover:border-ink-primary transition-colors"
+            onClick={() => setActiveTab("moodboard")}
+          >
+            View Moodboard
+          </button>
+        </div>
+      </div>
+    );
   };
 
   const renderContent = () => {
@@ -123,22 +173,39 @@ export default function App() {
         return (
           <GuardianRoom
             project={activeProject}
-            onBack={() => setActiveProject(null)}
+            onBack={() => {
+              setWriterMode(false);
+              setActiveTab("projects");
+            }}
           />
         );
       }
+
+      if (activeTab === "moodboard") {
+        return (
+          <Moodboard
+            projectId={activeProject.id}
+            items={moodboardItems}
+            onItemDelete={handleMoodboardDelete}
+          />
+        );
+      }
+
       return (
-        <ProjectDashboard
-          projectId={activeProject.id}
-          projectTitle={activeProject.title}
-          brief={projectBrief}
-          onBriefChange={setProjectBrief}
-          onNavigateToWritersRoom={() => {
-            setWriterMode(true);
-            setActiveTab("writers-room");
-          }}
-          onNavigateToMoodboard={() => setActiveTab("moodboard")}
-        />
+        <>
+          <ProjectContextHeader />
+          <ProjectDashboard
+            projectId={activeProject.id}
+            projectTitle={activeProject.title}
+            brief={projectBrief}
+            onBriefChange={setProjectBrief}
+            onNavigateToWritersRoom={() => {
+              setWriterMode(true);
+              setActiveTab("writers-room");
+            }}
+            onNavigateToMoodboard={() => setActiveTab("moodboard")}
+          />
+        </>
       );
     }
     switch (activeTab) {
@@ -153,17 +220,6 @@ export default function App() {
           <GuardianRoom
             project={null}
             onBack={() => setActiveTab("dashboard")}
-          />
-        );
-      case "studio":
-        return (
-          <ProjectDashboard
-            projectId={projects[0].id}
-            projectTitle={projects[0].title}
-            brief={projectBrief}
-            onBriefChange={setProjectBrief}
-            onNavigateToWritersRoom={() => setActiveTab("writers-room")}
-            onNavigateToMoodboard={() => setActiveTab("moodboard")}
           />
         );
       case "moodboard":
