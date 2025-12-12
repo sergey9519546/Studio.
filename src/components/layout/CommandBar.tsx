@@ -17,7 +17,7 @@ const CommandBar: React.FC = () => {
     <>
       {/* Desktop Command Bar */}
       <div className="hidden md:block fixed bottom-8 left-72 right-0 flex justify-center z-[60] px-8 pointer-events-none">
-        <div className="glass-bar pointer-events-auto w-full max-w-3xl h-16 rounded-pill flex items-center justify-between px-2 pr-3">
+        <div className="glass-bar pointer-events-auto w-full max-w-3xl h-16 rounded-pill flex items-center justify-between px-2 pr-3 shadow-lg hover:shadow-xl transition-shadow">
           <form onSubmit={handleSubmit} className="flex items-center pl-4 w-full gap-4">
             <Command size={18} className="text-ink-secondary" aria-hidden="true" />
             <label htmlFor="command-input" className="sr-only">
@@ -29,9 +29,10 @@ const CommandBar: React.FC = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search manifests, assets, or run AI command..."
-              className="bg-transparent border-none outline-none h-full w-full text-sm text-ink-primary placeholder:text-ink-secondary/70 font-medium"
+              className="bg-transparent border-none outline-none h-full w-full text-sm text-ink-primary placeholder:text-ink-secondary/70 font-medium focus:placeholder:text-ink-tertiary transition-colors"
               role="searchbox"
               aria-label="Search manifests, assets, or run AI command"
+              autoComplete="off"
             />
           </form>
 
@@ -41,9 +42,10 @@ const CommandBar: React.FC = () => {
             </div>
             <div className="h-6 w-[1px] bg-border-subtle mx-1" aria-hidden="true" />
             <button 
-              className="w-10 h-10 rounded-full bg-ink-primary text-white flex items-center justify-center hover:scale-105 transition-transform shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              className="w-10 h-10 rounded-full bg-ink-primary text-white flex items-center justify-center hover:scale-105 transition-all shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 hover:bg-ink-primary/90"
               aria-label="Create new item"
               type="button"
+              title="Create new item (Ctrl+N)"
             >
               <Plus size={18} aria-hidden="true" />
             </button>
@@ -51,9 +53,9 @@ const CommandBar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Command Bar */}
+      {/* Mobile Command Bar - Positioned above mobile navigation to prevent overlap */}
       <div className="md:hidden fixed bottom-20 left-4 right-4 flex justify-center z-[60] pointer-events-none">
-        <div className="pointer-events-auto w-full max-w-md h-14 rounded-pill flex items-center justify-between px-3 pr-3 bg-surface/95 backdrop-blur-xl border border-border-subtle shadow-lg">
+        <div className="pointer-events-auto w-full max-w-md h-14 rounded-pill flex items-center justify-between px-3 pr-3 bg-surface/95 backdrop-blur-xl border border-border-subtle shadow-lg hover:shadow-xl transition-shadow">
           <form onSubmit={handleSubmit} className="flex items-center w-full gap-3">
             <Command size={16} className="text-ink-secondary" aria-hidden="true" />
             <label htmlFor="mobile-command-input" className="sr-only">
@@ -65,15 +67,17 @@ const CommandBar: React.FC = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search or command..."
-              className="bg-transparent border-none outline-none h-full w-full text-sm text-ink-primary placeholder:text-ink-secondary/70 font-medium"
+              className="bg-transparent border-none outline-none h-full w-full text-sm text-ink-primary placeholder:text-ink-secondary/70 font-medium focus:placeholder:text-ink-tertiary transition-colors"
               role="searchbox"
               aria-label="Search or run command"
+              autoComplete="off"
             />
           </form>
           <button 
-            className="w-8 h-8 rounded-full bg-ink-primary text-white flex items-center justify-center hover:scale-105 transition-transform shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1"
+            className="w-8 h-8 rounded-full bg-ink-primary text-white flex items-center justify-center hover:scale-105 transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 hover:bg-ink-primary/90"
             aria-label="Create new item"
             type="button"
+            title="Create new item"
           >
             <Plus size={14} aria-hidden="true" />
           </button>

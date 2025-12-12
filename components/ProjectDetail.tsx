@@ -22,7 +22,12 @@ interface ProjectDetailProps {
 }
 
 const DateBadge = ({ dueDate }: { dueDate?: string }) => {
-    if (!dueDate) return <span className="text-pencil text-xs font-medium tracking-wide">No Date</span>;
+    if (!dueDate) return (
+        <span className="text-ink-tertiary text-xs font-medium tracking-wide flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-subtle bg-subtle/50">
+            <Clock size={12} aria-hidden="true" />
+            No Date
+        </span>
+    );
 
     const due = new Date(dueDate);
     const now = new Date();
@@ -32,18 +37,25 @@ const DateBadge = ({ dueDate }: { dueDate?: string }) => {
     let bgClass = "bg-emerald-50 text-emerald-700 border-emerald-100";
     let icon = <Clock size={12} />;
     let text = `${diffDays} days left`;
+    let ariaLabel = `Due in ${diffDays} days`;
 
     if (diffDays < 0) {
         bgClass = "bg-rose-50 text-rose-700 border-rose-100";
         icon = <AlertTriangle size={12} />;
         text = `Overdue (${Math.abs(diffDays)}d)`;
+        ariaLabel = `Overdue by ${Math.abs(diffDays)} days`;
     } else if (diffDays < 3) {
         bgClass = "bg-amber-50 text-amber-700 border-amber-100";
         text = `Due in ${diffDays} days`;
+        ariaLabel = `Due in ${diffDays} days`;
     }
 
     return (
-        <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${bgClass}`}>
+        <div 
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${bgClass}`}
+            role="status"
+            aria-label={ariaLabel}
+        >
             {icon} {text}
         </div>
     );
@@ -54,16 +66,46 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects, freelancers, as
     const navigate = useNavigate();
     const project = projects.find(p => p.id === id);
     const [activeTab, setActiveTab] = useState<'overview' | 'moodboard' | 'ai-assistant'>('overview');
-
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const [scripts, setScripts] = useState<Script[]>([]);
     const [sources, setSources] = useState<KnowledgeSource[]>([]);
+    const [isEditing, setIsEditing] = useState(false);
 
     const projectId = project?.id;
 
     useEffect(() => {
-        if (projectId) {
-            api.scripts.findByProject(projectId).then(res => setScripts(res.data || [])).catch(console.error);
-        }
+        let didCancel = false;
+
+        const loadProjectData = async () => {
+            if (!projectId) {
+                setError("Project ID not found");
+                setIsLoading(false);
+                return;
+            }
+
+            setIsLoading(true);
+            setError(null);
+
+            try {
+                const scriptsData = await api.scripts.findByProject(projectId);
+                if (!didCancel) {
+                    setScripts(scriptsData.data || []);
+                }
+            } catch (error) {
+                console.error("Failed to load scripts:", error);
+                if (!didCancel) {
+                    setError("Failed to load project scripts");
+                }
+            } finally {
+                if (!didCancel) {
+                    setIsLoading(false);
+                }
+            }
+        };
+
+        loadProjectData();
+        return () => { didCancel = true; };
     }, [projectId]);
 
     const handleAddSource = async (newSource: KnowledgeSource) => {
@@ -101,59 +143,158 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects, freelancers, as
         onUpdateProject({ ...project, ...updates });
     };
 
-    if (!project) return <div className="p-12 text-center text-pencil text-sm font-medium">Project not found</div>;
+    const handleEditProject = () => {
+        setIsEditing(true);
+        // TODO: Implement actual edit functionality
+        setTimeout(() => setIsEditing(false), 1000);
+    };
+
+    if (!project) return (
+        <div className="p-12 text-center text-ink-secondary text-sm font-medium" role="alert">
+            <AlertTriangle size={24} className="mx-auto mb-4 text-state-danger" aria-hidden="true" />
+            <p>Project not found</p>
+            <button 
+                onClick={() => navigate('/projects')} 
+                className="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Return to projects list"
+            >
+                Back to Projects
+            </button>
+        </div>
+    );
 
     const assignedFreelancers = assignments
         .filter(a => a.projectId === project.id)
         .map(a => freelancers.find(f => f.id === a.freelancerId))
         .filter(Boolean) as Freelancer[];
 
+    if (isLoading) {
+        return (
+            <div className="h-full flex items-center justify-center bg-canvas" role="status" aria-live="polite">
+                <div className="flex items-center gap-3 text-ink-secondary">
+                    <div className="animate-spin rounded-full h-6 w-6 border-2 border-primary border-t-transparent"></div>
+                    <span className="font-medium">Loading project details...</span>
+                </div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="h-full flex items-center justify-center bg-canvas" role="alert">
+                <div className="bg-state-danger/10 border border-state-danger/30 rounded-2xl p-8 max-w-md text-center">
+                    <AlertTriangle size={32} className="mx-auto mb-4 text-state-danger" aria-hidden="true" />
+                    <h3 className="font-bold text-state-danger mb-2">Error Loading Project</h3>
+                    <p className="text-sm text-ink-secondary mb-4">{error}</p>
+                    <div className="flex gap-3 justify-center">
+                        <button 
+                            onClick={() => window.location.reload()} 
+                            className="px-4 py-2 bg-state-danger text-white rounded-lg hover:bg-state-danger/90 transition-colors focus:outline-none focus:ring-2 focus:ring-state-danger focus:ring-offset-2"
+                        >
+                            Retry
+                        </button>
+                        <button 
+                            onClick={() => navigate('/projects')} 
+                            className="px-4 py-2 border border-border-subtle rounded-lg hover:bg-subtle transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                        >
+                            Back to Projects
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className="h-full min-h-screen flex flex-col bg-canvas font-sans text-ink">
+        <div className="h-full min-h-screen flex flex-col bg-canvas font-sans text-ink-primary">
+            {/* Skip to content link for accessibility */}
+            <a
+                href="#project-main-content"
+                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg"
+                role="link"
+                aria-label="Skip to main project content"
+            >
+                Skip to main content
+            </a>
+
             {/* Header */}
-            <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-xl border-b border-mist px-8 py-6 flex flex-col gap-4">
+            <header className="sticky top-0 z-30 bg-surface/80 backdrop-blur-xl border-b border-border-subtle px-8 py-6 flex flex-col gap-4" role="banner">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-6">
-                        <button onClick={() => navigate('/projects')} className="p-2 -ml-2 hover:bg-mist/50 rounded-xl text-pencil transition-all duration-200 active:scale-95">
-                            <ChevronDown size={20} className="rotate-90" strokeWidth={2} />
+                        <button 
+                            onClick={() => navigate('/projects')} 
+                            className="p-2 -ml-2 hover:bg-subtle/50 rounded-xl text-ink-secondary transition-all duration-200 active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                            aria-label="Navigate back to projects list"
+                        >
+                            <ChevronDown size={20} className="rotate-90" strokeWidth={2} aria-hidden="true" />
                         </button>
                         <div>
                             <div className="flex items-center gap-2 mb-2">
-                                <span className="text-xs font-medium text-pencil">{project.category || 'Campaign'}</span>
-                                <span className="text-mist text-xs">/</span>
-                                <span className="text-xs font-medium text-pencil">{project.clientName}</span>
+                                <span className="text-xs font-medium text-ink-secondary">{project.category || 'Campaign'}</span>
+                                <span className="text-ink-tertiary text-xs" aria-hidden="true">/</span>
+                                <span className="text-xs font-medium text-ink-secondary">{project.clientName}</span>
                             </div>
-                            <h1 className="text-3xl font-semibold text-ink leading-none tracking-tight">{project.name}</h1>
+                            <h1 className="text-3xl font-semibold text-ink-primary leading-none tracking-tight">{project.name}</h1>
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
                         <DateBadge dueDate={project.dueDate} />
-                        <button className="bg-ink text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wide hover:bg-black hover:shadow-lg hover:-translate-y-[1px] transition-all duration-200 shadow-sm active:scale-[0.98]">
-                            Edit Project
+                        <button 
+                            onClick={handleEditProject}
+                            disabled={isEditing}
+                            className="bg-ink-primary text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wide hover:bg-ink-primary/90 hover:shadow-lg hover:-translate-y-[1px] transition-all duration-200 shadow-sm active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                            aria-label={isEditing ? "Editing project, please wait" : "Edit project details"}
+                        >
+                            {isEditing ? 'Editing...' : 'Edit Project'}
                         </button>
                     </div>
                 </div>
 
-                <div className="flex gap-8 border-t border-mist/50 pt-3">
-                    <button
-                        onClick={() => setActiveTab('overview')}
-                        className={`pb-3 text-sm font-semibold border-b-3 transition-all duration-200 flex items-center gap-2 ${activeTab === 'overview' ? 'border-ink text-ink bg-subtle/20' : 'border-transparent text-pencil hover:text-ink'} px-4 -mx-4 rounded-t-lg`}
-                    >
-                        <LayoutDashboard size={16} /> Brief & Specs
-                    </button>
-                    <button
-                        onClick={() => setActiveTab('moodboard')}
-                        className={`pb-3 text-sm font-semibold border-b-3 transition-all duration-200 flex items-center gap-2 ${activeTab === 'moodboard' ? 'border-indigo-600 text-indigo-600 bg-indigo-50/30' : 'border-transparent text-pencil hover:text-indigo-600'} px-4 -mx-4 rounded-t-lg`}
-                    >
-                        <Grid size={16} /> Visual Moodboard
-                    </button>
-                    <button
-                        onClick={() => setActiveTab('ai-assistant')}
-                        className={`pb-3 text-sm font-semibold border-b-3 transition-all duration-200 flex items-center gap-2 ${activeTab === 'ai-assistant' ? 'border-purple-600 text-purple-600 bg-purple-50/30' : 'border-transparent text-pencil hover:text-purple-600'} px-4 -mx-4 rounded-t-lg`}
-                    >
-                        <Sparkles size={16} /> Studio AI
-                    </button>
-                </div>
+                <nav aria-label="Project sections" role="navigation">
+                    <div className="flex gap-8 border-t border-border-subtle/50 pt-3">
+                        <button
+                            onClick={() => setActiveTab('overview')}
+                            className={`pb-3 text-sm font-semibold border-b-3 transition-all duration-200 flex items-center gap-2 px-4 -mx-4 rounded-t-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                                activeTab === 'overview' 
+                                    ? 'border-ink-primary text-ink-primary bg-subtle/20' 
+                                    : 'border-transparent text-ink-secondary hover:text-ink-primary'
+                            }`}
+                            aria-pressed={activeTab === 'overview'}
+                            aria-describedby="overview-desc"
+                        >
+                            <LayoutDashboard size={16} aria-hidden="true" /> Brief & Specs
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('moodboard')}
+                            className={`pb-3 text-sm font-semibold border-b-3 transition-all duration-200 flex items-center gap-2 px-4 -mx-4 rounded-t-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                                activeTab === 'moodboard' 
+                                    ? 'border-primary text-primary bg-primary/10' 
+                                    : 'border-transparent text-ink-secondary hover:text-primary'
+                            }`}
+                            aria-pressed={activeTab === 'moodboard'}
+                            aria-describedby="moodboard-desc"
+                        >
+                            <Grid size={16} aria-hidden="true" /> Visual Moodboard
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('ai-assistant')}
+                            className={`pb-3 text-sm font-semibold border-b-3 transition-all duration-200 flex items-center gap-2 px-4 -mx-4 rounded-t-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                                activeTab === 'ai-assistant' 
+                                    ? 'border-purple-600 text-purple-600 bg-purple-50/30' 
+                                    : 'border-transparent text-ink-secondary hover:text-purple-600'
+                            }`}
+                            aria-pressed={activeTab === 'ai-assistant'}
+                            aria-describedby="ai-desc"
+                        >
+                            <Sparkles size={16} aria-hidden="true" /> Studio AI
+                        </button>
+                    </div>
+                    <div className="sr-only">
+                        <div id="overview-desc">View project brief, specifications, and details</div>
+                        <div id="moodboard-desc">Access visual moodboard and creative assets</div>
+                        <div id="ai-desc">Interact with AI assistant for project guidance</div>
+                    </div>
+                </nav>
             </header>
 
             {activeTab === 'moodboard' ? (
@@ -185,132 +326,23 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects, freelancers, as
                     </div>
                 </div>
             ) : (
-                <div className="flex-1 flex flex-col lg:flex-row overflow-hidden max-w-[1800px] mx-auto w-full p-8 gap-10 animate-in fade-in slide-in-from-bottom-2 duration-300">
-
+                <div 
+                    id="project-main-content"
+                    className="flex-1 flex flex-col lg:flex-row overflow-hidden max-w-[1800px] mx-auto w-full p-8 gap-10 animate-in fade-in slide-in-from-bottom-2 duration-300"
+                    role="main"
+                >
                     {/* Main Content */}
-                    <main className="flex-1 flex flex-col gap-12 overflow-y-auto custom-scrollbar pr-2 pb-24">
-
+                    <main className="flex-1 flex flex-col gap-12 overflow-y-auto custom-scrollbar pr-2 pb-24" role="main">
                         {/* 1. Brief */}
-                        <section>
-                            <h2 className="text-[10px] font-bold text-pencil uppercase tracking-widest mb-4 flex items-center gap-2">
-                                <FileText size={14} className="opacity-70" /> Brief & Constraints
+                        <section aria-labelledby="brief-heading">
+                            <h2 id="brief-heading" className="text-[10px] font-bold text-ink-tertiary uppercase tracking-widest mb-4 flex items-center gap-2">
+                                <FileText size={14} className="opacity-70" aria-hidden="true" /> Brief & Constraints
                             </h2>
-                            <div className="bg-white rounded-2xl border border-mist p-10 shadow-sm hover:shadow-soft transition-shadow duration-500">
-                                <div className="prose prose-sm max-w-none text-ink leading-loose font-sans font-medium text-base/7">
-                                    {project.description || <span className="text-pencil italic font-normal">No brief provided.</span>}
+                            <div className="bg-surface border border-border-subtle rounded-2xl p-10 shadow-card hover:shadow-lg hover:border-primary/20 transition-all duration-200">
+                                <div className="prose prose-sm max-w-none text-ink-primary leading-loose font-sans font-medium text-base/7">
+                                    {project.description || <span className="text-ink-secondary italic font-normal">No brief provided.</span>}
                                 </div>
                                 {project.notes && (
-                                    <div className="mt-10 pt-8 border-t border-mist/60">
-                                        <h3 className="text-[10px] font-bold text-pencil uppercase tracking-widest mb-4 opacity-70">Technical Notes</h3>
-                                        <div className="bg-canvas/50 p-6 rounded-xl border border-mist/60">
-                                            <p className="text-xs text-ink font-mono leading-relaxed">{project.notes}</p>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        </section>
-
-                        {/* 2. Visual Assets */}
-                        <section>
-                            <h2 className="text-[10px] font-bold text-pencil uppercase tracking-widest mb-4 flex items-center gap-2">
-                                <Layers size={14} className="opacity-70" /> Quick References
-                            </h2>
-                            <ReferenceGallery
-                                items={project.references || []}
-                                onAdd={async (content) => {
-                                    const updatedRefs = [...(project.references || []), content];
-                                    onUpdateProject({ ...project, references: updatedRefs });
-                                }}
-                                onRemove={(url) => {
-                                    const updatedRefs = (project.references || []).filter(r => r !== url);
-                                    onUpdateProject({ ...project, references: updatedRefs });
-                                }}
-                            />
-                        </section>
-
-                        {/* 3. Creative Direction */}
-                        <section>
-                            <h2 className="text-[10px] font-bold text-pencil uppercase tracking-widest mb-4 flex items-center gap-2">
-                                <Sparkles size={14} className="opacity-70" /> Creative Direction
-                            </h2>
-                            <ToneMoodBoard project={project} onUpdate={handleProjectUpdate} />
-                        </section>
-
-                        {/* 4. Project Intelligence */}
-                        <section>
-                            <h2 className="text-[10px] font-bold text-pencil uppercase tracking-widest mb-4 flex items-center gap-2">
-                                <Database size={14} className="opacity-70" /> Project Intelligence
-                            </h2>
-                            <div className="bg-white rounded-2xl border border-mist overflow-hidden h-[460px] shadow-sm hover:shadow-soft transition-shadow duration-500">
-                                <ContextHub sources={sources} onAddSource={handleAddSource} onRemoveSource={handleRemoveSource} />
-                            </div>
-                        </section>
-
-                    </main>
-
-                    {/* Sidebar */}
-                    <aside className="w-full lg:w-96 flex flex-col gap-8 flex-shrink-0">
-
-                        {/* Team */}
-                        <div className="bg-white rounded-2xl border border-mist p-8 shadow-sm">
-                            <h3 className="text-[10px] font-bold text-pencil uppercase tracking-widest mb-6 flex items-center gap-2"><User size={14} /> Team Assignment</h3>
-                            <div className="space-y-5">
-                                {assignedFreelancers.length === 0 ? (
-                                    <div className="text-center py-8 border border-dashed border-mist rounded-xl bg-canvas/30">
-                                        <span className="text-xs text-pencil font-medium">No active assignments</span>
-                                    </div>
-                                ) : (
-                                    assignedFreelancers.map(f => (
-                                        <div key={f.id} className="flex items-center gap-4 group cursor-default">
-                                            <img src={f.avatar} className="w-10 h-10 rounded-full bg-mist object-cover border border-mist group-hover:border-ink transition-colors" />
-                                            <div className="min-w-0">
-                                                <div className="text-sm font-semibold text-ink truncate tracking-tight">{f.name}</div>
-                                                <div className="text-[10px] text-pencil font-medium truncate uppercase tracking-wide mt-0.5">{f.role}</div>
-                                            </div>
-                                        </div>
-                                    ))
-                                )}
-                                <button className="w-full mt-4 py-3 text-[10px] font-bold text-ink bg-white hover:bg-canvas rounded-xl border border-mist transition-colors uppercase tracking-widest shadow-sm">
-                                    Manage Roster
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Specs */}
-                        <div className="bg-white rounded-2xl border border-mist p-8 shadow-sm">
-                            <h3 className="text-[10px] font-bold text-pencil uppercase tracking-widest mb-6">Specifications</h3>
-                            <div className="space-y-4">
-                                <div className="flex justify-between items-center py-2.5 border-b border-mist/50">
-                                    <span className="text-xs text-pencil font-medium">Format</span>
-                                    <span className="text-xs font-mono font-bold text-ink bg-canvas px-2 py-1 rounded">{project.format || '—'}</span>
-                                </div>
-                                <div className="flex justify-between items-center py-2.5 border-b border-mist/50">
-                                    <span className="text-xs text-pencil font-medium">Duration</span>
-                                    <span className="text-xs font-mono font-bold text-ink bg-canvas px-2 py-1 rounded">{project.length || '—'}</span>
-                                </div>
-                                <div className="flex justify-between items-center py-2.5 border-b border-mist/50">
-                                    <span className="text-xs text-pencil font-medium">Budget</span>
-                                    <span className="text-xs font-mono font-bold text-ink bg-canvas px-2 py-1 rounded">{project.budget || '—'}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Scripts */}
-                        <div className="bg-white rounded-2xl border border-mist p-8 shadow-sm flex flex-col h-96">
-                            <div className="flex justify-between items-center mb-6">
-                                <h3 className="text-[10px] font-bold text-pencil uppercase tracking-widest flex items-center gap-2">
-                                    <ScrollText size={14} /> Scripts
-                                </h3>
-                                <Link to={`/studio?project=${project.id}`} className="text-[10px] font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1 transition-colors uppercase tracking-wide">
-                                    Open Studio <ArrowRight size={12} />
-                                </Link>
-                            </div>
-                            <div className="flex-1 overflow-y-auto space-y-3 pr-1 custom-scrollbar">
-                                {scripts.length === 0 ? (
-                                    <div className="h-full flex flex-col items-center justify-center text-center p-6 bg-canvas/30 rounded-xl border border-dashed border-mist">
-                                        <span className="text-xs text-pencil font-medium mb-3">No drafts initialized.</span>
-                                        <Link to={`/studio?project=${project.id}`} className="px-4 py-2 bg-white border border-mist rounded-lg text-[10px] font-bold text-ink uppercase tracking-wide shadow-sm hover:border-ink transition-colors">Start Writing</Link>
-                                    </div>
-                                ) : (
-                                    scripts.map(script => (
-                                        <Link key={script.id} to={`/studio?project=${project.id}&script=${script
+                                    <div className="mt-10 pt-8 border-t border-border-subtle/60">
+                                        <h3 className="text-[10px] font-bold text-ink-tertiary uppercase tracking-widest mb-4 opacity-70">Technical Notes</h3>
+                                        <div
