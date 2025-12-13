@@ -3,10 +3,11 @@
  * Provides AI-powered document analysis with advanced capabilities
  */
 
-import React, { useState, useRef, useCallback } from 'react';
-import { FileText, Upload, Download, Eye, Brain, Search, Edit3, BookOpen, FileImage, Settings, Zap } from 'lucide-react';
+import { BookOpen, Brain, Edit3, Eye, FileImage, FileText, Search, Settings, Upload } from 'lucide-react';
+import React, { useCallback, useRef, useState } from 'react';
 import { Button } from '../design/Button';
 import { LiquidGlassContainer } from '../design/LiquidGlassContainer';
+import { generateMockDocumentContent, generateMockDocumentStructure, generateMockDocumentSummary, generateMockEntityExtraction, generateMockKeywords, generateMockLanguageDetection, generateMockReadabilityMetrics, generateMockSentimentAnalysis } from './mockDataGenerators';
 
 export interface DocumentAnalysisResult {
   id: string;
@@ -476,8 +477,3 @@ async function simulateDocumentAnalysis(file: File, config: DocumentAIConfig): P
   
   return mockResult;
 }
-
-// Mock data generators
-function generateMockDocumentContent(): DocumentContent {
-  const sampleText = `This is a sample document with multiple paragraphs, headings, and structured content. 
-  The document analysis has successfully extracted text content and identified various elements including headings

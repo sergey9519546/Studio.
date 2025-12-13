@@ -3,8 +3,8 @@
  * Provides AI-powered visual analysis with advanced capabilities
  */
 
-import React, { useState, useRef, useCallback } from 'react';
-import { Camera, Upload, Image, Video, FileImage, Scan, Brain, Download, Eye, Zap } from 'lucide-react';
+import { Brain, Camera, Download, Eye, FileImage, Image, Scan, Upload, Zap } from 'lucide-react';
+import React, { useCallback, useRef, useState } from 'react';
 import { Button } from '../design/Button';
 import { LiquidGlassContainer } from '../design/LiquidGlassContainer';
 
@@ -412,7 +412,7 @@ async function simulateVisionAnalysis(file: File, config: VisionAIConfig): Promi
       objects: config.enableObjectDetection ? generateMockObjects() : [],
       scenes: config.enableSceneAnalysis ? [generateMockScene()] : [],
       text: config.enableTextRecognition ? generateMockText() : [],
-      faces: config.enableFaceAnalysis ? generateMockFaces() : undefined,
+      faces: config.enableFaceAnalysis ? [generateMockFaces()] : undefined,
       colors: config.enableColorAnalysis ? generateMockColors() : undefined,
       emotions: config.enableEmotionDetection ? generateMockEmotions() : undefined,
       composition: config.enableCompositionAnalysis ? generateMockComposition() : undefined,
@@ -493,4 +493,63 @@ function generateMockFaces(): FaceAnalysis {
 }
 
 function generateMockColors(): ColorAnalysis {
-  const colors = ['#FF6B6B', '#4ECDC
+  const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DFE6E9'];
+  return {
+    dominant: colors.slice(0, 3),
+    palette: colors.slice(0, 4).map(color => ({
+      color,
+      percentage: Math.random() * 30 + 10
+    })),
+    mood: 'vibrant',
+    harmony: 0.85
+  };
+}
+
+function generateMockEmotions(): EmotionAnalysis {
+  return {
+    overall: 'positive',
+    confidence: 0.85,
+    emotions: [
+      { emotion: 'happiness', intensity: 0.8, confidence: 0.9 },
+      { emotion: 'calm', intensity: 0.6, confidence: 0.85 }
+    ]
+  };
+}
+
+function generateMockComposition(): CompositionAnalysis {
+  return {
+    ruleOfThirds: 0.75,
+    symmetry: 0.65,
+    leadingLines: ['diagonal', 'horizontal'],
+    balance: 0.8,
+    focalPoints: [{ x: 450, y: 300, strength: 0.9 }]
+  };
+}
+
+function generateMockStyle(): StyleAnalysis {
+  return {
+    artistic: 'contemporary',
+    photography: 'portrait',
+    design: 'minimalist',
+    period: 'modern',
+    movements: ['impressionism', 'realism']
+  };
+}
+
+function generateMockQuality(): QualityAnalysis {
+  return {
+    sharpness: 0.88,
+    exposure: 0.75,
+    noise: 0.15,
+    clarity: 0.82,
+    overall: 0.8
+  };
+}
+
+function generateMockTags(): string[] {
+  return ['outdoor', 'nature', 'landscape', 'photography', 'scenic', 'travel'];
+}
+
+function generateMockDescription(filename: string): string {
+  return `AI-generated description for ${filename}: This image features a compelling visual composition with balanced elements and engaging subject matter.`;
+}

@@ -6,6 +6,7 @@ import {
   Layout,
   LucideIcon,
   MessageSquare,
+  Plug,
   Users,
 } from "lucide-react";
 
@@ -110,6 +111,17 @@ export const routes: RouteConfig[] = [
       keywords: ["transcripts", "audio", "video", "text"],
     },
   },
+  {
+    path: "/plugins",
+    label: "Plugins",
+    icon: Plug,
+    requiresAuth: true,
+    description: "Plugin management and marketplace",
+    metadata: {
+      title: "Plugin Manager - Studio Roster",
+      keywords: ["plugins", "extensions", "marketplace", "management"],
+    },
+  },
 ];
 
 // Helper functions for route management
@@ -150,7 +162,7 @@ export const getRouteDescription = (path: string): string => {
 // Navigation helpers
 export const getMainNavigationRoutes = (): RouteConfig[] => {
   return routes.filter(route => 
-    ["/", "/projects", "/moodboard", "/talent", "/writers-room", "/knowledge-base", "/transcripts"]
+    ["/", "/projects", "/moodboard", "/talent", "/writers-room", "/knowledge-base", "/transcripts", "/plugins"]
       .includes(route.path)
   );
 };

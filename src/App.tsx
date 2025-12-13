@@ -2,16 +2,17 @@ import { Box } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Navigate, Route, Routes, useNavigate, useParams } from "react-router-dom";
 
-import { Moodboard } from "./src/components/Moodboard";
-import { ProjectDashboard } from "./src/components/ProjectDashboard";
-import { TalentRoster } from "./src/components/TalentRoster";
-import CommandBar from "./src/components/layout/CommandBar";
-import Sidebar from "./src/components/layout/Sidebar";
-import ConfluenceView from "./src/views/ConfluenceView";
-import DashboardHome from "./src/views/DashboardHome";
-import GuardianRoom from "./src/views/GuardianRoom";
-import ProjectsView from "./src/views/ProjectsView";
-import TranscriptsView from "./src/views/TranscriptsView";
+import { Moodboard } from "./components/Moodboard";
+import { ProjectDashboard } from "./components/ProjectDashboard";
+import { TalentRoster } from "./components/TalentRoster";
+import CommandBar from "./components/layout/CommandBar";
+import Sidebar from "./components/layout/Sidebar";
+import PluginManagerPage from "./pages/PluginManagerPage";
+import ConfluenceView from "./views/ConfluenceView";
+import DashboardHome from "./views/DashboardHome";
+import GuardianRoom from "./views/GuardianRoom";
+import ProjectsView from "./views/ProjectsView";
+import TranscriptsView from "./views/TranscriptsView";
 
 type Project = {
   id: string;
@@ -257,6 +258,18 @@ const MoodboardRoute = () => {
   );
 };
 
+// Talent Roster Component with proper navigation
+const TalentRosterRoute = () => {
+  const navigate = useNavigate();
+  
+  return (
+    <TalentRoster
+      freelancers={mockFreelancers}
+      onSelect={() => navigate("/writers-room")}
+    />
+  );
+};
+
 // Layout Component with Sidebar
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -294,15 +307,10 @@ export default function App() {
         <Route path="/moodboard" element={<MoodboardRoute />} />
         
         {/* Talent Roster */}
-        <Route 
-          path="/talent" 
-          element={
-            <TalentRoster
-              freelancers={mockFreelancers}
-              onSelect={() => navigate("/writers-room")}
-            />
-          } 
-        />
+        <Route path="/talent" element={<TalentRosterRoute />} />
+        
+        {/* Plugins */}
+        <Route path="/plugins" element={<PluginManagerPage />} />
         
         {/* Writers Room */}
         <Route path="/writers-room" element={<WritersRoomRoute />} />

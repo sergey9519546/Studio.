@@ -243,7 +243,7 @@ function pluginAPIReducer(state: PluginAPIState, action: PluginAPIAction): Plugi
     case 'REMOVE_ACTIVE_HOOK':
       return {
         ...state,
-        activeHooks: state.activeHooks.filter(hook => hook.id !== action.payload.id)
+        activeHooks: state.activeHooks.filter(hook => hook.id !== action.payload)
       };
 
     case 'ADD_API_CALL':
@@ -596,3 +596,4 @@ export const PluginAPIProvider: React.FC<PluginAPIProviderProps> = ({
         duration 
       };
     } catch (error) {
+      const errorMessage = error instanceof

@@ -3,8 +3,8 @@
  * Provides AI-powered document analysis with advanced capabilities
  */
 
-import React, { useState, useRef, useCallback } from 'react';
-import { FileText, Upload, Download, Eye, Brain, Search, Edit3, BookOpen, FileImage, Settings, Zap } from 'lucide-react';
+import { BookOpen, Brain, Edit3, Eye, FileImage, FileText, Search, Settings, Upload } from 'lucide-react';
+import React, { useCallback, useRef, useState } from 'react';
 import { Button } from '../design/Button';
 import { LiquidGlassContainer } from '../design/LiquidGlassContainer';
 
@@ -302,7 +302,7 @@ export const DocumentAIComponent: React.FC<DocumentAIProps> = ({
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2) + ' ' + sizes[i];
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
   return (
@@ -494,3 +494,111 @@ function generateMockDocumentContent(): DocumentContent {
         page: 1,
         position: { x: 100, y: 200, width: 300, height: 200 },
         altText: 'Sample chart',
+        description: 'A sample chart image'
+      }
+    ],
+    tables: [
+      {
+        id: 'table_1',
+        data: [['Header 1', 'Header 2'], ['Data 1', 'Data 2']],
+        headers: ['Header 1', 'Header 2'],
+        page: 2,
+        position: { x: 50, y: 100, width: 400, height: 150 }
+      }
+    ],
+    metadata: {
+      title: 'Sample Document',
+      author: 'Document AI',
+      creationDate: new Date()
+    }
+  };
+}
+
+function generateMockDocumentStructure(): DocumentStructure {
+  return {
+    headings: [
+      { level: 1, text: 'Introduction', page: 1, position: { x: 50, y: 50 } },
+      { level: 2, text: 'Background', page: 2, position: { x: 50, y: 100 } }
+    ],
+    paragraphs: [
+      {
+        text: 'Sample paragraph content.',
+        page: 1,
+        position: { x: 50, y: 100 },
+        style: { fontSize: 12, fontFamily: 'Arial', isBold: false, isItalic: false, alignment: 'left' }
+      }
+    ],
+    sections: [
+      { title: 'Introduction', startPage: 1, endPage: 2, content: 'Intro content' }
+    ],
+    tableOfContents: [
+      { title: 'Introduction', page: 1, level: 1 }
+    ],
+    metadata: {
+      hasTableOfContents: true,
+      hasBibliography: false,
+      hasFootnotes: false,
+      hasEndnotes: false
+    }
+  };
+}
+
+function generateMockEntityExtraction(): EntityExtraction[] {
+  return [
+    { type: 'person', text: 'John Smith', confidence: 0.95, startPosition: 0, endPosition: 10, page: 1 },
+    { type: 'organization', text: 'Acme Corp', confidence: 0.89, startPosition: 20, endPosition: 30, page: 1 },
+    { type: 'date', text: '2024-01-15', confidence: 0.97, startPosition: 50, endPosition: 60, page: 2 }
+  ];
+}
+
+function generateMockSentimentAnalysis(): SentimentAnalysis {
+  return {
+    overall: 'positive',
+    confidence: 0.85,
+    emotions: [
+      { emotion: 'optimism', intensity: 0.7, confidence: 0.8 },
+      { emotion: 'confidence', intensity: 0.6, confidence: 0.75 }
+    ],
+    subjectivity: 0.4,
+    polarity: 0.6
+  };
+}
+
+function generateMockDocumentSummary(length: 'short' | 'medium' | 'long'): DocumentSummary {
+  return {
+    abstract: 'This document provides a comprehensive overview of the subject matter.',
+    keyPoints: ['Key point 1', 'Key point 2', 'Key point 3'],
+    conclusions: ['Main conclusion based on analysis'],
+    recommendations: ['Recommended action items'],
+    length,
+    confidence: 0.88
+  };
+}
+
+function generateMockKeywords(): string[] {
+  return ['document', 'analysis', 'AI', 'processing', 'content', 'structure'];
+}
+
+function generateMockReadabilityMetrics(): ReadabilityMetrics {
+  return {
+    fleschReadingEase: 65.5,
+    fleschKincaidGrade: 8.2,
+    gunningFog: 10.1,
+    smog: 9.5,
+    automatedReadabilityIndex: 8.8,
+    colemanLiauIndex: 9.2,
+    level: 'standard'
+  };
+}
+
+function generateMockLanguageDetection(): LanguageDetection {
+  return {
+    primary: 'en',
+    confidence: 0.98,
+    alternatives: [
+      { language: 'es', confidence: 0.01 },
+      { language: 'fr', confidence: 0.01 }
+    ],
+    isTranslated: false
+  };
+}
