@@ -104,7 +104,7 @@ firebase deploy --project gen-lang-client-0704991831 --only hosting
 
 ```powershell
 # Run the PowerShell deployment script
-powershell -ExecutionPolicy Bypass -File deploy.ps1
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -File deploy.ps1
 ```
 
 ## 🎯 Post-Deployment Verification

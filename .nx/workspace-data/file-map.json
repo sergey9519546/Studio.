@@ -3957,7 +3957,7 @@
       },
       {
         "file": "DEPLOYMENT_GUIDE_FINAL.md",
-        "hash": "6566544303616063789"
+        "hash": "10078609934000086840"
       },
       {
         "file": "DEPLOYMENT_INSTRUCTIONS.md",
@@ -3973,7 +3973,7 @@
       },
       {
         "file": "DEPLOYMENT_SUMMARY.md",
-        "hash": "14322887641492955326"
+        "hash": "2533988352507341339"
       },
       {
         "file": "DEPLOYMENT_VERIFICATION.md",
@@ -4192,6 +4192,10 @@
         "hash": "1247703567615508587"
       },
       {
+        "file": "SETTINGS_COMPARISON.md",
+        "hash": "10650982175887816678"
+      },
+      {
         "file": "TASK_PLAN.md",
         "hash": "9979694515093621991"
       },
@@ -4266,6 +4270,10 @@
       {
         "file": "VISIONARY_TODO.md",
         "hash": "16695084313422442326"
+      },
+      {
+        "file": "VSCODE_SETTINGS_IMPROVEMENTS.md",
+        "hash": "11080629632097533827"
       },
       {
         "file": "WINDOWS_COMMAND_EQUIVALENTS.md",
@@ -48990,6 +48998,10 @@
       {
         "file": "icons.json",
         "hash": "17688469751964912452"
+      },
+      {
+        "file": "improved_settings.json",
+        "hash": "3231891925806727749"
       },
       {
         "file": "index.css",

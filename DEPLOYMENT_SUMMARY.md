@@ -118,7 +118,7 @@ npx eslint --fix "{src,apps,libs,test}/**/*.{ts,tsx}"
 bash deploy.sh
 
 # For Windows
-powershell -ExecutionPolicy Bypass -File deploy.ps1
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -File deploy.ps1
 
 # Manual deployment
 docker build -t gcr.io/PROJECT_ID/studio-roster .
