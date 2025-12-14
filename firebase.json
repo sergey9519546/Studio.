@@ -25,7 +25,7 @@
     },
     "singleProjectMode": true
   },
-  "dataconnect": {
+    "dataconnect": {
     "source": "dataconnect"
   },
   "hosting": {
