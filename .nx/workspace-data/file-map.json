@@ -41,7 +41,7 @@
         },
         {
           "file": "apps/api/src/app.module.ts",
-          "hash": "11344091336790740271",
+          "hash": "6169665301881957582",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
@@ -3528,7 +3528,7 @@
         },
         {
           "file": "apps/api/src/modules/rag/rag.service.ts",
-          "hash": "10520864256534011184",
+          "hash": "9428503962326463523",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3730,14 +3730,38 @@
         },
         {
           "file": "apps/api/tsconfig.app.json",
-          "hash": "18308417277604896792"
+          "hash": "7380474413514376629"
         }
       ]
     },
     "nonProjectFiles": [
       {
+        "file": ".agent/CONTEXT_REPORT_TEMPLATE.md",
+        "hash": "12029379539437659388"
+      },
+      {
+        "file": ".agent/rules/remediation.md",
+        "hash": "8458181456430353644"
+      },
+      {
+        "file": ".agent/safety_config.json",
+        "hash": "16249116165710684810"
+      },
+      {
+        "file": ".agent/tdr_protocol.js",
+        "hash": "4973794279125316242"
+      },
+      {
+        "file": ".agent/verification_engine.js",
+        "hash": "9352860187990588886"
+      },
+      {
         "file": ".agent/workflows/designgenius.md",
         "hash": "16606810806492001175"
+      },
+      {
+        "file": ".agent/workflows/full_fix.yaml",
+        "hash": "9561788651565094218"
       },
       {
         "file": ".agent/workflows/lastminutesavior.md",
@@ -3749,7 +3773,7 @@
       },
       {
         "file": ".builderrules",
-        "hash": "624827413472848368"
+        "hash": "5870021093906778410"
       },
       {
         "file": ".continue/agents/new-config-1.yaml",
@@ -3861,7 +3885,7 @@
       },
       {
         "file": "BACKEND_REPAIR_TODO.md",
-        "hash": "2248683573160932445"
+        "hash": "18436108450761219576"
       },
       {
         "file": "BUILD_DEPLOYMENT_COMPLETE.md",
@@ -4006,6 +4030,10 @@
       {
         "file": "DEPLOYMENT_FIXES_README.md",
         "hash": "8839456142501731964"
+      },
+      {
+        "file": "DEPLOYMENT_GUIDE.md",
+        "hash": "75644470797981725"
       },
       {
         "file": "DEPLOYMENT_GUIDE_FINAL.md",
@@ -8817,7 +8845,7 @@
       },
       {
         "file": "ffmpeg/Changelog",
-        "hash": "15835923736912809268"
+        "hash": "16797490566194479552"
       },
       {
         "file": "ffmpeg/FUNDING.json",
@@ -8949,7 +8977,7 @@
       },
       {
         "file": "ffmpeg/configure",
-        "hash": "9044060323716137555"
+        "hash": "4117462668597521412"
       },
       {
         "file": "ffmpeg/doc/.gitignore",
@@ -8957,7 +8985,7 @@
       },
       {
         "file": "ffmpeg/doc/APIchanges",
-        "hash": "10744050964736050875"
+        "hash": "11400817034417410969"
       },
       {
         "file": "ffmpeg/doc/Doxyfile",
@@ -9221,7 +9249,7 @@
       },
       {
         "file": "ffmpeg/doc/filters.texi",
-        "hash": "9752553285203701722"
+        "hash": "8460186033987796689"
       },
       {
         "file": "ffmpeg/doc/formats.texi",
@@ -9669,7 +9697,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/Makefile",
-        "hash": "8837792468126662490"
+        "hash": "9105330579983240124"
       },
       {
         "file": "ffmpeg/libavcodec/a64colors.h",
@@ -10485,7 +10513,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/allcodecs.c",
-        "hash": "11982734782910551472"
+        "hash": "7985027965566640085"
       },
       {
         "file": "ffmpeg/libavcodec/alsdec.c",
@@ -12049,7 +12077,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/codec_desc.c",
-        "hash": "2728864313232848662"
+        "hash": "13867389430415050030"
       },
       {
         "file": "ffmpeg/libavcodec/codec_desc.h",
@@ -12057,7 +12085,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/codec_id.h",
-        "hash": "13469324264586796766"
+        "hash": "16777603578631460663"
       },
       {
         "file": "ffmpeg/libavcodec/codec_internal.h",
@@ -14112,6 +14140,14 @@
         "hash": "13418778229533863322"
       },
       {
+        "file": "ffmpeg/libavcodec/jpegxs.h",
+        "hash": "13749604643502549960"
+      },
+      {
+        "file": "ffmpeg/libavcodec/jpegxs_parser.c",
+        "hash": "3631542189490287488"
+      },
+      {
         "file": "ffmpeg/libavcodec/jrevdct.c",
         "hash": "17411229620169924279"
       },
@@ -14350,6 +14386,14 @@
       {
         "file": "ffmpeg/libavcodec/libsvtav1.c",
         "hash": "127903266764152075"
+      },
+      {
+        "file": "ffmpeg/libavcodec/libsvtjpegxsdec.c",
+        "hash": "5847730777515868970"
+      },
+      {
+        "file": "ffmpeg/libavcodec/libsvtjpegxsenc.c",
+        "hash": "17369663657831184373"
       },
       {
         "file": "ffmpeg/libavcodec/libtheoraenc.c",
@@ -14693,7 +14737,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/lossless_videoencdsp.h",
-        "hash": "8020314008992620938"
+        "hash": "10843776490700361758"
       },
       {
         "file": "ffmpeg/libavcodec/lpc.c",
@@ -16209,7 +16253,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/parsers.c",
-        "hash": "8728469633879651045"
+        "hash": "8415528596867709701"
       },
       {
         "file": "ffmpeg/libavcodec/pcm-bluray.c",
@@ -16785,7 +16829,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/riscv/Makefile",
-        "hash": "17066223388889212124"
+        "hash": "10179313150526842466"
       },
       {
         "file": "ffmpeg/libavcodec/riscv/aacencdsp_init.c",
@@ -17001,11 +17045,15 @@
       },
       {
         "file": "ffmpeg/libavcodec/riscv/llvidencdsp_init.c",
-        "hash": "17845785254979277357"
+        "hash": "13688757975478036184"
+      },
+      {
+        "file": "ffmpeg/libavcodec/riscv/llvidencdsp_rvb.S",
+        "hash": "8589599501997742182"
       },
       {
         "file": "ffmpeg/libavcodec/riscv/llvidencdsp_rvv.S",
-        "hash": "18338979694901854256"
+        "hash": "1679867586665547672"
       },
       {
         "file": "ffmpeg/libavcodec/riscv/lpc_init.c",
@@ -18461,7 +18509,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/version.h",
-        "hash": "8096987695821370266"
+        "hash": "567944050713626099"
       },
       {
         "file": "ffmpeg/libavcodec/version_major.h",
@@ -18777,15 +18825,15 @@
       },
       {
         "file": "ffmpeg/libavcodec/vulkan/Makefile",
-        "hash": "14991391689492525175"
+        "hash": "15411081869535127475"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan/common.comp",
-        "hash": "2811004753849099405"
+        "hash": "9426238948192267861"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan/dpx_copy.comp",
-        "hash": "16577172365496753723"
+        "hash": "10547625136263607407"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan/dpx_unpack.comp",
@@ -18797,7 +18845,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/vulkan/ffv1_dec.comp",
-        "hash": "13228694380033010873"
+        "hash": "13762696799670524801"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan/ffv1_dec_setup.comp",
@@ -18805,19 +18853,11 @@
       },
       {
         "file": "ffmpeg/libavcodec/vulkan/ffv1_enc.comp",
-        "hash": "18263500933789864278"
-      },
-      {
-        "file": "ffmpeg/libavcodec/vulkan/ffv1_enc_rct.comp",
-        "hash": "4055177127089296546"
+        "hash": "14917714254237983527"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan/ffv1_enc_setup.comp",
         "hash": "1617646067072045743"
-      },
-      {
-        "file": "ffmpeg/libavcodec/vulkan/ffv1_rct.comp",
-        "hash": "7124245726902612737"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan/ffv1_rct_search.comp",
@@ -18853,19 +18893,19 @@
       },
       {
         "file": "ffmpeg/libavcodec/vulkan_av1.c",
-        "hash": "445407524463170802"
+        "hash": "12382366431108547345"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan_decode.c",
-        "hash": "10209862159067293720"
+        "hash": "2462630319142490098"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan_decode.h",
-        "hash": "12568463906750213355"
+        "hash": "7206567785649072614"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan_dpx.c",
-        "hash": "13829060803044048596"
+        "hash": "10617856849043339119"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan_encode.c",
@@ -18889,7 +18929,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/vulkan_ffv1.c",
-        "hash": "4073261066243128870"
+        "hash": "17868216043071287475"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan_glslang.c",
@@ -18897,19 +18937,19 @@
       },
       {
         "file": "ffmpeg/libavcodec/vulkan_h264.c",
-        "hash": "5655246858588375755"
+        "hash": "11174555332052728882"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan_hevc.c",
-        "hash": "2573193443151817115"
+        "hash": "6238676675313775200"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan_prores.c",
-        "hash": "17031259542095999451"
+        "hash": "5399115130279128483"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan_prores_raw.c",
-        "hash": "1119437499022753290"
+        "hash": "12823661773454207028"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan_shaderc.c",
@@ -18925,7 +18965,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/vulkan_vp9.c",
-        "hash": "17964906244989047650"
+        "hash": "10124778216276186041"
       },
       {
         "file": "ffmpeg/libavcodec/vvc.h",
@@ -19673,11 +19713,11 @@
       },
       {
         "file": "ffmpeg/libavcodec/x86/lossless_videoencdsp.asm",
-        "hash": "2695530076589028248"
+        "hash": "3923189092345792639"
       },
       {
         "file": "ffmpeg/libavcodec/x86/lossless_videoencdsp_init.c",
-        "hash": "910695162137062419"
+        "hash": "475950567080509630"
       },
       {
         "file": "ffmpeg/libavcodec/x86/lpc.asm",
@@ -21385,7 +21425,7 @@
       },
       {
         "file": "ffmpeg/libavfilter/f_sidedata.c",
-        "hash": "3791947097820569765"
+        "hash": "7755275921995792763"
       },
       {
         "file": "ffmpeg/libavfilter/f_streamselect.c",
@@ -23681,7 +23721,7 @@
       },
       {
         "file": "ffmpeg/libavformat/Makefile",
-        "hash": "2165355621455345355"
+        "hash": "10539735038484138286"
       },
       {
         "file": "ffmpeg/libavformat/a64.c",
@@ -23777,7 +23817,7 @@
       },
       {
         "file": "ffmpeg/libavformat/allformats.c",
-        "hash": "11207682747706105153"
+        "hash": "10779363363241910632"
       },
       {
         "file": "ffmpeg/libavformat/alp.c",
@@ -24689,7 +24729,7 @@
       },
       {
         "file": "ffmpeg/libavformat/img2.c",
-        "hash": "4511849507459328605"
+        "hash": "17100765565223829499"
       },
       {
         "file": "ffmpeg/libavformat/img2.h",
@@ -24705,11 +24745,11 @@
       },
       {
         "file": "ffmpeg/libavformat/img2dec.c",
-        "hash": "354466502496668131"
+        "hash": "17242502316892757974"
       },
       {
         "file": "ffmpeg/libavformat/img2enc.c",
-        "hash": "12655535875081822642"
+        "hash": "2717359764297421485"
       },
       {
         "file": "ffmpeg/libavformat/imx.c",
@@ -25097,15 +25137,15 @@
       },
       {
         "file": "ffmpeg/libavformat/mpegts.c",
-        "hash": "13664418895605733871"
+        "hash": "4195729934999509413"
       },
       {
         "file": "ffmpeg/libavformat/mpegts.h",
-        "hash": "5250561609865773997"
+        "hash": "10681216139501161533"
       },
       {
         "file": "ffmpeg/libavformat/mpegtsenc.c",
-        "hash": "10891348237100977005"
+        "hash": "12410825946460324128"
       },
       {
         "file": "ffmpeg/libavformat/mpegvideodec.c",
@@ -26285,7 +26325,7 @@
       },
       {
         "file": "ffmpeg/libavformat/version.h",
-        "hash": "4693758819319561857"
+        "hash": "10830038573691863165"
       },
       {
         "file": "ffmpeg/libavformat/version_major.h",
@@ -26473,7 +26513,7 @@
       },
       {
         "file": "ffmpeg/libavformat/xmv.c",
-        "hash": "5065535930621123900"
+        "hash": "3673545620091204364"
       },
       {
         "file": "ffmpeg/libavformat/xvag.c",
@@ -27221,7 +27261,7 @@
       },
       {
         "file": "ffmpeg/libavutil/log.c",
-        "hash": "5901097290697244650"
+        "hash": "16088440850725969347"
       },
       {
         "file": "ffmpeg/libavutil/log.h",
@@ -27961,7 +28001,7 @@
       },
       {
         "file": "ffmpeg/libavutil/tx_template.c",
-        "hash": "6606007335540561542"
+        "hash": "18150061425600664099"
       },
       {
         "file": "ffmpeg/libavutil/utils.c",
@@ -28137,11 +28177,11 @@
       },
       {
         "file": "ffmpeg/libavutil/x86/tx_float.asm",
-        "hash": "14462307160519968243"
+        "hash": "7066625559237780921"
       },
       {
         "file": "ffmpeg/libavutil/x86/tx_float_init.c",
-        "hash": "15052572281753896310"
+        "hash": "1770147861094287927"
       },
       {
         "file": "ffmpeg/libavutil/x86/w64xmmtest.h",
@@ -28941,7 +28981,7 @@
       },
       {
         "file": "ffmpeg/tests/checkasm/Makefile",
-        "hash": "12640988145880573570"
+        "hash": "3231117523156999477"
       },
       {
         "file": "ffmpeg/tests/checkasm/aacencdsp.c",
@@ -29001,11 +29041,11 @@
       },
       {
         "file": "ffmpeg/tests/checkasm/checkasm.c",
-        "hash": "16040485642177715778"
+        "hash": "10660269950458433072"
       },
       {
         "file": "ffmpeg/tests/checkasm/checkasm.h",
-        "hash": "527310997466136427"
+        "hash": "13964608559271369766"
       },
       {
         "file": "ffmpeg/tests/checkasm/dcadsp.c",
@@ -29112,8 +29152,8 @@
         "hash": "16218400723378942262"
       },
       {
-        "file": "ffmpeg/tests/checkasm/llviddspenc.c",
-        "hash": "11430824867345161713"
+        "file": "ffmpeg/tests/checkasm/llvidencdsp.c",
+        "hash": "11761250465246099056"
       },
       {
         "file": "ffmpeg/tests/checkasm/lpc.c",
@@ -29417,7 +29457,7 @@
       },
       {
         "file": "ffmpeg/tests/fate/checkasm.mak",
-        "hash": "10457596245350656072"
+        "hash": "1044355701821180947"
       },
       {
         "file": "ffmpeg/tests/fate/concatdec.mak",
@@ -29749,7 +29789,7 @@
       },
       {
         "file": "ffmpeg/tests/fate/vcodec.mak",
-        "hash": "7258547301296271793"
+        "hash": "11105785088815966245"
       },
       {
         "file": "ffmpeg/tests/fate/video.mak",
@@ -40913,7 +40953,7 @@
       },
       {
         "file": "ffmpeg/tests/ref/fate/xmv-demux",
-        "hash": "14154950455124336022"
+        "hash": "5234046303489656194"
       },
       {
         "file": "ffmpeg/tests/ref/fate/xtea",
@@ -46697,7 +46737,7 @@
       },
       {
         "file": "ffmpeg/tests/ref/vsynth/vsynth1-ffvhuff420p12",
-        "hash": "9905336107735354098"
+        "hash": "12664486327666523282"
       },
       {
         "file": "ffmpeg/tests/ref/vsynth/vsynth1-ffvhuff422p10left",
@@ -46745,7 +46785,7 @@
       },
       {
         "file": "ffmpeg/tests/ref/vsynth/vsynth1-huffyuv",
-        "hash": "7729180306490681150"
+        "hash": "2582033103746569186"
       },
       {
         "file": "ffmpeg/tests/ref/vsynth/vsynth1-huffyuvbgr24",
@@ -47253,7 +47293,7 @@
       },
       {
         "file": "ffmpeg/tests/ref/vsynth/vsynth2-ffvhuff420p12",
-        "hash": "12398033203353230730"
+        "hash": "10158420898828791850"
       },
       {
         "file": "ffmpeg/tests/ref/vsynth/vsynth2-ffvhuff422p10left",
@@ -47773,7 +47813,7 @@
       },
       {
         "file": "ffmpeg/tests/ref/vsynth/vsynth3-ffvhuff420p12",
-        "hash": "6407277509918307915"
+        "hash": "2087407727330815951"
       },
       {
         "file": "ffmpeg/tests/ref/vsynth/vsynth3-ffvhuff422p10left",
@@ -48217,7 +48257,7 @@
       },
       {
         "file": "ffmpeg/tests/ref/vsynth/vsynth_lena-ffvhuff420p12",
-        "hash": "12161761174218532142"
+        "hash": "11432745983826744872"
       },
       {
         "file": "ffmpeg/tests/ref/vsynth/vsynth_lena-ffvhuff422p10left",
@@ -49205,7 +49245,7 @@
       },
       {
         "file": "package.json",
-        "hash": "3192071036835035887"
+        "hash": "10059440642911375217"
       },
       {
         "file": "package_backup.json",
@@ -49976,6 +50016,10 @@
         "hash": "9564512296546428352"
       },
       {
+        "file": "tmp/apps/api/serve/tsconfig.generated.4233c9b0-e968-4191-b076-e8a0eecc9950.json",
+        "hash": "9564512296546428352"
+      },
+      {
         "file": "tmp/apps/api/serve/tsconfig.generated.48163b6a-69b9-4e0e-ae5e-58ae58a48d38.json",
         "hash": "9564512296546428352"
       },
@@ -50002,10 +50046,6 @@
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.89550a6e-86e2-44cf-9201-b0a81eaa776d.json",
         "hash": "12178908264864505738"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.8ada3b58-137b-49e0-83e0-ee16a2024bf4.json",
-        "hash": "9564512296546428352"
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.c441147f-83db-4a30-b0a5-c435610636f4.json",
@@ -50070,6 +50110,10 @@
       {
         "file": "yarn.lock",
         "hash": "9009708810444462254"
+      },
+      {
+        "file": "~/.gemini/GEMINI.md",
+        "hash": "1422412567898435348"
       }
     ]
   },
