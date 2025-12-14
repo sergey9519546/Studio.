@@ -76,7 +76,7 @@ export class ConversationsService {
   /**
    * Add message with flexible parameters (for AI controller compatibility)
    */
-  async addMessage(conversationId: string, messageData: { role: string; content: string; tokens?: number; metadata?: any }) {
+  async addFlexibleMessage(conversationId: string, messageData: { role: string; content: string; tokens?: number; metadata?: any }) {
     return this.addMessage({
       conversationId,
       role: messageData.role as MessageRole,
@@ -284,7 +284,7 @@ export class ConversationsService {
       userId,
       ...(filters?.projectId && { projectId: filters.projectId }),
       ...(filters?.status && { status: filters.status }),
-      ...(filters?.topic && { topic: { contains: filters.topic, mode: 'insensitive' } }),
+      ...(filters?.topic && { topic: { contains: filters.topic, mode: 'insensitive' as const } }),
     };
 
     const [conversations, total] = await Promise.all([
@@ -511,9 +511,9 @@ export class ConversationsService {
         where: {
           userId,
           OR: [
-            { title: { contains: query, mode: 'insensitive' } },
-            { topic: { contains: query, mode: 'insensitive' } },
-            { messages: { some: { content: { contains: query, mode: 'insensitive' } } } },
+            { title: { contains: query, mode: 'insensitive' as const } },
+            { topic: { contains: query, mode: 'insensitive' as const } },
+            { messages: { some: { content: { contains: query, mode: 'insensitive' as const } } } },
           ],
         },
         skip,
@@ -540,9 +540,9 @@ export class ConversationsService {
         where: {
           userId,
           OR: [
-            { title: { contains: query, mode: 'insensitive' } },
-            { topic: { contains: query, mode: 'insensitive' } },
-            { messages: { some: { content: { contains: query, mode: 'insensitive' } } } },
+            { title: { contains: query, mode: 'insensitive' as const } },
+            { topic: { contains: query, mode: 'insensitive' as const } },
+            { messages: { some: { content: { contains: query, mode: 'insensitive' as const } } } },
           ],
         },
       }),

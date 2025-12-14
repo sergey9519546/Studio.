@@ -1,10 +1,9 @@
 
-import { Injectable, BadRequestException } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service.js';
-import { Prisma } from '@prisma/client';
-import { Inject } from '@nestjs/common';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import type { Cache } from 'cache-manager';
+import { PrismaService } from '../../prisma/prisma.service.js';
 
 export interface ProjectInput {
   name?: string;
@@ -54,7 +53,7 @@ export class ProjectsService {
       this.prisma.project.findMany({
         skip,
         take: limit,
-        include: { roleRequirements: true, knowledgeBase: true },
+        include: { roleRequirements: true },
         orderBy: { updatedAt: 'desc' }
       })
     ]);
@@ -73,7 +72,7 @@ export class ProjectsService {
   async findOne(id: string) {
     const project = await this.prisma.project.findUnique({
       where: { id },
-      include: { roleRequirements: true, knowledgeBase: true, scripts: true, assignments: true }
+      include: { roleRequirements: true, scripts: true, assignments: true }
     });
     return this.toDto(project);
   }
@@ -104,7 +103,7 @@ export class ProjectsService {
         title: projectData.title,
         client: projectData.client,
         description: projectData.description,
-        status: projectData.status,
+        status: projectData.status as any,
         budget: projectData.budget,
         startDate: projectData.startDate,
         endDate: projectData.endDate,
@@ -112,7 +111,7 @@ export class ProjectsService {
           create: (roleRequirements || []).map((rr: { role: string; count?: number; skills: string[] | string }) => ({
             role: rr.role,
             count: rr.count || 1,
-            skills: Array.isArray(rr.skills) ? rr.skills.join(',') : rr.skills // Convert array to CSV
+            skills: Array.isArray(rr.skills) ? rr.skills : [rr.skills].filter(Boolean)
           }))
         },
       },

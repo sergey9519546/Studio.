@@ -13,6 +13,7 @@ import {
     UseInterceptors,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
+import { MessageRole } from '@prisma/client';
 import type { Response } from 'express';
 import 'multer';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
@@ -177,23 +178,21 @@ ${JSON.stringify(parsedContext, null, 2)}
                 }
 
                 // Save user message
-                await this.conversationsService.addMessage(actualConversationId, {
-                    role: 'user',
+                await this.conversationsService.addMessage({
+                    conversationId: actualConversationId,
+                    role: MessageRole.USER,
                     content: message,
-                    metadata: {
-                        files: files?.map(f => ({ name: f.originalname, size: f.size })) || [],
-                    }
+                    tokens: 0,
+                    referencedSources: [],
                 });
 
                 // Save assistant response
-                await this.conversationsService.addMessage(actualConversationId, {
-                    role: 'assistant',
+                await this.conversationsService.addMessage({
+                    conversationId: actualConversationId,
+                    role: MessageRole.ASSISTANT,
                     content: finalResponse as string,
-                    metadata: {
-                        tokensUsed: this.estimateTokens(finalResponse as string),
-                        codeContext: codeContextMetadata,
-                        toolCalls: toolResults.length > 0 ? toolResults : undefined,
-                    }
+                    tokens: this.estimateTokens(finalResponse as string),
+                    referencedSources: [],
                 });
 
                 // Generate context snapshot for RAG enhancement
@@ -359,7 +358,8 @@ ${JSON.stringify(parsedContext, null, 2)}
     @Post('generate/project-brief/:id')
     @HttpCode(HttpStatus.OK)
     async generateProjectBrief(@Param('id') id: string) {
-        return this.aiService.generateProjectBrief(id);
+        // TODO: Implement generateProjectBrief in GeminiAnalystService
+        throw new BadRequestException('generateProjectBrief not implemented yet');
     }
 
     /**

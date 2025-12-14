@@ -41,7 +41,7 @@
         },
         {
           "file": "apps/api/src/app.module.ts",
-          "hash": "223127100439007317",
+          "hash": "11344091336790740271",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
@@ -2778,10 +2778,11 @@
         },
         {
           "file": "apps/api/src/modules/ai/ai.controller.ts",
-          "hash": "10273838316211917814",
+          "hash": "4445714799859985878",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
+            "npm:@prisma/client",
             "npm:express",
             "npm:multer"
           ]
@@ -2957,7 +2958,7 @@
         },
         {
           "file": "apps/api/src/modules/assignments/assignments.service.ts",
-          "hash": "6266487598311195622",
+          "hash": "18364895821130549864",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3040,7 +3041,7 @@
         },
         {
           "file": "apps/api/src/modules/conversations/conversations.controller.ts",
-          "hash": "9181424089532968552",
+          "hash": "7345516038403372821",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client"
@@ -3055,7 +3056,7 @@
         },
         {
           "file": "apps/api/src/modules/conversations/conversations.service.ts",
-          "hash": "2343502926754756690",
+          "hash": "1709654650429816303",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client"
@@ -3092,11 +3093,10 @@
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.service.ts",
-          "hash": "9630255974746342673",
+          "hash": "15210053936165665085",
           "deps": [
-            "npm:@nestjs/common",
-            "npm:@prisma/client",
             "npm:@nestjs/cache-manager",
+            "npm:@nestjs/common",
             "npm:cache-manager"
           ]
         },
@@ -3450,11 +3450,11 @@
         },
         {
           "file": "apps/api/src/modules/projects/projects.service.ts",
-          "hash": "6280600247258640446",
+          "hash": "3831292036268279083",
           "deps": [
+            "npm:@nestjs/cache-manager",
             "npm:@nestjs/common",
             "npm:@prisma/client",
-            "npm:@nestjs/cache-manager",
             "npm:cache-manager"
           ]
         },
@@ -3528,7 +3528,7 @@
         },
         {
           "file": "apps/api/src/modules/rag/rag.service.ts",
-          "hash": "18374719556646858019",
+          "hash": "10520864256534011184",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3730,7 +3730,7 @@
         },
         {
           "file": "apps/api/tsconfig.app.json",
-          "hash": "15634758350194468584"
+          "hash": "18308417277604896792"
         }
       ]
     },
@@ -3858,6 +3858,10 @@
       {
         "file": "App.tsx",
         "hash": "5908673748023796475"
+      },
+      {
+        "file": "BACKEND_REPAIR_TODO.md",
+        "hash": "2248683573160932445"
       },
       {
         "file": "BUILD_DEPLOYMENT_COMPLETE.md",
@@ -4650,6 +4654,10 @@
       {
         "file": "context/ToastContext.tsx",
         "hash": "11364685758065263369"
+      },
+      {
+        "file": "conversations_service_patch.ts",
+        "hash": "13167251755981413342"
       },
       {
         "file": "create_tables.sql",
@@ -49049,7 +49057,7 @@
       },
       {
         "file": "generated/prisma/package.json",
-        "hash": "7368696176583080785"
+        "hash": "16680845927177091581"
       },
       {
         "file": "generated/prisma/query_compiler_bg.js",
@@ -49241,7 +49249,7 @@
       },
       {
         "file": "prisma/schema.prisma",
-        "hash": "13298098624400906441"
+        "hash": "7247329654354357425"
       },
       {
         "file": "prisma/schema.prisma.bak",
@@ -49994,6 +50002,10 @@
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.89550a6e-86e2-44cf-9201-b0a81eaa776d.json",
         "hash": "12178908264864505738"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.8ada3b58-137b-49e0-83e0-ee16a2024bf4.json",
+        "hash": "9564512296546428352"
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.c441147f-83db-4a30-b0a5-c435610636f4.json",

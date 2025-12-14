@@ -1,11 +1,9 @@
 
-import { Injectable, Inject, BadRequestException } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service.js';
-import { Freelancer, Skill } from '@prisma/client';
-import { CreateFreelancerDto, UpdateFreelancerDto, ImportFreelancerDto } from './dto/freelancer.dto.js';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import type { Cache } from 'cache-manager';
-
+import { PrismaService } from '../../prisma/prisma.service.js';
+import { CreateFreelancerDto, ImportFreelancerDto, UpdateFreelancerDto } from './dto/freelancer.dto.js';
 @Injectable()
 export class FreelancersService {
   private readonly CACHE_KEY = 'freelancers:list';
@@ -16,10 +14,6 @@ export class FreelancersService {
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) { }
 
-  private mapWithSkills(f: Freelancer & { skills: Skill[] }) {
-    return { ...f, skills: f.skills.map((s: Skill) => s.name) };
-  }
-
   async findAll() {
     // Check cache first
     const cached = await this.cacheManager.get(this.CACHE_KEY);
@@ -29,26 +23,19 @@ export class FreelancersService {
 
     // Fetch from database
     const freelancers = await this.prisma.freelancer.findMany({
-      include: { skills: true },
       orderBy: { name: 'asc' }
     });
 
-    // Flatten skills for frontend compatibility
-    const result = freelancers.map((f) => this.mapWithSkills(f));
-
     // Cache the result for 24 hours
-    await this.cacheManager.set(this.CACHE_KEY, result, this.CACHE_TTL);
+    await this.cacheManager.set(this.CACHE_KEY, freelancers, this.CACHE_TTL);
 
-    return result;
+    return freelancers;
   }
 
   async findOne(id: string) {
-    const f = await this.prisma.freelancer.findUnique({
-      where: { id },
-      include: { skills: true }
+    return await this.prisma.freelancer.findUnique({
+      where: { id }
     });
-    if (!f) return null;
-    return this.mapWithSkills(f);
   }
 
   async create(data: CreateFreelancerDto) {
@@ -63,14 +50,9 @@ export class FreelancersService {
       data: {
         ...rest,
         email: resolvedEmail,
-        skills: {
-          connectOrCreate: (skills || []).map((name: string) => ({
-            where: { name },
-            create: { name }
-          }))
-        }
-      },
-      include: { skills: true }
+        skills: skills || [],
+        status: rest.status as any
+      }
     });
 
     // Invalidate cache when creating
@@ -87,15 +69,9 @@ export class FreelancersService {
       data: {
         ...rest,
         ...(resolvedEmail ? { email: resolvedEmail } : {}),
-        skills: skills ? {
-          set: [], // Clear existing
-          connectOrCreate: skills.map((name: string) => ({
-            where: { name },
-            create: { name }
-          }))
-        } : undefined
-      },
-      include: { skills: true }
+        ...(skills ? { skills } : {}),
+        ...(rest.status ? { status: rest.status as any } : {})
+      }
     });
 
     // Invalidate cache when updating
@@ -116,24 +92,21 @@ export class FreelancersService {
           { name: { contains: q, mode: 'insensitive' } },
           { email: { contains: q, mode: 'insensitive' } },
           { role: { contains: q, mode: 'insensitive' } },
-          { skills: { some: { name: { contains: q, mode: 'insensitive' } } } },
         ],
       },
-      include: { skills: true },
       take: limit,
       orderBy: { name: 'asc' },
     });
 
-    return results.map((f) => this.mapWithSkills(f));
+    return results;
   }
 
   async suggested(limit = 5) {
     const results = await this.prisma.freelancer.findMany({
-      include: { skills: true },
       take: limit,
       orderBy: { createdAt: 'desc' },
     });
-    return results.map((f) => this.mapWithSkills(f));
+    return results;
   }
 
   async remove(id: string) {
@@ -146,7 +119,7 @@ export class FreelancersService {
   }
 
   async createBatch(items: ImportFreelancerDto[]) {
-    // Sequential execution to handle connectOrCreate correctly
+    // Sequential execution for batch creation
     let created = 0;
     const updated = 0;
     for (const item of items) {
@@ -159,18 +132,11 @@ export class FreelancersService {
         continue;
       }
 
-      const skillOps = {
-        connectOrCreate: (skills || []).map((name: string) => ({
-          where: { name },
-          create: { name }
-        }))
-      };
-
       try {
         await this.prisma.freelancer.upsert({
           where: { email: resolvedEmail },
-          create: { ...rest, email: resolvedEmail, skills: skillOps },
-          update: { ...rest, email: resolvedEmail, skills: skillOps }
+          create: { ...rest, email: resolvedEmail, skills: skills || [], status: rest.status as any },
+          update: { ...rest, email: resolvedEmail, skills: skills || [], status: rest.status as any }
         });
         // Simplistic count
         created++;

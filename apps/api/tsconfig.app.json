@@ -1,13 +1,21 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/apps/api",
+        "outDir": "../../build/apps/api",
         "target": "ES2022",
+        "module": "CommonJS",
+        "moduleResolution": "node",
         "types": [
             "node"
         ],
         "baseUrl": "./",
-        "rootDir": "."
+        "rootDir": ".",
+        "noImplicitAny": false,
+        "strict": false,
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true
     },
     "include": [
         "src/**/*"

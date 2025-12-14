@@ -1,5 +1,5 @@
 
-import { Injectable, ConflictException } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { AvailabilityService } from '../availability/availability.service.js';
 import { RealtimeService } from '../realtime/realtime.service.js';
@@ -33,7 +33,12 @@ export class AssignmentsService {
       throw new ConflictException('CONFLICT_DETECTED');
     }
 
-    const result = await this.prisma.assignment.create({ data });
+    const result = await this.prisma.assignment.create({
+      data: {
+        ...data,
+        status: data.status as any
+      }
+    });
 
     // Broadcast real-time update
     this.realtimeService.broadcast({
@@ -63,7 +68,10 @@ export class AssignmentsService {
 
     const result = await this.prisma.assignment.update({
       where: { id },
-      data
+      data: {
+        ...data,
+        ...(data.status ? { status: data.status as any } : {})
+      }
     });
 
     // Broadcast real-time update

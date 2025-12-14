@@ -167,7 +167,7 @@ export class RAGService {
           context: memoryContext,
         },
         memory: {
-          relatedQueries,
+          relatedQueries: relatedQueries || [],
         },
       };
     }
@@ -362,7 +362,6 @@ export class RAGService {
         brandTensor: fullSnapshot.brandTensor,
         assetIntelligence: fullSnapshot.assetIntelligence,
       },
-      embedding: fullSnapshot.embedding,
     }]);
 
     // Update memory
@@ -713,7 +712,11 @@ Summary:`;
     id: string;
     name: string;
   }> {
-    const entities = [];
+    const entities: Array<{
+      type: 'freelancer' | 'project' | 'asset' | 'concept';
+      id: string;
+      name: string;
+    }> = [];
     const textLower = text.toLowerCase();
 
     // Extract project mentions
