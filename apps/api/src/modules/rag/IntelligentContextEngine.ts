@@ -182,8 +182,8 @@ export class IntelligentContextEngine {
       : [];
     
     // Step 6: Assemble context content
-    const content = this.assembleContextContent(briefContext, brandTensor, assetIntelligence, entities);
-    
+    const content = this.assembleContextContent(briefContext, brandTensor as any, assetIntelligence as any, entities);
+
     // Step 7: Generate metadata
     const metadata = await this.generateMetadata(content, entities, context);
     
@@ -577,4 +577,241 @@ export class IntelligentContextEngine {
   /**
    * Extract entities from messages
    */
-  private async extractEntitiesFromMessages
+  private async extractEntitiesFromMessages(messages: Array<{ role: string; content: string }>): Promise<Array<{
+    type: string;
+    id: string;
+    name: string;
+    data?: any;
+  }>> {
+    const entities = [];
+
+    for (const message of messages) {
+      // Simple entity extraction from message content
+      const content = message.content.toLowerCase();
+
+      // Extract project mentions (simple pattern matching)
+      const projectMatches = content.match(/project\s+(\w+)/g);
+      if (projectMatches) {
+        projectMatches.forEach(match => {
+          const projectName = match.replace('project ', '');
+          entities.push({
+            type: 'project',
+            id: `project_${projectName}`,
+            name: projectName,
+          });
+        });
+      }
+
+      // Extract freelancer mentions
+      const freelancerMatches = content.match(/freelancer\s+(\w+)/g);
+      if (freelancerMatches) {
+        freelancerMatches.forEach(match => {
+          const freelancerName = match.replace('freelancer ', '');
+          entities.push({
+            type: 'freelancer',
+            id: `freelancer_${freelancerName}`,
+            name: freelancerName,
+          });
+        });
+      }
+
+      // Extract asset mentions
+      const assetMatches = content.match(/asset\s+(\w+)/g);
+      if (assetMatches) {
+        assetMatches.forEach(match => {
+          const assetName = match.replace('asset ', '');
+          entities.push({
+            type: 'asset',
+            id: `asset_${assetName}`,
+            name: assetName,
+          });
+        });
+      }
+    }
+
+    // Remove duplicates
+    const uniqueEntities = entities.filter((entity, index, self) =>
+      index === self.findIndex(e => e.id === entity.id && e.type === entity.type)
+    );
+
+    return uniqueEntities;
+  }
+
+  /**
+   * Calculate entity relevance score
+   */
+  private calculateEntityRelevance(entity: any, context: any): number {
+    let relevance = 0.5; // Base relevance
+
+    // Increase relevance if entity appears in current project
+    if (context.currentProject && entity.type === 'project' &&
+        context.currentProject.title?.toLowerCase().includes(entity.name.toLowerCase())) {
+      relevance += 0.3;
+    }
+
+    // Increase relevance based on recency (if we had access to timestamps)
+    // For now, return base relevance
+    return Math.min(relevance, 1.0);
+  }
+
+  /**
+   * Summarize recent messages for context
+   */
+  private summarizeMessages(messages: Array<{ role: string; content: string }>): string {
+    if (messages.length === 0) return '';
+
+    // Simple summarization - take last few messages
+    const recentMessages = messages.slice(-3);
+    const summary = recentMessages
+      .map(msg => `${msg.role}: ${msg.content.substring(0, 100)}${msg.content.length > 100 ? '...' : ''}`)
+      .join(' | ');
+
+    return `Recent conversation: ${summary}`;
+  }
+
+  /**
+   * Calculate asset similarity for relationship analysis
+   */
+  private calculateAssetSimilarity(asset1: any, asset2: any): number {
+    // Simple similarity based on metadata
+    let similarity = 0;
+    let factors = 0;
+
+    // Type similarity
+    if (asset1.type === asset2.type) {
+      similarity += 0.3;
+    }
+    factors += 0.3;
+
+    // Tag similarity
+    if (asset1.metadata?.tags && asset2.metadata?.tags) {
+      const tags1 = new Set(asset1.metadata.tags);
+      const tags2 = new Set(asset2.metadata.tags);
+      const intersection = new Set([...tags1].filter(tag => tags2.has(tag)));
+      const union = new Set([...tags1, ...tags2]);
+      if (union.size > 0) {
+        similarity += (intersection.size / union.size) * 0.4;
+      }
+    }
+    factors += 0.4;
+
+    // Color similarity
+    if (asset1.metadata?.colors && asset2.metadata?.colors) {
+      const colors1 = new Set(asset1.metadata.colors);
+      const colors2 = new Set(asset2.metadata.colors);
+      const intersection = new Set([...colors1].filter(color => colors2.has(color)));
+      const union = new Set([...colors1, ...colors2]);
+      if (union.size > 0) {
+        similarity += (intersection.size / union.size) * 0.3;
+      }
+    }
+    factors += 0.3;
+
+    return factors > 0 ? similarity / factors : 0;
+  }
+
+  /**
+   * Assemble context content from various sources
+   */
+  private assembleContextContent(
+    briefContext: Record<string, unknown>,
+    brandTensor: any,
+    assetIntelligence: any,
+    entities: any[]
+  ): string {
+    const parts = [];
+
+    // Add brief context
+    if (briefContext.summary) {
+      parts.push(`Summary: ${briefContext.summary}`);
+    }
+
+    // Add project context
+    if (briefContext.project) {
+      const project = briefContext.project as any;
+      parts.push(`Project: ${project.name} (${project.status}) - Client: ${project.client}`);
+    }
+
+    // Add key entities
+    if (briefContext.key_entities) {
+      const keyEntities = briefContext.key_entities as any[];
+      if (keyEntities.length > 0) {
+        parts.push(`Key Entities: ${keyEntities.map(e => `${e.type}: ${e.name}`).join(', ')}`);
+      }
+    }
+
+    // Add conversation summary
+    if (briefContext.conversation_summary) {
+      parts.push(briefContext.conversation_summary as string);
+    }
+
+    // Add brand tensor information
+    if (brandTensor) {
+      parts.push(`Brand: ${brandTensor.brandName}`);
+      if (brandTensor.personality?.traits) {
+        const topTraits = brandTensor.personality.traits.slice(0, 3);
+        parts.push(`Brand Traits: ${topTraits.map((t: any) => t.trait).join(', ')}`);
+      }
+    }
+
+    // Add asset intelligence
+    if (assetIntelligence?.insights) {
+      const insights = assetIntelligence.insights;
+      if (insights.usage_patterns?.length > 0) {
+        parts.push(`Asset Patterns: ${insights.usage_patterns[0].pattern}`);
+      }
+    }
+
+    return parts.join('\n\n');
+  }
+
+  /**
+   * Generate metadata for the context
+   */
+  private async generateMetadata(
+    content: string,
+    entities: any[],
+    context: any
+  ): Promise<ContextGenerationResult['metadata']> {
+    // Extract topics from entities
+    const topics = entities.map(e => e.type).filter((type, index, self) => self.indexOf(type) === index);
+
+    // Simple sentiment analysis (placeholder)
+    const sentiment = content.toLowerCase().includes('good') || content.toLowerCase().includes('excellent')
+      ? 'positive'
+      : content.toLowerCase().includes('bad') || content.toLowerCase().includes('issue')
+      ? 'negative'
+      : 'neutral';
+
+    // Determine urgency based on keywords
+    let urgency: 'low' | 'medium' | 'high' = 'low';
+    if (content.toLowerCase().includes('urgent') || content.toLowerCase().includes('asap')) {
+      urgency = 'high';
+    } else if (content.toLowerCase().includes('soon') || content.toLowerCase().includes('important')) {
+      urgency = 'medium';
+    }
+
+    // Determine complexity
+    let complexity: 'simple' | 'moderate' | 'complex' = 'simple';
+    if (entities.length > 5 || content.length > 1000) {
+      complexity = 'complex';
+    } else if (entities.length > 2 || content.length > 500) {
+      complexity = 'moderate';
+    }
+
+    return {
+      entities: entities.map(e => ({
+        type: e.type,
+        id: e.id,
+        name: e.name,
+        relevance: this.calculateEntityRelevance(e, context),
+      })) as any,
+      topics: topics as any,
+      sentiment,
+      urgency,
+      complexity,
+      confidence: 0.8,
+      generatedAt: new Date(),
+    };
+  }
+}

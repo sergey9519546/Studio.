@@ -573,3 +573,172 @@ Image URL: ${imageUrl}`;
     `;
 
     const schema = {
+      type: 'object',
+      properties: {
+        performanceScore: { type: 'number', description: 'A score from 0 to 10 indicating overall performance' },
+        summary: { type: 'string', description: 'A brief summary of the freelancer\'s performance' },
+        recommendations: { type: 'string', description: 'Recommendations for improvement or utilization' },
+      },
+      required: ['performanceScore', 'summary', 'recommendations'],
+    };
+
+    const result = await this.extractData(prompt, schema);
+
+    // Cache for 24 hours
+    await this.cacheManager.set(cacheKey, result, 86400);
+
+    // Log usage
+    const duration = Date.now() - startTime;
+    this.logger.log({
+      type: 'ai_usage',
+      endpoint: 'analyzeFreelancerPerformance',
+      freelancerId,
+      duration_ms: duration,
+      cached: false,
+    });
+
+    return result;
+  }
+
+  /**
+   * Build vision analysis prompt
+   */
+  private buildVisionAnalysisPrompt(imageUrl: string, analysisType: string, context: string, brandGuidelines: Record<string, unknown>): string {
+    let prompt = `Analyze this image for ${analysisType} aspects. `;
+
+    if (context) {
+      prompt += `Context: ${context}. `;
+    }
+
+    if (brandGuidelines && Object.keys(brandGuidelines).length > 0) {
+      prompt += `Brand Guidelines: ${JSON.stringify(brandGuidelines)}. `;
+    }
+
+    prompt += `Image URL: ${imageUrl}`;
+
+    return prompt;
+  }
+
+  /**
+   * Get vision analysis schema
+   */
+  private getVisionAnalysisSchema(analysisType: string): Record<string, unknown> {
+    const baseSchema: any = {
+      type: 'object',
+      properties: {
+        tags: { type: 'array', items: { type: 'string' } },
+        moods: { type: 'array', items: { type: 'string' } },
+        colors: { type: 'array', items: { type: 'string' } },
+        description: { type: 'string' },
+      },
+      required: ['tags', 'moods', 'colors', 'description'],
+    };
+
+    if (analysisType === 'creative' || analysisType === 'technical') {
+      baseSchema.properties.composition = {
+        type: 'object',
+        properties: {
+          ruleOfThirds: { type: 'boolean' },
+          leadingLines: { type: 'array', items: { type: 'string' } },
+          focalPoints: { type: 'array', items: { type: 'string' } },
+          balance: { type: 'string', enum: ['balanced', 'unbalanced', 'dynamic'] },
+        },
+      };
+
+      baseSchema.properties.lighting = {
+        type: 'object',
+        properties: {
+          type: { type: 'string' },
+          direction: { type: 'string' },
+          mood: { type: 'string' },
+          quality: { type: 'string', enum: ['soft', 'harsh', 'natural', 'artificial'] },
+        },
+      };
+
+      baseSchema.properties.style = {
+        type: 'object',
+        properties: {
+          genre: { type: 'string' },
+          era: { type: 'string' },
+          movements: { type: 'array', items: { type: 'string' } },
+          techniques: { type: 'array', items: { type: 'string' } },
+        },
+      };
+    }
+
+    if (analysisType === 'brand') {
+      baseSchema.properties.brandCompliance = {
+        type: 'object',
+        properties: {
+          compliant: { type: 'boolean' },
+          issues: { type: 'array', items: { type: 'string' } },
+          suggestions: { type: 'array', items: { type: 'string' } },
+        },
+        required: ['compliant'],
+      };
+    }
+
+    if (analysisType === 'technical') {
+      baseSchema.properties.technical = {
+        type: 'object',
+        properties: {
+          resolution: { type: 'string' },
+          aspectRatio: { type: 'string' },
+          quality: { type: 'string', enum: ['high', 'medium', 'low'] },
+          issues: { type: 'array', items: { type: 'string' } },
+        },
+      };
+
+      baseSchema.properties.creativeFeedback = {
+        type: 'object',
+        properties: {
+          strengths: { type: 'array', items: { type: 'string' } },
+          improvements: { type: 'array', items: { type: 'string' } },
+          alternativeSuggestions: { type: 'array', items: { type: 'string' } },
+        },
+      };
+    }
+
+    return baseSchema;
+  }
+
+  /**
+   * Compare images for batch analysis
+   */
+  private async compareImages(analyses: any[]): Promise<{
+    consistency: number;
+    commonElements: string[];
+    differences: string[];
+    recommendations: string[];
+  }> {
+    // Simple comparison logic
+    const commonTags = new Set<string>();
+    const allTags = new Set<string>();
+
+    analyses.forEach(analysis => {
+      if (analysis.tags) {
+        analysis.tags.forEach((tag: string) => {
+          allTags.add(tag);
+          // Count frequency for common elements
+          if (analyses.filter(a => a.tags?.includes(tag)).length > analyses.length / 2) {
+            commonTags.add(tag);
+          }
+        });
+      }
+    });
+
+    const consistency = commonTags.size / Math.max(allTags.size, 1);
+    const differences = Array.from(allTags).filter(tag => !commonTags.has(tag));
+
+    return {
+      consistency,
+      commonElements: Array.from(commonTags),
+      differences,
+      recommendations: [
+        'Ensure consistent visual style across assets',
+        'Maintain color palette consistency',
+        'Align composition and layout patterns',
+      ],
+    };
+  }
+}

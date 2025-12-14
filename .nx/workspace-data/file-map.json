@@ -2796,7 +2796,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini-analyst.service.ts",
-          "hash": "10469623308048735789",
+          "hash": "16962799635165401757",
           "deps": [
             "npm:@nestjs/cache-manager",
             "npm:@nestjs/common",
@@ -3055,7 +3055,7 @@
         },
         {
           "file": "apps/api/src/modules/conversations/conversations.service.ts",
-          "hash": "12102029526962490400",
+          "hash": "2343502926754756690",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client"
@@ -3460,14 +3460,14 @@
         },
         {
           "file": "apps/api/src/modules/rag/AssetSimilarityEngine.ts",
-          "hash": "7309916439689370111",
+          "hash": "14001963254686335848",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/rag/IntelligentContextEngine.ts",
-          "hash": "13756192874845891591",
+          "hash": "14210506846283452265",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3528,7 +3528,7 @@
         },
         {
           "file": "apps/api/src/modules/rag/rag.service.ts",
-          "hash": "13821251126449429956",
+          "hash": "18374719556646858019",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3737,7 +3737,7 @@
     "nonProjectFiles": [
       {
         "file": ".agent/workflows/designgenius.md",
-        "hash": "13560014299464650447"
+        "hash": "16606810806492001175"
       },
       {
         "file": ".agent/workflows/lastminutesavior.md",
@@ -3752,20 +3752,16 @@
         "hash": "624827413472848368"
       },
       {
-        "file": ".clinerules/11thhour.md",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": ".clinerules/workflows/11thhour.md",
-        "hash": "4055606894390288348"
-      },
-      {
         "file": ".continue/agents/new-config-1.yaml",
         "hash": "4163857882156651287"
       },
       {
         "file": ".continue/agents/new-config.yaml",
         "hash": "4163857882156651287"
+      },
+      {
+        "file": ".continue/mcpServers/new-mcp-server.yaml",
+        "hash": "4809097836192732274"
       },
       {
         "file": ".dockerignore",
@@ -3808,6 +3804,14 @@
         "hash": "4867561674071577364"
       },
       {
+        "file": ".github/workflows/dependency-updates-fixed.yml",
+        "hash": "10626297391756657279"
+      },
+      {
+        "file": ".github/workflows/dependency-updates.yml",
+        "hash": "11654874021301542713"
+      },
+      {
         "file": ".github/workflows/docker-image.yml",
         "hash": "5206607132747754828"
       },
@@ -3822,6 +3826,14 @@
       {
         "file": ".vscode/extensions.json",
         "hash": "364080017629887166"
+      },
+      {
+        "file": ".yarn/releases/yarn-1.22.11.cjs",
+        "hash": "1607646537402647760"
+      },
+      {
+        "file": ".yarnrc",
+        "hash": "16235535688118853446"
       },
       {
         "file": "ACCURATE_TODO_LIST.md",
@@ -3866,6 +3878,18 @@
       {
         "file": "BUILD_FIXES_EXECUTION_TODO.md",
         "hash": "16112906481654877193"
+      },
+      {
+        "file": "BUILD_VERIFICATION_RESULTS.md",
+        "hash": "13880881965611456353"
+      },
+      {
+        "file": "CODE_MODE_DEMO.md",
+        "hash": "11885162614981660451"
+      },
+      {
+        "file": "CODE_MODE_SERVER_DEMO.md",
+        "hash": "12115438979561596853"
       },
       {
         "file": "COMMAND_LINE_FIXES_SUMMARY.md",
@@ -3916,6 +3940,10 @@
         "hash": "1973459037493620273"
       },
       {
+        "file": "CRITICAL_BACKEND_REPAIR_TODO.md",
+        "hash": "16726460496970108366"
+      },
+      {
         "file": "CRITICAL_FIXES_IMPLEMENTATION.md",
         "hash": "2030404483325209613"
       },
@@ -3938,6 +3966,22 @@
       {
         "file": "DEEPER_ANALYSIS_TODO.md",
         "hash": "7270575788884375212"
+      },
+      {
+        "file": "DEPENDENCY_AUTOMATION_DOCUMENTATION.md",
+        "hash": "5170676351390462290"
+      },
+      {
+        "file": "DEPENDENCY_INSTALLATION_REPORT.md",
+        "hash": "14904109491236199299"
+      },
+      {
+        "file": "DEPENDENCY_SCAN_TODO.md",
+        "hash": "8622271130988110837"
+      },
+      {
+        "file": "DEPENDENCY_UPDATE_AUTOMATION_TODO.md",
+        "hash": "17021461926029838517"
       },
       {
         "file": "DEPLOYMENT.md",
@@ -4024,6 +4068,10 @@
         "hash": "509948261554683690"
       },
       {
+        "file": "FINAL_CODE_MODE_SETUP_SUMMARY.md",
+        "hash": "7454520571063350729"
+      },
+      {
         "file": "FINAL_COMPLETION_SUMMARY.md",
         "hash": "5343902080290116765"
       },
@@ -4084,6 +4132,18 @@
         "hash": "5074123106484243014"
       },
       {
+        "file": "IMPLEMENTATION_COMPLETE_SUMMARY.md",
+        "hash": "14359912232135368556"
+      },
+      {
+        "file": "IMPLEMENTATION_VERIFICATION_SUMMARY.md",
+        "hash": "8801866847839487510"
+      },
+      {
+        "file": "IMPLEMENTATION_VERIFICATION_TODO.md",
+        "hash": "13859315075561706976"
+      },
+      {
         "file": "INTEGRATION_GUIDE.md",
         "hash": "10673789318204221778"
       },
@@ -4120,6 +4180,10 @@
         "hash": "13273653514558772249"
       },
       {
+        "file": "MCP_SETUP_TODO.md",
+        "hash": "15324959102746078851"
+      },
+      {
         "file": "MOCK_DATA_ANALYSIS_REPORT.md",
         "hash": "9525340211105045472"
       },
@@ -4130,6 +4194,30 @@
       {
         "file": "MOCK_DATA_REPLACEMENT_TODO.md",
         "hash": "12772104027224296047"
+      },
+      {
+        "file": "NPM_AUDIT_FIX_COMPLETE.md",
+        "hash": "17043580295113946283"
+      },
+      {
+        "file": "NPM_DEPENDENCY_SCAN_TODO.md",
+        "hash": "1618637571959678140"
+      },
+      {
+        "file": "NPM_FIX_IMPLEMENTATION_COMPLETE.md",
+        "hash": "13080446695637385854"
+      },
+      {
+        "file": "NPM_FIX_IMPLEMENTATION_TODO.md",
+        "hash": "8940008570049213940"
+      },
+      {
+        "file": "NPM_INSTALLATION_REPORT.md",
+        "hash": "9681849836989560531"
+      },
+      {
+        "file": "NPM_INSTALLATION_SUCCESS_REPORT.md",
+        "hash": "18180138178023120495"
       },
       {
         "file": "PHASE_2_PROGRESS_SUMMARY.md",
@@ -4196,8 +4284,20 @@
         "hash": "1247703567615508587"
       },
       {
+        "file": "SEQUENTIAL_THINKING_MCP_SETUP_COMPLETE.md",
+        "hash": "3188871022786497137"
+      },
+      {
+        "file": "SEQUENTIAL_THINKING_MCP_SETUP_TODO.md",
+        "hash": "253584249656509072"
+      },
+      {
         "file": "SETTINGS_COMPARISON.md",
         "hash": "10650982175887816678"
+      },
+      {
+        "file": "TASK_CONTINUATION_PROGRESS.md",
+        "hash": "14262874442741745936"
       },
       {
         "file": "TASK_PLAN.md",
@@ -4360,6 +4460,10 @@
         "hash": "3561032120960224652"
       },
       {
+        "file": "components/EnhancedAIOrchestrator.tsx",
+        "hash": "11422106876438388199"
+      },
+      {
         "file": "components/ErrorBoundary.tsx",
         "hash": "10503169007878811521"
       },
@@ -4410,6 +4514,10 @@
       {
         "file": "components/Moodboard/MoodboardTab.tsx",
         "hash": "4940508735662327388"
+      },
+      {
+        "file": "components/PluginRegistry.tsx",
+        "hash": "17169606297043093465"
       },
       {
         "file": "components/ProjectDetail.tsx",
@@ -4488,8 +4596,20 @@
         "hash": "4347028523770668979"
       },
       {
+        "file": "components/ui/Alert.tsx",
+        "hash": "12020003018417846580"
+      },
+      {
         "file": "components/ui/AspectRatioBox.tsx",
         "hash": "12771639351760230291"
+      },
+      {
+        "file": "components/ui/Badge.tsx",
+        "hash": "2709536066573775907"
+      },
+      {
+        "file": "components/ui/Button.tsx",
+        "hash": "5925430597364696779"
       },
       {
         "file": "components/ui/Card.tsx",
@@ -4504,8 +4624,16 @@
         "hash": "14593071745394260422"
       },
       {
+        "file": "components/ui/Progress.tsx",
+        "hash": "5153295367289169732"
+      },
+      {
         "file": "components/ui/Skeleton.tsx",
         "hash": "6575817293010480234"
+      },
+      {
+        "file": "components/ui/Tabs.tsx",
+        "hash": "2114804515691365322"
       },
       {
         "file": "components/ui/Toast.tsx",
@@ -8554,6 +8682,10 @@
       {
         "file": "dataconnect/seed_data.gql",
         "hash": "15166990222291471623"
+      },
+      {
+        "file": "dependency-update.config.js",
+        "hash": "15663723986237763472"
       },
       {
         "file": "deploy-firebase-production.sh",
@@ -48797,7 +48929,7 @@
       },
       {
         "file": "firebase.json",
-        "hash": "9941295669491600294"
+        "hash": "9498298147333037216"
       },
       {
         "file": "firebase.json.backup",
@@ -48913,11 +49045,11 @@
       },
       {
         "file": "generated/prisma/package-lock.json",
-        "hash": "4744043884143626290"
+        "hash": "1628735212340878968"
       },
       {
         "file": "generated/prisma/package.json",
-        "hash": "16680845927177091581"
+        "hash": "7368696176583080785"
       },
       {
         "file": "generated/prisma/query_compiler_bg.js",
@@ -48965,7 +49097,7 @@
       },
       {
         "file": "generated/prisma/src/dataconnect-generated/.guides/usage.md",
-        "hash": "9730055188755409149"
+        "hash": "6734198676851408184"
       },
       {
         "file": "generated/prisma/src/dataconnect-generated/README.md",
@@ -48973,7 +49105,7 @@
       },
       {
         "file": "generated/prisma/src/dataconnect-generated/esm/index.esm.js",
-        "hash": "8103665619056376340"
+        "hash": "6110978263211776781"
       },
       {
         "file": "generated/prisma/src/dataconnect-generated/esm/package.json",
@@ -48981,11 +49113,11 @@
       },
       {
         "file": "generated/prisma/src/dataconnect-generated/index.cjs.js",
-        "hash": "11947682604775880572"
+        "hash": "6179164097319436544"
       },
       {
         "file": "generated/prisma/src/dataconnect-generated/index.d.ts",
-        "hash": "12121625883648963937"
+        "hash": "12827982418421243259"
       },
       {
         "file": "generated/prisma/src/dataconnect-generated/package.json",
@@ -49061,11 +49193,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "4211313873924658208"
+        "hash": "9567073582837665753"
       },
       {
         "file": "package.json",
-        "hash": "14570331761646674758"
+        "hash": "3192071036835035887"
       },
       {
         "file": "package_backup.json",
@@ -49109,7 +49241,7 @@
       },
       {
         "file": "prisma/schema.prisma",
-        "hash": "18312926238962063183"
+        "hash": "13298098624400906441"
       },
       {
         "file": "prisma/schema.prisma.bak",
@@ -49118,6 +49250,10 @@
       {
         "file": "prisma/schema_backup.prisma",
         "hash": "8887657023626792185"
+      },
+      {
+        "file": "prisma/schema_fix.prisma",
+        "hash": "13298098624400906441"
       },
       {
         "file": "prisma/schema_header.txt",
@@ -49136,8 +49272,20 @@
         "hash": "14037500887127943709"
       },
       {
+        "file": "scripts/dependency-health-monitor.js",
+        "hash": "1892618692869548136"
+      },
+      {
+        "file": "scripts/dependency-updater.js",
+        "hash": "6588559812608558945"
+      },
+      {
         "file": "scripts/index-docs.ts",
         "hash": "11353008968943586635"
+      },
+      {
+        "file": "scripts/run-dependency-automation.js",
+        "hash": "3515512920844316919"
       },
       {
         "file": "scripts/test-genai.ts",
@@ -49357,7 +49505,7 @@
       },
       {
         "file": "src/components/ProjectDashboard.tsx",
-        "hash": "11925607471977064069"
+        "hash": "4963655126952505923"
       },
       {
         "file": "src/components/ProjectHub.tsx",
@@ -49581,7 +49729,7 @@
       },
       {
         "file": "src/dataconnect-generated/.guides/usage.md",
-        "hash": "9395073703261133520"
+        "hash": "6620734942988841674"
       },
       {
         "file": "src/dataconnect-generated/README.md",
@@ -49589,7 +49737,7 @@
       },
       {
         "file": "src/dataconnect-generated/esm/index.esm.js",
-        "hash": "8103665619056376340"
+        "hash": "6110978263211776781"
       },
       {
         "file": "src/dataconnect-generated/esm/package.json",
@@ -49597,11 +49745,11 @@
       },
       {
         "file": "src/dataconnect-generated/index.cjs.js",
-        "hash": "11947682604775880572"
+        "hash": "6179164097319436544"
       },
       {
         "file": "src/dataconnect-generated/index.d.ts",
-        "hash": "12121625883648963937"
+        "hash": "12827982418421243259"
       },
       {
         "file": "src/dataconnect-generated/package.json",
@@ -49613,7 +49761,7 @@
       },
       {
         "file": "src/dataconnect-generated/react/esm/index.esm.js",
-        "hash": "14570083277883875313"
+        "hash": "12174374708228840605"
       },
       {
         "file": "src/dataconnect-generated/react/esm/package.json",
@@ -49621,11 +49769,11 @@
       },
       {
         "file": "src/dataconnect-generated/react/index.cjs.js",
-        "hash": "2913033731498597627"
+        "hash": "18430920159781452914"
       },
       {
         "file": "src/dataconnect-generated/react/index.d.ts",
-        "hash": "498645000099755456"
+        "hash": "1450360211015605153"
       },
       {
         "file": "src/dataconnect-generated/react/package.json",
@@ -49645,7 +49793,7 @@
       },
       {
         "file": "src/hooks/useAutoSave.ts",
-        "hash": "4770588258561078619"
+        "hash": "14291288554847610525"
       },
       {
         "file": "src/hooks/useDashboardData.ts",
@@ -49685,7 +49833,7 @@
       },
       {
         "file": "src/services/DraftService.ts",
-        "hash": "3850220641775488978"
+        "hash": "3412753642641608477"
       },
       {
         "file": "src/services/KeyboardService.ts",
@@ -49881,7 +50029,7 @@
       },
       {
         "file": "types/@google-cloud/aiplatform/index.d.ts",
-        "hash": "2586467088794651224"
+        "hash": "14803650518435133445"
       },
       {
         "file": "types/confluence.types.ts",
@@ -49906,8 +50054,12 @@
       {
         "file": "vitest.config.ts",
         "hash": "10219842993516952569"
+      },
+      {
+        "file": "yarn.lock",
+        "hash": "9009708810444462254"
       }
     ]
   },
-  "externalNodesHash": "16301202749002254160"
+  "externalNodesHash": "13160242844713596574"
 }

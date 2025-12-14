@@ -1,12 +1,10 @@
-import { Edit2, FileText, Image, Zap, Users, Activity, Bell, RefreshCw, Wifi, WifiOff, Save, Clock, User } from "lucide-react";
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Button } from "./design/Button";
-import { Input } from "./design/Input";
-import { LiquidGlassContainer } from "./design/LiquidGlassContainer";
-import { Textarea } from "./design/Textarea";
+import { Activity, Edit2, FileText, Image, RefreshCw, Save, User, Users, Wifi, WifiOff } from "lucide-react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useAutoSave } from "../hooks/useAutoSave";
 import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
-import { draftService } from "../services/DraftService";
+import { Button } from "./design/Button";
+import { LiquidGlassContainer } from "./design/LiquidGlassContainer";
+import { Textarea } from "./design/Textarea";
 
 interface ProjectDashboardProps {
   projectId: string;
@@ -476,4 +474,80 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
                 <li className="flex items-start gap-2">
                   <span className="mt-1 w-2 h-2 rounded-full bg-amber-500" />
                   Secure reference assets for visual direction.
-                </li
+                </li>
+              </ul>
+            </LiquidGlassContainer>
+          </div>
+
+          {/* RIGHT COLUMNS: Assets & Timeline */}
+          <div className="lg:col-span-3 space-y-6">
+            {/* Assets Grid */}
+            <LiquidGlassContainer level="lg">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-lg font-bold text-ink-primary">
+                  Project Assets
+                </h2>
+                <Button size="sm" variant="secondary">
+                  Upload Asset
+                </Button>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {/* Placeholder assets */}
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="aspect-square bg-subtle border border-border-subtle rounded-lg flex items-center justify-center text-ink-tertiary"
+                  >
+                    <Image size={24} />
+                  </div>
+                ))}
+              </div>
+            </LiquidGlassContainer>
+
+            {/* Timeline/Progress */}
+            <LiquidGlassContainer level="lg">
+              <h2 className="text-lg font-bold text-ink-primary mb-6">
+                Project Timeline
+              </h2>
+
+              <div className="space-y-4">
+                {[
+                  { phase: "Concept & Planning", status: "completed", date: "Dec 10" },
+                  { phase: "Script Development", status: "in-progress", date: "Dec 13" },
+                  { phase: "Pre-production", status: "pending", date: "Dec 20" },
+                  { phase: "Production", status: "pending", date: "Jan 5" },
+                  { phase: "Post-production", status: "pending", date: "Jan 20" },
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center gap-4">
+                    <div className={`w-3 h-3 rounded-full ${
+                      item.status === "completed"
+                        ? "bg-green-500"
+                        : item.status === "in-progress"
+                        ? "bg-blue-500"
+                        : "bg-gray-400"
+                    }`} />
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <span className={`font-medium ${
+                          item.status === "completed"
+                            ? "text-ink-secondary line-through"
+                            : item.status === "in-progress"
+                            ? "text-ink-primary"
+                            : "text-ink-secondary"
+                        }`}>
+                          {item.phase}
+                        </span>
+                        <span className="text-sm text-ink-tertiary">{item.date}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </LiquidGlassContainer>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

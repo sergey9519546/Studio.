@@ -619,3 +619,266 @@ Summary:`;
     const recentQueries = memory.recentQueries
       .slice(-5)
       .map(q => q.query);
+
+    const relevantContext = memory.recentQueries
+      .filter(q => {
+        // Simple relevance check - could be improved with embeddings
+        const queryWords = q.query.toLowerCase().split(' ');
+        const currentWords = currentQuery.toLowerCase().split(' ');
+        const commonWords = queryWords.filter(word => currentWords.includes(word));
+        return commonWords.length > Math.min(queryWords.length, currentWords.length) * 0.3;
+      })
+      .slice(-3); // Take last 3 relevant queries
+
+    return {
+      context: relevantContext.map(q => `${q.query}: ${q.result.answer}`).join('\n'),
+      relatedQueries,
+    };
+  }
+
+  /**
+   * Generate context snapshots from search results
+   */
+  private generateContextSnapshots(relevantDocs: any[], conversationId: string): Array<{
+    id: string;
+    content: string;
+    relevance: number;
+    timestamp: string;
+  }> {
+    return relevantDocs.slice(0, 3).map((doc, index) => ({
+      id: `snapshot_${conversationId}_${Date.now()}_${index}`,
+      content: doc.content.substring(0, 500), // Limit content length
+      relevance: doc.score,
+      timestamp: new Date().toISOString(),
+    }));
+  }
+
+  /**
+   * Update conversation memory with new interaction
+   */
+  private updateMemory(conversationId: string, query: string, result: RAGResponse, relevantDocs: any[]): void {
+    const memory = this.memoryStore.get(conversationId);
+    if (!memory) return;
+
+    // Add new query to memory
+    memory.recentQueries.push({
+      query,
+      timestamp: new Date(),
+      result,
+      contextUsed: relevantDocs.map(doc => doc.content.substring(0, 200)),
+    });
+
+    // Keep only last 10 queries
+    if (memory.recentQueries.length > 10) {
+      memory.recentQueries = memory.recentQueries.slice(-10);
+    }
+
+    // Update related entities based on query analysis
+    this.updateRelatedEntities(memory, query, relevantDocs);
+  }
+
+  /**
+   * Update related entities in memory
+   */
+  private updateRelatedEntities(memory: SmartMemory, query: string, relevantDocs: any[]): void {
+    const queryLower = query.toLowerCase();
+
+    // Simple entity extraction from query and documents
+    const entities = this.extractEntitiesFromText(query + ' ' + relevantDocs.map(d => d.content).join(' '));
+
+    entities.forEach(entity => {
+      const existingEntity = memory.relatedEntities.find(e => e.id === entity.id);
+      if (existingEntity) {
+        existingEntity.relevance = Math.min(existingEntity.relevance + 0.1, 1.0);
+        existingEntity.lastAccessed = new Date();
+      } else {
+        memory.relatedEntities.push({
+          ...entity,
+          relevance: 0.5,
+          lastAccessed: new Date(),
+        });
+      }
+    });
+
+    // Keep only top 20 entities
+    memory.relatedEntities.sort((a, b) => b.relevance - a.relevance);
+    memory.relatedEntities = memory.relatedEntities.slice(0, 20);
+  }
+
+  /**
+   * Extract entities from text (simple implementation)
+   */
+  private extractEntitiesFromText(text: string): Array<{
+    type: 'freelancer' | 'project' | 'asset' | 'concept';
+    id: string;
+    name: string;
+  }> {
+    const entities = [];
+    const textLower = text.toLowerCase();
+
+    // Extract project mentions
+    const projectMatches = textLower.match(/project\s+(\w+)/g);
+    if (projectMatches) {
+      projectMatches.forEach(match => {
+        const projectName = match.replace('project ', '');
+        entities.push({
+          type: 'project' as const,
+          id: `project_${projectName}`,
+          name: projectName,
+        });
+      });
+    }
+
+    // Extract freelancer mentions
+    const freelancerMatches = textLower.match(/freelancer\s+(\w+)/g);
+    if (freelancerMatches) {
+      freelancerMatches.forEach(match => {
+        const freelancerName = match.replace('freelancer ', '');
+        entities.push({
+          type: 'freelancer' as const,
+          id: `freelancer_${freelancerName}`,
+          name: freelancerName,
+        });
+      });
+    }
+
+    // Extract asset mentions
+    const assetMatches = textLower.match(/asset\s+(\w+)/g);
+    if (assetMatches) {
+      assetMatches.forEach(match => {
+        const assetName = match.replace('asset ', '');
+        entities.push({
+          type: 'asset' as const,
+          id: `asset_${assetName}`,
+          name: assetName,
+        });
+      });
+    }
+
+    return entities;
+  }
+
+  /**
+   * Calculate confidence score for RAG response
+   */
+  private calculateConfidence(relevantDocs: any[], answer: string): number {
+    if (relevantDocs.length === 0) return 0;
+
+    // Base confidence on number of relevant docs and their scores
+    const avgScore = relevantDocs.reduce((sum, doc) => sum + doc.score, 0) / relevantDocs.length;
+    const docCountBonus = Math.min(relevantDocs.length * 0.1, 0.3);
+
+    // Answer quality bonus (simple heuristic)
+    const answerQualityBonus = answer.length > 100 && !answer.includes('could not find') ? 0.2 : 0;
+
+    return Math.min(avgScore + docCountBonus + answerQualityBonus, 1.0);
+  }
+
+  /**
+   * Build enhanced RAG prompt with context
+   */
+  private buildSmartRAGPrompt(question: string, context: string, relatedQueries: string[]): string {
+    let prompt = `You are an expert AI assistant with access to relevant context information.
+
+QUESTION: ${question}
+
+`;
+
+    if (context) {
+      prompt += `RELEVANT CONTEXT:
+${context}
+
+`;
+    }
+
+    if (relatedQueries.length > 0) {
+      prompt += `RELATED PREVIOUS QUERIES:
+${relatedQueries.map(q => `- ${q}`).join('\n')}
+
+`;
+    }
+
+    prompt += `INSTRUCTIONS:
+- Answer the question based on the provided context
+- If the context doesn't contain enough information, say so clearly
+- Be concise but comprehensive
+- Cite specific information from the context when possible
+- If you need to make assumptions, state them clearly
+
+ANSWER:`;
+
+    return prompt;
+  }
+
+  /**
+   * Build conversational RAG prompt
+   */
+  private buildConversationalPrompt(
+    message: string,
+    context: string,
+    memoryContext: string,
+    conversationHistory: Array<{ role: string; content: string }>
+  ): string {
+    let prompt = `You are a helpful AI assistant engaged in a conversation. Use the following context to inform your responses:
+
+`;
+
+    if (context) {
+      prompt += `RELEVANT DOCUMENTS:
+${context}
+
+`;
+    }
+
+    if (memoryContext) {
+      prompt += `CONVERSATION MEMORY:
+${memoryContext}
+
+`;
+    }
+
+    prompt += `CURRENT MESSAGE: ${message}
+
+Respond naturally and helpfully, using the context when relevant.`;
+
+    return prompt;
+  }
+
+  /**
+   * Build standard RAG prompt
+   */
+  private buildRAGPrompt(question: string, context: string): string {
+    return `Answer the following question based on the provided context. If the context doesn't contain enough information to fully answer the question, acknowledge this limitation.
+
+QUESTION: ${question}
+
+CONTEXT:
+${context}
+
+ANSWER:`;
+  }
+
+  /**
+   * Enhance query with context from related queries
+   */
+  private enhanceQuery(query: string, relatedQueries: string[]): string {
+    if (relatedQueries.length === 0) return query;
+
+    // Simple enhancement - could be improved with NLP
+    const queryLower = query.toLowerCase();
+    const enhancements = relatedQueries
+      .filter(q => {
+        const qLower = q.toLowerCase();
+        // Find queries that share significant keywords
+        const queryWords = queryLower.split(' ').filter(word => word.length > 3);
+        const commonWords = queryWords.filter(word => qLower.includes(word));
+        return commonWords.length > queryWords.length * 0.3;
+      })
+      .slice(0, 2); // Take up to 2 related queries
+
+    if (enhancements.length === 0) return query;
+
+    // Combine original query with context from related queries
+    return `${query} [Context: ${enhancements.join(' | ')}]`;
+  }
+}

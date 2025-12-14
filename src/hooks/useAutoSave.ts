@@ -579,4 +579,41 @@ export function useAutoSaveWithConflicts(
         setHasConflict(true);
       }
     }
-  }, [autoSave.draft, conflictingDraft
+  }, [autoSave.draft, conflictingDraft]);
+
+  const resolveConflict = useCallback(async (resolution: 'keep-local' | 'keep-remote' | 'merge') => {
+    if (!hasConflict || !conflictingDraft) return;
+
+    try {
+      switch (resolution) {
+        case 'keep-local':
+          // Keep local changes, discard remote
+          setHasConflict(false);
+          setConflictingDraft(null);
+          break;
+        case 'keep-remote':
+          // Replace local with remote
+          await autoSave.update(conflictingDraft.content, conflictingDraft.metadata);
+          setHasConflict(false);
+          setConflictingDraft(null);
+          break;
+        case 'merge':
+          // This would require a merge function
+          if (options.onConflict) {
+            const result = await options.onConflict(autoSave.draft!, conflictingDraft);
+            resolveConflict(result);
+          }
+          break;
+      }
+    } catch (error) {
+      console.error('Conflict resolution failed:', error);
+    }
+  }, [hasConflict, conflictingDraft, autoSave, options.onConflict]);
+
+  return {
+    ...autoSave,
+    hasConflict,
+    conflictingDraft,
+    resolveConflict
+  };
+}

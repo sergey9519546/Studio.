@@ -507,4 +507,290 @@ export class AssetSimilarityEngine {
     const lines1 = new Set(comp1.leadingLines);
     const lines2 = new Set(comp2.leadingLines);
     const lineIntersection = new Set([...lines1].filter(line => lines2.has(line)));
-    const line
+    const lineUnion = new Set([...lines1, ...lines2]);
+    if (lineUnion.size > 0) {
+      similarity += (lineIntersection.size / lineUnion.size) * 0.2;
+    }
+    factors += 0.2;
+
+    return factors > 0 ? similarity / factors : 0;
+  }
+
+  /**
+   * Calculate semantic similarity between two assets
+   */
+  private calculateSemanticSimilarity(analysis1: AssetAnalysisResult, analysis2: AssetAnalysisResult): number {
+    // For now, use a simple approach based on shared tags and moods
+    const tags1 = new Set(analysis1.analysis.tags);
+    const tags2 = new Set(analysis2.analysis.tags);
+    const moods1 = new Set(analysis1.analysis.moods);
+    const moods2 = new Set(analysis2.analysis.moods);
+
+    const tagSimilarity = this.jaccardSimilarity(tags1, tags2);
+    const moodSimilarity = this.jaccardSimilarity(moods1, moods2);
+
+    return (tagSimilarity + moodSimilarity) / 2;
+  }
+
+  /**
+   * Calculate overall similarity score
+   */
+  private calculateOverallSimilarity(
+    analysis1: AssetAnalysisResult,
+    analysis2: AssetAnalysisResult,
+    similarityTypes: Array<'visual' | 'color' | 'style' | 'composition' | 'semantic'>
+  ): number {
+    let totalSimilarity = 0;
+    let totalWeight = 0;
+
+    const weights = {
+      visual: 0.25,
+      color: 0.20,
+      style: 0.25,
+      composition: 0.15,
+      semantic: 0.15,
+    };
+
+    if (similarityTypes.includes('visual')) {
+      totalSimilarity += this.calculateVisualSimilarity(analysis1, analysis2) * weights.visual;
+      totalWeight += weights.visual;
+    }
+
+    if (similarityTypes.includes('color')) {
+      totalSimilarity += this.calculateColorSimilarity(analysis1, analysis2) * weights.color;
+      totalWeight += weights.color;
+    }
+
+    if (similarityTypes.includes('style')) {
+      totalSimilarity += this.calculateStyleSimilarity(analysis1, analysis2) * weights.style;
+      totalWeight += weights.style;
+    }
+
+    if (similarityTypes.includes('composition')) {
+      totalSimilarity += this.calculateCompositionSimilarity(analysis1, analysis2) * weights.composition;
+      totalWeight += weights.composition;
+    }
+
+    if (similarityTypes.includes('semantic')) {
+      totalSimilarity += this.calculateSemanticSimilarity(analysis1, analysis2) * weights.semantic;
+      totalWeight += weights.semantic;
+    }
+
+    return totalWeight > 0 ? totalSimilarity / totalWeight : 0;
+  }
+
+  /**
+   * Calculate confidence score for similarity analysis
+   */
+  private calculateConfidence(
+    analysis1: AssetAnalysisResult,
+    analysis2: AssetAnalysisResult,
+    processingTime: number
+  ): number {
+    // Simple confidence calculation based on analysis quality and processing time
+    const baseConfidence = 0.7;
+    const timeBonus = processingTime < 5000 ? 0.1 : 0; // Bonus for fast processing
+    const qualityBonus = (analysis1.analysis.tags.length + analysis2.analysis.tags.length) > 4 ? 0.1 : 0;
+
+    return Math.min(baseConfidence + timeBonus + qualityBonus, 1.0);
+  }
+
+  /**
+   * Find common features between two asset analyses
+   */
+  private findCommonFeatures(analysis1: AssetAnalysisResult, analysis2: AssetAnalysisResult): string[] {
+    const commonFeatures: string[] = [];
+
+    // Common tags
+    const commonTags = analysis1.analysis.tags.filter(tag => analysis2.analysis.tags.includes(tag));
+    if (commonTags.length > 0) {
+      commonFeatures.push(`Shared tags: ${commonTags.join(', ')}`);
+    }
+
+    // Common moods
+    const commonMoods = analysis1.analysis.moods.filter(mood => analysis2.analysis.moods.includes(mood));
+    if (commonMoods.length > 0) {
+      commonFeatures.push(`Shared moods: ${commonMoods.join(', ')}`);
+    }
+
+    // Common colors
+    const commonColors = analysis1.analysis.colors.filter(color => analysis2.analysis.colors.includes(color));
+    if (commonColors.length > 0) {
+      commonFeatures.push(`Shared colors: ${commonColors.join(', ')}`);
+    }
+
+    return commonFeatures;
+  }
+
+  /**
+   * Find differences between two asset analyses
+   */
+  private findDifferences(analysis1: AssetAnalysisResult, analysis2: AssetAnalysisResult): string[] {
+    const differences: string[] = [];
+
+    // Different tags
+    const diffTags = analysis1.analysis.tags.filter(tag => !analysis2.analysis.tags.includes(tag));
+    if (diffTags.length > 0) {
+      differences.push(`Unique tags in asset 1: ${diffTags.join(', ')}`);
+    }
+
+    const diffTags2 = analysis2.analysis.tags.filter(tag => !analysis1.analysis.tags.includes(tag));
+    if (diffTags2.length > 0) {
+      differences.push(`Unique tags in asset 2: ${diffTags2.join(', ')}`);
+    }
+
+    // Different moods
+    const diffMoods = analysis1.analysis.moods.filter(mood => !analysis2.analysis.moods.includes(mood));
+    if (diffMoods.length > 0) {
+      differences.push(`Unique moods in asset 1: ${diffMoods.join(', ')}`);
+    }
+
+    return differences;
+  }
+
+  /**
+   * Generate recommendations based on similarity analysis
+   */
+  private generateRecommendations(
+    analysis1: AssetAnalysisResult,
+    analysis2: AssetAnalysisResult,
+    comparisonDetails: any
+  ): string[] {
+    const recommendations: string[] = [];
+
+    if (comparisonDetails.visualSimilarity < 0.5) {
+      recommendations.push('Consider improving visual consistency between assets');
+    }
+
+    if (comparisonDetails.colorSimilarity < 0.5) {
+      recommendations.push('Review color palette consistency across assets');
+    }
+
+    if (comparisonDetails.styleSimilarity < 0.5) {
+      recommendations.push('Align artistic style and composition techniques');
+    }
+
+    if (recommendations.length === 0) {
+      recommendations.push('Assets show good consistency - maintain current approach');
+    }
+
+    return recommendations;
+  }
+
+  /**
+   * Perform clustering of assets
+   */
+  private performClustering(
+    assetAnalyses: Array<{ asset: any; analysis: AssetAnalysisResult }>,
+    options: {
+      maxClusters: number;
+      similarityThreshold: number;
+      clusterType: 'auto' | 'style' | 'color' | 'composition';
+    }
+  ): AssetCluster[] {
+    const clusters: AssetCluster[] = [];
+    const processedAssets = new Set<string>();
+
+    for (const item of assetAnalyses) {
+      if (processedAssets.has(item.asset.id)) continue;
+
+      const cluster: AssetCluster = {
+        clusterId: `cluster_${clusters.length + 1}`,
+        assets: [item.asset],
+        clusterFeatures: [],
+        averageSimilarity: 1.0,
+        metadata: {
+          type: options.clusterType === 'auto' ? 'mixed' : options.clusterType,
+          description: `Cluster ${clusters.length + 1}`,
+          confidence: 0.8,
+        },
+      };
+
+      processedAssets.add(item.asset.id);
+
+      // Find similar assets for this cluster
+      for (const otherItem of assetAnalyses) {
+        if (processedAssets.has(otherItem.asset.id)) continue;
+
+        const similarity = this.calculateOverallSimilarity(
+          item.analysis,
+          otherItem.analysis,
+          ['visual', 'color', 'style', 'composition', 'semantic']
+        );
+
+        if (similarity >= options.similarityThreshold) {
+          cluster.assets.push(otherItem.asset);
+          processedAssets.add(otherItem.asset.id);
+        }
+      }
+
+      // Calculate cluster features and average similarity
+      if (cluster.assets.length > 1) {
+        cluster.clusterFeatures = this.extractClusterFeatures(cluster.assets);
+        cluster.averageSimilarity = this.calculateClusterAverageSimilarity(
+          cluster.assets.map(a => assetAnalyses.find(item => item.asset.id === a.id)?.analysis!)
+        );
+      }
+
+      clusters.push(cluster);
+
+      if (clusters.length >= options.maxClusters) break;
+    }
+
+    return clusters;
+  }
+
+  /**
+   * Extract features common to a cluster of assets
+   */
+  private extractClusterFeatures(assets: any[]): string[] {
+    const features: string[] = [];
+
+    if (assets.length === 0) return features;
+
+    // Find common tags across all assets
+    const commonTags = assets.reduce((acc, asset) => {
+      // This would need actual tag data from the asset
+      return acc;
+    }, new Set<string>());
+
+    if (commonTags.size > 0) {
+      features.push(`Common tags: ${Array.from(commonTags).join(', ')}`);
+    }
+
+    return features;
+  }
+
+  /**
+   * Calculate average similarity within a cluster
+   */
+  private calculateClusterAverageSimilarity(analyses: AssetAnalysisResult[]): number {
+    if (analyses.length < 2) return 1.0;
+
+    let totalSimilarity = 0;
+    let pairCount = 0;
+
+    for (let i = 0; i < analyses.length; i++) {
+      for (let j = i + 1; j < analyses.length; j++) {
+        totalSimilarity += this.calculateOverallSimilarity(
+          analyses[i],
+          analyses[j],
+          ['visual', 'color', 'style', 'composition', 'semantic']
+        );
+        pairCount++;
+      }
+    }
+
+    return pairCount > 0 ? totalSimilarity / pairCount : 1.0;
+  }
+
+  /**
+   * Calculate Jaccard similarity between two sets
+   */
+  private jaccardSimilarity(set1: Set<string>, set2: Set<string>): number {
+    const intersection = new Set([...set1].filter(x => set2.has(x)));
+    const union = new Set([...set1, ...set2]);
+
+    return union.size > 0 ? intersection.size / union.size : 0;
+  }
+}

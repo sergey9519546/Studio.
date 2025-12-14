@@ -467,7 +467,7 @@ class DraftService {
   /**
    * Simple method to save draft (alias for compatibility)
    */
-  async saveDraft(draftId: string, data: any): Promise<void> {
+  async saveDraftCompat(draftId: string, data: any): Promise<void> {
     await this.updateDraft(draftId, data);
   }
 
@@ -627,3 +627,60 @@ class DraftService {
       return stored ? JSON.parse(stored) : {};
     } catch (error) {
       console.warn('Failed to load drafts from storage:', error);
+      return {};
+    }
+  }
+
+  private getVersionStorage(): Record<string, any> {
+    try {
+      const stored = localStorage.getItem(this.versionStorageKey);
+      return stored ? JSON.parse(stored) : {};
+    } catch (error) {
+      console.warn('Failed to load versions from storage:', error);
+      return {};
+    }
+  }
+
+  private loadDraftsFromStorage(): void {
+    try {
+      const storage = this.getDraftStorage();
+      for (const [id, draftData] of Object.entries(storage)) {
+        const draft: DraftData = {
+          ...draftData,
+          metadata: {
+            ...draftData.metadata,
+            lastModified: new Date(draftData.metadata.lastModified)
+          },
+          lastSaved: draftData.lastSaved ? new Date(draftData.lastSaved) : undefined
+        } as DraftData;
+
+        this.drafts.set(id, draft);
+
+        // Start auto-save if enabled
+        if (draft.autoSaveEnabled) {
+          this.startAutoSave(id);
+        }
+      }
+    } catch (error) {
+      console.warn('Failed to load drafts from storage:', error);
+    }
+  }
+
+  private loadVersionsFromStorage(): void {
+    try {
+      const storage = this.getVersionStorage();
+      for (const [id, versionData] of Object.entries(storage)) {
+        const versions = (versionData as any[]).map(v => ({
+          ...v,
+          timestamp: new Date(v.timestamp)
+        }));
+        this.versions.set(id, versions);
+      }
+    } catch (error) {
+      console.warn('Failed to load versions from storage:', error);
+    }
+  }
+}
+
+// Export singleton instance
+export const draftService = DraftService.getInstance();
