@@ -41,15 +41,15 @@ export class AIUsageService {
     async logUsage(data: AIUsageRecord) {
         return this.prisma.aIUsage.create({
             data: {
-                endpoint: data.endpoint,
+                endpoint: data.endpoint || 'unknown',
                 model: data.model || 'gemini-1.5-pro',
-                inputTokens: data.inputTokens || 0,
-                outputTokens: data.outputTokens || 0,
+                tokens: (data.inputTokens || 0) + (data.outputTokens || 0),
                 cost: data.cost || 0,
-                duration: data.duration,
+                operation: 'chat',
                 cached: data.cached,
                 userId: data.userId,
                 projectId: data.projectId,
+                duration: data.duration,
             }
         });
     }
@@ -57,7 +57,7 @@ export class AIUsageService {
     async getStats(timeRange: { start: Date; end: Date }): Promise<AIUsageStats> {
         const usage = await this.prisma.aIUsage.findMany({
             where: {
-                timestamp: {
+                createdAt: {
                     gte: timeRange.start,
                     lte: timeRange.end
                 }
@@ -67,7 +67,7 @@ export class AIUsageService {
         const uncachedRequests = usage.filter(u => !u.cached);
         const cachedRequests = usage.filter(u => u.cached);
         const avgCostPerUncached = uncachedRequests.length > 0
-            ? uncachedRequests.reduce((sum, u) => sum + u.cost, 0) / uncachedRequests.length
+            ? uncachedRequests.reduce((sum, u) => sum + (u.cost || 0), 0) / uncachedRequests.length
             : 0.02;
 
         return {
@@ -77,25 +77,27 @@ export class AIUsageService {
             cacheHitRate: usage.length > 0
                 ? ((cachedRequests.length / usage.length * 100).toFixed(2) + '%')
                 : '0%',
-            totalCost: '$' + usage.reduce((sum, u) => sum + u.cost, 0).toFixed(4),
+            totalCost: '$' + usage.reduce((sum, u) => sum + (u.cost || 0), 0).toFixed(4),
             costSaved: '$' + (cachedRequests.length * avgCostPerUncached).toFixed(4),
             avgDuration: usage.length > 0
-                ? (usage.reduce((sum, u) => sum + u.duration, 0) / usage.length).toFixed(0) + 'ms'
+                ? (usage.reduce((sum, u) => sum + (u.duration || 0), 0) / usage.length).toFixed(0) + 'ms'
                 : '0ms',
             byEndpoint: this.groupByEndpoint(usage),
         };
     }
 
-    private groupByEndpoint(usage: { endpoint: string; cost: number; duration: number; cached: boolean }[]): Record<string, GroupedEndpointStats> {
+    private groupByEndpoint(usage: any[]): Record<string, GroupedEndpointStats> {
+        const filteredUsage = usage.filter(u => u.endpoint && typeof u.endpoint === 'string');
 
-        const grouped = usage.reduce((acc, u) => {
-            if (!acc[u.endpoint]) {
-                acc[u.endpoint] = { count: 0, cost: 0, avgDuration: 0, cached: 0 };
+        const grouped = filteredUsage.reduce((acc, u) => {
+            const endpoint = u.endpoint as string;
+            if (!acc[endpoint]) {
+                acc[endpoint] = { count: 0, cost: 0, avgDuration: 0, cached: 0 };
             }
-            acc[u.endpoint].count++;
-            (acc[u.endpoint].cost as number) += u.cost;
-            (acc[u.endpoint].avgDuration as number) += u.duration;
-            if (u.cached) acc[u.endpoint].cached++;
+            acc[endpoint].count++;
+            (acc[endpoint].cost as number) += u.cost || 0;
+            (acc[endpoint].avgDuration as number) += u.duration || 0;
+            if (u.cached) acc[endpoint].cached++;
             return acc;
         }, {} as Record<string, GroupedEndpointStats>);
 

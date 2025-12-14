@@ -179,8 +179,8 @@ Respond based on the provided context.`;
       recommendations: string[];
     };
   }> {
-    const results = [];
-    
+    const results: Array<{ imageUrl: string; analysis: any }> = [];
+
     for (const imageUrl of imageUrls) {
       try {
         const analysis = await this.analyzeImage(imageUrl, {
@@ -190,9 +190,9 @@ Respond based on the provided context.`;
         results.push({ imageUrl, analysis });
       } catch (error) {
         this.logger.error(`Error analyzing image ${imageUrl}:`, error);
-        results.push({ 
-          imageUrl, 
-          analysis: { error: error.message } 
+        results.push({
+          imageUrl,
+          analysis: { error: (error as Error).message }
         });
       }
     }
@@ -486,6 +486,7 @@ Image URL: ${imageUrl}`;
     }
 
     const totalCost = project.assignments.reduce((acc, assignment) => {
+      if (!assignment.endDate || !assignment.startDate) return acc;
       const duration = (assignment.endDate.getTime() - assignment.startDate.getTime()) / (1000 * 60 * 60 * 24); // duration in days
       const rate = assignment.freelancer.rate || 0;
       return acc + (duration * (rate / 30)); // assuming rate is monthly
@@ -549,27 +550,25 @@ Image URL: ${imageUrl}`;
 
     const freelancer = await this.prisma.freelancer.findUnique({
       where: { id: freelancerId },
-      include: {
-        skills: true,
-        assignments: {
-          include: {
-            project: true,
-          },
-        },
-      },
     });
 
     if (!freelancer) {
       throw new Error('Freelancer not found');
     }
 
+    // Get assignments separately
+    const assignments = await this.prisma.assignment.findMany({
+      where: { freelancerId },
+      include: { project: true },
+    });
+
     const prompt = `
       Analyze the following freelancer data and provide a performance review.
-      Freelancer Name: ${freelancer.name}
-      Role: ${freelancer.role}
-      Skills: ${freelancer.skills.map(s => s.name).join(', ')}
+      Freelancer Name: ${freelancer.name || 'Unknown'}
+      Role: ${freelancer.role || 'Not specified'}
+      Skills: Not available in current schema
       Assignments:
-      ${freelancer.assignments.map(a => `- ${a.project.title}: ${a.role}`).join('\n')}
+      ${assignments.map(a => `- ${a.project?.title || 'Unknown Project'}: ${a.role || 'Not specified'}`).join('\n')}
     `;
 
     const schema = {

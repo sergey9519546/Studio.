@@ -20,6 +20,7 @@ import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
 import { ConversationsService } from '../conversations/conversations.service.js';
 import { RAGService } from '../rag/rag.service.js';
 import { GeminiAnalystService } from './gemini-analyst.service.js';
+import { GeminiService } from './gemini.service.js';
 import { StreamingService } from './streaming.service.js';
 
 interface ChatRequest {
@@ -47,6 +48,7 @@ interface ChatResponse {
 export class AIController {
     constructor(
         private readonly aiService: GeminiAnalystService,
+        private readonly geminiService: GeminiService,
         private readonly rag: RAGService,
         private readonly streaming: StreamingService,
         private readonly conversationsService: ConversationsService,
@@ -360,6 +362,367 @@ ${JSON.stringify(parsedContext, null, 2)}
     async generateProjectBrief(@Param('id') id: string) {
         // TODO: Implement generateProjectBrief in GeminiAnalystService
         throw new BadRequestException('generateProjectBrief not implemented yet');
+    }
+
+    /**
+     * Generate content with Google Search grounding
+     * POST /api/ai/search
+     */
+    @Post('search')
+    @HttpCode(HttpStatus.OK)
+    async search(@Body() body: { query: string; model?: string }) {
+        if (!body.query) {
+            throw new BadRequestException('Query is required');
+        }
+
+        const result = await this.geminiService.generateWithGoogleSearch(
+            body.query,
+            body.model
+        );
+
+        return {
+            query: body.query,
+            response: result,
+            provider: 'Google Gemini with Search',
+        };
+    }
+
+    /**
+     * Execute code using AI-powered code execution
+     * POST /api/ai/execute-code
+     */
+    @Post('execute-code')
+    @HttpCode(HttpStatus.OK)
+    async executeCode(
+        @Body() body: {
+            code: string;
+            language?: 'python' | 'javascript' | 'java' | 'cpp' | 'go' | string;
+            model?: string;
+        }
+    ) {
+        if (!body.code) {
+            throw new BadRequestException('Code is required');
+        }
+
+        const result = await this.geminiService.executeCode(
+            body.code,
+            body.language,
+            { model: body.model }
+        );
+
+        return result;
+    }
+
+    /**
+     * Generate images using AI
+     * POST /api/ai/generate-image
+     */
+    @Post('generate-image')
+    @HttpCode(HttpStatus.OK)
+    async generateImage(
+        @Body() body: {
+            prompt: string;
+            style?: 'natural' | 'vivid' | 'artistic';
+            model?: string;
+            savePath?: string;
+        }
+    ) {
+        if (!body.prompt) {
+            throw new BadRequestException('Prompt is required');
+        }
+
+        const result = await this.geminiService.generateImage(
+            body.prompt,
+            {
+                style: body.style,
+                model: body.model,
+                savePath: body.savePath,
+            }
+        );
+
+        return result;
+    }
+
+    /**
+     * Perform deep research using specialized agent
+     * POST /api/ai/deep-research
+     */
+    @Post('deep-research')
+    @HttpCode(HttpStatus.OK)
+    async deepResearch(
+        @Body() body: {
+            query: string;
+            background?: boolean;
+            maxWaitTime?: number;
+        }
+    ) {
+        if (!body.query) {
+            throw new BadRequestException('Query is required');
+        }
+
+        const result = await this.geminiService.performDeepResearch(
+            body.query,
+            {
+                background: body.background,
+                maxWaitTime: body.maxWaitTime,
+            }
+        );
+
+        return result;
+    }
+
+    /**
+     * Create multi-tool interaction
+     * POST /api/ai/multi-tool
+     */
+    @Post('multi-tool')
+    @HttpCode(HttpStatus.OK)
+    async multiTool(
+        @Body() body: {
+            input: string;
+            tools: Array<'google_search' | 'code_execution' | { type: 'function'; name: string; description: string; parameters: Record<string, any> }>;
+            model?: string;
+            agent?: string;
+            background?: boolean;
+        }
+    ) {
+        if (!body.input) {
+            throw new BadRequestException('Input is required');
+        }
+
+        if (!body.tools || body.tools.length === 0) {
+            throw new BadRequestException('At least one tool is required');
+        }
+
+        const result = await this.geminiService.createMultiToolInteraction(
+            body.input,
+            body.tools,
+            {
+                model: body.model,
+                agent: body.agent,
+                background: body.background,
+            }
+        );
+
+        return result;
+    }
+
+    /**
+     * Create advanced conversation with memory management
+     * POST /api/ai/conversation/advanced
+     */
+    @Post('conversation/advanced')
+    @HttpCode(HttpStatus.OK)
+    async createAdvancedConversation(
+        @Body() body: {
+            initialPrompt: string;
+            systemPrompt?: string;
+            memorySize?: number;
+            model?: string;
+            tools?: Array<any>;
+        }
+    ) {
+        if (!body.initialPrompt) {
+            throw new BadRequestException('Initial prompt is required');
+        }
+
+        const result = await this.geminiService.createAdvancedConversation({
+            initialPrompt: body.initialPrompt,
+            systemPrompt: body.systemPrompt,
+            memorySize: body.memorySize,
+            model: body.model,
+            tools: body.tools,
+        });
+
+        return result;
+    }
+
+    /**
+     * Continue advanced conversation
+     * POST /api/ai/conversation/continue
+     */
+    @Post('conversation/continue')
+    @HttpCode(HttpStatus.OK)
+    async continueAdvancedConversation(
+        @Body() body: {
+            conversationId: string;
+            userMessage: string;
+            conversationHistory: Array<{ role: string; content: string }>;
+            memorySize?: number;
+            model?: string;
+            tools?: Array<any>;
+        }
+    ) {
+        if (!body.conversationId) {
+            throw new BadRequestException('Conversation ID is required');
+        }
+
+        if (!body.userMessage) {
+            throw new BadRequestException('User message is required');
+        }
+
+        if (!body.conversationHistory) {
+            throw new BadRequestException('Conversation history is required');
+        }
+
+        const result = await this.geminiService.continueAdvancedConversation(
+            body.conversationId,
+            body.userMessage,
+            body.conversationHistory,
+            {
+                memorySize: body.memorySize,
+                model: body.model,
+                tools: body.tools,
+            }
+        );
+
+        return result;
+    }
+
+    /**
+     * Batch process multiple prompts
+     * POST /api/ai/batch
+     */
+    @Post('batch')
+    @HttpCode(HttpStatus.OK)
+    async batchProcess(
+        @Body() body: {
+            prompts: Array<{
+                prompt: string;
+                model?: string;
+                temperature?: number;
+            }>;
+            concurrency?: number;
+            delay?: number;
+        }
+    ) {
+        if (!body.prompts || body.prompts.length === 0) {
+            throw new BadRequestException('At least one prompt is required');
+        }
+
+        const results = await this.geminiService.batchGenerateContent(
+            body.prompts,
+            {
+                concurrency: body.concurrency,
+                delay: body.delay,
+            }
+        );
+
+        return {
+            total: body.prompts.length,
+            successful: results.filter(r => r.success).length,
+            failed: results.filter(r => !r.success).length,
+            results,
+        };
+    }
+
+    /**
+     * Generate content with custom model parameters
+     * POST /api/ai/custom-config
+     */
+    @Post('custom-config')
+    @HttpCode(HttpStatus.OK)
+    async customConfig(
+        @Body() body: {
+            prompt: string;
+            config: {
+                model?: string;
+                temperature?: number;
+                maxOutputTokens?: number;
+                topP?: number;
+                topK?: number;
+                stopSequences?: string[];
+                candidateCount?: number;
+                safetySettings?: any[];
+            };
+        }
+    ) {
+        if (!body.prompt) {
+            throw new BadRequestException('Prompt is required');
+        }
+
+        const result = await this.geminiService.generateWithCustomConfig(
+            body.prompt,
+            body.config || {}
+        );
+
+        return result;
+    }
+
+    /**
+     * Analyze content quality with AI feedback
+     * POST /api/ai/analyze-quality
+     */
+    @Post('analyze-quality')
+    @HttpCode(HttpStatus.OK)
+    async analyzeQuality(
+        @Body() body: {
+            content: string;
+            criteria?: {
+                checkGrammar?: boolean;
+                checkClarity?: boolean;
+                checkEngagement?: boolean;
+                checkOriginality?: boolean;
+                targetAudience?: string;
+            };
+        }
+    ) {
+        if (!body.content) {
+            throw new BadRequestException('Content is required');
+        }
+
+        const result = await this.geminiService.analyzeContentQuality(
+            body.content,
+            body.criteria || {}
+        );
+
+        return result;
+    }
+
+    /**
+     * Generate a comprehensive moodboard for creative projects
+     * POST /api/ai/moodboard/generate
+     */
+    @Post('moodboard/generate')
+    @HttpCode(HttpStatus.OK)
+    async generateMoodboard(
+        @Body() body: {
+            theme: string;
+            style?: 'minimalist' | 'vibrant' | 'elegant' | 'modern' | 'vintage' | 'industrial' | 'organic' | 'futuristic';
+            colors?: string[];
+            targetAudience?: string;
+            projectType?: 'website' | 'branding' | 'product' | 'interior' | 'fashion' | 'marketing';
+            mood?: string[];
+            generateImages?: boolean;
+            imageCount?: number;
+        }
+    ) {
+        if (!body.theme) {
+            throw new BadRequestException('Theme is required');
+        }
+
+        const moodboard = await this.geminiService.generateMoodboard({
+            theme: body.theme,
+            style: body.style,
+            colors: body.colors,
+            targetAudience: body.targetAudience,
+            projectType: body.projectType,
+            mood: body.mood,
+            generateImages: body.generateImages,
+            imageCount: body.imageCount,
+        });
+
+        return moodboard;
+    }
+
+    /**
+     * Get Gemini service health check
+     * GET /api/ai/health
+     */
+    @Get('health')
+    async getHealth() {
+        const health = await this.geminiService.healthCheck();
+        return health;
     }
 
     /**

@@ -1,231 +1,306 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import OpenAI from 'openai';
+import { GeminiService } from './gemini.service';
 
 /**
- * Service for interacting with Google's Gemini API via OpenAI-compatible endpoint
- * This provides an alternative to the Vertex AI implementation
+ * OpenAI-compatible service using Google Gemini as the backend
+ * Provides OpenAI-like API interface for seamless integration
  */
 @Injectable()
 export class GeminiOpenAIService {
   private readonly logger = new Logger(GeminiOpenAIService.name);
-  private client: OpenAI;
 
-  constructor(private configService: ConfigService) {
-    const apiKey = this.configService.get<string>('GEMINI_API_KEY');
+  constructor(
+    private geminiService: GeminiService,
+    private configService: ConfigService
+  ) {}
 
-    if (!apiKey) {
-      this.logger.warn(
-        'GEMINI_API_KEY not configured. Service will not be functional.'
-      );
+  /**
+   * Create a chat completion using OpenAI-compatible interface
+   */
+  async createChatCompletion(options: {
+    model?: string;
+    messages: Array<{
+      role: 'system' | 'user' | 'assistant';
+      content: string;
+    }>;
+    temperature?: number;
+    max_tokens?: number;
+    stream?: boolean;
+  }) {
+    try {
+      const {
+        model = 'gpt-3.5-turbo',
+        messages,
+        temperature = 0.7,
+        max_tokens = 2048,
+        stream = false
+      } = options;
+
+      // Convert OpenAI format to Gemini format
+      const geminiMessages = messages.map(msg => ({
+        role: msg.role,
+        content: msg.content
+      }));
+
+      const systemPrompt = messages.find(msg => msg.role === 'system')?.content;
+
+      if (stream) {
+        // Return async generator for streaming
+        return this.createStreamingChatCompletion(geminiMessages, systemPrompt, model);
+      }
+
+      // Get response from Gemini
+      const response = await this.geminiService.chat(geminiMessages, systemPrompt);
+
+      // Return in OpenAI format
+      return {
+        id: `chatcmpl-${Date.now()}`,
+        object: 'chat.completion',
+        created: Math.floor(Date.now() / 1000),
+        model: model,
+        choices: [{
+          index: 0,
+          message: {
+            role: 'assistant',
+            content: response,
+          },
+          finish_reason: 'stop'
+        }],
+        usage: {
+          prompt_tokens: this.estimateTokens(messages.map(m => m.content).join(' ')),
+          completion_tokens: this.estimateTokens(response),
+          total_tokens: 0 // Will be calculated by usage estimator
+        }
+      };
+    } catch (error) {
+      this.logger.error('Error in createChatCompletion:', error);
+      throw error;
     }
-
-    this.client = new OpenAI({
-      apiKey: apiKey || 'placeholder',
-      baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai/',
-    });
-
-    this.logger.log('GeminiOpenAIService initialized');
   }
 
   /**
-   * Generate a chat completion using Gemini
-   * @param messages Array of chat messages with role and content
-   * @param systemPrompt Optional system prompt to guide the AI
-   * @param model Gemini model to use (default: gemini-2.0-flash-exp)
-   * @returns The AI's response message
+   * Create a streaming chat completion
    */
-  async chat(
+  async *createStreamingChatCompletion(
     messages: Array<{ role: string; content: string }>,
     systemPrompt?: string,
-    model: string = 'gemini-2.0-flash-exp'
-  ): Promise<string> {
+    model: string = 'gpt-3.5-turbo'
+  ) {
     try {
-      const chatMessages: OpenAI.Chat.ChatCompletionMessageParam[] = [];
+      const stream = this.geminiService.streamChat(messages, systemPrompt, model);
 
-      // Add system prompt if provided
-      if (systemPrompt) {
-        chatMessages.push({
-          role: 'system',
-          content: systemPrompt,
-        });
-      }
-
-      // Add user messages
-      chatMessages.push(
-        ...messages.map((msg) => ({
-          role: msg.role as 'user' | 'assistant' | 'system',
-          content: msg.content,
-        }))
-      );
-
-      this.logger.debug(
-        `Sending chat request to Gemini with ${chatMessages.length} messages`
-      );
-
-      const response = await this.client.chat.completions.create({
-        model,
-        messages: chatMessages,
-      });
-
-      const content = response.choices[0]?.message?.content;
-
-      if (!content) {
-        throw new Error('No content in response');
-      }
-
-      this.logger.debug('Successfully received chat response from Gemini');
-      return content;
-    } catch (error) {
-      this.logger.error('Error calling Gemini chat API:', error);
-      throw error;
-    }
-  }
-
-  /**
-   * Generate content from a simple prompt
-   * @param prompt The text prompt
-   * @param model Gemini model to use (default: gemini-2.0-flash-exp)
-   * @returns The AI's generated content
-   */
-  async generateContent(
-    prompt: string,
-    model: string = 'gemini-2.0-flash-exp'
-  ): Promise<string> {
-    try {
-      this.logger.debug(`Generating content with prompt: ${prompt.substring(0, 100)}...`);
-
-      const response = await this.client.chat.completions.create({
-        model,
-        messages: [
-          {
-            role: 'user',
-            content: prompt,
-          },
-        ],
-      });
-
-      const content = response.choices[0]?.message?.content;
-
-      if (!content) {
-        throw new Error('No content in response');
-      }
-
-      this.logger.debug('Successfully generated content from Gemini');
-      return content;
-    } catch (error) {
-      this.logger.error('Error generating content from Gemini:', error);
-      throw error;
-    }
-  }
-
-  /**
-   * Generate content with streaming support
-   * @param prompt The text prompt
-   * @param model Gemini model to use
-   * @returns AsyncGenerator that yields content chunks
-   */
-  async *streamContent(
-    prompt: string,
-    model: string = 'gemini-2.0-flash-exp'
-  ): AsyncGenerator<string> {
-    try {
-      this.logger.debug(`Streaming content with prompt: ${prompt.substring(0, 100)}...`);
-
-      const stream = await this.client.chat.completions.create({
-        model,
-        messages: [
-          {
-            role: 'user',
-            content: prompt,
-          },
-        ],
-        stream: true,
-      });
-
+      let chunkIndex = 0;
       for await (const chunk of stream) {
-        const content = chunk.choices[0]?.delta?.content;
-        if (content) {
-          yield content;
-        }
+        yield {
+          id: `chatcmpl-${Date.now()}`,
+          object: 'chat.completion.chunk',
+          created: Math.floor(Date.now() / 1000),
+          model: model,
+          choices: [{
+            index: 0,
+            delta: {
+              content: chunk
+            },
+            finish_reason: null
+          }]
+        };
+        chunkIndex++;
       }
 
-      this.logger.debug('Successfully completed streaming from Gemini');
+      // Send final chunk with finish reason
+      yield {
+        id: `chatcmpl-${Date.now()}`,
+        object: 'chat.completion.chunk',
+        created: Math.floor(Date.now() / 1000),
+        model: model,
+        choices: [{
+          index: 0,
+          delta: {},
+          finish_reason: 'stop'
+        }]
+      };
     } catch (error) {
-      this.logger.error('Error streaming content from Gemini:', error);
+      this.logger.error('Error in createStreamingChatCompletion:', error);
       throw error;
     }
   }
 
   /**
-   * Chat with streaming support
-   * @param messages Array of chat messages
-   * @param systemPrompt Optional system prompt
-   * @param model Gemini model to use
-   * @returns AsyncGenerator that yields content chunks
+   * Create a completion using OpenAI-compatible interface
    */
-  async *streamChat(
-    messages: Array<{ role: string; content: string }>,
-    systemPrompt?: string,
-    model: string = 'gemini-2.0-flash-exp'
-  ): AsyncGenerator<string> {
+  async createCompletion(options: {
+    model?: string;
+    prompt: string | string[];
+    temperature?: number;
+    max_tokens?: number;
+    stream?: boolean;
+  }) {
     try {
-      const chatMessages: OpenAI.Chat.ChatCompletionMessageParam[] = [];
+      const {
+        model = 'text-davinci-003',
+        prompt,
+        temperature = 0.7,
+        max_tokens = 2048,
+        stream = false
+      } = options;
 
-      if (systemPrompt) {
-        chatMessages.push({
-          role: 'system',
-          content: systemPrompt,
-        });
+      const promptText = Array.isArray(prompt) ? prompt.join('\n') : prompt;
+
+      if (stream) {
+        return this.createStreamingCompletion(promptText, model);
       }
 
-      chatMessages.push(
-        ...messages.map((msg) => ({
-          role: msg.role as 'user' | 'assistant' | 'system',
-          content: msg.content,
-        }))
-      );
+      const response = await this.geminiService.generateContent(promptText);
 
-      this.logger.debug(
-        `Streaming chat with ${chatMessages.length} messages`
-      );
-
-      const stream = await this.client.chat.completions.create({
-        model,
-        messages: chatMessages,
-        stream: true,
-      });
-
-      for await (const chunk of stream) {
-        const content = chunk.choices[0]?.delta?.content;
-        if (content) {
-          yield content;
+      return {
+        id: `cmpl-${Date.now()}`,
+        object: 'text_completion',
+        created: Math.floor(Date.now() / 1000),
+        model: model,
+        choices: [{
+          text: response,
+          index: 0,
+          logprobs: null,
+          finish_reason: 'stop'
+        }],
+        usage: {
+          prompt_tokens: this.estimateTokens(promptText),
+          completion_tokens: this.estimateTokens(response),
+          total_tokens: 0
         }
-      }
-
-      this.logger.debug('Successfully completed streaming chat from Gemini');
+      };
     } catch (error) {
-      this.logger.error('Error streaming chat from Gemini:', error);
+      this.logger.error('Error in createCompletion:', error);
       throw error;
     }
   }
 
   /**
-   * Health check for the Gemini OpenAI service
-   * @returns Service status information
+   * Create a streaming completion
    */
-  async healthCheck(): Promise<{
-    status: string;
-    configured: boolean;
-    endpoint: string;
-  }> {
-    const apiKey = this.configService.get<string>('GEMINI_API_KEY');
-    const configured = !!apiKey;
+  async *createStreamingCompletion(
+    prompt: string,
+    model: string = 'text-davinci-003'
+  ) {
+    try {
+      const stream = this.geminiService.streamContent(prompt, model);
 
+      let chunkIndex = 0;
+      for await (const chunk of stream) {
+        yield {
+          id: `cmpl-${Date.now()}`,
+          object: 'text_completion',
+          created: Math.floor(Date.now() / 1000),
+          model: model,
+          choices: [{
+            text: chunk,
+            index: 0,
+            logprobs: null,
+            finish_reason: null
+          }]
+        };
+        chunkIndex++;
+      }
+
+      // Send final chunk
+      yield {
+        id: `cmpl-${Date.now()}`,
+        object: 'text_completion',
+        created: Math.floor(Date.now() / 1000),
+        model: model,
+        choices: [{
+          text: '',
+          index: 0,
+          logprobs: null,
+          finish_reason: 'stop'
+        }]
+      };
+    } catch (error) {
+      this.logger.error('Error in createStreamingCompletion:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * List available models (OpenAI-compatible response)
+   */
+  async listModels() {
     return {
-      status: configured ? 'operational' : 'not_configured',
-      configured,
-      endpoint: 'https://generativelanguage.googleapis.com/v1beta/openai/',
+      object: 'list',
+      data: [
+        {
+          id: 'gpt-3.5-turbo',
+          object: 'model',
+          created: Date.now(),
+          owned_by: 'openai',
+          permission: [],
+          root: 'gpt-3.5-turbo',
+          parent: null
+        },
+        {
+          id: 'gpt-4',
+          object: 'model',
+          created: Date.now(),
+          owned_by: 'openai',
+          permission: [],
+          root: 'gpt-4',
+          parent: null
+        },
+        {
+          id: 'text-davinci-003',
+          object: 'model',
+          created: Date.now(),
+          owned_by: 'openai',
+          permission: [],
+          root: 'text-davinci-003',
+          parent: null
+        }
+      ]
     };
+  }
+
+  /**
+   * Get model information
+   */
+  async retrieveModel(model: string) {
+    const models = await this.listModels();
+    const foundModel = models.data.find(m => m.id === model);
+
+    if (!foundModel) {
+      throw new Error(`Model ${model} not found`);
+    }
+
+    return foundModel;
+  }
+
+  /**
+   * Estimate token count (rough approximation)
+   */
+  private estimateTokens(text: string): number {
+    // Rough estimation: ~4 characters per token for English text
+    return Math.ceil(text.length / 4);
+  }
+
+  /**
+   * Health check for the OpenAI-compatible service
+   */
+  async healthCheck() {
+    try {
+      const health = await this.geminiService.healthCheck();
+      return {
+        ...health,
+        compatibleWith: 'OpenAI API',
+        version: '1.0.0'
+      };
+    } catch (error) {
+      return {
+        status: 'error',
+        configured: false,
+        provider: 'Google Gemini AI (OpenAI Compatible)',
+        mode: 'unknown',
+        error: error.message
+      };
+    }
   }
 }

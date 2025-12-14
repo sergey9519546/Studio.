@@ -8,12 +8,17 @@ import { StorageService } from "../storage/storage.service.js";
 export interface AssetEntity {
   id: string;
   projectId?: string | null;
-  fileName: string;
-  mimeType: string;
-  sizeBytes: number;
-  storageKey: string;
+  fileName: string | null;
+  mimeType: string | null;
+  sizeBytes: number | null;
+  storageKey: string | null;
   publicUrl?: string | null;
   createdAt: Date;
+  updatedAt: Date;
+  metadata: any;
+  title?: string | null;
+  type: string;
+  userId?: string | null;
   isTransient?: boolean;
   url?: string; // Virtual field for frontend convenience
 }
@@ -63,11 +68,14 @@ export class AssetsService {
       mimeType: file.mimetype,
       sizeBytes: file.size,
       storageKey: uploaded.storageKey,
-      publicUrl: uploaded.publicUrl,
       url: finalUrl,
       createdAt: new Date(),
+      updatedAt: new Date(),
+      metadata: {},
+      type: 'file',
       isTransient: true,
-      projectId: projectId || undefined
+      projectId: projectId || null,
+      userId: null
     };
 
     // 2. Save to Memory Store (Resilience)
@@ -81,11 +89,12 @@ export class AssetsService {
       const asset = await this.prisma.asset.create({
         data: {
           id: assetEntity.id,
+          url: finalUrl || '',
+          type: 'file',
           fileName: file.originalname,
           mimeType: file.mimetype,
           sizeBytes: file.size,
           storageKey: uploaded.storageKey,
-          publicUrl: uploaded.publicUrl, // Nullable in DB
           projectId: projectId || null,
         },
       });
@@ -138,7 +147,7 @@ export class AssetsService {
       let url = '';
       try {
         // Only try signing if we have a key and no public url
-        if (a.storageKey) {
+        if (a.storageKey && a.storageKey !== null) {
           url = await this.storage.getSignedDownloadUrl(a.storageKey);
         }
       } catch {
@@ -164,7 +173,10 @@ export class AssetsService {
       const asset = await this.findOne(id);
       if (asset.url) return asset.url;
       if (asset.publicUrl) return asset.publicUrl;
-      return this.storage.getSignedDownloadUrl(asset.storageKey);
+      if (asset.storageKey && asset.storageKey !== null) {
+        return this.storage.getSignedDownloadUrl(asset.storageKey);
+      }
+      return '';
     } catch {
       return '';
     }
@@ -174,7 +186,9 @@ export class AssetsService {
     try {
       const asset = await this.findOne(id);
 
-      await this.storage.deleteObject(asset.storageKey);
+      if (asset.storageKey && asset.storageKey !== null) {
+        await this.storage.deleteObject(asset.storageKey);
+      }
       this.memoryStore = this.memoryStore.filter(a => a.id !== id);
 
       await this.prisma.asset.delete({ where: { id } });

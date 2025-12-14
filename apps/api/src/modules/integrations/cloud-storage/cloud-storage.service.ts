@@ -1,7 +1,7 @@
-import { Injectable, Logger, BadRequestException } from '@nestjs/common';
-import { ICloudStorageAdapter } from './adapters/storage-adapter.interface.js';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { GoogleDriveAdapter } from './adapters/google-drive.adapter.js'; // Implementation below
-import { CloudProviderOptionDto, CloudProviderType, CloudFileDto } from './dto/cloud-storage.dto.js';
+import { ICloudStorageAdapter } from './adapters/storage-adapter.interface.js';
+import { CloudFileDto, CloudProviderOptionDto, CloudProviderType } from './dto/cloud-storage.dto.js';
 
 @Injectable()
 export class CloudStorageService {
@@ -24,7 +24,7 @@ export class CloudStorageService {
   /**
    * Returns all available storage options and their connection status for the user.
    */
-  async getProviderOptions(userId: number): Promise<CloudProviderOptionDto[]> {
+  async getProviderOptions(userId: string): Promise<CloudProviderOptionDto[]> {
     const options: CloudProviderOptionDto[] = [];
 
     // 1. Google Drive
@@ -39,7 +39,7 @@ export class CloudStorageService {
     return options;
   }
 
-  async listFiles(userId: number, providerId: string, folderId?: string): Promise<{ files: CloudFileDto[]; nextPageToken?: string }> {
+  async listFiles(userId: string, providerId: string, folderId?: string): Promise<{ files: CloudFileDto[]; nextPageToken?: string }> {
     const adapter = this.adapters.get(providerId);
     if (!adapter) {
       throw new BadRequestException(`Provider '${providerId}' is not supported.`);

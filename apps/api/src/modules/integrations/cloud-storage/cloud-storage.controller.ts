@@ -16,8 +16,7 @@ export class CloudStorageController {
 
   @Get("options")
   async getOptions(@Req() req: RequestWithUser) {
-    const userId = parseInt(req.user.id, 10);
-    return this.storageService.getProviderOptions(userId);
+    return this.storageService.getProviderOptions(req.user.id);
   }
 
   @Get(":provider/files")
@@ -26,7 +25,6 @@ export class CloudStorageController {
     @Query() query: ListFilesQueryDto,
     @Req() req: RequestWithUser
   ) {
-    const userId = parseInt(req.user.id, 10);
-    return this.storageService.listFiles(userId, provider, query.folderId);
+    return this.storageService.listFiles(req.user.id, provider, query.folderId);
   }
 }

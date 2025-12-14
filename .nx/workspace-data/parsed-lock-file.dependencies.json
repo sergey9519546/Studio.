@@ -5861,7 +5861,7 @@
   },
   {
     "source": "npm:@inquirer/core",
-    "target": "npm:wrap-ansi@9.0.2",
+    "target": "npm:wrap-ansi",
     "type": "static"
   },
   {
@@ -5891,7 +5891,7 @@
   },
   {
     "source": "npm:@inquirer/external-editor",
-    "target": "npm:chardet@2.1.1",
+    "target": "npm:chardet",
     "type": "static"
   },
   {
@@ -10075,381 +10075,6 @@
     "type": "static"
   },
   {
-    "source": "npm:@tiptap-pro/extension-ai",
-    "target": "npm:memoize-one",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap-pro/extension-ai",
-    "target": "npm:tiny-invariant",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/extension-bubble-menu",
-    "target": "npm:tippy.js",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/extension-emoji",
-    "target": "npm:emoji-regex",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/extension-emoji",
-    "target": "npm:emojibase-data",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/extension-emoji",
-    "target": "npm:is-emoji-supported",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/extension-floating-menu",
-    "target": "npm:tippy.js",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/extension-link",
-    "target": "npm:linkifyjs",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/extension-link@3.13.0",
-    "target": "npm:linkifyjs",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/extension-unique-id",
-    "target": "npm:uuid@10.0.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-changeset",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-collab",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-commands",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-dropcursor",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-gapcursor",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-history",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-inputrules",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-keymap",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-markdown",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-menu",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-schema-basic",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-schema-list",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-tables",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-trailing-node",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-changeset",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-collab",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-commands",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-dropcursor",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-gapcursor",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-history",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-inputrules",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-keymap",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-markdown",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-menu",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-schema-basic",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-schema-list",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-tables",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-trailing-node",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/pm@3.13.0",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/react",
-    "target": "npm:@tiptap/extension-bubble-menu",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/react",
-    "target": "npm:@tiptap/extension-floating-menu",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/react",
-    "target": "npm:@types/use-sync-external-store",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/react",
-    "target": "npm:fast-deep-equal",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/react",
-    "target": "npm:use-sync-external-store",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/core@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-blockquote@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-bold@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-bullet-list@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-code@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-code-block@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-document@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-dropcursor@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-gapcursor@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-hard-break@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-heading@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-horizontal-rule@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-italic@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-link@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-list",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-list-item@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-list-keymap",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-ordered-list@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-paragraph@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-strike@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-text@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extension-underline@3.13.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/extensions",
-    "type": "static"
-  },
-  {
-    "source": "npm:@tiptap/starter-kit",
-    "target": "npm:@tiptap/pm@3.13.0",
-    "type": "static"
-  },
-  {
     "source": "npm:@tokenizer/inflate",
     "target": "npm:debug",
     "type": "static"
@@ -10722,16 +10347,6 @@
   {
     "source": "npm:@types/lodash.throttle",
     "target": "npm:@types/lodash",
-    "type": "static"
-  },
-  {
-    "source": "npm:@types/markdown-it",
-    "target": "npm:@types/linkify-it",
-    "type": "static"
-  },
-  {
-    "source": "npm:@types/markdown-it",
-    "target": "npm:@types/mdurl",
     "type": "static"
   },
   {
@@ -17346,7 +16961,7 @@
   },
   {
     "source": "npm:external-editor",
-    "target": "npm:chardet",
+    "target": "npm:chardet@0.7.0",
     "type": "static"
   },
   {
@@ -17361,7 +16976,7 @@
   },
   {
     "source": "npm:external-editor",
-    "target": "npm:chardet",
+    "target": "npm:chardet@0.7.0",
     "type": "static"
   },
   {
@@ -19456,7 +19071,7 @@
   },
   {
     "source": "npm:inquirer@8.2.6",
-    "target": "npm:wrap-ansi",
+    "target": "npm:wrap-ansi@6.2.0",
     "type": "static"
   },
   {
@@ -19531,7 +19146,7 @@
   },
   {
     "source": "npm:inquirer@9.2.15",
-    "target": "npm:wrap-ansi",
+    "target": "npm:wrap-ansi@6.2.0",
     "type": "static"
   },
   {
@@ -22505,11 +22120,6 @@
     "type": "static"
   },
   {
-    "source": "npm:linkify-it",
-    "target": "npm:uc.micro",
-    "type": "static"
-  },
-  {
     "source": "npm:locate-path",
     "target": "npm:p-locate",
     "type": "static"
@@ -22672,36 +22282,6 @@
   {
     "source": "npm:mammoth",
     "target": "npm:xmlbuilder",
-    "type": "static"
-  },
-  {
-    "source": "npm:markdown-it",
-    "target": "npm:argparse",
-    "type": "static"
-  },
-  {
-    "source": "npm:markdown-it",
-    "target": "npm:entities@4.5.0",
-    "type": "static"
-  },
-  {
-    "source": "npm:markdown-it",
-    "target": "npm:linkify-it",
-    "type": "static"
-  },
-  {
-    "source": "npm:markdown-it",
-    "target": "npm:mdurl",
-    "type": "static"
-  },
-  {
-    "source": "npm:markdown-it",
-    "target": "npm:punycode.js",
-    "type": "static"
-  },
-  {
-    "source": "npm:markdown-it",
-    "target": "npm:uc.micro",
     "type": "static"
   },
   {
@@ -24472,646 +24052,6 @@
   {
     "source": "npm:proper-lockfile",
     "target": "npm:signal-exit@3.0.7",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-changeset",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-collab",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-commands",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-commands",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-commands",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-commands",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-commands",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-commands",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-commands",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-commands",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-commands",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-dropcursor",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-dropcursor",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-dropcursor",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-dropcursor",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-dropcursor",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-dropcursor",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-gapcursor",
-    "target": "npm:prosemirror-keymap",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-gapcursor",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-gapcursor",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-gapcursor",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-gapcursor",
-    "target": "npm:prosemirror-keymap",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-gapcursor",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-gapcursor",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-gapcursor",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-history",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-history",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-history",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-history",
-    "target": "npm:rope-sequence",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-history",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-history",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-history",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-history",
-    "target": "npm:rope-sequence",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-inputrules",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-inputrules",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-inputrules",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-inputrules",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-inputrules",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-inputrules",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-keymap",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-keymap",
-    "target": "npm:w3c-keyname",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-keymap",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-keymap",
-    "target": "npm:w3c-keyname",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-keymap",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-keymap",
-    "target": "npm:w3c-keyname",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-keymap",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-keymap",
-    "target": "npm:w3c-keyname",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-markdown",
-    "target": "npm:@types/markdown-it",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-markdown",
-    "target": "npm:markdown-it",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-markdown",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-menu",
-    "target": "npm:crelt",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-menu",
-    "target": "npm:prosemirror-commands",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-menu",
-    "target": "npm:prosemirror-history",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-menu",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-model",
-    "target": "npm:orderedmap",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-model",
-    "target": "npm:orderedmap",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-model",
-    "target": "npm:orderedmap",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-model",
-    "target": "npm:orderedmap",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-model",
-    "target": "npm:orderedmap",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-model",
-    "target": "npm:orderedmap",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-model",
-    "target": "npm:orderedmap",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-model",
-    "target": "npm:orderedmap",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-schema-basic",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-schema-list",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-schema-list",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-schema-list",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-schema-list",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-schema-list",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-schema-list",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-schema-list",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-schema-list",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-schema-list",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-state",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-state",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-state",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-state",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-state",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-state",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-state",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-state",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-state",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-state",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-state",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-state",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-state",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-state",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-state",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-tables",
-    "target": "npm:prosemirror-keymap",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-tables",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-tables",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-tables",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-tables",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-tables",
-    "target": "npm:prosemirror-keymap",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-tables",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-tables",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-tables",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-tables",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-trailing-node",
-    "target": "npm:@remirror/core-constants",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-trailing-node",
-    "target": "npm:escape-string-regexp",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-transform",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-transform",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-transform",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-transform",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-transform",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-transform",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:prosemirror-view",
-    "target": "npm:prosemirror-transform",
     "type": "static"
   },
   {
@@ -26896,7 +25836,7 @@
   },
   {
     "source": "npm:string-width-cjs",
-    "target": "npm:emoji-regex@8.0.0",
+    "target": "npm:emoji-regex",
     "type": "static"
   },
   {
@@ -26911,7 +25851,7 @@
   },
   {
     "source": "npm:string-width",
-    "target": "npm:emoji-regex@8.0.0",
+    "target": "npm:emoji-regex",
     "type": "static"
   },
   {
@@ -26926,7 +25866,7 @@
   },
   {
     "source": "npm:string-width",
-    "target": "npm:emoji-regex@8.0.0",
+    "target": "npm:emoji-regex",
     "type": "static"
   },
   {
@@ -26941,7 +25881,7 @@
   },
   {
     "source": "npm:string-width",
-    "target": "npm:emoji-regex@8.0.0",
+    "target": "npm:emoji-regex",
     "type": "static"
   },
   {
@@ -26986,7 +25926,7 @@
   },
   {
     "source": "npm:string-width@7.2.0",
-    "target": "npm:emoji-regex",
+    "target": "npm:emoji-regex@10.6.0",
     "type": "static"
   },
   {
@@ -27667,111 +26607,6 @@
   {
     "source": "npm:tinyglobby",
     "target": "npm:picomatch@4.0.3",
-    "type": "static"
-  },
-  {
-    "source": "npm:tippy.js",
-    "target": "npm:@popperjs/core",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap-commands",
-    "target": "npm:prosemirror-commands",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap-commands",
-    "target": "npm:prosemirror-inputrules",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap-commands",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap-commands",
-    "target": "npm:prosemirror-schema-list",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap-commands",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap-commands",
-    "target": "npm:prosemirror-tables",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap-commands",
-    "target": "npm:tiptap-utils",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap-utils",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap-utils",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap-utils",
-    "target": "npm:prosemirror-tables",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap",
-    "target": "npm:prosemirror-commands",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap",
-    "target": "npm:prosemirror-dropcursor",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap",
-    "target": "npm:prosemirror-gapcursor",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap",
-    "target": "npm:prosemirror-inputrules",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap",
-    "target": "npm:prosemirror-keymap",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap",
-    "target": "npm:prosemirror-model",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap",
-    "target": "npm:prosemirror-state",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap",
-    "target": "npm:prosemirror-view",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap",
-    "target": "npm:tiptap-commands",
-    "type": "static"
-  },
-  {
-    "source": "npm:tiptap",
-    "target": "npm:tiptap-utils",
     "type": "static"
   },
   {
@@ -29045,32 +27880,32 @@
     "type": "static"
   },
   {
-    "source": "npm:wrap-ansi",
+    "source": "npm:wrap-ansi@6.2.0",
     "target": "npm:ansi-styles",
     "type": "static"
   },
   {
-    "source": "npm:wrap-ansi",
+    "source": "npm:wrap-ansi@6.2.0",
     "target": "npm:string-width",
     "type": "static"
   },
   {
-    "source": "npm:wrap-ansi",
+    "source": "npm:wrap-ansi@6.2.0",
     "target": "npm:strip-ansi",
     "type": "static"
   },
   {
-    "source": "npm:wrap-ansi",
+    "source": "npm:wrap-ansi@6.2.0",
     "target": "npm:ansi-styles",
     "type": "static"
   },
   {
-    "source": "npm:wrap-ansi",
+    "source": "npm:wrap-ansi@6.2.0",
     "target": "npm:string-width",
     "type": "static"
   },
   {
-    "source": "npm:wrap-ansi",
+    "source": "npm:wrap-ansi@6.2.0",
     "target": "npm:strip-ansi",
     "type": "static"
   },
@@ -29090,17 +27925,17 @@
     "type": "static"
   },
   {
-    "source": "npm:wrap-ansi@9.0.2",
+    "source": "npm:wrap-ansi",
     "target": "npm:ansi-styles@6.2.3",
     "type": "static"
   },
   {
-    "source": "npm:wrap-ansi@9.0.2",
+    "source": "npm:wrap-ansi",
     "target": "npm:string-width@7.2.0",
     "type": "static"
   },
   {
-    "source": "npm:wrap-ansi@9.0.2",
+    "source": "npm:wrap-ansi",
     "target": "npm:strip-ansi@7.1.2",
     "type": "static"
   },

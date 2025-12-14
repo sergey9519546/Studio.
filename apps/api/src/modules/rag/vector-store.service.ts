@@ -59,11 +59,10 @@ export class VectorStoreService {
     try {
       await this.prisma.knowledgeSource.create({
         data: {
-          type: "text",
           title: (metadata.title as string) || "Untitled",
+          content: content,
           originalContent: content,
           status: "indexed",
-          summary: metadata.summary as string,
           projectId: metadata.projectId as string,
         },
       });

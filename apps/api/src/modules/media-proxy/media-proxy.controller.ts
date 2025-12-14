@@ -105,12 +105,12 @@ export class MediaProxyController {
       await this.prisma.pageMedia.create({
         data: {
           id: fileId,
+          url: `https://media.example.com/${fileId}`, // Placeholder URL - would be replaced with actual media URL
           filename: file.originalname,
           mimeType: file.mimetype,
           size: file.size,
           s3Key: uploadResult.key,
           mediaType: mediaType,
-          uploadedBy: "public", // Public access - no auth required
         },
       });
 
@@ -165,7 +165,7 @@ export class MediaProxyController {
       }
 
       // Generate pre-signed GCS URL for file access (1 hour expiry)
-      const signedUrl = await this.gcsService.getSignedUrl(media.s3Key, 3600);
+      const signedUrl = media.s3Key ? await this.gcsService.getSignedUrl(media.s3Key, 3600) : '';
 
       // Return MOCKED Stargate response
       // The MediaClient expects the URL in the 'artifacts' field
@@ -173,15 +173,15 @@ export class MediaProxyController {
         data: {
           id: media.id,
           processingStatus: "succeeded",
-          mediaType: media.mediaType,
-          mimeType: media.mimeType,
-          name: media.filename,
-          size: media.size,
+          mediaType: media.mediaType || 'unknown',
+          mimeType: media.mimeType || 'application/octet-stream',
+          name: media.filename || 'Unknown file',
+          size: media.size || 0,
           createdAt: media.createdAt.toISOString(),
           // Artifacts: URLs for different representations
           artifacts: {
             // Primary artifact - the actual file
-            [`${media.mediaType}.${this.getExtension(media.mimeType)}`]: {
+            [`${media.mediaType || 'unknown'}.${this.getExtension(media.mimeType || 'application/octet-stream')}`]: {
               url: signedUrl,
               processingStatus: "succeeded",
             },
@@ -230,23 +230,23 @@ export class MediaProxyController {
       ]);
 
       // Batch generate signed URLs for performance
-      const keys = media.map((m) => m.s3Key);
+      const keys = media.map((m) => m.s3Key).filter(key => key !== null) as string[];
       const urlMap = await this.gcsService.getSignedUrlsBatch(keys, 3600);
 
       // Transform to collection format
       const items = media.map((m) => {
-        const urlData = urlMap.get(m.s3Key);
+        const urlData = m.s3Key ? urlMap.get(m.s3Key) : undefined;
         return {
           id: m.id,
           type: "file" as const,
           details: {
-            name: m.filename,
-            size: m.size,
-            mediaType: m.mediaType,
-            mimeType: m.mimeType,
+            name: m.filename || 'Unknown file',
+            size: m.size || 0,
+            mediaType: m.mediaType || 'unknown',
+            mimeType: m.mimeType || 'application/octet-stream',
             artifacts: {
-              [`${m.mediaType}.${this.getExtension(m.mimeType)}`]: {
-                url: urlData?.url,
+              [`${m.mediaType || 'unknown'}.${this.getExtension(m.mimeType || 'application/octet-stream')}`]: {
+                url: urlData?.url || '',
                 expiresAt: urlData?.expiresAt,
               },
             },

@@ -7,20 +7,20 @@ export interface ICloudStorageAdapter {
   /**
    * Checks if the user has valid credentials for this provider.
    */
-  isConnected(userId: number): Promise<boolean>;
+  isConnected(userId: string): Promise<boolean>;
 
   /**
    * Generates the OAuth2 authorization URL for this provider.
    */
-  getAuthUrl(userId: number): Promise<string>;
+  getAuthUrl(userId: string): Promise<string>;
 
   /**
    * Lists files/folders from the provider.
    */
-  listFiles(userId: number, folderId?: string, pageToken?: string): Promise<{ files: CloudFileDto[]; nextPageToken?: string }>;
+  listFiles(userId: string, folderId?: string, pageToken?: string): Promise<{ files: CloudFileDto[]; nextPageToken?: string }>;
 
   /**
    * Gets a download stream or URL for a specific file.
    */
-  getDownloadUrl(userId: number, fileId: string): Promise<string>;
+  getDownloadUrl(userId: string, fileId: string): Promise<string>;
 }

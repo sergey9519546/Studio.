@@ -113,34 +113,19 @@
         },
         {
           "file": "apps/api/src/components/tiptap-extension/list-normalization-extension.ts",
-          "hash": "7189296180858055777",
-          "deps": [
-            "npm:@tiptap/core",
-            "npm:@tiptap/pm"
-          ]
+          "hash": "7189296180858055777"
         },
         {
           "file": "apps/api/src/components/tiptap-extension/node-alignment-extension.ts",
-          "hash": "17728529638238830355",
-          "deps": [
-            "npm:@tiptap/core",
-            "npm:@tiptap/pm"
-          ]
+          "hash": "17728529638238830355"
         },
         {
           "file": "apps/api/src/components/tiptap-extension/node-background-extension.ts",
-          "hash": "3521535137430218298",
-          "deps": [
-            "npm:@tiptap/core",
-            "npm:@tiptap/pm"
-          ]
+          "hash": "3521535137430218298"
         },
         {
           "file": "apps/api/src/components/tiptap-extension/ui-state-extension.ts",
-          "hash": "4719380987410867592",
-          "deps": [
-            "npm:@tiptap/core"
-          ]
+          "hash": "4719380987410867592"
         },
         {
           "file": "apps/api/src/components/tiptap-icons/add-col-left-icon.tsx",
@@ -835,11 +820,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/horizontal-rule-node/horizontal-rule-node-extension.ts",
-          "hash": "9797612534841406069",
-          "deps": [
-            "npm:@tiptap/react",
-            "npm:@tiptap/extension-horizontal-rule"
-          ]
+          "hash": "9797612534841406069"
         },
         {
           "file": "apps/api/src/components/tiptap-node/horizontal-rule-node/horizontal-rule-node.scss",
@@ -847,19 +828,11 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/image-node/image-node-extension.ts",
-          "hash": "17640453937331188125",
-          "deps": [
-            "npm:@tiptap/react",
-            "npm:@tiptap/extension-image",
-            "npm:@tiptap/pm"
-          ]
+          "hash": "17640453937331188125"
         },
         {
           "file": "apps/api/src/components/tiptap-node/image-node/image-node-floating.tsx",
-          "hash": "13383906511476862087",
-          "deps": [
-            "npm:@tiptap/react"
-          ]
+          "hash": "13383906511476862087"
         },
         {
           "file": "apps/api/src/components/tiptap-node/image-node/image-node-view.scss",
@@ -869,9 +842,7 @@
           "file": "apps/api/src/components/tiptap-node/image-node/image-node-view.tsx",
           "hash": "10823462295031259782",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -880,11 +851,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/image-upload-node/image-upload-node-extension.ts",
-          "hash": "15772021251239479638",
-          "deps": [
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
-          ]
+          "hash": "15772021251239479638"
         },
         {
           "file": "apps/api/src/components/tiptap-node/image-upload-node/image-upload-node.scss",
@@ -894,8 +861,7 @@
           "file": "apps/api/src/components/tiptap-node/image-upload-node/image-upload-node.tsx",
           "hash": "15985871004808507002",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react"
+            "npm:react"
           ]
         },
         {
@@ -912,10 +878,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/extensions/table-handle/helpers/create-image.ts",
-          "hash": "16661066936261471639",
-          "deps": [
-            "npm:@tiptap/core"
-          ]
+          "hash": "16661066936261471639"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/extensions/table-handle/index.ts",
@@ -923,43 +886,26 @@
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/extensions/table-handle/table-handle-plugin.ts",
-          "hash": "9122886632634692910",
-          "deps": [
-            "npm:@tiptap/core",
-            "npm:@tiptap/pm"
-          ]
+          "hash": "9122886632634692910"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/extensions/table-handle/table-handle.ts",
-          "hash": "8882987686612873204",
-          "deps": [
-            "npm:@tiptap/core"
-          ]
+          "hash": "8882987686612873204"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/extensions/table-node-extension.ts",
-          "hash": "533739047329854142",
-          "deps": [
-            "npm:@tiptap/pm",
-            "npm:@tiptap/extension-table",
-            "npm:@tiptap/core"
-          ]
+          "hash": "533739047329854142"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/hooks/use-table-handle-state.ts",
           "hash": "14218487443616605737",
           "deps": [
-            "npm:@tiptap/react",
             "npm:react"
           ]
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/lib/tiptap-table-utils.ts",
-          "hash": "6975756215968312451",
-          "deps": [
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
-          ]
+          "hash": "6975756215968312451"
         },
         {
           "file": "apps/api/src/components/tiptap-node/table-node/styles/prosemirror-table.scss",
@@ -984,9 +930,7 @@
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-add-row-column-button/use-table-add-row-column.ts",
           "hash": "13055043401112162928",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -1004,8 +948,7 @@
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-align-cell-button/use-table-align-cell.ts",
           "hash": "9848734279336766396",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react"
+            "npm:react"
           ]
         },
         {
@@ -1028,8 +971,7 @@
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-cell-handle-menu/table-cell-handle-menu.tsx",
           "hash": "10349249214985536679",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react"
+            "npm:react"
           ]
         },
         {
@@ -1047,9 +989,7 @@
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-clear-row-column-content-button/use-table-clear-row-column-content.ts",
           "hash": "16585287119501027946",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -1067,9 +1007,7 @@
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-delete-row-column-button/use-table-delete-row-column.ts",
           "hash": "12418134674779936526",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -1087,9 +1025,7 @@
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-duplicate-row-column-button/use-table-duplicate-row-column.ts",
           "hash": "4454164195634758630",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -1105,8 +1041,6 @@
           "hash": "2241023970724266691",
           "deps": [
             "npm:@floating-ui/react",
-            "npm:@tiptap/pm",
-            "npm:@tiptap/react",
             "npm:react"
           ]
         },
@@ -1133,8 +1067,7 @@
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-fit-to-width-button/use-table-fit-to-width.ts",
           "hash": "15894822731207842609",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react"
+            "npm:react"
           ]
         },
         {
@@ -1149,9 +1082,7 @@
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-handle-menu/table-handle-menu.tsx",
           "hash": "4966335084951659931",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -1163,8 +1094,6 @@
           "hash": "9333907964185282616",
           "deps": [
             "npm:@floating-ui/react",
-            "npm:@tiptap/pm",
-            "npm:@tiptap/react",
             "npm:react"
           ]
         },
@@ -1191,9 +1120,7 @@
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-header-row-column-button/use-table-header-row-column.ts",
           "hash": "18143642195856165882",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -1211,9 +1138,7 @@
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-merge-split-cell-button/use-table-merge-split-cell.ts",
           "hash": "8419509194136454451",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -1231,9 +1156,7 @@
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-move-row-column-button/use-table-move-row-column.ts",
           "hash": "1721694983889241549",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -1245,8 +1168,6 @@
           "hash": "17362921429401955153",
           "deps": [
             "npm:@floating-ui/react",
-            "npm:@tiptap/pm",
-            "npm:@tiptap/react",
             "npm:react"
           ]
         },
@@ -1254,9 +1175,7 @@
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-selection-overlay/use-resize-overlay.ts",
           "hash": "10961719840369441284",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -1274,9 +1193,7 @@
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-sort-row-column-button/use-table-sort-row-column.ts",
           "hash": "17204552228078684548",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -1305,8 +1222,7 @@
           "file": "apps/api/src/components/tiptap-node/table-node/ui/table-trigger-button/use-table-trigger.ts",
           "hash": "16220471386958316846",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react"
+            "npm:react"
           ]
         },
         {
@@ -1329,7 +1245,6 @@
           "file": "apps/api/src/components/tiptap-templates/notion-like/notion-like-editor-mobile-toolbar.tsx",
           "hash": "6055598904774475201",
           "deps": [
-            "npm:@tiptap/react",
             "npm:react"
           ]
         },
@@ -1344,8 +1259,7 @@
           "file": "apps/api/src/components/tiptap-templates/notion-like/notion-like-editor-toolbar-floating.tsx",
           "hash": "3340071533323974207",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react"
+            "npm:react"
           ]
         },
         {
@@ -1357,26 +1271,8 @@
           "hash": "11737401328018218231",
           "deps": [
             "npm:react",
-            "npm:@tiptap/react",
             "npm:yjs",
-            "npm:@tiptap-pro/provider",
-            "npm:react-dom",
-            "npm:@tiptap/starter-kit",
-            "npm:@tiptap/extension-mention",
-            "npm:@tiptap/extension-list",
-            "npm:@tiptap/extension-text-style",
-            "npm:@tiptap/extensions",
-            "npm:@tiptap/extension-collaboration",
-            "npm:@tiptap/extension-collaboration-caret",
-            "npm:@tiptap/extension-typography",
-            "npm:@tiptap/extension-highlight",
-            "npm:@tiptap/extension-superscript",
-            "npm:@tiptap/extension-subscript",
-            "npm:@tiptap/extension-text-align",
-            "npm:@tiptap/extension-mathematics",
-            "npm:@tiptap-pro/extension-ai",
-            "npm:@tiptap/extension-unique-id",
-            "npm:@tiptap/extension-emoji"
+            "npm:react-dom"
           ]
         },
         {
@@ -1655,18 +1551,13 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui-utils/floating-element/floating-element-utils.ts",
-          "hash": "3707387320263272291",
-          "deps": [
-            "npm:@tiptap/react"
-          ]
+          "hash": "3707387320263272291"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-utils/floating-element/floating-element.tsx",
           "hash": "678020217120296666",
           "deps": [
             "npm:@floating-ui/react",
-            "npm:@tiptap/pm",
-            "npm:@tiptap/react",
             "npm:react"
           ]
         },
@@ -1682,28 +1573,19 @@
           "file": "apps/api/src/components/tiptap-ui-utils/suggestion-menu/suggestion-menu-types.ts",
           "hash": "4898929272699047278",
           "deps": [
-            "npm:@floating-ui/react",
-            "npm:@tiptap/pm",
-            "npm:@tiptap/suggestion",
-            "npm:@tiptap/react"
+            "npm:@floating-ui/react"
           ]
         },
         {
           "file": "apps/api/src/components/tiptap-ui-utils/suggestion-menu/suggestion-menu-utils.ts",
-          "hash": "17084359084754516052",
-          "deps": [
-            "npm:@tiptap/pm"
-          ]
+          "hash": "17084359084754516052"
         },
         {
           "file": "apps/api/src/components/tiptap-ui-utils/suggestion-menu/suggestion-menu.tsx",
           "hash": "17193118930355619229",
           "deps": [
             "npm:react",
-            "npm:@floating-ui/react",
-            "npm:@tiptap/pm",
-            "npm:@tiptap/react",
-            "npm:@tiptap/suggestion"
+            "npm:@floating-ui/react"
           ]
         },
         {
@@ -1721,7 +1603,6 @@
           "file": "apps/api/src/components/tiptap-ui/ai-ask-button/use-ai-ask.ts",
           "hash": "1735807054112392839",
           "deps": [
-            "npm:@tiptap/react",
             "npm:react",
             "npm:react-hotkeys-hook"
           ]
@@ -1734,9 +1615,7 @@
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu-actions/ai-menu-actions.tsx",
           "hash": "13391839364847793035",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap-pro/extension-ai"
+            "npm:react"
           ]
         },
         {
@@ -1747,9 +1626,7 @@
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu-hooks.ts",
           "hash": "2410476421383513014",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -1772,8 +1649,7 @@
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu-input/ai-menu-input.tsx",
           "hash": "15406759042801044420",
           "deps": [
-            "npm:react",
-            "npm:@tiptap-pro/extension-ai"
+            "npm:react"
           ]
         },
         {
@@ -1782,26 +1658,17 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu-items/ai-menu-items-constants.ts",
-          "hash": "12110057204165728559",
-          "deps": [
-            "npm:@tiptap-pro/extension-ai"
-          ]
+          "hash": "12110057204165728559"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu-items/ai-menu-items-types.ts",
-          "hash": "8810865998602310002",
-          "deps": [
-            "npm:@tiptap-pro/extension-ai",
-            "npm:@tiptap/react"
-          ]
+          "hash": "8810865998602310002"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu-items/ai-menu-items.tsx",
           "hash": "18383608193195268696",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap-pro/extension-ai"
+            "npm:react"
           ]
         },
         {
@@ -1810,17 +1677,11 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu-types.ts",
-          "hash": "12984020084703535425",
-          "deps": [
-            "npm:@tiptap-pro/extension-ai"
-          ]
+          "hash": "12984020084703535425"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu-utils.ts",
-          "hash": "17669403866269267597",
-          "deps": [
-            "npm:@tiptap/react"
-          ]
+          "hash": "17669403866269267597"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu.scss",
@@ -1830,8 +1691,7 @@
           "file": "apps/api/src/components/tiptap-ui/ai-menu/ai-menu.tsx",
           "hash": "12358474469198048569",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react"
+            "npm:react"
           ]
         },
         {
@@ -1853,9 +1713,7 @@
           "file": "apps/api/src/components/tiptap-ui/blockquote-button/use-blockquote.ts",
           "hash": "9870886337017851408",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -1873,9 +1731,7 @@
           "file": "apps/api/src/components/tiptap-ui/code-block-button/use-code-block.ts",
           "hash": "16963393743687433206",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -1898,7 +1754,6 @@
           "hash": "9034381538461440726",
           "deps": [
             "npm:react",
-            "npm:@tiptap/react",
             "npm:react-hotkeys-hook"
           ]
         },
@@ -1906,8 +1761,7 @@
           "file": "apps/api/src/components/tiptap-ui/color-highlight-popover/color-highlight-popover.tsx",
           "hash": "10261690588195815229",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react"
+            "npm:react"
           ]
         },
         {
@@ -1916,10 +1770,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/color-menu/color-menu.tsx",
-          "hash": "17543956432595954311",
-          "deps": [
-            "npm:@tiptap/react"
-          ]
+          "hash": "17543956432595954311"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/color-menu/index.tsx",
@@ -1945,7 +1796,6 @@
           "hash": "12045775432480622610",
           "deps": [
             "npm:react",
-            "npm:@tiptap/react",
             "npm:react-hotkeys-hook"
           ]
         },
@@ -1968,8 +1818,7 @@
           "file": "apps/api/src/components/tiptap-ui/color-text-popover/use-color-text-popover.ts",
           "hash": "4211335369101671356",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react"
+            "npm:react"
           ]
         },
         {
@@ -1988,17 +1837,14 @@
           "hash": "1792012217333474257",
           "deps": [
             "npm:react",
-            "npm:react-hotkeys-hook",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react-hotkeys-hook"
           ]
         },
         {
           "file": "apps/api/src/components/tiptap-ui/copy-anchor-link-button/use-scroll-to-hash.ts",
           "hash": "3150997556322405790",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react"
+            "npm:react"
           ]
         },
         {
@@ -2017,9 +1863,7 @@
           "hash": "13078776915068148454",
           "deps": [
             "npm:react",
-            "npm:@tiptap/react",
-            "npm:react-hotkeys-hook",
-            "npm:@tiptap/pm"
+            "npm:react-hotkeys-hook"
           ]
         },
         {
@@ -2038,19 +1882,12 @@
           "hash": "8808464515601554876",
           "deps": [
             "npm:react",
-            "npm:react-hotkeys-hook",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react-hotkeys-hook"
           ]
         },
         {
           "file": "apps/api/src/components/tiptap-ui/drag-context-menu/drag-context-menu-types.ts",
-          "hash": "17481893887802225009",
-          "deps": [
-            "npm:@tiptap/extension-drag-handle-react",
-            "npm:@tiptap/pm",
-            "npm:@tiptap/react"
-          ]
+          "hash": "17481893887802225009"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/drag-context-menu/drag-context-menu.scss",
@@ -2061,9 +1898,7 @@
           "hash": "4511923404438656896",
           "deps": [
             "npm:react",
-            "npm:@tiptap/pm",
-            "npm:@floating-ui/react",
-            "npm:@tiptap/extension-drag-handle-react"
+            "npm:@floating-ui/react"
           ]
         },
         {
@@ -2086,18 +1921,14 @@
           "hash": "17044013172022176308",
           "deps": [
             "npm:react",
-            "npm:react-hotkeys-hook",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react-hotkeys-hook"
           ]
         },
         {
           "file": "apps/api/src/components/tiptap-ui/emoji-dropdown-menu/emoji-dropdown-menu.tsx",
           "hash": "13275289430606473983",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/extension-emoji"
+            "npm:react"
           ]
         },
         {
@@ -2106,10 +1937,7 @@
         },
         {
           "file": "apps/api/src/components/tiptap-ui/emoji-menu/emoji-menu-utils.ts",
-          "hash": "11992004319281088319",
-          "deps": [
-            "npm:@tiptap/extension-emoji"
-          ]
+          "hash": "11992004319281088319"
         },
         {
           "file": "apps/api/src/components/tiptap-ui/emoji-menu/emoji-menu.scss",
@@ -2119,8 +1947,7 @@
           "file": "apps/api/src/components/tiptap-ui/emoji-menu/emoji-menu.tsx",
           "hash": "4973644201274444058",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/extension-emoji"
+            "npm:react"
           ]
         },
         {
@@ -2143,9 +1970,7 @@
           "hash": "13171829983631211445",
           "deps": [
             "npm:react",
-            "npm:react-hotkeys-hook",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react-hotkeys-hook"
           ]
         },
         {
@@ -2163,9 +1988,7 @@
           "file": "apps/api/src/components/tiptap-ui/heading-button/use-heading.ts",
           "hash": "9576481490026689514",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -2184,9 +2007,7 @@
           "hash": "4852613219093914246",
           "deps": [
             "npm:react",
-            "npm:react-hotkeys-hook",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react-hotkeys-hook"
           ]
         },
         {
@@ -2204,9 +2025,7 @@
           "file": "apps/api/src/components/tiptap-ui/image-caption-button/use-image-caption.ts",
           "hash": "13612713329478017036",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -2225,9 +2044,7 @@
           "hash": "13151504309047272330",
           "deps": [
             "npm:react",
-            "npm:react-hotkeys-hook",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react-hotkeys-hook"
           ]
         },
         {
@@ -2246,17 +2063,14 @@
           "hash": "4602251695821914485",
           "deps": [
             "npm:react",
-            "npm:react-hotkeys-hook",
-            "npm:@tiptap/react"
+            "npm:react-hotkeys-hook"
           ]
         },
         {
           "file": "apps/api/src/components/tiptap-ui/improve-dropdown/improve-dropdown.tsx",
           "hash": "3932764020565681837",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap-pro/extension-ai"
+            "npm:react"
           ]
         },
         {
@@ -2267,10 +2081,7 @@
           "file": "apps/api/src/components/tiptap-ui/improve-dropdown/use-improve-dropdown.ts",
           "hash": "5872605841341262365",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap-pro/extension-ai",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -2281,7 +2092,6 @@
           "file": "apps/api/src/components/tiptap-ui/link-popover/link-popover.tsx",
           "hash": "7475793924573778367",
           "deps": [
-            "npm:@tiptap/react",
             "npm:react"
           ]
         },
@@ -2289,7 +2099,6 @@
           "file": "apps/api/src/components/tiptap-ui/link-popover/use-link-popover.ts",
           "hash": "17886361689229186440",
           "deps": [
-            "npm:@tiptap/react",
             "npm:react"
           ]
         },
@@ -2308,9 +2117,7 @@
           "file": "apps/api/src/components/tiptap-ui/list-button/use-list.ts",
           "hash": "11527127955257233929",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -2328,8 +2135,7 @@
           "file": "apps/api/src/components/tiptap-ui/mark-button/use-mark.ts",
           "hash": "6245282079961852633",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react"
+            "npm:react"
           ]
         },
         {
@@ -2340,8 +2146,7 @@
           "file": "apps/api/src/components/tiptap-ui/mention-dropdown-menu/mention-dropdown-menu.tsx",
           "hash": "4810983153585750763",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react"
+            "npm:react"
           ]
         },
         {
@@ -2360,9 +2165,7 @@
           "hash": "6390861416442561661",
           "deps": [
             "npm:react",
-            "npm:react-hotkeys-hook",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react-hotkeys-hook"
           ]
         },
         {
@@ -2381,9 +2184,7 @@
           "hash": "12413169734097190928",
           "deps": [
             "npm:react",
-            "npm:react-hotkeys-hook",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react-hotkeys-hook"
           ]
         },
         {
@@ -2402,9 +2203,7 @@
           "hash": "1665226092357238627",
           "deps": [
             "npm:react",
-            "npm:react-hotkeys-hook",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react-hotkeys-hook"
           ]
         },
         {
@@ -2423,9 +2222,7 @@
           "hash": "9514715392293932933",
           "deps": [
             "npm:react",
-            "npm:react-hotkeys-hook",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react-hotkeys-hook"
           ]
         },
         {
@@ -2447,8 +2244,7 @@
           "file": "apps/api/src/components/tiptap-ui/slash-dropdown-menu/use-slash-dropdown-menu.ts",
           "hash": "17900452550770892363",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react"
+            "npm:react"
           ]
         },
         {
@@ -2466,8 +2262,7 @@
           "file": "apps/api/src/components/tiptap-ui/text-align-button/use-text-align.ts",
           "hash": "3491890922600217836",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react"
+            "npm:react"
           ]
         },
         {
@@ -2486,9 +2281,7 @@
           "hash": "2434081435223793128",
           "deps": [
             "npm:react",
-            "npm:@tiptap/react",
-            "npm:react-hotkeys-hook",
-            "npm:@tiptap/pm"
+            "npm:react-hotkeys-hook"
           ]
         },
         {
@@ -2506,9 +2299,7 @@
           "file": "apps/api/src/components/tiptap-ui/turn-into-dropdown/use-turn-into-dropdown.ts",
           "hash": "7471370551659274192",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm"
+            "npm:react"
           ]
         },
         {
@@ -2526,8 +2317,7 @@
           "file": "apps/api/src/components/tiptap-ui/undo-redo-button/use-undo-redo.ts",
           "hash": "343775380062171494",
           "deps": [
-            "npm:react",
-            "npm:@tiptap/react"
+            "npm:react"
           ]
         },
         {
@@ -2560,7 +2350,6 @@
           "file": "apps/api/src/contexts/collab-context.tsx",
           "hash": "15523043513569495701",
           "deps": [
-            "npm:@tiptap-pro/provider",
             "npm:react",
             "npm:yjs"
           ]
@@ -2597,7 +2386,6 @@
           "file": "apps/api/src/hooks/use-cursor-visibility.ts",
           "hash": "258303576516197972",
           "deps": [
-            "npm:@tiptap/react",
             "npm:react"
           ]
         },
@@ -2620,8 +2408,6 @@
           "file": "apps/api/src/hooks/use-floating-toolbar-visibility.ts",
           "hash": "3128017614046356386",
           "deps": [
-            "npm:@tiptap/react",
-            "npm:@tiptap/pm",
             "npm:react"
           ]
         },
@@ -2643,7 +2429,6 @@
           "file": "apps/api/src/hooks/use-menu-navigation.ts",
           "hash": "13509511227308643275",
           "deps": [
-            "npm:@tiptap/react",
             "npm:react"
           ]
         },
@@ -2673,16 +2458,12 @@
           "file": "apps/api/src/hooks/use-tiptap-editor.ts",
           "hash": "1642642591220840622",
           "deps": [
-            "npm:@tiptap/react",
             "npm:react"
           ]
         },
         {
           "file": "apps/api/src/hooks/use-ui-editor-state.ts",
-          "hash": "11333942944160519246",
-          "deps": [
-            "npm:@tiptap/react"
-          ]
+          "hash": "11333942944160519246"
         },
         {
           "file": "apps/api/src/hooks/use-unmount.ts",
@@ -2696,30 +2477,6 @@
           "hash": "5906955904361712143",
           "deps": [
             "npm:react"
-          ]
-        },
-        {
-          "file": "apps/api/src/lib/tiptap-advanced-utils.ts",
-          "hash": "3792590819177654350",
-          "deps": [
-            "npm:@tiptap/pm",
-            "npm:@tiptap/react"
-          ]
-        },
-        {
-          "file": "apps/api/src/lib/tiptap-collab-utils.ts",
-          "hash": "9100947356498268742",
-          "deps": [
-            "npm:@tiptap/pm",
-            "npm:@tiptap/react"
-          ]
-        },
-        {
-          "file": "apps/api/src/lib/tiptap-utils.ts",
-          "hash": "12145101872547333164",
-          "deps": [
-            "npm:@tiptap/pm",
-            "npm:@tiptap/react"
           ]
         },
         {
@@ -2778,7 +2535,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/ai.controller.ts",
-          "hash": "4445714799859985878",
+          "hash": "799506085017403900",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -2789,7 +2546,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/ai.module.ts",
-          "hash": "15366790159725943101",
+          "hash": "478771514168475556",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -2806,11 +2563,19 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini-openai.service.ts",
-          "hash": "8480181593307848938",
+          "hash": "8920016556265812544",
           "deps": [
             "npm:@nestjs/common",
-            "npm:@nestjs/config",
-            "npm:openai"
+            "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/ai/gemini.service.ts",
+          "hash": "11166696112341494146",
+          "deps": [
+            "npm:@google/genai",
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
           ]
         },
         {
@@ -3034,7 +2799,7 @@
         },
         {
           "file": "apps/api/src/modules/availability/availability.service.ts",
-          "hash": "6321341833466292427",
+          "hash": "4797510597102315832",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3412,7 +3177,7 @@
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.service.ts",
-          "hash": "10878636178921764081",
+          "hash": "1122537851460138935",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client"
@@ -3740,6 +3505,10 @@
         "hash": "12029379539437659388"
       },
       {
+        "file": ".agent/VERIFICATION_LOG.md",
+        "hash": "4263528838627904820"
+      },
+      {
         "file": ".agent/rules/remediation.md",
         "hash": "8458181456430353644"
       },
@@ -3774,6 +3543,30 @@
       {
         "file": ".builderrules",
         "hash": "5870021093906778410"
+      },
+      {
+        "file": ".clinerules/CONTEXT_REPORT.md",
+        "hash": "16100806406712779609"
+      },
+      {
+        "file": ".clinerules/config.json",
+        "hash": "829766863104685482"
+      },
+      {
+        "file": ".clinerules/rules.md",
+        "hash": "5550356251398298759"
+      },
+      {
+        "file": ".clinerules/tdr_protocol_cline.js",
+        "hash": "12610252151735058617"
+      },
+      {
+        "file": ".clinerules/verification_engine_cline.js",
+        "hash": "15818515352342523701"
+      },
+      {
+        "file": ".clinerules/workflows/autonomous_fix.yaml",
+        "hash": "88613076487606624"
       },
       {
         "file": ".continue/agents/new-config-1.yaml",
@@ -3910,6 +3703,10 @@
       {
         "file": "BUILD_VERIFICATION_RESULTS.md",
         "hash": "13880881965611456353"
+      },
+      {
+        "file": "CLINE_INTEGRATION_README.md",
+        "hash": "4362666339293138294"
       },
       {
         "file": "CODE_MODE_DEMO.md",
@@ -49241,11 +49038,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "9567073582837665753"
+        "hash": "13914220836469946514"
       },
       {
         "file": "package.json",
-        "hash": "10059440642911375217"
+        "hash": "4877069096512325663"
       },
       {
         "file": "package_backup.json",
@@ -49289,7 +49086,7 @@
       },
       {
         "file": "prisma/schema.prisma",
-        "hash": "7247329654354357425"
+        "hash": "13429002308495318897"
       },
       {
         "file": "prisma/schema.prisma.bak",
@@ -50016,10 +49813,6 @@
         "hash": "9564512296546428352"
       },
       {
-        "file": "tmp/apps/api/serve/tsconfig.generated.4233c9b0-e968-4191-b076-e8a0eecc9950.json",
-        "hash": "9564512296546428352"
-      },
-      {
         "file": "tmp/apps/api/serve/tsconfig.generated.48163b6a-69b9-4e0e-ae5e-58ae58a48d38.json",
         "hash": "9564512296546428352"
       },
@@ -50109,13 +49902,13 @@
       },
       {
         "file": "yarn.lock",
-        "hash": "9009708810444462254"
+        "hash": "11784517485486354302"
       },
       {
         "file": "~/.gemini/GEMINI.md",
-        "hash": "1422412567898435348"
+        "hash": "14094975943149461712"
       }
     ]
   },
-  "externalNodesHash": "13160242844713596574"
+  "externalNodesHash": "4186912829682600041"
 }

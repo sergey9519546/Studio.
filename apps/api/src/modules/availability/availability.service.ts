@@ -59,7 +59,6 @@ export class AvailabilityService {
         projectId: true,
         role: true,
         status: true,
-        notes: true,
         createdAt: true,
         updatedAt: true,
         project: {
@@ -80,7 +79,7 @@ export class AvailabilityService {
     // FIX: Safe date parsing for serialization robustness
     const pointsOfInterest = new Set<number>([
       new Date(startDate).getTime(),
-      ...overlaps.map(o => new Date(o.startDate).getTime())
+      ...overlaps.map(o => new Date(o.startDate || new Date()).getTime())
     ]);
 
     // Add the start time of the request itself
@@ -95,12 +94,12 @@ export class AvailabilityService {
 
       // Safe Date comparison using timestamps
       const activeAssignments = overlaps.filter((a) => {
-        const aStart = new Date(a.startDate).getTime();
-        const aEnd = new Date(a.endDate).getTime();
+        const aStart = new Date(a.startDate || new Date()).getTime();
+        const aEnd = new Date(a.endDate || new Date()).getTime();
         return aStart <= checkDateMs && aEnd >= checkDateMs;
       });
 
-      const currentLoad = activeAssignments.reduce((sum, a) => sum + a.allocation, 0);
+      const currentLoad = activeAssignments.reduce((sum, a) => sum + (a.allocation || 0), 0);
       if (currentLoad > maxUtilization) {
         maxUtilization = currentLoad;
       }
@@ -109,7 +108,7 @@ export class AvailabilityService {
     const totalProjectedLoad = maxUtilization + requestedAllocation;
 
     if (totalProjectedLoad > 100) {
-      const projectNames = overlaps.map((o: { project: { title: string } }) => o.project.title).join(', ');
+      const projectNames = overlaps.map((o) => o.project?.title || 'Unknown Project').join(', ');
       return {
         isAvailable: false,
         reason: `Overloaded: Projected utilization ${totalProjectedLoad}% exceeds capacity. Conflicts with: ${projectNames}`,

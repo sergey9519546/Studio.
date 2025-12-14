@@ -1,9 +1,9 @@
 import { Injectable, Logger, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
+import { Buffer } from 'buffer';
 import { AssetsService } from '../assets/assets.service.js';
 import { DeepReaderService } from '../intelligence/deep-reader.service.js';
-import { KnowledgeSourceEntity } from './interfaces/knowledge-source.interface.js';
 import { StorageService } from '../storage/storage.service.js';
-import { Buffer } from 'buffer';
+import { KnowledgeSourceEntity } from './interfaces/knowledge-source.interface.js';
 
 @Injectable()
 export class KnowledgeService {
@@ -51,8 +51,8 @@ export class KnowledgeService {
 
             // 3. Off-Thread Processing
             // The heavy lifting now happens in the Worker Thread
-            content = await this.deepReader.extractText(buffer, asset.mimeType);
-            summary = `Indexed ${asset.fileName} (${(content.length / 1000).toFixed(1)}k chars)`;
+            content = await this.deepReader.extractText(buffer, asset.mimeType || 'application/octet-stream');
+            summary = `Indexed ${asset.fileName || 'Unknown file'} (${(content.length / 1000).toFixed(1)}k chars)`;
 
         } catch (error: unknown) {
             const err = error instanceof Error ? error : new Error(String(error));
@@ -67,7 +67,7 @@ export class KnowledgeService {
         const newSource: KnowledgeSourceEntity = {
             id: `ks-${Date.now()}`,
             type: 'file',
-            title: asset.fileName,
+            title: asset.fileName || 'Unknown file',
             assetId: asset.id,
             originalContent: content,
             summary,

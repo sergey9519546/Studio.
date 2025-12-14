@@ -141,6 +141,7 @@ model MoodboardItem {
   colors       String[]
   shotType     String?
   source       String   // 'upload', 'unsplash', 'external'
+  assetId      String?  // Link to Asset table
   metadata     Json?
   isFavorite   Boolean  @default(false)
   projectId    String
@@ -149,6 +150,7 @@ model MoodboardItem {
 
   // Relations
   project      Project  @relation(fields: [projectId], references: [id])
+  asset        Asset?   @relation(fields: [assetId], references: [id])
   collections  MoodboardCollectionItem[]
 
   @@map("moodboard_items")
@@ -185,8 +187,7 @@ model MoodboardCollectionItem {
 model Asset {
   id          String   @id @default(uuid())
   title       String?
-  url         String
-  publicUrl   String?  // Public URL for access
+  url         String   // Public URL for access
   type        String   // 'image', 'video', 'document', etc.
   fileName    String?  // Original filename
   mimeType    String?  // MIME type
@@ -201,6 +202,7 @@ model Asset {
   // Relations
   project     Project? @relation(fields: [projectId], references: [id])
   user        User?    @relation(fields: [userId], references: [id])
+  moodboardItems MoodboardItem[]
 
   @@map("assets")
 }
@@ -363,6 +365,11 @@ model PageMedia {
   url         String
   title       String?
   alt         String?
+  s3Key       String?  // Storage key for S3/GCS
+  mediaType   String?  // Type of media (image, video, document)
+  filename    String?  // Original filename
+  size        Int?     // File size in bytes
+  mimeType    String?  // MIME type
   projectId   String?
   userId      String?
   metadata    Json?
@@ -385,6 +392,10 @@ model AIUsage {
   tokens      Int      // Number of tokens used
   cost        Float?   // Cost in USD
   operation   String   // Type of operation (chat, analysis, generation, etc.)
+  endpoint    String?  // API endpoint used
+  timestamp   DateTime? // Custom timestamp (different from createdAt)
+  cached      Boolean? @default(false) // Whether response was cached
+  duration    Int?     // Response time in milliseconds
   metadata    Json?    // Additional metadata
   createdAt   DateTime @default(now())
 

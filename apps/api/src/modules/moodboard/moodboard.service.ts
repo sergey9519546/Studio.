@@ -22,12 +22,12 @@ export class MoodboardService {
       data: {
         projectId: createDto.projectId,
         assetId: "manual",
-        type: createDto.type,
-        url: createDto.url,
+        source: "upload",
+        url: createDto.url || "",
         caption: createDto.caption || "Processing...",
-        tags: (createDto.tags || []).join(","),
-        moods: (createDto.moods || []).join(","),
-        colors: (createDto.colors || []).join(","),
+        tags: Array.isArray(createDto.tags) ? createDto.tags : (createDto.tags ? [createDto.tags] : []),
+        moods: Array.isArray(createDto.moods) ? createDto.moods : (createDto.moods ? [createDto.moods] : []),
+        colors: Array.isArray(createDto.colors) ? createDto.colors : (createDto.colors ? [createDto.colors] : []),
         shotType: createDto.shotType,
       },
     });
@@ -41,17 +41,12 @@ export class MoodboardService {
     return this.prisma.moodboardItem.create({
       data: {
         projectId: dto.projectId,
-        type: "image",
         source: "unsplash",
         url: dto.imageUrl,
-        unsplashId: dto.unsplashId,
-        photographerName: dto.photographerName,
-        photographerUrl: dto.photographerUrl,
         caption: dto.description || dto.altDescription || "",
-        tags: "",
-        moods: "",
-        colors: dto.color || "",
-        shotType: undefined,
+        tags: [],
+        moods: [],
+        colors: dto.color ? [dto.color] : [],
         assetId: null,
       },
     });
@@ -66,19 +61,15 @@ export class MoodboardService {
   ): Promise<MoodboardItem> {
     const asset = await this.assetsService.findOne(assetId);
 
-    // Determine type from asset mimeType
-    let type = "image";
-    if (asset.mimeType.includes("video")) type = "video";
-    else if (asset.mimeType.includes("gif")) type = "gif";
-
     const newItem = await this.prisma.moodboardItem.create({
       data: {
         projectId,
         assetId: asset.id,
-        type,
-        tags: "",
-        moods: "",
-        colors: "",
+        source: "asset",
+        url: asset.url || "",
+        tags: [],
+        moods: [],
+        colors: [],
         caption: "Processing analysis...",
       },
     });
@@ -154,10 +145,8 @@ export class MoodboardService {
   ): Promise<MoodboardItem> {
     const data: Record<string, unknown> = { ...updateData };
 
-    // Convert arrays back to CSV if present
-    if (Array.isArray(data.tags)) data.tags = data.tags.join(",");
-    if (Array.isArray(data.moods)) data.moods = data.moods.join(",");
-    if (Array.isArray(data.colors)) data.colors = data.colors.join(",");
+    // Arrays are already in correct format for Prisma
+    // No conversion needed since schema defines them as String[]
 
     try {
       return await this.prisma.moodboardItem.update({
@@ -236,30 +225,42 @@ export class MoodboardService {
     itemId: string,
     collectionId: string
   ): Promise<MoodboardItem> {
-    return this.prisma.moodboardItem.update({
-      where: { id: itemId },
-      data: { collectionId },
+    // Create the relationship in MoodboardCollectionItem table
+    await this.prisma.moodboardCollectionItem.create({
+      data: {
+        collectionId,
+        moodboardItemId: itemId,
+      },
     });
+
+    // Return the updated item
+    return this.prisma.moodboardItem.findUnique({
+      where: { id: itemId },
+    }) as Promise<MoodboardItem>;
   }
 
   /**
    * P1: Remove item from collection
    */
   async removeFromCollection(itemId: string): Promise<MoodboardItem> {
-    return this.prisma.moodboardItem.update({
-      where: { id: itemId },
-      data: { collectionId: null },
+    // Remove the relationship from MoodboardCollectionItem table
+    await this.prisma.moodboardCollectionItem.deleteMany({
+      where: { moodboardItemId: itemId },
     });
+
+    // Return the item
+    return this.prisma.moodboardItem.findUnique({
+      where: { id: itemId },
+    }) as Promise<MoodboardItem>;
   }
 
   /**
    * P1: Delete a collection
    */
   async deleteCollection(id: string): Promise<void> {
-    // First, unlink all items from this collection
-    await this.prisma.moodboardItem.updateMany({
+    // First, delete all relationships in the junction table
+    await this.prisma.moodboardCollectionItem.deleteMany({
       where: { collectionId: id },
-      data: { collectionId: null },
     });
 
     // Then delete the collection
@@ -269,7 +270,8 @@ export class MoodboardService {
   }
 
   /**
-   * Helper: Enrich items with parsed tags/moods/colors and signed URLs
+   * Helper: Enrich items with signed URLs
+   * Tags, moods, colors are already arrays in the schema
    */
   private async enrichItems(items: MoodboardItem[]): Promise<
     Array<
@@ -283,11 +285,11 @@ export class MoodboardService {
     return Promise.all(
       items.map(async (item) => {
         let url = item.url;
-        const tags = item.tags ? item.tags.split(",").filter(Boolean) : [];
-        const moods = item.moods ? item.moods.split(",").filter(Boolean) : [];
-        const colors = item.colors
-          ? item.colors.split(",").filter(Boolean)
-          : [];
+
+        // Tags, moods, colors are already arrays - no need to split
+        const tags = item.tags || [];
+        const moods = item.moods || [];
+        const colors = item.colors || [];
 
         if (item.assetId && item.assetId !== "manual") {
           try {
