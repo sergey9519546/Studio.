@@ -8,9 +8,6 @@
     "@/*": [
       "src/*"
     ],
-    "@google-cloud/aiplatform": [
-      "types/@google-cloud/aiplatform/index.d.ts"
-    ],
     "googleapis": [
       "types/googleapis/index.d.ts"
     ]
@@ -2862,6 +2859,7 @@
           "deps": [
             "npm:@nestjs/cache-manager",
             "npm:@nestjs/common",
+            "npm:@prisma/client",
             "npm:cache-manager"
           ]
         },

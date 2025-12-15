@@ -1,11 +1,13 @@
-
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, Logger } from '@nestjs/common';
+import type { FreelancerStatus } from '@prisma/client';
 import type { Cache } from 'cache-manager';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { CreateFreelancerDto, ImportFreelancerDto, UpdateFreelancerDto } from './dto/freelancer.dto.js';
+
 @Injectable()
 export class FreelancersService {
+  private readonly logger = new Logger(FreelancersService.name);
   private readonly CACHE_KEY = 'freelancers:list';
   private readonly CACHE_TTL = 24 * 60 * 60; // 24 hours in seconds
 
@@ -51,7 +53,7 @@ export class FreelancersService {
         ...rest,
         email: resolvedEmail,
         skills: skills || [],
-        status: rest.status as any
+        status: rest.status as FreelancerStatus
       }
     });
 
@@ -70,7 +72,7 @@ export class FreelancersService {
         ...rest,
         ...(resolvedEmail ? { email: resolvedEmail } : {}),
         ...(skills ? { skills } : {}),
-        ...(rest.status ? { status: rest.status as any } : {})
+        ...(rest.status ? { status: rest.status as FreelancerStatus } : {})
       }
     });
 
@@ -135,13 +137,13 @@ export class FreelancersService {
       try {
         await this.prisma.freelancer.upsert({
           where: { email: resolvedEmail },
-          create: { ...rest, email: resolvedEmail, skills: skills || [], status: rest.status as any },
-          update: { ...rest, email: resolvedEmail, skills: skills || [], status: rest.status as any }
+          create: { ...rest, email: resolvedEmail, skills: skills || [], status: rest.status as FreelancerStatus },
+          update: { ...rest, email: resolvedEmail, skills: skills || [], status: rest.status as FreelancerStatus }
         });
         // Simplistic count
         created++;
       } catch (e) {
-        console.error(e);
+        this.logger.error(`Failed to upsert freelancer: ${resolvedEmail}`, e);
       }
     }
     return { created, updated, errors: [] };
