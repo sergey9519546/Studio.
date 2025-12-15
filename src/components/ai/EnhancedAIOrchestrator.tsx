@@ -279,7 +279,7 @@ export const EnhancedAIOrchestrator: React.FC<EnhancedAIOrchestratorProps> = ({
     files.forEach((file, index) => {
       const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
       let stepType: ProcessingStep['type'] = 'document';
-      
+
       if (['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp', 'tiff', 'mp4', 'avi', 'mov', 'mkv'].includes(fileExtension)) {
         stepType = 'vision';
       } else if (['mp3', 'wav', 'm4a', 'ogg', 'flac', 'aac', 'wma'].includes(fileExtension)) {
@@ -318,7 +318,7 @@ export const EnhancedAIOrchestrator: React.FC<EnhancedAIOrchestratorProps> = ({
     });
 
     dispatch({ type: 'START_PIPELINE', payload: pipeline });
-  }, [finalConfig.enableMultiModal]);
+  }, [finalConfig.enableMultiModal, finalConfig]);
 
   const executePipeline = useCallback(async (pipelineId: string) => {
     const pipeline = state.activePipelines.find(p => p.id === pipelineId);

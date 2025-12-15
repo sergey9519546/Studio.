@@ -3,6 +3,12 @@ import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import type { Cache } from 'cache-manager';
 import { PrismaService } from '../../prisma/prisma.service.js';
+
+export interface ProjectInput {
+  name?: string;
+  clientName?: string;
+  roleRequirements?: Prisma.RoleRequirementCreateWithoutProjectInput[];
+  knowledgeBase?: { title: string; content: string; category: string }[];
   budget?: string | number;
   startDate?: string | Date;
   dueDate?: string | Date;
