@@ -1,9 +1,15 @@
-
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import type { Cache } from 'cache-manager';
 import { PrismaService } from '../../prisma/prisma.service.js';
+import { create } from 'domain';
+import { number } from 'framer-motion';
+import { ids } from 'googleapis/build/src/apis/ids/index.js';
+import { take, async } from 'rxjs';
+import { string, unknown } from 'zod/v3';
+import { id } from 'zod/v4/locales';
+import { limit } from 'firebase/firestore';
 
 export interface ProjectInput {
   name?: string;
@@ -20,6 +26,89 @@ export interface ProjectInput {
   [key: string]: unknown;
 }
 
+/**
+ * Type definition for Prisma project result
+ */
+interface PrismaProjectResult {
+  id: string;
+  title: string;
+  client?: string;
+  description?: string;
+  status: string;
+  budget?: number;
+  startDate?: Date;
+  endDate?: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  roleRequirements?: Array<{
+    id: string;
+    role: string;
+    count: number;
+    skills: string[];
+    projectId: string;
+  }>;
+  knowledgeBase?: Array<{
+    id: string;
+    title: string;
+    content: string;
+    category: string;
+    projectId: string;
+  }>;
+  moodboardItems?: Array<{
+    id: string;
+    title: string;
+    description?: string;
+    imageUrl?: string;
+    tags: string[];
+    projectId: string;
+  }>;
+  scripts?: Array<unknown>;
+  assignments?: Array<unknown>;
+}
+
+/**
+ * Type definition for DTO output
+ */
+interface ProjectDto {
+  id: string;
+  name: string;
+  title: string;
+  clientName?: string;
+  client?: string;
+  description?: string;
+  status: string;
+  budget?: number;
+  startDate?: Date;
+  dueDate?: Date;
+  endDate?: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  roleRequirements: Array<{
+    id: string;
+    role: string;
+    count: number;
+    skills: string[];
+    projectId: string;
+  }>;
+  knowledgeBase: Array<{
+    id: string;
+    title: string;
+    content: string;
+    category: string;
+    projectId: string;
+  }>;
+  moodboardItems: Array<{
+    id: string;
+    title: string;
+    description?: string;
+    imageUrl?: string;
+    tags: string[];
+    projectId: string;
+  }>;
+  scripts?: Array<unknown>;
+  assignments?: Array<unknown>;
+}
+
 @Injectable()
 export class ProjectsService {
   private readonly CACHE_KEY = 'projects:list';
@@ -30,8 +119,7 @@ export class ProjectsService {
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) { }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private toDto(project: any) { // Keep explicit any here as it maps from Prisma raw result which can be complex
+  private toDto(project: PrismaProjectResult | null): ProjectDto | null {
     if (!project) return null;
     return {
       ...project,
@@ -51,9 +139,9 @@ export class ProjectsService {
     const [total, projects] = await Promise.all([
       this.prisma.project.count(),
       this.prisma.project.findMany({
+       : limit,
         skip,
-        take: limit,
-        include: { roleRequirements: true },
+        take include: { roleRequirements: true },
         orderBy: { updatedAt: 'desc' }
       })
     ]);
@@ -103,7 +191,7 @@ export class ProjectsService {
         title: projectData.title,
         client: projectData.client,
         description: projectData.description,
-        status: projectData.status as any,
+        status: projectData.status,
         budget: projectData.budget,
         startDate: projectData.startDate,
         endDate: projectData.endDate,

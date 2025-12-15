@@ -310,7 +310,7 @@ export class ProjectMetricsService {
     const trend: Array<{ date: string; value: number }> = [];
 
     switch (metric) {
-      case 'usage':
+      case 'usage': {
         const usageData = await this.prisma.aIUsage.groupBy({
           by: ['createdAt'],
           where: {
@@ -331,8 +331,9 @@ export class ProjectMetricsService {
           trend.push({ date, value });
         }
         break;
+      }
 
-      case 'storage':
+      case 'storage': {
         const storageData = await this.prisma.asset.groupBy({
           by: ['createdAt'],
           where: {
@@ -349,8 +350,9 @@ export class ProjectMetricsService {
           });
         }
         break;
+      }
 
-      case 'activity':
+      case 'activity': {
         const activityData = await this.prisma.projectAuditLog.groupBy({
           by: ['timestamp'],
           where: {
@@ -371,6 +373,7 @@ export class ProjectMetricsService {
           trend.push({ date, value });
         }
         break;
+      }
     }
 
     return trend.sort((a, b) => a.date.localeCompare(b.date));

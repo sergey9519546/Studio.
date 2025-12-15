@@ -15,11 +15,20 @@ import { CommonModule } from "./common/guards/common.module.js";
 import { LoggerModule } from './common/logger/logger.module.js';
 import { validate } from "./config/env.validation.js";
 import { HealthModule } from "./health/health.module.js";
+import { AssignmentsModule } from "./modules/assignments/assignments.module.js";
 import { AuthModule } from "./modules/auth/auth.module.js";
+import { AvailabilityModule } from "./modules/availability/availability.module.js";
 import { FreelancersModule } from "./modules/freelancers/freelancers.module.js";
 import { GoogleModule } from "./modules/google/google.module.js";
+import { IntegrationsModule } from "./modules/integrations/integrations.module.js";
+import { IntelligenceModule } from "./modules/intelligence/intelligence.module.js";
 import { KnowledgeModule } from "./modules/knowledge/knowledge.module.js";
+import { MonitoringModule } from "./modules/monitoring/monitoring.module.js";
+import { MoodboardModule } from "./modules/moodboard/moodboard.module.js";
 import { ProjectsModule } from "./modules/projects/projects.module.js";
+import { RAGModule } from "./modules/rag/rag.module.js";
+import { RealtimeModule } from "./modules/realtime/realtime.module.js";
+import { ScriptsModule } from "./modules/scripts/scripts.module.js";
 import { StorageModule } from "./modules/storage/storage.module.js";
 import { PrismaModule } from "./prisma/prisma.module.js";
 const __dirname = dirname(__filename);
@@ -107,24 +116,24 @@ appLogger.log(`Static root: ${staticRoot ?? 'not-found'} | cwd: ${process.cwd()}
     GoogleModule,
     // TESTING MODULE RE-ENABLEMENT - One at a time
     KnowledgeModule,
+    IntelligenceModule,
+    MoodboardModule,
+    AssignmentsModule,
+    ScriptsModule,
+    AvailabilityModule,
+    RealtimeModule,
+    MonitoringModule,
+    IntegrationsModule,
+    RAGModule,
     // TEMPORARILY DISABLED FOR DEPLOYMENT - Modules with compilation errors
     // AssetsModule,
-    // IntelligenceModule,
-    // MoodboardModule,
     // AnalysisModule,
     // AIModule,
-    // AssignmentsModule,
-    // ScriptsModule,
-    // AvailabilityModule,
     HealthModule,
-    // RealtimeModule,
     AuthModule,
     ProjectsModule,
     FreelancersModule,
-    // MonitoringModule,
-    // IntegrationsModule,
     // TranscriptsModule,
-    // RAGModule, // Temporarily disabled due to compilation errors
   ],
   providers: [
     {

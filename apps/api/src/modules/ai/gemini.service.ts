@@ -6,6 +6,88 @@ import { ConfigService } from '@nestjs/config';
  * Service for interacting with Google's Gemini API using the new Gen AI SDK
  * Supports both direct API and Vertex AI based on environment configuration
  */
+
+// Define proper interfaces to replace 'any' types
+interface ClientConfig {
+  vertexai: boolean;
+  project?: string;
+  location?: string;
+  apiVersion?: string;
+  apiKey?: string;
+}
+
+interface ToolDefinition {
+  type: 'function';
+  name: string;
+  description: string;
+  parameters: Record<string, unknown>;
+}
+
+interface CodeExecutionOptions {
+  model?: string;
+}
+
+interface ImageGenerationOptions {
+  style?: 'natural' | 'vivid' | 'artistic';
+  model?: string;
+  savePath?: string;
+}
+
+interface DeepResearchOptions {
+  background?: boolean;
+  maxWaitTime?: number;
+}
+
+interface MultiToolOptions {
+  model?: string;
+  agent?: string;
+  background?: boolean;
+}
+
+interface AdvancedConversationConfig {
+  initialPrompt: string;
+  systemPrompt?: string;
+  memorySize?: number;
+  model?: string;
+  tools?: Array<ToolDefinition>;
+}
+
+interface ContinueConversationOptions {
+  memorySize?: number;
+  model?: string;
+  tools?: Array<ToolDefinition>;
+}
+
+interface CustomModelConfig {
+  model?: string;
+  temperature?: number;
+  maxOutputTokens?: number;
+  topP?: number;
+  topK?: number;
+  stopSequences?: string[];
+  candidateCount?: number;
+  safetySettings?: Array<unknown>;
+}
+
+interface ContentQualityCriteria {
+  checkGrammar?: boolean;
+  checkClarity?: boolean;
+  checkEngagement?: boolean;
+  checkOriginality?: boolean;
+  targetAudience?: string;
+}
+
+interface MoodboardConfig {
+  theme: string;
+  style?: 'minimalist' | 'vibrant' | 'elegant' | 'modern' | 'vintage' | 'industrial' | 'organic' | 'futuristic';
+  colors?: string[];
+  targetAudience?: string;
+  projectType?: 'website' | 'branding' | 'product' | 'interior' | 'fashion' | 'marketing';
+  mood?: string[];
+  generateImages?: boolean;
+  imageCount?: number;
+}
+
 @Injectable()
 export class GeminiService {
   private readonly logger = new Logger(GeminiService.name);
@@ -15,7 +97,9 @@ export class GeminiService {
     const useVertexAI = this.configService.get<string>('GOOGLE_GENAI_USE_VERTEXAI') === 'true' ||
                        this.configService.get<string>('GOOGLE_GENAI_USE_VERTEXAI') === 'True';
 
-    let clientConfig: any = {};
+    let clientConfig: ClientConfig = {
+      vertexai: false,
+    };
 
     if (useVertexAI) {
       const project = this.configService.get<string>('GOOGLE_CLOUD_PROJECT');
@@ -52,7 +136,7 @@ export class GeminiService {
       this.logger.log(`Google Gemini AI Service initialized with Developer API (apiVersion: ${apiVersion})`);
     }
 
-    this.client = new GoogleGenAI(clientConfig);
+    this.client = new GoogleGenAI(clientConfig as any);
   }
 
   async chat(
@@ -220,7 +304,7 @@ export class GeminiService {
     return `Search-grounded response for: "${query}". This feature requires additional Google Search API integration.`;
   }
 
-  async executeCode(code: string, language?: string, options?: { model?: string }): Promise<{
+  async executeCode(code: string, language?: string, options?: CodeExecutionOptions): Promise<{
     output: string;
     error?: string;
     executionTime?: number;
@@ -231,15 +315,11 @@ export class GeminiService {
     };
   }
 
-  async generateImage(prompt: string, options?: {
-    style?: 'natural' | 'vivid' | 'artistic';
-    model?: string;
-    savePath?: string;
-  }): Promise<{
+  async generateImage(prompt: string, options?: ImageGenerationOptions): Promise<{
     imageUrl?: string;
     savePath?: string;
     prompt: string;
-    metadata?: any;
+    metadata?: Record<string, unknown>;
   }> {
     return {
       imageUrl: `placeholder-image-url-for-${encodeURIComponent(prompt)}`,
@@ -252,10 +332,7 @@ export class GeminiService {
     };
   }
 
-  async performDeepResearch(query: string, options?: {
-    background?: boolean;
-    maxWaitTime?: number;
-  }): Promise<{
+  async performDeepResearch(query: string, options?: DeepResearchOptions): Promise<{
     query: string;
     results: string;
     sources: string[];
@@ -269,15 +346,11 @@ export class GeminiService {
     };
   }
 
-  async createMultiToolInteraction(input: string, tools: Array<'google_search' | 'code_execution' | { type: 'function'; name: string; description: string; parameters: Record<string, any> }>, options?: {
-    model?: string;
-    agent?: string;
-    background?: boolean;
-  }): Promise<{
+  async createMultiToolInteraction(input: string, tools: Array<'google_search' | 'code_execution' | ToolDefinition>, options?: MultiToolOptions): Promise<{
     input: string;
     response: string;
     toolsUsed: string[];
-    results: any[];
+    results: unknown[];
   }> {
     return {
       input,
@@ -287,13 +360,7 @@ export class GeminiService {
     };
   }
 
-  async createAdvancedConversation(config: {
-    initialPrompt: string;
-    systemPrompt?: string;
-    memorySize?: number;
-    model?: string;
-    tools?: Array<any>;
-  }): Promise<{
+  async createAdvancedConversation(config: AdvancedConversationConfig): Promise<{
     conversationId: string;
     response: string;
     memoryUsed: number;
@@ -307,11 +374,7 @@ export class GeminiService {
     };
   }
 
-  async continueAdvancedConversation(conversationId: string, userMessage: string, conversationHistory: Array<{ role: string; content: string }>, options?: {
-    memorySize?: number;
-    model?: string;
-    tools?: Array<any>;
-  }): Promise<{
+  async continueAdvancedConversation(conversationId: string, userMessage: string, conversationHistory: Array<{ role: string; content: string }>, options?: ContinueConversationOptions): Promise<{
     conversationId: string;
     response: string;
     memoryUsed: number;
@@ -345,16 +408,7 @@ export class GeminiService {
     }));
   }
 
-  async generateWithCustomConfig(prompt: string, config: {
-    model?: string;
-    temperature?: number;
-    maxOutputTokens?: number;
-    topP?: number;
-    topK?: number;
-    stopSequences?: string[];
-    candidateCount?: number;
-    safetySettings?: any[];
-  }): Promise<string> {
+  async generateWithCustomConfig(prompt: string, config: CustomModelConfig): Promise<string> {
     const model = config.model || 'gemini-2.0-flash-exp';
     
     const response = await this.client.models.generateContent({
@@ -379,13 +433,7 @@ export class GeminiService {
     return text;
   }
 
-  async analyzeContentQuality(content: string, criteria: {
-    checkGrammar?: boolean;
-    checkClarity?: boolean;
-    checkEngagement?: boolean;
-    checkOriginality?: boolean;
-    targetAudience?: string;
-  }): Promise<{
+  async analyzeContentQuality(content: string, criteria: ContentQualityCriteria): Promise<{
     overallScore: number;
     grammar: number;
     clarity: number;
@@ -413,16 +461,7 @@ export class GeminiService {
     };
   }
 
-  async generateMoodboard(config: {
-    theme: string;
-    style?: 'minimalist' | 'vibrant' | 'elegant' | 'modern' | 'vintage' | 'industrial' | 'organic' | 'futuristic';
-    colors?: string[];
-    targetAudience?: string;
-    projectType?: 'website' | 'branding' | 'product' | 'interior' | 'fashion' | 'marketing';
-    mood?: string[];
-    generateImages?: boolean;
-    imageCount?: number;
-  }): Promise<{
+  async generateMoodboard(config: MoodboardConfig): Promise<{
     theme: string;
     concept: string;
     colors: string[];

@@ -1,12 +1,12 @@
 // API Response Types
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data: T;
   message?: string;
   error?: string;
 }
 
-export interface PaginatedResponse<T = any> {
+export interface PaginatedResponse<T = unknown> {
   data: T[];
   pagination: {
     page: number;
@@ -128,17 +128,21 @@ export interface RegisterData {
 }
 
 // WebSocket Event Types
-export interface WebSocketEvent {
+export interface WebSocketEvent<T = unknown> {
   type: string;
-  payload: any;
+  payload: T;
   timestamp: string;
   userId?: string;
 }
 
-export interface RealtimeUpdate {
-  entity: 'project' | 'moodboard' | 'freelancer' | 'user';
-  action: 'create' | 'update' | 'delete';
-  data: any;
+// Realtime entity types
+export type RealtimeEntity = 'project' | 'moodboard' | 'freelancer' | 'user';
+export type RealtimeAction = 'create' | 'update' | 'delete';
+
+export interface RealtimeUpdate<T = unknown> {
+  entity: RealtimeEntity;
+  action: RealtimeAction;
+  data: T;
   timestamp: string;
 }
 
@@ -147,7 +151,7 @@ export interface ApiError {
   message: string;
   code: string;
   statusCode: number;
-  details?: any;
+  details?: unknown;
 }
 
 // Loading States
@@ -157,4 +161,26 @@ export interface AsyncState<T> {
   data: T | null;
   loading: boolean;
   error: string | null;
+}
+
+// Additional utility types
+export interface SelectOption {
+  value: string;
+  label: string;
+}
+
+export interface DateRange {
+  start: string;
+  end: string;
+}
+
+export interface SortConfig {
+  field: string;
+  direction: 'asc' | 'desc';
+}
+
+export interface FilterConfig {
+  field: string;
+  operator: 'eq' | 'neq' | 'gt' | 'gte' | 'lt' | 'lte' | 'contains' | 'in';
+  value: string | number | boolean | string[] | number[];
 }

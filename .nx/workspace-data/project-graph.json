@@ -16442,6 +16442,11 @@
       },
       {
         "source": "api",
+        "target": "npm:zod",
+        "type": "static"
+      },
+      {
+        "source": "api",
         "target": "npm:ollama",
         "type": "static"
       },
@@ -39633,5 +39638,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1765806370321
+  "computedAt": 1765811554888
 }

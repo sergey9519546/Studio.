@@ -2,6 +2,26 @@ import { ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/com
 import { AuthGuard } from '@nestjs/passport';
 import { Observable } from 'rxjs';
 
+/**
+ * JWT payload structure from authentication
+ */
+export interface JwtPayloadUser {
+  id: string | number;
+  email: string;
+  name?: string;
+  sub?: string;
+  iat?: number;
+  exp?: number;
+}
+
+/**
+ * Authentication error details
+ */
+interface AuthErrorInfo {
+  message?: string;
+  name?: string;
+}
+
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
   canActivate(
@@ -10,9 +30,14 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     return super.canActivate(context);
   }
 
-  handleRequest(err: any, user: any, info: any) {
+  handleRequest<TUser = JwtPayloadUser>(
+    err: Error | null,
+    user: TUser | false,
+    info: AuthErrorInfo | undefined
+  ): TUser {
     if (err || !user) {
-      throw err || new UnauthorizedException('Invalid or missing authentication token');
+      const errorMessage = info?.message || 'Invalid or missing authentication token';
+      throw err || new UnauthorizedException(errorMessage);
     }
     return user;
   }

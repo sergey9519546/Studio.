@@ -2,6 +2,7 @@ import { BadRequestException, ForbiddenException, Injectable } from '@nestjs/com
 import * as crypto from 'crypto';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { ProjectContextService } from './project-context.service.js';
+import { file } from 'zod/v4';
 
 export interface IngestionOptions {
   sensitivityLevel?: 'standard' | 'confidential' | 'restricted';
