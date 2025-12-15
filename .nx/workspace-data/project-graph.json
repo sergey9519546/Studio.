@@ -16277,6 +16277,11 @@
       },
       {
         "source": "api",
+        "target": "npm:express",
+        "type": "static"
+      },
+      {
+        "source": "api",
         "target": "npm:react",
         "type": "static"
       },
@@ -16368,11 +16373,6 @@
       {
         "source": "api",
         "target": "npm:@prisma/client",
-        "type": "static"
-      },
-      {
-        "source": "api",
-        "target": "npm:express",
         "type": "static"
       },
       {
@@ -39633,5 +39633,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1765801293948
+  "computedAt": 1765806370321
 }

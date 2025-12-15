@@ -7,9 +7,6 @@
     ],
     "@/*": [
       "src/*"
-    ],
-    "googleapis": [
-      "types/googleapis/index.d.ts"
     ]
   },
   "nxJsonPlugins": [],
@@ -106,6 +103,14 @@
           "deps": [
             "npm:@nestjs/common",
             "npm:nestjs-pino"
+          ]
+        },
+        {
+          "file": "apps/api/src/common/middleware/project-context.middleware.ts",
+          "hash": "503655630994147797",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:express"
           ]
         },
         {
@@ -3225,6 +3230,67 @@
           ]
         },
         {
+          "file": "apps/api/src/modules/projects/project-access-control.service.ts",
+          "hash": "11940309514199149060",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/projects/project-audit.service.ts",
+          "hash": "37038058340785149",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/projects/project-aware-ingestion.service.ts",
+          "hash": "9094150108637155681",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/projects/project-cache.service.ts",
+          "hash": "15652744885522454296",
+          "deps": [
+            "npm:@nestjs/cache-manager",
+            "npm:@nestjs/common",
+            "npm:cache-manager"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/projects/project-context.service.ts",
+          "hash": "16646505133424802377",
+          "deps": [
+            "npm:@nestjs/cache-manager",
+            "npm:@nestjs/common",
+            "npm:cache-manager"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/projects/project-encryption.service.ts",
+          "hash": "1557277167437164812",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/projects/project-metrics.service.ts",
+          "hash": "536668909077861574",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/projects/project-queue.service.ts",
+          "hash": "9217426690956694780",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/event-emitter"
+          ]
+        },
+        {
           "file": "apps/api/src/modules/projects/projects.controller.ts",
           "hash": "998265033615323377",
           "deps": [
@@ -3233,7 +3299,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/projects.module.ts",
-          "hash": "6603857446761298534",
+          "hash": "16009719198366545443",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3254,6 +3320,13 @@
             "npm:@nestjs/common",
             "npm:@prisma/client",
             "npm:cache-manager"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/projects/sharded-vector-store.service.ts",
+          "hash": "14132100745019954274",
+          "deps": [
+            "npm:@nestjs/common"
           ]
         },
         {
@@ -3284,6 +3357,13 @@
         {
           "file": "apps/api/src/modules/rag/embeddings.service.ts",
           "hash": "10025180204544423655",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/rag/project-scoped-rag.service.ts",
+          "hash": "12434611607292165294",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3623,7 +3703,7 @@
       },
       {
         "file": ".firebase/hosting.YnVpbGRcY2xpZW50.cache",
-        "hash": "16957965979838313832"
+        "hash": "13432746234621101517"
       },
       {
         "file": ".firebaserc",
@@ -3906,8 +3986,16 @@
         "hash": "12898927544059431243"
       },
       {
+        "file": "ENHANCED_ARCHITECTURE_IMPLEMENTATION_TODO.md",
+        "hash": "5728965244931264341"
+      },
+      {
         "file": "ENHANCED_PROJECT_DATA_SEPARATION_ARCHITECTURE.md",
         "hash": "13359887639127334835"
+      },
+      {
+        "file": "ENHANCED_PROJECT_DATA_SEPARATION_IMPLEMENTATION_SUMMARY.md",
+        "hash": "17137953318711939943"
       },
       {
         "file": "ENHANCED_PROJECT_DETAIL_COMPLETE.md",
@@ -3971,7 +4059,7 @@
       },
       {
         "file": "FIREBASE_DEPLOYMENT_TODO.md",
-        "hash": "10636627103315326282"
+        "hash": "2679871842251229918"
       },
       {
         "file": "FIREBASE_PRODUCTION_DEPLOYMENT_GUIDE.md",
@@ -4000,6 +4088,10 @@
       {
         "file": "FULL_STACK_FIREBASE_DEPLOYMENT_REPORT.md",
         "hash": "5074123106484243014"
+      },
+      {
+        "file": "IMPLEMENTATION_COMPLETE.md",
+        "hash": "6895689899973084515"
       },
       {
         "file": "IMPLEMENTATION_COMPLETE_SUMMARY.md",
@@ -4284,6 +4376,10 @@
       {
         "file": "WINDOWS_FIXES_SUMMARY.md",
         "hash": "9133183954912432113"
+      },
+      {
+        "file": "WORKSPACE_REMEDIATION_TODO.md",
+        "hash": "17461704644450339203"
       },
       {
         "file": "WSL_ERROR_FIX_TODO.md",
@@ -8919,7 +9015,7 @@
       },
       {
         "file": "ffmpeg/doc/encoders.texi",
-        "hash": "12545601235142060240"
+        "hash": "9389951088517524615"
       },
       {
         "file": "ffmpeg/doc/errno.txt",
@@ -9127,7 +9223,7 @@
       },
       {
         "file": "ffmpeg/doc/general_contents.texi",
-        "hash": "16881168041979547252"
+        "hash": "7111896711993383823"
       },
       {
         "file": "ffmpeg/doc/git-howto.texi",
@@ -14255,11 +14351,11 @@
       },
       {
         "file": "ffmpeg/libavcodec/libsvtjpegxsdec.c",
-        "hash": "5847730777515868970"
+        "hash": "4930239975260993065"
       },
       {
         "file": "ffmpeg/libavcodec/libsvtjpegxsenc.c",
-        "hash": "17369663657831184373"
+        "hash": "10840962119902502287"
       },
       {
         "file": "ffmpeg/libavcodec/libtheoraenc.c",
@@ -18375,7 +18471,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/version.h",
-        "hash": "567944050713626099"
+        "hash": "3089456628774519832"
       },
       {
         "file": "ffmpeg/libavcodec/version_major.h",
@@ -22395,7 +22491,7 @@
       },
       {
         "file": "ffmpeg/libavfilter/vf_libplacebo.c",
-        "hash": "16134719646245737244"
+        "hash": "17767405220609737402"
       },
       {
         "file": "ffmpeg/libavfilter/vf_libvmaf.c",
@@ -49130,10 +49226,6 @@
         "hash": "1579725330904862112"
       },
       {
-        "file": "prisma/comment_schema_addition.prisma",
-        "hash": "3650114432106741156"
-      },
-      {
         "file": "prisma/migrations/20251204103845_initial_schema/migration.sql",
         "hash": "8474946449556009100"
       },
@@ -49146,6 +49238,10 @@
         "hash": "872437952673290735"
       },
       {
+        "file": "prisma/migrations/project_isolation_rls.sql",
+        "hash": "8907364102824483303"
+      },
+      {
         "file": "prisma/models.txt",
         "hash": "10350745335057674820"
       },
@@ -49155,7 +49251,7 @@
       },
       {
         "file": "prisma/schema.prisma",
-        "hash": "13429002308495318897"
+        "hash": "8738525749051969273"
       },
       {
         "file": "prisma/schema_header.txt",
@@ -49971,7 +50067,7 @@
       },
       {
         "file": "tsconfig.json",
-        "hash": "14746810451127705744"
+        "hash": "13510155211436025188"
       },
       {
         "file": "types.ts",

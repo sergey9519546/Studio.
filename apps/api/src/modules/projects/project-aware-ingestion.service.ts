@@ -21,7 +21,7 @@ export interface IngestionResult {
   createdAt: Date;
 }
 
-export interface DocumentMetadata {
+export interface DocumentMetadata extends Record<string, any> {
   projectId: string;
   userId: string;
   sourceType: string;
@@ -31,6 +31,21 @@ export interface DocumentMetadata {
   tags?: string[];
   sensitivityLevel: 'standard' | 'confidential' | 'restricted';
   encryptionStatus?: 'unencrypted' | 'encrypted' | 'hsm_encrypted';
+  classificationConfidence?: number;
+  ingestionTimestamp?: Date;
+  contentClassification?: string;
+  model?: string;
+  dimension?: number;
+}
+
+export interface FileLike {
+  buffer?: Buffer;
+  text?: string;
+  originalname?: string;
+  name?: string;
+  size?: number;
+  mimetype?: string;
+  type?: string;
 }
 
 @Injectable()
@@ -43,7 +58,7 @@ export class ProjectAwareIngestionService {
   ) {}
 
   async ingestDocument(
-    file: any, 
+    file: FileLike, 
     projectId: string, 
     userId: string,
     options: IngestionOptions = {}
@@ -160,13 +175,16 @@ export class ProjectAwareIngestionService {
       // Update project metrics
       await this.updateProjectMetrics(projectId, 'document_ingested');
 
+      const finalStatus: 'processed' | 'encrypted' | 'archived' = 
+        encryptionStatus === 'unencrypted' ? 'processed' : 'encrypted';
+
       return {
         id: knowledgeSource.id,
         projectId,
         userId,
         contentHash,
         embeddingId: projectEmbedding.id,
-        status: encryptionStatus === 'unencrypted' ? 'processed' : 'encrypted',
+        status: finalStatus,
         metadata: {
           ...metadata,
           knowledgeSourceId: knowledgeSource.id,
@@ -213,7 +231,7 @@ export class ProjectAwareIngestionService {
       sourceId: conversationId,
       title: conversation.title || 'Conversation',
       category: 'conversation',
-      sensitivityLevel: conversation.sensitivityLevel || 'standard',
+      sensitivityLevel: (conversation.sensitivityLevel as 'standard' | 'confidential' | 'restricted') || 'standard',
       encryptionStatus: conversation.encryptionKeyId ? 'encrypted' : 'unencrypted',
     };
 
@@ -411,7 +429,7 @@ export class ProjectAwareIngestionService {
     return flags;
   }
 
-  private async extractContent(file: any): Promise<string> {
+  private async extractContent(file: FileLike): Promise<string> {
     // Placeholder for content extraction from various file types
     if (file.buffer) {
       return file.buffer.toString('utf8');
@@ -422,7 +440,7 @@ export class ProjectAwareIngestionService {
     return '';
   }
 
-  private extractMetadata(file: any, projectId: string, userId: string, options: IngestionOptions): DocumentMetadata {
+  private extractMetadata(file: FileLike, projectId: string, userId: string, options: IngestionOptions): DocumentMetadata {
     return {
       projectId,
       userId,
@@ -435,12 +453,13 @@ export class ProjectAwareIngestionService {
     };
   }
 
-  private inferCategory(mimeType: string): string {
-    if (mimeType?.includes('image')) return 'image';
-    if (mimeType?.includes('video')) return 'video';
-    if (mimeType?.includes('audio')) return 'audio';
-    if (mimeType?.includes('pdf')) return 'document';
-    if (mimeType?.includes('text')) return 'text';
+  private inferCategory(mimeType?: string): string {
+    if (!mimeType) return 'unknown';
+    if (mimeType.includes('image')) return 'image';
+    if (mimeType.includes('video')) return 'video';
+    if (mimeType.includes('audio')) return 'audio';
+    if (mimeType.includes('pdf')) return 'document';
+    if (mimeType.includes('text')) return 'text';
     return 'unknown';
   }
 
@@ -462,7 +481,7 @@ export class ProjectAwareIngestionService {
     }
   }
 
-  private async validateProjectQuotas(projectId: string, userId: string): Promise<void> {
+  private async validateProjectQuotas(projectId: string, _userId: string): Promise<void> {
     // Check storage quotas, API limits, etc.
     // This would integrate with your quota management system
     const currentUsage = await this.getCurrentUsage(projectId);
@@ -488,7 +507,7 @@ export class ProjectAwareIngestionService {
     };
   }
 
-  private async getProjectLimits(projectId: string): Promise<{ maxDocuments: number; maxStorage: number }> {
+  private async getProjectLimits(_projectId: string): Promise<{ maxDocuments: number; maxStorage: number }> {
     // Get limits based on project tier/plan
     return {
       maxDocuments: 10000,
@@ -496,12 +515,12 @@ export class ProjectAwareIngestionService {
     };
   }
 
-  private async updateProjectMetrics(projectId: string, metric: string): Promise<void> {
+  private async updateProjectMetrics(_projectId: string, _metric: string): Promise<void> {
     // Update project health metrics
-    await this.projectContextService.getProjectHealth(projectId);
+    await this.projectContextService.getProjectHealth(_projectId);
   }
 
-  private async updateProjectKnowledgeGraph(projectId: string, knowledgeSourceId: string): Promise<void> {
+  private async updateProjectKnowledgeGraph(_projectId: string, _knowledgeSourceId: string): Promise<void> {
     // Update knowledge graph relationships
     // This would integrate with your graph database or knowledge graph service
   }

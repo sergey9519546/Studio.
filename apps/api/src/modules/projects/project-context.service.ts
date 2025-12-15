@@ -1,6 +1,6 @@
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { BadRequestException, ForbiddenException, Inject, Injectable } from '@nestjs/common';
-import { Cache } from 'cache-manager';
+import type { Cache } from 'cache-manager';
 import * as crypto from 'crypto';
 import { PrismaService } from '../../prisma/prisma.service.js';
 
@@ -107,7 +107,7 @@ export class ProjectContextService {
     return context;
   }
 
-  private async getProjectContextFromDB(userId: string, projectId: string): Promise<ProjectContext | null> {
+  private async getProjectContextFromDB(userId: string, projectId: string): Promise<ProjectContext | undefined> {
     const [project, accessControl] = await Promise.all([
       this.prisma.project.findUnique({ where: { id: projectId } }),
       this.prisma.projectAccessControl.findUnique({
@@ -117,7 +117,7 @@ export class ProjectContextService {
       })
     ]);
 
-    if (!project) return null;
+    if (!project) return undefined;
 
     // Determine user role and permissions
     let role: 'owner' | 'editor' | 'viewer' = 'viewer';
@@ -130,7 +130,7 @@ export class ProjectContextService {
       role = accessControl.role as 'owner' | 'editor' | 'viewer';
       permissions = accessControl.permissions as string[];
     } else {
-      return null; // No access
+      return undefined; // No access
     }
 
     return {
@@ -138,12 +138,26 @@ export class ProjectContextService {
       userId,
       role,
       permissions,
-      encryptionKeyId: project.encryptionKeyId,
-      accessLevel: project.accessLevel || 'private',
-      complianceFlags: project.complianceFlags || {},
+      encryptionKeyId: project.encryptionKeyId ?? undefined,
+      accessLevel: (project.accessLevel as 'private' | 'team' | 'public') || 'private',
+      complianceFlags: this.parseComplianceFlags(project.complianceFlags),
       createdAt: new Date(),
       expiresAt: new Date(Date.now() + this.CONTEXT_CACHE_TTL * 1000),
     };
+  }
+
+  private parseComplianceFlags(flags: any): Record<string, boolean> {
+    if (!flags || typeof flags !== 'object') return {};
+    
+    const result: Record<string, boolean> = {};
+    for (const [key, value] of Object.entries(flags)) {
+      if (typeof value === 'boolean') {
+        result[key] = value;
+      } else {
+        result[key] = Boolean(value);
+      }
+    }
+    return result;
   }
 
   async validateProjectAccess(userId: string, projectId: string, requiredPermission: string): Promise<boolean> {
@@ -238,7 +252,7 @@ export class ProjectContextService {
   private async clearProjectContextCache(projectId: string): Promise<void> {
     // Clear all cached contexts for this project
     // This is a simplified implementation - in production, you might want to use Redis patterns
-    const keys = await this.cacheManager.store.keys(`${this.CONTEXT_CACHE_PREFIX}${projectId}:*`);
+    const keys = await (this.cacheManager as any).store?.keys?.(`${this.CONTEXT_CACHE_PREFIX}${projectId}:*`) || [];
     for (const key of keys) {
       await this.cacheManager.del(key);
     }
@@ -365,7 +379,7 @@ export class ProjectContextService {
     ]);
 
     const dates = [project?.updatedAt, asset?.updatedAt, knowledgeSource?.updatedAt]
-      .filter(Boolean)
+      .filter((date): date is Date => Boolean(date))
       .sort((a, b) => b.getTime() - a.getTime());
 
     return dates[0] || null;
