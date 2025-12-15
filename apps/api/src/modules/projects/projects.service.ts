@@ -3,19 +3,6 @@ import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import type { Cache } from 'cache-manager';
 import { PrismaService } from '../../prisma/prisma.service.js';
-import { create } from 'domain';
-import { number } from 'framer-motion';
-import { ids } from 'googleapis/build/src/apis/ids/index.js';
-import { take, async } from 'rxjs';
-import { string, unknown } from 'zod/v3';
-import { id } from 'zod/v4/locales';
-import { limit } from 'firebase/firestore';
-
-export interface ProjectInput {
-  name?: string;
-  clientName?: string;
-  roleRequirements?: Prisma.RoleRequirementCreateWithoutProjectInput[];
-  knowledgeBase?: { title: string; content: string; category: string }[];
   budget?: string | number;
   startDate?: string | Date;
   dueDate?: string | Date;
@@ -31,19 +18,19 @@ export interface ProjectInput {
  */
 interface PrismaProjectResult {
   id: string;
-  title: string;
-  client?: string;
-  description?: string;
+  title: string | null;
+  client: string | null;
+  description: string | null;
   status: string;
-  budget?: number;
-  startDate?: Date;
-  endDate?: Date;
+  budget: number | null;
+  startDate: Date | null;
+  endDate: Date | null;
   createdAt: Date;
   updatedAt: Date;
   roleRequirements?: Array<{
     id: string;
     role: string;
-    count: number;
+    count: number | null;
     skills: string[];
     projectId: string;
   }>;
@@ -57,8 +44,8 @@ interface PrismaProjectResult {
   moodboardItems?: Array<{
     id: string;
     title: string;
-    description?: string;
-    imageUrl?: string;
+    description: string | null;
+    imageUrl: string | null;
     tags: string[];
     projectId: string;
   }>;
@@ -123,13 +110,31 @@ export class ProjectsService {
     if (!project) return null;
     return {
       ...project,
-      name: project.title,
-      clientName: project.client,
-      dueDate: project.endDate,
-      // Ensure arrays are present
-      roleRequirements: project.roleRequirements || [],
+      name: project.title || '',
+      title: project.title || '',
+      clientName: project.client || undefined,
+      client: project.client || undefined,
+      description: project.description || undefined,
+      status: project.status,
+      budget: project.budget || undefined,
+      startDate: project.startDate || undefined,
+      dueDate: project.endDate || undefined,
+      endDate: project.endDate || undefined,
+      createdAt: project.createdAt,
+      updatedAt: project.updatedAt,
+      // Ensure arrays are present and handle nullable count
+      roleRequirements: (project.roleRequirements || []).map(rr => ({
+        ...rr,
+        count: rr.count || 0
+      })),
       knowledgeBase: project.knowledgeBase || [],
-      moodboardItems: project.moodboardItems || []
+      moodboardItems: (project.moodboardItems || []).map(item => ({
+        ...item,
+        description: item.description || undefined,
+        imageUrl: item.imageUrl || undefined
+      })),
+      scripts: project.scripts,
+      assignments: project.assignments
     };
   }
 
@@ -139,9 +144,9 @@ export class ProjectsService {
     const [total, projects] = await Promise.all([
       this.prisma.project.count(),
       this.prisma.project.findMany({
-       : limit,
         skip,
-        take include: { roleRequirements: true },
+        take: limit,
+        include: { roleRequirements: true },
         orderBy: { updatedAt: 'desc' }
       })
     ]);
@@ -191,7 +196,7 @@ export class ProjectsService {
         title: projectData.title,
         client: projectData.client,
         description: projectData.description,
-        status: projectData.status,
+        status: projectData.status as any,
         budget: projectData.budget,
         startDate: projectData.startDate,
         endDate: projectData.endDate,

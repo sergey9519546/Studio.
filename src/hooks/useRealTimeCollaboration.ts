@@ -81,6 +81,7 @@ export function useRealTimeCollaboration(
 
   // Refs
   const currentDocumentId = useRef<string>('');
+  const sessionCleanupRef = useRef<Array<() => void>>([]);
   const eventHandlers = useRef<{
     connectionChange: Set<(state: ConnectionState) => void>;
     edit: Set<(edit: CollaborativeEdit) => void>;
@@ -160,24 +161,42 @@ export function useRealTimeCollaboration(
       currentDocumentId.current = documentId;
       const docState = await liveEditingService.joinSession(documentId, initialContent);
       setDocument(docState);
-      
+
       // Subscribe to edit events
       const unsubscribeEdit = liveEditingService.onEdit(documentId, (edit) => {
         setCollaborativeEdits(prev => [...prev, edit]);
-        notifyEditHandlers(edit);
+        // Use direct notification to avoid circular dependencies
+        eventHandlers.current.edit.forEach(handler => {
+          try {
+            handler(edit);
+          } catch (error) {
+            console.error('Error in edit handler:', error);
+          }
+        });
       });
 
       // Subscribe to presence events for this document
       const unsubscribePresence = liveEditingService.onPresence(documentId, (users) => {
         setActiveUsers(users);
-        notifyPresenceChangeHandlers(users);
+        // Use direct notification to avoid circular dependencies
+        eventHandlers.current.presenceChange.forEach(handler => {
+          try {
+            handler(users);
+          } catch (error) {
+            console.error('Error in presence handler:', error);
+          }
+        });
       });
 
-      // Store unsubscribe functions for cleanup
-      return () => {
+      // Store unsubscribe functions in a ref for cleanup
+      // This prevents memory leaks by ensuring subscriptions are properly cleaned up
+      if (!eventHandlers.current.sessionCleanup) {
+        eventHandlers.current.sessionCleanup = [];
+      }
+      (eventHandlers.current.sessionCleanup as Array<() => void>).push(() => {
         unsubscribeEdit();
         unsubscribePresence();
-      };
+      });
     } catch (error) {
       console.error('Failed to join editing session:', error);
     }

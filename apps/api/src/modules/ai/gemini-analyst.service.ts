@@ -182,16 +182,22 @@ export interface PerformanceAnalysisResult {
 
 /**
  * JSON schema definition for structured extraction
- * Uses index signature to be compatible with Record<string, unknown>
  */
 interface JsonSchema {
-  [key: string]: unknown;
-  type: string;
-  properties?: Record<string, unknown>;
+  type: 'object' | 'array' | 'string' | 'number' | 'boolean' | 'null';
+  properties?: Record<string, JsonSchema>;
   required?: string[];
-  items?: Record<string, unknown>;
-  enum?: string[];
+  items?: JsonSchema;
+  enum?: (string | number | boolean | null)[];
   description?: string;
+  minimum?: number;
+  maximum?: number;
+  minLength?: number;
+  maxLength?: number;
+  pattern?: string;
+  format?: string;
+  default?: unknown;
+  [key: string]: unknown;
 }
 
 @Injectable()

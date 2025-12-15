@@ -2537,7 +2537,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/ai.controller.ts",
-          "hash": "5822497487641864005",
+          "hash": "7407940574798607081",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -2556,7 +2556,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini-analyst.service.ts",
-          "hash": "13242622037436950529",
+          "hash": "2204445381026810251",
           "deps": [
             "npm:@nestjs/cache-manager",
             "npm:@nestjs/common",
@@ -3315,7 +3315,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/projects.service.ts",
-          "hash": "3831292036268279083",
+          "hash": "11340221787834960195",
           "deps": [
             "npm:@nestjs/cache-manager",
             "npm:@nestjs/common",
@@ -49860,7 +49860,7 @@
       },
       {
         "file": "src/hooks/useRealTimeCollaboration.ts",
-        "hash": "8502717576564257217"
+        "hash": "10859363879162108406"
       },
       {
         "file": "src/hooks/useToast.ts",
