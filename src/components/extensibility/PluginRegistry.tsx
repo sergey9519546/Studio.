@@ -3,24 +3,7 @@
  * Provides plugin discovery, registration, and marketplace functionality
  */
 
-import React, { createContext, useContext, useReducer, useCallback, useEffect, ReactNode } from 'react';
-import { Button } from '../design/Button';
-import { LiquidGlassContainer } from '../design/LiquidGlassContainer';
-import { 
-  Search, 
-  Star, 
-  Download, 
-  Filter,
-  Grid,
-  List,
-  ExternalLink,
-  Clock,
-  TrendingUp,
-  Award,
-  Users,
-  Tag,
-  BookOpen
-} from 'lucide-react';
+import React, { createContext, ReactNode, useCallback, useContext, useEffect, useReducer } from 'react';
 import { Plugin, PluginCategory } from './PluginManager';
 
 // Registry Types
@@ -494,4 +477,52 @@ export const PluginRegistryProvider: React.FC<PluginRegistryProviderProps> = ({
   const sharePlugin = useCallback(async (entryId: string) => {
     // Simulate sharing
     const url = `${registryUrl}/plugins/${entryId}`;
-    if (navigator
+    if (navigator.share) {
+      await navigator.share({
+        title: 'Check out this plugin',
+        url
+      });
+    } else {
+      await navigator.clipboard.writeText(url);
+    }
+  }, [registryUrl]);
+
+  const value: RegistryContext = {
+    state,
+    dispatch,
+    searchPlugins,
+    applyFilters,
+    loadFeatured,
+    loadTrending,
+    loadPage,
+    getPluginById,
+    installFromRegistry,
+    ratePlugin,
+    bookmarkPlugin,
+    sharePlugin
+  };
+
+  return (
+    <RegistryContext.Provider value={value}>
+      {children}
+    </RegistryContext.Provider>
+  );
+};
+
+// Hook
+export const usePluginRegistry = () => {
+  const context = useContext(RegistryContext);
+  if (!context) {
+    throw new Error('usePluginRegistry must be used within a PluginRegistryProvider');
+  }
+  return context;
+};
+
+// Helper function
+function calculateNewRating(reviews: PluginReview[], newReview: PluginReview): number {
+  const allReviews = [...reviews, newReview];
+  const totalRating = allReviews.reduce((sum, r) => sum + r.rating, 0);
+  return totalRating / allReviews.length;
+}
+
+export default PluginRegistryProvider;

@@ -4907,6 +4907,15 @@
         "hash": "sha512-dVd04UKsfpINUnK0yBoYHDF3xu7xVH4BuDotC/xGuycx4CgbP48X/KF/586bcObxT0HENHXEU8Nqtu6NR+eKhw=="
       }
     },
+    "npm:@types/google-cloud__storage": {
+      "type": "npm",
+      "name": "npm:@types/google-cloud__storage",
+      "data": {
+        "version": "1.7.2",
+        "packageName": "@types/google-cloud__storage",
+        "hash": "sha512-RaQJ7+Ht20MRYJu7mgKBpbVNZIPneztKIl/DUKacRC6A8mXRsJfgDdPA7indHmJGIgm+hzUTj44+A3RyuuYZhg=="
+      }
+    },
     "npm:@types/graceful-fs": {
       "type": "npm",
       "name": "npm:@types/graceful-fs",
@@ -25953,6 +25962,18 @@
         "type": "static"
       }
     ],
+    "npm:@types/google-cloud__storage": [
+      {
+        "source": "npm:@types/google-cloud__storage",
+        "target": "npm:@types/node",
+        "type": "static"
+      },
+      {
+        "source": "npm:@types/google-cloud__storage",
+        "target": "npm:@types/request",
+        "type": "static"
+      }
+    ],
     "npm:@types/graceful-fs": [
       {
         "source": "npm:@types/graceful-fs",
@@ -39607,5 +39628,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1765752215659
+  "computedAt": 1765760816316
 }

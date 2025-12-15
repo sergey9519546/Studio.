@@ -10290,6 +10290,16 @@
     "type": "static"
   },
   {
+    "source": "npm:@types/google-cloud__storage",
+    "target": "npm:@types/node",
+    "type": "static"
+  },
+  {
+    "source": "npm:@types/google-cloud__storage",
+    "target": "npm:@types/request",
+    "type": "static"
+  },
+  {
     "source": "npm:@types/graceful-fs",
     "target": "npm:@types/node",
     "type": "static"
@@ -10432,6 +10442,26 @@
   {
     "source": "npm:@types/react",
     "target": "npm:csstype",
+    "type": "static"
+  },
+  {
+    "source": "npm:@types/request",
+    "target": "npm:@types/caseless",
+    "type": "static"
+  },
+  {
+    "source": "npm:@types/request",
+    "target": "npm:@types/node",
+    "type": "static"
+  },
+  {
+    "source": "npm:@types/request",
+    "target": "npm:@types/tough-cookie",
+    "type": "static"
+  },
+  {
+    "source": "npm:@types/request",
+    "target": "npm:form-data@2.5.5",
     "type": "static"
   },
   {

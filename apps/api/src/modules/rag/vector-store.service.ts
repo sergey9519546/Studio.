@@ -61,6 +61,8 @@ export class VectorStoreService {
         data: {
           title: (metadata.title as string) || "Untitled",
           content: content,
+          category: "document",
+          sourceType: "vector_store",
           originalContent: content,
           status: "indexed",
           projectId: metadata.projectId as string,

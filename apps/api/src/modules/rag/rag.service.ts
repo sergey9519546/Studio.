@@ -15,7 +15,7 @@ interface RAGContext {
   context: string;
 }
 
-interface RAGResponse {
+export interface RAGResponse {
   answer: string;
   sources: Array<{
     content: string;

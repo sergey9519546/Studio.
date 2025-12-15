@@ -1,13 +1,12 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { Send, Loader2, Copy, Download, Book, Undo2, Redo2, Save, History, Command, Sparkles } from 'lucide-react';
-import { Button } from './design/Button';
-import { Textarea } from './design/Textarea';
-import { LiquidGlassContainer } from './design/LiquidGlassContainer';
+import { Book, Command, Copy, Download, History, Loader2, Redo2, Save, Send, Sparkles, Undo2 } from 'lucide-react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useAutoSave } from '../hooks/useAutoSave';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
-import { CommandPalette } from './ui/CommandPalette';
-import { draftService } from '../services/DraftService';
 import { UndoRedoService } from '../services/UndoRedoService';
+import { Button } from './design/Button';
+import { LiquidGlassContainer } from './design/LiquidGlassContainer';
+import { Textarea } from './design/Textarea';
+import { CommandPalette } from './ui/CommandPalette';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -538,4 +537,49 @@ export const WritersRoom: React.FC<WritersRoomProps> = ({
                 </Button>
               </div>
               
-              <div className="
+              <div className="space-y-2">
+                {getDraftHistory().length === 0 ? (
+                  <p className="text-ink-tertiary text-sm">No draft history available.</p>
+                ) : (
+                  getDraftHistory().map((version, index) => (
+                    <div 
+                      key={index}
+                      className="flex items-center justify-between p-3 bg-subtle rounded-lg"
+                    >
+                      <div>
+                        <p className="text-sm font-medium text-ink-primary">
+                          Version {getDraftHistory().length - index}
+                        </p>
+                        <p className="text-xs text-ink-tertiary">
+                          {new Date(version.timestamp).toLocaleString()}
+                        </p>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleRestoreVersion(index)}
+                      >
+                        Restore
+                      </Button>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Command Palette */}
+        {showCommandPalette && (
+          <CommandPalette
+            commands={commands}
+            isOpen={showCommandPalette}
+            onClose={() => setShowCommandPalette(false)}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default WritersRoom;

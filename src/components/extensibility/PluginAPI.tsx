@@ -3,26 +3,7 @@
  * Provides standardized API for plugin development and integration
  */
 
-import React, { createContext, useContext, useCallback, useEffect, ReactNode, useReducer } from 'react';
-import { Button } from '../design/Button';
-import { LiquidGlassContainer } from '../design/LiquidGlassContainer';
-import { 
-  Code, 
-  Webhook, 
-  Zap, 
-  Shield, 
-  Activity, 
-  Database, 
-  Globe, 
-  Settings,
-  Play,
-  Pause,
-  RefreshCw,
-  CheckCircle,
-  AlertCircle,
-  Clock,
-  Terminal
-} from 'lucide-react';
+import React, { createContext, ReactNode, useCallback, useContext, useEffect, useReducer } from 'react';
 
 // Plugin API Types
 export interface PluginAPIConfig {
@@ -596,4 +577,67 @@ export const PluginAPIProvider: React.FC<PluginAPIProviderProps> = ({
         duration 
       };
     } catch (error) {
-      const errorMessage = error instanceof
+      const errorMessage = error instanceof Error ? error.message : 'API call failed';
+
+      const apiError: APIError = {
+        id: `error_${Date.now()}`,
+        timestamp: new Date(),
+        endpoint,
+        method,
+        error: errorMessage,
+        pluginId: pluginId || 'unknown',
+        severity: 'medium',
+        resolved: false
+      };
+
+      dispatch({ type: 'ADD_ERROR', payload: apiError });
+
+      if (onAPIError) {
+        onAPIError(apiError);
+      }
+
+      throw error;
+    }
+  }, [onAPIError]);
+
+  const getPerformanceMetrics = useCallback((): APIPerformance => {
+    return state.performance;
+  }, [state.performance]);
+
+  const clearErrorLog = useCallback(() => {
+    // Would need to add CLEAR_ERRORS action
+  }, []);
+
+  const resolveError = useCallback((errorId: string) => {
+    dispatch({ type: 'RESOLVE_ERROR', payload: errorId });
+  }, []);
+
+  const value = {
+    state,
+    dispatch,
+    executeHook,
+    registerEndpoint,
+    registerMiddleware,
+    callEndpoint,
+    getPerformanceMetrics,
+    clearErrorLog,
+    resolveError
+  };
+
+  return (
+    <PluginAPIContext.Provider value={value}>
+      {children}
+    </PluginAPIContext.Provider>
+  );
+};
+
+// Hook
+export const usePluginAPI = () => {
+  const context = useContext(PluginAPIContext);
+  if (!context) {
+    throw new Error('usePluginAPI must be used within a PluginAPIProvider');
+  }
+  return context;
+};
+
+export default PluginAPIProvider;

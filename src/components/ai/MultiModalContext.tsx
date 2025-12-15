@@ -3,10 +3,10 @@
  * Provides unified context management for Vision, Audio, and Document AI analysis
  */
 
-import React, { createContext, useContext, useReducer, useCallback, ReactNode } from 'react';
-import { VisionAnalysisResult } from './VisionAIComponent';
+import React, { createContext, ReactNode, useCallback, useContext, useReducer } from 'react';
 import { AudioAnalysisResult } from './AudioAIComponent';
 import { DocumentAnalysisResult } from './DocumentAIComponent';
+import { VisionAnalysisResult } from './VisionAIComponent';
 
 // Context Types
 export interface UnifiedContext {
@@ -573,4 +573,117 @@ function calculateAggregatedMetadata(mediaItems: MediaItem[]): AggregatedMetadat
   const processingEfficiency = mediaItems.length > 0 
     ? mediaItems.reduce((sum, item) => sum + (1 / (item.processingTime + 1)), 0) / mediaItems.length 
     : 0;
-  const coverage = mediaItems.length / 10; // Assuming max 10
+  const coverage = Math.min(mediaItems.length / 10, 1); // Assuming max 10
+
+  return {
+    totalFiles: mediaItems.length,
+    fileTypes,
+    timeSpan: {
+      start: earliestTime,
+      end: latestTime,
+      duration: timeSpanDuration
+    },
+    contentMetrics: {
+      totalText,
+      totalImages,
+      totalAudio,
+      totalWords,
+      totalDuration
+    },
+    qualityMetrics: {
+      averageConfidence,
+      processingEfficiency,
+      coverage
+    }
+  };
+}
+
+function generateContextSummary(mediaItems: MediaItem[], insights: CrossModalInsight[]): ContextSummary {
+  const themes = insights
+    .filter(i => i.type === 'theme')
+    .map(i => i.title);
+
+  const patterns = insights
+    .filter(i => i.type === 'conceptual' || i.type === 'semantic')
+    .map(i => i.description);
+
+  return {
+    overview: `Context aggregated from ${mediaItems.length} media items with ${insights.length} cross-modal insights.`,
+    keyFindings: insights.slice(0, 5).map(i => i.description),
+    dominantThemes: themes.slice(0, 5),
+    notablePatterns: patterns.slice(0, 3),
+    recommendations: [
+      'Review high-confidence insights for action items',
+      'Consider temporal relationships between media items'
+    ],
+    confidence: insights.length > 0 
+      ? insights.reduce((sum, i) => sum + i.confidence, 0) / insights.length 
+      : 0,
+    generatedAt: new Date()
+  };
+}
+
+async function generateCrossModalInsights(mediaItems: MediaItem[]): Promise<CrossModalInsight[]> {
+  // Simulate insight generation
+  const insights: CrossModalInsight[] = [];
+  
+  if (mediaItems.length >= 2) {
+    insights.push({
+      id: `insight_${Date.now()}_1`,
+      type: 'theme',
+      title: 'Common Theme Detected',
+      description: 'Multiple media items share similar thematic elements.',
+      confidence: 0.75,
+      relatedMediaIds: mediaItems.slice(0, 2).map(m => m.id),
+      evidence: [],
+      category: 'mixed',
+      impact: 'medium',
+      timestamp: new Date()
+    });
+  }
+
+  return insights;
+}
+
+async function detectRelationships(mediaItems: MediaItem[]): Promise<ContextRelationship[]> {
+  const relationships: ContextRelationship[] = [];
+  
+  // Create temporal relationships between consecutive items
+  for (let i = 0; i < mediaItems.length - 1; i++) {
+    relationships.push({
+      id: `rel_${Date.now()}_${i}`,
+      type: 'temporal',
+      sourceMediaId: mediaItems[i].id,
+      targetMediaId: mediaItems[i + 1].id,
+      strength: 0.8,
+      description: 'Sequential relationship',
+      metadata: {}
+    });
+  }
+
+  return relationships;
+}
+
+async function generateSuggestions(
+  mediaItems: MediaItem[], 
+  insights: CrossModalInsight[]
+): Promise<AISuggestion[]> {
+  const suggestions: AISuggestion[] = [];
+
+  if (mediaItems.length > 0) {
+    suggestions.push({
+      id: `suggestion_${Date.now()}_1`,
+      type: 'analysis',
+      title: 'Deep Analysis Available',
+      description: 'Consider running deeper analysis on high-confidence items.',
+      priority: 'medium',
+      confidence: 0.7,
+      relatedInsights: insights.slice(0, 2).map(i => i.id),
+      actionable: true,
+      estimatedImpact: 'Improved understanding of cross-modal relationships',
+      timestamp: new Date()
+    });
+  }
+
+  return suggestions;
+}

@@ -3,23 +3,7 @@
  * Provides extensible plugin architecture for the Enhanced Liquid Glass Design System
  */
 
-import React, { createContext, useContext, useReducer, useCallback, useEffect, ReactNode } from 'react';
-import { Button } from '../design/Button';
-import { LiquidGlassContainer } from '../design/LiquidGlassContainer';
-import { 
-  Plug, 
-  Download, 
-  Settings, 
-  Trash2, 
-  Play, 
-  Pause, 
-  AlertCircle, 
-  CheckCircle,
-  Zap,
-  Code,
-  Package,
-  Plus
-} from 'lucide-react';
+import React, { createContext, ReactNode, useCallback, useContext, useEffect, useReducer } from 'react';
 
 // Plugin Types
 export interface Plugin {
@@ -444,7 +428,7 @@ export const PluginManagerProvider: React.FC<PluginManagerProps> = ({
             entryPoint: './data-analyzer.js',
             manifest: { main: './data-analyzer.js', name: 'Smart Data Analyzer' },
             size: 512000,
-sha256:def            checksum: '456',
+            checksum: 'sha256:def456',
             compatibleVersions: ['2.0.0', '2.1.0'],
             installationDate: new Date('2024-02-20'),
             rating: 4.6,
@@ -519,4 +503,86 @@ sha256:def            checksum: '456',
 
   const enablePlugin = useCallback(async (id: string) => {
     try {
-      await new Promise
+      await new Promise(resolve => setTimeout(resolve, 500));
+      dispatch({ type: 'ENABLE_PLUGIN', payload: id });
+    } catch (error) {
+      dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Failed to enable plugin' });
+    }
+  }, []);
+
+  const disablePlugin = useCallback(async (id: string) => {
+    try {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      dispatch({ type: 'DISABLE_PLUGIN', payload: id });
+    } catch (error) {
+      dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Failed to disable plugin' });
+    }
+  }, []);
+
+  const updatePlugin = useCallback(async (id: string) => {
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      dispatch({ type: 'UPDATE_PLUGIN', payload: { id, updates: { version: 'updated' } } });
+    } catch (error) {
+      dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Failed to update plugin' });
+    }
+  }, []);
+
+  const getPluginContext = useCallback((id: string): PluginContext | null => {
+    return state.pluginContext.get(id) || null;
+  }, [state.pluginContext]);
+
+  const emitPluginEvent = useCallback((pluginId: string, event: string, data?: any) => {
+    const handlers = state.eventBus.get(event) || [];
+    handlers.forEach(handler => handler(data));
+  }, [state.eventBus]);
+
+  const registerPluginHook = useCallback((pluginId: string, name: string, hook: Function) => {
+    // Register hook implementation
+  }, []);
+
+  const checkPermissions = useCallback(async (permissions: PluginPermission[]): Promise<boolean> => {
+    return permissions.every(p => p.granted);
+  }, []);
+
+  const getAvailablePlugins = useCallback(() => state.plugins.availablePlugins, [state.plugins.availablePlugins]);
+  const getInstalledPlugins = useCallback(() => state.plugins.installedPlugins, [state.plugins.installedPlugins]);
+  const getActivePlugins = useCallback(() => {
+    return state.plugins.installedPlugins.filter(p => state.activePlugins.has(p.id));
+  }, [state.plugins.installedPlugins, state.activePlugins]);
+
+  const value = {
+    state,
+    dispatch,
+    installPlugin,
+    uninstallPlugin,
+    enablePlugin,
+    disablePlugin,
+    loadPlugins,
+    updatePlugin,
+    getPluginContext,
+    emitPluginEvent,
+    registerPluginHook,
+    checkPermissions,
+    getAvailablePlugins,
+    getInstalledPlugins,
+    getActivePlugins
+  };
+
+  return (
+    <PluginManagerContext.Provider value={value}>
+      {children}
+    </PluginManagerContext.Provider>
+  );
+};
+
+// Hook
+export const usePluginManager = () => {
+  const context = useContext(PluginManagerContext);
+  if (!context) {
+    throw new Error('usePluginManager must be used within a PluginManagerProvider');
+  }
+  return context;
+};
+
+export default PluginManagerProvider;

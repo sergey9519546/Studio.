@@ -13,15 +13,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ConversationStatus } from '@prisma/client';
+import { CurrentUser, type JwtPayloadUser } from '../auth/decorators';
+import { JwtAuthGuard } from '../auth/guards';
 import type { AddMessageDto, CaptureContextSnapshotDto, CreateConversationDto, UpdateConversationDto } from './conversations.service';
 import { ConversationsService } from './conversations.service';
-
-// Simple JWT guard placeholder - TODO: Implement proper authentication
-function JwtAuthGuard() {
-  return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-    return descriptor;
-  };
-}
 
 @Controller('api/v1/conversations')
 @UseGuards(JwtAuthGuard)
@@ -36,6 +31,7 @@ export class ConversationsController {
 
   @Get()
   async getUserConversations(
+    @CurrentUser() user: JwtPayloadUser,
     @Query('page') page?: number,
     @Query('limit') limit?: number,
     @Query('projectId') projectId?: string,
@@ -43,7 +39,7 @@ export class ConversationsController {
     @Query('topic') topic?: string,
   ) {
     return this.conversationsService.getUserConversations(
-      'current-user-id', // TODO: Extract from JWT token
+      String(user.id),
       page ? Number(page) : 1,
       limit ? Number(limit) : 10,
       {
@@ -61,12 +57,13 @@ export class ConversationsController {
 
   @Get('search')
   async searchConversations(
+    @CurrentUser() user: JwtPayloadUser,
     @Query('q') query: string,
     @Query('page') page?: number,
     @Query('limit') limit?: number,
   ) {
     return this.conversationsService.searchConversations(
-      'current-user-id', // TODO: Extract from JWT token
+      String(user.id),
       query,
       page ? Number(page) : 1,
       limit ? Number(limit) : 10,

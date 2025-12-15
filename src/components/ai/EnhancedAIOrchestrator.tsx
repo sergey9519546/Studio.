@@ -3,33 +3,8 @@
  * Coordinates Vision, Audio, Document, and MultiModalContext components
  */
 
-import React, { createContext, useContext, useReducer, useCallback, ReactNode, useEffect } from 'react';
-import { VisionAIComponent } from './VisionAIComponent';
-import { AudioAIComponent } from './AudioAIComponent';
-import { DocumentAIComponent } from './DocumentAIComponent';
-import { MultiModalProvider, useMultiModal, MediaItem } from './MultiModalContext';
-import { VisionAnalysisResult } from './VisionAIComponent';
-import { AudioAnalysisResult } from './AudioAIComponent';
-import { DocumentAnalysisResult } from './DocumentAIComponent';
-import { Button } from '../design/Button';
-import { LiquidGlassContainer } from '../design/LiquidGlassContainer';
-import { 
-  Brain, 
-  Camera, 
-  Mic, 
-  FileText, 
-  Layers, 
-  Zap, 
-  Settings, 
-  Play, 
-  Pause, 
-  RotateCcw,
-  Download,
-  Share2,
-  Filter,
-  Grid,
-  List
-} from 'lucide-react';
+import React, { createContext, ReactNode, useCallback, useContext, useEffect, useReducer } from 'react';
+import { MultiModalProvider } from './MultiModalContext';
 
 // Orchestrator Types
 export interface OrchestratorConfig {
@@ -138,11 +113,11 @@ const initialState: OrchestratorState = {
   currentPipeline: null,
   viewMode: 'grid',
   filterStatus: 'all',
-   exportProgress: 0
+  selectedResults: [],
+  exportProgress: 0
 };
 
-// selectedResults: [],
- Reducer
+// Reducer
 function orchestratorReducer(state: OrchestratorState, action: OrchestratorAction): OrchestratorState {
   switch (action.type) {
     case 'SET_CONFIG':
@@ -182,7 +157,7 @@ function orchestratorReducer(state: OrchestratorState, action: OrchestratorActio
         ],
         isProcessing: state.activePipelines.length > 1,
         currentPipeline: state.activePipelines.length > 1 
-          ?.find(p => p state.activePipelines.id !== action.payload.id) || null
+          ? state.activePipelines.find(p => p.id !== action.payload.id) || null
           : null
       };
 
@@ -496,4 +471,80 @@ export const EnhancedAIOrchestrator: React.FC<EnhancedAIOrchestratorProps> = ({
 
     try {
       // Simulate export process
-      for (let i
+      for (let i = 0; i <= 100; i += 10) {
+        await new Promise(resolve => setTimeout(resolve, 200));
+        dispatch({ type: 'SET_EXPORT_PROGRESS', payload: i });
+      }
+
+      // Generate export data based on format
+      let exportData: string;
+      switch (format) {
+        case 'json':
+          exportData = JSON.stringify(pipeline.results, null, 2);
+          break;
+        case 'csv':
+          exportData = pipeline.results.map(r => `${r.id},${r.type},${r.confidence}`).join('\n');
+          break;
+        case 'markdown':
+          exportData = pipeline.results.map(r => `## ${r.type}\n${r.data}`).join('\n\n');
+          break;
+        default:
+          exportData = JSON.stringify(pipeline.results);
+      }
+
+      // Trigger download
+      const blob = new Blob([exportData], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${pipeline.name}_results.${format}`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      dispatch({ type: 'SET_EXPORT_PROGRESS', payload: 100 });
+    } catch (error) {
+      console.error('Export failed:', error);
+    }
+  }, [state.completedPipelines]);
+
+  const clearCompletedPipelines = useCallback(() => {
+    // Clear completed pipelines (would need a new action type)
+  }, []);
+
+  const getPipelineResults = useCallback((pipelineId: string): ProcessingResult[] => {
+    const pipeline = [...state.activePipelines, ...state.completedPipelines].find(p => p.id === pipelineId);
+    return pipeline?.results || [];
+  }, [state.activePipelines, state.completedPipelines]);
+
+  const value = {
+    state,
+    dispatch,
+    createPipeline,
+    executePipeline,
+    pausePipeline,
+    resumePipeline,
+    cancelPipeline,
+    exportResults,
+    clearCompletedPipelines,
+    getPipelineResults
+  };
+
+  return (
+    <OrchestratorContext.Provider value={value}>
+      <MultiModalProvider projectId={projectId}>
+        {children}
+      </MultiModalProvider>
+    </OrchestratorContext.Provider>
+  );
+};
+
+// Hook
+export const useOrchestrator = () => {
+  const context = useContext(OrchestratorContext);
+  if (!context) {
+    throw new Error('useOrchestrator must be used within an EnhancedAIOrchestrator');
+  }
+  return context;
+};
+
+export default EnhancedAIOrchestrator;
