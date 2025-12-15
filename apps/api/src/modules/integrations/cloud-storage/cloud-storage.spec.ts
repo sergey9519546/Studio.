@@ -4,6 +4,7 @@ import { GoogleDriveAdapter } from "./adapters/google-drive.adapter.js";
 import { CloudStorageController } from "./cloud-storage.controller.js";
 import { CloudStorageService } from "./cloud-storage.service.js";
 import { CloudProviderType } from "./dto/cloud-storage.dto.js";
+import type { Request } from "express";
 
 // Simple mock for GoogleDriveAdapter
 const mockGoogleDriveAdapter = {
@@ -14,12 +15,9 @@ const mockGoogleDriveAdapter = {
 };
 
 // Helper to build a fake request with user
-interface FakeRequest {
-  user: { id: string; email: string };
-}
-const makeRequest = (userId: string): FakeRequest => ({
-  user: { id: userId, email: "test@example.com" },
-});
+type RequestWithUser = Request & { user: { id: string; email: string } };
+const makeRequest = (userId: string): RequestWithUser =>
+  ({ user: { id: userId, email: "test@example.com" } } as RequestWithUser);
 
 describe("CloudStorageService", () => {
   let service: CloudStorageService;
@@ -152,7 +150,7 @@ describe("CloudStorageController", () => {
     (service.getProviderOptions as jest.Mock).mockResolvedValueOnce([]);
 
     const req = makeRequest("42");
-    const result = await controller.getOptions(req as any);
+    const result = await controller.getOptions(req);
 
     expect(service.getProviderOptions).toHaveBeenCalledWith(42);
     expect(result).toEqual([]);
@@ -169,7 +167,7 @@ describe("CloudStorageController", () => {
     const result = await controller.listFiles(
       "google-drive",
       query,
-      req as any
+      req
     );
 
     expect(service.listFiles).toHaveBeenCalledWith(7, "google-drive", "root");

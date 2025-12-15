@@ -1,5 +1,9 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { docs_v1, sheets_v4 } from 'googleapis';
 import { AuthenticatedUser, GoogleClientFactory } from './google-client.factory.js';
+
+type SheetValues = NonNullable<sheets_v4.Schema$ValueRange['values']>;
+type StructuralElement = docs_v1.Schema$StructuralElement;
 
 @Injectable()
 export class DataExtractorService {
@@ -19,23 +23,25 @@ export class DataExtractorService {
       // 1. Fetch Data
       // Fetching all data from the first sheet by default (assuming A1 notation without sheet name gets first sheet in some contexts, 
       // but getting sheet name first is safer).
-      const meta = await (sheets as any).spreadsheets.get({ spreadsheetId: fileId });
+      const meta = await sheets.spreadsheets.get({ spreadsheetId: fileId });
       const sheetName = meta.data.sheets?.[0]?.properties?.title;
 
       if (!sheetName) throw new Error('No sheets found');
 
-      const response = await (sheets as any).spreadsheets.values.get({
+      const response = await sheets.spreadsheets.values.get({
         spreadsheetId: fileId,
         range: sheetName, // Get full range
         valueRenderOption: 'FORMATTED_VALUE',
       });
 
-      let rows = response.data.values || [];
+      let rows: SheetValues = response.data.values ?? [];
 
       // 2. Intelligent Cleaning
       // Remove completely empty rows
-      rows = rows.filter((row: unknown[]) =>
-        row.some((cell: unknown) => cell !== "" && cell !== null && cell !== undefined)
+      rows = rows.filter(
+        (row): row is SheetValues[number] =>
+          Array.isArray(row) &&
+          row.some(cell => cell !== '' && cell !== null && cell !== undefined)
       );
 
       if (rows.length === 0) return 'Sheet is empty.';
@@ -51,9 +57,9 @@ export class DataExtractorService {
       return this.convertToMarkdown(rows) + warningNote;
 
     } catch (error: unknown) {
-      const err = error as Error;
-      this.logger.error(`Sheet extraction failed: ${err.message}`);
-      throw new BadRequestException(`Failed to extract sheet data: ${err.message}`);
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      this.logger.error(`Sheet extraction failed: ${message}`);
+      throw new BadRequestException(`Failed to extract sheet data: ${message}`);
     }
   }
 
@@ -64,35 +70,37 @@ export class DataExtractorService {
     const { docs } = this.clientFactory.createClients(user);
 
     try {
-      const doc = await (docs as any).documents.get({ documentId: fileId });
-      const content = doc.data.body?.content;
+      const doc = await docs.documents.get({ documentId: fileId });
+      const content: StructuralElement[] = doc.data.body?.content ?? [];
 
-      if (!content) return '';
+      if (content.length === 0) return '';
 
       let fullText = '';
 
       // Iterate through structural elements
-      content.forEach((element: any) => {
-        if (element.paragraph) {
-          element.paragraph.elements?.forEach((el: any) => {
-            if (el.textRun?.content) {
-              fullText += el.textRun.content;
+      content.forEach((element: StructuralElement) => {
+        if (element.paragraph?.elements) {
+          element.paragraph.elements.forEach(el => {
+            const text = el.textRun?.content;
+            if (text) {
+              fullText += text;
             }
           });
-        } else if (element.table) {
-          // Rudimentary table text extraction
-          element.table.tableRows?.forEach((row: any) => {
-            row.tableCells?.forEach((cell: any) => {
-              cell.content?.forEach((cellContent: any) => {
-                if (cellContent.paragraph?.elements) {
-                  cellContent.paragraph.elements.forEach((el: any) => {
-                    if (el.textRun?.content) fullText += el.textRun.content + " ";
-                  });
-                }
+          return;
+        }
+
+        if (element.table?.tableRows) {
+          element.table.tableRows.forEach(row => {
+            row.tableCells?.forEach(cell => {
+              cell.content?.forEach(cellContent => {
+                cellContent.paragraph?.elements?.forEach(el => {
+                  const text = el.textRun?.content;
+                  if (text) fullText += `${text} `;
+                });
               });
-              fullText += " | ";
+              fullText += ' | ';
             });
-            fullText += "\n";
+            fullText += '\n';
           });
         }
       });
@@ -100,13 +108,13 @@ export class DataExtractorService {
       return fullText.trim();
 
     } catch (error: unknown) {
-      const err = error as Error;
-      this.logger.error(`Doc extraction failed: ${err.message}`);
-      throw new BadRequestException(`Failed to extract doc text: ${err.message}`);
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      this.logger.error(`Doc extraction failed: ${message}`);
+      throw new BadRequestException(`Failed to extract doc text: ${message}`);
     }
   }
 
-  private convertToMarkdown(rows: unknown[][]): string {
+  private convertToMarkdown(rows: SheetValues): string {
     if (rows.length === 0) return '';
 
     const headers = rows[0].map(h => String(h || '').trim());

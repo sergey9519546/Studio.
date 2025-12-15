@@ -2,6 +2,12 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createApi } from 'unsplash-js';
 
+type UnsplashApiClient = ReturnType<typeof createApi>;
+type SearchPhotosResponse = NonNullable<Awaited<ReturnType<UnsplashApiClient['search']['getPhotos']>>['response']>;
+type UnsplashPhotoPayload =
+  | SearchPhotosResponse['results'][number]
+  | NonNullable<Awaited<ReturnType<UnsplashApiClient['photos']['get']>>['response']>;
+
 export interface UnsplashSearchParams {
   query: string;
   page?: number;
@@ -62,7 +68,7 @@ export interface UnsplashSearchResponse {
 @Injectable()
 export class UnsplashService {
   private readonly logger = new Logger(UnsplashService.name);
-  private unsplashApi: ReturnType<typeof createApi> | null = null;
+  private unsplashApi: UnsplashApiClient | null = null;
 
   constructor(private configService: ConfigService) {
     this.initializeUnsplash();
@@ -90,25 +96,31 @@ export class UnsplashService {
     }
   }
 
+  private requireClient(): UnsplashApiClient {
+    if (!this.unsplashApi) {
+      throw new Error('Unsplash API not initialized. Check your access key configuration.');
+    }
+    return this.unsplashApi;
+  }
+
   /**
    * Search for photos on Unsplash
    */
   async searchPhotos(params: UnsplashSearchParams): Promise<UnsplashSearchResponse> {
-    if (!this.unsplashApi) {
-      throw new Error('Unsplash API not initialized. Check your access key configuration.');
-    }
-
     try {
+      const api = this.requireClient();
       this.logger.log(`Searching photos for query: "${params.query}"`);
 
-      const response = await this.unsplashApi.search.getPhotos({
+      const searchParams: Parameters<UnsplashApiClient['search']['getPhotos']>[0] = {
         query: params.query,
-        page: params.page || 1,
-        perPage: params.per_page || 12,
-        orderBy: (params.order_by as any) || 'relevant',
-        contentFilter: params.content_filter as any || 'low',
-        orientation: params.orientation as any,
-      });
+        page: params.page ?? 1,
+        perPage: params.per_page ?? 12,
+        orderBy: params.order_by ?? 'relevant',
+        contentFilter: params.content_filter ?? 'low',
+        orientation: params.orientation,
+      };
+
+      const response = await api.search.getPhotos(searchParams);
 
       if (response.errors) {
         this.logger.error('Unsplash API errors:', response.errors);
@@ -137,14 +149,11 @@ export class UnsplashService {
    * Get a specific photo by ID
    */
   async getPhoto(photoId: string): Promise<UnsplashPhoto> {
-    if (!this.unsplashApi) {
-      throw new Error('Unsplash API not initialized. Check your access key configuration.');
-    }
-
     try {
+      const api = this.requireClient();
       this.logger.log(`Getting photo with ID: ${photoId}`);
 
-      const response = await this.unsplashApi.photos.get({ photoId });
+      const response = await api.photos.get({ photoId });
 
       if (response.errors) {
         this.logger.error('Unsplash API errors:', response.errors);
@@ -173,18 +182,17 @@ export class UnsplashService {
     per_page?: number;
     order_by?: 'latest' | 'oldest' | 'popular';
   }): Promise<UnsplashSearchResponse> {
-    if (!this.unsplashApi) {
-      throw new Error('Unsplash API not initialized. Check your access key configuration.');
-    }
-
     try {
+      const api = this.requireClient();
       this.logger.log('Getting curated photos');
 
-      const response = await this.unsplashApi.photos.list({
-        page: params?.page || 1,
-        perPage: params?.per_page || 12,
-        orderBy: (params?.order_by as any) || 'popular',
-      });
+      const listParams: Parameters<UnsplashApiClient['photos']['list']>[0] = {
+        page: params?.page ?? 1,
+        perPage: params?.per_page ?? 12,
+        orderBy: params?.order_by ?? 'popular',
+      };
+
+      const response = await api.photos.list(listParams);
 
       if (response.errors) {
         this.logger.error('Unsplash API errors:', response.errors);
@@ -217,18 +225,17 @@ export class UnsplashService {
     per_page?: number;
     order_by?: 'latest' | 'oldest' | 'popular';
   }): Promise<UnsplashSearchResponse> {
-    if (!this.unsplashApi) {
-      throw new Error('Unsplash API not initialized. Check your access key configuration.');
-    }
-
     try {
+      const api = this.requireClient();
       this.logger.log('Getting popular photos');
 
-      const response = await this.unsplashApi.photos.list({
-        page: params?.page || 1,
-        perPage: params?.per_page || 12,
-        orderBy: (params?.order_by as any) || 'popular',
-      });
+      const listParams: Parameters<UnsplashApiClient['photos']['list']>[0] = {
+        page: params?.page ?? 1,
+        perPage: params?.per_page ?? 12,
+        orderBy: params?.order_by ?? 'popular',
+      };
+
+      const response = await api.photos.list(listParams);
 
       if (response.errors) {
         this.logger.error('Unsplash API errors:', response.errors);
@@ -274,7 +281,7 @@ export class UnsplashService {
   /**
    * Map Unsplash photo response to our interface
    */
-  private mapUnsplashPhoto(photo: any): UnsplashPhoto {
+  private mapUnsplashPhoto(photo: UnsplashPhotoPayload): UnsplashPhoto {
     return {
       id: photo.id,
       created_at: photo.created_at,

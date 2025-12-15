@@ -1,5 +1,6 @@
 
 import { ConflictException, Injectable } from '@nestjs/common';
+import { AssignmentStatus } from '@prisma/client';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { AvailabilityService } from '../availability/availability.service.js';
 import { RealtimeService } from '../realtime/realtime.service.js';
@@ -19,7 +20,7 @@ export class AssignmentsService {
   }
 
   async create(data: CreateAssignmentDto) {
-    const { freelancerId, startDate, endDate, allocation } = data;
+    const { freelancerId, startDate, endDate, allocation, status, ...rest } = data;
 
     // Server-side Check
     const check = await this.availabilityService.checkConflicts(
@@ -35,8 +36,12 @@ export class AssignmentsService {
 
     const result = await this.prisma.assignment.create({
       data: {
-        ...data,
-        status: data.status as any
+        ...rest,
+        freelancerId,
+        startDate,
+        endDate,
+        allocation,
+        status: this.normalizeStatus(status)
       }
     });
 
@@ -51,7 +56,7 @@ export class AssignmentsService {
   }
 
   async update(id: string, data: UpdateAssignmentDto) {
-    const { freelancerId, startDate, endDate, allocation } = data;
+    const { freelancerId, startDate, endDate, allocation, status, ...rest } = data;
 
     if (freelancerId && startDate && endDate) {
       const check = await this.availabilityService.checkConflicts(
@@ -66,12 +71,16 @@ export class AssignmentsService {
       }
     }
 
+    const updatePayload: Record<string, unknown> = { ...rest };
+    if (freelancerId !== undefined) updatePayload.freelancerId = freelancerId;
+    if (startDate !== undefined) updatePayload.startDate = startDate;
+    if (endDate !== undefined) updatePayload.endDate = endDate;
+    if (allocation !== undefined) updatePayload.allocation = allocation;
+    if (status) updatePayload.status = this.normalizeStatus(status);
+
     const result = await this.prisma.assignment.update({
       where: { id },
-      data: {
-        ...data,
-        ...(data.status ? { status: data.status as any } : {})
-      }
+      data: updatePayload
     });
 
     // Broadcast real-time update
@@ -95,5 +104,15 @@ export class AssignmentsService {
     });
 
     return result;
+  }
+
+  private normalizeStatus(status?: string): AssignmentStatus {
+    if (!status) {
+      return AssignmentStatus.ACTIVE;
+    }
+
+    const normalized = status.toUpperCase().replace(/\s+/g, '_');
+    const allowedStatuses = Object.values(AssignmentStatus) as string[];
+    return allowedStatuses.includes(normalized) ? normalized as AssignmentStatus : AssignmentStatus.ACTIVE;
   }
 }

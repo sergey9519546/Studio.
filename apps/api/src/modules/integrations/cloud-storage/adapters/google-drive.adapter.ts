@@ -56,21 +56,21 @@ export class GoogleDriveAdapter implements ICloudStorageAdapter {
     const user: AuthenticatedUser = await this.getUserWithCredentials(userId);
     const { drive } = this.clientFactory.createDriveClientForUser(user);
 
-    const res = await (drive as any).files.list({
+    const res = await drive.files.list({
       q: `'${folderId}' in parents and trashed = false`,
       fields: 'nextPageToken, files(id, name, mimeType, size, thumbnailLink, webViewLink, modifiedTime)',
       pageSize: 20,
     });
 
-    const files = (res.data.files || []).map((f: any) => ({
-      id: f.id!,
-      name: f.name!,
+    const files = (res.data.files ?? []).map((f) => ({
+      id: f.id ?? '',
+      name: f.name ?? '',
       provider: CloudProviderType.GOOGLE_DRIVE,
       type: f.mimeType === 'application/vnd.google-apps.folder' ? CloudFileType.FOLDER : CloudFileType.FILE,
-      mimeType: f.mimeType!,
-      sizeBytes: f.size ? parseInt(f.size) : undefined,
-      thumbnailUrl: f.thumbnailLink || undefined,
-      webViewUrl: f.webViewLink || undefined,
+      mimeType: f.mimeType ?? '',
+      sizeBytes: f.size ? parseInt(f.size, 10) : undefined,
+      thumbnailUrl: f.thumbnailLink ?? undefined,
+      webViewUrl: f.webViewLink ?? undefined,
       updatedAt: f.modifiedTime || new Date().toISOString()
     }));
 

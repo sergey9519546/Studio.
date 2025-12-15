@@ -7,14 +7,7 @@ import { ConfigService } from '@nestjs/config';
  * Supports both direct API and Vertex AI based on environment configuration
  */
 
-// Define proper interfaces to replace 'any' types
-interface ClientConfig {
-  vertexai: boolean;
-  project?: string;
-  location?: string;
-  apiVersion?: string;
-  apiKey?: string;
-}
+type GeminiClientConfig = ConstructorParameters<typeof GoogleGenAI>[0];
 
 interface ToolDefinition {
   type: 'function';
@@ -97,7 +90,7 @@ export class GeminiService {
     const useVertexAI = this.configService.get<string>('GOOGLE_GENAI_USE_VERTEXAI') === 'true' ||
                        this.configService.get<string>('GOOGLE_GENAI_USE_VERTEXAI') === 'True';
 
-    let clientConfig: ClientConfig = {
+    let clientConfig: GeminiClientConfig = {
       vertexai: false,
     };
 
@@ -136,7 +129,7 @@ export class GeminiService {
       this.logger.log(`Google Gemini AI Service initialized with Developer API (apiVersion: ${apiVersion})`);
     }
 
-    this.client = new GoogleGenAI(clientConfig as any);
+    this.client = new GoogleGenAI(clientConfig);
   }
 
   async chat(

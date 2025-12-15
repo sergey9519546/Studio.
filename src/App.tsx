@@ -1,5 +1,5 @@
 import { Box } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Navigate, Route, Routes, useNavigate, useParams } from "react-router-dom";
 
 import { Moodboard } from "./components/Moodboard";
@@ -35,7 +35,7 @@ function useApiData<T>(fetchFunction: () => Promise<T[]>): DataState<T> {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -47,11 +47,11 @@ function useApiData<T>(fetchFunction: () => Promise<T[]>): DataState<T> {
     } finally {
       setLoading(false);
     }
-  };
+  }, [fetchFunction]);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    void fetchData();
+  }, [fetchData]);
 
   return { data, loading, error, refetch: fetchData };
 }
@@ -151,10 +151,10 @@ function ProjectDashboardRoute() {
     "Creative direction for a kinetic, zero-gravity inspired brand world."
   );
 
+  const fetchProjects = useCallback(() => ProjectsAPI.getProjects(), []);
+
   // Fetch project data from API
-  const { data: projects, loading, error, refetch } = useApiData<Project>(() =>
-    ProjectsAPI.getProjects()
-  );
+  const { data: projects, loading, error, refetch } = useApiData<Project>(fetchProjects);
 
   const project = projects.find(p => p.id === id);
 
@@ -188,16 +188,6 @@ function ProjectDashboardRoute() {
     );
   }
 
-  const handleMoodboardDelete = async (itemId: string) => {
-    try {
-      await MoodboardAPI.deleteMoodboardItem(itemId);
-      console.log("Moodboard item deleted:", itemId);
-      // Optionally refetch moodboard data
-    } catch (error) {
-      console.error("Failed to delete moodboard item:", error);
-    }
-  };
-
   return (
     <>
       <ProjectContextHeader project={project} />
@@ -220,10 +210,10 @@ function WritersRoomRoute() {
   const params = new URLSearchParams(search);
   const projectId = params.get("project");
 
+  const fetchProjects = useCallback(() => ProjectsAPI.getProjects(), []);
+
   // Fetch project data for context
-  const { data: projects, loading, error } = useApiData<Project>(() =>
-    ProjectsAPI.getProjects()
-  );
+  const { data: projects, loading, error } = useApiData<Project>(fetchProjects);
 
   const project = projectId ? projects.find(p => p.id === projectId) : null;
 
@@ -245,18 +235,25 @@ function WritersRoomRoute() {
 
 // Moodboard Component with Project Context
 function MoodboardRoute() {
-  const navigate = useNavigate();
   const { search } = window.location;
   const params = new URLSearchParams(search);
   const projectId = params.get("project");
 
-  // Fetch moodboard items from API
-  const { data: moodboardItems, loading, error, refetch } = useApiData<MoodboardItem>(() =>
-    projectId ? MoodboardAPI.getMoodboardItems(projectId).then(response => response.data) : Promise.resolve([])
+  const fetchMoodboardItems = useCallback(
+    () =>
+      projectId
+        ? MoodboardAPI.getMoodboardItems(projectId).then(response => response.data)
+        : Promise.resolve([]),
+    [projectId]
   );
 
+  const fetchProjects = useCallback(() => ProjectsAPI.getProjects(), []);
+
+  // Fetch moodboard items from API
+  const { data: moodboardItems, loading, error, refetch } = useApiData<MoodboardItem>(fetchMoodboardItems);
+
   // Fetch projects for fallback
-  const { data: projects } = useApiData<Project>(() => ProjectsAPI.getProjects());
+  const { data: projects } = useApiData<Project>(fetchProjects);
 
   const project = projectId ? projects.find(p => p.id === projectId) : projects[0];
   const effectiveProjectId = projectId || project?.id || '';
@@ -286,10 +283,10 @@ function MoodboardRoute() {
 function TalentRosterRoute() {
   const navigate = useNavigate();
 
+  const fetchFreelancers = useCallback(() => FreelancersAPI.getFreelancers(), []);
+
   // Fetch freelancers from API
-  const { data: freelancers, loading, error, refetch } = useApiData<Freelancer>(() =>
-    FreelancersAPI.getFreelancers()
-  );
+  const { data: freelancers, loading, error, refetch } = useApiData<Freelancer>(fetchFreelancers);
 
   return (
     <DataLoader loading={loading} error={error} onRetry={refetch}>
@@ -337,9 +334,8 @@ function Layout({ children }: { children: React.ReactNode }) {
 
 // Wrapper component for ProjectsView to handle API data
 function ProjectsViewWrapper() {
-  const { data: projects, loading, error, refetch } = useApiData<Project>(() =>
-    ProjectsAPI.getProjects()
-  );
+  const fetchProjects = useCallback(() => ProjectsAPI.getProjects(), []);
+  const { data: projects, loading, error, refetch } = useApiData<Project>(fetchProjects);
 
   return (
     <DataLoader loading={loading} error={error} onRetry={refetch}>

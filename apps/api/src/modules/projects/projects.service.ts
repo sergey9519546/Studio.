@@ -1,6 +1,6 @@
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, ProjectStatus } from '@prisma/client';
 import type { Cache } from 'cache-manager';
 import { PrismaService } from '../../prisma/prisma.service.js';
 
@@ -177,10 +177,11 @@ export class ProjectsService {
   }
 
   async create(data: { title?: string; name?: string; description?: string; client?: string; clientName?: string; status?: string; budget?: number; startDate?: string | Date; endDate?: string | Date; roleRequirements?: { role: string; count?: number; skills: string[] }[] }) {
-    const { roleRequirements, title, name, client, clientName, budget, startDate, endDate, ...rest } = data;
+    const { roleRequirements, title, name, client, clientName, budget, startDate, endDate, status, ...rest } = data;
 
     const resolvedTitle = title || name;
     const resolvedClient = client || clientName;
+    const normalizedStatus = this.normalizeStatus(status);
 
     if (!resolvedTitle) {
       throw new BadRequestException('Project title/name is required');
@@ -194,7 +195,7 @@ export class ProjectsService {
       budget: budget ? parseFloat(budget.toString()) : undefined,
       startDate: startDate ? new Date(startDate) : undefined,
       endDate: endDate ? new Date(endDate) : undefined,
-      status: rest.status || 'PLANNED'
+      status: normalizedStatus
     };
 
     const created = await this.prisma.project.create({
@@ -202,7 +203,7 @@ export class ProjectsService {
         title: projectData.title,
         client: projectData.client,
         description: projectData.description,
-        status: projectData.status as any,
+        status: projectData.status,
         budget: projectData.budget,
         startDate: projectData.startDate,
         endDate: projectData.endDate,
@@ -227,7 +228,7 @@ export class ProjectsService {
     if (resolvedTitle) updateData.title = resolvedTitle;
     if (resolvedClient) updateData.client = resolvedClient;
     if (data.description !== undefined) updateData.description = data.description;
-    if (data.status) updateData.status = data.status;
+    if (data.status) updateData.status = this.normalizeStatus(data.status);
     if (data.budget !== undefined) updateData.budget = data.budget;
     if (data.startDate) updateData.startDate = new Date(data.startDate);
     if (data.endDate) updateData.endDate = new Date(data.endDate);
@@ -260,7 +261,7 @@ export class ProjectsService {
           title: (item.name || item.title) as string,
           description: item.description as string | undefined,
           client: (item.clientName || item.client) as string | undefined,
-          status: (item.status || 'PLANNED') as string,
+          status: this.normalizeStatus(item.status as string | undefined),
           budget: item.budget as number | undefined,
           startDate: item.startDate as string | Date | undefined,
           endDate: (item.dueDate || item.endDate) as string | Date | undefined,
@@ -274,5 +275,15 @@ export class ProjectsService {
       }
     }
     return { created, updated: 0, errors };
+  }
+
+  private normalizeStatus(status?: string): ProjectStatus {
+    if (!status) {
+      return ProjectStatus.PLANNED;
+    }
+
+    const normalized = status.toUpperCase().replace(/\s+/g, '_');
+    const allowedStatuses = Object.values(ProjectStatus) as string[];
+    return allowedStatuses.includes(normalized) ? normalized as ProjectStatus : ProjectStatus.PLANNED;
   }
 }

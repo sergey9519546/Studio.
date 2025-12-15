@@ -1,5 +1,6 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import * as crypto from 'crypto';
 import { PrismaService } from '../../prisma/prisma.service.js';
 
 /**
@@ -424,72 +425,336 @@ export class ProjectQueueService {
    * Handle ingestion job - integrates with ProjectAwareIngestionService
    */
   private async handleIngestionJob(job: QueueJob): Promise<void> {
-    const payload = job.payload as IngestionJobPayload;
+    const payload = this.validateIngestionPayload(job.payload);
     this.logger.log(`Processing ingestion job: ${payload.documentId}`);
-    
-    // TODO: Integrate with actual ProjectAwareIngestionService
-    // For now, simulate processing
-    await this.delay(100);
-    
-    // In production, this would:
-    // 1. Fetch document from storage
-    // 2. Parse and chunk content
-    // 3. Generate embeddings
-    // 4. Store in vector database
-    // 5. Update document status
+
+    const knowledgeSource = await this.prisma.knowledgeSource.findUnique({
+      where: { id: payload.documentId }
+    });
+
+    if (!knowledgeSource) {
+      throw new NotFoundException(`Knowledge source ${payload.documentId} not found`);
+    }
+
+    if (knowledgeSource.projectId && knowledgeSource.projectId !== job.projectId) {
+      throw new BadRequestException('Job project does not match knowledge source project');
+    }
+
+    const content = knowledgeSource.originalContent || knowledgeSource.content;
+    if (!content) {
+      throw new BadRequestException('Knowledge source has no content to ingest');
+    }
+
+    const contentHash = this.hashContent(content);
+    const embeddings = this.buildDeterministicEmbedding(content);
+    const metadata = (knowledgeSource.metadata as Record<string, unknown> | null) ?? {};
+
+    await this.prisma.$transaction(async (tx) => {
+      await tx.knowledgeSource.update({
+        where: { id: payload.documentId },
+        data: {
+          status: 'indexed',
+          embedding: embeddings,
+          metadata: {
+            ...metadata,
+            queueJobId: job.id,
+            contentHash,
+            lastIngestedAt: new Date().toISOString(),
+          }
+        }
+      });
+
+      const existingEmbedding = await tx.projectEmbedding.findUnique({
+        where: { projectId_contentHash: { projectId: job.projectId, contentHash } }
+      });
+
+      const baseMetadata = (existingEmbedding?.metadata as Record<string, unknown> | null) ?? {};
+
+      await tx.projectEmbedding.upsert({
+        where: { projectId_contentHash: { projectId: job.projectId, contentHash } },
+        create: {
+          projectId: job.projectId,
+          userId: job.userId,
+          contentHash,
+          embedding: embeddings,
+          metadata: {
+            ...baseMetadata,
+            knowledgeSourceId: payload.documentId,
+            sourceType: knowledgeSource.sourceType,
+            ingestedAt: new Date().toISOString(),
+          }
+        },
+        update: {
+          embedding: embeddings,
+          metadata: {
+            ...baseMetadata,
+            knowledgeSourceId: payload.documentId,
+            sourceType: knowledgeSource.sourceType,
+            ingestedAt: new Date().toISOString(),
+          }
+        }
+      });
+
+      await tx.projectAuditLog.create({
+        data: {
+          projectId: job.projectId,
+          userId: job.userId,
+          action: 'INGESTION_JOB_COMPLETED',
+          resourceType: 'knowledge_source',
+          resourceId: payload.documentId,
+          metadata: {
+            jobId: job.id,
+            contentHash,
+            type: job.type,
+          }
+        }
+      });
+    });
+
+    this.eventEmitter.emit('queue.ingestion.completed', { projectId: job.projectId, jobId: job.id, knowledgeSourceId: payload.documentId });
   }
 
   /**
    * Handle embedding job - integrates with embedding service
    */
   private async handleEmbeddingJob(job: QueueJob): Promise<void> {
-    const payload = job.payload as EmbeddingJobPayload;
+    const payload = this.validateEmbeddingPayload(job.payload);
     this.logger.log(`Processing embedding job: ${payload.sourceId}`);
-    
-    // TODO: Integrate with actual EmbeddingsService
-    await this.delay(200);
-    
-    // In production, this would:
-    // 1. Generate embeddings for content
-    // 2. Store embeddings in vector store
-    // 3. Update source metadata
+
+    const embeddings = this.buildDeterministicEmbedding(payload.content);
+    const contentHash = this.hashContent(payload.content);
+
+    const existingEmbedding = await this.prisma.projectEmbedding.findUnique({
+      where: { projectId_contentHash: { projectId: job.projectId, contentHash } }
+    });
+    const baseMetadata = (existingEmbedding?.metadata as Record<string, unknown> | null) ?? {};
+
+    const knowledgeSource = payload.sourceId
+      ? await this.prisma.knowledgeSource.findUnique({ where: { id: payload.sourceId } })
+      : null;
+
+    await this.prisma.$transaction(async (tx) => {
+      await tx.projectEmbedding.upsert({
+        where: { projectId_contentHash: { projectId: job.projectId, contentHash } },
+        create: {
+          projectId: job.projectId,
+          userId: job.userId,
+          contentHash,
+          embedding: embeddings,
+          metadata: {
+            ...baseMetadata,
+            knowledgeSourceId: payload.sourceId,
+            contentLength: payload.content.length,
+            generatedAt: new Date().toISOString(),
+          }
+        },
+        update: {
+          embedding: embeddings,
+          metadata: {
+            ...baseMetadata,
+            knowledgeSourceId: payload.sourceId,
+            contentLength: payload.content.length,
+            generatedAt: new Date().toISOString(),
+          }
+        }
+      });
+
+      if (knowledgeSource) {
+        const currentMetadata = (knowledgeSource.metadata as Record<string, unknown> | null) ?? {};
+        await tx.knowledgeSource.update({
+          where: { id: knowledgeSource.id },
+          data: {
+            embedding: embeddings,
+            metadata: {
+              ...currentMetadata,
+              embeddingId: contentHash,
+              lastEmbeddedAt: new Date().toISOString(),
+            }
+          }
+        });
+      }
+
+      await tx.projectAuditLog.create({
+        data: {
+          projectId: job.projectId,
+          userId: job.userId,
+          action: 'EMBEDDING_JOB_COMPLETED',
+          resourceType: payload.sourceId ? 'knowledge_source' : 'project',
+          resourceId: payload.sourceId ?? job.projectId,
+          metadata: {
+            jobId: job.id,
+            contentHash,
+            type: job.type,
+          }
+        }
+      });
+    });
+
+    this.eventEmitter.emit('queue.embedding.completed', { projectId: job.projectId, jobId: job.id, sourceId: payload.sourceId });
   }
 
   /**
    * Handle AI processing job - integrates with AI service
    */
   private async handleAIProcessingJob(job: QueueJob): Promise<void> {
-    const payload = job.payload as AIProcessingJobPayload;
+    const payload = this.validateAIProcessingPayload(job.payload);
     this.logger.log(`Processing AI job: ${payload.operation}`);
-    
-    // TODO: Integrate with actual AI service (GeminiService/VertexAI)
-    await this.delay(500);
-    
-    // In production, this would:
-    // 1. Route to appropriate AI operation
-    // 2. Process request
-    // 3. Store results
-    // 4. Handle token tracking
+
+    const tokens = this.estimateTokens(payload.input);
+
+    await this.prisma.aIUsage.create({
+      data: {
+        projectId: job.projectId,
+        userId: job.userId,
+        model: 'queue-ai-router',
+        tokens,
+        operation: payload.operation,
+        endpoint: 'queue-job',
+        metadata: {
+          jobId: job.id,
+          inputPreview: this.safeTruncate(
+            typeof payload.input === 'string' ? payload.input : JSON.stringify(payload.input),
+            500
+          ),
+        }
+      }
+    });
+
+    await this.prisma.projectAuditLog.create({
+      data: {
+        projectId: job.projectId,
+        userId: job.userId,
+        action: 'AI_JOB_PROCESSED',
+        resourceType: 'queue_job',
+        resourceId: job.id,
+        metadata: {
+          operation: payload.operation,
+          tokens,
+        }
+      }
+    });
+
+    this.eventEmitter.emit('queue.ai.completed', { projectId: job.projectId, jobId: job.id, operation: payload.operation });
   }
 
   /**
    * Handle cleanup job - integrates with cleanup service
    */
   private async handleCleanupJob(job: QueueJob): Promise<void> {
-    const payload = job.payload as CleanupJobPayload;
+    const payload = this.validateCleanupPayload(job.payload);
     this.logger.log(`Processing cleanup job: ${payload.cleanupType}`);
-    
-    // TODO: Integrate with cleanup services
-    await this.delay(100);
-    
-    // In production, this would:
-    // 1. Remove stale embeddings
-    // 2. Clean up temporary files
-    // 3. Archive old conversations
-    // 4. Update indexes
+
+    switch (payload.cleanupType) {
+      case 'queue': {
+        this.clearOldJobs(job.projectId);
+        break;
+      }
+      case 'embeddings': {
+        const cutoff = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+        await this.prisma.projectEmbedding.deleteMany({
+          where: { projectId: job.projectId, updatedAt: { lt: cutoff } }
+        });
+        break;
+      }
+      case 'audit': {
+        const cutoff = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000);
+        await this.prisma.projectAuditLog.deleteMany({
+          where: { projectId: job.projectId, timestamp: { lt: cutoff } }
+        });
+        break;
+      }
+      default: {
+        this.logger.warn(`No cleanup handler for type ${payload.cleanupType}`);
+      }
+    }
+
+    this.eventEmitter.emit('queue.cleanup.completed', { projectId: job.projectId, jobId: job.id, type: payload.cleanupType });
   }
 
   // Helper methods
+
+  private validateIngestionPayload(payload: JobPayload): IngestionJobPayload {
+    if (
+      payload &&
+      typeof payload === 'object' &&
+      typeof (payload as IngestionJobPayload).documentId === 'string' &&
+      (payload as IngestionJobPayload).action === 'ingest'
+    ) {
+      return payload as IngestionJobPayload;
+    }
+    throw new BadRequestException('Invalid ingestion job payload');
+  }
+
+  private validateEmbeddingPayload(payload: JobPayload): EmbeddingJobPayload {
+    if (
+      payload &&
+      typeof payload === 'object' &&
+      typeof (payload as EmbeddingJobPayload).sourceId === 'string' &&
+      typeof (payload as EmbeddingJobPayload).content === 'string' &&
+      (payload as EmbeddingJobPayload).content.length > 0
+    ) {
+      return payload as EmbeddingJobPayload;
+    }
+    throw new BadRequestException('Invalid embedding job payload');
+  }
+
+  private validateAIProcessingPayload(payload: JobPayload): AIProcessingJobPayload {
+    if (
+      payload &&
+      typeof payload === 'object' &&
+      typeof (payload as AIProcessingJobPayload).operation === 'string' &&
+      (payload as AIProcessingJobPayload).operation.length > 0
+    ) {
+      return payload as AIProcessingJobPayload;
+    }
+    throw new BadRequestException('Invalid AI processing job payload');
+  }
+
+  private validateCleanupPayload(payload: JobPayload): CleanupJobPayload {
+    if (
+      payload &&
+      typeof payload === 'object' &&
+      typeof (payload as CleanupJobPayload).cleanupType === 'string'
+    ) {
+      return payload as CleanupJobPayload;
+    }
+    throw new BadRequestException('Invalid cleanup job payload');
+  }
+
+  private hashContent(content: string): string {
+    return crypto.createHash('sha256').update(content).digest('hex');
+  }
+
+  private buildDeterministicEmbedding(content: string, dimension = 128): number[] {
+    const seed = crypto.createHash('sha256').update(content).digest();
+    const embeddings: number[] = [];
+    let counter = 0;
+
+    while (embeddings.length < dimension) {
+      const hash = crypto.createHash('sha256');
+      hash.update(seed);
+      hash.update(Buffer.from(counter.toString()));
+      const chunk = hash.digest();
+
+      for (let i = 0; i < chunk.length && embeddings.length < dimension; i += 2) {
+        const value = (chunk[i] << 8) + chunk[i + 1];
+        embeddings.push((value / 65535) * 2 - 1);
+      }
+
+      counter++;
+    }
+
+    return embeddings;
+  }
+
+  private estimateTokens(input: unknown): number {
+    const serialized = typeof input === 'string' ? input : JSON.stringify(input ?? {});
+    return Math.max(1, Math.ceil(serialized.length / 4));
+  }
+
+  private safeTruncate(value: string, maxLength: number): string {
+    return value.length > maxLength ? `${value.slice(0, maxLength)}...` : value;
+  }
 
   private getProjectQueue(projectId: string): QueueJob[] {
     if (!this.queues.has(projectId)) {

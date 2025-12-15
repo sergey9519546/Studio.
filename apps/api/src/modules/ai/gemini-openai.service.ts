@@ -32,8 +32,8 @@ export class GeminiOpenAIService {
       const {
         model = 'gpt-3.5-turbo',
         messages,
-        temperature = 0.7,
-        max_tokens = 2048,
+        temperature: _temperature = 0.7,
+        max_tokens: _max_tokens = 2048,
         stream = false
       } = options;
 
@@ -50,8 +50,8 @@ export class GeminiOpenAIService {
         return this.createStreamingChatCompletion(geminiMessages, systemPrompt, model);
       }
 
-      // Get response from Gemini
-      const response = await this.geminiService.chat(geminiMessages, systemPrompt);
+      // Get response from Gemini (temperature/max_tokens not yet supported in chat method)
+      const response = await this.geminiService.chat(geminiMessages, systemPrompt, model);
 
       // Return in OpenAI format
       return {
@@ -98,7 +98,7 @@ export class GeminiOpenAIService {
           created: Math.floor(Date.now() / 1000),
           model: model,
           choices: [{
-            index: 0,
+            index: chunkIndex,
             delta: {
               content: chunk
             },
@@ -140,8 +140,8 @@ export class GeminiOpenAIService {
       const {
         model = 'text-davinci-003',
         prompt,
-        temperature = 0.7,
-        max_tokens = 2048,
+        temperature: _temperature = 0.7,
+        max_tokens: _max_tokens = 2048,
         stream = false
       } = options;
 

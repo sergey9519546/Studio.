@@ -4,10 +4,22 @@ import type { Cache } from 'cache-manager';
 import * as crypto from 'crypto';
 import { PrismaService } from '../../prisma/prisma.service.js';
 
+type ProjectRole = 'owner' | 'editor' | 'viewer';
+type HealthMetrics = {
+  documentCount: number;
+  conversationCount: number;
+  storageUsed: number;
+  aiTokensUsed: number;
+  lastActivity: Date | null;
+};
+type CacheStoreWithKeys = {
+  keys?: (pattern: string) => Promise<string[] | undefined> | string[] | undefined;
+};
+
 export interface ProjectContext {
   projectId: string;
   userId: string;
-  role: 'owner' | 'editor' | 'viewer';
+  role: ProjectRole;
   permissions: string[];
   encryptionKeyId?: string;
   accessLevel: 'private' | 'team' | 'public';
@@ -19,7 +31,7 @@ export interface ProjectContext {
 export interface CreateProjectContextDTO {
   projectId: string;
   userId: string;
-  role: 'owner' | 'editor' | 'viewer';
+  role: ProjectRole;
   permissions: string[];
   encryptionKeyId?: string;
   accessLevel?: 'private' | 'team' | 'public';
@@ -120,15 +132,15 @@ export class ProjectContextService {
     if (!project) return undefined;
 
     // Determine user role and permissions
-    let role: 'owner' | 'editor' | 'viewer' = 'viewer';
-    let permissions: string[] = ['read'];
+    let role: ProjectRole = 'viewer';
+    let permissions: string[] = this.getDefaultPermissions(role);
 
     if (project.userId === userId) {
       role = 'owner';
-      permissions = ['read', 'write', 'delete', 'manage_access', 'admin'];
+      permissions = this.getDefaultPermissions(role);
     } else if (accessControl) {
-      role = accessControl.role as 'owner' | 'editor' | 'viewer';
-      permissions = accessControl.permissions as string[];
+      role = this.castRole(accessControl.role);
+      permissions = this.parsePermissions(accessControl.permissions, role);
     } else {
       return undefined; // No access
     }
@@ -146,18 +158,43 @@ export class ProjectContextService {
     };
   }
 
-  private parseComplianceFlags(flags: any): Record<string, boolean> {
-    if (!flags || typeof flags !== 'object') return {};
+  private parseComplianceFlags(flags: unknown): Record<string, boolean> {
+    if (!flags || typeof flags !== 'object' || Array.isArray(flags)) return {};
     
     const result: Record<string, boolean> = {};
-    for (const [key, value] of Object.entries(flags)) {
+    for (const [key, value] of Object.entries(flags as Record<string, unknown>)) {
       if (typeof value === 'boolean') {
         result[key] = value;
+      } else if (typeof value === 'number') {
+        result[key] = value !== 0;
       } else {
         result[key] = Boolean(value);
       }
     }
     return result;
+  }
+
+  private castRole(role?: string | null): ProjectRole {
+    return role === 'owner' || role === 'editor' || role === 'viewer' ? role : 'viewer';
+  }
+
+  private parsePermissions(value: unknown, fallbackRole: ProjectRole): string[] {
+    if (Array.isArray(value)) {
+      return value.filter((permission): permission is string => typeof permission === 'string');
+    }
+    return this.getDefaultPermissions(fallbackRole);
+  }
+
+  private getDefaultPermissions(role: ProjectRole): string[] {
+    switch (role) {
+      case 'owner':
+        return ['read', 'write', 'delete', 'manage_access', 'admin'];
+      case 'editor':
+        return ['read', 'write'];
+      case 'viewer':
+      default:
+        return ['read'];
+    }
   }
 
   async validateProjectAccess(userId: string, projectId: string, requiredPermission: string): Promise<boolean> {
@@ -252,7 +289,10 @@ export class ProjectContextService {
   private async clearProjectContextCache(projectId: string): Promise<void> {
     // Clear all cached contexts for this project
     // This is a simplified implementation - in production, you might want to use Redis patterns
-    const keys = await (this.cacheManager as any).store?.keys?.(`${this.CONTEXT_CACHE_PREFIX}${projectId}:*`) || [];
+    const pattern = `${this.CONTEXT_CACHE_PREFIX}${projectId}:*`;
+    const store = (this.cacheManager as Cache & { store?: CacheStoreWithKeys }).store;
+    const keysResult = store?.keys ? await store.keys(pattern) : [];
+    const keys = Array.isArray(keysResult) ? keysResult : [];
     for (const key of keys) {
       await this.cacheManager.del(key);
     }
@@ -264,7 +304,7 @@ export class ProjectContextService {
     action: string;
     resourceType: string;
     resourceId: string;
-    metadata?: Record<string, any>;
+    metadata?: Record<string, unknown>;
   }): Promise<void> {
     try {
       await this.prisma.projectAuditLog.create({
@@ -385,13 +425,7 @@ export class ProjectContextService {
     return dates[0] || null;
   }
 
-  private calculateHealthScore(metrics: {
-    documentCount: number;
-    conversationCount: number;
-    storageUsed: number;
-    aiTokensUsed: number;
-    lastActivity: Date | null;
-  }): number {
+  private calculateHealthScore(metrics: HealthMetrics): number {
     let score = 100;
 
     // Deduct points for inactivity
@@ -410,7 +444,7 @@ export class ProjectContextService {
     return Math.max(0, score);
   }
 
-  private async checkHealthAlerts(projectId: string, metrics: any): Promise<string[]> {
+  private async checkHealthAlerts(projectId: string, metrics: HealthMetrics): Promise<string[]> {
     const alerts: string[] = [];
 
     if (!metrics.lastActivity) {

@@ -1,20 +1,23 @@
 import { Injectable, Logger } from '@nestjs/common';
 import * as crypto from 'crypto';
+import type { Prisma } from '@prisma/client';
 import { PrismaService } from '../../prisma/prisma.service.js';
+
+type VectorMetadata = Prisma.JsonObject;
 
 export interface VectorEntry {
   id: string;
   projectId: string;
   contentHash: string;
   vector: number[];
-  metadata: Record<string, any>;
+  metadata: VectorMetadata;
   shardId: string;
 }
 
 export interface SearchResult {
   id: string;
   score: number;
-  metadata: Record<string, any>;
+  metadata: VectorMetadata;
 }
 
 export interface ShardStats {
@@ -62,7 +65,7 @@ export class ShardedVectorStoreService {
     projectId: string,
     contentHash: string,
     vector: number[],
-    metadata: Record<string, any> = {}
+    metadata: VectorMetadata = {}
   ): Promise<string> {
     const shardId = this.getShardForProject(projectId);
     const entryId = this.generateEntryId(projectId, contentHash);
@@ -298,8 +301,8 @@ export class ShardedVectorStoreService {
         id: embedding.id,
         projectId: embedding.projectId,
         contentHash: embedding.contentHash,
-        vector: embedding.embedding as number[],
-        metadata: embedding.metadata as Record<string, any>,
+        vector: this.parseVector(embedding.embedding),
+        metadata: this.parseMetadata(embedding.metadata),
         shardId,
       });
     }
@@ -316,7 +319,7 @@ export class ShardedVectorStoreService {
     vectors: Array<{
       contentHash: string;
       vector: number[];
-      metadata?: Record<string, any>;
+      metadata?: VectorMetadata;
     }>
   ): Promise<string[]> {
     const shardId = this.getShardForProject(projectId);
@@ -396,6 +399,11 @@ export class ShardedVectorStoreService {
   }
 
   private async persistVector(entry: VectorEntry): Promise<void> {
+    const metadataWithShard: VectorMetadata = {
+      ...entry.metadata,
+      shardId: entry.shardId,
+    };
+
     await this.prisma.projectEmbedding.upsert({
       where: {
         projectId_contentHash: {
@@ -407,18 +415,12 @@ export class ShardedVectorStoreService {
         id: entry.id,
         projectId: entry.projectId,
         contentHash: entry.contentHash,
-        embedding: entry.vector as any,
-        metadata: {
-          ...entry.metadata,
-          shardId: entry.shardId,
-        },
+        embedding: entry.vector,
+        metadata: metadataWithShard,
       },
       update: {
-        embedding: entry.vector as any,
-        metadata: {
-          ...entry.metadata,
-          shardId: entry.shardId,
-        },
+        embedding: entry.vector,
+        metadata: metadataWithShard,
       },
     });
   }
@@ -435,7 +437,7 @@ export class ShardedVectorStoreService {
       id: string;
       contentHash: string;
       vector: number[];
-      metadata?: Record<string, any>;
+      metadata?: VectorMetadata;
     }>
   ): Promise<void> {
     // Use transaction for batch operations
@@ -452,15 +454,29 @@ export class ShardedVectorStoreService {
             id: v.id,
             projectId,
             contentHash: v.contentHash,
-            embedding: v.vector as any,
-            metadata: v.metadata || {},
+            embedding: v.vector,
+            metadata: v.metadata ?? {},
           },
           update: {
-            embedding: v.vector as any,
-            metadata: v.metadata || {},
+            embedding: v.vector,
+            metadata: v.metadata ?? {},
           },
         })
       )
     );
+  }
+
+  private parseVector(value: Prisma.JsonValue | null): number[] {
+    if (Array.isArray(value) && value.every(item => typeof item === 'number')) {
+      return value as number[];
+    }
+    return [];
+  }
+
+  private parseMetadata(value: Prisma.JsonValue | null): VectorMetadata {
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+      return value as Prisma.JsonObject;
+    }
+    return {};
   }
 }

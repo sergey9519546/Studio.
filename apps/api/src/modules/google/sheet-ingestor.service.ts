@@ -1,5 +1,8 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { sheets_v4 } from 'googleapis';
 import { AuthenticatedUser, GoogleClientFactory } from './google-client.factory.js';
+
+type SheetValues = NonNullable<sheets_v4.Schema$ValueRange['values']>;
 
 @Injectable()
 export class SheetIngestorService {
@@ -21,8 +24,8 @@ export class SheetIngestorService {
 
     try {
       // 1. Get Spreadsheet Metadata to identify the first visible sheet
-      const meta = await (sheets as any).spreadsheets.get({ spreadsheetId: fileId });
-      const visibleSheet = meta.data.sheets?.find((s: any) => !s.properties?.hidden);
+      const meta = await sheets.spreadsheets.get({ spreadsheetId: fileId });
+      const visibleSheet = meta.data.sheets?.find(sheet => !sheet.properties?.hidden);
 
       if (!visibleSheet?.properties?.title) {
         throw new Error('No visible sheets found in document.');
@@ -32,13 +35,13 @@ export class SheetIngestorService {
 
       // 2. Fetch Data (Values)
       // We rely on the API to return the "used range" if we just provide the sheet name
-      const response = await (sheets as any).spreadsheets.values.get({
+      const response = await sheets.spreadsheets.values.get({
         spreadsheetId: fileId,
         range: sheetName,
         valueRenderOption: 'FORMATTED_VALUE', // Get human-readable strings (e.g. "$100.00" instead of 100)
       });
 
-      const rows = response.data.values;
+      const rows: SheetValues = response.data.values ?? [];
       if (!rows || rows.length === 0) {
         return 'The sheet appears to be empty.';
       }
@@ -47,12 +50,13 @@ export class SheetIngestorService {
       return this.rowsToMarkdown(rows);
 
     } catch (error: unknown) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const err = error as any; // Cast to access response properties safely or use a better type guard
-      this.logger.error(`Failed to ingest sheet ${fileId}: ${err.message}`);
-      // Clean up error message for frontend
-      const msg = err.response?.data?.error?.message || err.message || String(error);
-      throw new BadRequestException(`Google Sheets Error: ${msg}`);
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      const apiMessage = typeof error === 'object' && error !== null && 'response' in error
+        ? (error as { response?: { data?: { error?: { message?: string } } } }).response?.data?.error?.message
+        : undefined;
+      const cleanedMessage = apiMessage || message || String(error);
+      this.logger.error(`Failed to ingest sheet ${fileId}: ${cleanedMessage}`);
+      throw new BadRequestException(`Google Sheets Error: ${cleanedMessage}`);
     }
   }
 
@@ -60,7 +64,7 @@ export class SheetIngestorService {
    * Converts a 2D array of strings into a Markdown table.
    * Includes logic to truncate data if it exceeds token limits.
    */
-  private rowsToMarkdown(rows: unknown[][]): string {
+  private rowsToMarkdown(rows: SheetValues): string {
     const totalCells = rows.reduce((acc, row) => acc + row.length, 0);
 
     let activeRows = rows;
