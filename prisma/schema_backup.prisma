@@ -1,5 +1,5 @@
 // prisma/schema.prisma
-// Enhanced database schema for Studio Roster with Project Data Separation
+// Comprehensive database schema for Creative Studio Platform
 
 generator client {
   provider = "prisma-client-js"
@@ -31,14 +31,11 @@ model User {
   conversations Conversation[]
   pageMedia  PageMedia[]
   aiUsage    AIUsage[]
-  projectAccessControl ProjectAccessControl[]
-  projectEmbeddings ProjectEmbedding[]
-  projectAuditLogs ProjectAuditLog[]
 
   @@map("users")
 }
 
-// Enhanced Project Management with Isolation
+// Project Management
 model Project {
   id          String   @id @default(uuid())
   title       String?
@@ -53,16 +50,6 @@ model Project {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  // Enhanced project isolation fields
-  encryptionKeyId       String?   // For encrypted content
-  dataRetentionDays     Int       @default(2555) // 7 years default
-  accessLevel           String    @default("private") // 'private', 'team', 'public'
-  complianceFlags       Json      @default("{}") // GDPR, HIPAA, etc.
-  createdBy             String?   // User ID who created the project
-  lastAccessedAt        DateTime?
-  archivedAt            DateTime?
-  deletionScheduledAt   DateTime?
-
   // Relations
   userId        String?
   user          User?           @relation(fields: [userId], references: [id])
@@ -70,16 +57,13 @@ model Project {
   assignments   Assignment[]
   scripts       Script[]
   moodboardItems MoodboardItem[]
-  assets        Asset[]
+  assets        Asset[]         // Added missing relation
   knowledgeSources KnowledgeSource[]
   transcripts   Transcript[]
   conversations Conversation[]
   projectVersions ProjectVersion[]
-  pageMedia     PageMedia[]
-  aiUsage       AIUsage[]
-  projectAccessControl ProjectAccessControl[]
-  projectEmbeddings ProjectEmbedding[]
-  projectAuditLogs ProjectAuditLog[]
+  pageMedia  PageMedia[]
+  aiUsage    AIUsage[]
 
   @@map("projects")
 }
@@ -127,7 +111,7 @@ model Assignment {
   id           String   @id @default(uuid())
   freelancerId String
   projectId    String
-  role         String?
+  role         String?  // Added missing role field
   startDate    DateTime?
   endDate      DateTime?
   allocation   Float?   // Percentage of time allocated
@@ -151,7 +135,7 @@ model MoodboardItem {
   url          String
   title        String?
   description  String?
-  caption      String?
+  caption      String?  // Added missing caption field
   tags         String[]
   moods        String[]
   colors       String[]
@@ -199,7 +183,7 @@ model MoodboardCollectionItem {
   @@map("moodboard_collection_items")
 }
 
-// Asset Management
+// Asset Management (added missing asset model)
 model Asset {
   id          String   @id @default(uuid())
   title       String?
@@ -241,7 +225,7 @@ model Script {
   @@map("scripts")
 }
 
-// Enhanced Knowledge Management with Project Isolation
+// Knowledge Management
 model KnowledgeSource {
   id          String   @id @default(uuid())
   title       String
@@ -253,21 +237,14 @@ model KnowledgeSource {
   userId      String?
   metadata    Json?
   embedding   Json?    // For vector search
-  status      String?  @default("indexed")
-  type        String?
-  originalContent String?
+  status      String?  @default("indexed") // Added missing status field
+  type        String?  // Added missing type field
+  originalContent String? // Added missing originalContent field
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  // Enhanced isolation fields
-  accessLevel         String    @default("private")
-  encryptionStatus    String    @default("unencrypted")
-  complianceFlags     Json      @default("{}")
-  classificationConfidence Float?
-  retentionPolicy     String    @default("standard")
-
   // Relations
-  project Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  project Project? @relation(fields: [projectId], references: [id])
   user    User?    @relation(fields: [userId], references: [id])
 
   @@map("knowledge_sources")
@@ -291,7 +268,7 @@ model Transcript {
   @@map("transcripts")
 }
 
-// Enhanced Conversation with Project Isolation
+// Conversation Management for AI Chat Persistence
 model Conversation {
   id          String   @id @default(uuid())
   title       String?
@@ -300,13 +277,7 @@ model Conversation {
   userId      String?
   status      ConversationStatus @default(ACTIVE)
   messageCount Int     @default(0)
-  metadata    Json?
-
-  // Enhanced isolation fields
-  sensitivityLevel     String    @default("standard") // 'public', 'internal', 'confidential'
-  encryptionKeyId      String?
-  autoDeleteAt         DateTime?
-
+  metadata    Json?    // { tags, theme, context_type }
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -357,7 +328,7 @@ model ContextSnapshot {
   @@map("context_snapshots")
 }
 
-// Project Version Management
+// Project Version Management for Auto-save and Version History
 model ProjectVersion {
   id          String   @id @default(uuid())
   projectId   String
@@ -376,7 +347,7 @@ model ProjectVersion {
   @@map("project_versions")
 }
 
-// Embedding Management
+// Embedding Management for Vector Search
 model Embedding {
   id          String   @id @default(uuid())
   content     String
@@ -438,70 +409,6 @@ model AIUsage {
   @@map("ai_usage")
 }
 
-// Project Isolation Models for Enhanced Security
-model ProjectAccessControl {
-  id            String   @id @default(uuid())
-  projectId     String
-  userId        String
-  role          String   @default("viewer") // 'owner', 'editor', 'viewer'
-  permissions   Json     @default("[]") // Granular permissions
-  grantedAt     DateTime @default(now())
-  grantedBy     String?  // User ID who granted access
-
-  // Relations
-  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  user          User?    @relation(fields: [userId], references: [id])
-
-  @@unique([projectId, userId])
-  @@index([projectId])
-  @@index([userId])
-  @@map("project_access_control")
-}
-
-model ProjectEmbedding {
-  id            String   @id @default(uuid())
-  projectId     String
-  userId        String?
-  contentHash   String
-  embedding     Json     // Vector embedding data
-  metadata      Json     // Additional metadata
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  // Relations
-  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  user          User?    @relation(fields: [userId], references: [id])
-
-  @@index([projectId])
-  @@index([userId])
-  @@index([createdAt])
-  @@unique([projectId, contentHash])
-  @@map("project_embeddings")
-}
-
-model ProjectAuditLog {
-  id            String   @id @default(uuid())
-  projectId     String
-  userId        String?
-  action        String   // Action performed
-  resourceType  String   // Type of resource
-  resourceId    String?  // ID of the resource
-  metadata      Json?    // Additional metadata
-  ipAddress     String?
-  userAgent     String?
-  timestamp     DateTime @default(now())
-
-  // Relations
-  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  user          User?    @relation(fields: [userId], references: [id])
-
-  @@index([projectId])
-  @@index([userId])
-  @@index([timestamp])
-  @@index([action])
-  @@map("project_audit_log")
-}
-
 // Enums
 enum ProjectStatus {
   PLANNED
@@ -541,3 +448,5 @@ enum MessageRole {
   USER
   ASSISTANT
 }
+
+// Note: Keeping the original User model for backward compatibility (removed unused Post model)

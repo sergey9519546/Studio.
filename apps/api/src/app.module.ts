@@ -18,8 +18,8 @@ import { HealthModule } from "./health/health.module.js";
 // import { AssignmentsModule } from "./modules/assignments/assignments.module.js";
 import { AuthModule } from "./modules/auth/auth.module.js";
 // import { AvailabilityModule } from "./modules/availability/availability.module.js";
-// import { FreelancersModule } from "./modules/freelancers/freelancers.module.js";
-// import { GoogleModule } from "./modules/google/google.module.js";
+import { FreelancersModule } from "./modules/freelancers/freelancers.module.js";
+import { GoogleModule } from "./modules/google/google.module.js";
 // import { IntegrationsModule } from './modules/integrations/integrations.module.js';
 // import { IntelligenceModule } from './modules/intelligence/intelligence.module.js';
 // import { KnowledgeModule } from "./modules/knowledge/knowledge.module.js";
@@ -28,6 +28,7 @@ import { AuthModule } from "./modules/auth/auth.module.js";
 // import { ProjectsModule } from "./modules/projects/projects.module.js";
 // import { RealtimeModule } from "./modules/realtime/realtime.module.js";
 // import { ScriptsModule } from "./modules/scripts/scripts.module.js";
+import { ProjectsModule } from './modules/projects/projects.module.js';
 import { StorageModule } from "./modules/storage/storage.module.js";
 import { PrismaModule } from "./prisma/prisma.module.js";
 const __dirname = dirname(__filename);
@@ -111,15 +112,15 @@ appLogger.log(`Static root: ${staticRoot ?? 'not-found'} | cwd: ${process.cwd()}
     LoggerModule,
     PrismaModule,
     StorageModule,
+    // ENABLED MODULES
+    GoogleModule,
     // TEMPORARILY DISABLED FOR DEPLOYMENT - Modules with compilation errors
-    // GoogleModule,
     // AssetsModule,
     // KnowledgeModule,
     // IntelligenceModule,
     // MoodboardModule,
     // AnalysisModule,
     // AIModule,
-    // FreelancersModule,
     // ProjectsModule,
     // AssignmentsModule,
     // ScriptsModule,
@@ -127,6 +128,8 @@ appLogger.log(`Static root: ${staticRoot ?? 'not-found'} | cwd: ${process.cwd()}
     HealthModule,
     // RealtimeModule,
     AuthModule,
+    ProjectsModule,
+    FreelancersModule,
     // MonitoringModule,
     // IntegrationsModule,
     // TranscriptsModule,

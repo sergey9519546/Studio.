@@ -64,16 +64,20 @@ export class FreelancersService {
   }
 
   async update(id: string, data: UpdateFreelancerDto) {
-    const { skills, contactInfo, email, ...rest }: UpdateFreelancerDto = data;
+    const { skills, contactInfo, email, status, ...rest } = data;
     const resolvedEmail = email || contactInfo;
+    
+    const updateData: any = {
+      ...rest,
+    };
+    
+    if (resolvedEmail) updateData.email = resolvedEmail;
+    if (skills) updateData.skills = skills;
+    if (status) updateData.status = status as FreelancerStatus;
+
     const updated = await this.prisma.freelancer.update({
       where: { id },
-      data: {
-        ...rest,
-        ...(resolvedEmail ? { email: resolvedEmail } : {}),
-        ...(skills ? { skills } : {}),
-        ...(rest.status ? { status: rest.status as FreelancerStatus } : {})
-      }
+      data: updateData
     });
 
     // Invalidate cache when updating
@@ -125,7 +129,7 @@ export class FreelancersService {
     let created = 0;
     const updated = 0;
     for (const item of items) {
-      const { skills, contactInfo, email, ...rest }: ImportFreelancerDto = item;
+      const { skills, contactInfo, email, status, ...rest } = item;
 
       const resolvedEmail = email || contactInfo;
       if (!resolvedEmail) {
@@ -137,8 +141,8 @@ export class FreelancersService {
       try {
         await this.prisma.freelancer.upsert({
           where: { email: resolvedEmail },
-          create: { ...rest, email: resolvedEmail, skills: skills || [], status: rest.status as FreelancerStatus },
-          update: { ...rest, email: resolvedEmail, skills: skills || [], status: rest.status as FreelancerStatus }
+          create: { ...rest, email: resolvedEmail, skills: skills || [], status: status as FreelancerStatus },
+          update: { ...rest, email: resolvedEmail, skills: skills || [], status: status as FreelancerStatus }
         });
         // Simplistic count
         created++;

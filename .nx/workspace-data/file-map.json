@@ -38,7 +38,7 @@
         },
         {
           "file": "apps/api/src/app.module.ts",
-          "hash": "6169665301881957582",
+          "hash": "16262853374371902984",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
@@ -2551,7 +2551,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini-analyst.service.ts",
-          "hash": "16962799635165401757",
+          "hash": "11218222226208038339",
           "deps": [
             "npm:@nestjs/cache-manager",
             "npm:@nestjs/common",
@@ -2568,7 +2568,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini.service.ts",
-          "hash": "11166696112341494146",
+          "hash": "9282016173561365449",
           "deps": [
             "npm:@google/genai",
             "npm:@nestjs/common",
@@ -2699,7 +2699,7 @@
         },
         {
           "file": "apps/api/src/modules/assets/assets.service.ts",
-          "hash": "5042151525691825590",
+          "hash": "9364436280204243397",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -2778,6 +2778,30 @@
           ]
         },
         {
+          "file": "apps/api/src/modules/auth/decorators/current-user.decorator.ts",
+          "hash": "10365313480996110675",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/auth/decorators/index.ts",
+          "hash": "18317797250066046402"
+        },
+        {
+          "file": "apps/api/src/modules/auth/guards/index.ts",
+          "hash": "14939356640261835088"
+        },
+        {
+          "file": "apps/api/src/modules/auth/guards/jwt-auth.guard.ts",
+          "hash": "9100629731013212608",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/passport",
+            "npm:rxjs"
+          ]
+        },
+        {
           "file": "apps/api/src/modules/auth/jwt.strategy.ts",
           "hash": "18188382670478033667",
           "deps": [
@@ -2803,7 +2827,7 @@
         },
         {
           "file": "apps/api/src/modules/conversations/conversations.controller.ts",
-          "hash": "7345516038403372821",
+          "hash": "18397121081293047932",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client"
@@ -2855,7 +2879,7 @@
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.service.ts",
-          "hash": "15210053936165665085",
+          "hash": "6935861773590215511",
           "deps": [
             "npm:@nestjs/cache-manager",
             "npm:@nestjs/common",
@@ -2900,12 +2924,23 @@
           ]
         },
         {
-          "file": "apps/api/src/modules/google/google-client.factory.spec.ts",
-          "hash": "16255824019655031051",
+          "file": "apps/api/src/modules/google/google-auth.controller.ts",
+          "hash": "3493050075284869685",
           "deps": [
-            "npm:@nestjs/testing",
+            "npm:@nestjs/common",
             "npm:@nestjs/config",
-            "npm:@nestjs/common"
+            "npm:express",
+            "npm:googleapis",
+            "npm:jsonwebtoken"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/google/google-client.factory.spec.ts",
+          "hash": "2583297850597226061",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:@nestjs/testing"
           ]
         },
         {
@@ -2920,7 +2955,7 @@
         },
         {
           "file": "apps/api/src/modules/google/google.module.ts",
-          "hash": "8375897464254430863",
+          "hash": "13872030148899745909",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -2943,18 +2978,18 @@
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/adapters/google-drive.adapter.ts",
-          "hash": "6723539658400128062",
+          "hash": "12265741327151972740",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/adapters/storage-adapter.interface.ts",
-          "hash": "10368363698762588507"
+          "hash": "3219338973688439800"
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.controller.ts",
-          "hash": "4138270984376136752",
+          "hash": "16751119856312806199",
           "deps": [
             "npm:@nestjs/common",
             "npm:express"
@@ -2962,7 +2997,7 @@
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.service.ts",
-          "hash": "12379681993957075693",
+          "hash": "14363775057829538019",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3029,7 +3064,7 @@
         },
         {
           "file": "apps/api/src/modules/intelligence/vector-math.ts",
-          "hash": "1144650233775979282"
+          "hash": "11156163585636371595"
         },
         {
           "file": "apps/api/src/modules/knowledge/interfaces/knowledge-source.interface.ts",
@@ -3052,7 +3087,7 @@
         },
         {
           "file": "apps/api/src/modules/knowledge/knowledge.service.ts",
-          "hash": "5917208986977921575",
+          "hash": "1158794182105140420",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3066,7 +3101,7 @@
         },
         {
           "file": "apps/api/src/modules/media-proxy/media-proxy.controller.ts",
-          "hash": "14246102616915949336",
+          "hash": "2891532128150283595",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -3095,7 +3130,7 @@
         },
         {
           "file": "apps/api/src/modules/monitoring/ai-usage.service.ts",
-          "hash": "5017403909240587318",
+          "hash": "14473739661112953057",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3110,7 +3145,7 @@
         },
         {
           "file": "apps/api/src/modules/monitoring/budget.guard.ts",
-          "hash": "2175895247594262838",
+          "hash": "9951290952093513361",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3175,7 +3210,7 @@
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.service.ts",
-          "hash": "1122537851460138935",
+          "hash": "18170762484933933912",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client"
@@ -3191,7 +3226,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/projects.controller.ts",
-          "hash": "13578838715545167983",
+          "hash": "998265033615323377",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3223,17 +3258,14 @@
         },
         {
           "file": "apps/api/src/modules/rag/AssetSimilarityEngine.ts",
-          "hash": "14001963254686335848",
+          "hash": "16655016238402686382",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
-          "file": "apps/api/src/modules/rag/IntelligentContextEngine.ts",
-          "hash": "14210506846283452265",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
+          "file": "apps/api/src/modules/rag/IntelligentContextEngine.ts.disabled",
+          "hash": "10719799933417377313"
         },
         {
           "file": "apps/api/src/modules/rag/chunking.service.ts",
@@ -3291,7 +3323,7 @@
         },
         {
           "file": "apps/api/src/modules/rag/rag.service.ts",
-          "hash": "9428503962326463523",
+          "hash": "12303671911874904736",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3302,7 +3334,7 @@
         },
         {
           "file": "apps/api/src/modules/rag/vector-store.service.ts",
-          "hash": "2251019550706663534",
+          "hash": "15519685524027790312",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3362,16 +3394,11 @@
         },
         {
           "file": "apps/api/src/modules/storage/storage.service.ts",
-          "hash": "17737348778993734996",
+          "hash": "8953936999209852853",
           "deps": [
-            "npm:@google-cloud/storage",
             "npm:@nestjs/common",
             "npm:@nestjs/config",
-            "npm:@nestjs/event-emitter",
-            [
-              "npm:@google-cloud/storage",
-              "dynamic"
-            ]
+            "npm:@nestjs/event-emitter"
           ]
         },
         {
@@ -3679,6 +3706,14 @@
         "hash": "18436108450761219576"
       },
       {
+        "file": "BROWSER_TOOLS_MCP_DEMO.md",
+        "hash": "14594226417125823166"
+      },
+      {
+        "file": "BROWSER_TOOLS_MCP_SETUP_TODO.md",
+        "hash": "15866659799300784766"
+      },
+      {
         "file": "BUILD_DEPLOYMENT_COMPLETE.md",
         "hash": "14623746215293879210"
       },
@@ -3701,6 +3736,10 @@
       {
         "file": "BUILD_VERIFICATION_RESULTS.md",
         "hash": "13880881965611456353"
+      },
+      {
+        "file": "BrowserTools-1.2.0-extension.zip",
+        "hash": "17029242998552393176"
       },
       {
         "file": "CLINE_INTEGRATION_README.md",
@@ -3867,6 +3906,10 @@
         "hash": "12898927544059431243"
       },
       {
+        "file": "ENHANCED_PROJECT_DATA_SEPARATION_ARCHITECTURE.md",
+        "hash": "13359887639127334835"
+      },
+      {
         "file": "ENHANCED_PROJECT_DETAIL_COMPLETE.md",
         "hash": "9446360416170365322"
       },
@@ -4011,6 +4054,10 @@
         "hash": "15324959102746078851"
       },
       {
+        "file": "MCP_SOFTWARE_PLANNING_SETUP_TODO.md",
+        "hash": "12095325001458688036"
+      },
+      {
         "file": "MOCK_DATA_ANALYSIS_REPORT.md",
         "hash": "9525340211105045472"
       },
@@ -4047,6 +4094,18 @@
         "hash": "18180138178023120495"
       },
       {
+        "file": "OLLAMA_MCP_SERVER_DEMO.md",
+        "hash": "17075704626409691371"
+      },
+      {
+        "file": "OLLAMA_MCP_SETUP_TODO.md",
+        "hash": "8594893766131778758"
+      },
+      {
+        "file": "PHASE_2_3_IMPLEMENTATION_TODO.md",
+        "hash": "2457825442176616981"
+      },
+      {
         "file": "PHASE_2_PROGRESS_SUMMARY.md",
         "hash": "9730885719020555992"
       },
@@ -4065,6 +4124,10 @@
       {
         "file": "PRODUCT_DISCOVERY_STRATEGY.md",
         "hash": "7817553116608421190"
+      },
+      {
+        "file": "PROJECT_DATA_SEPARATION_IMPROVEMENT_TODO.md",
+        "hash": "409728230540463325"
       },
       {
         "file": "PROJECT_DETAIL_INTEGRATION_COMPLETE.md",
@@ -4137,6 +4200,14 @@
       {
         "file": "TASK_PROGRESS_BUILD_DEPLOY.md",
         "hash": "10049283393712990793"
+      },
+      {
+        "file": "TASK_PROGRESS_TAVILY_MCP_SETUP.md",
+        "hash": "6043081671510950337"
+      },
+      {
+        "file": "TAVILY_MCP_SERVER_DEMO.md",
+        "hash": "9794323269124316861"
       },
       {
         "file": "TYPESCRIPT_COMPILATION_FIXES_TODO.md",
@@ -49036,11 +49107,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "13914220836469946514"
+        "hash": "1837060819444796090"
       },
       {
         "file": "package.json",
-        "hash": "4877069096512325663"
+        "hash": "11788676869657522382"
       },
       {
         "file": "package_backup.json",
@@ -49087,24 +49158,8 @@
         "hash": "13429002308495318897"
       },
       {
-        "file": "prisma/schema.prisma.bak",
-        "hash": "13493496863099499486"
-      },
-      {
-        "file": "prisma/schema_backup.prisma",
-        "hash": "8887657023626792185"
-      },
-      {
-        "file": "prisma/schema_fix.prisma",
-        "hash": "13298098624400906441"
-      },
-      {
         "file": "prisma/schema_header.txt",
         "hash": "12276007508623322390"
-      },
-      {
-        "file": "prisma/schema_new.prisma",
-        "hash": "12722156534786930910"
       },
       {
         "file": "prisma/seed.ts",
@@ -49304,7 +49359,7 @@
       },
       {
         "file": "src/App.tsx",
-        "hash": "17300897758973191994"
+        "hash": "1230624853631041797"
       },
       {
         "file": "src/__test__/DashboardHome.test.tsx",
@@ -49321,6 +49376,10 @@
       {
         "file": "src/components/Accessibility.tsx",
         "hash": "4428204295675663527"
+      },
+      {
+        "file": "src/components/ConnectionStatus.tsx",
+        "hash": "17469694337804842105"
       },
       {
         "file": "src/components/Dashboard.test.tsx",
@@ -49376,7 +49435,7 @@
       },
       {
         "file": "src/components/WritersRoom.tsx",
-        "hash": "572100742146594644"
+        "hash": "1310556653966845766"
       },
       {
         "file": "src/components/ai/AudioAIComponent.tsx",
@@ -49392,11 +49451,11 @@
       },
       {
         "file": "src/components/ai/EnhancedAIOrchestrator.tsx",
-        "hash": "4047993934094039924"
+        "hash": "11311957666554575340"
       },
       {
         "file": "src/components/ai/MultiModalContext.tsx",
-        "hash": "5484568366028133588"
+        "hash": "5750201326322986788"
       },
       {
         "file": "src/components/ai/VisionAIComponent.tsx",
@@ -49405,6 +49464,10 @@
       {
         "file": "src/components/ai/mockDataGenerators.ts",
         "hash": "2363446151797231695"
+      },
+      {
+        "file": "src/components/auth/ProtectedRoute.tsx",
+        "hash": "10191826064923864403"
       },
       {
         "file": "src/components/dashboard/DashboardHeader.css",
@@ -49508,23 +49571,15 @@
       },
       {
         "file": "src/components/extensibility/PluginAPI.tsx",
-        "hash": "17622548071771912421"
+        "hash": "11922543933552250134"
       },
       {
         "file": "src/components/extensibility/PluginManager.tsx",
-        "hash": "5543087120709310786"
-      },
-      {
-        "file": "src/components/extensibility/PluginManager_Complete.tsx",
-        "hash": "15491082008125281838"
-      },
-      {
-        "file": "src/components/extensibility/PluginManager_Final.tsx",
-        "hash": "16366117136136012937"
+        "hash": "1872130086464065546"
       },
       {
         "file": "src/components/extensibility/PluginRegistry.tsx",
-        "hash": "6265825105066488226"
+        "hash": "2452535839728182768"
       },
       {
         "file": "src/components/layout/CommandBar.tsx",
@@ -49533,6 +49588,14 @@
       {
         "file": "src/components/layout/Sidebar.tsx",
         "hash": "14307122109017786024"
+      },
+      {
+        "file": "src/components/loading/ErrorBoundary.tsx",
+        "hash": "15782206394974074222"
+      },
+      {
+        "file": "src/components/loading/LoadingSpinner.tsx",
+        "hash": "6287413903367863473"
       },
       {
         "file": "src/components/plugins/PluginManagerUI.tsx",
@@ -49561,6 +49624,10 @@
       {
         "file": "src/context/RouteContext.tsx",
         "hash": "2068113342752627556"
+      },
+      {
+        "file": "src/contexts/AuthContext.tsx",
+        "hash": "8174855104369453296"
       },
       {
         "file": "src/dataconnect-generated/.guides/config.json",
@@ -49647,6 +49714,10 @@
         "hash": "5382572993735306076"
       },
       {
+        "file": "src/hooks/useRealTime.ts",
+        "hash": "11640297375157640361"
+      },
+      {
         "file": "src/hooks/useRealTimeCollaboration.ts",
         "hash": "8502717576564257217"
       },
@@ -49699,6 +49770,30 @@
         "hash": "16228258526414326732"
       },
       {
+        "file": "src/services/api/auth.ts",
+        "hash": "9687577133472333503"
+      },
+      {
+        "file": "src/services/api/client.ts",
+        "hash": "33404102385844715"
+      },
+      {
+        "file": "src/services/api/freelancers.ts",
+        "hash": "10542368340415171625"
+      },
+      {
+        "file": "src/services/api/index.ts",
+        "hash": "8398338317662009937"
+      },
+      {
+        "file": "src/services/api/moodboard.ts",
+        "hash": "4965676766123230862"
+      },
+      {
+        "file": "src/services/api/projects.ts",
+        "hash": "3688733625945614859"
+      },
+      {
         "file": "src/services/moodboardApi.ts",
         "hash": "10733614409343421873"
       },
@@ -49711,12 +49806,16 @@
         "hash": "13258423192488170655"
       },
       {
-        "file": "src/test/setup.ts",
-        "hash": "12868387811487735507"
+        "file": "src/services/types.ts",
+        "hash": "17013710599564996464"
       },
       {
-        "file": "src/tests/integration/pluginManager.integration.test.ts",
-        "hash": "10440346868322077995"
+        "file": "src/services/websocket.ts",
+        "hash": "9432025281619255418"
+      },
+      {
+        "file": "src/test/setup.ts",
+        "hash": "12868387811487735507"
       },
       {
         "file": "src/theme/README.md",
@@ -49783,6 +49882,10 @@
         "hash": "15390637036230227210"
       },
       {
+        "file": "task_progress",
+        "hash": "4055606894390288348"
+      },
+      {
         "file": "test-commands-fixed.ps1",
         "hash": "11525517678057778410"
       },
@@ -49831,6 +49934,10 @@
         "hash": "9564512296546428352"
       },
       {
+        "file": "tmp/apps/api/serve/tsconfig.generated.6b57c821-ce34-4da2-bb1e-f28a3679dcae.json",
+        "hash": "16590372849415018452"
+      },
+      {
         "file": "tmp/apps/api/serve/tsconfig.generated.6ebc14d0-72f1-4703-8df5-7a48b5ccf680.json",
         "hash": "9564512296546428352"
       },
@@ -49864,15 +49971,11 @@
       },
       {
         "file": "tsconfig.json",
-        "hash": "5163860676036951392"
+        "hash": "14746810451127705744"
       },
       {
         "file": "types.ts",
         "hash": "11208913364460149634"
-      },
-      {
-        "file": "types/@google-cloud/aiplatform/index.d.ts",
-        "hash": "14803650518435133445"
       },
       {
         "file": "types/confluence.types.ts",
@@ -49881,6 +49984,10 @@
       {
         "file": "types/googleapis/index.d.ts",
         "hash": "6432555131811957729"
+      },
+      {
+        "file": "types/index.d.ts",
+        "hash": "10170097538273133487"
       },
       {
         "file": "types/media.types.ts",
@@ -49900,7 +50007,7 @@
       },
       {
         "file": "yarn.lock",
-        "hash": "11784517485486354302"
+        "hash": "15269631629142118552"
       },
       {
         "file": "~/.gemini/GEMINI.md",

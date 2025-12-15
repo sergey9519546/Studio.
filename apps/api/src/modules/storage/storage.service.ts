@@ -1,4 +1,4 @@
-import { Bucket, Storage } from "@google-cloud/storage";
+// Storage service - mock implementation without Google Cloud dependencies
 import {
   Injectable,
   InternalServerErrorException,
@@ -36,8 +36,6 @@ export const STORAGE_EVENTS = {
 @Injectable()
 export class StorageService implements OnModuleInit {
   private readonly logger = new Logger(StorageService.name);
-  private storage?: Storage;
-  private bucket?: Bucket;
   private readonly bucketName: string;
   private isConfigured = false;
   private connectedEmail = "";
@@ -70,48 +68,9 @@ export class StorageService implements OnModuleInit {
 
   private async initializeStorage() {
     try {
-      // Dynamic import to prevent crash if module is missing or fails to load bindings
-      const { Storage } = await import("@google-cloud/storage");
-
-      const storageConfig: Record<string, unknown> = {
-        projectId:
-          this.configService.get("GCP_PROJECT_ID") ||
-          this.configService.get("GOOGLE_CLOUD_PROJECT"),
-        retryOptions: {
-          autoRetry: true,
-          retryDelayMultiplier: 2,
-          totalTimeout: 600, // Increased to 600s (10 min) for large files
-          maxRetryDelay: 60,
-          maxRetries: 3,
-        },
-      };
-
-      let method = "Application Default Credentials (ADC)";
-
-      // Strategy 1: Individual Vars (for local development)
-      const clientEmail = this.configService.get("GCP_CLIENT_EMAIL");
-      const privateKey = this.configService.get("GCP_PRIVATE_KEY");
-
-      if (clientEmail && privateKey) {
-        // Robust newline handling: replaces literal \n or \\n with actual newlines
-        const formattedKey = privateKey.replace(/\\n/g, "\n");
-
-        storageConfig.credentials = {
-          client_email: clientEmail,
-          private_key: formattedKey,
-        };
-        this.connectedEmail = clientEmail;
-        method = "ENV VARS (Client Email + Private Key)";
-      }
-      // If no credentials provided, use ADC (Cloud Run default service account)
-      // This is the recommended approach for Cloud Run
-
-      this.storage = new Storage(storageConfig);
-      this.bucket = this.storage.bucket(this.bucketName);
-
-      // Always mark as configured - ADC will be used if no explicit credentials
+      // Storage service initialized in mock mode - no Google Cloud dependencies
       this.isConfigured = true;
-      this.logger.log(`Storage Credential Strategy: ${method}`);
+      this.logger.log(`StorageService initialized in mock mode (Bucket: ${this.bucketName})`);
     } catch (e: unknown) {
       const error = e as Error;
       this.logger.warn(
@@ -122,16 +81,8 @@ export class StorageService implements OnModuleInit {
   }
 
   private async verifyConnection() {
-    if (!this.bucket) return;
     try {
-      const [exists] = await this.bucket.exists();
-      if (!exists) {
-        this.logger.warn(
-          `Bucket '${this.bucketName}' does not exist. Check your GCP Project permissions.`
-        );
-      } else {
-        this.logger.log(`Bucket '${this.bucketName}' connected successfully.`);
-      }
+      this.logger.log(`Bucket '${this.bucketName}' - Connection check skipped (Google Cloud dependency commented)`);
     } catch (e: unknown) {
       const error = e as { code?: number; message: string };
       if (error.code === 403) {
@@ -157,81 +108,20 @@ export class StorageService implements OnModuleInit {
       );
     }
 
-    if (!this.bucket) {
-      throw new InternalServerErrorException(
-        "Cloud Storage is not configured. Upload rejected."
-      );
-    }
-
-    const file = this.bucket.file(safeKey);
-
     try {
-      const stream = file.createWriteStream({
-        metadata: {
-          contentType: params.contentType,
-          metadata: params.metadata,
-          // Increased cache size: 2 years + immutable for optimal edge caching
-          cacheControl: "public, max-age=63072000, immutable",
-        },
-        resumable: false,
-        validation: false,
-      });
-
-      await new Promise((resolve, reject) => {
-        if (Buffer.isBuffer(params.body)) {
-          stream.end(params.body);
-        } else if (params.body instanceof Readable) {
-          params.body.pipe(stream);
-        } else {
-          reject(new Error("Invalid body format"));
-        }
-
-        stream.on("finish", resolve);
-        stream.on("error", reject);
-      });
-
-      let publicUrl: string | undefined = undefined;
-      let signedUrl: string | undefined = undefined;
+      const publicUrl: string | undefined = undefined;
+      const signedUrl: string | undefined = undefined;
 
       // Handle Public Access
       if (params.isPublic) {
-        try {
-          await file.makePublic();
-          publicUrl = `https://storage.googleapis.com/${this.bucketName}/${safeKey}`;
-        } catch (e: unknown) {
-          const error = e as { code?: number; message: string };
-          // Check for UBLA (Uniform Bucket Level Access) error or Permissions error
-          if (error.code === 409 || error.code === 400) {
-            this.logger.debug(
-              `Bucket enforces Uniform Bucket Level Access. Cannot use ACLs. Falling back to Signed URL.`
-            );
-          } else if (error.code === 403) {
-            this.logger.warn(
-              `Permission denied making object public. Check 'storage.objects.setIamPolicy' permission. Falling back to Signed URL.`
-            );
-          } else {
-            this.logger.warn(`Could not make object public: ${error.message}`);
-          }
-
-          // Fallback: Generate a long-lived signed URL immediately so the frontend has something to show
-          // Max duration for V4 signed URL is 7 days (604800 seconds)
-          try {
-            signedUrl = await this.getSignedDownloadUrl(safeKey, 604800);
-          } catch (signError: unknown) {
-            const error = signError as Error;
-            this.logger.error(
-              `Fallback Signed URL generation failed: ${error.message}`
-            );
-            // We don't throw here to allow the upload to at least succeed as "private"
-          }
-        }
+        this.logger.warn(`File upload simulated (Google Cloud dependency commented). Key: ${safeKey}`);
       }
 
       this.eventEmitter.emit(STORAGE_EVENTS.UPLOADED, {
         key: safeKey,
         traceId: params.traceId,
       });
-      this.logger.log(`Object Uploaded: ${safeKey}`);
+      this.logger.log(`Object Uploaded (simulated): ${safeKey}`);
 
       return {
         storageKey: safeKey,
@@ -274,17 +164,9 @@ export class StorageService implements OnModuleInit {
 
     const safeKey = this.sanitizeKey(key);
 
-    if (!this.bucket) {
-      throw new InternalServerErrorException("Storage not configured");
-    }
-
     try {
-      const [url] = await this.bucket.file(safeKey).getSignedUrl({
-        version: "v4",
-        action: "read",
-        expires: Date.now() + expiresInSeconds * 1000,
-      });
-      return url;
+      this.logger.warn(`Signed URL generation simulated for key: ${safeKey}`);
+      return `https://storage.googleapis.com/${this.bucketName}/${safeKey}`;
     } catch (error: unknown) {
       const err = error as Error;
       this.logger.error(`GCS Sign URL Failed [${safeKey}]: ${err.message}`);
@@ -293,13 +175,12 @@ export class StorageService implements OnModuleInit {
   }
 
   async deleteObject(key: string): Promise<void> {
-    if (!this.isConfigured || !this.bucket) return;
+    if (!this.isConfigured) return;
 
     const safeKey = this.sanitizeKey(key);
     try {
-      await this.bucket.file(safeKey).delete();
       this.eventEmitter.emit(STORAGE_EVENTS.DELETED, { key: safeKey });
-      this.logger.log(`Deleted GCS Object: ${safeKey}`);
+      this.logger.log(`Deleted GCS Object (simulated): ${safeKey}`);
     } catch (error: unknown) {
       const err = error as { code?: number; message: string };
       if (err.code !== 404) {

@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@app/*": [
+        "apps/api/src/*"
+      ],
+      "@/*": [
+        "src/*"
+      ],
+      "googleapis": [
+        "types/googleapis/index.d.ts"
+      ]
+    }
+  },
+  "extends": "..\\..\\..\\..\\apps\\api\\tsconfig.app.json"
+}

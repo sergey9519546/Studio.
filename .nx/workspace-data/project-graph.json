@@ -16212,11 +16212,6 @@
       },
       {
         "source": "api",
-        "target": "npm:@google-cloud/storage",
-        "type": "dynamic"
-      },
-      {
-        "source": "api",
         "target": "npm:dotenv",
         "type": "static"
       },
@@ -16402,12 +16397,22 @@
       },
       {
         "source": "api",
-        "target": "npm:google-auth-library",
+        "target": "npm:rxjs",
         "type": "static"
       },
       {
         "source": "api",
         "target": "npm:googleapis",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:jsonwebtoken",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:google-auth-library",
         "type": "static"
       },
       {
@@ -39628,5 +39633,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1765770698949
+  "computedAt": 1765801293948
 }
