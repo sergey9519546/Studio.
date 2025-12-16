@@ -36,6 +36,15 @@
         "hash": "sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw=="
       }
     },
+    "npm:@angular-devkit/core@16.1.3": {
+      "type": "npm",
+      "name": "npm:@angular-devkit/core@16.1.3",
+      "data": {
+        "version": "16.1.3",
+        "packageName": "@angular-devkit/core",
+        "hash": "sha512-cFhNdJHumNMZGD3NYxOtNuMGRQXeDnKbwvK+IJmKAttXt8na6EvURR/ZxZOI7rl/YRVX+vcNSdtXz3hE6g+Isw=="
+      }
+    },
     "npm:@angular-devkit/core": {
       "type": "npm",
       "name": "npm:@angular-devkit/core",
@@ -58,9 +67,18 @@
       "type": "npm",
       "name": "npm:@angular-devkit/schematics-cli",
       "data": {
-        "version": "17.3.11",
+        "version": "16.1.3",
         "packageName": "@angular-devkit/schematics-cli",
-        "hash": "sha512-kcOMqp+PHAKkqRad7Zd7PbpqJ0LqLaNZdY1+k66lLWmkEBozgq8v4ASn/puPWf9Bo0HpCiK+EzLf0VHE8Z/y6Q=="
+        "hash": "sha512-uZAi5xrvZLgQkqVsR0wxbUZgiMHVNstOnNm446Bs69iadbLymvWvdg95hYPL3IWAlYrNiwwGNSjyp6JS0Qn06Q=="
+      }
+    },
+    "npm:@angular-devkit/schematics@16.1.3": {
+      "type": "npm",
+      "name": "npm:@angular-devkit/schematics@16.1.3",
+      "data": {
+        "version": "16.1.3",
+        "packageName": "@angular-devkit/schematics",
+        "hash": "sha512-hWEuQnfQOgcSs4YX6iF4QR/34ROeSPaMi7lQOYg33hStg+pnk/JDdIU0f2nrIIz3t0jqAj+5VXVLBJvOCd84vg=="
       }
     },
     "npm:@angular-devkit/schematics": {
@@ -2646,24 +2664,6 @@
         "hash": "sha512-cae7mzluplsjSdgFA6ACLygb5jC8alO0UUnFPyu0E7tNRPrL+q/f8VcSXp+cjZQ7l5CMpDpi2G1+IQvkOiL1Lw=="
       }
     },
-    "npm:@isaacs/balanced-match": {
-      "type": "npm",
-      "name": "npm:@isaacs/balanced-match",
-      "data": {
-        "version": "4.0.1",
-        "packageName": "@isaacs/balanced-match",
-        "hash": "sha512-yzMTt9lEb8Gv7zRioUilSglI0c0smZ9k5D65677DLWLtWJaXIS3CqcGyUFByYKlnUj6TkjLVs54fBl6+TiGQDQ=="
-      }
-    },
-    "npm:@isaacs/brace-expansion": {
-      "type": "npm",
-      "name": "npm:@isaacs/brace-expansion",
-      "data": {
-        "version": "5.0.0",
-        "packageName": "@isaacs/brace-expansion",
-        "hash": "sha512-ZT55BDLV0yv0RBm2czMiZ+SqCGO7AvmOM3G/w2xhVPH+te0aKgFjmBvGlL1dH+ql2tgGO3MVrbb3jCKyvpgnxA=="
-      }
-    },
     "npm:@isaacs/cliui": {
       "type": "npm",
       "name": "npm:@isaacs/cliui",
@@ -3051,15 +3051,6 @@
         "hash": "sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA=="
       }
     },
-    "npm:@ljharb/through": {
-      "type": "npm",
-      "name": "npm:@ljharb/through",
-      "data": {
-        "version": "2.3.14",
-        "packageName": "@ljharb/through",
-        "hash": "sha512-ajBvlKpWucBB17FuQYUShqpqy8GRgYEpJW0vWJbUu1CV9lWyrDCapy0lScU8T8Z6qn49sSwJB3+M+evYIdGg+A=="
-      }
-    },
     "npm:@lukeed/csprng": {
       "type": "npm",
       "name": "npm:@lukeed/csprng",
@@ -3109,9 +3100,9 @@
       "type": "npm",
       "name": "npm:@nestjs/cli",
       "data": {
-        "version": "10.4.9",
+        "version": "10.1.0",
         "packageName": "@nestjs/cli",
-        "hash": "sha512-s8qYd97bggqeK7Op3iD49X2MpFtW4LVNLAwXFkfbRxKME6IYT7X0muNTJ2+QfI8hpbNx9isWkrLWIp+g5FOhiA=="
+        "hash": "sha512-R/n+cFIvK3YbFSU9t7NFyBgXJRDK1biCZgz1VqYdpZj4JmIj8RmllA9Fp3YZUg98D8K7T4HoIuVFUAkEFSSLTg=="
       }
     },
     "npm:@nestjs/common": {
@@ -4770,24 +4761,6 @@
         "hash": "sha512-c9h9dVVMigMPc4bwTvC5dxqtqJZwQPePsWjPlpSOnojbor6pGqdk541lfA7AqFQr5pB1BRdq0juY9db81BwyFw=="
       }
     },
-    "npm:@types/eslint-scope": {
-      "type": "npm",
-      "name": "npm:@types/eslint-scope",
-      "data": {
-        "version": "3.7.7",
-        "packageName": "@types/eslint-scope",
-        "hash": "sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg=="
-      }
-    },
-    "npm:@types/eslint": {
-      "type": "npm",
-      "name": "npm:@types/eslint",
-      "data": {
-        "version": "9.6.1",
-        "packageName": "@types/eslint",
-        "hash": "sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag=="
-      }
-    },
     "npm:@types/estree": {
       "type": "npm",
       "name": "npm:@types/estree",
@@ -5605,6 +5578,15 @@
         "version": "1.3.8",
         "packageName": "accepts",
         "hash": "sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw=="
+      }
+    },
+    "npm:acorn-import-attributes@1.9.5": {
+      "type": "npm",
+      "name": "npm:acorn-import-attributes@1.9.5",
+      "data": {
+        "version": "1.9.5",
+        "packageName": "acorn-import-attributes",
+        "hash": "sha512-n02Vykv5uA3eHGM/Z2dQrcD56kL8TyDb2p1+0P83PClMnC/nc+anbQRhIOWnSq4Ke/KvDPrY3C9hDtC/A3eHnQ=="
       }
     },
     "npm:acorn-jsx": {
@@ -6723,6 +6705,15 @@
         "hash": "sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA=="
       }
     },
+    "npm:chokidar@3.5.3": {
+      "type": "npm",
+      "name": "npm:chokidar@3.5.3",
+      "data": {
+        "version": "3.5.3",
+        "packageName": "chokidar",
+        "hash": "sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw=="
+      }
+    },
     "npm:chrome-trace-event": {
       "type": "npm",
       "name": "npm:chrome-trace-event",
@@ -6817,9 +6808,9 @@
       "type": "npm",
       "name": "npm:cli-table3",
       "data": {
-        "version": "0.6.5",
+        "version": "0.6.3",
         "packageName": "cli-table3",
-        "hash": "sha512-+W/5efTR7y5HRD7gACw9yQjqMVvEMLBHmboM/kPWam+H+Hmyrgjh6YncVKK122YZkXrLudzTuAukUw9FnMf7IQ=="
+        "hash": "sha512-w5Jac5SykAeZJKntOxJCrm63Eg5/4dhMWIcuTbo9rpE+brgaSZo0RuNJZeOyMgsUdhDeojvgyQLmjI+K50ZGyg=="
       }
     },
     "npm:cli-width@3.0.0": {
@@ -7207,15 +7198,6 @@
         "version": "7.1.0",
         "packageName": "cosmiconfig",
         "hash": "sha512-AdmX6xUzdNASswsFtmwSt7Vj8po9IuqXm0UXz7QKPuEUmPB4XyjGfaAr2PSuELMwkRMVH1EpIkX5bTZGRB3eCA=="
-      }
-    },
-    "npm:cosmiconfig@8.3.6": {
-      "type": "npm",
-      "name": "npm:cosmiconfig@8.3.6",
-      "data": {
-        "version": "8.3.6",
-        "packageName": "cosmiconfig",
-        "hash": "sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA=="
       }
     },
     "npm:crc-32": {
@@ -8343,6 +8325,15 @@
         "hash": "sha512-XctvKaEMaj1Ii9oDOqbW/6e1gXknSY4g/aLCDicOXqBE4M0nRWkUu0PTp++UPNzoFY12BNHMfs/VadKIS6llvg=="
       }
     },
+    "npm:execa@4.1.0": {
+      "type": "npm",
+      "name": "npm:execa@4.1.0",
+      "data": {
+        "version": "4.1.0",
+        "packageName": "execa",
+        "hash": "sha512-j5W0//W7f8UxAn8hXVnwG8tLwdiUy4FJLcSupCg6maBYZDpyBvTApK7KyuI4bKj8KOh1r2YH+6ucuYtJv1bTZA=="
+      }
+    },
     "npm:execa": {
       "type": "npm",
       "name": "npm:execa",
@@ -8788,9 +8779,9 @@
       "type": "npm",
       "name": "npm:fork-ts-checker-webpack-plugin",
       "data": {
-        "version": "9.0.2",
+        "version": "8.0.0",
         "packageName": "fork-ts-checker-webpack-plugin",
-        "hash": "sha512-Uochze2R8peoN1XqlSi/rGUkDQpRogtLFocP9+PGu68zk1BDAKXfdeCdyVZpgTk8V8WFVQXdEz426VKjXLO1Gg=="
+        "hash": "sha512-mX3qW3idpueT2klaQXBzrIM/pHw+T0B/V9KHEvNrqijTq9NFnMZU6oreVxDYcf33P8a5cW+67PjodNHthGnNVg=="
       }
     },
     "npm:form-data@2.5.5": {
@@ -9081,6 +9072,15 @@
         "hash": "sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g=="
       }
     },
+    "npm:get-stream@5.2.0": {
+      "type": "npm",
+      "name": "npm:get-stream@5.2.0",
+      "data": {
+        "version": "5.2.0",
+        "packageName": "get-stream",
+        "hash": "sha512-nBF+F1rAZVCu/p7rjzgA+Yb4lfYXrpl7a6VmJrU8wF9I1CKvP/QwPNZHnOlwbTkY6dvtFIzFMSyQXbLoTQPRpA=="
+      }
+    },
     "npm:get-stream": {
       "type": "npm",
       "name": "npm:get-stream",
@@ -9162,15 +9162,6 @@
         "hash": "sha512-DfXN8DfhJ7NH3Oe7cFmu3NCu1wKbkReJ8TorzSAFbSKrlNaQSKfIzqYqVY8zlbs2NLBbWpRiU52GX2PbaBVNkg=="
       }
     },
-    "npm:glob": {
-      "type": "npm",
-      "name": "npm:glob",
-      "data": {
-        "version": "13.0.0",
-        "packageName": "glob",
-        "hash": "sha512-tvZgpqk6fz4BaNZ66ZsRaZnbHvP/jG3uKJvAZOwEVUL4RTA5nJeeLYfyN9/VA8NX/V3IBG+hkeuGpKjvELkVhA=="
-      }
-    },
     "npm:glob@7.2.3": {
       "type": "npm",
       "name": "npm:glob@7.2.3",
@@ -9180,13 +9171,13 @@
         "hash": "sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q=="
       }
     },
-    "npm:glob@10.4.5": {
+    "npm:glob": {
       "type": "npm",
-      "name": "npm:glob@10.4.5",
+      "name": "npm:glob",
       "data": {
-        "version": "10.4.5",
+        "version": "10.1.0",
         "packageName": "glob",
-        "hash": "sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg=="
+        "hash": "sha512-daGobsYuT0G4hng24B5LbeLNvwKZYRhWyDl3RvqqAGZjJnCopWWK6PWnAGBY1M/vdA63QE+jddhZcYp+74Bq6Q=="
       }
     },
     "npm:globals@13.24.0": {
@@ -9621,6 +9612,15 @@
         "hash": "sha512-vK9P5/iUfdl95AI+JVyUuIcVtd4ofvtrOr3HNtM2yxC9bnMbEdp3x01OhQNnjb8IJYi38VlTE3mBXwcfvywuSw=="
       }
     },
+    "npm:human-signals@1.1.1": {
+      "type": "npm",
+      "name": "npm:human-signals@1.1.1",
+      "data": {
+        "version": "1.1.1",
+        "packageName": "human-signals",
+        "hash": "sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw=="
+      }
+    },
     "npm:human-signals": {
       "type": "npm",
       "name": "npm:human-signals",
@@ -9783,22 +9783,22 @@
         "hash": "sha512-4vv4GS/9HLnn0radvmHlXUXiNkd2gYCBQ4U1rxZWBJDisu2Z06bzUM9CFU8pcu1vwuAQjo6O+CFiqCYNsEi6qQ=="
       }
     },
-    "npm:inquirer@8.2.6": {
+    "npm:inquirer@8.2.4": {
       "type": "npm",
-      "name": "npm:inquirer@8.2.6",
+      "name": "npm:inquirer@8.2.4",
       "data": {
-        "version": "8.2.6",
+        "version": "8.2.4",
         "packageName": "inquirer",
-        "hash": "sha512-M1WuAmb7pn9zdFRtQYk26ZBoY043Sse0wVDdk4Bppr+JOXyQYybdtvK+l9wUibhtjdjvtoiNy8tk+EgsYIUqKg=="
+        "hash": "sha512-nn4F01dxU8VeKfq192IjLsxu0/OmMZ4Lg3xKAns148rCaXP6ntAoEkVYZThWjwON8AlzdZZi6oqnhNbxUG9hVg=="
       }
     },
-    "npm:inquirer@9.2.15": {
+    "npm:inquirer@8.2.5": {
       "type": "npm",
-      "name": "npm:inquirer@9.2.15",
+      "name": "npm:inquirer@8.2.5",
       "data": {
-        "version": "9.2.15",
+        "version": "8.2.5",
         "packageName": "inquirer",
-        "hash": "sha512-vI2w4zl/mDluHt9YEQ/543VTCwPKWiHzKtm9dM2V0NdFcqEexDAjUHzO1oA60HRNaVifGXXM1tRRNluLVHa0Kg=="
+        "hash": "sha512-QAgPDQMEgrDssk1XiwwHoOGYF9BAbUcc1+j+FhEvaOt8/cKRqyLn0U5qA6F74fGhTMGxf92pOvPBeh29jQJDTQ=="
       }
     },
     "npm:internal-slot": {
@@ -9808,6 +9808,15 @@
         "version": "1.1.0",
         "packageName": "internal-slot",
         "hash": "sha512-4gd7VpWNQNB4UKKCFFVcp1AVv+FMOgs9NKzjHKusc8jTMhd5eL1NqQqOpE0KzMds804/yHlglp3uxgluOqAPLw=="
+      }
+    },
+    "npm:interpret": {
+      "type": "npm",
+      "name": "npm:interpret",
+      "data": {
+        "version": "1.4.0",
+        "packageName": "interpret",
+        "hash": "sha512-agE4QfB2Lkp9uICn7BAqoscw4SZP9kTE2hxiFI3jBPmXJfdqiahTbUuKGsMoN2GtqL9AxhYioAcVvgsb1HvRbA=="
       }
     },
     "npm:intl-messageformat": {
@@ -11502,6 +11511,15 @@
         "hash": "sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ=="
       }
     },
+    "npm:macos-release": {
+      "type": "npm",
+      "name": "npm:macos-release",
+      "data": {
+        "version": "2.5.1",
+        "packageName": "macos-release",
+        "hash": "sha512-DXqXhEM7gW59OjZO8NIjBCz9AQ1BEMrfiOAl4AYByHCtVHRF4KoGNO8mqQeM8lRCtQe/UnJ4imO/d2HdkKsd+A=="
+      }
+    },
     "npm:magic-string@0.30.21": {
       "type": "npm",
       "name": "npm:magic-string@0.30.21",
@@ -11509,6 +11527,15 @@
         "version": "0.30.21",
         "packageName": "magic-string",
         "hash": "sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ=="
+      }
+    },
+    "npm:magic-string@0.30.0": {
+      "type": "npm",
+      "name": "npm:magic-string@0.30.0",
+      "data": {
+        "version": "0.30.0",
+        "packageName": "magic-string",
+        "hash": "sha512-LA+31JYDJLs82r2ScLrlz1GjSgu66ZV518eyWT+S8VhyQn/JL0u9MeBOvQMGYiPk1DBiSN9DDMOcXvigJZaViQ=="
       }
     },
     "npm:magic-string@0.30.17": {
@@ -11745,15 +11772,6 @@
         "hash": "sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg=="
       }
     },
-    "npm:minimatch@10.1.1": {
-      "type": "npm",
-      "name": "npm:minimatch@10.1.1",
-      "data": {
-        "version": "10.1.1",
-        "packageName": "minimatch",
-        "hash": "sha512-enIvLvRAFZYXJzkCYG5RKmPfrFArdLv+R+lbQ53BmIMLIry74bjKzX6iHAm8WYamJkhSSEabrWN5D97XnKObjQ=="
-      }
-    },
     "npm:minimatch@3.1.2": {
       "type": "npm",
       "name": "npm:minimatch@3.1.2",
@@ -11772,15 +11790,6 @@
         "hash": "sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g=="
       }
     },
-    "npm:minimatch@9.0.5": {
-      "type": "npm",
-      "name": "npm:minimatch@9.0.5",
-      "data": {
-        "version": "9.0.5",
-        "packageName": "minimatch",
-        "hash": "sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow=="
-      }
-    },
     "npm:minimatch": {
       "type": "npm",
       "name": "npm:minimatch",
@@ -11788,6 +11797,15 @@
         "version": "9.0.3",
         "packageName": "minimatch",
         "hash": "sha512-RHiac9mvaRw0x3AYRgDC1CxAP7HTcNrrECeA8YYJeWnpo+2Q5CegtZjaotWTWxDG3UeGA1coE05iH1mPjT/2mg=="
+      }
+    },
+    "npm:minimatch@9.0.5": {
+      "type": "npm",
+      "name": "npm:minimatch@9.0.5",
+      "data": {
+        "version": "9.0.5",
+        "packageName": "minimatch",
+        "hash": "sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow=="
       }
     },
     "npm:minimist": {
@@ -11806,6 +11824,15 @@
         "version": "7.1.2",
         "packageName": "minipass",
         "hash": "sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw=="
+      }
+    },
+    "npm:minipass@5.0.0": {
+      "type": "npm",
+      "name": "npm:minipass@5.0.0",
+      "data": {
+        "version": "5.0.0",
+        "packageName": "minipass",
+        "hash": "sha512-3FnjYuehv9k6ovOEbyOswadCDPX1piCfhV8ncmYtHOjuPwylVWsghTLo7rabjC3Rx5xD4HDx8Wm1xnMF7S5qFQ=="
       }
     },
     "npm:mkdirp": {
@@ -11887,15 +11914,6 @@
         "version": "0.0.8",
         "packageName": "mute-stream",
         "hash": "sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA=="
-      }
-    },
-    "npm:mute-stream@1.0.0": {
-      "type": "npm",
-      "name": "npm:mute-stream@1.0.0",
-      "data": {
-        "version": "1.0.0",
-        "packageName": "mute-stream",
-        "hash": "sha512-avsJQhyd+680gKXyG/sQc0nXaC6rBkPOfyHYcFb9+hdkqQkR9bdnkJ0AMZhke0oesPqIO+mFFJ+IdBc7mst4IA=="
       }
     },
     "npm:mysql2": {
@@ -12348,13 +12366,13 @@
         "hash": "sha512-zAKMgGXUim0Jyd6CXK9lraBnD3H5yPGBPPOkC23a2BG6hsm4Zu6OQSjQuEtV0BHDf4aKHcUFvJiGRrFuW3MG8g=="
       }
     },
-    "npm:os-tmpdir": {
+    "npm:os-name": {
       "type": "npm",
-      "name": "npm:os-tmpdir",
+      "name": "npm:os-name",
       "data": {
-        "version": "1.0.2",
-        "packageName": "os-tmpdir",
-        "hash": "sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g=="
+        "version": "4.0.1",
+        "packageName": "os-name",
+        "hash": "sha512-xl9MAoU97MH1Xt5K9ERft2YfCAoaO6msy1OBA0ozxEC0x0TmIoE6K3QvgJMMZA9yKGLmHXNY/YZoDbiGDj4zYw=="
       }
     },
     "npm:own-keys": {
@@ -12528,22 +12546,13 @@
         "hash": "sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw=="
       }
     },
-    "npm:path-scurry@1.11.1": {
-      "type": "npm",
-      "name": "npm:path-scurry@1.11.1",
-      "data": {
-        "version": "1.11.1",
-        "packageName": "path-scurry",
-        "hash": "sha512-Xa4Nw17FS9ApQFJ9umLiJS4orGjm7ZzwUrwamcGQuHSzDyth9boKDaycYdDcZDuqYATXw4HFXgaqWTctW/v1HA=="
-      }
-    },
     "npm:path-scurry": {
       "type": "npm",
       "name": "npm:path-scurry",
       "data": {
-        "version": "2.0.1",
+        "version": "1.11.1",
         "packageName": "path-scurry",
-        "hash": "sha512-oWyT4gICAu+kaA7QWk/jvCHWarMKNs6pXOGWKDTr7cw4IGcUbW+PeTfbaQiLGheFRpjo6O9J0PmyMfQPjH71oA=="
+        "hash": "sha512-Xa4Nw17FS9ApQFJ9umLiJS4orGjm7ZzwUrwamcGQuHSzDyth9boKDaycYdDcZDuqYATXw4HFXgaqWTctW/v1HA=="
       }
     },
     "npm:path-to-regexp@8.3.0": {
@@ -13482,6 +13491,15 @@
         "hash": "sha512-57frrGM/OCTLqLOAh0mhVA9VBMHd+9U7Zb2THMGdBUoZVOtGbJzjxsYGDJ3A9AYYCP4hn6y1TVbaOfzWtm5GFg=="
       }
     },
+    "npm:rechoir": {
+      "type": "npm",
+      "name": "npm:rechoir",
+      "data": {
+        "version": "0.6.2",
+        "packageName": "rechoir",
+        "hash": "sha512-HFM8rkZ+i3zrV+4LQjwQ0W+ez98pApMGM3HUrN04j3CqzPOzl9nmP15Y8YXNm8QHGv/eacOVEjqhmWpkRV0NAw=="
+      }
+    },
     "npm:redent": {
       "type": "npm",
       "name": "npm:redent",
@@ -13770,6 +13788,15 @@
         "hash": "sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w=="
       }
     },
+    "npm:rimraf@4.4.1": {
+      "type": "npm",
+      "name": "npm:rimraf@4.4.1",
+      "data": {
+        "version": "4.4.1",
+        "packageName": "rimraf",
+        "hash": "sha512-Gk8NlF062+T9CqNGn6h4tls3k6T1+/nXdOcSZVikNVtlRdYpA7wRJJMoXmuvOnLW844rPjdQ7JgXCYM6PPC/og=="
+      }
+    },
     "npm:rollup": {
       "type": "npm",
       "name": "npm:rollup",
@@ -13795,15 +13822,6 @@
         "version": "2.4.1",
         "packageName": "run-async",
         "hash": "sha512-tvVnVv01b8c1RrA6Ep7JkStj85Guv/YrMcwqYQnwjsAS2cTmmPGBBjAjpCW7RrSodNSoE2/qg9O4bceNvUuDgQ=="
-      }
-    },
-    "npm:run-async@3.0.0": {
-      "type": "npm",
-      "name": "npm:run-async@3.0.0",
-      "data": {
-        "version": "3.0.0",
-        "packageName": "run-async",
-        "hash": "sha512-540WwVDOMxA6dN6We19EcT9sc3hkXPw5mzRNGM3FkdN/vtE9NFvj5lFAPNwUDmJjXidm3v7TC1cTE7t17Ulm1Q=="
       }
     },
     "npm:run-async": {
@@ -14128,6 +14146,15 @@
         "version": "1.0.2",
         "packageName": "shell-exec",
         "hash": "sha512-jyVd+kU2X+mWKMmGhx4fpWbPsjvD53k9ivqetutVW/BQ+WIZoDoP4d8vUMGezV6saZsiNoW2f9GIhg9Dondohg=="
+      }
+    },
+    "npm:shelljs": {
+      "type": "npm",
+      "name": "npm:shelljs",
+      "data": {
+        "version": "0.8.5",
+        "packageName": "shelljs",
+        "hash": "sha512-TiwcRcrkhHvbrZbnRcFYMLl30Dfov3HKqzp5tO5b4pt6G/SezKcYhmDg15zXVBswHmctSAQKznqNW2LO5tTDow=="
       }
     },
     "npm:side-channel-list": {
@@ -14949,22 +14976,13 @@
         "hash": "sha512-8PWx8tvC4jDB39BQw1m4x8y5MH1BcQ5xHeL2n7UVFulMPH/3Q0uiamahFJ3lXA0zO2SUyRXuVVbWSDmstlt9YA=="
       }
     },
-    "npm:tmp@0.0.33": {
-      "type": "npm",
-      "name": "npm:tmp@0.0.33",
-      "data": {
-        "version": "0.0.33",
-        "packageName": "tmp",
-        "hash": "sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw=="
-      }
-    },
     "npm:tmp": {
       "type": "npm",
       "name": "npm:tmp",
       "data": {
-        "version": "0.2.5",
+        "version": "0.2.4",
         "packageName": "tmp",
-        "hash": "sha512-voyz6MApa1rQGUxT3E+BK7/ROe8itEx7vD8/HEvt4xwXucvQ5G5oeEiHkmHZJuBO21RpOf+YYm9MOivj709jow=="
+        "hash": "sha512-UdiSoX6ypifLmrfQ/XfiawN6hkjSBpCjhKxxZcWlUUmoXLaCKQU0bx4HF/tdDK2uzRuchf1txGvrWBzYREssoQ=="
       }
     },
     "npm:tmpl": {
@@ -15106,9 +15124,9 @@
       "type": "npm",
       "name": "npm:tsconfig-paths-webpack-plugin",
       "data": {
-        "version": "4.2.0",
+        "version": "4.0.1",
         "packageName": "tsconfig-paths-webpack-plugin",
-        "hash": "sha512-zbem3rfRS8BgeNK50Zz5SIQgXzLafiHjOwUAvk/38/o1jHn/V5QAgVUcz884or7WYcPaH3N2CIfUc2u0ul7UcA=="
+        "hash": "sha512-m5//KzLoKmqu2MVix+dgLKq70MnFi8YL8sdzQZ6DblmCdfuq/y3OqvJd5vMndg2KEVCOeNz8Es4WVZhYInteLw=="
       }
     },
     "npm:tsconfig-paths": {
@@ -15273,13 +15291,13 @@
         "hash": "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="
       }
     },
-    "npm:typescript@5.7.2": {
+    "npm:typescript@5.1.6": {
       "type": "npm",
-      "name": "npm:typescript@5.7.2",
+      "name": "npm:typescript@5.1.6",
       "data": {
-        "version": "5.7.2",
+        "version": "5.1.6",
         "packageName": "typescript",
-        "hash": "sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg=="
+        "hash": "sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA=="
       }
     },
     "npm:uglify-js": {
@@ -15705,13 +15723,13 @@
         "hash": "sha512-yd1RBzSGanHkitROoPFd6qsrxt+oFhg/129YzheDGqeustzX0vTZJZsSsQjVQC4yzBQ56K55XU8gaNCtIzOnTg=="
       }
     },
-    "npm:webpack": {
+    "npm:webpack@5.94.0": {
       "type": "npm",
-      "name": "npm:webpack",
+      "name": "npm:webpack@5.94.0",
       "data": {
-        "version": "5.97.1",
+        "version": "5.94.0",
         "packageName": "webpack",
-        "hash": "sha512-EksG6gFY3L1eFMROS/7Wzgrii5mBAFe4rIr3r2BTfo7bcc+DWwFZ4OJ/miOuHJO/A85HwyI4eQ0F6IKXesO7Fg=="
+        "hash": "sha512-KcsGn50VT+06JH/iunZJedYGUJS5FGjow8wb9c0v5n1Om8O1g4L6LjtfxwlXIATopoQu+vOXXa7gYisWxCoPyg=="
       }
     },
     "npm:websocket-driver": {
@@ -15831,6 +15849,15 @@
         "hash": "sha512-hUrmaWBdVDcxvYqnyh09zunKzROWjbZTiNy8dBEjkS7ehEDQibXJ7XvlmtbwuTclUiIyN+CyXQD4Vmko8fNm8w=="
       }
     },
+    "npm:windows-release": {
+      "type": "npm",
+      "name": "npm:windows-release",
+      "data": {
+        "version": "4.0.0",
+        "packageName": "windows-release",
+        "hash": "sha512-OxmV4wzDKB1x7AZaZgXMVsdJ1qER1ed83ZrTYd5Bwq2HfJVg3DJS8nqlAG4sMoJ7mu8cuRmLEYyU13BKwctRAg=="
+      }
+    },
     "npm:winston-transport": {
       "type": "npm",
       "name": "npm:winston-transport",
@@ -15883,15 +15910,6 @@
         "version": "7.0.0",
         "packageName": "wrap-ansi",
         "hash": "sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q=="
-      }
-    },
-    "npm:wrap-ansi@6.2.0": {
-      "type": "npm",
-      "name": "npm:wrap-ansi@6.2.0",
-      "data": {
-        "version": "6.2.0",
-        "packageName": "wrap-ansi",
-        "hash": "sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA=="
       }
     },
     "npm:wrap-ansi@8.1.0": {
@@ -16116,9 +16134,11 @@
     "@adobe/css-tools@^4.4.0": "npm:@adobe/css-tools",
     "@agentset/mcp@^1.3.0": "npm:@agentset/mcp",
     "@alloc/quick-lru@^5.2.0": "npm:@alloc/quick-lru",
+    "@angular-devkit/core@16.1.3": "npm:@angular-devkit/core@16.1.3",
     "@angular-devkit/core@17.3.11": "npm:@angular-devkit/core",
     "@angular-devkit/core@19.2.17": "npm:@angular-devkit/core@19.2.17",
-    "@angular-devkit/schematics-cli@17.3.11": "npm:@angular-devkit/schematics-cli",
+    "@angular-devkit/schematics-cli@16.1.3": "npm:@angular-devkit/schematics-cli",
+    "@angular-devkit/schematics@16.1.3": "npm:@angular-devkit/schematics@16.1.3",
     "@angular-devkit/schematics@17.3.11": "npm:@angular-devkit/schematics",
     "@angular-devkit/schematics@19.2.17": "npm:@angular-devkit/schematics@19.2.17",
     "@ariakit/core@0.4.17": "npm:@ariakit/core",
@@ -16472,8 +16492,6 @@
     "@inquirer/search@^4.0.3": "npm:@inquirer/search",
     "@inquirer/select@^5.0.3": "npm:@inquirer/select",
     "@inquirer/type@^4.0.2": "npm:@inquirer/type",
-    "@isaacs/balanced-match@^4.0.1": "npm:@isaacs/balanced-match",
-    "@isaacs/brace-expansion@^5.0.0": "npm:@isaacs/brace-expansion",
     "@isaacs/cliui@^8.0.2": "npm:@isaacs/cliui",
     "@istanbuljs/load-nyc-config@^1.0.0": "npm:@istanbuljs/load-nyc-config",
     "@istanbuljs/schema@^0.1.2": "npm:@istanbuljs/schema",
@@ -16518,6 +16536,7 @@
     "@jridgewell/resolve-uri@^3.1.0": "npm:@jridgewell/resolve-uri",
     "@jridgewell/source-map@^0.3.3": "npm:@jridgewell/source-map",
     "@jridgewell/sourcemap-codec@^1.4.10": "npm:@jridgewell/sourcemap-codec",
+    "@jridgewell/sourcemap-codec@^1.4.13": "npm:@jridgewell/sourcemap-codec",
     "@jridgewell/sourcemap-codec@^1.4.14": "npm:@jridgewell/sourcemap-codec",
     "@jridgewell/sourcemap-codec@^1.4.15": "npm:@jridgewell/sourcemap-codec",
     "@jridgewell/sourcemap-codec@^1.5.0": "npm:@jridgewell/sourcemap-codec",
@@ -16531,14 +16550,13 @@
     "@jridgewell/trace-mapping@0.3.9": "npm:@jridgewell/trace-mapping@0.3.9",
     "@js-sdsl/ordered-map@^4.4.2": "npm:@js-sdsl/ordered-map",
     "@keyv/serialize@^1.1.1": "npm:@keyv/serialize",
-    "@ljharb/through@^2.3.12": "npm:@ljharb/through",
     "@lukeed/csprng@^1.0.0": "npm:@lukeed/csprng",
     "@modelcontextprotocol/sdk@^1.12.3": "npm:@modelcontextprotocol/sdk",
     "@modelcontextprotocol/sdk@^1.24.3": "npm:@modelcontextprotocol/sdk",
     "@mrleebo/prisma-ast@0.12.1": "npm:@mrleebo/prisma-ast",
     "@napi-rs/wasm-runtime@0.2.4": "npm:@napi-rs/wasm-runtime",
     "@nestjs/cache-manager@^3.0.1": "npm:@nestjs/cache-manager",
-    "@nestjs/cli@^10.0.0": "npm:@nestjs/cli",
+    "@nestjs/cli@10.1.0": "npm:@nestjs/cli",
     "@nestjs/common@^10.0.0": "npm:@nestjs/common",
     "@nestjs/config@^3.0.0": "npm:@nestjs/config",
     "@nestjs/core@^10.0.0": "npm:@nestjs/core",
@@ -16733,11 +16751,8 @@
     "@types/connect@*": "npm:@types/connect",
     "@types/cookiejar@^2.1.5": "npm:@types/cookiejar",
     "@types/deep-eql@*": "npm:@types/deep-eql",
-    "@types/eslint-scope@^3.7.7": "npm:@types/eslint-scope",
-    "@types/eslint@*": "npm:@types/eslint",
-    "@types/estree@*": "npm:@types/estree",
     "@types/estree@^1.0.0": "npm:@types/estree",
-    "@types/estree@^1.0.6": "npm:@types/estree",
+    "@types/estree@^1.0.5": "npm:@types/estree",
     "@types/estree@1.0.8": "npm:@types/estree",
     "@types/express-serve-static-core@^4.17.33": "npm:@types/express-serve-static-core",
     "@types/express@*": "npm:@types/express",
@@ -16755,7 +16770,6 @@
     "@types/istanbul-reports@^3.0.0": "npm:@types/istanbul-reports",
     "@types/istanbul-reports@^3.0.4": "npm:@types/istanbul-reports",
     "@types/jest@^30.0.0": "npm:@types/jest",
-    "@types/json-schema@*": "npm:@types/json-schema",
     "@types/json-schema@^7.0.8": "npm:@types/json-schema",
     "@types/json-schema@^7.0.9": "npm:@types/json-schema",
     "@types/jsonwebtoken@*": "npm:@types/jsonwebtoken",
@@ -16823,7 +16837,7 @@
     "@vitest/snapshot@4.0.15": "npm:@vitest/snapshot",
     "@vitest/spy@4.0.15": "npm:@vitest/spy",
     "@vitest/utils@4.0.15": "npm:@vitest/utils",
-    "@webassemblyjs/ast@^1.14.1": "npm:@webassemblyjs/ast",
+    "@webassemblyjs/ast@^1.12.1": "npm:@webassemblyjs/ast",
     "@webassemblyjs/ast@1.14.1": "npm:@webassemblyjs/ast",
     "@webassemblyjs/floating-point-hex-parser@1.13.2": "npm:@webassemblyjs/floating-point-hex-parser",
     "@webassemblyjs/helper-api-error@1.13.2": "npm:@webassemblyjs/helper-api-error",
@@ -16834,10 +16848,10 @@
     "@webassemblyjs/ieee754@1.13.2": "npm:@webassemblyjs/ieee754",
     "@webassemblyjs/leb128@1.13.2": "npm:@webassemblyjs/leb128",
     "@webassemblyjs/utf8@1.13.2": "npm:@webassemblyjs/utf8",
-    "@webassemblyjs/wasm-edit@^1.14.1": "npm:@webassemblyjs/wasm-edit",
+    "@webassemblyjs/wasm-edit@^1.12.1": "npm:@webassemblyjs/wasm-edit",
     "@webassemblyjs/wasm-gen@1.14.1": "npm:@webassemblyjs/wasm-gen",
     "@webassemblyjs/wasm-opt@1.14.1": "npm:@webassemblyjs/wasm-opt",
-    "@webassemblyjs/wasm-parser@^1.14.1": "npm:@webassemblyjs/wasm-parser",
+    "@webassemblyjs/wasm-parser@^1.12.1": "npm:@webassemblyjs/wasm-parser",
     "@webassemblyjs/wasm-parser@1.14.1": "npm:@webassemblyjs/wasm-parser",
     "@webassemblyjs/wast-printer@1.14.1": "npm:@webassemblyjs/wast-printer",
     "@xmldom/xmldom@^0.8.6": "npm:@xmldom/xmldom",
@@ -16849,12 +16863,13 @@
     "abort-controller@^3.0.0": "npm:abort-controller",
     "accepts@^2.0.0": "npm:accepts",
     "accepts@~1.3.8": "npm:accepts@1.3.8",
+    "acorn-import-attributes@^1.9.5": "npm:acorn-import-attributes@1.9.5",
     "acorn-jsx@^5.3.2": "npm:acorn-jsx",
     "acorn-walk@^8.1.1": "npm:acorn-walk",
     "acorn@^8.11.0": "npm:acorn",
-    "acorn@^8.14.0": "npm:acorn",
     "acorn@^8.15.0": "npm:acorn",
     "acorn@^8.4.1": "npm:acorn",
+    "acorn@^8.7.1": "npm:acorn",
     "acorn@^8.9.0": "npm:acorn",
     "address@^1.0.1": "npm:address",
     "agent-base@^7.1.0": "npm:agent-base",
@@ -16972,6 +16987,7 @@
     "brace-expansion@^2.0.1": "npm:brace-expansion",
     "braces@^3.0.3": "npm:braces",
     "braces@~3.0.2": "npm:braces",
+    "browserslist@^4.21.10": "npm:browserslist",
     "browserslist@^4.24.0": "npm:browserslist",
     "browserslist@^4.27.0": "npm:browserslist",
     "browserslist@^4.28.0": "npm:browserslist",
@@ -17017,7 +17033,6 @@
     "chalk@^4.1.2": "npm:chalk",
     "chalk@4.1.2": "npm:chalk",
     "chalk@^5.0.1": "npm:chalk@5.6.2",
-    "chalk@^5.3.0": "npm:chalk@5.6.2",
     "char-regex@^1.0.2": "npm:char-regex",
     "chardet@^0.7.0": "npm:chardet@0.7.0",
     "chardet@^2.1.1": "npm:chardet",
@@ -17025,9 +17040,9 @@
     "chevrotain@^10.5.0": "npm:chevrotain",
     "chokidar@^3.5.3": "npm:chokidar",
     "chokidar@^3.6.0": "npm:chokidar",
-    "chokidar@3.6.0": "npm:chokidar",
     "chokidar@^4.0.0": "npm:chokidar@4.0.3",
     "chokidar@^4.0.3": "npm:chokidar@4.0.3",
+    "chokidar@3.5.3": "npm:chokidar@3.5.3",
     "chrome-trace-event@^1.0.2": "npm:chrome-trace-event",
     "ci-info@^3.2.0": "npm:ci-info",
     "ci-info@^4.2.0": "npm:ci-info@4.3.1",
@@ -17040,7 +17055,7 @@
     "cli-cursor@3.1.0": "npm:cli-cursor",
     "cli-spinners@^2.5.0": "npm:cli-spinners",
     "cli-spinners@2.6.1": "npm:cli-spinners",
-    "cli-table3@0.6.5": "npm:cli-table3",
+    "cli-table3@0.6.3": "npm:cli-table3",
     "cli-width@^3.0.0": "npm:cli-width@3.0.0",
     "cli-width@^4.1.0": "npm:cli-width",
     "cliui@^8.0.1": "npm:cliui",
@@ -17092,12 +17107,13 @@
     "cors@^2.8.5": "npm:cors",
     "cors@2.8.5": "npm:cors",
     "cosmiconfig@^7.0.0": "npm:cosmiconfig",
-    "cosmiconfig@^8.2.0": "npm:cosmiconfig@8.3.6",
+    "cosmiconfig@^7.0.1": "npm:cosmiconfig",
     "crc-32@^1.2.0": "npm:crc-32",
     "crc32-stream@^4.0.2": "npm:crc32-stream",
     "create-jest@^29.7.0": "npm:create-jest",
     "create-require@^1.1.0": "npm:create-require",
     "cron@4.3.5": "npm:cron",
+    "cross-spawn@^7.0.0": "npm:cross-spawn",
     "cross-spawn@^7.0.2": "npm:cross-spawn",
     "cross-spawn@^7.0.3": "npm:cross-spawn",
     "cross-spawn@^7.0.5": "npm:cross-spawn",
@@ -17267,6 +17283,7 @@
     "eventsource-parser@^3.0.1": "npm:eventsource-parser",
     "eventsource@^3.0.2": "npm:eventsource",
     "exceljs@^4.3.0": "npm:exceljs",
+    "execa@^4.0.2": "npm:execa@4.1.0",
     "execa@^5.0.0": "npm:execa",
     "exit-x@^0.2.2": "npm:exit-x",
     "exit@^0.1.2": "npm:exit",
@@ -17281,7 +17298,6 @@
     "exsolve@^1.0.7": "npm:exsolve",
     "extend@^3.0.2": "npm:extend",
     "external-editor@^3.0.3": "npm:external-editor",
-    "external-editor@^3.1.0": "npm:external-editor",
     "fast-check@^3.23.1": "npm:fast-check",
     "fast-copy@^4.0.0": "npm:fast-copy",
     "fast-csv@^4.3.1": "npm:fast-csv",
@@ -17308,7 +17324,6 @@
     "fetch-blob@^3.1.4": "npm:fetch-blob",
     "fflate@^0.8.2": "npm:fflate",
     "figures@^3.0.0": "npm:figures",
-    "figures@^3.2.0": "npm:figures",
     "figures@3.2.0": "npm:figures",
     "file-entry-cache@^6.0.1": "npm:file-entry-cache",
     "file-selector@^2.1.0": "npm:file-selector",
@@ -17331,7 +17346,7 @@
     "for-each@^0.3.5": "npm:for-each",
     "foreground-child@^3.1.0": "npm:foreground-child",
     "foreground-child@3.3.1": "npm:foreground-child",
-    "fork-ts-checker-webpack-plugin@9.0.2": "npm:fork-ts-checker-webpack-plugin",
+    "fork-ts-checker-webpack-plugin@8.0.0": "npm:fork-ts-checker-webpack-plugin",
     "form-data@^2.5.5": "npm:form-data@2.5.5",
     "form-data@^4.0.0": "npm:form-data",
     "form-data@^4.0.4": "npm:form-data",
@@ -17374,6 +17389,7 @@
     "get-port-please@3.1.2": "npm:get-port-please",
     "get-proto@^1.0.0": "npm:get-proto",
     "get-proto@^1.0.1": "npm:get-proto",
+    "get-stream@^5.0.0": "npm:get-stream@5.2.0",
     "get-stream@^6.0.0": "npm:get-stream",
     "get-symbol-description@^1.1.0": "npm:get-symbol-description",
     "get-them-args@1.3.2": "npm:get-them-args",
@@ -17385,11 +17401,10 @@
     "glob-to-regexp@^0.4.1": "npm:glob-to-regexp",
     "glob@^10.3.10": "npm:glob@10.5.0",
     "glob@^10.3.7": "npm:glob@10.5.0",
-    "glob@^13.0.0": "npm:glob",
     "glob@^7.1.3": "npm:glob@7.2.3",
     "glob@^7.1.4": "npm:glob@7.2.3",
     "glob@^7.2.3": "npm:glob@7.2.3",
-    "glob@10.4.5": "npm:glob@10.4.5",
+    "glob@10.1.0": "npm:glob",
     "globals@^13.19.0": "npm:globals@13.24.0",
     "globals@^16.5.0": "npm:globals",
     "globalthis@^1.0.4": "npm:globalthis",
@@ -17454,6 +17469,7 @@
     "https-proxy-agent@^5.0.0": "npm:https-proxy-agent@5.0.1",
     "https-proxy-agent@^7.0.1": "npm:https-proxy-agent",
     "https-proxy-agent@^7.0.6": "npm:https-proxy-agent",
+    "human-signals@^1.1.1": "npm:human-signals@1.1.1",
     "human-signals@^2.1.0": "npm:human-signals",
     "iconv-lite@^0.4.24": "npm:iconv-lite",
     "iconv-lite@0.4.24": "npm:iconv-lite",
@@ -17471,7 +17487,6 @@
     "immediate@~3.0.5": "npm:immediate",
     "immutable@^5.0.2": "npm:immutable",
     "import-fresh@^3.2.1": "npm:import-fresh",
-    "import-fresh@^3.3.0": "npm:import-fresh",
     "import-local@^3.0.2": "npm:import-local",
     "imurmurhash@^0.1.4": "npm:imurmurhash",
     "indent-string@^4.0.0": "npm:indent-string",
@@ -17484,9 +17499,10 @@
     "inherits@2": "npm:inherits",
     "inherits@2.0.4": "npm:inherits",
     "inquirer@^13.1.0": "npm:inquirer",
-    "inquirer@8.2.6": "npm:inquirer@8.2.6",
-    "inquirer@9.2.15": "npm:inquirer@9.2.15",
+    "inquirer@8.2.4": "npm:inquirer@8.2.4",
+    "inquirer@8.2.5": "npm:inquirer@8.2.5",
     "internal-slot@^1.1.0": "npm:internal-slot",
+    "interpret@^1.0.0": "npm:interpret",
     "intl-messageformat@10.7.18": "npm:intl-messageformat",
     "ip-regex@^4.1.0": "npm:ip-regex",
     "ipaddr.js@1.9.1": "npm:ipaddr.js",
@@ -17701,7 +17717,6 @@
     "loose-envify@^1.4.0": "npm:loose-envify",
     "lop@^0.4.2": "npm:lop",
     "lru-cache@^10.2.0": "npm:lru-cache@10.4.3",
-    "lru-cache@^11.0.0": "npm:lru-cache@11.2.4",
     "lru-cache@^11.2.2": "npm:lru-cache@11.2.4",
     "lru-cache@^11.2.4": "npm:lru-cache@11.2.4",
     "lru-cache@^5.1.1": "npm:lru-cache",
@@ -17710,7 +17725,9 @@
     "lucide-react@^0.260.0": "npm:lucide-react",
     "luxon@~3.7.0": "npm:luxon",
     "lz-string@^1.5.0": "npm:lz-string",
+    "macos-release@^2.5.0": "npm:macos-release",
     "magic-string@^0.30.21": "npm:magic-string@0.30.21",
+    "magic-string@0.30.0": "npm:magic-string@0.30.0",
     "magic-string@0.30.17": "npm:magic-string@0.30.17",
     "magic-string@0.30.8": "npm:magic-string",
     "make-dir@^4.0.0": "npm:make-dir",
@@ -17748,19 +17765,20 @@
     "mime@2.6.0": "npm:mime@2.6.0",
     "mimic-fn@^2.1.0": "npm:mimic-fn",
     "min-indent@^1.0.0": "npm:min-indent",
-    "minimatch@^10.1.1": "npm:minimatch@10.1.1",
     "minimatch@^3.0.4": "npm:minimatch@3.1.2",
     "minimatch@^3.1.1": "npm:minimatch@3.1.2",
     "minimatch@^3.0.5": "npm:minimatch@3.1.2",
     "minimatch@^3.1.2": "npm:minimatch@3.1.2",
     "minimatch@^5.0.1": "npm:minimatch@5.1.6",
     "minimatch@^5.1.0": "npm:minimatch@5.1.6",
-    "minimatch@^9.0.4": "npm:minimatch@9.0.5",
+    "minimatch@^9.0.0": "npm:minimatch",
     "minimatch@9.0.3": "npm:minimatch",
+    "minimatch@^9.0.4": "npm:minimatch@9.0.5",
     "minimist@^1.2.5": "npm:minimist",
     "minimist@^1.2.6": "npm:minimist",
     "minipass@^5.0.0 || ^6.0.2 || ^7.0.0": "npm:minipass",
     "minipass@^7.1.2": "npm:minipass",
+    "minipass@^5.0.0": "npm:minipass@5.0.0",
     "mkdirp@^0.5.6": "npm:mkdirp",
     "mkdirp@>=0.5 0": "npm:mkdirp",
     "motion-dom@^12.23.23": "npm:motion-dom",
@@ -17773,7 +17791,6 @@
     "multer@2.0.2": "npm:multer",
     "mute-stream@^3.0.0": "npm:mute-stream",
     "mute-stream@0.0.8": "npm:mute-stream@0.0.8",
-    "mute-stream@1.0.0": "npm:mute-stream@1.0.0",
     "mysql2@3.15.3": "npm:mysql2",
     "mz@^2.7.0": "npm:mz",
     "named-placeholders@^1.1.3": "npm:named-placeholders",
@@ -17803,6 +17820,7 @@
     "normalize-path@^3.0.0": "npm:normalize-path",
     "normalize-path@~3.0.0": "npm:normalize-path",
     "normalize-range@^0.1.2": "npm:normalize-range",
+    "npm-run-path@^4.0.0": "npm:npm-run-path",
     "npm-run-path@^4.0.1": "npm:npm-run-path",
     "nx@^22.1.3": "npm:nx",
     "nx@22.2.3": "npm:nx",
@@ -17839,7 +17857,7 @@
     "ora@^5.4.1": "npm:ora",
     "ora@5.4.1": "npm:ora",
     "ora@5.3.0": "npm:ora@5.3.0",
-    "os-tmpdir@~1.0.2": "npm:os-tmpdir",
+    "os-name@4.0.1": "npm:os-name",
     "own-keys@^1.0.1": "npm:own-keys",
     "p-limit@^2.2.0": "npm:p-limit@2.3.0",
     "p-limit@^3.0.1": "npm:p-limit",
@@ -17865,8 +17883,8 @@
     "path-key@^3.0.0": "npm:path-key",
     "path-key@^3.1.0": "npm:path-key",
     "path-parse@^1.0.7": "npm:path-parse",
-    "path-scurry@^1.11.1": "npm:path-scurry@1.11.1",
-    "path-scurry@^2.0.0": "npm:path-scurry",
+    "path-scurry@^1.11.1": "npm:path-scurry",
+    "path-scurry@^1.7.0": "npm:path-scurry",
     "path-to-regexp@^8.0.0": "npm:path-to-regexp@8.3.0",
     "path-to-regexp@8.3.0": "npm:path-to-regexp@8.3.0",
     "path-to-regexp@0.1.12": "npm:path-to-regexp@0.1.12",
@@ -18011,6 +18029,7 @@
     "readdirp@^4.0.1": "npm:readdirp@4.1.2",
     "readdirp@~3.6.0": "npm:readdirp",
     "real-require@^0.2.0": "npm:real-require",
+    "rechoir@^0.6.2": "npm:rechoir",
     "redent@^3.0.0": "npm:redent",
     "reflect-metadata@^0.1.13": "npm:reflect-metadata",
     "reflect.getprototypeof@^1.0.6": "npm:reflect.getprototypeof",
@@ -18034,6 +18053,7 @@
     "resolve-pkg-maps@^1.0.0": "npm:resolve-pkg-maps",
     "resolve.exports@^2.0.0": "npm:resolve.exports",
     "resolve.exports@2.0.3": "npm:resolve.exports",
+    "resolve@^1.1.6": "npm:resolve",
     "resolve@^1.1.7": "npm:resolve",
     "resolve@^1.19.0": "npm:resolve",
     "resolve@^1.20.0": "npm:resolve",
@@ -18050,16 +18070,16 @@
     "rimraf@^3.0.2": "npm:rimraf",
     "rimraf@^5.0.1": "npm:rimraf@5.0.10",
     "rimraf@2": "npm:rimraf@2.7.1",
+    "rimraf@4.4.1": "npm:rimraf@4.4.1",
     "rollup@^4.43.0": "npm:rollup",
     "router@^2.2.0": "npm:router",
     "run-async@^2.4.0": "npm:run-async@2.4.1",
-    "run-async@^3.0.0": "npm:run-async@3.0.0",
     "run-async@^4.0.6": "npm:run-async",
     "run-parallel@^1.1.9": "npm:run-parallel",
     "rxjs@^7.4.0": "npm:rxjs",
-    "rxjs@^7.5.5": "npm:rxjs",
     "rxjs@^7.8.1": "npm:rxjs",
     "rxjs@^7.8.2": "npm:rxjs",
+    "rxjs@^7.5.5": "npm:rxjs@7.8.1",
     "rxjs@7.8.1": "npm:rxjs@7.8.1",
     "safe-array-concat@^1.1.3": "npm:safe-array-concat",
     "safe-buffer@^5.0.1": "npm:safe-buffer",
@@ -18113,6 +18133,7 @@
     "shebang-command@^2.0.0": "npm:shebang-command",
     "shebang-regex@^3.0.0": "npm:shebang-regex",
     "shell-exec@1.0.2": "npm:shell-exec",
+    "shelljs@0.8.5": "npm:shelljs",
     "side-channel-list@^1.0.0": "npm:side-channel-list",
     "side-channel-map@^1.0.1": "npm:side-channel-map",
     "side-channel-weakmap@^1.0.2": "npm:side-channel-weakmap",
@@ -18132,6 +18153,7 @@
     "source-map-js@>=0.6.2 <2.0.0": "npm:source-map-js",
     "source-map-support@^0.5.21": "npm:source-map-support",
     "source-map-support@~0.5.20": "npm:source-map-support",
+    "source-map-support@0.5.21": "npm:source-map-support",
     "source-map-support@0.5.13": "npm:source-map-support@0.5.13",
     "source-map-support@0.5.19": "npm:source-map-support@0.5.19",
     "source-map@^0.6.0": "npm:source-map@0.6.1",
@@ -18230,9 +18252,7 @@
     "tinyrainbow@^3.0.3": "npm:tinyrainbow",
     "tldts-core@^7.0.19": "npm:tldts-core",
     "tldts@^7.0.5": "npm:tldts",
-    "tmp@^0.0.33": "npm:tmp@0.0.33",
-    "tmp@^0.2.0": "npm:tmp",
-    "tmp@~0.2.1": "npm:tmp",
+    "tmp@0.2.4": "npm:tmp",
     "tmpl@1.0.5": "npm:tmpl",
     "to-regex-range@^5.0.1": "npm:to-regex-range",
     "toidentifier@~1.0.1": "npm:toidentifier",
@@ -18250,7 +18270,7 @@
     "ts-jest@^29.1.0": "npm:ts-jest",
     "ts-loader@^9.4.3": "npm:ts-loader",
     "ts-node@^10.9.1": "npm:ts-node",
-    "tsconfig-paths-webpack-plugin@4.2.0": "npm:tsconfig-paths-webpack-plugin",
+    "tsconfig-paths-webpack-plugin@4.0.1": "npm:tsconfig-paths-webpack-plugin",
     "tsconfig-paths@^4.1.2": "npm:tsconfig-paths",
     "tsconfig-paths@^4.2.0": "npm:tsconfig-paths",
     "tsconfig-paths@4.2.0": "npm:tsconfig-paths",
@@ -18282,7 +18302,7 @@
     "typescript-eslint@^8.48.1": "npm:typescript-eslint",
     "typescript@^5.1.3": "npm:typescript",
     "typescript@~5.9.2": "npm:typescript",
-    "typescript@5.7.2": "npm:typescript@5.7.2",
+    "typescript@5.1.6": "npm:typescript@5.1.6",
     "uglify-js@^3.1.4": "npm:uglify-js",
     "uid@2.0.2": "npm:uid",
     "uint8array-extras@^1.4.0": "npm:uint8array-extras",
@@ -18341,7 +18361,7 @@
     "webidl-conversions@^8.0.0": "npm:webidl-conversions",
     "webpack-node-externals@3.0.0": "npm:webpack-node-externals",
     "webpack-sources@^3.2.3": "npm:webpack-sources",
-    "webpack@5.97.1": "npm:webpack",
+    "webpack@5.94.0": "npm:webpack@5.94.0",
     "websocket-driver@>=0.5.1": "npm:websocket-driver",
     "websocket-extensions@>=0.1.1": "npm:websocket-extensions",
     "whatwg-encoding@^3.1.1": "npm:whatwg-encoding",
@@ -18358,14 +18378,13 @@
     "which-typed-array@^1.1.19": "npm:which-typed-array",
     "which@^2.0.1": "npm:which",
     "why-is-node-running@^2.3.0": "npm:why-is-node-running",
+    "windows-release@^4.0.0": "npm:windows-release",
     "winston-transport@^4.9.0": "npm:winston-transport",
     "winston@^3.18.3": "npm:winston",
     "word-wrap@^1.2.5": "npm:word-wrap",
     "wordwrap@^1.0.0": "npm:wordwrap",
     "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0": "npm:wrap-ansi-cjs",
     "wrap-ansi@^7.0.0": "npm:wrap-ansi@7.0.0",
-    "wrap-ansi@^6.0.1": "npm:wrap-ansi@6.2.0",
-    "wrap-ansi@^6.2.0": "npm:wrap-ansi@6.2.0",
     "wrap-ansi@^8.1.0": "npm:wrap-ansi@8.1.0",
     "wrap-ansi@^9.0.2": "npm:wrap-ansi",
     "wrappy@1": "npm:wrappy",
