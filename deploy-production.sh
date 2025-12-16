@@ -12,11 +12,12 @@ export GCP_PROJECT_ID="gen-lang-client-0704991831"
 export DATABASE_URL="postgres://d39ff80c447dd119c0734d1a975c6a82a0035bb651679b284ca967053cf4748e:sk_x5ixVg3byJuf64tCMX3OU@db.prisma.io:5432/postgres?sslmode=require"
 export JWT_SECRET="w8KJ3qF7mN2pR6tY9vC4xH8jL1bD5gE0sI3kM7wO8uP9aQ2zF4yH6jT8vB5nG"
 export GCP_LOCATION="us-central1"
-export STORAGE_BUCKET="studio-roster-assets-prod"
+export STORAGE_BUCKET="${STORAGE_BUCKET:-${GCP_PROJECT_ID}.appspot.com}"
 
 echo "Environment setup complete:"
 echo "  Project: $GCP_PROJECT_ID"
 echo "  Region: $GCP_LOCATION"
+echo "  Storage Bucket: $STORAGE_BUCKET (Firebase default if unset)"
 echo ""
 
 # Authenticate with GCP

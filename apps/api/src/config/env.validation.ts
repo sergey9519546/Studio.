@@ -58,6 +58,22 @@ class EnvironmentVariables {
   @IsString()
   GOOGLE_APPLICATION_CREDENTIALS?: string;
 
+  @IsOptional()
+  @IsString()
+  GOOGLE_APPLICATION_CREDENTIALS_JSON?: string;
+
+  @IsOptional()
+  @IsString()
+  GCP_CREDENTIALS?: string;
+
+  @IsOptional()
+  @IsString()
+  GOOGLE_SERVICE_ACCOUNT_EMAIL?: string;
+
+  @IsOptional()
+  @IsString()
+  GOOGLE_SERVICE_PRIVATE_KEY?: string;
+
   // STORAGE_BUCKET is optional - defaults to project-assets
   @IsOptional()
   @IsString()
@@ -99,14 +115,37 @@ export function validate(config: Record<string, unknown>) {
     skipMissingProperties: false,
   });
 
+  const nodeEnv = validatedConfig.NODE_ENV || Environment.Development;
   const projectId =
     validatedConfig.GCP_PROJECT_ID || validatedConfig.GOOGLE_CLOUD_PROJECT;
+  const canInferFirebaseBucket = !!projectId;
 
   const missingRequired: string[] = [];
   if (!validatedConfig.DATABASE_URL) missingRequired.push("DATABASE_URL");
   if (!validatedConfig.JWT_SECRET) missingRequired.push("JWT_SECRET");
   if (!projectId)
     missingRequired.push("GCP_PROJECT_ID or GOOGLE_CLOUD_PROJECT");
+
+  const hasGcsCredentials =
+    !!validatedConfig.GOOGLE_APPLICATION_CREDENTIALS_JSON ||
+    !!validatedConfig.GCP_CREDENTIALS ||
+    !!validatedConfig.GOOGLE_APPLICATION_CREDENTIALS ||
+    (!!validatedConfig.GCP_CLIENT_EMAIL && !!validatedConfig.GCP_PRIVATE_KEY) ||
+    (!!validatedConfig.GOOGLE_SERVICE_ACCOUNT_EMAIL &&
+      !!validatedConfig.GOOGLE_SERVICE_PRIVATE_KEY);
+
+  if (nodeEnv === Environment.Production) {
+    if (!validatedConfig.STORAGE_BUCKET && !canInferFirebaseBucket) {
+      missingRequired.push(
+        "STORAGE_BUCKET (or provide GCP_PROJECT_ID so Firebase default bucket can be derived)"
+      );
+    }
+    if (!hasGcsCredentials) {
+      missingRequired.push(
+        "GCS credentials (one of GOOGLE_APPLICATION_CREDENTIALS_JSON, GCP_CREDENTIALS, GOOGLE_APPLICATION_CREDENTIALS, or GCP_CLIENT_EMAIL+GCP_PRIVATE_KEY)"
+      );
+    }
+  }
 
   if (missingRequired.length || validationErrors.length) {
     const details = [
@@ -118,7 +157,11 @@ export function validate(config: Record<string, unknown>) {
 
   // Default STORAGE_BUCKET if not set
   if (!validatedConfig.STORAGE_BUCKET) {
-    validatedConfig.STORAGE_BUCKET = `${projectId || "studio-roster"}-assets`;
+    if (canInferFirebaseBucket) {
+      validatedConfig.STORAGE_BUCKET = `${projectId}.appspot.com`;
+    } else if (nodeEnv !== Environment.Production) {
+      validatedConfig.STORAGE_BUCKET = "studio-roster-assets";
+    }
   }
 
   // Normalize project id value for downstream consumers

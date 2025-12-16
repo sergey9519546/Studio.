@@ -10,6 +10,16 @@ import { EventEmitter2 } from "@nestjs/event-emitter";
 import { Buffer } from "buffer";
 import { Readable } from "stream";
 import { Storage, type UploadOptions as GcsUploadOptions } from "@google-cloud/storage";
+import {
+  applicationDefault,
+  cert,
+  getApp,
+  getApps,
+  initializeApp,
+  type App,
+  type ServiceAccount,
+} from "firebase-admin/app";
+import { getStorage } from "firebase-admin/storage";
 
 export interface StoredObject {
   storageKey: string;
@@ -38,17 +48,34 @@ export const STORAGE_EVENTS = {
 export class StorageService implements OnModuleInit {
   private readonly logger = new Logger(StorageService.name);
   private readonly bucketName: string;
+  private readonly nodeEnv: string;
+  private readonly projectId: string | undefined;
   private isConfigured = false;
   private connectedEmail = "";
+  private firebaseApp: App | null = null;
   private storage: Storage | null = null;
 
   constructor(
     private configService: ConfigService,
     private eventEmitter: EventEmitter2
   ) {
-    // Specific bucket configuration with fallback
-    this.bucketName =
-      this.configService.get("STORAGE_BUCKET") || "studio-roster-assets-main";
+    const envBucket = this.configService.get("STORAGE_BUCKET");
+    this.nodeEnv = this.configService.get("NODE_ENV") || "development";
+    this.projectId =
+      this.configService.get("GCP_PROJECT_ID") ||
+      this.configService.get("GOOGLE_CLOUD_PROJECT");
+
+    // Specific bucket configuration with fallback (production requires explicit value)
+    const defaultFirebaseBucket = this.projectId
+      ? `${this.projectId}.appspot.com`
+      : "studio-roster-assets-main";
+    this.bucketName = envBucket || defaultFirebaseBucket;
+
+    if (!envBucket && this.nodeEnv === "production") {
+      this.logger.error(
+        "STORAGE_BUCKET is required in production. Set it via environment variable or Secret Manager."
+      );
+    }
   }
 
   async onModuleInit() {
@@ -68,15 +95,85 @@ export class StorageService implements OnModuleInit {
     }
   }
 
-  private async initializeStorage() {
-    const credentialsJson = this.configService.get<string>("GOOGLE_APPLICATION_CREDENTIALS_JSON");
+  private initFirebaseApp(): App {
+    if (this.firebaseApp) return this.firebaseApp;
+    if (getApps().length) {
+      this.firebaseApp = getApp();
+      return this.firebaseApp;
+    }
+
+    const credentialsJson =
+      this.configService.get<string>("GOOGLE_APPLICATION_CREDENTIALS_JSON") ||
+      this.configService.get<string>("GCP_CREDENTIALS");
+    const clientEmail =
+      this.configService.get<string>("GCP_CLIENT_EMAIL") ||
+      this.configService.get<string>("GOOGLE_SERVICE_ACCOUNT_EMAIL");
+    const privateKey =
+      this.configService.get<string>("GCP_PRIVATE_KEY") ||
+      this.configService.get<string>("GOOGLE_SERVICE_PRIVATE_KEY");
+    const keyFile = this.configService.get<string>(
+      "GOOGLE_APPLICATION_CREDENTIALS"
+    );
+
+    let credential: ReturnType<typeof applicationDefault> =
+      applicationDefault();
+
     try {
       if (credentialsJson) {
-        const credentials = JSON.parse(credentialsJson);
-        this.storage = new Storage({ credentials });
+        const parsed = JSON.parse(credentialsJson) as Record<string, string>;
+        const parsedProjectId =
+          parsed.project_id || parsed.projectId || this.projectId;
+        const parsedClientEmail =
+          parsed.client_email || parsed.clientEmail || clientEmail;
+        const parsedPrivateKey =
+          parsed.private_key || parsed.privateKey || privateKey;
+        if (parsedClientEmail && parsedPrivateKey) {
+          credential = cert({
+            projectId: parsedProjectId,
+            clientEmail: parsedClientEmail,
+            privateKey: parsedPrivateKey.replace(/\\n/g, "\n"),
+          } as ServiceAccount);
+          this.logger.log("Firebase Admin: using inline JSON credentials");
+        } else {
+          this.logger.warn(
+            "Firebase Admin: inline JSON missing client_email/private_key, falling back to application default credentials"
+          );
+          credential = applicationDefault();
+        }
+      } else if (clientEmail && privateKey) {
+        credential = cert({
+          projectId: this.projectId,
+          clientEmail,
+          privateKey: privateKey.replace(/\\n/g, "\n"),
+        } as ServiceAccount);
+        this.logger.log("Firebase Admin: using client email/private key env vars");
+      } else if (keyFile) {
+        credential = cert(keyFile);
+        this.logger.log(`Firebase Admin: using key file ${keyFile}`);
       } else {
-        this.storage = new Storage();
+        credential = applicationDefault();
+        this.logger.warn("Firebase Admin: using application default credentials");
       }
+    } catch (e: unknown) {
+      const error = e as Error;
+      this.logger.warn(
+        `Firebase Admin credential initialization failed, falling back to application default. Reason: ${error.message}`
+      );
+      credential = applicationDefault();
+    }
+
+    this.firebaseApp = initializeApp({
+      credential,
+      projectId: this.projectId,
+      storageBucket: this.bucketName,
+    });
+    return this.firebaseApp;
+  }
+
+  private async initializeStorage() {
+    try {
+      const app = this.initFirebaseApp();
+      this.storage = getStorage(app);
 
       const bucket = this.storage.bucket(this.bucketName);
       await bucket.getMetadata();
@@ -240,10 +337,7 @@ export class StorageService implements OnModuleInit {
       bucket: this.bucketName,
       configured: this.isConfigured,
       identity: this.connectedEmail || "unknown",
-      projectId:
-        this.configService.get("GCP_PROJECT_ID") ||
-        this.configService.get("GOOGLE_CLOUD_PROJECT") ||
-        "unknown",
+      projectId: this.projectId || "unknown",
     };
   }
 }

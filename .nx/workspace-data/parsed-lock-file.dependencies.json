@@ -5120,6 +5120,46 @@
     "type": "static"
   },
   {
+    "source": "npm:@firebase/database-compat",
+    "target": "npm:@firebase/component",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database-compat",
+    "target": "npm:@firebase/database",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database-compat",
+    "target": "npm:@firebase/database-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database-compat",
+    "target": "npm:@firebase/logger",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database-compat",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database-compat",
+    "target": "npm:tslib",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database-types",
+    "target": "npm:@firebase/app-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@firebase/database-types",
+    "target": "npm:@firebase/util",
+    "type": "static"
+  },
+  {
     "source": "npm:@firebase/database-types",
     "target": "npm:@firebase/app-types",
     "type": "static"
@@ -5675,6 +5715,31 @@
     "type": "static"
   },
   {
+    "source": "npm:@google-cloud/firestore",
+    "target": "npm:@opentelemetry/api",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/firestore",
+    "target": "npm:fast-deep-equal",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/firestore",
+    "target": "npm:functional-red-black-tree",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/firestore",
+    "target": "npm:google-gax@4.6.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/firestore",
+    "target": "npm:protobufjs",
+    "type": "static"
+  },
+  {
     "source": "npm:@google-cloud/functions",
     "target": "npm:google-gax",
     "type": "static"
@@ -5687,6 +5752,81 @@
   {
     "source": "npm:@google-cloud/paginator",
     "target": "npm:extend",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/storage",
+    "target": "npm:@google-cloud/paginator",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/storage",
+    "target": "npm:@google-cloud/projectify",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/storage",
+    "target": "npm:@google-cloud/promisify",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/storage",
+    "target": "npm:abort-controller",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/storage",
+    "target": "npm:async-retry",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/storage",
+    "target": "npm:duplexify",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/storage",
+    "target": "npm:fast-xml-parser@4.5.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/storage",
+    "target": "npm:gaxios",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/storage",
+    "target": "npm:google-auth-library",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/storage",
+    "target": "npm:html-entities",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/storage",
+    "target": "npm:mime",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/storage",
+    "target": "npm:p-limit",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/storage",
+    "target": "npm:retry-request",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/storage",
+    "target": "npm:teeny-request",
+    "type": "static"
+  },
+  {
+    "source": "npm:@google-cloud/storage",
+    "target": "npm:uuid",
     "type": "static"
   },
   {
@@ -5785,6 +5925,16 @@
     "type": "static"
   },
   {
+    "source": "npm:@grpc/grpc-js@1.14.3",
+    "target": "npm:@grpc/proto-loader@0.8.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:@grpc/grpc-js@1.14.3",
+    "target": "npm:@js-sdsl/ordered-map",
+    "type": "static"
+  },
+  {
     "source": "npm:@grpc/grpc-js",
     "target": "npm:@grpc/proto-loader",
     "type": "static"
@@ -5792,6 +5942,26 @@
   {
     "source": "npm:@grpc/grpc-js",
     "target": "npm:@types/node",
+    "type": "static"
+  },
+  {
+    "source": "npm:@grpc/proto-loader",
+    "target": "npm:lodash.camelcase",
+    "type": "static"
+  },
+  {
+    "source": "npm:@grpc/proto-loader",
+    "target": "npm:long",
+    "type": "static"
+  },
+  {
+    "source": "npm:@grpc/proto-loader",
+    "target": "npm:protobufjs",
+    "type": "static"
+  },
+  {
+    "source": "npm:@grpc/proto-loader",
+    "target": "npm:yargs",
     "type": "static"
   },
   {
@@ -10320,6 +10490,26 @@
     "type": "static"
   },
   {
+    "source": "npm:@types/express",
+    "target": "npm:@types/body-parser",
+    "type": "static"
+  },
+  {
+    "source": "npm:@types/express",
+    "target": "npm:@types/express-serve-static-core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@types/express",
+    "target": "npm:@types/qs",
+    "type": "static"
+  },
+  {
+    "source": "npm:@types/express",
+    "target": "npm:@types/serve-static",
+    "type": "static"
+  },
+  {
     "source": "npm:@types/google-cloud__storage",
     "target": "npm:@types/node",
     "type": "static"
@@ -10385,6 +10575,16 @@
     "type": "static"
   },
   {
+    "source": "npm:@types/jsonwebtoken",
+    "target": "npm:@types/ms",
+    "type": "static"
+  },
+  {
+    "source": "npm:@types/jsonwebtoken",
+    "target": "npm:@types/node",
+    "type": "static"
+  },
+  {
     "source": "npm:@types/lodash.throttle",
     "target": "npm:@types/lodash",
     "type": "static"
@@ -10411,6 +10611,11 @@
   },
   {
     "source": "npm:@types/node",
+    "target": "npm:undici-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:@types/node@22.19.3",
     "target": "npm:undici-types",
     "type": "static"
   },
@@ -13667,6 +13872,26 @@
   {
     "source": "npm:duplexer2",
     "target": "npm:readable-stream@2.3.8",
+    "type": "static"
+  },
+  {
+    "source": "npm:duplexify",
+    "target": "npm:end-of-stream",
+    "type": "static"
+  },
+  {
+    "source": "npm:duplexify",
+    "target": "npm:inherits",
+    "type": "static"
+  },
+  {
+    "source": "npm:duplexify",
+    "target": "npm:readable-stream",
+    "type": "static"
+  },
+  {
+    "source": "npm:duplexify",
+    "target": "npm:stream-shift",
     "type": "static"
   },
   {
@@ -17350,6 +17575,71 @@
     "type": "static"
   },
   {
+    "source": "npm:firebase-admin",
+    "target": "npm:@fastify/busboy",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase-admin",
+    "target": "npm:@firebase/database-compat",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase-admin",
+    "target": "npm:@firebase/database-types",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase-admin",
+    "target": "npm:@types/node@22.19.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase-admin",
+    "target": "npm:farmhash-modern",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase-admin",
+    "target": "npm:fast-deep-equal",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase-admin",
+    "target": "npm:google-auth-library",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase-admin",
+    "target": "npm:jsonwebtoken",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase-admin",
+    "target": "npm:jwks-rsa",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase-admin",
+    "target": "npm:node-forge",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase-admin",
+    "target": "npm:uuid@11.1.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase-admin",
+    "target": "npm:@google-cloud/firestore",
+    "type": "static"
+  },
+  {
+    "source": "npm:firebase-admin",
+    "target": "npm:@google-cloud/storage",
+    "type": "static"
+  },
+  {
     "source": "npm:firebase",
     "target": "npm:@firebase/ai",
     "type": "static"
@@ -18652,6 +18942,126 @@
   {
     "source": "npm:google-auth-library",
     "target": "npm:jws",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library",
+    "target": "npm:base64-js",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library",
+    "target": "npm:ecdsa-sig-formatter",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library",
+    "target": "npm:gaxios",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library",
+    "target": "npm:gcp-metadata",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library",
+    "target": "npm:gtoken",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library",
+    "target": "npm:jws",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library",
+    "target": "npm:base64-js",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library",
+    "target": "npm:ecdsa-sig-formatter",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library",
+    "target": "npm:gaxios",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library",
+    "target": "npm:gcp-metadata",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library",
+    "target": "npm:gtoken",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-auth-library",
+    "target": "npm:jws",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-gax@4.6.1",
+    "target": "npm:@grpc/grpc-js@1.14.3",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-gax@4.6.1",
+    "target": "npm:@grpc/proto-loader",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-gax@4.6.1",
+    "target": "npm:@types/long",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-gax@4.6.1",
+    "target": "npm:abort-controller",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-gax@4.6.1",
+    "target": "npm:duplexify",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-gax@4.6.1",
+    "target": "npm:google-auth-library",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-gax@4.6.1",
+    "target": "npm:node-fetch",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-gax@4.6.1",
+    "target": "npm:object-hash",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-gax@4.6.1",
+    "target": "npm:proto3-json-serializer@2.0.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-gax@4.6.1",
+    "target": "npm:protobufjs",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-gax@4.6.1",
+    "target": "npm:retry-request",
+    "type": "static"
+  },
+  {
+    "source": "npm:google-gax@4.6.1",
+    "target": "npm:uuid@9.0.1",
     "type": "static"
   },
   {
@@ -22145,6 +22555,36 @@
     "type": "static"
   },
   {
+    "source": "npm:jwks-rsa",
+    "target": "npm:@types/express",
+    "type": "static"
+  },
+  {
+    "source": "npm:jwks-rsa",
+    "target": "npm:@types/jsonwebtoken",
+    "type": "static"
+  },
+  {
+    "source": "npm:jwks-rsa",
+    "target": "npm:debug",
+    "type": "static"
+  },
+  {
+    "source": "npm:jwks-rsa",
+    "target": "npm:jose@4.15.9",
+    "type": "static"
+  },
+  {
+    "source": "npm:jwks-rsa",
+    "target": "npm:limiter",
+    "type": "static"
+  },
+  {
+    "source": "npm:jwks-rsa",
+    "target": "npm:lru-memoizer",
+    "type": "static"
+  },
+  {
     "source": "npm:jws",
     "target": "npm:jwa",
     "type": "static"
@@ -22297,6 +22737,21 @@
   {
     "source": "npm:lru-cache",
     "target": "npm:yallist",
+    "type": "static"
+  },
+  {
+    "source": "npm:lru-cache@6.0.0",
+    "target": "npm:yallist@4.0.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:lru-memoizer",
+    "target": "npm:lodash.clonedeep",
+    "type": "static"
+  },
+  {
+    "source": "npm:lru-memoizer",
+    "target": "npm:lru-cache@6.0.0",
     "type": "static"
   },
   {
@@ -24155,8 +24610,133 @@
     "type": "static"
   },
   {
+    "source": "npm:proto3-json-serializer@2.0.2",
+    "target": "npm:protobufjs",
+    "type": "static"
+  },
+  {
     "source": "npm:proto3-json-serializer",
     "target": "npm:protobufjs",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/aspromise",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/base64",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/codegen",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/eventemitter",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/fetch",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/float",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/inquire",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/path",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/pool",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/utf8",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@types/node",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:long",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/aspromise",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/base64",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/codegen",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/eventemitter",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/fetch",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/float",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/inquire",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/path",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/pool",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@protobufjs/utf8",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:@types/node",
+    "type": "static"
+  },
+  {
+    "source": "npm:protobufjs",
+    "target": "npm:long",
     "type": "static"
   },
   {
@@ -27525,117 +28105,117 @@
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:@types/estree",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:@webassemblyjs/ast",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:@webassemblyjs/wasm-edit",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:@webassemblyjs/wasm-parser",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:acorn",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
-    "target": "npm:acorn-import-attributes@1.9.5",
+    "source": "npm:webpack",
+    "target": "npm:acorn-import-attributes",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:browserslist",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:chrome-trace-event",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:enhanced-resolve",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:es-module-lexer",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:eslint-scope@5.1.1",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:events",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:glob-to-regexp",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:graceful-fs",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:json-parse-even-better-errors",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:loader-runner",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:mime-types@2.1.35",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:neo-async",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:schema-utils",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:tapable",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:terser-webpack-plugin",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:watchpack",
     "type": "static"
   },
   {
-    "source": "npm:webpack@5.94.0",
+    "source": "npm:webpack",
     "target": "npm:webpack-sources",
     "type": "static"
   },

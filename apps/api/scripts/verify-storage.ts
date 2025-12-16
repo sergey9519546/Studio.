@@ -1,5 +1,6 @@
 
-import { Storage } from '@google-cloud/storage';
+import { applicationDefault, cert, getApps, initializeApp, type ServiceAccount } from "firebase-admin/app";
+import { getStorage } from "firebase-admin/storage";
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 
@@ -12,43 +13,61 @@ async function verifyStorage() {
     console.log('--- Cloud Storage Verification ---');
 
     const projectId = process.env.GCP_PROJECT_ID || process.env.GOOGLE_CLOUD_PROJECT;
-    const bucketName = process.env.STORAGE_BUCKET || 'studio-roster-assets-main';
+    const bucketName = process.env.STORAGE_BUCKET || (projectId ? `${projectId}.appspot.com` : "studio-roster-assets");
     const clientEmail = process.env.GCP_CLIENT_EMAIL;
     const privateKey = process.env.GCP_PRIVATE_KEY;
-    const credentialsJson = process.env.GCP_CREDENTIALS;
+    const credentialsJson = process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON || process.env.GCP_CREDENTIALS;
     const keyFile = process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
-    // Fix unused variable error
-    const configType = credentialsJson ? 'json' : (clientEmail && privateKey ? 'env' : (keyFile ? 'file' : 'default'));
+    let configType = 'default';
+    if (credentialsJson) configType = 'json';
+    else if (clientEmail && privateKey) configType = 'env';
+    else if (keyFile) configType = 'file';
     console.log(`Configuration type detected: ${configType}`);
 
     console.log(`Project ID: ${projectId}`);
     console.log(`Target Bucket: ${bucketName}`);
 
-    let storage: Storage;
+    let credential: ReturnType<typeof applicationDefault> = applicationDefault();
 
     try {
         if (credentialsJson) {
             console.log('Method: GCP_CREDENTIALS (JSON)');
-            const credentials = JSON.parse(credentialsJson) as Record<string, unknown>;
-            storage = new Storage({ projectId, credentials });
+            const parsed = JSON.parse(credentialsJson) as Record<string, string>;
+            const parsedClientEmail = parsed.client_email || parsed.clientEmail || clientEmail;
+            const parsedPrivateKey = parsed.private_key || parsed.privateKey || privateKey;
+            if (parsedClientEmail && parsedPrivateKey) {
+                credential = cert({
+                    projectId: parsed.project_id || parsed.projectId || projectId,
+                    clientEmail: parsedClientEmail,
+                    privateKey: parsedPrivateKey.replace(/\\n/g, '\n'),
+                } as ServiceAccount);
+            } else {
+                console.warn('Inline JSON missing client_email/private_key, falling back to application default credentials');
+                credential = applicationDefault();
+            }
         } else if (clientEmail && privateKey) {
             console.log('Method: ENV VARS (Client Email + Private Key)');
-            storage = new Storage({
+            credential = cert({
                 projectId,
-                credentials: {
-                    client_email: clientEmail,
-                    private_key: privateKey.replace(/\\n/g, '\n'),
-                }
-            });
+                clientEmail,
+                privateKey: privateKey.replace(/\\n/g, '\n'),
+            } as ServiceAccount);
         } else if (keyFile) {
             console.log('Method: GOOGLE_APPLICATION_CREDENTIALS (File)');
-            storage = new Storage({ projectId, keyFilename: keyFile });
+            credential = cert(keyFile);
         } else {
             console.log('Method: Default (ADC)');
-            storage = new Storage({ projectId });
+            credential = applicationDefault();
         }
 
+        const app = getApps()[0] || initializeApp({
+            credential,
+            projectId,
+            storageBucket: bucketName,
+        });
+
+        const storage = getStorage(app);
         const bucket = storage.bucket(bucketName);
         const [exists] = await bucket.exists();
 

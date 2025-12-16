@@ -1881,6 +1881,15 @@
         "hash": "sha512-uRsLYksqpbDmWaSmzvJcuApSEe38+6NQZBUsuAyMZKqHxH0g1wcJgsKUvN3WC8tewaqFjBMMGrkHmC+T7k8LvA=="
       }
     },
+    "npm:@fastify/busboy": {
+      "type": "npm",
+      "name": "npm:@fastify/busboy",
+      "data": {
+        "version": "3.2.0",
+        "packageName": "@fastify/busboy",
+        "hash": "sha512-m9FVDXU3GT2ITSe0UaMA5rU3QkfC/UXtCU8y0gSN/GugTqtVldOBWIB5V6V3sbmenVZUIpU6f+mPEO2+m5iTaA=="
+      }
+    },
     "npm:@firebase/ai": {
       "type": "npm",
       "name": "npm:@firebase/ai",
@@ -2383,6 +2392,15 @@
         "version": "5.14.0",
         "packageName": "@google-cloud/aiplatform",
         "hash": "sha512-Bh36aXsH/CkWfw/Sm7M2j56Ozi+nV5aVcVGmGsRn1M5espcFo2eEbG5zsHvdJ/RJrQc+R/Q8jLqaovfhEy1tHw=="
+      }
+    },
+    "npm:@google-cloud/firestore": {
+      "type": "npm",
+      "name": "npm:@google-cloud/firestore",
+      "data": {
+        "version": "7.11.6",
+        "packageName": "@google-cloud/firestore",
+        "hash": "sha512-EW/O8ktzwLfyWBOsNuhRoMi8lrC3clHM5LVFhGvO1HCsLozCOOXRAlHrYBoE6HL42Sc8yYMuCb2XqcnJ4OOEpw=="
       }
     },
     "npm:@google-cloud/functions": {
@@ -3355,6 +3373,15 @@
         "version": "22.2.3",
         "packageName": "@nx/workspace",
         "hash": "sha512-yx6PSzQKX5Mon2a0xMDCKg85UguF3/+qDcxdLtDRu2sP3+5euiJ/mpKKxt9yN40IAiyYXF5ttRsdZ88FoxP/Ow=="
+      }
+    },
+    "npm:@opentelemetry/api": {
+      "type": "npm",
+      "name": "npm:@opentelemetry/api",
+      "data": {
+        "version": "1.9.0",
+        "packageName": "@opentelemetry/api",
+        "hash": "sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg=="
       }
     },
     "npm:@pact-foundation/pact-core-windows-x64": {
@@ -4905,6 +4932,15 @@
         "hash": "sha512-FOvQ0YPD5NOfPgMzJihoT+Za5pdkDJWcbpuj1DjaKZIr/gxodQjY/uWEFlTNqW2ugXHUiL8lRQgw63dzKHZdeQ=="
       }
     },
+    "npm:@types/long": {
+      "type": "npm",
+      "name": "npm:@types/long",
+      "data": {
+        "version": "4.0.2",
+        "packageName": "@types/long",
+        "hash": "sha512-MqTGEo5bj5t157U6fA/BiDynNkn0YknVdh48CMPkTSpFTVmvao5UQmm7uEF6xBEo7qIMAlY/JSleYaE6VOdpaA=="
+      }
+    },
     "npm:@types/luxon": {
       "type": "npm",
       "name": "npm:@types/luxon",
@@ -4966,6 +5002,15 @@
         "version": "14.18.63",
         "packageName": "@types/node",
         "hash": "sha512-fAtCfv4jJg+ExtXhvCkCqUKZ+4ok/JQk01qDKhL5BDDoS3AxKXhV5/MAVUZyQnSEd2GT92fkgZl0pz0Q0AzcIQ=="
+      }
+    },
+    "npm:@types/node@22.19.3": {
+      "type": "npm",
+      "name": "npm:@types/node@22.19.3",
+      "data": {
+        "version": "22.19.3",
+        "packageName": "@types/node",
+        "hash": "sha512-1N9SBnWYOJTrNZCdh/yJE+t910Y128BoyY+zBLWhL3r0TYzlTmFdXrPwHL9DyFZmlEXNQQolTZh3KHV31QDhyA=="
       }
     },
     "npm:@types/parse-json": {
@@ -5580,9 +5625,9 @@
         "hash": "sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw=="
       }
     },
-    "npm:acorn-import-attributes@1.9.5": {
+    "npm:acorn-import-attributes": {
       "type": "npm",
-      "name": "npm:acorn-import-attributes@1.9.5",
+      "name": "npm:acorn-import-attributes",
       "data": {
         "version": "1.9.5",
         "packageName": "acorn-import-attributes",
@@ -8442,6 +8487,15 @@
         "hash": "sha512-hMQ4CX1p1izmuLYyZqLMO/qGNw10wSv9QDCPfzXfyFrOaCSSoRfqE1Kf1s5an66J5JZC62NewG+mK49jOCtQew=="
       }
     },
+    "npm:farmhash-modern": {
+      "type": "npm",
+      "name": "npm:farmhash-modern",
+      "data": {
+        "version": "1.1.0",
+        "packageName": "farmhash-modern",
+        "hash": "sha512-6ypT4XfgqJk/F3Yuv4SX26I3doUjt0GTG4a+JgWxXQpxXzTBq8fPUeGHfcYMMDPHJHm3yPOSjaeBwBGAHWXCdA=="
+      }
+    },
     "npm:fast-check": {
       "type": "npm",
       "name": "npm:fast-check",
@@ -8703,6 +8757,15 @@
         "hash": "sha512-78/PXT1wlLLDgTzDs7sjq9hzz0vXD+zn+7wypEe4fXQxCmdmqfGsEPQxmiCSQI3ajFV91bVSsvNtrJRiW6nGng=="
       }
     },
+    "npm:firebase-admin": {
+      "type": "npm",
+      "name": "npm:firebase-admin",
+      "data": {
+        "version": "13.6.0",
+        "packageName": "firebase-admin",
+        "hash": "sha512-GdPA/t0+Cq8p1JnjFRBmxRxAGvF/kl2yfdhALl38PrRp325YxyQ5aNaHui0XmaKcKiGRFIJ/EgBNWFoDP0onjw=="
+      }
+    },
     "npm:firebase": {
       "type": "npm",
       "name": "npm:firebase",
@@ -8935,6 +8998,15 @@
         "version": "1.1.8",
         "packageName": "function.prototype.name",
         "hash": "sha512-e5iwyodOHhbMr/yNrc7fDYG4qlbIvI5gajyzPnb5TCwyhjApznQh1BMFou9b30SevY43gCJKXycoCBjMbsuW0Q=="
+      }
+    },
+    "npm:functional-red-black-tree": {
+      "type": "npm",
+      "name": "npm:functional-red-black-tree",
+      "data": {
+        "version": "1.0.1",
+        "packageName": "functional-red-black-tree",
+        "hash": "sha512-dsKNQNdj6xA3T+QlADDA7mOSlX0qiMINjn0cgr+eGHGsbSHzTabcIogz2+p/iqP1Xs6EP/sS2SbqH+brGTbq0g=="
       }
     },
     "npm:functions-have-names": {
@@ -9223,6 +9295,15 @@
         "version": "9.15.1",
         "packageName": "google-auth-library",
         "hash": "sha512-Jb6Z0+nvECVz+2lzSMt9u98UsoakXxA2HGHMCxh+so3n90XgYWkq5dur19JAJV7ONiJY22yBTyJB1TSkvPq9Ng=="
+      }
+    },
+    "npm:google-gax@4.6.1": {
+      "type": "npm",
+      "name": "npm:google-gax@4.6.1",
+      "data": {
+        "version": "4.6.1",
+        "packageName": "google-gax",
+        "hash": "sha512-V6eky/xz2mcKfAd1Ioxyd6nmA61gao3n01C+YeuIwu3vzM9EDR6wcVzMSIbLMDXWeoi9SHYctXuKYC5uJUT3eQ=="
       }
     },
     "npm:google-gax": {
@@ -10791,6 +10872,15 @@
         "hash": "sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ=="
       }
     },
+    "npm:jose@4.15.9": {
+      "type": "npm",
+      "name": "npm:jose@4.15.9",
+      "data": {
+        "version": "4.15.9",
+        "packageName": "jose",
+        "hash": "sha512-1vUQX+IdDMVPj4k8kOxgUqlcK518yluMuGZwqlr44FS1ppZB/5GWh4rZG89erpOBOJjU/OBsnCVFfapsRz6nEA=="
+      }
+    },
     "npm:jose": {
       "type": "npm",
       "name": "npm:jose",
@@ -10998,6 +11088,15 @@
         "hash": "sha512-hRF04fqJIP8Abbkq5NKGN0Bbr3JxlQ+qhZufXVr0DvujKy93ZCbXZMHDL4EOtodSbCWxOqR8MS1tXA5hwqCXDg=="
       }
     },
+    "npm:jwks-rsa": {
+      "type": "npm",
+      "name": "npm:jwks-rsa",
+      "data": {
+        "version": "3.2.0",
+        "packageName": "jwks-rsa",
+        "hash": "sha512-PwchfHcQK/5PSydeKCs1ylNym0w/SSv8a62DgHJ//7x2ZclCoinlsjAfDxAAbpoTPybOum/Jgy+vkvMmKz89Ww=="
+      }
+    },
     "npm:jws": {
       "type": "npm",
       "name": "npm:jws",
@@ -11124,6 +11223,15 @@
         "hash": "sha512-/vlFKAoH5Cgt3Ie+JLhRbwOsCQePABiU3tJ1egGvyQ+33R/vcwM2Zl2QR/LzjsBeItPt3oSVXapn+m4nQDvpzw=="
       }
     },
+    "npm:limiter": {
+      "type": "npm",
+      "name": "npm:limiter",
+      "data": {
+        "version": "1.1.5",
+        "packageName": "limiter",
+        "hash": "sha512-FWWMIEOxz3GwUI4Ts/IvgVy6LPvoMPgjMdQ185nN6psJyBJ4yOpzqm695/h5umdLJg2vW3GR5iG11MAkR2AzJA=="
+      }
+    },
     "npm:lines-and-columns@1.2.4": {
       "type": "npm",
       "name": "npm:lines-and-columns@1.2.4",
@@ -11194,6 +11302,15 @@
         "version": "4.3.0",
         "packageName": "lodash.camelcase",
         "hash": "sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA=="
+      }
+    },
+    "npm:lodash.clonedeep": {
+      "type": "npm",
+      "name": "npm:lodash.clonedeep",
+      "data": {
+        "version": "4.5.0",
+        "packageName": "lodash.clonedeep",
+        "hash": "sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ=="
       }
     },
     "npm:lodash.debounce": {
@@ -11473,6 +11590,24 @@
         "version": "5.1.1",
         "packageName": "lru-cache",
         "hash": "sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w=="
+      }
+    },
+    "npm:lru-cache@6.0.0": {
+      "type": "npm",
+      "name": "npm:lru-cache@6.0.0",
+      "data": {
+        "version": "6.0.0",
+        "packageName": "lru-cache",
+        "hash": "sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA=="
+      }
+    },
+    "npm:lru-memoizer": {
+      "type": "npm",
+      "name": "npm:lru-memoizer",
+      "data": {
+        "version": "2.3.0",
+        "packageName": "lru-memoizer",
+        "hash": "sha512-GXn7gyHAMhO13WSKrIiNfztwxodVsP8IoZ3XfrJV4yH2x0/OeTO/FIaAHTY5YekdGgW94njfuKmyyt1E0mR6Ug=="
       }
     },
     "npm:lru.min": {
@@ -12085,6 +12220,15 @@
         "version": "3.3.2",
         "packageName": "node-fetch",
         "hash": "sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA=="
+      }
+    },
+    "npm:node-forge": {
+      "type": "npm",
+      "name": "npm:node-forge",
+      "data": {
+        "version": "1.3.3",
+        "packageName": "node-forge",
+        "hash": "sha512-rLvcdSyRCyouf6jcOIPe/BgwG/d7hKjzMKOas33/pHEr6gbq18IK9zV7DiPvzsz0oBJPme6qr6H6kGZuI9/DZg=="
       }
     },
     "npm:node-gyp-build": {
@@ -13093,6 +13237,15 @@
         "version": "4.1.2",
         "packageName": "proper-lockfile",
         "hash": "sha512-TjNPblN4BwAWMXU8s9AEz4JmQxnD1NNL7bNOY/AKUzyamc379FWASUhc/K1pL2noVb+XmZKLL68cjzLsiOAMaA=="
+      }
+    },
+    "npm:proto3-json-serializer@2.0.2": {
+      "type": "npm",
+      "name": "npm:proto3-json-serializer@2.0.2",
+      "data": {
+        "version": "2.0.2",
+        "packageName": "proto3-json-serializer",
+        "hash": "sha512-SAzp/O4Yh02jGdRc+uIrGoe87dkN/XtwxfZ4ZyafJHymd79ozp5VG5nyZ7ygqPM5+cpLDjjGnYFUkngonyDPOQ=="
       }
     },
     "npm:proto3-json-serializer": {
@@ -15534,6 +15687,15 @@
         "hash": "sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA=="
       }
     },
+    "npm:uuid@11.1.0": {
+      "type": "npm",
+      "name": "npm:uuid@11.1.0",
+      "data": {
+        "version": "11.1.0",
+        "packageName": "uuid",
+        "hash": "sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A=="
+      }
+    },
     "npm:uuid": {
       "type": "npm",
       "name": "npm:uuid",
@@ -15723,9 +15885,9 @@
         "hash": "sha512-yd1RBzSGanHkitROoPFd6qsrxt+oFhg/129YzheDGqeustzX0vTZJZsSsQjVQC4yzBQ56K55XU8gaNCtIzOnTg=="
       }
     },
-    "npm:webpack@5.94.0": {
+    "npm:webpack": {
       "type": "npm",
-      "name": "npm:webpack@5.94.0",
+      "name": "npm:webpack",
       "data": {
         "version": "5.94.0",
         "packageName": "webpack",
@@ -16018,6 +16180,15 @@
         "version": "3.1.1",
         "packageName": "yallist",
         "hash": "sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g=="
+      }
+    },
+    "npm:yallist@4.0.0": {
+      "type": "npm",
+      "name": "npm:yallist@4.0.0",
+      "data": {
+        "version": "4.0.0",
+        "packageName": "yallist",
+        "hash": "sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A=="
       }
     },
     "npm:yaml": {
@@ -16403,6 +16574,7 @@
     "@eslint/js@8.57.1": "npm:@eslint/js@8.57.1",
     "@fast-csv/format@4.3.5": "npm:@fast-csv/format",
     "@fast-csv/parse@4.3.6": "npm:@fast-csv/parse",
+    "@fastify/busboy@^3.0.0": "npm:@fastify/busboy",
     "@firebase/ai@2.6.0": "npm:@firebase/ai",
     "@firebase/analytics-compat@0.2.25": "npm:@firebase/analytics-compat",
     "@firebase/analytics-types@0.8.3": "npm:@firebase/analytics-types",
@@ -16420,7 +16592,9 @@
     "@firebase/auth@1.11.1": "npm:@firebase/auth",
     "@firebase/component@0.7.0": "npm:@firebase/component",
     "@firebase/data-connect@0.3.12": "npm:@firebase/data-connect",
+    "@firebase/database-compat@^2.0.0": "npm:@firebase/database-compat",
     "@firebase/database-compat@2.1.0": "npm:@firebase/database-compat",
+    "@firebase/database-types@^1.0.6": "npm:@firebase/database-types",
     "@firebase/database-types@1.0.16": "npm:@firebase/database-types",
     "@firebase/database@1.1.0": "npm:@firebase/database",
     "@firebase/firestore-compat@0.4.2": "npm:@firebase/firestore-compat",
@@ -16461,15 +16635,19 @@
     "@formatjs/intl-localematcher@0.6.2": "npm:@formatjs/intl-localematcher",
     "@formatjs/intl@3.1.8": "npm:@formatjs/intl",
     "@google-cloud/aiplatform@^5.13.0": "npm:@google-cloud/aiplatform",
+    "@google-cloud/firestore@^7.11.0": "npm:@google-cloud/firestore",
     "@google-cloud/functions@^4.2.1": "npm:@google-cloud/functions",
     "@google-cloud/paginator@^5.0.0": "npm:@google-cloud/paginator",
     "@google-cloud/projectify@^4.0.0": "npm:@google-cloud/projectify",
     "@google-cloud/promisify@<4.1.0": "npm:@google-cloud/promisify",
+    "@google-cloud/storage@^7.14.0": "npm:@google-cloud/storage",
     "@google-cloud/storage@^7.17.3": "npm:@google-cloud/storage",
     "@google/genai@^1.33.0": "npm:@google/genai",
     "@google/generative-ai@^0.24.1": "npm:@google/generative-ai",
+    "@grpc/grpc-js@^1.10.9": "npm:@grpc/grpc-js@1.14.3",
     "@grpc/grpc-js@^1.12.6": "npm:@grpc/grpc-js@1.14.3",
     "@grpc/grpc-js@~1.9.0": "npm:@grpc/grpc-js",
+    "@grpc/proto-loader@^0.7.13": "npm:@grpc/proto-loader",
     "@grpc/proto-loader@^0.7.8": "npm:@grpc/proto-loader",
     "@grpc/proto-loader@^0.8.0": "npm:@grpc/proto-loader@0.8.0",
     "@hono/node-server@1.19.6": "npm:@hono/node-server",
@@ -16591,6 +16769,7 @@
     "@nx/node@22.2.3": "npm:@nx/node",
     "@nx/nx-win32-x64-msvc@22.2.3": "npm:@nx/nx-win32-x64-msvc",
     "@nx/workspace@22.2.3": "npm:@nx/workspace",
+    "@opentelemetry/api@^1.3.0": "npm:@opentelemetry/api",
     "@pact-foundation/pact-core-windows-x64@17.0.2": "npm:@pact-foundation/pact-core-windows-x64",
     "@pact-foundation/pact-core@^17.0.0": "npm:@pact-foundation/pact-core",
     "@pact-foundation/pact@^16.0.2": "npm:@pact-foundation/pact",
@@ -16757,6 +16936,7 @@
     "@types/express-serve-static-core@^4.17.33": "npm:@types/express-serve-static-core",
     "@types/express@*": "npm:@types/express",
     "@types/express@^4.17.17": "npm:@types/express",
+    "@types/express@^4.17.20": "npm:@types/express",
     "@types/google-cloud__storage@^1.7.2": "npm:@types/google-cloud__storage",
     "@types/graceful-fs@^4.1.3": "npm:@types/graceful-fs",
     "@types/hoist-non-react-statics@^3.3.1": "npm:@types/hoist-non-react-statics",
@@ -16773,9 +16953,11 @@
     "@types/json-schema@^7.0.8": "npm:@types/json-schema",
     "@types/json-schema@^7.0.9": "npm:@types/json-schema",
     "@types/jsonwebtoken@*": "npm:@types/jsonwebtoken",
+    "@types/jsonwebtoken@^9.0.4": "npm:@types/jsonwebtoken",
     "@types/jsonwebtoken@9.0.10": "npm:@types/jsonwebtoken",
     "@types/lodash.throttle@^4.1.9": "npm:@types/lodash.throttle",
     "@types/lodash@*": "npm:@types/lodash",
+    "@types/long@^4.0.0": "npm:@types/long",
     "@types/luxon@~3.7.0": "npm:@types/luxon",
     "@types/methods@^1.1.4": "npm:@types/methods",
     "@types/mime@^1": "npm:@types/mime",
@@ -16786,6 +16968,7 @@
     "@types/node@>=12.12.47": "npm:@types/node",
     "@types/node@>=13.7.0": "npm:@types/node",
     "@types/node@^14.0.1": "npm:@types/node@14.18.63",
+    "@types/node@^22.8.7": "npm:@types/node@22.19.3",
     "@types/parse-json@^4.0.0": "npm:@types/parse-json",
     "@types/passport-jwt@^4.0.1": "npm:@types/passport-jwt",
     "@types/passport-strategy@*": "npm:@types/passport-strategy",
@@ -16863,7 +17046,7 @@
     "abort-controller@^3.0.0": "npm:abort-controller",
     "accepts@^2.0.0": "npm:accepts",
     "accepts@~1.3.8": "npm:accepts@1.3.8",
-    "acorn-import-attributes@^1.9.5": "npm:acorn-import-attributes@1.9.5",
+    "acorn-import-attributes@^1.9.5": "npm:acorn-import-attributes",
     "acorn-jsx@^5.3.2": "npm:acorn-jsx",
     "acorn-walk@^8.1.1": "npm:acorn-walk",
     "acorn@^8.11.0": "npm:acorn",
@@ -17196,6 +17379,7 @@
     "dunder-proto@^1.0.0": "npm:dunder-proto",
     "dunder-proto@^1.0.1": "npm:dunder-proto",
     "duplexer2@~0.1.4": "npm:duplexer2",
+    "duplexify@^4.0.0": "npm:duplexify",
     "duplexify@^4.1.3": "npm:duplexify",
     "eastasianwidth@^0.2.0": "npm:eastasianwidth",
     "ecdsa-sig-formatter@^1.0.11": "npm:ecdsa-sig-formatter",
@@ -17298,6 +17482,7 @@
     "exsolve@^1.0.7": "npm:exsolve",
     "extend@^3.0.2": "npm:extend",
     "external-editor@^3.0.3": "npm:external-editor",
+    "farmhash-modern@^1.1.0": "npm:farmhash-modern",
     "fast-check@^3.23.1": "npm:fast-check",
     "fast-copy@^4.0.0": "npm:fast-copy",
     "fast-csv@^4.3.1": "npm:fast-csv",
@@ -17335,6 +17520,7 @@
     "find-up@^4.0.0": "npm:find-up",
     "find-up@^4.1.0": "npm:find-up",
     "find-up@^5.0.0": "npm:find-up@5.0.0",
+    "firebase-admin@^13.0.1": "npm:firebase-admin",
     "firebase@^12.6.0": "npm:firebase",
     "flat-cache@^3.0.4": "npm:flat-cache",
     "flat@^5.0.2": "npm:flat",
@@ -17366,6 +17552,7 @@
     "function-bind@^1.1.2": "npm:function-bind",
     "function.prototype.name@^1.1.6": "npm:function.prototype.name",
     "function.prototype.name@^1.1.8": "npm:function.prototype.name",
+    "functional-red-black-tree@^1.0.1": "npm:functional-red-black-tree",
     "functions-have-names@^1.2.3": "npm:functions-have-names",
     "gaxios@^6.0.0": "npm:gaxios",
     "gaxios@^6.0.2": "npm:gaxios",
@@ -17411,8 +17598,11 @@
     "google-auth-library@^10.1.0": "npm:google-auth-library@10.5.0",
     "google-auth-library@^10.3.0": "npm:google-auth-library@10.5.0",
     "google-auth-library@^9.0.0": "npm:google-auth-library",
+    "google-auth-library@^9.14.2": "npm:google-auth-library",
+    "google-auth-library@^9.3.0": "npm:google-auth-library",
     "google-auth-library@^9.6.3": "npm:google-auth-library",
     "google-auth-library@^9.7.0": "npm:google-auth-library",
+    "google-gax@^4.3.3": "npm:google-gax@4.6.1",
     "google-gax@^5.0.0": "npm:google-gax",
     "google-logging-utils@^0.0.2": "npm:google-logging-utils",
     "google-logging-utils@^1.0.0": "npm:google-logging-utils@1.1.3",
@@ -17630,6 +17820,7 @@
     "jest@^29.5.0": "npm:jest",
     "jiti@^1.21.7": "npm:jiti@1.21.7",
     "jiti@^2.4.2": "npm:jiti",
+    "jose@^4.15.4": "npm:jose@4.15.9",
     "jose@^6.1.1": "npm:jose",
     "joycon@^3.1.1": "npm:joycon",
     "js-base64@^3.7.8": "npm:js-base64",
@@ -17660,6 +17851,7 @@
     "jszip@^3.10.1": "npm:jszip",
     "jszip@^3.7.1": "npm:jszip",
     "jwa@^2.0.1": "npm:jwa",
+    "jwks-rsa@^3.1.0": "npm:jwks-rsa",
     "jws@^4.0.0": "npm:jws",
     "jws@^4.0.1": "npm:jws",
     "keyv@^4.5.3": "npm:keyv@4.5.4",
@@ -17676,6 +17868,7 @@
     "lilconfig@^2.1.0": "npm:lilconfig",
     "lilconfig@^3.1.1": "npm:lilconfig@3.1.3",
     "lilconfig@^3.1.3": "npm:lilconfig@3.1.3",
+    "limiter@^1.1.5": "npm:limiter",
     "lines-and-columns@^1.1.6": "npm:lines-and-columns@1.2.4",
     "lines-and-columns@2.0.3": "npm:lines-and-columns",
     "listenercount@~1.0.1": "npm:listenercount",
@@ -17684,6 +17877,7 @@
     "locate-path@^6.0.0": "npm:locate-path@6.0.0",
     "lodash-es@^4.17.21": "npm:lodash-es",
     "lodash.camelcase@^4.3.0": "npm:lodash.camelcase",
+    "lodash.clonedeep@^4.5.0": "npm:lodash.clonedeep",
     "lodash.debounce@^4.0.8": "npm:lodash.debounce",
     "lodash.defaults@^4.2.0": "npm:lodash.defaults",
     "lodash.difference@^4.5.0": "npm:lodash.difference",
@@ -17720,6 +17914,8 @@
     "lru-cache@^11.2.2": "npm:lru-cache@11.2.4",
     "lru-cache@^11.2.4": "npm:lru-cache@11.2.4",
     "lru-cache@^5.1.1": "npm:lru-cache",
+    "lru-cache@6.0.0": "npm:lru-cache@6.0.0",
+    "lru-memoizer@^2.2.0": "npm:lru-memoizer",
     "lru.min@^1.0.0": "npm:lru.min",
     "lru.min@^1.1.0": "npm:lru.min",
     "lucide-react@^0.260.0": "npm:lucide-react",
@@ -17813,6 +18009,7 @@
     "node-fetch@^2.6.9": "npm:node-fetch",
     "node-fetch@^2.7.0": "npm:node-fetch",
     "node-fetch@^3.3.2": "npm:node-fetch@3.3.2",
+    "node-forge@^1.3.1": "npm:node-forge",
     "node-gyp-build@^4.6.0": "npm:node-gyp-build",
     "node-int64@^0.4.0": "npm:node-int64",
     "node-machine-id@1.1.12": "npm:node-machine-id",
@@ -17966,8 +18163,11 @@
     "prop-types@^15.5.7": "npm:prop-types",
     "prop-types@^15.8.1": "npm:prop-types",
     "proper-lockfile@4.1.2": "npm:proper-lockfile",
+    "proto3-json-serializer@^2.0.2": "npm:proto3-json-serializer@2.0.2",
     "proto3-json-serializer@^3.0.0": "npm:proto3-json-serializer",
     "protobufjs@^7.2.5": "npm:protobufjs",
+    "protobufjs@^7.2.6": "npm:protobufjs",
+    "protobufjs@^7.3.2": "npm:protobufjs",
     "protobufjs@^7.4.0": "npm:protobufjs",
     "protobufjs@^7.5.3": "npm:protobufjs",
     "proxy-addr@^2.0.7": "npm:proxy-addr",
@@ -18334,6 +18534,7 @@
     "util-deprecate@~1.0.1": "npm:util-deprecate",
     "utils-merge@^1.0.1": "npm:utils-merge",
     "utils-merge@1.0.1": "npm:utils-merge",
+    "uuid@^11.0.2": "npm:uuid@11.1.0",
     "uuid@^8.0.0": "npm:uuid",
     "uuid@^8.3.0": "npm:uuid",
     "uuid@^9.0.0": "npm:uuid@9.0.1",
@@ -18361,7 +18562,7 @@
     "webidl-conversions@^8.0.0": "npm:webidl-conversions",
     "webpack-node-externals@3.0.0": "npm:webpack-node-externals",
     "webpack-sources@^3.2.3": "npm:webpack-sources",
-    "webpack@5.94.0": "npm:webpack@5.94.0",
+    "webpack@5.94.0": "npm:webpack",
     "websocket-driver@>=0.5.1": "npm:websocket-driver",
     "websocket-extensions@>=0.1.1": "npm:websocket-extensions",
     "whatwg-encoding@^3.1.1": "npm:whatwg-encoding",
@@ -18399,6 +18600,7 @@
     "xtend@^4.0.2": "npm:xtend",
     "y18n@^5.0.5": "npm:y18n",
     "yallist@^3.0.2": "npm:yallist",
+    "yallist@^4.0.0": "npm:yallist@4.0.0",
     "yaml@^1.10.0": "npm:yaml",
     "yaml@^2.6.0": "npm:yaml@2.8.2",
     "yargs-parser@^21.1.1": "npm:yargs-parser",

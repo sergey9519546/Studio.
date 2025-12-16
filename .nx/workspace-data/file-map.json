@@ -23,9 +23,9 @@
         },
         {
           "file": "apps/api/scripts/verify-storage.ts",
-          "hash": "1074471628945342175",
+          "hash": "7012925799267347720",
           "deps": [
-            "npm:@google-cloud/storage",
+            "npm:firebase-admin",
             "npm:dotenv"
           ]
         },
@@ -107,7 +107,7 @@
         },
         {
           "file": "apps/api/src/common/middleware/project-context.middleware.ts",
-          "hash": "503655630994147797",
+          "hash": "16534115800226802803",
           "deps": [
             "npm:@nestjs/common",
             "npm:express"
@@ -2328,7 +2328,7 @@
         },
         {
           "file": "apps/api/src/config/env.validation.ts",
-          "hash": "6931586646051038738",
+          "hash": "8768587790976438045",
           "deps": [
             "npm:class-transformer",
             "npm:class-validator"
@@ -2494,22 +2494,6 @@
           ]
         },
         {
-          "file": "apps/api/src/modules/ai/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai-embeddings.service.spec.ts",
-          "hash": "11546289107729072920"
-        },
-        {
-          "file": "apps/api/src/modules/ai/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai-embeddings.service.ts",
-          "hash": "16372949285207238327"
-        },
-        {
-          "file": "apps/api/src/modules/ai/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai.service.spec.ts",
-          "hash": "9609701531790527146"
-        },
-        {
-          "file": "apps/api/src/modules/ai/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai.service.ts",
-          "hash": "13865713121525180165"
-        },
-        {
           "file": "apps/api/src/modules/ai/ai.controller.contract.spec.ts",
           "hash": "1276710016520851779",
           "deps": [
@@ -2518,14 +2502,14 @@
         },
         {
           "file": "apps/api/src/modules/ai/ai.controller.spec.ts",
-          "hash": "6132562432892156264",
+          "hash": "15211422673177188108",
           "deps": [
             "npm:@nestjs/testing"
           ]
         },
         {
           "file": "apps/api/src/modules/ai/ai.controller.ts",
-          "hash": "7407940574798607081",
+          "hash": "8631965150282667736",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -2537,7 +2521,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/ai.module.ts",
-          "hash": "478771514168475556",
+          "hash": "10859284843720183009",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -2545,7 +2529,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini-analyst.service.ts",
-          "hash": "2204445381026810251",
+          "hash": "10218092053294093495",
           "deps": [
             "npm:@nestjs/cache-manager",
             "npm:@nestjs/common",
@@ -2554,7 +2538,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini-openai.service.ts",
-          "hash": "8920016556265812544",
+          "hash": "3472939996376537725",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -2562,11 +2546,18 @@
         },
         {
           "file": "apps/api/src/modules/ai/gemini.service.ts",
-          "hash": "8191015036920839607",
+          "hash": "964284754457972057",
           "deps": [
             "npm:@google/genai",
             "npm:@nestjs/common",
             "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/ai/mock-analysis.service.ts",
+          "hash": "3048284641736844372",
+          "deps": [
+            "npm:@nestjs/common"
           ]
         },
         {
@@ -2600,7 +2591,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/streaming.service.ts",
-          "hash": "615645124266229897",
+          "hash": "1307589899027396085",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -2644,7 +2635,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai-embeddings.service.ts",
-          "hash": "11560915460396046704",
+          "hash": "9262353836056833841",
           "deps": [
             "npm:@google/generative-ai",
             "npm:@nestjs/common",
@@ -2653,7 +2644,7 @@
         },
         {
           "file": "apps/api/src/modules/ai/vertex-ai.service.ts",
-          "hash": "2848637718071304392",
+          "hash": "12929601490573093893",
           "deps": [
             "npm:@google/generative-ai",
             "npm:@nestjs/common",
@@ -2693,7 +2684,7 @@
         },
         {
           "file": "apps/api/src/modules/assets/assets.service.ts",
-          "hash": "9364436280204243397",
+          "hash": "771875448442090323",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -2714,7 +2705,7 @@
         },
         {
           "file": "apps/api/src/modules/assignments/assignments.service.ts",
-          "hash": "18364895821130549864",
+          "hash": "17787851230959825352",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client"
@@ -2754,7 +2745,7 @@
         },
         {
           "file": "apps/api/src/modules/auth/auth.service.spec.ts",
-          "hash": "11548325989505605675",
+          "hash": "6177760967430380981",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/jwt",
@@ -2764,7 +2755,7 @@
         },
         {
           "file": "apps/api/src/modules/auth/auth.service.ts",
-          "hash": "14758451420056384239",
+          "hash": "7977183336341167182",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/jwt",
@@ -2866,7 +2857,7 @@
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.service.spec.ts",
-          "hash": "18394256254947871977",
+          "hash": "16313843993766904869",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/cache-manager"
@@ -2874,7 +2865,7 @@
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.service.ts",
-          "hash": "6935861773590215511",
+          "hash": "5339783681163389186",
           "deps": [
             "npm:@nestjs/cache-manager",
             "npm:@nestjs/common",
@@ -2884,7 +2875,7 @@
         },
         {
           "file": "apps/api/src/modules/google/data-extractor.service.spec.ts",
-          "hash": "14398778278611206109",
+          "hash": "4446784758003184070",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/common"
@@ -2892,7 +2883,7 @@
         },
         {
           "file": "apps/api/src/modules/google/data-extractor.service.ts",
-          "hash": "385224992154432804",
+          "hash": "15534127513481304206",
           "deps": [
             "npm:@nestjs/common",
             "npm:googleapis"
@@ -2907,14 +2898,14 @@
         },
         {
           "file": "apps/api/src/modules/google/drive.service.spec.ts",
-          "hash": "3570524794226188864",
+          "hash": "2819148740105722002",
           "deps": [
             "npm:@nestjs/testing"
           ]
         },
         {
           "file": "apps/api/src/modules/google/drive.service.ts",
-          "hash": "11548549256996570271",
+          "hash": "1253435199911715729",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -2932,7 +2923,7 @@
         },
         {
           "file": "apps/api/src/modules/google/google-client.factory.spec.ts",
-          "hash": "2583297850597226061",
+          "hash": "4538124568885539034",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
@@ -2941,7 +2932,7 @@
         },
         {
           "file": "apps/api/src/modules/google/google-client.factory.ts",
-          "hash": "14316931858740037305",
+          "hash": "6023697439070213017",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
@@ -2959,7 +2950,7 @@
         },
         {
           "file": "apps/api/src/modules/google/sheet-ingestor.service.spec.ts",
-          "hash": "1217751784126406257",
+          "hash": "18264505800684154767",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/common"
@@ -2967,7 +2958,7 @@
         },
         {
           "file": "apps/api/src/modules/google/sheet-ingestor.service.ts",
-          "hash": "5564640608739356943",
+          "hash": "9650927980108653085",
           "deps": [
             "npm:@nestjs/common",
             "npm:googleapis"
@@ -2975,7 +2966,7 @@
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/adapters/google-drive.adapter.ts",
-          "hash": "12265741327151972740",
+          "hash": "11094566121827007073",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -2986,7 +2977,7 @@
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.controller.ts",
-          "hash": "16751119856312806199",
+          "hash": "777355986858704345",
           "deps": [
             "npm:@nestjs/common",
             "npm:express"
@@ -2994,14 +2985,14 @@
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.service.ts",
-          "hash": "14363775057829538019",
+          "hash": "231193109033972415",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.spec.ts",
-          "hash": "4633264736148274264",
+          "hash": "6207623513747111664",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/testing",
@@ -3024,7 +3015,7 @@
         },
         {
           "file": "apps/api/src/modules/integrations/unsplash/unsplash.controller.ts",
-          "hash": "16647802975233332323",
+          "hash": "10156070166387387741",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3039,7 +3030,7 @@
         },
         {
           "file": "apps/api/src/modules/integrations/unsplash/unsplash.service.ts",
-          "hash": "4817688078345265362",
+          "hash": "9170875579235087538",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
@@ -3128,7 +3119,7 @@
         },
         {
           "file": "apps/api/src/modules/monitoring/ai-usage.service.ts",
-          "hash": "14473739661112953057",
+          "hash": "3812690513545185251",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3231,14 +3222,14 @@
         },
         {
           "file": "apps/api/src/modules/projects/project-audit.service.ts",
-          "hash": "37038058340785149",
+          "hash": "3702668550524049031",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/projects/project-aware-ingestion.service.ts",
-          "hash": "148843975373808712",
+          "hash": "2740297445150842231",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client"
@@ -3246,7 +3237,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/project-cache.service.ts",
-          "hash": "15652744885522454296",
+          "hash": "12255027526227115751",
           "deps": [
             "npm:@nestjs/cache-manager",
             "npm:@nestjs/common",
@@ -3255,7 +3246,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/project-context.service.ts",
-          "hash": "16646505133424802377",
+          "hash": "13584613997374526820",
           "deps": [
             "npm:@nestjs/cache-manager",
             "npm:@nestjs/common",
@@ -3265,7 +3256,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/project-encryption.service.ts",
-          "hash": "1557277167437164812",
+          "hash": "14908734849924297130",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3279,7 +3270,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/project-queue.service.ts",
-          "hash": "16091758331366288241",
+          "hash": "14946676059448863595",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/event-emitter"
@@ -3301,7 +3292,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/projects.service.spec.ts",
-          "hash": "2375615166953067478",
+          "hash": "3210139110146217779",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/cache-manager"
@@ -3309,7 +3300,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/projects.service.ts",
-          "hash": "11340221787834960195",
+          "hash": "11170665385360943572",
           "deps": [
             "npm:@nestjs/cache-manager",
             "npm:@nestjs/common",
@@ -3319,7 +3310,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/sharded-vector-store.service.ts",
-          "hash": "14132100745019954274",
+          "hash": "9363221747199690500",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client"
@@ -3345,14 +3336,14 @@
         },
         {
           "file": "apps/api/src/modules/rag/embeddings.service.spec.ts",
-          "hash": "16477922267036236957",
+          "hash": "4880376536196131436",
           "deps": [
             "npm:@nestjs/testing"
           ]
         },
         {
           "file": "apps/api/src/modules/rag/embeddings.service.ts",
-          "hash": "10025180204544423655",
+          "hash": "11831989706630601138",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3399,7 +3390,7 @@
         },
         {
           "file": "apps/api/src/modules/rag/rag.service.ts",
-          "hash": "12303671911874904736",
+          "hash": "6205442522426540539",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3410,7 +3401,7 @@
         },
         {
           "file": "apps/api/src/modules/rag/vector-store.service.ts",
-          "hash": "15519685524027790312",
+          "hash": "15409145725091371847",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -3470,11 +3461,13 @@
         },
         {
           "file": "apps/api/src/modules/storage/storage.service.ts",
-          "hash": "8953936999209852853",
+          "hash": "14338442356349222787",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
-            "npm:@nestjs/event-emitter"
+            "npm:@nestjs/event-emitter",
+            "npm:@google-cloud/storage",
+            "npm:firebase-admin"
           ]
         },
         {
@@ -3535,7 +3528,7 @@
         },
         {
           "file": "apps/api/src/prisma/prisma.service.spec.ts",
-          "hash": "9271288927475188863",
+          "hash": "2006509212235169788",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/testing"
@@ -3561,7 +3554,7 @@
         },
         {
           "file": "apps/api/src/types/external-modules.d.ts",
-          "hash": "219312072805278744"
+          "hash": "14390130174945932794"
         },
         {
           "file": "apps/api/src/utils/math.utils.ts",
@@ -3687,11 +3680,11 @@
       },
       {
         "file": ".env.example",
-        "hash": "15948273227485083106"
+        "hash": "16218938003085913375"
       },
       {
         "file": ".env.template",
-        "hash": "14997438395986673694"
+        "hash": "14522459579582785192"
       },
       {
         "file": ".firebase/.graphqlrc",
@@ -3818,6 +3811,10 @@
         "hash": "17029242998552393176"
       },
       {
+        "file": "CLEANUP_PLAN.md",
+        "hash": "9567195899651149489"
+      },
+      {
         "file": "CLINE_INTEGRATION_README.md",
         "hash": "4362666339293138294"
       },
@@ -3860,10 +3857,6 @@
       {
         "file": "COMPREHENSIVE_FEATURES_CONNECTIONS_AUDIT_REPORT.md",
         "hash": "14185755208573875430"
-      },
-      {
-        "file": "COMPREHENSIVE_FIX_TODO.md",
-        "hash": "18025584748739149227"
       },
       {
         "file": "COMPREHENSIVE_PROJECT_ANALYSIS_TODO.md",
@@ -3935,7 +3928,7 @@
       },
       {
         "file": "DEPLOYMENT.md",
-        "hash": "4339139330958676058"
+        "hash": "1914026477313028707"
       },
       {
         "file": "DEPLOYMENT_CHECKLIST.md",
@@ -8731,15 +8724,15 @@
       },
       {
         "file": "deploy-production.sh",
-        "hash": "13635380021780354254"
+        "hash": "3729610668378743174"
       },
       {
         "file": "deploy.ps1",
-        "hash": "9446315422812237930"
+        "hash": "3558580958656454198"
       },
       {
         "file": "deploy.sh",
-        "hash": "4993783187988589423"
+        "hash": "6349247509151372929"
       },
       {
         "file": "docs/CLS_OPTIMIZATION.md",
@@ -8763,7 +8756,7 @@
       },
       {
         "file": "eslint.config.mjs",
-        "hash": "4068474252254596598"
+        "hash": "8931688906851693062"
       },
       {
         "file": "exportedData/dataconnect_export/postgres.tar.gz",
@@ -14147,7 +14140,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/jpegxs_parser.c",
-        "hash": "3631542189490287488"
+        "hash": "9739897067168099115"
       },
       {
         "file": "ffmpeg/libavcodec/jrevdct.c",
@@ -16831,7 +16824,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/riscv/Makefile",
-        "hash": "10179313150526842466"
+        "hash": "15780064961984854495"
       },
       {
         "file": "ffmpeg/libavcodec/riscv/aacencdsp_init.c",
@@ -17055,7 +17048,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/riscv/llvidencdsp_rvv.S",
-        "hash": "1679867586665547672"
+        "hash": "2583170232303252243"
       },
       {
         "file": "ffmpeg/libavcodec/riscv/lpc_init.c",
@@ -18831,7 +18824,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/vulkan/common.comp",
-        "hash": "9426238948192267861"
+        "hash": "8881196966134072985"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan/dpx_copy.comp",
@@ -18887,7 +18880,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/vulkan/prores_vld.comp",
-        "hash": "4322980557683264260"
+        "hash": "3453671373722609589"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan/rangecoder.comp",
@@ -18947,7 +18940,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/vulkan_prores.c",
-        "hash": "5399115130279128483"
+        "hash": "13315955183629394786"
       },
       {
         "file": "ffmpeg/libavcodec/vulkan_prores_raw.c",
@@ -28515,11 +28508,11 @@
       },
       {
         "file": "ffmpeg/libswscale/format.c",
-        "hash": "14184517667356641249"
+        "hash": "15318274996451404528"
       },
       {
         "file": "ffmpeg/libswscale/format.h",
-        "hash": "13077803019385545270"
+        "hash": "3061953756205927608"
       },
       {
         "file": "ffmpeg/libswscale/gamma.c",
@@ -28527,7 +28520,7 @@
       },
       {
         "file": "ffmpeg/libswscale/graph.c",
-        "hash": "7435104144958285331"
+        "hash": "11861137729952405865"
       },
       {
         "file": "ffmpeg/libswscale/graph.h",
@@ -28627,11 +28620,11 @@
       },
       {
         "file": "ffmpeg/libswscale/ops.c",
-        "hash": "7426128780310897658"
+        "hash": "7625702749930324208"
       },
       {
         "file": "ffmpeg/libswscale/ops.h",
-        "hash": "2367825589482367072"
+        "hash": "14916017720958481227"
       },
       {
         "file": "ffmpeg/libswscale/ops_backend.c",
@@ -28659,7 +28652,7 @@
       },
       {
         "file": "ffmpeg/libswscale/ops_optimizer.c",
-        "hash": "10149955351317933991"
+        "hash": "7699671821540436282"
       },
       {
         "file": "ffmpeg/libswscale/ops_tmpl_common.c",
@@ -28667,7 +28660,7 @@
       },
       {
         "file": "ffmpeg/libswscale/ops_tmpl_float.c",
-        "hash": "4410927740322540951"
+        "hash": "16939647617200155365"
       },
       {
         "file": "ffmpeg/libswscale/ops_tmpl_int.c",
@@ -28759,7 +28752,7 @@
       },
       {
         "file": "ffmpeg/libswscale/swscale.c",
-        "hash": "15348153537706062693"
+        "hash": "3927556161287195501"
       },
       {
         "file": "ffmpeg/libswscale/swscale.h",
@@ -28795,7 +28788,7 @@
       },
       {
         "file": "ffmpeg/libswscale/tests/sws_ops.c",
-        "hash": "4813189976293819459"
+        "hash": "5146416981316990621"
       },
       {
         "file": "ffmpeg/libswscale/tests/swscale.c",
@@ -28835,15 +28828,15 @@
       },
       {
         "file": "ffmpeg/libswscale/x86/ops.c",
-        "hash": "18390055191827761899"
+        "hash": "10682023499098254509"
       },
       {
         "file": "ffmpeg/libswscale/x86/ops_common.asm",
-        "hash": "14367914177773634068"
+        "hash": "128543701784437254"
       },
       {
         "file": "ffmpeg/libswscale/x86/ops_float.asm",
-        "hash": "16857796868700489309"
+        "hash": "4546824892508104560"
       },
       {
         "file": "ffmpeg/libswscale/x86/ops_int.asm",
@@ -28927,7 +28920,7 @@
       },
       {
         "file": "ffmpeg/tests/Makefile",
-        "hash": "805282419435436027"
+        "hash": "18038894584303154578"
       },
       {
         "file": "ffmpeg/tests/api/.gitignore",
@@ -29043,7 +29036,7 @@
       },
       {
         "file": "ffmpeg/tests/checkasm/checkasm.c",
-        "hash": "10660269950458433072"
+        "hash": "12183843689364557148"
       },
       {
         "file": "ffmpeg/tests/checkasm/checkasm.h",
@@ -29155,7 +29148,7 @@
       },
       {
         "file": "ffmpeg/tests/checkasm/llvidencdsp.c",
-        "hash": "11761250465246099056"
+        "hash": "10729198887044385263"
       },
       {
         "file": "ffmpeg/tests/checkasm/lpc.c",
@@ -29215,7 +29208,7 @@
       },
       {
         "file": "ffmpeg/tests/checkasm/sw_ops.c",
-        "hash": "349269493252501911"
+        "hash": "11109321695850632869"
       },
       {
         "file": "ffmpeg/tests/checkasm/sw_range_convert.c",
@@ -29475,7 +29468,7 @@
       },
       {
         "file": "ffmpeg/tests/fate/demux.mak",
-        "hash": "16902698530732042099"
+        "hash": "1621681915416723307"
       },
       {
         "file": "ffmpeg/tests/fate/dfa.mak",
@@ -37214,6 +37207,10 @@
         "hash": "10964353025388660942"
       },
       {
+        "file": "ffmpeg/tests/ref/fate/jxs-concat-demux",
+        "hash": "14188404228889696703"
+      },
+      {
         "file": "ffmpeg/tests/ref/fate/kgv1",
         "hash": "9607474417671249982"
       },
@@ -39087,7 +39084,7 @@
       },
       {
         "file": "ffmpeg/tests/ref/fate/sws-ops-list",
-        "hash": "3533472184058230659"
+        "hash": "6044591177681644443"
       },
       {
         "file": "ffmpeg/tests/ref/fate/sws-pixdesc-query",
@@ -48979,7 +48976,7 @@
       },
       {
         "file": "firebase.json",
-        "hash": "9498298147333037216"
+        "hash": "9941295669491600294"
       },
       {
         "file": "firebase.json.backup",
@@ -49243,11 +49240,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "1837060819444796090"
+        "hash": "15155753506358505255"
       },
       {
         "file": "package.json",
-        "hash": "11788676869657522382"
+        "hash": "15141924222106276803"
       },
       {
         "file": "package_backup.json",
@@ -49495,7 +49492,7 @@
       },
       {
         "file": "src/App.tsx",
-        "hash": "1230624853631041797"
+        "hash": "15955058732918680316"
       },
       {
         "file": "src/__test__/DashboardHome.test.tsx",
@@ -49511,11 +49508,11 @@
       },
       {
         "file": "src/components/Accessibility.tsx",
-        "hash": "4428204295675663527"
+        "hash": "1394431520560888326"
       },
       {
         "file": "src/components/ConnectionStatus.tsx",
-        "hash": "17469694337804842105"
+        "hash": "13789938421887265972"
       },
       {
         "file": "src/components/Dashboard.test.tsx",
@@ -49539,7 +49536,7 @@
       },
       {
         "file": "src/components/Moodboard.tsx",
-        "hash": "11598325097065524403"
+        "hash": "13794736545211003799"
       },
       {
         "file": "src/components/ProjectDashboard.tsx",
@@ -49575,19 +49572,19 @@
       },
       {
         "file": "src/components/ai/AudioAIComponent.tsx",
-        "hash": "10601864451876009853"
+        "hash": "11648941499269246517"
       },
       {
         "file": "src/components/ai/DocumentAIComponent.tsx",
-        "hash": "14122505054005292547"
+        "hash": "10224629865571286997"
       },
       {
         "file": "src/components/ai/DocumentAIComponent_Complete.tsx",
-        "hash": "11743942622106458404"
+        "hash": "15446880592268123699"
       },
       {
         "file": "src/components/ai/EnhancedAIOrchestrator.tsx",
-        "hash": "11311957666554575340"
+        "hash": "16723367992767223494"
       },
       {
         "file": "src/components/ai/MultiModalContext.tsx",
@@ -49595,7 +49592,7 @@
       },
       {
         "file": "src/components/ai/VisionAIComponent.tsx",
-        "hash": "6419950741993151322"
+        "hash": "1728311291133885919"
       },
       {
         "file": "src/components/ai/mockDataGenerators.ts",
@@ -49711,7 +49708,7 @@
       },
       {
         "file": "src/components/extensibility/PluginManager.tsx",
-        "hash": "1872130086464065546"
+        "hash": "3439502733171339600"
       },
       {
         "file": "src/components/extensibility/PluginRegistry.tsx",
@@ -49723,7 +49720,7 @@
       },
       {
         "file": "src/components/layout/Sidebar.tsx",
-        "hash": "14307122109017786024"
+        "hash": "17854998502334177006"
       },
       {
         "file": "src/components/loading/ErrorBoundary.tsx",
@@ -49735,7 +49732,7 @@
       },
       {
         "file": "src/components/plugins/PluginManagerUI.tsx",
-        "hash": "3139396416558008279"
+        "hash": "18230439207639835391"
       },
       {
         "file": "src/components/ui/Card.tsx",
@@ -49743,19 +49740,19 @@
       },
       {
         "file": "src/components/ui/CollaborativeCursor.tsx",
-        "hash": "5419196806296082463"
+        "hash": "12157034314455680547"
       },
       {
         "file": "src/components/ui/CommandPalette.tsx",
-        "hash": "15422827679812843411"
+        "hash": "2303294174766989448"
       },
       {
         "file": "src/components/ui/ContextMenu.tsx",
-        "hash": "13613794571608279112"
+        "hash": "16783072142745709924"
       },
       {
         "file": "src/components/ui/FloatingActionMenu.tsx",
-        "hash": "13705940506658449651"
+        "hash": "17530664760738013379"
       },
       {
         "file": "src/context/RouteContext.tsx",
@@ -49827,7 +49824,7 @@
       },
       {
         "file": "src/dataconnect.ts",
-        "hash": "18294500969293888097"
+        "hash": "15218105469447355347"
       },
       {
         "file": "src/firebase.d.ts",
@@ -49847,15 +49844,15 @@
       },
       {
         "file": "src/hooks/useKeyboardShortcuts.ts",
-        "hash": "5382572993735306076"
+        "hash": "1751393150904682591"
       },
       {
         "file": "src/hooks/useRealTime.ts",
-        "hash": "11640297375157640361"
+        "hash": "1061413450340040224"
       },
       {
         "file": "src/hooks/useRealTimeCollaboration.ts",
-        "hash": "10859363879162108406"
+        "hash": "6460437455969164854"
       },
       {
         "file": "src/hooks/useToast.ts",
@@ -49867,11 +49864,11 @@
       },
       {
         "file": "src/integration/Phase3IntegrationTest.tsx",
-        "hash": "7165342501346673973"
+        "hash": "12723758120101883718"
       },
       {
         "file": "src/lib/utils.ts",
-        "hash": "17496777374974015995"
+        "hash": "1150028292556679078"
       },
       {
         "file": "src/pages/PluginManagerPage.tsx",
@@ -49891,23 +49888,27 @@
       },
       {
         "file": "src/services/LiveEditingService.ts",
-        "hash": "4185708581380001763"
+        "hash": "11592480024612622031"
       },
       {
         "file": "src/services/PresenceService.ts",
-        "hash": "8151213718329259447"
+        "hash": "7365804276136302930"
       },
       {
         "file": "src/services/UndoRedoService.ts",
-        "hash": "12323325874369949959"
+        "hash": "568819660074676621"
       },
       {
         "file": "src/services/WebSocketService.ts",
-        "hash": "16228258526414326732"
+        "hash": "2664513731412620155"
+      },
+      {
+        "file": "src/services/api/ai.ts",
+        "hash": "8735217764547397523"
       },
       {
         "file": "src/services/api/auth.ts",
-        "hash": "9687577133472333503"
+        "hash": "12694498640134112816"
       },
       {
         "file": "src/services/api/client.ts",
@@ -49915,7 +49916,7 @@
       },
       {
         "file": "src/services/api/freelancers.ts",
-        "hash": "10542368340415171625"
+        "hash": "2173256082277643508"
       },
       {
         "file": "src/services/api/index.ts",
@@ -49927,7 +49928,7 @@
       },
       {
         "file": "src/services/api/projects.ts",
-        "hash": "3688733625945614859"
+        "hash": "6426931251319058272"
       },
       {
         "file": "src/services/moodboardApi.ts",
@@ -49947,7 +49948,7 @@
       },
       {
         "file": "src/services/websocket.ts",
-        "hash": "9432025281619255418"
+        "hash": "12047885852827045780"
       },
       {
         "file": "src/test/setup.ts",
@@ -49963,7 +49964,7 @@
       },
       {
         "file": "src/utils/mockDataGenerators.ts",
-        "hash": "13039915366985208211"
+        "hash": "9469877211330761170"
       },
       {
         "file": "src/views/ConfluenceView.tsx",
@@ -50118,6 +50119,10 @@
         "hash": "6968874576227316231"
       },
       {
+        "file": "types/google-cloud/index.d.ts",
+        "hash": "12523411197007194898"
+      },
+      {
         "file": "types/googleapis/index.d.ts",
         "hash": "6432555131811957729"
       },
@@ -50143,7 +50148,7 @@
       },
       {
         "file": "yarn.lock",
-        "hash": "15269631629142118552"
+        "hash": "9088328614700898664"
       },
       {
         "file": "~/.gemini/GEMINI.md",
@@ -50151,5 +50156,5 @@
       }
     ]
   },
-  "externalNodesHash": "2660539890834158284"
+  "externalNodesHash": "17793024819779634617"
 }
