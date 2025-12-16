@@ -3,6 +3,7 @@ import { BadRequestException, ForbiddenException, Inject, Injectable } from '@ne
 import type { Cache } from 'cache-manager';
 import * as crypto from 'crypto';
 import { PrismaService } from '../../prisma/prisma.service.js';
+import type { Prisma } from '@prisma/client';
 
 type ProjectRole = 'owner' | 'editor' | 'viewer';
 type HealthMetrics = {
@@ -226,7 +227,7 @@ export class ProjectContextService {
       action: 'ARCHIVE_PROJECT',
       resourceType: 'project',
       resourceId: projectId,
-      metadata: { reason, timestamp: new Date() },
+      metadata: this.toJsonValue({ reason, timestamp: new Date() }),
     });
 
     // Clear cache
@@ -270,7 +271,7 @@ export class ProjectContextService {
       action: 'DELETE_PROJECT',
       resourceType: 'project',
       resourceId: projectId,
-      metadata: { timestamp: new Date() },
+      metadata: this.toJsonValue({ timestamp: new Date() }),
     });
   }
 
@@ -307,6 +308,7 @@ export class ProjectContextService {
     metadata?: Record<string, unknown>;
   }): Promise<void> {
     try {
+      const metadataValue = this.toJsonValue(event.metadata || {}) as Prisma.InputJsonValue;
       await this.prisma.projectAuditLog.create({
         data: {
           projectId: event.projectId,
@@ -314,7 +316,7 @@ export class ProjectContextService {
           action: event.action,
           resourceType: event.resourceType,
           resourceId: event.resourceId,
-          metadata: event.metadata || {},
+          metadata: metadataValue,
           timestamp: new Date(),
         }
       });
@@ -465,5 +467,14 @@ export class ProjectContextService {
     }
 
     return alerts;
+  }
+
+  private toJsonValue(data: Record<string, unknown>): Record<string, unknown> {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => [
+        key,
+        value instanceof Date ? value.toISOString() : value,
+      ])
+    );
   }
 }

@@ -1,8 +1,8 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { VertexAIService } from "../ai/vertex-ai.service.js";
-import { ChunkingService } from "./chunking.service.js";
-import { EmbeddingsService } from "./embeddings.service.js";
-import { VectorStoreService } from "./vector-store.service.js";
+import { VertexAIService } from "../ai/vertex-ai.service";
+import { ChunkingService } from "./chunking.service";
+import { EmbeddingsService } from "./embeddings.service";
+import { VectorStoreService } from "./vector-store.service";
 
 interface RAGContext {
   query: string;

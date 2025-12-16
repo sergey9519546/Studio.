@@ -2495,31 +2495,19 @@
         },
         {
           "file": "apps/api/src/modules/ai/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai-embeddings.service.spec.ts",
-          "hash": "11546289107729072920",
-          "deps": [
-            "npm:@nestjs/testing"
-          ]
+          "hash": "11546289107729072920"
         },
         {
           "file": "apps/api/src/modules/ai/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai-embeddings.service.ts",
-          "hash": "16372949285207238327",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
+          "hash": "16372949285207238327"
         },
         {
           "file": "apps/api/src/modules/ai/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai.service.spec.ts",
-          "hash": "9609701531790527146",
-          "deps": [
-            "npm:@nestjs/testing"
-          ]
+          "hash": "9609701531790527146"
         },
         {
           "file": "apps/api/src/modules/ai/Users/serge/OneDrive/Documents/Sergey-Avetisyan-main/apps/api/src/modules/ai/vertex-ai.service.ts",
-          "hash": "13865713121525180165",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
+          "hash": "13865713121525180165"
         },
         {
           "file": "apps/api/src/modules/ai/ai.controller.contract.spec.ts",

@@ -17,7 +17,7 @@ const mockGoogleDriveAdapter = {
 // Helper to build a fake request with user
 type RequestWithUser = Request & { user: { id: string; email: string } };
 const makeRequest = (userId: string): RequestWithUser =>
-  ({ user: { id: userId, email: "test@example.com" } } as RequestWithUser);
+  ({ user: { id: Number(userId), email: "test@example.com" } } as RequestWithUser);
 
 describe("CloudStorageService", () => {
   let service: CloudStorageService;

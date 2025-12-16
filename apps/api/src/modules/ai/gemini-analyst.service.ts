@@ -2,10 +2,10 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import type { Cache } from 'cache-manager';
 import { createHash } from 'crypto';
-import { PrismaService } from '../../prisma/prisma.service.js';
-import { getTools } from './tools.js';
-import type { ToolCall, ToolDefinition } from './types.js';
-import { VertexAIService } from './vertex-ai.service.js';
+import { PrismaService } from '../../prisma/prisma.service';
+import { getTools } from './tools';
+import type { ToolCall, ToolDefinition } from './types';
+import { VertexAIService } from './vertex-ai.service';
 
 /**
  * Image composition analysis result

@@ -1,7 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { PrismaService } from "../../prisma/prisma.service.js";
-import { cosineSimilarity } from "../../utils/math.utils.js";
-import { EmbeddingsService } from "./embeddings.service.js";
+import { PrismaService } from "../../prisma/prisma.service";
+import { cosineSimilarity } from "../../utils/math.utils";
+import { EmbeddingsService } from "./embeddings.service";
 
 interface StoredVector {
   id: string;

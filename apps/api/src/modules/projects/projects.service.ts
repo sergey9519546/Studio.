@@ -2,7 +2,7 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { Prisma, ProjectStatus } from '@prisma/client';
 import type { Cache } from 'cache-manager';
-import { PrismaService } from '../../prisma/prisma.service.js';
+import { PrismaService } from '../../prisma/prisma.service';
 
 export interface ProjectInput {
   name?: string;
@@ -62,7 +62,7 @@ interface PrismaProjectResult {
 /**
  * Type definition for DTO output
  */
-interface ProjectDto {
+export interface ProjectDto {
   id: string;
   name: string;
   title: string;

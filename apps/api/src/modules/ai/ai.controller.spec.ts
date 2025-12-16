@@ -2,7 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { RAGService } from "../rag/rag.service";
 import { AIController } from "./ai.controller";
 import { GeminiAnalystService } from "./gemini-analyst.service";
+import { GeminiService } from "./gemini.service";
 import { StreamingService } from "./streaming.service";
+import { ConversationsService } from "../conversations/conversations.service";
 
 describe("AIController", () => {
   let controller: AIController;
@@ -25,6 +27,28 @@ describe("AIController", () => {
     chatStreamEnhanced: jest.fn(),
   };
 
+  const mockGeminiService = {
+    generateContent: jest.fn(),
+    generateWithGoogleSearch: jest.fn(),
+    executeCode: jest.fn(),
+    generateImage: jest.fn(),
+    performDeepResearch: jest.fn(),
+    createMultiToolInteraction: jest.fn(),
+    createAdvancedConversation: jest.fn(),
+    continueAdvancedConversation: jest.fn(),
+    batchGenerateContent: jest.fn(),
+    generateWithCustomConfig: jest.fn(),
+    healthCheck: jest.fn(),
+  };
+
+  const mockConversationsService = {
+    findById: jest.fn(),
+    getMessages: jest.fn(),
+    create: jest.fn(),
+    addMessage: jest.fn(),
+    generateContextSnapshot: jest.fn(),
+  };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AIController],
@@ -34,12 +58,20 @@ describe("AIController", () => {
           useValue: mockGeminiAnalystService,
         },
         {
+          provide: GeminiService,
+          useValue: mockGeminiService,
+        },
+        {
           provide: RAGService,
           useValue: mockRAGService,
         },
         {
           provide: StreamingService,
           useValue: mockStreamingService,
+        },
+        {
+          provide: ConversationsService,
+          useValue: mockConversationsService,
         },
       ],
     }).compile();

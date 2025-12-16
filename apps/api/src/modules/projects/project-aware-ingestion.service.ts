@@ -1,5 +1,6 @@
 import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import * as crypto from 'crypto';
+import type { Prisma } from '@prisma/client';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { ProjectContextService } from './project-context.service.js';
 
@@ -94,7 +95,7 @@ export class ProjectAwareIngestionService {
 
     // 3. Encrypt sensitive content if required
     let processedContent = content;
-    let encryptionStatus = 'unencrypted';
+    let encryptionStatus: DocumentMetadata['encryptionStatus'] = 'unencrypted';
 
     if (options.encryptContent || metadata.sensitivityLevel !== 'standard') {
       const encryptionResult = await this.encryptSensitiveContent(
@@ -148,7 +149,7 @@ export class ProjectAwareIngestionService {
           sourceId: metadata.sourceId,
           projectId,
           userId,
-          metadata,
+          metadata: this.toJsonMetadata(metadata),
           embedding: embeddingBatch.embeddings,
           status: 'indexed',
           type: 'document',
@@ -168,12 +169,12 @@ export class ProjectAwareIngestionService {
           userId,
           contentHash,
           embedding: embeddingBatch.embeddings,
-          metadata: {
+          metadata: this.toJsonMetadata({
             ...metadata,
             knowledgeSourceId: knowledgeSource.id,
-            ingestionTimestamp: new Date().toISOString(),
+            ingestionTimestamp: new Date(),
             encryptionStatus,
-          }
+          })
         }
       });
 
@@ -185,13 +186,13 @@ export class ProjectAwareIngestionService {
           action: 'INGEST_DOCUMENT',
           resourceType: 'knowledge_source',
           resourceId: knowledgeSource.id,
-          metadata: {
+          metadata: this.toJsonMetadata({
             fileName: file.originalname || file.name,
             fileSize: file.size,
             sensitivityLevel: metadata.sensitivityLevel,
             encryptionStatus,
             contentHash,
-          }
+          })
         }
       });
 
@@ -306,7 +307,7 @@ export class ProjectAwareIngestionService {
           sourceId: metadata.sourceId,
           projectId: metadata.projectId,
           userId: metadata.userId,
-          metadata,
+          metadata: this.toJsonMetadata(metadata),
           embedding: embeddingBatch.embeddings,
           status: 'indexed',
           type: 'text',
@@ -323,11 +324,11 @@ export class ProjectAwareIngestionService {
           userId: metadata.userId,
           contentHash,
           embedding: embeddingBatch.embeddings,
-          metadata: {
+          metadata: this.toJsonMetadata({
             ...metadata,
             knowledgeSourceId: knowledgeSource.id,
-            ingestionTimestamp: new Date().toISOString(),
-          }
+            ingestionTimestamp: new Date(),
+          })
         }
       });
 
@@ -354,7 +355,7 @@ export class ProjectAwareIngestionService {
   ) {
     const embeddings = await this.generateEmbeddings(content);
     const classification = this.classifyContent(content);
-    const ingestionTimestamp = new Date().toISOString();
+    const ingestionTimestamp = new Date();
     
     return {
       projectId: metadata.projectId,
@@ -400,7 +401,7 @@ export class ProjectAwareIngestionService {
     content: string,
     projectId: string,
     sensitivityLevel: 'standard' | 'confidential' | 'restricted'
-  ): Promise<{ encryptedContent: string; encryptionStatus: string }> {
+  ): Promise<{ encryptedContent: string; encryptionStatus: DocumentMetadata['encryptionStatus'] }> {
     // Get project encryption key
     const encryptionKey = await this.getProjectEncryptionKey(projectId);
 
@@ -460,6 +461,15 @@ export class ProjectAwareIngestionService {
       return Buffer.from(key, 'hex');
     }
     return crypto.createHash('sha256').update(key).digest();
+  }
+
+  private toJsonMetadata(metadata: Partial<DocumentMetadata>): Prisma.InputJsonValue {
+    return {
+      ...metadata,
+      ingestionTimestamp: metadata.ingestionTimestamp instanceof Date
+        ? metadata.ingestionTimestamp.toISOString()
+        : metadata.ingestionTimestamp,
+    } as Prisma.InputJsonValue;
   }
 
   private async hashContent(content: string): Promise<string> {

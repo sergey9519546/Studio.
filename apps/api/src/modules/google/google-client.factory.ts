@@ -1,7 +1,10 @@
 import { Injectable, Logger, OnModuleInit, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JWT, OAuth2Client } from 'google-auth-library';
-import { google, drive_v3, docs_v1, sheets_v4 } from 'googleapis';
+import { google } from 'googleapis';
+import type { drive_v3 } from 'googleapis/build/src/apis/drive/v3';
+import type { docs_v1 } from 'googleapis/build/src/apis/docs/v1';
+import type { sheets_v4 } from 'googleapis/build/src/apis/sheets/v4';
 
 export interface GoogleUserCredentials {
   accessToken?: string;

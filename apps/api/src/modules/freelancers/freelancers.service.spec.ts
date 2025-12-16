@@ -58,8 +58,7 @@ describe('FreelancersService', () => {
             const result = await service.findAll();
 
             expect(prismaService.freelancer.findMany).toHaveBeenCalledWith({
-                include: { skills: true },
-                orderBy: { name: 'asc' },
+                orderBy: { name: 'asc' },  
             });
 
             expect(result).toEqual([
@@ -91,8 +90,7 @@ describe('FreelancersService', () => {
             const result = await service.findOne('1');
 
             expect(prismaService.freelancer.findUnique).toHaveBeenCalledWith({
-                where: { id: '1' },
-                include: { skills: true },
+                where: { id: '1' },        
             });
 
             expect(result).toEqual({
@@ -124,7 +122,7 @@ describe('FreelancersService', () => {
                 id: '3',
                 name: 'Alice Johnson',
                 email: 'alice@example.com',
-                skills: [{ name: 'React' }, { name: 'Vue' }],
+                skills: ['React', 'Vue'],
             };
 
             mockPrismaService.freelancer.create.mockResolvedValue(mockCreatedFreelancer);
@@ -135,14 +133,9 @@ describe('FreelancersService', () => {
                 data: {
                     name: 'Alice Johnson',
                     email: 'alice@example.com',
-                    skills: {
-                        connectOrCreate: [
-                            { where: { name: 'React' }, create: { name: 'React' } },
-                            { where: { name: 'Vue' }, create: { name: 'Vue' } },
-                        ],
-                    },
+                    skills: ['React', 'Vue'],
+                    status: undefined,
                 },
-                include: { skills: true },
             });
 
             expect(result).toEqual(mockCreatedFreelancer);
@@ -160,7 +153,7 @@ describe('FreelancersService', () => {
                 id: '1',
                 name: 'John Updated',
                 email: 'john@example.com',
-                skills: [{ name: 'Angular' }, { name: 'TypeScript' }],
+                skills: ['Angular', 'TypeScript'],
             };
 
             mockPrismaService.freelancer.update.mockResolvedValue(mockUpdatedFreelancer);
@@ -170,16 +163,9 @@ describe('FreelancersService', () => {
             expect(prismaService.freelancer.update).toHaveBeenCalledWith({
                 where: { id: '1' },
                 data: {
-                    name: 'John Updated',
-                    skills: {
-                        set: [],
-                        connectOrCreate: [
-                            { where: { name: 'Angular' }, create: { name: 'Angular' } },
-                            { where: { name: 'TypeScript' }, create: { name: 'TypeScript' } },
-                        ],
-                    },
+                    name: 'John Updated', 
+                    skills: ['Angular', 'TypeScript'],
                 },
-                include: { skills: true },
             });
 
             expect(result).toEqual(mockUpdatedFreelancer);
@@ -191,6 +177,7 @@ describe('FreelancersService', () => {
             const mockDeletedFreelancer = {
                 id: '1',
                 name: 'John Doe',
+                skills: [],
             };
 
             mockPrismaService.freelancer.delete.mockResolvedValue(mockDeletedFreelancer);

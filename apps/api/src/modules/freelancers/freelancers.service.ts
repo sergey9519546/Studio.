@@ -2,7 +2,7 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { BadRequestException, Inject, Injectable, Logger } from '@nestjs/common';
 import type { FreelancerStatus } from '@prisma/client';
 import type { Cache } from 'cache-manager';
-import { PrismaService } from '../../prisma/prisma.service.js';
+import { PrismaService } from '../../prisma/prisma.service';
 import { CreateFreelancerDto, ImportFreelancerDto, UpdateFreelancerDto } from './dto/freelancer.dto.js';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class FreelancersService {
     // Check cache first
     const cached = await this.cacheManager.get(this.CACHE_KEY);
     if (cached) {
-      return cached;
+      return this.normalizeFreelancers(cached as unknown[]);
     }
 
     // Fetch from database
@@ -31,13 +31,14 @@ export class FreelancersService {
     // Cache the result for 24 hours
     await this.cacheManager.set(this.CACHE_KEY, freelancers, this.CACHE_TTL);
 
-    return freelancers;
+    return this.normalizeFreelancers(freelancers);
   }
 
   async findOne(id: string) {
-    return await this.prisma.freelancer.findUnique({
+    const freelancer = await this.prisma.freelancer.findUnique({
       where: { id }
     });
+    return freelancer ? this.normalizeFreelancer(freelancer) : null;
   }
 
   async create(data: CreateFreelancerDto) {
@@ -60,7 +61,7 @@ export class FreelancersService {
     // Invalidate cache when creating
     await this.cacheManager.del(this.CACHE_KEY);
 
-    return created;
+    return this.normalizeFreelancer(created);
   }
 
   async update(id: string, data: UpdateFreelancerDto) {
@@ -83,7 +84,7 @@ export class FreelancersService {
     // Invalidate cache when updating
     await this.cacheManager.del(this.CACHE_KEY);
 
-    return updated;
+    return this.normalizeFreelancer(updated);
   }
 
   async search(query: string, limit = 10) {
@@ -104,7 +105,7 @@ export class FreelancersService {
       orderBy: { name: 'asc' },
     });
 
-    return results;
+    return this.normalizeFreelancers(results);
   }
 
   async suggested(limit = 5) {
@@ -112,7 +113,7 @@ export class FreelancersService {
       take: limit,
       orderBy: { createdAt: 'desc' },
     });
-    return results;
+    return this.normalizeFreelancers(results);
   }
 
   async remove(id: string) {
@@ -121,7 +122,7 @@ export class FreelancersService {
     // Invalidate cache when deleting
     await this.cacheManager.del(this.CACHE_KEY);
 
-    return deleted;
+    return this.normalizeFreelancer(deleted);
   }
 
   async createBatch(items: ImportFreelancerDto[]) {
@@ -151,5 +152,18 @@ export class FreelancersService {
       }
     }
     return { created, updated, errors: [] };
+  }
+
+  private normalizeFreelancers(items: unknown[]): unknown[] {
+    return items.map(item => this.normalizeFreelancer(item));
+  }
+
+  private normalizeFreelancer(item: unknown): any {
+    if (!item || typeof item !== 'object') return item;
+    const freelancer = item as { skills?: unknown[] };
+    const skills = Array.isArray(freelancer.skills)
+      ? freelancer.skills.map(s => (typeof s === 'string' ? s : (s as { name?: string }).name || '')).filter(Boolean)
+      : [];
+    return { ...(item as Record<string, unknown>), skills };
   }
 }

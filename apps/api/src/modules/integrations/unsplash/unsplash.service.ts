@@ -7,12 +7,14 @@ type SearchPhotosResponse = NonNullable<Awaited<ReturnType<UnsplashApiClient['se
 type UnsplashPhotoPayload =
   | SearchPhotosResponse['results'][number]
   | NonNullable<Awaited<ReturnType<UnsplashApiClient['photos']['get']>>['response']>;
+export type SearchOrderBy = 'relevant' | 'latest' | 'oldest' | 'popular';
+export type ListOrderBy = 'latest' | 'oldest' | 'popular';
 
 export interface UnsplashSearchParams {
   query: string;
   page?: number;
   per_page?: number;
-  order_by?: 'relevant' | 'latest' | 'oldest' | 'popular';
+  order_by?: SearchOrderBy;
   content_filter?: 'low' | 'high';
   orientation?: 'landscape' | 'portrait' | 'squarish';
 }
@@ -108,17 +110,17 @@ export class UnsplashService {
    */
   async searchPhotos(params: UnsplashSearchParams): Promise<UnsplashSearchResponse> {
     try {
-      const api = this.requireClient();
-      this.logger.log(`Searching photos for query: "${params.query}"`);
+    const api = this.requireClient();
+    this.logger.log(`Searching photos for query: "${params.query}"`);
 
-      const searchParams: Parameters<UnsplashApiClient['search']['getPhotos']>[0] = {
-        query: params.query,
-        page: params.page ?? 1,
-        perPage: params.per_page ?? 12,
-        orderBy: params.order_by ?? 'relevant',
-        contentFilter: params.content_filter ?? 'low',
-        orientation: params.orientation,
-      };
+    const searchParams = {
+      query: params.query,
+      page: params.page ?? 1,
+      perPage: params.per_page ?? 12,
+      orderBy: params.order_by ?? 'relevant',
+      contentFilter: params.content_filter ?? 'low',
+      orientation: params.orientation,
+    } as Parameters<UnsplashApiClient['search']['getPhotos']>[0];
 
       const response = await api.search.getPhotos(searchParams);
 
@@ -180,17 +182,17 @@ export class UnsplashService {
   async getCuratedPhotos(params?: {
     page?: number;
     per_page?: number;
-    order_by?: 'latest' | 'oldest' | 'popular';
+    order_by?: ListOrderBy;
   }): Promise<UnsplashSearchResponse> {
     try {
       const api = this.requireClient();
       this.logger.log('Getting curated photos');
 
-      const listParams: Parameters<UnsplashApiClient['photos']['list']>[0] = {
+      const listParams = {
         page: params?.page ?? 1,
         perPage: params?.per_page ?? 12,
         orderBy: params?.order_by ?? 'popular',
-      };
+      } as Parameters<UnsplashApiClient['photos']['list']>[0];
 
       const response = await api.photos.list(listParams);
 
@@ -223,17 +225,17 @@ export class UnsplashService {
   async getPopularPhotos(params?: {
     page?: number;
     per_page?: number;
-    order_by?: 'latest' | 'oldest' | 'popular';
+    order_by?: ListOrderBy;
   }): Promise<UnsplashSearchResponse> {
     try {
       const api = this.requireClient();
       this.logger.log('Getting popular photos');
 
-      const listParams: Parameters<UnsplashApiClient['photos']['list']>[0] = {
+      const listParams = {
         page: params?.page ?? 1,
         perPage: params?.per_page ?? 12,
         orderBy: params?.order_by ?? 'popular',
-      };
+      } as Parameters<UnsplashApiClient['photos']['list']>[0];
 
       const response = await api.photos.list(listParams);
 
@@ -287,7 +289,7 @@ export class UnsplashService {
       created_at: photo.created_at,
       width: photo.width,
       height: photo.height,
-      color: photo.color,
+      color: photo.color || '#000000',
       likes: photo.likes,
       description: photo.description,
       alt_description: photo.alt_description,
@@ -296,8 +298,8 @@ export class UnsplashService {
         username: photo.user.username,
         name: photo.user.name,
         first_name: photo.user.first_name,
-        last_name: photo.user.last_name,
-        portfolio_url: photo.user.portfolio_url,
+        last_name: photo.user.last_name || '',
+        portfolio_url: photo.user.portfolio_url || undefined,
         profile_image: {
           small: photo.user.profile_image.small,
           medium: photo.user.profile_image.medium,

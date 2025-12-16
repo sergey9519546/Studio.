@@ -61,7 +61,7 @@ describe('ProjectsService', () => {
             expect(prismaService.project.findMany).toHaveBeenCalledWith({
                 skip: 2,  // (page - 1) * limit = (2 - 1) * 2 = 2
                 take: 2,
-                include: { roleRequirements: true, knowledgeBase: true },
+                include: { roleRequirements: true },
                 orderBy: { updatedAt: 'desc' },
             });
 
@@ -74,7 +74,6 @@ describe('ProjectsService', () => {
                         name: 'Project 1',  // DTO transformation
                         client: 'Client A',
                         clientName: 'Client A',  // DTO transformation
-                        dueDate: null,  // DTO transformation from endDate
                     }),
                     expect.objectContaining({
                         id: '2',
@@ -82,7 +81,6 @@ describe('ProjectsService', () => {
                         name: 'Project 2',
                         client: 'Client B',
                         clientName: 'Client B',
-                        dueDate: null,
                     }),
                 ],
                 meta: {
@@ -145,7 +143,6 @@ describe('ProjectsService', () => {
                 where: { id: '1' },
                 include: {
                     roleRequirements: true,
-                    knowledgeBase: true,
                     scripts: true,
                     assignments: true,
                 },
@@ -157,7 +154,6 @@ describe('ProjectsService', () => {
                 name: 'Project 1',
                 client: 'Client A',
                 clientName: 'Client A',
-                dueDate: null,
             });
         });
 

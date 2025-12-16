@@ -16,17 +16,18 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { MessageRole } from '@prisma/client';
 import type { Response } from 'express';
 import 'multer';
-import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
-import { ConversationsService } from '../conversations/conversations.service.js';
-import { RAGService } from '../rag/rag.service.js';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { ConversationsService } from '../conversations/conversations.service';
+import { RAGService } from '../rag/rag.service';
 import {
     GeminiAnalystService,
     type ImageAnalysisResult,
     type PerformanceAnalysisResult,
     type ProfitabilityAnalysisResult
-} from './gemini-analyst.service.js';
-import { GeminiService } from './gemini.service.js';
-import { StreamingService } from './streaming.service.js';
+} from './gemini-analyst.service';
+import { GeminiService } from './gemini.service';
+import { StreamingService, type StreamChunk } from './streaming.service';
+import type { SafetySetting } from '@google/genai';
 
 /**
  * Chat request DTO
@@ -65,27 +66,10 @@ interface ToolDefinition {
 }
 
 /**
- * Safety settings for model configuration
- */
-interface SafetySetting {
-    category: string;
-    threshold: string;
-}
-
-/**
  * RAG source metadata
  */
 interface RAGSourceMetadata {
     source?: string;
-    [key: string]: unknown;
-}
-
-/**
- * Streaming chunk response
- */
-interface StreamChunk {
-    error?: string;
-    done?: boolean;
     [key: string]: unknown;
 }
 
@@ -255,15 +239,14 @@ ${JSON.stringify(parsedContext, null, 2)}
             const stream = this.streaming.chatStreamEnhanced(enhancedContext, conversationHistory);
 
             for await (const chunk of stream) {
-                const typedChunk = chunk as StreamChunk;
-                if (typedChunk.error) {
-                    res.write(`data: ${JSON.stringify({ error: typedChunk.error })}\n\n`);
+                if (chunk.error) {
+                    res.write(`data: ${JSON.stringify({ error: chunk.error })}\n\n`);
                     break;
                 }
 
                 res.write(`data: ${JSON.stringify(chunk)}\n\n`);
 
-                if (typedChunk.done) {
+                if (chunk.done) {
                     break;
                 }
             }
@@ -362,8 +345,20 @@ ${JSON.stringify(parsedContext, null, 2)}
 
     @Post('generate/project-brief/:id')
     @HttpCode(HttpStatus.OK)
-    async generateProjectBrief(@Param('id') _id: string): Promise<never> {
-        throw new BadRequestException(`generateProjectBrief not implemented yet for project ${_id}`);
+    async generateProjectBrief(@Param('id') projectId: string): Promise<{ projectId: string; brief: string }> {
+        const prompt = [
+            'Create a concise project brief for a creative agency project.',
+            `Project ID: ${projectId}`,
+            'Include sections: Overview, Goals, Deliverables, Timeline, Risks, Next Steps.',
+            'Keep it under 250 words and use bullet points where appropriate.',
+        ].join('\n');
+
+        const brief = await this.geminiService.generateContent(prompt);
+
+        return {
+            projectId,
+            brief,
+        };
     }
 
     /**

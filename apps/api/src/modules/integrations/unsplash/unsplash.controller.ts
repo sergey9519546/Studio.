@@ -10,13 +10,13 @@ import {
     Post,
     Query
 } from '@nestjs/common';
-import { UnsplashSearchParams, UnsplashService } from './unsplash.service.js';
+import { UnsplashSearchParams, UnsplashService, type SearchOrderBy, type ListOrderBy } from './unsplash.service.js';
 
 interface SearchQueryDto {
   query: string;
   page?: number;
   per_page?: number;
-  order_by?: 'relevant' | 'latest' | 'oldest' | 'popular';
+  order_by?: SearchOrderBy;
   content_filter?: 'low' | 'high';
   orientation?: 'landscape' | 'portrait' | 'squarish';
 }
@@ -24,7 +24,7 @@ interface SearchQueryDto {
 interface PaginationQueryDto {
   page?: number;
   per_page?: number;
-  order_by?: 'latest' | 'oldest' | 'popular';
+  order_by?: ListOrderBy;
 }
 
 @Controller('api/v1/unsplash')

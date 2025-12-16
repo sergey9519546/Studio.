@@ -1,6 +1,8 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
-import { docs_v1, sheets_v4 } from 'googleapis';
-import { AuthenticatedUser, GoogleClientFactory } from './google-client.factory.js';
+import { google } from 'googleapis';
+import type { docs_v1 } from 'googleapis/build/src/apis/docs/v1';
+import type { sheets_v4 } from 'googleapis/build/src/apis/sheets/v4';
+import { AuthenticatedUser, GoogleClientFactory } from './google-client.factory';
 
 type SheetValues = NonNullable<sheets_v4.Schema$ValueRange['values']>;
 type StructuralElement = docs_v1.Schema$StructuralElement;

@@ -1,4 +1,5 @@
 import { GoogleGenAI } from '@google/genai';
+import type { SafetySetting, HarmCategory } from '@google/genai';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { writeFile } from 'fs/promises';
@@ -61,7 +62,7 @@ interface CustomModelConfig {
   topK?: number;
   stopSequences?: string[];
   candidateCount?: number;
-  safetySettings?: Array<unknown>;
+  safetySettings?: SafetySetting[];
 }
 
 interface ContentQualityCriteria {
@@ -730,6 +731,10 @@ export class GeminiService {
 
   async generateWithCustomConfig(prompt: string, config: CustomModelConfig): Promise<string> {
     const model = config.model || 'gemini-2.0-flash-exp';
+    const safetySettings = config.safetySettings?.map(setting => ({
+      ...setting,
+      category: setting.category as HarmCategory | undefined,
+    }));
     
     const response = await this.client.models.generateContent({
       model,
@@ -741,7 +746,7 @@ export class GeminiService {
         topK: config.topK,
         stopSequences: config.stopSequences,
         candidateCount: config.candidateCount,
-        safetySettings: config.safetySettings,
+        safetySettings,
       },
     });
 
