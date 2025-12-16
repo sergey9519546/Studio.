@@ -1,9 +1,9 @@
 import { BadRequestException } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
-import { GoogleDriveAdapter } from "./adapters/google-drive.adapter.js";
-import { CloudStorageController } from "./cloud-storage.controller.js";
-import { CloudStorageService } from "./cloud-storage.service.js";
-import { CloudProviderType } from "./dto/cloud-storage.dto.js";
+import { GoogleDriveAdapter } from "./adapters/google-drive.adapter";
+import { CloudStorageController } from "./cloud-storage.controller";
+import { CloudStorageService } from "./cloud-storage.service";
+import { CloudProviderType } from "./dto/cloud-storage.dto";
 import type { Request } from "express";
 
 // Simple mock for GoogleDriveAdapter

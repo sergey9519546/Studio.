@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BadRequestException } from '@nestjs/common';
-import { DataExtractorService } from './data-extractor.service.js';
-import { GoogleClientFactory } from './google-client.factory.js';
+import { DataExtractorService } from './data-extractor.service';
+import { GoogleClientFactory } from './google-client.factory';
 
 describe('DataExtractorService', () => {
     let service: DataExtractorService;

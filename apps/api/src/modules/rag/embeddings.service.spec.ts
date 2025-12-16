@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { EmbeddingsService } from './embeddings.service.js';
+import { EmbeddingsService } from './embeddings.service';
 import {
   EMBEDDINGS_PROVIDER,
   EmbeddingsProvider,
-} from "./providers/embeddings-provider.interface.js";
+} from "./providers/embeddings-provider.interface";
 // Jest provides describe, beforeEach, afterEach, it as globals
 
 describe("EmbeddingsService", () => {

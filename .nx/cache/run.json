@@ -1,18 +1,18 @@
 {
   "run": {
-    "command": "nx build api",
-    "startTime": "2025-12-15T12:18:00.537Z",
-    "endTime": "2025-12-15T12:18:05.784Z",
+    "command": "nx lint api",
+    "startTime": "2025-12-16T12:38:54.071Z",
+    "endTime": "2025-12-16T12:39:02.387Z",
     "inner": false
   },
   "tasks": [
     {
-      "taskId": "api:build",
-      "target": "build",
+      "taskId": "api:lint",
+      "target": "lint",
       "projectName": "api",
-      "hash": "18133039775277432967",
-      "startTime": "2025-12-15T12:18:00.544Z",
-      "endTime": "2025-12-15T12:18:05.783Z",
+      "hash": "7228141525510860973",
+      "startTime": "2025-12-16T12:38:54.088Z",
+      "endTime": "2025-12-16T12:39:02.386Z",
       "params": "",
       "cacheStatus": "cache-miss",
       "status": 1

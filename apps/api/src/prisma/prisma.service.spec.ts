@@ -1,6 +1,6 @@
 import { Logger } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
-import { PrismaService } from "./prisma.service.js";
+import { PrismaService } from "./prisma.service";
 
 // Mock @prisma/client to avoid real Prisma runtime initialization
 jest.mock("@prisma/client", () => {

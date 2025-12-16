@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ProjectsService } from './projects.service.js';
-import { PrismaService } from '../../prisma/prisma.service.js';
+import { ProjectsService } from './projects.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 
 describe('ProjectsService', () => {

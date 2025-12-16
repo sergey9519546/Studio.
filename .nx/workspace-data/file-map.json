@@ -2727,7 +2727,8 @@
           "file": "apps/api/src/modules/assignments/assignments.service.ts",
           "hash": "18364895821130549864",
           "deps": [
-            "npm:@nestjs/common"
+            "npm:@nestjs/common",
+            "npm:@prisma/client"
           ]
         },
         {
@@ -2904,7 +2905,8 @@
           "file": "apps/api/src/modules/google/data-extractor.service.ts",
           "hash": "385224992154432804",
           "deps": [
-            "npm:@nestjs/common"
+            "npm:@nestjs/common",
+            "npm:googleapis"
           ]
         },
         {
@@ -2978,7 +2980,8 @@
           "file": "apps/api/src/modules/google/sheet-ingestor.service.ts",
           "hash": "5564640608739356943",
           "deps": [
-            "npm:@nestjs/common"
+            "npm:@nestjs/common",
+            "npm:googleapis"
           ]
         },
         {
@@ -3012,7 +3015,8 @@
           "hash": "4633264736148274264",
           "deps": [
             "npm:@nestjs/common",
-            "npm:@nestjs/testing"
+            "npm:@nestjs/testing",
+            "npm:express"
           ]
         },
         {
@@ -3247,8 +3251,7 @@
           "file": "apps/api/src/modules/projects/project-aware-ingestion.service.ts",
           "hash": "148843975373808712",
           "deps": [
-            "npm:@nestjs/common",
-            "npm:zod"
+            "npm:@nestjs/common"
           ]
         },
         {
@@ -3327,7 +3330,8 @@
           "file": "apps/api/src/modules/projects/sharded-vector-store.service.ts",
           "hash": "14132100745019954274",
           "deps": [
-            "npm:@nestjs/common"
+            "npm:@nestjs/common",
+            "npm:@prisma/client"
           ]
         },
         {
