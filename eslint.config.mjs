@@ -6,10 +6,13 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
     { ignores: [
-        'dist', 
-        'node_modules', 
-        'build', 
+        'dist',
+        'node_modules',
+        'build',
+        '**/build/**',
+        '**/dist/**',
         'coverage',
+        'src/dataconnect-generated/**',
         // Ignore truncated/incomplete files with parsing errors (backend/api files)
         'apps/api/src/modules/rag/**',
         'apps/api/src/modules/ai/gemini-analyst.service.ts',

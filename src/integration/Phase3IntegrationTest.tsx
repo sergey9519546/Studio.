@@ -28,7 +28,7 @@ const mockOnNavigateToMoodboard = () => {
   console.log('Navigating to Moodboard');
 };
 
-const mockOnGenerateContent = async (prompt: string, context: any) => {
+const mockOnGenerateContent = async (prompt: string, _context: unknown) => {
   // Simulate AI content generation
   return `Generated content for: ${prompt}`;
 };
@@ -419,7 +419,7 @@ describe('Phase 3 Enhanced Liquid Glass Design System Integration', () => {
     });
 
     test('should handle AI generation errors gracefully', async () => {
-      const failingGenerateContent = async (prompt: string, context: any) => {
+      const failingGenerateContent = async (_prompt: string, _context: unknown) => {
         throw new Error('AI service unavailable');
       };
 

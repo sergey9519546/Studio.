@@ -17,7 +17,7 @@ import {
     Trash2,
     User
 } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { cn } from '../../lib/utils';
 
 interface ContextMenuItem {
@@ -75,6 +75,8 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
   }, [isOpen, onClose]);
 
   // Handle keyboard navigation
+  const getVisibleItems = useCallback(() => items.filter(item => !item.separator), [items]);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!isOpen) return;
@@ -144,7 +146,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, state, items, onClose]);
+  }, [getVisibleItems, isOpen, items, onClose, state]);
 
   // Reset state when menu closes
   useEffect(() => {
@@ -152,10 +154,6 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
       setState({ activeSubmenu: null, activeIndex: -1 });
     }
   }, [isOpen]);
-
-  const getVisibleItems = () => {
-    return items.filter(item => !item.separator);
-  };
 
   const handleItemClick = (item: ContextMenuItem, event: React.MouseEvent) => {
     event.stopPropagation();
@@ -254,7 +252,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
     );
   };
 
-  const renderSubmenu = (submenuItems: ContextMenuItem[], submenuId: string) => {
+  const renderSubmenu = (submenuItems: ContextMenuItem[]) => {
     const visibleSubmenuItems = submenuItems.filter(item => !item.separator);
     
     return (
@@ -314,7 +312,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
               {(() => {
                 const submenuItem = items.find(item => item.id === state.activeSubmenu);
                 return submenuItem?.submenu 
-                  ? renderSubmenu(submenuItem.submenu, state.activeSubmenu)
+                  ? renderSubmenu(submenuItem.submenu)
                   : null;
               })()}
             </div>
@@ -326,7 +324,10 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
 };
 
 // Predefined menu templates for common use cases
-export const createProjectContextMenu = (projectId: string, onAction: (action: string, data?: any) => void): ContextMenuItem[] => [
+export const createProjectContextMenu = (
+  projectId: string,
+  onAction: (action: string, data?: Record<string, unknown>) => void
+): ContextMenuItem[] => [
   {
     id: 'view',
     label: 'View Project',
@@ -413,7 +414,11 @@ export const createProjectContextMenu = (projectId: string, onAction: (action: s
   }
 ];
 
-export const createFileContextMenu = (fileId: string, fileType: string, onAction: (action: string, data?: any) => void): ContextMenuItem[] => [
+export const createFileContextMenu = (
+  fileId: string,
+  fileType: string,
+  onAction: (action: string, data?: Record<string, unknown>) => void
+): ContextMenuItem[] => [
   {
     id: 'open',
     label: 'Open',
@@ -495,7 +500,9 @@ export const createFileContextMenu = (fileId: string, fileType: string, onAction
   }
 ];
 
-export const createTextContextMenu = (onAction: (action: string, data?: any) => void): ContextMenuItem[] => [
+export const createTextContextMenu = (
+  onAction: (action: string, data?: Record<string, unknown>) => void
+): ContextMenuItem[] => [
   {
     id: 'cut',
     label: 'Cut',

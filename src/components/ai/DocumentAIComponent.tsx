@@ -4,7 +4,8 @@
  */
 
 import { BookOpen, Brain, Edit3, Eye, FileImage, FileText, Search, Settings, Upload } from 'lucide-react';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
+import { AIAPI } from '../../services/api/ai';
 import { Button } from '../design/Button';
 import { LiquidGlassContainer } from '../design/LiquidGlassContainer';
 
@@ -118,7 +119,7 @@ export interface EntityExtraction {
   startPosition: number;
   endPosition: number;
   page: number;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface SentimentAnalysis {
@@ -215,7 +216,7 @@ export const DocumentAIComponent: React.FC<DocumentAIProps> = ({
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   
-  const finalConfig = { ...defaultConfig, ...config };
+  const finalConfig = useMemo(() => ({ ...defaultConfig, ...config }), [config]);
 
   const handleFileUpload = useCallback(async (file: File) => {
     if (!file) return;
@@ -234,31 +235,16 @@ export const DocumentAIComponent: React.FC<DocumentAIProps> = ({
 
     setSelectedFile(file);
     setIsProcessing(true);
-    setProcessingProgress(0);
+    setProcessingProgress(10);
 
     try {
-      // Simulate processing progress
-      const progressInterval = setInterval(() => {
-        setProcessingProgress(prev => Math.min(prev + Math.random() * 12, 95));
-      }, 400);
-
-      // Create FormData for upload
-      const formData = new FormData();
-      formData.append('document', file);
-      formData.append('config', JSON.stringify({
+      const result = await AIAPI.analyzeDocumentFile(file, {
         ...finalConfig,
         projectId,
         projectContext
-      }));
+      });
 
-      // Simulate AI analysis (replace with actual API call)
-      await new Promise(resolve => setTimeout(resolve, 4000));
-      
-      clearInterval(progressInterval);
       setProcessingProgress(100);
-
-      // Generate mock analysis result
-      const result = await simulateDocumentAnalysis(file, finalConfig);
       
       onAnalysisComplete(result);
     } catch (error) {
@@ -440,165 +426,3 @@ export const DocumentAIComponent: React.FC<DocumentAIProps> = ({
     </div>
   );
 };
-
-// Mock function to simulate AI document analysis
-async function simulateDocumentAnalysis(file: File, config: DocumentAIConfig): Promise<DocumentAnalysisResult> {
-  const startTime = Date.now();
-  
-  // Simulate processing delay
-  await new Promise(resolve => setTimeout(resolve, 3000 + Math.random() * 4000));
-  
-  const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
-  
-  // Generate mock analysis
-  const mockResult: DocumentAnalysisResult = {
-    id: `doc_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-    filename: file.name,
-    documentType: fileExtension,
-    content: config.enableTextExtraction ? generateMockDocumentContent() : {} as DocumentContent,
-    structure: config.enableStructureAnalysis ? generateMockDocumentStructure() : {} as DocumentStructure,
-    entities: config.enableEntityExtraction ? generateMockEntityExtraction() : undefined,
-    sentiment: config.enableSentimentAnalysis ? generateMockSentimentAnalysis() : undefined,
-    summary: config.enableSummarization ? generateMockDocumentSummary(config.summaryLength) : {} as DocumentSummary,
-    keywords: generateMockKeywords(),
-    readability: config.enableReadabilityAnalysis ? generateMockReadabilityMetrics() : {} as ReadabilityMetrics,
-    language: config.enableLanguageDetection ? generateMockLanguageDetection() : {} as LanguageDetection,
-    processingTime: Date.now() - startTime,
-    timestamp: new Date(),
-    metadata: {
-      pages: Math.floor(Math.random() * 50) + 5,
-      format: fileExtension.toUpperCase(),
-      size: file.size,
-      wordCount: Math.floor(Math.random() * 10000) + 1000,
-      characterCount: Math.floor(Math.random() * 50000) + 5000
-    }
-  };
-  
-  return mockResult;
-}
-
-// Mock data generators
-function generateMockDocumentContent(): DocumentContent {
-  const sampleText = `This is a sample document with multiple paragraphs, headings, and structured content. 
-  The document analysis has successfully extracted text content and identified various elements including headings, 
-  paragraphs, and metadata. The AI system can analyze document structure and provide insights.`;
-  
-  return {
-    text: sampleText,
-    extractedImages: [
-      {
-        id: 'img_1',
-        filename: 'chart.png',
-        format: 'PNG',
-        size: 102400,
-        page: 1,
-        position: { x: 100, y: 200, width: 300, height: 200 },
-        altText: 'Sample chart',
-        description: 'A sample chart image'
-      }
-    ],
-    tables: [
-      {
-        id: 'table_1',
-        data: [['Header 1', 'Header 2'], ['Data 1', 'Data 2']],
-        headers: ['Header 1', 'Header 2'],
-        page: 2,
-        position: { x: 50, y: 100, width: 400, height: 150 }
-      }
-    ],
-    metadata: {
-      title: 'Sample Document',
-      author: 'Document AI',
-      creationDate: new Date()
-    }
-  };
-}
-
-function generateMockDocumentStructure(): DocumentStructure {
-  return {
-    headings: [
-      { level: 1, text: 'Introduction', page: 1, position: { x: 50, y: 50 } },
-      { level: 2, text: 'Background', page: 2, position: { x: 50, y: 100 } }
-    ],
-    paragraphs: [
-      {
-        text: 'Sample paragraph content.',
-        page: 1,
-        position: { x: 50, y: 100 },
-        style: { fontSize: 12, fontFamily: 'Arial', isBold: false, isItalic: false, alignment: 'left' }
-      }
-    ],
-    sections: [
-      { title: 'Introduction', startPage: 1, endPage: 2, content: 'Intro content' }
-    ],
-    tableOfContents: [
-      { title: 'Introduction', page: 1, level: 1 }
-    ],
-    metadata: {
-      hasTableOfContents: true,
-      hasBibliography: false,
-      hasFootnotes: false,
-      hasEndnotes: false
-    }
-  };
-}
-
-function generateMockEntityExtraction(): EntityExtraction[] {
-  return [
-    { type: 'person', text: 'John Smith', confidence: 0.95, startPosition: 0, endPosition: 10, page: 1 },
-    { type: 'organization', text: 'Acme Corp', confidence: 0.89, startPosition: 20, endPosition: 30, page: 1 },
-    { type: 'date', text: '2024-01-15', confidence: 0.97, startPosition: 50, endPosition: 60, page: 2 }
-  ];
-}
-
-function generateMockSentimentAnalysis(): SentimentAnalysis {
-  return {
-    overall: 'positive',
-    confidence: 0.85,
-    emotions: [
-      { emotion: 'optimism', intensity: 0.7, confidence: 0.8 },
-      { emotion: 'confidence', intensity: 0.6, confidence: 0.75 }
-    ],
-    subjectivity: 0.4,
-    polarity: 0.6
-  };
-}
-
-function generateMockDocumentSummary(length: 'short' | 'medium' | 'long'): DocumentSummary {
-  return {
-    abstract: 'This document provides a comprehensive overview of the subject matter.',
-    keyPoints: ['Key point 1', 'Key point 2', 'Key point 3'],
-    conclusions: ['Main conclusion based on analysis'],
-    recommendations: ['Recommended action items'],
-    length,
-    confidence: 0.88
-  };
-}
-
-function generateMockKeywords(): string[] {
-  return ['document', 'analysis', 'AI', 'processing', 'content', 'structure'];
-}
-
-function generateMockReadabilityMetrics(): ReadabilityMetrics {
-  return {
-    fleschReadingEase: 65.5,
-    fleschKincaidGrade: 8.2,
-    gunningFog: 10.1,
-    smog: 9.5,
-    automatedReadabilityIndex: 8.8,
-    colemanLiauIndex: 9.2,
-    level: 'standard'
-  };
-}
-
-function generateMockLanguageDetection(): LanguageDetection {
-  return {
-    primary: 'en',
-    confidence: 0.98,
-    alternatives: [
-      { language: 'es', confidence: 0.01 },
-      { language: 'fr', confidence: 0.01 }
-    ],
-    isTranslated: false
-  };
-}

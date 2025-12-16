@@ -21,6 +21,7 @@ import {
 import React, { useState } from 'react';
 import { usePluginManager } from '../../components/extensibility/PluginManager_Final';
 import { Button } from '../design/Button';
+import type { Plugin } from '../../components/extensibility/PluginManager';
 
 interface PluginManagerUIProps {
   onClose?: () => void;
@@ -32,8 +33,7 @@ export const PluginManagerUI: React.FC<PluginManagerUIProps> = ({ onClose }) => 
     installPlugin,
     uninstallPlugin,
     enablePlugin,
-    disablePlugin,
-    loadPlugins
+    disablePlugin
   } = usePluginManager();
 
   const [viewMode, setViewMode] = useState<'installed' | 'available'>('installed');
@@ -54,14 +54,14 @@ export const PluginManagerUI: React.FC<PluginManagerUIProps> = ({ onClose }) => 
 
   const categories = ['all', 'ui-enhancement', 'data-analysis', 'integration', 'visualization', 'productivity', 'development'];
 
-  const getStatusColor = (plugin: any) => {
+  const getStatusColor = (plugin: Plugin) => {
     if (plugin.enabled) return 'text-green-600';
     if (plugin.lifecycle?.state === 'loading') return 'text-blue-600';
     if (plugin.lifecycle?.state === 'error') return 'text-red-600';
     return 'text-gray-600';
   };
 
-  const getStatusIcon = (plugin: any) => {
+  const getStatusIcon = (plugin: Plugin) => {
     if (plugin.enabled) return <CheckCircle size={16} className="text-green-600" />;
     if (plugin.lifecycle?.state === 'loading') return <Clock size={16} className="text-blue-600" />;
     if (plugin.lifecycle?.state === 'error') return <AlertCircle size={16} className="text-red-600" />;

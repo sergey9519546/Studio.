@@ -6,7 +6,7 @@
 export interface WebSocketMessage {
   id: string;
   type: string;
-  payload: any;
+  payload?: Record<string, unknown>;
   timestamp: number;
   userId?: string;
   sessionId?: string;
@@ -238,7 +238,8 @@ class WebSocketService {
       }, 5000);
 
       const unsubscribe = this.onMessage('pong', (message) => {
-        if (message.payload?.pingId === pingId) {
+        const payload = message.payload as { pingId?: string } | undefined;
+        if (payload?.pingId === pingId) {
           clearTimeout(timeout);
           unsubscribe();
           const latency = Date.now() - start;

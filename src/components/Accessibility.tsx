@@ -216,6 +216,14 @@ export const AccessibleModal = forwardRef<
 >(({ isOpen, onClose, title, children, size = 'md', className = '', ...props }, ref) => {
   const modalRef = React.useRef<HTMLDivElement>(null);
   const previousFocusRef = React.useRef<HTMLElement | null>(null);
+  const setRefs = (node: HTMLDivElement | null) => {
+    modalRef.current = node;
+    if (typeof ref === 'function') {
+      ref(node);
+    } else if (ref) {
+      (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+    }
+  };
   
   React.useEffect(() => {
     if (isOpen) {
@@ -259,7 +267,7 @@ export const AccessibleModal = forwardRef<
       
       {/* Modal */}
       <div
-        ref={modalRef}
+        ref={setRefs}
         className={[
           'relative bg-surface rounded-2xl shadow-float border border-border-subtle',
           'animate-scale-in',
@@ -418,11 +426,21 @@ export const EmptyState = ({
 );
 
 // Error boundary wrapper
+interface AccessibleErrorBoundaryProps {
+  children: ReactNode;
+  fallback?: ReactNode;
+}
+
+interface AccessibleErrorBoundaryState {
+  hasError: boolean;
+  error?: Error;
+}
+
 export class AccessibleErrorBoundary extends React.Component<
-  { children: ReactNode; fallback?: ReactNode },
-  { hasError: boolean; error?: Error }
+  AccessibleErrorBoundaryProps,
+  AccessibleErrorBoundaryState
 > {
-  constructor(props: any) {
+  constructor(props: AccessibleErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
   }

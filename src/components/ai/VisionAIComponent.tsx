@@ -4,7 +4,8 @@
  */
 
 import { Brain, Camera, Download, Eye, FileImage, Image, Scan, Upload, Zap } from 'lucide-react';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
+import { AIAPI } from '../../services/api/ai';
 import { Button } from '../design/Button';
 import { LiquidGlassContainer } from '../design/LiquidGlassContainer';
 
@@ -178,7 +179,7 @@ export const VisionAIComponent: React.FC<VisionAIProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cameraInputRef = useRef<HTMLInputElement>(null);
   
-  const finalConfig = { ...defaultConfig, ...config };
+  const finalConfig = useMemo(() => ({ ...defaultConfig, ...config }), [config]);
 
   const handleFileUpload = useCallback(async (file: File) => {
     if (!file) return;
@@ -196,31 +197,16 @@ export const VisionAIComponent: React.FC<VisionAIProps> = ({
     }
 
     setIsAnalyzing(true);
-    setAnalysisProgress(0);
+    setAnalysisProgress(10);
 
     try {
-      // Simulate analysis progress
-      const progressInterval = setInterval(() => {
-        setAnalysisProgress(prev => Math.min(prev + Math.random() * 20, 90));
-      }, 200);
-
-      // Create FormData for upload
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('config', JSON.stringify({
+      const result = await AIAPI.analyzeVisionFile(file, {
         ...finalConfig,
         projectId,
         projectContext
-      }));
+      });
 
-      // Simulate AI analysis (replace with actual API call)
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      clearInterval(progressInterval);
       setAnalysisProgress(100);
-
-      // Generate mock analysis result
-      const result = await simulateVisionAnalysis(file, finalConfig);
       
       onAnalysisComplete(result);
     } catch (error) {
@@ -392,164 +378,3 @@ export const VisionAIComponent: React.FC<VisionAIProps> = ({
     </div>
   );
 };
-
-// Mock function to simulate AI vision analysis
-async function simulateVisionAnalysis(file: File, config: VisionAIConfig): Promise<VisionAnalysisResult> {
-  const startTime = Date.now();
-  
-  // Simulate processing delay
-  await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
-  
-  const isVideo = file.type.startsWith('video/');
-  const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
-  
-  // Generate mock analysis based on file type
-  const mockResult: VisionAnalysisResult = {
-    id: `vision_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-    type: isVideo ? 'video' : 'image',
-    filename: file.name,
-    analysis: {
-      objects: config.enableObjectDetection ? generateMockObjects() : [],
-      scenes: config.enableSceneAnalysis ? [generateMockScene()] : [],
-      text: config.enableTextRecognition ? generateMockText() : [],
-      faces: config.enableFaceAnalysis ? [generateMockFaces()] : undefined,
-      colors: config.enableColorAnalysis ? generateMockColors() : undefined,
-      emotions: config.enableEmotionDetection ? generateMockEmotions() : undefined,
-      composition: config.enableCompositionAnalysis ? generateMockComposition() : undefined,
-      style: config.enableStyleAnalysis ? generateMockStyle() : undefined,
-      quality: config.enableQualityAssessment ? generateMockQuality() : undefined,
-      tags: generateMockTags(),
-      description: generateMockDescription(file.name),
-      confidence: 0.85 + Math.random() * 0.1
-    },
-    processingTime: Date.now() - startTime,
-    timestamp: new Date(),
-    metadata: {
-      dimensions: { width: 1920, height: 1080 },
-      format: fileExtension.toUpperCase(),
-      size: file.size,
-      duration: isVideo ? Math.floor(Math.random() * 300) + 10 : undefined
-    }
-  };
-  
-  return mockResult;
-}
-
-// Mock data generators
-function generateMockObjects(): DetectedObject[] {
-  const objects = ['person', 'car', 'building', 'tree', 'dog', 'cat', 'chair', 'table', 'phone', 'laptop'];
-  return Array.from({ length: Math.floor(Math.random() * 8) + 2 }, () => ({
-    name: objects[Math.floor(Math.random() * objects.length)],
-    confidence: 0.7 + Math.random() * 0.3,
-    boundingBox: {
-      x: Math.floor(Math.random() * 500),
-      y: Math.floor(Math.random() * 300),
-      width: Math.floor(Math.random() * 200) + 50,
-      height: Math.floor(Math.random() * 200) + 50
-    },
-    attributes: Math.random() > 0.5 ? ['modern', 'vintage', 'wooden', 'metal'] : undefined
-  }));
-}
-
-function generateMockScene(): SceneAnalysis {
-  return {
-    environment: ['indoor', 'outdoor', 'studio', 'natural', 'urban'][Math.floor(Math.random() * 5)],
-    lighting: ['bright', 'dim', 'natural', 'artificial', 'golden hour'][Math.floor(Math.random() * 5)],
-    setting: ['home', 'office', 'street', 'park', 'beach'][Math.floor(Math.random() * 5)],
-    timeOfDay: ['morning', 'afternoon', 'evening', 'night'][Math.floor(Math.random() * 4)],
-    weather: ['sunny', 'cloudy', 'rainy'][Math.floor(Math.random() * 3)]
-  };
-}
-
-function generateMockText(): TextDetection[] {
-  return Array.from({ length: Math.floor(Math.random() * 3) + 1 }, () => ({
-    text: 'Sample detected text',
-    confidence: 0.8 + Math.random() * 0.2,
-    boundingBox: {
-      x: Math.floor(Math.random() * 400),
-      y: Math.floor(Math.random() * 200),
-      width: Math.floor(Math.random() * 300) + 100,
-      height: Math.floor(Math.random() * 50) + 20
-    },
-    language: 'en'
-  }));
-}
-
-function generateMockFaces(): FaceAnalysis {
-  const count = Math.floor(Math.random() * 5) + 1;
-  return {
-    count,
-    emotions: Array.from({ length: count }, () => ({
-      emotion: ['happy', 'neutral', 'surprised', 'sad', 'angry'][Math.floor(Math.random() * 5)],
-      confidence: 0.7 + Math.random() * 0.3,
-      boundingBox: {
-        x: Math.floor(Math.random() * 300),
-        y: Math.floor(Math.random() * 200),
-        width: Math.floor(Math.random() * 100) + 50,
-        height: Math.floor(Math.random() * 100) + 50
-      }
-    }))
-  };
-}
-
-function generateMockColors(): ColorAnalysis {
-  const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DFE6E9'];
-  return {
-    dominant: colors.slice(0, 3),
-    palette: colors.slice(0, 4).map(color => ({
-      color,
-      percentage: Math.random() * 30 + 10
-    })),
-    mood: 'vibrant',
-    harmony: 0.85
-  };
-}
-
-function generateMockEmotions(): EmotionAnalysis {
-  return {
-    overall: 'positive',
-    confidence: 0.85,
-    emotions: [
-      { emotion: 'happiness', intensity: 0.8, confidence: 0.9 },
-      { emotion: 'calm', intensity: 0.6, confidence: 0.85 }
-    ]
-  };
-}
-
-function generateMockComposition(): CompositionAnalysis {
-  return {
-    ruleOfThirds: 0.75,
-    symmetry: 0.65,
-    leadingLines: ['diagonal', 'horizontal'],
-    balance: 0.8,
-    focalPoints: [{ x: 450, y: 300, strength: 0.9 }]
-  };
-}
-
-function generateMockStyle(): StyleAnalysis {
-  return {
-    artistic: 'contemporary',
-    photography: 'portrait',
-    design: 'minimalist',
-    period: 'modern',
-    movements: ['impressionism', 'realism']
-  };
-}
-
-function generateMockQuality(): QualityAnalysis {
-  return {
-    sharpness: 0.88,
-    exposure: 0.75,
-    noise: 0.15,
-    clarity: 0.82,
-    overall: 0.8
-  };
-}
-
-function generateMockTags(): string[] {
-  return ['outdoor', 'nature', 'landscape', 'photography', 'scenic', 'travel'];
-}
-
-function generateMockDescription(filename: string): string {
-  return `AI-generated description for ${filename}: This image features a compelling visual composition with balanced elements and engaging subject matter.`;
-}

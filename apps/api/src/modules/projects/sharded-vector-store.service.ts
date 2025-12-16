@@ -256,12 +256,12 @@ export class ShardedVectorStoreService {
     for (const [shardId, shard] of this.shards) {
       const entriesToMove: VectorEntry[] = [];
 
-      for (const [entryId, entry] of shard) {
-        const correctShardId = this.getShardForProject(entry.projectId);
-        if (correctShardId !== shardId) {
-          entriesToMove.push(entry);
-        }
+    for (const [, entry] of shard) {
+      const correctShardId = this.getShardForProject(entry.projectId);
+      if (correctShardId !== shardId) {
+        entriesToMove.push(entry);
       }
+    }
 
       for (const entry of entriesToMove) {
         shard.delete(entry.id);

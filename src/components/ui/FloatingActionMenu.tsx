@@ -368,7 +368,9 @@ export const FloatingActionMenu: React.FC<FloatingActionMenuProps> = ({
 };
 
 // Predefined action sets for common use cases
-export const createProjectActions = (onAction: (action: string, data?: any) => void): FloatingActionItem[] => [
+export const createProjectActions = (
+  onAction: (action: string, data?: Record<string, unknown>) => void
+): FloatingActionItem[] => [
   {
     id: 'new-file',
     label: 'New File',
@@ -413,7 +415,9 @@ export const createProjectActions = (onAction: (action: string, data?: any) => v
   }
 ];
 
-export const createContentActions = (onAction: (action: string, data?: any) => void): FloatingActionItem[] => [
+export const createContentActions = (
+  onAction: (action: string, data?: Record<string, unknown>) => void
+): FloatingActionItem[] => [
   {
     id: 'add-text',
     label: 'Add Text',
@@ -451,7 +455,9 @@ export const createContentActions = (onAction: (action: string, data?: any) => v
   }
 ];
 
-export const createNavigationActions = (onAction: (action: string, data?: any) => void): FloatingActionItem[] => [
+export const createNavigationActions = (
+  onAction: (action: string, data?: Record<string, unknown>) => void
+): FloatingActionItem[] => [
   {
     id: 'go-projects',
     label: 'Projects',

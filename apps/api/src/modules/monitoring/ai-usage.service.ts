@@ -86,7 +86,9 @@ export class AIUsageService {
         };
     }
 
-    private groupByEndpoint(usage: any[]): Record<string, GroupedEndpointStats> {
+    private groupByEndpoint(
+        usage: Array<AIUsageRecord & { endpoint: string; duration: number; cost?: number }>
+    ): Record<string, GroupedEndpointStats> {
         const filteredUsage = usage.filter(u => u.endpoint && typeof u.endpoint === 'string');
 
         const grouped = filteredUsage.reduce((acc, u) => {

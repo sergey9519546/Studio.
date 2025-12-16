@@ -1,14 +1,14 @@
 declare module "@google-cloud/aiplatform" {
-  export const protos: any;
+  export const protos: unknown;
   export class PredictionServiceClient {
     constructor(options?: Record<string, unknown>);
-    predict(request: Record<string, unknown>): Promise<any[]>;
+    predict(request: Record<string, unknown>): Promise<unknown[]>;
   }
 }
 
 declare module "googleapis" {
-  export const google: any;
-  export const sheets_v4: any;
-  export const docs_v1: any;
-  export const drive_v3: any;
+  export const google: Record<string, unknown>;
+  export const sheets_v4: Record<string, unknown>;
+  export const docs_v1: Record<string, unknown>;
+  export const drive_v3: Record<string, unknown>;
 }

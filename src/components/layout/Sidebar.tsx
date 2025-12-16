@@ -6,11 +6,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useNavigationState } from "../../context/RouteContext";
 import { getMainNavigationRoutes } from "../../routes";
 
-interface SidebarProps {
-  // No props needed anymore - router-driven
-}
-
-const Sidebar: React.FC<SidebarProps> = () => {
+const Sidebar: React.FC = () => {
   const navigate = useNavigate();
   const { activeItem } = useNavigationState();
   const navigationRoutes = getMainNavigationRoutes();

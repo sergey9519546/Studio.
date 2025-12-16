@@ -45,7 +45,8 @@ describe("PrismaService", () => {
 
     const service = module.get<PrismaService>(PrismaService);
 
-    expect((service as any)._pool).toBeDefined();
+    const serviceWithPool = service as unknown as { _pool?: unknown };
+    expect(serviceWithPool._pool).toBeDefined();
   });
 
   it("Should construct without adapter when DATABASE_URL is not defined", async () => {
@@ -57,19 +58,18 @@ describe("PrismaService", () => {
 
     const service = module.get<PrismaService>(PrismaService);
 
-    expect((service as any)._pool).toBeUndefined();
+    const serviceWithPool = service as unknown as { _pool?: unknown };
+    expect(serviceWithPool._pool).toBeUndefined();
   });
 
   it("onModuleInit should attempt lazy connect and log success", async () => {
     process.env.DATABASE_URL = "postgres://user:pass@localhost:5432/db";
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const loggerLog = jest
-      .spyOn(Logger.prototype as any, "log")
+      .spyOn(Logger.prototype, "log")
       .mockImplementation(() => {});
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const loggerWarn = jest
-      .spyOn(Logger.prototype as any, "warn")
+      .spyOn(Logger.prototype, "warn")
       .mockImplementation(() => {});
 
     const module: TestingModule = await Test.createTestingModule({
@@ -94,9 +94,8 @@ describe("PrismaService", () => {
   it("onModuleInit should log a warning if connect fails but not throw", async () => {
     process.env.DATABASE_URL = "postgres://user:pass@localhost:5432/db";
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const loggerWarn = jest
-      .spyOn(Logger.prototype as any, "warn")
+      .spyOn(Logger.prototype, "warn")
       .mockImplementation(() => {});
 
     const module: TestingModule = await Test.createTestingModule({

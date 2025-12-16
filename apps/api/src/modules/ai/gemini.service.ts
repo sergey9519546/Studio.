@@ -773,7 +773,7 @@ export class GeminiService {
     const avgWordsPerSentence = sentenceCount ? wordCount / sentenceCount : wordCount;
     const longSentences = text.match(/[,;:—–-]/g)?.length ?? 0;
     const passiveHints = (text.match(/\b(been|being|was|were|is|are|be)\b/gi) || []).length;
-    const exclamationCount = text.match(/\!/g)?.length ?? 0;
+    const exclamationCount = text.match(/!/g)?.length ?? 0;
 
     const grammar = criteria.checkGrammar === false ? 0 : this.clampScore(9 - longSentences * 0.2 - passiveHints * 0.05);
     const clarity = criteria.checkClarity === false ? 0 : this.clampScore(10 - avgWordsPerSentence * 0.1);

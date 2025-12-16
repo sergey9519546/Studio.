@@ -3,7 +3,7 @@
  * Integrates with KeyboardService to provide easy shortcut handling in React components
  */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { debounce } from '../lib/utils';
 import {
   keyboardService,
@@ -62,7 +62,6 @@ export function useKeyboardShortcuts(
 
   const shortcutsRef = useRef<Map<string, ShortcutHandler>>(new Map());
   const contextManager = useKeyboardContext();
-  const eventHandlersRef = useRef<Map<string, EventListener>>(new Map());
 
   // Set initial context
   useEffect(() => {
@@ -72,39 +71,36 @@ export function useKeyboardShortcuts(
   }, [context, contextManager]);
 
   // Memoized event handler for global shortcuts
-  const handleGlobalShortcut = useCallback(
-    debounce((event: KeyboardEvent) => {
-      const shortcuts = keyboardService.getShortcuts(context);
+  const handleGlobalShortcut = useMemo(() => debounce((event: KeyboardEvent) => {
+    const shortcuts = keyboardService.getShortcuts(context);
+    
+    for (const registration of shortcuts) {
+      const { shortcut } = registration;
       
-      for (const registration of shortcuts) {
-        const { shortcut } = registration;
-        
-        if (!shortcut.enabled && shortcut.enabled !== undefined) {
-          continue;
-        }
-
-        if (matchesShortcut(event, shortcut)) {
-          if (preventDefault) {
-            event.preventDefault();
-          }
-          
-          if (stopPropagation) {
-            event.stopPropagation();
-          }
-
-          // Execute the shortcut action
-          try {
-            shortcut.action();
-          } catch (error) {
-            console.error(`Error executing shortcut ${shortcut.id}:`, error);
-          }
-          
-          break; // Only execute the first matching shortcut
-        }
+      if (!shortcut.enabled && shortcut.enabled !== undefined) {
+        continue;
       }
-    }, throttleMs),
-    [context, preventDefault, stopPropagation, throttleMs]
-  );
+
+      if (matchesShortcut(event, shortcut)) {
+        if (preventDefault) {
+          event.preventDefault();
+        }
+        
+        if (stopPropagation) {
+          event.stopPropagation();
+        }
+
+        // Execute the shortcut action
+        try {
+          shortcut.action();
+        } catch (error) {
+          console.error(`Error executing shortcut ${shortcut.id}:`, error);
+        }
+        
+        break; // Only execute the first matching shortcut
+      }
+    }
+  }, throttleMs), [context, preventDefault, stopPropagation, throttleMs]);
 
   // Set up global shortcut listener
   useEffect(() => {
@@ -130,8 +126,7 @@ export function useKeyboardShortcuts(
       priority: shortcutPriority = priority,
       enabled: shortcutEnabled = enabled,
       global: shortcutGlobal = global,
-      preventDefault: shortcutPreventDefault = preventDefault,
-      stopPropagation: shortcutStopPropagation = stopPropagation
+      preventDefault: shortcutPreventDefault = preventDefault
     } = registerOptions;
 
     const shortcut: KeyboardShortcut = {
@@ -172,7 +167,7 @@ export function useKeyboardShortcuts(
     return () => {
       unregisterShortcut(shortcutConfig.id);
     };
-  }, [context, priority, enabled, global, preventDefault, stopPropagation]);
+  }, [context, priority, enabled, global, preventDefault, unregisterShortcut]);
 
   /**
    * Unregister a keyboard shortcut
@@ -191,7 +186,7 @@ export function useKeyboardShortcuts(
    * Unregister all shortcuts registered by this hook
    */
   const unregisterAll = useCallback(() => {
-    shortcutsRef.current.forEach((handler, id) => {
+    shortcutsRef.current.forEach((handler, _id) => {
       if (handler.cleanup) {
         handler.cleanup();
       }
@@ -347,7 +342,7 @@ export function useCommonKeyboardShortcuts() {
    * Register navigation shortcuts
    */
   const registerNavigation = useCallback((
-    shortcuts: Array<{
+    shortcutConfigs: Array<{
       id: string;
       key: string;
       modifiers?: KeyboardShortcut['modifiers'];
@@ -358,7 +353,7 @@ export function useCommonKeyboardShortcuts() {
   ) => {
     const cleanups: (() => void)[] = [];
 
-    shortcuts.forEach(shortcut => {
+    shortcutConfigs.forEach(shortcut => {
       cleanups.push(shortcuts.registerShortcut(
         {
           id: shortcut.id,

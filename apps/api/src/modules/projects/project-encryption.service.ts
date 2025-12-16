@@ -89,10 +89,10 @@ export class ProjectEncryptionService {
    */
   async encryptFields(
     projectId: string, 
-    data: Record<string, any>, 
+    data: Record<string, unknown>, 
     fieldsToEncrypt: string[]
   ): Promise<{
-    encryptedData: Record<string, any>;
+    encryptedData: Record<string, unknown>;
     encryptionMetadata: Record<string, EncryptionResult>;
   }> {
     const encryptedData = { ...data };
@@ -114,9 +114,9 @@ export class ProjectEncryptionService {
    */
   async decryptFields(
     projectId: string,
-    data: Record<string, any>,
+    data: Record<string, unknown>,
     encryptionMetadata: Record<string, EncryptionResult>
-  ): Promise<Record<string, any>> {
+  ): Promise<Record<string, unknown>> {
     const decryptedData = { ...data };
 
     for (const [field, metadata] of Object.entries(encryptionMetadata)) {
@@ -160,7 +160,7 @@ export class ProjectEncryptionService {
   /**
    * Re-encrypt all content with new key after rotation
    */
-  async reencryptProjectContent(projectId: string, oldKeyId: string): Promise<number> {
+  async reencryptProjectContent(projectId: string, _oldKeyId: string): Promise<number> {
     let reencryptedCount = 0;
 
     // Get all knowledge sources with encryption
@@ -174,12 +174,13 @@ export class ProjectEncryptionService {
     for (const source of knowledgeSources) {
       try {
         // Decrypt with old key
-        const metadata = source.metadata as Record<string, any>;
-        if (metadata?.encryptionMetadata) {
+        const metadata = source.metadata as Record<string, unknown>;
+        const encryptionMeta = metadata?.encryptionMetadata as Record<string, EncryptionResult> | undefined;
+        if (encryptionMeta?.content) {
           const decrypted = await this.decryptFields(
             projectId,
             { content: source.content },
-            { content: metadata.encryptionMetadata.content }
+            { content: encryptionMeta.content }
           );
 
           // Re-encrypt with new key

@@ -45,8 +45,109 @@ export const CollaborativeCursor: React.FC<CollaborativeCursorProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const cursorTimeouts = useRef<Map<string, NodeJS.Timeout>>(new Map());
 
+  const updateUserCursors = React.useCallback((users: PresenceUser[]) => {
+    setUserCursors(prev => {
+      const newCursors = new Map(prev);
+
+      users.forEach(user => {
+        if (user.currentActivity?.type === 'editing' || user.currentActivity?.type === 'viewing') {
+          const existingCursor = newCursors.get(user.id);
+          if (existingCursor) {
+            newCursors.set(user.id, {
+              ...existingCursor,
+              userName: user.name,
+              color: user.color,
+              isVisible: true,
+              timestamp: Date.now()
+            });
+          } else {
+            newCursors.set(user.id, {
+              userId: user.id,
+              userName: user.name,
+              color: user.color,
+              position: { x: 0, y: 0 },
+              selection: null,
+              isVisible: true,
+              timestamp: Date.now()
+            });
+          }
+        } else {
+          newCursors.delete(user.id);
+        }
+      });
+
+      return newCursors;
+    });
+  }, []);
+
+  const updateCollaborativeCursors = React.useCallback((users: UserPresence[]) => {
+    setUserCursors(prev => {
+      const newCursors = new Map(prev);
+
+      users.forEach(user => {
+        if (user.userId !== currentUserId) {
+          const existingCursor = newCursors.get(user.userId);
+          if (existingCursor) {
+            newCursors.set(user.userId, {
+              ...existingCursor,
+              userName: user.userName,
+              color: user.color,
+              selection: user.selection,
+              timestamp: Date.now()
+            });
+          }
+        }
+      });
+
+      return newCursors;
+    });
+  }, [currentUserId]);
+
+  const updateCurrentUserCursor = React.useCallback((e: MouseEvent) => {
+    if (!containerRef.current) return;
+
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    // const y = e.clientY - rect.top; // y currently unused for live editing API
+
+    liveEditingService.updateCursor(documentId, x, null);
+    presenceService.trackActivity('editing', 'Moving cursor', documentId);
+  }, [documentId]);
+
+  const updateCurrentUserSelection = React.useCallback(() => {
+    const selection = window.getSelection();
+    if (!selection || selection.rangeCount === 0) return;
+
+    const range = selection.getRangeAt(0);
+    if (!containerRef.current?.contains(range.commonAncestorContainer)) return;
+
+    const start = range.startOffset;
+    const end = range.endOffset;
+
+    if (start !== end) {
+      liveEditingService.updateCursor(documentId, start, { start, end });
+      presenceService.trackActivity('editing', 'Making selection', documentId);
+    }
+  }, [documentId]);
+
+  const handleMouseEnter = React.useCallback((userId: string) => {
+    const timeout = cursorTimeouts.current.get(userId);
+    if (timeout) {
+      clearTimeout(timeout);
+      cursorTimeouts.current.delete(userId);
+    }
+
+    setUserCursors(prev => {
+      const newCursors = new Map(prev);
+      const cursor = newCursors.get(userId);
+      if (cursor) {
+        newCursors.set(userId, { ...cursor, isVisible: true });
+      }
+      return newCursors;
+    });
+  }, []);
+
   useEffect(() => {
-    // Initialize collaboration services
     presenceService.initialize(currentUserId, {
       name: 'Current User', // This should come from user context
       color: '#4ECDC4',
@@ -62,7 +163,6 @@ export const CollaborativeCursor: React.FC<CollaborativeCursorProps> = ({
 
     liveEditingService.initialize(currentUserId, 'Current User');
 
-    // Join the collaborative editing session
     const joinSession = async () => {
       try {
         await liveEditingService.joinSession(documentId);
@@ -72,171 +172,48 @@ export const CollaborativeCursor: React.FC<CollaborativeCursorProps> = ({
       }
     };
 
-    joinSession();
+    void joinSession();
 
-    // Subscribe to presence updates
     const unsubscribePresence = presenceService.onUsersChange((users) => {
       const activeUsers = users.filter(user => user.id !== currentUserId);
       updateUserCursors(activeUsers);
     });
 
-    // Subscribe to live editing updates
     const unsubscribeEditing = liveEditingService.onPresence(documentId, (users) => {
       updateCollaborativeCursors(users);
     });
 
-    // Track cursor position changes
     const trackCursorPosition = (e: MouseEvent) => {
       updateCurrentUserCursor(e);
     };
 
-    // Track selection changes
     const trackSelection = () => {
       updateCurrentUserSelection();
     };
 
+    const timeoutSnapshot = cursorTimeouts.current;
+
     document.addEventListener('mousemove', trackCursorPosition);
     document.addEventListener('selectionchange', trackSelection);
 
-    // Cleanup
     return () => {
       unsubscribePresence();
       unsubscribeEditing();
       document.removeEventListener('mousemove', trackCursorPosition);
       document.removeEventListener('selectionchange', trackSelection);
       liveEditingService.leaveSession(documentId);
-      
-      // Clear all cursor timeouts
-      cursorTimeouts.current.forEach(timeout => clearTimeout(timeout));
-      cursorTimeouts.current.clear();
+
+      timeoutSnapshot.forEach(timeout => clearTimeout(timeout));
+      timeoutSnapshot.clear();
     };
-  }, [documentId, currentUserId]);
-
-  const updateUserCursors = (users: PresenceUser[]) => {
-    const newCursors = new Map(userCursors);
-
-    users.forEach(user => {
-      if (user.currentActivity?.type === 'editing' || user.currentActivity?.type === 'viewing') {
-        const existingCursor = newCursors.get(user.id);
-        if (existingCursor) {
-          // Update existing cursor
-          newCursors.set(user.id, {
-            ...existingCursor,
-            userName: user.name,
-            color: user.color,
-            isVisible: true,
-            timestamp: Date.now()
-          });
-        } else {
-          // Create new cursor
-          newCursors.set(user.id, {
-            userId: user.id,
-            userName: user.name,
-            color: user.color,
-            position: { x: 0, y: 0 },
-            selection: null,
-            isVisible: true,
-            timestamp: Date.now()
-          });
-        }
-      } else {
-        // Hide cursor if user is not actively editing/viewing
-        newCursors.delete(user.id);
-      }
-    });
-
-    setUserCursors(newCursors);
-  };
-
-  const updateCollaborativeCursors = (users: UserPresence[]) => {
-    const newCursors = new Map(userCursors);
-
-    users.forEach(user => {
-      if (user.userId !== currentUserId) {
-        const existingCursor = newCursors.get(user.userId);
-        if (existingCursor) {
-          newCursors.set(user.userId, {
-            ...existingCursor,
-            userName: user.userName,
-            color: user.color,
-            selection: user.selection,
-            timestamp: Date.now()
-          });
-        }
-      }
-    });
-
-    setUserCursors(newCursors);
-  };
-
-  const updateCurrentUserCursor = (e: MouseEvent) => {
-    if (!containerRef.current) return;
-
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    // Update cursor position in live editing service
-    liveEditingService.updateCursor(documentId, x, null);
-
-    // Update presence activity
-    presenceService.trackActivity('editing', 'Moving cursor', documentId);
-  };
-
-  const updateCurrentUserSelection = () => {
-    const selection = window.getSelection();
-    if (!selection || selection.rangeCount === 0) return;
-
-    const range = selection.getRangeAt(0);
-    if (!containerRef.current?.contains(range.commonAncestorContainer)) return;
-
-    const start = range.startOffset;
-    const end = range.endOffset;
-
-    if (start !== end) {
-      liveEditingService.updateCursor(documentId, start, { start, end });
-      presenceService.trackActivity('editing', 'Making selection', documentId);
-    }
-  };
-
-  const hideCursorAfterDelay = (userId: string) => {
-    // Clear existing timeout
-    const existingTimeout = cursorTimeouts.current.get(userId);
-    if (existingTimeout) {
-      clearTimeout(existingTimeout);
-    }
-
-    // Set new timeout to hide cursor after 3 seconds of inactivity
-    const timeout = setTimeout(() => {
-      setUserCursors(prev => {
-        const newCursors = new Map(prev);
-        const cursor = newCursors.get(userId);
-        if (cursor) {
-          newCursors.set(userId, { ...cursor, isVisible: false });
-        }
-        return newCursors;
-      });
-    }, 3000);
-
-    cursorTimeouts.current.set(userId, timeout);
-  };
-
-  const handleMouseEnter = (userId: string) => {
-    const timeout = cursorTimeouts.current.get(userId);
-    if (timeout) {
-      clearTimeout(timeout);
-      cursorTimeouts.current.delete(userId);
-    }
-
-    setUserCursors(prev => {
-      const newCursors = new Map(prev);
-      const cursor = newCursors.get(userId);
-      if (cursor) {
-        newCursors.set(userId, { ...cursor, isVisible: true });
-      }
-      return newCursors;
-    });
-  };
+  }, [
+    currentUserId,
+    documentId,
+    updateCollaborativeCursors,
+    updateCurrentUserCursor,
+    updateCurrentUserSelection,
+    updateUserCursors,
+  ]);
 
   return (
     <div ref={containerRef} className={`relative ${className}`}>

@@ -4,7 +4,7 @@
  */
 
 import { BookOpen, Brain, Edit3, Eye, FileImage, FileText, Search, Settings, Upload } from 'lucide-react';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { Button } from '../design/Button';
 import { LiquidGlassContainer } from '../design/LiquidGlassContainer';
 import { generateMockDocumentContent, generateMockDocumentStructure, generateMockDocumentSummary, generateMockEntityExtraction, generateMockKeywords, generateMockLanguageDetection, generateMockReadabilityMetrics, generateMockSentimentAnalysis } from './mockDataGenerators';
@@ -119,7 +119,7 @@ export interface EntityExtraction {
   startPosition: number;
   endPosition: number;
   page: number;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface SentimentAnalysis {
@@ -216,7 +216,7 @@ export const DocumentAIComponent: React.FC<DocumentAIProps> = ({
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   
-  const finalConfig = { ...defaultConfig, ...config };
+  const finalConfig = useMemo(() => ({ ...defaultConfig, ...config }), [config]);
 
   const handleFileUpload = useCallback(async (file: File) => {
     if (!file) return;

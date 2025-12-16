@@ -15,7 +15,7 @@ export interface AssetEntity {
   publicUrl?: string | null;
   createdAt: Date;
   updatedAt: Date;
-  metadata: any;
+  metadata: Record<string, unknown>;
   title?: string | null;
   type: string;
   userId?: string | null;

@@ -12,7 +12,7 @@ export function ConnectionStatus({
   position = 'top-right',
   size = 'md' 
 }: ConnectionStatusProps) {
-  const { connectionStatus, isOnline, isConnected } = useRealTime({ autoConnect: true });
+  const { connectionStatus, isOnline } = useRealTime({ autoConnect: true });
 
   const getStatusConfig = () => {
     if (!isOnline) {

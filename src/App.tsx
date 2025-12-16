@@ -151,7 +151,10 @@ function ProjectDashboardRoute() {
     "Creative direction for a kinetic, zero-gravity inspired brand world."
   );
 
-  const fetchProjects = useCallback(() => ProjectsAPI.getProjects(), []);
+  const fetchProjects = useCallback(
+    () => ProjectsAPI.getProjects().then(resp => resp.data),
+    []
+  );
 
   // Fetch project data from API
   const { data: projects, loading, error, refetch } = useApiData<Project>(fetchProjects);
@@ -210,7 +213,10 @@ function WritersRoomRoute() {
   const params = new URLSearchParams(search);
   const projectId = params.get("project");
 
-  const fetchProjects = useCallback(() => ProjectsAPI.getProjects(), []);
+  const fetchProjects = useCallback(
+    () => ProjectsAPI.getProjects().then(resp => resp.data),
+    []
+  );
 
   // Fetch project data for context
   const { data: projects, loading, error } = useApiData<Project>(fetchProjects);
@@ -247,7 +253,10 @@ function MoodboardRoute() {
     [projectId]
   );
 
-  const fetchProjects = useCallback(() => ProjectsAPI.getProjects(), []);
+  const fetchProjects = useCallback(
+    () => ProjectsAPI.getProjects().then(resp => resp.data),
+    []
+  );
 
   // Fetch moodboard items from API
   const { data: moodboardItems, loading, error, refetch } = useApiData<MoodboardItem>(fetchMoodboardItems);
@@ -283,7 +292,10 @@ function MoodboardRoute() {
 function TalentRosterRoute() {
   const navigate = useNavigate();
 
-  const fetchFreelancers = useCallback(() => FreelancersAPI.getFreelancers(), []);
+  const fetchFreelancers = useCallback(
+    () => FreelancersAPI.getFreelancers().then(resp => resp.data),
+    []
+  );
 
   // Fetch freelancers from API
   const { data: freelancers, loading, error, refetch } = useApiData<Freelancer>(fetchFreelancers);
@@ -334,7 +346,10 @@ function Layout({ children }: { children: React.ReactNode }) {
 
 // Wrapper component for ProjectsView to handle API data
 function ProjectsViewWrapper() {
-  const fetchProjects = useCallback(() => ProjectsAPI.getProjects(), []);
+  const fetchProjects = useCallback(
+    () => ProjectsAPI.getProjects().then(resp => resp.data),
+    []
+  );
   const { data: projects, loading, error, refetch } = useApiData<Project>(fetchProjects);
 
   return (

@@ -9,7 +9,7 @@ export interface Action {
   type: string;
   description: string;
   timestamp: Date;
-  data: any; // Action-specific data for undo/redo
+  data: unknown; // Action-specific data for undo/redo
   execute: () => Promise<void> | void; // Execute the action
   undo?: () => Promise<void> | void; // Undo the action (optional)
   redo?: () => Promise<void> | void; // Redo the action (optional)
@@ -297,7 +297,7 @@ class UndoRedoService {
   /**
    * Undo an entire action group
    */
-  async undoGroup(groupId: string): Promise<boolean> {
+  async undoGroup(_groupId: string): Promise<boolean> {
     // Implementation for undoing action groups
     // This would require tracking groups in the history
     console.warn('Group undo functionality not yet implemented');
@@ -379,7 +379,7 @@ class UndoRedoService {
       if (data.history && data.history.actions) {
         this.history = {
           ...data.history,
-          actions: data.history.actions.map((action: any) => ({
+          actions: data.history.actions.map((action: Action) => ({
             ...action,
             timestamp: new Date(action.timestamp)
           }))
@@ -570,7 +570,7 @@ class UndoRedoService {
         
         this.history = {
           ...data.history,
-          actions: data.history.actions.map((action: any) => ({
+          actions: data.history.actions.map((action: Action) => ({
             ...action,
             timestamp: new Date(action.timestamp)
           }))

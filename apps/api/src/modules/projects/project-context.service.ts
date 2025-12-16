@@ -211,7 +211,7 @@ export class ProjectContextService {
     }
 
     // Soft delete with data retention policy
-    const project = await this.prisma.project.update({
+    await this.prisma.project.update({
       where: { id: projectId },
       data: {
         status: 'ARCHIVED',

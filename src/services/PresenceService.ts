@@ -36,7 +36,7 @@ export interface ActivityInfo {
   details: string;
   target?: string; // document id, project id, etc.
   startTime: Date;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface LocationInfo {
@@ -67,7 +67,7 @@ export interface PresenceEvent {
   userId: string;
   type: PresenceEventType;
   timestamp: Date;
-  data: any;
+  data: unknown;
 }
 
 export type PresenceEventType = 
@@ -556,7 +556,7 @@ class PresenceService {
     this.notifyUsersChangeHandlers();
   }
 
-  private broadcastPresence(eventType: PresenceEventType, data: any): void {
+  private broadcastPresence(eventType: PresenceEventType, data: unknown): void {
     if (!this.currentUserId) return;
 
     webSocketService.send({

@@ -68,7 +68,7 @@ export class FreelancersService {
     const { skills, contactInfo, email, status, ...rest } = data;
     const resolvedEmail = email || contactInfo;
     
-    const updateData: any = {
+    const updateData: Record<string, unknown> = {
       ...rest,
     };
     
@@ -158,7 +158,7 @@ export class FreelancersService {
     return items.map(item => this.normalizeFreelancer(item));
   }
 
-  private normalizeFreelancer(item: unknown): any {
+  private normalizeFreelancer(item: unknown): Record<string, unknown> | unknown {
     if (!item || typeof item !== 'object') return item;
     const freelancer = item as { skills?: unknown[] };
     const skills = Array.isArray(freelancer.skills)

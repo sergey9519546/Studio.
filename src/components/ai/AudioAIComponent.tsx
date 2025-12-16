@@ -4,7 +4,8 @@
  */
 
 import { Brain, Download, FileAudio, Mic, Pause, Play, Settings, Square, Upload, Volume2 } from 'lucide-react';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { AIAPI } from '../../services/api/ai';
 import { Button } from '../design/Button';
 import { LiquidGlassContainer } from '../design/LiquidGlassContainer';
 
@@ -161,7 +162,7 @@ export const AudioAIComponent: React.FC<AudioAIProps> = ({
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const recordingIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
-  const finalConfig = { ...defaultConfig, ...config };
+  const finalConfig = useMemo(() => ({ ...defaultConfig, ...config }), [config]);
 
   // Recording timer
   useEffect(() => {
@@ -204,10 +205,10 @@ export const AudioAIComponent: React.FC<AudioAIProps> = ({
       mediaRecorderRef.current = mediaRecorder;
       mediaRecorder.start();
       setIsRecording(true);
-    } catch (error) {
+    } catch {
       onError('Failed to start recording. Please check microphone permissions.');
     }
-  }, [onError]);
+  }, [handleFileUpload, onError]);
 
   const stopRecording = useCallback(() => {
     if (mediaRecorderRef.current && isRecording) {
@@ -238,35 +239,20 @@ export const AudioAIComponent: React.FC<AudioAIProps> = ({
     }
 
     setIsProcessing(true);
-    setProcessingProgress(0);
+    setProcessingProgress(15);
 
     try {
       // Create audio URL for playback
       const url = URL.createObjectURL(file);
       setAudioUrl(url);
 
-      // Simulate processing progress
-      const progressInterval = setInterval(() => {
-        setProcessingProgress(prev => Math.min(prev + Math.random() * 15, 95));
-      }, 300);
-
-      // Create FormData for upload
-      const formData = new FormData();
-      formData.append('audio', file);
-      formData.append('config', JSON.stringify({
+      const result = await AIAPI.analyzeAudioFile(file, {
         ...finalConfig,
         projectId,
         projectContext
-      }));
+      });
 
-      // Simulate AI analysis (replace with actual API call)
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      
-      clearInterval(progressInterval);
       setProcessingProgress(100);
-
-      // Generate mock analysis result
-      const result = await simulateAudioAnalysis(file, finalConfig);
       
       onAnalysisComplete(result);
     } catch (error) {
@@ -502,128 +488,3 @@ export const AudioAIComponent: React.FC<AudioAIProps> = ({
     </div>
   );
 };
-
-// Mock function to simulate AI audio analysis
-async function simulateAudioAnalysis(file: File, config: AudioAIConfig): Promise<AudioAnalysisResult> {
-  const startTime = Date.now();
-  
-  // Simulate processing delay
-  await new Promise(resolve => setTimeout(resolve, 2000 + Math.random() * 3000));
-  
-  const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
-  
-  // Generate mock analysis
-  const mockResult: AudioAnalysisResult = {
-    id: `audio_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-    filename: file.name,
-    transcription: config.enableTranscription ? generateMockTranscription() : [],
-    audioFeatures: config.enableAudioFeatures ? generateMockAudioFeatures() : {} as AudioFeatures,
-    speakerAnalysis: config.enableSpeakerDetection ? generateMockSpeakerAnalysis() : undefined,
-    languageDetection: config.enableLanguageDetection ? generateMockLanguageDetection() : undefined,
-    emotionAnalysis: config.enableEmotionAnalysis ? generateMockEmotionAnalysis() : undefined,
-    qualityMetrics: config.enableQualityAssessment ? generateMockQualityMetrics() : {} as QualityMetrics,
-    processingTime: Date.now() - startTime,
-    timestamp: new Date(),
-    metadata: {
-      duration: Math.floor(Math.random() * 300) + 30,
-      format: fileExtension.toUpperCase(),
-      sampleRate: 44100,
-      channels: 2,
-      size: file.size
-    }
-  };
-  
-  return mockResult;
-}
-
-// Mock data generators
-function generateMockTranscription(): TranscriptionResult[] {
-  return [
-    {
-      id: 'seg_001',
-      text: 'Hello and welcome to this audio recording.',
-      confidence: 0.95,
-      startTime: 0,
-      endTime: 3.5,
-      speaker: 'Speaker 1',
-      language: 'en'
-    },
-    {
-      id: 'seg_002',
-      text: 'Today we will be discussing important topics.',
-      confidence: 0.92,
-      startTime: 3.5,
-      endTime: 7.2,
-      speaker: 'Speaker 1',
-      language: 'en'
-    }
-  ];
-}
-
-function generateMockAudioFeatures(): AudioFeatures {
-  return {
-    tempo: 120,
-    key: 'C',
-    mode: 'major',
-    energy: 0.75,
-    valence: 0.65,
-    danceability: 0.55,
-    acousticness: 0.45,
-    instrumentalness: 0.1,
-    speechiness: 0.85,
-    loudness: -8.5,
-    spectralCentroid: 2500,
-    mfccs: Array(13).fill(0).map(() => Math.random() * 20 - 10)
-  };
-}
-
-function generateMockSpeakerAnalysis(): SpeakerAnalysis {
-  return {
-    speakers: [
-      {
-        id: 'speaker_1',
-        confidence: 0.92,
-        characteristics: {
-          age: 'adult',
-          gender: 'male',
-          speakingRate: 145
-        }
-      }
-    ],
-    totalSpeakers: 1,
-    speakerDiarization: [
-      { speakerId: 'speaker_1', startTime: 0, endTime: 10, confidence: 0.92 }
-    ]
-  };
-}
-
-function generateMockLanguageDetection(): LanguageDetection {
-  return {
-    primary: 'en',
-    confidence: 0.96,
-    alternatives: [
-      { language: 'es', confidence: 0.02 },
-      { language: 'fr', confidence: 0.02 }
-    ]
-  };
-}
-
-function generateMockEmotionAnalysis(): EmotionAnalysis {
-  return {
-    overall: 'neutral',
-    confidence: 0.85,
-    emotions: [
-      { emotion: 'calm', intensity: 0.7, confidence: 0.85, timeRange: [0, 10] }
-    ]
-  };
-}
-
-function generateMockQualityMetrics(): QualityMetrics {
-  return {
-    clarity: 0.88,
-    noiseLevel: 0.12,
-    signalToNoise: 25,
-    clipping: 0.01,
-    dynamicRange: 45
-  };
-}

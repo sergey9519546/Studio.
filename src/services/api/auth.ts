@@ -34,7 +34,7 @@ export class AuthAPI {
       await apiClient.post('/auth/logout');
     } catch (error) {
       // Even if logout fails on server, clear local tokens
-      console.warn('Server logout failed, clearing local tokens');
+      console.warn('Server logout failed, clearing local tokens', error);
     } finally {
       // Always clear local storage
       localStorage.removeItem('authToken');

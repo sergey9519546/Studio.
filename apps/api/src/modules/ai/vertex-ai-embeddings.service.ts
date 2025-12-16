@@ -81,8 +81,8 @@ export class VertexAIEmbeddingsService implements EmbeddingsProvider {
         const batchPromises = batch.map(text => model.embedContent(text));
 
         const batchResults = await Promise.all(batchPromises);
-        const embeddings = batchResults.map((result: any) => {
-          const embedding = result.embedding.values;
+        const embeddings = batchResults.map((result) => {
+          const embedding = result.embedding?.values as number[] | undefined;
           if (!embedding || embedding.length === 0) {
             throw new Error("No embedding returned from Vertex AI");
           }

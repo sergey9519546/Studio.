@@ -19,6 +19,7 @@ import 'multer';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { ConversationsService } from '../conversations/conversations.service';
 import { RAGService } from '../rag/rag.service';
+import { MockAnalysisService, type VisionAnalysisResult, type DocumentAnalysisResult, type AudioAnalysisResult } from './mock-analysis.service';
 import {
     GeminiAnalystService,
     type ImageAnalysisResult,
@@ -26,7 +27,7 @@ import {
     type ProfitabilityAnalysisResult
 } from './gemini-analyst.service';
 import { GeminiService } from './gemini.service';
-import { StreamingService, type StreamChunk } from './streaming.service';
+import { StreamingService } from './streaming.service';
 import type { SafetySetting } from '@google/genai';
 
 /**
@@ -82,6 +83,7 @@ export class AIController {
         private readonly rag: RAGService,
         private readonly streaming: StreamingService,
         private readonly conversationsService: ConversationsService,
+        private readonly mockAnalysisService: MockAnalysisService,
     ) {}
 
     /**
@@ -288,6 +290,44 @@ ${JSON.stringify(parsedContext, null, 2)}
     }
 
     /**
+     * Analyze document upload (replaces frontend mock usage)
+     */
+    @Post('document/analyze-file')
+    @HttpCode(HttpStatus.OK)
+    @UseInterceptors(FilesInterceptor('file', 1, {
+        limits: { fileSize: 50 * 1024 * 1024 }
+    }))
+    async analyzeDocumentFile(
+        @UploadedFiles() files?: Array<Express.Multer.File>,
+    ): Promise<DocumentAnalysisResult> {
+        if (!files || files.length === 0) {
+            throw new BadRequestException('File is required');
+        }
+
+        const file = files[0];
+        return this.mockAnalysisService.analyzeDocument(file);
+    }
+
+    /**
+     * Analyze audio upload (replaces frontend mock usage)
+     */
+    @Post('audio/analyze-file')
+    @HttpCode(HttpStatus.OK)
+    @UseInterceptors(FilesInterceptor('file', 1, {
+        limits: { fileSize: 50 * 1024 * 1024 }
+    }))
+    async analyzeAudioFile(
+        @UploadedFiles() files?: Array<Express.Multer.File>,
+    ): Promise<AudioAnalysisResult> {
+        if (!files || files.length === 0) {
+            throw new BadRequestException('File is required');
+        }
+
+        const file = files[0];
+        return this.mockAnalysisService.analyzeAudio(file);
+    }
+
+    /**
      * Analyze image using Gemini Vision
      */
     @Post('vision/analyze')
@@ -300,6 +340,25 @@ ${JSON.stringify(parsedContext, null, 2)}
         }
 
         return this.aiService.analyzeImage(body.imageUrl);
+    }
+
+    /**
+     * Analyze vision file upload (replaces frontend mock usage)
+     */
+    @Post('vision/analyze-file')
+    @HttpCode(HttpStatus.OK)
+    @UseInterceptors(FilesInterceptor('file', 1, {
+        limits: { fileSize: 20 * 1024 * 1024 }
+    }))
+    async analyzeVisionFile(
+        @UploadedFiles() files?: Array<Express.Multer.File>,
+    ): Promise<VisionAnalysisResult> {
+        if (!files || files.length === 0) {
+            throw new BadRequestException('File is required');
+        }
+
+        const file = files[0];
+        return this.mockAnalysisService.analyzeVision(file);
     }
 
     /**

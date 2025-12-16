@@ -14,6 +14,14 @@ export interface ProjectContextRequest extends Request {
   };
 }
 
+interface AuthenticatedRequest extends Request {
+  user?: {
+    id?: string | number;
+    sub?: string | number;
+    [key: string]: unknown;
+  };
+}
+
 @Injectable()
 export class ProjectContextMiddleware implements NestMiddleware {
   constructor(private prisma: PrismaService) {}
@@ -77,9 +85,9 @@ export class ProjectContextMiddleware implements NestMiddleware {
 
   private extractUserId(req: Request): string | null {
     // From JWT payload (set by auth middleware)
-    const user = (req as any).user;
+    const user = (req as AuthenticatedRequest).user;
     if (user?.id || user?.sub) {
-      return user.id || user.sub;
+      return (user.id ?? user.sub)?.toString() || null;
     }
 
     // From headers (for internal services)
@@ -128,7 +136,9 @@ export class ProjectContextMiddleware implements NestMiddleware {
       permissions = ['read', 'write', 'delete', 'manage_access', 'admin'];
     } else if (accessControl) {
       role = accessControl.role as 'owner' | 'editor' | 'viewer';
-      permissions = (accessControl.permissions as string[]) || this.getDefaultPermissions(role);
+      permissions = Array.isArray(accessControl.permissions)
+        ? accessControl.permissions
+        : this.getDefaultPermissions(role);
     } else {
       // Check if project is public
       if (project.accessLevel !== 'public') {
@@ -148,7 +158,7 @@ export class ProjectContextMiddleware implements NestMiddleware {
     };
   }
 
-  private getDefaultPermissions(role: string): string[] {
+  private getDefaultPermissions(role: 'owner' | 'editor' | 'viewer'): string[] {
     switch (role) {
       case 'owner':
         return ['read', 'write', 'delete', 'manage_access', 'admin'];

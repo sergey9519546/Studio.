@@ -79,7 +79,7 @@ export class VertexAIService {
       const modelInstance = this.getModel(model);
       
       // Build generation config with filtered undefined values (IMPROVEMENT)
-      const generationConfig: Record<string, any> = {};
+      const generationConfig: Record<string, number> = {};
       if (options?.temperature !== undefined) {
         generationConfig.temperature = options.temperature;
       }
@@ -170,7 +170,17 @@ export class VertexAIService {
       const modelInstance = this.getModel(model);  // IMPROVEMENT: Use parameter instead of hardcoded
 
       // Build startChat configuration
-      const chatConfig: Record<string, any> = {
+      const chatConfig: {
+        history: Array<{ role: string; parts: Array<{ text: string }> }>;
+        generationConfig: {
+          temperature: number;
+          maxOutputTokens: number;
+          topP: number;
+          topK: number;
+        };
+        systemInstruction?: { parts: Array<{ text: string }> };
+        tools?: Array<{ functionDeclarations: Array<{ name: string; description: string; parameters: Record<string, unknown> }> }>;
+      } = {
         history: messages.slice(0, -1).map(msg => ({
           role: msg.role === 'assistant' ? 'model' : 'user',
           parts: [{ text: msg.content }],
@@ -212,7 +222,7 @@ export class VertexAIService {
       // Check for function calls
       const functionCalls = response.functionCalls();
       if (functionCalls && functionCalls.length > 0) {
-        const toolCalls: ToolCall[] = functionCalls.map((call: any) => ({
+        const toolCalls: ToolCall[] = functionCalls.map((call) => ({
           name: call.name,
           args: call.args,
         }));

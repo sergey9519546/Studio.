@@ -147,10 +147,10 @@ export class ProjectCacheService {
   /**
    * Cache project context
    */
-  async cacheProjectContext(
+  async cacheProjectContext<T>(
     projectId: string,
     userId: string,
-    context: any
+    context: T
   ): Promise<void> {
     const key = `context:${userId}`;
     await this.set(projectId, key, context, { ttl: 3600, tags: ['context'] });
@@ -159,9 +159,9 @@ export class ProjectCacheService {
   /**
    * Get cached project context
    */
-  async getProjectContext(projectId: string, userId: string): Promise<any | null> {
+  async getProjectContext<T>(projectId: string, userId: string): Promise<T | null> {
     const key = `context:${userId}`;
-    return this.get(projectId, key);
+    return this.get<T>(projectId, key);
   }
 
   /**
@@ -187,10 +187,10 @@ export class ProjectCacheService {
   /**
    * Cache search results
    */
-  async cacheSearchResults(
+  async cacheSearchResults<T>(
     projectId: string,
     queryHash: string,
-    results: any[]
+    results: T[]
   ): Promise<void> {
     const key = `search:${queryHash}`;
     await this.set(projectId, key, results, { ttl: 300, tags: ['search'] }); // 5 minutes
@@ -199,15 +199,15 @@ export class ProjectCacheService {
   /**
    * Get cached search results
    */
-  async getSearchResults(projectId: string, queryHash: string): Promise<any[] | null> {
+  async getSearchResults<T>(projectId: string, queryHash: string): Promise<T[] | null> {
     const key = `search:${queryHash}`;
-    return this.get(projectId, key);
+    return this.get<T[]>(projectId, key);
   }
 
   /**
    * Cache project metrics
    */
-  async cacheMetrics(projectId: string, metrics: any): Promise<void> {
+  async cacheMetrics<T>(projectId: string, metrics: T): Promise<void> {
     const key = 'metrics';
     await this.set(projectId, key, metrics, { ttl: 60, tags: ['metrics'] }); // 1 minute
   }
@@ -215,8 +215,8 @@ export class ProjectCacheService {
   /**
    * Get cached metrics
    */
-  async getMetrics(projectId: string): Promise<any | null> {
-    return this.get(projectId, 'metrics');
+  async getMetrics<T>(projectId: string): Promise<T | null> {
+    return this.get<T>(projectId, 'metrics');
   }
 
   /**

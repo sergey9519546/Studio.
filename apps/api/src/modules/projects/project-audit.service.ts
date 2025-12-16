@@ -7,7 +7,7 @@ export interface AuditEvent {
   action: string;
   resourceType: string;
   resourceId?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
   ipAddress?: string;
   userAgent?: string;
 }
@@ -22,6 +22,18 @@ export interface AuditLogFilter {
   limit?: number;
   offset?: number;
 }
+
+type AuditLogEntry = {
+  id?: string;
+  projectId: string;
+  userId: string | null;
+  action: string;
+  resourceType: string;
+  resourceId: string | null;
+  metadata: Record<string, unknown>;
+  timestamp: Date;
+  user?: { id: string; name: string; email: string } | null;
+};
 
 @Injectable()
 export class ProjectAuditService {
@@ -60,7 +72,7 @@ export class ProjectAuditService {
     projectId: string,
     userId: string,
     documentId: string,
-    metadata: Record<string, any> = {}
+    metadata: Record<string, unknown> = {}
   ): Promise<void> {
     await this.logEvent({
       projectId,
@@ -153,20 +165,21 @@ export class ProjectAuditService {
    * Get audit logs for a project with filtering
    */
   async getAuditLogs(filter: AuditLogFilter): Promise<{
-    logs: any[];
+    logs: AuditLogEntry[];
     total: number;
     hasMore: boolean;
   }> {
-    const where: any = {};
+    const where: Record<string, unknown> = {};
 
     if (filter.projectId) where.projectId = filter.projectId;
     if (filter.userId) where.userId = filter.userId;
     if (filter.action) where.action = filter.action;
     if (filter.resourceType) where.resourceType = filter.resourceType;
     if (filter.startDate || filter.endDate) {
-      where.timestamp = {};
-      if (filter.startDate) where.timestamp.gte = filter.startDate;
-      if (filter.endDate) where.timestamp.lte = filter.endDate;
+      const timestampRange: Record<string, Date> = {};
+      if (filter.startDate) timestampRange.gte = filter.startDate;
+      if (filter.endDate) timestampRange.lte = filter.endDate;
+      where.timestamp = timestampRange;
     }
 
     const [logs, total] = await Promise.all([
@@ -185,7 +198,7 @@ export class ProjectAuditService {
     ]);
 
     return {
-      logs,
+      logs: logs as AuditLogEntry[],
       total,
       hasMore: (filter.offset || 0) + logs.length < total,
     };
@@ -198,7 +211,7 @@ export class ProjectAuditService {
     totalEvents: number;
     byAction: Record<string, number>;
     byUser: Record<string, number>;
-    recentActivity: any[];
+    recentActivity: AuditLogEntry[];
   }> {
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - days);

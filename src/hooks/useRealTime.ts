@@ -9,6 +9,7 @@ export interface UseRealTimeOptions {
 }
 
 export function useRealTime(options: UseRealTimeOptions = {}) {
+  const { autoConnect = false } = options;
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('disconnected');
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
@@ -30,7 +31,7 @@ export function useRealTime(options: UseRealTimeOptions = {}) {
     const handleOnline = () => {
       setIsOnline(true);
       // Attempt to reconnect when coming back online
-      if (connectionStatus === 'disconnected' && options.autoConnect) {
+      if (connectionStatus === 'disconnected' && autoConnect) {
         webSocketService.connect().catch(console.error);
       }
     };
@@ -47,14 +48,14 @@ export function useRealTime(options: UseRealTimeOptions = {}) {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
-  }, [connectionStatus, options.autoConnect]);
+  }, [autoConnect, connectionStatus]);
 
   // Auto-connect if enabled
   useEffect(() => {
-    if (options.autoConnect && isOnline && connectionStatus === 'disconnected') {
+    if (autoConnect && isOnline && connectionStatus === 'disconnected') {
       webSocketService.connect().catch(console.error);
     }
-  }, [options.autoConnect, isOnline, connectionStatus]);
+  }, [autoConnect, isOnline, connectionStatus]);
 
   // Subscribe to specific entity updates
   const subscribeToUpdates = useCallback((entities: string[], callback: (update: RealtimeUpdate) => void) => {
@@ -85,7 +86,7 @@ export function useRealTime(options: UseRealTimeOptions = {}) {
     webSocketService.disconnect();
   }, []);
 
-  const send = useCallback((event: string, data: any) => {
+  const send = useCallback(<TPayload,>(event: string, data: TPayload) => {
     webSocketService.send(event, data);
   }, []);
 

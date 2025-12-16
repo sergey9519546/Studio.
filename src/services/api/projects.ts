@@ -73,7 +73,12 @@ export class ProjectsAPI {
     completed: number;
     blocked: number;
   }> {
-    const response = await apiClient.get<ApiResponse<any>>('/projects/stats');
+    const response = await apiClient.get<ApiResponse<{
+      total: number;
+      active: number;
+      completed: number;
+      blocked: number;
+    }>>('/projects/stats');
     return response.data.data;
   }
 }

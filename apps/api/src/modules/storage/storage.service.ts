@@ -1,4 +1,4 @@
-// Storage service - mock implementation without Google Cloud dependencies
+// Storage service - Google Cloud Storage implementation
 import {
   Injectable,
   InternalServerErrorException,
@@ -9,6 +9,7 @@ import { ConfigService } from "@nestjs/config";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import { Buffer } from "buffer";
 import { Readable } from "stream";
+import { Storage, type UploadOptions as GcsUploadOptions } from "@google-cloud/storage";
 
 export interface StoredObject {
   storageKey: string;
@@ -39,6 +40,7 @@ export class StorageService implements OnModuleInit {
   private readonly bucketName: string;
   private isConfigured = false;
   private connectedEmail = "";
+  private storage: Storage | null = null;
 
   constructor(
     private configService: ConfigService,
@@ -67,10 +69,23 @@ export class StorageService implements OnModuleInit {
   }
 
   private async initializeStorage() {
+    const credentialsJson = this.configService.get<string>("GOOGLE_APPLICATION_CREDENTIALS_JSON");
     try {
-      // Storage service initialized in mock mode - no Google Cloud dependencies
+      if (credentialsJson) {
+        const credentials = JSON.parse(credentialsJson);
+        this.storage = new Storage({ credentials });
+      } else {
+        this.storage = new Storage();
+      }
+
+      const bucket = this.storage.bucket(this.bucketName);
+      await bucket.getMetadata();
+
+      const [serviceAccount] = await this.storage.getServiceAccount();
+      this.connectedEmail = serviceAccount?.email || "";
+
       this.isConfigured = true;
-      this.logger.log(`StorageService initialized in mock mode (Bucket: ${this.bucketName})`);
+      this.logger.log(`StorageService: Connected to bucket ${this.bucketName}`);
     } catch (e: unknown) {
       const error = e as Error;
       this.logger.warn(
@@ -81,8 +96,11 @@ export class StorageService implements OnModuleInit {
   }
 
   private async verifyConnection() {
+    if (!this.storage) return;
     try {
-      this.logger.log(`Bucket '${this.bucketName}' - Connection check skipped (Google Cloud dependency commented)`);
+      const bucket = this.storage.bucket(this.bucketName);
+      await bucket.getMetadata();
+      this.logger.log(`Bucket '${this.bucketName}' verified successfully`);
     } catch (e: unknown) {
       const error = e as { code?: number; message: string };
       if (error.code === 403) {
@@ -109,19 +127,39 @@ export class StorageService implements OnModuleInit {
     }
 
     try {
-      const publicUrl: string | undefined = undefined;
-      const signedUrl: string | undefined = undefined;
+      const bucket = this.storage!.bucket(this.bucketName);
+      const file = bucket.file(safeKey);
 
-      // Handle Public Access
-      if (params.isPublic) {
-        this.logger.warn(`File upload simulated (Google Cloud dependency commented). Key: ${safeKey}`);
+      const uploadOpts: GcsUploadOptions = {
+        contentType: params.contentType,
+        gzip: false,
+        metadata: params.metadata ? { metadata: params.metadata } : undefined,
+        resumable: false,
+        predefinedAcl: params.isPublic ? "publicRead" : undefined,
+      };
+
+      // Use save for buffers; createWriteStream for streams
+      if (Buffer.isBuffer(params.body)) {
+        await file.save(params.body, uploadOpts);
+      } else {
+        await new Promise<void>((resolve, reject) => {
+          const stream = params.body.pipe(file.createWriteStream(uploadOpts));
+          stream.on("finish", () => resolve());
+          stream.on("error", reject);
+        });
       }
+
+      const publicUrl = params.isPublic ? `https://storage.googleapis.com/${this.bucketName}/${safeKey}` : undefined;
+      const [signedUrl] = await file.getSignedUrl({
+        action: "read",
+        expires: Date.now() + 60 * 60 * 1000, // 1h
+      });
 
       this.eventEmitter.emit(STORAGE_EVENTS.UPLOADED, {
         key: safeKey,
         traceId: params.traceId,
       });
-      this.logger.log(`Object Uploaded (simulated): ${safeKey}`);
+      this.logger.log(`Object Uploaded: ${safeKey}`);
 
       return {
         storageKey: safeKey,
@@ -157,7 +195,7 @@ export class StorageService implements OnModuleInit {
 
   async getSignedDownloadUrl(
     key: string,
-    expiresInSeconds = 3600
+    _expiresInSeconds = 3600
   ): Promise<string> {
     if (!this.isConfigured)
       throw new InternalServerErrorException("Storage not configured");
@@ -165,8 +203,13 @@ export class StorageService implements OnModuleInit {
     const safeKey = this.sanitizeKey(key);
 
     try {
-      this.logger.warn(`Signed URL generation simulated for key: ${safeKey}`);
-      return `https://storage.googleapis.com/${this.bucketName}/${safeKey}`;
+      const bucket = this.storage!.bucket(this.bucketName);
+      const file = bucket.file(safeKey);
+      const [url] = await file.getSignedUrl({
+        action: "read",
+        expires: Date.now() + _expiresInSeconds * 1000,
+      });
+      return url;
     } catch (error: unknown) {
       const err = error as Error;
       this.logger.error(`GCS Sign URL Failed [${safeKey}]: ${err.message}`);
@@ -179,8 +222,11 @@ export class StorageService implements OnModuleInit {
 
     const safeKey = this.sanitizeKey(key);
     try {
+      const bucket = this.storage!.bucket(this.bucketName);
+      const file = bucket.file(safeKey);
+      await file.delete({ ignoreNotFound: true });
       this.eventEmitter.emit(STORAGE_EVENTS.DELETED, { key: safeKey });
-      this.logger.log(`Deleted GCS Object (simulated): ${safeKey}`);
+      this.logger.log(`Deleted GCS Object: ${safeKey}`);
     } catch (error: unknown) {
       const err = error as { code?: number; message: string };
       if (err.code !== 404) {

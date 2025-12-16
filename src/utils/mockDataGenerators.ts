@@ -151,17 +151,6 @@ export function generateMockFreelancer(overrides: Partial<Freelancer> = {}): Fre
 
 // Assignment Mock Data Generators
 export function generateMockAssignment(overrides: Partial<Assignment> = {}): Assignment {
-  const assignmentTitles = [
-    'Frontend Development Task',
-    'UI Design Component',
-    'Backend API Development',
-    'Mobile App Feature',
-    'Brand Identity Design',
-    'Content Strategy',
-    'User Research Analysis',
-    'Performance Optimization'
-  ];
-
   const id = `assignment_${Math.random().toString(36).substr(2, 9)}`;
   const freelancer = generateMockFreelancer();
 
@@ -209,7 +198,7 @@ export function generateMockMoodboardItem(overrides: Partial<MoodboardItem> = {}
 
 // Helper function to get random enum value
 function getRandomEnumValue<T>(enumObj: T): T[keyof T] {
-  const values = Object.values(enumObj as any) as (keyof T)[];
+  const values = Object.values(enumObj as Record<string, T[keyof T]>) as T[keyof T][];
   return values[Math.floor(Math.random() * values.length)];
 }
 
@@ -293,11 +282,11 @@ export function generateLargeDataset<T>(
 }
 
 // Data caching utilities for performance
-const cache = new Map<string, any>();
+const cache = new Map<string, unknown>();
 
 export function getCachedData<T>(key: string, generator: () => T): T {
   if (cache.has(key)) {
-    return cache.get(key);
+    return cache.get(key) as T;
   }
   
   const data = generator();

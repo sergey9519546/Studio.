@@ -5,6 +5,8 @@
 
 import React, { createContext, ReactNode, useCallback, useContext, useEffect, useReducer } from 'react';
 
+type UnknownRecord = Record<string, unknown>;
+
 // Plugin Types
 export interface Plugin {
   id: string;
@@ -25,7 +27,7 @@ export interface Plugin {
 
 export interface PluginMetadata {
   entryPoint: string;
-  manifest: Record<string, any>;
+  manifest: UnknownRecord;
   size: number;
   checksum: string;
   compatibleVersions: string[];
@@ -44,10 +46,10 @@ export interface PluginHooks {
   onDisable?: () => void;
   onUninstall?: () => void;
   onUpdate?: (oldVersion: string, newVersion: string) => void;
-  beforeRender?: (props: any) => any;
+  beforeRender?: (props: unknown) => unknown;
   afterRender?: (element: HTMLElement) => void;
   onError?: (error: Error) => void;
-  custom?: Record<string, Function>;
+  custom?: Record<string, (...args: unknown[]) => unknown>;
 }
 
 export interface PluginLifecycle {
@@ -67,32 +69,32 @@ export interface PluginPermission {
 }
 
 export interface PluginContext {
-  registerHook: (name: string, hook: Function) => void;
+  registerHook: (name: string, hook: (...args: unknown[]) => unknown) => void;
   unregisterHook: (name: string) => void;
-  emitEvent: (event: string, data?: any) => void;
-  getConfig: (key: string, defaultValue?: any) => any;
-  setConfig: (key: string, value: any) => void;
+  emitEvent: (event: string, data?: unknown) => void;
+  getConfig: <T = unknown>(key: string, defaultValue?: T) => T;
+  setConfig: (key: string, value: unknown) => void;
   requestPermission: (permission: PluginPermission) => Promise<boolean>;
-  getAPI: (name: string) => any;
+  getAPI: (name: string) => unknown;
   log: (level: 'debug' | 'info' | 'warn' | 'error', message: string) => void;
 }
 
 export interface PluginAPI {
   ui: {
-    createComponent: (component: React.ComponentType<any>, props?: any) => void;
-    registerShortcut: (shortcut: string, callback: Function) => void;
+    createComponent: (component: React.ComponentType<unknown>, props?: UnknownRecord) => void;
+    registerShortcut: (shortcut: string, callback: () => void) => void;
     showNotification: (message: string, type?: 'info' | 'success' | 'warning' | 'error') => void;
-    openModal: (component: React.ComponentType<any>, props?: any) => void;
+    openModal: (component: React.ComponentType<unknown>, props?: UnknownRecord) => void;
   };
   data: {
-    getStore: (key: string) => any;
-    setStore: (key: string, value: any) => void;
-    subscribe: (key: string, callback: Function) => () => void;
+    getStore: <T = unknown>(key: string) => T;
+    setStore: (key: string, value: unknown) => void;
+    subscribe: (key: string, callback: (value: unknown) => void) => () => void;
   };
   system: {
     getVersion: () => string;
     getPlatform: () => string;
-    getConfig: () => any;
+    getConfig: () => UnknownRecord;
     restart: () => void;
   };
   plugin: {
@@ -337,8 +339,8 @@ const PluginManagerContext = createContext<{
   loadPlugins: () => Promise<void>;
   updatePlugin: (id: string) => Promise<void>;
   getPluginContext: (id: string) => PluginContext | null;
-  emitPluginEvent: (pluginId: string, event: string, data?: any) => void;
-  registerPluginHook: (pluginId: string, name: string, hook: Function) => void;
+  emitPluginEvent: (pluginId: string, event: string, data?: unknown) => void;
+  registerPluginHook: (pluginId: string, name: string, hook: (...args: unknown[]) => unknown) => void;
   checkPermissions: (permissions: PluginPermission[]) => Promise<boolean>;
   getAvailablePlugins: () => Plugin[];
   getInstalledPlugins: () => Plugin[];

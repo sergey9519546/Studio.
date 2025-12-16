@@ -4,7 +4,6 @@ import {
   searchSimilarImages,
   trackDownload,
   isUnsplashConfigured,
-  type UnsplashSearchResponse,
   type UnsplashImage,
 } from "../../services/unsplash";
 import { useToast } from "../hooks/useToast";

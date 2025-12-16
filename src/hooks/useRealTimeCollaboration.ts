@@ -13,7 +13,6 @@ export interface RealTimeCollaborationConfig {
   enablePresence?: boolean;
   enableEditing?: boolean;
   enableCursorTracking?: boolean;
-  heartbeatInterval?: number;
 }
 
 export interface UseRealTimeCollaborationReturn {
@@ -57,8 +56,7 @@ export function useRealTimeCollaboration(
     autoConnect = true,
     enablePresence = true,
     enableEditing = true,
-    enableCursorTracking = true,
-    heartbeatInterval = 30000
+    enableCursorTracking = true
   } = config;
 
   // State
@@ -81,7 +79,6 @@ export function useRealTimeCollaboration(
 
   // Refs
   const currentDocumentId = useRef<string>('');
-  const sessionCleanupRef = useRef<Array<() => void>>([]);
   const eventHandlers = useRef<{
     connectionChange: Set<(state: ConnectionState) => void>;
     edit: Set<(edit: CollaborativeEdit) => void>;
@@ -93,38 +90,7 @@ export function useRealTimeCollaboration(
     presenceChange: new Set(),
     documentChange: new Set()
   });
-
-  // Initialize services
-  useEffect(() => {
-    if (enablePresence) {
-      presenceService.initialize(userId, {
-        name: userName,
-        color: generateUserColor(userId),
-        permissions: {
-          canEdit: true,
-          canComment: true,
-          canView: true,
-          canInvite: false,
-          canDelete: false,
-          role: 'editor'
-        }
-      });
-    }
-
-    if (enableEditing) {
-      liveEditingService.initialize(userId, userName);
-    }
-
-    // Auto-connect if enabled
-    if (autoConnect) {
-      connect();
-    }
-
-    // Cleanup on unmount
-    return () => {
-      disconnect();
-    };
-  }, [userId, userName, autoConnect, enablePresence, enableEditing]);
+  const sessionSubscriptions = useRef<{ edit?: () => void; presence?: () => void }>({});
 
   // Connect to WebSocket
   const connect = useCallback(async () => {
@@ -152,6 +118,38 @@ export function useRealTimeCollaboration(
       presenceService.goOffline();
     }
   }, [enablePresence]);
+
+  // Initialize services
+  useEffect(() => {
+    if (enablePresence) {
+      presenceService.initialize(userId, {
+        name: userName,
+        color: generateUserColor(userId),
+        permissions: {
+          canEdit: true,
+          canComment: true,
+          canView: true,
+          canInvite: false,
+          canDelete: false,
+          role: 'editor'
+        }
+      });
+    }
+
+    if (enableEditing) {
+      liveEditingService.initialize(userId, userName);
+    }
+
+    // Auto-connect if enabled
+    if (autoConnect) {
+      void connect();
+    }
+
+    // Cleanup on unmount
+    return () => {
+      disconnect();
+    };
+  }, [autoConnect, connect, disconnect, enableEditing, enablePresence, userId, userName]);
 
   // Join collaborative editing session
   const joinSession = useCallback(async (documentId: string, initialContent: string = '') => {
@@ -187,16 +185,11 @@ export function useRealTimeCollaboration(
           }
         });
       });
+      sessionSubscriptions.current = {
+        edit: unsubscribeEdit,
+        presence: unsubscribePresence
+      };
 
-      // Store unsubscribe functions in a ref for cleanup
-      // This prevents memory leaks by ensuring subscriptions are properly cleaned up
-      if (!eventHandlers.current.sessionCleanup) {
-        eventHandlers.current.sessionCleanup = [];
-      }
-      (eventHandlers.current.sessionCleanup as Array<() => void>).push(() => {
-        unsubscribeEdit();
-        unsubscribePresence();
-      });
     } catch (error) {
       console.error('Failed to join editing session:', error);
     }
@@ -206,6 +199,9 @@ export function useRealTimeCollaboration(
   const leaveSession = useCallback(() => {
     if (!enableEditing || !currentDocumentId.current) return;
 
+    sessionSubscriptions.current.edit?.();
+    sessionSubscriptions.current.presence?.();
+    sessionSubscriptions.current = {};
     liveEditingService.leaveSession(currentDocumentId.current);
     setDocument(null);
     setCollaborativeEdits([]);
@@ -296,26 +292,6 @@ export function useRealTimeCollaboration(
         handler(state);
       } catch (error) {
         console.error('Error in connection change handler:', error);
-      }
-    });
-  }, []);
-
-  const notifyEditHandlers = useCallback((edit: CollaborativeEdit) => {
-    eventHandlers.current.edit.forEach(handler => {
-      try {
-        handler(edit);
-      } catch (error) {
-        console.error('Error in edit handler:', error);
-      }
-    });
-  }, []);
-
-  const notifyPresenceChangeHandlers = useCallback((users: PresenceUser[]) => {
-    eventHandlers.current.presenceChange.forEach(handler => {
-      try {
-        handler(users);
-      } catch (error) {
-        console.error('Error in presence change handler:', error);
       }
     });
   }, []);

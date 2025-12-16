@@ -32,8 +32,6 @@ export class GeminiOpenAIService {
       const {
         model = 'gpt-3.5-turbo',
         messages,
-        temperature: _temperature = 0.7,
-        max_tokens: _max_tokens = 2048,
         stream = false
       } = options;
 
@@ -140,8 +138,6 @@ export class GeminiOpenAIService {
       const {
         model = 'text-davinci-003',
         prompt,
-        temperature: _temperature = 0.7,
-        max_tokens: _max_tokens = 2048,
         stream = false
       } = options;
 
@@ -186,7 +182,6 @@ export class GeminiOpenAIService {
     try {
       const stream = this.geminiService.streamContent(prompt, model);
 
-      let chunkIndex = 0;
       for await (const chunk of stream) {
         yield {
           id: `cmpl-${Date.now()}`,
@@ -200,7 +195,6 @@ export class GeminiOpenAIService {
             finish_reason: null
           }]
         };
-        chunkIndex++;
       }
 
       // Send final chunk

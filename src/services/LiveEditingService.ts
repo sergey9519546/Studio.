@@ -297,7 +297,7 @@ class LiveEditingService {
   /**
    * Redo the last undone operation
    */
-  redo(documentId: string): boolean {
+  redo(_documentId: string): boolean {
     // Implementation would track undone operations separately
     // For now, return false as it's a complex feature
     return false;
@@ -328,7 +328,7 @@ class LiveEditingService {
       };
 
       // Restore users
-      users.forEach((user: any) => {
+      users.forEach((user: UserPresence) => {
         document.users.set(user.userId, user);
       });
 

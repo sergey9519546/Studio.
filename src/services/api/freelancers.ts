@@ -88,13 +88,19 @@ export class FreelancersAPI {
     unavailable: number;
     averageRate: number;
   }> {
-    const response = await apiClient.get<ApiResponse<any>>('/freelancers/stats');
+    const response = await apiClient.get<ApiResponse<{
+      total: number;
+      available: number;
+      limited: number;
+      unavailable: number;
+      averageRate: number;
+    }>>('/freelancers/stats');
     return response.data.data;
   }
 
   // Get popular skills
   static async getPopularSkills(): Promise<{ skill: string; count: number }[]> {
-    const response = await apiClient.get<ApiResponse<any>>('/freelancers/skills/popular');
+    const response = await apiClient.get<ApiResponse<Array<{ skill: string; count: number }>>>('/freelancers/skills/popular');
     return response.data.data;
   }
 

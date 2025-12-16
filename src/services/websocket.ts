@@ -11,7 +11,7 @@ export class WebSocketService {
   private reconnectDelay = 1000;
   private callbacks: Map<string, WebSocketCallback[]> = new Map();
   private connectionStatus: ConnectionStatus = 'disconnected';
-  private heartbeatInterval: NodeJS.Timeout | null = null;
+  private heartbeatInterval: ReturnType<typeof setInterval> | null = null;
   private lastPong = Date.now();
 
   constructor(private url: string = 'ws://localhost:3000/ws') {}
@@ -73,7 +73,7 @@ export class WebSocketService {
   }
 
   // Send message to server
-  send(event: string, data: any): void {
+  send<TPayload>(event: string, data: TPayload): void {
     if (this.ws && this.ws.readyState === WebSocket.OPEN) {
       this.ws.send(JSON.stringify({ event, data }));
     } else {
@@ -117,7 +117,7 @@ export class WebSocketService {
 
   // Handle incoming messages
   private handleMessage(data: WebSocketEvent): void {
-    const { type, payload } = data;
+    const { type } = data;
     
     // Call specific event callbacks
     if (this.callbacks.has(type)) {

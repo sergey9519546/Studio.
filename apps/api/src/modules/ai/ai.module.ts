@@ -15,6 +15,7 @@ import { StreamingService } from "./streaming.service.js";
 import { PromptTesterService } from "./testing/prompt-tester.service.js";
 import { VertexAIEmbeddingsService } from "./vertex-ai-embeddings.service.js";
 import { VertexAIService } from "./vertex-ai.service.js";
+import { MockAnalysisService } from "./mock-analysis.service.js";
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { VertexAIService } from "./vertex-ai.service.js";
     VertexAIProvider,
     AIProviderManager,
     PromptTesterService,
+    MockAnalysisService,
   ],
   exports: [
     GeminiAnalystService,
@@ -43,6 +45,7 @@ import { VertexAIService } from "./vertex-ai.service.js";
     VertexAIEmbeddingsService,
     StreamingService,
     AIProviderManager,
+    MockAnalysisService,
   ],
 })
 export class AIModule {}
