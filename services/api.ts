@@ -13,6 +13,26 @@ import {
   Script,
 } from "../types";
 
+// Simple logging utility for frontend services
+const logger = {
+  error: (message: string, error?: unknown) => {
+    if (process.env.NODE_ENV === 'development') {
+      console.error(`[API Service] ${message}`, error);
+    }
+    // In production, you could send to error reporting service
+  },
+  warn: (message: string, data?: unknown) => {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`[API Service] ${message}`, data);
+    }
+  },
+  info: (message: string, data?: unknown) => {
+    if (process.env.NODE_ENV === 'development') {
+      console.info(`[API Service] ${message}`, data);
+    }
+  }
+};
+
 // const _appId = 'studio-roster-v1';
 
 // --- API CONFIGURATION ---
@@ -53,7 +73,7 @@ export const loadFromStorage = <T>(key: string, defaultData: T): T => {
         const stored = localStorage.getItem(STORAGE_PREFIX + key);
         return stored ? JSON.parse(stored) : defaultData;
     } catch (e) {
-        console.error(`Failed to load ${key}`, e);
+        logger.error(`Failed to load ${key}`, e);
         return defaultData;
     }
 };
@@ -62,7 +82,7 @@ const saveToStorage = (key: string, data: unknown) => {
     try {
         localStorage.setItem(STORAGE_PREFIX + key, JSON.stringify(data));
     } catch (e) {
-        console.error(`Failed to save ${key}`, e);
+        logger.error(`Failed to save ${key}`, e);
     }
 };
 
@@ -114,7 +134,7 @@ async function fetchApi<T>(path: string, options?: RequestInit & { timeout?: num
 
   // Security: Handle Unauthorized Access
   if (res.status === 401) {
-    console.warn("Session expired or unauthorized. Redirecting...");
+    logger.warn("Session expired or unauthorized. Redirecting...");
     // Optional: Dispatch a global event or clear storage
     // window.location.href = '/login'; // Or handle via React State in App.tsx
     throw new Error("Unauthorized");
@@ -184,7 +204,7 @@ const uploadToBackend = async (file: File, projectId?: string): Promise<Asset> =
         );
         asset.url = urlRes.data?.url;
       } catch {
-        console.warn("Could not sign URL for asset", asset.id);
+        logger.warn("Could not sign URL for asset", asset.id);
       }
     } else if (asset.publicUrl) {
       asset.url = asset.publicUrl;
@@ -255,7 +275,7 @@ export const api = {
                 }
                 return res;
             } catch (e) {
-                console.error("Auth failed:", e);
+                logger.error("Auth failed:", e);
                 throw e;
             }
         },
@@ -272,7 +292,7 @@ export const api = {
                 saveToStorage('assets', localAssets);
                 return res;
             } catch (e) {
-                console.error("Assets API Error:", e); // Log specific error for debugging
+                logger.error("Assets API Error:", e); // Log specific error for debugging
                 return { data: localAssets, success: true, message: 'Offline Mode (Cached)' };
             }
         },

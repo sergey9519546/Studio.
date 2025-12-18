@@ -15,6 +15,9 @@ import { CommonModule } from "./common/guards/common.module.js";
 import { LoggerModule } from './common/logger/logger.module.js';
 import { validate } from "./config/env.validation.js";
 import { HealthModule } from "./health/health.module.js";
+import { AIModule } from "./modules/ai/ai.module.js";
+import { AnalysisModule } from "./modules/analysis/analysis.module.js";
+import { AssetsModule } from "./modules/assets/assets.module.js";
 import { AssignmentsModule } from "./modules/assignments/assignments.module.js";
 import { AuthModule } from "./modules/auth/auth.module.js";
 import { AvailabilityModule } from "./modules/availability/availability.module.js";
@@ -30,24 +33,26 @@ import { RAGModule } from "./modules/rag/rag.module.js";
 import { RealtimeModule } from "./modules/realtime/realtime.module.js";
 import { ScriptsModule } from "./modules/scripts/scripts.module.js";
 import { StorageModule } from "./modules/storage/storage.module.js";
+import { TranscriptsModule } from "./modules/transcripts/transcripts.module.js";
 import { PrismaModule } from "./prisma/prisma.module.js";
 const moduleDir = dirname(__filename);
 
-const appLogger = new Logger('AppModule');
+const appLogger = new Logger("AppModule");
 
 // Resolve the frontend build directory robustly across build outputs (dist/build)
 // In production (Docker), the path is always /app/build/client
-const staticRoot = process.env.NODE_ENV === 'production' 
-  ? join(process.cwd(), 'build/client')
-  : (() => {
-      const staticCandidates = [
-        join(process.cwd(), "build/client"),
-        join(process.cwd(), "dist/client"),
-        join(moduleDir, "../../../client"),
-        join(moduleDir, "../../client"),
-      ];
-      return staticCandidates.find(p => existsSync(p));
-    })();
+const staticRoot =
+  process.env.NODE_ENV === "production"
+    ? join(process.cwd(), "build/client")
+    : (() => {
+        const staticCandidates = [
+          join(process.cwd(), "build/client"),
+          join(process.cwd(), "dist/client"),
+          join(moduleDir, "../../../client"),
+          join(moduleDir, "../../client"),
+        ];
+        return staticCandidates.find((p) => existsSync(p));
+      })();
 
 appLogger.log(
   `Static root: ${staticRoot ?? "not-found"} | cwd: ${process.cwd()} | __dirname: ${moduleDir}`
@@ -127,15 +132,14 @@ appLogger.log(
     MonitoringModule,
     IntegrationsModule,
     RAGModule,
-    // TEMPORARILY DISABLED FOR DEPLOYMENT - Modules with compilation errors
-    // AssetsModule,
-    // AnalysisModule,
-    // AIModule,
+    AssetsModule,
+    AnalysisModule,
+    AIModule,
     HealthModule,
     AuthModule,
     ProjectsModule,
     FreelancersModule,
-    // TranscriptsModule,
+    TranscriptsModule,
   ],
   providers: [
     {

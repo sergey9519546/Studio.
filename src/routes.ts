@@ -4,6 +4,7 @@ import {
   Grid,
   Layers,
   Layout,
+  LineChart,
   LucideIcon,
   MessageSquare,
   Plug,
@@ -112,6 +113,23 @@ export const routes: RouteConfig[] = [
     },
   },
   {
+    path: "/analysis",
+    label: "Intelligence",
+    icon: LineChart,
+    requiresAuth: true,
+    description: "Workspace-wide AI analysis and business intelligence",
+    metadata: {
+      title: "Workspace Intelligence - Studio Roster",
+      keywords: [
+        "analysis",
+        "intelligence",
+        "reports",
+        "workload",
+        "profitability",
+      ],
+    },
+  },
+  {
     path: "/plugins",
     label: "Plugins",
     icon: Plug,
@@ -161,9 +179,18 @@ export const getRouteDescription = (path: string): string => {
 
 // Navigation helpers
 export const getMainNavigationRoutes = (): RouteConfig[] => {
-  return routes.filter(route => 
-    ["/", "/projects", "/moodboard", "/talent", "/writers-room", "/knowledge-base", "/transcripts", "/plugins"]
-      .includes(route.path)
+  return routes.filter((route) =>
+    [
+      "/",
+      "/analysis",
+      "/projects",
+      "/moodboard",
+      "/talent",
+      "/writers-room",
+      "/knowledge-base",
+      "/transcripts",
+      "/plugins",
+    ].includes(route.path)
   );
 };
 

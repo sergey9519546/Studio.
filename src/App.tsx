@@ -15,6 +15,7 @@ import { MoodboardAPI } from "./services/api/moodboard";
 import { ProjectsAPI } from "./services/api/projects";
 import { Freelancer, MoodboardItem, Project } from "./services/types";
 import { webSocketService } from "./services/websocket";
+import AnalysisView from "./views/AnalysisView";
 import ConfluenceView from "./views/ConfluenceView";
 import DashboardHome from "./views/DashboardHome";
 import GuardianRoom from "./views/GuardianRoom";
@@ -370,29 +371,32 @@ export default function App() {
         <Routes>
           {/* Dashboard */}
           <Route path="/" element={<DashboardHome />} />
-          
+
+          {/* Analysis */}
+          <Route path="/analysis" element={<AnalysisView />} />
+
           {/* Projects */}
           <Route path="/projects" element={<ProjectsViewWrapper />} />
           <Route path="/projects/:id" element={<ProjectDashboardRoute />} />
-          
+
           {/* Moodboard */}
           <Route path="/moodboard" element={<MoodboardRoute />} />
-          
+
           {/* Talent Roster */}
           <Route path="/talent" element={<TalentRosterRoute />} />
-          
+
           {/* Plugins */}
           <Route path="/plugins" element={<PluginManagerPage />} />
-          
+
           {/* Writers Room */}
           <Route path="/writers-room" element={<WritersRoomRoute />} />
-          
+
           {/* Knowledge Base */}
           <Route path="/knowledge-base" element={<ConfluenceView />} />
-          
+
           {/* Transcripts */}
           <Route path="/transcripts" element={<TranscriptsView />} />
-          
+
           {/* Catch all route - redirect to dashboard */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

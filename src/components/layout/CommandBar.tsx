@@ -10,17 +10,75 @@ type CommandItem = {
 };
 
 const QUICK_ACTIONS: CommandItem[] = [
-  { label: "New Project", path: "/projects/new", category: "Create", keywords: ["campaign", "brief"] },
-  { label: "New Talent Profile", path: "/freelancers/new", category: "Create", keywords: ["roster", "freelancer"] },
-  { label: "New Transcript", path: "/transcripts/new", category: "Create", keywords: ["meeting", "call"] },
+  {
+    label: "New Project",
+    path: "/projects/new",
+    category: "Create",
+    keywords: ["campaign", "brief"],
+  },
+  {
+    label: "New Talent Profile",
+    path: "/talent/new",
+    category: "Create",
+    keywords: ["roster", "freelancer"],
+  },
+  {
+    label: "New Transcript",
+    path: "/transcripts/new",
+    category: "Create",
+    keywords: ["meeting", "call"],
+  },
 ];
 
 const NAV_COMMANDS: CommandItem[] = [
-  { label: "Dashboard", path: "/", category: "Navigation", keywords: ["home", "overview"] },
-  { label: "Projects", path: "/projects", category: "Navigation", keywords: ["campaigns", "briefs"] },
-  { label: "Freelancers", path: "/freelancers", category: "Navigation", keywords: ["talent", "roster"] },
-  { label: "Transcripts", path: "/transcripts", category: "Navigation", keywords: ["calls", "meetings"] },
-  { label: "Confluence", path: "/confluence", category: "Navigation", keywords: ["docs", "wiki"] },
+  {
+    label: "Dashboard",
+    path: "/",
+    category: "Navigation",
+    keywords: ["home", "overview"],
+  },
+  {
+    label: "Intelligence",
+    path: "/analysis",
+    category: "Navigation",
+    keywords: ["ai", "reports", "workload", "economics"],
+  },
+  {
+    label: "Projects",
+    path: "/projects",
+    category: "Navigation",
+    keywords: ["campaigns", "briefs"],
+  },
+  {
+    label: "Visuals",
+    path: "/moodboard",
+    category: "Navigation",
+    keywords: ["inspiration", "moodboard", "assets"],
+  },
+  {
+    label: "Talent",
+    path: "/talent",
+    category: "Navigation",
+    keywords: ["freelancers", "roster", "talent"],
+  },
+  {
+    label: "Writer's Room",
+    path: "/writers-room",
+    category: "Navigation",
+    keywords: ["ai", "chat", "creative"],
+  },
+  {
+    label: "Knowledge Base",
+    path: "/knowledge-base",
+    category: "Navigation",
+    keywords: ["docs", "wiki", "confluence"],
+  },
+  {
+    label: "Transcripts",
+    path: "/transcripts",
+    category: "Navigation",
+    keywords: ["calls", "meetings"],
+  },
 ];
 
 const CommandBar: React.FC = () => {
@@ -61,29 +119,39 @@ const CommandBar: React.FC = () => {
   const renderResults = (isMobile = false) =>
     isOpen && (
       <div
-        className={`absolute ${isMobile ? "bottom-36 left-4 right-4" : "bottom-20 left-0 right-0 mx-auto max-w-3xl"} bg-surface border border-border-subtle shadow-xl rounded-2xl overflow-hidden z-[65] pointer-events-auto`}
+        className={`absolute ${isMobile ? "bottom-36 left-4 right-4" : "bottom-20 left-0 right-0 mx-auto max-w-3xl"} bg-surface border border-border-subtle/50 shadow-elevation rounded-2xl overflow-hidden z-[65] pointer-events-auto animate-in fade-in slide-in-from-bottom-2 duration-300`}
         role="listbox"
         aria-label="Command palette results"
       >
         {filteredCommands.length === 0 ? (
-          <div className="px-4 py-3 text-sm text-ink-secondary">No matches found.</div>
+          <div className="px-6 py-4 text-xs font-black uppercase tracking-widest text-ink-tertiary opacity-40">
+            No matches found.
+          </div>
         ) : (
-          filteredCommands.map((cmd) => (
-            <button
-              key={cmd.label}
-              className="w-full flex items-center justify-between text-left px-4 py-3 hover:bg-subtle transition-colors focus:outline-none focus:bg-subtle"
-              onClick={() => handleNavigate(cmd.path)}
-              role="option"
-            >
-              <div className="flex flex-col">
-                <span className="text-sm font-semibold text-ink-primary">{cmd.label}</span>
-                <span className="text-[11px] uppercase tracking-widest text-ink-tertiary">
-                  {cmd.category}
-                </span>
-              </div>
-              <ArrowRight size={16} className="text-ink-tertiary" aria-hidden="true" />
-            </button>
-          ))
+          <div className="flex flex-col">
+            {filteredCommands.map((cmd) => (
+              <button
+                key={cmd.label}
+                className="w-full flex items-center justify-between text-left px-6 py-4 hover:bg-subtle transition-colors group focus:outline-none focus:bg-subtle"
+                onClick={() => handleNavigate(cmd.path)}
+                role="option"
+              >
+                <div className="flex flex-col">
+                  <span className="text-sm font-black text-black tracking-tight group-hover:translate-x-1 transition-transform">
+                    {cmd.label}
+                  </span>
+                  <span className="text-[9px] uppercase tracking-[0.3em] font-black text-ink-tertiary opacity-40 mt-1">
+                    {cmd.category}
+                  </span>
+                </div>
+                <ArrowRight
+                  size={14}
+                  className="text-ink-tertiary opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
+                  aria-hidden="true"
+                />
+              </button>
+            ))}
+          </div>
         )}
       </div>
     );
@@ -113,8 +181,8 @@ const CommandBar: React.FC = () => {
                 setQuery(e.target.value);
                 setIsOpen(true);
               }}
-              placeholder="Search projects, assets, or run AI command..."
-              className="bg-transparent border-none outline-none h-full w-full text-sm text-ink-primary placeholder:text-ink-secondary/70 font-medium focus:placeholder:text-ink-tertiary transition-colors"
+              placeholder="INTENT SEARCH..."
+              className="bg-transparent border-none outline-none h-full w-full text-xs font-black tracking-[0.2em] text-black placeholder:text-ink-tertiary/40 uppercase focus:placeholder:opacity-0 transition-opacity"
               role="searchbox"
               aria-label="Search projects, assets, or run AI command"
               autoComplete="off"
@@ -123,16 +191,12 @@ const CommandBar: React.FC = () => {
             />
           </form>
 
-          <div className="flex items-center gap-2 shrink-0">
-            <div className="hidden lg:flex text-[10px] font-bold text-ink-tertiary bg-subtle px-2 py-1 rounded-md border border-border-subtle">
-              ⌘ K
+          <div className="flex items-center gap-4 shrink-0 px-2">
+            <div className="hidden lg:flex text-[9px] font-black text-ink-tertiary bg-subtle px-2 py-1 rounded-md border border-border-subtle tracking-tighter opacity-40">
+              CMD K
             </div>
-            <div
-              className="h-6 w-[1px] bg-border-subtle mx-1"
-              aria-hidden="true"
-            />
             <button
-              className="w-10 h-10 rounded-full bg-ink-primary text-white flex items-center justify-center hover:scale-105 transition-all shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 hover:bg-ink-primary/90"
+              className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:scale-105 transition-all shadow-elevation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
               aria-label="Create new item"
               type="button"
               title="Create new item (Ctrl+N)"
@@ -187,8 +251,8 @@ const CommandBar: React.FC = () => {
                 setQuery(e.target.value);
                 setIsOpen(true);
               }}
-              placeholder="Search or command..."
-              className="bg-transparent border-none outline-none h-full w-full text-sm text-ink-primary placeholder:text-ink-secondary/70 font-medium focus:placeholder:text-ink-tertiary transition-colors"
+              placeholder="INTENT SEARCH..."
+              className="bg-transparent border-none outline-none h-full w-full text-xs font-black tracking-[0.2em] text-black placeholder:text-ink-tertiary/40 uppercase focus:placeholder:opacity-0 transition-opacity"
               role="searchbox"
               aria-label="Search or run command"
               autoComplete="off"
@@ -197,13 +261,13 @@ const CommandBar: React.FC = () => {
             />
           </form>
           <button
-            className="w-8 h-8 rounded-full bg-ink-primary text-white flex items-center justify-center hover:scale-105 transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 hover:bg-ink-primary/90"
+            className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:scale-105 transition-all shadow-elevation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-1"
             aria-label="Create new item"
             type="button"
             title="Create new item"
             onClick={() => setShowQuickCreate((prev) => !prev)}
           >
-            <Plus size={14} aria-hidden="true" />
+            <Plus size={18} aria-hidden="true" />
           </button>
           {renderResults(true)}
         </div>

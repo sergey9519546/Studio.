@@ -9,46 +9,46 @@
 export const colors = {
   // THE CANVAS (Luminance)
   bg: {
-    app: '#F5F5F7',      // System Mist. The infinite void.
-    surface: '#FFFFFF',  // Porcelain. Cards sit *on* the mist.
-    subtle: '#F9F9FB',   // Subdued backgrounds for container nesting.
-    sidebar: '#FBFBFD', // Slightly distinct from main bg
+    app: "#F5F5F7", // Ghost Gray. System Mist.
+    surface: "#FDFDFD", // The Sophisticated Canvas. Paper-like warmth.
+    subtle: "#F9F9FB", // Subdued backgrounds for container nesting.
+    sidebar: "#FDFDFD", // Unified with canvas for seamless flow.
   },
   border: {
-    subtle: '#E5E5EA',   // Delicate structural lines (use sparingly).
-    hover: '#D1D1D6',    // Slightly darker for interactions.
-    subtleAlpha: 'rgba(0,0,0,0.04)', // Subtle definition for borders
+    subtle: "#E5E5EA", // Delicate structural lines (use sparingly).
+    hover: "#D1D1D6", // Slightly darker for interactions.
+    subtleAlpha: "rgba(0,0,0,0.04)", // Subtle definition for borders
   },
   text: {
-    primary: '#1D1D1F',  // Obsidian. Primary data.
-    secondary: '#86868B', // Slate. Metadata, secondary information.
-    tertiary: '#A2A2A7', // Tertiary. Placeholders, disabled.
-    inverse: '#FFFFFF',  // Inverse text on primary actions.
+    primary: "#000000", // Absolute Obsidian. Peak contrast.
+    secondary: "#6E6E73", // Refined Slate. High legibility metadata.
+    tertiary: "#A2A2A7", // Tertiary. Ghostly placeholders.
+    inverse: "#FFFFFF", // Absolute White on primary actions.
   },
 
   // PRIMARY ACCENT (Rival Blue)
   accent: {
-    primary: '#2463E6',      // Main brand color.
-    primaryHover: '#1E4EC8', // Interaction state.
-    tint: '#E1EBFF',         // Subtlety (chips, active backgrounds).
+    primary: "#2463E6", // Main brand color.
+    primaryHover: "#1E4EC8", // Interaction state.
+    tint: "#E1EBFF", // Subtlety (chips, active backgrounds).
   },
 
   // THE "DANGEROUS EDGE" (Gradients & Highlights)
   edge: {
-    teal: '#18C9AE',    // Intelligence, Freshness
-    magenta: '#E14BF7', // Creative spark, AI
-    gradient: 'linear-gradient(90deg, #2463E6 0%, #18C9AE 50%, #E14BF7 100%)',
+    teal: "#18C9AE", // Intelligence, Freshness
+    magenta: "#E14BF7", // Creative Lumina, AI
+    gradient: "linear-gradient(90deg, #2463E6 0%, #18C9AE 50%, #E14BF7 100%)",
   },
 
   // SEMANTIC STATES
   state: {
-    success: '#34C759',
-    successBg: '#E8F5E9',
-    warning: '#FF9500',
-    warningBg: '#FFF3E0',
-    danger: '#FF3B30',
-    dangerBg: '#FFEBEE',
-  }
+    success: "#34C759",
+    successBg: "#E8F5E9",
+    warning: "#FF9500",
+    warningBg: "#FFF3E0",
+    danger: "#FF3B30",
+    dangerBg: "#FFEBEE",
+  },
 } as const;
 
 export const typography = {

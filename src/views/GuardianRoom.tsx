@@ -1,7 +1,7 @@
 import { ArrowRight, FileText, ImageIcon, Plus, Sparkles } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
+import Card from "../../components/ui/Card";
 import { GenAIService } from "../../services/GenAIService";
-import Card from "../components/ui/Card";
 
 interface Message {
   role: "user" | "system";
@@ -55,7 +55,10 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
       );
       setMessages((p) => [...p, { role: "system", text: res }]);
     } catch (error) {
-      console.error("Lumina Intelligence Error:", error);
+      // Log error for debugging in development only
+      if (process.env.NODE_ENV === 'development') {
+        console.error("Lumina Intelligence Error:", error);
+      }
       setMessages((p) => [
         ...p,
         {
@@ -148,7 +151,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
         {/* Chat Header */}
         <div className="flex items-center justify-between p-6 border-b border-border-subtle bg-surface/80 backdrop-blur-md z-10 sticky top-0">
           <div className="flex items-center gap-3">
-            <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-glow" />
+            <div className="w-2.5 h-2.5 bg-black rounded-full animate-pulse shadow-glow" />
             <div>
               <span className="text-sm font-bold text-ink-primary block">
                 Lumina Intelligence
@@ -158,7 +161,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
               </span>
             </div>
           </div>
-          <button className="text-xs text-ink-primary bg-subtle hover:bg-border-subtle border border-transparent px-4 py-2 rounded-full font-bold transition-all">
+          <button className="text-xs text-white bg-black hover:bg-black/90 border border-transparent px-4 py-2 rounded-full font-bold transition-all shadow-sm">
             Export Script
           </button>
         </div>
@@ -212,7 +215,9 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
+              onKeyDown={(e) =>
+                e.key === "Enter" && !e.shiftKey && sendMessage()
+              }
               placeholder="Message Lumina..."
               disabled={isLoading}
               className="w-full bg-subtle border border-transparent focus:border-border-subtle focus:bg-surface rounded-2xl px-6 py-4 text-sm outline-none transition-all pl-6 pr-14 font-medium placeholder:text-ink-tertiary text-ink-primary disabled:opacity-50"
@@ -220,7 +225,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
             <button
               onClick={() => sendMessage()}
               disabled={isLoading || !input.trim()}
-              className="absolute right-2 top-2 p-2 bg-ink-primary text-white rounded-xl hover:scale-105 transition-transform shadow-md disabled:opacity-50 disabled:hover:scale-100"
+              className="absolute right-2 top-2 p-2 bg-black text-white rounded-xl hover:scale-105 transition-transform shadow-md disabled:opacity-50 disabled:hover:scale-100"
               aria-label="Send message"
             >
               <ArrowRight size={18} />

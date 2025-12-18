@@ -216,16 +216,19 @@ export class GeminiAnalystService {
   /**
    * Chat with context (cached for common queries)
    */
-  async chat(context: string, messages: Array<{ role: string; content: string }> = []): Promise<string | { toolCalls: ToolCall[] }> {
+  async chat(
+    context: string,
+    messages: Array<{ role: string; content: string }> = []
+  ): Promise<string | { toolCalls: ToolCall[] }> {
     const cacheKey = `ai:chat:${this.hashContent(context + JSON.stringify(messages))}`;
 
     const cached = await this.cacheManager.get(cacheKey);
     if (cached) {
-      this.logger.debug('Chat cache HIT');
+      this.logger.debug("Chat cache HIT");
       return cached as string | { toolCalls: ToolCall[] };
     }
 
-    this.logger.debug('Chat cache MISS');
+    this.logger.debug("Chat cache MISS");
     const startTime = Date.now();
 
     const systemPrompt = `You are an expert AI analyst for a creative agency management system.
@@ -257,8 +260,8 @@ Respond based on the provided context.`;
 
     const duration = Date.now() - startTime;
     this.logger.log({
-      type: 'ai_usage',
-      endpoint: 'chat',
+      type: "ai_usage",
+      endpoint: "chat",
       duration_ms: duration,
       cached: false,
     });
@@ -270,14 +273,17 @@ Respond based on the provided context.`;
    * Hash content for cache key generation
    */
   private hashContent(content: string): string {
-    return createHash('sha256').update(content).digest('hex').substring(0, 16);
+    return createHash("sha256").update(content).digest("hex").substring(0, 16);
   }
 
   /**
    * Execute a tool
    */
-  async executeTool(toolName: string, args: Record<string, unknown>): Promise<unknown> {
-    const tool = this.tools.find(t => t.name === toolName);
+  async executeTool(
+    toolName: string,
+    args: Record<string, unknown>
+  ): Promise<unknown> {
+    const tool = this.tools.find((t) => t.name === toolName);
     if (!tool) {
       throw new Error(`Tool ${toolName} not found`);
     }
@@ -287,31 +293,123 @@ Respond based on the provided context.`;
   /**
    * Enhanced image analysis using Gemini Vision with creative intelligence
    */
-  async analyzeImage(imageUrl: string, options?: ImageAnalysisOptions): Promise<ImageAnalysisResult> {
+  async analyzeImage(
+    imageUrl: string,
+    options?: ImageAnalysisOptions
+  ): Promise<ImageAnalysisResult> {
     try {
-      const analysisType = options?.analysisType ?? 'creative';
-      const context = options?.context ?? '';
+      const analysisType = options?.analysisType ?? "creative";
+      const context = options?.context ?? "";
       const brandGuidelines = options?.brandGuidelines ?? {};
 
-      const prompt = this.buildVisionAnalysisPrompt(imageUrl, analysisType, context, brandGuidelines);
+      const prompt = this.buildVisionAnalysisPrompt(
+        imageUrl,
+        analysisType,
+        context,
+        brandGuidelines
+      );
       const schema = this.getVisionAnalysisSchema(analysisType);
 
       const result = await this.extractData(prompt, schema);
       return result as ImageAnalysisResult;
     } catch (error) {
-      this.logger.error('Error analyzing image:', error);
+      this.logger.error("Error analyzing image:", error);
       throw error;
     }
   }
 
   /**
+   * Analyze image from a direct file upload
+   */
+  async analyzeVisionFile(
+    file: Express.Multer.File,
+    options?: ImageAnalysisOptions
+  ): Promise<ImageAnalysisResult> {
+    const analysisType = options?.analysisType ?? "creative";
+    const context = options?.context ?? "";
+    const base64Data = file.buffer.toString("base64");
+
+    const prompt = `Analyze this image for ${analysisType} aspects. ${context ? `Context: ${context}.` : ""} Provide a detailed analysis including tags, moods, colors, and specific ${analysisType} feedback.`;
+    const schema = this.getVisionAnalysisSchema(analysisType);
+
+    const result = await this.vertexAI.generateContentWithVision(prompt, {
+      data: base64Data,
+      mimeType: file.mimetype,
+    });
+
+    // Try to parse the result as it might contain JSON within markdown
+    try {
+      return (await this.vertexAI.extractData(
+        result,
+        schema
+      )) as ImageAnalysisResult;
+    } catch {
+      // Fallback if parsing fails
+      return {
+        tags: ["uploaded"],
+        moods: ["unknown"],
+        colors: [],
+        description:
+          typeof result === "string" ? result : JSON.stringify(result),
+      } as ImageAnalysisResult;
+    }
+  }
+
+  /**
+   * Analyze document from file upload
+   */
+  async analyzeDocumentFile(
+    file: Express.Multer.File
+  ): Promise<Record<string, unknown>> {
+    const base64Data = file.buffer.toString("base64");
+    const prompt = `Analyze this document and extract its key content, structure, and entities. Detect technical details and provide a comprehensive summary.`;
+
+    const result = await this.vertexAI.generateContentWithVision(prompt, {
+      data: base64Data,
+      mimeType: file.mimetype,
+    });
+
+    return {
+      id: `doc_${Date.now()}`,
+      filename: file.originalname,
+      analysis: result,
+      timestamp: new Date(),
+    };
+  }
+
+  /**
+   * Analyze audio from file upload
+   */
+  async analyzeAudioFile(
+    file: Express.Multer.File
+  ): Promise<Record<string, unknown>> {
+    const base64Data = file.buffer.toString("base64");
+    const prompt = `Transcribe and analyze this audio file. Identify speakers, emotions, and key topics discussed.`;
+
+    const result = await this.vertexAI.generateContentWithVision(prompt, {
+      data: base64Data,
+      mimeType: file.mimetype,
+    });
+
+    return {
+      id: `audio_${Date.now()}`,
+      filename: file.originalname,
+      analysis: result,
+      timestamp: new Date(),
+    };
+  }
+
+  /**
    * Batch analyze multiple images for consistency and comparison
    */
-  async analyzeImageBatch(imageUrls: string[], options?: {
-    analysisType?: 'basic' | 'creative' | 'brand' | 'technical';
-    compareMode?: boolean;
-    context?: string;
-  }): Promise<{
+  async analyzeImageBatch(
+    imageUrls: string[],
+    options?: {
+      analysisType?: "basic" | "creative" | "brand" | "technical";
+      compareMode?: boolean;
+      context?: string;
+    }
+  ): Promise<{
     results: BatchImageResult[];
     comparison?: ImageComparisonResult;
   }> {
@@ -321,14 +419,14 @@ Respond based on the provided context.`;
       try {
         const analysis = await this.analyzeImage(imageUrl, {
           analysisType: options?.analysisType,
-          context: options?.context
+          context: options?.context,
         });
         results.push({ imageUrl, analysis });
       } catch (error) {
         this.logger.error(`Error analyzing image ${imageUrl}:`, error);
         results.push({
           imageUrl,
-          analysis: { error: (error as Error).message }
+          analysis: { error: (error as Error).message },
         });
       }
     }
@@ -336,10 +434,11 @@ Respond based on the provided context.`;
     let comparison: ImageComparisonResult | undefined;
     if (options?.compareMode && results.length > 1) {
       const validAnalyses = results
-        .filter((r): r is { imageUrl: string; analysis: ImageAnalysisResult } => 
-          !('error' in r.analysis)
+        .filter(
+          (r): r is { imageUrl: string; analysis: ImageAnalysisResult } =>
+            !("error" in r.analysis)
         )
-        .map(r => r.analysis);
+        .map((r) => r.analysis);
       comparison = await this.compareImages(validAnalyses);
     }
 
@@ -349,40 +448,45 @@ Respond based on the provided context.`;
   /**
    * Analyze brand consistency across multiple assets
    */
-  async analyzeBrandConsistency(imageUrls: string[], brandGuidelines: Record<string, unknown>): Promise<BrandConsistencyResult> {
+  async analyzeBrandConsistency(
+    imageUrls: string[],
+    brandGuidelines: Record<string, unknown>
+  ): Promise<BrandConsistencyResult> {
     const batchResults = await this.analyzeImageBatch(imageUrls, {
-      analysisType: 'brand',
+      analysisType: "brand",
       compareMode: true,
-      context: 'brand consistency analysis'
+      context: "brand consistency analysis",
     });
 
-    const assetScores = batchResults.results.map(result => {
+    const assetScores = batchResults.results.map((result) => {
       const analysis = result.analysis as ImageAnalysisResult;
       const compliance = analysis?.brandCompliance?.compliant ?? false;
       const score = compliance ? 8 + Math.random() * 2 : Math.random() * 7;
-      
+
       return {
         imageUrl: result.imageUrl,
         score: Math.round(score * 10) / 10,
         compliance,
-        issues: analysis?.brandCompliance?.issues ?? []
+        issues: analysis?.brandCompliance?.issues ?? [],
       };
     });
 
-    const overallScore = assetScores.reduce((acc, asset) => acc + asset.score, 0) / assetScores.length;
-    
+    const overallScore =
+      assetScores.reduce((acc, asset) => acc + asset.score, 0) /
+      assetScores.length;
+
     const recommendations = [
-      'Ensure consistent color palette across all brand assets',
-      'Maintain uniform typography and font usage',
-      'Align visual style with brand personality',
-      'Review logo placement and sizing consistency'
+      "Ensure consistent color palette across all brand assets",
+      "Maintain uniform typography and font usage",
+      "Align visual style with brand personality",
+      "Review logo placement and sizing consistency",
     ];
 
     return {
       overallScore: Math.round(overallScore * 10) / 10,
       assetScores,
       recommendations,
-      brandGuidelines
+      brandGuidelines,
     };
   }
 
@@ -420,73 +524,84 @@ Respond based on the provided context.`;
 Image URL: ${imageUrl}`;
 
     const schema: JsonSchema = {
-      type: 'object',
+      type: "object",
       properties: {
         dimensions: {
-          type: 'object',
+          type: "object",
           properties: {
-            width: { type: 'number' },
-            height: { type: 'number' }
+            width: { type: "number" },
+            height: { type: "number" },
           },
-          required: ['width', 'height']
+          required: ["width", "height"],
         },
-        format: { type: 'string' },
-        colorProfile: { type: 'string' },
+        format: { type: "string" },
+        colorProfile: { type: "string" },
         dominantColors: {
-          type: 'array',
+          type: "array",
           items: {
-            type: 'object',
+            type: "object",
             properties: {
-              color: { type: 'string' },
-              percentage: { type: 'number' }
+              color: { type: "string" },
+              percentage: { type: "number" },
             },
-            required: ['color', 'percentage']
-          }
+            required: ["color", "percentage"],
+          },
         },
         visualElements: {
-          type: 'object',
+          type: "object",
           properties: {
-            text: { type: 'boolean' },
-            logos: { type: 'boolean' },
-            faces: { type: 'boolean' },
-            objects: { type: 'array', items: { type: 'string' } },
-            patterns: { type: 'array', items: { type: 'string' } }
+            text: { type: "boolean" },
+            logos: { type: "boolean" },
+            faces: { type: "boolean" },
+            objects: { type: "array", items: { type: "string" } },
+            patterns: { type: "array", items: { type: "string" } },
           },
-          required: ['text', 'logos', 'faces', 'objects', 'patterns']
+          required: ["text", "logos", "faces", "objects", "patterns"],
         },
         composition: {
-          type: 'object',
+          type: "object",
           properties: {
-            ruleOfThirds: { type: 'boolean' },
-            symmetry: { type: 'boolean' },
-            leadingLines: { type: 'boolean' },
-            focalPoint: { type: 'string' }
+            ruleOfThirds: { type: "boolean" },
+            symmetry: { type: "boolean" },
+            leadingLines: { type: "boolean" },
+            focalPoint: { type: "string" },
           },
-          required: ['ruleOfThirds', 'symmetry', 'leadingLines', 'focalPoint']
+          required: ["ruleOfThirds", "symmetry", "leadingLines", "focalPoint"],
         },
         accessibility: {
-          type: 'object',
+          type: "object",
           properties: {
-            contrastRatio: { type: 'number' },
-            readabilityScore: { type: 'number' },
-            altTextSuggestions: { type: 'array', items: { type: 'string' } }
+            contrastRatio: { type: "number" },
+            readabilityScore: { type: "number" },
+            altTextSuggestions: { type: "array", items: { type: "string" } },
           },
-          required: ['contrastRatio', 'readabilityScore', 'altTextSuggestions']
-        }
+          required: ["contrastRatio", "readabilityScore", "altTextSuggestions"],
+        },
       },
-      required: ['dimensions', 'format', 'colorProfile', 'dominantColors', 'visualElements', 'composition', 'accessibility']
+      required: [
+        "dimensions",
+        "format",
+        "colorProfile",
+        "dominantColors",
+        "visualElements",
+        "composition",
+        "accessibility",
+      ],
     };
 
-    return await this.extractData(prompt, schema) as VisualMetadataResult;
+    return (await this.extractData(prompt, schema)) as VisualMetadataResult;
   }
 
   /**
    * Generate creative suggestions and improvements
    */
-  async generateCreativeSuggestions(imageUrl: string, brief?: string): Promise<CreativeSuggestionsResult> {
+  async generateCreativeSuggestions(
+    imageUrl: string,
+    brief?: string
+  ): Promise<CreativeSuggestionsResult> {
     const prompt = `As a creative director, analyze this image and provide constructive feedback and suggestions. Consider the brief if provided.
 
-Brief: ${brief ?? 'No specific brief provided'}
+Brief: ${brief ?? "No specific brief provided"}
 
 Provide suggestions in JSON format:
 {
@@ -506,17 +621,20 @@ Focus on:
 Image URL: ${imageUrl}`;
 
     const schema: JsonSchema = {
-      type: 'object',
+      type: "object",
       properties: {
-        improvements: { type: 'array', items: { type: 'string' } },
-        alternatives: { type: 'array', items: { type: 'string' } },
-        variations: { type: 'array', items: { type: 'string' } },
-        nextSteps: { type: 'array', items: { type: 'string' } }
+        improvements: { type: "array", items: { type: "string" } },
+        alternatives: { type: "array", items: { type: "string" } },
+        variations: { type: "array", items: { type: "string" } },
+        nextSteps: { type: "array", items: { type: "string" } },
       },
-      required: ['improvements', 'alternatives', 'variations', 'nextSteps']
+      required: ["improvements", "alternatives", "variations", "nextSteps"],
     };
 
-    return await this.extractData(prompt, schema) as CreativeSuggestionsResult;
+    return (await this.extractData(
+      prompt,
+      schema
+    )) as CreativeSuggestionsResult;
   }
 
   /**
@@ -529,20 +647,24 @@ Image URL: ${imageUrl}`;
     shotType?: string;
     description: string;
   }> {
-    return this.analyzeImage(imageUrl, { analysisType: 'basic' });
+    return this.analyzeImage(imageUrl, { analysisType: "basic" });
   }
 
   /**
    * Extract structured data
    */
-  async extractData(prompt: string, schema?: Record<string, unknown>, files?: Express.Multer.File[]): Promise<unknown> {
+  async extractData(
+    prompt: string,
+    schema?: Record<string, unknown>,
+    files?: Express.Multer.File[]
+  ): Promise<unknown> {
     let fullPrompt = prompt;
 
     if (files && files.length > 0) {
-      fullPrompt += '\n\nAttached files:\n';
+      fullPrompt += "\n\nAttached files:\n";
       for (const file of files) {
         fullPrompt += `\nFile: ${file.originalname}\n`;
-        fullPrompt += `Content: ${file.buffer.toString('utf-8').substring(0, 5000)}\n`;
+        fullPrompt += `Content: ${file.buffer.toString("utf-8").substring(0, 5000)}\n`;
       }
     }
 
@@ -559,7 +681,9 @@ Image URL: ${imageUrl}`;
   /**
    * Analyze project profitability (cached 12h)
    */
-  async analyzeProjectProfitability(projectId: string): Promise<ProfitabilityAnalysisResult> {
+  async analyzeProjectProfitability(
+    projectId: string
+  ): Promise<ProfitabilityAnalysisResult> {
     const cacheKey = `ai:project:${projectId}`;
 
     const cached = await this.cacheManager.get(cacheKey);
@@ -583,14 +707,16 @@ Image URL: ${imageUrl}`;
     });
 
     if (!project) {
-      throw new Error('Project not found');
+      throw new Error("Project not found");
     }
 
     const totalCost = project.assignments.reduce((acc, assignment) => {
       if (!assignment.endDate || !assignment.startDate) return acc;
-      const duration = (assignment.endDate.getTime() - assignment.startDate.getTime()) / (1000 * 60 * 60 * 24);
+      const duration =
+        (assignment.endDate.getTime() - assignment.startDate.getTime()) /
+        (1000 * 60 * 60 * 24);
       const rate = assignment.freelancer.rate ?? 0;
-      return acc + (duration * (rate / 30));
+      return acc + duration * (rate / 30);
     }, 0);
 
     const profit = (project.budget ?? 0) - totalCost;
@@ -602,27 +728,39 @@ Image URL: ${imageUrl}`;
       Total Cost: ${totalCost}
       Profit: ${profit}
       Assignments:
-      ${project.assignments.map(a => `- ${a.freelancer.name}: ${a.role}`).join('\n')}
+      ${project.assignments.map((a) => `- ${a.freelancer.name}: ${a.role}`).join("\n")}
     `;
 
     const schema: JsonSchema = {
-      type: 'object',
+      type: "object",
       properties: {
-        profitabilityScore: { type: 'number', description: 'A score from 0 to 10 indicating profitability' },
-        summary: { type: 'string', description: 'A brief summary of the profitability analysis' },
-        recommendations: { type: 'string', description: 'Recommendations to improve profitability' },
+        profitabilityScore: {
+          type: "number",
+          description: "A score from 0 to 10 indicating profitability",
+        },
+        summary: {
+          type: "string",
+          description: "A brief summary of the profitability analysis",
+        },
+        recommendations: {
+          type: "string",
+          description: "Recommendations to improve profitability",
+        },
       },
-      required: ['profitabilityScore', 'summary', 'recommendations'],
+      required: ["profitabilityScore", "summary", "recommendations"],
     };
 
-    const result = await this.extractData(prompt, schema) as ProfitabilityAnalysisResult;
+    const result = (await this.extractData(
+      prompt,
+      schema
+    )) as ProfitabilityAnalysisResult;
 
     await this.cacheManager.set(cacheKey, result, 43200);
 
     const duration = Date.now() - startTime;
     this.logger.log({
-      type: 'ai_usage',
-      endpoint: 'analyzeProjectProfitability',
+      type: "ai_usage",
+      endpoint: "analyzeProjectProfitability",
       projectId,
       duration_ms: duration,
       cached: false,
@@ -634,7 +772,9 @@ Image URL: ${imageUrl}`;
   /**
    * Analyze freelancer performance (cached 24h)
    */
-  async analyzeFreelancerPerformance(freelancerId: string): Promise<PerformanceAnalysisResult> {
+  async analyzeFreelancerPerformance(
+    freelancerId: string
+  ): Promise<PerformanceAnalysisResult> {
     const cacheKey = `ai:freelancer:${freelancerId}`;
 
     const cached = await this.cacheManager.get(cacheKey);
@@ -651,7 +791,7 @@ Image URL: ${imageUrl}`;
     });
 
     if (!freelancer) {
-      throw new Error('Freelancer not found');
+      throw new Error("Freelancer not found");
     }
 
     const assignments = await this.prisma.assignment.findMany({
@@ -661,31 +801,43 @@ Image URL: ${imageUrl}`;
 
     const prompt = `
       Analyze the following freelancer data and provide a performance review.
-      Freelancer Name: ${freelancer.name ?? 'Unknown'}
-      Role: ${freelancer.role ?? 'Not specified'}
+      Freelancer Name: ${freelancer.name ?? "Unknown"}
+      Role: ${freelancer.role ?? "Not specified"}
       Skills: Not available in current schema
       Assignments:
-      ${assignments.map(a => `- ${a.project?.title ?? 'Unknown Project'}: ${a.role ?? 'Not specified'}`).join('\n')}
+      ${assignments.map((a) => `- ${a.project?.title ?? "Unknown Project"}: ${a.role ?? "Not specified"}`).join("\n")}
     `;
 
     const schema: JsonSchema = {
-      type: 'object',
+      type: "object",
       properties: {
-        performanceScore: { type: 'number', description: 'A score from 0 to 10 indicating overall performance' },
-        summary: { type: 'string', description: 'A brief summary of the freelancer\'s performance' },
-        recommendations: { type: 'string', description: 'Recommendations for improvement or utilization' },
+        performanceScore: {
+          type: "number",
+          description: "A score from 0 to 10 indicating overall performance",
+        },
+        summary: {
+          type: "string",
+          description: "A brief summary of the freelancer's performance",
+        },
+        recommendations: {
+          type: "string",
+          description: "Recommendations for improvement or utilization",
+        },
       },
-      required: ['performanceScore', 'summary', 'recommendations'],
+      required: ["performanceScore", "summary", "recommendations"],
     };
 
-    const result = await this.extractData(prompt, schema) as PerformanceAnalysisResult;
+    const result = (await this.extractData(
+      prompt,
+      schema
+    )) as PerformanceAnalysisResult;
 
     await this.cacheManager.set(cacheKey, result, 86400);
 
     const duration = Date.now() - startTime;
     this.logger.log({
-      type: 'ai_usage',
-      endpoint: 'analyzeFreelancerPerformance',
+      type: "ai_usage",
+      endpoint: "analyzeFreelancerPerformance",
       freelancerId,
       duration_ms: duration,
       cached: false,
@@ -698,9 +850,9 @@ Image URL: ${imageUrl}`;
    * Build vision analysis prompt
    */
   private buildVisionAnalysisPrompt(
-    imageUrl: string, 
-    analysisType: string, 
-    context: string, 
+    imageUrl: string,
+    analysisType: string,
+    context: string,
     brandGuidelines: Record<string, unknown>
   ): string {
     let prompt = `Analyze this image for ${analysisType} aspects. `;
@@ -723,77 +875,83 @@ Image URL: ${imageUrl}`;
    */
   private getVisionAnalysisSchema(analysisType: string): JsonSchema {
     const baseSchema: JsonSchema = {
-      type: 'object',
+      type: "object",
       properties: {
-        tags: { type: 'array', items: { type: 'string' } },
-        moods: { type: 'array', items: { type: 'string' } },
-        colors: { type: 'array', items: { type: 'string' } },
-        description: { type: 'string' },
+        tags: { type: "array", items: { type: "string" } },
+        moods: { type: "array", items: { type: "string" } },
+        colors: { type: "array", items: { type: "string" } },
+        description: { type: "string" },
       },
-      required: ['tags', 'moods', 'colors', 'description'],
+      required: ["tags", "moods", "colors", "description"],
     };
 
-    if (analysisType === 'creative' || analysisType === 'technical') {
+    if (analysisType === "creative" || analysisType === "technical") {
       baseSchema.properties!.composition = {
-        type: 'object',
+        type: "object",
         properties: {
-          ruleOfThirds: { type: 'boolean' },
-          leadingLines: { type: 'array', items: { type: 'string' } },
-          focalPoints: { type: 'array', items: { type: 'string' } },
-          balance: { type: 'string', enum: ['balanced', 'unbalanced', 'dynamic'] },
+          ruleOfThirds: { type: "boolean" },
+          leadingLines: { type: "array", items: { type: "string" } },
+          focalPoints: { type: "array", items: { type: "string" } },
+          balance: {
+            type: "string",
+            enum: ["balanced", "unbalanced", "dynamic"],
+          },
         },
       };
 
       baseSchema.properties!.lighting = {
-        type: 'object',
+        type: "object",
         properties: {
-          type: { type: 'string' },
-          direction: { type: 'string' },
-          mood: { type: 'string' },
-          quality: { type: 'string', enum: ['soft', 'harsh', 'natural', 'artificial'] },
+          type: { type: "string" },
+          direction: { type: "string" },
+          mood: { type: "string" },
+          quality: {
+            type: "string",
+            enum: ["soft", "harsh", "natural", "artificial"],
+          },
         },
       };
 
       baseSchema.properties!.style = {
-        type: 'object',
+        type: "object",
         properties: {
-          genre: { type: 'string' },
-          era: { type: 'string' },
-          movements: { type: 'array', items: { type: 'string' } },
-          techniques: { type: 'array', items: { type: 'string' } },
+          genre: { type: "string" },
+          era: { type: "string" },
+          movements: { type: "array", items: { type: "string" } },
+          techniques: { type: "array", items: { type: "string" } },
         },
       };
     }
 
-    if (analysisType === 'brand') {
+    if (analysisType === "brand") {
       baseSchema.properties!.brandCompliance = {
-        type: 'object',
+        type: "object",
         properties: {
-          compliant: { type: 'boolean' },
-          issues: { type: 'array', items: { type: 'string' } },
-          suggestions: { type: 'array', items: { type: 'string' } },
+          compliant: { type: "boolean" },
+          issues: { type: "array", items: { type: "string" } },
+          suggestions: { type: "array", items: { type: "string" } },
         },
-        required: ['compliant'],
+        required: ["compliant"],
       };
     }
 
-    if (analysisType === 'technical') {
+    if (analysisType === "technical") {
       baseSchema.properties!.technical = {
-        type: 'object',
+        type: "object",
         properties: {
-          resolution: { type: 'string' },
-          aspectRatio: { type: 'string' },
-          quality: { type: 'string', enum: ['high', 'medium', 'low'] },
-          issues: { type: 'array', items: { type: 'string' } },
+          resolution: { type: "string" },
+          aspectRatio: { type: "string" },
+          quality: { type: "string", enum: ["high", "medium", "low"] },
+          issues: { type: "array", items: { type: "string" } },
         },
       };
 
       baseSchema.properties!.creativeFeedback = {
-        type: 'object',
+        type: "object",
         properties: {
-          strengths: { type: 'array', items: { type: 'string' } },
-          improvements: { type: 'array', items: { type: 'string' } },
-          alternativeSuggestions: { type: 'array', items: { type: 'string' } },
+          strengths: { type: "array", items: { type: "string" } },
+          improvements: { type: "array", items: { type: "string" } },
+          alternativeSuggestions: { type: "array", items: { type: "string" } },
         },
       };
     }
@@ -804,15 +962,20 @@ Image URL: ${imageUrl}`;
   /**
    * Compare images for batch analysis
    */
-  private async compareImages(analyses: ImageAnalysisResult[]): Promise<ImageComparisonResult> {
+  private async compareImages(
+    analyses: ImageAnalysisResult[]
+  ): Promise<ImageComparisonResult> {
     const commonTags = new Set<string>();
     const allTags = new Set<string>();
 
-    analyses.forEach(analysis => {
+    analyses.forEach((analysis) => {
       if (analysis.tags) {
         analysis.tags.forEach((tag: string) => {
           allTags.add(tag);
-          if (analyses.filter(a => a.tags?.includes(tag)).length > analyses.length / 2) {
+          if (
+            analyses.filter((a) => a.tags?.includes(tag)).length >
+            analyses.length / 2
+          ) {
             commonTags.add(tag);
           }
         });
@@ -820,16 +983,18 @@ Image URL: ${imageUrl}`;
     });
 
     const consistency = commonTags.size / Math.max(allTags.size, 1);
-    const differences = Array.from(allTags).filter(tag => !commonTags.has(tag));
+    const differences = Array.from(allTags).filter(
+      (tag) => !commonTags.has(tag)
+    );
 
     return {
       consistency,
       commonElements: Array.from(commonTags),
       differences,
       recommendations: [
-        'Ensure consistent visual style across assets',
-        'Maintain color palette consistency',
-        'Align composition and layout patterns',
+        "Ensure consistent visual style across assets",
+        "Maintain color palette consistency",
+        "Align composition and layout patterns",
       ],
     };
   }

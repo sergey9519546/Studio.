@@ -1,4 +1,5 @@
 import {
+  BarChart3,
   Briefcase,
   Calendar,
   Layers,
@@ -6,7 +7,6 @@ import {
   LogOut,
   Palette,
   Settings,
-  Sparkles,
   Upload,
   Users,
 } from "lucide-react";
@@ -18,9 +18,9 @@ const Layout: React.FC = () => {
   const navItems = [
     { icon: LayoutGrid, label: 'Dashboard', path: '/' },
     { icon: Briefcase, label: 'Projects', path: '/projects' },
-    { icon: Sparkles, label: 'Studio', path: '/studio' },
+    { icon: BarChart3, label: 'Intelligence', path: '/analysis' },
     { icon: Palette, label: 'Moodboard', path: '/moodboard' },
-    { icon: Users, label: 'Roster', path: '/freelancers' },
+    { icon: Users, label: 'Talent', path: '/freelancers' },
     { icon: Calendar, label: 'Schedule', path: '/assignments' },
     { icon: Upload, label: 'Import', path: '/imports' },
     { icon: Layers, label: 'Design', path: '/design' },
@@ -41,7 +41,7 @@ const Layout: React.FC = () => {
       <aside className="w-72 flex-shrink-0 hidden md:flex flex-col h-full border-r border-border-subtle bg-surface z-50 relative">
         <div className="h-20 flex items-center px-8">
           <div className="flex items-center gap-3 group cursor-default">
-            <div className="w-9 h-9 bg-primary text-white rounded-lg flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform duration-500 ease-out">
+            <div className="w-9 h-9 bg-black text-white rounded-lg flex items-center justify-center shadow-lg shadow-black/10 group-hover:scale-105 transition-transform duration-500 ease-out">
               <Layers size={20} strokeWidth={2} />
             </div>
             <div>
@@ -59,32 +59,31 @@ const Layout: React.FC = () => {
           <div className="px-3 mb-4 text-[10px] font-bold text-ink-tertiary uppercase tracking-widest opacity-80">
             Operations
           </div>
-          {navItems.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
-                  isActive
-                    ? "bg-brand text-white shadow-sm"
-                    : "text-ink-secondary hover:bg-subtle/60 hover:text-ink-primary"
-                }`
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  <item.icon
-                    size={18}
-                    strokeWidth={2}
-                    className={`transition-colors duration-200 ${isActive ? "text-primary" : "text-ink-tertiary group-hover:text-ink-secondary"}`}
-                  />
-                  <span className="relative z-10 tracking-tight">
-                    {item.label}
-                  </span>
-                </>
-              )}
-            </NavLink>
-          ))}
+          {navItems.map((item) => {
+            const IconComponent = item.icon;
+            return (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) =>
+                  `flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
+                    isActive
+                      ? "bg-black text-white shadow-sm"
+                      : "text-ink-secondary hover:bg-subtle/60 hover:text-ink-primary"
+                  }`
+                }
+              >
+                <IconComponent
+                  size={18}
+                  strokeWidth={2}
+                  className="transition-colors duration-200"
+                />
+                <span className="relative z-10 tracking-tight">
+                  {item.label}
+                </span>
+              </NavLink>
+            );
+          })}
         </div>
 
         <div className="p-6 mx-2 mb-2 border-t border-border-subtle space-y-2">
@@ -102,7 +101,7 @@ const Layout: React.FC = () => {
       {/* Mobile Header */}
       <div className="md:hidden fixed top-0 w-full bg-surface/80 backdrop-blur-xl border-b border-border-subtle h-16 z-50 flex items-center px-6 justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-black text-white rounded-lg flex items-center justify-center">
             <Layers size={18} />
           </div>
           <span className="font-display font-semibold text-lg tracking-tight text-ink-primary">

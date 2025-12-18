@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx"; // Enhanced Studio Roster with Router
 import "./index.css";
+import App from "./src/App.tsx"; // Production-ready Studio Roster with Router
 import { Providers } from "./src/app/providers";
 import "./src/index.css";
 

@@ -18,10 +18,10 @@ import {
     Trash2,
     Zap
 } from 'lucide-react';
-import React, { useState } from 'react';
-import { usePluginManager } from '../../components/extensibility/PluginManager_Final';
-import { Button } from '../design/Button';
-import type { Plugin } from '../../components/extensibility/PluginManager';
+import React, { useState } from "react";
+import { Button } from "../design/Button";
+import type { Plugin } from "../extensibility/PluginManager";
+import { usePluginManager } from "../extensibility/PluginManager";
 
 interface PluginManagerUIProps {
   onClose?: () => void;

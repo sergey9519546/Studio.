@@ -35,14 +35,16 @@ interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
   className?: string;
+  commands?: Command[];
 }
 
-export const CommandPalette: React.FC<CommandPaletteProps> = ({ 
-  isOpen, 
-  onClose, 
-  className 
+export const CommandPalette: React.FC<CommandPaletteProps> = ({
+  isOpen,
+  onClose,
+  className,
+  commands: customCommands,
 }) => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -57,191 +59,203 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   // Reset state when closing
   useEffect(() => {
     if (!isOpen) {
-      setQuery('');
+      setQuery("");
       setSelectedIndex(0);
     }
   }, [isOpen]);
 
   // Define available commands
-  const commands = useMemo<Command[]>(() => [
-    // Navigation
-    {
-      id: 'nav-home',
-      title: 'Go to Dashboard',
-      description: 'Navigate to the main dashboard',
-      icon: Home,
-      category: 'navigation',
-      keywords: ['dashboard', 'home', 'main'],
-      action: () => navigate('/dashboard'),
-      route: '/dashboard',
-      shortcut: 'g d'
-    },
-    {
-      id: 'nav-projects',
-      title: 'Go to Projects',
-      description: 'View and manage projects',
-      icon: FolderOpen,
-      category: 'navigation',
-      keywords: ['projects', 'portfolio', 'work'],
-      action: () => navigate('/projects'),
-      route: '/projects',
-      shortcut: 'g p'
-    },
-    {
-      id: 'nav-freelancers',
-      title: 'Go to Talent Roster',
-      description: 'Browse available freelancers',
-      icon: Users,
-      category: 'navigation',
-      keywords: ['freelancers', 'talent', 'team', 'roster'],
-      action: () => navigate('/freelancers'),
-      route: '/freelancers',
-      shortcut: 'g t'
-    },
-    {
-      id: 'nav-messages',
-      title: 'Go to Messages',
-      description: 'Check your conversations',
-      icon: MessageSquare,
-      category: 'navigation',
-      keywords: ['messages', 'chat', 'conversations'],
-      action: () => navigate('/messages'),
-      route: '/messages',
-      shortcut: 'g m'
-    },
-
-    // Actions
-    {
-      id: 'action-new-project',
-      title: 'Create New Project',
-      description: 'Start a new creative project',
-      icon: Plus,
-      category: 'actions',
-      keywords: ['new', 'create', 'project', 'add'],
-      action: () => navigate('/projects/new'),
-      shortcut: 'n p'
-    },
-    {
-      id: 'action-new-freelancer',
-      title: 'Add Freelancer',
-      description: 'Add a new freelancer to the roster',
-      icon: Plus,
-      category: 'actions',
-      keywords: ['add', 'freelancer', 'hire', 'new'],
-      action: () => navigate('/freelancers/new'),
-      shortcut: 'n f'
-    },
-    {
-      id: 'action-new-script',
-      title: 'Write New Script',
-      description: 'Create a new script or document',
-      icon: FileText,
-      category: 'actions',
-      keywords: ['script', 'write', 'document', 'new'],
-      action: () => navigate('/writers-room'),
-      shortcut: 'n s'
-    },
-
-    // Tools
-    {
-      id: 'tool-moodboard',
-      title: 'Open Moodboard',
-      description: 'Create and manage visual moodboards',
-      icon: Palette,
-      category: 'tools',
-      keywords: ['moodboard', 'design', 'visual', 'inspiration'],
-      action: () => navigate('/moodboard'),
-      shortcut: 't m'
-    },
-    {
-      id: 'tool-ai-chat',
-      title: 'AI Creative Assistant',
-      description: 'Chat with AI for creative insights',
-      icon: Zap,
-      category: 'tools',
-      keywords: ['ai', 'chat', 'assistant', 'help'],
-      action: () => navigate('/ai-chat'),
-      shortcut: 't a'
-    },
-    {
-      id: 'tool-asset-browser',
-      title: 'Asset Browser',
-      description: 'Browse and manage creative assets',
-      icon: Image,
-      category: 'tools',
-      keywords: ['assets', 'images', 'files', 'media'],
-      action: () => navigate('/assets'),
-      shortcut: 't b'
-    },
-
-    // Settings
-    {
-      id: 'settings-profile',
-      title: 'Profile Settings',
-      description: 'Manage your profile and preferences',
-      icon: Settings,
-      category: 'settings',
-      keywords: ['profile', 'settings', 'account', 'preferences'],
-      action: () => navigate('/settings/profile'),
-      shortcut: 's p'
-    },
-    {
-      id: 'settings-team',
-      title: 'Team Settings',
-      description: 'Manage team members and permissions',
-      icon: Users,
-      category: 'settings',
-      keywords: ['team', 'settings', 'members', 'permissions'],
-      action: () => navigate('/settings/team'),
-      shortcut: 's t'
-    },
-
-    // Shortcuts
-    {
-      id: 'shortcuts-help',
-      title: 'Keyboard Shortcuts',
-      description: 'View all available keyboard shortcuts',
-      icon: Keyboard,
-      category: 'shortcuts',
-      keywords: ['shortcuts', 'keyboard', 'help', 'cheat sheet'],
-      action: () => {
-        // Could open a shortcuts modal
-        console.log('Show shortcuts help');
+  const internalCommands = useMemo<Command[]>(
+    () => [
+      // Navigation
+      {
+        id: "nav-home",
+        title: "Go to Dashboard",
+        description: "Navigate to the main dashboard",
+        icon: Home,
+        category: "navigation",
+        keywords: ["dashboard", "home", "main"],
+        action: () => navigate("/dashboard"),
+        route: "/dashboard",
+        shortcut: "g d",
       },
-      shortcut: '?'
-    }
-  ], [navigate]);
+      {
+        id: "nav-projects",
+        title: "Go to Projects",
+        description: "View and manage projects",
+        icon: FolderOpen,
+        category: "navigation",
+        keywords: ["projects", "portfolio", "work"],
+        action: () => navigate("/projects"),
+        route: "/projects",
+        shortcut: "g p",
+      },
+      {
+        id: "nav-freelancers",
+        title: "Go to Talent Roster",
+        description: "Browse available freelancers",
+        icon: Users,
+        category: "navigation",
+        keywords: ["freelancers", "talent", "team", "roster"],
+        action: () => navigate("/freelancers"),
+        route: "/freelancers",
+        shortcut: "g t",
+      },
+      {
+        id: "nav-messages",
+        title: "Go to Messages",
+        description: "Check your conversations",
+        icon: MessageSquare,
+        category: "navigation",
+        keywords: ["messages", "chat", "conversations"],
+        action: () => navigate("/messages"),
+        route: "/messages",
+        shortcut: "g m",
+      },
+
+      // Actions
+      {
+        id: "action-new-project",
+        title: "Create New Project",
+        description: "Start a new creative project",
+        icon: Plus,
+        category: "actions",
+        keywords: ["new", "create", "project", "add"],
+        action: () => navigate("/projects/new"),
+        shortcut: "n p",
+      },
+      {
+        id: "action-new-freelancer",
+        title: "Add Freelancer",
+        description: "Add a new freelancer to the roster",
+        icon: Plus,
+        category: "actions",
+        keywords: ["add", "freelancer", "hire", "new"],
+        action: () => navigate("/freelancers/new"),
+        shortcut: "n f",
+      },
+      {
+        id: "action-new-script",
+        title: "Write New Script",
+        description: "Create a new script or document",
+        icon: FileText,
+        category: "actions",
+        keywords: ["script", "write", "document", "new"],
+        action: () => navigate("/writers-room"),
+        shortcut: "n s",
+      },
+
+      // Tools
+      {
+        id: "tool-moodboard",
+        title: "Open Moodboard",
+        description: "Create and manage visual moodboards",
+        icon: Palette,
+        category: "tools",
+        keywords: ["moodboard", "design", "visual", "inspiration"],
+        action: () => navigate("/moodboard"),
+        shortcut: "t m",
+      },
+      {
+        id: "tool-ai-chat",
+        title: "AI Creative Assistant",
+        description: "Chat with AI for creative insights",
+        icon: Zap,
+        category: "tools",
+        keywords: ["ai", "chat", "assistant", "help"],
+        action: () => navigate("/ai-chat"),
+        shortcut: "t a",
+      },
+      {
+        id: "tool-asset-browser",
+        title: "Asset Browser",
+        description: "Browse and manage creative assets",
+        icon: Image,
+        category: "tools",
+        keywords: ["assets", "images", "files", "media"],
+        action: () => navigate("/assets"),
+        shortcut: "t b",
+      },
+
+      // Settings
+      {
+        id: "settings-profile",
+        title: "Profile Settings",
+        description: "Manage your profile and preferences",
+        icon: Settings,
+        category: "settings",
+        keywords: ["profile", "settings", "account", "preferences"],
+        action: () => navigate("/settings/profile"),
+        shortcut: "s p",
+      },
+      {
+        id: "settings-team",
+        title: "Team Settings",
+        description: "Manage team members and permissions",
+        icon: Users,
+        category: "settings",
+        keywords: ["team", "settings", "members", "permissions"],
+        action: () => navigate("/settings/team"),
+        shortcut: "s t",
+      },
+
+      // Shortcuts
+      {
+        id: "shortcuts-help",
+        title: "Keyboard Shortcuts",
+        description: "View all available keyboard shortcuts",
+        icon: Keyboard,
+        category: "shortcuts",
+        keywords: ["shortcuts", "keyboard", "help", "cheat sheet"],
+        action: () => {
+          // Could open a shortcuts modal
+          console.log("Show shortcuts help");
+        },
+        shortcut: "?",
+      },
+    ],
+    [navigate]
+  );
+
+  const activeCommands = customCommands || internalCommands;
 
   // Filter commands based on search query
   const filteredCommands = useMemo(() => {
-    if (!query.trim()) return commands;
+    if (!query.trim()) return activeCommands;
 
-    const searchTerms = query.toLowerCase().split(' ').filter(Boolean);
-    
-    return commands
-      .map(command => {
+    const searchTerms = query.toLowerCase().split(" ").filter(Boolean);
+
+    return activeCommands
+      .map((command) => {
         const searchText = [
           command.title,
-          command.description || '',
-          ...command.keywords
-        ].join(' ').toLowerCase();
+          command.description || "",
+          ...command.keywords,
+        ]
+          .join(" ")
+          .toLowerCase();
 
-        const matches = searchTerms.every(term => searchText.includes(term));
-        
-        return matches ? {
-          ...command,
-          matchScore: calculateMatchScore(searchTerms, searchText)
-        } : null;
+        const matches = searchTerms.every((term) => searchText.includes(term));
+
+        return matches
+          ? {
+              ...command,
+              matchScore: calculateMatchScore(searchTerms, searchText),
+            }
+          : null;
       })
       .filter(Boolean)
       .sort((a, b) => (b?.matchScore || 0) - (a?.matchScore || 0));
-  }, [query, commands]);
+  }, [query, activeCommands]);
 
   // Calculate relevance score for search results
-  const calculateMatchScore = (searchTerms: string[], searchText: string): number => {
+  const calculateMatchScore = (
+    searchTerms: string[],
+    searchText: string
+  ): number => {
     let score = 0;
-    
-    searchTerms.forEach(term => {
+
+    searchTerms.forEach((term) => {
       if (searchText.includes(term)) {
         // Exact title match gets highest score
         if (searchText.startsWith(term)) score += 10;
@@ -251,7 +265,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         else score += 2;
       }
     });
-    
+
     return score;
   };
 
@@ -261,34 +275,34 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       if (!isOpen) return;
 
       switch (e.key) {
-        case 'ArrowDown':
+        case "ArrowDown":
           e.preventDefault();
-          setSelectedIndex(prev => 
+          setSelectedIndex((prev) =>
             prev < filteredCommands.length - 1 ? prev + 1 : 0
           );
           break;
-        case 'ArrowUp':
+        case "ArrowUp":
           e.preventDefault();
-          setSelectedIndex(prev => 
+          setSelectedIndex((prev) =>
             prev > 0 ? prev - 1 : filteredCommands.length - 1
           );
           break;
-        case 'Enter':
+        case "Enter":
           e.preventDefault();
           if (filteredCommands[selectedIndex]) {
             filteredCommands[selectedIndex].action();
             onClose();
           }
           break;
-        case 'Escape':
+        case "Escape":
           e.preventDefault();
           onClose();
           break;
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, filteredCommands, selectedIndex, onClose]);
 
   // Reset selection when results change
@@ -303,23 +317,35 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case 'navigation': return <FolderOpen className="w-4 h-4" />;
-      case 'actions': return <Plus className="w-4 h-4" />;
-      case 'tools': return <Zap className="w-4 h-4" />;
-      case 'settings': return <Settings className="w-4 h-4" />;
-      case 'shortcuts': return <Keyboard className="w-4 h-4" />;
-      default: return <Command className="w-4 h-4" />;
+      case "navigation":
+        return <FolderOpen className="w-4 h-4" />;
+      case "actions":
+        return <Plus className="w-4 h-4" />;
+      case "tools":
+        return <Zap className="w-4 h-4" />;
+      case "settings":
+        return <Settings className="w-4 h-4" />;
+      case "shortcuts":
+        return <Keyboard className="w-4 h-4" />;
+      default:
+        return <Command className="w-4 h-4" />;
     }
   };
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case 'navigation': return 'text-blue-400';
-      case 'actions': return 'text-green-400';
-      case 'tools': return 'text-purple-400';
-      case 'settings': return 'text-orange-400';
-      case 'shortcuts': return 'text-pink-400';
-      default: return 'text-gray-400';
+      case "navigation":
+        return "text-blue-400";
+      case "actions":
+        return "text-green-400";
+      case "tools":
+        return "text-purple-400";
+      case "settings":
+        return "text-orange-400";
+      case "shortcuts":
+        return "text-pink-400";
+      default:
+        return "text-gray-400";
     }
   };
 
@@ -348,7 +374,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               "overflow-hidden",
               className
             )}
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
           >
             {/* Search Input */}
             <div className="flex items-center px-6 py-4 border-b border-white/10">
@@ -358,7 +384,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                 type="text"
                 placeholder="Search commands..."
                 value={query}
-                onChange={e => setQuery(e.target.value)}
+                onChange={(e) => setQuery(e.target.value)}
                 className="flex-1 bg-transparent text-white placeholder-white/60 outline-none text-lg"
               />
               <div className="flex items-center space-x-2 text-white/60">
@@ -397,13 +423,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                         index === selectedIndex && "bg-white/10"
                       )}
                     >
-                      <div className={cn(
-                        "flex items-center justify-center w-10 h-10 rounded-lg",
-                        "bg-white/10 border border-white/20"
-                      )}>
+                      <div
+                        className={cn(
+                          "flex items-center justify-center w-10 h-10 rounded-lg",
+                          "bg-white/10 border border-white/20"
+                        )}
+                      >
                         <command.icon className="w-5 h-5 text-white" />
                       </div>
-                      
+
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center space-x-2">
                           <h3 className="text-white font-medium truncate">
@@ -423,7 +451,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                       </div>
 
                       <div className="flex items-center space-x-2">
-                        <div className={cn("flex items-center", getCategoryColor(command.category))}>
+                        <div
+                          className={cn(
+                            "flex items-center",
+                            getCategoryColor(command.category)
+                          )}
+                        >
                           {getCategoryIcon(command.category)}
                         </div>
                         <ArrowRight className="w-4 h-4 text-white/40" />
@@ -447,7 +480,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   </div>
                   <div className="flex items-center space-x-2">
                     <span>Close</span>
-                    <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-xs">esc</kbd>
+                    <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-xs">
+                      esc
+                    </kbd>
                   </div>
                 </div>
               </div>

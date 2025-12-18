@@ -65,9 +65,9 @@ const BentoCard: React.FC<BentoCardProps> = ({
   return (
     <motion.div
       variants={itemVariants}
-      whileHover={{ 
+      whileHover={{
         scale: 1.02,
-        transition: { type: 'spring', stiffness: 400, damping: 17 }
+        transition: { type: "spring", stiffness: 400, damping: 17 },
       }}
       className={`
         group relative overflow-hidden rounded-3xl border border-border-subtle
@@ -79,7 +79,7 @@ const BentoCard: React.FC<BentoCardProps> = ({
     >
       {/* Glassmorphism overlay */}
       <div className="absolute inset-0 bg-white/40 backdrop-blur-xl" />
-      
+
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col p-6">
         {/* Header */}
@@ -91,7 +91,7 @@ const BentoCard: React.FC<BentoCardProps> = ({
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="w-2 h-2 rounded-full bg-primary shadow-glow"
+            className="w-2 h-2 rounded-full bg-black shadow-glow"
           />
         </div>
 
@@ -108,11 +108,7 @@ const BentoCard: React.FC<BentoCardProps> = ({
         )}
 
         {/* Custom content */}
-        {children && (
-          <div className="flex-1 mt-auto">
-            {children}
-          </div>
-        )}
+        {children && <div className="flex-1 mt-auto">{children}</div>}
       </div>
 
       {/* Hover gradient effect */}
@@ -136,7 +132,7 @@ const UltimateBentoGrid: React.FC = () => {
         <BentoCard
           title="Creative Brief"
           description="The vision, constraints, and soul of your project. Every word matters."
-          icon={<FileText size={24} className="text-primary" />}
+          icon={<FileText size={24} className="text-ink-primary" />}
           gradient="from-surface to-subtle"
           className="col-span-12 md:col-span-4 row-span-2"
         >
@@ -192,21 +188,21 @@ const UltimateBentoGrid: React.FC = () => {
 
         {/* 4. AI INSIGHTS — Compact power (3 cols x 1 row) - ONLY CARD WITH COLOR */}
         <BentoCard
-          title="Gemini Insights"
-          icon={<Sparkles size={20} className="text-primary" />}
-          gradient="from-primary-tint to-surface"
+          title="Lumina Insights"
+          icon={<Sparkles size={20} className="text-ink-primary" />}
+          gradient="from-subtle to-surface"
           className="col-span-12 md:col-span-3 row-span-1"
         >
           <div className="flex items-center gap-2 mt-2">
             <div className="flex-1 h-1.5 bg-border-subtle rounded-full overflow-hidden">
               <motion.div
                 initial={{ width: 0 }}
-                animate={{ width: '78%' }}
-                transition={{ duration: 1.5, ease: 'easeOut' }}
-                className="h-full bg-primary"
+                animate={{ width: "78%" }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+                className="h-full bg-black"
               />
             </div>
-            <span className="text-xs font-bold text-primary">78%</span>
+            <span className="text-xs font-bold text-ink-primary">78%</span>
           </div>
         </BentoCard>
 
@@ -238,7 +234,7 @@ const UltimateBentoGrid: React.FC = () => {
             {/* Subtle hint of edge colors only in mood palette */}
             <div className="flex-1 h-6 rounded-lg shadow-sm bg-gradient-to-br from-subtle to-border-subtle" />
             <div className="flex-1 h-6 rounded-lg shadow-sm bg-[#18C9AE]/20" />
-            <div className="flex-1 h-6 rounded-lg shadow-sm bg-primary/20" />
+            <div className="flex-1 h-6 rounded-lg shadow-sm bg-black/10" />
             <div className="flex-1 h-6 rounded-lg shadow-sm bg-[#E14BF7]/20" />
             <div className="flex-1 h-6 rounded-lg shadow-sm bg-gradient-to-br from-subtle to-border-subtle" />
           </div>
@@ -273,8 +269,12 @@ const UltimateBentoGrid: React.FC = () => {
           className="col-span-12 md:col-span-4 row-span-1"
         >
           <div className="flex items-center gap-2 mt-2">
-            <div className="px-2 py-1 bg-subtle rounded text-xs font-mono text-ink-secondary">12 sources</div>
-            <div className="px-2 py-1 bg-subtle rounded text-xs font-mono text-ink-secondary">847 chunks</div>
+            <div className="px-2 py-1 bg-subtle rounded text-xs font-mono text-ink-secondary">
+              12 sources
+            </div>
+            <div className="px-2 py-1 bg-subtle rounded text-xs font-mono text-ink-secondary">
+              847 chunks
+            </div>
           </div>
         </BentoCard>
 
@@ -287,7 +287,7 @@ const UltimateBentoGrid: React.FC = () => {
           className="col-span-12 md:col-span-5 row-span-1"
         >
           <div className="flex gap-2 mt-2 overflow-x-auto">
-            {['v1.2', 'v2.0', 'v2.1'].map((version) => (
+            {["v1.2", "v2.0", "v2.1"].map((version) => (
               <div
                 key={version}
                 className="px-3 py-1.5 bg-surface border border-border-subtle rounded-lg text-xs font-bold text-ink-primary whitespace-nowrap"
@@ -300,15 +300,15 @@ const UltimateBentoGrid: React.FC = () => {
 
         {/* 10. QUICK ACTION — CTA (3 cols x 1 row) - Primary blue for CTA */}
         <BentoCard
-          title="Launch Studio"
-          icon={<Zap size={20} className="text-primary" />}
-          gradient="from-primary-tint to-surface"
+          title="Lumina Studio"
+          icon={<Zap size={20} className="text-black" />}
+          gradient="from-subtle to-surface"
           className="col-span-12 md:col-span-3 row-span-1"
         >
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full mt-2 py-2 bg-primary hover:bg-primary-hover text-white font-bold rounded-xl shadow-sm"
+            className="w-full mt-2 py-2 bg-black hover:bg-black/90 text-white font-bold rounded-xl shadow-sm"
           >
             Start Writing →
           </motion.button>
@@ -322,10 +322,14 @@ const UltimateBentoGrid: React.FC = () => {
         transition={{ delay: 0.8 }}
         className="fixed bottom-8 right-8 px-6 py-4 bg-white/80 backdrop-blur-xl rounded-2xl shadow-float border border-border-subtle"
       >
-        <div className="text-xs font-mono text-ink-tertiary mb-1">COMPUTATIONAL STATUS</div>
+        <div className="text-xs font-mono text-ink-tertiary mb-1">
+          COMPUTATIONAL STATUS
+        </div>
         <div className="flex items-center gap-3">
-          <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-          <span className="text-sm font-semibold text-ink-primary">System Optimal</span>
+          <div className="w-2 h-2 bg-black rounded-full animate-pulse" />
+          <span className="text-sm font-semibold text-ink-primary">
+            System Optimal
+          </span>
         </div>
       </motion.div>
     </div>

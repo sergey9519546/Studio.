@@ -4,3 +4,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .nav-item {
+    @apply flex items-center gap-3 px-4 py-3 text-sm font-medium text-ink-secondary rounded-xl transition-all duration-300;
+  }
+
+  .nav-item:hover {
+    @apply bg-subtle text-ink-primary;
+  }
+
+  .nav-item.active {
+    @apply bg-subtle text-ink-primary font-bold;
+  }
+
+  .nav-item svg {
+    @apply text-ink-tertiary transition-colors;
+  }
+
+  .nav-item:hover svg, .nav-item.active svg {
+    @apply text-ink-primary;
+  }
+}
+
+.bg-sidebar {
+  @apply bg-surface border-r border-border-subtle/30;
+}
+
+.glass-bar {
+  @apply bg-surface/80 backdrop-blur-2xl border border-white/40 shadow-elevation;
+}
+
+.nav-label {
+  @apply text-[9px] font-black text-ink-tertiary uppercase tracking-[0.2em] px-4 mb-2 mt-8 opacity-40;
+}

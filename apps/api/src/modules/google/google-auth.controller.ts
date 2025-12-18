@@ -76,7 +76,7 @@ export class GoogleAuthController {
       oauth2Client.setCredentials(tokens);
 
       // Get user info from Google
-      // Use non-blocking cast or explicit type if possible. googleapis oauth2 is complex.
+      // googleapis oauth2 typing is complex, using type assertion
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const oauth2 = (google as any).oauth2({
         auth: oauth2Client,

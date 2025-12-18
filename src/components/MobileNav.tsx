@@ -1,6 +1,12 @@
-import { Briefcase, Calendar, LayoutGrid, Sparkles, Users } from 'lucide-react';
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import {
+  BarChart3,
+  Briefcase,
+  Calendar,
+  LayoutGrid,
+  Users,
+} from "lucide-react";
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 interface MobileNavProps {
   className?: string;
@@ -11,13 +17,38 @@ interface MobileNavProps {
  * Follows iOS/Android convention for primary navigation on mobile devices
  * Addresses Jakob's Law compliance for mobile UX
  */
-export const MobileNav: React.FC<MobileNavProps> = ({ className = '' }) => {
+export const MobileNav: React.FC<MobileNavProps> = ({ className = "" }) => {
   const navItems = [
-    { icon: LayoutGrid, label: 'Dashboard', path: '/', ariaLabel: 'Navigate to Dashboard' },
-    { icon: Briefcase, label: 'Projects', path: '/projects', ariaLabel: 'Navigate to Projects' },
-    { icon: Sparkles, label: 'Studio', path: '/studio', ariaLabel: 'Navigate to Studio' },
-    { icon: Users, label: 'Roster', path: '/freelancers', ariaLabel: 'Navigate to Freelancer Roster' },
-    { icon: Calendar, label: 'Schedule', path: '/assignments', ariaLabel: 'Navigate to Schedule' },
+    {
+      icon: LayoutGrid,
+      label: "Dashboard",
+      path: "/",
+      ariaLabel: "Navigate to Dashboard",
+    },
+    {
+      icon: Briefcase,
+      label: "Projects",
+      path: "/projects",
+      ariaLabel: "Navigate to Projects",
+    },
+    {
+      icon: BarChart3,
+      label: "Intelligence",
+      path: "/analysis",
+      ariaLabel: "Navigate to Intelligence",
+    },
+    {
+      icon: Users,
+      label: "Talent",
+      path: "/talent",
+      ariaLabel: "Navigate to Talent Roster",
+    },
+    {
+      icon: Calendar,
+      label: "Schedule",
+      path: "/assignments",
+      ariaLabel: "Navigate to Schedule",
+    },
   ];
 
   return (
@@ -35,30 +66,32 @@ export const MobileNav: React.FC<MobileNavProps> = ({ className = '' }) => {
             className={({ isActive }) =>
               `flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-lg transition-all min-w-[64px] ${
                 isActive
-                  ? 'text-primary'
-                  : 'text-ink-tertiary hover:text-ink-secondary active:scale-95'
+                  ? "text-ink-primary"
+                  : "text-ink-tertiary hover:text-ink-secondary active:scale-95"
               }`
             }
           >
             {({ isActive }) => (
               <>
-                <item.icon 
-                  size={20} 
-                  strokeWidth={2} 
-                  className={`transition-colors ${isActive ? 'text-primary' : ''}`}
+                <item.icon
+                  size={20}
+                  strokeWidth={2}
+                  className={`transition-colors ${isActive ? "text-ink-primary" : ""}`}
                   aria-hidden="true"
                 />
-                <span 
-                  className={`text-[10px] font-medium tracking-tight ${
-                    isActive ? 'text-primary' : 'text-ink-tertiary'
+                <span
+                  className={`text-[10px] font-black tracking-tight ${
+                    isActive
+                      ? "text-ink-primary"
+                      : "text-ink-tertiary opacity-60"
                   }`}
                 >
                   {item.label}
                 </span>
                 {/* Active indicator */}
                 {isActive && (
-                  <div 
-                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full"
+                  <div
+                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-black rounded-full"
                     aria-hidden="true"
                   />
                 )}
@@ -67,7 +100,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ className = '' }) => {
           </NavLink>
         ))}
       </div>
-      
+
       {/* iOS safe area support */}
       <style>{`
         .safe-area-pb {
