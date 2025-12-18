@@ -6,11 +6,11 @@ import { type Editor } from "@tiptap/react"
 import { NodeSelection } from "@tiptap/pm/state"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
 
 // --- Icons ---
-import { TrashIcon } from "@app/components/tiptap-icons/trash-icon"
+import { TrashIcon } from "@/components/tiptap-icons/trash-icon"
 
 export const DELETE_NODE_SHORTCUT_KEY = "backspace"
 

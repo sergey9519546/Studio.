@@ -18,17 +18,17 @@ import {
 } from "react"
 
 // --- Hooks ---
-import { useFloatingElement } from "@app/hooks/use-floating-element"
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useFloatingElement } from "@/hooks/use-floating-element"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Lib ---
 import {
   getSelectionBoundingRect,
   isSelectionValid,
-} from "@app/lib/tiptap-collab-utils"
+} from "@/lib/tiptap-collab-utils"
 
-import { isElementWithinEditor } from "@app/components/tiptap-ui-utils/floating-element"
-import { isValidPosition } from "@app/lib/tiptap-utils"
+import { isElementWithinEditor } from "@/components/tiptap-ui-utils/floating-element"
+import { isValidPosition } from "@/lib/tiptap-utils"
 
 export interface FloatingElementProps extends HTMLAttributes<HTMLDivElement> {
   /**

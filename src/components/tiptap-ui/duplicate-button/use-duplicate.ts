@@ -6,11 +6,11 @@ import { type Editor } from "@tiptap/react"
 import { NodeSelection } from "@tiptap/pm/state"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
 
 // --- Icons ---
-import { CopyIcon } from "@app/components/tiptap-icons/copy-icon"
+import { CopyIcon } from "@/components/tiptap-icons/copy-icon"
 
 export const DUPLICATE_SHORTCUT_KEY = "mod+d"
 

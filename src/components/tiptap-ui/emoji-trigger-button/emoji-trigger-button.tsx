@@ -1,22 +1,22 @@
 import { forwardRef, useCallback } from "react"
 
 // --- Lib ---
-import { parseShortcutKeys } from "@app/lib/tiptap-utils"
+import { parseShortcutKeys } from "@/lib/tiptap-utils"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Tiptap UI ---
-import type { UseEmojiTriggerConfig } from "@app/components/tiptap-ui/emoji-trigger-button"
+import type { UseEmojiTriggerConfig } from "@/components/tiptap-ui/emoji-trigger-button"
 import {
   EMOJI_TRIGGER_SHORTCUT_KEY,
   useEmojiTrigger,
-} from "@app/components/tiptap-ui/emoji-trigger-button"
+} from "@/components/tiptap-ui/emoji-trigger-button"
 
 // --- UI Primitives ---
-import type { ButtonProps } from "@app/components/tiptap-ui-primitive/button"
-import { Button } from "@app/components/tiptap-ui-primitive/button"
-import { Badge } from "@app/components/tiptap-ui-primitive/badge"
+import type { ButtonProps } from "@/components/tiptap-ui-primitive/button"
+import { Button } from "@/components/tiptap-ui-primitive/button"
+import { Badge } from "@/components/tiptap-ui-primitive/badge"
 
 export interface EmojiTriggerButtonProps
   extends Omit<ButtonProps, "type">,

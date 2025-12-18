@@ -30,6 +30,7 @@ type AuditLogEntry = {
   action: string;
   resourceType: string;
   resourceId: string | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   metadata: any;
   timestamp: Date;
   user?: { id: string; name: string; email: string } | null;
@@ -53,7 +54,9 @@ export class ProjectAuditService {
           action: event.action,
           resourceType: event.resourceType,
           resourceId: event.resourceId,
-          metadata: (event.metadata || {}) as any,
+          // explicit cast for Prisma Json compatibility
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          metadata: (event.metadata || {}) as Record<string, any>,
           ipAddress: event.ipAddress,
           userAgent: event.userAgent,
           timestamp: new Date(),

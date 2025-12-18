@@ -1,5 +1,5 @@
 import { type Editor } from "@tiptap/react"
-import { getSelectedDOMElement } from "@app/lib/tiptap-advanced-utils"
+import { getSelectedDOMElement } from "@/lib/tiptap-advanced-utils"
 
 export function getContextAndInsertAt(editor: Editor) {
   let context: string | undefined = ""

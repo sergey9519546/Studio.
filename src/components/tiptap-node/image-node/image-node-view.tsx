@@ -3,7 +3,7 @@ import type { Editor, NodeViewProps } from "@tiptap/react"
 import { NodeViewWrapper, NodeViewContent } from "@tiptap/react"
 import { NodeSelection } from "@tiptap/pm/state"
 
-import { isValidPosition } from "@app/lib/tiptap-utils"
+import { isValidPosition } from "@/lib/tiptap-utils"
 
 import "./image-node-view.scss"
 

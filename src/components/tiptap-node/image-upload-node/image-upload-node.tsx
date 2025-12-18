@@ -3,10 +3,10 @@
 import { useRef, useState } from "react"
 import type { NodeViewProps } from "@tiptap/react"
 import { NodeViewWrapper } from "@tiptap/react"
-import { Button } from "@app/components/tiptap-ui-primitive/button"
-import { CloseIcon } from "@app/components/tiptap-icons/close-icon"
-import "@app/components/tiptap-node/image-upload-node/image-upload-node.scss"
-import { focusNextNode, isValidPosition } from "@app/lib/tiptap-utils"
+import { Button } from "@/components/tiptap-ui-primitive/button"
+import { CloseIcon } from "@/components/tiptap-icons/close-icon"
+import "@/components/tiptap-node/image-upload-node/image-upload-node.scss"
+import { focusNextNode, isValidPosition } from "@/lib/tiptap-utils"
 
 export interface FileItem {
   /**

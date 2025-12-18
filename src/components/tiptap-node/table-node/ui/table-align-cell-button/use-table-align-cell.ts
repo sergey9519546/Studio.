@@ -4,24 +4,24 @@ import { useCallback, useMemo } from "react"
 import type { Editor } from "@tiptap/react"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Lib ---
-import { isExtensionAvailable } from "@app/lib/tiptap-utils"
-import type { Orientation } from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+import { isExtensionAvailable } from "@/lib/tiptap-utils"
+import type { Orientation } from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 import {
   getTable,
   getRowOrColumnCells,
-} from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+} from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 
 // --- Icons ---
-import { AlignLeftIcon } from "@app/components/tiptap-icons/align-left-icon"
-import { AlignCenterIcon } from "@app/components/tiptap-icons/align-center-icon"
-import { AlignRightIcon } from "@app/components/tiptap-icons/align-right-icon"
-import { AlignJustifyIcon } from "@app/components/tiptap-icons/align-justify-icon"
-import { AlignBottomIcon } from "@app/components/tiptap-icons/align-bottom-icon"
-import { AlignTopIcon } from "@app/components/tiptap-icons/align-top-icon"
-import { AlignMiddleIcon } from "@app/components/tiptap-icons/align-middle-icon"
+import { AlignLeftIcon } from "@/components/tiptap-icons/align-left-icon"
+import { AlignCenterIcon } from "@/components/tiptap-icons/align-center-icon"
+import { AlignRightIcon } from "@/components/tiptap-icons/align-right-icon"
+import { AlignJustifyIcon } from "@/components/tiptap-icons/align-justify-icon"
+import { AlignBottomIcon } from "@/components/tiptap-icons/align-bottom-icon"
+import { AlignTopIcon } from "@/components/tiptap-icons/align-top-icon"
+import { AlignMiddleIcon } from "@/components/tiptap-icons/align-middle-icon"
 
 export type TextAlignment = "left" | "center" | "right" | "justify"
 export type VerticalAlignment = "top" | "middle" | "bottom"

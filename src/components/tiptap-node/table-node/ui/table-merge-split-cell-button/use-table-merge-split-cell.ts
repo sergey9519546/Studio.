@@ -3,14 +3,14 @@ import type { Editor } from "@tiptap/react"
 import { mergeCells, splitCell } from "@tiptap/pm/tables"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Lib ---
-import { isExtensionAvailable } from "@app/lib/tiptap-utils"
+import { isExtensionAvailable } from "@/lib/tiptap-utils"
 
 // --- Icons ---
-import { TableCellMergeIcon } from "@app/components/tiptap-icons/table-cell-merge-icon"
-import { TableCellSplitIcon } from "@app/components/tiptap-icons/table-cell-split-icon"
+import { TableCellMergeIcon } from "@/components/tiptap-icons/table-cell-merge-icon"
+import { TableCellSplitIcon } from "@/components/tiptap-icons/table-cell-split-icon"
 
 export type MergeSplitAction = "merge" | "split"
 

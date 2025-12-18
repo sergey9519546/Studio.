@@ -4,36 +4,36 @@ import { useCallback } from "react"
 import type { Editor } from "@tiptap/react"
 
 // --- Icons ---
-import { CodeBlockIcon } from "@app/components/tiptap-icons/code-block-icon"
-import { HeadingOneIcon } from "@app/components/tiptap-icons/heading-one-icon"
-import { HeadingTwoIcon } from "@app/components/tiptap-icons/heading-two-icon"
-import { HeadingThreeIcon } from "@app/components/tiptap-icons/heading-three-icon"
-import { ImageIcon } from "@app/components/tiptap-icons/image-icon"
-import { ListIcon } from "@app/components/tiptap-icons/list-icon"
-import { ListOrderedIcon } from "@app/components/tiptap-icons/list-ordered-icon"
-import { BlockquoteIcon } from "@app/components/tiptap-icons/blockquote-icon"
-import { ListTodoIcon } from "@app/components/tiptap-icons/list-todo-icon"
-import { AiSparklesIcon } from "@app/components/tiptap-icons/ai-sparkles-icon"
-import { MinusIcon } from "@app/components/tiptap-icons/minus-icon"
-import { TypeIcon } from "@app/components/tiptap-icons/type-icon"
-import { AtSignIcon } from "@app/components/tiptap-icons/at-sign-icon"
-import { SmilePlusIcon } from "@app/components/tiptap-icons/smile-plus-icon"
-import { TableIcon } from "@app/components/tiptap-icons/table-icon"
+import { CodeBlockIcon } from "@/components/tiptap-icons/code-block-icon"
+import { HeadingOneIcon } from "@/components/tiptap-icons/heading-one-icon"
+import { HeadingTwoIcon } from "@/components/tiptap-icons/heading-two-icon"
+import { HeadingThreeIcon } from "@/components/tiptap-icons/heading-three-icon"
+import { ImageIcon } from "@/components/tiptap-icons/image-icon"
+import { ListIcon } from "@/components/tiptap-icons/list-icon"
+import { ListOrderedIcon } from "@/components/tiptap-icons/list-ordered-icon"
+import { BlockquoteIcon } from "@/components/tiptap-icons/blockquote-icon"
+import { ListTodoIcon } from "@/components/tiptap-icons/list-todo-icon"
+import { AiSparklesIcon } from "@/components/tiptap-icons/ai-sparkles-icon"
+import { MinusIcon } from "@/components/tiptap-icons/minus-icon"
+import { TypeIcon } from "@/components/tiptap-icons/type-icon"
+import { AtSignIcon } from "@/components/tiptap-icons/at-sign-icon"
+import { SmilePlusIcon } from "@/components/tiptap-icons/smile-plus-icon"
+import { TableIcon } from "@/components/tiptap-icons/table-icon"
 
 // --- Lib ---
 import {
   isExtensionAvailable,
   isNodeInSchema,
-} from "@app/lib/tiptap-utils"
+} from "@/lib/tiptap-utils"
 import {
   findSelectionPosition,
   hasContentAbove,
-} from "@app/lib/tiptap-advanced-utils"
+} from "@/lib/tiptap-advanced-utils"
 
 // --- Tiptap UI ---
-import type { SuggestionItem } from "@app/components/tiptap-ui-utils/suggestion-menu"
-import { addEmojiTrigger } from "@app/components/tiptap-ui/emoji-trigger-button"
-import { addMentionTrigger } from "@app/components/tiptap-ui/mention-trigger-button"
+import type { SuggestionItem } from "@/components/tiptap-ui-utils/suggestion-menu"
+import { addEmojiTrigger } from "@/components/tiptap-ui/emoji-trigger-button"
+import { addMentionTrigger } from "@/components/tiptap-ui/mention-trigger-button"
 
 export interface SlashMenuConfig {
   enabledItems?: SlashMenuItemType[]

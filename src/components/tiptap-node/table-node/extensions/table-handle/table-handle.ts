@@ -1,9 +1,9 @@
 import { Extension } from "@tiptap/core"
-import type { TableHandlesState } from "@app/components/tiptap-node/table-node/extensions/table-handle"
+import type { TableHandlesState } from "@/components/tiptap-node/table-node/extensions/table-handle"
 import {
   TableHandlePlugin,
   tableHandlePluginKey,
-} from "@app/components/tiptap-node/table-node/extensions/table-handle/table-handle-plugin"
+} from "@/components/tiptap-node/table-node/extensions/table-handle/table-handle-plugin"
 
 declare module "@tiptap/core" {
   interface Commands<ReturnType> {

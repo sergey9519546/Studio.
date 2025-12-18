@@ -3,7 +3,7 @@ import {
   getUrlParam,
   TIPTAP_COLLAB_APP_ID,
   TIPTAP_COLLAB_DOC_PREFIX,
-} from "@app/lib/tiptap-collab-utils"
+} from "@/lib/tiptap-collab-utils"
 import { TiptapCollabProvider } from "@tiptap-pro/provider"
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import { Doc as YDoc } from "yjs"

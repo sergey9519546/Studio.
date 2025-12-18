@@ -2,49 +2,49 @@ import { useEffect, useState } from "react"
 import { type Editor } from "@tiptap/react"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useUiEditorState } from "@app/hooks/use-ui-editor-state"
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
-import { useFloatingToolbarVisibility } from "@app/hooks/use-floating-toolbar-visibility"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useUiEditorState } from "@/hooks/use-ui-editor-state"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
+import { useFloatingToolbarVisibility } from "@/hooks/use-floating-toolbar-visibility"
 
 // --- Node ---
-import { ImageNodeFloating } from "@app/components/tiptap-node/image-node/image-node-floating"
+import { ImageNodeFloating } from "@/components/tiptap-node/image-node/image-node-floating"
 
 // --- Icons ---
-import { MoreVerticalIcon } from "@app/components/tiptap-icons/more-vertical-icon"
+import { MoreVerticalIcon } from "@/components/tiptap-icons/more-vertical-icon"
 
 // --- UI ---
-import { ColorTextPopover } from "@app/components/tiptap-ui/color-text-popover"
-import { ImproveDropdown } from "@app/components/tiptap-ui/improve-dropdown"
-import { LinkPopover } from "@app/components/tiptap-ui/link-popover"
-import type { Mark } from "@app/components/tiptap-ui/mark-button"
-import { canToggleMark, MarkButton } from "@app/components/tiptap-ui/mark-button"
-import type { TextAlign } from "@app/components/tiptap-ui/text-align-button"
+import { ColorTextPopover } from "@/components/tiptap-ui/color-text-popover"
+import { ImproveDropdown } from "@/components/tiptap-ui/improve-dropdown"
+import { LinkPopover } from "@/components/tiptap-ui/link-popover"
+import type { Mark } from "@/components/tiptap-ui/mark-button"
+import { canToggleMark, MarkButton } from "@/components/tiptap-ui/mark-button"
+import type { TextAlign } from "@/components/tiptap-ui/text-align-button"
 import {
   canSetTextAlign,
   TextAlignButton,
-} from "@app/components/tiptap-ui/text-align-button"
-import { TurnIntoDropdown } from "@app/components/tiptap-ui/turn-into-dropdown"
+} from "@/components/tiptap-ui/text-align-button"
+import { TurnIntoDropdown } from "@/components/tiptap-ui/turn-into-dropdown"
 
 // --- Utils ---
-import { isSelectionValid } from "@app/lib/tiptap-collab-utils"
+import { isSelectionValid } from "@/lib/tiptap-collab-utils"
 
 // --- Primitive UI Components ---
-import type { ButtonProps } from "@app/components/tiptap-ui-primitive/button"
-import { Button } from "@app/components/tiptap-ui-primitive/button"
+import type { ButtonProps } from "@/components/tiptap-ui-primitive/button"
+import { Button } from "@/components/tiptap-ui-primitive/button"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@app/components/tiptap-ui-primitive/popover"
+} from "@/components/tiptap-ui-primitive/popover"
 import {
   Toolbar,
   ToolbarGroup,
   ToolbarSeparator,
-} from "@app/components/tiptap-ui-primitive/toolbar"
+} from "@/components/tiptap-ui-primitive/toolbar"
 
 // --- UI Utils ---
-import { FloatingElement } from "@app/components/tiptap-ui-utils/floating-element"
+import { FloatingElement } from "@/components/tiptap-ui-utils/floating-element"
 
 export function NotionToolbarFloating() {
   const { editor } = useTiptapEditor()

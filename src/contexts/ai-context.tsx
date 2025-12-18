@@ -1,6 +1,6 @@
 "use client"
 
-import { fetchAiToken, getUrlParam } from "@app/lib/tiptap-collab-utils"
+import { fetchAiToken, getUrlParam } from "@/lib/tiptap-collab-utils"
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 
 export type AiContextValue = {

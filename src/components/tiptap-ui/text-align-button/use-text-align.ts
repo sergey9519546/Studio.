@@ -5,19 +5,19 @@ import type { ChainedCommands } from "@tiptap/react"
 import { type Editor } from "@tiptap/react"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Lib ---
 import {
   isExtensionAvailable,
   isNodeTypeSelected,
-} from "@app/lib/tiptap-utils"
+} from "@/lib/tiptap-utils"
 
 // --- Icons ---
-import { AlignCenterIcon } from "@app/components/tiptap-icons/align-center-icon"
-import { AlignJustifyIcon } from "@app/components/tiptap-icons/align-justify-icon"
-import { AlignLeftIcon } from "@app/components/tiptap-icons/align-left-icon"
-import { AlignRightIcon } from "@app/components/tiptap-icons/align-right-icon"
+import { AlignCenterIcon } from "@/components/tiptap-icons/align-center-icon"
+import { AlignJustifyIcon } from "@/components/tiptap-icons/align-justify-icon"
+import { AlignLeftIcon } from "@/components/tiptap-icons/align-left-icon"
+import { AlignRightIcon } from "@/components/tiptap-icons/align-right-icon"
 
 export type TextAlign = "left" | "center" | "right" | "justify"
 

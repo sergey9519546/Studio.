@@ -8,14 +8,14 @@ import { useHotkeys } from "react-hotkeys-hook"
 import {
   isExtensionAvailable,
   isNodeTypeSelected,
-} from "@app/lib/tiptap-utils"
+} from "@/lib/tiptap-utils"
 
 // --- Hooks ---
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Icons ---
-import { AiSparklesIcon } from "@app/components/tiptap-icons/ai-sparkles-icon"
+import { AiSparklesIcon } from "@/components/tiptap-icons/ai-sparkles-icon"
 
 export interface UseAiAskConfig {
   /**

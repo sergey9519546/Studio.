@@ -1,4 +1,4 @@
-import type { Action } from "@app/components/tiptap-ui-primitive/menu/menu-types"
+import type { Action } from "@/components/tiptap-ui-primitive/menu/menu-types"
 
 /**
  * Filters menu items based on search value

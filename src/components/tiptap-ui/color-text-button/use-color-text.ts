@@ -5,18 +5,18 @@ import { type Editor } from "@tiptap/react"
 import { useHotkeys } from "react-hotkeys-hook"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
 
 // --- Lib ---
 import {
   isMarkInSchema,
   isNodeTypeSelected,
   selectCurrentBlockContent,
-} from "@app/lib/tiptap-utils"
+} from "@/lib/tiptap-utils"
 
 // --- Icons ---
-import { TextColorSmallIcon } from "@app/components/tiptap-icons/text-color-small-icon"
+import { TextColorSmallIcon } from "@/components/tiptap-icons/text-color-small-icon"
 
 export const COLOR_TEXT_SHORTCUT_KEY = "mod+shift+t"
 export const TEXT_COLORS = [

@@ -212,7 +212,8 @@ export class VertexAIService {
       }
 
       // Start chat session
-      const chat = modelInstance.startChat(chatConfig as any);
+      // Cast to unknown first to avoid deep type mismatches with SDK versions
+      const chat = modelInstance.startChat(chatConfig as unknown as import("@google/generative-ai").StartChatParams);
 
       // Send the last message
       const lastMessage = messages[messages.length - 1];
@@ -244,6 +245,56 @@ export class VertexAIService {
         `Vertex AI chat failed: ${message}`,
         error instanceof Error ? error.stack : undefined
       );
+      throw error;
+    }
+  }
+
+  /**
+   * Stream chat response functionality
+   */
+  async *chatStream(
+    messages: Array<{ role: string; content: string }>,
+    systemPrompt?: string,
+    model: string = "gemini-1.5-pro"
+  ): AsyncGenerator<string> {
+    try {
+      const modelInstance = this.getModel(model);
+
+      const chatConfig = {
+        history: messages.slice(0, -1).map(msg => ({
+          role: msg.role === 'assistant' ? 'model' : 'user',
+          parts: [{ text: msg.content }],
+        })),
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 2048,
+          topP: 0.95,
+          topK: 40,
+        },
+      };
+
+      if (systemPrompt) {
+        Object.assign(chatConfig, {
+          systemInstruction: {
+            parts: [{ text: systemPrompt }]
+          }
+        });
+      }
+
+      const chat = modelInstance.startChat(chatConfig as unknown as import("@google/generative-ai").StartChatParams);
+      const lastMessage = messages[messages.length - 1];
+      
+      const result = await chat.sendMessageStream(lastMessage.content);
+      
+      for await (const chunk of result.stream) {
+        const chunkText = chunk.text();
+        if (chunkText) {
+          yield chunkText;
+        }
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown streaming error";
+      this.logger.error(`Vertex AI stream failed: ${message}`);
       throw error;
     }
   }

@@ -1,22 +1,22 @@
 import { forwardRef, useCallback } from "react"
 
 // --- Lib ---
-import { parseShortcutKeys } from "@app/lib/tiptap-utils"
+import { parseShortcutKeys } from "@/lib/tiptap-utils"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Tiptap UI ---
-import type { UseImageDownloadConfig } from "@app/components/tiptap-ui/image-download-button"
+import type { UseImageDownloadConfig } from "@/components/tiptap-ui/image-download-button"
 import {
   IMAGE_DOWNLOAD_SHORTCUT_KEY,
   useImageDownload,
-} from "@app/components/tiptap-ui/image-download-button"
+} from "@/components/tiptap-ui/image-download-button"
 
 // --- UI Primitives ---
-import type { ButtonProps } from "@app/components/tiptap-ui-primitive/button"
-import { Button } from "@app/components/tiptap-ui-primitive/button"
-import { Badge } from "@app/components/tiptap-ui-primitive/badge"
+import type { ButtonProps } from "@/components/tiptap-ui-primitive/button"
+import { Button } from "@/components/tiptap-ui-primitive/button"
+import { Badge } from "@/components/tiptap-ui-primitive/badge"
 
 export interface ImageDownloadButtonProps
   extends Omit<ButtonProps, "type">,

@@ -3,15 +3,15 @@
 import { forwardRef, useCallback } from "react"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Tiptap UI ---
-import type { UseTableSortRowColumnConfig } from "@app/components/tiptap-node/table-node/ui/table-sort-row-column-button"
-import { useTableSortRowColumn } from "@app/components/tiptap-node/table-node/ui/table-sort-row-column-button"
+import type { UseTableSortRowColumnConfig } from "@/components/tiptap-node/table-node/ui/table-sort-row-column-button"
+import { useTableSortRowColumn } from "@/components/tiptap-node/table-node/ui/table-sort-row-column-button"
 
 // --- UI Primitives ---
-import type { ButtonProps } from "@app/components/tiptap-ui-primitive/button"
-import { Button } from "@app/components/tiptap-ui-primitive/button"
+import type { ButtonProps } from "@/components/tiptap-ui-primitive/button"
+import { Button } from "@/components/tiptap-ui-primitive/button"
 
 export interface TableSortRowColumnButtonProps
   extends Omit<ButtonProps, "type">,

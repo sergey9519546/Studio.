@@ -6,13 +6,13 @@ import type { Language, TextOptions, Tone } from "@tiptap-pro/extension-ai"
 import { NodeSelection } from "@tiptap/pm/state"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Icons ---
-import { AiSparklesIcon } from "@app/components/tiptap-icons/ai-sparkles-icon"
+import { AiSparklesIcon } from "@/components/tiptap-icons/ai-sparkles-icon"
 
 // --- Lib ---
-import { isNodeTypeSelected } from "@app/lib/tiptap-utils"
+import { isNodeTypeSelected } from "@/lib/tiptap-utils"
 
 /**
  * AI commands that can be executed on selected text

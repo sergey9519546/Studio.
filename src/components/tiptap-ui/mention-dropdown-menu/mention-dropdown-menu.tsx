@@ -4,24 +4,24 @@ import { useEffect, useMemo, useRef } from "react"
 import type { Editor, Range } from "@tiptap/react"
 
 // --- Lib ---
-import { getElementOverflowPosition } from "@app/lib/tiptap-collab-utils"
+import { getElementOverflowPosition } from "@/lib/tiptap-collab-utils"
 
 // --- Tiptap UI ---
 import type {
   SuggestionItem,
   SuggestionMenuProps,
   SuggestionMenuRenderProps,
-} from "@app/components/tiptap-ui-utils/suggestion-menu"
-import { SuggestionMenu } from "@app/components/tiptap-ui-utils/suggestion-menu"
+} from "@/components/tiptap-ui-utils/suggestion-menu"
+import { SuggestionMenu } from "@/components/tiptap-ui-utils/suggestion-menu"
 
 // --- UI Primitives ---
 import {
   Avatar,
   AvatarImage,
   AvatarFallback,
-} from "@app/components/tiptap-ui-primitive/avatar"
-import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
-import { Card, CardBody } from "@app/components/tiptap-ui-primitive/card"
+} from "@/components/tiptap-ui-primitive/avatar"
+import { Button, ButtonGroup } from "@/components/tiptap-ui-primitive/button"
+import { Card, CardBody } from "@/components/tiptap-ui-primitive/card"
 
 interface User {
   id: number

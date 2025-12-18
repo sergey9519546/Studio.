@@ -1,8 +1,8 @@
 import type { Editor } from "@tiptap/react"
 
 // Primitive UI Components
-import { Button } from "@app/components/tiptap-ui-primitive/button"
-import { Spacer } from "@app/components/tiptap-ui-primitive/spacer"
+import { Button } from "@/components/tiptap-ui-primitive/button"
+import { Spacer } from "@/components/tiptap-ui-primitive/spacer"
 import {
   Menu,
   MenuContent,
@@ -10,30 +10,30 @@ import {
   MenuGroup,
   MenuGroupLabel,
   MenuButton,
-} from "@app/components/tiptap-ui-primitive/menu"
-import { ComboboxList } from "@app/components/tiptap-ui-primitive/combobox"
-import { Separator } from "@app/components/tiptap-ui-primitive/separator"
+} from "@/components/tiptap-ui-primitive/menu"
+import { ComboboxList } from "@/components/tiptap-ui-primitive/combobox"
+import { Separator } from "@/components/tiptap-ui-primitive/separator"
 
 // Tiptap UI
 import {
   TEXT_COLORS,
   useColorText,
-} from "@app/components/tiptap-ui/color-text-button"
+} from "@/components/tiptap-ui/color-text-button"
 import {
   HIGHLIGHT_COLORS,
   useColorHighlight,
-} from "@app/components/tiptap-ui/color-highlight-button"
-import type { RecentColor } from "@app/components/tiptap-ui/color-text-popover"
+} from "@/components/tiptap-ui/color-highlight-button"
+import type { RecentColor } from "@/components/tiptap-ui/color-text-popover"
 import {
   getColorByValue,
   useRecentColors,
-} from "@app/components/tiptap-ui/color-text-popover"
+} from "@/components/tiptap-ui/color-text-popover"
 
 // Icons
-import { PaintBucketIcon } from "@app/components/tiptap-icons/paint-bucket-icon"
-import { ChevronRightIcon } from "@app/components/tiptap-icons/chevron-right-icon"
-import { TextColorSmallIcon } from "@app/components/tiptap-icons/text-color-small-icon"
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { PaintBucketIcon } from "@/components/tiptap-icons/paint-bucket-icon"
+import { ChevronRightIcon } from "@/components/tiptap-icons/chevron-right-icon"
+import { TextColorSmallIcon } from "@/components/tiptap-icons/text-color-small-icon"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 interface ColorMenuItemProps {
   color: { value: string; label: string }

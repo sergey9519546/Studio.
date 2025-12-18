@@ -6,19 +6,19 @@ import { deleteRow, deleteColumn, CellSelection } from "@tiptap/pm/tables"
 import type { Transaction } from "@tiptap/pm/state"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Lib ---
-import { isExtensionAvailable } from "@app/lib/tiptap-utils"
-import type { Orientation } from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+import { isExtensionAvailable } from "@/lib/tiptap-utils"
+import type { Orientation } from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 import {
   getTable,
   getTableSelectionType,
   selectCellsByCoords,
-} from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+} from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 
 // --- Icons ---
-import { TrashIcon } from "@app/components/tiptap-icons/trash-icon"
+import { TrashIcon } from "@/components/tiptap-icons/trash-icon"
 
 export interface UseTableDeleteRowColumnConfig {
   /**

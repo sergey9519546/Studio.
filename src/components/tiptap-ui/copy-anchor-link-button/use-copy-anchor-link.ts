@@ -4,17 +4,17 @@ import { type Editor } from "@tiptap/react"
 import type { Node } from "@tiptap/pm/model"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
 
 // --- Utils ---
 import {
   getAnchorNodeAndPos,
   getEditorExtension,
-} from "@app/lib/tiptap-advanced-utils"
+} from "@/lib/tiptap-advanced-utils"
 
 // --- Icons ---
-import { LinkIcon } from "@app/components/tiptap-icons/link-icon"
+import { LinkIcon } from "@/components/tiptap-icons/link-icon"
 
 export const COPY_ANCHOR_LINK_SHORTCUT_KEY = "mod+ctrl+l"
 

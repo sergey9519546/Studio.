@@ -1,15 +1,15 @@
 import { forwardRef, useCallback } from "react"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Tiptap UI ---
-import type { UseTableAlignCellConfig } from "@app/components/tiptap-node/table-node/ui/table-align-cell-button"
-import { useTableAlignCell } from "@app/components/tiptap-node/table-node/ui/table-align-cell-button"
+import type { UseTableAlignCellConfig } from "@/components/tiptap-node/table-node/ui/table-align-cell-button"
+import { useTableAlignCell } from "@/components/tiptap-node/table-node/ui/table-align-cell-button"
 
 // --- UI Primitives ---
-import type { ButtonProps } from "@app/components/tiptap-ui-primitive/button"
-import { Button } from "@app/components/tiptap-ui-primitive/button"
+import type { ButtonProps } from "@/components/tiptap-ui-primitive/button"
+import { Button } from "@/components/tiptap-ui-primitive/button"
 
 export interface TableAlignCellButtonProps
   extends Omit<ButtonProps, "type">,

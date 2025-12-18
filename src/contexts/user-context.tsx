@@ -1,6 +1,6 @@
 "use client"
 
-import { getAvatar } from "@app/lib/tiptap-collab-utils"
+import { getAvatar } from "@/lib/tiptap-collab-utils"
 import { createContext, useContext, useEffect, useState } from "react"
 
 export type User = {

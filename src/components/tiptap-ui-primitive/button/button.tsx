@@ -7,14 +7,14 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@app/components/tiptap-ui-primitive/tooltip"
+} from "@/components/tiptap-ui-primitive/tooltip"
 
 // --- Lib ---
-import { cn, parseShortcutKeys } from "@app/lib/tiptap-utils"
+import { cn, parseShortcutKeys } from "@/lib/tiptap-utils"
 
-import "@app/components/tiptap-ui-primitive/button/button-colors.scss"
-import "@app/components/tiptap-ui-primitive/button/button-group.scss"
-import "@app/components/tiptap-ui-primitive/button/button.scss"
+import "@/components/tiptap-ui-primitive/button/button-colors.scss"
+import "@/components/tiptap-ui-primitive/button/button-group.scss"
+import "@/components/tiptap-ui-primitive/button/button.scss"
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

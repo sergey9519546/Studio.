@@ -52,13 +52,17 @@ export class GoogleAuthController {
   @Get('callback')
   async googleCallback(@Query('code') code: string, @Res() res: Response) {
     try {
-      const clientId = this.configService.get<string>('GOOGLE_CLIENT_ID');
-      const clientSecret = this.configService.get<string>('GOOGLE_CLIENT_SECRET');
-      const redirectUri = this.configService.get<string>('GOOGLE_REDIRECT_URI') || 'http://localhost:3000/api/v1/google/callback';
-      const jwtSecret = this.configService.get<string>('JWT_SECRET');
+      const clientId = this.configService.get<string>("GOOGLE_CLIENT_ID");
+      const clientSecret = this.configService.get<string>(
+        "GOOGLE_CLIENT_SECRET"
+      );
+      const redirectUri =
+        this.configService.get<string>("GOOGLE_REDIRECT_URI") ||
+        "http://localhost:3000/api/v1/google/callback";
+      const jwtSecret = this.configService.get<string>("JWT_SECRET");
 
       if (!clientId || !clientSecret || !jwtSecret) {
-        throw new UnauthorizedException('Google OAuth or JWT not configured');
+        throw new UnauthorizedException("Google OAuth or JWT not configured");
       }
 
       const oauth2Client = new OAuth2Client(
@@ -72,6 +76,8 @@ export class GoogleAuthController {
       oauth2Client.setCredentials(tokens);
 
       // Get user info from Google
+      // Use non-blocking cast or explicit type if possible. googleapis oauth2 is complex.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const oauth2 = (google as any).oauth2({
         auth: oauth2Client,
         version: "v2",
@@ -81,7 +87,9 @@ export class GoogleAuthController {
       const googleUser = userInfo.data;
 
       if (!googleUser.email || !googleUser.id) {
-        throw new UnauthorizedException('Failed to get user information from Google');
+        throw new UnauthorizedException(
+          "Failed to get user information from Google"
+        );
       }
 
       // Find or create user in our database (without googleId field)
@@ -95,7 +103,7 @@ export class GoogleAuthController {
             email: googleUser.email,
             name: googleUser.name || googleUser.email,
             avatar: googleUser.picture,
-            role: 'user',
+            role: "user",
             googleAccessToken: tokens.access_token,
             googleRefreshToken: tokens.refresh_token,
           },
@@ -117,18 +125,22 @@ export class GoogleAuthController {
       const token = jwt.sign(
         { userId: user.id, email: user.email },
         jwtSecret,
-        { expiresIn: '60m' }
+        { expiresIn: "60m" }
       );
 
       // Redirect back to frontend with token
-      const frontendUrl = this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3000';
-      const redirectUrl = `${frontendUrl}/auth/callback?token=${token}&user=${encodeURIComponent(JSON.stringify({
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-        avatar: user.avatar,
-      }))}`;
+      const frontendUrl =
+        this.configService.get<string>("FRONTEND_URL") ||
+        "http://localhost:3000";
+      const redirectUrl = `${frontendUrl}/auth/callback?token=${token}&user=${encodeURIComponent(
+        JSON.stringify({
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+          avatar: user.avatar,
+        })
+      )}`;
 
       return res.redirect(redirectUrl);
     } catch (error) {

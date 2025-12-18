@@ -6,13 +6,13 @@ import type { TextOptions } from "@tiptap-pro/extension-ai"
 import { type Language } from "@tiptap-pro/extension-ai"
 
 // -- Hooks --
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // -- Tiptap UI --
 import {
   getContextAndInsertAt,
   useAiMenuState,
-} from "@app/components/tiptap-ui/ai-menu"
+} from "@/components/tiptap-ui/ai-menu"
 
 // -- UI Primitives --
 import {
@@ -27,34 +27,34 @@ import {
   MenuGroupLabel,
   MenuItem,
   useComboboxValueState,
-} from "@app/components/tiptap-ui-primitive/menu"
-import { Button } from "@app/components/tiptap-ui-primitive/button"
-import { ComboboxList } from "@app/components/tiptap-ui-primitive/combobox"
-import { Separator } from "@app/components/tiptap-ui-primitive/separator"
+} from "@/components/tiptap-ui-primitive/menu"
+import { Button } from "@/components/tiptap-ui-primitive/button"
+import { ComboboxList } from "@/components/tiptap-ui-primitive/combobox"
+import { Separator } from "@/components/tiptap-ui-primitive/separator"
 
 import {
   SUPPORTED_LANGUAGES,
   SUPPORTED_TONES,
-} from "@app/components/tiptap-ui/ai-menu/ai-menu-items/ai-menu-items-constants"
+} from "@/components/tiptap-ui/ai-menu/ai-menu-items/ai-menu-items-constants"
 import type {
   EditorMenuAction,
   ExecutableMenuAction,
   MenuActionIdentifier,
   MenuActionRendererProps,
   NestedMenuAction,
-} from "@app/components/tiptap-ui/ai-menu/ai-menu-items/ai-menu-items-types"
+} from "@/components/tiptap-ui/ai-menu/ai-menu-items/ai-menu-items-types"
 
 // -- Icons --
-import { ChevronRightIcon } from "@app/components/tiptap-icons/chevron-right-icon"
-import { SummarizeTextIcon } from "@app/components/tiptap-icons/summarize-text-icon"
-import { Simplify2Icon } from "@app/components/tiptap-icons/simplify-2-icon"
-import { LanguagesIcon } from "@app/components/tiptap-icons/languages-icon"
-import { MicAiIcon } from "@app/components/tiptap-icons/mic-ai-icon"
-import { TextExtendIcon } from "@app/components/tiptap-icons/text-extend-icon"
-import { TextReduceIcon } from "@app/components/tiptap-icons/text-reduce-icon"
-import { CompleteSentenceIcon } from "@app/components/tiptap-icons/complete-sentence-icon"
-import { SmileAiIcon } from "@app/components/tiptap-icons/smile-ai-icon"
-import { CheckAiIcon } from "@app/components/tiptap-icons/check-ai-icon"
+import { ChevronRightIcon } from "@/components/tiptap-icons/chevron-right-icon"
+import { SummarizeTextIcon } from "@/components/tiptap-icons/summarize-text-icon"
+import { Simplify2Icon } from "@/components/tiptap-icons/simplify-2-icon"
+import { LanguagesIcon } from "@/components/tiptap-icons/languages-icon"
+import { MicAiIcon } from "@/components/tiptap-icons/mic-ai-icon"
+import { TextExtendIcon } from "@/components/tiptap-icons/text-extend-icon"
+import { TextReduceIcon } from "@/components/tiptap-icons/text-reduce-icon"
+import { CompleteSentenceIcon } from "@/components/tiptap-icons/complete-sentence-icon"
+import { SmileAiIcon } from "@/components/tiptap-icons/smile-ai-icon"
+import { CheckAiIcon } from "@/components/tiptap-icons/check-ai-icon"
 
 function initializeEditorMenuActions(): Record<
   MenuActionIdentifier,

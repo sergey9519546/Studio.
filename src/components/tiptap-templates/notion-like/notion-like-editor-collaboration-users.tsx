@@ -1,23 +1,23 @@
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { getAvatar } from "@app/lib/tiptap-collab-utils"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { getAvatar } from "@/lib/tiptap-collab-utils"
 import {
   Avatar,
   AvatarFallback,
   AvatarGroup,
   AvatarImage,
-} from "@app/components/tiptap-ui-primitive/avatar"
-import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
+} from "@/components/tiptap-ui-primitive/avatar"
+import { Button, ButtonGroup } from "@/components/tiptap-ui-primitive/button"
 import {
   Card,
   CardBody,
   CardItemGroup,
-} from "@app/components/tiptap-ui-primitive/card"
+} from "@/components/tiptap-ui-primitive/card"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@app/components/tiptap-ui-primitive/dropdown-menu"
+} from "@/components/tiptap-ui-primitive/dropdown-menu"
 
 type User = { clientId: number; id: string; name: string; color: string }
 

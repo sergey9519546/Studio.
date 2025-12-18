@@ -2,38 +2,38 @@ import { forwardRef, useCallback, useMemo, useRef, useState } from "react"
 import * as Ariakit from "@ariakit/react"
 
 // -- Hooks --
-import { useOnClickOutside } from "@app/hooks/use-on-click-outside"
-import { useComposedRef } from "@app/hooks/use-composed-ref"
+import { useOnClickOutside } from "@/hooks/use-on-click-outside"
+import { useComposedRef } from "@/hooks/use-composed-ref"
 
 // -- Utils --
-import { cn } from "@app/lib/tiptap-utils"
+import { cn } from "@/lib/tiptap-utils"
 
 // -- UI Primitives --
 import {
   ComboboxItem,
   ComboboxProvider,
-} from "@app/components/tiptap-ui-primitive/combobox"
-import { Label } from "@app/components/tiptap-ui-primitive/label"
+} from "@/components/tiptap-ui-primitive/combobox"
+import { Label } from "@/components/tiptap-ui-primitive/label"
 
 // -- Local imports --
 import type {
   MenuProps,
   MenuContentProps,
   MenuItemProps,
-} from "@app/components/tiptap-ui-primitive/menu"
+} from "@/components/tiptap-ui-primitive/menu"
 import {
   SearchableContext,
   MenuContext,
   useSearchableContext,
   useMenuContext,
-} from "@app/components/tiptap-ui-primitive/menu"
+} from "@/components/tiptap-ui-primitive/menu"
 import {
   useMenuPlacement,
   useMenuItemClick,
-} from "@app/components/tiptap-ui-primitive/menu"
+} from "@/components/tiptap-ui-primitive/menu"
 
 // -- Styles --
-import "@app/components/tiptap-ui-primitive/menu/menu.scss"
+import "@/components/tiptap-ui-primitive/menu/menu.scss"
 
 export function Menu({
   children,

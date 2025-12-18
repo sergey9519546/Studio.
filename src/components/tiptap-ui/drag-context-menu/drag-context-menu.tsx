@@ -4,14 +4,14 @@ import { offset } from "@floating-ui/react"
 import { DragHandle } from "@tiptap/extension-drag-handle-react"
 
 // Hooks
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
-import { useUiEditorState } from "@app/hooks/use-ui-editor-state"
-import { selectNodeAndHideFloating } from "@app/hooks/use-floating-toolbar-visibility"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
+import { useUiEditorState } from "@/hooks/use-ui-editor-state"
+import { selectNodeAndHideFloating } from "@/hooks/use-floating-toolbar-visibility"
 
 // Primitive UI Components
-import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
-import { Spacer } from "@app/components/tiptap-ui-primitive/spacer"
+import { Button, ButtonGroup } from "@/components/tiptap-ui-primitive/button"
+import { Spacer } from "@/components/tiptap-ui-primitive/spacer"
 import {
   Menu,
   MenuContent,
@@ -19,61 +19,61 @@ import {
   MenuGroup,
   MenuGroupLabel,
   MenuButton,
-} from "@app/components/tiptap-ui-primitive/menu"
-import { Combobox, ComboboxList } from "@app/components/tiptap-ui-primitive/combobox"
-import { Separator } from "@app/components/tiptap-ui-primitive/separator"
+} from "@/components/tiptap-ui-primitive/menu"
+import { Combobox, ComboboxList } from "@/components/tiptap-ui-primitive/combobox"
+import { Separator } from "@/components/tiptap-ui-primitive/separator"
 
 // Tiptap UI
-import { useImageDownload } from "@app/components/tiptap-ui/image-download-button"
+import { useImageDownload } from "@/components/tiptap-ui/image-download-button"
 import {
   DuplicateShortcutBadge,
   useDuplicate,
-} from "@app/components/tiptap-ui/duplicate-button"
+} from "@/components/tiptap-ui/duplicate-button"
 import {
   CopyToClipboardShortcutBadge,
   useCopyToClipboard,
-} from "@app/components/tiptap-ui/copy-to-clipboard-button"
+} from "@/components/tiptap-ui/copy-to-clipboard-button"
 import {
   DeleteNodeShortcutBadge,
   useDeleteNode,
-} from "@app/components/tiptap-ui/delete-node-button"
+} from "@/components/tiptap-ui/delete-node-button"
 import {
   CopyAnchorLinkShortcutBadge,
   useCopyAnchorLink,
-} from "@app/components/tiptap-ui/copy-anchor-link-button"
-import { useResetAllFormatting } from "@app/components/tiptap-ui/reset-all-formatting-button"
-import { SlashCommandTriggerButton } from "@app/components/tiptap-ui/slash-command-trigger-button"
+} from "@/components/tiptap-ui/copy-anchor-link-button"
+import { useResetAllFormatting } from "@/components/tiptap-ui/reset-all-formatting-button"
+import { SlashCommandTriggerButton } from "@/components/tiptap-ui/slash-command-trigger-button"
 import {
   AskAiShortcutBadge,
   useAiAsk,
-} from "@app/components/tiptap-ui/ai-ask-button"
-import { useText } from "@app/components/tiptap-ui/text-button"
-import { useHeading } from "@app/components/tiptap-ui/heading-button"
-import { useList } from "@app/components/tiptap-ui/list-button"
-import { useBlockquote } from "@app/components/tiptap-ui/blockquote-button"
-import { useCodeBlock } from "@app/components/tiptap-ui/code-block-button"
-import { ColorMenu } from "@app/components/tiptap-ui/color-menu"
-import { TableAlignMenu } from "@app/components/tiptap-node/table-node/ui/table-alignment-menu"
-import { useTableFitToWidth } from "@app/components/tiptap-node/table-node/ui/table-fit-to-width-button"
-import { useTableClearRowColumnContent } from "@app/components/tiptap-node/table-node/ui/table-clear-row-column-content-button"
+} from "@/components/tiptap-ui/ai-ask-button"
+import { useText } from "@/components/tiptap-ui/text-button"
+import { useHeading } from "@/components/tiptap-ui/heading-button"
+import { useList } from "@/components/tiptap-ui/list-button"
+import { useBlockquote } from "@/components/tiptap-ui/blockquote-button"
+import { useCodeBlock } from "@/components/tiptap-ui/code-block-button"
+import { ColorMenu } from "@/components/tiptap-ui/color-menu"
+import { TableAlignMenu } from "@/components/tiptap-node/table-node/ui/table-alignment-menu"
+import { useTableFitToWidth } from "@/components/tiptap-node/table-node/ui/table-fit-to-width-button"
+import { useTableClearRowColumnContent } from "@/components/tiptap-node/table-node/ui/table-clear-row-column-content-button"
 
 // Utils
 import {
   getNodeDisplayName,
   isTextSelectionValid,
-} from "@app/lib/tiptap-collab-utils"
-import { SR_ONLY } from "@app/lib/tiptap-utils"
+} from "@/lib/tiptap-collab-utils"
+import { SR_ONLY } from "@/lib/tiptap-utils"
 
 import type {
   DragContextMenuProps,
   MenuItemProps,
   NodeChangeData,
-} from "@app/components/tiptap-ui/drag-context-menu/drag-context-menu-types"
+} from "@/components/tiptap-ui/drag-context-menu/drag-context-menu-types"
 
 // Icons
-import { GripVerticalIcon } from "@app/components/tiptap-icons/grip-vertical-icon"
-import { ChevronRightIcon } from "@app/components/tiptap-icons/chevron-right-icon"
-import { Repeat2Icon } from "@app/components/tiptap-icons/repeat-2-icon"
+import { GripVerticalIcon } from "@/components/tiptap-icons/grip-vertical-icon"
+import { ChevronRightIcon } from "@/components/tiptap-icons/chevron-right-icon"
+import { Repeat2Icon } from "@/components/tiptap-icons/repeat-2-icon"
 import "./drag-context-menu.scss"
 
 const useNodeTransformActions = () => {

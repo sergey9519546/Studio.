@@ -1,15 +1,15 @@
 import * as React from "react"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Tiptap UI ---
-import type { UseImageCaptionConfig } from "@app/components/tiptap-ui/image-caption-button"
-import { useImageCaption } from "@app/components/tiptap-ui/image-caption-button"
+import type { UseImageCaptionConfig } from "@/components/tiptap-ui/image-caption-button"
+import { useImageCaption } from "@/components/tiptap-ui/image-caption-button"
 
 // --- UI Primitives ---
-import type { ButtonProps } from "@app/components/tiptap-ui-primitive/button"
-import { Button } from "@app/components/tiptap-ui-primitive/button"
+import type { ButtonProps } from "@/components/tiptap-ui-primitive/button"
+import { Button } from "@/components/tiptap-ui-primitive/button"
 
 export interface ImageCaptionButtonProps
   extends Omit<ButtonProps, "type">,

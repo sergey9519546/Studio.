@@ -89,7 +89,15 @@ export class AIUsageService {
                   usage.length
                 ).toFixed(0) + "ms"
               : "0ms",
-          byEndpoint: this.groupByEndpoint(usage as any[]),
+          byEndpoint: this.groupByEndpoint(
+            usage as Array<
+              AIUsageRecord & {
+                endpoint: string;
+                duration: number;
+                cost?: number;
+              }
+            >
+          ),
         };
     }
 

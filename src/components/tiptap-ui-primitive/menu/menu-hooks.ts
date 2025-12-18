@@ -4,7 +4,7 @@ import type {
   ContextMenuAnchor,
   UseContextMenuReturn,
   UseMenuStoreReturn,
-} from "@app/components/tiptap-ui-primitive/menu/menu-types"
+} from "@/components/tiptap-ui-primitive/menu/menu-types"
 
 export function useComboboxValueState(): readonly [
   string,

@@ -4,20 +4,20 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import type { EmojiItem } from "@tiptap/extension-emoji"
 
 // --- Hooks ---
-import { useMenuNavigation } from "@app/hooks/use-menu-navigation"
+import { useMenuNavigation } from "@/hooks/use-menu-navigation"
 
 // --- Lib ---
-import { getElementOverflowPosition } from "@app/lib/tiptap-collab-utils"
+import { getElementOverflowPosition } from "@/lib/tiptap-collab-utils"
 
 // --- UI Primitives ---
-import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
-import { Input } from "@app/components/tiptap-ui-primitive/input"
-import { Card, CardBody, CardHeader } from "@app/components/tiptap-ui-primitive/card"
+import { Button, ButtonGroup } from "@/components/tiptap-ui-primitive/button"
+import { Input } from "@/components/tiptap-ui-primitive/input"
+import { Card, CardBody, CardHeader } from "@/components/tiptap-ui-primitive/card"
 
-import { getFilteredEmojis } from "@app/components/tiptap-ui/emoji-menu/emoji-menu-utils"
+import { getFilteredEmojis } from "@/components/tiptap-ui/emoji-menu/emoji-menu-utils"
 
 // --- Styles ---
-import "@app/components/tiptap-ui/emoji-menu/emoji-menu.scss"
+import "@/components/tiptap-ui/emoji-menu/emoji-menu.scss"
 
 export interface EmojiMenuItemProps<T extends EmojiItem> {
   emoji: T

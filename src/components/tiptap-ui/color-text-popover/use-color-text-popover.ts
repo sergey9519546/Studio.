@@ -4,18 +4,18 @@ import { useCallback, useEffect, useState } from "react"
 import type { Editor } from "@tiptap/react"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Icons ---
-import { TextColorSmallIcon } from "@app/components/tiptap-icons/text-color-small-icon"
+import { TextColorSmallIcon } from "@/components/tiptap-icons/text-color-small-icon"
 
 // --- Lib ---
-import { isMarkInSchema } from "@app/lib/tiptap-utils"
-import { getActiveMarkAttrs } from "@app/lib/tiptap-advanced-utils"
+import { isMarkInSchema } from "@/lib/tiptap-utils"
+import { getActiveMarkAttrs } from "@/lib/tiptap-advanced-utils"
 
 // --- Tiptap UI ---
-import { canColorText } from "@app/components/tiptap-ui/color-text-button"
-import { canColorHighlight } from "@app/components/tiptap-ui/color-highlight-button"
+import { canColorText } from "@/components/tiptap-ui/color-text-button"
+import { canColorHighlight } from "@/components/tiptap-ui/color-highlight-button"
 
 export type ColorType = "text" | "highlight"
 

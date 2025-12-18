@@ -6,18 +6,18 @@ import { type Editor } from "@tiptap/react"
 import { NodeSelection } from "@tiptap/pm/state"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
 
 // --- Lib ---
 import {
   isExtensionAvailable,
   isNodeTypeSelected,
   sanitizeUrl,
-} from "@app/lib/tiptap-utils"
+} from "@/lib/tiptap-utils"
 
 // --- Icons ---
-import { ArrowDownToLineIcon } from "@app/components/tiptap-icons/arrow-down-to-line-icon"
+import { ArrowDownToLineIcon } from "@/components/tiptap-icons/arrow-down-to-line-icon"
 
 export const IMAGE_DOWNLOAD_SHORTCUT_KEY = "mod+shift+d"
 

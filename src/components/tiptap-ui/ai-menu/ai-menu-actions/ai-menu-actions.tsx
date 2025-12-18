@@ -2,14 +2,14 @@
 
 import { useCallback } from "react"
 import type { Editor } from "@tiptap/react"
-import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
-import { RefreshAiIcon } from "@app/components/tiptap-icons/refresh-ai-icon"
-import { XIcon } from "@app/components/tiptap-icons/x-icon"
-import { CheckIcon } from "@app/components/tiptap-icons/check-icon"
+import { Button, ButtonGroup } from "@/components/tiptap-ui-primitive/button"
+import { RefreshAiIcon } from "@/components/tiptap-icons/refresh-ai-icon"
+import { XIcon } from "@/components/tiptap-icons/x-icon"
+import { CheckIcon } from "@/components/tiptap-icons/check-icon"
 import type { TextOptions } from "@tiptap-pro/extension-ai"
-import { useUiEditorState } from "@app/hooks/use-ui-editor-state"
+import { useUiEditorState } from "@/hooks/use-ui-editor-state"
 
-import "@app/components/tiptap-ui/ai-menu/ai-menu-actions/ai-menu-actions.scss"
+import "@/components/tiptap-ui/ai-menu/ai-menu-actions/ai-menu-actions.scss"
 
 export interface AiMenuActionsProps {
   editor: Editor | null

@@ -5,7 +5,7 @@ import { type Editor } from "@tiptap/react"
 import { NodeSelection, TextSelection } from "@tiptap/pm/state"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Lib ---
 import {
@@ -14,15 +14,15 @@ import {
   isNodeTypeSelected,
   isValidPosition,
   selectionWithinConvertibleTypes,
-} from "@app/lib/tiptap-utils"
+} from "@/lib/tiptap-utils"
 
 // --- Icons ---
-import { HeadingOneIcon } from "@app/components/tiptap-icons/heading-one-icon"
-import { HeadingTwoIcon } from "@app/components/tiptap-icons/heading-two-icon"
-import { HeadingThreeIcon } from "@app/components/tiptap-icons/heading-three-icon"
-import { HeadingFourIcon } from "@app/components/tiptap-icons/heading-four-icon"
-import { HeadingFiveIcon } from "@app/components/tiptap-icons/heading-five-icon"
-import { HeadingSixIcon } from "@app/components/tiptap-icons/heading-six-icon"
+import { HeadingOneIcon } from "@/components/tiptap-icons/heading-one-icon"
+import { HeadingTwoIcon } from "@/components/tiptap-icons/heading-two-icon"
+import { HeadingThreeIcon } from "@/components/tiptap-icons/heading-three-icon"
+import { HeadingFourIcon } from "@/components/tiptap-icons/heading-four-icon"
+import { HeadingFiveIcon } from "@/components/tiptap-icons/heading-five-icon"
+import { HeadingSixIcon } from "@/components/tiptap-icons/heading-six-icon"
 
 export type Level = 1 | 2 | 3 | 4 | 5 | 6
 

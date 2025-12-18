@@ -25,62 +25,62 @@ import { UniqueID } from "@tiptap/extension-unique-id"
 import { Emoji, gitHubEmojis } from "@tiptap/extension-emoji"
 
 // --- Hooks ---
-import { useUiEditorState } from "@app/hooks/use-ui-editor-state"
-import { useScrollToHash } from "@app/components/tiptap-ui/copy-anchor-link-button/use-scroll-to-hash"
+import { useUiEditorState } from "@/hooks/use-ui-editor-state"
+import { useScrollToHash } from "@/components/tiptap-ui/copy-anchor-link-button/use-scroll-to-hash"
 
 // --- Custom Extensions ---
-import { HorizontalRule } from "@app/components/tiptap-node/horizontal-rule-node/horizontal-rule-node-extension"
-import { UiState } from "@app/components/tiptap-extension/ui-state-extension"
-import { Image } from "@app/components/tiptap-node/image-node/image-node-extension"
-import { NodeBackground } from "@app/components/tiptap-extension/node-background-extension"
-import { NodeAlignment } from "@app/components/tiptap-extension/node-alignment-extension"
+import { HorizontalRule } from "@/components/tiptap-node/horizontal-rule-node/horizontal-rule-node-extension"
+import { UiState } from "@/components/tiptap-extension/ui-state-extension"
+import { Image } from "@/components/tiptap-node/image-node/image-node-extension"
+import { NodeBackground } from "@/components/tiptap-extension/node-background-extension"
+import { NodeAlignment } from "@/components/tiptap-extension/node-alignment-extension"
 
 // --- Tiptap Node ---
-import { ImageUploadNode } from "@app/components/tiptap-node/image-upload-node/image-upload-node-extension"
+import { ImageUploadNode } from "@/components/tiptap-node/image-upload-node/image-upload-node-extension"
 
 // --- Table Node ---
-import { TableKit } from "@app/components/tiptap-node/table-node/extensions/table-node-extension"
-import { TableHandleExtension } from "@app/components/tiptap-node/table-node/extensions/table-handle"
-import { TableHandle } from "@app/components/tiptap-node/table-node/ui/table-handle/table-handle"
-import { TableSelectionOverlay } from "@app/components/tiptap-node/table-node/ui/table-selection-overlay"
-import { TableCellHandleMenu } from "@app/components/tiptap-node/table-node/ui/table-cell-handle-menu"
-import { TableExtendRowColumnButtons } from "@app/components/tiptap-node/table-node/ui/table-extend-row-column-button"
-import "@app/components/tiptap-node/table-node/styles/prosemirror-table.scss"
-import "@app/components/tiptap-node/table-node/styles/table-node.scss"
+import { TableKit } from "@/components/tiptap-node/table-node/extensions/table-node-extension"
+import { TableHandleExtension } from "@/components/tiptap-node/table-node/extensions/table-handle"
+import { TableHandle } from "@/components/tiptap-node/table-node/ui/table-handle/table-handle"
+import { TableSelectionOverlay } from "@/components/tiptap-node/table-node/ui/table-selection-overlay"
+import { TableCellHandleMenu } from "@/components/tiptap-node/table-node/ui/table-cell-handle-menu"
+import { TableExtendRowColumnButtons } from "@/components/tiptap-node/table-node/ui/table-extend-row-column-button"
+import "@/components/tiptap-node/table-node/styles/prosemirror-table.scss"
+import "@/components/tiptap-node/table-node/styles/table-node.scss"
 
-import "@app/components/tiptap-node/blockquote-node/blockquote-node.scss"
-import "@app/components/tiptap-node/code-block-node/code-block-node.scss"
-import "@app/components/tiptap-node/horizontal-rule-node/horizontal-rule-node.scss"
-import "@app/components/tiptap-node/list-node/list-node.scss"
-import "@app/components/tiptap-node/image-node/image-node.scss"
-import "@app/components/tiptap-node/heading-node/heading-node.scss"
-import "@app/components/tiptap-node/paragraph-node/paragraph-node.scss"
+import "@/components/tiptap-node/blockquote-node/blockquote-node.scss"
+import "@/components/tiptap-node/code-block-node/code-block-node.scss"
+import "@/components/tiptap-node/horizontal-rule-node/horizontal-rule-node.scss"
+import "@/components/tiptap-node/list-node/list-node.scss"
+import "@/components/tiptap-node/image-node/image-node.scss"
+import "@/components/tiptap-node/heading-node/heading-node.scss"
+import "@/components/tiptap-node/paragraph-node/paragraph-node.scss"
 
 // --- Tiptap UI ---
-import { EmojiDropdownMenu } from "@app/components/tiptap-ui/emoji-dropdown-menu"
-import { MentionDropdownMenu } from "@app/components/tiptap-ui/mention-dropdown-menu"
-import { SlashDropdownMenu } from "@app/components/tiptap-ui/slash-dropdown-menu"
-import { DragContextMenu } from "@app/components/tiptap-ui/drag-context-menu"
-import { AiMenu } from "@app/components/tiptap-ui/ai-menu"
+import { EmojiDropdownMenu } from "@/components/tiptap-ui/emoji-dropdown-menu"
+import { MentionDropdownMenu } from "@/components/tiptap-ui/mention-dropdown-menu"
+import { SlashDropdownMenu } from "@/components/tiptap-ui/slash-dropdown-menu"
+import { DragContextMenu } from "@/components/tiptap-ui/drag-context-menu"
+import { AiMenu } from "@/components/tiptap-ui/ai-menu"
 
 // --- Contexts ---
-import { AppProvider } from "@app/contexts/app-context"
-import { UserProvider, useUser } from "@app/contexts/user-context"
-import { CollabProvider, useCollab } from "@app/contexts/collab-context"
-import { AiProvider, useAi } from "@app/contexts/ai-context"
+import { AppProvider } from "@/contexts/app-context"
+import { UserProvider, useUser } from "@/contexts/user-context"
+import { CollabProvider, useCollab } from "@/contexts/collab-context"
+import { AiProvider, useAi } from "@/contexts/ai-context"
 
 // --- Lib ---
-import { handleImageUpload, MAX_FILE_SIZE } from "@app/lib/tiptap-utils"
-import { TIPTAP_AI_APP_ID } from "@app/lib/tiptap-collab-utils"
+import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/tiptap-utils"
+import { TIPTAP_AI_APP_ID } from "@/lib/tiptap-collab-utils"
 
 // --- Styles ---
-import "@app/components/tiptap-templates/notion-like/notion-like-editor.scss"
+import "@/components/tiptap-templates/notion-like/notion-like-editor.scss"
 
 // --- Content ---
-import { NotionEditorHeader } from "@app/components/tiptap-templates/notion-like/notion-like-editor-header"
-import { MobileToolbar } from "@app/components/tiptap-templates/notion-like/notion-like-editor-mobile-toolbar"
-import { NotionToolbarFloating } from "@app/components/tiptap-templates/notion-like/notion-like-editor-toolbar-floating"
-import { ListNormalizationExtension } from "@app/components/tiptap-extension/list-normalization-extension"
+import { NotionEditorHeader } from "@/components/tiptap-templates/notion-like/notion-like-editor-header"
+import { MobileToolbar } from "@/components/tiptap-templates/notion-like/notion-like-editor-mobile-toolbar"
+import { NotionToolbarFloating } from "@/components/tiptap-templates/notion-like/notion-like-editor-toolbar-floating"
+import { ListNormalizationExtension } from "@/components/tiptap-extension/list-normalization-extension"
 
 export interface NotionEditorProps {
   room: string

@@ -1,0 +1,22 @@
+
+> studio-roster@0.0.1 lint
+> eslint "{src,apps,libs,test}/**/*.{ts,tsx}"
+
+
+C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\apps\api\src\modules\google\google-auth.controller.ts
+  75:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\apps\api\src\modules\google\google-client.factory.ts
+  165:23  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\apps\api\src\modules\projects\project-audit.service.ts
+  33:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  57:62  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\apps\api\src\modules\storage\storage.service.ts
+  179:41  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  186:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  187:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+Γ£û 7 problems (0 errors, 7 warnings)
+

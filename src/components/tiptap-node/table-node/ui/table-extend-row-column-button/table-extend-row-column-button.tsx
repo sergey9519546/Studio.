@@ -5,11 +5,11 @@ import { type Editor } from "@tiptap/react"
 import { useCallback, useEffect, useRef, useState } from "react"
 
 // --- Hooks ---
-import { useTableHandleState } from "@app/components/tiptap-node/table-node/hooks/use-table-handle-state"
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTableHandleState } from "@/components/tiptap-node/table-node/hooks/use-table-handle-state"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Lib ---
-import type { Orientation } from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+import type { Orientation } from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 import {
   EMPTY_CELL_HEIGHT,
   EMPTY_CELL_WIDTH,
@@ -18,14 +18,14 @@ import {
   marginRound,
   runPreservingCursor,
   selectLastCell,
-} from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
-import { cn } from "@app/lib/tiptap-utils"
+} from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
+import { cn } from "@/lib/tiptap-utils"
 
 // --- Icons ---
-import { PlusSmallIcon } from "@app/components/tiptap-icons/plus-small-icon"
+import { PlusSmallIcon } from "@/components/tiptap-icons/plus-small-icon"
 
 // --- Internal ---
-import { useTableExtendRowColumnButtonsPositioning } from "@app/components/tiptap-node/table-node/ui/table-extend-row-column-button/use-table-extend-row-column"
+import { useTableExtendRowColumnButtonsPositioning } from "@/components/tiptap-node/table-node/ui/table-extend-row-column-button/use-table-extend-row-column"
 import "./table-extend-row-column-button.scss"
 
 interface TableExtendRowColumnButtonProps {

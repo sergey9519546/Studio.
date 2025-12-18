@@ -16,23 +16,23 @@ import type { Transaction } from "@tiptap/pm/state"
 import type { Node } from "@tiptap/pm/model"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Lib ---
-import { isExtensionAvailable } from "@app/lib/tiptap-utils"
-import type { Orientation } from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+import { isExtensionAvailable } from "@/lib/tiptap-utils"
+import type { Orientation } from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 import {
   getTable,
   getTableSelectionType,
   selectCellsByCoords,
   updateSelectionAfterAction,
-} from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+} from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 
 // --- Icons ---
-import { AddColLeftIcon } from "@app/components/tiptap-icons/add-col-left-icon"
-import { AddColRightIcon } from "@app/components/tiptap-icons/add-col-right-icon"
-import { AddRowBottomIcon } from "@app/components/tiptap-icons/add-row-bottom-icon"
-import { AddRowTopIcon } from "@app/components/tiptap-icons/add-row-top-icon"
+import { AddColLeftIcon } from "@/components/tiptap-icons/add-col-left-icon"
+import { AddColRightIcon } from "@/components/tiptap-icons/add-col-right-icon"
+import { AddRowBottomIcon } from "@/components/tiptap-icons/add-row-bottom-icon"
+import { AddRowTopIcon } from "@/components/tiptap-icons/add-row-top-icon"
 
 export type RowSide = "above" | "below"
 export type ColSide = "left" | "right"

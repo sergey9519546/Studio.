@@ -5,16 +5,16 @@ import { type Editor } from "@tiptap/react"
 import { NodeSelection } from "@tiptap/pm/state"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Lib ---
 import {
   isExtensionAvailable,
   isNodeTypeSelected,
-} from "@app/lib/tiptap-utils"
+} from "@/lib/tiptap-utils"
 
 // --- Icons ---
-import { ImageCaptionIcon } from "@app/components/tiptap-icons/image-caption-icon"
+import { ImageCaptionIcon } from "@/components/tiptap-icons/image-caption-icon"
 
 /**
  * Configuration for the image caption functionality

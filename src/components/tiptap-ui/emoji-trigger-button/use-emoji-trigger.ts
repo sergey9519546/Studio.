@@ -6,18 +6,18 @@ import { type Editor } from "@tiptap/react"
 import type { Node } from "@tiptap/pm/model"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
 
 // --- Lib ---
 import {
   findNodePosition,
   isNodeTypeSelected,
   isValidPosition,
-} from "@app/lib/tiptap-utils"
+} from "@/lib/tiptap-utils"
 
 // --- Icons ---
-import { SmilePlusIcon } from "@app/components/tiptap-icons/smile-plus-icon"
+import { SmilePlusIcon } from "@/components/tiptap-icons/smile-plus-icon"
 
 export const EMOJI_TRIGGER_SHORTCUT_KEY = "mod+shift+e"
 

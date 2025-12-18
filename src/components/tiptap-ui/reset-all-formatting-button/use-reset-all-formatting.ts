@@ -6,11 +6,11 @@ import { type Editor } from "@tiptap/react"
 import type { Transaction } from "@tiptap/pm/state"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
 
 // --- Icons ---
-import { RotateCcwIcon } from "@app/components/tiptap-icons/rotate-ccw-icon"
+import { RotateCcwIcon } from "@/components/tiptap-icons/rotate-ccw-icon"
 
 export const RESET_ALL_FORMATTING_SHORTCUT_KEY = "mod+r"
 

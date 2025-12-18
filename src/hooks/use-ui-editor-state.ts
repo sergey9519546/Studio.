@@ -3,7 +3,7 @@ import { useEditorState } from "@tiptap/react"
 import {
   defaultUiState,
   type UiState,
-} from "@app/components/tiptap-extension/ui-state-extension"
+} from "@/components/tiptap-extension/ui-state-extension"
 
 export function useUiEditorState(editor: Editor | null): UiState {
   return (

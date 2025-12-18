@@ -5,13 +5,13 @@ import type { Editor } from "@tiptap/react"
 import { NodeSelection } from "@tiptap/pm/state"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Icons ---
-import { ChevronDownIcon } from "@app/components/tiptap-icons/chevron-down-icon"
+import { ChevronDownIcon } from "@/components/tiptap-icons/chevron-down-icon"
 
 // --- Tiptap UI ---
-import type { Level } from "@app/components/tiptap-ui/heading-button"
+import type { Level } from "@/components/tiptap-ui/heading-button"
 
 export const TURN_INTO_BLOCKS = [
   "paragraph",

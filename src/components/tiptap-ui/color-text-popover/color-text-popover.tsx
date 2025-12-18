@@ -1,11 +1,11 @@
 import { forwardRef, useCallback, useMemo, useRef, useState } from "react"
 
 // --- Hooks ---
-import { useMenuNavigation } from "@app/hooks/use-menu-navigation"
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useMenuNavigation } from "@/hooks/use-menu-navigation"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Icons ---
-import { ChevronDownIcon } from "@app/components/tiptap-icons/chevron-down-icon"
+import { ChevronDownIcon } from "@/components/tiptap-icons/chevron-down-icon"
 
 // --- Tiptap UI ---
 import type {
@@ -13,41 +13,41 @@ import type {
   ColorItem,
   RecentColor,
   UseColorTextPopoverConfig,
-} from "@app/components/tiptap-ui/color-text-popover"
+} from "@/components/tiptap-ui/color-text-popover"
 import {
   useColorTextPopover,
   useRecentColors,
   getColorByValue,
-} from "@app/components/tiptap-ui/color-text-popover"
+} from "@/components/tiptap-ui/color-text-popover"
 import {
   TEXT_COLORS,
   ColorTextButton,
-} from "@app/components/tiptap-ui/color-text-button"
+} from "@/components/tiptap-ui/color-text-button"
 import {
   HIGHLIGHT_COLORS,
   ColorHighlightButton,
-} from "@app/components/tiptap-ui/color-highlight-button"
+} from "@/components/tiptap-ui/color-highlight-button"
 
 // --- UI Primitives ---
-import type { ButtonProps } from "@app/components/tiptap-ui-primitive/button"
-import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
+import type { ButtonProps } from "@/components/tiptap-ui-primitive/button"
+import { Button, ButtonGroup } from "@/components/tiptap-ui-primitive/button"
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@app/components/tiptap-ui-primitive/popover"
+} from "@/components/tiptap-ui-primitive/popover"
 import {
   Card,
   CardBody,
   CardGroupLabel,
   CardItemGroup,
-} from "@app/components/tiptap-ui-primitive/card"
+} from "@/components/tiptap-ui-primitive/card"
 
 // --- Utils ---
-import { chunkArray } from "@app/lib/tiptap-advanced-utils"
+import { chunkArray } from "@/lib/tiptap-advanced-utils"
 
 // --- Styles ---
-import "@app/components/tiptap-ui/color-text-popover/color-text-popover.scss"
+import "@/components/tiptap-ui/color-text-popover/color-text-popover.scss"
 
 export interface RenderColorButtonProps extends ButtonProps {
   colorObj: RecentColor

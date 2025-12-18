@@ -4,36 +4,36 @@ import { useCallback, useState } from "react"
 import type { Tone } from "@tiptap-pro/extension-ai"
 
 // Icons
-import { MicAiIcon } from "@app/components/tiptap-icons/mic-ai-icon"
-import { ArrowUpIcon } from "@app/components/tiptap-icons/arrow-up-icon"
-import { AiSparklesIcon } from "@app/components/tiptap-icons/ai-sparkles-icon"
+import { MicAiIcon } from "@/components/tiptap-icons/mic-ai-icon"
+import { ArrowUpIcon } from "@/components/tiptap-icons/arrow-up-icon"
+import { AiSparklesIcon } from "@/components/tiptap-icons/ai-sparkles-icon"
 
 // UI Components
-import { SUPPORTED_TONES } from "@app/components/tiptap-ui/ai-menu"
+import { SUPPORTED_TONES } from "@/components/tiptap-ui/ai-menu"
 
 // UI Primitives
-import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
-import { Spacer } from "@app/components/tiptap-ui-primitive/spacer"
-import { Toolbar, ToolbarGroup } from "@app/components/tiptap-ui-primitive/toolbar"
-import { useComboboxValueState } from "@app/components/tiptap-ui-primitive/menu"
-import { Combobox } from "@app/components/tiptap-ui-primitive/combobox"
+import { Button, ButtonGroup } from "@/components/tiptap-ui-primitive/button"
+import { Spacer } from "@/components/tiptap-ui-primitive/spacer"
+import { Toolbar, ToolbarGroup } from "@/components/tiptap-ui-primitive/toolbar"
+import { useComboboxValueState } from "@/components/tiptap-ui-primitive/menu"
+import { Combobox } from "@/components/tiptap-ui-primitive/combobox"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@app/components/tiptap-ui-primitive/dropdown-menu"
-import { TextareaAutosize } from "@app/components/tiptap-ui-primitive/textarea-autosize"
-import { Card, CardBody } from "@app/components/tiptap-ui-primitive/card"
+} from "@/components/tiptap-ui-primitive/dropdown-menu"
+import { TextareaAutosize } from "@/components/tiptap-ui-primitive/textarea-autosize"
+import { Card, CardBody } from "@/components/tiptap-ui-primitive/card"
 
 import {
   useBlurHandler,
   useKeyboardHandlers,
-} from "@app/components/tiptap-ui/ai-menu/ai-menu-input/ai-menu-input-hooks"
-import type { AiMenuInputTextareaProps } from "@app/components/tiptap-ui/ai-menu/ai-menu-input/ai-menu-input-types"
+} from "@/components/tiptap-ui/ai-menu/ai-menu-input/ai-menu-input-hooks"
+import type { AiMenuInputTextareaProps } from "@/components/tiptap-ui/ai-menu/ai-menu-input/ai-menu-input-types"
 
 // Styles
-import "@app/components/tiptap-ui/ai-menu/ai-menu-input/ai-menu-input.scss"
+import "@/components/tiptap-ui/ai-menu/ai-menu-input/ai-menu-input.scss"
 
 export function AiMenuInputPlaceholder({
   onPlaceholderClick,

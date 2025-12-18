@@ -8,11 +8,11 @@ import { TextSelection } from "@tiptap/pm/state"
 import { Fragment, Slice } from "@tiptap/pm/model"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
 
 // --- Icons ---
-import { ClipboardIcon } from "@app/components/tiptap-icons/clipboard-icon"
+import { ClipboardIcon } from "@/components/tiptap-icons/clipboard-icon"
 
 export const COPY_TO_CLIPBOARD_SHORTCUT_KEY = "mod+c"
 

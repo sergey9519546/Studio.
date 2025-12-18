@@ -1,11 +1,11 @@
-import type { Orientation } from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+import type { Orientation } from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 
 // --- UI ---
-import { useTableAlignCell } from "@app/components/tiptap-node/table-node/ui/table-align-cell-button"
+import { useTableAlignCell } from "@/components/tiptap-node/table-node/ui/table-align-cell-button"
 
 // --- Icons ---
-import { AlignmentIcon } from "@app/components/tiptap-icons/alignment-icon"
-import { ChevronRightIcon } from "@app/components/tiptap-icons/chevron-right-icon"
+import { AlignmentIcon } from "@/components/tiptap-icons/alignment-icon"
+import { ChevronRightIcon } from "@/components/tiptap-icons/chevron-right-icon"
 
 // --- UI Primitives ---
 import {
@@ -15,10 +15,10 @@ import {
   MenuContent,
   MenuGroup,
   MenuItem,
-} from "@app/components/tiptap-ui-primitive/menu"
-import { Button } from "@app/components/tiptap-ui-primitive/button"
-import { ComboboxList } from "@app/components/tiptap-ui-primitive/combobox"
-import { Separator } from "@app/components/tiptap-ui-primitive/separator"
+} from "@/components/tiptap-ui-primitive/menu"
+import { Button } from "@/components/tiptap-ui-primitive/button"
+import { ComboboxList } from "@/components/tiptap-ui-primitive/combobox"
+import { Separator } from "@/components/tiptap-ui-primitive/separator"
 
 export interface ActionItemProps {
   icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>

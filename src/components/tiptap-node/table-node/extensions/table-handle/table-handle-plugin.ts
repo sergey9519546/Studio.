@@ -21,9 +21,9 @@ import {
   isTableNode,
   safeClosest,
   selectCellsByCoords,
-} from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
-import { isValidPosition } from "@app/lib/tiptap-utils"
-import { createTableDragImage } from "@app/components/tiptap-node/table-node/extensions/table-handle/helpers/create-image"
+} from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
+import { isValidPosition } from "@/lib/tiptap-utils"
+import { createTableDragImage } from "@/components/tiptap-node/table-node/extensions/table-handle/helpers/create-image"
 
 export type TableHandlesState = {
   show: boolean

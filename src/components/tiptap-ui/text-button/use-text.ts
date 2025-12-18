@@ -6,11 +6,11 @@ import { useHotkeys } from "react-hotkeys-hook"
 import { NodeSelection, TextSelection } from "@tiptap/pm/state"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
 
 // --- Icons ---
-import { TypeIcon } from "@app/components/tiptap-icons/type-icon"
+import { TypeIcon } from "@/components/tiptap-icons/type-icon"
 
 // --- Lib ---
 import {
@@ -18,7 +18,7 @@ import {
   isNodeInSchema,
   isValidPosition,
   selectionWithinConvertibleTypes,
-} from "@app/lib/tiptap-utils"
+} from "@/lib/tiptap-utils"
 
 export const TEXT_SHORTCUT_KEY = "mod+alt+0"
 

@@ -9,16 +9,16 @@ import {
 } from "react"
 import { type Editor } from "@tiptap/react"
 import type { Transaction } from "@tiptap/pm/state"
-import { getSelectedDOMElement } from "@app/lib/tiptap-advanced-utils"
+import { getSelectedDOMElement } from "@/lib/tiptap-advanced-utils"
 import {
   findPrioritizedAIElement,
   cleanupFallbackAnchors,
-} from "@app/components/tiptap-ui/ai-menu/ai-menu-utils"
+} from "@/components/tiptap-ui/ai-menu/ai-menu-utils"
 import type {
   AiMenuState,
   AiMenuStateContextValue,
   AiMenuPosition,
-} from "@app/components/tiptap-ui/ai-menu/ai-menu-types"
+} from "@/components/tiptap-ui/ai-menu/ai-menu-types"
 
 export const AiMenuStateContext = createContext<AiMenuStateContextValue | null>(
   null

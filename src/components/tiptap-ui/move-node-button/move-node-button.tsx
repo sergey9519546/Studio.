@@ -1,19 +1,19 @@
 import { forwardRef, useCallback } from "react"
 
 // --- Lib ---
-import { parseShortcutKeys } from "@app/lib/tiptap-utils"
+import { parseShortcutKeys } from "@/lib/tiptap-utils"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Tiptap UI ---
-import type { UseMoveNodeConfig } from "@app/components/tiptap-ui/move-node-button"
-import { useMoveNode } from "@app/components/tiptap-ui/move-node-button"
+import type { UseMoveNodeConfig } from "@/components/tiptap-ui/move-node-button"
+import { useMoveNode } from "@/components/tiptap-ui/move-node-button"
 
 // --- UI Primitives ---
-import type { ButtonProps } from "@app/components/tiptap-ui-primitive/button"
-import { Button } from "@app/components/tiptap-ui-primitive/button"
-import { Badge } from "@app/components/tiptap-ui-primitive/badge"
+import type { ButtonProps } from "@/components/tiptap-ui-primitive/button"
+import { Button } from "@/components/tiptap-ui-primitive/button"
+import { Badge } from "@/components/tiptap-ui-primitive/badge"
 
 export interface MoveNodeButtonProps
   extends Omit<ButtonProps, "type">,

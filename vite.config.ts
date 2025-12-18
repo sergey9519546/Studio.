@@ -1,6 +1,8 @@
 // vite.config.ts - Production Optimizations
 import react from "@vitejs/plugin-react";
+import autoprefixer from "autoprefixer";
 import { resolve } from "path";
+import tailwindcss from "tailwindcss";
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -8,10 +10,7 @@ export default defineConfig({
 
   css: {
     postcss: {
-      plugins: [
-        require('tailwindcss'),
-        require('autoprefixer'),
-      ],
+      plugins: [tailwindcss, autoprefixer],
     },
   },
 
@@ -96,7 +95,10 @@ export default defineConfig({
       },
       {
         find: "rxjs/observable/ConnectableObservable",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/observable/ConnectableObservable.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/observable/ConnectableObservable.js"
+        ),
       },
       {
         find: "rxjs/observable/dom/AjaxObservable",
@@ -116,27 +118,45 @@ export default defineConfig({
       },
       {
         find: "rxjs/testing/TestScheduler",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/testing/TestScheduler.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/testing/TestScheduler.js"
+        ),
       },
       {
         find: "rxjs/scheduler/queue",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/scheduler/queue.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/scheduler/queue.js"
+        ),
       },
       {
         find: "rxjs/scheduler/VirtualTimeScheduler",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/scheduler/VirtualTimeScheduler.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/scheduler/VirtualTimeScheduler.js"
+        ),
       },
       {
         find: "rxjs/scheduler/asap",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/scheduler/asap.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/scheduler/asap.js"
+        ),
       },
       {
         find: "rxjs/scheduler/async",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/scheduler/async.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/scheduler/async.js"
+        ),
       },
       {
         find: "rxjs/scheduler/animationFrame",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/scheduler/animationFrame.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/scheduler/animationFrame.js"
+        ),
       },
       {
         find: "rxjs/operators/buffer",
@@ -228,35 +248,59 @@ export default defineConfig({
       },
       {
         find: "rxjs/util/UnsubscriptionError",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/util/UnsubscriptionError.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/util/UnsubscriptionError.js"
+        ),
       },
       {
         find: "./util/UnsubscriptionError",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/util/UnsubscriptionError.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/util/UnsubscriptionError.js"
+        ),
       },
       {
         find: "rxjs/util/ObjectUnsubscribedError",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/util/ObjectUnsubscribedError.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/util/ObjectUnsubscribedError.js"
+        ),
       },
       {
         find: "./util/ObjectUnsubscribedError",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/util/ObjectUnsubscribedError.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/util/ObjectUnsubscribedError.js"
+        ),
       },
       {
         find: "rxjs/util/EmptyError",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/util/EmptyError.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/util/EmptyError.js"
+        ),
       },
       {
         find: "./util/EmptyError",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/util/EmptyError.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/util/EmptyError.js"
+        ),
       },
       {
         find: "rxjs/util/ArgumentOutOfRangeError",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/util/ArgumentOutOfRangeError.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/util/ArgumentOutOfRangeError.js"
+        ),
       },
       {
         find: "./util/ArgumentOutOfRangeError",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/util/ArgumentOutOfRangeError.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/util/ArgumentOutOfRangeError.js"
+        ),
       },
       {
         find: "rxjs/util/TimeoutError",
@@ -276,19 +320,31 @@ export default defineConfig({
       },
       {
         find: "rxjs/symbol/iterator",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/symbol/iterator.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/symbol/iterator.js"
+        ),
       },
       {
         find: "./symbol/iterator",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/symbol/iterator.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/symbol/iterator.js"
+        ),
       },
       {
         find: "rxjs/symbol/observable",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/symbol/observable.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/symbol/observable.js"
+        ),
       },
       {
         find: "./symbol/observable",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/symbol/observable.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/symbol/observable.js"
+        ),
       },
       {
         find: "rxjs/util/root",
@@ -300,11 +356,17 @@ export default defineConfig({
       },
       {
         find: "rxjs/util/pipe",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/util/pipe.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/util/pipe.js"
+        ),
       },
       {
         find: "./util/pipe",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/util/pipe.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/util/pipe.js"
+        ),
       },
       {
         find: /^\.\/add\/observable\/.*/,
@@ -320,11 +382,17 @@ export default defineConfig({
       },
       {
         find: "./testing/TestScheduler",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/testing/TestScheduler.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/testing/TestScheduler.js"
+        ),
       },
       {
         find: "./observable/ConnectableObservable",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/observable/ConnectableObservable.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/observable/ConnectableObservable.js"
+        ),
       },
       {
         find: "./observable/dom/AjaxObservable",
@@ -340,25 +408,41 @@ export default defineConfig({
       },
       {
         find: "./scheduler/queue",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/scheduler/queue.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/scheduler/queue.js"
+        ),
       },
       {
         find: "./scheduler/VirtualTimeScheduler",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/scheduler/VirtualTimeScheduler.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/scheduler/VirtualTimeScheduler.js"
+        ),
       },
       {
         find: "./scheduler/asap",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/scheduler/asap.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/scheduler/asap.js"
+        ),
       },
       {
         find: "./scheduler/async",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/scheduler/async.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/scheduler/async.js"
+        ),
       },
       {
         find: "./scheduler/animationFrame",
-        replacement: resolve(__dirname, "node_modules/rxjs/dist/esm/internal/scheduler/animationFrame.js"),
+        replacement: resolve(
+          __dirname,
+          "node_modules/rxjs/dist/esm/internal/scheduler/animationFrame.js"
+        ),
       },
       { find: "@", replacement: "/src" },
+      { find: "@app", replacement: "/src" },
     ],
   },
 });

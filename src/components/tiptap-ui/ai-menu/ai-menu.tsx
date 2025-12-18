@@ -1,47 +1,47 @@
 import { useCallback, useEffect, useRef } from "react"
 import { type Editor } from "@tiptap/react"
 
-import { AiMenuItems } from "@app/components/tiptap-ui/ai-menu/ai-menu-items/ai-menu-items"
+import { AiMenuItems } from "@/components/tiptap-ui/ai-menu/ai-menu-items/ai-menu-items"
 
 // -- Hooks --
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useUiEditorState } from "@app/hooks/use-ui-editor-state"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useUiEditorState } from "@/hooks/use-ui-editor-state"
 
 // -- Utils --
 import {
   getSelectedDOMElement,
   selectionHasText,
-} from "@app/lib/tiptap-advanced-utils"
+} from "@/lib/tiptap-advanced-utils"
 
 // -- Tiptap UI --
-import { AiMenuInputTextarea } from "@app/components/tiptap-ui/ai-menu/ai-menu-input/ai-menu-input"
-import { AiMenuActions } from "@app/components/tiptap-ui/ai-menu/ai-menu-actions/ai-menu-actions"
+import { AiMenuInputTextarea } from "@/components/tiptap-ui/ai-menu/ai-menu-input/ai-menu-input"
+import { AiMenuActions } from "@/components/tiptap-ui/ai-menu/ai-menu-actions/ai-menu-actions"
 
 // -- UI Primitives --
 import {
   Menu,
   MenuContent,
   useFloatingMenuStore,
-} from "@app/components/tiptap-ui-primitive/menu"
-import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
+} from "@/components/tiptap-ui-primitive/menu"
+import { Button, ButtonGroup } from "@/components/tiptap-ui-primitive/button"
 import {
   ComboboxList,
   ComboboxPopover,
-} from "@app/components/tiptap-ui-primitive/combobox"
-import { Card } from "@app/components/tiptap-ui-primitive/card/card"
+} from "@/components/tiptap-ui-primitive/combobox"
+import { Card } from "@/components/tiptap-ui-primitive/card/card"
 
-import { getContextAndInsertAt } from "@app/components/tiptap-ui/ai-menu/ai-menu-utils"
+import { getContextAndInsertAt } from "@/components/tiptap-ui/ai-menu/ai-menu-utils"
 import {
   useAiContentTracker,
   useAiMenuState,
   useAiMenuStateProvider,
   useTextSelectionTracker,
-} from "@app/components/tiptap-ui/ai-menu/ai-menu-hooks"
+} from "@/components/tiptap-ui/ai-menu/ai-menu-hooks"
 
 // -- Icons --
-import { StopCircle2Icon } from "@app/components/tiptap-icons/stop-circle-2-icon"
+import { StopCircle2Icon } from "@/components/tiptap-icons/stop-circle-2-icon"
 
-import "@app/components/tiptap-ui/ai-menu/ai-menu.scss"
+import "@/components/tiptap-ui/ai-menu/ai-menu.scss"
 
 export function AiMenuStateProvider({
   children,

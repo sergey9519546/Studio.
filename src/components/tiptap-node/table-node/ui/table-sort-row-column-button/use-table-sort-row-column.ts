@@ -3,22 +3,22 @@ import type { Editor } from "@tiptap/react"
 import type { Node } from "@tiptap/pm/model"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Lib ---
-import { isExtensionAvailable } from "@app/lib/tiptap-utils"
-import type { Orientation } from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+import { isExtensionAvailable } from "@/lib/tiptap-utils"
+import type { Orientation } from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 import {
   type CellInfo,
   getTable,
   getTableSelectionType,
   getRowOrColumnCells,
   isCellEmpty,
-} from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+} from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 
 // --- Icons ---
-import { ArrowDownAZIcon } from "@app/components/tiptap-icons/arrow-down-a-z-icon"
-import { ArrowDownZAIcon } from "@app/components/tiptap-icons/arrow-down-z-a-icon"
+import { ArrowDownAZIcon } from "@/components/tiptap-icons/arrow-down-a-z-icon"
+import { ArrowDownZAIcon } from "@/components/tiptap-icons/arrow-down-z-a-icon"
 
 export type SortDirection = "asc" | "desc"
 

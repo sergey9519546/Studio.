@@ -6,31 +6,31 @@ import type { TextOptions, Tone } from "@tiptap-pro/extension-ai"
 import {
   useImproveDropdown,
   type AICommand,
-} from "@app/components/tiptap-ui/improve-dropdown"
+} from "@/components/tiptap-ui/improve-dropdown"
 
 // --- Icons ---
-import { MicAiIcon } from "@app/components/tiptap-icons/mic-ai-icon"
-import { AiSparklesIcon } from "@app/components/tiptap-icons/ai-sparkles-icon"
-import { CheckAiIcon } from "@app/components/tiptap-icons/check-ai-icon"
-import { TextExtendIcon } from "@app/components/tiptap-icons/text-extend-icon"
-import { TextReduceIcon } from "@app/components/tiptap-icons/text-reduce-icon"
-import { Simplify2Icon } from "@app/components/tiptap-icons/simplify-2-icon"
-import { SmileAiIcon } from "@app/components/tiptap-icons/smile-ai-icon"
-import { CompleteSentenceIcon } from "@app/components/tiptap-icons/complete-sentence-icon"
-import { SummarizeTextIcon } from "@app/components/tiptap-icons/summarize-text-icon"
-import { LanguagesIcon } from "@app/components/tiptap-icons/languages-icon"
-import { ChevronRightIcon } from "@app/components/tiptap-icons/chevron-right-icon"
+import { MicAiIcon } from "@/components/tiptap-icons/mic-ai-icon"
+import { AiSparklesIcon } from "@/components/tiptap-icons/ai-sparkles-icon"
+import { CheckAiIcon } from "@/components/tiptap-icons/check-ai-icon"
+import { TextExtendIcon } from "@/components/tiptap-icons/text-extend-icon"
+import { TextReduceIcon } from "@/components/tiptap-icons/text-reduce-icon"
+import { Simplify2Icon } from "@/components/tiptap-icons/simplify-2-icon"
+import { SmileAiIcon } from "@/components/tiptap-icons/smile-ai-icon"
+import { CompleteSentenceIcon } from "@/components/tiptap-icons/complete-sentence-icon"
+import { SummarizeTextIcon } from "@/components/tiptap-icons/summarize-text-icon"
+import { LanguagesIcon } from "@/components/tiptap-icons/languages-icon"
+import { ChevronRightIcon } from "@/components/tiptap-icons/chevron-right-icon"
 
 // --- Tiptap UI ---
 import {
   SUPPORTED_LANGUAGES,
   SUPPORTED_TONES,
-} from "@app/components/tiptap-ui/ai-menu"
-import { AiAskButton } from "@app/components/tiptap-ui/ai-ask-button"
+} from "@/components/tiptap-ui/ai-menu"
+import { AiAskButton } from "@/components/tiptap-ui/ai-ask-button"
 
 // --- UI Primitives ---
-import type { ButtonProps } from "@app/components/tiptap-ui-primitive/button"
-import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
+import type { ButtonProps } from "@/components/tiptap-ui-primitive/button"
+import { Button, ButtonGroup } from "@/components/tiptap-ui-primitive/button"
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -39,9 +39,9 @@ import {
   DropdownMenuSub,
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
-} from "@app/components/tiptap-ui-primitive/dropdown-menu"
-import { Card, CardBody } from "@app/components/tiptap-ui-primitive/card"
-import { Separator } from "@app/components/tiptap-ui-primitive/separator"
+} from "@/components/tiptap-ui-primitive/dropdown-menu"
+import { Card, CardBody } from "@/components/tiptap-ui-primitive/card"
+import { Separator } from "@/components/tiptap-ui-primitive/separator"
 
 export interface ToneOption {
   label: string

@@ -10,38 +10,38 @@ import { TableMap } from "@tiptap/pm/tables"
 import type { Node } from "@tiptap/pm/model"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { cn, isValidPosition, SR_ONLY } from "@app/lib/tiptap-utils"
-import type { Orientation } from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
-import { selectCellsByCoords } from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { cn, isValidPosition, SR_ONLY } from "@/lib/tiptap-utils"
+import type { Orientation } from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
+import { selectCellsByCoords } from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 
 // --- Icons ---
-import { MoreVerticalIcon } from "@app/components/tiptap-icons/more-vertical-icon"
+import { MoreVerticalIcon } from "@/components/tiptap-icons/more-vertical-icon"
 
 // --- UI Primitives ---
-import { Button } from "@app/components/tiptap-ui-primitive/button"
-import { Combobox, ComboboxList } from "@app/components/tiptap-ui-primitive/combobox"
+import { Button } from "@/components/tiptap-ui-primitive/button"
+import { Combobox, ComboboxList } from "@/components/tiptap-ui-primitive/combobox"
 import {
   Menu,
   MenuButton,
   MenuContent,
   MenuGroup,
   MenuItem,
-} from "@app/components/tiptap-ui-primitive/menu"
-import { Separator } from "@app/components/tiptap-ui-primitive/separator"
+} from "@/components/tiptap-ui-primitive/menu"
+import { Separator } from "@/components/tiptap-ui-primitive/separator"
 
 // --- Tiptap UI ---
-import { useTableDuplicateRowColumn } from "@app/components/tiptap-node/table-node/ui/table-duplicate-row-column-button"
-import { useTableMoveRowColumn } from "@app/components/tiptap-node/table-node/ui/table-move-row-column-button"
-import { useTableClearRowColumnContent } from "@app/components/tiptap-node/table-node/ui/table-clear-row-column-content-button"
-import { useTableHeaderRowColumn } from "@app/components/tiptap-node/table-node/ui/table-header-row-column-button"
-import { useTableAddRowColumn } from "@app/components/tiptap-node/table-node/ui/table-add-row-column-button"
-import { useTableDeleteRowColumn } from "@app/components/tiptap-node/table-node/ui/table-delete-row-column-button"
-import { useTableSortRowColumn } from "@app/components/tiptap-node/table-node/ui/table-sort-row-column-button"
-import { ColorMenu } from "@app/components/tiptap-ui/color-menu"
-import { TableAlignMenu } from "@app/components/tiptap-node/table-node/ui/table-alignment-menu"
+import { useTableDuplicateRowColumn } from "@/components/tiptap-node/table-node/ui/table-duplicate-row-column-button"
+import { useTableMoveRowColumn } from "@/components/tiptap-node/table-node/ui/table-move-row-column-button"
+import { useTableClearRowColumnContent } from "@/components/tiptap-node/table-node/ui/table-clear-row-column-content-button"
+import { useTableHeaderRowColumn } from "@/components/tiptap-node/table-node/ui/table-header-row-column-button"
+import { useTableAddRowColumn } from "@/components/tiptap-node/table-node/ui/table-add-row-column-button"
+import { useTableDeleteRowColumn } from "@/components/tiptap-node/table-node/ui/table-delete-row-column-button"
+import { useTableSortRowColumn } from "@/components/tiptap-node/table-node/ui/table-sort-row-column-button"
+import { ColorMenu } from "@/components/tiptap-ui/color-menu"
+import { TableAlignMenu } from "@/components/tiptap-node/table-node/ui/table-alignment-menu"
 
-import { dragEnd } from "@app/components/tiptap-node/table-node/extensions/table-handle"
+import { dragEnd } from "@/components/tiptap-node/table-node/extensions/table-handle"
 
 import "./table-handle-menu.scss"
 

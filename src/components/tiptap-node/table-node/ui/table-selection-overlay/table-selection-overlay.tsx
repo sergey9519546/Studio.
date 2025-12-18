@@ -9,15 +9,15 @@ import type { Editor } from "@tiptap/react"
 import { useCallback, useEffect, useRef, useState } from "react"
 
 // --- Hooks ---
-import { useResizeOverlay } from "@app/components/tiptap-node/table-node/ui/table-selection-overlay/use-resize-overlay"
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useResizeOverlay } from "@/components/tiptap-node/table-node/ui/table-selection-overlay/use-resize-overlay"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Lib ---
 import {
   domCellAround,
   getTable,
   rectEq,
-} from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+} from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 
 export interface TableSelectionOverlayProps {
   editor?: Editor | null

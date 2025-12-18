@@ -9,21 +9,21 @@ import {
 } from "@tiptap/pm/tables"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Lib ---
-import { isExtensionAvailable } from "@app/lib/tiptap-utils"
-import type { Orientation } from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+import { isExtensionAvailable } from "@/lib/tiptap-utils"
+import type { Orientation } from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 import {
   getTable,
   getTableSelectionType,
   getRowOrColumnCells,
   setCellAttr,
   isCellEmpty,
-} from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+} from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 
 // --- Icons ---
-import { SquareXIcon } from "@app/components/tiptap-icons/square-x-icon"
+import { SquareXIcon } from "@/components/tiptap-icons/square-x-icon"
 
 export interface UseTableClearRowColumnContentConfig {
   /**

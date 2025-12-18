@@ -4,24 +4,24 @@ import { CellSelection, toggleHeader } from "@tiptap/pm/tables"
 import type { Transaction } from "@tiptap/pm/state"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Lib ---
 import {
   isExtensionAvailable,
   isValidPosition,
-} from "@app/lib/tiptap-utils"
-import type { Orientation } from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+} from "@/lib/tiptap-utils"
+import type { Orientation } from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 import {
   getIndexCoordinates,
   getRowOrColumnCells,
   getTableSelectionType,
   selectCellsByCoords,
-} from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+} from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 
 // --- Icons ---
-import { TableHeaderRowIcon } from "@app/components/tiptap-icons/table-header-row-icon"
-import { TableHeaderColumnIcon } from "@app/components/tiptap-icons/table-header-column-icon"
+import { TableHeaderRowIcon } from "@/components/tiptap-icons/table-header-row-icon"
+import { TableHeaderColumnIcon } from "@/components/tiptap-icons/table-header-column-icon"
 
 export interface UseTableHeaderRowColumnConfig {
   /**

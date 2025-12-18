@@ -1,7 +1,7 @@
 import { forwardRef } from "react"
 import * as Ariakit from "@ariakit/react"
-import { cn } from "@app/lib/tiptap-utils"
-import "@app/components/tiptap-ui-primitive/combobox/combobox.scss"
+import { cn } from "@/lib/tiptap-utils"
+import "@/components/tiptap-ui-primitive/combobox/combobox.scss"
 
 export function ComboboxProvider({ ...props }: Ariakit.ComboboxProviderProps) {
   return (

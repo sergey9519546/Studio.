@@ -1,37 +1,37 @@
 import { forwardRef } from "react"
 
 // --- Tiptap UI ---
-import type { UseTurnIntoDropdownConfig } from "@app/components/tiptap-ui/turn-into-dropdown"
+import type { UseTurnIntoDropdownConfig } from "@/components/tiptap-ui/turn-into-dropdown"
 import {
   useTurnIntoDropdown,
   getFilteredBlockTypeOptions,
-} from "@app/components/tiptap-ui/turn-into-dropdown"
+} from "@/components/tiptap-ui/turn-into-dropdown"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Tiptap UI Components ---
-import { TextButton } from "@app/components/tiptap-ui/text-button"
-import { HeadingButton } from "@app/components/tiptap-ui/heading-button"
-import { ListButton } from "@app/components/tiptap-ui/list-button"
-import { BlockquoteButton } from "@app/components/tiptap-ui/blockquote-button"
-import { CodeBlockButton } from "@app/components/tiptap-ui/code-block-button"
+import { TextButton } from "@/components/tiptap-ui/text-button"
+import { HeadingButton } from "@/components/tiptap-ui/heading-button"
+import { ListButton } from "@/components/tiptap-ui/list-button"
+import { BlockquoteButton } from "@/components/tiptap-ui/blockquote-button"
+import { CodeBlockButton } from "@/components/tiptap-ui/code-block-button"
 
 // --- UI Primitives ---
-import type { ButtonProps } from "@app/components/tiptap-ui-primitive/button"
-import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
+import type { ButtonProps } from "@/components/tiptap-ui-primitive/button"
+import { Button, ButtonGroup } from "@/components/tiptap-ui-primitive/button"
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@app/components/tiptap-ui-primitive/dropdown-menu"
+} from "@/components/tiptap-ui-primitive/dropdown-menu"
 import {
   Card,
   CardBody,
   CardGroupLabel,
   CardItemGroup,
-} from "@app/components/tiptap-ui-primitive/card"
+} from "@/components/tiptap-ui-primitive/card"
 
 export interface TurnIntoDropdownContentProps {
   blockTypes?: string[]

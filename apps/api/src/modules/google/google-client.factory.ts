@@ -132,7 +132,9 @@ export class GoogleClientFactory implements OnModuleInit {
     const auth = this.createAuth(user.googleCredentials);
 
     return {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       sheets: (google as any).sheets({ version: "v4", auth }),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       docs: (google as any).docs({ version: "v1", auth }),
     };
   }
@@ -150,6 +152,7 @@ export class GoogleClientFactory implements OnModuleInit {
     const auth = this.createAuth(user.googleCredentials);
 
     return {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       drive: (google as any).drive({ version: "v3", auth }),
     };
   }
@@ -159,6 +162,7 @@ export class GoogleClientFactory implements OnModuleInit {
    */
   createDriveClient(): drive_v3.Drive {
     const auth = this.createServiceAccountAuth();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (google as any).drive({ version: "v3", auth });
   }
 

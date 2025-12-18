@@ -1,6 +1,6 @@
 "use client"
 
-import "@app/components/tiptap-ui-primitive/tooltip/tooltip.scss"
+import "@/components/tiptap-ui-primitive/tooltip/tooltip.scss"
 import {
   autoUpdate,
   flip,

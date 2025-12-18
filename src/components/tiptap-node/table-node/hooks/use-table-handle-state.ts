@@ -1,7 +1,7 @@
 "use client"
 
-import type { TableHandlesState } from "@app/components/tiptap-node/table-node/extensions/table-handle"
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import type { TableHandlesState } from "@/components/tiptap-node/table-node/extensions/table-handle"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 import type { Editor } from "@tiptap/react"
 import { useCallback, useEffect, useRef, useState } from "react"
 

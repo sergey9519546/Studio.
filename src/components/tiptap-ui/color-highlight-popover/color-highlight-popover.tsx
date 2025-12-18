@@ -4,39 +4,39 @@ import { forwardRef, useMemo, useRef, useState } from "react"
 import { type Editor } from "@tiptap/react"
 
 // --- Hooks ---
-import { useMenuNavigation } from "@app/hooks/use-menu-navigation"
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useMenuNavigation } from "@/hooks/use-menu-navigation"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Icons ---
-import { BanIcon } from "@app/components/tiptap-icons/ban-icon"
-import { HighlighterIcon } from "@app/components/tiptap-icons/highlighter-icon"
+import { BanIcon } from "@/components/tiptap-icons/ban-icon"
+import { HighlighterIcon } from "@/components/tiptap-icons/highlighter-icon"
 
 // --- UI Primitives ---
-import type { ButtonProps } from "@app/components/tiptap-ui-primitive/button"
-import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
+import type { ButtonProps } from "@/components/tiptap-ui-primitive/button"
+import { Button, ButtonGroup } from "@/components/tiptap-ui-primitive/button"
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@app/components/tiptap-ui-primitive/popover"
-import { Separator } from "@app/components/tiptap-ui-primitive/separator"
+} from "@/components/tiptap-ui-primitive/popover"
+import { Separator } from "@/components/tiptap-ui-primitive/separator"
 import {
   Card,
   CardBody,
   CardItemGroup,
-} from "@app/components/tiptap-ui-primitive/card"
+} from "@/components/tiptap-ui-primitive/card"
 
 // --- Tiptap UI ---
 import type {
   HighlightColor,
   UseColorHighlightConfig,
-} from "@app/components/tiptap-ui/color-highlight-button"
+} from "@/components/tiptap-ui/color-highlight-button"
 import {
   ColorHighlightButton,
   pickHighlightColorsByValue,
   useColorHighlight,
-} from "@app/components/tiptap-ui/color-highlight-button"
+} from "@/components/tiptap-ui/color-highlight-button"
 
 export interface ColorHighlightPopoverContentProps {
   /**

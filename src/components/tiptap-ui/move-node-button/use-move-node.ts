@@ -6,15 +6,15 @@ import { type Editor } from "@tiptap/react"
 import { TextSelection } from "@tiptap/pm/state"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
 
 // --- Utils ---
-import { getAnchorNodeAndPos } from "@app/lib/tiptap-advanced-utils"
+import { getAnchorNodeAndPos } from "@/lib/tiptap-advanced-utils"
 
 // --- Icons ---
-import { AlignTopIcon } from "@app/components/tiptap-icons/align-top-icon"
-import { AlignBottomIcon } from "@app/components/tiptap-icons/align-bottom-icon"
+import { AlignTopIcon } from "@/components/tiptap-icons/align-top-icon"
+import { AlignBottomIcon } from "@/components/tiptap-icons/align-bottom-icon"
 
 export const MOVE_UP_SHORTCUT_KEY = "mod+shift+ArrowUp"
 export const MOVE_DOWN_SHORTCUT_KEY = "mod+shift+ArrowDown"

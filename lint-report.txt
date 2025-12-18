@@ -1,0 +1,34 @@
+
+> studio-roster@0.0.1 lint
+> eslint "{src,apps,libs,test}/**/*.{ts,tsx}"
+
+
+C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\apps\api\src\common\middleware\project-context.middleware.ts
+  140:41  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\apps\api\src\modules\ai\vertex-ai.service.ts
+  215:58  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\apps\api\src\modules\google\google-auth.controller.ts
+  75:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\apps\api\src\modules\google\google-client.factory.ts
+  135:26  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  136:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  153:25  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  162:23  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\apps\api\src\modules\monitoring\ai-usage.service.ts
+  92:53  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\apps\api\src\modules\projects\project-audit.service.ts
+  33:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  56:47  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\serge\OneDrive\Documents\Sergey-Avetisyan-main\apps\api\src\modules\storage\storage.service.ts
+  179:41  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  186:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  187:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+Γ£û 13 problems (0 errors, 13 warnings)
+

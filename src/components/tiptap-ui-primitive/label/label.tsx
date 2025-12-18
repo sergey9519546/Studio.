@@ -1,8 +1,8 @@
 "use client"
 
-import { cn } from "@app/lib/tiptap-utils"
+import { cn } from "@/lib/tiptap-utils"
 import { createElement, forwardRef } from "react"
-import "@app/components/tiptap-ui-primitive/label/label.scss"
+import "@/components/tiptap-ui-primitive/label/label.scss"
 
 export interface BaseProps extends React.HTMLAttributes<HTMLElement> {
   as?: "label" | "div"

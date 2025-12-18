@@ -176,6 +176,7 @@ export class StorageService implements OnModuleInit {
   private async initializeStorage() {
     try {
       const app = this.initFirebaseApp();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.storage = getStorage(app) as any;
 
       const bucket = this.storage!.bucket(this.bucketName);
@@ -183,7 +184,9 @@ export class StorageService implements OnModuleInit {
 
       const [serviceAccount] = await this.storage!.getServiceAccount();
       this.connectedEmail =
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (serviceAccount as any)?.email ||
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (serviceAccount as any)?.client_email ||
         "";
 

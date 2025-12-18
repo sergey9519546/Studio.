@@ -6,16 +6,16 @@ import { type Editor } from "@tiptap/react"
 import { NodeSelection } from "@tiptap/pm/state"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
 
 // --- Lib ---
-import { isExtensionAvailable } from "@app/lib/tiptap-utils"
+import { isExtensionAvailable } from "@/lib/tiptap-utils"
 
 // --- Icons ---
-import { AlignCenterVerticalIcon } from "@app/components/tiptap-icons/align-center-vertical-icon"
-import { AlignEndVerticalIcon } from "@app/components/tiptap-icons/align-end-vertical-icon"
-import { AlignStartVerticalIcon } from "@app/components/tiptap-icons/align-start-vertical-icon"
+import { AlignCenterVerticalIcon } from "@/components/tiptap-icons/align-center-vertical-icon"
+import { AlignEndVerticalIcon } from "@/components/tiptap-icons/align-end-vertical-icon"
+import { AlignStartVerticalIcon } from "@/components/tiptap-icons/align-start-vertical-icon"
 
 export type ImageAlign = "left" | "center" | "right"
 

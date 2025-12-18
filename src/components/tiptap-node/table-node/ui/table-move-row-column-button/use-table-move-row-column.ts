@@ -13,24 +13,24 @@ import type { Transaction } from "@tiptap/pm/state"
 import type { Node } from "@tiptap/pm/model"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Lib ---
-import { isExtensionAvailable } from "@app/lib/tiptap-utils"
-import type { Orientation } from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+import { isExtensionAvailable } from "@/lib/tiptap-utils"
+import type { Orientation } from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 import {
   getTable,
   getTableSelectionType,
   selectCellsByCoords,
   cellsOverlapRectangle,
   getIndexCoordinates,
-} from "@app/components/tiptap-node/table-node/lib/tiptap-table-utils"
+} from "@/components/tiptap-node/table-node/lib/tiptap-table-utils"
 
 // --- Icons ---
-import { ArrowLeftIcon } from "@app/components/tiptap-icons/arrow-left-icon"
-import { ArrowRightIcon } from "@app/components/tiptap-icons/arrow-right-icon"
-import { ArrowUpIcon } from "@app/components/tiptap-icons/arrow-up-icon"
-import { ArrowDownIcon } from "@app/components/tiptap-icons/arrow-down-icon"
+import { ArrowLeftIcon } from "@/components/tiptap-icons/arrow-left-icon"
+import { ArrowRightIcon } from "@/components/tiptap-icons/arrow-right-icon"
+import { ArrowUpIcon } from "@/components/tiptap-icons/arrow-up-icon"
+import { ArrowDownIcon } from "@/components/tiptap-icons/arrow-down-icon"
 
 export type MoveDirection = "up" | "down" | "left" | "right"
 

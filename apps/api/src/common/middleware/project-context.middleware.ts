@@ -137,7 +137,7 @@ export class ProjectContextMiddleware implements NestMiddleware {
     } else if (accessControl) {
       role = accessControl.role as 'owner' | 'editor' | 'viewer';
       permissions = Array.isArray(accessControl.permissions)
-        ? (accessControl.permissions as any)
+        ? (accessControl.permissions as unknown as string[])
         : this.getDefaultPermissions(role);
     } else {
       // Check if project is public

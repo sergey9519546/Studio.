@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect } from "react"
 import { type Editor } from "@tiptap/react"
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { getEditorExtension } from "@app/lib/tiptap-advanced-utils"
-import { selectNodeAndHideFloating } from "@app/hooks/use-floating-toolbar-visibility"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { getEditorExtension } from "@/lib/tiptap-advanced-utils"
+import { selectNodeAndHideFloating } from "@/hooks/use-floating-toolbar-visibility"
 
 export interface UseScrollToHashConfig {
   /**

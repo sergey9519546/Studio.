@@ -1,32 +1,32 @@
 import { useEffect, useMemo, useRef } from "react"
 
 // --- Lib ---
-import { getElementOverflowPosition } from "@app/lib/tiptap-collab-utils"
+import { getElementOverflowPosition } from "@/lib/tiptap-collab-utils"
 
 // --- Tiptap UI ---
 import type {
   SuggestionMenuProps,
   SuggestionItem,
   SuggestionMenuRenderProps,
-} from "@app/components/tiptap-ui-utils/suggestion-menu"
-import { filterSuggestionItems } from "@app/components/tiptap-ui-utils/suggestion-menu"
-import { SuggestionMenu } from "@app/components/tiptap-ui-utils/suggestion-menu"
+} from "@/components/tiptap-ui-utils/suggestion-menu"
+import { filterSuggestionItems } from "@/components/tiptap-ui-utils/suggestion-menu"
+import { SuggestionMenu } from "@/components/tiptap-ui-utils/suggestion-menu"
 
 // --- Hooks ---
-import type { SlashMenuConfig } from "@app/components/tiptap-ui/slash-dropdown-menu/use-slash-dropdown-menu"
-import { useSlashDropdownMenu } from "@app/components/tiptap-ui/slash-dropdown-menu/use-slash-dropdown-menu"
+import type { SlashMenuConfig } from "@/components/tiptap-ui/slash-dropdown-menu/use-slash-dropdown-menu"
+import { useSlashDropdownMenu } from "@/components/tiptap-ui/slash-dropdown-menu/use-slash-dropdown-menu"
 
 // --- UI Primitives ---
-import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
-import { Separator } from "@app/components/tiptap-ui-primitive/separator"
+import { Button, ButtonGroup } from "@/components/tiptap-ui-primitive/button"
+import { Separator } from "@/components/tiptap-ui-primitive/separator"
 import {
   Card,
   CardBody,
   CardGroupLabel,
   CardItemGroup,
-} from "@app/components/tiptap-ui-primitive/card"
+} from "@/components/tiptap-ui-primitive/card"
 
-import "@app/components/tiptap-ui/slash-dropdown-menu/slash-dropdown-menu.scss"
+import "@/components/tiptap-ui/slash-dropdown-menu/slash-dropdown-menu.scss"
 
 type SlashDropdownMenuProps = Omit<
   SuggestionMenuProps,

@@ -3,15 +3,15 @@
 import { forwardRef, useCallback } from "react"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Tiptap UI ---
-import type { UseTableMoveRowColumnConfig } from "@app/components/tiptap-node/table-node/ui/table-move-row-column-button"
-import { useTableMoveRowColumn } from "@app/components/tiptap-node/table-node/ui/table-move-row-column-button"
+import type { UseTableMoveRowColumnConfig } from "@/components/tiptap-node/table-node/ui/table-move-row-column-button"
+import { useTableMoveRowColumn } from "@/components/tiptap-node/table-node/ui/table-move-row-column-button"
 
 // --- UI Primitives ---
-import type { ButtonProps } from "@app/components/tiptap-ui-primitive/button"
-import { Button } from "@app/components/tiptap-ui-primitive/button"
+import type { ButtonProps } from "@/components/tiptap-ui-primitive/button"
+import { Button } from "@/components/tiptap-ui-primitive/button"
 
 export interface TableMoveRowColumnButtonProps
   extends Omit<ButtonProps, "type">,

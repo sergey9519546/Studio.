@@ -7,14 +7,14 @@ import type {
   SuggestionItem,
   SuggestionMenuProps,
   SuggestionMenuRenderProps,
-} from "@app/components/tiptap-ui-utils/suggestion-menu"
-import { SuggestionMenu } from "@app/components/tiptap-ui-utils/suggestion-menu"
+} from "@/components/tiptap-ui-utils/suggestion-menu"
+import { SuggestionMenu } from "@/components/tiptap-ui-utils/suggestion-menu"
 import {
   EmojiMenuItem,
   getFilteredEmojis,
-} from "@app/components/tiptap-ui/emoji-menu"
-import { Card, CardBody } from "@app/components/tiptap-ui-primitive/card"
-import { ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
+} from "@/components/tiptap-ui/emoji-menu"
+import { Card, CardBody } from "@/components/tiptap-ui-primitive/card"
+import { ButtonGroup } from "@/components/tiptap-ui-primitive/button"
 
 export type EmojiDropdownMenuProps = Omit<
   SuggestionMenuProps,

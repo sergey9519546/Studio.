@@ -4,66 +4,66 @@ import { type Editor } from "@tiptap/react"
 import { cloneElement, useEffect, useMemo, useRef, useState } from "react"
 
 // --- Hooks ---
-import { useIsBreakpoint } from "@app/hooks/use-is-breakpoint"
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
-import { useWindowSize } from "@app/hooks/use-window-size"
+import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useWindowSize } from "@/hooks/use-window-size"
 
 // --- Tiptap UI ---
-import { AiAskButton } from "@app/components/tiptap-ui/ai-ask-button"
+import { AiAskButton } from "@/components/tiptap-ui/ai-ask-button"
 import {
   canColorHighlight,
   ColorHighlightButton,
   HIGHLIGHT_COLORS,
-} from "@app/components/tiptap-ui/color-highlight-button"
+} from "@/components/tiptap-ui/color-highlight-button"
 import {
   ColorHighlightPopover,
   ColorHighlightPopoverButton,
   ColorHighlightPopoverContent,
-} from "@app/components/tiptap-ui/color-highlight-popover"
+} from "@/components/tiptap-ui/color-highlight-popover"
 import {
   ColorTextButton,
   TEXT_COLORS,
-} from "@app/components/tiptap-ui/color-text-button"
-import { useRecentColors } from "@app/components/tiptap-ui/color-text-popover"
-import { CopyAnchorLinkButton } from "@app/components/tiptap-ui/copy-anchor-link-button"
-import { CopyToClipboardButton } from "@app/components/tiptap-ui/copy-to-clipboard-button"
-import { DeleteNodeButton } from "@app/components/tiptap-ui/delete-node-button"
-import { DuplicateButton } from "@app/components/tiptap-ui/duplicate-button"
-import { ImageUploadButton } from "@app/components/tiptap-ui/image-upload-button"
-import { ImproveDropdown } from "@app/components/tiptap-ui/improve-dropdown"
+} from "@/components/tiptap-ui/color-text-button"
+import { useRecentColors } from "@/components/tiptap-ui/color-text-popover"
+import { CopyAnchorLinkButton } from "@/components/tiptap-ui/copy-anchor-link-button"
+import { CopyToClipboardButton } from "@/components/tiptap-ui/copy-to-clipboard-button"
+import { DeleteNodeButton } from "@/components/tiptap-ui/delete-node-button"
+import { DuplicateButton } from "@/components/tiptap-ui/duplicate-button"
+import { ImageUploadButton } from "@/components/tiptap-ui/image-upload-button"
+import { ImproveDropdown } from "@/components/tiptap-ui/improve-dropdown"
 import {
   canSetLink,
   LinkButton,
   LinkContent,
   LinkPopover,
-} from "@app/components/tiptap-ui/link-popover"
-import { MarkButton } from "@app/components/tiptap-ui/mark-button"
-import { ResetAllFormattingButton } from "@app/components/tiptap-ui/reset-all-formatting-button"
-import { SlashCommandTriggerButton } from "@app/components/tiptap-ui/slash-command-trigger-button"
-import { TextAlignButton } from "@app/components/tiptap-ui/text-align-button"
-import { TurnIntoDropdownContent } from "@app/components/tiptap-ui/turn-into-dropdown"
+} from "@/components/tiptap-ui/link-popover"
+import { MarkButton } from "@/components/tiptap-ui/mark-button"
+import { ResetAllFormattingButton } from "@/components/tiptap-ui/reset-all-formatting-button"
+import { SlashCommandTriggerButton } from "@/components/tiptap-ui/slash-command-trigger-button"
+import { TextAlignButton } from "@/components/tiptap-ui/text-align-button"
+import { TurnIntoDropdownContent } from "@/components/tiptap-ui/turn-into-dropdown"
 
 // --- Utils ---
-import { getNodeDisplayName } from "@app/lib/tiptap-collab-utils"
+import { getNodeDisplayName } from "@/lib/tiptap-collab-utils"
 
 // --- Icons ---
-import { PaintBucketIcon } from "@app/components/tiptap-icons/paint-bucket-icon"
-import { Repeat2Icon } from "@app/components/tiptap-icons/repeat-2-icon"
+import { PaintBucketIcon } from "@/components/tiptap-icons/paint-bucket-icon"
+import { Repeat2Icon } from "@/components/tiptap-icons/repeat-2-icon"
 
 // --- UI Primitives ---
-import { ArrowLeftIcon } from "@app/components/tiptap-icons/arrow-left-icon"
-import { ChevronRightIcon } from "@app/components/tiptap-icons/chevron-right-icon"
-import { HighlighterIcon } from "@app/components/tiptap-icons/highlighter-icon"
-import { LinkIcon } from "@app/components/tiptap-icons/link-icon"
-import { MoreVerticalIcon } from "@app/components/tiptap-icons/more-vertical-icon"
-import { ImageNodeFloating } from "@app/components/tiptap-node/image-node/image-node-floating"
-import { Button, ButtonGroup } from "@app/components/tiptap-ui-primitive/button"
+import { ArrowLeftIcon } from "@/components/tiptap-icons/arrow-left-icon"
+import { ChevronRightIcon } from "@/components/tiptap-icons/chevron-right-icon"
+import { HighlighterIcon } from "@/components/tiptap-icons/highlighter-icon"
+import { LinkIcon } from "@/components/tiptap-icons/link-icon"
+import { MoreVerticalIcon } from "@/components/tiptap-icons/more-vertical-icon"
+import { ImageNodeFloating } from "@/components/tiptap-node/image-node/image-node-floating"
+import { Button, ButtonGroup } from "@/components/tiptap-ui-primitive/button"
 import {
   Card,
   CardBody,
   CardGroupLabel,
   CardItemGroup,
-} from "@app/components/tiptap-ui-primitive/card"
+} from "@/components/tiptap-ui-primitive/card"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -73,16 +73,16 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@app/components/tiptap-ui-primitive/dropdown-menu"
-import { Separator } from "@app/components/tiptap-ui-primitive/separator"
-import { Spacer } from "@app/components/tiptap-ui-primitive/spacer"
+} from "@/components/tiptap-ui-primitive/dropdown-menu"
+import { Separator } from "@/components/tiptap-ui-primitive/separator"
+import { Spacer } from "@/components/tiptap-ui-primitive/spacer"
 import {
   Toolbar,
   ToolbarGroup,
   ToolbarSeparator,
-} from "@app/components/tiptap-ui-primitive/toolbar"
-import { MoveNodeButton } from "@app/components/tiptap-ui/move-node-button"
-import { useCursorVisibility } from "@app/hooks/use-cursor-visibility"
+} from "@/components/tiptap-ui-primitive/toolbar"
+import { MoveNodeButton } from "@/components/tiptap-ui/move-node-button"
+import { useCursorVisibility } from "@/hooks/use-cursor-visibility"
 
 // =============================================================================
 // Types & Constants

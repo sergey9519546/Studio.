@@ -4,31 +4,31 @@ import { forwardRef, useCallback, useEffect, useState } from "react"
 import type { Editor } from "@tiptap/react"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@app/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Lib ---
-import { cn, SR_ONLY } from "@app/lib/tiptap-utils"
+import { cn, SR_ONLY } from "@/lib/tiptap-utils"
 
 // --- UI ---
-import { ColorMenu } from "@app/components/tiptap-ui/color-menu"
-import { TableAlignMenu } from "@app/components/tiptap-node/table-node/ui/table-alignment-menu"
-import { useTableClearRowColumnContent } from "@app/components/tiptap-node/table-node/ui/table-clear-row-column-content-button"
-import { useTableMergeSplitCell } from "@app/components/tiptap-node/table-node/ui/table-merge-split-cell-button"
+import { ColorMenu } from "@/components/tiptap-ui/color-menu"
+import { TableAlignMenu } from "@/components/tiptap-node/table-node/ui/table-alignment-menu"
+import { useTableClearRowColumnContent } from "@/components/tiptap-node/table-node/ui/table-clear-row-column-content-button"
+import { useTableMergeSplitCell } from "@/components/tiptap-node/table-node/ui/table-merge-split-cell-button"
 
 // --- UI Primitives ---
-import { Button } from "@app/components/tiptap-ui-primitive/button"
-import { Combobox, ComboboxList } from "@app/components/tiptap-ui-primitive/combobox"
+import { Button } from "@/components/tiptap-ui-primitive/button"
+import { Combobox, ComboboxList } from "@/components/tiptap-ui-primitive/combobox"
 import {
   Menu,
   MenuButton,
   MenuContent,
   MenuGroup,
   MenuItem,
-} from "@app/components/tiptap-ui-primitive/menu"
-import { Separator } from "@app/components/tiptap-ui-primitive/separator"
+} from "@/components/tiptap-ui-primitive/menu"
+import { Separator } from "@/components/tiptap-ui-primitive/separator"
 
 // --- Icons ---
-import { Grip4Icon } from "@app/components/tiptap-icons/grip-4-icon"
+import { Grip4Icon } from "@/components/tiptap-icons/grip-4-icon"
 
 import "./table-cell-handle-menu.scss"
 
