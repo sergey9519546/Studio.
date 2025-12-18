@@ -91,7 +91,7 @@ const CommandBar: React.FC = () => {
   return (
     <>
       {/* Desktop Command Bar */}
-      <div className="hidden md:block fixed bottom-8 left-72 right-0 flex justify-center z-[60] px-8 pointer-events-none">
+      <div className="hidden md:flex fixed bottom-8 left-72 right-0 justify-center z-[60] px-8 pointer-events-none">
         <div className="glass-bar pointer-events-auto w-full max-w-3xl h-16 rounded-pill flex items-center justify-between px-2 pr-3 shadow-lg hover:shadow-xl transition-shadow relative">
           <form
             onSubmit={handleSubmit}
