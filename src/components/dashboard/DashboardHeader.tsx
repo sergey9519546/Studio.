@@ -1,7 +1,7 @@
 import { Bell } from "lucide-react";
 import React from "react";
-import StatusBadge from "./StatusBadge";
 import "./DashboardHeader.css";
+import StatusBadge from "./StatusBadge";
 
 interface DashboardHeaderProps {
   onNotificationsClick?: () => void;
@@ -37,11 +37,11 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           <Bell size={18} />
         </button>
         <button
-          className="h-10 px-5 rounded-full text-white text-xs font-bold uppercase tracking-wider transition-shadow new-project-button"
+          className="h-10 px-5 rounded-full text-white text-xs font-bold tracking-wider transition-shadow new-project-button"
           onClick={onNewProjectClick}
           aria-label="Create a new project"
         >
-          New Project
+          Create Project
         </button>
       </div>
     </header>

@@ -51,6 +51,7 @@ coverage/
 build_log*.txt
 docker_build*.txt
 run_logs.txt
+*_output.txt
 
 # Prevent temporary file clutter
 *.tmp
@@ -64,7 +65,14 @@ kombai-instructions.txt
 test.txt
 test.svg
 
-
+# Agent Artifacts
+*_TODO.md
+*_REPORT.md
+*_PLAN.md
+*_STATUS.md
+*_CHECKLIST.md
+*_COMPLETE.md
+*_SUMMARY.md
 
 .nx/cache
 .nx/workspace-data

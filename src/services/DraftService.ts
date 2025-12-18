@@ -3,11 +3,10 @@
  * Provides automatic saving, version control, and recovery capabilities
  */
 
-import { debounce } from '../lib/utils';
-
+import { debounce } from "../lib/utils";
 export interface DraftData {
   id: string;
-  type: 'project' | 'script' | 'message' | 'design' | 'document';
+  type: "project" | "script" | "message" | "design" | "document";
   content: any;
   metadata: {
     title?: string;
@@ -18,7 +17,7 @@ export interface DraftData {
     size: number;
     tags?: string[];
   };
-  status: 'draft' | 'saving' | 'saved' | 'error';
+  status: "draft" | "saving" | "saved" | "error";
   autoSaveEnabled: boolean;
   lastSaved?: Date;
   error?: string;
@@ -36,10 +35,10 @@ export interface DraftOptions {
 export interface DraftMetadata {
   id: string;
   title: string;
-  type: DraftData['type'];
+  type: DraftData["type"];
   lastModified: Date;
   size: number;
-  status: DraftData['status'];
+  status: DraftData["status"];
   hasUnsavedChanges: boolean;
   projectId?: string;
   version: number;
@@ -63,8 +62,8 @@ class DraftService {
   private autoSaveTimers: Map<string, NodeJS.Timeout> = new Map();
   private options: DraftOptions;
   private listeners: Map<string, Set<(draft: DraftData) => void>> = new Map();
-  private storageKey = 'studio_roster_drafts';
-  private versionStorageKey = 'studio_roster_versions';
+  private storageKey = "studio_roster_drafts";
+  private versionStorageKey = "studio_roster_versions";
 
   private constructor(options: DraftOptions = {}) {
     this.options = {
@@ -74,12 +73,17 @@ class DraftService {
       maxVersions: 10,
       debounceMs: 2000, // 2 seconds
       enableEncryption: false,
-      ...options
+      ...options,
     };
 
     // Load drafts from storage on initialization
     this.loadDraftsFromStorage();
     this.loadVersionsFromStorage();
+
+    // Initialize debounced auto-save
+    this.triggerAutoSave = debounce((id: string) => {
+      this.performAutoSave(id);
+    }, this.options.debounceMs || 2000);
   }
 
   /**
@@ -97,26 +101,26 @@ class DraftService {
    */
   async createDraft(
     id: string,
-    type: DraftData['type'],
+    type: DraftData["type"],
     content: any,
-    metadata: Partial<DraftData['metadata']> = {}
+    metadata: Partial<DraftData["metadata"]> = {}
   ): Promise<DraftData> {
     const draft: DraftData = {
       id,
       type,
       content: this.serializeContent(content),
       metadata: {
-        title: metadata.title || 'Untitled',
+        title: metadata.title || "Untitled",
         projectId: metadata.projectId,
         userId: metadata.userId,
         lastModified: new Date(),
         version: 1,
         size: this.calculateSize(content),
         tags: metadata.tags || [],
-        ...metadata
+        ...metadata,
       },
-      status: 'draft',
-      autoSaveEnabled: true
+      status: "draft",
+      autoSaveEnabled: true,
     };
 
     this.drafts.set(id, draft);
@@ -137,7 +141,7 @@ class DraftService {
   async updateDraft(
     id: string,
     content: any,
-    metadata?: Partial<DraftData['metadata']>
+    metadata?: Partial<DraftData["metadata"]>
   ): Promise<DraftData> {
     const draft = this.drafts.get(id);
     if (!draft) {
@@ -146,7 +150,10 @@ class DraftService {
 
     // Create version before update if versioning is enabled
     if (this.options.enableVersioning) {
-      await this.createVersion(id, `Auto-save before update to v${draft.metadata.version + 1}`);
+      await this.createVersion(
+        id,
+        `Auto-save before update to v${draft.metadata.version + 1}`
+      );
     }
 
     // Update draft
@@ -156,9 +163,9 @@ class DraftService {
       ...metadata,
       lastModified: new Date(),
       version: draft.metadata.version + 1,
-      size: this.calculateSize(content)
+      size: this.calculateSize(content),
     };
-    draft.status = 'draft';
+    draft.status = "draft";
 
     this.drafts.set(id, draft);
     this.saveDraftToStorage(id);
@@ -181,14 +188,14 @@ class DraftService {
       throw new Error(`Draft with id ${id} not found`);
     }
 
-    draft.status = 'saving';
+    draft.status = "saving";
     this.notifyListeners(id, draft);
 
     try {
       // Simulate async save operation
       await this.performSave(draft);
-      
-      draft.status = 'saved';
+
+      draft.status = "saved";
       draft.lastSaved = new Date();
       delete draft.error;
 
@@ -198,8 +205,8 @@ class DraftService {
 
       return draft;
     } catch (error) {
-      draft.status = 'error';
-      draft.error = error instanceof Error ? error.message : 'Unknown error';
+      draft.status = "error";
+      draft.error = error instanceof Error ? error.message : "Unknown error";
       this.drafts.set(id, draft);
       this.notifyListeners(id, draft);
       throw error;
@@ -217,39 +224,42 @@ class DraftService {
    * Get all drafts
    */
   getAllDrafts(): DraftData[] {
-    return Array.from(this.drafts.values()).sort((a, b) => 
-      b.metadata.lastModified.getTime() - a.metadata.lastModified.getTime()
+    return Array.from(this.drafts.values()).sort(
+      (a, b) =>
+        b.metadata.lastModified.getTime() - a.metadata.lastModified.getTime()
     );
   }
 
   /**
    * Get drafts by type
    */
-  getDraftsByType(type: DraftData['type']): DraftData[] {
-    return this.getAllDrafts().filter(draft => draft.type === type);
+  getDraftsByType(type: DraftData["type"]): DraftData[] {
+    return this.getAllDrafts().filter((draft) => draft.type === type);
   }
 
   /**
    * Get drafts by project
    */
   getDraftsByProject(projectId: string): DraftData[] {
-    return this.getAllDrafts().filter(draft => draft.metadata.projectId === projectId);
+    return this.getAllDrafts().filter(
+      (draft) => draft.metadata.projectId === projectId
+    );
   }
 
   /**
    * Get draft metadata (lightweight listing)
    */
   getDraftMetadata(): DraftMetadata[] {
-    return this.getAllDrafts().map(draft => ({
+    return this.getAllDrafts().map((draft) => ({
       id: draft.id,
-      title: draft.metadata.title || 'Untitled',
+      title: draft.metadata.title || "Untitled",
       type: draft.type,
       lastModified: draft.metadata.lastModified,
       size: draft.metadata.size,
       status: draft.status,
-      hasUnsavedChanges: draft.status === 'draft',
+      hasUnsavedChanges: draft.status === "draft",
       projectId: draft.metadata.projectId,
-      version: draft.metadata.version
+      version: draft.metadata.version,
     }));
   }
 
@@ -302,10 +312,7 @@ class DraftService {
   /**
    * Create a version of the draft
    */
-  async createVersion(
-    id: string,
-    description?: string
-  ): Promise<VersionInfo> {
+  async createVersion(id: string, description?: string): Promise<VersionInfo> {
     const draft = this.drafts.get(id);
     if (!draft) {
       throw new Error(`Draft with id ${id} not found`);
@@ -319,7 +326,7 @@ class DraftService {
       timestamp: new Date(),
       size: draft.metadata.size,
       checksum: this.calculateChecksum(draft.content),
-      description
+      description,
     };
 
     const versions = this.versions.get(id) || [];
@@ -340,9 +347,7 @@ class DraftService {
    * Get versions for a draft
    */
   getVersions(id: string): VersionInfo[] {
-    return (this.versions.get(id) || []).sort((a, b) => 
-      b.version - a.version
-    );
+    return (this.versions.get(id) || []).sort((a, b) => b.version - a.version);
   }
 
   /**
@@ -354,7 +359,7 @@ class DraftService {
       throw new Error(`No versions found for draft ${id}`);
     }
 
-    const version = versions.find(v => v.version === versionNumber);
+    const version = versions.find((v) => v.version === versionNumber);
     if (!version) {
       throw new Error(`Version ${versionNumber} not found for draft ${id}`);
     }
@@ -414,7 +419,7 @@ class DraftService {
     if (!this.listeners.has(id)) {
       this.listeners.set(id, new Set());
     }
-    
+
     this.listeners.get(id)!.add(callback);
 
     // Return unsubscribe function
@@ -441,18 +446,32 @@ class DraftService {
     newestDraft?: Date;
   } {
     const drafts = this.getAllDrafts();
-    const totalSize = drafts.reduce((sum, draft) => sum + draft.metadata.size, 0);
-    const totalVersions = Array.from(this.versions.values())
-      .reduce((sum, versions) => sum + versions.length, 0);
+    const totalSize = drafts.reduce(
+      (sum, draft) => sum + draft.metadata.size,
+      0
+    );
+    const totalVersions = Array.from(this.versions.values()).reduce(
+      (sum, versions) => sum + versions.length,
+      0
+    );
 
-    const draftsByType = drafts.reduce((acc, draft) => {
-      acc[draft.type] = (acc[draft.type] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
+    const draftsByType = drafts.reduce(
+      (acc, draft) => {
+        acc[draft.type] = (acc[draft.type] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
 
-    const dates = drafts.map(d => d.metadata.lastModified);
-    const oldestDraft = dates.length > 0 ? new Date(Math.min(...dates.map(d => d.getTime()))) : undefined;
-    const newestDraft = dates.length > 0 ? new Date(Math.max(...dates.map(d => d.getTime()))) : undefined;
+    const dates = drafts.map((d) => d.metadata.lastModified);
+    const oldestDraft =
+      dates.length > 0
+        ? new Date(Math.min(...dates.map((d) => d.getTime())))
+        : undefined;
+    const newestDraft =
+      dates.length > 0
+        ? new Date(Math.max(...dates.map((d) => d.getTime())))
+        : undefined;
 
     return {
       totalDrafts: drafts.length,
@@ -460,7 +479,7 @@ class DraftService {
       totalSize,
       draftsByType,
       oldestDraft,
-      newestDraft
+      newestDraft,
     };
   }
 
@@ -483,7 +502,7 @@ class DraftService {
 
   private startAutoSave(id: string): void {
     this.stopAutoSave(id); // Clear any existing timer
-    
+
     const timer = setTimeout(() => {
       this.performAutoSave(id);
     }, this.options.autoSaveInterval);
@@ -499,9 +518,7 @@ class DraftService {
     }
   }
 
-  private triggerAutoSave = debounce((id: string) => {
-    this.performAutoSave(id);
-  }, this.options.debounceMs);
+  private triggerAutoSave: (id: string) => void;
 
   private async performAutoSave(id: string): Promise<void> {
     const draft = this.drafts.get(id);
@@ -516,8 +533,8 @@ class DraftService {
 
   private async performSave(draft: DraftData): Promise<void> {
     // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 100));
-    
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
     // In a real implementation, this would make an API call
     // await api.saveDraft(draft);
   }
@@ -544,7 +561,7 @@ class DraftService {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
       const char = str.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
+      hash = (hash << 5) - hash + char;
       hash = hash & hash; // Convert to 32-bit integer
     }
     return Math.abs(hash).toString(16);
@@ -553,11 +570,11 @@ class DraftService {
   private notifyListeners(id: string, draft: DraftData): void {
     const callbacks = this.listeners.get(id);
     if (callbacks) {
-      callbacks.forEach(callback => {
+      callbacks.forEach((callback) => {
         try {
           callback(draft);
         } catch (error) {
-          console.error('Error in draft listener:', error);
+          console.error("Error in draft listener:", error);
         }
       });
     }
@@ -573,14 +590,14 @@ class DraftService {
         ...draft,
         metadata: {
           ...draft.metadata,
-          lastModified: draft.metadata.lastModified.toISOString()
+          lastModified: draft.metadata.lastModified.toISOString(),
         },
-        lastSaved: draft.lastSaved?.toISOString()
+        lastSaved: draft.lastSaved?.toISOString(),
       };
 
       localStorage.setItem(this.storageKey, JSON.stringify(storage));
     } catch (error) {
-      console.warn('Failed to save draft to storage:', error);
+      console.warn("Failed to save draft to storage:", error);
     }
   }
 
@@ -590,7 +607,7 @@ class DraftService {
       delete storage[id];
       localStorage.setItem(this.storageKey, JSON.stringify(storage));
     } catch (error) {
-      console.warn('Failed to remove draft from storage:', error);
+      console.warn("Failed to remove draft from storage:", error);
     }
   }
 
@@ -600,14 +617,14 @@ class DraftService {
       if (!versions) return;
 
       const storage = this.getVersionStorage();
-      storage[id] = versions.map(v => ({
+      storage[id] = versions.map((v) => ({
         ...v,
-        timestamp: v.timestamp.toISOString()
+        timestamp: v.timestamp.toISOString(),
       }));
 
       localStorage.setItem(this.versionStorageKey, JSON.stringify(storage));
     } catch (error) {
-      console.warn('Failed to save versions to storage:', error);
+      console.warn("Failed to save versions to storage:", error);
     }
   }
 
@@ -617,7 +634,7 @@ class DraftService {
       delete storage[id];
       localStorage.setItem(this.versionStorageKey, JSON.stringify(storage));
     } catch (error) {
-      console.warn('Failed to remove versions from storage:', error);
+      console.warn("Failed to remove versions from storage:", error);
     }
   }
 
@@ -626,7 +643,7 @@ class DraftService {
       const stored = localStorage.getItem(this.storageKey);
       return stored ? JSON.parse(stored) : {};
     } catch (error) {
-      console.warn('Failed to load drafts from storage:', error);
+      console.warn("Failed to load drafts from storage:", error);
       return {};
     }
   }
@@ -636,7 +653,7 @@ class DraftService {
       const stored = localStorage.getItem(this.versionStorageKey);
       return stored ? JSON.parse(stored) : {};
     } catch (error) {
-      console.warn('Failed to load versions from storage:', error);
+      console.warn("Failed to load versions from storage:", error);
       return {};
     }
   }
@@ -649,9 +666,11 @@ class DraftService {
           ...draftData,
           metadata: {
             ...draftData.metadata,
-            lastModified: new Date(draftData.metadata.lastModified)
+            lastModified: new Date(draftData.metadata.lastModified),
           },
-          lastSaved: draftData.lastSaved ? new Date(draftData.lastSaved) : undefined
+          lastSaved: draftData.lastSaved
+            ? new Date(draftData.lastSaved)
+            : undefined,
         } as DraftData;
 
         this.drafts.set(id, draft);
@@ -662,7 +681,7 @@ class DraftService {
         }
       }
     } catch (error) {
-      console.warn('Failed to load drafts from storage:', error);
+      console.warn("Failed to load drafts from storage:", error);
     }
   }
 
@@ -670,14 +689,14 @@ class DraftService {
     try {
       const storage = this.getVersionStorage();
       for (const [id, versionData] of Object.entries(storage)) {
-        const versions = (versionData as any[]).map(v => ({
+        const versions = (versionData as any[]).map((v) => ({
           ...v,
-          timestamp: new Date(v.timestamp)
+          timestamp: new Date(v.timestamp),
         }));
         this.versions.set(id, versions);
       }
     } catch (error) {
-      console.warn('Failed to load versions from storage:', error);
+      console.warn("Failed to load versions from storage:", error);
     }
   }
 }

@@ -43,7 +43,7 @@ if %errorlevel% equ 0 (
 
 echo.
 echo 4. Setting WSL version to 2...
-wsl --set-default-version 2 2>nul
+wsl --set-default-version 2
 if %errorlevel% equ 0 (
     echo   ✓ WSL version set to 2
 ) else (

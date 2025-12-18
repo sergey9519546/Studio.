@@ -102,10 +102,19 @@ export class AssetsService {
       // Update memory store to reflect persistence (remove transient flag)
       const index = this.memoryStore.findIndex(a => a.id === assetEntity.id);
       if (index !== -1) {
-        this.memoryStore[index] = { ...asset, url: finalUrl, isTransient: false };
+        this.memoryStore[index] = {
+          ...(asset as unknown as AssetEntity),
+          url: finalUrl,
+          isTransient: false,
+        };
       }
 
-      return { ...asset, url: finalUrl, isTransient: false, projectId: asset.projectId ?? undefined };
+      return {
+        ...(asset as unknown as AssetEntity),
+        url: finalUrl,
+        isTransient: false,
+        projectId: asset.projectId ?? undefined,
+      };
     } catch (error: unknown) {
       const err = error instanceof Error ? error : new Error(String(error));
       this.logger.warn(`Database save failed (Storage successful). Asset ${assetEntity.id} kept in memory: ${err.message}`);
@@ -165,7 +174,7 @@ export class AssetsService {
     // 2. Check DB
     const asset = await this.prisma.asset.findUnique({ where: { id } });
     if (!asset) throw new NotFoundException('Asset not found');
-    return asset;
+    return asset as unknown as AssetEntity;
   }
 
   async getDownloadUrl(id: string): Promise<string> {

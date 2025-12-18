@@ -72,3 +72,12 @@ docker-compose*.yml
 # Editor
 *.sublime-project
 *.sublime-workspace
+
+# Agent Artifacts
+*_TODO.md
+*_REPORT.md
+*_PLAN.md
+*_STATUS.md
+*_CHECKLIST.md
+*_COMPLETE.md
+*_SUMMARY.md

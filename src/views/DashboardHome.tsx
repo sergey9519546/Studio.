@@ -1,14 +1,16 @@
 import React from "react";
 import DashboardHeader from "../components/dashboard/DashboardHeader";
 import HeroProjectCard from "../components/dashboard/HeroProjectCard";
+import RecentActivityWidget from "../components/dashboard/RecentActivityWidget";
 import RecentArtifactsCard, {
   Artifact,
 } from "../components/dashboard/RecentArtifactsCard";
-import SparkAICard from "../components/dashboard/SparkAICard";
+import ResourceUsageWidget from "../components/dashboard/ResourceUsageWidget";
 import VibePaletteCard from "../components/dashboard/VibePaletteCard";
 import { useDashboardData } from "../hooks/useDashboardData";
 import { useToast } from "../hooks/useToast";
 import "./DashboardHome.css";
+import LuminaAICard from "@/components/dashboard/LuminaAICard";
 
 interface DashboardHomeProps {
   onNavigateToGallery?: () => void;
@@ -169,8 +171,8 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({
 
         {/* Right Column Grid */}
         <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6 content-start">
-          {/* 2. Spark AI (Ideation) */}
-          <SparkAICard
+          {/* 2. Lumina AI (Ideation) */}
+          <LuminaAICard
             onSubmitPrompt={handleSubmitPrompt}
             className="sm:col-span-2 lg:col-span-1 min-h-[220px]"
           />
@@ -190,6 +192,10 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({
             onArtifactClick={handleArtifactClick}
             className="sm:col-span-2"
           />
+
+          {/* 5. New Widgets (Visual Polish) */}
+          <RecentActivityWidget className="sm:col-span-1 min-h-[220px]" />
+          <ResourceUsageWidget className="sm:col-span-1 min-h-[220px]" />
         </div>
       </div>
     </main>

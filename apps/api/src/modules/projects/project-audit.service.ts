@@ -30,7 +30,7 @@ type AuditLogEntry = {
   action: string;
   resourceType: string;
   resourceId: string | null;
-  metadata: Record<string, unknown>;
+  metadata: any;
   timestamp: Date;
   user?: { id: string; name: string; email: string } | null;
 };
@@ -53,7 +53,7 @@ export class ProjectAuditService {
           action: event.action,
           resourceType: event.resourceType,
           resourceId: event.resourceId,
-          metadata: event.metadata || {},
+          metadata: (event.metadata || {}) as any,
           ipAddress: event.ipAddress,
           userAgent: event.userAgent,
           timestamp: new Date(),
@@ -61,7 +61,7 @@ export class ProjectAuditService {
       });
     } catch (error) {
       // Don't fail operations due to audit logging errors
-      this.logger.error('Failed to log audit event', { error, event });
+      this.logger.error("Failed to log audit event", { error, event });
     }
   }
 
@@ -77,8 +77,8 @@ export class ProjectAuditService {
     await this.logEvent({
       projectId,
       userId,
-      action: 'DOCUMENT_INGEST',
-      resourceType: 'knowledge_source',
+      action: "DOCUMENT_INGEST",
+      resourceType: "knowledge_source",
       resourceId: documentId,
       metadata,
     });
@@ -91,14 +91,14 @@ export class ProjectAuditService {
     projectId: string,
     userId: string,
     targetUserId: string,
-    action: 'GRANT' | 'REVOKE' | 'UPDATE',
+    action: "GRANT" | "REVOKE" | "UPDATE",
     role: string
   ): Promise<void> {
     await this.logEvent({
       projectId,
       userId,
       action: `ACCESS_${action}`,
-      resourceType: 'access_control',
+      resourceType: "access_control",
       resourceId: targetUserId,
       metadata: { role, targetUserId },
     });
@@ -116,8 +116,8 @@ export class ProjectAuditService {
     await this.logEvent({
       projectId,
       userId,
-      action: 'STATUS_CHANGE',
-      resourceType: 'project',
+      action: "STATUS_CHANGE",
+      resourceType: "project",
       resourceId: projectId,
       metadata: { previousStatus, newStatus },
     });
@@ -135,8 +135,8 @@ export class ProjectAuditService {
     await this.logEvent({
       projectId,
       userId,
-      action: 'DATA_EXPORT',
-      resourceType: 'export',
+      action: "DATA_EXPORT",
+      resourceType: "export",
       metadata: { exportType, resourceCount },
     });
   }
@@ -149,7 +149,7 @@ export class ProjectAuditService {
     userId: string,
     resourceType: string,
     resourceId: string,
-    accessType: 'READ' | 'WRITE' | 'DELETE'
+    accessType: "READ" | "WRITE" | "DELETE"
   ): Promise<void> {
     await this.logEvent({
       projectId,
@@ -185,7 +185,7 @@ export class ProjectAuditService {
     const [logs, total] = await Promise.all([
       this.prisma.projectAuditLog.findMany({
         where,
-        orderBy: { timestamp: 'desc' },
+        orderBy: { timestamp: "desc" },
         take: filter.limit || 50,
         skip: filter.offset || 0,
         include: {
@@ -207,7 +207,10 @@ export class ProjectAuditService {
   /**
    * Get audit summary for a project
    */
-  async getAuditSummary(projectId: string, days: number = 30): Promise<{
+  async getAuditSummary(
+    projectId: string,
+    days: number = 30
+  ): Promise<{
     totalEvents: number;
     byAction: Record<string, number>;
     byUser: Record<string, number>;
@@ -221,7 +224,7 @@ export class ProjectAuditService {
         projectId,
         timestamp: { gte: startDate },
       },
-      orderBy: { timestamp: 'desc' },
+      orderBy: { timestamp: "desc" },
     });
 
     const byAction: Record<string, number> = {};
@@ -257,45 +260,51 @@ export class ProjectAuditService {
     const sensitiveAccessCount = await this.prisma.projectAuditLog.count({
       where: {
         projectId,
-        action: { startsWith: 'SENSITIVE_' },
+        action: { startsWith: "SENSITIVE_" },
         timestamp: { gte: new Date(Date.now() - 24 * 60 * 60 * 1000) }, // Last 24 hours
       },
     });
 
     if (sensitiveAccessCount > 100) {
-      warnings.push(`High volume of sensitive data access: ${sensitiveAccessCount} events in 24 hours`);
+      warnings.push(
+        `High volume of sensitive data access: ${sensitiveAccessCount} events in 24 hours`
+      );
     }
 
     // Check for data export events
     const exportCount = await this.prisma.projectAuditLog.count({
       where: {
         projectId,
-        action: 'DATA_EXPORT',
+        action: "DATA_EXPORT",
         timestamp: { gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) }, // Last 7 days
       },
     });
 
     if (exportCount > 10) {
-      warnings.push(`Multiple data exports detected: ${exportCount} in the last 7 days`);
+      warnings.push(
+        `Multiple data exports detected: ${exportCount} in the last 7 days`
+      );
     }
 
     // Check for access control changes
     const accessChanges = await this.prisma.projectAuditLog.count({
       where: {
         projectId,
-        action: { startsWith: 'ACCESS_' },
+        action: { startsWith: "ACCESS_" },
         timestamp: { gte: new Date(Date.now() - 24 * 60 * 60 * 1000) },
       },
     });
 
     if (accessChanges > 20) {
-      warnings.push(`Unusual access control activity: ${accessChanges} changes in 24 hours`);
+      warnings.push(
+        `Unusual access control activity: ${accessChanges} changes in 24 hours`
+      );
     }
 
     // Get last audit timestamp
     const lastAuditLog = await this.prisma.projectAuditLog.findFirst({
       where: { projectId },
-      orderBy: { timestamp: 'desc' },
+      orderBy: { timestamp: "desc" },
       select: { timestamp: true },
     });
 
@@ -309,7 +318,10 @@ export class ProjectAuditService {
   /**
    * Purge old audit logs based on retention policy
    */
-  async purgeOldLogs(projectId: string, retentionDays: number): Promise<number> {
+  async purgeOldLogs(
+    projectId: string,
+    retentionDays: number
+  ): Promise<number> {
     const cutoffDate = new Date();
     cutoffDate.setDate(cutoffDate.getDate() - retentionDays);
 
@@ -320,7 +332,9 @@ export class ProjectAuditService {
       },
     });
 
-    this.logger.log(`Purged ${result.count} audit logs for project ${projectId}`);
+    this.logger.log(
+      `Purged ${result.count} audit logs for project ${projectId}`
+    );
     return result.count;
   }
 }

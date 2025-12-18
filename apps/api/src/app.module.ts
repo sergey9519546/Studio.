@@ -31,7 +31,7 @@ import { RealtimeModule } from "./modules/realtime/realtime.module.js";
 import { ScriptsModule } from "./modules/scripts/scripts.module.js";
 import { StorageModule } from "./modules/storage/storage.module.js";
 import { PrismaModule } from "./prisma/prisma.module.js";
-const __dirname = dirname(__filename);
+const moduleDir = dirname(__filename);
 
 const appLogger = new Logger('AppModule');
 
@@ -41,15 +41,17 @@ const staticRoot = process.env.NODE_ENV === 'production'
   ? join(process.cwd(), 'build/client')
   : (() => {
       const staticCandidates = [
-        join(process.cwd(), 'build/client'),
-        join(process.cwd(), 'dist/client'),
-        join(__dirname, '../../../client'),
-        join(__dirname, '../../client'),
+        join(process.cwd(), "build/client"),
+        join(process.cwd(), "dist/client"),
+        join(moduleDir, "../../../client"),
+        join(moduleDir, "../../client"),
       ];
       return staticCandidates.find(p => existsSync(p));
     })();
 
-appLogger.log(`Static root: ${staticRoot ?? 'not-found'} | cwd: ${process.cwd()} | __dirname: ${__dirname}`);
+appLogger.log(
+  `Static root: ${staticRoot ?? "not-found"} | cwd: ${process.cwd()} | __dirname: ${moduleDir}`
+);
 
 @Module({
   imports: [

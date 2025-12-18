@@ -1,14 +1,10 @@
-import {
-  Settings
-} from "lucide-react";
+import { Settings } from "lucide-react";
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useNavigationState } from "../../context/RouteContext";
 import { getMainNavigationRoutes } from "../../routes";
 
 const Sidebar: React.FC = () => {
   const navigate = useNavigate();
-  const { activeItem } = useNavigationState();
   const navigationRoutes = getMainNavigationRoutes();
 
   const handleLogoClick = () => {
@@ -23,7 +19,7 @@ const Sidebar: React.FC = () => {
   return (
     <nav className="fixed left-0 top-0 bottom-0 w-72 flex flex-col py-8 bg-sidebar border-r border-border-subtle z-50">
       {/* Brand */}
-      <div 
+      <div
         className="px-8 mb-12 flex items-center gap-4 cursor-pointer hover:opacity-80 transition-opacity"
         onClick={handleLogoClick}
         role="button"
@@ -36,7 +32,10 @@ const Sidebar: React.FC = () => {
         }}
       >
         <div className="w-10 h-10 bg-ink-primary rounded-xl flex items-center justify-center text-white shadow-xl">
-          <div className="w-4 h-4 bg-white rounded-full border-2 border-ink-primary" aria-hidden="true" />
+          <div
+            className="w-4 h-4 bg-white rounded-full border-2 border-ink-primary"
+            aria-hidden="true"
+          />
         </div>
         <div>
           <h1 className="font-bold text-xl tracking-tight text-ink-primary">
@@ -49,30 +48,30 @@ const Sidebar: React.FC = () => {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto px-6 space-y-2" aria-label="Main navigation">
+      <nav
+        className="flex-1 overflow-y-auto px-6 space-y-2"
+        aria-label="Main navigation"
+      >
         <div className="px-4 mb-2 text-[10px] font-bold text-ink-tertiary uppercase tracking-widest opacity-60">
           Core Modules
         </div>
         {navigationRoutes.map((route) => {
           const IconComponent = route.icon;
-          const isActive = activeItem === route.path.replace("/", "");
-          
+
           return (
             <NavLink
               key={route.path}
               to={route.path}
-              className={({ isActive: navIsActive }) =>
+              className={({ isActive }) =>
                 `nav-item w-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg transition-all duration-200 ${
-                  navIsActive || isActive ? "active bg-primary/10 text-primary border-primary/20" : "hover:bg-subtle"
+                  isActive
+                    ? "active bg-primary/10 text-primary border-primary/20"
+                    : "hover:bg-subtle"
                 }`
               }
               aria-label={`Navigate to ${route.label}`}
             >
-              <IconComponent
-                size={18}
-                strokeWidth={2}
-                aria-hidden="true"
-              />
+              <IconComponent size={18} strokeWidth={2} aria-hidden="true" />
               <span>{route.label}</span>
             </NavLink>
           );
@@ -81,7 +80,7 @@ const Sidebar: React.FC = () => {
 
       {/* User / Settings */}
       <div className="px-6 mt-auto pt-6 border-t border-border-subtle/50 flex flex-col gap-2">
-        <button 
+        <button
           className="nav-item w-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg hover:bg-subtle transition-colors"
           aria-label="Open system configuration settings"
           tabIndex={0}

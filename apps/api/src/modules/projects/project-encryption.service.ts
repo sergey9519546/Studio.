@@ -123,7 +123,7 @@ export class ProjectEncryptionService {
       if (data[field]) {
         const result = await this.decrypt(
           projectId,
-          data[field],
+          data[field] as string,
           metadata.iv,
           metadata.keyId
         );
@@ -184,7 +184,10 @@ export class ProjectEncryptionService {
           );
 
           // Re-encrypt with new key
-          const encrypted = await this.encrypt(projectId, decrypted.content);
+          const encrypted = await this.encrypt(
+            projectId,
+            decrypted.content as string
+          );
 
           // Update record
           await this.prisma.knowledgeSource.update({

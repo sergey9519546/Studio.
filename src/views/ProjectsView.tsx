@@ -42,7 +42,7 @@ const ProjectsView: React.FC<ProjectsViewProps> = ({ projects, onSelect }) => {
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-8">
         <div>
           <h1 className="text-4xl font-bold tracking-tight text-ink-primary mb-2">
-            Manifests
+            Projects
           </h1>
           <p className="text-ink-secondary text-sm">
             Active creative engagements.
@@ -78,7 +78,7 @@ const ProjectsView: React.FC<ProjectsViewProps> = ({ projects, onSelect }) => {
             <Plus size={32} />
           </div>
           <span className="font-medium text-ink-secondary group-hover:text-ink-primary">
-            Initiate Manifest
+            Create Project
           </span>
         </div>
         {visibleProjects.map((p) => (

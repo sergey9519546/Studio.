@@ -212,7 +212,7 @@ export class VertexAIService {
       }
 
       // Start chat session
-      const chat = modelInstance.startChat(chatConfig);
+      const chat = modelInstance.startChat(chatConfig as any);
 
       // Send the last message
       const lastMessage = messages[messages.length - 1];
@@ -224,7 +224,7 @@ export class VertexAIService {
       if (functionCalls && functionCalls.length > 0) {
         const toolCalls: ToolCall[] = functionCalls.map((call) => ({
           name: call.name,
-          args: call.args,
+          args: call.args as Record<string, unknown>,
         }));
         return { toolCalls };
       }

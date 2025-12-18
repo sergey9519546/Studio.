@@ -2,8 +2,8 @@ import { Injectable, Logger, OnModuleInit, UnauthorizedException } from '@nestjs
 import { ConfigService } from '@nestjs/config';
 import { JWT, OAuth2Client } from 'google-auth-library';
 import { google } from 'googleapis';
-import type { drive_v3 } from 'googleapis/build/src/apis/drive/v3';
-import type { docs_v1 } from 'googleapis/build/src/apis/docs/v1';
+import type { docs_v1 } from "googleapis/build/src/apis/docs/v1";
+import type { drive_v3 } from "googleapis/build/src/apis/drive/v3";
 import type { sheets_v4 } from 'googleapis/build/src/apis/sheets/v4';
 
 export interface GoogleUserCredentials {
@@ -76,9 +76,9 @@ export class GoogleClientFactory implements OnModuleInit {
     }
 
     try {
-      const auth = new google.auth.OAuth2(
-        this.configService.get('GOOGLE_CLIENT_ID'),
-        this.configService.get('GOOGLE_CLIENT_SECRET')
+      const auth = new OAuth2Client(
+        this.configService.get("GOOGLE_CLIENT_ID"),
+        this.configService.get("GOOGLE_CLIENT_SECRET")
       );
 
       auth.setCredentials({
@@ -105,10 +105,10 @@ export class GoogleClientFactory implements OnModuleInit {
     }
 
     try {
-      const client = new google.auth.JWT({
+      const client = new JWT({
         email: this.serviceAccountEmail,
         key: this.serviceAccountKey,
-        scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+        scopes: ["https://www.googleapis.com/auth/drive.readonly"],
       });
       return client;
     } catch (error: unknown) {
@@ -132,8 +132,8 @@ export class GoogleClientFactory implements OnModuleInit {
     const auth = this.createAuth(user.googleCredentials);
 
     return {
-      sheets: google.sheets({ version: 'v4', auth }),
-      docs: google.docs({ version: 'v1', auth }),
+      sheets: (google as any).sheets({ version: "v4", auth }),
+      docs: (google as any).docs({ version: "v1", auth }),
     };
   }
 
@@ -150,7 +150,7 @@ export class GoogleClientFactory implements OnModuleInit {
     const auth = this.createAuth(user.googleCredentials);
 
     return {
-      drive: google.drive({ version: 'v3', auth })
+      drive: (google as any).drive({ version: "v3", auth }),
     };
   }
 
@@ -159,7 +159,7 @@ export class GoogleClientFactory implements OnModuleInit {
    */
   createDriveClient(): drive_v3.Drive {
     const auth = this.createServiceAccountAuth();
-    return google.drive({ version: 'v3', auth });
+    return (google as any).drive({ version: "v3", auth });
   }
 
   getServiceAccountProfile() {

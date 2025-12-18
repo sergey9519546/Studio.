@@ -2917,6 +2917,7 @@
             "npm:@nestjs/common",
             "npm:@nestjs/config",
             "npm:express",
+            "npm:google-auth-library",
             "npm:googleapis",
             "npm:jsonwebtoken"
           ]
@@ -3463,10 +3464,10 @@
           "file": "apps/api/src/modules/storage/storage.service.ts",
           "hash": "14338442356349222787",
           "deps": [
+            "npm:@google-cloud/storage",
             "npm:@nestjs/common",
             "npm:@nestjs/config",
             "npm:@nestjs/event-emitter",
-            "npm:@google-cloud/storage",
             "npm:firebase-admin"
           ]
         },
@@ -49008,11 +49009,11 @@
       },
       {
         "file": "fix-wsl.bat",
-        "hash": "1787285501002890846"
+        "hash": "12665851312230206891"
       },
       {
         "file": "fix-wsl.ps1",
-        "hash": "17000865272450398534"
+        "hash": "6713174668435829786"
       },
       {
         "file": "generated/prisma/browser.ts",

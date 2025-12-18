@@ -71,18 +71,25 @@ export class AIUsageService {
             : 0.02;
 
         return {
-            totalRequests: usage.length,
-            cachedRequests: cachedRequests.length,
-            uncachedRequests: uncachedRequests.length,
-            cacheHitRate: usage.length > 0
-                ? ((cachedRequests.length / usage.length * 100).toFixed(2) + '%')
-                : '0%',
-            totalCost: '$' + usage.reduce((sum, u) => sum + (u.cost || 0), 0).toFixed(4),
-            costSaved: '$' + (cachedRequests.length * avgCostPerUncached).toFixed(4),
-            avgDuration: usage.length > 0
-                ? (usage.reduce((sum, u) => sum + (u.duration || 0), 0) / usage.length).toFixed(0) + 'ms'
-                : '0ms',
-            byEndpoint: this.groupByEndpoint(usage),
+          totalRequests: usage.length,
+          cachedRequests: cachedRequests.length,
+          uncachedRequests: uncachedRequests.length,
+          cacheHitRate:
+            usage.length > 0
+              ? ((cachedRequests.length / usage.length) * 100).toFixed(2) + "%"
+              : "0%",
+          totalCost:
+            "$" + usage.reduce((sum, u) => sum + (u.cost || 0), 0).toFixed(4),
+          costSaved:
+            "$" + (cachedRequests.length * avgCostPerUncached).toFixed(4),
+          avgDuration:
+            usage.length > 0
+              ? (
+                  usage.reduce((sum, u) => sum + (u.duration || 0), 0) /
+                  usage.length
+                ).toFixed(0) + "ms"
+              : "0ms",
+          byEndpoint: this.groupByEndpoint(usage as any[]),
         };
     }
 

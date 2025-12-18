@@ -2,14 +2,14 @@ import { ArrowRight, Brain } from "lucide-react";
 import React, { useId, useState } from "react";
 import Card from "../../components/ui/Card";
 
-interface SparkAICardProps {
+interface LuminaAICardProps {
   onSubmitPrompt?: (prompt: string) => void;
   className?: string;
 }
 
 const MAX_PROMPT_LENGTH = 160;
 
-const SparkAICard: React.FC<SparkAICardProps> = ({ onSubmitPrompt, className = "" }) => {
+const LuminaAICard: React.FC<LuminaAICardProps> = ({ onSubmitPrompt, className = "" }) => {
   const [prompt, setPrompt] = useState("");
   const helperId = useId();
   const accent = "var(--dashboard-accent, #2463E6)";
@@ -36,15 +36,13 @@ const SparkAICard: React.FC<SparkAICardProps> = ({ onSubmitPrompt, className = "
         <div className="p-2.5 bg-white/10 rounded-xl backdrop-blur-sm">
           <Brain size={20} className="text-white" />
         </div>
-        <span className="text-[10px] font-mono text-white/40">
-          AI v4.0
-        </span>
+        <span className="text-[10px] font-mono text-white/40">AI v4.0</span>
       </div>
       <div className="z-10">
         <h3 className="text-lg font-medium mb-4 leading-tight">
-          Spark
+          Lumina
           <br />
-          Creativity.
+          Intelligence.
         </h3>
         <form onSubmit={handleSubmit} className="relative group/input">
           <label htmlFor="ai-prompt" className="sr-only">
@@ -52,10 +50,10 @@ const SparkAICard: React.FC<SparkAICardProps> = ({ onSubmitPrompt, className = "
           </label>
           <input
             id="ai-prompt"
-            placeholder="Concept prompt..."
+            placeholder="Ask Lumina..."
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            className="w-full bg-white/10 border border-white/5 rounded-2xl px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:bg-white/20 focus:border-white/20 transition-all pr-10"
+            className="w-full bg-white/20 border border-white/10 rounded-2xl px-4 py-3 text-sm text-white placeholder-white/60 outline-none focus:bg-white/30 focus:border-white/30 transition-all pr-10"
             maxLength={MAX_PROMPT_LENGTH}
             aria-describedby={helperId}
           />
@@ -69,7 +67,10 @@ const SparkAICard: React.FC<SparkAICardProps> = ({ onSubmitPrompt, className = "
             <ArrowRight size={14} />
           </button>
         </form>
-        <div id={helperId} className="mt-2 text-[11px] text-white/70 flex items-center justify-between">
+        <div
+          id={helperId}
+          className="mt-2 text-[11px] text-white/70 flex items-center justify-between"
+        >
           <span>Anchor with concrete nouns and tone cues.</span>
           <span aria-live="polite">{remainingCharacters} left</span>
         </div>
@@ -78,4 +79,4 @@ const SparkAICard: React.FC<SparkAICardProps> = ({ onSubmitPrompt, className = "
   );
 };
 
-export default SparkAICard;
+export default LuminaAICard;

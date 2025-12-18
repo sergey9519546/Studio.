@@ -138,7 +138,7 @@ const RecentArtifactsCard: React.FC<RecentArtifactsCardProps> = ({
             No artifacts yet
           </div>
           <p className="text-xs text-ink-secondary">
-            Generate with Spark or upload a render to populate this space.
+            Generate with Lumina or upload a render to populate this space.
           </p>
           <button
             className="text-xs font-bold text-ink-primary hover:opacity-70 transition-opacity underline-offset-2 underline"

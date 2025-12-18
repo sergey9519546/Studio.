@@ -16,46 +16,46 @@ Write-Host "Running as Administrator - Good!" -ForegroundColor Green
 
 # Step 1: Enable Windows Subsystem for Linux
 Write-Host "`n1. Enabling Windows Subsystem for Linux..." -ForegroundColor Yellow
-try {
-    dism /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+if ($LASTEXITCODE -eq 0) {
     Write-Host "✓ WSL enabled successfully" -ForegroundColor Green
-} catch {
+} else {
     Write-Host "✗ Failed to enable WSL" -ForegroundColor Red
 }
 
 # Step 2: Enable Virtual Machine Platform
 Write-Host "`n2. Enabling Virtual Machine Platform..." -ForegroundColor Yellow
-try {
-    dism /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+dism /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+if ($LASTEXITCODE -eq 0) {
     Write-Host "✓ Virtual Machine Platform enabled successfully" -ForegroundColor Green
-} catch {
+} else {
     Write-Host "✗ Failed to enable Virtual Machine Platform" -ForegroundColor Red
 }
 
 # Step 3: Enable Hyper-V (optional but recommended)
 Write-Host "`n3. Enabling Hyper-V..." -ForegroundColor Yellow
-try {
-    dism /online /enable-feature /featurename:Microsoft-Hyper-V /all /norestart
+dism /online /enable-feature /featurename:Microsoft-Hyper-V /all /norestart
+if ($LASTEXITCODE -eq 0) {
     Write-Host "✓ Hyper-V enabled successfully" -ForegroundColor Green
-} catch {
+} else {
     Write-Host "⚠ Failed to enable Hyper-V (may not be available on all systems)" -ForegroundColor Yellow
 }
 
 # Step 4: Enable Containers (for Docker support)
 Write-Host "`n4. Enabling Windows Containers..." -ForegroundColor Yellow
-try {
-    dism /online /enable-feature /featurename:Containers /all /norestart
+dism /online /enable-feature /featurename:Containers /all /norestart
+if ($LASTEXITCODE -eq 0) {
     Write-Host "✓ Containers enabled successfully" -ForegroundColor Green
-} catch {
+} else {
     Write-Host "⚠ Failed to enable Containers (may not be available on all systems)" -ForegroundColor Yellow
 }
 
 # Step 5: Set WSL version to 2
 Write-Host "`n5. Setting WSL version to 2..." -ForegroundColor Yellow
-try {
-    wsl --set-default-version 2
+wsl --set-default-version 2
+if ($LASTEXITCODE -eq 0) {
     Write-Host "✓ WSL version set to 2" -ForegroundColor Green
-} catch {
+} else {
     Write-Host "⚠ Could not set WSL version (may need after reboot)" -ForegroundColor Yellow
 }
 

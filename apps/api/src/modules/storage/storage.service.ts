@@ -1,5 +1,9 @@
 // Storage service - Google Cloud Storage implementation
 import {
+  Storage,
+  type UploadOptions as GcsUploadOptions,
+} from "@google-cloud/storage";
+import {
   Injectable,
   InternalServerErrorException,
   Logger,
@@ -8,8 +12,6 @@ import {
 import { ConfigService } from "@nestjs/config";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import { Buffer } from "buffer";
-import { Readable } from "stream";
-import { Storage, type UploadOptions as GcsUploadOptions } from "@google-cloud/storage";
 import {
   applicationDefault,
   cert,
@@ -20,6 +22,7 @@ import {
   type ServiceAccount,
 } from "firebase-admin/app";
 import { getStorage } from "firebase-admin/storage";
+import { Readable } from "stream";
 
 export interface StoredObject {
   storageKey: string;
@@ -173,13 +176,16 @@ export class StorageService implements OnModuleInit {
   private async initializeStorage() {
     try {
       const app = this.initFirebaseApp();
-      this.storage = getStorage(app);
+      this.storage = getStorage(app) as any;
 
-      const bucket = this.storage.bucket(this.bucketName);
+      const bucket = this.storage!.bucket(this.bucketName);
       await bucket.getMetadata();
 
-      const [serviceAccount] = await this.storage.getServiceAccount();
-      this.connectedEmail = serviceAccount?.email || "";
+      const [serviceAccount] = await this.storage!.getServiceAccount();
+      this.connectedEmail =
+        (serviceAccount as any)?.email ||
+        (serviceAccount as any)?.client_email ||
+        "";
 
       this.isConfigured = true;
       this.logger.log(`StorageService: Connected to bucket ${this.bucketName}`);
@@ -240,7 +246,9 @@ export class StorageService implements OnModuleInit {
         await file.save(params.body, uploadOpts);
       } else {
         await new Promise<void>((resolve, reject) => {
-          const stream = params.body.pipe(file.createWriteStream(uploadOpts));
+          const stream = (params.body as Readable).pipe(
+            file.createWriteStream(uploadOpts)
+          );
           stream.on("finish", () => resolve());
           stream.on("error", reject);
         });

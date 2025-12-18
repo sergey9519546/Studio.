@@ -1,6 +1,7 @@
 import { Controller, Get, Query, Res, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import type { Response } from 'express';
+import { OAuth2Client } from "google-auth-library";
 import { google } from 'googleapis';
 import * as jwt from 'jsonwebtoken';
 import { PrismaService } from '../../prisma/prisma.service.js';
@@ -23,7 +24,7 @@ export class GoogleAuthController {
         throw new UnauthorizedException('Google OAuth not configured');
       }
 
-      const oauth2Client = new google.auth.OAuth2(
+      const oauth2Client = new OAuth2Client(
         clientId,
         clientSecret,
         redirectUri
@@ -60,7 +61,7 @@ export class GoogleAuthController {
         throw new UnauthorizedException('Google OAuth or JWT not configured');
       }
 
-      const oauth2Client = new google.auth.OAuth2(
+      const oauth2Client = new OAuth2Client(
         clientId,
         clientSecret,
         redirectUri
@@ -71,9 +72,9 @@ export class GoogleAuthController {
       oauth2Client.setCredentials(tokens);
 
       // Get user info from Google
-      const oauth2 = google.oauth2({
+      const oauth2 = (google as any).oauth2({
         auth: oauth2Client,
-        version: 'v2',
+        version: "v2",
       });
 
       const userInfo = await oauth2.userinfo.get();
