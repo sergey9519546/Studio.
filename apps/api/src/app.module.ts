@@ -15,25 +15,9 @@ import { CommonModule } from "./common/guards/common.module.js";
 import { LoggerModule } from './common/logger/logger.module.js';
 import { validate } from "./config/env.validation.js";
 import { HealthModule } from "./health/health.module.js";
-import { AIModule } from "./modules/ai/ai.module.js";
-import { AnalysisModule } from "./modules/analysis/analysis.module.js";
-import { AssetsModule } from "./modules/assets/assets.module.js";
-import { AssignmentsModule } from "./modules/assignments/assignments.module.js";
-import { AuthModule } from "./modules/auth/auth.module.js";
-import { AvailabilityModule } from "./modules/availability/availability.module.js";
 import { FreelancersModule } from "./modules/freelancers/freelancers.module.js";
-import { GoogleModule } from "./modules/google/google.module.js";
-import { IntegrationsModule } from "./modules/integrations/integrations.module.js";
-import { IntelligenceModule } from "./modules/intelligence/intelligence.module.js";
-import { KnowledgeModule } from "./modules/knowledge/knowledge.module.js";
-import { MonitoringModule } from "./modules/monitoring/monitoring.module.js";
-import { MoodboardModule } from "./modules/moodboard/moodboard.module.js";
 import { ProjectsModule } from "./modules/projects/projects.module.js";
-import { RAGModule } from "./modules/rag/rag.module.js";
-import { RealtimeModule } from "./modules/realtime/realtime.module.js";
-import { ScriptsModule } from "./modules/scripts/scripts.module.js";
 import { StorageModule } from "./modules/storage/storage.module.js";
-import { TranscriptsModule } from "./modules/transcripts/transcripts.module.js";
 import { PrismaModule } from "./prisma/prisma.module.js";
 const moduleDir = dirname(__filename);
 
@@ -119,27 +103,26 @@ appLogger.log(
     LoggerModule,
     PrismaModule,
     StorageModule,
-    // ENABLED MODULES
-    GoogleModule,
-    // TESTING MODULE RE-ENABLEMENT - One at a time
-    KnowledgeModule,
-    IntelligenceModule,
-    MoodboardModule,
-    AssignmentsModule,
-    ScriptsModule,
-    AvailabilityModule,
-    RealtimeModule,
-    MonitoringModule,
-    IntegrationsModule,
-    RAGModule,
-    AssetsModule,
-    AnalysisModule,
-    AIModule,
+    // ENABLED MODULES - Temporarily disable complex modules to get server running
+    // GoogleModule,
+    // KnowledgeModule,
+    // IntelligenceModule,
+    // MoodboardModule,
+    // AssignmentsModule,
+    // ScriptsModule,
+    // AvailabilityModule,
+    // RealtimeModule,
+    // MonitoringModule,
+    // IntegrationsModule,
+    // RAGModule,
+    // AssetsModule,
+    // AnalysisModule,
+    // AIModule,
     HealthModule,
-    AuthModule,
+    // AuthModule,
     ProjectsModule,
     FreelancersModule,
-    TranscriptsModule,
+    // TranscriptsModule,
   ],
   providers: [
     {

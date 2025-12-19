@@ -96,9 +96,9 @@ export class FreelancersService {
     const results = await this.prisma.freelancer.findMany({
       where: {
         OR: [
-          { name: { contains: q, mode: 'insensitive' } },
-          { email: { contains: q, mode: 'insensitive' } },
-          { role: { contains: q, mode: 'insensitive' } },
+          { name: { contains: q } },
+          { email: { contains: q } },
+          { role: { contains: q } },
         ],
       },
       take: limit,

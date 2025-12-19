@@ -1,14 +1,14 @@
 import {
-    AlertCircle,
-    ArrowRight,
-    BarChart3,
-    BrainCircuit,
-    Briefcase,
-    CheckCircle2,
-    DollarSign,
-    Loader2,
-    TrendingUp,
-    Users
+  AlertCircle,
+  ArrowRight,
+  BarChart3,
+  BrainCircuit,
+  Briefcase,
+  CheckCircle2,
+  DollarSign,
+  Loader2,
+  TrendingUp,
+  Users
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { AnalysisAPI, WorkspaceAnalysis, WorkspaceOverview } from "../services/api/analysis";
@@ -20,8 +20,6 @@ const AnalysisView: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [analyzingWorkload, setAnalyzingWorkload] = useState(false);
   const [analyzingProfit, setAnalyzingProfit] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
   useEffect(() => {
     fetchOverview();
   }, []);
@@ -32,7 +30,6 @@ const AnalysisView: React.FC = () => {
       const data = await AnalysisAPI.getOverview();
       setOverview(data);
     } catch (err) {
-      setError("Failed to load workspace overview");
       console.error(err);
     } finally {
       setLoading(false);
@@ -203,13 +200,12 @@ const StatCard: React.FC<{ icon: React.ReactNode; label: string; value: string |
   </div>
 );
 
-const AnalysisResults: React.FC<{ analysis: WorkspaceAnalysis; color: string }> = ({ analysis, color }) => {
-  const colorClasses = {
-    indigo: "text-indigo-600 bg-indigo-50 border-indigo-100",
-    emerald: "text-emerald-600 bg-emerald-50 border-emerald-100"
-  };
-  
-  const activeClass = colorClasses[color as keyof typeof colorClasses] || colorClasses.indigo;
+const AnalysisResults: React.FC<{ analysis: WorkspaceAnalysis; color: string }> = ({ analysis, color: _color }) => {
+  // Color classes available for future styling enhancements
+  // const colorClasses = {
+  //   indigo: "text-indigo-600 bg-indigo-50 border-indigo-100",
+  //   emerald: "text-emerald-600 bg-emerald-50 border-emerald-100"
+  // };
 
   return (
     <div className="space-y-8 animate-in fade-in duration-700">

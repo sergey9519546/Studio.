@@ -3487,18 +3487,18 @@
       "type": "npm",
       "name": "npm:@prisma/client-runtime-utils",
       "data": {
-        "version": "7.1.0",
+        "version": "7.2.0",
         "packageName": "@prisma/client-runtime-utils",
-        "hash": "sha512-39xmeBrNTN40FzF34aJMjfX1PowVCqoT3UKUWBBSP3aXV05NRqGBC3x2wCDs96ti6ZgdiVzqnRDHtbzU8X+lPQ=="
+        "hash": "sha512-dn7oB53v0tqkB0wBdMuTNFNPdEbfICEUe82Tn9FoKAhJCUkDH+fmyEp0ClciGh+9Hp2Tuu2K52kth2MTLstvmA=="
       }
     },
     "npm:@prisma/client": {
       "type": "npm",
       "name": "npm:@prisma/client",
       "data": {
-        "version": "7.1.0",
+        "version": "7.2.0",
         "packageName": "@prisma/client",
-        "hash": "sha512-qf7GPYHmS/xybNiSOpzv9wBo+UwqfL2PeyX+08v+KVHDI0AlSCQIh5bBySkH3alu06NX9wy98JEnckhMHoMFfA=="
+        "hash": "sha512-JdLF8lWZ+LjKGKpBqyAlenxd/kXjd1Abf/xK+6vUA7R7L2Suo6AFTHFRpPSdAKCan9wzdFApsUpSa/F6+t1AtA=="
       }
     },
     "npm:@prisma/config": {
@@ -3508,6 +3508,15 @@
         "version": "7.1.0",
         "packageName": "@prisma/config",
         "hash": "sha512-Uz+I43Wn1RYNHtuYtOhOnUcNMWp2Pd3GUDDKs37xlHptCGpzEG3MRR9L+8Y2ISMsMI24z/Ni+ww6OB/OO8M0sQ=="
+      }
+    },
+    "npm:@prisma/config@7.2.0": {
+      "type": "npm",
+      "name": "npm:@prisma/config@7.2.0",
+      "data": {
+        "version": "7.2.0",
+        "packageName": "@prisma/config",
+        "hash": "sha512-qmvSnfQ6l/srBW1S7RZGfjTQhc44Yl3ldvU6y3pgmuLM+83SBDs6UQVgMtQuMRe9J3gGqB0RF8wER6RlXEr6jQ=="
       }
     },
     "npm:@prisma/debug@6.8.2": {
@@ -3528,13 +3537,22 @@
         "hash": "sha512-pPAckG6etgAsEBusmZiFwM9bldLSNkn++YuC4jCTJACdK5hLOVnOzX7eSL2FgaU6Gomd6wIw21snUX2dYroMZQ=="
       }
     },
+    "npm:@prisma/debug@7.2.0": {
+      "type": "npm",
+      "name": "npm:@prisma/debug@7.2.0",
+      "data": {
+        "version": "7.2.0",
+        "packageName": "@prisma/debug",
+        "hash": "sha512-YSGTiSlBAVJPzX4ONZmMotL+ozJwQjRmZweQNIq/ER0tQJKJynNkRB3kyvt37eOfsbMCXk3gnLF6J9OJ4QWftw=="
+      }
+    },
     "npm:@prisma/dev": {
       "type": "npm",
       "name": "npm:@prisma/dev",
       "data": {
-        "version": "0.15.0",
+        "version": "0.17.0",
         "packageName": "@prisma/dev",
-        "hash": "sha512-KhWaipnFlS/fWEs6I6Oqjcy2S08vKGmxJ5LexqUl/3Ve0EgLUsZwdKF0MvqPM5F5ttw8GtfZarjM5y7VLwv9Ow=="
+        "hash": "sha512-6sGebe5jxX+FEsQTpjHLzvOGPn6ypFQprcs3jcuIWv1Xp/5v6P/rjfdvAwTkP2iF6pDx2tCd8vGLNWcsWzImTA=="
       }
     },
     "npm:@prisma/driver-adapter-utils": {
@@ -3550,18 +3568,18 @@
       "type": "npm",
       "name": "npm:@prisma/engines-version",
       "data": {
-        "version": "7.1.0-6.ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba",
+        "version": "7.2.0-4.0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
         "packageName": "@prisma/engines-version",
-        "hash": "sha512-qZUevUh+yPhGT28rDQnV8V2kLnFjirzhVD67elRPIJHRsUV/mkII10HSrJrhK/U2GYgAxXR2VEREtq7AsfS8qw=="
+        "hash": "sha512-KezsjCZDsbjNR7SzIiVlUsn9PnLePI7r5uxABlwL+xoerurZTfgQVbIjvjF2sVr3Uc0ZcsnREw3F84HvbggGdA=="
       }
     },
     "npm:@prisma/engines": {
       "type": "npm",
       "name": "npm:@prisma/engines",
       "data": {
-        "version": "7.1.0",
+        "version": "7.2.0",
         "packageName": "@prisma/engines",
-        "hash": "sha512-KQlraOybdHAzVv45KWKJzpR9mJLkib7/TyApQpqrsL7FUHfgjIcy8jrVGt3iNfG6/GDDl+LNlJ84JSQwIfdzxA=="
+        "hash": "sha512-HUeOI/SvCDsHrR9QZn24cxxZcujOjcS3w1oW/XVhnSATAli5SRMOfp/WkG3TtT5rCxDA4xOnlJkW7xkho4nURA=="
       }
     },
     "npm:@prisma/extension-accelerate": {
@@ -3577,9 +3595,9 @@
       "type": "npm",
       "name": "npm:@prisma/fetch-engine",
       "data": {
-        "version": "7.1.0",
+        "version": "7.2.0",
         "packageName": "@prisma/fetch-engine",
-        "hash": "sha512-GZYF5Q8kweXWGfn87hTu17kw7x1DgnehgKoE4Zg1BmHYF3y1Uu0QRY/qtSE4veH3g+LW8f9HKqA0tARG66bxxQ=="
+        "hash": "sha512-Z5XZztJ8Ap+wovpjPD2lQKnB8nWFGNouCrglaNFjxIWAGWz0oeHXwUJRiclIoSSXN/ptcs9/behptSk8d0Yy6w=="
       }
     },
     "npm:@prisma/get-platform": {
@@ -3591,13 +3609,13 @@
         "hash": "sha512-vXSxyUgX3vm1Q70QwzwkjeYfRryIvKno1SXbIqwSptKwqKzskINnDUcx85oX+ys6ooN2ATGSD0xN2UTfg6Zcow=="
       }
     },
-    "npm:@prisma/get-platform@7.1.0": {
+    "npm:@prisma/get-platform@7.2.0": {
       "type": "npm",
-      "name": "npm:@prisma/get-platform@7.1.0",
+      "name": "npm:@prisma/get-platform@7.2.0",
       "data": {
-        "version": "7.1.0",
+        "version": "7.2.0",
         "packageName": "@prisma/get-platform",
-        "hash": "sha512-lq8hMdjKiZftuT5SssYB3EtQj8+YjL24/ZTLflQqzFquArKxBcyp6Xrblto+4lzIKJqnpOjfMiBjMvl7YuD7+Q=="
+        "hash": "sha512-k1V0l0Td1732EHpAfi2eySTezyllok9dXb6UQanajkJQzPUGi3vO2z7jdkz67SypFTdmbnyGYxvEvYZdZsMAVA=="
       }
     },
     "npm:@prisma/query-plan-executor": {
@@ -3613,9 +3631,9 @@
       "type": "npm",
       "name": "npm:@prisma/studio-core",
       "data": {
-        "version": "0.8.2",
+        "version": "0.9.0",
         "packageName": "@prisma/studio-core",
-        "hash": "sha512-/iAEWEUpTja+7gVMu1LtR2pPlvDmveAwMHdTWbDeGlT7yiv0ZTCPpmeAGdq/Y9aJ9Zj1cEGBXGRbmmNPj022PQ=="
+        "hash": "sha512-xA2zoR/ADu/NCSQuriBKTh6Ps4XjU0bErkEcgMfnSGh346K1VI7iWKnoq1l2DoxUqiddPHIEWwtxJ6xCHG6W7g=="
       }
     },
     "npm:@protobufjs/aspromise": {
@@ -13189,9 +13207,9 @@
       "type": "npm",
       "name": "npm:prisma",
       "data": {
-        "version": "7.1.0",
+        "version": "7.2.0",
         "packageName": "prisma",
-        "hash": "sha512-dy/3urE4JjhdiW5b09pGjVhGI7kPESK2VlCDrCqeYK5m5SslAtG5FCGnZWP7E8Sdg+Ow1wV2mhJH5RTFL5gEsw=="
+        "hash": "sha512-jSdHWgWOgFF24+nRyyNRVBIgGDQEsMEF8KPHvhBBg3jWyR9fUAK0Nq9ThUmiGlNgq2FA7vSk/ZoCvefod+a8qg=="
       }
     },
     "npm:process-nextick-args": {
@@ -16781,21 +16799,23 @@
     "@pkgjs/parseargs@^0.11.0": "npm:@pkgjs/parseargs",
     "@pkgr/core@^0.2.9": "npm:@pkgr/core",
     "@prisma/adapter-pg@7.1.0": "npm:@prisma/adapter-pg",
-    "@prisma/client-runtime-utils@7.1.0": "npm:@prisma/client-runtime-utils",
-    "@prisma/client@^7.1.0": "npm:@prisma/client",
+    "@prisma/client-runtime-utils@7.2.0": "npm:@prisma/client-runtime-utils",
+    "@prisma/client@^7.2.0": "npm:@prisma/client",
     "@prisma/config@7.1.0": "npm:@prisma/config",
+    "@prisma/config@7.2.0": "npm:@prisma/config@7.2.0",
     "@prisma/debug@6.8.2": "npm:@prisma/debug@6.8.2",
     "@prisma/debug@7.1.0": "npm:@prisma/debug",
-    "@prisma/dev@0.15.0": "npm:@prisma/dev",
+    "@prisma/debug@7.2.0": "npm:@prisma/debug@7.2.0",
+    "@prisma/dev@0.17.0": "npm:@prisma/dev",
     "@prisma/driver-adapter-utils@7.1.0": "npm:@prisma/driver-adapter-utils",
-    "@prisma/engines-version@7.1.0-6.ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba": "npm:@prisma/engines-version",
-    "@prisma/engines@7.1.0": "npm:@prisma/engines",
+    "@prisma/engines-version@7.2.0-4.0c8ef2ce45c83248ab3df073180d5eda9e8be7a3": "npm:@prisma/engines-version",
+    "@prisma/engines@7.2.0": "npm:@prisma/engines",
     "@prisma/extension-accelerate@^3.0.1": "npm:@prisma/extension-accelerate",
-    "@prisma/fetch-engine@7.1.0": "npm:@prisma/fetch-engine",
+    "@prisma/fetch-engine@7.2.0": "npm:@prisma/fetch-engine",
     "@prisma/get-platform@6.8.2": "npm:@prisma/get-platform",
-    "@prisma/get-platform@7.1.0": "npm:@prisma/get-platform@7.1.0",
+    "@prisma/get-platform@7.2.0": "npm:@prisma/get-platform@7.2.0",
     "@prisma/query-plan-executor@6.18.0": "npm:@prisma/query-plan-executor",
-    "@prisma/studio-core@0.8.2": "npm:@prisma/studio-core",
+    "@prisma/studio-core@0.9.0": "npm:@prisma/studio-core",
     "@protobufjs/aspromise@^1.1.1": "npm:@protobufjs/aspromise",
     "@protobufjs/aspromise@^1.1.2": "npm:@protobufjs/aspromise",
     "@protobufjs/base64@^1.1.2": "npm:@protobufjs/base64",
@@ -18156,7 +18176,7 @@
     "pretty-format@^29.7.0": "npm:pretty-format@29.7.0",
     "pretty-format@^30.0.0": "npm:pretty-format@30.2.0",
     "pretty-format@30.2.0": "npm:pretty-format@30.2.0",
-    "prisma@^7.1.0": "npm:prisma",
+    "prisma@^7.2.0": "npm:prisma",
     "process-nextick-args@~2.0.0": "npm:process-nextick-args",
     "process-warning@^5.0.0": "npm:process-warning",
     "prompts@^2.0.1": "npm:prompts",

@@ -1,18 +1,18 @@
 {
   "run": {
-    "command": "nx test api",
-    "startTime": "2025-12-16T12:49:18.825Z",
-    "endTime": "2025-12-16T12:49:22.490Z",
+    "command": "nx serve api",
+    "startTime": "2025-12-18T15:53:37.864Z",
+    "endTime": "2025-12-18T20:35:43.180Z",
     "inner": false
   },
   "tasks": [
     {
-      "taskId": "api:test",
-      "target": "test",
+      "taskId": "api:serve:development",
+      "target": "serve",
       "projectName": "api",
-      "hash": "13786654603319025545",
-      "startTime": "2025-12-16T12:49:18.834Z",
-      "endTime": "2025-12-16T12:49:22.489Z",
+      "hash": "4958531299339240014",
+      "startTime": "2025-12-18T15:53:37.870Z",
+      "endTime": "2025-12-18T20:35:43.179Z",
       "params": "",
       "cacheStatus": "cache-miss",
       "status": 1

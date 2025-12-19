@@ -293,7 +293,7 @@ export class GeminiOpenAIService {
         configured: false,
         provider: 'Google Gemini AI (OpenAI Compatible)',
         mode: 'unknown',
-        error: error.message
+        error: error instanceof Error ? error.message : 'Unknown error'
       };
     }
   }

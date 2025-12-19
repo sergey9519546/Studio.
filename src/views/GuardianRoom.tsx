@@ -130,17 +130,27 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
             <h3 className="text-sm font-bold">Visual Language</h3>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <div className="aspect-square bg-subtle rounded-xl border border-border-subtle flex items-center justify-center text-ink-tertiary">
-              Ref 1
+            <div className="aspect-square bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl border border-border-subtle flex flex-col items-center justify-center text-center p-3">
+              <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mb-2">
+                <ImageIcon size={16} className="text-white" />
+              </div>
+              <span className="text-xs font-semibold text-blue-700 dark:text-blue-300">Style Guide</span>
             </div>
-            <div className="aspect-square bg-subtle rounded-xl border border-border-subtle flex items-center justify-center text-ink-tertiary">
-              Ref 2
+            <div className="aspect-square bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl border border-border-subtle flex flex-col items-center justify-center text-center p-3">
+              <div className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center mb-2">
+                <Sparkles size={16} className="text-white" />
+              </div>
+              <span className="text-xs font-semibold text-purple-700 dark:text-purple-300">Mood Board</span>
             </div>
-            <div className="aspect-square bg-subtle rounded-xl border border-border-subtle flex items-center justify-center text-ink-tertiary">
-              Ref 3
+            <div className="aspect-square bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl border border-border-subtle flex flex-col items-center justify-center text-center p-3">
+              <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center mb-2">
+                <FileText size={16} className="text-white" />
+              </div>
+              <span className="text-xs font-semibold text-green-700 dark:text-green-300">Reference</span>
             </div>
-            <div className="aspect-square border-2 border-dashed border-border-subtle rounded-xl flex items-center justify-center text-ink-tertiary hover:border-ink-primary hover:text-ink-primary transition-colors cursor-pointer">
-              <Plus size={20} />
+            <div className="aspect-square border-2 border-dashed border-border-subtle rounded-xl flex flex-col items-center justify-center text-center p-3 hover:border-ink-primary hover:bg-ink-primary/5 transition-all cursor-pointer">
+              <Plus size={20} className="text-ink-tertiary hover:text-ink-primary mb-1" />
+              <span className="text-xs font-medium text-ink-tertiary hover:text-ink-primary">Add Visual</span>
             </div>
           </div>
         </Card>

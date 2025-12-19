@@ -128,7 +128,7 @@ export class ConversationsService {
 
       return conversation;
     } catch (error) {
-      throw new BadRequestException(`Failed to create conversation: ${error.message}`);
+      throw new BadRequestException(`Failed to create conversation: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 
@@ -261,7 +261,7 @@ export class ConversationsService {
 
       return message;
     } catch (error) {
-      throw new BadRequestException(`Failed to add message: ${error.message}`);
+      throw new BadRequestException(`Failed to add message: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 
@@ -284,7 +284,7 @@ export class ConversationsService {
       userId,
       ...(filters?.projectId && { projectId: filters.projectId }),
       ...(filters?.status && { status: filters.status }),
-      ...(filters?.topic && { topic: { contains: filters.topic, mode: 'insensitive' as const } }),
+      ...(filters?.topic && { topic: { contains: filters.topic } }),
     };
 
     const [conversations, total] = await Promise.all([
@@ -511,9 +511,9 @@ export class ConversationsService {
         where: {
           userId,
           OR: [
-            { title: { contains: query, mode: 'insensitive' as const } },
-            { topic: { contains: query, mode: 'insensitive' as const } },
-            { messages: { some: { content: { contains: query, mode: 'insensitive' as const } } } },
+            { title: { contains: query } },
+            { topic: { contains: query } },
+            { messages: { some: { content: { contains: query } } } },
           ],
         },
         skip,
@@ -540,9 +540,9 @@ export class ConversationsService {
         where: {
           userId,
           OR: [
-            { title: { contains: query, mode: 'insensitive' as const } },
-            { topic: { contains: query, mode: 'insensitive' as const } },
-            { messages: { some: { content: { contains: query, mode: 'insensitive' as const } } } },
+            { title: { contains: query } },
+            { topic: { contains: query } },
+            { messages: { some: { content: { contains: query } } } },
           ],
         },
       }),

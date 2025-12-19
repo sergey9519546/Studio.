@@ -19,16 +19,20 @@ interface MockHeroProjectCardProps {
   description: string;
 }
 
-interface MockSparkAICardProps {
+interface MockLuminaAICardProps {
   onSubmitPrompt: (prompt: string) => void;
 }
 
 interface MockVibePaletteCardProps {
   onColorSelect: (color: string) => void;
+  selectedColor?: string;
 }
 
 interface MockRecentArtifactsCardProps {
   artifacts: Artifact[];
+  loading?: boolean;
+  onViewGallery?: () => void;
+  onArtifactClick?: (artifact: Artifact) => void;
 }
 
 // Mock the child components
@@ -66,8 +70,8 @@ vi.mock("../components/dashboard/HeroProjectCard", () => ({
   ),
 }));
 
-vi.mock("../components/dashboard/SparkAICard", () => ({
-  default: ({ onSubmitPrompt }: MockSparkAICardProps) => (
+vi.mock("@/components/dashboard/LuminaAICard", () => ({
+  default: ({ onSubmitPrompt }: MockLuminaAICardProps) => (
     <div data-testid="spark-ai-card">
       <input data-testid="prompt-input" placeholder="Enter prompt" />
       <button

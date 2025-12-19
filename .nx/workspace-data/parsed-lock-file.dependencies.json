@@ -8735,6 +8735,26 @@
     "type": "static"
   },
   {
+    "source": "npm:@prisma/config@7.2.0",
+    "target": "npm:c12",
+    "type": "static"
+  },
+  {
+    "source": "npm:@prisma/config@7.2.0",
+    "target": "npm:deepmerge-ts",
+    "type": "static"
+  },
+  {
+    "source": "npm:@prisma/config@7.2.0",
+    "target": "npm:effect",
+    "type": "static"
+  },
+  {
+    "source": "npm:@prisma/config@7.2.0",
+    "target": "npm:empathic",
+    "type": "static"
+  },
+  {
     "source": "npm:@prisma/dev",
     "target": "npm:@electric-sql/pglite",
     "type": "static"
@@ -8826,7 +8846,7 @@
   },
   {
     "source": "npm:@prisma/engines",
-    "target": "npm:@prisma/debug",
+    "target": "npm:@prisma/debug@7.2.0",
     "type": "static"
   },
   {
@@ -8841,12 +8861,12 @@
   },
   {
     "source": "npm:@prisma/engines",
-    "target": "npm:@prisma/get-platform@7.1.0",
+    "target": "npm:@prisma/get-platform@7.2.0",
     "type": "static"
   },
   {
     "source": "npm:@prisma/fetch-engine",
-    "target": "npm:@prisma/debug",
+    "target": "npm:@prisma/debug@7.2.0",
     "type": "static"
   },
   {
@@ -8856,7 +8876,7 @@
   },
   {
     "source": "npm:@prisma/fetch-engine",
-    "target": "npm:@prisma/get-platform@7.1.0",
+    "target": "npm:@prisma/get-platform@7.2.0",
     "type": "static"
   },
   {
@@ -8865,8 +8885,8 @@
     "type": "static"
   },
   {
-    "source": "npm:@prisma/get-platform@7.1.0",
-    "target": "npm:@prisma/debug",
+    "source": "npm:@prisma/get-platform@7.2.0",
+    "target": "npm:@prisma/debug@7.2.0",
     "type": "static"
   },
   {
@@ -24526,7 +24546,7 @@
   },
   {
     "source": "npm:prisma",
-    "target": "npm:@prisma/config",
+    "target": "npm:@prisma/config@7.2.0",
     "type": "static"
   },
   {

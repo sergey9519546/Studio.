@@ -271,7 +271,7 @@ export class MoodboardService {
 
   /**
    * Helper: Enrich items with signed URLs
-   * Tags, moods, colors are already arrays in the schema
+   * Parse Json fields to ensure they are string arrays
    */
   private async enrichItems(items: MoodboardItem[]): Promise<
     Array<
@@ -286,10 +286,10 @@ export class MoodboardService {
       items.map(async (item) => {
         let url = item.url;
 
-        // Tags, moods, colors are already arrays - no need to split
-        const tags = item.tags || [];
-        const moods = item.moods || [];
-        const colors = item.colors || [];
+        // Parse Json fields to ensure they are string arrays
+        const tags = this.parseJsonArray(item.tags);
+        const moods = this.parseJsonArray(item.moods);
+        const colors = this.parseJsonArray(item.colors);
 
         if (item.assetId && item.assetId !== "manual") {
           try {
@@ -322,7 +322,7 @@ export class MoodboardService {
     try {
       const asset = await this.assetsService.findOne(assetId);
 
-      const prompt = `Analyze this file: ${asset.fileName} (${asset.mimeType}). 
+      const prompt = `Analyze this file: ${asset.fileName} (${asset.mimeType}).
       Generate a JSON response with:
       - caption: A short creative caption
       - tags: 5 comma-separated keywords
@@ -345,5 +345,26 @@ export class MoodboardService {
         error instanceof Error ? error.message : String(error)
       );
     }
+  }
+
+  /**
+   * Helper: Parse Json field to ensure it's a string array
+   */
+  private parseJsonArray(value: unknown): string[] {
+    if (Array.isArray(value)) {
+      return value.filter(item => typeof item === 'string') as string[];
+    }
+    if (typeof value === 'string') {
+      try {
+        const parsed = JSON.parse(value);
+        if (Array.isArray(parsed)) {
+          return parsed.filter(item => typeof item === 'string');
+        }
+      } catch {
+        // If parsing fails, treat as single string
+        return [value];
+      }
+    }
+    return [];
   }
 }

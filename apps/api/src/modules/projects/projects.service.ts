@@ -37,7 +37,7 @@ interface PrismaProjectResult {
     id: string;
     role: string;
     count: number | null;
-    skills: string[];
+    skills: unknown; // Json field in database
     projectId: string;
   }>;
   knowledgeBase?: Array<{
@@ -128,10 +128,11 @@ export class ProjectsService {
       endDate: project.endDate || undefined,
       createdAt: project.createdAt,
       updatedAt: project.updatedAt,
-      // Ensure arrays are present and handle nullable count
+      // Ensure arrays are present and handle nullable count, parse Json skills
       roleRequirements: (project.roleRequirements || []).map(rr => ({
         ...rr,
-        count: rr.count || 0
+        count: rr.count || 0,
+        skills: this.parseJsonArray(rr.skills)
       })),
       knowledgeBase: project.knowledgeBase || [],
       moodboardItems: (project.moodboardItems || []).map(item => ({
@@ -285,5 +286,26 @@ export class ProjectsService {
     const normalized = status.toUpperCase().replace(/\s+/g, '_');
     const allowedStatuses = Object.values(ProjectStatus) as string[];
     return allowedStatuses.includes(normalized) ? normalized as ProjectStatus : ProjectStatus.PLANNED;
+  }
+
+  /**
+   * Helper: Parse Json field to ensure it's a string array
+   */
+  private parseJsonArray(value: unknown): string[] {
+    if (Array.isArray(value)) {
+      return value.filter(item => typeof item === 'string') as string[];
+    }
+    if (typeof value === 'string') {
+      try {
+        const parsed = JSON.parse(value);
+        if (Array.isArray(parsed)) {
+          return parsed.filter(item => typeof item === 'string');
+        }
+      } catch {
+        // If parsing fails, treat as single string
+        return [value];
+      }
+    }
+    return [];
   }
 }

@@ -307,7 +307,7 @@ export const api = {
                 return { data: asset, success: true };
             } catch (e) {
                 const message = e instanceof Error ? e.message : String(e);
-                console.error("Upload failed:", message);
+                logger.error("Upload failed:", message);
                 throw e; // Propagate error to UI
             }
         },
@@ -317,7 +317,7 @@ export const api = {
                   method: "DELETE",
                 });
             } catch {
-                console.warn("Delete failed online, removing locally");
+                logger.warn("Delete failed online, removing locally");
             }
             localAssets = localAssets.filter(a => a.id !== id);
             saveToStorage('assets', localAssets);
