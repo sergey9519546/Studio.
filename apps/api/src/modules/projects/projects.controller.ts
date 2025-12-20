@@ -4,7 +4,6 @@ import { CreateProjectDto, UpdateProjectDto } from './dto/project.dto.js';
 import { ProjectInput, ProjectsService } from './projects.service.js';
 
 @Controller({ path: 'projects', version: '1' })
-// @UseGuards(JwtAuthGuard) // Temporarily disabled for API integration testing
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) { }
 

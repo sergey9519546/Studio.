@@ -21,17 +21,6 @@ class EnvironmentVariables {
   @IsString()
   DATABASE_URL!: string;
 
-  @IsString()
-  JWT_SECRET!: string;
-
-  @IsOptional()
-  @IsString()
-  ADMIN_EMAIL?: string;
-
-  @IsOptional()
-  @IsString()
-  ADMIN_PASSWORD?: string;
-
   // GCP_PROJECT_ID is optional - can fall back to GOOGLE_CLOUD_PROJECT (set by Cloud Run)
   @IsOptional()
   @IsString()
@@ -122,7 +111,6 @@ export function validate(config: Record<string, unknown>) {
 
   const missingRequired: string[] = [];
   if (!validatedConfig.DATABASE_URL) missingRequired.push("DATABASE_URL");
-  if (!validatedConfig.JWT_SECRET) missingRequired.push("JWT_SECRET");
   if (!projectId)
     missingRequired.push("GCP_PROJECT_ID or GOOGLE_CLOUD_PROJECT");
 

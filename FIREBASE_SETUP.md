@@ -29,6 +29,8 @@ This document outlines the complete Firebase setup for the Studio Roster project
 - **Security Rules**: ✅ Role-based file access
 - **Structure**: Public, User, Project, Assignment file organization
 - **Access Control**: Fine-grained permissions
+- **Bucket Config**: API uses `STORAGE_BUCKET` (defaults to `<project-id>.appspot.com`); frontend uses Firebase config `storageBucket` (also accepts `<project-id>.firebasestorage.app`)
+- **Emulator Support**: API auto-detects `firebase.json` to set `FIREBASE_STORAGE_EMULATOR_HOST`; frontend can opt-in via `VITE_FIREBASE_EMULATORS=true`
 
 ### 5. Cloud Functions
 - **Runtime**: Node.js 20
@@ -103,6 +105,16 @@ firebase emulators:start --only firestore,auth,storage
 # Access Emulator UI
 # http://localhost:4000
 ```
+
+### Frontend Emulator Toggle
+```bash
+# Connect frontend SDKs to local emulators
+VITE_FIREBASE_EMULATORS=true npm run dev
+```
+
+### Firebase AI Defaults (Frontend)
+- **Model**: `VITE_FIREBASE_AI_MODEL` (default `gemini-2.5-flash`)
+- **Location**: `VITE_FIREBASE_AI_LOCATION` (default `us-central1`)
 
 ### Production Deployment
 ```bash

@@ -47,12 +47,12 @@ export default defineConfig({
     proxy: {
       // Proxy API v1 requests to backend
       "/api/v1": {
-        target: "http://localhost:3001",
+        target: "http://localhost:3002",
         changeOrigin: true,
       },
       // Legacy fallback for non-versioned API calls (if any remain)
       "/api": {
-        target: "http://localhost:3001",
+        target: "http://localhost:3002",
         changeOrigin: true,
       },
     },

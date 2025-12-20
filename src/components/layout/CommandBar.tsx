@@ -12,21 +12,21 @@ type CommandItem = {
 const QUICK_ACTIONS: CommandItem[] = [
   {
     label: "New Project",
-    path: "/projects/new",
+    path: "/projects",
     category: "Create",
     keywords: ["campaign", "brief"],
   },
   {
-    label: "New Talent Profile",
-    path: "/talent/new",
+    label: "New Freelancer",
+    path: "/freelancers",
     category: "Create",
     keywords: ["roster", "freelancer"],
   },
   {
-    label: "New Transcript",
-    path: "/transcripts/new",
+    label: "Add Moodboard Item",
+    path: "/moodboard",
     category: "Create",
-    keywords: ["meeting", "call"],
+    keywords: ["moodboard", "visuals", "asset"],
   },
 ];
 
@@ -38,46 +38,28 @@ const NAV_COMMANDS: CommandItem[] = [
     keywords: ["home", "overview"],
   },
   {
-    label: "Intelligence",
-    path: "/analysis",
-    category: "Navigation",
-    keywords: ["ai", "reports", "workload", "economics"],
-  },
-  {
     label: "Projects",
     path: "/projects",
     category: "Navigation",
     keywords: ["campaigns", "briefs"],
   },
   {
-    label: "Visuals",
+    label: "Moodboard",
     path: "/moodboard",
     category: "Navigation",
     keywords: ["inspiration", "moodboard", "assets"],
   },
   {
-    label: "Talent",
-    path: "/talent",
+    label: "Freelancers",
+    path: "/freelancers",
     category: "Navigation",
     keywords: ["freelancers", "roster", "talent"],
   },
   {
-    label: "Writer's Room",
+    label: "Writers Room",
     path: "/writers-room",
     category: "Navigation",
     keywords: ["ai", "chat", "creative"],
-  },
-  {
-    label: "Knowledge Base",
-    path: "/knowledge-base",
-    category: "Navigation",
-    keywords: ["docs", "wiki", "confluence"],
-  },
-  {
-    label: "Transcripts",
-    path: "/transcripts",
-    category: "Navigation",
-    keywords: ["calls", "meetings"],
   },
 ];
 
@@ -92,7 +74,7 @@ const CommandBar: React.FC = () => {
 
   const filteredCommands = useMemo(() => {
     const term = query.trim().toLowerCase();
-    if (!term) return NAV_COMMANDS.slice(0, 4);
+    if (!term) return NAV_COMMANDS;
     return commands.filter(
       (cmd) =>
         cmd.label.toLowerCase().includes(term) ||

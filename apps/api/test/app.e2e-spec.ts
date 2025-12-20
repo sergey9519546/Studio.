@@ -31,22 +31,4 @@ describe('AppController (e2e)', () => {
         });
     });
 
-    describe('/api/v1/ai/extract (POST)', () => {
-        it('should reject request without prompt or files', () => {
-            return request(app.getHttpServer())
-                .post('/api/v1/ai/extract')
-                .send({ prompt: '', schema: null })
-                .expect(400);
-        });
-
-        it('should accept request with valid prompt', () => {
-            return request(app.getHttpServer())
-                .post('/api/v1/ai/extract')
-                .send({
-                    prompt: 'Extract test data',
-                    schema: { type: 'ARRAY' },
-                })
-                .expect(200);
-        });
-    });
 });

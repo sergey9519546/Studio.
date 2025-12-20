@@ -5,7 +5,7 @@ import {
   trackDownload,
   isUnsplashConfigured,
   type UnsplashImage,
-} from "../../services/unsplash";
+} from "../services/unsplash";
 import { useToast } from "../hooks/useToast";
 import {
   toggleFavorite as apiToggleFavorite,

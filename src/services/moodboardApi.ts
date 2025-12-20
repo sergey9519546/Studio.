@@ -1,4 +1,4 @@
-import { UnsplashImage } from "../../services/unsplash";
+import { UnsplashImage } from "./unsplash";
 
 const getDefaultApiBase = () => {
   if (typeof window !== "undefined") {

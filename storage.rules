@@ -1,10 +1,57 @@
 rules_version = '2';
 
-// Craft rules based on data in your Firestore database
-// allow write: if firestore.get(
-//    /databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
 service firebase.storage {
   match /b/{bucket}/o {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdminOrEditor() {
+      return isSignedIn() && request.auth.token.role in ['admin', 'editor'];
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isProjectMember(projectId) {
+      return isSignedIn()
+        && firestore.get(/databases/(default)/documents/projects/$(projectId)).data.members.hasAny([request.auth.uid]);
+    }
+
+    function isAssignmentParticipant(assignmentId) {
+      return isSignedIn()
+        && (
+          request.auth.uid
+            == firestore.get(/databases/(default)/documents/assignments/$(assignmentId)).data.assignedTo
+          || request.auth.uid
+            == firestore.get(/databases/(default)/documents/assignments/$(assignmentId)).data.createdBy
+        );
+    }
+
+    // Public assets (read for everyone, write for admin/editor)
+    match /public/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdminOrEditor();
+    }
+
+    // User uploads
+    match /users/{userId}/{allPaths=**} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // Project assets
+    match /projects/{projectId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdminOrEditor() || isProjectMember(projectId);
+    }
+
+    // Assignment assets
+    match /assignments/{assignmentId}/{allPaths=**} {
+      allow read, write: if isAssignmentParticipant(assignmentId);
+    }
+
+    // Default deny
     match /{allPaths=**} {
       allow read, write: if false;
     }

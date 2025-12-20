@@ -110,16 +110,10 @@ export const RETRY_CONFIG: RetryConfig = {
   },
 };
 
-// Request interceptor for adding auth tokens
+// Request interceptor for timing metadata
 export const setupRequestInterceptor = (axios: AxiosInstance): void => {
   axios.interceptors.request.use(
     (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
-      // Add auth token if available
-      const token = localStorage.getItem('authToken');
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-      
       // Add request timestamp for debugging
       (config as RequestConfigWithMetadata).metadata = { startTime: new Date() };
       
@@ -148,13 +142,6 @@ export const setupResponseInterceptor = (axios: AxiosInstance): void => {
       return response;
     },
     (error: TypedAxiosError) => {
-      // Handle 401 Unauthorized - redirect to login
-      if (error.response?.status === 401) {
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('refreshToken');
-        window.location.href = '/login';
-      }
-      
       // Handle 403 Forbidden
       if (error.response?.status === 403) {
         console.warn('Access denied:', error.response.data?.message);
@@ -175,7 +162,7 @@ export const validateEnvironment = (): void => {
   }
 };
 
-// Utility function to make authenticated requests
+// Utility function to make requests
 export const makeRequest = async <T>(axios: AxiosInstance, config: AxiosRequestConfig): Promise<T> => {
   try {
     const response = await axios(config);

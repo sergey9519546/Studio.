@@ -1,11 +1,11 @@
 declare module './firebase' {
-  import { FirebaseApp } from 'firebase/app';
-  import { Analytics } from 'firebase/analytics';
-  import { Firestore } from 'firebase/firestore';
-  import { FirebaseStorage } from 'firebase/storage';
-  import { Auth } from 'firebase/auth';
-  import { Functions } from 'firebase/functions';
   import { FirebaseAI, GenerativeModel } from 'firebase/ai';
+  import { Analytics } from 'firebase/analytics';
+  import { FirebaseApp } from 'firebase/app';
+  import { Auth } from 'firebase/auth';
+  import { Firestore } from 'firebase/firestore';
+  import { Functions } from 'firebase/functions';
+  import { FirebaseStorage } from 'firebase/storage';
 
   export const app: FirebaseApp;
   export const analytics: Analytics;

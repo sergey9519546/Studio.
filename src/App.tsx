@@ -9,18 +9,13 @@ import CommandBar from "./components/layout/CommandBar";
 import Sidebar from "./components/layout/Sidebar";
 import { ErrorBoundary } from "./components/loading/ErrorBoundary";
 import { LoadingSpinner } from "./components/loading/LoadingSpinner";
-import PluginManagerPage from "./pages/PluginManagerPage";
 import { FreelancersAPI } from "./services/api/freelancers";
 import { MoodboardAPI } from "./services/api/moodboard";
 import { ProjectsAPI } from "./services/api/projects";
 import { Freelancer, MoodboardItem, Project } from "./services/types";
-import { webSocketService } from "./services/websocket";
-import AnalysisView from "./views/AnalysisView";
-import ConfluenceView from "./views/ConfluenceView";
 import DashboardHome from "./views/DashboardHome";
 import GuardianRoom from "./views/GuardianRoom";
 import ProjectsView from "./views/ProjectsView";
-import TranscriptsView from "./views/TranscriptsView";
 
 // State interfaces for data management
 interface DataState<T> {
@@ -289,8 +284,8 @@ function MoodboardRoute() {
   );
 }
 
-// Talent Roster Component with API data
-function TalentRosterRoute() {
+// Freelancers Component with API data
+function FreelancersRoute() {
   const navigate = useNavigate();
 
   const fetchFreelancers = useCallback(
@@ -311,27 +306,8 @@ function TalentRosterRoute() {
   );
 }
 
-// Layout Component with WebSocket integration
+// Layout Component
 function Layout({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    // Initialize WebSocket connection
-    const initializeWebSocket = async () => {
-      try {
-        await webSocketService.connect();
-        console.log('WebSocket connected successfully');
-      } catch (error) {
-        console.warn('WebSocket connection failed:', error);
-      }
-    };
-
-    initializeWebSocket();
-
-    // Cleanup on unmount
-    return () => {
-      webSocketService.disconnect();
-    };
-  }, []);
-
   return (
     <ErrorBoundary>
       <div className="w-full h-screen bg-app flex relative overflow-hidden text-ink-primary">
@@ -372,9 +348,6 @@ export default function App() {
           {/* Dashboard */}
           <Route path="/" element={<DashboardHome />} />
 
-          {/* Analysis */}
-          <Route path="/analysis" element={<AnalysisView />} />
-
           {/* Projects */}
           <Route path="/projects" element={<ProjectsViewWrapper />} />
           <Route path="/projects/:id" element={<ProjectDashboardRoute />} />
@@ -382,20 +355,11 @@ export default function App() {
           {/* Moodboard */}
           <Route path="/moodboard" element={<MoodboardRoute />} />
 
-          {/* Talent Roster */}
-          <Route path="/talent" element={<TalentRosterRoute />} />
-
-          {/* Plugins */}
-          <Route path="/plugins" element={<PluginManagerPage />} />
+          {/* Freelancers */}
+          <Route path="/freelancers" element={<FreelancersRoute />} />
 
           {/* Writers Room */}
           <Route path="/writers-room" element={<WritersRoomRoute />} />
-
-          {/* Knowledge Base */}
-          <Route path="/knowledge-base" element={<ConfluenceView />} />
-
-          {/* Transcripts */}
-          <Route path="/transcripts" element={<TranscriptsView />} />
 
           {/* Catch all route - redirect to dashboard */}
           <Route path="*" element={<Navigate to="/" replace />} />

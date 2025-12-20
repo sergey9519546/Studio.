@@ -1,21 +1,16 @@
 import {
-  BookOpen,
-  FileText,
   Grid,
   Layers,
   Layout,
-  LineChart,
   LucideIcon,
-  MessageSquare,
-  Plug,
-  Users,
+  Sparkles,
+  Users
 } from "lucide-react";
 
 export interface RouteConfig {
   path: string;
   label: string;
   icon: LucideIcon;
-  requiresAuth?: boolean;
   description?: string;
   metadata?: {
     title?: string;
@@ -28,7 +23,6 @@ export const routes: RouteConfig[] = [
     path: "/",
     label: "Dashboard",
     icon: Layout,
-    requiresAuth: true,
     description: "Main dashboard with project overview and quick actions",
     metadata: {
       title: "Dashboard - Studio Roster",
@@ -39,7 +33,6 @@ export const routes: RouteConfig[] = [
     path: "/projects",
     label: "Projects",
     icon: Layers,
-    requiresAuth: true,
     description: "Project management hub with creation and listing",
     metadata: {
       title: "Projects - Studio Roster",
@@ -50,7 +43,6 @@ export const routes: RouteConfig[] = [
     path: "/projects/:id",
     label: "Project Dashboard",
     icon: Layers,
-    requiresAuth: true,
     description: "Individual project workspace with brief, assets, and tools",
     metadata: {
       title: "Project Dashboard - Studio Roster",
@@ -59,9 +51,8 @@ export const routes: RouteConfig[] = [
   },
   {
     path: "/moodboard",
-    label: "Visuals",
+    label: "Moodboard",
     icon: Grid,
-    requiresAuth: true,
     description: "Visual inspiration and moodboard management",
     metadata: {
       title: "Moodboard - Studio Roster",
@@ -69,75 +60,31 @@ export const routes: RouteConfig[] = [
     },
   },
   {
-    path: "/talent",
-    label: "Talent",
+    path: "/freelancers",
+    label: "Freelancers",
     icon: Users,
-    requiresAuth: true,
     description: "Freelancer roster and talent management",
     metadata: {
-      title: "Talent Roster - Studio Roster",
-      keywords: ["talent", "freelancers", "roster", "hiring"],
+      title: "Freelancers - Studio Roster",
+      keywords: ["freelancers", "roster", "hiring", "talent"],
     },
   },
   {
     path: "/writers-room",
-    label: "Writer's Room",
-    icon: FileText,
-    requiresAuth: true,
-    description: "AI-powered creative collaboration and chat interface",
+    label: "Writers Room",
+    icon: Sparkles,
+    description: "Lumina-powered creative collaboration and chat interface",
     metadata: {
-      title: "Writer's Room - Studio Roster",
-      keywords: ["writers room", "ai chat", "collaboration", "creative"],
-    },
-  },
-  {
-    path: "/knowledge-base",
-    label: "Knowledge Base",
-    icon: BookOpen,
-    requiresAuth: true,
-    description: "Documentation and knowledge management system",
-    metadata: {
-      title: "Knowledge Base - Studio Roster",
-      keywords: ["knowledge", "documentation", "confluence", "wiki"],
-    },
-  },
-  {
-    path: "/transcripts",
-    label: "Transcripts",
-    icon: MessageSquare,
-    requiresAuth: true,
-    description: "Audio and video transcript management",
-    metadata: {
-      title: "Transcripts - Studio Roster",
-      keywords: ["transcripts", "audio", "video", "text"],
-    },
-  },
-  {
-    path: "/analysis",
-    label: "Intelligence",
-    icon: LineChart,
-    requiresAuth: true,
-    description: "Workspace-wide AI analysis and business intelligence",
-    metadata: {
-      title: "Workspace Intelligence - Studio Roster",
+      title: "Writers Room - Studio Roster",
       keywords: [
-        "analysis",
-        "intelligence",
-        "reports",
-        "workload",
-        "profitability",
+        "writers room",
+        "lumina",
+        "firebase ai",
+        "gemini",
+        "ai chat",
+        "collaboration",
+        "creative",
       ],
-    },
-  },
-  {
-    path: "/plugins",
-    label: "Plugins",
-    icon: Plug,
-    requiresAuth: true,
-    description: "Plugin management and marketplace",
-    metadata: {
-      title: "Plugin Manager - Studio Roster",
-      keywords: ["plugins", "extensions", "marketplace", "management"],
     },
   },
 ];
@@ -167,11 +114,6 @@ export const getRouteIcon = (path: string) => {
   return route?.icon || Layout;
 };
 
-export const isAuthRequired = (path: string): boolean => {
-  const route = getRouteByPath(path);
-  return route?.requiresAuth ?? true;
-};
-
 export const getRouteDescription = (path: string): string => {
   const route = getRouteByPath(path);
   return route?.description || "";
@@ -182,14 +124,10 @@ export const getMainNavigationRoutes = (): RouteConfig[] => {
   return routes.filter((route) =>
     [
       "/",
-      "/analysis",
       "/projects",
       "/moodboard",
-      "/talent",
+      "/freelancers",
       "/writers-room",
-      "/knowledge-base",
-      "/transcripts",
-      "/plugins",
     ].includes(route.path)
   );
 };

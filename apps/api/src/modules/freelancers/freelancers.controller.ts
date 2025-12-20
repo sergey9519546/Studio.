@@ -1,11 +1,9 @@
 
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { FreelancersService } from './freelancers.service.js';
-import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
 import { CreateFreelancerDto, UpdateFreelancerDto, ImportFreelancerDto } from './dto/freelancer.dto.js';
 
 @Controller({ path: 'freelancers', version: '1' })
-@UseGuards(JwtAuthGuard)
 export class FreelancersController {
   constructor(private readonly freelancersService: FreelancersService) { }
 

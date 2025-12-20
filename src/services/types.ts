@@ -98,54 +98,6 @@ export interface CreateFreelancerData {
   phone?: string;
 }
 
-// Auth Types
-export interface User {
-  id: string;
-  email: string;
-  name: string;
-  role: 'admin' | 'user' | 'freelancer';
-  avatar?: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface AuthResponse {
-  user: User;
-  token: string;
-  refreshToken: string;
-}
-
-export interface LoginData {
-  email: string;
-  password: string;
-}
-
-export interface RegisterData {
-  email: string;
-  password: string;
-  name: string;
-  role?: 'user' | 'freelancer';
-}
-
-// WebSocket Event Types
-export interface WebSocketEvent<T = unknown> {
-  type: string;
-  payload: T;
-  timestamp: string;
-  userId?: string;
-}
-
-// Realtime entity types
-export type RealtimeEntity = 'project' | 'moodboard' | 'freelancer' | 'user';
-export type RealtimeAction = 'create' | 'update' | 'delete';
-
-export interface RealtimeUpdate<T = unknown> {
-  entity: RealtimeEntity;
-  action: RealtimeAction;
-  data: T;
-  timestamp: string;
-}
-
 // Error Types
 export interface ApiError {
   message: string;

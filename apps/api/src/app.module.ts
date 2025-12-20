@@ -1,9 +1,7 @@
 import { Logger, Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
-import { JwtModule } from "@nestjs/jwt";
-import { PassportModule } from "@nestjs/passport";
 import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 
 import { ServeStaticModule } from "@nestjs/serve-static";
@@ -11,12 +9,11 @@ import { existsSync } from "fs";
 import { dirname, join } from "path";
 
 import { CacheModule } from "./common/cache/cache.module.js";
-import { CommonModule } from "./common/guards/common.module.js";
 import { LoggerModule } from './common/logger/logger.module.js';
 import { validate } from "./config/env.validation.js";
 import { HealthModule } from "./health/health.module.js";
-import { AuthModule } from "./modules/auth/auth.module.js";
 import { FreelancersModule } from "./modules/freelancers/freelancers.module.js";
+import { MoodboardModule } from "./modules/moodboard/moodboard.module.js";
 import { ProjectsModule } from "./modules/projects/projects.module.js";
 import { StorageModule } from "./modules/storage/storage.module.js";
 import { PrismaModule } from "./prisma/prisma.module.js";
@@ -90,40 +87,14 @@ appLogger.log(
           }),
         ]
       : []),
-    PassportModule,
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<string>("JWT_SECRET"),
-        signOptions: { expiresIn: "60m" },
-      }),
-      inject: [ConfigService],
-    }),
-    CommonModule,
     CacheModule,
     LoggerModule,
     PrismaModule,
     StorageModule,
-    // ENABLED MODULES - Temporarily disable complex modules to get server running
-    // GoogleModule,
-    // KnowledgeModule,
-    // IntelligenceModule,
-    // MoodboardModule,
-    // AssignmentsModule,
-    // ScriptsModule,
-    // AvailabilityModule,
-    // RealtimeModule,
-    // MonitoringModule,
-    // IntegrationsModule,
-    // RAGModule,
-    // AssetsModule,
-    // AnalysisModule,
-    // AIModule,
     HealthModule,
-    AuthModule,
     ProjectsModule,
     FreelancersModule,
-    // TranscriptsModule,
+    MoodboardModule,
   ],
   providers: [
     {

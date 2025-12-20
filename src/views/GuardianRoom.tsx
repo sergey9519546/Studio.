@@ -1,7 +1,7 @@
 import { ArrowRight, FileText, ImageIcon, Plus, Sparkles } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
-import Card from "../../components/ui/Card";
-import { GenAIService } from "../../services/GenAIService";
+import Card from "../components/ui/Card";
+import { GenAIService } from "../services/GenAIService";
 
 interface Message {
   role: "user" | "system";
@@ -32,11 +32,23 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
   const endRef = useRef<HTMLDivElement>(null);
   const genAIService = GenAIService.getInstance();
 
+  const buildProjectContext = () => {
+    if (!project) return undefined;
+    const contextParts = [
+      project.title ? `Project: ${project.title}` : null,
+      project.description ? `Brief: ${project.description}` : null,
+      project.tone?.length ? `Tone: ${project.tone.join(", ")}` : null,
+    ];
+    const context = contextParts.filter(Boolean).join("\n");
+    return context || undefined;
+  };
+
   const sendMessage = async (overrideText?: string) => {
-    const messageToSend = overrideText ?? input;
-    if (!messageToSend.trim() || isLoading) return;
+    const messageToSend = (overrideText ?? input).trim();
+    if (!messageToSend || isLoading) return;
 
     const newMsg: Message = { role: "user", text: messageToSend };
+    const history = messages;
     setMessages((p) => [...p, newMsg]);
     if (!overrideText) {
       setInput("");
@@ -48,15 +60,15 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
         ? `You are Lumina, an AI creative director working on "${project.title}". ${project.description ? "Project: " + project.description + ". " : ""}Keep responses concise and focused on film/design direction.`
         : "You are Lumina, a creative AI director. Keep responses concise and focused on film/design direction.";
 
-      const res = await genAIService.generateEnhancedContent(
-        messageToSend,
-        undefined,
-        systemInstruction
-      );
+      const res = await genAIService.generateContent(messageToSend, {
+        context: buildProjectContext(),
+        systemInstruction,
+        history,
+      });
       setMessages((p) => [...p, { role: "system", text: res }]);
     } catch (error) {
       // Log error for debugging in development only
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         console.error("Lumina Intelligence Error:", error);
       }
       setMessages((p) => [

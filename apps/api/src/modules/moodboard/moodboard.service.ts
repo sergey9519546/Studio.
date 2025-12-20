@@ -1,7 +1,6 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { MoodboardCollection, MoodboardItem } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service.js";
-import { VertexAIService } from "../ai/vertex-ai.service.js";
 import { AssetsService } from "../assets/assets.service.js";
 import { CreateCollectionDto } from "./dto/create-collection.dto.js";
 import { CreateFromUnsplashDto } from "./dto/create-from-unsplash.dto.js";
@@ -13,8 +12,7 @@ export class MoodboardService {
 
   constructor(
     private readonly assetsService: AssetsService,
-    private readonly prisma: PrismaService,
-    private readonly vertexAI: VertexAIService
+    private readonly prisma: PrismaService
   ) {}
 
   async create(createDto: CreateMoodboardItemDto): Promise<MoodboardItem> {
@@ -73,11 +71,6 @@ export class MoodboardService {
         caption: "Processing analysis...",
       },
     });
-
-    // Trigger Async Analysis
-    this.analyzeAsset(newItem.id, assetId).catch((err) =>
-      this.logger.error(`Analysis failed for ${newItem.id}`, err)
-    );
 
     return newItem;
   }
@@ -315,35 +308,6 @@ export class MoodboardService {
       });
     } catch {
       // Ignore if already deleted
-    }
-  }
-
-  private async analyzeAsset(itemId: string, assetId: string) {
-    try {
-      const asset = await this.assetsService.findOne(assetId);
-
-      const prompt = `Analyze this file: ${asset.fileName} (${asset.mimeType}).
-      Generate a JSON response with:
-      - caption: A short creative caption
-      - tags: 5 comma-separated keywords
-      - moods: 3 comma-separated mood adjectives`;
-
-      const text = await this.vertexAI.generateContent(prompt);
-
-      await this.update(itemId, {
-        caption: text.slice(0, 200), // Truncate for safety
-        tags: ["AI", "Analyzed", "GenAI"],
-        moods: ["Automated", "Smart"],
-      } as Partial<
-        MoodboardItem & { tags?: string[]; moods?: string[]; colors?: string[] }
-      >);
-
-      this.logger.log(`AI Analysis completed for ${itemId}`);
-    } catch (error: unknown) {
-      this.logger.error(
-        "AI Analysis Failed",
-        error instanceof Error ? error.message : String(error)
-      );
     }
   }
 

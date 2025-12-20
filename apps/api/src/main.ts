@@ -6,7 +6,6 @@ import { Logger } from 'nestjs-pino';
 import 'reflect-metadata';
 import { AppModule } from './app.module.js';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter.js';
-import { AuthService } from './modules/auth/auth.service.js';
 
 async function bootstrap() {
   const bootstrapLogger = new NestLogger('Bootstrap');
@@ -110,27 +109,6 @@ async function bootstrap() {
     type: VersioningType.URI,
     defaultVersion: '1',
   });
-
-  // Seed admin user (opt-in for production)
-  const shouldSeedAdmin =
-    process.env.SEED_ADMIN_ON_BOOT === 'true' ||
-    (process.env.NODE_ENV !== 'production' &&
-      process.env.ADMIN_PASSWORD &&
-      process.env.ADMIN_EMAIL);
-
-  if (shouldSeedAdmin) {
-    try {
-      const authService = app.get(AuthService);
-      // Non-blocking: run in background
-      authService.seedAdminUser().catch((error) => {
-        bootstrapLogger.error('Failed to seed admin user in background:', error instanceof Error ? error.stack : String(error));
-      });
-    } catch (error) {
-      bootstrapLogger.error('Failed to initiate admin user seeding:', error instanceof Error ? error.stack : String(error));
-    }
-  } else {
-    bootstrapLogger.log('Admin seed skipped (production without opt-in or missing credentials).');
-  }
 
   const port = parseInt(process.env.PORT || '3001', 10);
   await app.listen(port, '0.0.0.0');

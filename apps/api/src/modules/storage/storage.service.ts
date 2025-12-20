@@ -12,6 +12,7 @@ import {
 import { ConfigService } from "@nestjs/config";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import { Buffer } from "buffer";
+import { existsSync, readFileSync } from "fs";
 import {
   applicationDefault,
   cert,
@@ -22,6 +23,7 @@ import {
   type ServiceAccount,
 } from "firebase-admin/app";
 import { getStorage } from "firebase-admin/storage";
+import { join } from "path";
 import { Readable } from "stream";
 
 export interface StoredObject {
@@ -53,6 +55,7 @@ export class StorageService implements OnModuleInit {
   private readonly bucketName: string;
   private readonly nodeEnv: string;
   private readonly projectId: string | undefined;
+  private readonly usesStorageEmulator: boolean;
   private isConfigured = false;
   private connectedEmail = "";
   private firebaseApp: App | null = null;
@@ -68,6 +71,11 @@ export class StorageService implements OnModuleInit {
       this.configService.get("GCP_PROJECT_ID") ||
       this.configService.get("GOOGLE_CLOUD_PROJECT");
 
+    this.applyStorageEmulatorConfig();
+    this.usesStorageEmulator =
+      this.nodeEnv !== "production" &&
+      Boolean(process.env.FIREBASE_STORAGE_EMULATOR_HOST);
+
     // Specific bucket configuration with fallback (production requires explicit value)
     const defaultFirebaseBucket = this.projectId
       ? `${this.projectId}.appspot.com`
@@ -77,6 +85,33 @@ export class StorageService implements OnModuleInit {
     if (!envBucket && this.nodeEnv === "production") {
       this.logger.error(
         "STORAGE_BUCKET is required in production. Set it via environment variable or Secret Manager."
+      );
+    }
+  }
+
+  private applyStorageEmulatorConfig() {
+    if (this.nodeEnv === "production") return;
+    if (process.env.FIREBASE_STORAGE_EMULATOR_HOST) return;
+
+    const firebaseConfigPath = join(process.cwd(), "firebase.json");
+    if (!existsSync(firebaseConfigPath)) return;
+
+    try {
+      const rawConfig = readFileSync(firebaseConfigPath, "utf8");
+      const config = JSON.parse(rawConfig) as {
+        emulators?: { storage?: { port?: number } };
+      };
+      const port = config?.emulators?.storage?.port;
+      if (!port) return;
+
+      const host = `localhost:${port}`;
+      process.env.FIREBASE_STORAGE_EMULATOR_HOST = host;
+      process.env.STORAGE_EMULATOR_HOST = `http://${host}`;
+      this.logger.log(`Firebase Storage emulator configured at ${host}`);
+    } catch (e: unknown) {
+      const error = e as Error;
+      this.logger.warn(
+        `Failed to read firebase.json for storage emulator config: ${error.message}`
       );
     }
   }
@@ -102,6 +137,18 @@ export class StorageService implements OnModuleInit {
     if (this.firebaseApp) return this.firebaseApp;
     if (getApps().length) {
       this.firebaseApp = getApp();
+      return this.firebaseApp;
+    }
+
+    const emulatorHost = process.env.FIREBASE_STORAGE_EMULATOR_HOST;
+    if (emulatorHost && this.nodeEnv !== "production") {
+      this.logger.warn(
+        `Firebase Storage emulator in use (${emulatorHost}). Credentials are not required.`
+      );
+      this.firebaseApp = initializeApp({
+        projectId: this.projectId || "demo-project",
+        storageBucket: this.bucketName,
+      });
       return this.firebaseApp;
     }
 
@@ -179,6 +226,15 @@ export class StorageService implements OnModuleInit {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.storage = getStorage(app) as any;
 
+      if (this.usesStorageEmulator) {
+        this.isConfigured = true;
+        this.connectedEmail = "emulator";
+        this.logger.log(
+          `StorageService: Emulator ready (Bucket: ${this.bucketName})`
+        );
+        return;
+      }
+
       const bucket = this.storage!.bucket(this.bucketName);
       await bucket.getMetadata();
 
@@ -202,6 +258,7 @@ export class StorageService implements OnModuleInit {
   }
 
   private async verifyConnection() {
+    if (this.usesStorageEmulator) return;
     if (!this.storage) return;
     try {
       const bucket = this.storage.bucket(this.bucketName);
@@ -349,6 +406,8 @@ export class StorageService implements OnModuleInit {
       configured: this.isConfigured,
       identity: this.connectedEmail || "unknown",
       projectId: this.projectId || "unknown",
+      emulator: this.usesStorageEmulator,
+      emulatorHost: process.env.FIREBASE_STORAGE_EMULATOR_HOST || null,
     };
   }
 }

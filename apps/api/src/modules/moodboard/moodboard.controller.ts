@@ -10,13 +10,12 @@ import {
   Post,
   Query,
   UploadedFile,
-  UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Throttle } from '@nestjs/throttler';
-import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard.js";
 import { AssetsService } from "../assets/assets.service.js";
+import type { MulterFile } from "../assets/assets.service.js";
 import { CreateCollectionDto } from "./dto/create-collection.dto.js";
 import { CreateFromUnsplashDto } from "./dto/create-from-unsplash.dto.js";
 import { CreateMoodboardItemDto } from './dto/create-moodboard-item.dto.js';
@@ -24,7 +23,6 @@ import { UpdateMoodboardItemDto } from './dto/update-moodboard-item.dto.js';
 import { MoodboardService } from "./moodboard.service.js";
 
 @Controller({ path: "moodboard", version: "1" })
-@UseGuards(JwtAuthGuard)
 export class MoodboardController {
   constructor(
     private readonly moodboardService: MoodboardService,
@@ -36,7 +34,7 @@ export class MoodboardController {
   @UseInterceptors(FileInterceptor("file"))
   async uploadFile(
     @Param("projectId") projectId: string,
-    @UploadedFile() file: Express.Multer.File
+    @UploadedFile() file: MulterFile
   ) {
     // 1. Upload to Cloud Storage via AssetsService
     const asset = await this.assetsService.create(file, projectId);

@@ -74,7 +74,7 @@ export const TalentRoster: React.FC<TalentRosterProps> = ({
       <div className="max-w-7xl mx-auto p-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-ink-primary mb-2">Talent Roster</h1>
+          <h1 className="text-4xl font-bold text-ink-primary mb-2">Freelancers</h1>
           <p className="text-ink-secondary">Discover and match creative professionals with your projects</p>
         </div>
 

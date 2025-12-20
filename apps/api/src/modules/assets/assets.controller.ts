@@ -10,16 +10,13 @@ import {
   UploadedFile,
   ParseFilePipe,
   MaxFileSizeValidator,
-  Logger,
-  UseGuards
+  Logger
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AssetsService } from './assets.service.js';
 import type { MulterFile } from './assets.service.js';
-import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
 
 @Controller({ path: 'assets', version: '1' })
-@UseGuards(JwtAuthGuard)
 export class AssetsController {
   private readonly logger = new Logger(AssetsController.name);
 

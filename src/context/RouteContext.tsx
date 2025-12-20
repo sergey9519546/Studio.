@@ -73,7 +73,6 @@ export const useRouteMetadata = () => {
     title: currentRoute?.metadata?.title || "Studio Roster",
     description: currentRoute?.description || "",
     keywords: currentRoute?.metadata?.keywords || [],
-    requiresAuth: currentRoute?.requiresAuth ?? true,
   };
 };
 
@@ -100,10 +99,8 @@ export const useNavigationState = () => {
     if (location.pathname.startsWith("/projects") && !location.pathname.includes("/", 1)) return "projects";
     if (location.pathname.startsWith("/projects/") && location.pathname.split("/").length > 2) return "projects";
     if (location.pathname.startsWith("/moodboard")) return "moodboard";
-    if (location.pathname.startsWith("/talent")) return "talent";
+    if (location.pathname.startsWith("/freelancers")) return "freelancers";
     if (location.pathname.startsWith("/writers-room")) return "writers-room";
-    if (location.pathname.startsWith("/knowledge-base")) return "knowledge-base";
-    if (location.pathname.startsWith("/transcripts")) return "transcripts";
     return "dashboard";
   };
 
