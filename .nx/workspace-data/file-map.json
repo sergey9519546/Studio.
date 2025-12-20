@@ -1204,10 +1204,10 @@
           "file": "apps/api/src/prisma/prisma.service.ts",
           "hash": "5443298673135333215",
           "deps": [
-            "npm:@libsql/client",
             "npm:@nestjs/common",
-            "npm:@prisma/adapter-libsql",
-            "npm:@prisma/client"
+            "npm:@prisma/adapter-pg",
+            "npm:@prisma/client",
+            "npm:pg"
           ]
         },
         {

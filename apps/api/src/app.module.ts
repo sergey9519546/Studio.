@@ -15,6 +15,7 @@ import { CommonModule } from "./common/guards/common.module.js";
 import { LoggerModule } from './common/logger/logger.module.js';
 import { validate } from "./config/env.validation.js";
 import { HealthModule } from "./health/health.module.js";
+import { AuthModule } from "./modules/auth/auth.module.js";
 import { FreelancersModule } from "./modules/freelancers/freelancers.module.js";
 import { ProjectsModule } from "./modules/projects/projects.module.js";
 import { StorageModule } from "./modules/storage/storage.module.js";
@@ -119,7 +120,7 @@ appLogger.log(
     // AnalysisModule,
     // AIModule,
     HealthModule,
-    // AuthModule,
+    AuthModule,
     ProjectsModule,
     FreelancersModule,
     // TranscriptsModule,

@@ -16789,12 +16789,12 @@
       },
       {
         "source": "api",
-        "target": "npm:@libsql/client",
+        "target": "npm:@prisma/adapter-pg",
         "type": "static"
       },
       {
         "source": "api",
-        "target": "npm:@prisma/adapter-libsql",
+        "target": "npm:pg",
         "type": "static"
       },
       {
@@ -40459,5 +40459,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1766230021578
+  "computedAt": 1766247600641
 }

@@ -1,22 +1,30 @@
 import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
-import { PrismaLibSql } from '@prisma/adapter-libsql';
+import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '@prisma/client';
+import { Pool } from 'pg';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
   private readonly logger: Logger;
+  private readonly _pool?: Pool;
 
   constructor() {
-    // Create the adapter with proper configuration using URL directly
-    const adapter = new PrismaLibSql({
-      url: 'file:./dev.db',
-    });
+    const databaseUrl = process.env.DATABASE_URL;
+    const pool = databaseUrl ? new Pool({ connectionString: databaseUrl }) : undefined;
+    const adapter = pool ? new PrismaPg(pool) : undefined;
 
-    super({
-      adapter,
-      log: ['query', 'info', 'warn', 'error'],
-    });
+    super(
+      adapter
+        ? {
+            adapter,
+            log: ['query', 'info', 'warn', 'error'],
+          }
+        : {
+            log: ['query', 'info', 'warn', 'error'],
+          },
+    );
     this.logger = new Logger(PrismaService.name);
+    this._pool = pool;
   }
 
   async onModuleInit() {
@@ -32,5 +40,8 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
 
   async onModuleDestroy() {
     await this.$disconnect();
+    if (this._pool) {
+      await this._pool.end();
+    }
   }
 }

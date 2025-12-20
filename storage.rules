@@ -1,38 +1,10 @@
 rules_version = '2';
+
+// Craft rules based on data in your Firestore database
+// allow write: if firestore.get(
+//    /databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
 service firebase.storage {
   match /b/{bucket}/o {
-    // Public files - readable by anyone, writable by authenticated users with admin/editor role
-    match /public/{allPaths=**} {
-      allow read: if true;
-      allow write: if request.auth != null && 
-                   request.auth.token.role in ['admin', 'editor'];
-    }
-    
-    // User files - only accessible by the file owner
-    match /users/{userId}/{allPaths=**} {
-      allow read, write: if request.auth != null && 
-                          request.auth.uid == userId;
-    }
-    
-    // Project files - readable by all, writable by project members
-    match /projects/{projectId}/{allPaths=**} {
-      allow read: if true;
-      allow write: if request.auth != null && 
-                   request.auth.token.role in ['admin', 'editor'];
-    }
-    
-    // Assignment files - accessible to assignees and creators only
-    match /assignments/{assignmentId}/{allPaths=**} {
-      allow read: if request.auth != null &&
-                   (request.auth.uid == assignmentId ||
-                    exists(/databases/$(database)/documents/assignments/$(assignmentId)) &&
-                    get(/databases/$(database)/documents/assignments/$(assignmentId)).data.createdBy == request.auth.uid);
-      allow write: if request.auth != null &&
-                   exists(/databases/$(database)/documents/assignments/$(assignmentId)) &&
-                   get(/databases/$(database)/documents/assignments/$(assignmentId)).data.createdBy == request.auth.uid;
-    }
-    
-    // Default deny all other access
     match /{allPaths=**} {
       allow read, write: if false;
     }
