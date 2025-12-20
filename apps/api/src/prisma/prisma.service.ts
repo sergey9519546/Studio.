@@ -1,6 +1,5 @@
-import { createClient } from '@libsql/client';
 import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
-import { PrismaLibSQL } from '@prisma/adapter-libsql';
+import { PrismaLibSql } from '@prisma/adapter-libsql';
 import { PrismaClient } from '@prisma/client';
 
 @Injectable()
@@ -8,13 +7,10 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
   private readonly logger: Logger;
 
   constructor() {
-    // Create libsql client for SQLite
-    const libsql = createClient({
+    // Create the adapter with proper configuration using URL directly
+    const adapter = new PrismaLibSql({
       url: 'file:./dev.db',
     });
-
-    // Create the adapter
-    const adapter = new PrismaLibSQL(libsql);
 
     super({
       adapter,
