@@ -6004,7 +6004,7 @@
       },
       {
         "file": "ffmpeg/.forgejo/workflows/test.yml",
-        "hash": "17314073645431640804"
+        "hash": "9647921042972334205"
       },
       {
         "file": "ffmpeg/.gitattributes",
@@ -6164,7 +6164,7 @@
       },
       {
         "file": "ffmpeg/compat/windows/makedef",
-        "hash": "4234296178730288051"
+        "hash": "11769599812744644209"
       },
       {
         "file": "ffmpeg/compat/windows/mslink",
@@ -6176,7 +6176,7 @@
       },
       {
         "file": "ffmpeg/configure",
-        "hash": "4117462668597521412"
+        "hash": "2317841733895915542"
       },
       {
         "file": "ffmpeg/doc/.gitignore",
@@ -6252,7 +6252,7 @@
       },
       {
         "file": "ffmpeg/doc/encoders.texi",
-        "hash": "9389951088517524615"
+        "hash": "14200826840767322383"
       },
       {
         "file": "ffmpeg/doc/errno.txt",
@@ -6380,7 +6380,7 @@
       },
       {
         "file": "ffmpeg/doc/fate_config.sh.template",
-        "hash": "17954900405428372450"
+        "hash": "12895660616354302261"
       },
       {
         "file": "ffmpeg/doc/ffmpeg-bitstream-filters.texi",
@@ -6460,7 +6460,7 @@
       },
       {
         "file": "ffmpeg/doc/general_contents.texi",
-        "hash": "7111896711993383823"
+        "hash": "6598538595985610537"
       },
       {
         "file": "ffmpeg/doc/git-howto.texi",
@@ -6552,7 +6552,7 @@
       },
       {
         "file": "ffmpeg/doc/platform.texi",
-        "hash": "15465809729346039046"
+        "hash": "2643220125730734273"
       },
       {
         "file": "ffmpeg/doc/print_options.c",
@@ -7844,7 +7844,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/apv_parser.c",
-        "hash": "1413794661215778278"
+        "hash": "9014785683412224352"
       },
       {
         "file": "ffmpeg/libavcodec/arbc.c",
@@ -8104,7 +8104,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/arm/mathops.h",
-        "hash": "6027560556732063800"
+        "hash": "14156882439360859540"
       },
       {
         "file": "ffmpeg/libavcodec/arm/me_cmp_armv6.S",
@@ -11628,7 +11628,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/libvpxenc.c",
-        "hash": "14355039230312949137"
+        "hash": "8925025946748552157"
       },
       {
         "file": "ffmpeg/libavcodec/libvvenc.c",
@@ -12000,7 +12000,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/mathops.h",
-        "hash": "13016762803399261546"
+        "hash": "291231374548343911"
       },
       {
         "file": "ffmpeg/libavcodec/mathtables.c",
@@ -14263,6 +14263,10 @@
         "hash": "6984903937578513861"
       },
       {
+        "file": "ffmpeg/libavcodec/riscv/mathops.h",
+        "hash": "11102222563467790303"
+      },
+      {
         "file": "ffmpeg/libavcodec/riscv/me_cmp_init.c",
         "hash": "7610576137477670090"
       },
@@ -15708,7 +15712,7 @@
       },
       {
         "file": "ffmpeg/libavcodec/version.h",
-        "hash": "3089456628774519832"
+        "hash": "6908673877898325969"
       },
       {
         "file": "ffmpeg/libavcodec/version_major.h",
@@ -18920,7 +18924,7 @@
       },
       {
         "file": "ffmpeg/libavfilter/riscv/Makefile",
-        "hash": "10941694685272581249"
+        "hash": "3873778391808748672"
       },
       {
         "file": "ffmpeg/libavfilter/riscv/af_afir_init.c",
@@ -18933,6 +18937,14 @@
       {
         "file": "ffmpeg/libavfilter/riscv/cpu_common.c",
         "hash": "10516546549279077008"
+      },
+      {
+        "file": "ffmpeg/libavfilter/riscv/vf_blackdetect_init.c",
+        "hash": "15770741756344861249"
+      },
+      {
+        "file": "ffmpeg/libavfilter/riscv/vf_blackdetect_rvv.S",
+        "hash": "15257088583448249272"
       },
       {
         "file": "ffmpeg/libavfilter/scale_eval.c",
@@ -19152,7 +19164,7 @@
       },
       {
         "file": "ffmpeg/libavfilter/vf_blackdetect.h",
-        "hash": "13826880438881069211"
+        "hash": "5465864316441060093"
       },
       {
         "file": "ffmpeg/libavfilter/vf_blackdetect_vulkan.c",
@@ -21428,7 +21440,7 @@
       },
       {
         "file": "ffmpeg/libavformat/demux.c",
-        "hash": "17034978141861771149"
+        "hash": "11276692763190113523"
       },
       {
         "file": "ffmpeg/libavformat/demux.h",
@@ -21524,7 +21536,7 @@
       },
       {
         "file": "ffmpeg/libavformat/dvenc.c",
-        "hash": "4836814624982030623"
+        "hash": "1006918830527400653"
       },
       {
         "file": "ffmpeg/libavformat/dxa.c",
@@ -21600,7 +21612,7 @@
       },
       {
         "file": "ffmpeg/libavformat/flac_picture.c",
-        "hash": "917994525567012204"
+        "hash": "13780331649283848444"
       },
       {
         "file": "ffmpeg/libavformat/flac_picture.h",
@@ -21632,7 +21644,7 @@
       },
       {
         "file": "ffmpeg/libavformat/flvdec.c",
-        "hash": "4470617313919837765"
+        "hash": "18015572522026044522"
       },
       {
         "file": "ffmpeg/libavformat/flvenc.c",
@@ -23292,7 +23304,7 @@
       },
       {
         "file": "ffmpeg/libavformat/supenc.c",
-        "hash": "16307759777969422256"
+        "hash": "11870579139799182452"
       },
       {
         "file": "ffmpeg/libavformat/svag.c",
@@ -23660,7 +23672,7 @@
       },
       {
         "file": "ffmpeg/libavformat/whip.c",
-        "hash": "11825245843929444771"
+        "hash": "8171061963492010986"
       },
       {
         "file": "ffmpeg/libavformat/wsddec.c",
@@ -26240,7 +26252,7 @@
       },
       {
         "file": "ffmpeg/tests/checkasm/checkasm.c",
-        "hash": "12183843689364557148"
+        "hash": "15644933153256426203"
       },
       {
         "file": "ffmpeg/tests/checkasm/checkasm.h",
@@ -26564,7 +26576,7 @@
       },
       {
         "file": "ffmpeg/tests/fate-run.sh",
-        "hash": "13859418176806306795"
+        "hash": "14880801137413347686"
       },
       {
         "file": "ffmpeg/tests/fate-valgrind.supp",
@@ -26572,7 +26584,7 @@
       },
       {
         "file": "ffmpeg/tests/fate.sh",
-        "hash": "13307048887844967258"
+        "hash": "1154020525449310405"
       },
       {
         "file": "ffmpeg/tests/fate/aac.mak",
@@ -48936,5 +48948,5 @@
       }
     ]
   },
-  "externalNodesHash": "10811126731408293517"
+  "externalNodesHash": "12441087567772570337"
 }

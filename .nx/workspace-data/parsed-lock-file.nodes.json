@@ -3069,6 +3069,105 @@
         "hash": "sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA=="
       }
     },
+    "npm:@libsql/client": {
+      "type": "npm",
+      "name": "npm:@libsql/client",
+      "data": {
+        "version": "0.15.15",
+        "packageName": "@libsql/client",
+        "hash": "sha512-twC0hQxPNHPKfeOv3sNT6u2pturQjLcI+CnpTM0SjRpocEGgfiZ7DWKXLNnsothjyJmDqEsBQJ5ztq9Wlu470w=="
+      }
+    },
+    "npm:@libsql/client@0.8.1": {
+      "type": "npm",
+      "name": "npm:@libsql/client@0.8.1",
+      "data": {
+        "version": "0.8.1",
+        "packageName": "@libsql/client",
+        "hash": "sha512-xGg0F4iTDFpeBZ0r4pA6icGsYa5rG6RAG+i/iLDnpCAnSuTqEWMDdPlVseiq4Z/91lWI9jvvKKiKpovqJ1kZWA=="
+      }
+    },
+    "npm:@libsql/core": {
+      "type": "npm",
+      "name": "npm:@libsql/core",
+      "data": {
+        "version": "0.15.15",
+        "packageName": "@libsql/core",
+        "hash": "sha512-C88Z6UKl+OyuKKPwz224riz02ih/zHYI3Ho/LAcVOgjsunIRZoBw7fjRfaH9oPMmSNeQfhGklSG2il1URoOIsA=="
+      }
+    },
+    "npm:@libsql/core@0.8.1": {
+      "type": "npm",
+      "name": "npm:@libsql/core@0.8.1",
+      "data": {
+        "version": "0.8.1",
+        "packageName": "@libsql/core",
+        "hash": "sha512-u6nrj6HZMTPsgJ9EBhLzO2uhqhlHQJQmVHV+0yFLvfGf3oSP8w7TjZCNUgu1G8jHISx6KFi7bmcrdXW9lRt++A=="
+      }
+    },
+    "npm:@libsql/hrana-client@0.6.2": {
+      "type": "npm",
+      "name": "npm:@libsql/hrana-client@0.6.2",
+      "data": {
+        "version": "0.6.2",
+        "packageName": "@libsql/hrana-client",
+        "hash": "sha512-MWxgD7mXLNf9FXXiM0bc90wCjZSpErWKr5mGza7ERy2FJNNMXd7JIOv+DepBA1FQTIfI8TFO4/QDYgaQC0goNw=="
+      }
+    },
+    "npm:@libsql/hrana-client": {
+      "type": "npm",
+      "name": "npm:@libsql/hrana-client",
+      "data": {
+        "version": "0.7.0",
+        "packageName": "@libsql/hrana-client",
+        "hash": "sha512-OF8fFQSkbL7vJY9rfuegK1R7sPgQ6kFMkDamiEccNUvieQ+3urzfDFI616oPl8V7T9zRmnTkSjMOImYCAVRVuw=="
+      }
+    },
+    "npm:@libsql/isomorphic-fetch@0.2.5": {
+      "type": "npm",
+      "name": "npm:@libsql/isomorphic-fetch@0.2.5",
+      "data": {
+        "version": "0.2.5",
+        "packageName": "@libsql/isomorphic-fetch",
+        "hash": "sha512-8s/B2TClEHms2yb+JGpsVRTPBfy1ih/Pq6h6gvyaNcYnMVJvgQRY7wAa8U2nD0dppbCuDU5evTNMEhrQ17ZKKg=="
+      }
+    },
+    "npm:@libsql/isomorphic-fetch": {
+      "type": "npm",
+      "name": "npm:@libsql/isomorphic-fetch",
+      "data": {
+        "version": "0.3.1",
+        "packageName": "@libsql/isomorphic-fetch",
+        "hash": "sha512-6kK3SUK5Uu56zPq/Las620n5aS9xJq+jMBcNSOmjhNf/MUvdyji4vrMTqD7ptY7/4/CAVEAYDeotUz60LNQHtw=="
+      }
+    },
+    "npm:@libsql/isomorphic-ws": {
+      "type": "npm",
+      "name": "npm:@libsql/isomorphic-ws",
+      "data": {
+        "version": "0.1.5",
+        "packageName": "@libsql/isomorphic-ws",
+        "hash": "sha512-DtLWIH29onUYR00i0GlQ3UdcTRC6EP4u9w/h9LxpUZJWRMARk6dQwZ6Jkd+QdwVpuAOrdxt18v0K2uIYR3fwFg=="
+      }
+    },
+    "npm:@libsql/win32-x64-msvc@0.3.19": {
+      "type": "npm",
+      "name": "npm:@libsql/win32-x64-msvc@0.3.19",
+      "data": {
+        "version": "0.3.19",
+        "packageName": "@libsql/win32-x64-msvc",
+        "hash": "sha512-ay1X9AobE4BpzG0XPw1gplyLZPGHIgJOovvW23gUrukRegiUP62uzhpRbKNogLlUOynyXeq//prHgPXiebUfWg=="
+      }
+    },
+    "npm:@libsql/win32-x64-msvc": {
+      "type": "npm",
+      "name": "npm:@libsql/win32-x64-msvc",
+      "data": {
+        "version": "0.5.22",
+        "packageName": "@libsql/win32-x64-msvc",
+        "hash": "sha512-Fj0j8RnBpo43tVZUVoNK6BV/9AtDUM5S7DF3LB4qTYg1LMSZqi3yeCneUTLJD6XomQJlZzbI4mst89yspVSAnA=="
+      }
+    },
     "npm:@lukeed/csprng": {
       "type": "npm",
       "name": "npm:@lukeed/csprng",
@@ -3103,6 +3202,15 @@
         "version": "0.2.4",
         "packageName": "@napi-rs/wasm-runtime",
         "hash": "sha512-9zESzOO5aDByvhIAsOy9TbpZ0Ur2AJbUI7UT73kcUTS2mxAMHOBaa1st/jAymNoCtvrit99kkzT1FZuXVcgfIQ=="
+      }
+    },
+    "npm:@neon-rs/load": {
+      "type": "npm",
+      "name": "npm:@neon-rs/load",
+      "data": {
+        "version": "0.0.4",
+        "packageName": "@neon-rs/load",
+        "hash": "sha512-kTPhdZyTQxB+2wpiRcFWrDcejc4JI6tkPuS7UZCG4l6Zvc5kU/gGQ/ozvHTh1XR5tS+UlfAfGuPajjzQjCiHCw=="
       }
     },
     "npm:@nestjs/cache-manager": {
@@ -3474,6 +3582,15 @@
         "hash": "sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA=="
       }
     },
+    "npm:@prisma/adapter-libsql": {
+      "type": "npm",
+      "name": "npm:@prisma/adapter-libsql",
+      "data": {
+        "version": "7.2.0",
+        "packageName": "@prisma/adapter-libsql",
+        "hash": "sha512-8KmMZWiHDMJObKU5o+OQBKa7WocWLpWRYHmbkVOG60GC8EcxYXHWjDwmwjFh/ggfluCwp/Z+6hOqHZJte51TmQ=="
+      }
+    },
     "npm:@prisma/adapter-pg": {
       "type": "npm",
       "name": "npm:@prisma/adapter-pg",
@@ -3562,6 +3679,15 @@
         "version": "7.1.0",
         "packageName": "@prisma/driver-adapter-utils",
         "hash": "sha512-AlVLzeXkw81+47MvQ9M8DvTiHkRfJ8xzklTbYjpskb0cTTDVHboTI/OVwT6Wcep/bNvfLKJYO0nylBiM5rxgww=="
+      }
+    },
+    "npm:@prisma/driver-adapter-utils@7.2.0": {
+      "type": "npm",
+      "name": "npm:@prisma/driver-adapter-utils@7.2.0",
+      "data": {
+        "version": "7.2.0",
+        "packageName": "@prisma/driver-adapter-utils",
+        "hash": "sha512-gzrUcbI9VmHS24Uf+0+7DNzdIw7keglJsD5m/MHxQOU68OhGVzlphQRobLiDMn8CHNA2XN8uugwKjudVtnfMVQ=="
       }
     },
     "npm:@prisma/engines-version": {
@@ -5229,6 +5355,15 @@
         "hash": "sha512-T8L6i7wCuyoK8A/ZeLYt1+q0ty3Zb9+qbSSvrIVitzT3YjZqkTZ40IbRsPanlB4h1QB3JVL1SYCdR6ngtFYcuA=="
       }
     },
+    "npm:@types/ws": {
+      "type": "npm",
+      "name": "npm:@types/ws",
+      "data": {
+        "version": "8.18.1",
+        "packageName": "@types/ws",
+        "hash": "sha512-ThVF6DCVhA8kUGy+aazFQ4kXQ7E1Ty7A3ypFOe0IcJV8O/M511G99AW24irKrW56Wt44yG9+ij8FaqoBGkuBXg=="
+      }
+    },
     "npm:@types/yargs-parser": {
       "type": "npm",
       "name": "npm:@types/yargs-parser",
@@ -6073,6 +6208,15 @@
         "version": "1.0.0",
         "packageName": "async-function",
         "hash": "sha512-hsU18Ae8CDTR6Kgu9DYf0EbCr/a5iGL0rytQDobUcdpYOKokk8LEjVphnXkDkgpi0wYVsqrXuP0bZxJaTqdgoA=="
+      }
+    },
+    "npm:async-mutex": {
+      "type": "npm",
+      "name": "npm:async-mutex",
+      "data": {
+        "version": "0.5.0",
+        "packageName": "async-mutex",
+        "hash": "sha512-1A94B18jkJ3DYq284ohPxoXbfTA5HsQ7/Mf4DEhcyLx3Bz27Rh59iScbB6EPiP+B+joue6YCxcMXSbFC1tZKwA=="
       }
     },
     "npm:async-retry": {
@@ -7639,6 +7783,15 @@
         "version": "2.1.2",
         "packageName": "detect-libc",
         "hash": "sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ=="
+      }
+    },
+    "npm:detect-libc@2.0.2": {
+      "type": "npm",
+      "name": "npm:detect-libc@2.0.2",
+      "data": {
+        "version": "2.0.2",
+        "packageName": "detect-libc",
+        "hash": "sha512-UX6sGumvvqSaXgdKGUsgZWqcUyIXZ/vZTrlRT/iobiKhGL0zL4d3osHj3uqllWJK+i+sixDS/3COVEOFbupFyw=="
       }
     },
     "npm:detect-newline": {
@@ -11214,6 +11367,24 @@
         "hash": "sha512-Z3IhgVgrqO1S5xPYM3K5XwbkDasU67/Vys4heW+lfSBALcUZjeIIzI8zCLifY+OCzSq+fpDdywMDa7z+4srJPQ=="
       }
     },
+    "npm:libsql@0.3.19": {
+      "type": "npm",
+      "name": "npm:libsql@0.3.19",
+      "data": {
+        "version": "0.3.19",
+        "packageName": "libsql",
+        "hash": "sha512-Aj5cQ5uk/6fHdmeW0TiXK42FqUlwx7ytmMLPSaUQPin5HKKKuUPD62MAbN4OEweGBBI7q1BekoEN4gPUEL6MZA=="
+      }
+    },
+    "npm:libsql": {
+      "type": "npm",
+      "name": "npm:libsql",
+      "data": {
+        "version": "0.5.22",
+        "packageName": "libsql",
+        "hash": "sha512-NscWthMQt7fpU8lqd7LXMvT9pi+KhhmTHAJWUB/Lj6MWa0MKFv0F2V4C6WKKpjCVZl0VwcDz4nOI3CyaT1DDiA=="
+      }
+    },
     "npm:lie": {
       "type": "npm",
       "name": "npm:lie",
@@ -13228,6 +13399,15 @@
         "version": "5.0.0",
         "packageName": "process-warning",
         "hash": "sha512-a39t9ApHNx2L4+HBnQKqxxHNs1r7KF+Intd8Q/g1bUh6q0WIp9voPXJ/x0j+ZL45KF1pJd9+q2jLIRMfvEshkA=="
+      }
+    },
+    "npm:promise-limit": {
+      "type": "npm",
+      "name": "npm:promise-limit",
+      "data": {
+        "version": "2.7.0",
+        "packageName": "promise-limit",
+        "hash": "sha512-7nJ6v5lnJsXwGprnGXga4wx6d1POjvi5Qmf1ivTRxTjH4Z/9Czja/UCMLVmB9N93GeWOU93XaFaEt6jbuoagNw=="
       }
     },
     "npm:prompts": {
@@ -16746,11 +16926,23 @@
     "@jridgewell/trace-mapping@0.3.9": "npm:@jridgewell/trace-mapping@0.3.9",
     "@js-sdsl/ordered-map@^4.4.2": "npm:@js-sdsl/ordered-map",
     "@keyv/serialize@^1.1.1": "npm:@keyv/serialize",
+    "@libsql/client@^0.15.15": "npm:@libsql/client",
+    "@libsql/client@^0.8.1": "npm:@libsql/client@0.8.1",
+    "@libsql/core@^0.15.14": "npm:@libsql/core",
+    "@libsql/core@^0.8.1": "npm:@libsql/core@0.8.1",
+    "@libsql/hrana-client@^0.6.2": "npm:@libsql/hrana-client@0.6.2",
+    "@libsql/hrana-client@^0.7.0": "npm:@libsql/hrana-client",
+    "@libsql/isomorphic-fetch@^0.2.1": "npm:@libsql/isomorphic-fetch@0.2.5",
+    "@libsql/isomorphic-fetch@^0.3.1": "npm:@libsql/isomorphic-fetch",
+    "@libsql/isomorphic-ws@^0.1.5": "npm:@libsql/isomorphic-ws",
+    "@libsql/win32-x64-msvc@0.3.19": "npm:@libsql/win32-x64-msvc@0.3.19",
+    "@libsql/win32-x64-msvc@0.5.22": "npm:@libsql/win32-x64-msvc",
     "@lukeed/csprng@^1.0.0": "npm:@lukeed/csprng",
     "@modelcontextprotocol/sdk@^1.12.3": "npm:@modelcontextprotocol/sdk",
     "@modelcontextprotocol/sdk@^1.24.3": "npm:@modelcontextprotocol/sdk",
     "@mrleebo/prisma-ast@0.12.1": "npm:@mrleebo/prisma-ast",
     "@napi-rs/wasm-runtime@0.2.4": "npm:@napi-rs/wasm-runtime",
+    "@neon-rs/load@^0.0.4": "npm:@neon-rs/load",
     "@nestjs/cache-manager@^3.0.1": "npm:@nestjs/cache-manager",
     "@nestjs/cli@10.1.0": "npm:@nestjs/cli",
     "@nestjs/common@^10.0.0": "npm:@nestjs/common",
@@ -16798,6 +16990,7 @@
     "@pinojs/redact@^0.4.0": "npm:@pinojs/redact",
     "@pkgjs/parseargs@^0.11.0": "npm:@pkgjs/parseargs",
     "@pkgr/core@^0.2.9": "npm:@pkgr/core",
+    "@prisma/adapter-libsql@^7.2.0": "npm:@prisma/adapter-libsql",
     "@prisma/adapter-pg@7.1.0": "npm:@prisma/adapter-pg",
     "@prisma/client-runtime-utils@7.2.0": "npm:@prisma/client-runtime-utils",
     "@prisma/client@^7.2.0": "npm:@prisma/client",
@@ -16808,6 +17001,7 @@
     "@prisma/debug@7.2.0": "npm:@prisma/debug@7.2.0",
     "@prisma/dev@0.17.0": "npm:@prisma/dev",
     "@prisma/driver-adapter-utils@7.1.0": "npm:@prisma/driver-adapter-utils",
+    "@prisma/driver-adapter-utils@7.2.0": "npm:@prisma/driver-adapter-utils@7.2.0",
     "@prisma/engines-version@7.2.0-4.0c8ef2ce45c83248ab3df073180d5eda9e8be7a3": "npm:@prisma/engines-version",
     "@prisma/engines@7.2.0": "npm:@prisma/engines",
     "@prisma/extension-accelerate@^3.0.1": "npm:@prisma/extension-accelerate",
@@ -17014,6 +17208,7 @@
     "@types/triple-beam@^1.3.2": "npm:@types/triple-beam",
     "@types/uuid@^10.0.0": "npm:@types/uuid",
     "@types/validator@^13.15.3": "npm:@types/validator",
+    "@types/ws@^8.5.4": "npm:@types/ws",
     "@types/yargs-parser@*": "npm:@types/yargs-parser",
     "@types/yargs@^17.0.33": "npm:@types/yargs",
     "@types/yargs@^17.0.8": "npm:@types/yargs",
@@ -17136,6 +17331,7 @@
     "asap@^2.0.0": "npm:asap",
     "assertion-error@^2.0.1": "npm:assertion-error",
     "async-function@^1.0.0": "npm:async-function",
+    "async-mutex@0.5.0": "npm:async-mutex",
     "async-retry@^1.3.3": "npm:async-retry",
     "async@^3.2.3": "npm:async",
     "async@^3.2.4": "npm:async",
@@ -17373,6 +17569,7 @@
     "destroy@1.2.0": "npm:destroy",
     "detect-libc@^1.0.3": "npm:detect-libc@1.0.3",
     "detect-libc@^2.0.3": "npm:detect-libc",
+    "detect-libc@2.0.2": "npm:detect-libc@2.0.2",
     "detect-newline@^3.0.0": "npm:detect-newline",
     "detect-newline@^3.1.0": "npm:detect-newline",
     "detect-node-es@^1.1.0": "npm:detect-node-es",
@@ -17843,6 +18040,7 @@
     "jose@^4.15.4": "npm:jose@4.15.9",
     "jose@^6.1.1": "npm:jose",
     "joycon@^3.1.1": "npm:joycon",
+    "js-base64@^3.7.5": "npm:js-base64",
     "js-base64@^3.7.8": "npm:js-base64",
     "js-tokens@^3.0.0 || ^4.0.0": "npm:js-tokens",
     "js-tokens@^4.0.0": "npm:js-tokens",
@@ -17884,6 +18082,9 @@
     "levn@^0.4.1": "npm:levn",
     "lib0@^0.2.99": "npm:lib0",
     "libphonenumber-js@^1.11.1": "npm:libphonenumber-js",
+    "libsql@^0.3.10": "npm:libsql@0.3.19",
+    "libsql@^0.3.15": "npm:libsql@0.3.19",
+    "libsql@^0.5.22": "npm:libsql",
     "lie@~3.3.0": "npm:lie",
     "lilconfig@^2.1.0": "npm:lilconfig",
     "lilconfig@^3.1.1": "npm:lilconfig@3.1.3",
@@ -18179,6 +18380,7 @@
     "prisma@^7.2.0": "npm:prisma",
     "process-nextick-args@~2.0.0": "npm:process-nextick-args",
     "process-warning@^5.0.0": "npm:process-warning",
+    "promise-limit@^2.7.0": "npm:promise-limit",
     "prompts@^2.0.1": "npm:prompts",
     "prop-types@^15.5.7": "npm:prop-types",
     "prop-types@^15.8.1": "npm:prop-types",
@@ -18611,6 +18813,7 @@
     "wrappy@1": "npm:wrappy",
     "write-file-atomic@^4.0.2": "npm:write-file-atomic@4.0.2",
     "write-file-atomic@^5.0.1": "npm:write-file-atomic",
+    "ws@^8.13.0": "npm:ws",
     "ws@^8.18.0": "npm:ws",
     "ws@^8.18.3": "npm:ws",
     "xml-name-validator@^5.0.0": "npm:xml-name-validator",

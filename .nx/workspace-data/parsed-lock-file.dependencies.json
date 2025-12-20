@@ -7415,6 +7415,116 @@
     "type": "static"
   },
   {
+    "source": "npm:@libsql/client",
+    "target": "npm:@libsql/core",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/client",
+    "target": "npm:@libsql/hrana-client",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/client",
+    "target": "npm:js-base64",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/client",
+    "target": "npm:libsql",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/client",
+    "target": "npm:promise-limit",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/client@0.8.1",
+    "target": "npm:@libsql/core@0.8.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/client@0.8.1",
+    "target": "npm:@libsql/hrana-client@0.6.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/client@0.8.1",
+    "target": "npm:js-base64",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/client@0.8.1",
+    "target": "npm:libsql@0.3.19",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/client@0.8.1",
+    "target": "npm:promise-limit",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/core",
+    "target": "npm:js-base64",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/core@0.8.1",
+    "target": "npm:js-base64",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/hrana-client@0.6.2",
+    "target": "npm:@libsql/isomorphic-fetch@0.2.5",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/hrana-client@0.6.2",
+    "target": "npm:@libsql/isomorphic-ws",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/hrana-client@0.6.2",
+    "target": "npm:js-base64",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/hrana-client@0.6.2",
+    "target": "npm:node-fetch@3.3.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/hrana-client",
+    "target": "npm:@libsql/isomorphic-fetch",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/hrana-client",
+    "target": "npm:@libsql/isomorphic-ws",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/hrana-client",
+    "target": "npm:js-base64",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/hrana-client",
+    "target": "npm:node-fetch@3.3.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/isomorphic-ws",
+    "target": "npm:@types/ws",
+    "type": "static"
+  },
+  {
+    "source": "npm:@libsql/isomorphic-ws",
+    "target": "npm:ws",
+    "type": "static"
+  },
+  {
     "source": "npm:@modelcontextprotocol/sdk",
     "target": "npm:ajv",
     "type": "static"
@@ -8695,6 +8805,21 @@
     "type": "static"
   },
   {
+    "source": "npm:@prisma/adapter-libsql",
+    "target": "npm:@libsql/client@0.8.1",
+    "type": "static"
+  },
+  {
+    "source": "npm:@prisma/adapter-libsql",
+    "target": "npm:@prisma/driver-adapter-utils@7.2.0",
+    "type": "static"
+  },
+  {
+    "source": "npm:@prisma/adapter-libsql",
+    "target": "npm:async-mutex",
+    "type": "static"
+  },
+  {
     "source": "npm:@prisma/adapter-pg",
     "target": "npm:@prisma/driver-adapter-utils",
     "type": "static"
@@ -8842,6 +8967,11 @@
   {
     "source": "npm:@prisma/driver-adapter-utils",
     "target": "npm:@prisma/debug",
+    "type": "static"
+  },
+  {
+    "source": "npm:@prisma/driver-adapter-utils@7.2.0",
+    "target": "npm:@prisma/debug@7.2.0",
     "type": "static"
   },
   {
@@ -10800,6 +10930,11 @@
     "type": "static"
   },
   {
+    "source": "npm:@types/ws",
+    "target": "npm:@types/node",
+    "type": "static"
+  },
+  {
     "source": "npm:@types/yargs",
     "target": "npm:@types/yargs-parser",
     "type": "static"
@@ -11982,6 +12117,11 @@
   {
     "source": "npm:arraybuffer.prototype.slice",
     "target": "npm:is-array-buffer",
+    "type": "static"
+  },
+  {
+    "source": "npm:async-mutex",
+    "target": "npm:tslib",
     "type": "static"
   },
   {
@@ -22662,6 +22802,61 @@
   {
     "source": "npm:lib0",
     "target": "npm:isomorphic.js",
+    "type": "static"
+  },
+  {
+    "source": "npm:libsql@0.3.19",
+    "target": "npm:@neon-rs/load",
+    "type": "static"
+  },
+  {
+    "source": "npm:libsql@0.3.19",
+    "target": "npm:detect-libc@2.0.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:libsql@0.3.19",
+    "target": "npm:libsql@0.3.19",
+    "type": "static"
+  },
+  {
+    "source": "npm:libsql@0.3.19",
+    "target": "npm:@libsql/win32-x64-msvc@0.3.19",
+    "type": "static"
+  },
+  {
+    "source": "npm:libsql@0.3.19",
+    "target": "npm:@neon-rs/load",
+    "type": "static"
+  },
+  {
+    "source": "npm:libsql@0.3.19",
+    "target": "npm:detect-libc@2.0.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:libsql@0.3.19",
+    "target": "npm:libsql@0.3.19",
+    "type": "static"
+  },
+  {
+    "source": "npm:libsql@0.3.19",
+    "target": "npm:@libsql/win32-x64-msvc@0.3.19",
+    "type": "static"
+  },
+  {
+    "source": "npm:libsql",
+    "target": "npm:@neon-rs/load",
+    "type": "static"
+  },
+  {
+    "source": "npm:libsql",
+    "target": "npm:detect-libc@2.0.2",
+    "type": "static"
+  },
+  {
+    "source": "npm:libsql",
+    "target": "npm:@libsql/win32-x64-msvc",
     "type": "static"
   },
   {
