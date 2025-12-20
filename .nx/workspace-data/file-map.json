@@ -1202,9 +1202,11 @@
         },
         {
           "file": "apps/api/src/prisma/prisma.service.ts",
-          "hash": "1682678324449508722",
+          "hash": "5443298673135333215",
           "deps": [
+            "npm:@libsql/client",
             "npm:@nestjs/common",
+            "npm:@prisma/adapter-libsql",
             "npm:@prisma/client"
           ]
         },
@@ -46364,7 +46366,7 @@
       },
       {
         "file": "generated/prisma/src/dataconnect-generated/.guides/usage.md",
-        "hash": "9730055188755409149"
+        "hash": "6734198676851408184"
       },
       {
         "file": "generated/prisma/src/dataconnect-generated/README.md",
@@ -46372,7 +46374,7 @@
       },
       {
         "file": "generated/prisma/src/dataconnect-generated/esm/index.esm.js",
-        "hash": "8103665619056376340"
+        "hash": "6110978263211776781"
       },
       {
         "file": "generated/prisma/src/dataconnect-generated/esm/package.json",
@@ -46380,11 +46382,11 @@
       },
       {
         "file": "generated/prisma/src/dataconnect-generated/index.cjs.js",
-        "hash": "11947682604775880572"
+        "hash": "6179164097319436544"
       },
       {
         "file": "generated/prisma/src/dataconnect-generated/index.d.ts",
-        "hash": "12121625883648963937"
+        "hash": "12827982418421243259"
       },
       {
         "file": "generated/prisma/src/dataconnect-generated/package.json",
@@ -46476,11 +46478,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "15855719103715029319"
+        "hash": "10182423134376160235"
       },
       {
         "file": "package.json",
-        "hash": "2287841028214369600"
+        "hash": "10185997537024328847"
       },
       {
         "file": "package_backup.json",
@@ -46528,7 +46530,7 @@
       },
       {
         "file": "prisma/schema.prisma",
-        "hash": "1501621839836368200"
+        "hash": "16123504981938436645"
       },
       {
         "file": "prisma/schema_header.txt",
@@ -48536,7 +48538,7 @@
       },
       {
         "file": "src/dataconnect-generated/.guides/usage.md",
-        "hash": "9395073703261133520"
+        "hash": "6620734942988841674"
       },
       {
         "file": "src/dataconnect-generated/README.md",
@@ -48544,7 +48546,7 @@
       },
       {
         "file": "src/dataconnect-generated/esm/index.esm.js",
-        "hash": "8103665619056376340"
+        "hash": "6110978263211776781"
       },
       {
         "file": "src/dataconnect-generated/esm/package.json",
@@ -48552,11 +48554,11 @@
       },
       {
         "file": "src/dataconnect-generated/index.cjs.js",
-        "hash": "11947682604775880572"
+        "hash": "6179164097319436544"
       },
       {
         "file": "src/dataconnect-generated/index.d.ts",
-        "hash": "12121625883648963937"
+        "hash": "12827982418421243259"
       },
       {
         "file": "src/dataconnect-generated/package.json",
@@ -48568,7 +48570,7 @@
       },
       {
         "file": "src/dataconnect-generated/react/esm/index.esm.js",
-        "hash": "14570083277883875313"
+        "hash": "12174374708228840605"
       },
       {
         "file": "src/dataconnect-generated/react/esm/package.json",
@@ -48576,11 +48578,11 @@
       },
       {
         "file": "src/dataconnect-generated/react/index.cjs.js",
-        "hash": "2913033731498597627"
+        "hash": "18430920159781452914"
       },
       {
         "file": "src/dataconnect-generated/react/index.d.ts",
-        "hash": "498645000099755456"
+        "hash": "1450360211015605153"
       },
       {
         "file": "src/dataconnect-generated/react/package.json",
@@ -48940,7 +48942,7 @@
       },
       {
         "file": "yarn.lock",
-        "hash": "12201737966598271928"
+        "hash": "9892715049562307727"
       },
       {
         "file": "~/.gemini/GEMINI.md",

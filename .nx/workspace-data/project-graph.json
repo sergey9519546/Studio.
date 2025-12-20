@@ -16789,6 +16789,16 @@
       },
       {
         "source": "api",
+        "target": "npm:@libsql/client",
+        "type": "static"
+      },
+      {
+        "source": "api",
+        "target": "npm:@prisma/adapter-libsql",
+        "type": "static"
+      },
+      {
+        "source": "api",
         "target": "npm:supertest",
         "type": "static"
       }
@@ -40449,5 +40459,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1766182423857
+  "computedAt": 1766229479998
 }
