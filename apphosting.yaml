@@ -8,14 +8,33 @@ runConfig:
   # memoryMiB: 512
 
 # Environment variables and secrets.
-# env:
-  # Configure environment variables.
-  # See https://firebase.google.com/docs/app-hosting/configure#user-defined-environment
-  # - variable: MESSAGE
-  #   value: Hello world!
-  #   availability:
-  #     - BUILD
-  #     - RUNTIME
+env:
+  # Runtime config for the Nest API + static client served via ServeStaticModule.
+  - variable: NODE_ENV
+    value: "production"
+    availability:
+      - RUNTIME
+  - variable: DATABASE_URL
+    value: "postgres://d39ff80c447dd119c0734d1a975c6a82a0035bb651679b284ca967053cf4748e:sk_gCPaAOJVKHGEOCTlNv2hF@db.prisma.io:5432/postgres?sslmode=require&pool=true"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: GCP_PROJECT_ID
+    value: "gen-lang-client-0704991831"
+    availability:
+      - RUNTIME
+  - variable: STORAGE_BUCKET
+    value: "gen-lang-client-0704991831.appspot.com"
+    availability:
+      - RUNTIME
+  - variable: ALLOWED_ORIGINS
+    value: "https://gen-lang-client-0704991831-35466.web.app,https://gen-lang-client-0704991831-35466.firebaseapp.com,https://studiodotmanagement--gen-lang-client-0704991831.us-central1.hosted.app"
+    availability:
+      - RUNTIME
+  - variable: GOOGLE_APPLICATION_CREDENTIALS
+    value: "service-account-key.json"
+    availability:
+      - RUNTIME
 
   # Grant access to secrets in Cloud Secret Manager.
   # See https://firebase.google.com/docs/app-hosting/configure#secret-parameters

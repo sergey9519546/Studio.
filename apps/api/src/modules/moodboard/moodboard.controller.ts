@@ -10,7 +10,7 @@ import {
   Post,
   Query,
   UploadedFile,
-  UseInterceptors,
+  UseInterceptors
 } from "@nestjs/common";
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Throttle } from '@nestjs/throttler';

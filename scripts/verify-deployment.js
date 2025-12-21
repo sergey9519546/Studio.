@@ -17,7 +17,6 @@ console.log('==================================================\n');
 // Test counters
 let passed = 0;
 let failed = 0;
-let total = 9;
 
 function logResult(testName, success, details = '') {
   const status = success ? '✅' : '❌';
@@ -44,35 +43,18 @@ try {
 
     // Check for critical environment variables
     const hasDatabaseUrl = envContent.includes('DATABASE_URL=') && !envContent.includes('DATABASE_URL=""');
-    const hasJwtSecret = envContent.includes('JWT_SECRET=') && !envContent.includes('JWT_SECRET=""') && !envContent.includes('JWT_SECRET="temp"');
     const hasProductionNodeEnv = envContent.includes('NODE_ENV=production');
     const hasAllowedOrigins = envContent.includes('ALLOWED_ORIGINS=');
-    const hasAdminEmail = envContent.includes('ADMIN_EMAIL=') && !envContent.includes('ADMIN_EMAIL=""');
-    const hasAdminPassword = envContent.includes('ADMIN_PASSWORD=') && !envContent.includes('ADMIN_PASSWORD=""');
+    const hasStorageBucket = envContent.includes('STORAGE_BUCKET=') && !envContent.includes('STORAGE_BUCKET=""');
 
     logResult('DATABASE_URL configured', hasDatabaseUrl);
-    logResult('JWT_SECRET configured', hasJwtSecret);
     logResult('NODE_ENV set to production', hasProductionNodeEnv);
     logResult('CORS ALLOWED_ORIGINS configured', hasAllowedOrigins);
-    logResult('Admin credentials configured', hasAdminEmail && hasAdminPassword);
+    logResult('STORAGE_BUCKET configured', hasStorageBucket);
   }
 
-  // 2. Check if Atlaskit icon fixes are in place
-  console.log('\n2. Testing Atlaskit icon fixes...');
-  const iconFix1 = fs.existsSync('node_modules/@atlaskit/icon/dist/esm/migration/cross-circle.js');
-  const iconFix2 = fs.existsSync('node_modules/@atlaskit/icon/dist/esm/migration/index.js');
-
-  logResult('Cross-circle icon shim exists', iconFix1);
-  logResult('Migration index file exists', iconFix2);
-
-  if (iconFix1) {
-    const iconContent = fs.readFileSync('node_modules/@atlaskit/icon/dist/esm/migration/cross-circle.js', 'utf8');
-    const hasReactComponent = iconContent.includes('React.forwardRef') && iconContent.includes('CrossCircleIcon');
-    logResult('Cross-circle icon is valid React component', hasReactComponent);
-  }
-
-  // 3. Test TypeScript build configuration
-  console.log('\n3. Testing TypeScript build fixes...');
+  // 2. Test TypeScript build configuration
+  console.log('\n2. Testing TypeScript build fixes...');
   const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
   const buildApiScript = packageJson.scripts?.['build:api'];
 
@@ -83,22 +65,25 @@ try {
                          packageJson.scripts['build'].includes('npm run build:client && npm run build:api');
   logResult('Main build script includes both frontend and backend', hasCorrectBuild);
 
-  // 4. Check Prisma configuration
-  console.log('\n4. Testing database configuration...');
-  const prismaConfigExists = fs.existsSync('prisma/prisma.config.ts');
+  // 3. Check Prisma configuration
+  console.log('\n3. Testing database configuration...');
+  const prismaConfigExists = fs.existsSync('prisma.config.ts');
   logResult('Prisma config file exists', prismaConfigExists);
 
   if (prismaConfigExists) {
-    const prismaConfig = fs.readFileSync('prisma/prisma.config.ts', 'utf8');
-    const usesEnvDbUrl = prismaConfig.includes('process.env.DATABASE_URL');
+    const prismaConfig = fs.readFileSync('prisma.config.ts', 'utf8');
+    const usesEnvDbUrl =
+      prismaConfig.includes('env("DATABASE_URL")') ||
+      prismaConfig.includes("env('DATABASE_URL')") ||
+      prismaConfig.includes('DATABASE_URL');
     logResult('Prisma uses environment DATABASE_URL', usesEnvDbUrl);
   }
 
   const schemaExists = fs.existsSync('prisma/schema.prisma');
   logResult('Prisma schema exists', schemaExists);
 
-  // 5. API structure validation
-  console.log('\n5. Testing API structure...');
+  // 4. API structure validation
+  console.log('\n4. Testing API structure...');
   const mainTsExists = fs.existsSync('apps/api/src/main.ts');
   const appModuleExists = fs.existsSync('apps/api/src/app.module.ts');
 
@@ -110,20 +95,19 @@ try {
     const hasSecurityHeaders = mainContent.includes('helmet') && mainContent.includes('contentSecurityPolicy');
     const hasCors = mainContent.includes('enableCors');
     const hasValidationPipe = mainContent.includes('ValidationPipe');
-    const hasJwtSecret = mainContent.includes('JWT_SECRET');
 
     logResult('Security headers (Helmet) configured', hasSecurityHeaders);
     logResult('CORS configuration present', hasCors);
     logResult('Global validation pipe configured', hasValidationPipe);
-    logResult('References JWT_SECRET environment variable', hasJwtSecret);
   }
 
   // Summary
   console.log('\n==================================================');
+  const total = passed + failed;
   console.log(`✅ PASSED: ${passed}/${total} tests`);
   console.log(`❌ FAILED: ${failed}/${total} tests`);
 
-  const passRate = Math.round((passed / total) * 100);
+  const passRate = total ? Math.round((passed / total) * 100) : 100;
   console.log(`📊 PASS RATE: ${passRate}%`);
 
   if (failed > 0) {

@@ -22,23 +22,21 @@ const moduleDir = dirname(__filename);
 const appLogger = new Logger("AppModule");
 
 // Resolve the frontend build directory robustly across build outputs (dist/build)
-// In production (Docker), the path is always /app/build/client
-const staticRoot =
-  process.env.NODE_ENV === "production"
-    ? join(process.cwd(), "build/client")
-    : (() => {
-        const staticCandidates = [
-          join(process.cwd(), "build/client"),
-          join(process.cwd(), "dist/client"),
-          join(moduleDir, "../../../client"),
-          join(moduleDir, "../../client"),
-        ];
-        return staticCandidates.find((p) => existsSync(p));
-      })();
+const staticCandidates = [
+  join(process.cwd(), "build/client"),
+  join(process.cwd(), "dist/client"),
+  join(moduleDir, "../../../client"),
+  join(moduleDir, "../../client"),
+];
+
+const staticRoot = staticCandidates.find((p) => existsSync(p));
 
 appLogger.log(
   `Static root: ${staticRoot ?? "not-found"} | cwd: ${process.cwd()} | __dirname: ${moduleDir}`
 );
+if (!staticRoot && process.env.NODE_ENV === "production") {
+  appLogger.warn(`Static root not found. Checked: ${staticCandidates.join(", ")}`);
+}
 
 @Module({
   imports: [

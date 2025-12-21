@@ -2,8 +2,40 @@ import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, Inte
 import { ApiError } from '../types';
 
 // Environment configuration
+const resolveApiBaseUrl = (): string => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (!envUrl) {
+    return '/api/v1';
+  }
+
+  if (typeof window === 'undefined') {
+    return envUrl;
+  }
+
+  const hostname = window.location.hostname;
+  const isLocalHost =
+    hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1';
+
+  if (!isLocalHost) {
+    try {
+      const parsed = new URL(envUrl, window.location.origin);
+      const pointsToLocalhost =
+        parsed.hostname === 'localhost' ||
+        parsed.hostname === '127.0.0.1' ||
+        parsed.hostname === '::1';
+      if (pointsToLocalhost) {
+        return '/api/v1';
+      }
+    } catch {
+      // Keep relative or invalid URLs as-is.
+    }
+  }
+
+  return envUrl;
+};
+
 export const API_CONFIG = {
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api',
+  baseURL: resolveApiBaseUrl(),
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -116,7 +148,6 @@ export const setupRequestInterceptor = (axios: AxiosInstance): void => {
     (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
       // Add request timestamp for debugging
       (config as RequestConfigWithMetadata).metadata = { startTime: new Date() };
-      
       return config;
     },
     (error: unknown) => {

@@ -1,5 +1,5 @@
 
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, DefaultValuePipe, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
 import { CreateProjectDto, UpdateProjectDto } from './dto/project.dto.js';
 import { ProjectInput, ProjectsService } from './projects.service.js';
 
@@ -9,10 +9,12 @@ export class ProjectsController {
 
   @Get()
   async findAll(
-    @Query('page') page: number = 1,
-    @Query('limit') limit: number = 50
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('limit', new DefaultValuePipe(50), ParseIntPipe) limit: number
   ) {
-    return this.projectsService.findAll(Number(page), Number(limit));
+    const safePage = page > 0 ? page : 1;
+    const safeLimit = limit > 0 ? Math.min(limit, 200) : 50;
+    return this.projectsService.findAll(safePage, safeLimit);
   }
 
   @Get(':id')
