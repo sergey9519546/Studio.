@@ -35,7 +35,7 @@
         },
         {
           "file": "apps/api/src/app.module.ts",
-          "hash": "13202847069900395539",
+          "hash": "15117414015782892443",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
@@ -44,10 +44,6 @@
             "npm:@nestjs/throttler",
             "npm:@nestjs/serve-static"
           ]
-        },
-        {
-          "file": "apps/api/src/common/auth/jwt.strategy.ts",
-          "hash": "12571748095947165367"
         },
         {
           "file": "apps/api/src/common/cache/cache.controller.ts",
@@ -75,14 +71,6 @@
           ]
         },
         {
-          "file": "apps/api/src/common/guards/common.module.ts",
-          "hash": "1436129260906170165"
-        },
-        {
-          "file": "apps/api/src/common/guards/jwt-auth.guard.ts",
-          "hash": "3423183016370227136"
-        },
-        {
           "file": "apps/api/src/common/logger/logger.module.ts",
           "hash": "13842984578203782834",
           "deps": [
@@ -91,16 +79,12 @@
           ]
         },
         {
-          "file": "apps/api/src/common/middleware/project-context.middleware.ts",
-          "hash": "7522358731782644552"
-        },
-        {
           "file": "apps/api/src/config/brand.config.ts",
           "hash": "1394767015284191615"
         },
         {
           "file": "apps/api/src/config/env.validation.ts",
-          "hash": "8768587790976438045",
+          "hash": "17692560895732295742",
           "deps": [
             "npm:class-transformer",
             "npm:class-validator"
@@ -122,7 +106,7 @@
         },
         {
           "file": "apps/api/src/main.ts",
-          "hash": "16563121350992449800",
+          "hash": "6186170148714948008",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/core",
@@ -133,112 +117,8 @@
           ]
         },
         {
-          "file": "apps/api/src/modules/ai/ai.controller.contract.spec.ts",
-          "hash": "1276710016520851779"
-        },
-        {
-          "file": "apps/api/src/modules/ai/ai.controller.spec.ts",
-          "hash": "15211422673177188108"
-        },
-        {
-          "file": "apps/api/src/modules/ai/ai.controller.ts",
-          "hash": "1491214702996316035"
-        },
-        {
-          "file": "apps/api/src/modules/ai/ai.module.ts",
-          "hash": "7291854545618553988"
-        },
-        {
-          "file": "apps/api/src/modules/ai/gemini-analyst.service.ts",
-          "hash": "7865971255912891737"
-        },
-        {
-          "file": "apps/api/src/modules/ai/gemini-openai.service.ts",
-          "hash": "11612267009398319082"
-        },
-        {
-          "file": "apps/api/src/modules/ai/gemini.service.ts",
-          "hash": "964284754457972057"
-        },
-        {
-          "file": "apps/api/src/modules/ai/mock-analysis.service.ts",
-          "hash": "3048284641736844372"
-        },
-        {
-          "file": "apps/api/src/modules/ai/optimization.controller.ts",
-          "hash": "9453892816875743482"
-        },
-        {
-          "file": "apps/api/src/modules/ai/prompts/templates.ts",
-          "hash": "2679321650139944980"
-        },
-        {
-          "file": "apps/api/src/modules/ai/providers/ai-provider.interface.ts",
-          "hash": "3077547593399989040"
-        },
-        {
-          "file": "apps/api/src/modules/ai/providers/ai-provider.manager.ts",
-          "hash": "13392448998679837309"
-        },
-        {
-          "file": "apps/api/src/modules/ai/providers/vertex-ai.provider.ts",
-          "hash": "9388370784905671071"
-        },
-        {
-          "file": "apps/api/src/modules/ai/streaming.service.ts",
-          "hash": "9750957333355101220"
-        },
-        {
-          "file": "apps/api/src/modules/ai/testing/prompt-tester.service.ts",
-          "hash": "2819578958739523303"
-        },
-        {
-          "file": "apps/api/src/modules/ai/testing/test-cases.ts",
-          "hash": "556879506162132032"
-        },
-        {
-          "file": "apps/api/src/modules/ai/testing/testing.controller.ts",
-          "hash": "10192911678880077847"
-        },
-        {
-          "file": "apps/api/src/modules/ai/testing/testing.module.ts",
-          "hash": "7876521411734454196"
-        },
-        {
-          "file": "apps/api/src/modules/ai/tools.ts",
-          "hash": "8555823102347259150"
-        },
-        {
-          "file": "apps/api/src/modules/ai/types.ts",
-          "hash": "17445365943537183244"
-        },
-        {
-          "file": "apps/api/src/modules/ai/types/tool.types.ts",
-          "hash": "14933142985577929735"
-        },
-        {
-          "file": "apps/api/src/modules/ai/vertex-ai-embeddings.service.ts",
-          "hash": "9262353836056833841"
-        },
-        {
-          "file": "apps/api/src/modules/ai/vertex-ai.service.ts",
-          "hash": "2552511904422142435"
-        },
-        {
-          "file": "apps/api/src/modules/analysis/analysis.module.ts",
-          "hash": "1361450022985063062"
-        },
-        {
-          "file": "apps/api/src/modules/analysis/workspace-analysis.controller.ts",
-          "hash": "15940831705532274521"
-        },
-        {
-          "file": "apps/api/src/modules/analysis/workspace-analysis.service.ts",
-          "hash": "6416667662002646053"
-        },
-        {
           "file": "apps/api/src/modules/assets/assets.controller.ts",
-          "hash": "11164590688528397300",
+          "hash": "6124302882295524053",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express"
@@ -260,82 +140,6 @@
           ]
         },
         {
-          "file": "apps/api/src/modules/assignments/assignments.controller.ts",
-          "hash": "12258433724051101706"
-        },
-        {
-          "file": "apps/api/src/modules/assignments/assignments.module.ts",
-          "hash": "10981589503402036315"
-        },
-        {
-          "file": "apps/api/src/modules/assignments/assignments.service.ts",
-          "hash": "17787851230959825352"
-        },
-        {
-          "file": "apps/api/src/modules/assignments/dto/assignment.dto.ts",
-          "hash": "11668927093397763873"
-        },
-        {
-          "file": "apps/api/src/modules/assignments/dto/update-assignment.dto.ts",
-          "hash": "1308357725724232072"
-        },
-        {
-          "file": "apps/api/src/modules/auth/auth.controller.ts",
-          "hash": "10831137922678424832"
-        },
-        {
-          "file": "apps/api/src/modules/auth/auth.module.ts",
-          "hash": "11861219993557583728"
-        },
-        {
-          "file": "apps/api/src/modules/auth/auth.service.spec.ts",
-          "hash": "6177760967430380981"
-        },
-        {
-          "file": "apps/api/src/modules/auth/auth.service.ts",
-          "hash": "7977183336341167182"
-        },
-        {
-          "file": "apps/api/src/modules/auth/decorators/current-user.decorator.ts",
-          "hash": "5481468635226357012"
-        },
-        {
-          "file": "apps/api/src/modules/auth/decorators/index.ts",
-          "hash": "18317797250066046402"
-        },
-        {
-          "file": "apps/api/src/modules/auth/guards/index.ts",
-          "hash": "14939356640261835088"
-        },
-        {
-          "file": "apps/api/src/modules/auth/guards/jwt-auth.guard.ts",
-          "hash": "17247973864008319971"
-        },
-        {
-          "file": "apps/api/src/modules/auth/jwt.strategy.ts",
-          "hash": "18188382670478033667"
-        },
-        {
-          "file": "apps/api/src/modules/availability/availability.module.ts",
-          "hash": "16726673687371745941"
-        },
-        {
-          "file": "apps/api/src/modules/availability/availability.service.ts",
-          "hash": "4797510597102315832"
-        },
-        {
-          "file": "apps/api/src/modules/conversations/conversations.controller.ts",
-          "hash": "18397121081293047932"
-        },
-        {
-          "file": "apps/api/src/modules/conversations/conversations.module.ts",
-          "hash": "642012100290007853"
-        },
-        {
-          "file": "apps/api/src/modules/conversations/conversations.service.ts",
-          "hash": "13903722656172704797"
-        },
-        {
           "file": "apps/api/src/modules/freelancers/dto/freelancer.dto.ts",
           "hash": "1537147164385067933",
           "deps": [
@@ -344,7 +148,7 @@
         },
         {
           "file": "apps/api/src/modules/freelancers/freelancers.controller.ts",
-          "hash": "3386218241932318117",
+          "hash": "915250774257613820",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -373,158 +177,6 @@
             "npm:@prisma/client",
             "npm:cache-manager"
           ]
-        },
-        {
-          "file": "apps/api/src/modules/google/data-extractor.service.spec.ts",
-          "hash": "4446784758003184070"
-        },
-        {
-          "file": "apps/api/src/modules/google/data-extractor.service.ts",
-          "hash": "15534127513481304206"
-        },
-        {
-          "file": "apps/api/src/modules/google/drive.controller.ts",
-          "hash": "7132104153768570402"
-        },
-        {
-          "file": "apps/api/src/modules/google/drive.service.spec.ts",
-          "hash": "2819148740105722002"
-        },
-        {
-          "file": "apps/api/src/modules/google/drive.service.ts",
-          "hash": "1253435199911715729"
-        },
-        {
-          "file": "apps/api/src/modules/google/google-auth.controller.ts",
-          "hash": "11853910849839274785"
-        },
-        {
-          "file": "apps/api/src/modules/google/google-client.factory.spec.ts",
-          "hash": "4538124568885539034"
-        },
-        {
-          "file": "apps/api/src/modules/google/google-client.factory.ts",
-          "hash": "12385285373389588576"
-        },
-        {
-          "file": "apps/api/src/modules/google/google.module.ts",
-          "hash": "13872030148899745909"
-        },
-        {
-          "file": "apps/api/src/modules/google/sheet-ingestor.service.spec.ts",
-          "hash": "18264505800684154767"
-        },
-        {
-          "file": "apps/api/src/modules/google/sheet-ingestor.service.ts",
-          "hash": "9650927980108653085"
-        },
-        {
-          "file": "apps/api/src/modules/integrations/cloud-storage/adapters/google-drive.adapter.ts",
-          "hash": "11094566121827007073"
-        },
-        {
-          "file": "apps/api/src/modules/integrations/cloud-storage/adapters/storage-adapter.interface.ts",
-          "hash": "3219338973688439800"
-        },
-        {
-          "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.controller.ts",
-          "hash": "777355986858704345"
-        },
-        {
-          "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.service.ts",
-          "hash": "231193109033972415"
-        },
-        {
-          "file": "apps/api/src/modules/integrations/cloud-storage/cloud-storage.spec.ts",
-          "hash": "6207623513747111664"
-        },
-        {
-          "file": "apps/api/src/modules/integrations/cloud-storage/dto/cloud-storage.dto.ts",
-          "hash": "9658786719582104374"
-        },
-        {
-          "file": "apps/api/src/modules/integrations/integrations.module.ts",
-          "hash": "10848511649528205583"
-        },
-        {
-          "file": "apps/api/src/modules/integrations/unsplash/unsplash.controller.ts",
-          "hash": "10156070166387387741"
-        },
-        {
-          "file": "apps/api/src/modules/integrations/unsplash/unsplash.module.ts",
-          "hash": "3953859773515803268"
-        },
-        {
-          "file": "apps/api/src/modules/integrations/unsplash/unsplash.service.ts",
-          "hash": "9170875579235087538"
-        },
-        {
-          "file": "apps/api/src/modules/intelligence/deep-reader.service.ts",
-          "hash": "13979811898279438260"
-        },
-        {
-          "file": "apps/api/src/modules/intelligence/intelligence.module.ts",
-          "hash": "10074631116246802307"
-        },
-        {
-          "file": "apps/api/src/modules/intelligence/vector-math.ts",
-          "hash": "11156163585636371595"
-        },
-        {
-          "file": "apps/api/src/modules/knowledge/interfaces/knowledge-source.interface.ts",
-          "hash": "1228975466599269017"
-        },
-        {
-          "file": "apps/api/src/modules/knowledge/knowledge.controller.ts",
-          "hash": "2914717301683772244"
-        },
-        {
-          "file": "apps/api/src/modules/knowledge/knowledge.module.ts",
-          "hash": "11615525868757659217"
-        },
-        {
-          "file": "apps/api/src/modules/knowledge/knowledge.service.ts",
-          "hash": "1158794182105140420"
-        },
-        {
-          "file": "apps/api/src/modules/media-proxy/gcs-media.service.ts",
-          "hash": "13760904655673955301"
-        },
-        {
-          "file": "apps/api/src/modules/media-proxy/media-proxy.controller.ts",
-          "hash": "2891532128150283595"
-        },
-        {
-          "file": "apps/api/src/modules/media-proxy/media-proxy.errors.ts",
-          "hash": "17611250479986658556"
-        },
-        {
-          "file": "apps/api/src/modules/media-proxy/media-proxy.module.ts",
-          "hash": "6749932469868489107"
-        },
-        {
-          "file": "apps/api/src/modules/media-proxy/s3-media.service.ts",
-          "hash": "3807857821540974937"
-        },
-        {
-          "file": "apps/api/src/modules/monitoring/ai-usage.service.ts",
-          "hash": "8818653854898290238"
-        },
-        {
-          "file": "apps/api/src/modules/monitoring/alerts.service.ts",
-          "hash": "4442211198543104338"
-        },
-        {
-          "file": "apps/api/src/modules/monitoring/budget.guard.ts",
-          "hash": "9951290952093513361"
-        },
-        {
-          "file": "apps/api/src/modules/monitoring/monitoring.controller.ts",
-          "hash": "7684038300428797324"
-        },
-        {
-          "file": "apps/api/src/modules/monitoring/monitoring.module.ts",
-          "hash": "4689685787603908536"
         },
         {
           "file": "apps/api/src/modules/moodboard/dto/create-collection.dto.ts",
@@ -556,7 +208,7 @@
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.controller.ts",
-          "hash": "10287185168265234410",
+          "hash": "14628168527210832389",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/platform-express",
@@ -565,14 +217,14 @@
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.module.ts",
-          "hash": "6644554675763299392",
+          "hash": "6398972095735768762",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/modules/moodboard/moodboard.service.ts",
-          "hash": "17115019874324851691",
+          "hash": "3412246416866222955",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/client"
@@ -651,7 +303,7 @@
         },
         {
           "file": "apps/api/src/modules/projects/projects.controller.ts",
-          "hash": "998265033615323377",
+          "hash": "5756852103390870018",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -690,84 +342,8 @@
           ]
         },
         {
-          "file": "apps/api/src/modules/rag/AssetSimilarityEngine.ts",
-          "hash": "16655016238402686382"
-        },
-        {
-          "file": "apps/api/src/modules/rag/IntelligentContextEngine.ts.disabled",
-          "hash": "10719799933417377313"
-        },
-        {
-          "file": "apps/api/src/modules/rag/chunking.service.ts",
-          "hash": "12602239940995481921"
-        },
-        {
-          "file": "apps/api/src/modules/rag/embeddings.service.spec.ts",
-          "hash": "4880376536196131436"
-        },
-        {
-          "file": "apps/api/src/modules/rag/embeddings.service.ts",
-          "hash": "11831989706630601138"
-        },
-        {
-          "file": "apps/api/src/modules/rag/project-scoped-rag.service.ts",
-          "hash": "12434611607292165294"
-        },
-        {
-          "file": "apps/api/src/modules/rag/providers/embeddings-provider.interface.ts",
-          "hash": "17328124503036976364"
-        },
-        {
-          "file": "apps/api/src/modules/rag/providers/index.ts",
-          "hash": "16118233423615933443"
-        },
-        {
-          "file": "apps/api/src/modules/rag/providers/ollama-embeddings.service.ts",
-          "hash": "16286965985690419899"
-        },
-        {
-          "file": "apps/api/src/modules/rag/rag.controller.ts",
-          "hash": "12043553256481693089"
-        },
-        {
-          "file": "apps/api/src/modules/rag/rag.module.ts",
-          "hash": "5914185948651734324"
-        },
-        {
-          "file": "apps/api/src/modules/rag/rag.service.ts",
-          "hash": "6205442522426540539"
-        },
-        {
-          "file": "apps/api/src/modules/rag/types/rag.types.ts",
-          "hash": "3081349398431445079"
-        },
-        {
-          "file": "apps/api/src/modules/rag/vector-store.service.ts",
-          "hash": "15409145725091371847"
-        },
-        {
-          "file": "apps/api/src/modules/realtime/realtime.controller.ts",
-          "hash": "10770249165150685196"
-        },
-        {
-          "file": "apps/api/src/modules/realtime/realtime.module.ts",
-          "hash": "7093575085150655265"
-        },
-        {
-          "file": "apps/api/src/modules/realtime/realtime.service.ts",
-          "hash": "15370102189022591274"
-        },
-        {
-          "file": "apps/api/src/modules/scripts/dto/script.dto.ts",
-          "hash": "5665575739908196718"
-        },
-        {
-          "file": "apps/api/src/modules/scripts/scripts.module.ts",
-          "hash": "4215064407000741759"
-        },
-        {
           "file": "apps/api/src/modules/storage/storage.controller.ts",
-          "hash": "15198133815022645510",
+          "hash": "13242703810000381663",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -782,7 +358,7 @@
         },
         {
           "file": "apps/api/src/modules/storage/storage.service.ts",
-          "hash": "1227108658948588844",
+          "hash": "1648109178106852483",
           "deps": [
             "npm:@google-cloud/storage",
             "npm:@nestjs/common",
@@ -790,34 +366,6 @@
             "npm:@nestjs/event-emitter",
             "npm:firebase-admin"
           ]
-        },
-        {
-          "file": "apps/api/src/modules/tools/tool-handlers.service.ts",
-          "hash": "17074286325031566350"
-        },
-        {
-          "file": "apps/api/src/modules/tools/tool-schemas.ts",
-          "hash": "1343508345542477007"
-        },
-        {
-          "file": "apps/api/src/modules/tools/tools.module.ts",
-          "hash": "3545000650754467216"
-        },
-        {
-          "file": "apps/api/src/modules/transcripts/dto/create-transcript.dto.ts",
-          "hash": "15894768053861824312"
-        },
-        {
-          "file": "apps/api/src/modules/transcripts/transcripts.controller.ts",
-          "hash": "3505272390389064052"
-        },
-        {
-          "file": "apps/api/src/modules/transcripts/transcripts.module.ts",
-          "hash": "7117682427901965838"
-        },
-        {
-          "file": "apps/api/src/modules/transcripts/transcripts.service.ts",
-          "hash": "9848943807092541004"
         },
         {
           "file": "apps/api/src/prisma/prisma.module.ts",
@@ -836,7 +384,7 @@
         },
         {
           "file": "apps/api/src/prisma/prisma.service.ts",
-          "hash": "5443298673135333215",
+          "hash": "10794516619585040805",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/adapter-pg",
@@ -845,20 +393,12 @@
           ]
         },
         {
-          "file": "apps/api/src/types/external-modules.d.ts",
-          "hash": "14390130174945932794"
-        },
-        {
           "file": "apps/api/src/utils/math.utils.ts",
           "hash": "17468602552112551810"
         },
         {
-          "file": "apps/api/test/ai.integration.spec.ts",
-          "hash": "11175792878027984718"
-        },
-        {
           "file": "apps/api/test/app.e2e-spec.ts",
-          "hash": "17912321195821454344",
+          "hash": "2065606095095525404",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/common",
@@ -963,11 +503,11 @@
       },
       {
         "file": ".env.example",
-        "hash": "16218938003085913375"
+        "hash": "8057110802477723277"
       },
       {
         "file": ".env.template",
-        "hash": "14522459579582785192"
+        "hash": "2427785320641271680"
       },
       {
         "file": ".firebase/.graphqlrc",
@@ -975,7 +515,7 @@
       },
       {
         "file": ".firebase/hosting.YnVpbGRcY2xpZW50.cache",
-        "hash": "13432746234621101517"
+        "hash": "11609281218898931323"
       },
       {
         "file": ".firebaserc",
@@ -1143,7 +683,11 @@
       },
       {
         "file": "FIREBASE_SETUP.md",
-        "hash": "17774235917085810443"
+        "hash": "16393303985034968326"
+      },
+      {
+        "file": "FIREBASE_SETUP_GUIDE.md",
+        "hash": "14197176401138122456"
       },
       {
         "file": "FLUID_DESIGN_README.md",
@@ -1270,8 +814,12 @@
         "hash": "7854761413069493917"
       },
       {
+        "file": "apphosting.emulator.yaml",
+        "hash": "2281618896110692474"
+      },
+      {
         "file": "apphosting.yaml",
-        "hash": "8627724752436180461"
+        "hash": "12158024404890494437"
       },
       {
         "file": "build_and_test_frontend.js",
@@ -1280,226 +828,6 @@
       {
         "file": "c",
         "hash": "4055606894390288348"
-      },
-      {
-        "file": "components/AIChat.tsx",
-        "hash": "13761227655424432739"
-      },
-      {
-        "file": "components/App.test.tsx",
-        "hash": "5175568660604383506"
-      },
-      {
-        "file": "components/AssignmentView.test.tsx",
-        "hash": "17049662249184017991"
-      },
-      {
-        "file": "components/AssignmentView.tsx",
-        "hash": "13488549722405148959"
-      },
-      {
-        "file": "components/CSSSplitStudio.tsx",
-        "hash": "8752134297189444581"
-      },
-      {
-        "file": "components/ContextHub.tsx",
-        "hash": "15577148361761945830"
-      },
-      {
-        "file": "components/CreateStudio.tsx",
-        "hash": "1128700466676719622"
-      },
-      {
-        "file": "components/CreativeStudio.tsx",
-        "hash": "4843901583429724284"
-      },
-      {
-        "file": "components/Dashboard.tsx",
-        "hash": "15117280766122551721"
-      },
-      {
-        "file": "components/DriveFileBrowser.tsx",
-        "hash": "3561032120960224652"
-      },
-      {
-        "file": "components/EnhancedAIOrchestrator.tsx",
-        "hash": "11422106876438388199"
-      },
-      {
-        "file": "components/ErrorBoundary.tsx",
-        "hash": "10503169007878811521"
-      },
-      {
-        "file": "components/FreelancerCard.tsx",
-        "hash": "17473306985424133761"
-      },
-      {
-        "file": "components/FreelancerDetail.tsx",
-        "hash": "5369401042965043287"
-      },
-      {
-        "file": "components/FreelancerList.tsx",
-        "hash": "3206363076560482395"
-      },
-      {
-        "file": "components/GuardianRoom.tsx",
-        "hash": "3389907129162320481"
-      },
-      {
-        "file": "components/INTEGRATION_3PANE.md",
-        "hash": "14261108282407197538"
-      },
-      {
-        "file": "components/ImportWizard.test.tsx",
-        "hash": "4319244585619788410"
-      },
-      {
-        "file": "components/ImportWizard.tsx",
-        "hash": "14787795322760620352"
-      },
-      {
-        "file": "components/Layout.tsx",
-        "hash": "4842199104006695766"
-      },
-      {
-        "file": "components/Login.tsx",
-        "hash": "2652152032987593865"
-      },
-      {
-        "file": "components/MobileNav.tsx",
-        "hash": "1253033552939005909"
-      },
-      {
-        "file": "components/Moodboard/MoodboardDetail.tsx",
-        "hash": "10695077455972881950"
-      },
-      {
-        "file": "components/Moodboard/MoodboardTab.tsx",
-        "hash": "4940508735662327388"
-      },
-      {
-        "file": "components/PluginRegistry.tsx",
-        "hash": "17169606297043093465"
-      },
-      {
-        "file": "components/ProjectDetail.tsx",
-        "hash": "4295960904140729967"
-      },
-      {
-        "file": "components/ProjectDetailRedesigned.tsx",
-        "hash": "7190425343559189754"
-      },
-      {
-        "file": "components/ProjectList.tsx",
-        "hash": "4547129720691650155"
-      },
-      {
-        "file": "components/ProjectModal.tsx",
-        "hash": "7915450955353840657"
-      },
-      {
-        "file": "components/ProjectsView.tsx",
-        "hash": "4781344758221669857"
-      },
-      {
-        "file": "components/PublicProjectView.tsx",
-        "hash": "12455714111201416048"
-      },
-      {
-        "file": "components/ReferenceGallery.tsx",
-        "hash": "2193542354676825022"
-      },
-      {
-        "file": "components/SplitPaneStudio.tsx",
-        "hash": "5850514320766910406"
-      },
-      {
-        "file": "components/ToneMoodBoard.tsx",
-        "hash": "9665275177637424020"
-      },
-      {
-        "file": "components/UnsplashPhotoSearch.tsx",
-        "hash": "15516012168608533060"
-      },
-      {
-        "file": "components/confluence/ConfluenceAuthProvider.tsx",
-        "hash": "274250038717095551"
-      },
-      {
-        "file": "components/confluence/EmbeddedConfluencePage.tsx",
-        "hash": "9038552767529671784"
-      },
-      {
-        "file": "components/dashboard/DataHUD.tsx",
-        "hash": "17157126818222238058"
-      },
-      {
-        "file": "components/dashboard/MorningBriefing.tsx",
-        "hash": "3700639742843839030"
-      },
-      {
-        "file": "components/dashboard/PriorityStack.tsx",
-        "hash": "9013955326416210875"
-      },
-      {
-        "file": "components/editor/AtlassianEditor.tsx",
-        "hash": "12394295115390268630"
-      },
-      {
-        "file": "components/editor/ProseMirrorEditor.tsx",
-        "hash": "17975797785490010912"
-      },
-      {
-        "file": "components/editor/SimpleEditor.tsx",
-        "hash": "3564312283204343904"
-      },
-      {
-        "file": "components/pages/TipTapEditor.tsx",
-        "hash": "4347028523770668979"
-      },
-      {
-        "file": "components/ui/Alert.tsx",
-        "hash": "12020003018417846580"
-      },
-      {
-        "file": "components/ui/AspectRatioBox.tsx",
-        "hash": "12771639351760230291"
-      },
-      {
-        "file": "components/ui/Badge.tsx",
-        "hash": "2709536066573775907"
-      },
-      {
-        "file": "components/ui/Button.tsx",
-        "hash": "5925430597364696779"
-      },
-      {
-        "file": "components/ui/Card.tsx",
-        "hash": "2024448588165487131"
-      },
-      {
-        "file": "components/ui/ImageWithPlaceholder.tsx",
-        "hash": "11885637246912031357"
-      },
-      {
-        "file": "components/ui/Input.tsx",
-        "hash": "14593071745394260422"
-      },
-      {
-        "file": "components/ui/Progress.tsx",
-        "hash": "5153295367289169732"
-      },
-      {
-        "file": "components/ui/Skeleton.tsx",
-        "hash": "6575817293010480234"
-      },
-      {
-        "file": "components/ui/Tabs.tsx",
-        "hash": "2114804515691365322"
-      },
-      {
-        "file": "components/ui/Toast.tsx",
-        "hash": "12945136494847467674"
       },
       {
         "file": "compose.debug.yaml",
@@ -45823,7 +45151,7 @@
       },
       {
         "file": "firebase.json",
-        "hash": "9941295669491600294"
+        "hash": "11875619998334275433"
       },
       {
         "file": "firebase.json.backup",
@@ -45864,6 +45192,34 @@
       {
         "file": "fix-wsl.ps1",
         "hash": "6713174668435829786"
+      },
+      {
+        "file": "functions/.eslintrc.js",
+        "hash": "14602641669624861997"
+      },
+      {
+        "file": "functions/.gitignore",
+        "hash": "6584717076054073749"
+      },
+      {
+        "file": "functions/package-lock.json",
+        "hash": "11413311444114682523"
+      },
+      {
+        "file": "functions/package.json",
+        "hash": "14084061981622488668"
+      },
+      {
+        "file": "functions/src/index.ts",
+        "hash": "10439713269761556197"
+      },
+      {
+        "file": "functions/tsconfig.dev.json",
+        "hash": "1817712665177004581"
+      },
+      {
+        "file": "functions/tsconfig.json",
+        "hash": "16574256112208261203"
       },
       {
         "file": "generated/prisma/browser.ts",
@@ -46107,11 +45463,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "10182423134376160235"
+        "hash": "10675660279880695095"
       },
       {
         "file": "package.json",
-        "hash": "10185997537024328847"
+        "hash": "5849288258782047149"
       },
       {
         "file": "package_backup.json",
@@ -46134,12 +45490,8 @@
         "hash": "14916883626947109929"
       },
       {
-        "file": "prisma/migrations/20251204103845_initial_schema/migration.sql",
-        "hash": "8474946449556009100"
-      },
-      {
-        "file": "prisma/migrations/add_pgvector_and_embeddings/migration.sql",
-        "hash": "1581348316463511631"
+        "file": "prisma/migrations/20251220053000_baseline/migration.sql",
+        "hash": "3647924002343211829"
       },
       {
         "file": "prisma/migrations/migration_lock.toml",
@@ -46148,6 +45500,14 @@
       {
         "file": "prisma/migrations/project_isolation_rls.sql",
         "hash": "8907364102824483303"
+      },
+      {
+        "file": "prisma/migrations_archive/20251204103845_initial_schema/migration.sql",
+        "hash": "8474946449556009100"
+      },
+      {
+        "file": "prisma/migrations_archive/add_pgvector_and_embeddings/migration.sql",
+        "hash": "1581348316463511631"
       },
       {
         "file": "prisma/models.txt",
@@ -46159,7 +45519,7 @@
       },
       {
         "file": "prisma/schema.prisma",
-        "hash": "16123504981938436645"
+        "hash": "14773892240670724448"
       },
       {
         "file": "prisma/schema_header.txt",
@@ -46199,79 +45559,7 @@
       },
       {
         "file": "scripts/verify-deployment.js",
-        "hash": "14944539972200540849"
-      },
-      {
-        "file": "services/AssetIntelligenceEngine.ts",
-        "hash": "14511922814109315921"
-      },
-      {
-        "file": "services/BrandContextAssembler.ts",
-        "hash": "6573694878419660252"
-      },
-      {
-        "file": "services/EmbeddingsService.ts",
-        "hash": "13138963803402963990"
-      },
-      {
-        "file": "services/GenAIService.ts",
-        "hash": "2660153776861118946"
-      },
-      {
-        "file": "services/GoogleVisionService.ts",
-        "hash": "10475804161569577238"
-      },
-      {
-        "file": "services/IntelligentContextEngine.ts",
-        "hash": "5914972324845769824"
-      },
-      {
-        "file": "services/OpenAIVisionService.ts",
-        "hash": "10475804161569577238"
-      },
-      {
-        "file": "services/ResilienceLayer.ts",
-        "hash": "6650077117810460973"
-      },
-      {
-        "file": "services/StructuredGenAI.ts",
-        "hash": "8978295534843082789"
-      },
-      {
-        "file": "services/VerificationEngine.ts",
-        "hash": "6322796157363968390"
-      },
-      {
-        "file": "services/api.ts",
-        "hash": "3884822827237278991"
-      },
-      {
-        "file": "services/confluenceService.ts",
-        "hash": "11407605123441457784"
-      },
-      {
-        "file": "services/intelligence.ts",
-        "hash": "4254875570619772085"
-      },
-      {
-        "file": "services/mockData.ts",
-        "hash": "14540299495636304102"
-      },
-      {
-        "file": "services/providers/CustomEmojiProvider.ts",
-        "hash": "13147170457816000197"
-      },
-      {
-        "file": "services/providers/CustomMediaProvider.ts",
-        "hash": "5284522353892065422"
-      },
-      {
-        "file": "services/providers/CustomMentionProvider.ts",
-        "hash": "14315504940649549546"
-      },
-      {
-        "file": "services/unsplash.ts",
-        "hash": "8629842608404393429"
+        "hash": "6092160181101170218"
       },
       {
         "file": "shims/atlaskit-adf-schema-steps.js",
@@ -46363,7 +45651,7 @@
       },
       {
         "file": "src/App.tsx",
-        "hash": "7891223056177295733"
+        "hash": "6094837929240575922"
       },
       {
         "file": "src/__test__/DashboardHome.test.tsx",
@@ -46378,100 +45666,16 @@
         "hash": "15792644288395328541"
       },
       {
-        "file": "src/components/Accessibility.tsx",
-        "hash": "1394431520560888326"
-      },
-      {
-        "file": "src/components/ConnectionStatus.tsx",
-        "hash": "13789938421887265972"
-      },
-      {
-        "file": "src/components/Dashboard.test.tsx",
-        "hash": "7533606736235011920"
-      },
-      {
-        "file": "src/components/FluidDesignShowcase.tsx",
-        "hash": "9716249022034664657"
-      },
-      {
-        "file": "src/components/FreelancerCard.test.tsx",
-        "hash": "9079194505458052282"
-      },
-      {
-        "file": "src/components/Layout.tsx",
-        "hash": "5994287533252657313"
-      },
-      {
-        "file": "src/components/MobileNav.tsx",
-        "hash": "15787382781162754507"
-      },
-      {
         "file": "src/components/Moodboard.tsx",
-        "hash": "13794736545211003799"
+        "hash": "3302117391968264010"
       },
       {
         "file": "src/components/ProjectDashboard.tsx",
         "hash": "4963655126952505923"
       },
       {
-        "file": "src/components/ProjectHub.tsx",
-        "hash": "10573695793640698028"
-      },
-      {
-        "file": "src/components/ProjectList.test.tsx",
-        "hash": "9655915655952059483"
-      },
-      {
-        "file": "src/components/Skeleton.css",
-        "hash": "3517557226276572197"
-      },
-      {
-        "file": "src/components/Skeleton.tsx",
-        "hash": "6445860143221703324"
-      },
-      {
         "file": "src/components/TalentRoster.tsx",
-        "hash": "10111532679302466361"
-      },
-      {
-        "file": "src/components/UltimateBentoGrid.tsx",
-        "hash": "16253533184577691376"
-      },
-      {
-        "file": "src/components/WritersRoom.tsx",
-        "hash": "5937269385699689819"
-      },
-      {
-        "file": "src/components/ai/AudioAIComponent.tsx",
-        "hash": "11648941499269246517"
-      },
-      {
-        "file": "src/components/ai/DocumentAIComponent.tsx",
-        "hash": "10224629865571286997"
-      },
-      {
-        "file": "src/components/ai/DocumentAIComponent_Complete.tsx",
-        "hash": "15446880592268123699"
-      },
-      {
-        "file": "src/components/ai/EnhancedAIOrchestrator.tsx",
-        "hash": "16723367992767223494"
-      },
-      {
-        "file": "src/components/ai/MultiModalContext.tsx",
-        "hash": "5750201326322986788"
-      },
-      {
-        "file": "src/components/ai/VisionAIComponent.tsx",
-        "hash": "1728311291133885919"
-      },
-      {
-        "file": "src/components/ai/mockDataGenerators.ts",
-        "hash": "2363446151797231695"
-      },
-      {
-        "file": "src/components/auth/ProtectedRoute.tsx",
-        "hash": "10191826064923864403"
+        "hash": "3945470290566530042"
       },
       {
         "file": "src/components/dashboard/DashboardHeader.css",
@@ -46582,20 +45786,8 @@
         "hash": "10280703256071447430"
       },
       {
-        "file": "src/components/extensibility/PluginAPI.tsx",
-        "hash": "11922543933552250134"
-      },
-      {
-        "file": "src/components/extensibility/PluginManager.tsx",
-        "hash": "3439502733171339600"
-      },
-      {
-        "file": "src/components/extensibility/PluginRegistry.tsx",
-        "hash": "2452535839728182768"
-      },
-      {
         "file": "src/components/layout/CommandBar.tsx",
-        "hash": "9826062370724411975"
+        "hash": "9763327246286583093"
       },
       {
         "file": "src/components/layout/Sidebar.tsx",
@@ -46603,1515 +45795,11 @@
       },
       {
         "file": "src/components/loading/ErrorBoundary.tsx",
-        "hash": "15782206394974074222"
+        "hash": "4268649706254786553"
       },
       {
         "file": "src/components/loading/LoadingSpinner.tsx",
         "hash": "6287413903367863473"
-      },
-      {
-        "file": "src/components/plugins/PluginManagerUI.tsx",
-        "hash": "16621255753096406171"
-      },
-      {
-        "file": "src/components/tiptap-extension/list-normalization-extension.ts",
-        "hash": "7189296180858055777"
-      },
-      {
-        "file": "src/components/tiptap-extension/node-alignment-extension.ts",
-        "hash": "3320963351639480285"
-      },
-      {
-        "file": "src/components/tiptap-extension/node-background-extension.ts",
-        "hash": "18086218562553704372"
-      },
-      {
-        "file": "src/components/tiptap-extension/ui-state-extension.ts",
-        "hash": "4719380987410867592"
-      },
-      {
-        "file": "src/components/tiptap-icons/add-col-left-icon.tsx",
-        "hash": "12809317509604101810"
-      },
-      {
-        "file": "src/components/tiptap-icons/add-col-right-icon.tsx",
-        "hash": "14144973616217170596"
-      },
-      {
-        "file": "src/components/tiptap-icons/add-row-bottom-icon.tsx",
-        "hash": "7087790099686810286"
-      },
-      {
-        "file": "src/components/tiptap-icons/add-row-top-icon.tsx",
-        "hash": "5703408172429213463"
-      },
-      {
-        "file": "src/components/tiptap-icons/ai-sparkles-icon.tsx",
-        "hash": "11606970541243676579"
-      },
-      {
-        "file": "src/components/tiptap-icons/align-bottom-icon.tsx",
-        "hash": "7188332540875134087"
-      },
-      {
-        "file": "src/components/tiptap-icons/align-center-icon.tsx",
-        "hash": "18369898098335712802"
-      },
-      {
-        "file": "src/components/tiptap-icons/align-center-vertical-icon.tsx",
-        "hash": "376311182399019482"
-      },
-      {
-        "file": "src/components/tiptap-icons/align-end-vertical-icon.tsx",
-        "hash": "1550919525078546441"
-      },
-      {
-        "file": "src/components/tiptap-icons/align-justify-icon.tsx",
-        "hash": "719015488941446144"
-      },
-      {
-        "file": "src/components/tiptap-icons/align-left-icon.tsx",
-        "hash": "6870310052537822476"
-      },
-      {
-        "file": "src/components/tiptap-icons/align-middle-icon.tsx",
-        "hash": "1816072437474882727"
-      },
-      {
-        "file": "src/components/tiptap-icons/align-right-icon.tsx",
-        "hash": "545256147404235647"
-      },
-      {
-        "file": "src/components/tiptap-icons/align-start-vertical-icon.tsx",
-        "hash": "13177772507577606461"
-      },
-      {
-        "file": "src/components/tiptap-icons/align-top-icon.tsx",
-        "hash": "7576582133136480903"
-      },
-      {
-        "file": "src/components/tiptap-icons/alignment-icon.tsx",
-        "hash": "14895567286503933051"
-      },
-      {
-        "file": "src/components/tiptap-icons/arrow-down-a-z-icon.tsx",
-        "hash": "17431613781008854817"
-      },
-      {
-        "file": "src/components/tiptap-icons/arrow-down-icon.tsx",
-        "hash": "16303993529356586456"
-      },
-      {
-        "file": "src/components/tiptap-icons/arrow-down-to-line-icon.tsx",
-        "hash": "55215353202080018"
-      },
-      {
-        "file": "src/components/tiptap-icons/arrow-down-z-a-icon.tsx",
-        "hash": "114704790693862848"
-      },
-      {
-        "file": "src/components/tiptap-icons/arrow-left-icon.tsx",
-        "hash": "8841191574137558872"
-      },
-      {
-        "file": "src/components/tiptap-icons/arrow-right-icon.tsx",
-        "hash": "14025811050604681276"
-      },
-      {
-        "file": "src/components/tiptap-icons/arrow-up-icon.tsx",
-        "hash": "8334346961229869289"
-      },
-      {
-        "file": "src/components/tiptap-icons/at-sign-icon.tsx",
-        "hash": "17316068592014821007"
-      },
-      {
-        "file": "src/components/tiptap-icons/ban-icon.tsx",
-        "hash": "14177331688656533080"
-      },
-      {
-        "file": "src/components/tiptap-icons/blockquote-icon.tsx",
-        "hash": "7278493247061017599"
-      },
-      {
-        "file": "src/components/tiptap-icons/bold-icon.tsx",
-        "hash": "16707467957552612257"
-      },
-      {
-        "file": "src/components/tiptap-icons/check-ai-icon.tsx",
-        "hash": "7025131480038576235"
-      },
-      {
-        "file": "src/components/tiptap-icons/check-icon.tsx",
-        "hash": "11718177966081507176"
-      },
-      {
-        "file": "src/components/tiptap-icons/chevron-down-icon.tsx",
-        "hash": "8108024138082589628"
-      },
-      {
-        "file": "src/components/tiptap-icons/chevron-right-icon.tsx",
-        "hash": "788004151918052749"
-      },
-      {
-        "file": "src/components/tiptap-icons/clipboard-icon.tsx",
-        "hash": "15061254106611139380"
-      },
-      {
-        "file": "src/components/tiptap-icons/close-icon.tsx",
-        "hash": "4598274711124997235"
-      },
-      {
-        "file": "src/components/tiptap-icons/code-block-icon.tsx",
-        "hash": "4821714387334841193"
-      },
-      {
-        "file": "src/components/tiptap-icons/code2-icon.tsx",
-        "hash": "8953395101371268274"
-      },
-      {
-        "file": "src/components/tiptap-icons/complete-sentence-icon.tsx",
-        "hash": "2070732382802005946"
-      },
-      {
-        "file": "src/components/tiptap-icons/copy-icon.tsx",
-        "hash": "2276301881591454787"
-      },
-      {
-        "file": "src/components/tiptap-icons/corner-down-left-icon.tsx",
-        "hash": "11799684502778704718"
-      },
-      {
-        "file": "src/components/tiptap-icons/external-link-icon.tsx",
-        "hash": "16600890521194092457"
-      },
-      {
-        "file": "src/components/tiptap-icons/grip-4-icon.tsx",
-        "hash": "14275509674552656241"
-      },
-      {
-        "file": "src/components/tiptap-icons/grip-vertical-icon.tsx",
-        "hash": "18052929212062636182"
-      },
-      {
-        "file": "src/components/tiptap-icons/heading-five-icon.tsx",
-        "hash": "533617432669610815"
-      },
-      {
-        "file": "src/components/tiptap-icons/heading-four-icon.tsx",
-        "hash": "8220456786991741036"
-      },
-      {
-        "file": "src/components/tiptap-icons/heading-one-icon.tsx",
-        "hash": "18058847543906957565"
-      },
-      {
-        "file": "src/components/tiptap-icons/heading-six-icon.tsx",
-        "hash": "12553456745298020347"
-      },
-      {
-        "file": "src/components/tiptap-icons/heading-three-icon.tsx",
-        "hash": "11167121264945156143"
-      },
-      {
-        "file": "src/components/tiptap-icons/heading-two-icon.tsx",
-        "hash": "14071499518320243201"
-      },
-      {
-        "file": "src/components/tiptap-icons/highlighter-icon.tsx",
-        "hash": "15185972014290205408"
-      },
-      {
-        "file": "src/components/tiptap-icons/image-caption-icon.tsx",
-        "hash": "9859993003745547063"
-      },
-      {
-        "file": "src/components/tiptap-icons/image-icon.tsx",
-        "hash": "10783054838732446694"
-      },
-      {
-        "file": "src/components/tiptap-icons/image-plus-icon.tsx",
-        "hash": "13088035502998657366"
-      },
-      {
-        "file": "src/components/tiptap-icons/italic-icon.tsx",
-        "hash": "2255635106544492188"
-      },
-      {
-        "file": "src/components/tiptap-icons/languages-icon.tsx",
-        "hash": "9979673697829888986"
-      },
-      {
-        "file": "src/components/tiptap-icons/link-icon.tsx",
-        "hash": "5070752808723335804"
-      },
-      {
-        "file": "src/components/tiptap-icons/list-icon.tsx",
-        "hash": "14074522574647081503"
-      },
-      {
-        "file": "src/components/tiptap-icons/list-ordered-icon.tsx",
-        "hash": "1701368686465340488"
-      },
-      {
-        "file": "src/components/tiptap-icons/list-todo-icon.tsx",
-        "hash": "16959918614978527914"
-      },
-      {
-        "file": "src/components/tiptap-icons/message-square-icon.tsx",
-        "hash": "13522105085073257654"
-      },
-      {
-        "file": "src/components/tiptap-icons/message-square-plus-icon.tsx",
-        "hash": "13577092965367573198"
-      },
-      {
-        "file": "src/components/tiptap-icons/mic-ai-icon.tsx",
-        "hash": "13375754392659760101"
-      },
-      {
-        "file": "src/components/tiptap-icons/minus-icon.tsx",
-        "hash": "15303939818394684492"
-      },
-      {
-        "file": "src/components/tiptap-icons/moon-star-icon.tsx",
-        "hash": "12315369338839848324"
-      },
-      {
-        "file": "src/components/tiptap-icons/more-vertical-icon.tsx",
-        "hash": "13258099173919918849"
-      },
-      {
-        "file": "src/components/tiptap-icons/move-horizontal-icon.tsx",
-        "hash": "18439632334179495867"
-      },
-      {
-        "file": "src/components/tiptap-icons/paint-bucket-icon.tsx",
-        "hash": "7652067288629863312"
-      },
-      {
-        "file": "src/components/tiptap-icons/plus-icon.tsx",
-        "hash": "15843389836125125600"
-      },
-      {
-        "file": "src/components/tiptap-icons/plus-small-icon.tsx",
-        "hash": "8070522558078797481"
-      },
-      {
-        "file": "src/components/tiptap-icons/redo2-icon.tsx",
-        "hash": "4408867888237229396"
-      },
-      {
-        "file": "src/components/tiptap-icons/refresh-ai-icon.tsx",
-        "hash": "4098107144413952230"
-      },
-      {
-        "file": "src/components/tiptap-icons/refresh-ccw-icon.tsx",
-        "hash": "6218406396514800993"
-      },
-      {
-        "file": "src/components/tiptap-icons/repeat-2-icon.tsx",
-        "hash": "14399766325243273640"
-      },
-      {
-        "file": "src/components/tiptap-icons/rotate-ccw-icon.tsx",
-        "hash": "13786890360455674364"
-      },
-      {
-        "file": "src/components/tiptap-icons/simplify-2-icon.tsx",
-        "hash": "17132785677995262920"
-      },
-      {
-        "file": "src/components/tiptap-icons/smile-ai-icon.tsx",
-        "hash": "2906115551598457327"
-      },
-      {
-        "file": "src/components/tiptap-icons/smile-plus-icon.tsx",
-        "hash": "11084225310387360460"
-      },
-      {
-        "file": "src/components/tiptap-icons/square-x-icon.tsx",
-        "hash": "10577163605081147802"
-      },
-      {
-        "file": "src/components/tiptap-icons/stop-circle-2-icon.tsx",
-        "hash": "14785105609035043834"
-      },
-      {
-        "file": "src/components/tiptap-icons/strike-icon.tsx",
-        "hash": "9213559889818368888"
-      },
-      {
-        "file": "src/components/tiptap-icons/subscript-icon.tsx",
-        "hash": "11183998407676568237"
-      },
-      {
-        "file": "src/components/tiptap-icons/summarize-text-icon.tsx",
-        "hash": "3784891537865574773"
-      },
-      {
-        "file": "src/components/tiptap-icons/sun-icon.tsx",
-        "hash": "2516815829751277523"
-      },
-      {
-        "file": "src/components/tiptap-icons/superscript-icon.tsx",
-        "hash": "7767207444144230502"
-      },
-      {
-        "file": "src/components/tiptap-icons/table-cell-merge-icon.tsx",
-        "hash": "1514877907011105841"
-      },
-      {
-        "file": "src/components/tiptap-icons/table-cell-split-icon.tsx",
-        "hash": "1753549368875596952"
-      },
-      {
-        "file": "src/components/tiptap-icons/table-column-icon.tsx",
-        "hash": "2396054983680023559"
-      },
-      {
-        "file": "src/components/tiptap-icons/table-header-column-icon.tsx",
-        "hash": "12785698660242195287"
-      },
-      {
-        "file": "src/components/tiptap-icons/table-header-row-icon.tsx",
-        "hash": "7392820371002824688"
-      },
-      {
-        "file": "src/components/tiptap-icons/table-icon.tsx",
-        "hash": "18428015106621534400"
-      },
-      {
-        "file": "src/components/tiptap-icons/table-row-icon.tsx",
-        "hash": "8010864046681728425"
-      },
-      {
-        "file": "src/components/tiptap-icons/text-color-small-icon.tsx",
-        "hash": "3324499687058261782"
-      },
-      {
-        "file": "src/components/tiptap-icons/text-extend-icon.tsx",
-        "hash": "17588372386937214685"
-      },
-      {
-        "file": "src/components/tiptap-icons/text-reduce-icon.tsx",
-        "hash": "11102263332020872044"
-      },
-      {
-        "file": "src/components/tiptap-icons/trash-icon.tsx",
-        "hash": "2846604564958743947"
-      },
-      {
-        "file": "src/components/tiptap-icons/type-icon.tsx",
-        "hash": "4016417002381401692"
-      },
-      {
-        "file": "src/components/tiptap-icons/underline-icon.tsx",
-        "hash": "14690195641601918811"
-      },
-      {
-        "file": "src/components/tiptap-icons/undo2-icon.tsx",
-        "hash": "17569594928094842414"
-      },
-      {
-        "file": "src/components/tiptap-icons/x-icon.tsx",
-        "hash": "12256350075806294414"
-      },
-      {
-        "file": "src/components/tiptap-node/blockquote-node/blockquote-node.scss",
-        "hash": "9636178487988447721"
-      },
-      {
-        "file": "src/components/tiptap-node/code-block-node/code-block-node.scss",
-        "hash": "7850218631289746255"
-      },
-      {
-        "file": "src/components/tiptap-node/heading-node/heading-node.scss",
-        "hash": "3662165796776662376"
-      },
-      {
-        "file": "src/components/tiptap-node/horizontal-rule-node/horizontal-rule-node-extension.ts",
-        "hash": "9797612534841406069"
-      },
-      {
-        "file": "src/components/tiptap-node/horizontal-rule-node/horizontal-rule-node.scss",
-        "hash": "6961501632107873755"
-      },
-      {
-        "file": "src/components/tiptap-node/image-node/image-node-extension.ts",
-        "hash": "635658008428426332"
-      },
-      {
-        "file": "src/components/tiptap-node/image-node/image-node-floating.tsx",
-        "hash": "13309563761752231666"
-      },
-      {
-        "file": "src/components/tiptap-node/image-node/image-node-view.scss",
-        "hash": "2578981899951893854"
-      },
-      {
-        "file": "src/components/tiptap-node/image-node/image-node-view.tsx",
-        "hash": "304828087737412314"
-      },
-      {
-        "file": "src/components/tiptap-node/image-node/image-node.scss",
-        "hash": "13973479646716306975"
-      },
-      {
-        "file": "src/components/tiptap-node/image-upload-node/image-upload-node-extension.ts",
-        "hash": "8141255367262831560"
-      },
-      {
-        "file": "src/components/tiptap-node/image-upload-node/image-upload-node.scss",
-        "hash": "10676464716028903159"
-      },
-      {
-        "file": "src/components/tiptap-node/image-upload-node/image-upload-node.tsx",
-        "hash": "5814928851550789407"
-      },
-      {
-        "file": "src/components/tiptap-node/image-upload-node/index.tsx",
-        "hash": "13437978837967253175"
-      },
-      {
-        "file": "src/components/tiptap-node/list-node/list-node.scss",
-        "hash": "17992535038019454996"
-      },
-      {
-        "file": "src/components/tiptap-node/paragraph-node/paragraph-node.scss",
-        "hash": "6796411310408078201"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/extensions/table-handle/helpers/create-image.ts",
-        "hash": "16661066936261471639"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/extensions/table-handle/index.ts",
-        "hash": "9687119669287252173"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/extensions/table-handle/table-handle-plugin.ts",
-        "hash": "4035944623408433588"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/extensions/table-handle/table-handle.ts",
-        "hash": "5156448616629067699"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/extensions/table-node-extension.ts",
-        "hash": "16967417444701815358"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/hooks/use-table-handle-state.ts",
-        "hash": "17369134344490377392"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/lib/tiptap-table-utils.ts",
-        "hash": "6975756215968312451"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/styles/prosemirror-table.scss",
-        "hash": "5220054883124307698"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/styles/table-node.scss",
-        "hash": "6531027605905792948"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-add-row-column-button/index.tsx",
-        "hash": "12564560791081628028"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-add-row-column-button/table-add-row-column-button.tsx",
-        "hash": "8541845828731595892"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-add-row-column-button/use-table-add-row-column.ts",
-        "hash": "7576629771178516632"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-align-cell-button/index.tsx",
-        "hash": "5127013995631034524"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-align-cell-button/table-align-cell-button.tsx",
-        "hash": "16935541690425666134"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-align-cell-button/use-table-align-cell.ts",
-        "hash": "17973936406705445737"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-alignment-menu/index.tsx",
-        "hash": "6843426100419547841"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-alignment-menu/table-alignment-menu.tsx",
-        "hash": "10358836420109974658"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-cell-handle-menu/index.tsx",
-        "hash": "7254371479386824174"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-cell-handle-menu/table-cell-handle-menu.scss",
-        "hash": "11926475174977913238"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-cell-handle-menu/table-cell-handle-menu.tsx",
-        "hash": "10685614345707959597"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-clear-row-column-content-button/index.tsx",
-        "hash": "7114621445506901030"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-clear-row-column-content-button/table-clear-row-column-content-button.tsx",
-        "hash": "8848874209930515609"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-clear-row-column-content-button/use-table-clear-row-column-content.ts",
-        "hash": "11238437773581683771"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-delete-row-column-button/index.tsx",
-        "hash": "14305481510360500625"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-delete-row-column-button/table-delete-row-column-button.tsx",
-        "hash": "3552821651320305206"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-delete-row-column-button/use-table-delete-row-column.ts",
-        "hash": "16337752403935158539"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-duplicate-row-column-button/index.tsx",
-        "hash": "17799082808399912981"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-duplicate-row-column-button/table-duplicate-row-column-button.tsx",
-        "hash": "17763926242368101707"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-duplicate-row-column-button/use-table-duplicate-row-column.ts",
-        "hash": "859769173779350114"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-extend-row-column-button/index.tsx",
-        "hash": "14984923873933137064"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-extend-row-column-button/table-extend-row-column-button.scss",
-        "hash": "2492317219014062413"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-extend-row-column-button/table-extend-row-column-button.tsx",
-        "hash": "1269785079714568561"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-extend-row-column-button/use-table-extend-row-column.ts",
-        "hash": "5404006628987454691"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-fit-to-width-button/index.tsx",
-        "hash": "7146491358641314163"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-fit-to-width-button/table-fit-to-width-button.tsx",
-        "hash": "10294778204214974191"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-fit-to-width-button/use-table-fit-to-width.ts",
-        "hash": "15794610000836045220"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-handle-menu/index.tsx",
-        "hash": "6745683124328831500"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-handle-menu/table-handle-menu.scss",
-        "hash": "5814701448868532783"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-handle-menu/table-handle-menu.tsx",
-        "hash": "16439564146549092068"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-handle/index.tsx",
-        "hash": "12928603563384048043"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-handle/table-handle.tsx",
-        "hash": "12852438734207110635"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-handle/use-table-handle-positioning.ts",
-        "hash": "3560944503819139242"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-header-row-column-button/index.tsx",
-        "hash": "10875430313385012716"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-header-row-column-button/table-header-row-column-button.tsx",
-        "hash": "12279958336979360602"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-header-row-column-button/use-table-header-row-column.ts",
-        "hash": "12091349485421982937"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-merge-split-cell-button/index.tsx",
-        "hash": "2376449599199740014"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-merge-split-cell-button/table-merge-split-cell-button.tsx",
-        "hash": "5892181694192886078"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-merge-split-cell-button/use-table-merge-split-cell.ts",
-        "hash": "2171472183102034584"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-move-row-column-button/index.tsx",
-        "hash": "4606197996859090286"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-move-row-column-button/table-move-row-column-button.tsx",
-        "hash": "7027783757505528651"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-move-row-column-button/use-table-move-row-column.ts",
-        "hash": "1841945425132644621"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-selection-overlay/index.tsx",
-        "hash": "150347146566590827"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-selection-overlay/table-selection-overlay.tsx",
-        "hash": "8763815804943898405"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-selection-overlay/use-resize-overlay.ts",
-        "hash": "10961719840369441284"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-sort-row-column-button/index.tsx",
-        "hash": "4597793850507513640"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-sort-row-column-button/table-sort-row-column-button.tsx",
-        "hash": "10259638138762185533"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-sort-row-column-button/use-table-sort-row-column.ts",
-        "hash": "18315972183136086192"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-trigger-button/index.tsx",
-        "hash": "14084167998291330534"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-trigger-button/table-grid-selector.scss",
-        "hash": "6207281150029904189"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-trigger-button/table-grid-selector.tsx",
-        "hash": "2547857137796131406"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-trigger-button/table-trigger-button.tsx",
-        "hash": "11279354459111099399"
-      },
-      {
-        "file": "src/components/tiptap-node/table-node/ui/table-trigger-button/use-table-trigger.ts",
-        "hash": "14956225913656314579"
-      },
-      {
-        "file": "src/components/tiptap-templates/notion-like/data/content.json",
-        "hash": "7497836842748837018"
-      },
-      {
-        "file": "src/components/tiptap-templates/notion-like/notion-like-editor-collaboration-users.tsx",
-        "hash": "3363238627562831883"
-      },
-      {
-        "file": "src/components/tiptap-templates/notion-like/notion-like-editor-header.scss",
-        "hash": "1545285973427971036"
-      },
-      {
-        "file": "src/components/tiptap-templates/notion-like/notion-like-editor-header.tsx",
-        "hash": "4173777835236122535"
-      },
-      {
-        "file": "src/components/tiptap-templates/notion-like/notion-like-editor-mobile-toolbar.tsx",
-        "hash": "11587354215624125200"
-      },
-      {
-        "file": "src/components/tiptap-templates/notion-like/notion-like-editor-theme-toggle.tsx",
-        "hash": "7383851187022267608"
-      },
-      {
-        "file": "src/components/tiptap-templates/notion-like/notion-like-editor-toolbar-floating.tsx",
-        "hash": "5151288770304269180"
-      },
-      {
-        "file": "src/components/tiptap-templates/notion-like/notion-like-editor.scss",
-        "hash": "15095473611943155347"
-      },
-      {
-        "file": "src/components/tiptap-templates/notion-like/notion-like-editor.tsx",
-        "hash": "5614271669460448113"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/avatar/avatar.scss",
-        "hash": "16723422313646479664"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/avatar/avatar.tsx",
-        "hash": "8981237015019054588"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/avatar/index.tsx",
-        "hash": "12018257512381746057"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/badge/badge-colors.scss",
-        "hash": "14237063181436875477"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/badge/badge-group.scss",
-        "hash": "3419433183926620929"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/badge/badge.scss",
-        "hash": "7199873995764134978"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/badge/badge.tsx",
-        "hash": "7635904483544518078"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/badge/index.tsx",
-        "hash": "14046952676275668886"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/button/button-colors.scss",
-        "hash": "12733789920873414293"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/button/button-group.scss",
-        "hash": "10634286364395731294"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/button/button.scss",
-        "hash": "10739940400960544684"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/button/button.tsx",
-        "hash": "17681931755211742004"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/button/index.tsx",
-        "hash": "3816727532389353832"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/card/card.scss",
-        "hash": "5218189384236467134"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/card/card.tsx",
-        "hash": "9166305098445280051"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/card/index.tsx",
-        "hash": "3167022333798763545"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/combobox/combobox.scss",
-        "hash": "10161666687152065345"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/combobox/combobox.tsx",
-        "hash": "3224668210988658860"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/combobox/index.tsx",
-        "hash": "9822349699567254937"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/dropdown-menu/dropdown-menu.scss",
-        "hash": "833462505191515550"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/dropdown-menu/dropdown-menu.tsx",
-        "hash": "7786477466283545544"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/dropdown-menu/index.tsx",
-        "hash": "8610104830000886429"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/input/index.tsx",
-        "hash": "12558102120870850026"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/input/input.scss",
-        "hash": "16771269524456416849"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/input/input.tsx",
-        "hash": "16824205151966041264"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/label/index.tsx",
-        "hash": "17563921477317838572"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/label/label.scss",
-        "hash": "12935225632602719757"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/label/label.tsx",
-        "hash": "5076897204317023375"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/menu/index.tsx",
-        "hash": "5645741174477839086"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/menu/menu-context.ts",
-        "hash": "12488339696286022144"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/menu/menu-hooks.ts",
-        "hash": "2592750881827270865"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/menu/menu-types.ts",
-        "hash": "12328060307815600222"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/menu/menu-utils.ts",
-        "hash": "2460667345596606490"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/menu/menu.scss",
-        "hash": "17945759143655894781"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/menu/menu.tsx",
-        "hash": "14613721202865355814"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/popover/index.tsx",
-        "hash": "2598599917463767429"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/popover/popover.scss",
-        "hash": "2211875634203535199"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/popover/popover.tsx",
-        "hash": "10729957765187879360"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/separator/index.tsx",
-        "hash": "12768307303088019272"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/separator/separator.scss",
-        "hash": "12983667350114636412"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/separator/separator.tsx",
-        "hash": "16151063910604557387"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/sidebar/index.tsx",
-        "hash": "7839514975188172151"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/sidebar/sidebar.scss",
-        "hash": "7903698289014160812"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/sidebar/sidebar.tsx",
-        "hash": "6765023488689433757"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/spacer/index.tsx",
-        "hash": "5675859104095854993"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/spacer/spacer.tsx",
-        "hash": "7971687611993594568"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/textarea-autosize/index.tsx",
-        "hash": "6836144803956595490"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/textarea-autosize/textarea-autosize.tsx",
-        "hash": "15150290192743972675"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/toolbar/index.tsx",
-        "hash": "3645659544006416182"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/toolbar/toolbar.scss",
-        "hash": "11809468045257860726"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/toolbar/toolbar.tsx",
-        "hash": "16562728295009390944"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/tooltip/index.tsx",
-        "hash": "17271359906305192810"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/tooltip/tooltip.scss",
-        "hash": "11257610965130631498"
-      },
-      {
-        "file": "src/components/tiptap-ui-primitive/tooltip/tooltip.tsx",
-        "hash": "11374157317493156806"
-      },
-      {
-        "file": "src/components/tiptap-ui-utils/floating-element/floating-element-utils.ts",
-        "hash": "3707387320263272291"
-      },
-      {
-        "file": "src/components/tiptap-ui-utils/floating-element/floating-element.tsx",
-        "hash": "2985272878058549055"
-      },
-      {
-        "file": "src/components/tiptap-ui-utils/floating-element/index.tsx",
-        "hash": "13802652141894223941"
-      },
-      {
-        "file": "src/components/tiptap-ui-utils/suggestion-menu/index.tsx",
-        "hash": "3585351913367786389"
-      },
-      {
-        "file": "src/components/tiptap-ui-utils/suggestion-menu/suggestion-menu-types.ts",
-        "hash": "4898929272699047278"
-      },
-      {
-        "file": "src/components/tiptap-ui-utils/suggestion-menu/suggestion-menu-utils.ts",
-        "hash": "4221021212434521786"
-      },
-      {
-        "file": "src/components/tiptap-ui-utils/suggestion-menu/suggestion-menu.tsx",
-        "hash": "10736515849633125046"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-ask-button/ai-ask-button.tsx",
-        "hash": "12511938771864135929"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-ask-button/index.tsx",
-        "hash": "13522940637622682625"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-ask-button/use-ai-ask.ts",
-        "hash": "3705012705959585823"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu-actions/ai-menu-actions.scss",
-        "hash": "8209466382894454123"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu-actions/ai-menu-actions.tsx",
-        "hash": "34525256834820430"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu-actions/index.tsx",
-        "hash": "18298936809208811162"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu-hooks.ts",
-        "hash": "6121037470888612098"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu-input/ai-menu-input-hooks.ts",
-        "hash": "13541532395726688258"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu-input/ai-menu-input-types.ts",
-        "hash": "2359496138312197607"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu-input/ai-menu-input.scss",
-        "hash": "10275475262677865202"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu-input/ai-menu-input.tsx",
-        "hash": "8604387698688397742"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu-input/index.tsx",
-        "hash": "4994529918143566603"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu-items/ai-menu-items-constants.ts",
-        "hash": "12110057204165728559"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu-items/ai-menu-items-types.ts",
-        "hash": "7686251244385554220"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu-items/ai-menu-items.tsx",
-        "hash": "8045956916527563329"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu-items/index.tsx",
-        "hash": "12829444822556229140"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu-types.ts",
-        "hash": "12984020084703535425"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu-utils.ts",
-        "hash": "1610145069365044040"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu.scss",
-        "hash": "15463083687241250089"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/ai-menu.tsx",
-        "hash": "17706138969819779188"
-      },
-      {
-        "file": "src/components/tiptap-ui/ai-menu/index.tsx",
-        "hash": "1152578912695041641"
-      },
-      {
-        "file": "src/components/tiptap-ui/blockquote-button/blockquote-button.tsx",
-        "hash": "13524170403504863900"
-      },
-      {
-        "file": "src/components/tiptap-ui/blockquote-button/index.tsx",
-        "hash": "7662327874875292966"
-      },
-      {
-        "file": "src/components/tiptap-ui/blockquote-button/use-blockquote.ts",
-        "hash": "5907411721608851965"
-      },
-      {
-        "file": "src/components/tiptap-ui/code-block-button/code-block-button.tsx",
-        "hash": "4351384709666956806"
-      },
-      {
-        "file": "src/components/tiptap-ui/code-block-button/index.tsx",
-        "hash": "433695221760690944"
-      },
-      {
-        "file": "src/components/tiptap-ui/code-block-button/use-code-block.ts",
-        "hash": "16492309861032925748"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-highlight-button/color-highlight-button.scss",
-        "hash": "10562608591164518156"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-highlight-button/color-highlight-button.tsx",
-        "hash": "10273723138132988520"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-highlight-button/index.tsx",
-        "hash": "17727863365531067375"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-highlight-button/use-color-highlight.ts",
-        "hash": "17909471276385187729"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-highlight-popover/color-highlight-popover.tsx",
-        "hash": "926045697941544937"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-highlight-popover/index.tsx",
-        "hash": "13237587038135321048"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-menu/color-menu.tsx",
-        "hash": "10272797514205626448"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-menu/index.tsx",
-        "hash": "17011702373476999992"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-text-button/color-text-button.scss",
-        "hash": "10659240634559110827"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-text-button/color-text-button.tsx",
-        "hash": "1261640654402426186"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-text-button/index.tsx",
-        "hash": "17609347181557121468"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-text-button/use-color-text.ts",
-        "hash": "17474577285981064144"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-text-popover/color-text-popover.scss",
-        "hash": "14923214460825737569"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-text-popover/color-text-popover.tsx",
-        "hash": "1866475556732722108"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-text-popover/index.tsx",
-        "hash": "1657685227033083646"
-      },
-      {
-        "file": "src/components/tiptap-ui/color-text-popover/use-color-text-popover.ts",
-        "hash": "12698591212904350207"
-      },
-      {
-        "file": "src/components/tiptap-ui/copy-anchor-link-button/copy-anchor-link-button.tsx",
-        "hash": "2550665440608180171"
-      },
-      {
-        "file": "src/components/tiptap-ui/copy-anchor-link-button/index.tsx",
-        "hash": "13709545043279100329"
-      },
-      {
-        "file": "src/components/tiptap-ui/copy-anchor-link-button/use-copy-anchor-link.ts",
-        "hash": "15456551908466111651"
-      },
-      {
-        "file": "src/components/tiptap-ui/copy-anchor-link-button/use-scroll-to-hash.ts",
-        "hash": "16463450717307096544"
-      },
-      {
-        "file": "src/components/tiptap-ui/copy-to-clipboard-button/copy-to-clipboard-button.tsx",
-        "hash": "10286556080938030840"
-      },
-      {
-        "file": "src/components/tiptap-ui/copy-to-clipboard-button/index.tsx",
-        "hash": "12251457628088830583"
-      },
-      {
-        "file": "src/components/tiptap-ui/copy-to-clipboard-button/use-copy-to-clipboard.ts",
-        "hash": "14499199294054649015"
-      },
-      {
-        "file": "src/components/tiptap-ui/delete-node-button/delete-node-button.tsx",
-        "hash": "192541720443713181"
-      },
-      {
-        "file": "src/components/tiptap-ui/delete-node-button/index.tsx",
-        "hash": "8579163997441809187"
-      },
-      {
-        "file": "src/components/tiptap-ui/delete-node-button/use-delete-node.ts",
-        "hash": "18285281513810546737"
-      },
-      {
-        "file": "src/components/tiptap-ui/drag-context-menu/drag-context-menu-types.ts",
-        "hash": "17481893887802225009"
-      },
-      {
-        "file": "src/components/tiptap-ui/drag-context-menu/drag-context-menu.scss",
-        "hash": "11748540046342691744"
-      },
-      {
-        "file": "src/components/tiptap-ui/drag-context-menu/drag-context-menu.tsx",
-        "hash": "12296357198062175289"
-      },
-      {
-        "file": "src/components/tiptap-ui/drag-context-menu/index.tsx",
-        "hash": "6484136415901266343"
-      },
-      {
-        "file": "src/components/tiptap-ui/duplicate-button/duplicate-button.tsx",
-        "hash": "10268137199459481951"
-      },
-      {
-        "file": "src/components/tiptap-ui/duplicate-button/index.tsx",
-        "hash": "17134294906416017706"
-      },
-      {
-        "file": "src/components/tiptap-ui/duplicate-button/use-duplicate.ts",
-        "hash": "15290787570264233559"
-      },
-      {
-        "file": "src/components/tiptap-ui/emoji-dropdown-menu/emoji-dropdown-menu.tsx",
-        "hash": "9084465437780841058"
-      },
-      {
-        "file": "src/components/tiptap-ui/emoji-dropdown-menu/index.tsx",
-        "hash": "4705359063817016990"
-      },
-      {
-        "file": "src/components/tiptap-ui/emoji-menu/emoji-menu-utils.ts",
-        "hash": "11992004319281088319"
-      },
-      {
-        "file": "src/components/tiptap-ui/emoji-menu/emoji-menu.scss",
-        "hash": "10538639160990450618"
-      },
-      {
-        "file": "src/components/tiptap-ui/emoji-menu/emoji-menu.tsx",
-        "hash": "8859113207654128329"
-      },
-      {
-        "file": "src/components/tiptap-ui/emoji-menu/index.tsx",
-        "hash": "3213215876147817661"
-      },
-      {
-        "file": "src/components/tiptap-ui/emoji-trigger-button/emoji-trigger-button.tsx",
-        "hash": "5402268664354551508"
-      },
-      {
-        "file": "src/components/tiptap-ui/emoji-trigger-button/index.tsx",
-        "hash": "8589070781228118914"
-      },
-      {
-        "file": "src/components/tiptap-ui/emoji-trigger-button/use-emoji-trigger.ts",
-        "hash": "6482315402148533498"
-      },
-      {
-        "file": "src/components/tiptap-ui/heading-button/heading-button.tsx",
-        "hash": "16156494952111586288"
-      },
-      {
-        "file": "src/components/tiptap-ui/heading-button/index.tsx",
-        "hash": "5903659175599325009"
-      },
-      {
-        "file": "src/components/tiptap-ui/heading-button/use-heading.ts",
-        "hash": "8773505324356808167"
-      },
-      {
-        "file": "src/components/tiptap-ui/image-align-button/image-align-button.tsx",
-        "hash": "14438341975092855554"
-      },
-      {
-        "file": "src/components/tiptap-ui/image-align-button/index.tsx",
-        "hash": "8010267431723963359"
-      },
-      {
-        "file": "src/components/tiptap-ui/image-align-button/use-image-align.ts",
-        "hash": "11759877971696304214"
-      },
-      {
-        "file": "src/components/tiptap-ui/image-caption-button/image-caption-button.tsx",
-        "hash": "8560729064351399492"
-      },
-      {
-        "file": "src/components/tiptap-ui/image-caption-button/index.tsx",
-        "hash": "4587801605896583059"
-      },
-      {
-        "file": "src/components/tiptap-ui/image-caption-button/use-image-caption.ts",
-        "hash": "1147224616824130640"
-      },
-      {
-        "file": "src/components/tiptap-ui/image-download-button/image-download-button.tsx",
-        "hash": "5704607747321625849"
-      },
-      {
-        "file": "src/components/tiptap-ui/image-download-button/index.tsx",
-        "hash": "5863195628894231349"
-      },
-      {
-        "file": "src/components/tiptap-ui/image-download-button/use-image-download.ts",
-        "hash": "7040551525003917353"
-      },
-      {
-        "file": "src/components/tiptap-ui/image-upload-button/image-upload-button.tsx",
-        "hash": "15966307625829147175"
-      },
-      {
-        "file": "src/components/tiptap-ui/image-upload-button/index.tsx",
-        "hash": "4621858783482282717"
-      },
-      {
-        "file": "src/components/tiptap-ui/image-upload-button/use-image-upload.ts",
-        "hash": "10707822181422024538"
-      },
-      {
-        "file": "src/components/tiptap-ui/improve-dropdown/improve-dropdown.tsx",
-        "hash": "2817829534334311620"
-      },
-      {
-        "file": "src/components/tiptap-ui/improve-dropdown/index.tsx",
-        "hash": "14235046143144193670"
-      },
-      {
-        "file": "src/components/tiptap-ui/improve-dropdown/use-improve-dropdown.ts",
-        "hash": "5949999810879620737"
-      },
-      {
-        "file": "src/components/tiptap-ui/link-popover/index.tsx",
-        "hash": "17584114609107909229"
-      },
-      {
-        "file": "src/components/tiptap-ui/link-popover/link-popover.tsx",
-        "hash": "6571861169364287043"
-      },
-      {
-        "file": "src/components/tiptap-ui/link-popover/use-link-popover.ts",
-        "hash": "18283530222241066108"
-      },
-      {
-        "file": "src/components/tiptap-ui/list-button/index.tsx",
-        "hash": "2353260947127762212"
-      },
-      {
-        "file": "src/components/tiptap-ui/list-button/list-button.tsx",
-        "hash": "8122211518965362344"
-      },
-      {
-        "file": "src/components/tiptap-ui/list-button/use-list.ts",
-        "hash": "553137254737658858"
-      },
-      {
-        "file": "src/components/tiptap-ui/mark-button/index.tsx",
-        "hash": "6028474015172002626"
-      },
-      {
-        "file": "src/components/tiptap-ui/mark-button/mark-button.tsx",
-        "hash": "6182785881048464809"
-      },
-      {
-        "file": "src/components/tiptap-ui/mark-button/use-mark.ts",
-        "hash": "4527284409050385325"
-      },
-      {
-        "file": "src/components/tiptap-ui/mention-dropdown-menu/index.tsx",
-        "hash": "2642033932109532223"
-      },
-      {
-        "file": "src/components/tiptap-ui/mention-dropdown-menu/mention-dropdown-menu.tsx",
-        "hash": "18186890685014584273"
-      },
-      {
-        "file": "src/components/tiptap-ui/mention-trigger-button/index.tsx",
-        "hash": "12566784340785454175"
-      },
-      {
-        "file": "src/components/tiptap-ui/mention-trigger-button/mention-trigger-button.tsx",
-        "hash": "17147729502390101826"
-      },
-      {
-        "file": "src/components/tiptap-ui/mention-trigger-button/use-mention-trigger.ts",
-        "hash": "16035353130204725042"
-      },
-      {
-        "file": "src/components/tiptap-ui/move-node-button/index.tsx",
-        "hash": "11594092373170260676"
-      },
-      {
-        "file": "src/components/tiptap-ui/move-node-button/move-node-button.tsx",
-        "hash": "9962580360570349221"
-      },
-      {
-        "file": "src/components/tiptap-ui/move-node-button/use-move-node.ts",
-        "hash": "7935673981116885005"
-      },
-      {
-        "file": "src/components/tiptap-ui/reset-all-formatting-button/index.tsx",
-        "hash": "14733160608444649890"
-      },
-      {
-        "file": "src/components/tiptap-ui/reset-all-formatting-button/reset-all-formatting-button.tsx",
-        "hash": "5809318933918840453"
-      },
-      {
-        "file": "src/components/tiptap-ui/reset-all-formatting-button/use-reset-all-formatting.ts",
-        "hash": "9398237811655958396"
-      },
-      {
-        "file": "src/components/tiptap-ui/slash-command-trigger-button/index.tsx",
-        "hash": "13407528280911433980"
-      },
-      {
-        "file": "src/components/tiptap-ui/slash-command-trigger-button/slash-command-trigger-button.tsx",
-        "hash": "9949185759795588372"
-      },
-      {
-        "file": "src/components/tiptap-ui/slash-command-trigger-button/use-slash-command-trigger.ts",
-        "hash": "10182977969366595167"
-      },
-      {
-        "file": "src/components/tiptap-ui/slash-dropdown-menu/index.tsx",
-        "hash": "14865189231475669073"
-      },
-      {
-        "file": "src/components/tiptap-ui/slash-dropdown-menu/slash-dropdown-menu.scss",
-        "hash": "3036987565836814276"
-      },
-      {
-        "file": "src/components/tiptap-ui/slash-dropdown-menu/slash-dropdown-menu.tsx",
-        "hash": "1476430255420183316"
-      },
-      {
-        "file": "src/components/tiptap-ui/slash-dropdown-menu/use-slash-dropdown-menu.ts",
-        "hash": "15756110277711228973"
-      },
-      {
-        "file": "src/components/tiptap-ui/text-align-button/index.tsx",
-        "hash": "15938116870683802497"
-      },
-      {
-        "file": "src/components/tiptap-ui/text-align-button/text-align-button.tsx",
-        "hash": "18268566751781228102"
-      },
-      {
-        "file": "src/components/tiptap-ui/text-align-button/use-text-align.ts",
-        "hash": "1240574196797519852"
-      },
-      {
-        "file": "src/components/tiptap-ui/text-button/index.tsx",
-        "hash": "3160409560416635746"
-      },
-      {
-        "file": "src/components/tiptap-ui/text-button/text-button.tsx",
-        "hash": "4043023100270243130"
-      },
-      {
-        "file": "src/components/tiptap-ui/text-button/use-text.ts",
-        "hash": "1674366917176014305"
-      },
-      {
-        "file": "src/components/tiptap-ui/turn-into-dropdown/index.tsx",
-        "hash": "18093103749429875160"
-      },
-      {
-        "file": "src/components/tiptap-ui/turn-into-dropdown/turn-into-dropdown.tsx",
-        "hash": "7233191909778856030"
-      },
-      {
-        "file": "src/components/tiptap-ui/turn-into-dropdown/use-turn-into-dropdown.ts",
-        "hash": "7405225859265773736"
-      },
-      {
-        "file": "src/components/tiptap-ui/undo-redo-button/index.tsx",
-        "hash": "1864731852787079602"
-      },
-      {
-        "file": "src/components/tiptap-ui/undo-redo-button/undo-redo-button.tsx",
-        "hash": "18091760359440508231"
-      },
-      {
-        "file": "src/components/tiptap-ui/undo-redo-button/use-undo-redo.ts",
-        "hash": "15631875302242227493"
       },
       {
         "file": "src/components/ui/Card.tsx",
@@ -48135,27 +45823,7 @@
       },
       {
         "file": "src/context/RouteContext.tsx",
-        "hash": "2068113342752627556"
-      },
-      {
-        "file": "src/contexts/AuthContext.tsx",
-        "hash": "8174855104369453296"
-      },
-      {
-        "file": "src/contexts/ai-context.tsx",
-        "hash": "16616376625910189501"
-      },
-      {
-        "file": "src/contexts/app-context.tsx",
-        "hash": "10289968195323857489"
-      },
-      {
-        "file": "src/contexts/collab-context.tsx",
-        "hash": "11523842648207892568"
-      },
-      {
-        "file": "src/contexts/user-context.tsx",
-        "hash": "6683643702349252419"
+        "hash": "7534818409301822077"
       },
       {
         "file": "src/dataconnect-generated/.guides/config.json",
@@ -48222,20 +45890,20 @@
         "hash": "15218105469447355347"
       },
       {
+        "file": "src/firebase.config.ts",
+        "hash": "4381389260627191169"
+      },
+      {
         "file": "src/firebase.d.ts",
-        "hash": "11825373376908959084"
+        "hash": "607929304725695177"
       },
       {
         "file": "src/firebase.ts",
-        "hash": "8997384421723207247"
+        "hash": "2672896271759146513"
       },
       {
         "file": "src/hooks/use-composed-ref.ts",
         "hash": "3347488360827534731"
-      },
-      {
-        "file": "src/hooks/use-cursor-visibility.ts",
-        "hash": "12809954569226914986"
       },
       {
         "file": "src/hooks/use-element-rect.ts",
@@ -48246,20 +45914,12 @@
         "hash": "16813752021805897878"
       },
       {
-        "file": "src/hooks/use-floating-toolbar-visibility.ts",
-        "hash": "3128017614046356386"
-      },
-      {
         "file": "src/hooks/use-is-breakpoint.ts",
         "hash": "5959027553870085304"
       },
       {
         "file": "src/hooks/use-isomorphic-layout-effect.ts",
         "hash": "2000123962328553848"
-      },
-      {
-        "file": "src/hooks/use-menu-navigation.ts",
-        "hash": "13509511227308643275"
       },
       {
         "file": "src/hooks/use-on-click-outside.ts",
@@ -48272,14 +45932,6 @@
       {
         "file": "src/hooks/use-throttled-callback.ts",
         "hash": "5324749142835737504"
-      },
-      {
-        "file": "src/hooks/use-tiptap-editor.ts",
-        "hash": "1642642591220840622"
-      },
-      {
-        "file": "src/hooks/use-ui-editor-state.ts",
-        "hash": "1450856201819519370"
       },
       {
         "file": "src/hooks/use-unmount.ts",
@@ -48302,80 +45954,40 @@
         "hash": "1751393150904682591"
       },
       {
-        "file": "src/hooks/useRealTime.ts",
-        "hash": "1061413450340040224"
-      },
-      {
-        "file": "src/hooks/useRealTimeCollaboration.ts",
-        "hash": "6460437455969164854"
-      },
-      {
         "file": "src/hooks/useToast.ts",
         "hash": "8251801115792104269"
       },
       {
         "file": "src/index.css",
-        "hash": "17262240583583283212"
-      },
-      {
-        "file": "src/integration/Phase3IntegrationTest.tsx",
-        "hash": "12723758120101883718"
+        "hash": "6161664156988708465"
       },
       {
         "file": "src/lib/utils.ts",
         "hash": "1150028292556679078"
       },
       {
-        "file": "src/pages/PluginManagerPage.tsx",
-        "hash": "7420669640367682133"
-      },
-      {
         "file": "src/routes.ts",
-        "hash": "775635305282190754"
+        "hash": "1203591351561608301"
       },
       {
         "file": "src/services/DraftService.ts",
         "hash": "10313986973375899667"
       },
       {
+        "file": "src/services/GenAIService.ts",
+        "hash": "15735382322218074244"
+      },
+      {
         "file": "src/services/KeyboardService.ts",
         "hash": "6975742834801797483"
       },
       {
-        "file": "src/services/LiveEditingService.ts",
-        "hash": "11592480024612622031"
-      },
-      {
-        "file": "src/services/PresenceService.ts",
-        "hash": "7365804276136302930"
-      },
-      {
-        "file": "src/services/UndoRedoService.ts",
-        "hash": "568819660074676621"
-      },
-      {
-        "file": "src/services/WebSocketService.ts",
-        "hash": "2664513731412620155"
-      },
-      {
-        "file": "src/services/api/ai.ts",
-        "hash": "8735217764547397523"
-      },
-      {
-        "file": "src/services/api/analysis.ts",
-        "hash": "6152890174292974121"
-      },
-      {
-        "file": "src/services/api/auth.ts",
-        "hash": "12694498640134112816"
-      },
-      {
         "file": "src/services/api/client.ts",
-        "hash": "3995508748809156264"
+        "hash": "13605878005866989064"
       },
       {
         "file": "src/services/api/freelancers.ts",
-        "hash": "2173256082277643508"
+        "hash": "2386190542306642394"
       },
       {
         "file": "src/services/api/index.ts",
@@ -48383,31 +45995,27 @@
       },
       {
         "file": "src/services/api/moodboard.ts",
-        "hash": "4965676766123230862"
+        "hash": "5967415697473935218"
       },
       {
         "file": "src/services/api/projects.ts",
-        "hash": "6426931251319058272"
+        "hash": "11560284639441769577"
       },
       {
         "file": "src/services/moodboardApi.ts",
-        "hash": "10733614409343421873"
+        "hash": "9506521278886276625"
       },
       {
         "file": "src/services/recentSearches.ts",
         "hash": "202700734677421798"
       },
       {
-        "file": "src/services/transcriptsApi.ts",
-        "hash": "13258423192488170655"
-      },
-      {
         "file": "src/services/types.ts",
-        "hash": "7460903412608567468"
+        "hash": "18176079714152935141"
       },
       {
-        "file": "src/services/websocket.ts",
-        "hash": "12047885852827045780"
+        "file": "src/services/unsplash.ts",
+        "hash": "14273376023891105329"
       },
       {
         "file": "src/styles/_keyframe-animations.scss",
@@ -48434,14 +46042,6 @@
         "hash": "9469877211330761170"
       },
       {
-        "file": "src/views/AnalysisView.tsx",
-        "hash": "12944885639671520007"
-      },
-      {
-        "file": "src/views/ConfluenceView.tsx",
-        "hash": "9805647501343118214"
-      },
-      {
         "file": "src/views/DashboardHome.css",
         "hash": "2803745941309226964"
       },
@@ -48451,15 +46051,11 @@
       },
       {
         "file": "src/views/GuardianRoom.tsx",
-        "hash": "353224186426067517"
+        "hash": "17854127159572891813"
       },
       {
         "file": "src/views/ProjectsView.tsx",
         "hash": "16245329302711008871"
-      },
-      {
-        "file": "src/views/TranscriptsView.tsx",
-        "hash": "9341692964019868797"
       },
       {
         "file": "src/views/dashboardConfig.ts",
@@ -48467,7 +46063,7 @@
       },
       {
         "file": "src/vite-env.d.ts",
-        "hash": "5563982428927376982"
+        "hash": "121194634376028796"
       },
       {
         "file": "start",
@@ -48475,7 +46071,7 @@
       },
       {
         "file": "storage.rules",
-        "hash": "3023062324893407777"
+        "hash": "3836269532278349373"
       },
       {
         "file": "stubs/atlassiansox-analytics-web-client/index.js",
@@ -48487,18 +46083,42 @@
       },
       {
         "file": "tailwind.config.js",
-        "hash": "1708466871082908058"
+        "hash": "16394969377478003224"
       },
       {
         "file": "task_progress",
-        "hash": "4055606894390288348"
+        "hash": "14347470391366945882"
       },
       {
         "file": "test-commands-fixed.ps1",
         "hash": "11525517678057778410"
       },
       {
+        "file": "tmp/apphosting-index.js",
+        "hash": "2811481002727543819"
+      },
+      {
         "file": "tmp/apps/api/serve/tsconfig.generated.0370f616-d0d4-4978-9d0f-1d6c5e01747d.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.2a0f7d13-6461-4b24-bc45-b705703d5a89.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.380aba2e-ea60-484f-8bbf-ec4258670880.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.45087d41-4c35-457c-9e2e-182a63251c4c.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.45f265e7-76fb-4151-9a76-e9d0dbd9c54c.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.4693c12f-bcdb-441b-8012-a8b7cf6dbe20.json",
         "hash": "12119823244770242550"
       },
       {
@@ -48514,7 +46134,15 @@
         "hash": "12119823244770242550"
       },
       {
+        "file": "tmp/apps/api/serve/tsconfig.generated.7612b3da-cc1e-4430-90b8-acc8c610e36b.json",
+        "hash": "12119823244770242550"
+      },
+      {
         "file": "tmp/apps/api/serve/tsconfig.generated.7e4927e5-10b3-4cc0-808d-6d5a472025cd.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.a3171402-4fd0-4c79-922b-f47a9994f5bd.json",
         "hash": "12119823244770242550"
       },
       {
@@ -48522,12 +46150,44 @@
         "hash": "12119823244770242550"
       },
       {
+        "file": "tmp/apps/api/serve/tsconfig.generated.af2cb214-37b1-44bd-b39a-f8338a044ad6.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.bbde1d67-c11c-4686-9431-b91cec4518c6.json",
+        "hash": "12119823244770242550"
+      },
+      {
         "file": "tmp/apps/api/serve/tsconfig.generated.bfb9bb51-1bf4-40b0-be31-534801b302fa.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.d8c80707-c120-4719-85d2-9baa2e95c351.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.dca48a22-8213-4936-9277-ef1ba896745e.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.e8d84d4c-5122-48b9-9139-6404c172acca.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.e96ca56b-e7df-4ad6-9fd1-4d97c4594142.json",
         "hash": "12119823244770242550"
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.edfcba54-1288-4873-b198-fdd83b3007cb.json",
         "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.f385698e-9f97-4c2e-ac66-8f4195cca1d8.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/hosting-index.js",
+        "hash": "3507866119118915827"
       },
       {
         "file": "tsconfig.json",
@@ -48536,10 +46196,6 @@
       {
         "file": "types.ts",
         "hash": "11208913364460149634"
-      },
-      {
-        "file": "types/confluence.types.ts",
-        "hash": "6968874576227316231"
       },
       {
         "file": "types/google-cloud/index.d.ts",
@@ -48563,7 +46219,7 @@
       },
       {
         "file": "vite.config.ts",
-        "hash": "11657533473017944701"
+        "hash": "15156515145404916992"
       },
       {
         "file": "vitest.config.ts",
@@ -48571,7 +46227,15 @@
       },
       {
         "file": "yarn.lock",
-        "hash": "9892715049562307727"
+        "hash": "6223704641644655603"
+      },
+      {
+        "file": "{entries",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "{for(entry",
+        "hash": "3244421341483603138"
       },
       {
         "file": "~/.gemini/GEMINI.md",
@@ -48579,5 +46243,5 @@
       }
     ]
   },
-  "externalNodesHash": "12948064513153130191"
+  "externalNodesHash": "7405181378684491948"
 }

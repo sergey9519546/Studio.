@@ -24,6 +24,7 @@
     "verify-deployment": "node scripts/verify-deployment.js"
   },
   "dependencies": {
+    "@dataconnect/admin-generated": "link:src\\dataconnect-admin-generated",
     "@dataconnect/generated": "file:src/dataconnect-generated",
     "@floating-ui/react": "^0.27.16",
     "@google-cloud/storage": "^7.17.3",
