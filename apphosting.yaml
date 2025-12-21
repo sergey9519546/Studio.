@@ -27,6 +27,11 @@ env:
     value: "gen-lang-client-0704991831.appspot.com"
     availability:
       - RUNTIME
+  - variable: VITE_API_URL
+    value: "/api/v1"
+    availability:
+      - BUILD
+      - RUNTIME
   - variable: ALLOWED_ORIGINS
     value: "https://gen-lang-client-0704991831-35466.web.app,https://gen-lang-client-0704991831-35466.firebaseapp.com,https://studiodotmanagement--gen-lang-client-0704991831.us-central1.hosted.app"
     availability:
@@ -34,6 +39,43 @@ env:
   - variable: GOOGLE_APPLICATION_CREDENTIALS
     value: "service-account-key.json"
     availability:
+      - RUNTIME
+
+  # Firebase client config for the frontend bundle (used by firebase.ts fallbacks)
+  - variable: VITE_FIREBASE_API_KEY
+    value: "AIzaSyAONjMz5IWshDt_spZEpGI_gnNDD7izGsA"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_AUTH_DOMAIN
+    value: "gen-lang-client-0704991831.firebaseapp.com"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_PROJECT_ID
+    value: "gen-lang-client-0704991831"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_STORAGE_BUCKET
+    value: "gen-lang-client-0704991831.firebasestorage.app"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_MESSAGING_SENDER_ID
+    value: "893670545674"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_APP_ID
+    value: "1:893670545674:web:9fee83296955160e8842f3"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_MEASUREMENT_ID
+    value: "G-4L6HZCPSSX"
+    availability:
+      - BUILD
       - RUNTIME
 
   # Grant access to secrets in Cloud Secret Manager.

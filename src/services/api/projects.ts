@@ -1,6 +1,67 @@
 import { ApiResponse, CreateProjectData, PaginatedResponse, Project, UpdateProjectData } from '../types';
 import { apiClient } from './index';
 
+type ProjectsListPayload =
+  | PaginatedResponse<Project>
+  | { data?: Project[]; pagination?: PaginatedResponse<Project>['pagination']; meta?: { page?: number; limit?: number; total?: number; lastPage?: number } }
+  | Project[];
+
+const normalizeProjectsList = (
+  payload: ProjectsListPayload,
+  page: number,
+  limit: number
+): PaginatedResponse<Project> => {
+  if (Array.isArray(payload)) {
+    return {
+      data: payload,
+      pagination: {
+        page,
+        limit,
+        total: payload.length,
+        totalPages: 1,
+      },
+    };
+  }
+
+  const data = Array.isArray(payload.data) ? payload.data : [];
+
+  if (payload.pagination) {
+    return {
+      data,
+      pagination: payload.pagination,
+    };
+  }
+
+  if (payload.meta) {
+    return {
+      data,
+      pagination: {
+        page: payload.meta.page ?? page,
+        limit: payload.meta.limit ?? limit,
+        total: payload.meta.total ?? data.length,
+        totalPages: payload.meta.lastPage ?? (data.length ? 1 : 0),
+      },
+    };
+  }
+
+  return {
+    data,
+    pagination: {
+      page,
+      limit,
+      total: data.length,
+      totalPages: data.length ? 1 : 0,
+    },
+  };
+};
+
+const normalizeProject = (payload: ApiResponse<Project> | Project): Project => {
+  if (payload && typeof payload === 'object' && 'data' in payload) {
+    return (payload as ApiResponse<Project>).data;
+  }
+  return payload as Project;
+};
+
 export class ProjectsAPI {
   // Get all projects with optional pagination and filters
   static async getProjects(
@@ -21,26 +82,26 @@ export class ProjectsAPI {
     if (filters?.client) params.append('client', filters.client);
     if (filters?.search) params.append('search', filters.search);
 
-    const response = await apiClient.get<PaginatedResponse<Project>>(`/projects?${params}`);
-    return response.data;
+    const response = await apiClient.get<ProjectsListPayload>(`/projects?${params}`);
+    return normalizeProjectsList(response.data, page, limit);
   }
 
   // Get a single project by ID
   static async getProject(id: string): Promise<Project> {
-    const response = await apiClient.get<ApiResponse<Project>>(`/projects/${id}`);
-    return response.data.data;
+    const response = await apiClient.get<ApiResponse<Project> | Project>(`/projects/${id}`);
+    return normalizeProject(response.data);
   }
 
   // Create a new project
   static async createProject(projectData: CreateProjectData): Promise<Project> {
-    const response = await apiClient.post<ApiResponse<Project>>('/projects', projectData);
-    return response.data.data;
+    const response = await apiClient.post<ApiResponse<Project> | Project>('/projects', projectData);
+    return normalizeProject(response.data);
   }
 
   // Update an existing project
   static async updateProject(id: string, projectData: Partial<UpdateProjectData>): Promise<Project> {
-    const response = await apiClient.put<ApiResponse<Project>>(`/projects/${id}`, projectData);
-    return response.data.data;
+    const response = await apiClient.patch<ApiResponse<Project> | Project>(`/projects/${id}`, projectData);
+    return normalizeProject(response.data);
   }
 
   // Delete a project

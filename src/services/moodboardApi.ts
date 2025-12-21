@@ -9,7 +9,39 @@ const getDefaultApiBase = () => {
   return "http://localhost:3001/api/v1";
 };
 
-export const API_BASE = import.meta.env.VITE_API_URL || getDefaultApiBase();
+const resolveApiBase = (): string => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (!envUrl) {
+    return getDefaultApiBase();
+  }
+
+  if (typeof window === "undefined") {
+    return envUrl;
+  }
+
+  const hostname = window.location.hostname;
+  const isLocalHost =
+    hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
+
+  if (!isLocalHost) {
+    try {
+      const parsed = new URL(envUrl, window.location.origin);
+      const pointsToLocalhost =
+        parsed.hostname === "localhost" ||
+        parsed.hostname === "127.0.0.1" ||
+        parsed.hostname === "::1";
+      if (pointsToLocalhost) {
+        return "/api/v1";
+      }
+    } catch {
+      // Keep relative or invalid URLs as-is.
+    }
+  }
+
+  return envUrl;
+};
+
+export const API_BASE = resolveApiBase();
 
 // Request timeout in milliseconds
 const REQUEST_TIMEOUT = 10000;

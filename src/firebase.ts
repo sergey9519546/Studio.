@@ -40,11 +40,11 @@ function validateEnvironmentVariables(): void {
   if (missing.length > 0) {
     const message =
       `Missing Firebase environment variables: ${missing.join(', ')}. ` +
-      'Using fallback configuration.';
+      'Firebase initialization requires these values to be set.';
     if (environment.isProduction) {
       console.warn(message);
     } else if (environment.isDevelopment) {
-      console.warn(`${message} This is expected in some local setups.`);
+      console.warn(`${message} This is expected only if you have not configured your .env file yet.`);
     }
   }
 }
@@ -99,7 +99,7 @@ class FirebaseServices {
   public readonly functions: Functions;
   public readonly ai: ReturnType<typeof getAI>;
   public readonly model: ReturnType<typeof getGenerativeModel>;
-  public readonly analytics: ReturnType<typeof getAnalytics> | null;
+  public analytics: ReturnType<typeof getAnalytics> | null;
   public readonly serviceConfig: FirebaseServiceConfig;
 
   constructor() {
@@ -122,7 +122,7 @@ class FirebaseServices {
       
       // Initialize Analytics (only in supported environments)
       this.analytics = null;
-      this.initializeAnalytics();
+      void this.initializeAnalytics();
       
       // Connect to emulators in development if enabled
       this.initializeEmulators();
@@ -257,8 +257,9 @@ export class FirebaseInitializationError extends Error {
 export function isFirebaseInitialized(): boolean {
   try {
     getFirebaseServices();
-  } catch {
     return true;
+  } catch {
+    return false;
   }
 }
 

@@ -92,12 +92,38 @@ async function bootstrap() {
   const corsOrigins =
     process.env.NODE_ENV === 'production'
       ? process.env.ALLOWED_ORIGINS
-        ? process.env.ALLOWED_ORIGINS.split(',')
+        ? process.env.ALLOWED_ORIGINS.split(',').map((origin) => origin.trim()).filter(Boolean)
         : []
       : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:8080'];
 
+  const allowedHostPatterns = [/\.web\.app$/i, /\.firebaseapp\.com$/i, /\.hosted\.app$/i];
+
+  const isOriginAllowed = (origin?: string): boolean => {
+    if (!origin) {
+      return true;
+    }
+    if (corsOrigins.includes(origin)) {
+      return true;
+    }
+    try {
+      const { hostname } = new URL(origin);
+      return allowedHostPatterns.some((pattern) => pattern.test(hostname));
+    } catch {
+      return false;
+    }
+  };
+
   app.enableCors({
-    origin: corsOrigins,
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? (origin, callback) => {
+            if (isOriginAllowed(origin)) {
+              callback(null, true);
+            } else {
+              callback(new Error(`CORS blocked for origin: ${origin ?? 'unknown'}`));
+            }
+          }
+        : corsOrigins,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],

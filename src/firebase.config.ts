@@ -35,7 +35,6 @@ export interface FirebaseEnvConfig {
   VITE_FIREBASE_EMULATORS?: string;
   
   // Firebase Measurement ID for Analytics
-  VITE_FIREBASE_MEASUREMENT_ID?: string;
 }
 
 // Firebase Service Configuration
@@ -90,10 +89,6 @@ export function validateFirebaseConfig(config: Partial<FirebaseConfig>): Validat
     warnings.push('Auth domain should typically be in format: project-id.firebaseapp.com');
   }
   
-  if (config.projectId && config.projectId.includes('-')) {
-    warnings.push('Project ID should not contain hyphens');
-  }
-  
   return {
     isValid: errors.length === 0,
     errors,
@@ -105,20 +100,24 @@ export function validateFirebaseConfig(config: Partial<FirebaseConfig>): Validat
  * Creates Firebase config from environment variables with fallbacks
  */
 export function createFirebaseConfig(): FirebaseConfig {
-  // Environment variable names with fallbacks
-  const config = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY || 
-            'AIzaSyAONjMz5IWshDt_spZEpGI_gnNDD7izGsA', // Fallback for development
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || 
-                `${import.meta.env.VITE_FIREBASE_PROJECT_ID || 'gen-lang-client-0704991831'}.firebaseapp.com`,
-    databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || 'gen-lang-client-0704991831',
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || 
-                   `${import.meta.env.VITE_FIREBASE_PROJECT_ID || 'gen-lang-client-0704991831'}.firebasestorage.app`,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || '893670545674',
-    appId: import.meta.env.VITE_FIREBASE_APP_ID || 
-           '1:893670545674:web:9fee83296955160e8842f3',
-    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || 'G-4L6HZCPSSX'
+  const env = import.meta.env as FirebaseEnvConfig;
+  const projectId = env.VITE_FIREBASE_PROJECT_ID?.trim();
+  const authDomain =
+    env.VITE_FIREBASE_AUTH_DOMAIN?.trim() ||
+    (projectId ? `${projectId}.firebaseapp.com` : undefined);
+  const storageBucket =
+    env.VITE_FIREBASE_STORAGE_BUCKET?.trim() ||
+    (projectId ? `${projectId}.firebasestorage.app` : undefined);
+
+  const config: Partial<FirebaseConfig> = {
+    apiKey: env.VITE_FIREBASE_API_KEY?.trim(),
+    authDomain,
+    databaseURL: env.VITE_FIREBASE_DATABASE_URL?.trim(),
+    projectId,
+    storageBucket,
+    messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID?.trim(),
+    appId: env.VITE_FIREBASE_APP_ID?.trim(),
+    measurementId: env.VITE_FIREBASE_MEASUREMENT_ID?.trim()
   };
   
   // Validate the configuration
@@ -132,7 +131,7 @@ export function createFirebaseConfig(): FirebaseConfig {
     console.warn('Firebase configuration warnings:', validation.warnings);
   }
   
-  return config;
+  return config as FirebaseConfig;
 }
 
 /**

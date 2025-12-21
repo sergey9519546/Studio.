@@ -27,6 +27,7 @@ Add your Firebase configuration to the appropriate `.env` file:
 VITE_FIREBASE_API_KEY="your-api-key"
 VITE_FIREBASE_AUTH_DOMAIN="your-project.firebaseapp.com"
 VITE_FIREBASE_PROJECT_ID="your-project-id"
+VITE_FIREBASE_DATABASE_URL="https://your-project-id.firebaseio.com" # Optional (Realtime Database)
 VITE_FIREBASE_STORAGE_BUCKET="your-project.firebasestorage.app"
 VITE_FIREBASE_MESSAGING_SENDER_ID="123456789012"
 VITE_FIREBASE_APP_ID="1:123456789012:web:abcdef123456789012"
@@ -68,6 +69,7 @@ The configuration will look like this:
 const firebaseConfig = {
   apiKey: "AIzaSy...",
   authDomain: "your-project.firebaseapp.com",
+  databaseURL: "https://your-project-id.firebaseio.com",
   projectId: "your-project-id",
   storageBucket: "your-project.firebasestorage.app",
   messagingSenderId: "123456789012",
@@ -382,6 +384,7 @@ firebase deploy
 interface FirebaseConfig {
   apiKey: string;
   authDomain: string;
+  databaseURL?: string;
   projectId: string;
   storageBucket: string;
   messagingSenderId: string;
