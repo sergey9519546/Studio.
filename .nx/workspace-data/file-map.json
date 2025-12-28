@@ -384,7 +384,7 @@
         },
         {
           "file": "apps/api/src/prisma/prisma.service.ts",
-          "hash": "10794516619585040805",
+          "hash": "9899559479871130220",
           "deps": [
             "npm:@nestjs/common",
             "npm:@prisma/adapter-pg",
@@ -515,7 +515,7 @@
       },
       {
         "file": ".firebase/hosting.YnVpbGRcY2xpZW50.cache",
-        "hash": "11609281218898931323"
+        "hash": "3252533947217797019"
       },
       {
         "file": ".firebaserc",
@@ -800,6 +800,10 @@
       {
         "file": "WORKSPACE_REMEDIATION_PROGRESS.md",
         "hash": "16653408429402822139"
+      },
+      {
+        "file": "WRITERS_ROOM_403_ERROR_FIX.md",
+        "hash": "13179641833456677918"
       },
       {
         "file": "WSL_FIX_COMMANDS.md",
@@ -4859,7 +4863,7 @@
       },
       {
         "file": "dataconnect/example/connector.yaml",
-        "hash": "4613492266074285742"
+        "hash": "2582625415520322487"
       },
       {
         "file": "dataconnect/example/mutations.gql",
@@ -45151,7 +45155,7 @@
       },
       {
         "file": "firebase.json",
-        "hash": "11875619998334275433"
+        "hash": "16104546296208912328"
       },
       {
         "file": "firebase.json.backup",
@@ -45211,7 +45215,7 @@
       },
       {
         "file": "functions/src/index.ts",
-        "hash": "10439713269761556197"
+        "hash": "6201698136851761512"
       },
       {
         "file": "functions/tsconfig.dev.json",
@@ -45467,7 +45471,7 @@
       },
       {
         "file": "package.json",
-        "hash": "5849288258782047149"
+        "hash": "9391352146530447612"
       },
       {
         "file": "package_backup.json",
@@ -45490,16 +45494,12 @@
         "hash": "14916883626947109929"
       },
       {
-        "file": "prisma/migrations/20251220053000_baseline/migration.sql",
-        "hash": "3647924002343211829"
+        "file": "prisma/migrations/20251222083433_init/migration.sql",
+        "hash": "13311638191530001439"
       },
       {
         "file": "prisma/migrations/migration_lock.toml",
-        "hash": "872437952673290735"
-      },
-      {
-        "file": "prisma/migrations/project_isolation_rls.sql",
-        "hash": "8907364102824483303"
+        "hash": "17507861707484682820"
       },
       {
         "file": "prisma/migrations_archive/20251204103845_initial_schema/migration.sql",
@@ -45519,7 +45519,7 @@
       },
       {
         "file": "prisma/schema.prisma",
-        "hash": "14773892240670724448"
+        "hash": "3179406696806278680"
       },
       {
         "file": "prisma/schema_header.txt",
@@ -45651,7 +45651,7 @@
       },
       {
         "file": "src/App.tsx",
-        "hash": "6094837929240575922"
+        "hash": "7610231798903774183"
       },
       {
         "file": "src/__test__/DashboardHome.test.tsx",
@@ -45826,6 +45826,26 @@
         "hash": "7534818409301822077"
       },
       {
+        "file": "src/dataconnect-admin-generated/esm/index.esm.js",
+        "hash": "3144918498367424581"
+      },
+      {
+        "file": "src/dataconnect-admin-generated/esm/package.json",
+        "hash": "5013508344222362296"
+      },
+      {
+        "file": "src/dataconnect-admin-generated/index.cjs.js",
+        "hash": "15655197687993496750"
+      },
+      {
+        "file": "src/dataconnect-admin-generated/index.d.ts",
+        "hash": "9056059318489376551"
+      },
+      {
+        "file": "src/dataconnect-admin-generated/package.json",
+        "hash": "15178259926053706640"
+      },
+      {
         "file": "src/dataconnect-generated/.guides/config.json",
         "hash": "6478345189631909518"
       },
@@ -45975,7 +45995,7 @@
       },
       {
         "file": "src/services/GenAIService.ts",
-        "hash": "15735382322218074244"
+        "hash": "9431743451623241769"
       },
       {
         "file": "src/services/KeyboardService.ts",
@@ -45987,11 +46007,15 @@
       },
       {
         "file": "src/services/api/freelancers.ts",
-        "hash": "2386190542306642394"
+        "hash": "6871669917817764488"
       },
       {
         "file": "src/services/api/index.ts",
         "hash": "8398338317662009937"
+      },
+      {
+        "file": "src/services/api/mockData.ts",
+        "hash": "9726878213831541039"
       },
       {
         "file": "src/services/api/moodboard.ts",
@@ -45999,7 +46023,7 @@
       },
       {
         "file": "src/services/api/projects.ts",
-        "hash": "11560284639441769577"
+        "hash": "2578375429321627345"
       },
       {
         "file": "src/services/moodboardApi.ts",
@@ -46102,15 +46126,23 @@
         "hash": "12119823244770242550"
       },
       {
+        "file": "tmp/apps/api/serve/tsconfig.generated.29caa807-397d-4568-9aed-06c06fdc9c60.json",
+        "hash": "12119823244770242550"
+      },
+      {
         "file": "tmp/apps/api/serve/tsconfig.generated.2a0f7d13-6461-4b24-bc45-b705703d5a89.json",
         "hash": "12119823244770242550"
       },
       {
-        "file": "tmp/apps/api/serve/tsconfig.generated.380aba2e-ea60-484f-8bbf-ec4258670880.json",
+        "file": "tmp/apps/api/serve/tsconfig.generated.2cd3f1a9-9fe6-4967-9a62-73d9231f3b1d.json",
         "hash": "12119823244770242550"
       },
       {
-        "file": "tmp/apps/api/serve/tsconfig.generated.45087d41-4c35-457c-9e2e-182a63251c4c.json",
+        "file": "tmp/apps/api/serve/tsconfig.generated.3028d9cc-79cb-4783-b675-bf6d2e728a30.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.380aba2e-ea60-484f-8bbf-ec4258670880.json",
         "hash": "12119823244770242550"
       },
       {
@@ -46123,6 +46155,10 @@
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.47d7a345-acb1-4c97-9c5f-5c2288bd3d34.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.4ac22481-6416-4ad4-bcb4-134073f35982.json",
         "hash": "12119823244770242550"
       },
       {
@@ -46158,6 +46194,14 @@
         "hash": "12119823244770242550"
       },
       {
+        "file": "tmp/apps/api/serve/tsconfig.generated.bc59ab27-1546-41f5-bc15-d01ee25463f2.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.bf9b756e-62af-44d0-a09e-14d523a82adc.json",
+        "hash": "12119823244770242550"
+      },
+      {
         "file": "tmp/apps/api/serve/tsconfig.generated.bfb9bb51-1bf4-40b0-be31-534801b302fa.json",
         "hash": "12119823244770242550"
       },
@@ -46167,6 +46211,10 @@
       },
       {
         "file": "tmp/apps/api/serve/tsconfig.generated.dca48a22-8213-4936-9277-ef1ba896745e.json",
+        "hash": "12119823244770242550"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.e7003a05-0607-4166-9f97-02cd04755107.json",
         "hash": "12119823244770242550"
       },
       {
@@ -46227,7 +46275,7 @@
       },
       {
         "file": "yarn.lock",
-        "hash": "6223704641644655603"
+        "hash": "9397653894985720952"
       },
       {
         "file": "{entries",
