@@ -31,7 +31,7 @@ const LuminaAICard: React.FC<LuminaAICardProps> = ({ onSubmitPrompt, className =
         background: `radial-gradient(120% 120% at 100% 0%, rgba(255,255,255,0.08), transparent 45%), ${accent}`,
       }}
     >
-      <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/20 blur-3xl rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-32 h-32 bg-amber-300/20 blur-3xl rounded-full pointer-events-none" />
       <div className="flex justify-between items-start z-10">
         <div className="p-2.5 bg-white/10 rounded-xl backdrop-blur-sm">
           <Brain size={20} className="text-white" />

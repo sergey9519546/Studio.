@@ -9,38 +9,38 @@ const tokensContent = fs.readFileSync(tokensPath, 'utf8');
 // Extract the exported constants
 const colors = {
   bg: {
-    app: "#F5F5F7",
-    surface: "#FDFDFD",
-    subtle: "#F9F9FB",
-    sidebar: "#FDFDFD",
+    app: "#F5F2EC",
+    surface: "#FFFDF9",
+    subtle: "#F8F3ED",
+    sidebar: "#FFFDF9",
   },
   border: {
-    subtle: "#E5E5EA",
-    hover: "#D1D1D6",
+    subtle: "#E1E1DF",
+    hover: "#CFCFCD",
     subtleAlpha: "rgba(0,0,0,0.04)",
   },
   text: {
-    primary: "#000000",
-    secondary: "#6E6E73",
-    tertiary: "#A2A2A7",
+    primary: "#111827",
+    secondary: "#4B5563",
+    tertiary: "#9CA3AF",
     inverse: "#FFFFFF",
   },
   accent: {
-    primary: "#2463E6",
-    primaryHover: "#1E4EC8",
-    tint: "#E1EBFF",
+    primary: "#0F766E",
+    primaryHover: "#0B5F59",
+    tint: "#D7EFE9",
   },
   edge: {
-    teal: "#18C9AE",
-    magenta: "#E14BF7",
+    teal: "#14B8A6",
+    magenta: "#F97316",
   },
   state: {
-    success: "#34C759",
-    successBg: "#E8F5E9",
-    warning: "#FF9500",
-    warningBg: "#FFF3E0",
-    danger: "#FF3B30",
-    dangerBg: "#FFEBEE",
+    success: "#16A34A",
+    successBg: "#E7F6EC",
+    warning: "#F59E0B",
+    warningBg: "#FFF3DB",
+    danger: "#EF4444",
+    dangerBg: "#FDECEC",
   },
 };
 
@@ -74,8 +74,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "SF Pro Text", "-apple-system", "sans-serif"],
-        display: ['"Inter Tight"', "SF Pro Display", "sans-serif"],
+        sans: ["Manrope", "Segoe UI", "sans-serif"],
+        display: ['"Space Grotesk"', "Manrope", "sans-serif"],
         mono: ['"JetBrains Mono"', "SF Mono", "monospace"],
       },
       colors: {
@@ -93,6 +93,7 @@ module.exports = {
         state: colors.state,
       },
       boxShadow: {
+        ambient: "0px 10px 40px rgba(0,0,0,0.04)",
         soft: "0px 2px 8px rgba(0,0,0,0.02)",
         card: "0px 8px 24px rgba(0,0,0,0.04)",
         elevation: "0px 10px 40px rgba(0,0,0,0.04)",
@@ -105,7 +106,7 @@ module.exports = {
       },
       backgroundImage: {
         "rival-gradient":
-          "linear-gradient(90deg, #2463E6 0%, #18C9AE 50%, #E14BF7 100%)",
+          "linear-gradient(90deg, #0F766E 0%, #14B8A6 55%, #F97316 100%)",
       },
       transitionDuration: {
         fast: "150ms",

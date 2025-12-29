@@ -9,59 +9,56 @@
 export const colors = {
   // THE CANVAS (Luminance)
   bg: {
-    app: "#F5F5F7", // Ghost Gray. System Mist.
-    surface: "#FDFDFD", // The Sophisticated Canvas. Paper-like warmth.
-    subtle: "#F9F9FB", // Subdued backgrounds for container nesting.
-    sidebar: "#FDFDFD", // Unified with canvas for seamless flow.
+    app: "#F5F2EC", // Warm parchment.
+    surface: "#FFFDF9", // Soft canvas.
+    subtle: "#F8F3ED", // Subdued layers.
+    sidebar: "#FFFDF9", // Unified with canvas for seamless flow.
   },
   border: {
-    subtle: "#E5E5EA", // Delicate structural lines (use sparingly).
-    hover: "#D1D1D6", // Slightly darker for interactions.
+    subtle: "#E1E1DF", // Delicate structural lines (use sparingly).
+    hover: "#CFCFCD", // Slightly darker for interactions.
     subtleAlpha: "rgba(0,0,0,0.04)", // Subtle definition for borders
   },
   text: {
-    primary: "#000000", // Absolute Obsidian. Peak contrast.
-    secondary: "#6E6E73", // Refined Slate. High legibility metadata.
-    tertiary: "#A2A2A7", // Tertiary. Ghostly placeholders.
+    primary: "#111827", // Deep graphite.
+    secondary: "#4B5563", // Muted slate.
+    tertiary: "#9CA3AF", // Ghosted metadata.
     inverse: "#FFFFFF", // Absolute White on primary actions.
   },
 
   // PRIMARY ACCENT (Rival Blue)
   accent: {
-    primary: "#2463E6", // Main brand color.
-    primaryHover: "#1E4EC8", // Interaction state.
-    tint: "#E1EBFF", // Subtlety (chips, active backgrounds).
+    primary: "#0F766E", // Studio teal.
+    primaryHover: "#0B5F59", // Interaction state.
+    tint: "#D7EFE9", // Subtlety (chips, active backgrounds).
   },
 
   // THE "DANGEROUS EDGE" (Gradients & Highlights)
   edge: {
-    teal: "#18C9AE", // Intelligence, Freshness
-    magenta: "#E14BF7", // Creative Lumina, AI
-    gradient: "linear-gradient(90deg, #2463E6 0%, #18C9AE 50%, #E14BF7 100%)",
+    teal: "#14B8A6", // Intelligence, Freshness
+    magenta: "#F97316", // Creative highlight (no purple)
+    gradient: "linear-gradient(90deg, #0F766E 0%, #14B8A6 55%, #F97316 100%)",
   },
 
   // SEMANTIC STATES
   state: {
-    success: "#34C759",
-    successBg: "#E8F5E9",
-    warning: "#FF9500",
-    warningBg: "#FFF3E0",
-    danger: "#FF3B30",
-    dangerBg: "#FFEBEE",
+    success: "#16A34A",
+    successBg: "#E7F6EC",
+    warning: "#F59E0B",
+    warningBg: "#FFF3DB",
+    danger: "#EF4444",
+    dangerBg: "#FDECEC",
   },
 } as const;
 
 export const typography = {
   fontFamily: {
     sans: [
-      "Inter",
-      "-apple-system",
-      "BlinkMacSystemFont",
+      "Manrope",
       "Segoe UI",
-      "Roboto",
       "sans-serif",
     ],
-    display: ["SF Pro Display", "Inter", "sans-serif"],
+    display: ["Space Grotesk", "Manrope", "sans-serif"],
     mono: ["SF Mono", "IBM Plex Mono", "monospace"],
   },
   letterSpacing: {

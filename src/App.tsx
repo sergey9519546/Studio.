@@ -1,6 +1,6 @@
 import { Box } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
-import { Navigate, Route, Routes, useNavigate, useParams } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { Moodboard } from "./components/Moodboard";
 import { ProjectDashboard } from "./components/ProjectDashboard";
@@ -13,9 +13,12 @@ import { FreelancersAPI } from "./services/api/freelancers";
 import { MoodboardAPI } from "./services/api/moodboard";
 import { ProjectsAPI } from "./services/api/projects";
 import { Freelancer, MoodboardItem, Project } from "./services/types";
+import { getProjectStatusMeta } from "./utils/status";
 import DashboardHome from "./views/DashboardHome";
 import GuardianRoom from "./views/GuardianRoom";
 import ProjectsView from "./views/ProjectsView";
+import CreateProjectModal from "./components/projects/CreateProjectModal";
+import ProjectSwitcher from "./components/projects/ProjectSwitcher";
 
 // State interfaces for data management
 interface DataState<T> {
@@ -55,31 +58,26 @@ function useApiData<T>(fetchFunction: () => Promise<T[]>): DataState<T> {
 // Project Context Header Component
 function ProjectContextHeader({ project }: { project: Project }) {
   const navigate = useNavigate();
-  const status = project.status || "Active";
-  const statusColor =
-    status === "In Progress"
-      ? "bg-blue-100 text-blue-700"
-      : status === "Blocked"
-        ? "bg-amber-100 text-amber-700"
-        : "bg-emerald-100 text-emerald-700";
+  const projectTitle = project.title || "Untitled";
+  const statusMeta = getProjectStatusMeta(project.status);
 
   return (
     <div className="sticky top-0 z-10 bg-app/95 backdrop-blur border-b border-border-subtle px-10 py-4 flex items-center justify-between gap-4">
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-2xl bg-ink-primary text-white flex items-center justify-center font-bold">
-          {project.title.slice(0, 2).toUpperCase()}
+          {projectTitle.slice(0, 2).toUpperCase()}
         </div>
         <div>
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold text-ink-tertiary uppercase">
               Project Context
             </span>
-            <span className={`text-[11px] px-2 py-1 rounded-full font-semibold ${statusColor}`}>
-              {status}
+            <span className={`text-[11px] px-2 py-1 rounded-full font-semibold border ${statusMeta.className}`}>
+              {statusMeta.label}
             </span>
           </div>
           <div className="text-lg font-bold text-ink-primary">
-            {project.title}
+            {projectTitle}
           </div>
         </div>
       </div>
@@ -143,9 +141,7 @@ function DataLoader({ loading, error, children, onRetry }: {
 function ProjectDashboardRoute() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [projectBrief, setProjectBrief] = useState(
-    "Creative direction for a kinetic, zero-gravity inspired brand world."
-  );
+  const [projectBrief, setProjectBrief] = useState("");
 
   const fetchProjects = useCallback(
     () => ProjectsAPI.getProjects().then(resp => resp.data),
@@ -156,6 +152,32 @@ function ProjectDashboardRoute() {
   const { data: projects, loading, error, refetch } = useApiData<Project>(fetchProjects);
 
   const project = projects.find(p => p.id === id);
+
+  const fetchProjectAssets = useCallback(
+    () =>
+      project?.id
+        ? MoodboardAPI.getMoodboardItems(project.id).then(response => response.data)
+        : Promise.resolve([]),
+    [project?.id]
+  );
+
+  const { data: projectAssets } = useApiData<MoodboardItem>(fetchProjectAssets);
+
+  useEffect(() => {
+    if (project) {
+      setProjectBrief(project.description || "");
+    }
+  }, [project]);
+
+  const handleBriefSave = useCallback(async (nextBrief: string) => {
+    if (!project) return;
+    setProjectBrief(nextBrief);
+    try {
+      await ProjectsAPI.updateProject(project.id, { description: nextBrief });
+    } catch (err) {
+      console.error("Failed to update project brief:", err);
+    }
+  }, [project]);
 
   useEffect(() => {
     if (!loading && !error && projects.length > 0 && !project) {
@@ -192,9 +214,15 @@ function ProjectDashboardRoute() {
       <ProjectContextHeader project={project} />
       <ProjectDashboard
         projectId={project.id}
-        projectTitle={project.title}
+        projectTitle={project.title || "Untitled Project"}
         brief={projectBrief}
-        onBriefChange={setProjectBrief}
+        status={project.status}
+        client={project.clientName || project.client}
+        startDate={project.startDate}
+        endDate={project.endDate}
+        tone={project.tone}
+        assets={projectAssets}
+        onBriefChange={handleBriefSave}
         onNavigateToWritersRoom={() => navigate(`/writers-room?project=${project.id}`)}
         onNavigateToMoodboard={() => navigate(`/moodboard?project=${project.id}`)}
       />
@@ -205,9 +233,10 @@ function ProjectDashboardRoute() {
 // Writers Room Component with Project Context
 function WritersRoomRoute() {
   const navigate = useNavigate();
-  const { search } = window.location;
-  const params = new URLSearchParams(search);
-  const projectId = params.get("project");
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const projectIdParam = params.get("project");
+  const prompt = params.get("prompt") || undefined;
 
   const fetchProjects = useCallback(
     () => ProjectsAPI.getProjects().then(resp => resp.data),
@@ -217,69 +246,143 @@ function WritersRoomRoute() {
   // Fetch project data for context
   const { data: projects, loading, error } = useApiData<Project>(fetchProjects);
 
-  const project = projectId ? projects.find(p => p.id === projectId) : null;
+  const fallbackProject = projects[0] || null;
+  const project = projectIdParam ? projects.find(p => p.id === projectIdParam) || fallbackProject : fallbackProject;
+  const activeProjectId = project?.id;
+
+  const handleProjectChange = (nextProjectId: string) => {
+    const nextParams = new URLSearchParams(location.search);
+    nextParams.set("project", nextProjectId);
+    navigate(`/writers-room?${nextParams.toString()}`, { replace: true });
+  };
 
   return (
     <DataLoader loading={loading} error={error}>
-      <GuardianRoom
-        project={project}
-        onBack={() => {
-          if (project) {
-            navigate(`/projects/${project.id}`);
-          } else {
-            navigate("/writers-room");
-          }
-        }}
-      />
+      <div className="h-full flex flex-col">
+        {projects.length > 1 && (
+          <div className="px-8 pt-8">
+            <ProjectSwitcher
+              projects={projects}
+              value={activeProjectId}
+              onChange={handleProjectChange}
+              label="Writer's Room context"
+            />
+          </div>
+        )}
+        <GuardianRoom
+          key={activeProjectId || "writers-room"}
+          project={project}
+          initialPrompt={prompt}
+          onBack={() => {
+            if (project) {
+              navigate(`/projects/${project.id}`);
+            } else {
+              navigate("/writers-room");
+            }
+          }}
+        />
+      </div>
     </DataLoader>
   );
 }
 
 // Moodboard Component with Project Context
 function MoodboardRoute() {
-  const { search } = window.location;
-  const params = new URLSearchParams(search);
-  const projectId = params.get("project");
-
-  const fetchMoodboardItems = useCallback(
-    () =>
-      projectId
-        ? MoodboardAPI.getMoodboardItems(projectId).then(response => response.data)
-        : Promise.resolve([]),
-    [projectId]
-  );
+  const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const projectIdParam = params.get("project");
 
   const fetchProjects = useCallback(
     () => ProjectsAPI.getProjects().then(resp => resp.data),
     []
   );
 
-  // Fetch moodboard items from API
-  const { data: moodboardItems, loading, error, refetch } = useApiData<MoodboardItem>(fetchMoodboardItems);
-
   // Fetch projects for fallback
   const { data: projects } = useApiData<Project>(fetchProjects);
 
-  const project = projectId ? projects.find(p => p.id === projectId) : projects[0];
-  const effectiveProjectId = projectId || project?.id || '';
+  const fallbackProject = projects[0] || null;
+  const project = projectIdParam ? projects.find(p => p.id === projectIdParam) || fallbackProject : fallbackProject;
+  const effectiveProjectId = project?.id || "";
+
+  const fetchMoodboardItems = useCallback(
+    () =>
+      effectiveProjectId
+        ? MoodboardAPI.getMoodboardItems(effectiveProjectId).then(response => response.data)
+        : Promise.resolve([]),
+    [effectiveProjectId]
+  );
+
+  // Fetch moodboard items from API
+  const { data: moodboardItems, loading, error, refetch } = useApiData<MoodboardItem>(fetchMoodboardItems);
+
+  const handleProjectChange = (nextProjectId: string) => {
+    const nextParams = new URLSearchParams(location.search);
+    nextParams.set("project", nextProjectId);
+    navigate(`/moodboard?${nextParams.toString()}`, { replace: true });
+  };
 
   const handleMoodboardDelete = async (itemId: string) => {
     try {
       await MoodboardAPI.deleteMoodboardItem(itemId);
       refetch(); // Refresh the moodboard items
-      console.log("Moodboard item deleted:", itemId);
     } catch (error) {
       console.error("Failed to delete moodboard item:", error);
     }
   };
 
+  const handleSemanticSearch = useCallback(
+    async (query: string) => {
+      if (!effectiveProjectId) return [];
+      return MoodboardAPI.searchMoodboardItems(query, effectiveProjectId);
+    },
+    [effectiveProjectId]
+  );
+
+  const handleUnsplashAdd = useCallback(async () => {
+    await refetch();
+  }, [refetch]);
+
   return (
     <DataLoader loading={loading} error={error} onRetry={refetch}>
-      <Moodboard
-        projectId={effectiveProjectId}
-        items={moodboardItems}
-        onItemDelete={handleMoodboardDelete}
-      />
+      {effectiveProjectId ? (
+        <div className="h-full flex flex-col">
+          {projects.length > 1 && (
+            <div className="px-8 pt-8">
+              <ProjectSwitcher
+                projects={projects}
+                value={effectiveProjectId}
+                onChange={handleProjectChange}
+                label="Moodboard context"
+              />
+            </div>
+          )}
+          <Moodboard
+            projectId={effectiveProjectId}
+            items={moodboardItems}
+            onItemDelete={handleMoodboardDelete}
+            onSemanticSearch={handleSemanticSearch}
+            onAddUnsplashImage={handleUnsplashAdd}
+          />
+        </div>
+      ) : (
+        <div className="p-12">
+          <div className="rounded-3xl border border-border-subtle bg-subtle p-10 text-center">
+            <h2 className="text-xl font-semibold text-ink-primary mb-2">
+              No projects available
+            </h2>
+            <p className="text-sm text-ink-secondary mb-4">
+              Create a project first to start building a moodboard.
+            </p>
+            <button
+              className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors"
+              onClick={() => navigate("/projects")}
+            >
+              Go to Projects
+            </button>
+          </div>
+        </div>
+      )}
     </DataLoader>
   );
 }
@@ -301,6 +404,13 @@ function FreelancersRoute() {
       <TalentRoster
         freelancers={freelancers}
         onSelect={() => navigate("/writers-room")}
+        onTalentMatch={(brief) => {
+          const params = new URLSearchParams();
+          if (brief) {
+            params.set("prompt", `Recommend freelancers for: ${brief}`);
+          }
+          navigate(`/writers-room?${params.toString()}`);
+        }}
       />
     </DataLoader>
   );
@@ -310,11 +420,9 @@ function FreelancersRoute() {
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <ErrorBoundary>
-      <div className="w-full h-screen bg-app flex relative overflow-hidden text-ink-primary">
+      <div className="app-shell">
         <Sidebar />
-        <main className="flex-1 ml-72 h-full overflow-y-auto relative z-0">
-          {children}
-        </main>
+        <div className="app-main">{children}</div>
         <CommandBar />
       </div>
     </ErrorBoundary>
@@ -323,6 +431,8 @@ function Layout({ children }: { children: React.ReactNode }) {
 
 // Wrapper component for ProjectsView to handle API data
 function ProjectsViewWrapper() {
+  const navigate = useNavigate();
+  const [createModalOpen, setCreateModalOpen] = useState(false);
   const fetchProjects = useCallback(
     () => ProjectsAPI.getProjects().then(resp => resp.data),
     []
@@ -331,10 +441,18 @@ function ProjectsViewWrapper() {
 
   return (
     <DataLoader loading={loading} error={error} onRetry={refetch}>
-      <ProjectsView 
-        projects={projects} 
-        onSelect={(project) => `/projects/${project.id}`} 
-      />
+      <>
+        <ProjectsView
+          projects={projects}
+          onSelect={(project) => navigate(`/projects/${project.id}`)}
+          onCreate={() => setCreateModalOpen(true)}
+        />
+        <CreateProjectModal
+          isOpen={createModalOpen}
+          onClose={() => setCreateModalOpen(false)}
+          onCreated={() => refetch()}
+        />
+      </>
     </DataLoader>
   );
 }

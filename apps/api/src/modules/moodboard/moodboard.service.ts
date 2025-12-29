@@ -19,7 +19,7 @@ export class MoodboardService {
     return this.prisma.moodboardItem.create({
       data: {
         projectId: createDto.projectId,
-        assetId: "manual",
+        assetId: createDto.assetId ?? null,
         source: "upload",
         url: createDto.url || "",
         caption: createDto.caption || "Processing...",
@@ -94,7 +94,11 @@ export class MoodboardService {
     }
 
     if (filters?.collectionId) {
-      where.collectionId = filters.collectionId;
+      where.collections = {
+        some: {
+          collectionId: filters.collectionId,
+        },
+      };
     }
 
     if (filters?.source) {
@@ -284,7 +288,7 @@ export class MoodboardService {
         const moods = this.parseJsonArray(item.moods);
         const colors = this.parseJsonArray(item.colors);
 
-        if (item.assetId && item.assetId !== "manual") {
+        if (item.assetId) {
           try {
             const freshUrl = await this.assetsService.getDownloadUrl(
               item.assetId

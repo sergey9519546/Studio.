@@ -339,7 +339,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       case "actions":
         return "text-green-400";
       case "tools":
-        return "text-purple-400";
+        return "text-amber-400";
       case "settings":
         return "text-orange-400";
       case "shortcuts":

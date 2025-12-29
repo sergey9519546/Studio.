@@ -1,4 +1,5 @@
-import { IsOptional, IsString, IsUrl, IsUUID } from 'class-validator';
+import { IsNumber, IsOptional, IsString, IsUrl, IsUUID } from 'class-validator';
+import { Type } from 'class-transformer';
 
 /**
  * DTO for creating a moodboard item from an Unsplash image
@@ -32,10 +33,12 @@ export class CreateFromUnsplashDto {
   color!: string; // Dominant color (hex)
 
   @IsOptional()
-  @IsString()
+  @IsNumber()
+  @Type(() => Number)
   width?: number; // Original width
 
   @IsOptional()
-  @IsString()
+  @IsNumber()
+  @Type(() => Number)
   height?: number; // Original height
 }

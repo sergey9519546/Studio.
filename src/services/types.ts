@@ -17,12 +17,21 @@ export interface PaginatedResponse<T = unknown> {
 }
 
 // Project Types
+export type ProjectStatus =
+  | 'PLANNED'
+  | 'IN_PROGRESS'
+  | 'REVIEW'
+  | 'DELIVERED'
+  | 'ARCHIVED';
+
 export interface Project {
   id: string;
   title: string;
+  name?: string;
   client?: string;
-  status: 'Active' | 'In Progress' | 'Blocked' | 'Completed' | 'Archived';
-  description: string;
+  clientName?: string;
+  status: ProjectStatus;
+  description?: string;
   tone?: string[];
   budget?: number;
   startDate?: string;
@@ -34,11 +43,13 @@ export interface Project {
 export interface CreateProjectData {
   title: string;
   client?: string;
-  description: string;
+  clientName?: string;
+  description?: string;
   tone?: string[];
   budget?: number;
   startDate?: string;
   endDate?: string;
+  status?: ProjectStatus;
 }
 
 export interface UpdateProjectData extends Partial<CreateProjectData> {
@@ -49,13 +60,18 @@ export interface UpdateProjectData extends Partial<CreateProjectData> {
 export interface MoodboardItem {
   id: string;
   url: string;
+  title?: string;
+  description?: string;
   tags: string[];
   moods: string[];
   colors: string[];
   shotType?: string;
-  uploadedAt: string;
+  caption?: string;
+  source?: string;
+  isFavorite?: boolean;
+  createdAt: string;
+  updatedAt: string;
   projectId: string;
-  uploadedBy: string;
 }
 
 export interface CreateMoodboardItemData {
@@ -64,20 +80,24 @@ export interface CreateMoodboardItemData {
   moods: string[];
   colors: string[];
   shotType?: string;
+  caption?: string;
   projectId: string;
 }
 
 // Freelancer Types
+export type FreelancerStatus = 'AVAILABLE' | 'BUSY' | 'UNAVAILABLE';
+
 export interface Freelancer {
   id: string;
   name: string;
-  role: string;
-  availability: 'Available' | 'Limited' | 'Unavailable';
+  role?: string;
+  status?: FreelancerStatus;
+  availability?: string;
   rate: number;
   skills: string[];
-  location: string;
-  rating: number;
-  bio: string;
+  location?: string;
+  rating?: number;
+  bio?: string;
   portfolio?: string;
   email?: string;
   phone?: string;
@@ -87,12 +107,13 @@ export interface Freelancer {
 
 export interface CreateFreelancerData {
   name: string;
-  role: string;
-  availability: 'Available' | 'Limited' | 'Unavailable';
-  rate: number;
-  skills: string[];
-  location: string;
-  bio: string;
+  role?: string;
+  status?: FreelancerStatus;
+  availability?: string;
+  rate?: number;
+  skills?: string[];
+  location?: string;
+  bio?: string;
   portfolio?: string;
   email?: string;
   phone?: string;

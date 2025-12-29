@@ -7,28 +7,15 @@ import {
   type UnsplashImage,
 } from "../services/unsplash";
 import { useToast } from "../hooks/useToast";
-import {
-  toggleFavorite as apiToggleFavorite,
-  saveUnsplashImage,
-} from "../services/moodboardApi";
+import { MoodboardAPI } from "../services/api/moodboard";
 import {
   addRecentSearch,
   getRecentSearches,
   removeRecentSearch,
 } from "../services/recentSearches";
+import type { MoodboardItem } from "../services/types";
 import { Card } from "./design/Card";
 import { Input } from "./design/Input";
-
-interface MoodboardItem {
-  id: string;
-  url: string;
-  tags: string[];
-  moods: string[];
-  colors: string[];
-  isFavorite?: boolean;
-  shotType?: string;
-  uploadedAt: string;
-}
 
 interface MoodboardProps {
   projectId: string;
@@ -39,6 +26,32 @@ interface MoodboardProps {
 }
 
 type TabType = "uploads" | "unsplash";
+
+const filterByTags = (list: MoodboardItem[], tags: string[]) => {
+  if (tags.length === 0) return list;
+  return list.filter((item) =>
+    tags.some((tag) => item.tags.includes(tag) || item.moods.includes(tag))
+  );
+};
+
+const filterByQuery = (list: MoodboardItem[], query: string) => {
+  const normalized = query.trim().toLowerCase();
+  if (!normalized) return list;
+  return list.filter((item) => {
+    const caption = item.caption?.toLowerCase() || "";
+    const title = item.title?.toLowerCase() || "";
+    const description = item.description?.toLowerCase() || "";
+    const tags = item.tags.some((tag) => tag.toLowerCase().includes(normalized));
+    const moods = item.moods.some((mood) => mood.toLowerCase().includes(normalized));
+    return (
+      caption.includes(normalized) ||
+      title.includes(normalized) ||
+      description.includes(normalized) ||
+      tags ||
+      moods
+    );
+  });
+};
 
 export const Moodboard: React.FC<MoodboardProps> = ({
   projectId,
@@ -53,6 +66,9 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [filteredItems, setFilteredItems] = useState(items);
   const [isSearching, setIsSearching] = useState(false);
+  const [searchResults, setSearchResults] = useState<MoodboardItem[] | null>(
+    null
+  );
   const { addToast } = useToast();
 
   // Unsplash state
@@ -80,9 +96,11 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   }>({});
 
   React.useEffect(() => {
-    // Keep filtered items in sync with upstream changes
-    setFilteredItems(items);
-  }, [items]);
+    if (!searchQuery.trim()) {
+      setSearchResults(null);
+      setFilteredItems(filterByTags(items, selectedTags));
+    }
+  }, [items, searchQuery, selectedTags]);
 
   // Load recent searches on mount and when tab changes to Unsplash
   React.useEffect(() => {
@@ -103,16 +121,27 @@ export const Moodboard: React.FC<MoodboardProps> = ({
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
-    if (query.trim()) {
-      setIsSearching(true);
-      try {
-        const results = (await onSemanticSearch?.(query)) || items;
-        setFilteredItems(results);
-      } finally {
-        setIsSearching(false);
-      }
-    } else {
-      filterItems(query, selectedTags);
+    const trimmed = query.trim();
+    if (!trimmed) {
+      setSearchResults(null);
+      setFilteredItems(filterByTags(items, selectedTags));
+      return;
+    }
+
+    setIsSearching(true);
+    try {
+      const baseResults = onSemanticSearch
+        ? await onSemanticSearch(trimmed)
+        : filterByQuery(items, trimmed);
+      setSearchResults(baseResults);
+      setFilteredItems(filterByTags(baseResults, selectedTags));
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Search failed. Try again.";
+      addToast(message);
+      setFilteredItems(filterByTags(items, selectedTags));
+    } finally {
+      setIsSearching(false);
     }
   };
 
@@ -121,19 +150,8 @@ export const Moodboard: React.FC<MoodboardProps> = ({
       ? selectedTags.filter((t) => t !== tag)
       : [...selectedTags, tag];
     setSelectedTags(newTags);
-    filterItems(searchQuery, newTags);
-  };
-
-  const filterItems = (query: string, tags: string[]) => {
-    let results = items;
-
-    if (tags.length > 0) {
-      results = results.filter((item) =>
-        tags.some((tag) => item.tags.includes(tag) || item.moods.includes(tag))
-      );
-    }
-
-    setFilteredItems(results);
+    const base = searchResults ?? items;
+    setFilteredItems(filterByTags(base, newTags));
   };
 
   // Unsplash search handler
@@ -246,7 +264,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
       await trackDownload(image);
 
       // Save to database via API
-      await saveUnsplashImage(projectId, image);
+      await MoodboardAPI.createFromUnsplash(projectId, image);
 
       // Call parent callback if provided
       if (onAddUnsplashImage) {
@@ -268,7 +286,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   ) => {
     const newValue = !currentValue;
     try {
-      await apiToggleFavorite(itemId, newValue);
+      await MoodboardAPI.toggleFavorite(itemId, newValue);
       setFilteredItems((prev) =>
         prev.map((item) =>
           item.id === itemId ? { ...item, isFavorite: newValue } : item
@@ -516,7 +534,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                   <option value="yellow">Yellow</option>
                   <option value="orange">Orange</option>
                   <option value="red">Red</option>
-                  <option value="purple">Purple</option>
+                  <option value="amber">Amber</option>
                   <option value="magenta">Magenta</option>
                   <option value="green">Green</option>
                   <option value="teal">Teal</option>

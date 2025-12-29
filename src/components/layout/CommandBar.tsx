@@ -98,10 +98,10 @@ const CommandBar: React.FC = () => {
     setIsOpen(true);
   };
 
-  const renderResults = (isMobile = false) =>
+  const renderResults = () =>
     isOpen && (
       <div
-        className={`absolute ${isMobile ? "bottom-36 left-4 right-4" : "bottom-20 left-0 right-0 mx-auto max-w-3xl"} bg-surface border border-border-subtle/50 shadow-elevation rounded-2xl overflow-hidden z-[65] pointer-events-auto animate-in fade-in slide-in-from-bottom-2 duration-300`}
+        className="command-results"
         role="listbox"
         aria-label="Command palette results"
       >
@@ -114,12 +114,12 @@ const CommandBar: React.FC = () => {
             {filteredCommands.map((cmd) => (
               <button
                 key={cmd.label}
-                className="w-full flex items-center justify-between text-left px-6 py-4 hover:bg-subtle transition-colors group focus:outline-none focus:bg-subtle"
+                className="w-full flex items-center justify-between text-left group focus:outline-none"
                 onClick={() => handleNavigate(cmd.path)}
                 role="option"
               >
-                <div className="flex flex-col">
-                  <span className="text-sm font-black text-black tracking-tight group-hover:translate-x-1 transition-transform">
+                <div className="flex flex-col px-5 py-3">
+                  <span className="text-sm font-black tracking-tight text-ink-primary group-hover:text-primary transition-colors">
                     {cmd.label}
                   </span>
                   <span className="text-[9px] uppercase tracking-[0.3em] font-black text-ink-tertiary opacity-40 mt-1">
@@ -141,11 +141,11 @@ const CommandBar: React.FC = () => {
   return (
     <>
       {/* Desktop Command Bar */}
-      <div className="hidden md:flex fixed bottom-8 left-72 right-0 justify-center z-[60] px-8 pointer-events-none">
-        <div className="glass-bar pointer-events-auto w-full max-w-3xl h-16 rounded-pill flex items-center justify-between px-2 pr-3 shadow-lg hover:shadow-xl transition-shadow relative">
+      <div className="command-bar-desktop">
+        <div className="command-bar-panel glass">
           <form
             onSubmit={handleSubmit}
-            className="flex items-center pl-4 w-full gap-4"
+            className="flex items-center w-full gap-4"
           >
             <Command
               size={18}
@@ -173,7 +173,7 @@ const CommandBar: React.FC = () => {
             />
           </form>
 
-          <div className="flex items-center gap-4 shrink-0 px-2">
+          <div className="flex items-center gap-4 shrink-0">
             <div className="hidden lg:flex text-[9px] font-black text-ink-tertiary bg-subtle px-2 py-1 rounded-md border border-border-subtle tracking-tighter opacity-40">
               CMD K
             </div>
@@ -187,10 +187,11 @@ const CommandBar: React.FC = () => {
               <Plus size={18} aria-hidden="true" />
             </button>
           </div>
-          {renderResults(false)}
+
+          {renderResults()}
 
           {showQuickCreate && (
-            <div className="absolute bottom-20 right-6 w-64 bg-surface border border-border-subtle rounded-xl shadow-xl p-3 z-[66]">
+            <div className="quick-create-panel">
               <p className="text-[11px] uppercase tracking-[0.2em] text-ink-tertiary mb-2 font-bold">
                 Quick Create
               </p>
@@ -199,7 +200,7 @@ const CommandBar: React.FC = () => {
                   <button
                     key={action.label}
                     onClick={() => handleNavigate(action.path)}
-                    className="px-3 py-2 rounded-lg hover:bg-subtle text-sm font-semibold text-ink-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 text-left"
+                    className="px-3 py-2 rounded-lg hover:bg-subtle text-sm font-semibold text-ink-primary transition-colors text-left"
                   >
                     {action.label}
                   </button>
@@ -210,9 +211,9 @@ const CommandBar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Command Bar - Positioned above mobile navigation to prevent overlap */}
-      <div className="md:hidden fixed bottom-20 left-4 right-4 flex justify-center z-[60] pointer-events-none">
-        <div className="pointer-events-auto w-full max-w-md h-14 rounded-pill flex items-center justify-between px-3 pr-3 bg-surface/95 backdrop-blur-xl border border-border-subtle shadow-lg hover:shadow-xl transition-shadow relative">
+      {/* Mobile Command Bar */}
+      <div className="command-bar-mobile">
+        <div className="command-bar-panel glass">
           <form
             onSubmit={handleSubmit}
             className="flex items-center w-full gap-3"
@@ -251,7 +252,7 @@ const CommandBar: React.FC = () => {
           >
             <Plus size={18} aria-hidden="true" />
           </button>
-          {renderResults(true)}
+          {renderResults()}
         </div>
       </div>
     </>

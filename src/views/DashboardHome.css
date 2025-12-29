@@ -14,27 +14,27 @@
 }
 
 .palette-color-0 {
-  background-color: #FF3B30;
+  background-color: #0F766E;
   transition-delay: 0ms;
 }
 
 .palette-color-1 {
-  background-color: #FF9500;
+  background-color: #F97316;
   transition-delay: 50ms;
 }
 
 .palette-color-2 {
-  background-color: #FFCC00;
+  background-color: #F2B705;
   transition-delay: 100ms;
 }
 
 .palette-color-3 {
-  background-color: #34C759;
+  background-color: #16A34A;
   transition-delay: 150ms;
 }
 
 .palette-color-4 {
-  background-color: #007AFF;
+  background-color: #0EA5E9;
   transition-delay: 200ms;
 }
 

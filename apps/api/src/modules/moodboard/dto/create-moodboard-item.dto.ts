@@ -16,6 +16,10 @@ export class CreateMoodboardItemDto {
   caption?: string;
 
   @IsOptional()
+  @IsUUID()
+  assetId?: string;
+
+  @IsOptional()
   @IsArray()
   @IsString({ each: true })
   tags?: string[];

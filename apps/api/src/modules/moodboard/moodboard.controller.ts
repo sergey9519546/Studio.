@@ -47,6 +47,7 @@ export class MoodboardController {
         | "video",
       url: asset.url || asset.publicUrl || "",
       caption: "Processing analysis...",
+      assetId: asset.id,
     };
 
     return this.moodboardService.create(dto);

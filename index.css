@@ -8,7 +8,7 @@
 html, body, #root {
   height: 100%;
   width: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: var(--font-body, "Manrope", "Segoe UI", sans-serif);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -25,8 +25,8 @@ html, body, #root {
 }
 
 body {
-  background-color: #f5f7fa;
-  color: #172b4d;
+  background-color: var(--color-app, #f5f2ec);
+  color: var(--color-ink-primary, #111827);
 }
 
 /* TipTap Editor Styles */
@@ -38,8 +38,8 @@ body {
 }
 
 .mention {
-  background-color: #e6f3ff;
-  color: #0052cc;
+  background-color: rgba(15, 118, 110, 0.12);
+  color: #0f766e;
   border-radius: 3px;
   padding: 2px 4px;
   font-weight: 500;

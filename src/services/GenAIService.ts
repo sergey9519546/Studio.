@@ -12,17 +12,8 @@ type GenerateOptions = {
   history?: HistoryMessage[];
 };
 
-// AI Service fallback for when Firebase AI is not available
-class MockGenAIService {
-  async generateContent(prompt: string): Promise<string> {
-    // Return a helpful fallback message when AI is not available
-    return `I see you mentioned: "${prompt}". I'm currently running in offline mode. For full AI capabilities, please ensure Firebase AI credentials are properly configured. In the meantime, you can still manage your project brief and creative direction manually.`;
-  }
-}
-
 export class GenAIService {
   private static instance: GenAIService | null = null;
-  private mockService = new MockGenAIService();
   private isAiAvailable = true;
 
   static getInstance(): GenAIService {
@@ -43,7 +34,7 @@ export class GenAIService {
 
   async generateContent(prompt: string, options: GenerateOptions = {}): Promise<string> {
     if (!this.isAiAvailable) {
-      return this.mockService.generateContent(prompt);
+      throw new Error("AI service unavailable");
     }
 
     try {
@@ -58,9 +49,9 @@ export class GenAIService {
       const result = await model.generateContent(request);
       return this.extractText(result);
     } catch (error) {
-      console.warn('Firebase AI service unavailable, falling back to mock service:', error);
-      this.isAiAvailable = false; // Mark as unavailable for future calls
-      return this.mockService.generateContent(prompt);
+      console.warn('Firebase AI service unavailable:', error);
+      this.isAiAvailable = false;
+      throw error;
     }
   }
 

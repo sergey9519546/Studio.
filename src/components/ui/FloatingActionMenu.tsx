@@ -312,13 +312,13 @@ export const FloatingActionMenu: React.FC<FloatingActionMenuProps> = ({
         whileTap={{ scale: 0.95 }}
         className={cn(
           "relative flex items-center justify-center rounded-full",
-          "bg-gradient-to-br from-blue-500 to-purple-600",
-          "hover:from-blue-600 hover:to-purple-700",
-          "shadow-lg shadow-blue-500/25",
+          "bg-gradient-to-br from-teal-500 to-amber-500",
+          "hover:from-teal-600 hover:to-amber-600",
+          "shadow-lg shadow-teal-500/25",
           "transition-all duration-200",
-          "focus:outline-none focus:ring-2 focus:ring-blue-500/50",
+          "focus:outline-none focus:ring-2 focus:ring-teal-500/50",
           sizeClasses.mainButton,
-          theme === 'light' && "from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800"
+          theme === 'light' && "from-teal-600 to-amber-600 hover:from-teal-700 hover:to-amber-700"
         )}
       >
         {/* Main Icon */}
@@ -341,7 +341,7 @@ export const FloatingActionMenu: React.FC<FloatingActionMenuProps> = ({
               animate={{ scale: 1.4, opacity: 0 }}
               exit={{ scale: 1, opacity: 0 }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute inset-0 rounded-full bg-blue-500"
+              className="absolute inset-0 rounded-full bg-teal-500"
             />
           )}
         </AnimatePresence>
@@ -389,14 +389,14 @@ export const createProjectActions = (
     id: 'add-freelancer',
     label: 'Add Freelancer',
     icon: Users,
-    color: 'purple',
+    color: 'amber',
     action: () => onAction('add-freelancer')
   },
   {
     id: 'create-moodboard',
     label: 'Moodboard',
     icon: Palette,
-    color: 'pink',
+    color: 'orange',
     action: () => onAction('create-moodboard')
   },
   {
@@ -410,7 +410,7 @@ export const createProjectActions = (
     id: 'share-project',
     label: 'Share',
     icon: Share,
-    color: 'indigo',
+    color: 'slate',
     action: () => onAction('share-project')
   }
 ];
@@ -436,7 +436,7 @@ export const createContentActions = (
     id: 'take-photo',
     label: 'Take Photo',
     icon: Camera,
-    color: 'purple',
+    color: 'amber',
     action: () => onAction('take-photo')
   },
   {
@@ -450,7 +450,7 @@ export const createContentActions = (
     id: 'bookmark',
     label: 'Bookmark',
     icon: Bookmark,
-    color: 'pink',
+    color: 'orange',
     action: () => onAction('bookmark')
   }
 ];
@@ -476,7 +476,7 @@ export const createNavigationActions = (
     id: 'go-messages',
     label: 'Messages',
     icon: MessageSquare,
-    color: 'purple',
+    color: 'amber',
     action: () => onAction('go-messages')
   },
   {

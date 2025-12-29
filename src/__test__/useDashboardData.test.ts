@@ -1,26 +1,41 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { renderHook, waitFor } from "@testing-library/react";
 import { useDashboardData } from "../hooks/useDashboardData";
 
-// Mock the useToast hook
+const mockGetProjects = vi.fn();
+const mockGetFreelancers = vi.fn();
+const mockGetMoodboardItems = vi.fn();
+
+vi.mock("../services/api/projects", () => ({
+  ProjectsAPI: {
+    getProjects: (...args: unknown[]) => mockGetProjects(...args),
+  },
+}));
+
+vi.mock("../services/api/freelancers", () => ({
+  FreelancersAPI: {
+    getFreelancers: (...args: unknown[]) => mockGetFreelancers(...args),
+  },
+}));
+
+vi.mock("../services/api/moodboard", () => ({
+  MoodboardAPI: {
+    getMoodboardItems: (...args: unknown[]) => mockGetMoodboardItems(...args),
+  },
+}));
+
 vi.mock("../hooks/useToast", () => ({
   useToast: () => ({
     addToast: vi.fn(),
   }),
 }));
 
-// Mock timers
-beforeEach(() => {
-  vi.useFakeTimers();
-});
-
-afterEach(() => {
-  vi.clearAllTimers();
-  vi.useRealTimers();
-});
-
 describe("useDashboardData", () => {
-  it("should initialize with loading states", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("initializes with loading states", () => {
     const { result } = renderHook(() => useDashboardData());
 
     expect(result.current.loadingHero).toBe(true);
@@ -31,87 +46,65 @@ describe("useDashboardData", () => {
     expect(result.current.artifacts).toEqual([]);
   });
 
-  it("should load hero project and artifacts after timeout", async () => {
-    const { result } = renderHook(() => useDashboardData());
+  it("loads hero project and artifacts", async () => {
+    mockGetProjects.mockResolvedValue({
+      data: [
+        {
+          id: "proj-1",
+          title: "Nebula Phase II",
+          description: "Comprehensive rebrand focusing on kinetic typography",
+          status: "IN_PROGRESS",
+          client: "Studio",
+          createdAt: "2024-01-01T00:00:00Z",
+          updatedAt: "2024-01-05T00:00:00Z",
+        },
+      ],
+      pagination: { page: 1, limit: 8, total: 1, totalPages: 1 },
+    });
 
-    // Fast-forward timers to trigger data loading
-    vi.advanceTimersByTime(350);
+    mockGetFreelancers.mockResolvedValue({
+      data: [
+        {
+          id: "freelancer-1",
+          name: "Alex Director",
+          role: "Creative Director",
+          createdAt: "2024-01-02T00:00:00Z",
+          updatedAt: "2024-01-02T00:00:00Z",
+          skills: ["Direction"],
+        },
+      ],
+      pagination: { page: 1, limit: 6, total: 1, totalPages: 1 },
+    });
+
+    mockGetMoodboardItems.mockResolvedValue({
+      data: [
+        {
+          id: "mood-1",
+          url: "https://example.com/image.jpg",
+          caption: "Launch frame",
+          tags: [],
+          moods: [],
+          colors: [],
+          createdAt: "2024-01-03T00:00:00Z",
+          updatedAt: "2024-01-03T00:00:00Z",
+          projectId: "proj-1",
+        },
+      ],
+      pagination: { page: 1, limit: 12, total: 1, totalPages: 1 },
+    });
+
+    const { result } = renderHook(() => useDashboardData());
 
     await waitFor(() => {
       expect(result.current.loadingHero).toBe(false);
       expect(result.current.loadingArtifacts).toBe(false);
     });
 
-    expect(result.current.heroProject).toBeTruthy();
     expect(result.current.heroProject?.title).toBe("Nebula Phase II");
-    expect(result.current.artifacts).toHaveLength(4);
-    expect(result.current.errorHero).toBe(null);
-    expect(result.current.errorArtifacts).toBe(null);
-  });
-
-  it("should provide addArtifact function that adds to artifacts list", async () => {
-    const { result } = renderHook(() => useDashboardData());
-
-    // Wait for initial load
-    vi.advanceTimersByTime(350);
-    await waitFor(() => {
-      expect(result.current.loadingArtifacts).toBe(false);
-    });
-
-    const initialLength = result.current.artifacts.length;
-
-    // Add a new artifact
-    const newArtifact = {
-      id: "new-art-1",
-      name: "New_Artifact.png",
-      imageSrc: "https://example.com/new.png",
-    };
-
-    result.current.addArtifact(newArtifact);
-
-    expect(result.current.artifacts).toHaveLength(initialLength + 1);
-    expect(result.current.artifacts[0]).toEqual(newArtifact);
-  });
-
-  it("should limit artifacts to 8 items", async () => {
-    const { result } = renderHook(() => useDashboardData());
-
-    // Wait for initial load with 4 items
-    vi.advanceTimersByTime(350);
-    await waitFor(() => {
-      expect(result.current.loadingArtifacts).toBe(false);
-    });
-
-    // Add 5 more artifacts (total would be 9, but should be limited to 8)
-    for (let i = 0; i < 5; i++) {
-      result.current.addArtifact({
-        id: `extra-${i}`,
-        name: `Extra_${i}.png`,
-        imageSrc: `https://example.com/extra${i}.png`,
-      });
-    }
-
-    expect(result.current.artifacts).toHaveLength(8);
-  });
-
-  it("should handle errors gracefully", async () => {
-    // Mock console.error to avoid noise
-    const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
-
-    const { result } = renderHook(() => useDashboardData());
-
-    // Simulate error by overriding the implementation (this is a simplified test)
-    // In a real scenario, you'd mock the data fetching
-    expect(result.current.loadingHero).toBe(true);
-
-    // Wait for timeout
-    vi.advanceTimersByTime(350);
-
-    // Note: In the current implementation, it shouldn't error, but the error handling is in place
-    await waitFor(() => {
-      expect(result.current.loadingHero).toBe(false);
-    });
-
-    consoleError.mockRestore();
+    expect(result.current.artifacts).toHaveLength(1);
+    expect(result.current.counts.projects).toBe(1);
+    expect(result.current.counts.freelancers).toBe(1);
+    expect(result.current.counts.moodboardItems).toBe(1);
+    expect(result.current.activities.length).toBeGreaterThan(0);
   });
 });

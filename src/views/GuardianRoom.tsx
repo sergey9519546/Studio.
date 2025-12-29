@@ -16,9 +16,14 @@ interface GuardianRoomProps {
     tone?: string[];
   } | null;
   onBack: () => void;
+  initialPrompt?: string;
 }
 
-const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
+const GuardianRoom: React.FC<GuardianRoomProps> = ({
+  project,
+  onBack,
+  initialPrompt,
+}) => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -30,6 +35,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
+  const hasSentInitialPrompt = useRef(false);
   const genAIService = GenAIService.getInstance();
 
   const buildProjectContext = () => {
@@ -43,45 +49,48 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
     return context || undefined;
   };
 
-  const sendMessage = async (overrideText?: string) => {
-    const messageToSend = (overrideText ?? input).trim();
-    if (!messageToSend || isLoading) return;
+  const sendMessage = React.useCallback(
+    async (overrideText?: string) => {
+      const messageToSend = (overrideText ?? input).trim();
+      if (!messageToSend || isLoading) return;
 
-    const newMsg: Message = { role: "user", text: messageToSend };
-    const history = messages;
-    setMessages((p) => [...p, newMsg]);
-    if (!overrideText) {
-      setInput("");
-    }
-    setIsLoading(true);
-
-    try {
-      const systemInstruction = project
-        ? `You are Lumina, an AI creative director working on "${project.title}". ${project.description ? "Project: " + project.description + ". " : ""}Keep responses concise and focused on film/design direction.`
-        : "You are Lumina, a creative AI director. Keep responses concise and focused on film/design direction.";
-
-      const res = await genAIService.generateContent(messageToSend, {
-        context: buildProjectContext(),
-        systemInstruction,
-        history,
-      });
-      setMessages((p) => [...p, { role: "system", text: res }]);
-    } catch (error) {
-      // Log error for debugging in development only
-      if (import.meta.env.DEV) {
-        console.error("Lumina Intelligence Error:", error);
+      const newMsg: Message = { role: "user", text: messageToSend };
+      const history = messages;
+      setMessages((p) => [...p, newMsg]);
+      if (!overrideText) {
+        setInput("");
       }
-      setMessages((p) => [
-        ...p,
-        {
-          role: "system",
-          text: "I'm having trouble connecting right now. Please try again in a moment.",
-        },
-      ]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+      setIsLoading(true);
+
+      try {
+        const systemInstruction = project
+          ? `You are Lumina, an AI creative director working on "${project.title}". ${project.description ? "Project: " + project.description + ". " : ""}Keep responses concise and focused on film/design direction.`
+          : "You are Lumina, a creative AI director. Keep responses concise and focused on film/design direction.";
+
+        const res = await genAIService.generateContent(messageToSend, {
+          context: buildProjectContext(),
+          systemInstruction,
+          history,
+        });
+        setMessages((p) => [...p, { role: "system", text: res }]);
+      } catch (error) {
+        // Log error for debugging in development only
+        if (import.meta.env.DEV) {
+          console.error("Lumina Intelligence Error:", error);
+        }
+        setMessages((p) => [
+          ...p,
+          {
+            role: "system",
+            text: "I'm having trouble connecting right now. Please try again in a moment.",
+          },
+        ]);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [input, isLoading, messages, project, genAIService]
+  );
 
   const promptStarters = [
     "Draft a scene outline based on this brief.",
@@ -92,6 +101,12 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  useEffect(() => {
+    if (!initialPrompt || hasSentInitialPrompt.current) return;
+    hasSentInitialPrompt.current = true;
+    void sendMessage(initialPrompt);
+  }, [initialPrompt, sendMessage]);
 
   return (
     <div className="h-full flex flex-col md:flex-row gap-8 pb-32 animate-in fade-in pt-8 px-8 max-w-[1800px] mx-auto">
@@ -142,23 +157,23 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
             <h3 className="text-sm font-bold">Visual Language</h3>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <div className="aspect-square bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl border border-border-subtle flex flex-col items-center justify-center text-center p-3">
-              <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mb-2">
+            <div className="aspect-square bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/20 dark:to-teal-800/20 rounded-xl border border-border-subtle flex flex-col items-center justify-center text-center p-3">
+              <div className="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center mb-2">
                 <ImageIcon size={16} className="text-white" />
               </div>
-              <span className="text-xs font-semibold text-blue-700 dark:text-blue-300">Style Guide</span>
+              <span className="text-xs font-semibold text-teal-700 dark:text-teal-300">Style Guide</span>
             </div>
-            <div className="aspect-square bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl border border-border-subtle flex flex-col items-center justify-center text-center p-3">
-              <div className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center mb-2">
+            <div className="aspect-square bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-900/20 dark:to-amber-800/20 rounded-xl border border-border-subtle flex flex-col items-center justify-center text-center p-3">
+              <div className="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center mb-2">
                 <Sparkles size={16} className="text-white" />
               </div>
-              <span className="text-xs font-semibold text-purple-700 dark:text-purple-300">Mood Board</span>
+              <span className="text-xs font-semibold text-amber-700 dark:text-amber-300">Mood Board</span>
             </div>
-            <div className="aspect-square bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl border border-border-subtle flex flex-col items-center justify-center text-center p-3">
-              <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center mb-2">
+            <div className="aspect-square bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900/20 dark:to-slate-800/20 rounded-xl border border-border-subtle flex flex-col items-center justify-center text-center p-3">
+              <div className="w-8 h-8 bg-slate-700 rounded-lg flex items-center justify-center mb-2">
                 <FileText size={16} className="text-white" />
               </div>
-              <span className="text-xs font-semibold text-green-700 dark:text-green-300">Reference</span>
+              <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Reference</span>
             </div>
             <div className="aspect-square border-2 border-dashed border-border-subtle rounded-xl flex flex-col items-center justify-center text-center p-3 hover:border-ink-primary hover:bg-ink-primary/5 transition-all cursor-pointer">
               <Plus size={20} className="text-ink-tertiary hover:text-ink-primary mb-1" />
@@ -201,59 +216,49 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({ project, onBack }) => {
           ))}
         </div>
 
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-8 space-y-8 bg-app">
-          {messages.map((m, i) => (
+        {/* Chat messages */}
+        <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4">
+          {messages.map((msg, idx) => (
             <div
-              key={i}
-              className={`flex ${m.role === "user" ? "justify-end" : "justify-start items-start gap-4"} animate-in slide-in-from-bottom-2`}
+              key={`${msg.role}-${idx}`}
+              className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
             >
-              {m.role === "system" && (
-                <div className="w-8 h-8 rounded-full bg-surface border border-border-subtle flex items-center justify-center mt-4 flex-shrink-0 shadow-sm text-ink-primary">
-                  <Sparkles size={14} />
-                </div>
-              )}
               <div
-                className={`max-w-[85%] md:max-w-[70%] ${m.role === "user" ? "bubble-user" : "bubble-ai"}`}
+                className={`max-w-[70%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
+                  msg.role === "user"
+                    ? "bg-ink-primary text-white"
+                    : "bg-subtle text-ink-secondary"
+                }`}
               >
-                {m.text}
+                {msg.text}
               </div>
             </div>
           ))}
-          {isLoading && (
-            <div className="flex justify-start items-start gap-4 animate-in slide-in-from-bottom-2">
-              <div className="w-8 h-8 rounded-full bg-surface border border-border-subtle flex items-center justify-center mt-4 flex-shrink-0 shadow-sm text-ink-primary">
-                <Sparkles size={14} />
-              </div>
-              <div className="bubble-ai shimmer">Thinking...</div>
-            </div>
-          )}
           <div ref={endRef} />
         </div>
 
         {/* Input */}
-        <div className="p-6 bg-surface border-t border-border-subtle">
-          <div className="relative max-w-4xl mx-auto">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) =>
-                e.key === "Enter" && !e.shiftKey && sendMessage()
-              }
-              placeholder="Message Lumina..."
-              disabled={isLoading}
-              className="w-full bg-subtle border border-transparent focus:border-border-subtle focus:bg-surface rounded-2xl px-6 py-4 text-sm outline-none transition-all pl-6 pr-14 font-medium placeholder:text-ink-tertiary text-ink-primary disabled:opacity-50"
-            />
-            <button
-              onClick={() => sendMessage()}
-              disabled={isLoading || !input.trim()}
-              className="absolute right-2 top-2 p-2 bg-black text-white rounded-xl hover:scale-105 transition-transform shadow-md disabled:opacity-50 disabled:hover:scale-100"
-              aria-label="Send message"
-            >
-              <ArrowRight size={18} />
-            </button>
-          </div>
-        </div>
+        <form
+          className="p-6 border-t border-border-subtle flex items-center gap-3"
+          onSubmit={(e) => {
+            e.preventDefault();
+            void sendMessage();
+          }}
+        >
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask Lumina for direction..."
+            className="flex-1 bg-subtle rounded-full px-4 py-3 text-sm text-ink-primary placeholder-ink-tertiary focus:outline-none focus:ring-2 focus:ring-primary/40"
+          />
+          <button
+            type="submit"
+            className="px-5 py-3 rounded-full bg-ink-primary text-white text-xs font-bold uppercase tracking-widest"
+            disabled={isLoading}
+          >
+            Send
+          </button>
+        </form>
       </div>
     </div>
   );

@@ -146,7 +146,7 @@ export class StorageService implements OnModuleInit {
         `Firebase Storage emulator in use (${emulatorHost}). Credentials are not required.`
       );
       this.firebaseApp = initializeApp({
-        projectId: this.projectId || "demo-project",
+        projectId: this.projectId || "local-emulator",
         storageBucket: this.bucketName,
       });
       return this.firebaseApp;

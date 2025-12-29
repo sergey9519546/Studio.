@@ -2,6 +2,7 @@ import { Activity, Edit2, FileText, Image, RefreshCw, Save, User, Users, Wifi, W
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useAutoSave } from "../hooks/useAutoSave";
 import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
+import { getProjectStatusMeta } from "../utils/status";
 import { Button } from "./design/Button";
 import { LiquidGlassContainer } from "./design/LiquidGlassContainer";
 import { Textarea } from "./design/Textarea";
@@ -10,6 +11,12 @@ interface ProjectDashboardProps {
   projectId: string;
   projectTitle?: string;
   brief?: string;
+  status?: string;
+  client?: string;
+  startDate?: string;
+  endDate?: string;
+  tone?: string[];
+  assets?: Array<{ id: string; url: string; caption?: string }>;
   onBriefChange?: (brief: string) => void;
   onNavigateToWritersRoom?: () => void;
   onNavigateToMoodboard?: () => void;
@@ -36,6 +43,12 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
   projectId,
   projectTitle = "Untitled Project",
   brief = "",
+  status,
+  client,
+  startDate,
+  endDate,
+  tone = [],
+  assets = [],
   onBriefChange,
   onNavigateToWritersRoom,
   onNavigateToMoodboard,
@@ -44,37 +57,24 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
   const [localBrief, setLocalBrief] = useState(brief);
   const [isOnline, setIsOnline] = useState(true);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
-  const [collaborators, setCollaborators] = useState<Collaborator[]>([
-    {
-      id: '1',
-      name: 'Sarah Chen',
-      status: 'online',
-      lastSeen: new Date(),
-    },
-    {
-      id: '2',
-      name: 'Mike Rodriguez',
-      status: 'away',
-      lastSeen: new Date(Date.now() - 5 * 60 * 1000),
-    },
-  ]);
-  const [activities, setActivities] = useState<ActivityItem[]>([
-    {
-      id: '1',
-      type: 'user_joined',
-      user: 'Sarah Chen',
-      message: 'joined the project',
-      timestamp: new Date(Date.now() - 2 * 60 * 1000),
-    },
-    {
-      id: '2',
-      type: 'brief_update',
-      user: 'You',
-      message: 'updated the creative brief',
-      timestamp: new Date(Date.now() - 5 * 60 * 1000),
-    },
-  ]);
+  const [collaborators] = useState<Collaborator[]>([]);
+  const [activities, setActivities] = useState<ActivityItem[]>([]);
   const activityFeedRef = useRef<HTMLDivElement>(null);
+  const statusMeta = getProjectStatusMeta(status);
+  const formattedStartDate = (() => {
+    if (!startDate) return "No kickoff date";
+    const date = new Date(startDate);
+    return Number.isNaN(date.getTime()) ? "No kickoff date" : date.toLocaleDateString();
+  })();
+  const formattedDueDate = (() => {
+    if (!endDate) return "No deadline";
+    const date = new Date(endDate);
+    return Number.isNaN(date.getTime()) ? "No deadline" : date.toLocaleDateString();
+  })();
+
+  useEffect(() => {
+    setLocalBrief(brief);
+  }, [brief]);
 
   // Auto-save functionality
   const autoSave = useAutoSave(
@@ -253,21 +253,23 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
               </div>
               
               <div className="flex flex-wrap gap-2 text-sm text-ink-secondary">
-                <span className="px-3 py-1 rounded-full bg-subtle border border-border-subtle font-semibold text-ink-primary">
-                  Status: Active
+                <span className={`px-3 py-1 rounded-full border font-semibold text-xs ${statusMeta.className}`}>
+                  Status: {statusMeta.label}
                 </span>
-                <span className="px-3 py-1 rounded-full bg-subtle border border-border-subtle text-ink-primary">
-                  Due: TBD
+                <span className="px-3 py-1 rounded-full bg-subtle border border-border-subtle text-ink-primary text-xs">
+                  Due: {formattedDueDate}
                 </span>
-                <span className="px-3 py-1 rounded-full bg-subtle border border-border-subtle text-ink-primary">
-                  Owner: Creative
-                </span>
+                {client && (
+                  <span className="px-3 py-1 rounded-full bg-subtle border border-border-subtle text-ink-primary text-xs">
+                    Client: {client}
+                  </span>
+                )}
                 {/* Auto-save Status */}
                 <span className={`px-3 py-1 rounded-full border text-xs ${
                   autoSave.status === 'saving' 
-                    ? 'bg-blue-100 border-blue-300 text-blue-800'
+                    ? 'bg-primary-tint border-primary/30 text-primary'
                     : autoSave.status === 'saved'
-                    ? 'bg-green-100 border-green-300 text-green-800'
+                    ? 'bg-state-success-bg border-state-success/30 text-state-success'
                     : 'bg-subtle border-border-subtle text-ink-primary'
                 }`}>
                   {autoSave.status === 'saving' && <RefreshCw size={12} className="inline mr-1 animate-spin" />}
@@ -281,23 +283,27 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
               {/* Collaborators */}
               <div className="flex items-center gap-2">
                 <Users size={16} className="text-ink-tertiary" />
-                <div className="flex -space-x-2">
-                  {collaborators.slice(0, 3).map((collaborator) => (
-                    <div
-                      key={collaborator.id}
-                      className="relative w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-medium border-2 border-white"
-                      title={`${collaborator.name} (${collaborator.status})`}
-                    >
-                      {collaborator.name.split(' ').map(n => n[0]).join('')}
-                      <div className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white ${getStatusColor(collaborator.status)}`} />
-                    </div>
-                  ))}
-                  {collaborators.length > 3 && (
-                    <div className="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white text-xs font-medium border-2 border-white">
-                      +{collaborators.length - 3}
-                    </div>
-                  )}
-                </div>
+                {collaborators.length > 0 ? (
+                  <div className="flex -space-x-2">
+                    {collaborators.slice(0, 3).map((collaborator) => (
+                      <div
+                        key={collaborator.id}
+                        className="relative w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-medium border-2 border-white"
+                        title={`${collaborator.name} (${collaborator.status})`}
+                      >
+                        {collaborator.name.split(' ').map(n => n[0]).join('')}
+                        <div className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white ${getStatusColor(collaborator.status)}`} />
+                      </div>
+                    ))}
+                    {collaborators.length > 3 && (
+                      <div className="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white text-xs font-medium border-2 border-white">
+                        +{collaborators.length - 3}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <span className="text-xs text-ink-tertiary">No collaborators yet</span>
+                )}
               </div>
               
               <div className="flex flex-wrap gap-2">
@@ -322,13 +328,13 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
                 <h2 className="text-lg font-bold text-ink-primary">
                   Creative Brief
                 </h2>
-                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2">
                   {/* Auto-save indicator */}
                   {autoSave.status === 'saving' && (
-                    <RefreshCw size={14} className="text-blue-500 animate-spin" />
+                    <RefreshCw size={14} className="text-primary animate-spin" />
                   )}
                   {autoSave.status === 'saved' && (
-                    <Save size={14} className="text-green-500" />
+                    <Save size={14} className="text-state-success" />
                   )}
                   {!editingBrief && (
                     <button
@@ -404,23 +410,28 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
                 ref={activityFeedRef}
                 className="space-y-3 max-h-64 overflow-y-auto"
               >
-                {activities.map((activity) => (
-                  <div key={activity.id} className="flex items-start gap-3 p-2 hover:bg-white/5 rounded-lg transition-colors">
-                    <div className="p-1.5 rounded-full bg-primary/10 text-primary flex-shrink-0">
-                      {getActivityIcon(activity.type)}
+                {activities.length > 0 ? (
+                  activities.map((activity) => (
+                    <div key={activity.id} className="flex items-start gap-3 p-2 hover:bg-white/5 rounded-lg transition-colors">
+                      <div className="p-1.5 rounded-full bg-primary/10 text-primary flex-shrink-0">
+                        {getActivityIcon(activity.type)}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm text-ink-primary">
+                          <span className="font-medium">{activity.user}</span>{" "}
+                          {activity.message}
+                        </p>
+                        <p className="text-xs text-ink-tertiary mt-0.5">
+                          {formatTimeAgo(activity.timestamp)}
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm text-ink-primary">
-                        <span className="font-medium">{activity.user}</span>
-                        {' '}
-                        {activity.message}
-                      </p>
-                      <p className="text-xs text-ink-tertiary mt-0.5">
-                        {formatTimeAgo(activity.timestamp)}
-                      </p>
-                    </div>
+                  ))
+                ) : (
+                  <div className="rounded-xl border border-border-subtle bg-subtle p-4 text-xs text-ink-tertiary">
+                    No activity yet. Save a brief or add assets to begin tracking updates.
                   </div>
-                ))}
+                )}
               </div>
             </LiquidGlassContainer>
 
@@ -436,15 +447,19 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
                     Mood Tags
                   </label>
                   <div className="flex flex-wrap gap-2">
-                    {["Cinematic", "Minimalist", "Bold", "Elegant"].map(
-                      (tag) => (
-                        <button
+                    {tone.length > 0 ? (
+                      tone.map((tag) => (
+                        <span
                           key={tag}
-                          className="px-3 py-1.5 rounded-[24px] bg-primary-tint text-primary text-xs font-medium hover:bg-primary hover:text-white transition-colors"
+                          className="px-3 py-1.5 rounded-[24px] bg-primary-tint text-primary text-xs font-medium"
                         >
                           {tag}
-                        </button>
-                      )
+                        </span>
+                      ))
+                    ) : (
+                      <span className="text-xs text-ink-tertiary">
+                        No tone tags yet.
+                      </span>
                     )}
                   </div>
                 </div>
@@ -466,16 +481,9 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
               <h2 className="text-lg font-bold text-ink-primary mb-3">
                 Risks & Blockers
               </h2>
-              <ul className="space-y-2 text-sm text-ink-secondary">
-                <li className="flex items-start gap-2">
-                  <span className="mt-1 w-2 h-2 rounded-full bg-amber-500" />
-                  Clarify deliverable scope and final runtime.
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-1 w-2 h-2 rounded-full bg-amber-500" />
-                  Secure reference assets for visual direction.
-                </li>
-              </ul>
+              <p className="text-sm text-ink-tertiary">
+                No blockers logged yet. Capture risks in the brief or add them here as they emerge.
+              </p>
             </LiquidGlassContainer>
           </div>
 
@@ -487,22 +495,32 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
                 <h2 className="text-lg font-bold text-ink-primary">
                   Project Assets
                 </h2>
-                <Button size="sm" variant="secondary">
+                <Button size="sm" variant="secondary" onClick={onNavigateToMoodboard}>
                   Upload Asset
                 </Button>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {/* Placeholder assets */}
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="aspect-square bg-subtle border border-border-subtle rounded-lg flex items-center justify-center text-ink-tertiary"
-                  >
-                    <Image size={24} />
-                  </div>
-                ))}
-              </div>
+              {assets.length > 0 ? (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {assets.map((asset) => (
+                    <div
+                      key={asset.id}
+                      className="aspect-square bg-subtle border border-border-subtle rounded-lg overflow-hidden"
+                    >
+                      <img
+                        src={asset.url}
+                        alt={asset.caption || "Project asset"}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="rounded-xl border border-border-subtle bg-subtle p-6 text-sm text-ink-tertiary">
+                  No assets uploaded yet. Add visuals from the moodboard to populate this space.
+                </div>
+              )}
             </LiquidGlassContainer>
 
             {/* Timeline/Progress */}
@@ -511,39 +529,36 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
                 Project Timeline
               </h2>
 
-              <div className="space-y-4">
-                {[
-                  { phase: "Concept & Planning", status: "completed", date: "Dec 10" },
-                  { phase: "Script Development", status: "in-progress", date: "Dec 13" },
-                  { phase: "Pre-production", status: "pending", date: "Dec 20" },
-                  { phase: "Production", status: "pending", date: "Jan 5" },
-                  { phase: "Post-production", status: "pending", date: "Jan 20" },
-                ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-4">
-                    <div className={`w-3 h-3 rounded-full ${
-                      item.status === "completed"
-                        ? "bg-green-500"
-                        : item.status === "in-progress"
-                        ? "bg-blue-500"
-                        : "bg-gray-400"
-                    }`} />
+              {startDate || endDate ? (
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-3 h-3 rounded-full bg-primary" />
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
-                        <span className={`font-medium ${
-                          item.status === "completed"
-                            ? "text-ink-secondary line-through"
-                            : item.status === "in-progress"
-                            ? "text-ink-primary"
-                            : "text-ink-secondary"
-                        }`}>
-                          {item.phase}
+                        <span className="font-medium text-ink-primary">
+                          Kickoff
                         </span>
-                        <span className="text-sm text-ink-tertiary">{item.date}</span>
+                        <span className="text-sm text-ink-tertiary">{formattedStartDate}</span>
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-3 h-3 rounded-full bg-state-warning" />
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-ink-primary">
+                          Delivery
+                        </span>
+                        <span className="text-sm text-ink-tertiary">{formattedDueDate}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="rounded-xl border border-border-subtle bg-subtle p-6 text-sm text-ink-tertiary">
+                  No timeline set yet. Add a kickoff and delivery date to track milestones.
+                </div>
+              )}
             </LiquidGlassContainer>
           </div>
         </div>

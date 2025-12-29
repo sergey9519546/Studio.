@@ -189,7 +189,8 @@
           "file": "apps/api/src/modules/moodboard/dto/create-from-unsplash.dto.ts",
           "hash": "1890356879146999906",
           "deps": [
-            "npm:class-validator"
+            "npm:class-validator",
+            "npm:class-transformer"
           ]
         },
         {

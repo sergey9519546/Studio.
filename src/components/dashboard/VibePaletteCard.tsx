@@ -12,11 +12,11 @@ interface VibePaletteCardProps {
 }
 
 const DEFAULT_COLORS = [
-  themeColors.state.danger,
-  themeColors.state.warning,
-  "#FFCC00",
-  themeColors.state.success,
   themeColors.accent.primary,
+  themeColors.edge.teal,
+  themeColors.state.warning,
+  themeColors.state.success,
+  themeColors.edge.magenta,
 ];
 
 const VibePaletteCard: React.FC<VibePaletteCardProps> = ({

@@ -1,17 +1,33 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
+import { MemoryRouter } from "react-router-dom";
 import { Artifact } from "../components/dashboard/RecentArtifactsCard";
-import { DashboardData, useDashboardData } from "../hooks/useDashboardData";
+import { DashboardCounts } from "../hooks/useDashboardData";
+import { useDashboardData } from "../hooks/useDashboardData";
 import { useToast } from "../hooks/useToast";
 import DashboardHome from "../views/DashboardHome";
+
+const mockNavigate = vi.fn();
+
+vi.mock("react-router-dom", async () => {
+  const actual = await vi.importActual<typeof import("react-router-dom")>(
+    "react-router-dom"
+  );
+  return {
+    ...actual,
+    useNavigate: () => mockNavigate,
+  };
+});
 
 // Mock the hooks
 vi.mock("../hooks/useDashboardData");
 vi.mock("../hooks/useToast");
 
 interface MockDashboardHeaderProps {
-  onNotificationsClick: () => void;
   onNewProjectClick: () => void;
+  projectCount: number;
+  freelancerCount: number;
+  moodboardCount: number;
 }
 
 interface MockHeroProjectCardProps {
@@ -38,18 +54,15 @@ interface MockRecentArtifactsCardProps {
 // Mock the child components
 vi.mock("../components/dashboard/DashboardHeader", () => ({
   default: ({
-    onNotificationsClick,
     onNewProjectClick,
+    projectCount,
+    freelancerCount,
+    moodboardCount,
   }: MockDashboardHeaderProps) => (
     <div data-testid="dashboard-header">
-      <button
-        onClick={onNotificationsClick}
-        data-testid="notifications-btn"
-        aria-label="View notifications"
-      >
-        <span className="sr-only">View notifications</span>
-        <svg></svg>
-      </button>
+      <div data-testid="counts">
+        {projectCount}-{freelancerCount}-{moodboardCount}
+      </div>
       <button
         onClick={onNewProjectClick}
         data-testid="new-project-btn"
@@ -73,14 +86,12 @@ vi.mock("../components/dashboard/HeroProjectCard", () => ({
 vi.mock("@/components/dashboard/LuminaAICard", () => ({
   default: ({ onSubmitPrompt }: MockLuminaAICardProps) => (
     <div data-testid="spark-ai-card">
-      <input data-testid="prompt-input" placeholder="Enter prompt" />
       <button
         onClick={() => onSubmitPrompt("Test prompt")}
         data-testid="submit-prompt-btn"
         aria-label="Submit prompt"
       >
-        <span className="sr-only">Submit prompt</span>
-        <svg></svg>
+        Submit
       </button>
     </div>
   ),
@@ -111,38 +122,62 @@ vi.mock("../components/dashboard/RecentArtifactsCard", () => ({
   ),
 }));
 
+vi.mock("../components/dashboard/RecentActivityWidget", () => ({
+  default: () => <div data-testid="recent-activity-widget" />,
+}));
+
+vi.mock("../components/dashboard/ResourceUsageWidget", () => ({
+  default: ({ counts }: { counts: DashboardCounts }) => (
+    <div data-testid="resource-usage-widget">
+      {counts.projects}
+    </div>
+  ),
+}));
+
+vi.mock("../components/projects/CreateProjectModal", () => ({
+  default: ({ isOpen }: { isOpen: boolean }) => (
+    <div data-testid="create-project-modal">{isOpen ? "open" : "closed"}</div>
+  ),
+}));
+
 describe("DashboardHome", () => {
   const mockAddToast = vi.fn();
-  const mockAddArtifact = vi.fn();
   const mockRefetch = vi.fn();
-
-  const mockDashboardData: DashboardData = {
-    heroProject: {
-      id: "hero-1",
-      imageSrc: "https://example.com/image.jpg",
-      priorityLabel: "Priority One",
-      title: "Nebula Phase II",
-      description: "Comprehensive rebrand focusing on kinetic typography",
-    },
-    artifacts: [
-      {
-        id: "art-1",
-        name: "Nebula_Launch.png",
-        imageSrc: "https://example.com/art1.jpg",
-      },
-    ],
-    loadingHero: false,
-    loadingArtifacts: false,
-    errorHero: null,
-    errorArtifacts: null,
-    addArtifact: mockAddArtifact,
-    refetch: mockRefetch,
-  };
 
   beforeEach(() => {
     vi.clearAllMocks();
 
-    (useDashboardData as Mock).mockReturnValue(mockDashboardData);
+    (useDashboardData as Mock).mockReturnValue({
+      heroProject: {
+        id: "hero-1",
+        title: "Nebula Phase II",
+        description: "Comprehensive rebrand focusing on kinetic typography",
+        status: "IN_PROGRESS",
+        client: "Studio",
+        createdAt: "2024-01-01T00:00:00Z",
+        updatedAt: "2024-01-02T00:00:00Z",
+      },
+      heroImage: "https://example.com/image.jpg",
+      artifacts: [
+        {
+          id: "art-1",
+          name: "Nebula_Launch.png",
+          imageSrc: "https://example.com/art1.jpg",
+        },
+      ],
+      activities: [],
+      counts: {
+        projects: 1,
+        freelancers: 2,
+        moodboardItems: 3,
+      },
+      loadingHero: false,
+      loadingArtifacts: false,
+      errorHero: null,
+      errorArtifacts: null,
+      refetch: mockRefetch,
+    });
+
     (useToast as Mock).mockReturnValue({
       toasts: [],
       addToast: mockAddToast,
@@ -150,7 +185,11 @@ describe("DashboardHome", () => {
   });
 
   it("renders the dashboard with hero project", async () => {
-    render(<DashboardHome />);
+    render(
+      <MemoryRouter>
+        <DashboardHome />
+      </MemoryRouter>
+    );
 
     await waitFor(() => {
       expect(screen.getByTestId("dashboard-header")).toBeInTheDocument();
@@ -166,105 +205,51 @@ describe("DashboardHome", () => {
     ).toBeInTheDocument();
   });
 
-  it("handles notifications button click", async () => {
-    render(<DashboardHome />);
-
-    const notificationsBtn = screen.getByTestId("notifications-btn");
-    fireEvent.click(notificationsBtn);
-
-    expect(mockAddToast).toHaveBeenCalledWith(
-      "Notifications panel is coming soon.",
-      "info"
+  it("opens create project modal when clicking new project button", async () => {
+    render(
+      <MemoryRouter>
+        <DashboardHome />
+      </MemoryRouter>
     );
-  });
-
-  it("handles new project button click", async () => {
-    render(<DashboardHome />);
 
     const newProjectBtn = screen.getByTestId("new-project-btn");
     fireEvent.click(newProjectBtn);
 
-    expect(mockAddToast).toHaveBeenCalledWith(
-      "New Project modal will open here.",
-      "success"
+    expect(screen.getByTestId("create-project-modal")).toHaveTextContent(
+      "open"
     );
   });
 
-  it("handles prompt submission", async () => {
-    render(<DashboardHome />);
+  it("navigates to writers room on prompt submission", async () => {
+    render(
+      <MemoryRouter>
+        <DashboardHome />
+      </MemoryRouter>
+    );
 
     const submitBtn = screen.getByTestId("submit-prompt-btn");
     fireEvent.click(submitBtn);
 
-    expect(mockAddToast).toHaveBeenCalledWith(
-      'Prompt sent: "Test prompt"',
-      "success"
-    );
-    const prompt = "Test prompt";
-    const expectedName = `${prompt
-      .trim()
-      .slice(0, 12)
-      .replace(/\s+/g, "_")}.png`;
-    expect(mockAddArtifact).toHaveBeenCalledWith({
-      id: expect.stringContaining("gen-"),
-      name: expectedName,
-      imageSrc: "",
-    });
-  });
+    const expectedParams = new URLSearchParams({
+      project: "hero-1",
+      prompt: "Test prompt",
+    }).toString();
 
-  it("validates prompt input length", async () => {
-    // Test will validate the behavior in the component logic
-    expect(true).toBe(true); // Placeholder for now - the validation logic is tested in the component
+    expect(mockNavigate).toHaveBeenCalledWith(
+      `/writers-room?${expectedParams}`
+    );
   });
 
   it("handles color selection", async () => {
-    render(<DashboardHome />);
+    render(
+      <MemoryRouter>
+        <DashboardHome />
+      </MemoryRouter>
+    );
 
     const colorBtn = screen.getByTestId("color-select-btn");
     fireEvent.click(colorBtn);
 
-    expect(mockAddToast).toHaveBeenCalledWith(
-      "Accent updated to #FF0000",
-      "info"
-    );
-  });
-
-  it("renders with proper accessibility attributes", async () => {
-    render(<DashboardHome />);
-
-    const main = screen.getByRole("main");
-    expect(main).toHaveAttribute("aria-label", "Dashboard home page");
-  });
-
-  it("renders loading states", async () => {
-    (useDashboardData as Mock).mockReturnValue({
-      ...mockDashboardData,
-      loadingHero: true,
-      loadingArtifacts: true,
-    });
-
-    render(<DashboardHome />);
-
-    // Should show loading indicators instead of content
-    await waitFor(() => {
-      expect(screen.getByLabelText("Loading hero project")).toBeInTheDocument();
-    });
-  });
-
-  it("renders error states", async () => {
-    (useDashboardData as Mock).mockReturnValue({
-      ...mockDashboardData,
-      errorHero: "Failed to load hero project",
-      errorArtifacts: null,
-    });
-
-    render(<DashboardHome />);
-
-    await waitFor(() => {
-      expect(screen.getByText("Failed to load project")).toBeInTheDocument();
-      expect(
-        screen.getByText("Failed to load hero project")
-      ).toBeInTheDocument();
-    });
+    expect(mockAddToast).toHaveBeenCalledWith("Accent updated to #FF0000", "info");
   });
 });

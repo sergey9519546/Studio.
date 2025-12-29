@@ -1,43 +1,69 @@
-
-import { Cpu, HardDrive, Wifi } from "lucide-react";
+import { ImageIcon, Layers, Users } from "lucide-react";
 import React from "react";
 import Card from "../ui/Card";
+import type { DashboardCounts } from "../../hooks/useDashboardData";
 
-interface ResourceMetric {
-  label: string;
-  value: number;
-  unit: string;
-  icon: React.ElementType;
-  color: string;
+interface ResourceUsageWidgetProps {
+  className?: string;
+  counts: DashboardCounts;
+  isError?: boolean;
 }
 
-const metrics: ResourceMetric[] = [
-  { label: "CPU", value: 42, unit: "%", icon: Cpu, color: "text-blue-500" },
-  { label: "Storage", value: 68, unit: "%", icon: HardDrive, color: "text-purple-500" },
-  { label: "Network", value: 24, unit: "ms", icon: Wifi, color: "text-emerald-500" },
-];
+const ResourceUsageWidget: React.FC<ResourceUsageWidgetProps> = ({
+  className = "",
+  counts,
+  isError = false,
+}) => {
+  const metrics = [
+    {
+      label: "Projects",
+      value: counts.projects,
+      helper: "Active pipeline",
+      icon: Layers,
+    },
+    {
+      label: "Freelancers",
+      value: counts.freelancers,
+      helper: "Rostered talent",
+      icon: Users,
+    },
+    {
+      label: "Assets",
+      value: counts.moodboardItems,
+      helper: "Moodboard items",
+      icon: ImageIcon,
+    },
+  ];
 
-const ResourceUsageWidget: React.FC<{ className?: string }> = ({ className = "" }) => {
   return (
     <Card className={`bg-surface border-border-subtle ${className}`}>
-      <h3 className="font-bold text-sm text-ink-primary mb-4">System Status</h3>
+      <h3 className="font-bold text-sm text-ink-primary mb-4">Studio Metrics</h3>
+      {isError ? (
+        <div className="rounded-xl border border-state-warning/30 bg-state-warning-bg px-4 py-3 text-xs text-state-warning">
+          Metrics are partially unavailable.
+        </div>
+      ) : null}
       <div className="space-y-4">
         {metrics.map((metric) => (
-          <div key={metric.label}>
-            <div className="flex items-end justify-between mb-1">
-              <div className="flex items-center gap-2 text-ink-secondary text-xs font-medium">
-                <metric.icon size={14} className={metric.color} />
-                {metric.label}
+          <div
+            key={metric.label}
+            className="flex items-center justify-between rounded-2xl border border-border-subtle bg-subtle px-4 py-3"
+          >
+            <div className="flex items-center gap-3 text-ink-secondary">
+              <div className="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center">
+                <metric.icon size={14} />
               </div>
-              <div className="text-xs font-bold text-ink-primary">
-                {metric.value}{metric.unit}
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-[0.2em]">
+                  {metric.label}
+                </div>
+                <div className="text-[11px] text-ink-tertiary">
+                  {metric.helper}
+                </div>
               </div>
             </div>
-            <div className="h-1.5 w-full bg-subtle rounded-full overflow-hidden">
-              <div 
-                className={`h-full rounded-full transition-all duration-500 ${metric.color.replace('text-', 'bg-')}`}
-                style={{ width: `${metric.value}%` }} 
-              />
+            <div className="text-lg font-semibold text-ink-primary">
+              {metric.value}
             </div>
           </div>
         ))}

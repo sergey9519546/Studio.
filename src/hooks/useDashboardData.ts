@@ -1,135 +1,176 @@
 import React from "react";
-import { DASHBOARD_CONSTANTS } from "../views/dashboardConfig";
+import { ProjectsAPI } from "../services/api/projects";
+import { FreelancersAPI } from "../services/api/freelancers";
+import { MoodboardAPI } from "../services/api/moodboard";
+import type { Freelancer, MoodboardItem, Project } from "../services/types";
+import { getProjectStatusMeta } from "../utils/status";
 import { useToast } from "./useToast";
 
-interface HeroProject {
-  id: string;
-  imageSrc: string;
-  priorityLabel?: string;
-  title: string;
-  description: string;
-}
-
-interface Artifact {
+export interface DashboardArtifact {
   id: string;
   name: string;
-  imageSrc: string;
+  imageSrc?: string;
+}
+
+export interface DashboardActivity {
+  id: string;
+  title: string;
+  description: string;
+  timestamp: string;
+  type: "project" | "moodboard" | "freelancer";
+}
+
+export interface DashboardCounts {
+  projects: number;
+  freelancers: number;
+  moodboardItems: number;
 }
 
 interface UseDashboardDataReturn {
-  heroProject: HeroProject | null;
-  artifacts: Artifact[];
+  heroProject: Project | null;
+  heroImage?: string;
+  artifacts: DashboardArtifact[];
+  activities: DashboardActivity[];
+  counts: DashboardCounts;
   loadingHero: boolean;
   loadingArtifacts: boolean;
   errorHero: string | null;
   errorArtifacts: string | null;
   refetch: () => void;
-  addArtifact: (artifact: Artifact) => void;
 }
 
-// Export type for tests
-export type DashboardData = UseDashboardDataReturn;
+const buildArtifacts = (items: MoodboardItem[]): DashboardArtifact[] => {
+  return items.map((item) => ({
+    id: item.id,
+    name: item.caption || item.title || "Moodboard Item",
+    imageSrc: item.url,
+  }));
+};
 
-// Mock data - in real app, this would come from API
-const getMockHeroProject = (): HeroProject => ({
-  id: "hero-1",
-  imageSrc: DASHBOARD_CONSTANTS.HERO_PROJECT.IMAGE,
-  priorityLabel: "Priority One",
-  title: DASHBOARD_CONSTANTS.HERO_PROJECT.TITLE,
-  description: DASHBOARD_CONSTANTS.HERO_PROJECT.DESCRIPTION,
-});
+const buildActivities = (
+  projects: Project[],
+  items: MoodboardItem[],
+  freelancers: Freelancer[]
+): DashboardActivity[] => {
+  const projectActivities = projects.map((project) => {
+    const status = getProjectStatusMeta(project.status);
+    return {
+      id: `project-${project.id}`,
+      title: project.title || "Untitled project",
+      description: `${status.label} project updated`,
+      timestamp: project.updatedAt,
+      type: "project" as const,
+    };
+  });
 
-const getMockArtifacts = (): Artifact[] => [
-  {
-    id: "art-1",
-    name: "Nebula_Launch.png",
-    imageSrc:
-      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&auto=format&fit=crop",
-  },
-  {
-    id: "art-2",
-    name: "Typography_Grid.png",
-    imageSrc:
-      "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1?w=800&auto=format&fit=crop",
-  },
-  {
-    id: "art-3",
-    name: "ZeroG_Mock.png",
-    imageSrc:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&auto=format&fit=crop",
-  },
-  {
-    id: "art-4",
-    name: "Palette_V04.png",
-    imageSrc:
-      "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&auto=format&fit=crop",
-  },
-];
+  const moodboardActivities = items.map((item) => ({
+    id: `moodboard-${item.id}`,
+    title: item.caption || "Moodboard update",
+    description: "New asset added to moodboard",
+    timestamp: item.createdAt,
+    type: "moodboard" as const,
+  }));
+
+  const freelancerActivities = freelancers.map((freelancer) => ({
+    id: `freelancer-${freelancer.id}`,
+    title: freelancer.name,
+    description: freelancer.role ? `New ${freelancer.role} added` : "New freelancer added",
+    timestamp: freelancer.createdAt,
+    type: "freelancer" as const,
+  }));
+
+  return [...projectActivities, ...moodboardActivities, ...freelancerActivities]
+    .filter((activity) => activity.timestamp)
+    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+    .slice(0, 6);
+};
 
 export const useDashboardData = (): UseDashboardDataReturn => {
-  const [heroProject, setHeroProject] = React.useState<HeroProject | null>(
-    null
-  );
-  const [artifacts, setArtifacts] = React.useState<Artifact[]>([]);
+  const [heroProject, setHeroProject] = React.useState<Project | null>(null);
+  const [heroImage, setHeroImage] = React.useState<string | undefined>(undefined);
+  const [artifacts, setArtifacts] = React.useState<DashboardArtifact[]>([]);
+  const [activities, setActivities] = React.useState<DashboardActivity[]>([]);
+  const [counts, setCounts] = React.useState<DashboardCounts>({
+    projects: 0,
+    freelancers: 0,
+    moodboardItems: 0,
+  });
   const [loadingHero, setLoadingHero] = React.useState(true);
   const [loadingArtifacts, setLoadingArtifacts] = React.useState(true);
   const [errorHero, setErrorHero] = React.useState<string | null>(null);
-  const [errorArtifacts, setErrorArtifacts] = React.useState<string | null>(
-    null
-  );
+  const [errorArtifacts, setErrorArtifacts] = React.useState<string | null>(null);
   const { addToast } = useToast();
 
-  const fetchData = React.useCallback(() => {
+  const fetchData = React.useCallback(async () => {
     setLoadingHero(true);
     setLoadingArtifacts(true);
     setErrorHero(null);
     setErrorArtifacts(null);
 
-    const timer = setTimeout(() => {
+    let projects: Project[] = [];
+    let freelancers: Freelancer[] = [];
+    let moodboardItems: MoodboardItem[] = [];
+
+    try {
+      const projectsResponse = await ProjectsAPI.getProjects(1, 8);
+      projects = projectsResponse.data;
+      setHeroProject(projects[0] || null);
+      setCounts((prev) => ({ ...prev, projects: projectsResponse.pagination.total }));
+      setLoadingHero(false);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Failed to load projects";
+      setErrorHero(message);
+      setLoadingHero(false);
+      addToast(message, "info");
+    }
+
+    try {
+      const freelancersResponse = await FreelancersAPI.getFreelancers(1, 6);
+      freelancers = freelancersResponse.data;
+      setCounts((prev) => ({ ...prev, freelancers: freelancersResponse.pagination.total }));
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Failed to load freelancers";
+      addToast(message, "info");
+    }
+
+    if (projects[0]) {
       try {
-        // Simulate API call for hero project
-        const heroData = getMockHeroProject();
-        setHeroProject(heroData);
-        setLoadingHero(false);
-
-        // Simulate API call for artifacts
-        const artifactsData = getMockArtifacts();
-        setArtifacts(artifactsData);
-        setLoadingArtifacts(false);
+        const moodboardResponse = await MoodboardAPI.getMoodboardItems(projects[0].id, 1, 12);
+        moodboardItems = moodboardResponse.data;
+        setArtifacts(buildArtifacts(moodboardItems));
+        setCounts((prev) => ({ ...prev, moodboardItems: moodboardResponse.pagination.total }));
+        setHeroImage(moodboardItems[0]?.url);
       } catch (error) {
-        console.error("Failed to load dashboard data:", error);
-        setErrorHero("Failed to load hero project");
-        setErrorArtifacts("Failed to load artifacts");
-        setLoadingHero(false);
+        const message = error instanceof Error ? error.message : "Failed to load moodboard items";
+        setErrorArtifacts(message);
+        addToast(message, "info");
+      } finally {
         setLoadingArtifacts(false);
-        addToast("Failed to load dashboard data", "info");
       }
-    }, DASHBOARD_CONSTANTS.LOADING_DELAY);
+    } else {
+      setArtifacts([]);
+      setHeroImage(undefined);
+      setCounts((prev) => ({ ...prev, moodboardItems: 0 }));
+      setLoadingArtifacts(false);
+    }
 
-    return () => clearTimeout(timer);
+    setActivities(buildActivities(projects, moodboardItems, freelancers));
   }, [addToast]);
 
-  const addArtifact = React.useCallback((newArtifact: Artifact) => {
-    setArtifacts((prev) => [newArtifact, ...prev].slice(0, 8));
-  }, []);
-
-  const refetch = React.useCallback(() => {
-    fetchData();
-  }, [fetchData]);
-
   React.useEffect(() => {
-    const cleanup = fetchData();
-    return cleanup;
+    void fetchData();
   }, [fetchData]);
 
   return {
     heroProject,
+    heroImage,
     artifacts,
+    activities,
+    counts,
     loadingHero,
     loadingArtifacts,
     errorHero,
     errorArtifacts,
-    refetch,
-    addArtifact,
+    refetch: fetchData,
   };
 };

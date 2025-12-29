@@ -16,11 +16,6 @@ interface RecentArtifactsCardProps {
   loading?: boolean;
 }
 
-const DEFAULT_ARTIFACTS: Artifact[] = [1, 2, 3, 4].map((i) => ({
-  id: i,
-  name: `Render_${i}.png`,
-}));
-
 interface ArtifactItemProps {
   artifact: Artifact;
   onClick?: (artifact: Artifact) => void;
@@ -66,7 +61,7 @@ const ArtifactItem: React.FC<ArtifactItemProps> = ({ artifact, onClick }) => {
 };
 
 const RecentArtifactsCard: React.FC<RecentArtifactsCardProps> = ({
-  artifacts = DEFAULT_ARTIFACTS,
+  artifacts = [],
   onViewGallery,
   onArtifactClick,
   className = "",
