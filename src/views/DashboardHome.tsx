@@ -24,7 +24,7 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({
 }) => {
   const [accentColor, setAccentColor] = React.useState("#0F766E");
   const [createModalOpen, setCreateModalOpen] = React.useState(false);
-  const { toasts, addToast } = useToast();
+  const { addToast } = useToast();
   const navigate = useNavigate();
   const {
     heroProject,
@@ -113,37 +113,11 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({
   return (
     // eslint-disable-next-line react/forbid-component-props -- dynamic accent color requires inline style
     <main
-      className="animate-in fade-in duration-700 pb-32 pt-12 px-12 max-w-[1600px] mx-auto"
+      className="page-shell animate-in fade-in duration-700"
       style={containerStyle}
       role="main"
       aria-label="Dashboard home page"
     >
-      <div className="fixed top-6 right-6 z-50 space-y-3">
-        {toasts.map((toast) => (
-          // eslint-disable-next-line react/forbid-component-props -- dynamic accent color
-          <div
-            key={toast.id}
-            className="bg-surface border border-border-subtle rounded-xl shadow-lg px-4 py-3 text-sm text-ink-primary w-72 flex items-start gap-2"
-            style={{
-              borderColor: toast.type === "success" ? accentColor : undefined,
-              boxShadow:
-                toast.type === "success"
-                  ? "0 10px 30px rgba(36, 99, 230, 0.15)"
-                  : undefined,
-            }}
-            role="status"
-            aria-live="polite"
-          >
-            {/* eslint-disable-next-line react/forbid-component-props -- dynamic accent indicator */}
-            <span
-              className="mt-1 block w-2 h-2 rounded-full"
-              style={{ backgroundColor: accentColor }}
-            />
-            <span className="flex-1">{toast.message}</span>
-          </div>
-        ))}
-      </div>
-
       <DashboardHeader
         onNewProjectClick={handleNewProjectClick}
         projectCount={counts.projects}
@@ -162,11 +136,11 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({
           </div>
         ) : errorHero ? (
           <div className="lg:col-span-6 w-full h-full flex items-center justify-center">
-            <div className="text-center p-8 rounded-2xl bg-error/10 border border-error/20">
-              <p className="text-error font-medium mb-2">
+            <div className="text-center p-8 rounded-2xl bg-state-danger-bg border border-state-danger/30">
+              <p className="text-state-danger font-medium mb-2">
                 Failed to load project
               </p>
-              <p className="text-sm text-error/70">{errorHero}</p>
+              <p className="text-sm text-state-danger/70">{errorHero}</p>
             </div>
           </div>
         ) : heroProject ? (

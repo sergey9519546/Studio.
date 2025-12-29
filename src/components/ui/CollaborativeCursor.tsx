@@ -244,8 +244,8 @@ export const CollaborativeCursor: React.FC<CollaborativeCursorProps> = ({
         <div className="absolute top-2 right-2 z-50">
           <div className={`px-2 py-1 rounded text-xs ${
             isConnected 
-              ? 'bg-green-500 text-white' 
-              : 'bg-red-500 text-white'
+              ? 'bg-state-success text-ink-inverse' 
+              : 'bg-state-danger text-ink-inverse'
           }`}>
             {isConnected ? '🟢 Connected' : '🔴 Disconnected'}
           </div>

@@ -177,7 +177,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
           key={item.id}
           className={cn(
             "h-px bg-white/10 mx-2 my-1",
-            theme === 'light' && "bg-gray-300"
+            theme === 'light' && "bg-border-subtle"
           )}
         />
       );
@@ -207,7 +207,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
             ? "opacity-50 cursor-not-allowed" 
             : "hover:bg-white/10 cursor-pointer",
           isActive && "bg-white/10",
-          item.danger && "hover:bg-red-500/20",
+          item.danger && "hover:bg-state-danger/20",
           isSubmenu && "px-2 py-1.5 text-xs"
         )}
       >
@@ -215,16 +215,16 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
         {Icon && (
           <Icon className={cn(
             "w-4 h-4 flex-shrink-0",
-            item.danger ? "text-red-400" : "text-white/70",
-            theme === 'light' && item.danger ? "text-red-600" : "text-gray-600"
+            item.danger ? "text-state-danger" : "text-white/70",
+            theme === 'light' && (item.danger ? "text-state-danger" : "text-ink-secondary")
           )} />
         )}
 
         {/* Label */}
         <span className={cn(
           "flex-1 font-medium truncate",
-          item.danger ? "text-red-400" : "text-white",
-          theme === 'light' && item.danger ? "text-red-600" : "text-gray-800"
+          item.danger ? "text-state-danger" : "text-white",
+          theme === 'light' && (item.danger ? "text-state-danger" : "text-ink-primary")
         )}>
           {item.label}
         </span>
@@ -233,7 +233,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
         {item.shortcut && (
           <span className={cn(
             "text-xs font-mono opacity-60",
-            theme === 'light' && "text-gray-500"
+            theme === 'light' && "text-ink-tertiary"
           )}>
             {item.shortcut}
           </span>
@@ -265,7 +265,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
           "bg-white/10 backdrop-blur-xl border border-white/20",
           "rounded-lg shadow-2xl shadow-black/20",
           "py-1 z-50",
-          theme === 'light' && "bg-white/95 border-gray-200 shadow-lg"
+          theme === 'light' && "bg-white/95 border-border-subtle shadow-lg"
         )}
       >
         {visibleSubmenuItems.map((item, index) => renderMenuItem(item, index, true))}
@@ -290,7 +290,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
           "bg-white/10 backdrop-blur-xl border border-white/20",
           "rounded-lg shadow-2xl shadow-black/20",
           "py-1 overflow-hidden",
-          theme === 'light' && "bg-white/95 border-gray-200 shadow-lg",
+          theme === 'light' && "bg-white/95 border-border-subtle shadow-lg",
           className
         )}
         style={{

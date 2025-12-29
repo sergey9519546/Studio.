@@ -36,10 +36,13 @@ const colors = {
   },
   state: {
     success: "#16A34A",
+    "success-bg": "#E7F6EC",
     successBg: "#E7F6EC",
     warning: "#F59E0B",
+    "warning-bg": "#FFF3DB",
     warningBg: "#FFF3DB",
     danger: "#EF4444",
+    "danger-bg": "#FDECEC",
     dangerBg: "#FDECEC",
   },
 };

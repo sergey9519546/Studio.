@@ -72,10 +72,10 @@ export const FluidButton: React.FC<FluidButtonProps> = ({
     `,
 
     danger: `
-      bg-state-danger text-white 
-      hover:bg-red-700 hover:shadow-lg hover:-translate-y-[2px] 
-      focus:ring-red-500/40 shadow-md
-      active:bg-red-800 active:shadow-sm
+      bg-state-danger text-ink-inverse 
+      hover:bg-state-danger/90 hover:shadow-lg hover:-translate-y-[2px] 
+      focus:ring-state-danger/40 shadow-md
+      active:bg-state-danger/80 active:shadow-sm
     `,
 
     edge: `

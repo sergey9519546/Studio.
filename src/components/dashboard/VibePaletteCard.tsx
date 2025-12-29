@@ -27,7 +27,7 @@ const VibePaletteCard: React.FC<VibePaletteCardProps> = ({
   selectedColor,
 }) => {
   return (
-    <Card className={`flex flex-col relative overflow-hidden shadow-lg border-0 bg-surface ${className}`}>
+    <Card className={`flex flex-col relative overflow-hidden shadow-lg border-0 bg-surface ${className}`} hoverable>
       <div className="flex justify-between items-start mb-6">
         <h3 className="text-lg font-bold text-ink-primary">Daily Vibe</h3>
         <Palette size={20} className="text-ink-tertiary" />

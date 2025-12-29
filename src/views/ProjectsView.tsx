@@ -1,6 +1,7 @@
 import { ArrowRight, MoreHorizontal, Plus } from "lucide-react";
 import React, { useMemo, useState } from "react";
 import Card from "../components/ui/Card";
+import { Select } from "../components/design/Select";
 import type { Project } from "../services/types";
 import { getProjectStatusMeta } from "../utils/status";
 
@@ -22,6 +23,23 @@ const ProjectsView: React.FC<ProjectsViewProps> = ({
     () => Array.from(new Set(projects.map((p) => p.status))).filter(Boolean),
     [projects]
   );
+  const statusOptions = useMemo(
+    () => [
+      { value: "all", label: "All statuses" },
+      ...statuses.map((status) => ({
+        value: status,
+        label: getProjectStatusMeta(status).label,
+      })),
+    ],
+    [statuses]
+  );
+  const sortOptions = useMemo(
+    () => [
+      { value: "recent", label: "Sort: Recent" },
+      { value: "title", label: "Sort: Title" },
+    ],
+    []
+  );
 
   const visibleProjects = useMemo(() => {
     let next = [...projects];
@@ -40,7 +58,7 @@ const ProjectsView: React.FC<ProjectsViewProps> = ({
   }, [projects, sortBy, statusFilter]);
 
   return (
-    <div className="pt-12 px-12 max-w-[1600px] mx-auto animate-in fade-in pb-32">
+    <div className="page-shell animate-in fade-in">
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-8">
         <div>
           <h1 className="text-4xl font-bold tracking-tight text-ink-primary mb-2">
@@ -51,26 +69,24 @@ const ProjectsView: React.FC<ProjectsViewProps> = ({
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <select
+          <Select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3 py-2 bg-surface border border-border-subtle rounded-xl text-xs font-bold hover:border-ink-primary transition-colors"
-          >
-            <option value="all">All statuses</option>
-            {statuses.map((status) => (
-              <option key={status} value={status}>
-                {getProjectStatusMeta(status).label}
-              </option>
-            ))}
-          </select>
-          <select
+            options={statusOptions}
+            size="sm"
+            variant="secondary"
+            className="min-w-[160px]"
+            aria-label="Filter projects by status"
+          />
+          <Select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as "recent" | "title")}
-            className="px-3 py-2 bg-surface border border-border-subtle rounded-xl text-xs font-bold hover:border-ink-primary transition-colors"
-          >
-            <option value="recent">Sort: Recent</option>
-            <option value="title">Sort: Title</option>
-          </select>
+            options={sortOptions}
+            size="sm"
+            variant="secondary"
+            className="min-w-[140px]"
+            aria-label="Sort projects"
+          />
         </div>
       </div>
 
@@ -94,6 +110,7 @@ const ProjectsView: React.FC<ProjectsViewProps> = ({
               key={project.id}
               onClick={() => onSelect(project)}
               className="min-h-[320px] flex flex-col justify-between group cursor-pointer hover:border-ink-primary/10"
+              hoverable
             >
               <div>
                 <div className="flex justify-between items-start mb-8">

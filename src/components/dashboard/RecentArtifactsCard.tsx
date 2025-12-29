@@ -78,6 +78,7 @@ const RecentArtifactsCard: React.FC<RecentArtifactsCardProps> = ({
     <Card
       className={`flex flex-col shadow-md border-border-subtle bg-surface h-full ${className}`}
       aria-busy={loading}
+      hoverable
     >
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-sm font-bold uppercase tracking-widest text-ink-secondary">

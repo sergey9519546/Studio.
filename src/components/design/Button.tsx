@@ -33,7 +33,7 @@ export const Button: React.FC<ButtonProps> = ({
     
     ghost: "bg-transparent text-ink-secondary hover:text-ink-primary hover:bg-subtle rounded-[24px]",
 
-    danger: "bg-state-danger text-white hover:bg-red-700 shadow-ambient hover:shadow-float hover:-translate-y-0.5 focus:ring-red-500/40",
+    danger: "bg-state-danger text-ink-inverse hover:bg-state-danger/90 shadow-ambient hover:shadow-float hover:-translate-y-0.5 focus:ring-state-danger/40",
   };
 
   return (

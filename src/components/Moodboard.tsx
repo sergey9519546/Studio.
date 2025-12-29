@@ -14,8 +14,10 @@ import {
   removeRecentSearch,
 } from "../services/recentSearches";
 import type { MoodboardItem } from "../services/types";
+import { Button } from "./design/Button";
 import { Card } from "./design/Card";
 import { Input } from "./design/Input";
+import { Select } from "./design/Select";
 
 interface MoodboardProps {
   projectId: string;
@@ -26,6 +28,28 @@ interface MoodboardProps {
 }
 
 type TabType = "uploads" | "unsplash";
+
+const UNSPLASH_COLOR_OPTIONS = [
+  { value: "", label: "All Colors" },
+  { value: "black_and_white", label: "Black & White" },
+  { value: "black", label: "Black" },
+  { value: "white", label: "White" },
+  { value: "yellow", label: "Yellow" },
+  { value: "orange", label: "Orange" },
+  { value: "red", label: "Red" },
+  { value: "amber", label: "Amber" },
+  { value: "magenta", label: "Magenta" },
+  { value: "green", label: "Green" },
+  { value: "teal", label: "Teal" },
+  { value: "blue", label: "Blue" },
+];
+
+const UNSPLASH_ORIENTATION_OPTIONS = [
+  { value: "", label: "Any Orientation" },
+  { value: "landscape", label: "Landscape" },
+  { value: "portrait", label: "Portrait" },
+  { value: "squarish", label: "Square" },
+];
 
 const filterByTags = (list: MoodboardItem[], tags: string[]) => {
   if (tags.length === 0) return list;
@@ -299,7 +323,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
 
   return (
     <div className="w-full h-full bg-app">
-      <div className="max-w-7xl mx-auto p-8">
+      <div className="page-shell">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-ink-primary mb-2">
@@ -484,7 +508,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
             {/* Unsplash Search */}
             <div className="mb-8">
               {!isUnsplashConfigured() && (
-                <Card className="mb-4 bg-amber-50 border-amber-200 text-amber-900">
+                <Card className="mb-4 bg-state-warning-bg border border-state-warning/30 text-state-warning">
                   <p className="text-sm font-medium">
                     Unsplash is not configured. Set <code>VITE_UNSPLASH_ACCESS_KEY</code> in your environment to enable search and downloads.
                   </p>
@@ -499,24 +523,27 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                     onChange={(e) => setUnsplashQuery(e.target.value)}
                     className="flex-1"
                   />
-                  <button
+                  <Button
                     type="submit"
+                    size="sm"
+                    variant="primary"
+                    isLoading={isLoadingUnsplash}
                     disabled={
                       isLoadingUnsplash ||
                       !unsplashQuery.trim() ||
                       !isUnsplashConfigured()
                     }
-                    className="px-6 py-2 bg-primary text-white rounded-[16px] font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    className="min-w-[104px]"
                   >
-                    {isLoadingUnsplash ? "Searching..." : "Search"}
-                  </button>
+                    Search
+                  </Button>
                 </div>
               </form>
 
               {/* P1: Advanced Filters */}
               <div className="flex items-center gap-3 mb-4">
                 <Filter size={16} className="text-ink-tertiary" />
-                <select
+                <Select
                   value={unsplashFilters.color || ""}
                   onChange={(e) =>
                     setUnsplashFilters({
@@ -524,24 +551,15 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                       color: e.target.value || undefined,
                     })
                   }
-                  className="px-3 py-1.5 rounded-[12px] bg-subtle border border-border-subtle text-xs font-medium text-ink-secondary hover:bg-surface transition-colors"
-                  title="Filter by color"
-                >
-                  <option value="">All Colors</option>
-                  <option value="black_and_white">Black & White</option>
-                  <option value="black">Black</option>
-                  <option value="white">White</option>
-                  <option value="yellow">Yellow</option>
-                  <option value="orange">Orange</option>
-                  <option value="red">Red</option>
-                  <option value="amber">Amber</option>
-                  <option value="magenta">Magenta</option>
-                  <option value="green">Green</option>
-                  <option value="teal">Teal</option>
-                  <option value="blue">Blue</option>
-                </select>
+                  options={UNSPLASH_COLOR_OPTIONS}
+                  placeholder=""
+                  size="sm"
+                  variant="secondary"
+                  className="min-w-[160px]"
+                  aria-label="Filter Unsplash by color"
+                />
 
-                <select
+                <Select
                   value={unsplashFilters.orientation || ""}
                   onChange={(e) =>
                     setUnsplashFilters({
@@ -549,14 +567,13 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                       orientation: e.target.value || undefined,
                     })
                   }
-                  className="px-3 py-1.5 rounded-[12px] bg-subtle border border-border-subtle text-xs font-medium text-ink-secondary hover:bg-surface transition-colors"
-                  title="Filter by orientation"
-                >
-                  <option value="">Any Orientation</option>
-                  <option value="landscape">Landscape</option>
-                  <option value="portrait">Portrait</option>
-                  <option value="squarish">Square</option>
-                </select>
+                  options={UNSPLASH_ORIENTATION_OPTIONS}
+                  placeholder=""
+                  size="sm"
+                  variant="secondary"
+                  className="min-w-[160px]"
+                  aria-label="Filter Unsplash by orientation"
+                />
 
                 {(unsplashFilters.color || unsplashFilters.orientation) && (
                   <button
@@ -748,7 +765,10 @@ export const Moodboard: React.FC<MoodboardProps> = ({
             className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"
             onClick={() => setSelectedItem(null)}
           >
-            <Card className="max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+            <Card
+              className="max-w-2xl w-full max-h-[80vh] overflow-y-auto"
+              onClick={(event) => event.stopPropagation()}
+            >
               <button
                 onClick={() => setSelectedItem(null)}
                 className="float-right p-2 hover:bg-subtle rounded-[16px] transition-colors"
@@ -816,7 +836,10 @@ export const Moodboard: React.FC<MoodboardProps> = ({
             className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"
             onClick={() => setSelectedUnsplashImage(null)}
           >
-            <Card className="max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <Card
+              className="max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(event) => event.stopPropagation()}
+            >
               <button
                 onClick={() => setSelectedUnsplashImage(null)}
                 className="float-right p-2 hover:bg-subtle rounded-[16px] transition-colors"
@@ -877,7 +900,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                         Unsplash
                       </a>
                     </p>
-                    <button
+                    <Button
                       onClick={() => {
                         const img = unsplashResults.find(
                           (i) => i.id === selectedUnsplashImage
@@ -887,11 +910,11 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                           setSelectedUnsplashImage(null);
                         }
                       }}
-                      className="px-6 py-3 bg-primary text-white rounded-[16px] font-medium hover:bg-primary/90 transition-all inline-flex items-center gap-2"
+                      variant="primary"
+                      leftIcon={<Plus size={18} />}
                     >
-                      <Plus size={18} />
                       Add to Moodboard
-                    </button>
+                    </Button>
                   </div>
                 </div>
               )}

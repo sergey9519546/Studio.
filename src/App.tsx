@@ -7,53 +7,18 @@ import { ProjectDashboard } from "./components/ProjectDashboard";
 import { TalentRoster } from "./components/TalentRoster";
 import CommandBar from "./components/layout/CommandBar";
 import Sidebar from "./components/layout/Sidebar";
-import { ErrorBoundary } from "./components/loading/ErrorBoundary";
 import { LoadingSpinner } from "./components/loading/LoadingSpinner";
 import { FreelancersAPI } from "./services/api/freelancers";
 import { MoodboardAPI } from "./services/api/moodboard";
 import { ProjectsAPI } from "./services/api/projects";
 import { Freelancer, MoodboardItem, Project } from "./services/types";
+import { useApiData } from "./hooks/useApiData";
 import { getProjectStatusMeta } from "./utils/status";
 import DashboardHome from "./views/DashboardHome";
 import GuardianRoom from "./views/GuardianRoom";
 import ProjectsView from "./views/ProjectsView";
 import CreateProjectModal from "./components/projects/CreateProjectModal";
 import ProjectSwitcher from "./components/projects/ProjectSwitcher";
-
-// State interfaces for data management
-interface DataState<T> {
-  data: T[];
-  loading: boolean;
-  error: string | null;
-  refetch: () => void;
-}
-
-// Custom hook for API data fetching
-function useApiData<T>(fetchFunction: () => Promise<T[]>): DataState<T> {
-  const [data, setData] = useState<T[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const fetchData = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const result = await fetchFunction();
-      setData(result);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
-      console.error('API fetch error:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [fetchFunction]);
-
-  useEffect(() => {
-    void fetchData();
-  }, [fetchData]);
-
-  return { data, loading, error, refetch: fetchData };
-}
 
 // Project Context Header Component
 function ProjectContextHeader({ project }: { project: Project }) {
@@ -62,7 +27,7 @@ function ProjectContextHeader({ project }: { project: Project }) {
   const statusMeta = getProjectStatusMeta(project.status);
 
   return (
-    <div className="sticky top-0 z-10 bg-app/95 backdrop-blur border-b border-border-subtle px-10 py-4 flex items-center justify-between gap-4">
+    <div className="sticky top-0 z-10 bg-app/95 backdrop-blur border-b border-border-subtle px-12 py-4 flex items-center justify-between gap-4">
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-2xl bg-ink-primary text-white flex items-center justify-center font-bold">
           {projectTitle.slice(0, 2).toUpperCase()}
@@ -117,15 +82,15 @@ function DataLoader({ loading, error, children, onRetry }: {
   if (error) {
     return (
       <div className="h-full flex flex-col items-center justify-center text-center">
-        <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
-          <Box className="w-8 h-8 text-red-600" />
+        <div className="w-16 h-16 bg-state-danger-bg rounded-full flex items-center justify-center mb-4">
+          <Box className="w-8 h-8 text-state-danger" />
         </div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">Error Loading Data</h3>
-        <p className="text-gray-600 mb-4">{error}</p>
+        <h3 className="text-lg font-semibold text-ink-primary mb-2">Error Loading Data</h3>
+        <p className="text-ink-secondary mb-4">{error}</p>
         {onRetry && (
           <button
             onClick={onRetry}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors"
           >
             Retry
           </button>
@@ -149,7 +114,10 @@ function ProjectDashboardRoute() {
   );
 
   // Fetch project data from API
-  const { data: projects, loading, error, refetch } = useApiData<Project>(fetchProjects);
+  const { data: projects, loading, error, refetch } = useApiData<Project>(fetchProjects, {
+    errorMessage: "Failed to load projects",
+    toastOnError: true,
+  });
 
   const project = projects.find(p => p.id === id);
 
@@ -161,7 +129,10 @@ function ProjectDashboardRoute() {
     [project?.id]
   );
 
-  const { data: projectAssets } = useApiData<MoodboardItem>(fetchProjectAssets);
+  const { data: projectAssets } = useApiData<MoodboardItem>(fetchProjectAssets, {
+    errorMessage: "Failed to load moodboard items",
+    toastOnError: true,
+  });
 
   useEffect(() => {
     if (project) {
@@ -244,7 +215,10 @@ function WritersRoomRoute() {
   );
 
   // Fetch project data for context
-  const { data: projects, loading, error } = useApiData<Project>(fetchProjects);
+  const { data: projects, loading, error } = useApiData<Project>(fetchProjects, {
+    errorMessage: "Failed to load projects",
+    toastOnError: true,
+  });
 
   const fallbackProject = projects[0] || null;
   const project = projectIdParam ? projects.find(p => p.id === projectIdParam) || fallbackProject : fallbackProject;
@@ -299,7 +273,10 @@ function MoodboardRoute() {
   );
 
   // Fetch projects for fallback
-  const { data: projects } = useApiData<Project>(fetchProjects);
+  const { data: projects } = useApiData<Project>(fetchProjects, {
+    errorMessage: "Failed to load projects",
+    toastOnError: true,
+  });
 
   const fallbackProject = projects[0] || null;
   const project = projectIdParam ? projects.find(p => p.id === projectIdParam) || fallbackProject : fallbackProject;
@@ -314,7 +291,10 @@ function MoodboardRoute() {
   );
 
   // Fetch moodboard items from API
-  const { data: moodboardItems, loading, error, refetch } = useApiData<MoodboardItem>(fetchMoodboardItems);
+  const { data: moodboardItems, loading, error, refetch } = useApiData<MoodboardItem>(fetchMoodboardItems, {
+    errorMessage: "Failed to load moodboard items",
+    toastOnError: true,
+  });
 
   const handleProjectChange = (nextProjectId: string) => {
     const nextParams = new URLSearchParams(location.search);
@@ -397,7 +377,10 @@ function FreelancersRoute() {
   );
 
   // Fetch freelancers from API
-  const { data: freelancers, loading, error, refetch } = useApiData<Freelancer>(fetchFreelancers);
+  const { data: freelancers, loading, error, refetch } = useApiData<Freelancer>(fetchFreelancers, {
+    errorMessage: "Failed to load freelancers",
+    toastOnError: true,
+  });
 
   return (
     <DataLoader loading={loading} error={error} onRetry={refetch}>
@@ -419,13 +402,11 @@ function FreelancersRoute() {
 // Layout Component
 function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <ErrorBoundary>
-      <div className="app-shell">
-        <Sidebar />
-        <div className="app-main">{children}</div>
-        <CommandBar />
-      </div>
-    </ErrorBoundary>
+    <div className="app-shell">
+      <Sidebar />
+      <div className="app-main">{children}</div>
+      <CommandBar />
+    </div>
   );
 }
 
@@ -437,7 +418,10 @@ function ProjectsViewWrapper() {
     () => ProjectsAPI.getProjects().then(resp => resp.data),
     []
   );
-  const { data: projects, loading, error, refetch } = useApiData<Project>(fetchProjects);
+  const { data: projects, loading, error, refetch } = useApiData<Project>(fetchProjects, {
+    errorMessage: "Failed to load projects",
+    toastOnError: true,
+  });
 
   return (
     <DataLoader loading={loading} error={error} onRetry={refetch}>
@@ -460,29 +444,27 @@ function ProjectsViewWrapper() {
 // Main App Component with Router
 export default function App() {
   return (
-    <ErrorBoundary>
-      <Layout>
-        <Routes>
-          {/* Dashboard */}
-          <Route path="/" element={<DashboardHome />} />
+    <Layout>
+      <Routes>
+        {/* Dashboard */}
+        <Route path="/" element={<DashboardHome />} />
 
-          {/* Projects */}
-          <Route path="/projects" element={<ProjectsViewWrapper />} />
-          <Route path="/projects/:id" element={<ProjectDashboardRoute />} />
+        {/* Projects */}
+        <Route path="/projects" element={<ProjectsViewWrapper />} />
+        <Route path="/projects/:id" element={<ProjectDashboardRoute />} />
 
-          {/* Moodboard */}
-          <Route path="/moodboard" element={<MoodboardRoute />} />
+        {/* Moodboard */}
+        <Route path="/moodboard" element={<MoodboardRoute />} />
 
-          {/* Freelancers */}
-          <Route path="/freelancers" element={<FreelancersRoute />} />
+        {/* Freelancers */}
+        <Route path="/freelancers" element={<FreelancersRoute />} />
 
-          {/* Writers Room */}
-          <Route path="/writers-room" element={<WritersRoomRoute />} />
+        {/* Writers Room */}
+        <Route path="/writers-room" element={<WritersRoomRoute />} />
 
-          {/* Catch all route - redirect to dashboard */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Layout>
-    </ErrorBoundary>
+        {/* Catch all route - redirect to dashboard */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Layout>
   );
 }

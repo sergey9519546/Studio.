@@ -187,10 +187,10 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
 
   const getStatusColor = (status: Collaborator['status']) => {
     switch (status) {
-      case 'online': return 'bg-green-500';
-      case 'away': return 'bg-yellow-500';
-      case 'offline': return 'bg-gray-400';
-      default: return 'bg-gray-400';
+      case 'online': return 'bg-state-success';
+      case 'away': return 'bg-state-warning';
+      case 'offline': return 'bg-ink-tertiary';
+      default: return 'bg-ink-tertiary';
     }
   };
 
@@ -218,7 +218,7 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
 
   return (
     <div className="w-full h-full bg-app">
-      <div className="max-w-7xl mx-auto p-8">
+      <div className="page-shell">
         {/* Enhanced Header with Real-time Status */}
         <div className="mb-8">
           <div className="flex items-center gap-2 text-xs text-ink-tertiary uppercase font-bold tracking-widest mb-2">
@@ -238,14 +238,14 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
                 {/* Connection Status */}
                 <div className="flex items-center gap-2">
                   {isOnline ? (
-                    <Wifi size={16} className="text-green-500" />
+                    <Wifi size={16} className="text-state-success" />
                   ) : (
-                    <WifiOff size={16} className="text-red-500" />
+                    <WifiOff size={16} className="text-state-danger" />
                   )}
                   <span className={`text-xs px-2 py-1 rounded-full ${
                     isOnline 
-                      ? 'bg-green-100 text-green-800' 
-                      : 'bg-red-100 text-red-800'
+                      ? 'bg-state-success-bg text-state-success' 
+                      : 'bg-state-danger-bg text-state-danger'
                   }`}>
                     {isOnline ? 'Online' : 'Offline'}
                   </span>
@@ -296,7 +296,7 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
                       </div>
                     ))}
                     {collaborators.length > 3 && (
-                      <div className="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white text-xs font-medium border-2 border-white">
+                      <div className="w-8 h-8 rounded-full bg-ink-tertiary flex items-center justify-center text-ink-inverse text-xs font-medium border-2 border-white">
                         +{collaborators.length - 3}
                       </div>
                     )}

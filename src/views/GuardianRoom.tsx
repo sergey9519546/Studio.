@@ -109,7 +109,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
   }, [initialPrompt, sendMessage]);
 
   return (
-    <div className="h-full flex flex-col md:flex-row gap-8 pb-32 animate-in fade-in pt-8 px-8 max-w-[1800px] mx-auto">
+    <div className="page-shell h-full flex flex-col md:flex-row gap-8 animate-in fade-in">
       {/* Header for Mobile */}
       <div className="md:hidden flex items-center gap-4 mb-4">
         <button
@@ -128,7 +128,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
           Project Context
         </div>
 
-        <Card className="bg-surface border-border-subtle shadow-sm">
+        <Card className="bg-surface border-border-subtle shadow-sm" hoverable>
           <div className="flex items-center gap-3 mb-4 text-ink-primary">
             <FileText size={18} />
             <h3 className="text-sm font-bold">The Brief</h3>
@@ -151,29 +151,29 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
           )}
         </Card>
 
-        <Card className="bg-surface border-border-subtle shadow-sm flex-1">
+        <Card className="bg-surface border-border-subtle shadow-sm flex-1" hoverable>
           <div className="flex items-center gap-3 mb-4 text-ink-primary">
             <ImageIcon size={18} />
             <h3 className="text-sm font-bold">Visual Language</h3>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <div className="aspect-square bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/20 dark:to-teal-800/20 rounded-xl border border-border-subtle flex flex-col items-center justify-center text-center p-3">
-              <div className="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center mb-2">
+            <div className="aspect-square bg-gradient-to-br from-primary/10 to-primary/20 rounded-xl border border-border-subtle flex flex-col items-center justify-center text-center p-3">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center mb-2">
                 <ImageIcon size={16} className="text-white" />
               </div>
-              <span className="text-xs font-semibold text-teal-700 dark:text-teal-300">Style Guide</span>
+              <span className="text-xs font-semibold text-primary">Style Guide</span>
             </div>
-            <div className="aspect-square bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-900/20 dark:to-amber-800/20 rounded-xl border border-border-subtle flex flex-col items-center justify-center text-center p-3">
-              <div className="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center mb-2">
+            <div className="aspect-square bg-gradient-to-br from-state-warning-bg to-state-warning/15 rounded-xl border border-border-subtle flex flex-col items-center justify-center text-center p-3">
+              <div className="w-8 h-8 bg-state-warning rounded-lg flex items-center justify-center mb-2">
                 <Sparkles size={16} className="text-white" />
               </div>
-              <span className="text-xs font-semibold text-amber-700 dark:text-amber-300">Mood Board</span>
+              <span className="text-xs font-semibold text-state-warning">Mood Board</span>
             </div>
-            <div className="aspect-square bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900/20 dark:to-slate-800/20 rounded-xl border border-border-subtle flex flex-col items-center justify-center text-center p-3">
-              <div className="w-8 h-8 bg-slate-700 rounded-lg flex items-center justify-center mb-2">
+            <div className="aspect-square bg-gradient-to-br from-subtle to-surface rounded-xl border border-border-subtle flex flex-col items-center justify-center text-center p-3">
+              <div className="w-8 h-8 bg-ink-secondary rounded-lg flex items-center justify-center mb-2">
                 <FileText size={16} className="text-white" />
               </div>
-              <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Reference</span>
+              <span className="text-xs font-semibold text-ink-secondary">Reference</span>
             </div>
             <div className="aspect-square border-2 border-dashed border-border-subtle rounded-xl flex flex-col items-center justify-center text-center p-3 hover:border-ink-primary hover:bg-ink-primary/5 transition-all cursor-pointer">
               <Plus size={20} className="text-ink-tertiary hover:text-ink-primary mb-1" />
@@ -188,7 +188,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
         {/* Chat Header */}
         <div className="flex items-center justify-between p-6 border-b border-border-subtle bg-surface/80 backdrop-blur-md z-10 sticky top-0">
           <div className="flex items-center gap-3">
-            <div className="w-2.5 h-2.5 bg-black rounded-full animate-pulse shadow-glow" />
+            <div className="w-2.5 h-2.5 bg-primary rounded-full animate-pulse shadow-glow" />
             <div>
               <span className="text-sm font-bold text-ink-primary block">
                 Lumina Intelligence
@@ -198,7 +198,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
               </span>
             </div>
           </div>
-          <button className="text-xs text-white bg-black hover:bg-black/90 border border-transparent px-4 py-2 rounded-full font-bold transition-all shadow-sm">
+          <button className="text-xs text-ink-inverse bg-ink-primary hover:bg-ink-primary/90 border border-transparent px-4 py-2 rounded-full font-bold transition-all shadow-sm">
             Export Script
           </button>
         </div>
@@ -226,7 +226,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
               <div
                 className={`max-w-[70%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
                   msg.role === "user"
-                    ? "bg-ink-primary text-white"
+                    ? "bg-ink-primary text-ink-inverse"
                     : "bg-subtle text-ink-secondary"
                 }`}
               >

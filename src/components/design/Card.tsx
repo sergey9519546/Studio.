@@ -1,26 +1,26 @@
 import React from 'react';
 
-interface CardProps {
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  className?: string;
   noPadding?: boolean;
   hoverable?: boolean;
   glass?: boolean;
-  onClick?: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ 
-  children, 
-  className = '', 
+export const Card: React.FC<CardProps> = ({
+  children,
+  className = '',
   noPadding = false,
   hoverable = false,
   glass = false,
-  onClick,
+  ...rest
 }) => {
   return (
-    <div 
+    <div
+      {...rest}
       className={`
         bg-surface
+        border border-border-subtle
         rounded-[24px]
         shadow-ambient
         overflow-hidden
@@ -29,7 +29,6 @@ export const Card: React.FC<CardProps> = ({
         ${hoverable ? 'hover:-translate-y-0.5 hover:shadow-float cursor-pointer' : ''}
         ${className}
       `}
-      onClick={onClick}
     >
       <div className={noPadding ? '' : 'p-6'}>
         {children}
@@ -37,3 +36,5 @@ export const Card: React.FC<CardProps> = ({
     </div>
   );
 };
+
+export default Card;

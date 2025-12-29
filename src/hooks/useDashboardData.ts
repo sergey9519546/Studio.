@@ -4,6 +4,7 @@ import { FreelancersAPI } from "../services/api/freelancers";
 import { MoodboardAPI } from "../services/api/moodboard";
 import type { Freelancer, MoodboardItem, Project } from "../services/types";
 import { getProjectStatusMeta } from "../utils/status";
+import { getErrorMessage } from "../utils/errors";
 import { useToast } from "./useToast";
 
 export interface DashboardArtifact {
@@ -118,7 +119,7 @@ export const useDashboardData = (): UseDashboardDataReturn => {
       setCounts((prev) => ({ ...prev, projects: projectsResponse.pagination.total }));
       setLoadingHero(false);
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Failed to load projects";
+      const message = getErrorMessage(error, "Failed to load projects");
       setErrorHero(message);
       setLoadingHero(false);
       addToast(message, "info");
@@ -129,7 +130,7 @@ export const useDashboardData = (): UseDashboardDataReturn => {
       freelancers = freelancersResponse.data;
       setCounts((prev) => ({ ...prev, freelancers: freelancersResponse.pagination.total }));
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Failed to load freelancers";
+      const message = getErrorMessage(error, "Failed to load freelancers");
       addToast(message, "info");
     }
 
@@ -141,7 +142,7 @@ export const useDashboardData = (): UseDashboardDataReturn => {
         setCounts((prev) => ({ ...prev, moodboardItems: moodboardResponse.pagination.total }));
         setHeroImage(moodboardItems[0]?.url);
       } catch (error) {
-        const message = error instanceof Error ? error.message : "Failed to load moodboard items";
+        const message = getErrorMessage(error, "Failed to load moodboard items");
         setErrorArtifacts(message);
         addToast(message, "info");
       } finally {

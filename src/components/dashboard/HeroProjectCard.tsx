@@ -26,6 +26,7 @@ const HeroProjectCard: React.FC<HeroProjectCardProps> = ({
     <Card
       className={`relative overflow-hidden group border-0 shadow-2xl min-h-[360px] ${className}`}
       noPadding
+      hoverable
     >
       {!imageFailed && imageSrc ? (
         <img

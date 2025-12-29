@@ -2,6 +2,7 @@ import { X } from "lucide-react";
 import React from "react";
 
 import { Button } from "../design/Button";
+import { Card } from "../design/Card";
 import { Input } from "../design/Input";
 import { Select } from "../design/Select";
 import { Textarea } from "../design/Textarea";
@@ -96,7 +97,7 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="relative z-10 w-full max-w-2xl rounded-[28px] bg-surface shadow-2xl border border-border-subtle overflow-hidden">
+      <Card className="relative z-10 w-full max-w-2xl overflow-hidden" noPadding>
         <div className="flex items-center justify-between px-8 py-6 border-b border-border-subtle bg-surface/80">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-ink-tertiary">
@@ -184,7 +185,7 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
             </Button>
           </div>
         </form>
-      </div>
+      </Card>
     </div>
   );
 };

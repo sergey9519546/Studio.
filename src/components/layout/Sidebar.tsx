@@ -30,8 +30,8 @@ const Sidebar: React.FC = () => {
           }
         }}
       >
-        <div className="w-10 h-10 rounded-2xl bg-black flex items-center justify-center text-white shadow-lg">
-          <div className="w-3 h-3 bg-white rounded-sm" aria-hidden="true" />
+        <div className="w-10 h-10 rounded-2xl bg-ink-primary flex items-center justify-center text-ink-inverse shadow-lg">
+          <div className="w-3 h-3 bg-ink-inverse rounded-sm" aria-hidden="true" />
         </div>
         <div>
           <h1>Studio.</h1>
@@ -73,7 +73,7 @@ const Sidebar: React.FC = () => {
           Config
         </button>
         <div className="sidebar-profile">
-          <div className="w-12 h-12 overflow-hidden rounded-full bg-gray-200 shadow-inner">
+          <div className="w-12 h-12 overflow-hidden rounded-full bg-subtle shadow-inner">
             <img
               src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
               className="w-full h-full object-cover"

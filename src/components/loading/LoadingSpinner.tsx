@@ -15,9 +15,9 @@ const sizeClasses = {
 };
 
 const colorClasses = {
-  primary: 'text-blue-600',
-  secondary: 'text-gray-600',
-  white: 'text-white',
+  primary: 'text-primary',
+  secondary: 'text-ink-secondary',
+  white: 'text-ink-inverse',
 };
 
 export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({

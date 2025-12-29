@@ -20,8 +20,6 @@ export type { } from './EmptyState';
 
 // Fluid & Glass Effects (iOS-inspired Design System)
 export { DGlassEffectContainer } from './DGlassEffectContainer';
-export { FloatingNavigation } from './FloatingNavigation';
-export type { } from './FloatingNavigation';
 export { FluidButton } from './FluidButton';
 export { MoodboardContainer } from './MoodboardContainer';
 export type { } from './MoodboardContainer';

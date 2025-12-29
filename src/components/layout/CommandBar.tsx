@@ -164,7 +164,7 @@ const CommandBar: React.FC = () => {
                 setIsOpen(true);
               }}
               placeholder="INTENT SEARCH..."
-              className="bg-transparent border-none outline-none h-full w-full text-xs font-black tracking-[0.2em] text-black placeholder:text-ink-tertiary/40 uppercase focus:placeholder:opacity-0 transition-opacity"
+              className="bg-transparent border-none outline-none h-full w-full text-xs font-black tracking-[0.2em] text-ink-primary placeholder:text-ink-tertiary/40 uppercase focus:placeholder:opacity-0 transition-opacity"
               role="searchbox"
               aria-label="Search projects, assets, or run AI command"
               autoComplete="off"
@@ -178,7 +178,7 @@ const CommandBar: React.FC = () => {
               CMD K
             </div>
             <button
-              className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:scale-105 transition-all shadow-elevation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+              className="w-10 h-10 rounded-full bg-ink-primary text-ink-inverse flex items-center justify-center hover:scale-105 transition-all shadow-elevation focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-2"
               aria-label="Create new item"
               type="button"
               title="Create new item (Ctrl+N)"
@@ -235,7 +235,7 @@ const CommandBar: React.FC = () => {
                 setIsOpen(true);
               }}
               placeholder="INTENT SEARCH..."
-              className="bg-transparent border-none outline-none h-full w-full text-xs font-black tracking-[0.2em] text-black placeholder:text-ink-tertiary/40 uppercase focus:placeholder:opacity-0 transition-opacity"
+              className="bg-transparent border-none outline-none h-full w-full text-xs font-black tracking-[0.2em] text-ink-primary placeholder:text-ink-tertiary/40 uppercase focus:placeholder:opacity-0 transition-opacity"
               role="searchbox"
               aria-label="Search or run command"
               autoComplete="off"
@@ -244,7 +244,7 @@ const CommandBar: React.FC = () => {
             />
           </form>
           <button
-            className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:scale-105 transition-all shadow-elevation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-1"
+            className="w-10 h-10 rounded-full bg-ink-primary text-ink-inverse flex items-center justify-center hover:scale-105 transition-all shadow-elevation focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-1"
             aria-label="Create new item"
             type="button"
             title="Create new item"

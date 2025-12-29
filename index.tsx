@@ -1,5 +1,4 @@
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import App from "./src/App.tsx"; // Production-ready Studio Roster with Router
 import { Providers } from "./src/app/providers";
 import "./src/index.css";

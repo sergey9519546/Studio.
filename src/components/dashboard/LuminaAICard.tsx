@@ -27,11 +27,12 @@ const LuminaAICard: React.FC<LuminaAICardProps> = ({ onSubmitPrompt, className =
   return (
     <Card
       className={`flex flex-col justify-between text-white border-0 shadow-xl relative overflow-hidden ${className}`}
+      hoverable
       style={{
         background: `radial-gradient(120% 120% at 100% 0%, rgba(255,255,255,0.08), transparent 45%), ${accent}`,
       }}
     >
-      <div className="absolute top-0 right-0 w-32 h-32 bg-amber-300/20 blur-3xl rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-32 h-32 bg-state-warning/20 blur-3xl rounded-full pointer-events-none" />
       <div className="flex justify-between items-start z-10">
         <div className="p-2.5 bg-white/10 rounded-xl backdrop-blur-sm">
           <Brain size={20} className="text-white" />
