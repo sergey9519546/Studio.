@@ -21,20 +21,7 @@ export const TalentRoster: React.FC<TalentRosterProps> = ({
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [filteredFreelancers, setFilteredFreelancers] = useState(freelancers);
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    filterFreelancers(query, selectedSkills);
-  };
-
-  const toggleSkillFilter = (skill: string) => {
-    const newSkills = selectedSkills.includes(skill)
-      ? selectedSkills.filter((s) => s !== skill)
-      : [...selectedSkills, skill];
-    setSelectedSkills(newSkills);
-    filterFreelancers(searchQuery, newSkills);
-  };
-
-  const filterFreelancers = (query: string, skills: string[]) => {
+  const filterFreelancers = React.useCallback((query: string, skills: string[]) => {
     let results = freelancers;
 
     if (query) {
@@ -56,6 +43,21 @@ export const TalentRoster: React.FC<TalentRosterProps> = ({
     }
 
     setFilteredFreelancers(results);
+  }, [freelancers]);
+
+  React.useEffect(() => {
+    filterFreelancers(searchQuery, selectedSkills);
+  }, [filterFreelancers, searchQuery, selectedSkills]);
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+  };
+
+  const toggleSkillFilter = (skill: string) => {
+    const newSkills = selectedSkills.includes(skill)
+      ? selectedSkills.filter((s) => s !== skill)
+      : [...selectedSkills, skill];
+    setSelectedSkills(newSkills);
   };
 
   const allSkills = Array.from(

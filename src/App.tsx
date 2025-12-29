@@ -8,6 +8,12 @@ import { TalentRoster } from "./components/TalentRoster";
 import CommandBar from "./components/layout/CommandBar";
 import Sidebar from "./components/layout/Sidebar";
 import { LoadingSpinner } from "./components/loading/LoadingSpinner";
+import {
+  DEMO_DATA_ENABLED,
+  DEMO_FREELANCERS,
+  DEMO_PROJECTS,
+  getDemoMoodboardItems,
+} from "./data/demoData";
 import { FreelancersAPI } from "./services/api/freelancers";
 import { MoodboardAPI } from "./services/api/moodboard";
 import { ProjectsAPI } from "./services/api/projects";
@@ -102,6 +108,23 @@ function DataLoader({ loading, error, children, onRetry }: {
   return <>{children}</>;
 }
 
+function resolveFallbackData<T>(
+  data: T[],
+  loading: boolean,
+  error: string | null,
+  fallback: T[],
+  enabled = true
+) {
+  const useFallback = Boolean(
+    enabled && DEMO_DATA_ENABLED && !loading && (error || data.length === 0)
+  );
+  return {
+    data: useFallback ? fallback : data,
+    error: useFallback ? null : error,
+    useFallback,
+  };
+}
+
 // Individual Project Dashboard Component
 function ProjectDashboardRoute() {
   const { id } = useParams<{ id: string }>();
@@ -114,12 +137,19 @@ function ProjectDashboardRoute() {
   );
 
   // Fetch project data from API
-  const { data: projects, loading, error, refetch } = useApiData<Project>(fetchProjects, {
-    errorMessage: "Failed to load projects",
-    toastOnError: true,
-  });
-
-  const project = projects.find(p => p.id === id);
+  const { data: projects, loading, error, refetch } = useApiData<Project>(
+    fetchProjects,
+    {
+      errorMessage: "Failed to load projects",
+      toastOnError: !DEMO_DATA_ENABLED,
+    }
+  );
+  const {
+    data: resolvedProjects,
+    error: resolvedProjectsError,
+    useFallback: usingDemoProjects,
+  } = resolveFallbackData(projects, loading, error, DEMO_PROJECTS);
+  const project = resolvedProjects.find((p) => p.id === id);
 
   const fetchProjectAssets = useCallback(
     () =>
@@ -129,10 +159,22 @@ function ProjectDashboardRoute() {
     [project?.id]
   );
 
-  const { data: projectAssets } = useApiData<MoodboardItem>(fetchProjectAssets, {
+  const {
+    data: projectAssets,
+    loading: assetsLoading,
+    error: assetsError,
+  } = useApiData<MoodboardItem>(fetchProjectAssets, {
     errorMessage: "Failed to load moodboard items",
-    toastOnError: true,
+    toastOnError: !DEMO_DATA_ENABLED,
   });
+  const demoAssets = project ? getDemoMoodboardItems(project.id) : [];
+  const { data: resolvedAssets } = resolveFallbackData(
+    projectAssets,
+    assetsLoading,
+    assetsError,
+    demoAssets,
+    usingDemoProjects && demoAssets.length > 0
+  );
 
   useEffect(() => {
     if (project) {
@@ -143,22 +185,23 @@ function ProjectDashboardRoute() {
   const handleBriefSave = useCallback(async (nextBrief: string) => {
     if (!project) return;
     setProjectBrief(nextBrief);
+    if (usingDemoProjects) return;
     try {
       await ProjectsAPI.updateProject(project.id, { description: nextBrief });
     } catch (err) {
       console.error("Failed to update project brief:", err);
     }
-  }, [project]);
+  }, [project, usingDemoProjects]);
 
   useEffect(() => {
-    if (!loading && !error && projects.length > 0 && !project) {
+    if (!loading && !resolvedProjectsError && resolvedProjects.length > 0 && !project) {
       navigate("/projects", { replace: true });
     }
-  }, [project, loading, error, projects, navigate]);
+  }, [project, loading, resolvedProjectsError, resolvedProjects, navigate]);
 
   if (!project) {
     return (
-      <DataLoader loading={loading} error={error} onRetry={refetch}>
+      <DataLoader loading={loading} error={resolvedProjectsError} onRetry={refetch}>
         <div className="h-full flex flex-col items-center justify-center text-ink-secondary">
           <div className="w-20 h-20 bg-subtle rounded-xl flex items-center justify-center mb-6">
             <Box size={32} />
@@ -192,7 +235,7 @@ function ProjectDashboardRoute() {
         startDate={project.startDate}
         endDate={project.endDate}
         tone={project.tone}
-        assets={projectAssets}
+        assets={resolvedAssets}
         onBriefChange={handleBriefSave}
         onNavigateToWritersRoom={() => navigate(`/writers-room?project=${project.id}`)}
         onNavigateToMoodboard={() => navigate(`/moodboard?project=${project.id}`)}
@@ -217,11 +260,16 @@ function WritersRoomRoute() {
   // Fetch project data for context
   const { data: projects, loading, error } = useApiData<Project>(fetchProjects, {
     errorMessage: "Failed to load projects",
-    toastOnError: true,
+    toastOnError: !DEMO_DATA_ENABLED,
   });
-
-  const fallbackProject = projects[0] || null;
-  const project = projectIdParam ? projects.find(p => p.id === projectIdParam) || fallbackProject : fallbackProject;
+  const {
+    data: resolvedProjects,
+    error: resolvedProjectsError,
+  } = resolveFallbackData(projects, loading, error, DEMO_PROJECTS);
+  const fallbackProject = resolvedProjects[0] || null;
+  const project = projectIdParam
+    ? resolvedProjects.find((p) => p.id === projectIdParam) || fallbackProject
+    : fallbackProject;
   const activeProjectId = project?.id;
 
   const handleProjectChange = (nextProjectId: string) => {
@@ -231,12 +279,12 @@ function WritersRoomRoute() {
   };
 
   return (
-    <DataLoader loading={loading} error={error}>
+    <DataLoader loading={loading} error={resolvedProjectsError}>
       <div className="h-full flex flex-col">
-        {projects.length > 1 && (
+        {resolvedProjects.length > 1 && (
           <div className="px-8 pt-8">
             <ProjectSwitcher
-              projects={projects}
+              projects={resolvedProjects}
               value={activeProjectId}
               onChange={handleProjectChange}
               label="Writer's Room context"
@@ -273,13 +321,20 @@ function MoodboardRoute() {
   );
 
   // Fetch projects for fallback
-  const { data: projects } = useApiData<Project>(fetchProjects, {
-    errorMessage: "Failed to load projects",
-    toastOnError: true,
-  });
-
-  const fallbackProject = projects[0] || null;
-  const project = projectIdParam ? projects.find(p => p.id === projectIdParam) || fallbackProject : fallbackProject;
+  const { data: projects, loading: projectsLoading, error: projectsError } = useApiData<Project>(
+    fetchProjects,
+    {
+      errorMessage: "Failed to load projects",
+      toastOnError: !DEMO_DATA_ENABLED,
+    }
+  );
+  const {
+    data: resolvedProjects,
+  } = resolveFallbackData(projects, projectsLoading, projectsError, DEMO_PROJECTS);
+  const fallbackProject = resolvedProjects[0] || null;
+  const project = projectIdParam
+    ? resolvedProjects.find((p) => p.id === projectIdParam) || fallbackProject
+    : fallbackProject;
   const effectiveProjectId = project?.id || "";
 
   const fetchMoodboardItems = useCallback(
@@ -291,10 +346,24 @@ function MoodboardRoute() {
   );
 
   // Fetch moodboard items from API
-  const { data: moodboardItems, loading, error, refetch } = useApiData<MoodboardItem>(fetchMoodboardItems, {
-    errorMessage: "Failed to load moodboard items",
-    toastOnError: true,
-  });
+  const { data: moodboardItems, loading, error, refetch } = useApiData<MoodboardItem>(
+    fetchMoodboardItems,
+    {
+      errorMessage: "Failed to load moodboard items",
+      toastOnError: !DEMO_DATA_ENABLED,
+    }
+  );
+  const demoItems = getDemoMoodboardItems(effectiveProjectId);
+  const {
+    data: resolvedMoodboardItems,
+    error: resolvedMoodboardError,
+  } = resolveFallbackData(
+    moodboardItems,
+    loading,
+    error,
+    demoItems,
+    DEMO_DATA_ENABLED && demoItems.length > 0
+  );
 
   const handleProjectChange = (nextProjectId: string) => {
     const nextParams = new URLSearchParams(location.search);
@@ -324,13 +393,13 @@ function MoodboardRoute() {
   }, [refetch]);
 
   return (
-    <DataLoader loading={loading} error={error} onRetry={refetch}>
+    <DataLoader loading={loading} error={resolvedMoodboardError} onRetry={refetch}>
       {effectiveProjectId ? (
         <div className="h-full flex flex-col">
-          {projects.length > 1 && (
+          {resolvedProjects.length > 1 && (
             <div className="px-8 pt-8">
               <ProjectSwitcher
-                projects={projects}
+                projects={resolvedProjects}
                 value={effectiveProjectId}
                 onChange={handleProjectChange}
                 label="Moodboard context"
@@ -339,7 +408,7 @@ function MoodboardRoute() {
           )}
           <Moodboard
             projectId={effectiveProjectId}
-            items={moodboardItems}
+            items={resolvedMoodboardItems}
             onItemDelete={handleMoodboardDelete}
             onSemanticSearch={handleSemanticSearch}
             onAddUnsplashImage={handleUnsplashAdd}
@@ -377,15 +446,22 @@ function FreelancersRoute() {
   );
 
   // Fetch freelancers from API
-  const { data: freelancers, loading, error, refetch } = useApiData<Freelancer>(fetchFreelancers, {
-    errorMessage: "Failed to load freelancers",
-    toastOnError: true,
-  });
+  const { data: freelancers, loading, error, refetch } = useApiData<Freelancer>(
+    fetchFreelancers,
+    {
+      errorMessage: "Failed to load freelancers",
+      toastOnError: !DEMO_DATA_ENABLED,
+    }
+  );
+  const {
+    data: resolvedFreelancers,
+    error: resolvedFreelancersError,
+  } = resolveFallbackData(freelancers, loading, error, DEMO_FREELANCERS);
 
   return (
-    <DataLoader loading={loading} error={error} onRetry={refetch}>
+    <DataLoader loading={loading} error={resolvedFreelancersError} onRetry={refetch}>
       <TalentRoster
-        freelancers={freelancers}
+        freelancers={resolvedFreelancers}
         onSelect={() => navigate("/writers-room")}
         onTalentMatch={(brief) => {
           const params = new URLSearchParams();
@@ -418,16 +494,23 @@ function ProjectsViewWrapper() {
     () => ProjectsAPI.getProjects().then(resp => resp.data),
     []
   );
-  const { data: projects, loading, error, refetch } = useApiData<Project>(fetchProjects, {
-    errorMessage: "Failed to load projects",
-    toastOnError: true,
-  });
+  const { data: projects, loading, error, refetch } = useApiData<Project>(
+    fetchProjects,
+    {
+      errorMessage: "Failed to load projects",
+      toastOnError: !DEMO_DATA_ENABLED,
+    }
+  );
+  const {
+    data: resolvedProjects,
+    error: resolvedProjectsError,
+  } = resolveFallbackData(projects, loading, error, DEMO_PROJECTS);
 
   return (
-    <DataLoader loading={loading} error={error} onRetry={refetch}>
+    <DataLoader loading={loading} error={resolvedProjectsError} onRetry={refetch}>
       <>
         <ProjectsView
-          projects={projects}
+          projects={resolvedProjects}
           onSelect={(project) => navigate(`/projects/${project.id}`)}
           onCreate={() => setCreateModalOpen(true)}
         />
