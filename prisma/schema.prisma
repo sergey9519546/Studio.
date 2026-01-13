@@ -542,3 +542,46 @@ enum MessageRole {
   USER
   ASSISTANT
 }
+
+// Omni-Context AI Models
+// Brand Context - Stores persistent brand voice and visual identity models per agency
+model BrandContext {
+  id          String   @id @default(uuid())
+  agencyId    String
+  name        String
+  type        String   // 'BRAND_VOICE', 'VISUAL_IDENTITY', 'MESSAGING_PATTERN', 'CREATIVE_DIRECTION', 'COMPETITIVE_POSITIONING'
+  embeddings  Json?     // Vector embeddings for semantic search
+  data        Json      // Full context data structured as JSON
+  metadata    Json?     // Additional metadata
+  confidence  Float     @default(0.8) // Quality score (0.0-1.0)
+  usageCount  Int       @default(0)
+  lastUsedAt  DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([agencyId, type])
+  @@index([usageCount(sort: Desc)])
+  @@index([lastUsedAt(sort: Desc)])
+  @@index([confidence(sort: Desc)])
+  @@map("brand_contexts")
+}
+
+// Client Preference - Stores learned client preferences from approvals and feedback
+model ClientPreference {
+  id             String   @id @default(uuid())
+  projectId      String?
+  clientId       String?
+  preferenceType String   // Type of preference: tone, messaging, visual, approval_pattern, etc.
+  preferences    Json      // Structured preference data as JSON
+  confidence     Float     @default(0.5) // Confidence score (0.0-1.0) based on sample size
+  sampleSize     Int       @default(1)
+  lastUpdated    DateTime @default(now())
+  createdAt      DateTime @default(now())
+
+  @@unique([projectId, preferenceType])
+  @@unique([clientId, preferenceType])
+  @@index([projectId])
+  @@index([clientId])
+  @@index([confidence(sort: Desc)])
+  @@map("client_preferences")
+}

@@ -7,6 +7,8 @@ import { ProjectDashboard } from "./components/ProjectDashboard";
 import { TalentRoster } from "./components/TalentRoster";
 import CommandBar from "./components/layout/CommandBar";
 import Sidebar from "./components/layout/Sidebar";
+import { CreativeBrainProvider } from "./context/CreativeBrainContext";
+import "./styles/glassmorphism.css";
 import { LoadingSpinner } from "./components/loading/LoadingSpinner";
 import {
   DEMO_DATA_ENABLED,
@@ -527,8 +529,9 @@ function ProjectsViewWrapper() {
 // Main App Component with Router
 export default function App() {
   return (
-    <Layout>
-      <Routes>
+    <CreativeBrainProvider>
+      <Layout>
+        <Routes>
         {/* Dashboard */}
         <Route path="/" element={<DashboardHome />} />
 
@@ -549,5 +552,6 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Layout>
+    </CreativeBrainProvider>
   );
 }

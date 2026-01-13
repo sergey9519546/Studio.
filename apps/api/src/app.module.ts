@@ -17,6 +17,8 @@ import { MoodboardModule } from "./modules/moodboard/moodboard.module.js";
 import { ProjectsModule } from "./modules/projects/projects.module.js";
 import { StorageModule } from "./modules/storage/storage.module.js";
 import { PrismaModule } from "./prisma/prisma.module.js";
+import { OmniContextModule } from "./modules/omni-context/omni-context.module.js";
+
 const moduleDir = dirname(__filename);
 
 const appLogger = new Logger("AppModule");
@@ -93,6 +95,7 @@ if (!staticRoot && process.env.NODE_ENV === "production") {
     ProjectsModule,
     FreelancersModule,
     MoodboardModule,
+    OmniContextModule,
   ],
   providers: [
     {

@@ -127,7 +127,25 @@ export class ProjectsAPI {
   // Delete a project
   static async deleteProject(id: string): Promise<void> {
     try {
+      // Delete the project itself
       await apiClient.delete(`/projects/${id}`);
+
+      // Cascade delete related moodboard items
+      try {
+        await apiClient.delete(`/moodboard/project/${id}`);
+      } catch (moodboardError) {
+        // Log but do not block project deletion
+        console.warn('Failed to delete related moodboard items:', moodboardError);
+      }
+
+      // Cascade delete related catalog assets
+      try {
+        await apiClient.delete(`/catalog/project/${id}`);
+      } catch (catalogError) {
+        console.warn('Failed to delete related catalog assets:', catalogError);
+      }
+
+      // TODO: Cascade delete related script references if API available
     } catch (error) {
       handleApiError(error);
     }
