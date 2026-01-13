@@ -1,6 +1,6 @@
 import { ApiResponse, CreateFreelancerData, Freelancer, PaginatedResponse } from '../types';
-import { apiClient } from './index';
 import { handleApiError } from './client';
+import { apiClient } from './index';
 
 type FreelancersListPayload =
   | PaginatedResponse<Freelancer>
