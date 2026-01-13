@@ -30,43 +30,69 @@ The Studio Roster Design System is a comprehensive guide that ensures visual con
 
 ### Core Principles
 
-#### 1. Liquid Glass Aesthetic
-Our design language is built around "liquid glass" - a modern approach that creates depth through subtle transparency, blur effects, and ambient lighting. This creates a sense of elevation and separation without overwhelming the content.
+#### 1. Onyx & Paper Aesthetic
+Our design language is built around "Onyx & Paper" - a monochrome, high-contrast approach inspired by high-end fashion lookbooks and architectural portfolios. This "brutalist-light" aesthetic creates depth through structure, borders, and stark typography rather than color, blur, or shadow.
 
-#### 2. Contextual Intelligence
-The design should adapt intelligently to the content and user's workflow. Every interface element should feel purposeful and contribute to the overall user experience.
+**Key Characteristics:**
+- **Pure White Background**: Crisp, paper-like canvas (#FFFFFF)
+- **Solid Black Elements**: Absolute black (#000000) for maximum contrast
+- **Sharp Corners**: Minimal rounding (0px-4px) for architectural precision
+- **Border-Defined Structure**: Hairline black borders create visual hierarchy
+- **Monochromatic Palette**: No gradients or colorful accents
 
-#### 3. Subtlety Over Flash
-We prioritize clear information hierarchy and smooth interactions over flashy animations or overwhelming visual effects.
+#### 2. Contrast & Structure
+Depth is created through:
+- **Border weight**: 1px-2px black lines define the grid
+- **Fill inversion**: Hover states invert colors (white → black, black → white)
+- **Typography hierarchy**: Bold uppercase headers vs. monospace metadata
+- **Spacing**: Precise gaps between borders create the grid system
 
-#### 4. Content-First Design
-The design system exists to serve the content and functionality, not the other way around. Every visual decision should enhance comprehension and task completion.
+#### 3. Swiss-Inspired Minimalism
+- **Grid-based layouts**: Elements align to a strict visual grid
+- **Kinetic typography**: Large, heavy headlines with tight tracking
+- **Functional over decorative**: Every element serves a purpose
+- **Technical aesthetic**: Monospace fonts for metadata and "AI" outputs
+
+#### 4. Curation Engine UX
+The interface shifts from "Friendly Assistant" to "Curation Engine":
+- **Precise interactions**: Clear feedback via color inversion
+- **Structured presentation**: Grid-based asset organization
+- **Technical polish**: Refined details feel expensive and curated
+- **Content-first**: Design serves the work, not the brand
 
 ### Design Values
 
 | Value | Description | Application |
 |-------|-------------|-------------|
-| **Clarity** | Clear information hierarchy and intuitive navigation | Consistent typography scale, clear spacing system |
-| **Efficiency** | Fast loading, responsive interactions | Optimized assets, efficient animations |
-| **Elegance** | Sophisticated visual language without complexity | Refined color palette, thoughtful micro-interactions |
-| **Empowerment** | Tools that enhance user productivity | Contextual UI, smart defaults, keyboard shortcuts |
+| **Clarity** | High contrast, maximum legibility | Black on white, clear borders |
+| **Precision** | Architectural lines and spacing | Sharp corners, exact alignment |
+| **Efficiency** | Fast loading, responsive interactions | Minimal overhead, crisp transitions |
+| **Refinement** | Sophisticated minimalism | Thoughtful details, no excess |
 
 ## Visual Language
 
 ### Color Psychology
 
-Our color system is designed to support both functional and emotional needs:
+Our monochrome system communicates through contrast and structure rather than color:
 
-#### Primary Brand Colors
-- **Studio Blue (#2463E6)**: Trust, professionalism, AI innovation
-- **Success Green (#18C9AE)**: Completion, positive actions, AI insights
-- **Warning Amber (#F59E0B)**: Attention, review needed, in-progress states
-- **Error Red (#EF4444)**: Critical issues, destructive actions, validation failures
+#### Primary Colors (Monochrome)
+- **Background (#FFFFFF)**: Pure white paper canvas
+- **Surface (#FFFFFF)**: Solid white with black borders
+- **Surface Highlight (#000000)**: Pure black for CTAs, sidebars
+- **Text Primary (#000000)**: Absolute black for maximum legibility
+- **Text Secondary (#666666)**: Mid-range gray for subtext
+- **Borders (#000000)**: Solid black lines define the grid
 
-#### Surface Hierarchy
-- **App Background (#F5F5F7)**: Creates a calm, spacious canvas
-- **Surface Cards (#FFFFFF)**: Clear content containers with subtle elevation
-- **Interactive Elements**: Maintain high contrast for accessibility
+#### Interaction States
+- **Default**: White background, black text, black border
+- **Hover**: Black background, white text (color inversion)
+- **Active**: Same as hover (black background)
+- **Disabled**: Gray text (#999999) with no hover effects
+
+#### Semantic States (Monochrome)
+- **Success**: Black checkmark on light gray background
+- **Warning**: Medium gray (#666666) text
+- **Error**: Black X on light gray background
 
 ### Typography System
 
@@ -75,52 +101,57 @@ Our color system is designed to support both functional and emotional needs:
 font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 ```
 
-#### Type Scale
-- **Display**: 36px/2.25rem - Hero sections, major announcements
-- **Heading 1**: 30px/1.875rem - Page titles, major section headers
-- **Heading 2**: 24px/1.5rem - Section headers, card titles
-- **Heading 3**: 20px/1.25rem - Subsection headers
-- **Body Large**: 18px/1.125rem - Important body text, lead paragraphs
-- **Body**: 16px/1rem - Standard body text
-- **Body Small**: 14px/0.875rem - Supporting text, captions
-- **Caption**: 12px/0.75rem - Metadata, labels, timestamps
+#### Type Scale & Usage
+- **Display Headers**: `font-black tracking-tighter uppercase text-4xl+` - Hero sections, major announcements
+- **Section Headers**: `font-bold uppercase tracking-tighter text-2xl` - Page titles, major section headers
+- **Body Text**: `font-normal text-base leading-relaxed` - Standard body text
+- **Metadata/Data**: `font-mono text-xs uppercase` - Technical data, timestamps, labels
+- **Caption**: `font-mono text-[11px] uppercase` - Small metadata
 
 #### Typography Guidelines
-- **Line Height**: 1.5x for body text, 1.25x for headings
-- **Letter Spacing**: Slightly tight for headings, normal for body
-- **Font Weight**: 400 (normal), 500 (medium), 600 (semibold), 700 (bold)
+- **Headers**: All uppercase, tight letter-spacing (-0.04em to -0.06em)
+- **Line Height**: 0.95 for kinetic headers, 1.5 for body text
+- **Font Weight**: 400 (normal), 600 (semibold), 700 (bold), 900 (black)
+- **Monospace**: Used for all metadata, technical info, and "AI" outputs
 
 ### Iconography
 
 #### Icon Principles
-- **Consistency**: Unified stroke width (2px) and corner radius
+- **Thinner Lines**: `strokeWidth={1}` for refined, expensive look
+- **Consistency**: Unified stroke width and corner radius
 - **Clarity**: Simple, recognizable shapes that work at small sizes
 - **Context**: Icons support content, never replace it
 - **Accessibility**: Text alternatives provided for all icons
 
 #### Icon Library
-- **Lucide React**: Primary icon library for consistency
+- **Lucide React**: Primary icon library with `strokeWidth={1}`
 - **Custom Icons**: Created when specific functionality requires it
-- **Icon Sizes**: 16px, 20px, 24px, 32px standard sizes
+- **Icon Sizes**: 16px, 20px, 24px standard sizes
 
 ## Components
 
 ### Foundation Components
 
 #### Button
-The button component is fundamental to our interaction patterns.
+Buttons use color inversion for interaction feedback.
 
 **Variants:**
-- **Primary**: Main actions, calls-to-action
-- **Secondary**: Alternative actions, less prominent
-- **Ghost**: Subtle actions, minimal visual weight
-- **Destructive**: Delete, remove, other destructive actions
+- **Primary**: Black background, white text (primary actions)
+- **Secondary**: White background, black border, black text (alternative actions)
+- **Ghost**: Transparent background, black text (subtle actions)
+- **Destructive**: Black background, white text (same as primary)
 
 **States:**
-- Default, Hover, Active, Disabled, Loading
+- **Default**: White background with black border, black text
+- **Hover**: Black background, white text (color inversion)
+- **Active**: Same as hover
+- **Disabled**: Gray text, no hover effects
 
 **Sizes:**
 - Small (32px height), Medium (40px height), Large (48px height)
+
+**Border Radius:**
+- `rounded-none` or `rounded-sm` (max 4px) - Sharp corners for precision
 
 ```css
 /* Button Base Styles */
@@ -128,102 +159,103 @@ The button component is fundamental to our interaction patterns.
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-lg);
-  font-weight: var(--font-weight-medium);
-  transition: all var(--duration-base) var(--ease-smooth);
-  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-weight-bold);
+  transition: background-color var(--duration-base) var(--ease-out);
+  border: 1px solid black;
   cursor: pointer;
 }
 
-/* Primary Button */
+/* Primary Button - Black background */
 .button--primary {
-  background-color: var(--color-primary);
-  color: var(--color-ink-inverse);
+  background-color: #000000;
+  color: #FFFFFF;
+  border: 1px solid #000000;
 }
 
 .button--primary:hover {
-  background-color: var(--color-primary-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-float);
+  background-color: #000000; /* Same color - no change */
+  transform: none; /* No lift - borders define structure */
 }
 ```
 
 #### Card
-Cards are the primary content container in our system.
+Cards are content containers defined by borders, not shadows.
 
 **Features:**
-- Glass morphism background
-- Subtle border and shadow
-- Rounded corners for modern feel
+- Solid white background
+- Black border (1px or 2px)
+- Sharp corners (0px-4px)
 - Responsive padding
 
 **Variants:**
-- **Default**: Standard content card
-- **Elevated**: Higher priority content
-- **Interactive**: Cards that respond to hover/click
+- **Default**: White background, black border
+- **Elevated**: Same as default (no elevation via shadow)
+- **Interactive**: Hover inverts to black background with white text
 
 #### Input Components
 
 **Text Input:**
-- Clear visual hierarchy
-- Focus states that are accessible
-- Error states with helpful messaging
-- Placeholder text that doesn't replace labels
+- White background, black border
+- Focus state: Black background with white text (inversion)
+- Sharp corners (0px-4px)
+- Error state: Black border with gray background
 
 **Select/Dropdown:**
+- Black border, white background
 - Keyboard navigation support
-- Search/filter capability for large lists
 - Clear selection indicators
 
 **Checkbox/Radio:**
+- Square shape (no circles)
+- Black border, white background
+- Checked state: Black fill, white checkmark
 - Large touch targets (44px minimum)
-- Clear checked/unchecked states
-- Label association for accessibility
 
 ### Navigation Components
 
 #### Sidebar
 - Fixed position navigation
-- Collapsible sections
-- Active state indicators
+- White background with black border
+- Active state: Black background with white text
 - Keyboard navigation support
 
 #### Breadcrumbs
+- Black borders between items
 - Clear hierarchical navigation
 - Truncation handling for long paths
-- Clickable segments with proper focus management
 
 #### Tabs
-- Horizontal or vertical orientation
-- Overflow handling for many tabs
+- Horizontal orientation only
+- Active tab: Black background with white text
+- Inactive tab: White background with black border
 - Keyboard arrow navigation
-- Active indicator animations
 
 ### Feedback Components
 
 #### Toast/Notification
+- Black background, white text
+- No backdrop blur (solid colors only)
 - Non-intrusive positioning
-- Auto-dismiss with manual close option
-- Consistent timing and animation
-- Priority levels (info, success, warning, error)
+- Priority levels: all use black/white
 
 #### Loading States
-- Skeleton loading for content
-- Spinner animations for actions
-- Progress indicators for multi-step processes
-- Empty states with helpful messaging
+- Solid black spinner on white background
+- No skeleton loading (use solid indicators)
+- Progress indicators in black
+- Empty states with black borders
 
 #### Modals
-- Focus trap for accessibility
-- Backdrop blur and transparency
+- White background, black border
+- No backdrop blur (solid overlay)
 - Multiple size options
-- Proper escape key handling
+- Escape key handling
 
 ## Layout System
 
 ### Grid System
 
-We use a flexible 12-column grid system that adapts to different screen sizes.
+We use a flexible 12-column grid system with border-defined structure.
 
 ```css
 .container {
@@ -235,26 +267,20 @@ We use a flexible 12-column grid system that adapts to different screen sizes.
 .row {
   display: flex;
   flex-wrap: wrap;
+  border: 1px solid black; /* Border defines structure */
   margin: 0 calc(var(--grid-gap) * -0.5);
 }
 
 .col {
   flex: 1;
+  border: 1px solid black; /* Borders create true grid */
   padding: 0 calc(var(--grid-gap) * 0.5);
-}
-
-/* Responsive breakpoints */
-@media (max-width: 768px) {
-  .col-sm-12 { flex: 0 0 100%; }
-  .col-sm-6 { flex: 0 0 50%; }
-  .col-sm-4 { flex: 0 0 33.333%; }
-  .col-sm-3 { flex: 0 0 25%; }
 }
 ```
 
 ### Spacing System
 
-Based on a 4px base unit for consistency and rhythm.
+Based on a 4px base unit for precision and rhythm.
 
 **Spacing Scale:**
 - xs: 4px
@@ -286,6 +312,8 @@ Start with mobile styles and progressively enhance for larger screens.
 /* Mobile first */
 .component {
   padding: var(--spacing-md);
+  border: 1px solid black;
+  border-radius: 0;
 }
 
 /* Tablet and up */
@@ -308,15 +336,15 @@ Start with mobile styles and progressively enhance for larger screens.
 ### WCAG 2.1 AA Compliance
 
 #### Color Contrast
-- **Normal text**: 4.5:1 minimum contrast ratio
-- **Large text**: 3:1 minimum contrast ratio
-- **UI components**: 3:1 minimum contrast ratio
+- **Normal text**: Black on white meets 21:1 ratio (exceeds 4.5:1)
+- **Large text**: Black on white meets 21:1 ratio (exceeds 3:1)
+- **UI components**: Black on white meets 21:1 ratio (exceeds 3:1)
 
 #### Keyboard Navigation
 - All interactive elements are keyboard accessible
 - Logical tab order throughout the application
 - Visible focus indicators on all focusable elements
-- Skip links for main content areas
+- Focus state: Black outline (2px solid)
 
 #### Screen Reader Support
 - Semantic HTML elements used appropriately
@@ -332,7 +360,7 @@ Start with mobile styles and progressively enhance for larger screens.
 
 ### Implementation Checklist
 
-- [ ] Color contrast ratios meet WCAG standards
+- [x] Color contrast ratios exceed WCAG standards
 - [ ] All interactive elements have keyboard access
 - [ ] Focus indicators are clearly visible
 - [ ] Screen reader testing completed
@@ -349,13 +377,12 @@ We use CSS custom properties for theming and dynamic values.
 
 ```css
 :root {
-  --color-primary: #2463E6;
-  --spacing-base: 1rem;
-  --radius-md: 0.5rem;
-}
-
-.dark-theme {
-  --color-primary: #3B82F6;
+  --color-bg: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #000000;
+  --color-border: #000000;
+  --radius-sm: 0px;
+  --radius-md: 4px;
 }
 ```
 
@@ -366,6 +393,8 @@ Each component follows a consistent pattern:
 /* Component namespace */
 .component {
   /* Component-specific styles */
+  border: 1px solid black;
+  border-radius: var(--radius-sm);
 }
 
 .component__element {
@@ -378,7 +407,9 @@ Each component follows a consistent pattern:
 
 /* Component states */
 .component:is(:hover, :focus) {
-  /* Hover/focus styles */
+  /* Hover/focus styles - color inversion */
+  background-color: #000000;
+  color: #FFFFFF;
 }
 ```
 
@@ -386,7 +417,7 @@ Each component follows a consistent pattern:
 Block, Element, Modifier naming convention for CSS classes.
 
 ```html
-<div class="card card--elevated">
+<div class="card card--interactive">
   <div class="card__header">
     <h2 class="card__title">Card Title</h2>
   </div>
@@ -475,6 +506,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
 - Minimum size: 32px height
 - Clear space: Logo height on all sides
 - Do not stretch, rotate, or alter proportions
+- Use black logo on white background
 
 #### Logo Variations
 - **Horizontal**: For wide spaces, headers
@@ -484,30 +516,38 @@ const Modal = ({ isOpen, onClose, title, children }) => {
 ### Voice & Tone
 
 #### Voice Characteristics
-- **Professional**: Expert knowledge without pretension
-- **Helpful**: Proactive assistance and clear guidance
-- **Innovative**: Forward-thinking AI capabilities
-- **Approachable**: Friendly, not intimidating
+- **Precise**: Expert knowledge without pretension
+- **Architectural**: Structured, organized communication
+- **Technical**: Informed, data-driven insights
+- **Refined**: Sophisticated, minimalist expression
 
 #### Tone Variations
-- **Feature announcements**: Excited, informative
+- **Feature announcements**: Concise, direct
 - **Error messages**: Helpful, solution-focused
-- **Loading states**: Optimistic, brief
-- **Success messages**: Celebratory, clear
+- **Loading states**: Brief, informative
+- **Success messages**: Clear, confirmation-focused
 
 ### Photography & Imagery
 
 #### Style Guidelines
-- **Real people**: Diverse, authentic, professional settings
-- **Product shots**: Clean, well-lit, context-relevant
-- **Illustrations**: Simple, consistent style matching brand colors
-- **Icons**: Outlined style, consistent weight
+- **Grayscale by default**: All images display in black and white
+- **Color on hover**: Images reveal color only on interaction
+- **Architecture-focused**: Lines, structure, composition over color
+- **High contrast**: Clear separation between elements
 
 #### Image Treatment
-- Subtle shadows for depth
-- Consistent filter treatment for moodboards
-- High contrast for accessibility
-- Optimized file sizes for performance
+```css
+/* Default grayscale state */
+.asset-image {
+  filter: grayscale(100%);
+  transition: filter 300ms ease;
+}
+
+/* Color revealed on hover */
+.asset-image:hover {
+  filter: grayscale(0%);
+}
+```
 
 ## Motion & Animation
 
@@ -515,10 +555,10 @@ const Modal = ({ isOpen, onClose, title, children }) => {
 
 #### Purposeful Motion
 Every animation should serve a functional purpose:
-- **Feedback**: Confirm user actions
+- **Feedback**: Confirm user actions (color inversion)
 - **Orientation**: Guide user attention
 - **Navigation**: Smooth transitions between states
-- **Personality**: Subtle brand expression
+- **Structure**: Emphasize grid and borders
 
 #### Performance Considerations
 - **Hardware acceleration**: Use transform and opacity
@@ -549,15 +589,15 @@ Every animation should serve a functional purpose:
 ### Common Animations
 
 #### Micro-interactions
-- **Button hover**: Subtle lift and shadow increase
-- **Input focus**: Border color change and gentle glow
-- **Card hover**: Elevated shadow and slight scale
-- **Icon button**: Scale and color change
+- **Button hover**: Color inversion (white → black)
+- **Input focus**: Background inversion (white → black)
+- **Card hover**: Background inversion with text color change
+- **Image hover**: Grayscale → Color reveal
 
 #### Page Transitions
 - **Slide transitions**: For navigation between pages
 - **Fade transitions**: For modal opens/closes
-- **Scale transitions**: For dropdowns and popovers
+- **No scale**: Avoid scaling, use color inversion instead
 
 ## Dark Mode Support
 
@@ -566,15 +606,17 @@ Every animation should serve a functional purpose:
 #### Color Strategy
 ```css
 :root {
-  --color-bg: #F5F5F7;
+  --color-bg: #FFFFFF;
   --color-surface: #FFFFFF;
-  --color-text: #1D1D1F;
+  --color-text: #000000;
+  --color-border: #000000;
 }
 
 [data-theme="dark"] {
-  --color-bg: #1A1A1A;
-  --color-surface: #2D2D2D;
+  --color-bg: #000000;
+  --color-surface: #000000;
   --color-text: #FFFFFF;
+  --color-border: #FFFFFF;
 }
 ```
 
@@ -587,14 +629,14 @@ Every animation should serve a functional purpose:
 ### Dark Mode Considerations
 
 #### Color Adjustments
-- **Increased contrast**: Dark backgrounds need lighter text
-- **Saturation changes**: Colors appear more vibrant on dark backgrounds
-- **Blue light**: Reduce blue light in evening hours
-- **Accent colors**: Ensure visibility on dark surfaces
+- **Complete inversion**: White ↔ Black swap
+- **Grayscale maintained**: No color accents in either mode
+- **Border consistency**: Borders remain visible in both modes
+- **Text readability**: High contrast maintained
 
 #### Performance
 - **CSS variables**: Efficient theme switching
-- **Image optimization**: Dark mode image variants
+- **Image optimization**: Same grayscale treatment
 - **Transition timing**: Smooth theme transitions
 
 ## Contributing
@@ -617,4 +659,59 @@ Every animation should serve a functional purpose:
 - Clear examples for all components
 - Interactive component playground
 - Migration guides for major changes
-- Contribution guidelines for new
+- Contribution guidelines for new components
+
+## Migration Guide: Liquid Glass → Onyx & Paper
+
+### Key Changes
+
+1. **Color Palette**
+   - Warm parchment backgrounds → Pure white (#FFFFFF)
+   - Teal/magenta accents → Pure black (#000000)
+   - Gradients removed → Solid monochrome
+   - All borders → Solid black (1px-2px)
+
+2. **Shapes & Radius**
+   - Rounded corners (24px) → Sharp/minimal (0px-4px)
+   - Pill buttons → Square buttons with minimal rounding
+   - Consistent `rounded-none` or `rounded-sm`
+
+3. **Depth & Shadows**
+   - Glass morphism → Solid backgrounds
+   - Blur effects → Removed
+   - Shadows → None (use borders instead)
+
+4. **Typography**
+   - Display font → Bold uppercase tracking-tighter
+   - Body text → Inter (same)
+   - Metadata → Monospace font required
+   - All headers → Uppercase
+
+5. **Interaction States**
+   - Color changes → Color inversion
+   - Hover lifts → Color inversion (no movement)
+   - Shadows → None
+
+6. **Imagery**
+   - Color by default → Grayscale by default
+   - Hover effects → Grayscale → Color reveal
+   - `grayscale hover:grayscale-0 transition-all`
+
+### Implementation Checklist
+
+- [ ] Update color tokens in `src/theme/tokens.ts`
+- [ ] Replace rounded-xl with rounded-none or rounded-sm
+- [ ] Remove all shadow classes
+- [ ] Convert button hover to color inversion
+- [ ] Add grayscale filter to images
+- [ ] Update typography to uppercase headers
+- [ ] Use monospace for metadata
+- [ ] Set icon strokeWidth to 1
+- [ ] Remove gradient classes
+- [ ] Test all interactive states
+- [ ] Verify accessibility compliance
+- [ ] Update documentation
+
+---
+
+*Design System v2.0 - Onyx & Paper Aesthetic*

@@ -416,7 +416,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                       <img
                         src={item.url}
                         alt={item.tags.join(", ") || "Moodboard item"}
-                        className="w-full h-auto object-cover"
+                        className="w-full h-auto object-cover grayscale transition-all duration-300 group-hover:grayscale-0"
                       />
 
                       <button
@@ -684,7 +684,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                             image.description ||
                             "Unsplash image"
                           }
-                          className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                          className="w-full h-auto object-cover grayscale transition-all duration-300 group-hover:grayscale-0"
                         />
 
                         {/* Overlay on Hover */}

@@ -1,76 +1,79 @@
 /**
- * LIQUID GLASS DESIGN SYSTEM
- * "Weightless. Luminous. Reductionist."
+ * ONYX & PAPER DESIGN SYSTEM
+ * "Contrast. Structure. Precision."
  * 
- * Aesthetic: Swiss International + Apple precision. Ultra-high luminance.
- * The interface is engineered as a state of flow.
+ * Aesthetic: High-end creative studio / Architectural portfolio.
+ * Brutalist-light approach: bold enough to be modern, refined enough to stay premium.
+ * Inspired by Swiss International minimalism and fashion lookbooks.
  */
 
 export const colors = {
-  // THE CANVAS (Luminance)
+  // THE CANVAS (Crisp Paper)
   bg: {
-    app: "#F5F2EC", // Warm parchment.
-    surface: "#FFFDF9", // Soft canvas.
-    subtle: "#F8F3ED", // Subdued layers.
-    sidebar: "#FFFDF9", // Unified with canvas for seamless flow.
+    app: "#FFFFFF", // Pure white paper background.
+    surface: "#FFFFFF", // Solid white. No transparency.
+    subtle: "#FAFAFA", // Very subtle gray for subtle layers.
+    sidebar: "#FFFFFF", // Unified with canvas.
   },
   border: {
-    subtle: "#E1E1DF", // Delicate structural lines (use sparingly).
-    hover: "#CFCFCD", // Slightly darker for interactions.
-    subtleAlpha: "rgba(0,0,0,0.04)", // Subtle definition for borders
+    subtle: "#000000", // Solid black lines define the grid.
+    hover: "#000000", // Same - interaction shown via fill inversion.
+    subtleAlpha: "rgba(0,0,0,0.8)", // High contrast for borders
   },
   text: {
-    primary: "#111827", // Deep graphite.
-    secondary: "#4B5563", // Muted slate.
-    tertiary: "#9CA3AF", // Ghosted metadata.
-    inverse: "#FFFFFF", // Absolute White on primary actions.
+    primary: "#000000", // Absolute black for maximum legibility.
+    secondary: "#666666", // Mid-range gray for subtext.
+    tertiary: "#999999", // Ghosted metadata.
+    inverse: "#FFFFFF", // White on black surfaces.
   },
 
-  // PRIMARY ACCENT (Rival Blue)
+  // PRIMARY ACCENT (Pure Black - Inversion for Interaction)
   accent: {
-    primary: "#0F766E", // Studio teal.
-    primaryHover: "#0B5F59", // Interaction state.
-    tint: "#D7EFE9", // Subtlety (chips, active backgrounds).
+    primary: "#000000", // Pure black for CTAs.
+    primaryHover: "#000000", // Same color - interaction via text inversion.
+    tint: "#F5F5F5", // Subtle background for hover states.
   },
 
-  // THE "DANGEROUS EDGE" (Gradients & Highlights)
+  // REMOVED: No gradients or colorful accents in Onyx & Paper
   edge: {
-    teal: "#14B8A6", // Intelligence, Freshness
-    magenta: "#F97316", // Creative highlight (no purple)
-    gradient: "linear-gradient(90deg, #0F766E 0%, #14B8A6 55%, #F97316 100%)",
+    teal: "#000000", // All accents become black
+    magenta: "#000000",
+    gradient: "#000000", // No gradients - pure monochrome
   },
 
-  // SEMANTIC STATES
+  // SEMANTIC STATES (Monochrome versions)
   state: {
-    success: "#16A34A",
-    successBg: "#E7F6EC",
-    warning: "#F59E0B",
-    warningBg: "#FFF3DB",
-    danger: "#EF4444",
-    dangerBg: "#FDECEC",
+    success: "#000000", // Black checkmarks on white
+    successBg: "#F0F0F0", // Subtle gray background
+    warning: "#666666", // Medium gray for warnings
+    warningBg: "#F5F5F5", // Light gray background
+    danger: "#000000", // Black for destructive actions
+    dangerBg: "#F0F0F0", // Subtle background
   },
 } as const;
 
 export const typography = {
   fontFamily: {
     sans: [
-      "Manrope",
+      "Inter",
+      "-apple-system",
+      "BlinkMacSystemFont",
       "Segoe UI",
       "sans-serif",
     ],
-    display: ["Space Grotesk", "Manrope", "sans-serif"],
-    mono: ["SF Mono", "IBM Plex Mono", "monospace"],
+    display: ["Inter", "Space Grotesk", "sans-serif"], // Heavy display font
+    mono: ["SF Mono", "IBM Plex Mono", "monospace"], // For metadata and technical data
   },
   letterSpacing: {
     tight: "-0.02em",
     tighter: "-0.04em",
-    kinetic: "-0.06em", // Studio OS kinetic text
+    kinetic: "-0.06em", // Kinetic text for headlines
     wide: "0.02em",
     wider: "0.04em",
     widest: "0.08em",
   },
   lineHeight: {
-    kinetic: "0.9", // Studio OS kinetic line height
+    kinetic: "0.95", // Tighter for architectural headlines
     tight: "1.25",
     normal: "1.5",
     relaxed: "1.6",
@@ -85,25 +88,25 @@ export const spacing = {
 } as const;
 
 export const radii = {
-  sm: "8px",
-  md: "12px",
-  lg: "16px",
-  xl: "24px", // Squircles. The preferred radius.
-  "2xl": "32px", // Extra large for hero cards
-  pill: "9999px",
-  btn: "14px",
-  card: "24px", // Studio OS default card radius
+  sm: "0px",      // Sharp corners for precision
+  md: "4px",      // Slight rounding (max 4px)
+  lg: "4px",      // Consistent slight rounding
+  xl: "4px",      // Uniform rounded-sm
+  "2xl": "4px",   // All corners consistent
+  pill: "9999px", // Only pills stay rounded
+  btn: "2px",     // Minimal button rounding
+  card: "4px",    // Consistent card radius
 } as const;
 
 export const shadows = {
-  ambient: "0px 10px 40px rgba(0,0,0,0.04)", // Ambient Levitation. Primary shadow.
-  subtle: "0px 1px 2px rgba(0,0,0,0.05)",
-  card: "0px 4px 12px rgba(0,0,0,0.06)",
-  float: "0px 20px 40px rgba(0,0,0,0.08)",
-  soft: "0px 4px 24px rgba(0,0,0,0.02)", // Studio OS soft shadow
-  inner: "inset 0px 1px 4px rgba(0,0,0,0.02)",
-  glow: "0px 0px 20px rgba(36, 99, 230, 0.15)",
-  "2xl": "0 20px 40px rgba(0,0,0,0.08)", // Studio OS float shadow
+  ambient: "none", // No shadows - borders create structure
+  subtle: "none",  // No shadows - use borders
+  card: "none",    // No shadows - use borders
+  float: "none",   // No shadows - use borders
+  soft: "none",    // No shadows - use borders
+  inner: "none",   // No shadows - use borders
+  glow: "none",    // No glow effects
+  "2xl": "none",   // No shadows
 } as const;
 
 export const transitions = {
@@ -113,14 +116,40 @@ export const transitions = {
   slower: "500ms cubic-bezier(0.16, 1, 0.3, 1)",
 } as const;
 
-// LIQUID GLASS MATERIAL
+// REMOVED: No glass effects in Onyx & Paper
+// Use solid backgrounds and borders instead
 export const glass = {
   backdrop: {
-    filter: "blur(20px) saturate(180%)",
-    background: "rgba(255, 255, 255, 0.75)",
+    filter: "none",
+    background: "#FFFFFF", // Solid white
   },
   backdropDark: {
-    filter: "blur(20px) saturate(150%)",
-    background: "rgba(29, 29, 31, 0.7)",
+    filter: "none",
+    background: "#000000", // Solid black
+  },
+} as const;
+
+// DESIGN SYSTEM HELPERS FOR ONYX & PAPER
+
+export const DS = {
+  colors: {
+    bg: "bg-[#FFFFFF]",
+    surface: "bg-white border border-black",
+    surfaceHighlight: "bg-black text-white",
+    textPrimary: "text-black",
+    textSecondary: "text-neutral-500",
+    border: "border-black",
+    accent: "bg-black",
+    shadow: "shadow-none",
+  },
+  layout: {
+    radius: "rounded-none", // Sharp, high-end look
+    radiusSm: "rounded-none",
+    gap: "gap-0", // Borders touch to create a true grid
+    pad: "p-10",
+  },
+  type: {
+    header: "font-bold uppercase tracking-tighter text-2xl",
+    body: "font-mono text-[13px] leading-tight",
   },
 } as const;
