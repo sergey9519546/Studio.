@@ -25,7 +25,7 @@ import GuardianRoom from "./views/GuardianRoom";
 import ProjectsView from "./views/ProjectsView";
 import CreateProjectModal from "./components/projects/CreateProjectModal";
 import ProjectSwitcher from "./components/projects/ProjectSwitcher";
-
+import { StudioProvider } from "./context/StudioContext";
 // Project Context Header Component
 function ProjectContextHeader({ project }: { project: Project }) {
   const navigate = useNavigate();
@@ -527,27 +527,29 @@ function ProjectsViewWrapper() {
 // Main App Component with Router
 export default function App() {
   return (
-    <Layout>
-      <Routes>
-        {/* Dashboard */}
-        <Route path="/" element={<DashboardHome />} />
+    <StudioProvider>
+      <Layout>
+        <Routes>
+          {/* Dashboard */}
+          <Route path="/" element={<DashboardHome />} />
 
-        {/* Projects */}
-        <Route path="/projects" element={<ProjectsViewWrapper />} />
-        <Route path="/projects/:id" element={<ProjectDashboardRoute />} />
+          {/* Projects */}
+          <Route path="/projects" element={<ProjectsViewWrapper />} />
+          <Route path="/projects/:id" element={<ProjectDashboardRoute />} />
 
-        {/* Moodboard */}
-        <Route path="/moodboard" element={<MoodboardRoute />} />
+          {/* Moodboard */}
+          <Route path="/moodboard" element={<MoodboardRoute />} />
 
-        {/* Freelancers */}
-        <Route path="/freelancers" element={<FreelancersRoute />} />
+          {/* Freelancers */}
+          <Route path="/freelancers" element={<FreelancersRoute />} />
 
-        {/* Writers Room */}
-        <Route path="/writers-room" element={<WritersRoomRoute />} />
+          {/* Writers Room */}
+          <Route path="/writers-room" element={<WritersRoomRoute />} />
 
-        {/* Catch all route - redirect to dashboard */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Layout>
+          {/* Catch all route - redirect to dashboard */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Layout>
+    </StudioProvider>
   );
 }

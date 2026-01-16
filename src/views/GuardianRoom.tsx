@@ -1,11 +1,17 @@
-import { ArrowRight, FileText, ImageIcon, Plus, Sparkles } from "lucide-react";
+import { ArrowRight, FileText, ImageIcon, Plus, Sparkles, Image as ImageIcon2 } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import Card from "../components/ui/Card";
 import { GenAIService } from "../services/GenAIService";
+import { ScriptAPI } from "../services/api/script";
+import { MoodboardAPI } from "../services/api/moodboard";
+import { Asset } from "../services/types";
+import { useToast } from "../hooks/useToast";
+import { useStudio } from "../context/StudioContext";
 
 interface Message {
   role: "user" | "system";
   text: string;
+  suggestedAssets?: Asset[];
 }
 
 interface GuardianRoomProps {
@@ -20,10 +26,13 @@ interface GuardianRoomProps {
 }
 
 const GuardianRoom: React.FC<GuardianRoomProps> = ({
-  project,
+  project: propProject,
   onBack,
   initialPrompt,
 }) => {
+  const { activeProject } = useStudio();
+  const project = propProject || activeProject; // Prefer prop if passed (e.g. from route params), else context
+
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -34,9 +43,11 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
     },
   ]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isVisualizing, setIsVisualizing] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
   const hasSentInitialPrompt = useRef(false);
   const genAIService = GenAIService.getInstance();
+  const { addToast } = useToast();
 
   const buildProjectContext = () => {
     if (!project) return undefined;
@@ -91,6 +102,49 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
     },
     [input, isLoading, messages, project, genAIService]
   );
+
+  const handleVisualize = async () => {
+    if (!input.trim() || !project?.id) return;
+
+    setIsVisualizing(true);
+    const scriptText = input.trim();
+
+    // Optimistic user message
+    const userMsg: Message = { role: "user", text: `Visualize: "${scriptText}"` };
+    setMessages((p) => [...p, userMsg]);
+    setInput("");
+
+    try {
+      const assets = await ScriptAPI.scriptAssist(project.id, scriptText);
+
+      const systemMsg: Message = {
+        role: "system",
+        text: assets.length > 0
+          ? `I've found ${assets.length} visual references that match that mood.`
+          : "I couldn't find any exact visual matches in our library for that specific imagery.",
+        suggestedAssets: assets
+      };
+
+      setMessages((p) => [...p, systemMsg]);
+    } catch (error) {
+      console.error("Visualization failed:", error);
+      addToast("Failed to visualize script line.");
+      setMessages((p) => [...p, { role: "system", text: "I had trouble accessing the visual library." }]);
+    } finally {
+      setIsVisualizing(false);
+    }
+  };
+
+  const addToMoodboard = async (asset: Asset) => {
+    if (!project?.id) return;
+    try {
+      await MoodboardAPI.createFromAsset(project.id, asset.id);
+      addToast("Added to Moodboard");
+    } catch (error) {
+      console.error("Failed to add to moodboard:", error);
+      addToast("Failed to add asset to moodboard");
+    }
+  };
 
   const promptStarters = [
     "Draft a scene outline based on this brief.",
@@ -217,12 +271,9 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
         </div>
 
         {/* Chat messages */}
-        <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4">
+        <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
           {messages.map((msg, idx) => (
-            <div
-              key={`${msg.role}-${idx}`}
-              className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-            >
+            <div key={`${msg.role}-${idx}`} className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}>
               <div
                 className={`max-w-[70%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
                   msg.role === "user"
@@ -232,6 +283,29 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
               >
                 {msg.text}
               </div>
+
+              {/* Asset Suggestions Grid */}
+              {msg.suggestedAssets && msg.suggestedAssets.length > 0 && (
+                <div className="mt-3 grid grid-cols-2 md:grid-cols-3 gap-2 max-w-[85%]">
+                  {msg.suggestedAssets.map((asset) => (
+                    <div key={asset.id} className="group relative aspect-video rounded-lg overflow-hidden border border-border-subtle cursor-pointer shadow-sm hover:shadow-md transition-all">
+                      <img
+                        src={asset.url}
+                        alt={asset.title || "Visual reference"}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <button
+                          onClick={() => addToMoodboard(asset)}
+                          className="bg-white/90 text-ink-primary px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider hover:bg-white"
+                        >
+                          + Moodboard
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
           <div ref={endRef} />
@@ -248,13 +322,30 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask Lumina for direction..."
+            placeholder="Ask Lumina for direction or visualize a scene..."
             className="flex-1 bg-subtle rounded-full px-4 py-3 text-sm text-ink-primary placeholder-ink-tertiary focus:outline-none focus:ring-2 focus:ring-primary/40"
           />
+
+          {project && (
+             <button
+              type="button"
+              onClick={handleVisualize}
+              disabled={isLoading || isVisualizing || !input.trim()}
+              className="p-3 rounded-full bg-subtle text-ink-secondary hover:bg-primary/10 hover:text-primary transition-colors disabled:opacity-50"
+              title="Visualize Script Line"
+            >
+              {isVisualizing ? (
+                <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <ImageIcon2 size={20} />
+              )}
+            </button>
+          )}
+
           <button
             type="submit"
-            className="px-5 py-3 rounded-full bg-ink-primary text-white text-xs font-bold uppercase tracking-widest"
-            disabled={isLoading}
+            className="px-5 py-3 rounded-full bg-ink-primary text-white text-xs font-bold uppercase tracking-widest disabled:opacity-50"
+            disabled={isLoading || isVisualizing}
           >
             Send
           </button>

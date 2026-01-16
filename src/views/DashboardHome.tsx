@@ -14,6 +14,7 @@ import LuminaAICard from "@/components/dashboard/LuminaAICard";
 import CreateProjectModal from "../components/projects/CreateProjectModal";
 import { getProjectStatusMeta } from "../utils/status";
 import type { Project } from "../services/types";
+import { useStudio } from "../context/StudioContext";
 
 interface DashboardHomeProps {
   onNavigateToGallery?: () => void;
@@ -26,6 +27,10 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({
   const [createModalOpen, setCreateModalOpen] = React.useState(false);
   const { addToast } = useToast();
   const navigate = useNavigate();
+
+  // Use global context for project updates, but keep dashboard specific data hook for now
+  const { setActiveProject, activeProject } = useStudio();
+
   const {
     heroProject,
     heroImage,
@@ -38,6 +43,13 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({
     errorArtifacts,
     refetch,
   } = useDashboardData();
+
+  // Sync hero project to context if not set
+  React.useEffect(() => {
+    if (heroProject && !activeProject) {
+        setActiveProject(heroProject.id);
+    }
+  }, [heroProject, activeProject, setActiveProject]);
 
   // Set CSS custom property for accent color
   React.useEffect(() => {
