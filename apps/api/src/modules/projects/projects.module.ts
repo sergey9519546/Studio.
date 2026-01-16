@@ -12,9 +12,11 @@ import { ProjectQueueService } from './project-queue.service.js';
 import { ProjectsController } from './projects.controller.js';
 import { ProjectsService } from './projects.service.js';
 import { ShardedVectorStoreService } from './sharded-vector-store.service.js';
+import { AssetsModule } from '../assets/assets.module.js';
+import { AIModule } from '../../common/ai/ai.module.js';
 
 @Module({
-  imports: [PrismaModule, CacheModule],
+  imports: [PrismaModule, CacheModule, AssetsModule, AIModule],
   controllers: [ProjectsController],
   providers: [
     // Core services

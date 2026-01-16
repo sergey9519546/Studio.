@@ -3,6 +3,8 @@ import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { Prisma, ProjectStatus } from '@prisma/client';
 import type { Cache } from 'cache-manager';
 import { PrismaService } from '../../prisma/prisma.service';
+import { AssetsService } from '../assets/assets.service.js';
+import { GenAIService } from '../../common/ai/gen-ai.service.js';
 
 export interface ProjectInput {
   name?: string;
@@ -110,7 +112,40 @@ export class ProjectsService {
   constructor(
     private prisma: PrismaService,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    private readonly assetsService: AssetsService,
+    private readonly genAIService: GenAIService,
   ) { }
+
+  async scriptAssist(id: string, scriptText: string) {
+    if (!scriptText || scriptText.length < 5) {
+      return [];
+    }
+
+    // 1. Intelligence
+    const systemPrompt = "You are a visual researcher for a film studio. Analyze the provided script line. Extract 3-5 distinct, comma-separated visual keywords that describe the setting, lighting, or objects. Output ONLY the keywords.";
+
+    let keywords: string[] = [];
+    try {
+      const rawResponse = await this.genAIService.generateText(scriptText, systemPrompt);
+      keywords = rawResponse.split(',').map(s => s.trim()).filter(Boolean);
+    } catch (e) {
+      // Fallback: simple split
+      keywords = scriptText.split(' ').filter(w => w.length > 3);
+    }
+
+    // 2. Discovery
+    let candidates: any[] = [];
+    for (const keyword of keywords) {
+      const results = await this.assetsService.search(keyword);
+      candidates = [...candidates, ...results];
+    }
+
+    // 3. Deduplicate
+    const unique = new Map();
+    candidates.forEach(c => unique.set(c.id, c));
+
+    return Array.from(unique.values()).slice(0, 10);
+  }
 
   private toDto(project: PrismaProjectResult | null): ProjectDto | null {
     if (!project) return null;
