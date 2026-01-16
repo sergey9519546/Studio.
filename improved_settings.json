@@ -1,0 +1,130 @@
+{
+  "debug.onTaskErrors": "debugAnyway",
+  "editor.codeActions.triggerOnFocusChange": true,
+  "diffEditor.codeLens": true,
+  "diffEditor.maxComputationTime": 0,
+  "comments.openView": "never",
+  "extensions.webWorker": false,
+  "[markdown]": {
+    "editor.defaultFormatter": "numso.prettier-standard-vscode"
+  },
+  "terminal.integrated.allowedLinkSchemes": [
+    "file",
+    "http",
+    "https",
+    "mailto",
+    "vscode",
+    "vscode-insiders",
+    "docker-desktop"
+  ],
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "powershell.cwd": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
+  "powershell.enableProfileLoading": false,
+  "workbench.settings.applyToAllProfiles": [
+    "terminal.integrated.defaultProfile.windows"
+  ],
+  "git.autofetch": true,
+  "security.workspace.trust.untrustedFiles": "newWindow",
+  "security.workspace.trust.banner": "never",
+  "redhat.telemetry.enabled": true,
+  "extensions.supportUntrustedWorkspaces": {
+    "rooveterinaryinc.roo-cline": {
+      "supported": true,
+      "version": "3.36.6"
+    },
+    "rooveterinaryinc.kilo-code": {
+      "supported": true,
+      "version": "3.36.6"
+    }
+  },
+  "antigravity.marketplaceExtensionGalleryServiceURL": "",
+  "antigravity.marketplaceGalleryItemURL": "",
+  "geminicodeassist.project": "gen-lang-client-0704991831",
+  "geminicodeassist.agentDebugMode": true,
+  "geminicodeassist.agentYoloMode": true,
+  "geminicodeassist.inlineSuggestions.enableAuto": false,
+  "geminicodeassist.inlineSuggestions.nextEditPredictions": true,
+  "cloudcode.project": "gen-lang-client-0704991831",
+  "cloudcode.autoDependencies": "off",
+  "cloudcode.apigee.gemini.options": {
+    "enterpriseContext": {
+      "enabled": true,
+      "includeMetadata": true,
+      "includeSecurity": true,
+      "includeSchema": true
+    },
+    "enableRemoteMockServer": true
+  },
+  "codium.codeCompletion.enable": true,
+  "codium.customInstructions.allMessages": "",
+  "codium.customInstructions.specificCommands": {},
+  "codium.editorButton": true,
+  "codium.rag.maxLocalSnippets": 5,
+  "codium.rag.maxRemoteSnippets": 5,
+  "codium.terminalAllowedCommands": [],
+  "codium.terminalBlockedCommands": [],
+  "codium.commitMessage.format": "",
+  "roo-cline.allowedCommands": [
+    "git log",
+    "git diff",
+    "git show"
+  ],
+  "roo-cline.deniedCommands": [],
+  "kilo-code.allowedCommands": [
+    "git log",
+    "git diff",
+    "git show"
+  ],
+  "kilo-code.deniedCommands": [],
+  "pieces.OS.launchOnStartup": "Yes",
+  "pieces.cloudCapabilities": "Blended",
+  "pieces.telemetry": true,
+  "eslint.debug": true,
+  "eslint.useESLintClass": true,
+  "totalTypeScript.hideAllTips": false,
+  "totalTypeScript.hideBasicTips": false,
+  "json.schemaDownload.enable": true,
+  "docker.extension.enableComposeLanguageServer": false,
+  "docker.lsp.experimental.scout.vulnerabilities": false,
+  "docker.lsp.experimental.scout.criticalHighVulnerabilities": false,
+  "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
+  "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
+  "vs-kubernetes": {
+    "vscode-kubernetes.helm-path-windows": "C:\\Users\\serge\\.vs-kubernetes\\tools\\helm\\windows-amd64\\helm.exe"
+  },
+  "rust-analyzer.checkOnSave": false,
+  "yaml.schemas": {
+    "file:///c%3A/Users/serge/.antigravity/extensions/continue.continue-1.3.28-win32-x64/config-yaml-schema.json": [
+      ".continue/**/*.yaml"
+    ]
+  },
+  "mcpServers": {
+    "claude-context": {
+      "command": "npx",
+      "args": [
+        "@zilliz/claude-context-mcp@latest"
+      ],
+      "env": {
+        "OPENAI_API_KEY": "your-openai-api-key",
+        "MILVUS_ADDRESS": "your-zilliz-cloud-public-endpoint",
+        "MILVUS_TOKEN": "your-zilliz-cloud-api-key"
+      }
+    },
+    "agentset": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@agentset/mcp@latest"
+      ],
+      "env": {
+        "AGENTSET_API_KEY": "agentset_xxx",
+        "AGENTSET_NAMESPACE_ID": "ns_xxx"
+      }
+    }
+  },
+  "gemini-cli.debug.logging.enabled": true,
+  "builder.allowSelfSignedCertificates": "Yes",
+  "atlascode.rovodev.showEntitlementNotifications": false,
+  "repomix.security.enableSecurityCheck": false
+}

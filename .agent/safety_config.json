@@ -1,0 +1,111 @@
+{
+  "version": "1.0.0",
+  "description": "Safety guardrails for Autonomous Principal Architect",
+
+  "terminal_policies": {
+    "default_mode": "auto",
+    "turbo_mode": false,
+    "max_execution_time": 300,
+
+    "allowed_commands": [
+      "ls", "find", "grep", "cat", "head", "tail",
+      "npm test", "npm run test", "yarn test",
+      "npm run lint", "npm run build",
+      "git status", "git log", "git diff",
+      "node --version", "npm --version",
+      "python --version", "pip --version"
+    ],
+
+    "require_confirmation": [
+      "rm", "del", "rmdir", "move", "mv",
+      "npm install", "yarn add", "pip install",
+      "git push", "git merge", "git pull --force",
+      "drop table", "truncate", "delete from",
+      "systemctl", "service", "sudo", "runas"
+    ],
+
+    "blocked_commands": [
+      "rm -rf /", "del /s /q", "format",
+      "sudo rm", "sudo chmod 777",
+      "systemctl stop", "service stop",
+      ":(){ :|:& };:", "fork bomb",
+      "shutdown", "reboot", "halt"
+    ],
+
+    "danger_patterns": [
+      "\\brm\\s+-rf\\s+/",
+      "\\bdel\\s+/s\\s+/q",
+      "\\bsudo\\s+.*\\b(rm|chmod|chown)",
+      "\\bdrop\\s+database",
+      "\\btruncate\\s+table\\s+.*",
+      "\\bdelete\\s+from\\s+.*\\s+where\\s+1=1"
+    ]
+  },
+
+  "file_system_protections": {
+    "protected_paths": [
+      "/",
+      "/bin",
+      "/sbin",
+      "/usr",
+      "/etc",
+      "/var",
+      "/System",
+      "/Windows",
+      "/Program Files",
+      "C:\\\\Windows",
+      "C:\\\\Program Files",
+      "~/.ssh",
+      "~/.aws",
+      "~/.config"
+    ],
+
+    "allowed_write_paths": [
+      "./",
+      "src/",
+      "components/",
+      "lib/",
+      "utils/",
+      "tests/",
+      "docs/",
+      ".agent/"
+    ],
+
+    "backup_required_for": [
+      "*.js", "*.ts", "*.jsx", "*.tsx",
+      "*.py", "*.java", "*.go", "*.rs",
+      "*.json", "*.yaml", "*.yml", "*.toml",
+      "*.md", "*.sql", "*.env"
+    ]
+  },
+
+  "remediation_limits": {
+    "max_files_modified_per_session": 50,
+    "max_lines_modified_per_file": 500,
+    "max_consecutive_failures": 3,
+    "max_execution_time_per_phase": 1800,
+    "require_human_review_after": 10
+  },
+
+  "logging_and_audit": {
+    "log_all_commands": true,
+    "log_file_changes": true,
+    "create_backups": true,
+    "audit_trail_enabled": true,
+    "log_retention_days": 30
+  },
+
+  "emergency_protocols": {
+    "auto_rollback_on_critical_error": true,
+    "create_blockers_file_on_failure": true,
+    "halt_on_suspicious_activity": true,
+    "notify_on_high_risk_actions": true
+  },
+
+  "verification_requirements": {
+    "require_tests_after_changes": true,
+    "require_lint_pass": true,
+    "require_build_success": false,
+    "verify_no_regressions": true
+  }
+}

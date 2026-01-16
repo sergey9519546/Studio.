@@ -1,0 +1,60 @@
+:root {
+  /* Palette */
+  --color-app: #f5f2ec;
+  --color-panel: #ffffff;
+  --color-surface: #fffdf9;
+  --color-subtle: #f8f3ed;
+  --color-border: rgba(15, 23, 42, 0.12);
+  --color-border-strong: rgba(15, 23, 42, 0.2);
+  --color-ink-primary: #111827;
+  --color-ink-secondary: #4b5563;
+  --color-ink-muted: #9ca3af;
+  --color-primary: #0f766e;
+  --color-primary-hover: #0b5f59;
+  --color-primary-tint: rgba(15, 118, 110, 0.12);
+  --color-success: #16a34a;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+
+  /* Typography */
+  --font-body: "Manrope", "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", "Manrope", "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Roboto Mono", monospace;
+
+  /* Spacing */
+  --spacing-tight: 1rem;
+  --spacing-base: 1.5rem;
+  --spacing-loose: 2.75rem;
+  --spacing-hero: 3.25rem;
+
+  /* Border radius */
+  --radius-pill: 999px;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+
+  /* Shadows */
+  --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.06);
+  --shadow-card: 0 20px 45px rgba(15, 23, 42, 0.1);
+  --shadow-focus: 0 0 0 3px rgba(36, 99, 230, 0.35);
+}
+
+.dark {
+  --color-app: #0b0f15;
+  --color-panel: #121821;
+  --color-surface: #161c26;
+  --color-subtle: rgba(255, 255, 255, 0.06);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.16);
+  --color-ink-primary: #f9fafb;
+  --color-ink-secondary: #cbd5f5;
+  --color-ink-muted: #94a3b8;
+  --color-primary: #3ca7a0;
+  --color-primary-hover: #2c8f89;
+  --color-primary-tint: rgba(60, 167, 160, 0.16);
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-error: #fb7185;
+  --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.55);
+  --shadow-card: 0 30px 60px rgba(0, 0, 0, 0.55);
+}

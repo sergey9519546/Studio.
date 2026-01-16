@@ -1,0 +1,43 @@
+/* Daily Vibe Palette Colors */
+.palette-color {
+  flex: 1;
+  border-radius: 9999px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  border: 1px solid rgb(0 0 0 / 0.05);
+  transition: transform 0.2s;
+  cursor: pointer;
+  outline: none;
+}
+
+.palette-color:hover {
+  transform: translateY(-0.25rem);
+}
+
+.palette-color-0 {
+  background-color: #0F766E;
+  transition-delay: 0ms;
+}
+
+.palette-color-1 {
+  background-color: #F97316;
+  transition-delay: 50ms;
+}
+
+.palette-color-2 {
+  background-color: #F2B705;
+  transition-delay: 100ms;
+}
+
+.palette-color-3 {
+  background-color: #16A34A;
+  transition-delay: 150ms;
+}
+
+.palette-color-4 {
+  background-color: #0EA5E9;
+  transition-delay: 200ms;
+}
+
+.palette-color:focus-visible {
+  box-shadow: 0 0 0 3px var(--dashboard-accent, #2463E6);
+}

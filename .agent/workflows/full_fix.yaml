@@ -1,0 +1,201 @@
+name: Full Project Remediation & Autonomous Architecture
+description: Complete autonomous codebase analysis, error fixing, and feature implementation
+command: /fix_all
+icon: 🔧
+
+# Workflow Configuration
+timeout: 3600  # 1 hour timeout
+max_iterations: 10
+error_handling: continue_on_error
+
+steps:
+  # PHASE 1: RECONNAISSANCE & CONTEXT INGESTION
+  - name: "Topology Mapping"
+    action: terminal
+    command: "find . -type f -name '*.json' -o -name '*.js' -o -name '*.ts' -o -name '*.py' -o -name 'requirements.txt' -o -name 'package.json' | head -20"
+    description: "Map project structure and identify configuration files"
+
+  - name: "Dependency Analysis"
+    action: prompt
+    text: "Execute Phase 1: Read package.json, requirements.txt, and other config files. Identify tech stack, missing dependencies, and version conflicts."
+
+  - name: "Entry Point Discovery"
+    action: prompt
+    text: "Locate and analyze the main application entry points (index.js, main.py, App.tsx, etc.). Understand initialization flow."
+
+  - name: "Generate Context Artifact"
+    action: file_create
+    path: ".agent/CONTEXT_REPORT.md"
+    content: |
+      # PROJECT CONTEXT REPORT
+      Generated: $(date)
+
+      ## Project Structure
+      [Analysis pending]
+
+      ## Tech Stack
+      [Analysis pending]
+
+      ## Health Score: [0-100]
+      [Analysis pending]
+
+      ## Missing Components
+      [Analysis pending]
+
+  - name: "Context Report Population"
+    action: prompt
+    text: "Populate .agent/CONTEXT_REPORT.md with detailed project analysis including health score and missing components inventory."
+
+  # PHASE 2: PLAN GENERATION
+  - name: "Gap Analysis"
+    action: prompt
+    text: "Execute Phase 2: Scan for TODO, FIXME, Ghost Imports, and missing UI components. Identify architectural gaps."
+
+  - name: "Generate Remediation Plan"
+    action: file_create
+    path: "PLAN.md"
+    content: |
+      # AUTONOMOUS REMEDIATION PLAN
+      Generated: $(date)
+
+      ## Section 1: Critical Fixes
+      - Compilation errors
+      - Runtime crashes
+      - Security vulnerabilities
+
+      ## Section 2: Missing Features
+      - Incomplete implementations
+      - Ghost imports resolution
+      - UI component completion
+
+      ## Section 3: Optimization
+      - Performance improvements
+      - Code quality enhancements
+
+  - name: "Plan Review Checkpoint"
+    action: user_review
+    message: "Review the generated PLAN.md. Approve to proceed with autonomous remediation, or provide modifications."
+    required: true
+
+  # PHASE 3: AUTONOMOUS REMEDIATION
+  - name: "Critical Fixes Execution"
+    action: prompt
+    text: "Execute Phase 3: Begin with Section 1 of PLAN.md. Use TDR Protocol for each critical fix. Verify after each change."
+
+  - name: "Missing Features Implementation"
+    action: prompt
+    text: "Execute Section 2: Implement missing features. Scaffold required files, implement business logic, wire integrations."
+
+  - name: "Optimization Phase"
+    action: prompt
+    text: "Execute Section 3: Apply optimizations while maintaining functionality."
+
+  # PHASE 4: CONFIGURATION & INTEGRATION
+  - name: "AI Integration Analysis"
+    action: prompt
+    text: "Execute Phase 4: Analyze AI services, third-party integrations. Verify configuration and data flow."
+
+  - name: "Environment Configuration"
+    action: prompt
+    text: "Check .env files, create .env.example if needed. Ensure all required secrets are documented."
+
+  - name: "Integration Wiring"
+    action: prompt
+    text: "Wire AI services, verify API connectivity, implement mocking for development environments."
+
+  - name: "Integration Documentation"
+    action: file_create
+    path: ".agent/INTEGRATION_MAP.md"
+    content: |
+      # INTEGRATION MAP
+      Generated: $(date)
+
+      ## AI Services
+      [Documented integrations]
+
+      ## Third-Party APIs
+      [External dependencies]
+
+      ## Data Flow
+      [Request/response patterns]
+
+  # PHASE 5: VERIFICATION
+  - name: "Build Verification"
+    action: terminal
+    command: "npm run build 2>&1 || echo 'Build failed'"
+    description: "Execute build process and capture any errors"
+
+  - name: "Test Execution"
+    action: terminal
+    command: "npm test 2>&1 || echo 'Tests failed'"
+    description: "Run test suite and capture results"
+
+  - name: "Linter Check"
+    action: terminal
+    command: "npm run lint 2>&1 || echo 'Linting failed'"
+    description: "Execute linting and capture issues"
+
+  - name: "Runtime Simulation Setup"
+    action: prompt
+    text: "Launch local development server and prepare for runtime verification."
+
+  - name: "Browser Agent Verification"
+    action: browser_preview
+    url: "http://localhost:3000"
+    actions:
+      - navigate: "/"
+      - screenshot: "verification-homepage.png"
+      - check_elements: ["main", "nav", "footer"]
+    description: "Use browser agent to verify application functionality"
+
+  - name: "Verification Logging"
+    action: file_create
+    path: ".agent/VERIFICATION_LOG.md"
+    content: |
+      # VERIFICATION LOG
+      Generated: $(date)
+
+      ## Build Status
+      [Pass/Fail]
+
+      ## Test Results
+      [Pass/Fail with details]
+
+      ## Linter Status
+      [Pass/Fail with details]
+
+      ## Runtime Verification
+      [Browser agent results]
+
+      ## Overall Status
+      [Ready for deployment / Issues remaining]
+
+  # FINAL REPORTING
+  - name: "Completion Summary"
+    action: prompt
+    text: "Generate final completion report summarizing all fixes, implementations, and verifications performed."
+
+  - name: "Cleanup Artifacts"
+    action: prompt
+    text: "Clean up temporary artifacts while preserving PLAN.md, CONTEXT_REPORT.md, and VERIFICATION_LOG.md for future reference."
+
+# Error Handling
+on_error:
+  - name: "Error Analysis"
+    action: prompt
+    text: "Analyze the error that occurred. Determine if it's recoverable or requires human intervention."
+
+  - name: "Error Logging"
+    action: file_append
+    path: ".agent/ERROR_LOG.md"
+    content: "Error at step {{step_name}}: {{error_message}}\nTimestamp: $(date)\n"
+
+  - name: "Failure Recovery"
+    action: prompt
+    text: "If error is recoverable, attempt automated recovery. If not, create BLOCKERS.md and request human assistance."
+
+# Success Handling
+on_success:
+  - name: "Success Notification"
+    action: prompt
+    text: "Remediation completed successfully. Provide summary of all changes made and verification results."
