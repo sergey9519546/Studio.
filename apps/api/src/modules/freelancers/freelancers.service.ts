@@ -3,7 +3,20 @@ import { BadRequestException, Inject, Injectable, Logger } from '@nestjs/common'
 import type { FreelancerStatus } from '@prisma/client';
 import type { Cache } from 'cache-manager';
 import { PrismaService } from '../../prisma/prisma.service';
+import { ZaiService } from '../../common/ai/zai.service.js';
 import { CreateFreelancerDto, ImportFreelancerDto, UpdateFreelancerDto } from './dto/freelancer.dto.js';
+
+export interface MulterFile {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  size: number;
+  destination: string;
+  filename: string;
+  path: string;
+  buffer: Buffer;
+}
 
 @Injectable()
 export class FreelancersService {
@@ -14,6 +27,7 @@ export class FreelancersService {
   constructor(
     private prisma: PrismaService,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    private readonly zaiService: ZaiService,
   ) { }
 
   async findAll() {
@@ -152,6 +166,86 @@ export class FreelancersService {
       }
     }
     return { created, updated, errors: [] };
+  }
+
+  /**
+   * Parse CV/resume file and create freelancer profile
+   */
+  async parseCVAndCreate(file: MulterFile) {
+    if (!file) {
+      throw new BadRequestException('No file provided');
+    }
+
+    try {
+      // Convert file to text
+      const fileContent = file.buffer.toString('utf-8');
+      
+      // Use Z.ai to parse the resume
+      const parsed = await this.zaiService.parseResume(fileContent);
+      
+      if (!parsed.name) {
+        throw new BadRequestException('Could not extract name from CV/resume');
+      }
+
+      if (!parsed.email) {
+        throw new BadRequestException('Could not extract email from CV/resume');
+      }
+
+      // Create freelancer profile from parsed data
+      const createDto: CreateFreelancerDto = {
+        name: parsed.name,
+        email: parsed.email,
+        contactInfo: parsed.phone || parsed.email,
+        skills: parsed.skills || [],
+        bio: this.buildBioFromParsedData(parsed),
+        status: 'AVAILABLE' as FreelancerStatus,
+      };
+
+      const freelancer = await this.create(createDto);
+
+      return {
+        success: true,
+        freelancer,
+        parsedData: parsed,
+        message: 'CV/Resume parsed and freelancer profile created successfully',
+      };
+    } catch (error) {
+      this.logger.error('Failed to parse CV', error);
+      throw new BadRequestException(
+        `Failed to parse CV/resume: ${error instanceof Error ? error.message : 'Unknown error'}`
+      );
+    }
+  }
+
+  /**
+   * Build bio text from parsed resume data
+   */
+  private buildBioFromParsedData(parsed: {
+    name?: string;
+    experience?: string;
+    education?: string;
+    skills?: string[];
+    availability?: string;
+  }): string {
+    const parts: string[] = [];
+
+    if (parsed.experience) {
+      parts.push(`Experience: ${parsed.experience}`);
+    }
+
+    if (parsed.education) {
+      parts.push(`Education: ${parsed.education}`);
+    }
+
+    if (parsed.skills && parsed.skills.length > 0) {
+      parts.push(`Skills: ${parsed.skills.join(', ')}`);
+    }
+
+    if (parsed.availability) {
+      parts.push(`Availability: ${parsed.availability}`);
+    }
+
+    return parts.join('\n\n') || 'No bio information available';
   }
 
   private normalizeFreelancers(items: unknown[]): unknown[] {

@@ -363,14 +363,14 @@ export class MoodboardService {
    * Batch analyze multiple moodboard items
    */
   async batchAnalyze(projectId: string): Promise<{ analyzed: number; failed: number }> {
-    const items = await this.prisma.moodboardItem.findMany({
-      where: {
-        projectId,
-        tags: {
-          isEmpty: true,
-        },
-      },
+    // Find items without tags - check if tags array is empty or has zero length
+    const allItems = await this.prisma.moodboardItem.findMany({
+      where: { projectId },
     });
+    
+    const items = allItems.filter(item => 
+      !item.tags || (Array.isArray(item.tags) && item.tags.length === 0)
+    );
 
     let analyzed = 0;
     let failed = 0;

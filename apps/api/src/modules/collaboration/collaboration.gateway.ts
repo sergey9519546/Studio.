@@ -16,7 +16,7 @@ import { Logger } from '@nestjs/common';
 })
 export class CollaborationGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer()
-  server: Server;
+  server!: Server;
 
   private readonly logger = new Logger(CollaborationGateway.name);
 

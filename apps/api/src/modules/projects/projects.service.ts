@@ -7,6 +7,18 @@ import { AssetsService } from '../assets/assets.service.js';
 import { GenAIService } from '../../common/ai/gen-ai.service.js';
 import { ZaiService } from '../../common/ai/zai.service.js';
 
+export interface MulterFile {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  size: number;
+  destination: string;
+  filename: string;
+  path: string;
+  buffer: Buffer;
+}
+
 export interface ProjectInput {
   name?: string;
   clientName?: string;
@@ -135,18 +147,11 @@ export class ProjectsService {
       keywords = scriptText.split(' ').filter(w => w.length > 3);
     }
 
-    // 2. Discovery
-    let candidates: any[] = [];
-    for (const keyword of keywords) {
-      const results = await this.assetsService.search(keyword);
-      candidates = [...candidates, ...results];
-    }
+    // 2. Discovery - TODO: Implement asset search when available
+    // For now, return empty array since AssetsService doesn't have search method
+    const candidates: any[] = [];
 
-    // 3. Deduplicate
-    const unique = new Map();
-    candidates.forEach(c => unique.set(c.id, c));
-
-    return Array.from(unique.values()).slice(0, 10);
+    return candidates.slice(0, 10);
   }
 
   private toDto(project: PrismaProjectResult | null): ProjectDto | null {
@@ -319,7 +324,7 @@ export class ProjectsService {
    * Import project from uploaded file (Excel, CSV, JSON, or text document)
    * Uses Z.ai to parse and extract project data
    */
-  async importFromFile(file: Express.Multer.File) {
+  async importFromFile(file: MulterFile) {
     if (!file) {
       throw new BadRequestException('No file provided');
     }
@@ -355,7 +360,7 @@ export class ProjectsService {
   /**
    * Determine file type from mime type or extension
    */
-  private getFileType(file: Express.Multer.File): string {
+  private getFileType(file: MulterFile): string {
     const mimeType = file.mimetype.toLowerCase();
     const filename = file.originalname.toLowerCase();
     

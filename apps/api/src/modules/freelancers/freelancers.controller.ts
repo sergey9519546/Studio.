@@ -1,6 +1,7 @@
 
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
-import { FreelancersService } from './freelancers.service.js';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { FreelancersService, type MulterFile } from './freelancers.service.js';
 import { CreateFreelancerDto, UpdateFreelancerDto, ImportFreelancerDto } from './dto/freelancer.dto.js';
 
 @Controller({ path: 'freelancers', version: '1' })
@@ -47,5 +48,11 @@ export class FreelancersController {
   @Post('batch')
   importBatch(@Body() items: ImportFreelancerDto[]) {
     return this.freelancersService.createBatch(items);
+  }
+
+  @Post('parse-cv')
+  @UseInterceptors(FileInterceptor('file'))
+  async parseCV(@UploadedFile() file: MulterFile) {
+    return this.freelancersService.parseCVAndCreate(file);
   }
 }
