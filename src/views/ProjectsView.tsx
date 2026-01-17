@@ -1,7 +1,8 @@
-import { ArrowRight, MoreHorizontal, Plus } from "lucide-react";
+import { ArrowRight, MoreHorizontal, Plus, Upload } from "lucide-react";
 import React, { useMemo, useState } from "react";
 import Card from "../components/ui/Card";
 import { Select } from "../components/design/Select";
+import ProjectFileImport from "../components/projects/ProjectFileImport";
 import type { Project } from "../services/types";
 import { getProjectStatusMeta } from "../utils/status";
 
@@ -9,15 +10,18 @@ interface ProjectsViewProps {
   projects: Project[];
   onSelect: (project: Project) => void;
   onCreate?: () => void;
+  onImportSuccess?: () => void;
 }
 
 const ProjectsView: React.FC<ProjectsViewProps> = ({
   projects,
   onSelect,
   onCreate,
+  onImportSuccess,
 }) => {
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [sortBy, setSortBy] = useState<"recent" | "title">("recent");
+  const [showImport, setShowImport] = useState(false);
 
   const statuses = useMemo(
     () => Array.from(new Set(projects.map((p) => p.status))).filter(Boolean),
@@ -69,6 +73,13 @@ const ProjectsView: React.FC<ProjectsViewProps> = ({
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
+          <button
+            onClick={() => setShowImport(true)}
+            className="px-4 py-2 rounded-xl border border-border-subtle text-ink-primary hover:border-primary hover:text-primary transition-colors flex items-center gap-2 text-sm font-medium"
+          >
+            <Upload size={16} />
+            Import from File
+          </button>
           <Select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
@@ -89,6 +100,15 @@ const ProjectsView: React.FC<ProjectsViewProps> = ({
           />
         </div>
       </div>
+
+      {showImport && (
+        <ProjectFileImport
+          onImportSuccess={() => {
+            onImportSuccess?.();
+          }}
+          onClose={() => setShowImport(false)}
+        />
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <button

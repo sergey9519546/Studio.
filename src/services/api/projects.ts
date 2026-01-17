@@ -132,4 +132,25 @@ export class ProjectsAPI {
       handleApiError(error);
     }
   }
+
+  /**
+   * Import project from file (Excel, CSV, Document)
+   */
+  static async importFromFile(formData: FormData): Promise<{ success: boolean; project: Project; message: string }> {
+    try {
+      const response = await apiClient.post<{ success: boolean; project: Project; message: string }>(
+        '/projects/import',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      handleApiError(error);
+      throw error;
+    }
+  }
 }
