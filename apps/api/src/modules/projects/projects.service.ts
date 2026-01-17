@@ -147,8 +147,9 @@ export class ProjectsService {
       keywords = scriptText.split(' ').filter(w => w.length > 3);
     }
 
-    // 2. Discovery - TODO: Implement asset search when available
-    // For now, return empty array since AssetsService doesn't have search method
+    // TODO: Implement asset search functionality
+    // The AssetsService needs a search method to find relevant assets by keyword
+    // For now, returning empty array until search is implemented
     const candidates: any[] = [];
 
     return candidates.slice(0, 10);
@@ -351,8 +352,29 @@ export class ProjectsService {
         message: 'Project imported successfully',
       };
     } catch (error) {
+      if (error instanceof BadRequestException) {
+        throw error;
+      }
+      
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      
+      // Provide more specific error messages
+      if (errorMessage.includes('parse') || errorMessage.includes('JSON')) {
+        throw new BadRequestException(
+          'Failed to parse file content. Please ensure the file is properly formatted and contains valid project data.'
+        );
+      } else if (errorMessage.includes('title') || errorMessage.includes('name')) {
+        throw new BadRequestException(
+          'Could not extract project name from file. Please ensure your file contains a project name or title field.'
+        );
+      } else if (errorMessage.includes('Z.ai') || errorMessage.includes('API')) {
+        throw new BadRequestException(
+          'AI parsing service is temporarily unavailable. Please try again later or check your Z.ai API configuration.'
+        );
+      }
+      
       throw new BadRequestException(
-        `Failed to import project from file: ${error instanceof Error ? error.message : 'Unknown error'}`
+        `Failed to import project from file: ${errorMessage}`
       );
     }
   }
