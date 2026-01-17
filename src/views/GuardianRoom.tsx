@@ -7,6 +7,7 @@ import { MoodboardAPI } from "../services/api/moodboard";
 import { Asset } from "../services/types";
 import { useToast } from "../hooks/useToast";
 import { useStudio } from "../context/StudioContext";
+import CollaborativeCursor from "../components/ui/CollaborativeCursor";
 
 interface Message {
   role: "user" | "system";
@@ -163,6 +164,11 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
   }, [initialPrompt, sendMessage]);
 
   return (
+    <CollaborativeCursor
+      documentId={project?.id || 'global'}
+      currentUserId={Math.random().toString(36).substr(2, 9)}
+      className="h-full w-full"
+    >
     <div className="page-shell h-full flex flex-col md:flex-row gap-8 animate-in fade-in">
       {/* Header for Mobile */}
       <div className="md:hidden flex items-center gap-4 mb-4">
@@ -352,6 +358,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
         </form>
       </div>
     </div>
+    </CollaborativeCursor>
   );
 };
 

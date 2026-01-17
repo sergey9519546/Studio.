@@ -16,6 +16,7 @@ import { FreelancersModule } from "./modules/freelancers/freelancers.module.js";
 import { MoodboardModule } from "./modules/moodboard/moodboard.module.js";
 import { ProjectsModule } from "./modules/projects/projects.module.js";
 import { StorageModule } from "./modules/storage/storage.module.js";
+import { CollaborationModule } from "./modules/collaboration/collaboration.module.js";
 import { PrismaModule } from "./prisma/prisma.module.js";
 const moduleDir = dirname(__filename);
 
@@ -93,6 +94,7 @@ if (!staticRoot && process.env.NODE_ENV === "production") {
     ProjectsModule,
     FreelancersModule,
     MoodboardModule,
+    CollaborationModule,
   ],
   providers: [
     {
