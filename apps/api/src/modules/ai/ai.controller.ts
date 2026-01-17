@@ -8,11 +8,11 @@ import {
     BadRequestException
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import 'multer';
+
 import { GeminiAnalystService } from './gemini-analyst.service';
 
 @Controller('ai')
-export class AIController {
+export class AiController {
     constructor(private readonly aiService: GeminiAnalystService) { }
 
     @Post('chat')
@@ -23,7 +23,7 @@ export class AIController {
         @UploadedFiles() files: Array<Express.Multer.File>
     ) {
         if (!message && (!files || files.length === 0)) {
-            throw new BadRequestException('Message or files are required');
+            throw new BadRequestException('Either a message or at least one file must be provided');
         }
 
         return this.aiService.analyzeContext(context, message, files);

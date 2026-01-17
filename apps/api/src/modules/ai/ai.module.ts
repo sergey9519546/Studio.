@@ -10,4 +10,4 @@ import { IntelligenceModule } from '../intelligence/intelligence.module';
     providers: [GeminiAnalystService],
     exports: [GeminiAnalystService],
 })
-export class AIModule { }
+export class AiModule { }
