@@ -1,4 +1,4 @@
-import { Clock, Filter, Heart, Image, Plus, Search, Trash2, X, XCircle } from "lucide-react";
+import { Clock, Filter, Heart, Image, Plus, Search, Trash2, X, XCircle, Wand2 } from "lucide-react";
 import React, { useMemo, useState } from "react";
 import {
   searchSimilarImages,
@@ -18,6 +18,7 @@ import { Button } from "./design/Button";
 import { Card } from "./design/Card";
 import { Input } from "./design/Input";
 import { Select } from "./design/Select";
+import AIImageGenerator from "./ai/AIImageGenerator";
 
 interface MoodboardProps {
   projectId: string;
@@ -27,7 +28,7 @@ interface MoodboardProps {
   onAddUnsplashImage?: (image: UnsplashImage) => Promise<void>;
 }
 
-type TabType = "uploads" | "unsplash";
+type TabType = "uploads" | "unsplash" | "ai-generate";
 
 const UNSPLASH_COLOR_OPTIONS = [
   { value: "", label: "All Colors" },
@@ -93,6 +94,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   const [searchResults, setSearchResults] = useState<MoodboardItem[] | null>(
     null
   );
+  const [showAIGenerator, setShowAIGenerator] = useState(false);
   const { addToast } = useToast();
 
   // Unsplash state
@@ -358,6 +360,14 @@ export const Moodboard: React.FC<MoodboardProps> = ({
               aria-label="Discover Unsplash images"
             >
               Discover
+            </button>
+            <button
+              onClick={() => setShowAIGenerator(true)}
+              className={`pb-3 px-1 font-medium transition-all flex items-center gap-2 text-ink-secondary hover:text-ink-primary`}
+              aria-label="Generate with AI"
+            >
+              <Wand2 size={16} />
+              AI Generate
             </button>
           </div>
         </div>
@@ -922,6 +932,18 @@ export const Moodboard: React.FC<MoodboardProps> = ({
           </div>
         )}
       </div>
+
+      {/* AI Image Generator Modal */}
+      {showAIGenerator && (
+        <AIImageGenerator
+          onImageGenerated={async (imageUrl) => {
+            // Add the generated image to the moodboard
+            addToast("Image generated successfully! You can now add it to your moodboard.");
+            setShowAIGenerator(false);
+          }}
+          onClose={() => setShowAIGenerator(false)}
+        />
+      )}
     </div>
   );
 };

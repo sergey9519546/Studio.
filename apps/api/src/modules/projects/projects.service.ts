@@ -5,6 +5,19 @@ import type { Cache } from 'cache-manager';
 import { PrismaService } from '../../prisma/prisma.service';
 import { AssetsService } from '../assets/assets.service.js';
 import { GenAIService } from '../../common/ai/gen-ai.service.js';
+import { ZaiService } from '../../common/ai/zai.service.js';
+
+export interface MulterFile {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  size: number;
+  destination: string;
+  filename: string;
+  path: string;
+  buffer: Buffer;
+}
 
 export interface ProjectInput {
   name?: string;
@@ -114,6 +127,7 @@ export class ProjectsService {
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private readonly assetsService: AssetsService,
     private readonly genAIService: GenAIService,
+    private readonly zaiService: ZaiService,
   ) { }
 
   async scriptAssist(id: string, scriptText: string) {
@@ -133,18 +147,12 @@ export class ProjectsService {
       keywords = scriptText.split(' ').filter(w => w.length > 3);
     }
 
-    // 2. Discovery
-    let candidates: any[] = [];
-    for (const keyword of keywords) {
-      const results = await this.assetsService.search(keyword);
-      candidates = [...candidates, ...results];
-    }
+    // TODO: Implement asset search functionality
+    // The AssetsService needs a search method to find relevant assets by keyword
+    // For now, returning empty array until search is implemented
+    const candidates: any[] = [];
 
-    // 3. Deduplicate
-    const unique = new Map();
-    candidates.forEach(c => unique.set(c.id, c));
-
-    return Array.from(unique.values()).slice(0, 10);
+    return candidates.slice(0, 10);
   }
 
   private toDto(project: PrismaProjectResult | null): ProjectDto | null {
@@ -311,6 +319,162 @@ export class ProjectsService {
       }
     }
     return { created, updated: 0, errors };
+  }
+
+  /**
+   * Import project from uploaded file (Excel, CSV, JSON, or text document)
+   * Uses Z.ai to parse and extract project data
+   */
+  async importFromFile(file: MulterFile) {
+    if (!file) {
+      throw new BadRequestException('No file provided');
+    }
+
+    try {
+      // Convert buffer to string
+      const fileContent = file.buffer.toString('utf-8');
+      
+      // Determine file type from mime type or extension
+      const fileType = this.getFileType(file);
+      
+      // Use Z.ai to parse the file content
+      const parsedData = await this.zaiService.parseFile(fileContent, fileType);
+      
+      // Validate and normalize the parsed data
+      const projectData = this.normalizeImportedProject(parsedData);
+      
+      // Create the project
+      const created = await this.create(projectData);
+      
+      return {
+        success: true,
+        project: created,
+        message: 'Project imported successfully',
+      };
+    } catch (error) {
+      if (error instanceof BadRequestException) {
+        throw error;
+      }
+      
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      
+      // Provide more specific error messages
+      if (errorMessage.includes('parse') || errorMessage.includes('JSON')) {
+        throw new BadRequestException(
+          'Failed to parse file content. Please ensure the file is properly formatted and contains valid project data.'
+        );
+      } else if (errorMessage.includes('title') || errorMessage.includes('name')) {
+        throw new BadRequestException(
+          'Could not extract project name from file. Please ensure your file contains a project name or title field.'
+        );
+      } else if (errorMessage.includes('Z.ai') || errorMessage.includes('API')) {
+        throw new BadRequestException(
+          'AI parsing service is temporarily unavailable. Please try again later or check your Z.ai API configuration.'
+        );
+      }
+      
+      throw new BadRequestException(
+        `Failed to import project from file: ${errorMessage}`
+      );
+    }
+  }
+
+  /**
+   * Determine file type from mime type or extension
+   */
+  private getFileType(file: MulterFile): string {
+    const mimeType = file.mimetype.toLowerCase();
+    const filename = file.originalname.toLowerCase();
+    
+    if (mimeType.includes('spreadsheet') || mimeType.includes('excel') || filename.endsWith('.xlsx') || filename.endsWith('.xls')) {
+      return 'Excel';
+    } else if (mimeType.includes('csv') || filename.endsWith('.csv')) {
+      return 'CSV';
+    } else if (mimeType.includes('json') || filename.endsWith('.json')) {
+      return 'JSON';
+    } else if (mimeType.includes('document') || filename.endsWith('.docx') || filename.endsWith('.doc')) {
+      return 'Document';
+    } else {
+      return 'Text';
+    }
+  }
+
+  /**
+   * Normalize imported project data to match our schema
+   */
+  private normalizeImportedProject(data: Record<string, unknown>): {
+    title: string;
+    description?: string;
+    client?: string;
+    status?: ProjectStatus;
+    budget?: number;
+    startDate?: Date;
+    endDate?: Date;
+    roleRequirements?: { role: string; count?: number; skills: string[] }[];
+  } {
+    // Extract project name/title
+    const title = (data.projectName || data.name || data.title || 'Imported Project') as string;
+    
+    // Extract description/brief
+    const description = (data.description || data.brief || data.summary) as string | undefined;
+    
+    // Extract client
+    const client = (data.client || data.clientName || data.customer) as string | undefined;
+    
+    // Extract budget
+    let budget: number | undefined;
+    if (data.budget) {
+      if (typeof data.budget === 'number') {
+        budget = data.budget;
+      } else if (typeof data.budget === 'string') {
+        // Try to parse budget string (e.g., "$10,000" -> 10000)
+        const numericBudget = parseFloat(data.budget.replace(/[^0-9.-]+/g, ''));
+        if (!isNaN(numericBudget)) {
+          budget = numericBudget;
+        }
+      }
+    }
+    
+    // Extract dates
+    let startDate: Date | undefined;
+    let endDate: Date | undefined;
+    
+    if (data.startDate || data.start || data.beginDate) {
+      const dateStr = (data.startDate || data.start || data.beginDate) as string;
+      const parsed = new Date(dateStr);
+      if (!isNaN(parsed.getTime())) {
+        startDate = parsed;
+      }
+    }
+    
+    if (data.endDate || data.dueDate || data.deadline || data.end) {
+      const dateStr = (data.endDate || data.dueDate || data.deadline || data.end) as string;
+      const parsed = new Date(dateStr);
+      if (!isNaN(parsed.getTime())) {
+        endDate = parsed;
+      }
+    }
+    
+    // Extract deliverables as role requirements
+    let roleRequirements: { role: string; count?: number; skills: string[] }[] | undefined;
+    if (data.deliverables && Array.isArray(data.deliverables)) {
+      roleRequirements = (data.deliverables as string[]).map(deliverable => ({
+        role: typeof deliverable === 'string' ? deliverable : String(deliverable),
+        count: 1,
+        skills: [],
+      }));
+    }
+    
+    return {
+      title,
+      description,
+      client,
+      status: this.normalizeStatus(data.status as string | undefined),
+      budget,
+      startDate,
+      endDate,
+      roleRequirements,
+    };
   }
 
   private normalizeStatus(status?: string): ProjectStatus {

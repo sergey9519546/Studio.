@@ -1,7 +1,8 @@
 
-import { Body, Controller, DefaultValuePipe, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, DefaultValuePipe, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateProjectDto, UpdateProjectDto } from './dto/project.dto.js';
-import { ProjectInput, ProjectsService } from './projects.service.js';
+import { ProjectInput, ProjectsService, type MulterFile } from './projects.service.js';
 
 @Controller({ path: 'projects', version: '1' })
 export class ProjectsController {
@@ -45,5 +46,13 @@ export class ProjectsController {
   @Post('batch')
   importBatch(@Body() items: ProjectInput[]) {
     return this.projectsService.importBatch(items);
+  }
+
+  @Post('import')
+  @UseInterceptors(FileInterceptor('file'))
+  async importFromFile(
+    @UploadedFile() file: MulterFile
+  ) {
+    return this.projectsService.importFromFile(file);
   }
 }

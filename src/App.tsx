@@ -513,6 +513,7 @@ function ProjectsViewWrapper() {
           projects={resolvedProjects}
           onSelect={(project) => navigate(`/projects/${project.id}`)}
           onCreate={() => setCreateModalOpen(true)}
+          onImportSuccess={() => refetch()}
         />
         <CreateProjectModal
           isOpen={createModalOpen}
