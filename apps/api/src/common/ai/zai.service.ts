@@ -53,6 +53,19 @@ interface ZaiVisionRequest {
   }>;
 }
 
+interface ZaiImageGenerationRequest {
+  model: string;
+  prompt: string;
+  size?: string;
+}
+
+interface ZaiImageGenerationResponse {
+  created: number;
+  data: Array<{
+    url: string;
+  }>;
+}
+
 @Injectable()
 export class ZaiService {
   private readonly logger = new Logger(ZaiService.name);
@@ -368,6 +381,75 @@ ${resumeText}`;
     }
 
     return tags.slice(0, 10); // Limit to 10 tags
+  }
+
+  /**
+   * Generate image using Z.ai GLM-Image model
+   */
+  async generateImage(
+    prompt: string,
+    options?: {
+      size?: '1024x1024' | '1280x1280' | '512x512';
+    }
+  ): Promise<{
+    url: string;
+    created: number;
+  }> {
+    if (!this.apiKey) {
+      this.logger.warn('Z.ai API key not configured, using mock response');
+      return this.mockImageGeneration(prompt);
+    }
+
+    try {
+      const requestBody: ZaiImageGenerationRequest = {
+        model: 'glm-image',
+        prompt,
+        size: options?.size || '1280x1280',
+      };
+
+      const response = await fetch(`${this.apiEndpoint.replace('/v4', '')}/v4/images/generations`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.apiKey}`,
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        this.logger.error(`Z.ai Image API error: ${response.status} - ${errorText}`);
+        throw new Error(`Z.ai Image API error: ${response.statusText}`);
+      }
+
+      const data: ZaiImageGenerationResponse = await response.json();
+      
+      if (!data.data || data.data.length === 0) {
+        throw new Error('No image generated from Z.ai API');
+      }
+
+      return {
+        url: data.data[0].url,
+        created: data.created,
+      };
+    } catch (error) {
+      this.logger.error('Failed to generate image with Z.ai', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Mock image generation for development/fallback
+   */
+  private mockImageGeneration(prompt: string): {
+    url: string;
+    created: number;
+  } {
+    this.logger.log('Using mock image generation');
+    return {
+      url: 'https://via.placeholder.com/1280x1280?text=Mock+Image',
+      created: Date.now(),
+    };
   }
 
   /**
