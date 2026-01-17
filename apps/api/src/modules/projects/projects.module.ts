@@ -10,6 +10,7 @@ import { ProjectEncryptionService } from './project-encryption.service.js';
 import { ProjectMetricsService } from './project-metrics.service.js';
 import { ProjectQueueService } from './project-queue.service.js';
 import { ProjectsController } from './projects.controller.js';
+import { ProjectsImportService } from './projects.import.service.js';
 import { ProjectsService } from './projects.service.js';
 import { ShardedVectorStoreService } from './sharded-vector-store.service.js';
 import { AssetsModule } from '../assets/assets.module.js';
@@ -21,6 +22,7 @@ import { AIModule } from '../../common/ai/ai.module.js';
   providers: [
     // Core services
     ProjectsService,
+    ProjectsImportService,
     ProjectContextService,
 
     // Security services
@@ -42,6 +44,7 @@ import { AIModule } from '../../common/ai/ai.module.js';
   exports: [
     // Core services
     ProjectsService,
+    ProjectsImportService,
     ProjectContextService,
 
     // Security services

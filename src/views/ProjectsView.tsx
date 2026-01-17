@@ -4,17 +4,20 @@ import Card from "../components/ui/Card";
 import { Select } from "../components/design/Select";
 import type { Project } from "../services/types";
 import { getProjectStatusMeta } from "../utils/status";
+import { ImportZone } from "../components/projects/ImportZone";
 
 interface ProjectsViewProps {
   projects: Project[];
   onSelect: (project: Project) => void;
   onCreate?: () => void;
+  onImport?: () => void;
 }
 
 const ProjectsView: React.FC<ProjectsViewProps> = ({
   projects,
   onSelect,
   onCreate,
+  onImport,
 }) => {
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [sortBy, setSortBy] = useState<"recent" | "title">("recent");
@@ -88,6 +91,10 @@ const ProjectsView: React.FC<ProjectsViewProps> = ({
             aria-label="Sort projects"
           />
         </div>
+      </div>
+
+      <div className="mb-8">
+        <ImportZone onImportComplete={onImport} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
