@@ -1,0 +1,36 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../build/apps/api",
+        "target": "ES2022",
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "types": [
+            "node"
+        ],
+        "baseUrl": "./",
+        "rootDir": ".",
+        "strict": true,
+        "noImplicitAny": true,
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "../../src",
+        "../../components",
+        "test/**/*",
+        "dist",
+        "**/*spec.ts",
+        "**/*.test.ts",
+        "scripts/**/*",
+        "src/components/**/*",
+        "src/contexts/**/*",
+        "src/hooks/**/*",
+        "**/*.tsx"
+    ]
+}

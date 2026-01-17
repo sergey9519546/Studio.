@@ -1,0 +1,3 @@
+
+> studio-roster@0.0.1 lint
+> eslint "{src,apps,libs,test}/**/*.{ts,tsx}"

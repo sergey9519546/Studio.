@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "git": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/inspector",
+        "uvx",
+        "mcp-server-git",
+        "--repository",
+        "/MAIN"
+      ]
+    },
+    "git-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote@0.1.29",
+        "https://gitmcp.io/SERG//MAIN"
+      ]
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "version": "1.0.0",
+  "name": "Autonomous Principal Architect - Cline Integration",
+
+  "system": {
+    "rules_file": ".clinerules/rules.md",
+    "tdr_protocol": ".clinerules/tdr_protocol_cline.js",
+    "verification_engine": ".clinerules/verification_engine_cline.js",
+    "context_report_template": ".agent/CONTEXT_REPORT_TEMPLATE.md"
+  },
+
+  "workflows": {
+    "analyze": {
+      "description": "Analyze codebase and generate context report",
+      "commands": ["/analyze", "analyze codebase"]
+    },
+    "plan": {
+      "description": "Generate remediation plan",
+      "commands": ["/plan", "generate plan"]
+    },
+    "fix": {
+      "description": "Execute autonomous remediation",
+      "commands": ["/fix", "fix all", "run remediation"]
+    },
+    "verify": {
+      "description": "Run comprehensive verification",
+      "commands": ["/verify", "run tests", "verify"]
+    },
+    "status": {
+      "description": "Show current progress and health",
+      "commands": ["/status", "show status"]
+    }
+  },
+
+  "commands": {
+    "activation": {
+      "prefixes": ["/", "@"],
+      "keywords": ["analyze", "plan", "fix", "verify", "status", "remediate", "test"]
+    }
+  },
+
+  "safety": {
+    "terminal_policies": {
+      "allowed_commands": [
+        "ls", "find", "grep", "cat", "head", "tail",
+        "npm test", "npm run test", "yarn test",
+        "npm run lint", "npm run build",
+        "git status", "git log", "git diff",
+        "node --version", "npm --version",
+        "python --version", "pip --version"
+      ],
+      "require_confirmation": [
+        "rm", "del", "rmdir", "move", "mv",
+        "npm install", "yarn add", "pip install",
+        "git push", "git merge", "git pull --force",
+        "drop table", "truncate", "delete from"
+      ],
+      "blocked_commands": [
+        "rm -rf /", "del /s /q", "format",
+        "sudo rm", "sudo chmod 777",
+        "systemctl stop", "service stop"
+      ]
+    },
+
+    "file_protections": {
+      "protected_paths": [
+        "/", "/bin", "/sbin", "/usr", "/etc", "/var",
+        "/System", "/Windows", "/Program Files",
+        "C:\\\\Windows", "C:\\\\Program Files",
+        "~/.ssh", "~/.aws", "~/.config"
+      ],
+      "allowed_write_paths": [
+        "./", "src/", "components/", "lib/", "utils/",
+        "tests/", "docs/", ".clinerules/"
+      ]
+    }
+  },
+
+  "logging": {
+    "enabled": true,
+    "files": {
+      "tdr_log": ".clinerules/TDR_LOG.md",
+      "verification_log": ".clinerules/VERIFICATION_LOG.md",
+      "context_report": ".clinerules/CONTEXT_REPORT.md",
+      "error_log": ".clinerules/ERROR_LOG.md"
+    },
+    "retention_days": 30
+  },
+
+  "remediation": {
+    "max_consecutive_failures": 3,
+    "max_files_per_session": 50,
+    "max_changes_per_file": 500,
+    "backup_before_changes": true,
+    "require_verification_after_fixes": true
+  },
+
+  "integration": {
+    "vscode_extensions": ["ms-vscode.vscode-typescript-next", "ms-vscode.vscode-json"],
+    "external_tools": ["node", "npm", "git"],
+    "supported_languages": ["javascript", "typescript", "python", "go", "rust"]
+  }
+}

@@ -1,0 +1,84 @@
+# Settings for Backend (on Cloud Run).
+# See https://firebase.google.com/docs/app-hosting/configure#cloud-run
+runConfig:
+  minInstances: 0
+  # maxInstances: 100
+  # concurrency: 80
+  # cpu: 1
+  # memoryMiB: 512
+
+# Environment variables and secrets.
+env:
+  # Runtime config for the Nest API + static client served via ServeStaticModule.
+  - variable: NODE_ENV
+    value: "production"
+    availability:
+      - RUNTIME
+  - variable: DATABASE_URL
+    value: "postgres://d39ff80c447dd119c0734d1a975c6a82a0035bb651679b284ca967053cf4748e:sk_gCPaAOJVKHGEOCTlNv2hF@db.prisma.io:5432/postgres?sslmode=require&pool=true"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: GCP_PROJECT_ID
+    value: "gen-lang-client-0704991831"
+    availability:
+      - RUNTIME
+  - variable: STORAGE_BUCKET
+    value: "gen-lang-client-0704991831.appspot.com"
+    availability:
+      - RUNTIME
+  - variable: VITE_API_URL
+    value: "/api/v1"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: ALLOWED_ORIGINS
+    value: "https://gen-lang-client-0704991831-35466.web.app,https://gen-lang-client-0704991831-35466.firebaseapp.com,https://studiodotmanagement--gen-lang-client-0704991831.us-central1.hosted.app"
+    availability:
+      - RUNTIME
+  - variable: GOOGLE_APPLICATION_CREDENTIALS
+    value: "service-account-key.json"
+    availability:
+      - RUNTIME
+
+  # Firebase client config for the frontend bundle (used by firebase.ts fallbacks)
+  - variable: VITE_FIREBASE_API_KEY
+    value: "AIzaSyAONjMz5IWshDt_spZEpGI_gnNDD7izGsA"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_AUTH_DOMAIN
+    value: "gen-lang-client-0704991831.firebaseapp.com"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_PROJECT_ID
+    value: "gen-lang-client-0704991831"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_STORAGE_BUCKET
+    value: "gen-lang-client-0704991831.firebasestorage.app"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_MESSAGING_SENDER_ID
+    value: "893670545674"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_APP_ID
+    value: "1:893670545674:web:9fee83296955160e8842f3"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_MEASUREMENT_ID
+    value: "G-4L6HZCPSSX"
+    availability:
+      - BUILD
+      - RUNTIME
+
+  # Grant access to secrets in Cloud Secret Manager.
+  # See https://firebase.google.com/docs/app-hosting/configure#secret-parameters
+  # - variable: MY_SECRET
+  #   secret: mySecretRef
