@@ -234,26 +234,31 @@ export class ProjectsService {
       status: normalizedStatus
     };
 
-    const created = await this.prisma.project.create({
-      data: {
-        title: projectData.title,
-        client: projectData.client,
-        description: projectData.description,
-        status: projectData.status,
-        budget: projectData.budget,
-        startDate: projectData.startDate,
-        endDate: projectData.endDate,
-        roleRequirements: {
-          create: (roleRequirements || []).map((rr: { role: string; count?: number; skills: string[] | string }) => ({
-            role: rr.role,
-            count: rr.count || 1,
-            skills: Array.isArray(rr.skills) ? rr.skills : [rr.skills].filter(Boolean)
-          }))
+    const roleReqs = (roleRequirements || []).map((rr: { role: string; count?: number; skills: string[] | string }) => ({
+      role: rr.role,
+      count: rr.count || 1,
+      skills: Array.isArray(rr.skills) ? rr.skills : [rr.skills].filter(Boolean)
+    }));
+
+    try {
+      const created = await this.prisma.project.create({
+        data: {
+          title: projectData.title,
+          client: projectData.client,
+          description: projectData.description,
+          status: projectData.status,
+          budget: projectData.budget,
+          startDate: projectData.startDate,
+          endDate: projectData.endDate,
+          roleRequirements: roleReqs.length > 0 ? { create: roleReqs } : undefined,
         },
-      },
-      include: { roleRequirements: true }
-    });
-    return this.toDto(created);
+        include: { roleRequirements: true }
+      });
+      return this.toDto(created);
+    } catch (e) {
+      // Logic Before Syntax: Fail gracefully if DB write fails, but let the controller handle the response
+      throw e;
+    }
   }
 
   async update(id: string, data: { title?: string; name?: string; description?: string; client?: string; clientName?: string; status?: string; budget?: number; startDate?: string | Date; endDate?: string | Date }) {
