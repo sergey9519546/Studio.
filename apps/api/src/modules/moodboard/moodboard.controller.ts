@@ -50,7 +50,16 @@ export class MoodboardController {
       assetId: asset.id,
     };
 
-    return this.moodboardService.create(dto);
+    const moodboardItem = await this.moodboardService.create(dto);
+    
+    // 3. Trigger AI analysis asynchronously (don't wait for it)
+    if (dto.type === 'image') {
+      this.moodboardService.analyzeAndTagImage(moodboardItem.id).catch(err => {
+        console.error(`Failed to analyze image ${moodboardItem.id}:`, err);
+      });
+    }
+    
+    return moodboardItem;
   }
 
   @Post(":projectId/link-asset")

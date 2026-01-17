@@ -2,6 +2,7 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { MoodboardCollection, MoodboardItem } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service.js";
 import { AssetsService } from "../assets/assets.service.js";
+import { ZaiService } from "../../common/ai/zai.service.js";
 import { CreateCollectionDto } from "./dto/create-collection.dto.js";
 import { CreateFromUnsplashDto } from "./dto/create-from-unsplash.dto.js";
 import { CreateMoodboardItemDto } from "./dto/create-moodboard-item.dto.js";
@@ -12,7 +13,8 @@ export class MoodboardService {
 
   constructor(
     private readonly assetsService: AssetsService,
-    private readonly prisma: PrismaService
+    private readonly prisma: PrismaService,
+    private readonly zaiService: ZaiService,
   ) {}
 
   async create(createDto: CreateMoodboardItemDto): Promise<MoodboardItem> {
@@ -303,6 +305,87 @@ export class MoodboardService {
         return { ...item, url, tags, moods, colors };
       })
     );
+  }
+
+  /**
+   * Analyze image using AI and update moodboard item with tags
+   */
+  async analyzeAndTagImage(itemId: string): Promise<MoodboardItem> {
+    const item = await this.prisma.moodboardItem.findUnique({
+      where: { id: itemId },
+    });
+
+    if (!item) {
+      throw new NotFoundException(`Moodboard item ${itemId} not found`);
+    }
+
+    if (!item.url) {
+      throw new Error('Moodboard item has no URL for analysis');
+    }
+
+    try {
+      this.logger.log(`Analyzing image for moodboard item ${itemId}`);
+      
+      // Use Z.ai to analyze the image
+      const analysis = await this.zaiService.analyzeImage(item.url);
+      
+      // Extract moods from tags
+      const moodKeywords = ['warm', 'cool', 'dramatic', 'soft', 'vibrant', 'calm', 'energetic', 'mysterious'];
+      const moods = analysis.tags.filter(tag => 
+        moodKeywords.some(mood => tag.toLowerCase().includes(mood))
+      );
+      
+      // Update the moodboard item with AI analysis
+      return await this.prisma.moodboardItem.update({
+        where: { id: itemId },
+        data: {
+          tags: analysis.tags,
+          moods: moods.length > 0 ? moods : [analysis.metadata.mood || 'neutral'],
+          colors: analysis.metadata.colorPalette || [],
+          caption: analysis.description.substring(0, 500), // Limit caption length
+        },
+      });
+    } catch (error) {
+      this.logger.error(`Failed to analyze image for item ${itemId}`, error);
+      
+      // Update with error state but don't fail completely
+      return await this.prisma.moodboardItem.update({
+        where: { id: itemId },
+        data: {
+          caption: 'Analysis failed - please try again',
+          tags: ['untagged'],
+        },
+      });
+    }
+  }
+
+  /**
+   * Batch analyze multiple moodboard items
+   */
+  async batchAnalyze(projectId: string): Promise<{ analyzed: number; failed: number }> {
+    const items = await this.prisma.moodboardItem.findMany({
+      where: {
+        projectId,
+        tags: {
+          isEmpty: true,
+        },
+      },
+    });
+
+    let analyzed = 0;
+    let failed = 0;
+
+    for (const item of items) {
+      try {
+        await this.analyzeAndTagImage(item.id);
+        analyzed++;
+      } catch (error) {
+        this.logger.error(`Failed to analyze item ${item.id}`, error);
+        failed++;
+      }
+    }
+
+    return { analyzed, failed };
   }
 
   async remove(id: string): Promise<void> {
