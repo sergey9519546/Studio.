@@ -24,6 +24,7 @@ import DashboardHome from "./views/DashboardHome";
 import GuardianRoom from "./views/GuardianRoom";
 import ProjectsView from "./views/ProjectsView";
 import FutureEditor from "./views/FutureEditor";
+import Aura from "./views/Aura";
 import CreateProjectModal from "./components/projects/CreateProjectModal";
 import ProjectSwitcher from "./components/projects/ProjectSwitcher";
 import { StudioProvider } from "./context/StudioContext";
@@ -534,6 +535,9 @@ export default function App() {
       <Routes>
         {/* Standalone Editor Route - No Dashboard Layout */}
         <Route path="/editor" element={<FutureEditor />} />
+
+        {/* Standalone Aura Route - No Dashboard Layout */}
+        <Route path="/aura" element={<Aura />} />
 
         {/* Main Dashboard Routes */}
         <Route path="*" element={
