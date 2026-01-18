@@ -23,9 +23,11 @@ import { getProjectStatusMeta } from "./utils/status";
 import DashboardHome from "./views/DashboardHome";
 import GuardianRoom from "./views/GuardianRoom";
 import ProjectsView from "./views/ProjectsView";
+import FutureEditor from "./views/FutureEditor";
 import CreateProjectModal from "./components/projects/CreateProjectModal";
 import ProjectSwitcher from "./components/projects/ProjectSwitcher";
 import { StudioProvider } from "./context/StudioContext";
+
 // Project Context Header Component
 function ProjectContextHeader({ project }: { project: Project }) {
   const navigate = useNavigate();
@@ -475,8 +477,8 @@ function FreelancersRoute() {
   );
 }
 
-// Layout Component
-function Layout({ children }: { children: React.ReactNode }) {
+// Layout Component (Renamed to DashboardLayout)
+function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="app-shell">
       <Sidebar />
@@ -529,28 +531,36 @@ function ProjectsViewWrapper() {
 export default function App() {
   return (
     <StudioProvider>
-      <Layout>
-        <Routes>
-          {/* Dashboard */}
-          <Route path="/" element={<DashboardHome />} />
+      <Routes>
+        {/* Standalone Editor Route - No Dashboard Layout */}
+        <Route path="/editor" element={<FutureEditor />} />
 
-          {/* Projects */}
-          <Route path="/projects" element={<ProjectsViewWrapper />} />
-          <Route path="/projects/:id" element={<ProjectDashboardRoute />} />
+        {/* Main Dashboard Routes */}
+        <Route path="*" element={
+          <DashboardLayout>
+            <Routes>
+              {/* Dashboard */}
+              <Route path="/" element={<DashboardHome />} />
 
-          {/* Moodboard */}
-          <Route path="/moodboard" element={<MoodboardRoute />} />
+              {/* Projects */}
+              <Route path="/projects" element={<ProjectsViewWrapper />} />
+              <Route path="/projects/:id" element={<ProjectDashboardRoute />} />
 
-          {/* Freelancers */}
-          <Route path="/freelancers" element={<FreelancersRoute />} />
+              {/* Moodboard */}
+              <Route path="/moodboard" element={<MoodboardRoute />} />
 
-          {/* Writers Room */}
-          <Route path="/writers-room" element={<WritersRoomRoute />} />
+              {/* Freelancers */}
+              <Route path="/freelancers" element={<FreelancersRoute />} />
 
-          {/* Catch all route - redirect to dashboard */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Layout>
+              {/* Writers Room */}
+              <Route path="/writers-room" element={<WritersRoomRoute />} />
+
+              {/* Catch all route - redirect to dashboard */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </DashboardLayout>
+        } />
+      </Routes>
     </StudioProvider>
   );
 }
