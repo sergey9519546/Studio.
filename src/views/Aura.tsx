@@ -23,6 +23,10 @@ const Aura: React.FC = () => {
 
   const selectedItem = MOCK_AURA_ITEMS.find(item => item.id === selectedId);
 
+  const handleSuggestionClick = (text: string) => {
+      setPrompt(text);
+  };
+
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white/20 overflow-hidden relative font-sans">
 
@@ -37,23 +41,45 @@ const Aura: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full h-screen">
-          {MOCK_AURA_ITEMS.map((item) => (
+          {MOCK_AURA_ITEMS.map((item, index) => (
             <motion.div
               layoutId={`card-${item.id}`}
               key={item.id}
-              className="relative aspect-[3/4] md:aspect-auto md:h-full group cursor-pointer overflow-hidden border-0"
+              className="relative aspect-[3/4] md:aspect-auto md:h-full group cursor-pointer overflow-hidden border-0 bg-black"
               onMouseEnter={() => setHoveredId(item.id)}
               onMouseLeave={() => setHoveredId(null)}
               onClick={() => setSelectedId(item.id)}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.8 }}
             >
+              {/* Image with Physics-based Hover (Spring) */}
               <motion.img
                 src={item.url}
                 alt={item.title}
-                className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-105"
+                className="w-full h-full object-cover"
+                initial={{ filter: 'grayscale(20%)' }}
+                whileHover={{
+                    scale: 1.05,
+                    filter: 'grayscale(0%)',
+                    transition: { type: "spring", stiffness: 200, damping: 20 }
+                }}
+                /* Breathing Effect when not hovered */
+                animate={{
+                    scale: hoveredId === item.id ? 1.05 : [1, 1.02, 1],
+                }}
+                transition={{
+                    scale: {
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 1.5
+                    }
+                }}
               />
 
               {/* Zero-Click Info (Ghost Overlay) */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8 pointer-events-none">
                 <motion.h3 className="text-xl font-light tracking-wide text-white mb-1" layoutId={`title-${item.id}`}>
                   {item.title}
                 </motion.h3>
@@ -97,48 +123,56 @@ const Aura: React.FC = () => {
               />
 
               {/* Overlay Content */}
-              <div className="absolute inset-0 flex flex-col justify-end p-12 md:p-20 bg-gradient-to-t from-black via-black/20 to-transparent">
-                  <motion.h2
-                    layoutId={`title-${selectedId}`}
-                    className="text-4xl md:text-6xl font-extralight tracking-tight text-white mb-2"
-                  >
-                    {selectedItem.title}
-                  </motion.h2>
+              <div className="absolute inset-0 flex flex-col justify-end p-12 md:p-20 bg-gradient-to-t from-black via-black/20 to-transparent pointer-events-none">
+                  <div className="pointer-events-auto">
+                    <motion.h2
+                        layoutId={`title-${selectedId}`}
+                        className="text-4xl md:text-6xl font-extralight tracking-tight text-white mb-2"
+                    >
+                        {selectedItem.title}
+                    </motion.h2>
 
-                  <div className="flex items-center gap-4 text-white/40 text-xs font-mono tracking-widest uppercase mb-8">
-                      <span>Ref: {selectedItem.id.padStart(3, '0')}</span>
-                      <span>•</span>
-                      <span>Source: Unsplash</span>
-                  </div>
+                    <div className="flex items-center gap-4 text-white/40 text-xs font-mono tracking-widest uppercase mb-8">
+                        <span>Ref: {selectedItem.id.padStart(3, '0')}</span>
+                        <span>•</span>
+                        <span>Source: Unsplash</span>
+                    </div>
 
-                  {/* The Oracle Chat */}
-                  <div className="w-full max-w-xl relative group">
-                      <div className="absolute inset-0 bg-white/5 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-                      <div className="relative flex items-center gap-4 border-b border-white/20 pb-4 focus-within:border-white/60 transition-colors">
-                          <Sparkles size={18} className="text-white/40 animate-pulse-subtle" />
-                          <input
-                            value={prompt}
-                            onChange={(e) => setPrompt(e.target.value)}
-                            placeholder="Type a command to alter reality..."
-                            className="bg-transparent border-none outline-none text-lg text-white placeholder-white/20 w-full font-light"
-                            autoFocus
-                          />
-                          <button className="text-white/40 hover:text-white transition-colors">
-                              <Send size={18} />
-                          </button>
-                      </div>
-                      <div className="mt-2 flex gap-2">
-                           <span className="text-[10px] text-white/20 hover:text-white/60 cursor-pointer transition-colors">make it darker</span>
-                           <span className="text-[10px] text-white/20 hover:text-white/60 cursor-pointer transition-colors">add fog</span>
-                           <span className="text-[10px] text-white/20 hover:text-white/60 cursor-pointer transition-colors">shift to blue</span>
-                      </div>
+                    {/* The Oracle Chat */}
+                    <div className="w-full max-w-xl relative group">
+                        <div className="absolute inset-0 bg-white/5 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
+                        <div className="relative flex items-center gap-4 border-b border-white/20 pb-4 focus-within:border-white/60 transition-colors">
+                            <Sparkles size={18} className="text-white/40 animate-pulse-subtle" />
+                            <input
+                                value={prompt}
+                                onChange={(e) => setPrompt(e.target.value)}
+                                placeholder="Type a command to alter reality..."
+                                className="bg-transparent border-none outline-none text-lg text-white placeholder-white/20 w-full font-light"
+                                autoFocus
+                            />
+                            <button className="text-white/40 hover:text-white transition-colors">
+                                <Send size={18} />
+                            </button>
+                        </div>
+                        <div className="mt-2 flex gap-2">
+                            {['make it darker', 'add fog', 'shift to blue'].map((suggestion) => (
+                                <span
+                                    key={suggestion}
+                                    onClick={() => handleSuggestionClick(suggestion)}
+                                    className="text-[10px] text-white/20 hover:text-white/60 cursor-pointer transition-colors"
+                                >
+                                    {suggestion}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
                   </div>
               </div>
 
               {/* Close Button */}
               <button
                 onClick={(e) => { e.stopPropagation(); setSelectedId(null); }}
-                className="absolute top-8 right-8 text-white/40 hover:text-white transition-colors"
+                className="absolute top-8 right-8 text-white/40 hover:text-white transition-colors z-50"
               >
                   <X size={32} strokeWidth={1} />
               </button>
@@ -147,13 +181,15 @@ const Aura: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* Hidden Navigation Back */}
-      <button
-        className="fixed top-8 left-8 z-50 text-white/20 hover:text-white transition-colors mix-blend-difference"
-        onClick={() => navigate('/')}
-      >
-        <ArrowLeft size={24} />
-      </button>
+      {/* Hidden Navigation Back - Quantum State (only visible on hover) */}
+      <div className="fixed top-8 left-8 z-50 opacity-0 hover:opacity-100 transition-opacity duration-500">
+         <button
+            className="text-white/50 hover:text-white transition-colors mix-blend-difference"
+            onClick={() => navigate('/')}
+        >
+            <ArrowLeft size={24} />
+        </button>
+      </div>
 
     </div>
   );

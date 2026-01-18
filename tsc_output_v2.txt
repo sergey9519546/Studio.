@@ -1,0 +1,248 @@
+apps/api/src/modules/assets/assets.service.ts(89,39): error TS2339: Property 'asset' does not exist on type 'PrismaService'.
+apps/api/src/modules/assets/assets.service.ts(131,41): error TS2339: Property 'asset' does not exist on type 'PrismaService'.
+apps/api/src/modules/assets/assets.service.ts(136,31): error TS7006: Parameter 'a' implicitly has an 'any' type.
+apps/api/src/modules/assets/assets.service.ts(175,37): error TS2339: Property 'asset' does not exist on type 'PrismaService'.
+apps/api/src/modules/assets/assets.service.ts(203,25): error TS2339: Property 'asset' does not exist on type 'PrismaService'.
+apps/api/src/modules/freelancers/freelancers.service.spec.ts(60,34): error TS2339: Property 'freelancer' does not exist on type 'PrismaService'.
+apps/api/src/modules/freelancers/freelancers.service.spec.ts(92,34): error TS2339: Property 'freelancer' does not exist on type 'PrismaService'.
+apps/api/src/modules/freelancers/freelancers.service.spec.ts(132,34): error TS2339: Property 'freelancer' does not exist on type 'PrismaService'.
+apps/api/src/modules/freelancers/freelancers.service.spec.ts(163,34): error TS2339: Property 'freelancer' does not exist on type 'PrismaService'.
+apps/api/src/modules/freelancers/freelancers.service.spec.ts(187,34): error TS2339: Property 'freelancer' does not exist on type 'PrismaService'.
+apps/api/src/modules/freelancers/freelancers.service.ts(3,15): error TS2305: Module '"@prisma/client"' has no exported member 'FreelancerStatus'.
+apps/api/src/modules/freelancers/freelancers.service.ts(41,43): error TS2339: Property 'freelancer' does not exist on type 'PrismaService'.
+apps/api/src/modules/freelancers/freelancers.service.ts(52,42): error TS2339: Property 'freelancer' does not exist on type 'PrismaService'.
+apps/api/src/modules/freelancers/freelancers.service.ts(66,39): error TS2339: Property 'freelancer' does not exist on type 'PrismaService'.
+apps/api/src/modules/freelancers/freelancers.service.ts(93,39): error TS2339: Property 'freelancer' does not exist on type 'PrismaService'.
+apps/api/src/modules/freelancers/freelancers.service.ts(110,39): error TS2339: Property 'freelancer' does not exist on type 'PrismaService'.
+apps/api/src/modules/freelancers/freelancers.service.ts(126,39): error TS2339: Property 'freelancer' does not exist on type 'PrismaService'.
+apps/api/src/modules/freelancers/freelancers.service.ts(134,39): error TS2339: Property 'freelancer' does not exist on type 'PrismaService'.
+apps/api/src/modules/freelancers/freelancers.service.ts(157,27): error TS2339: Property 'freelancer' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(2,10): error TS2305: Module '"@prisma/client"' has no exported member 'MoodboardCollection'.
+apps/api/src/modules/moodboard/moodboard.service.ts(2,31): error TS2305: Module '"@prisma/client"' has no exported member 'MoodboardItem'.
+apps/api/src/modules/moodboard/moodboard.service.ts(21,24): error TS2339: Property 'moodboardItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(41,24): error TS2339: Property 'moodboardItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(64,39): error TS2339: Property 'moodboardItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(110,37): error TS2339: Property 'moodboardItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(151,32): error TS2339: Property 'moodboardItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(167,24): error TS2339: Property 'moodboardItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(185,37): error TS2339: Property 'moodboardItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(201,24): error TS2339: Property 'moodboardCollection' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(214,24): error TS2339: Property 'moodboardCollection' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(228,23): error TS2339: Property 'moodboardCollectionItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(236,24): error TS2339: Property 'moodboardItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(246,23): error TS2339: Property 'moodboardCollectionItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(251,24): error TS2339: Property 'moodboardItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(261,23): error TS2339: Property 'moodboardCollectionItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(266,23): error TS2339: Property 'moodboardCollection' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(314,36): error TS2339: Property 'moodboardItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(339,32): error TS2339: Property 'moodboardItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(352,32): error TS2339: Property 'moodboardItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(367,40): error TS2339: Property 'moodboardItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/moodboard/moodboard.service.ts(371,35): error TS7006: Parameter 'item' implicitly has an 'any' type.
+apps/api/src/modules/moodboard/moodboard.service.ts(393,25): error TS2339: Property 'moodboardItem' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(57,45): error TS2339: Property 'projectAccessControl' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(111,39): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(121,23): error TS2339: Property 'projectAccessControl' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(155,45): error TS2339: Property 'projectAccessControl' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(192,39): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(203,45): error TS2339: Property 'projectAccessControl' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(226,39): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(233,45): error TS2339: Property 'projectAccessControl' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(252,46): error TS2339: Property 'projectAccessControl' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(263,39): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(272,62): error TS7006: Parameter 'ac' implicitly has an 'any' type.
+apps/api/src/modules/projects/project-access-control.service.ts(302,19): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(306,19): error TS2339: Property 'projectAccessControl' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(313,32): error TS7006: Parameter 'p' implicitly has an 'any' type.
+apps/api/src/modules/projects/project-access-control.service.ts(314,32): error TS7006: Parameter 'a' implicitly has an 'any' type.
+apps/api/src/modules/projects/project-access-control.service.ts(330,39): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(340,23): error TS2339: Property '$transaction' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(342,19): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(347,19): error TS2339: Property 'projectAccessControl' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-access-control.service.ts(354,19): error TS2339: Property 'projectAccessControl' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-audit.service.ts(50,25): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-audit.service.ts(189,19): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-audit.service.ts(200,19): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-audit.service.ts(225,36): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-audit.service.ts(263,52): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-audit.service.ts(278,43): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-audit.service.ts(293,45): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-audit.service.ts(308,44): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-audit.service.ts(331,38): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-aware-ingestion.service.ts(3,15): error TS2305: Module '"@prisma/client"' has no exported member 'Prisma'.
+apps/api/src/modules/projects/project-aware-ingestion.service.ts(114,49): error TS2339: Property 'projectEmbedding' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-aware-ingestion.service.ts(141,47): error TS2339: Property '$transaction' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-aware-ingestion.service.ts(141,67): error TS7006: Parameter 'tx' implicitly has an 'any' type.
+apps/api/src/modules/projects/project-aware-ingestion.service.ts(240,44): error TS2339: Property 'conversation' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-aware-ingestion.service.ts(283,40): error TS2339: Property 'projectEmbedding' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-aware-ingestion.service.ts(300,38): error TS2339: Property '$transaction' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-aware-ingestion.service.ts(300,58): error TS7006: Parameter 'tx' implicitly has an 'any' type.
+apps/api/src/modules/projects/project-aware-ingestion.service.ts(424,39): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-aware-ingestion.service.ts(432,25): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-aware-ingestion.service.ts(583,19): error TS2339: Property 'knowledgeSource' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-aware-ingestion.service.ts(584,19): error TS2339: Property 'projectEmbedding' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-aware-ingestion.service.ts(610,23): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-aware-ingestion.service.ts(620,23): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-aware-ingestion.service.ts(627,23): error TS2339: Property 'aIUsage' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(6,15): error TS2305: Module '"@prisma/client"' has no exported member 'Prisma'.
+apps/api/src/modules/projects/project-context.service.ts(54,39): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(64,45): error TS2339: Property 'projectAccessControl' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(125,19): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(126,19): error TS2339: Property 'projectAccessControl' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(214,23): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(245,23): error TS2339: Property '$transaction' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(247,19): error TS2339: Property 'projectEmbedding' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(252,19): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(257,19): error TS2339: Property 'projectAccessControl' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(262,19): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(282,23): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(312,25): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(342,19): error TS2339: Property 'knowledgeSource' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(343,19): error TS2339: Property 'conversation' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(380,38): error TS2339: Property 'asset' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(385,41): error TS2339: Property 'pageMedia' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(394,39): error TS2339: Property 'aIUsage' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(407,19): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(411,19): error TS2339: Property 'asset' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-context.service.ts(416,19): error TS2339: Property 'knowledgeSource' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-encryption.service.ts(148,23): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-encryption.service.ts(167,48): error TS2339: Property 'knowledgeSource' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-encryption.service.ts(193,29): error TS2339: Property 'knowledgeSource' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-encryption.service.ts(238,39): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-encryption.service.ts(244,19): error TS2339: Property 'knowledgeSource' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-encryption.service.ts(250,19): error TS2339: Property 'knowledgeSource' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-encryption.service.ts(270,39): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(144,19): error TS2339: Property 'aIUsage' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(148,19): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(154,19): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(160,19): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(184,19): error TS2339: Property 'knowledgeSource' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(185,19): error TS2339: Property 'asset' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(186,19): error TS2339: Property 'projectEmbedding' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(187,19): error TS2339: Property 'asset' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(191,19): error TS2339: Property 'pageMedia' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(223,19): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(230,19): error TS2339: Property 'conversation' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(231,19): error TS2339: Property 'message' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(236,19): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(241,28): error TS7006: Parameter 'r' implicitly has an 'any' type.
+apps/api/src/modules/projects/project-metrics.service.ts(258,19): error TS2339: Property 'knowledgeSource' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(264,19): error TS2339: Property 'knowledgeSource' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(270,19): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(274,19): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(314,45): error TS2339: Property 'aIUsage' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(337,47): error TS2339: Property 'asset' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(356,48): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(395,19): error TS2339: Property 'conversation' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(402,19): error TS2339: Property 'transcript' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(408,19): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(429,19): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(433,19): error TS2339: Property 'asset' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(438,19): error TS2339: Property 'knowledgeSource' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-metrics.service.ts(443,19): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-queue.service.ts(431,47): error TS2339: Property 'knowledgeSource' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-queue.service.ts(452,23): error TS2339: Property '$transaction' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-queue.service.ts(452,43): error TS7006: Parameter 'tx' implicitly has an 'any' type.
+apps/api/src/modules/projects/project-queue.service.ts(527,49): error TS2339: Property 'projectEmbedding' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-queue.service.ts(533,27): error TS2339: Property 'knowledgeSource' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-queue.service.ts(536,23): error TS2339: Property '$transaction' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-queue.service.ts(536,43): error TS7006: Parameter 'tx' implicitly has an 'any' type.
+apps/api/src/modules/projects/project-queue.service.ts(605,23): error TS2339: Property 'aIUsage' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-queue.service.ts(623,23): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-queue.service.ts(654,27): error TS2339: Property 'projectEmbedding' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/project-queue.service.ts(661,27): error TS2339: Property 'projectAuditLog' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/projects.service.spec.ts(60,34): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/projects.service.spec.ts(61,34): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/projects.service.spec.ts(142,34): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/projects.service.ts(3,10): error TS2305: Module '"@prisma/client"' has no exported member 'Prisma'.
+apps/api/src/modules/projects/projects.service.ts(3,18): error TS2305: Module '"@prisma/client"' has no exported member 'ProjectStatus'.
+apps/api/src/modules/projects/projects.service.ts(195,19): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/projects.service.ts(196,19): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/projects.service.ts(205,26): error TS7006: Parameter 'p' implicitly has an 'any' type.
+apps/api/src/modules/projects/projects.service.ts(216,39): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/projects.service.ts(245,39): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/projects.service.ts(280,39): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/projects.service.ts(290,24): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/projects.service.ts(294,24): error TS2339: Property 'project' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/sharded-vector-store.service.ts(3,15): error TS2305: Module '"@prisma/client"' has no exported member 'Prisma'.
+apps/api/src/modules/projects/sharded-vector-store.service.ts(195,23): error TS2339: Property 'projectEmbedding' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/sharded-vector-store.service.ts(292,42): error TS2339: Property 'projectEmbedding' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/sharded-vector-store.service.ts(407,23): error TS2339: Property 'projectEmbedding' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/sharded-vector-store.service.ts(429,23): error TS2339: Property 'projectEmbedding' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/sharded-vector-store.service.ts(444,23): error TS2339: Property '$transaction' does not exist on type 'PrismaService'.
+apps/api/src/modules/projects/sharded-vector-store.service.ts(446,21): error TS2339: Property 'projectEmbedding' does not exist on type 'PrismaService'.
+apps/api/src/prisma/prisma.service.spec.ts(81,13): error TS2339: Property '$connect' does not exist on type 'PrismaService'.
+apps/api/src/prisma/prisma.service.spec.ts(86,20): error TS2339: Property '$connect' does not exist on type 'PrismaService'.
+apps/api/src/prisma/prisma.service.spec.ts(108,13): error TS2339: Property '$connect' does not exist on type 'PrismaService'.
+apps/api/src/prisma/prisma.service.spec.ts(128,13): error TS2339: Property '$disconnect' does not exist on type 'PrismaService'.
+apps/api/src/prisma/prisma.service.ts(3,10): error TS2305: Module '"@prisma/client"' has no exported member 'PrismaClient'.
+apps/api/src/prisma/prisma.service.ts(34,10): error TS2339: Property '$connect' does not exist on type 'PrismaService'.
+apps/api/src/prisma/prisma.service.ts(36,15): error TS7006: Parameter 'e' implicitly has an 'any' type.
+apps/api/src/prisma/prisma.service.ts(43,16): error TS2339: Property '$disconnect' does not exist on type 'PrismaService'.
+index.tsx(2,17): error TS5097: An import path can only end with a '.tsx' extension when 'allowImportingTsExtensions' is enabled.
+node_modules/@prisma/client/default.d.ts(1,15): error TS2307: Cannot find module '.prisma/client/default' or its corresponding type declarations.
+node_modules/@types/request/index.d.ts(389,84): error TS2724: '"/app/node_modules/tough-cookie/dist/index"' has no exported member named 'CookieJar'. Did you mean 'Cookie'?
+node_modules/engine.io/build/server.d.ts(3,47): error TS7016: Could not find a declaration file for module 'ws'. '/app/node_modules/ws/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/ws` if it exists or add a new declaration (.d.ts) file containing `declare module 'ws';`
+node_modules/engine.io/build/transport.d.ts(6,32): error TS7016: Could not find a declaration file for module 'ws'. '/app/node_modules/ws/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/ws` if it exists or add a new declaration (.d.ts) file containing `declare module 'ws';`
+node_modules/engine.io/build/transports/websocket.d.ts(3,47): error TS7016: Could not find a declaration file for module 'ws'. '/app/node_modules/ws/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/ws` if it exists or add a new declaration (.d.ts) file containing `declare module 'ws';`
+node_modules/framer-motion/dist/types.d-DagZKalS.d.ts(33,11): error TS2320: Interface 'MotionStyle' cannot simultaneously extend types 'MakeMotionHelper<Omit<CSSProperties, "perspective" | "rotate" | "scale">>' and 'MakeMotionHelper<TransformProperties>'.
+  Named property 'x' of types 'MakeMotionHelper<Omit<CSSProperties, "perspective" | "rotate" | "scale">>' and 'MakeMotionHelper<TransformProperties>' are not identical.
+node_modules/vite/dist/node/module-runner.d.ts(159,11): error TS2430: Interface 'ModuleRunnerImportMeta' incorrectly extends interface 'ImportMeta'.
+  Types of property 'env' are incompatible.
+    Type 'ImportMetaEnv' is missing the following properties from type 'ImportMetaEnv': VITE_UNSPLASH_ACCESS_KEY, VITE_API_URL, VITE_API_KEY, VITE_FIREBASE_AI_MODEL, and 2 more.
+src/components/ProjectDashboard.tsx(104,24): error TS2345: Argument of type '{ key: string; modifiers: string[]; handler: (e: KeyboardEvent) => void; description: string; }[]' is not assignable to parameter of type 'ShortcutContext | undefined'.
+src/components/projects/CreateProjectModal.tsx(75,7): error TS2322: Type 'string' is not assignable to type 'ProjectStatus | undefined'.
+src/components/ui/CollaborativeCursor.tsx(95,15): error TS2322: Type '{ start: number; end: number; } | undefined' is not assignable to type '{ start: number; end: number; } | null'.
+  Type 'undefined' is not assignable to type '{ start: number; end: number; } | null'.
+src/context/StudioContext.tsx(2,19): error TS2305: Module '"../services/types"' has no exported member 'Asset'.
+src/dataconnect.ts(2,33): error TS2307: Cannot find module '@dataconnect/generated' or its corresponding type declarations.
+src/hooks/useAutoSave.ts(230,14): error TS2345: Argument of type '(content: any, metadata?: Partial<DraftData["metadata"]>) => Promise<void>' is not assignable to parameter of type '(...args: unknown[]) => unknown'.
+  Types of parameters 'metadata' and 'args' are incompatible.
+    Type 'unknown' is not assignable to type 'Partial<{ title?: string | undefined; projectId?: string | undefined; userId?: string | undefined; lastModified: Date; version: number; size: number; tags?: string[] | undefined; }> | undefined'.
+src/hooks/useAutoSave.ts(232,44): error TS2345: Argument of type 'Partial<{ title?: string | undefined; projectId?: string | undefined; userId?: string | undefined; lastModified: Date; version: number; size: number; tags?: string[] | undefined; }> | undefined' is not assignable to parameter of type 'Partial<{ title?: string | undefined; projectId?: string | undefined; userId?: string | undefined; lastModified: Date; version: number; size: number; tags?: string[] | undefined; }>'.
+  Type 'undefined' is not assignable to type 'Partial<{ title?: string | undefined; projectId?: string | undefined; userId?: string | undefined; lastModified: Date; version: number; size: number; tags?: string[] | undefined; }>'.
+src/hooks/useAutoSave.ts(321,40): error TS2345: Argument of type 'Partial<{ title?: string | undefined; projectId?: string | undefined; userId?: string | undefined; lastModified: Date; version: number; size: number; tags?: string[] | undefined; }> | undefined' is not assignable to parameter of type 'Partial<{ title?: string | undefined; projectId?: string | undefined; userId?: string | undefined; lastModified: Date; version: number; size: number; tags?: string[] | undefined; }>'.
+  Type 'undefined' is not assignable to type 'Partial<{ title?: string | undefined; projectId?: string | undefined; userId?: string | undefined; lastModified: Date; version: number; size: number; tags?: string[] | undefined; }>'.
+src/hooks/useAutoSave.ts(490,5): error TS2322: Type '(...args: unknown[]) => void' is not assignable to type '(content: any, metadata?: Partial<{ title?: string | undefined; projectId?: string | undefined; userId?: string | undefined; lastModified: Date; version: number; size: number; tags?: string[] | undefined; }> | undefined) => Promise<...>'.
+  Type 'void' is not assignable to type 'Promise<void>'.
+src/hooks/useKeyboardShortcuts.ts(74,55): error TS2345: Argument of type '(event: KeyboardEvent) => void' is not assignable to parameter of type '(...args: unknown[]) => unknown'.
+  Types of parameters 'event' and 'args' are incompatible.
+    Type 'unknown' is not assignable to type 'KeyboardEvent'.
+src/hooks/useKeyboardShortcuts.ts(170,59): error TS2448: Block-scoped variable 'unregisterShortcut' used before its declaration.
+src/hooks/useKeyboardShortcuts.ts(170,59): error TS2454: Variable 'unregisterShortcut' is used before being assigned.
+src/hooks/useKeyboardShortcuts.ts(520,54): error TS2345: Argument of type 'string' is not assignable to parameter of type 'ShortcutContext | undefined'.
+src/services/DraftService.ts(84,37): error TS2345: Argument of type '(id: string) => void' is not assignable to parameter of type '(...args: unknown[]) => unknown'.
+  Types of parameters 'id' and 'args' are incompatible.
+    Type 'unknown' is not assignable to type 'string'.
+src/services/KeyboardService.ts(118,7): error TS2322: Type 'ShortcutContext | undefined' is not assignable to type 'ShortcutContext | null'.
+  Type 'undefined' is not assignable to type 'ShortcutContext | null'.
+src/services/api/freelancers.ts(62,6): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/freelancers.ts(85,43): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/freelancers.ts(95,72): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/freelancers.ts(108,93): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/moodboard.ts(63,6): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/moodboard.ts(73,72): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/moodboard.ts(89,6): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/moodboard.ts(111,77): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/moodboard.ts(137,65): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/moodboard.ts(150,49): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/moodboard.ts(163,6): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/moodboard.ts(176,51): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/moodboard.ts(188,71): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/moodboard.ts(200,54): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/moodboard.ts(221,73): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/moodboard.ts(264,6): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/projects.ts(76,6): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/projects.ts(95,40): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/projects.ts(105,63): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/api/projects.ts(115,84): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/test/setup.ts(9,1): error TS2322: Type '() => CanvasRenderingContext2D' is not assignable to type '{ (contextId: "2d", options?: CanvasRenderingContext2DSettings | undefined): CanvasRenderingContext2D | null; (contextId: "bitmaprenderer", options?: ImageBitmapRenderingContextSettings | undefined): ImageBitmapRenderingContext | null; (contextId: "webgl", options?: WebGLContextAttributes | undefined): WebGLRenderin...'.
+  Property 'transferFromImageBitmap' is missing in type 'CanvasRenderingContext2D' but required in type 'ImageBitmapRenderingContext'.
+src/views/GuardianRoom.tsx(7,10): error TS2305: Module '"../services/types"' has no exported member 'Asset'.
+src/views/GuardianRoom.tsx(119,38): error TS2339: Property 'scriptAssist' does not exist on type '{ getScripts(projectId: string): Promise<{ data: Script[]; }>; getScript(id: string): Promise<{ data: Script; }>; createScript(data: CreateScriptDto): Promise<...>; updateScript(id: string, data: UpdateScriptDto): Promise<...>; deleteScript(id: string): Promise<...>; generateScript(projectId: string, prompt: string,...'.
+src/views/GuardianRoom.tsx(142,26): error TS2339: Property 'createFromAsset' does not exist on type 'typeof MoodboardAPI'.
+types/index.d.ts(2,15): error TS2307: Cannot find module './@google-cloud/aiplatform/index' or its corresponding type declarations.
+types/index.d.ts(3,15): error TS2307: Cannot find module './@google-cloud/storage/index' or its corresponding type declarations.
