@@ -87,6 +87,16 @@ export const routes: RouteConfig[] = [
       ],
     },
   },
+  {
+    path: "/editor",
+    label: "Future Editor",
+    icon: Sparkles,
+    description: "Experimental Apple x CapCut Editor Interface",
+    metadata: {
+      title: "Future Editor - Studio Roster",
+      keywords: ["editor", "future", "experimental", "video"],
+    },
+  },
 ];
 
 // Helper functions for route management

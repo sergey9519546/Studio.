@@ -22,6 +22,7 @@ import { useApiData } from "./hooks/useApiData";
 import { getProjectStatusMeta } from "./utils/status";
 import DashboardHome from "./views/DashboardHome";
 import GuardianRoom from "./views/GuardianRoom";
+import FutureEditor from "./views/FutureEditor";
 import ProjectsView from "./views/ProjectsView";
 import CreateProjectModal from "./components/projects/CreateProjectModal";
 import ProjectSwitcher from "./components/projects/ProjectSwitcher";
@@ -546,6 +547,9 @@ export default function App() {
 
           {/* Writers Room */}
           <Route path="/writers-room" element={<WritersRoomRoute />} />
+
+          {/* Future Editor */}
+          <Route path="/editor" element={<FutureEditor />} />
 
           {/* Catch all route - redirect to dashboard */}
           <Route path="*" element={<Navigate to="/" replace />} />
