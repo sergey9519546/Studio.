@@ -30,14 +30,30 @@ const Aura: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white/20 overflow-hidden relative font-sans">
 
-      {/* Background Ambience */}
+      {/* Background Ambience / Deleuzian Plane */}
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03),transparent_70%)] pointer-events-none z-0" />
 
-      {/* The Living Grid */}
-      <div className={`p-0 w-full min-h-screen transition-opacity duration-700 ${selectedId ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      {/* Chromatic Aberration / Mirage Effect (SVG Filter) */}
+      <svg className="hidden">
+        <filter id="mirage">
+            <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+        </filter>
+      </svg>
+
+      {/* The Rhizomatic Grid */}
+      <motion.div
+        className="p-0 w-full min-h-screen"
+        animate={{
+            scale: selectedId ? 0.9 : 1,
+            opacity: selectedId ? 0 : 1,
+            filter: selectedId ? 'blur(10px) brightness(0.5)' : 'blur(0px) brightness(1)',
+        }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} // Exponential Ease Out for "Heavy" feel
+      >
         {/* Subtle Header */}
-        <div className="fixed top-0 left-0 p-8 z-10 opacity-0 hover:opacity-100 transition-opacity duration-500">
-             <h1 className="text-sm font-bold tracking-[0.3em] uppercase text-white/40">Aura Engine</h1>
+        <div className={`fixed top-0 left-0 p-8 z-10 transition-opacity duration-500 ${selectedId ? 'opacity-0' : 'opacity-0 hover:opacity-100'}`}>
+             <h1 className="text-sm font-bold tracking-[0.3em] uppercase text-white/40">Aura Engine // Rhizome</h1>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full h-screen">
@@ -95,18 +111,18 @@ const Aura: React.FC = () => {
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
-      {/* The Extrusion (Focus Mode) */}
+      {/* The Crystal Image (Focus Mode / Inception Layer) */}
       <AnimatePresence>
         {selectedId && selectedItem && (
           <div className="fixed inset-0 z-50 flex items-center justify-center">
-            {/* Dimmed Backdrop */}
+            {/* Dimmed Backdrop (The Void) */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/95 backdrop-blur-2xl"
+              className="absolute inset-0 bg-black/80 backdrop-blur-xl"
               onClick={() => setSelectedId(null)}
             />
 
@@ -115,11 +131,12 @@ const Aura: React.FC = () => {
               layoutId={`card-${selectedId}`}
               className="relative w-full max-w-5xl aspect-video md:aspect-[21/9] bg-black shadow-2xl overflow-hidden z-50"
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              style={{ filter: 'url(#mirage)' }} // Applying subtle distortion
             >
                <motion.img
                 src={selectedItem.url}
                 alt={selectedItem.title}
-                className="w-full h-full object-cover opacity-80"
+                className="w-full h-full object-cover opacity-90"
               />
 
               {/* Overlay Content */}
@@ -135,7 +152,7 @@ const Aura: React.FC = () => {
                     <div className="flex items-center gap-4 text-white/40 text-xs font-mono tracking-widest uppercase mb-8">
                         <span>Ref: {selectedItem.id.padStart(3, '0')}</span>
                         <span>•</span>
-                        <span>Source: Unsplash</span>
+                        <span>Plane: Virtual</span>
                     </div>
 
                     {/* The Oracle Chat */}
@@ -146,7 +163,7 @@ const Aura: React.FC = () => {
                             <input
                                 value={prompt}
                                 onChange={(e) => setPrompt(e.target.value)}
-                                placeholder="Type a command to alter reality..."
+                                placeholder="Command the dream..."
                                 className="bg-transparent border-none outline-none text-lg text-white placeholder-white/20 w-full font-light"
                                 autoFocus
                             />
@@ -155,7 +172,7 @@ const Aura: React.FC = () => {
                             </button>
                         </div>
                         <div className="mt-2 flex gap-2">
-                            {['make it darker', 'add fog', 'shift to blue'].map((suggestion) => (
+                            {['deepen recursion', 'add temporal noise', 'crystallize'].map((suggestion) => (
                                 <span
                                     key={suggestion}
                                     onClick={() => handleSuggestionClick(suggestion)}
@@ -169,10 +186,10 @@ const Aura: React.FC = () => {
                   </div>
               </div>
 
-              {/* Close Button */}
+              {/* Close Button (The Kick) */}
               <button
                 onClick={(e) => { e.stopPropagation(); setSelectedId(null); }}
-                className="absolute top-8 right-8 text-white/40 hover:text-white transition-colors z-50"
+                className="absolute top-8 right-8 text-white/40 hover:text-white transition-colors z-50 mix-blend-difference"
               >
                   <X size={32} strokeWidth={1} />
               </button>
