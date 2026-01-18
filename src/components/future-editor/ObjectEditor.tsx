@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 
 interface EditorObject {
@@ -18,8 +18,8 @@ interface ObjectEditorProps {
 export function ObjectEditor({ mode }: ObjectEditorProps) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [objects, _setObjects] = useState<EditorObject[]>([
-    { id: 'obj1', x: 100, y: 100, width: 120, height: 180, color: 'bg-rose-500', label: 'Person A' },
-    { id: 'obj2', x: 300, y: 200, width: 100, height: 100, color: 'bg-emerald-500', label: 'Prop B' },
+    { id: 'obj1', x: 100, y: 100, width: 120, height: 180, color: 'bg-zinc-600', label: 'Person A' },
+    { id: 'obj2', x: 300, y: 200, width: 100, height: 100, color: 'bg-stone-700', label: 'Prop B' },
   ]);
 
   const [isDrawing, setIsDrawing] = useState(false);
@@ -28,6 +28,20 @@ export function ObjectEditor({ mode }: ObjectEditorProps) {
 
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const rectRef = useRef<DOMRect | null>(null);
+
+  // Update rect on mount and resize
+  useEffect(() => {
+    const updateRect = () => {
+      if (containerRef.current) {
+        rectRef.current = containerRef.current.getBoundingClientRect();
+      }
+    };
+
+    updateRect();
+    window.addEventListener('resize', updateRect);
+    return () => window.removeEventListener('resize', updateRect);
+  }, []);
 
   // 3D Motion Values
   const mouseX = useMotionValue(0);
@@ -36,12 +50,17 @@ export function ObjectEditor({ mode }: ObjectEditorProps) {
   const rotateY = useTransform(mouseX, [-300, 300], [-15, 15]);
 
   const handleMouseMoveGlobal = (e: React.MouseEvent) => {
-    if (mode === 'layers' && containerRef.current) {
-        const { left, top, width, height } = containerRef.current.getBoundingClientRect();
-        const x = e.clientX - left - width / 2;
-        const y = e.clientY - top - height / 2;
-        mouseX.set(x);
-        mouseY.set(y);
+    if (mode === 'layers') {
+        // Fallback to live measurement if rect is missing (should be rare)
+        const rect = rectRef.current || containerRef.current?.getBoundingClientRect();
+
+        if (rect) {
+            const { left, top, width, height } = rect;
+            const x = e.clientX - left - width / 2;
+            const y = e.clientY - top - height / 2;
+            mouseX.set(x);
+            mouseY.set(y);
+        }
     }
   };
 
@@ -84,7 +103,7 @@ export function ObjectEditor({ mode }: ObjectEditorProps) {
       >
         {/* Video Preview Mockup - Background Layer */}
         <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-black opacity-50"
+            className="absolute inset-0 bg-gradient-to-br from-gray-900 via-neutral-900 to-black"
             style={mode === 'layers' ? { translateZ: -50 } : {}}
         />
         <motion.div

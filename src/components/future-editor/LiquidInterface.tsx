@@ -9,9 +9,9 @@ interface LiquidInterfaceProps {
 export function LiquidContainer({ children, className = '' }: LiquidInterfaceProps) {
   return (
     <div className={`relative w-full h-full overflow-hidden bg-black ${className}`}>
-      {/* Ambient background gradients */}
-      <div className="absolute top-[-20%] left-[-20%] w-[80%] h-[80%] bg-purple-900/30 rounded-full blur-[120px] mix-blend-screen pointer-events-none animate-pulse" />
-      <div className="absolute bottom-[-20%] right-[-20%] w-[80%] h-[80%] bg-blue-900/30 rounded-full blur-[120px] mix-blend-screen pointer-events-none animate-pulse" style={{ animationDelay: '2s' }} />
+      {/* Ambient background gradients - Monochromatic */}
+      <div className="absolute top-[-20%] left-[-20%] w-[80%] h-[80%] bg-zinc-800/20 rounded-full blur-[120px] mix-blend-screen pointer-events-none animate-pulse" />
+      <div className="absolute bottom-[-20%] right-[-20%] w-[80%] h-[80%] bg-zinc-700/20 rounded-full blur-[120px] mix-blend-screen pointer-events-none animate-pulse" style={{ animationDelay: '2s' }} />
 
       {/* Glass Surface */}
       <div className="relative z-10 w-full h-full backdrop-blur-[20px] bg-white/5 border border-white/10 shadow-[inset_0_0_100px_rgba(255,255,255,0.05)] text-white overflow-hidden">
@@ -37,18 +37,23 @@ export function LiquidButton({ onClick, children, isActive = false }: LiquidButt
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >
-      {/* Fluid Background */}
-      <motion.div
-        className={`absolute inset-0 z-[-1] rounded-full filter blur-[8px]
-           ${isActive ? 'bg-white' : 'bg-white/10'}
-        `}
-        layoutId="liquid-bg"
-        transition={{
-          type: "spring",
-          stiffness: 500,
-          damping: 30
-        }}
-      />
+      {/* Fluid Background - Active State (Sliding Pill) */}
+      {isActive && (
+        <motion.div
+          className="absolute inset-0 z-[-1] rounded-full filter blur-[8px] bg-white"
+          layoutId="liquid-bg"
+          transition={{
+            type: "spring",
+            stiffness: 500,
+            damping: 30
+          }}
+        />
+      )}
+
+      {/* Inactive State Background */}
+      {!isActive && (
+        <div className="absolute inset-0 z-[-1] rounded-full filter blur-[8px] bg-white/10 transition-colors duration-300" />
+      )}
 
       {/* Liquid morphing effect on hover - pseudo-element simulation via another div */}
       <motion.div
