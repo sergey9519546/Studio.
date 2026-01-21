@@ -18,7 +18,7 @@ export class MoodboardService {
   ) {}
 
   async create(createDto: CreateMoodboardItemDto): Promise<MoodboardItem> {
-    return this.prisma.moodboardItem.create({
+    const item = await this.prisma.moodboardItem.create({
       data: {
         projectId: createDto.projectId,
         assetId: createDto.assetId ?? null,
@@ -31,6 +31,14 @@ export class MoodboardService {
         shotType: createDto.shotType,
       },
     });
+
+    // Trigger async analysis (The Analysis / Visual DNA)
+    // We do not await this, so the user gets a fast response while the "Vibe Engine" works in background.
+    this.analyzeAndTagImage(item.id).catch(err =>
+      this.logger.error(`Background analysis failed for item ${item.id}`, err)
+    );
+
+    return item;
   }
 
   /**
@@ -38,7 +46,7 @@ export class MoodboardService {
    * Stores all attribution metadata for API compliance
    */
   async createFromUnsplash(dto: CreateFromUnsplashDto): Promise<MoodboardItem> {
-    return this.prisma.moodboardItem.create({
+    const item = await this.prisma.moodboardItem.create({
       data: {
         projectId: dto.projectId,
         source: "unsplash",
@@ -50,6 +58,13 @@ export class MoodboardService {
         assetId: null,
       },
     });
+
+    // Trigger async analysis (The Analysis / Visual DNA)
+    this.analyzeAndTagImage(item.id).catch(err =>
+      this.logger.error(`Background analysis failed for item ${item.id}`, err)
+    );
+
+    return item;
   }
 
   /**

@@ -5,6 +5,7 @@ import { Artifact } from "../components/dashboard/RecentArtifactsCard";
 import { DashboardCounts } from "../hooks/useDashboardData";
 import { useDashboardData } from "../hooks/useDashboardData";
 import { useToast } from "../hooks/useToast";
+import { useStudio } from "../context/StudioContext";
 import DashboardHome from "../views/DashboardHome";
 
 const mockNavigate = vi.fn();
@@ -22,6 +23,7 @@ vi.mock("react-router-dom", async () => {
 // Mock the hooks
 vi.mock("../hooks/useDashboardData");
 vi.mock("../hooks/useToast");
+vi.mock("../context/StudioContext");
 
 interface MockDashboardHeaderProps {
   onNewProjectClick: () => void;
@@ -143,6 +145,7 @@ vi.mock("../components/projects/CreateProjectModal", () => ({
 describe("DashboardHome", () => {
   const mockAddToast = vi.fn();
   const mockRefetch = vi.fn();
+  const mockUpdateSessionMood = vi.fn();
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -181,6 +184,23 @@ describe("DashboardHome", () => {
     (useToast as Mock).mockReturnValue({
       toasts: [],
       addToast: mockAddToast,
+    });
+
+    (useStudio as Mock).mockReturnValue({
+      activeProject: null,
+      projects: [],
+      isLoading: false,
+      error: null,
+      session: {
+        mood: "",
+        recentAssets: [],
+        aiContext: ""
+      },
+      setActiveProject: vi.fn(),
+      refreshProjects: vi.fn(),
+      updateSessionMood: mockUpdateSessionMood,
+      addRecentAsset: vi.fn(),
+      updateAiContext: vi.fn()
     });
   });
 
@@ -250,6 +270,9 @@ describe("DashboardHome", () => {
     const colorBtn = screen.getByTestId("color-select-btn");
     fireEvent.click(colorBtn);
 
+    // Should call toast
     expect(mockAddToast).toHaveBeenCalledWith("Accent updated to #FF0000", "info");
+    // Should update session mood
+    expect(mockUpdateSessionMood).toHaveBeenCalledWith("#FF0000");
   });
 });

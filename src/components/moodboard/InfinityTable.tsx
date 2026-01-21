@@ -53,6 +53,26 @@ export const InfinityTable: React.FC<InfinityTableProps> = ({ items, onItemUpdat
     newX = Math.round(newX / 20) * 20;
     newY = Math.round(newY / 20) * 20;
 
+    // Smart Stacks: Check for overlap with other items
+    // If we are close enough to another item, snap to its exact position (pile it)
+    const STACK_THRESHOLD = 50; // pixels
+    for (const otherItem of positionedItems) {
+      if (otherItem.id === id) continue;
+
+      const dist = Math.sqrt(
+        Math.pow(newX - otherItem._x, 2) + Math.pow(newY - otherItem._y, 2)
+      );
+
+      if (dist < STACK_THRESHOLD) {
+        newX = otherItem._x;
+        newY = otherItem._y;
+        // Optionally add a tiny random offset to make it look like a natural pile
+        newX += (Math.random() - 0.5) * 10;
+        newY += (Math.random() - 0.5) * 10;
+        break; // Snap to the first valid target
+      }
+    }
+
     // Update local state
     const updatedItems = localItems.map(i => {
       if (i.id === id) {

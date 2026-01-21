@@ -29,7 +29,7 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({
   const navigate = useNavigate();
 
   // Use global context for project updates, but keep dashboard specific data hook for now
-  const { setActiveProject, activeProject } = useStudio();
+  const { setActiveProject, activeProject, updateSessionMood } = useStudio();
 
   const {
     heroProject,
@@ -87,9 +87,10 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({
   const handleColorSelect = React.useCallback(
     (color: string) => {
       setAccentColor(color);
+      updateSessionMood(color);
       addToast(`Accent updated to ${color}`, "info");
     },
-    [addToast]
+    [addToast, updateSessionMood]
   );
 
   const handleViewGallery = React.useCallback(() => {
