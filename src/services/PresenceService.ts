@@ -9,9 +9,9 @@ export interface PresenceUser {
 }
 
 class PresenceService {
-  initialize(userId: string, data: any) {}
-  trackActivity(type: string, description: string, documentId: string) {}
-  onUsersChange(callback: (users: PresenceUser[]) => void) {
+  initialize(_userId: string, _data: unknown) {}
+  trackActivity(_type: string, _description: string, _documentId: string) {}
+  onUsersChange(_callback: (users: PresenceUser[]) => void) {
     return () => {};
   }
 }

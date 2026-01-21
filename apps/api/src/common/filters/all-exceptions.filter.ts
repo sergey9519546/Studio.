@@ -62,18 +62,23 @@ export class AllExceptionsFilter implements ExceptionFilter {
     }
 
     // Detailed Logging
-    const logContext = `[${method}] ${path}`;
-    const stack = exception instanceof Error ? exception.stack : null;
+    const logObject = {
+      path,
+      method,
+      statusCode: httpStatus,
+      errorCode,
+      errorMessage,
+      errorDetails,
+      timestamp: new Date().toISOString(),
+      user: request.user?.id, // Assumes user is attached to request
+      ip: request.ip,
+      stack: exception instanceof Error ? exception.stack : undefined,
+    };
 
     if (httpStatus >= 500) {
-      this.logger.error(
-        `CRITICAL ERROR ${logContext} -> ${errorMessage}`,
-        stack
-      );
+      this.logger.error({ msg: `CRITICAL ERROR: ${errorMessage}`, ...logObject });
     } else {
-      this.logger.warn(
-        `CLIENT ERROR ${logContext} -> [${httpStatus}] ${errorMessage}`
-      );
+      this.logger.warn({ msg: `CLIENT ERROR: ${errorMessage}`, ...logObject });
     }
 
     // Standardized JSON Response

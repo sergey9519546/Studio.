@@ -138,20 +138,19 @@ export class ProjectsService {
     // 1. Intelligence
     const systemPrompt = "You are a visual researcher for a film studio. Analyze the provided script line. Extract 3-5 distinct, comma-separated visual keywords that describe the setting, lighting, or objects. Output ONLY the keywords.";
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    let keywords: string[] = [];
+    let _keywords: string[] = [];
     try {
       const rawResponse = await this.genAIService.generateText(scriptText, systemPrompt);
-      keywords = rawResponse.split(',').map(s => s.trim()).filter(Boolean);
-    } catch (_e) {
+      _keywords = rawResponse.split(',').map(s => s.trim()).filter(Boolean);
+    } catch {
       // Fallback: simple split
-      keywords = scriptText.split(' ').filter(w => w.length > 3);
+      _keywords = scriptText.split(' ').filter(w => w.length > 3);
     }
 
     // TODO: Implement asset search functionality
     // The AssetsService needs a search method to find relevant assets by keyword
     // For now, returning empty array until search is implemented
-    const candidates: any[] = [];
+    const candidates: unknown[] = [];
 
     return candidates.slice(0, 10);
   }
