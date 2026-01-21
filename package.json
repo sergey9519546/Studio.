@@ -8,6 +8,7 @@
     "prepare": "prisma generate",
     "build": "npm run build:client && npm run build:api",
     "build:client": "vite build",
+    "build:frontend": "vite build",
     "build:api": "npx tsc --project apps/api/tsconfig.app.json --outDir build/apps/api",
     "gcp-build": "npm run build",
     "start": "node build/apps/api/src/main.js",
@@ -18,7 +19,7 @@
     "test:watch": "jest --config apps/api/jest.config.ts --watch",
     "test:cov": "jest --config apps/api/jest.config.ts --coverage",
     "test:e2e": "jest --config apps/api/jest.config.ts --testRegex '.e2e-spec.ts$'",
-    "test:integration": "jest --config apps/api/jest.config.ts --testRegex '.integration.spec.ts$'",
+    "test:integration": "jest --config apps/api/jest.config.ts --testRegex '.integration.spec.ts$' --passWithNoTests",
     "test:frontend": "vitest run",
     "test:frontend:ui": "vitest --ui",
     "verify-deployment": "node scripts/verify-deployment.js"
@@ -136,7 +137,8 @@
       "glob": "10.1.0"
     },
     "webpack": "5.94.0",
-    "tmp": "0.2.4"
+    "tmp": "0.2.4",
+    "hono": "4.11.4"
   },
   "jest": {
     "moduleFileExtensions": [

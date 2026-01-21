@@ -441,7 +441,7 @@ ${resumeText}`;
   /**
    * Mock image generation for development/fallback
    */
-  private mockImageGeneration(prompt: string): {
+  private mockImageGeneration(_prompt: string): {
     url: string;
     created: number;
   } {
@@ -465,7 +465,7 @@ This is a mock response. Please configure ZAI_API_KEY for actual AI generation.`
   /**
    * Mock image analysis for development/fallback
    */
-  private mockImageAnalysis(imageUrl: string): {
+  private mockImageAnalysis(_imageUrl: string): {
     description: string;
     tags: string[];
     metadata: {

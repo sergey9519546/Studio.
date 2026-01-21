@@ -10,7 +10,7 @@ export class GenAIService {
     this.apiKey = this.configService.get<string>('GOOGLE_GENAI_API_KEY') || '';
   }
 
-  async generateText(prompt: string, systemInstruction?: string): Promise<string> {
+  async generateText(prompt: string, _systemInstruction?: string): Promise<string> {
     if (!this.apiKey) {
       this.logger.warn('GOOGLE_GENAI_API_KEY is not set. Returning mock response.');
       return "beach, sunset, cinematic, palm trees, warm"; // Mock fallback
