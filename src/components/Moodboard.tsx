@@ -981,7 +981,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
       {/* AI Image Generator Modal */}
       {showAIGenerator && (
         <AIImageGenerator
-          onImageGenerated={async (imageUrl) => {
+          onImageGenerated={async () => {
             // Add the generated image to the moodboard
             addToast("Image generated successfully! You can now add it to your moodboard.");
             setShowAIGenerator(false);

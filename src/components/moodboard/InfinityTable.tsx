@@ -1,11 +1,45 @@
 import React, { useRef, useMemo, useState, useEffect } from 'react';
-import { motion, useDragControls } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { MoodboardItem } from '../../services/types';
 
 interface InfinityTableProps {
   items: MoodboardItem[];
   onItemUpdate?: (id: string, metadata: any) => void;
 }
+
+// Helper to calculate smart stack position
+// Moved outside component to avoid "impure function" linting errors
+const calculateSmartStackPosition = (
+  currentX: number,
+  currentY: number,
+  id: string,
+  allItems: any[]
+): { x: number; y: number } | null => {
+  const STACK_THRESHOLD = 50; // pixels
+
+  for (const otherItem of allItems) {
+    if (otherItem.id === id) continue;
+
+    const dist = Math.sqrt(
+      Math.pow(currentX - otherItem._x, 2) + Math.pow(currentY - otherItem._y, 2)
+    );
+
+    if (dist < STACK_THRESHOLD) {
+      // Snap to the target item's position
+      let newX = otherItem._x;
+      let newY = otherItem._y;
+
+      // Add a tiny random offset to make it look like a natural pile
+      // Using a pseudo-random seed based on ID or time to be slightly more deterministic if needed,
+      // but Math.random() is fine here as this is an event handler helper.
+      newX += (Math.random() - 0.5) * 10;
+      newY += (Math.random() - 0.5) * 10;
+
+      return { x: newX, y: newY };
+    }
+  }
+  return null;
+};
 
 export const InfinityTable: React.FC<InfinityTableProps> = ({ items, onItemUpdate }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -54,23 +88,10 @@ export const InfinityTable: React.FC<InfinityTableProps> = ({ items, onItemUpdat
     newY = Math.round(newY / 20) * 20;
 
     // Smart Stacks: Check for overlap with other items
-    // If we are close enough to another item, snap to its exact position (pile it)
-    const STACK_THRESHOLD = 50; // pixels
-    for (const otherItem of positionedItems) {
-      if (otherItem.id === id) continue;
-
-      const dist = Math.sqrt(
-        Math.pow(newX - otherItem._x, 2) + Math.pow(newY - otherItem._y, 2)
-      );
-
-      if (dist < STACK_THRESHOLD) {
-        newX = otherItem._x;
-        newY = otherItem._y;
-        // Optionally add a tiny random offset to make it look like a natural pile
-        newX += (Math.random() - 0.5) * 10;
-        newY += (Math.random() - 0.5) * 10;
-        break; // Snap to the first valid target
-      }
+    const stackPos = calculateSmartStackPosition(newX, newY, id, positionedItems);
+    if (stackPos) {
+      newX = stackPos.x;
+      newY = stackPos.y;
     }
 
     // Update local state
