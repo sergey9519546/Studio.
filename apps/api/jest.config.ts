@@ -7,6 +7,9 @@ export default {
     transform: {
         '^.+\\.(t|j)s$': 'ts-jest',
     },
+    moduleNameMapper: {
+        '^(\\.{1,2}/.*)\\.js$': '$1',
+    },
     collectCoverageFrom: [
         '**/*.(t|j)s',
         '!**/*.spec.ts',

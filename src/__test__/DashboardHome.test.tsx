@@ -6,6 +6,7 @@ import { DashboardCounts } from "../hooks/useDashboardData";
 import { useDashboardData } from "../hooks/useDashboardData";
 import { useToast } from "../hooks/useToast";
 import DashboardHome from "../views/DashboardHome";
+import { StudioProvider } from "../context/StudioContext";
 
 const mockNavigate = vi.fn();
 
@@ -187,7 +188,9 @@ describe("DashboardHome", () => {
   it("renders the dashboard with hero project", async () => {
     render(
       <MemoryRouter>
-        <DashboardHome />
+        <StudioProvider>
+          <DashboardHome />
+        </StudioProvider>
       </MemoryRouter>
     );
 
@@ -208,7 +211,9 @@ describe("DashboardHome", () => {
   it("opens create project modal when clicking new project button", async () => {
     render(
       <MemoryRouter>
-        <DashboardHome />
+        <StudioProvider>
+          <DashboardHome />
+        </StudioProvider>
       </MemoryRouter>
     );
 
@@ -223,7 +228,9 @@ describe("DashboardHome", () => {
   it("navigates to writers room on prompt submission", async () => {
     render(
       <MemoryRouter>
-        <DashboardHome />
+        <StudioProvider>
+          <DashboardHome />
+        </StudioProvider>
       </MemoryRouter>
     );
 
@@ -243,7 +250,9 @@ describe("DashboardHome", () => {
   it("handles color selection", async () => {
     render(
       <MemoryRouter>
-        <DashboardHome />
+        <StudioProvider>
+          <DashboardHome />
+        </StudioProvider>
       </MemoryRouter>
     );
 
