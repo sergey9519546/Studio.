@@ -13,7 +13,7 @@ export interface UserPresence {
 class CollaborationService {
   private socket: Socket | null = null;
   private presenceCallbacks: ((users: UserPresence[]) => void)[] = [];
-  private cursorCallbacks: ((data: unknown) => void)[] = [];
+  private cursorCallbacks: ((data: UserPresence[]) => void)[] = [];
 
   constructor() {
     // Lazy initialization

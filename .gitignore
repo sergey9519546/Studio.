@@ -90,3 +90,11 @@ tmp/
 
 # Generated
 generated/
+
+# Backups & Exports
+*.tar.gz
+exportedData/
+
+# Lock files
+yarn.lock
+pnpm-lock.yaml
