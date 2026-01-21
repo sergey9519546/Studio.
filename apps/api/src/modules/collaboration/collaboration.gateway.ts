@@ -75,7 +75,7 @@ export class CollaborationGateway implements OnGatewayConnection, OnGatewayDisco
   }
 
   @SubscribeMessage('cursor-move')
-  handleCursorMove(client: Socket, payload: { x: number; y: number; selection?: any }) {
+  handleCursorMove(client: Socket, payload: { x: number; y: number; selection?: unknown }) {
     const info = this.clients.get(client.id);
     if (info) {
       // Broadcast to everyone else in the room

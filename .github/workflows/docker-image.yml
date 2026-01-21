@@ -14,5 +14,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Create .env file
+      run: |
+        echo "DATABASE_URL='file:./test.db'" >> .env
+        echo "JWT_SECRET='test-secret'" >> .env
+    - name: Generate Prisma client
+      run: npx prisma generate
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
