@@ -1,5 +1,6 @@
-import { Clock, Filter, Heart, Image, Plus, Search, Trash2, X, XCircle, Wand2 } from "lucide-react";
+import { Clock, Filter, Heart, Image, Plus, Search, Trash2, X, XCircle, Wand2, LayoutGrid, Move } from "lucide-react";
 import React, { useMemo, useState } from "react";
+import { InfinityTable } from "./moodboard/InfinityTable";
 import {
   searchSimilarImages,
   trackDownload,
@@ -86,6 +87,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   onAddUnsplashImage,
 }) => {
   const [activeTab, setActiveTab] = useState<TabType>("uploads");
+  const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
@@ -134,6 +136,14 @@ export const Moodboard: React.FC<MoodboardProps> = ({
       setRecentSearches(getRecentSearches());
     }
   }, [activeTab]);
+
+  const handleItemUpdate = async (id: string, metadata: any) => {
+    try {
+      await MoodboardAPI.updateMoodboardItem(id, { metadata });
+    } catch (e) {
+      console.error("Failed to update item metadata", e);
+    }
+  };
 
   // Extract all unique tags from items
   const allTags = useMemo(() => {
@@ -337,7 +347,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
         </div>
 
         {/* Tab Navigation */}
-        <div className="mb-6 border-b border-border-subtle">
+        <div className="mb-6 border-b border-border-subtle flex items-center justify-between">
           <div className="flex gap-6">
             <button
               onClick={() => setActiveTab("uploads")}
@@ -370,53 +380,86 @@ export const Moodboard: React.FC<MoodboardProps> = ({
               AI Generate
             </button>
           </div>
+
+          {activeTab === "uploads" && (
+            <div className="flex bg-subtle rounded-lg p-1 mb-2">
+              <button
+                onClick={() => setViewMode("grid")}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+                  viewMode === "grid"
+                    ? "bg-white text-primary shadow-sm"
+                    : "text-ink-secondary hover:text-ink-primary"
+                }`}
+              >
+                <LayoutGrid size={14} />
+                Grid
+              </button>
+              <button
+                onClick={() => setViewMode("table")}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+                  viewMode === "table"
+                    ? "bg-white text-primary shadow-sm"
+                    : "text-ink-secondary hover:text-ink-primary"
+                }`}
+              >
+                <Move size={14} />
+                Table
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Uploads Tab */}
         {activeTab === "uploads" && (
           <>
-            {/* Search & Filters */}
-            <div className="mb-8 space-y-6">
-              <Input
-                placeholder="Search visuals semantically... (e.g., 'melancholy summer' or 'cinematic blue hour')"
-                icon={<Search size={18} />}
-                value={searchQuery}
-                onChange={(e) => handleSearch(e.target.value)}
-              />
+            {viewMode === "table" ? (
+              <div className="w-full h-[800px] border border-border-subtle rounded-3xl overflow-hidden mb-8">
+                 <InfinityTable items={filteredItems} onItemUpdate={handleItemUpdate} />
+              </div>
+            ) : (
+              <>
+                {/* Search & Filters */}
+                <div className="mb-8 space-y-6">
+                  <Input
+                    placeholder="Search visuals semantically... (e.g., 'melancholy summer' or 'cinematic blue hour')"
+                    icon={<Search size={18} />}
+                    value={searchQuery}
+                    onChange={(e) => handleSearch(e.target.value)}
+                  />
 
-              {allTags.length > 0 && (
-                <div>
-                  <h3 className="text-sm font-bold text-ink-secondary uppercase tracking-wide mb-3">
-                    Filter by Tags
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {allTags.map((tag) => (
-                      <button
-                        key={tag}
-                        onClick={() => toggleTag(tag)}
-                        className={`px-3 py-1.5 rounded-[24px] text-xs font-medium transition-all ${
-                          selectedTags.includes(tag)
-                            ? "bg-primary text-white"
-                            : "bg-subtle text-ink-secondary hover:bg-surface"
-                        }`}
-                      >
-                        {tag}
-                      </button>
-                    ))}
-                  </div>
+                  {allTags.length > 0 && (
+                    <div>
+                      <h3 className="text-sm font-bold text-ink-secondary uppercase tracking-wide mb-3">
+                        Filter by Tags
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {allTags.map((tag) => (
+                          <button
+                            key={tag}
+                            onClick={() => toggleTag(tag)}
+                            className={`px-3 py-1.5 rounded-[24px] text-xs font-medium transition-all ${
+                              selectedTags.includes(tag)
+                                ? "bg-primary text-white"
+                                : "bg-subtle text-ink-secondary hover:bg-surface"
+                            }`}
+                          >
+                            {tag}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
 
-            {/* Masonry Grid */}
-            {isSearching && (
-              <p className="text-xs text-ink-tertiary mb-3">
-                Searching visuals...
-              </p>
-            )}
-            {filteredItems.length > 0 ? (
-              <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6">
-                {filteredItems.map((item) => (
+                {/* Masonry Grid */}
+                {isSearching && (
+                  <p className="text-xs text-ink-tertiary mb-3">
+                    Searching visuals...
+                  </p>
+                )}
+                {filteredItems.length > 0 ? (
+                  <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6">
+                    {filteredItems.map((item) => (
                   <Card
                     key={item.id}
                     className="mb-6 p-0 overflow-hidden cursor-pointer hover:shadow-2xl transition-shadow duration-300 break-inside-avoid group"
@@ -511,6 +554,8 @@ export const Moodboard: React.FC<MoodboardProps> = ({
             )}
           </>
         )}
+      </>
+    )}
 
         {/* Unsplash Tab */}
         {activeTab === "unsplash" && (

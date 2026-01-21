@@ -28,6 +28,7 @@ export function useApiData<T>(
   const isMountedRef = React.useRef(true);
 
   React.useEffect(() => {
+    isMountedRef.current = true;
     return () => {
       isMountedRef.current = false;
     };
@@ -40,12 +41,16 @@ export function useApiData<T>(
     setError(null);
 
     try {
+      console.log('useApiData: fetching...', requestId);
       const result = await fetchFunction();
+      console.log('useApiData: fetched', requestId, 'result count:', result?.length);
       if (!isMountedRef.current || requestId !== requestIdRef.current) {
+        console.log('useApiData: aborted (mounted/id mismatch)', requestId, isMountedRef.current, requestIdRef.current);
         return;
       }
       setData(result);
     } catch (err) {
+      console.error('useApiData: error', requestId, err);
       if (!isMountedRef.current || requestId !== requestIdRef.current) {
         return;
       }
@@ -59,6 +64,7 @@ export function useApiData<T>(
       }
     } finally {
       if (isMountedRef.current && requestId === requestIdRef.current) {
+        console.log('useApiData: finished loading', requestId);
         setLoading(false);
       }
     }

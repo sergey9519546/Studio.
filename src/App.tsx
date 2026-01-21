@@ -337,6 +337,14 @@ function MoodboardRoute() {
     : fallbackProject;
   const effectiveProjectId = project?.id || "";
 
+  console.log('MoodboardRoute state:', {
+    projectsLoading,
+    projectsCount: projects.length,
+    resolvedProjectsCount: resolvedProjects.length,
+    effectiveProjectId,
+    projectIdParam
+  });
+
   const fetchMoodboardItems = useCallback(
     () =>
       effectiveProjectId

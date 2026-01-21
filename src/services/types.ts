@@ -72,6 +72,11 @@ export interface MoodboardItem {
   createdAt: string;
   updatedAt: string;
   projectId: string;
+  metadata?: {
+    x?: number;
+    y?: number;
+    [key: string]: any;
+  };
 }
 
 export interface CreateMoodboardItemData {
@@ -82,6 +87,11 @@ export interface CreateMoodboardItemData {
   shotType?: string;
   caption?: string;
   projectId: string;
+  metadata?: {
+    x?: number;
+    y?: number;
+    [key: string]: any;
+  };
 }
 
 // Freelancer Types

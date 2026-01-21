@@ -62,9 +62,12 @@ export class MoodboardAPI {
     limit: number = 20
   ): Promise<PaginatedResponse<MoodboardItem>> {
     try {
+      console.log('Fetching moodboard items for:', projectId);
       const response = await apiClient.get<MoodboardListPayload>(`/moodboard/${projectId}`);
+      console.log('Moodboard response:', response.data);
       return normalizeMoodboardList(response.data, page, limit);
     } catch (error) {
+      console.error('Moodboard fetch error:', error);
       handleApiError(error);
     }
   }
