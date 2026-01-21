@@ -136,7 +136,7 @@ export class ProjectsService {
     }
 
     // 1. Intelligence
-    const systemPrompt = "You are a visual researcher for a film studio. Analyze the provided script line. Extract 3-5 distinct, comma-separated visual keywords that describe the setting, lighting, or objects. Output ONLY the keywords.";
+    // const systemPrompt = "You are a visual researcher for a film studio. Analyze the provided script line. Extract 3-5 distinct, comma-separated visual keywords that describe the setting, lighting, or objects. Output ONLY the keywords.";
 
     // TODO: Implement asset search functionality
     // The AssetsService needs a search method to find relevant assets by keyword
