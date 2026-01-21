@@ -63,7 +63,7 @@ class CollaborationService {
   }
 
   // To match the existing interface expected by CollaborativeCursor
-  onPresence(documentId: string, callback: (users: UserPresence[]) => void) {
+  onPresence(_documentId: string, callback: (users: UserPresence[]) => void) {
     this.cursorCallbacks.push(callback);
     return () => {
       this.cursorCallbacks = this.cursorCallbacks.filter(cb => cb !== callback);

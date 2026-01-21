@@ -1,6 +1,6 @@
 import { Box } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
-import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation, useNavigate, useParams, Outlet } from "react-router-dom";
 
 import { Moodboard } from "./components/Moodboard";
 import { ProjectDashboard } from "./components/ProjectDashboard";
@@ -27,6 +27,7 @@ import ProjectsView from "./views/ProjectsView";
 import CreateProjectModal from "./components/projects/CreateProjectModal";
 import ProjectSwitcher from "./components/projects/ProjectSwitcher";
 import { StudioProvider } from "./context/StudioContext";
+
 // Project Context Header Component
 function ProjectContextHeader({ project }: { project: Project }) {
   const navigate = useNavigate();
@@ -477,11 +478,13 @@ function FreelancersRoute() {
 }
 
 // Layout Component
-function Layout({ children }: { children: React.ReactNode }) {
+function Layout() {
   return (
     <div className="app-shell">
       <Sidebar />
-      <div className="app-main">{children}</div>
+      <div className="app-main">
+        <Outlet />
+      </div>
       <CommandBar />
     </div>
   );
@@ -530,8 +533,12 @@ function ProjectsViewWrapper() {
 export default function App() {
   return (
     <StudioProvider>
-      <Layout>
-        <Routes>
+      <Routes>
+        {/* Standalone full-screen routes */}
+        <Route path="/editor" element={<FutureEditor />} />
+
+        {/* Dashboard/Layout wrapped routes */}
+        <Route element={<Layout />}>
           {/* Dashboard */}
           <Route path="/" element={<DashboardHome />} />
 
@@ -548,13 +555,10 @@ export default function App() {
           {/* Writers Room */}
           <Route path="/writers-room" element={<WritersRoomRoute />} />
 
-          {/* Future Editor */}
-          <Route path="/editor" element={<FutureEditor />} />
-
           {/* Catch all route - redirect to dashboard */}
           <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Layout>
+        </Route>
+      </Routes>
     </StudioProvider>
   );
 }

@@ -138,9 +138,13 @@ export class ProjectsService {
     // 1. Intelligence
     const systemPrompt = "You are a visual researcher for a film studio. Analyze the provided script line. Extract 3-5 distinct, comma-separated visual keywords that describe the setting, lighting, or objects. Output ONLY the keywords.";
 
-    // TODO: Implement asset search functionality
-    // The AssetsService needs a search method to find relevant assets by keyword
-    // For now, returning empty array until search is implemented
+    try {
+      const rawResponse = await this.genAIService.generateText(scriptText, systemPrompt);
+      // Keywords would be processed here for asset search
+      void rawResponse;
+    } catch {
+      // Fallback logic placeholder
+    }
 
     // TODO: Implement asset search functionality
     // The AssetsService needs a search method to find relevant assets by keyword

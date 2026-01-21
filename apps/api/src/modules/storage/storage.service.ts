@@ -223,8 +223,8 @@ export class StorageService implements OnModuleInit {
   private async initializeStorage() {
     try {
       const app = this.initFirebaseApp();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.storage = getStorage(app) as any;
+      // Cast to unknown first to avoid direct type conflict between firebase-admin storage and google-cloud-storage
+      this.storage = getStorage(app) as unknown as Storage;
 
       if (this.usesStorageEmulator) {
         this.isConfigured = true;
@@ -239,11 +239,12 @@ export class StorageService implements OnModuleInit {
       await bucket.getMetadata();
 
       const [serviceAccount] = await this.storage!.getServiceAccount();
+      // ServiceAccount response type can be inconsistent, treating as Record
+      const accountData = serviceAccount as Record<string, unknown>;
+
       this.connectedEmail =
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (serviceAccount as any)?.email ||
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (serviceAccount as any)?.client_email ||
+        (typeof accountData?.email === 'string' ? accountData.email : '') ||
+        (typeof accountData?.client_email === 'string' ? accountData.client_email : '') ||
         "";
 
       this.isConfigured = true;
