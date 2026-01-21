@@ -13,13 +13,13 @@ export interface UserPresence {
 class CollaborationService {
   private socket: Socket | null = null;
   private presenceCallbacks: ((users: UserPresence[]) => void)[] = [];
-  private cursorCallbacks: ((data: any) => void)[] = [];
+  private cursorCallbacks: ((data: unknown) => void)[] = [];
 
   constructor() {
     // Lazy initialization
   }
 
-  initialize(userId: string, userName: string) {
+  initialize(_userId: string, _userName: string) {
     if (this.socket) return;
 
     this.socket = io(`${SOCKET_URL}/collaboration`, {
@@ -31,7 +31,7 @@ class CollaborationService {
       console.log('Connected to collaboration server');
     });
 
-    this.socket.on('presence-update', (users: string[]) => {
+    this.socket.on('presence-update', (_users: string[]) => {
       // Logic to fetch full user details if needed,
       // but for now the gateway just sends IDs.
       // We might need to enrich this.
@@ -57,13 +57,13 @@ class CollaborationService {
     this.socket.emit('leave-room', { projectId: documentId });
   }
 
-  updateCursor(documentId: string, x: number, selection: any) {
+  updateCursor(documentId: string, x: number, selection: unknown) {
     if (!this.socket) return;
     this.socket.emit('cursor-move', { x, y: 0, selection }); // y=0 for now if just horizontal text, or actual Y
   }
 
   // To match the existing interface expected by CollaborativeCursor
-  onPresence(documentId: string, callback: (users: UserPresence[]) => void) {
+  onPresence(_documentId: string, callback: (users: UserPresence[]) => void) {
     this.cursorCallbacks.push(callback);
     return () => {
       this.cursorCallbacks = this.cursorCallbacks.filter(cb => cb !== callback);
@@ -77,5 +77,5 @@ export const liveEditingService = new CollaborationService();
 export const presenceService = {
   initialize: () => {},
   trackActivity: () => {},
-  onUsersChange: (cb: any) => { return () => {} },
+  onUsersChange: (_cb: unknown) => { return () => {} },
 };

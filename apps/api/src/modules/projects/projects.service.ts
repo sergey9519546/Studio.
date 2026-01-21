@@ -143,15 +143,17 @@ export class ProjectsService {
     try {
       const rawResponse = await this.genAIService.generateText(scriptText, systemPrompt);
       keywords = rawResponse.split(',').map(s => s.trim()).filter(Boolean);
-    } catch (_e) {
+    } catch {
       // Fallback: simple split
       keywords = scriptText.split(' ').filter(w => w.length > 3);
     }
+    // Suppress unused warning for keywords as it's intended for the TODO below
+    void keywords;
 
     // TODO: Implement asset search functionality
     // The AssetsService needs a search method to find relevant assets by keyword
     // For now, returning empty array until search is implemented
-    const candidates: any[] = [];
+    const candidates: unknown[] = [];
 
     return candidates.slice(0, 10);
   }
