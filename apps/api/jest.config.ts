@@ -14,6 +14,9 @@ export default {
     ],
     coverageDirectory: '../coverage',
     testPathIgnorePatterns: ['/node_modules/', '/build/'],
+    moduleNameMapper: {
+        '^(\\.\\.?\\/.+)\\.js$': '$1',
+    },
     coverageThreshold: {
         global: {
             branches: 80,

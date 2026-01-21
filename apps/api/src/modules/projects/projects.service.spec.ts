@@ -2,6 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ProjectsService } from './projects.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { AssetsService } from '../assets/assets.service';
+import { GenAIService } from '../../common/ai/gen-ai.service';
+import { ZaiService } from '../../common/ai/zai.service';
 
 describe('ProjectsService', () => {
     let service: ProjectsService;
@@ -32,6 +35,26 @@ describe('ProjectsService', () => {
                         get: jest.fn(),
                         set: jest.fn(),
                         del: jest.fn(),
+                    },
+                },
+                {
+                    provide: AssetsService,
+                    useValue: {
+                        create: jest.fn(),
+                        findAll: jest.fn(),
+                    },
+                },
+                {
+                    provide: GenAIService,
+                    useValue: {
+                        generateText: jest.fn(),
+                    },
+                },
+                {
+                    provide: ZaiService,
+                    useValue: {
+                        generateEmbedding: jest.fn(),
+                        generateText: jest.fn(),
                     },
                 },
             ],
