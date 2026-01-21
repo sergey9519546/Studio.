@@ -1,4 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../../prisma/prisma.service.js';
 
 export interface AuditEvent {
@@ -30,8 +31,7 @@ type AuditLogEntry = {
   action: string;
   resourceType: string;
   resourceId: string | null;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  metadata: any;
+  metadata: Prisma.JsonValue;
   timestamp: Date;
   user?: { id: string; name: string; email: string } | null;
 };
@@ -55,8 +55,7 @@ export class ProjectAuditService {
           resourceType: event.resourceType,
           resourceId: event.resourceId,
           // explicit cast for Prisma Json compatibility
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          metadata: (event.metadata || {}) as Record<string, any>,
+          metadata: (event.metadata || {}) as Prisma.InputJsonValue,
           ipAddress: event.ipAddress,
           userAgent: event.userAgent,
           timestamp: new Date(),
