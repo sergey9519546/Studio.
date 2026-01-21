@@ -49,17 +49,9 @@ describe("PrismaService", () => {
     expect(serviceWithPool._pool).toBeDefined();
   });
 
-  it("Should construct without adapter when DATABASE_URL is not defined", async () => {
+  it("Should throw an error if DATABASE_URL is not defined", () => {
     delete process.env.DATABASE_URL;
-
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [PrismaService],
-    }).compile();
-
-    const service = module.get<PrismaService>(PrismaService);
-
-    const serviceWithPool = service as unknown as { _pool?: unknown };
-    expect(serviceWithPool._pool).toBeUndefined();
+    expect(() => new PrismaService()).toThrow("DATABASE_URL is not set");
   });
 
   it("onModuleInit should attempt lazy connect and log success", async () => {

@@ -9,7 +9,6 @@ import { LoadingSpinner } from "../components/loading/LoadingSpinner";
 import {
   DEMO_DATA_ENABLED,
   DEMO_FREELANCERS,
-  DEMO_PROJECTS,
   getDemoMoodboardItems,
 } from "../data/demoData";
 import { FreelancersAPI } from "../services/api/freelancers";

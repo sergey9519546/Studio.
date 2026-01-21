@@ -19,7 +19,7 @@ class CollaborationService {
     // Lazy initialization
   }
 
-  initialize(userId: string, userName: string) {
+  initialize(_userId: string, _userName: string) {
     if (this.socket) return;
 
     this.socket = io(`${SOCKET_URL}/collaboration`, {
