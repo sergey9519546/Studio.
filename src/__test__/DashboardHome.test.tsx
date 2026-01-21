@@ -6,6 +6,7 @@ import { DashboardCounts } from "../hooks/useDashboardData";
 import { useDashboardData } from "../hooks/useDashboardData";
 import { useToast } from "../hooks/useToast";
 import DashboardHome from "../views/DashboardHome";
+import { useStudio } from "../context/StudioContext";
 
 const mockNavigate = vi.fn();
 
@@ -22,6 +23,7 @@ vi.mock("react-router-dom", async () => {
 // Mock the hooks
 vi.mock("../hooks/useDashboardData");
 vi.mock("../hooks/useToast");
+vi.mock("../context/StudioContext");
 
 interface MockDashboardHeaderProps {
   onNewProjectClick: () => void;
@@ -143,9 +145,15 @@ vi.mock("../components/projects/CreateProjectModal", () => ({
 describe("DashboardHome", () => {
   const mockAddToast = vi.fn();
   const mockRefetch = vi.fn();
+  const mockSetActiveProject = vi.fn();
 
   beforeEach(() => {
     vi.clearAllMocks();
+
+    (useStudio as Mock).mockReturnValue({
+      activeProject: null,
+      setActiveProject: mockSetActiveProject,
+    });
 
     (useDashboardData as Mock).mockReturnValue({
       heroProject: {

@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 import { Project, Asset } from "../services/types";
 import { ProjectsAPI } from "../services/api/projects";
-import { MoodboardAPI } from "../services/api/moodboard";
 
 interface CreativeSession {
   mood: string;
