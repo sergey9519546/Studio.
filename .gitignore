@@ -90,3 +90,7 @@ tmp/
 
 # Generated
 generated/
+
+# Backups & Exports
+*.tar.gz
+exportedData/
