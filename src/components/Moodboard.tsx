@@ -111,6 +111,8 @@ export const Moodboard: React.FC<MoodboardProps> = ({
     page: number;
     per_page: number;
   }>({ total: 0, total_pages: 0, page: 1, per_page: 24 });
+  const latestSearchRequestId = React.useRef(0);
+  const searchDebounceTimeout = React.useRef<number | null>(null);
 
   // Recent searches state
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
@@ -122,11 +124,63 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   }>({});
 
   React.useEffect(() => {
-    if (!searchQuery.trim()) {
+    const trimmed = searchQuery.trim();
+    if (!trimmed) {
+      latestSearchRequestId.current += 1;
+      if (searchDebounceTimeout.current !== null) {
+        window.clearTimeout(searchDebounceTimeout.current);
+        searchDebounceTimeout.current = null;
+      }
+      setIsSearching(false);
       setSearchResults(null);
       setFilteredItems(filterByTags(items, selectedTags));
+      return;
     }
-  }, [items, searchQuery, selectedTags]);
+
+    setIsSearching(true);
+    if (searchDebounceTimeout.current !== null) {
+      window.clearTimeout(searchDebounceTimeout.current);
+    }
+
+    searchDebounceTimeout.current = window.setTimeout(() => {
+      const requestId = latestSearchRequestId.current + 1;
+      latestSearchRequestId.current = requestId;
+
+      const runSearch = async () => {
+        try {
+          const baseResults = onSemanticSearch
+            ? await onSemanticSearch(trimmed)
+            : filterByQuery(items, trimmed);
+          if (requestId !== latestSearchRequestId.current) {
+            return;
+          }
+          setSearchResults(baseResults);
+          setFilteredItems(filterByTags(baseResults, selectedTags));
+        } catch (error) {
+          if (requestId !== latestSearchRequestId.current) {
+            return;
+          }
+          const message =
+            error instanceof Error ? error.message : "Search failed. Try again.";
+          addToast(message);
+          setFilteredItems(filterByTags(items, selectedTags));
+        } finally {
+          if (requestId === latestSearchRequestId.current) {
+            setIsSearching(false);
+          }
+        }
+      };
+
+      void runSearch();
+    }, 300);
+
+    return () => {
+      if (searchDebounceTimeout.current !== null) {
+        window.clearTimeout(searchDebounceTimeout.current);
+        searchDebounceTimeout.current = null;
+      }
+    };
+  }, [addToast, items, onSemanticSearch, searchQuery, selectedTags]);
 
   // Load recent searches on mount and when tab changes to Unsplash
   React.useEffect(() => {
@@ -147,28 +201,6 @@ export const Moodboard: React.FC<MoodboardProps> = ({
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
-    const trimmed = query.trim();
-    if (!trimmed) {
-      setSearchResults(null);
-      setFilteredItems(filterByTags(items, selectedTags));
-      return;
-    }
-
-    setIsSearching(true);
-    try {
-      const baseResults = onSemanticSearch
-        ? await onSemanticSearch(trimmed)
-        : filterByQuery(items, trimmed);
-      setSearchResults(baseResults);
-      setFilteredItems(filterByTags(baseResults, selectedTags));
-    } catch (error) {
-      const message =
-        error instanceof Error ? error.message : "Search failed. Try again.";
-      addToast(message);
-      setFilteredItems(filterByTags(items, selectedTags));
-    } finally {
-      setIsSearching(false);
-    }
   };
 
   const toggleTag = (tag: string) => {
