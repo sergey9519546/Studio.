@@ -122,11 +122,25 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   }>({});
 
   React.useEffect(() => {
-    if (!searchQuery.trim()) {
+    const trimmed = searchQuery.trim();
+    if (!trimmed) {
       setSearchResults(null);
       setFilteredItems(filterByTags(items, selectedTags));
+      return;
     }
-  }, [items, searchQuery, selectedTags]);
+
+    if (!onSemanticSearch) {
+      const baseResults = filterByQuery(items, trimmed);
+      setSearchResults(baseResults);
+      setFilteredItems(filterByTags(baseResults, selectedTags));
+      return;
+    }
+
+    if (searchResults) {
+      // Semantic results are kept stable; we only re-apply tag filters when items change.
+      setFilteredItems(filterByTags(searchResults, selectedTags));
+    }
+  }, [items, searchQuery, selectedTags, onSemanticSearch, searchResults]);
 
   // Load recent searches on mount and when tab changes to Unsplash
   React.useEffect(() => {
