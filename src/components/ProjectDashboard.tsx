@@ -1,5 +1,5 @@
 import { Activity, Edit2, FileText, Image, RefreshCw, Save, User, Users, Wifi, WifiOff } from "lucide-react";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useAutoSave } from "../hooks/useAutoSave";
 import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
 import { getProjectStatusMeta } from "../utils/status";
@@ -60,17 +60,21 @@ export const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
   const [collaborators] = useState<Collaborator[]>([]);
   const [activities, setActivities] = useState<ActivityItem[]>([]);
   const activityFeedRef = useRef<HTMLDivElement>(null);
-  const statusMeta = getProjectStatusMeta(status);
-  const formattedStartDate = (() => {
+
+  // ⚡ Bolt: Memoize derived data to prevent recalculation on every render.
+  // This improves performance by avoiding unnecessary computations when props haven't changed.
+  const statusMeta = useMemo(() => getProjectStatusMeta(status), [status]);
+  const formattedStartDate = useMemo(() => {
     if (!startDate) return "No kickoff date";
     const date = new Date(startDate);
     return Number.isNaN(date.getTime()) ? "No kickoff date" : date.toLocaleDateString();
-  })();
-  const formattedDueDate = (() => {
+  }, [startDate]);
+
+  const formattedDueDate = useMemo(() => {
     if (!endDate) return "No deadline";
     const date = new Date(endDate);
     return Number.isNaN(date.getTime()) ? "No deadline" : date.toLocaleDateString();
-  })();
+  }, [endDate]);
 
   useEffect(() => {
     setLocalBrief(brief);
