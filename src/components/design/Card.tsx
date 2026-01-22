@@ -7,7 +7,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   glass?: boolean;
 }
 
-export const Card: React.FC<CardProps> = ({
+const CardComponent: React.FC<CardProps> = ({
   children,
   className = '',
   noPadding = false,
@@ -37,5 +37,9 @@ export const Card: React.FC<CardProps> = ({
     </div>
   );
 };
+
+// Using React.memo to prevent unnecessary re-renders of the card component
+// when its props do not change. This is a performance optimization.
+export const Card = React.memo(CardComponent);
 
 export default Card;
