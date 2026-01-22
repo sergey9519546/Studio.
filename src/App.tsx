@@ -24,6 +24,7 @@ import DashboardHome from "./views/DashboardHome";
 import GuardianRoom from "./views/GuardianRoom";
 import FutureEditor from "./views/FutureEditor";
 import ProjectsView from "./views/ProjectsView";
+import Whiteboard from "./views/Whiteboard";
 import CreateProjectModal from "./components/projects/CreateProjectModal";
 import ProjectSwitcher from "./components/projects/ProjectSwitcher";
 import { StudioProvider } from "./context/StudioContext";
@@ -548,6 +549,9 @@ export default function App() {
 
           {/* Moodboard */}
           <Route path="/moodboard" element={<MoodboardRoute />} />
+
+          {/* Whiteboard */}
+          <Route path="/whiteboard" element={<Whiteboard />} />
 
           {/* Freelancers */}
           <Route path="/freelancers" element={<FreelancersRoute />} />

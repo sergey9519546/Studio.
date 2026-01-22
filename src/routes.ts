@@ -1,5 +1,6 @@
 import {
   Grid,
+  LayoutGrid,
   Layers,
   Layout,
   LucideIcon,
@@ -57,6 +58,16 @@ export const routes: RouteConfig[] = [
     metadata: {
       title: "Moodboard - Studio Roster",
       keywords: ["moodboard", "visuals", "inspiration", "assets"],
+    },
+  },
+  {
+    path: "/whiteboard",
+    label: "Whiteboard",
+    icon: LayoutGrid,
+    description: "Infinite canvas for Freeform-style sketching and ideation",
+    metadata: {
+      title: "Whiteboard - Studio Roster",
+      keywords: ["whiteboard", "freeform", "canvas", "ideas"],
     },
   },
   {
@@ -136,6 +147,7 @@ export const getMainNavigationRoutes = (): RouteConfig[] => {
       "/",
       "/projects",
       "/moodboard",
+      "/whiteboard",
       "/freelancers",
       "/writers-room",
     ].includes(route.path)
