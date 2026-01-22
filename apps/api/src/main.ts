@@ -10,6 +10,20 @@ import { AllExceptionsFilter } from './common/filters/all-exceptions.filter.js';
 async function bootstrap() {
   const bootstrapLogger = new NestLogger('Bootstrap');
   bootstrapLogger.log('Boot: starting Nest application...');
+
+  // 🛡️ Sentinel: Security check for default admin password in production
+  if (
+    process.env.NODE_ENV === 'production' &&
+    process.env.ADMIN_PASSWORD === 'change-this-password'
+  ) {
+    bootstrapLogger.fatal(
+      'FATAL ERROR: Default admin password is being used in a production environment. ' +
+        'For security, the application will not start. ' +
+        'Please change the ADMIN_PASSWORD environment variable to a secure, unique password.',
+    );
+    process.exit(1); // Exit with a non-zero code to indicate failure
+  }
+
   const app = await NestFactory.create(AppModule, {
     // bufferLogs: true, // Buffer logs until Pino is ready - TEMPORARILY DISABLED
   });
