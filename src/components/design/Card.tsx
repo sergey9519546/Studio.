@@ -25,8 +25,9 @@ export const Card: React.FC<CardProps> = ({
         shadow-ambient
         overflow-hidden
         transition-all duration-200
+        outline-none
         ${glass ? 'glass' : ''}
-        ${hoverable ? 'hover:-translate-y-0.5 hover:shadow-float cursor-pointer' : ''}
+        ${hoverable ? 'hover:-translate-y-0.5 hover:shadow-float cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2' : ''}
         ${className}
       `}
     >
