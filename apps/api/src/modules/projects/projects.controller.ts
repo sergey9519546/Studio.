@@ -2,6 +2,7 @@
 import { Body, Controller, DefaultValuePipe, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateProjectDto, UpdateProjectDto } from './dto/project.dto.js';
+import { ScriptAssistDto } from './dto/script-assist.dto.js';
 import { ProjectsService } from './projects.service.js';
 import type { MulterFile, ProjectInput } from './projects-import.types.js';
 
@@ -55,5 +56,10 @@ export class ProjectsController {
     @UploadedFile() file: MulterFile
   ) {
     return this.projectsService.importFromFile(file);
+  }
+
+  @Post(':id/script-assist')
+  scriptAssist(@Param('id') id: string, @Body() dto: ScriptAssistDto) {
+    return this.projectsService.scriptAssist(id, dto.scriptText);
   }
 }

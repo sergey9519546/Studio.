@@ -172,6 +172,19 @@ export class MoodboardAPI {
     }
   }
 
+  // Link an existing asset to the moodboard
+  static async createFromAsset(projectId: string, assetId: string): Promise<MoodboardItem> {
+    try {
+      const response = await apiClient.post<ApiResponse<MoodboardItem> | MoodboardItem>(
+        `/moodboard/${projectId}/link-asset`,
+        { assetId }
+      );
+      return normalizeMoodboardItem(response.data);
+    } catch (error) {
+      handleApiError(error);
+    }
+  }
+
   // Get all collections for a project
   static async getCollections(projectId: string): Promise<MoodboardCollection[]> {
     try {
