@@ -3,7 +3,8 @@ import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '@prisma/client';
 import Database from 'better-sqlite3';
-import { Pool } from 'pg';
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
@@ -12,25 +13,11 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
   private readonly _db?: Database.Database;
 
   constructor() {
-    const databaseUrl = process.env.DATABASE_URL;
-    if (!databaseUrl) {
-      throw new Error("DATABASE_URL is not set");
-    }
-
-    const isPostgres = databaseUrl.startsWith('postgresql://') || databaseUrl.includes('postgres');
-    const isSqlite = databaseUrl.startsWith('file:');
-
-    let adapter;
-    let pool;
-    let db;
-
-    if (isPostgres) {
-      pool = new Pool({ connectionString: databaseUrl });
-      adapter = new PrismaPg(pool);
-    } else if (isSqlite) {
-      const dbPath = databaseUrl.replace('file:', '');
-      db = new Database(dbPath);
-      adapter = new PrismaBetterSqlite3(db);
+    const databaseUrl = process.env.DATABASE_URL || 'file:./prisma/dev.db';
+    const dbPath = databaseUrl.replace('file:', '');
+    const dbDir = path.dirname(dbPath);
+    if (!fs.existsSync(dbDir)) {
+      fs.mkdirSync(dbDir, { recursive: true });
     }
 
     super({
