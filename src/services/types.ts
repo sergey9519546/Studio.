@@ -52,6 +52,18 @@ export interface CreateProjectData {
   status?: ProjectStatus;
 }
 
+// Asset Types
+export interface Asset {
+  id: string;
+  projectId?: string;
+  fileName: string;
+  mimeType: string;
+  sizeBytes: number;
+  publicUrl?: string;
+  url?: string;
+  createdAt: string;
+}
+
 export interface UpdateProjectData extends Partial<CreateProjectData> {
   id: string;
 }

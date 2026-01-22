@@ -115,20 +115,35 @@ export class ProjectsService {
     // 1. Intelligence
     const systemPrompt = "You are a visual researcher for a film studio. Analyze the provided script line. Extract 3-5 distinct, comma-separated visual keywords that describe the setting, lighting, or objects. Output ONLY the keywords.";
 
+    let keywords: string[] = [];
+
     try {
       const rawResponse = await this.genAIService.generateText(scriptText, systemPrompt);
-      // Keywords would be processed here for asset search
-      void rawResponse;
-    } catch {
-      // Fallback logic placeholder
+      keywords = rawResponse
+        .split(/[,|\n]/)
+        .map(keyword => keyword.trim())
+        .filter(Boolean);
+    } catch (error) {
+      this.logger.warn(`Script assist AI keyword generation failed: ${error instanceof Error ? error.message : String(error)}`);
     }
 
-    // TODO: Implement asset search functionality
-    // The AssetsService needs a search method to find relevant assets by keyword
-    // For now, returning empty array until search is implemented
-    const candidates: unknown[] = [];
+    if (keywords.length === 0) {
+      keywords = scriptText
+        .split(/\s+/)
+        .map(word => word.replace(/[^\w-]/g, '').trim())
+        .filter(word => word.length > 3)
+        .slice(0, 5);
+    }
 
-    return candidates.slice(0, 10);
+    if (keywords.length === 0) {
+      return [];
+    }
+
+    return this.assetsService.searchByKeywords({
+      projectId: id,
+      keywords,
+      limit: 10,
+    });
   }
 
   private toDto(project: PrismaProjectResult | null): ProjectDto | null {

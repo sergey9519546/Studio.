@@ -1,3 +1,5 @@
+import type { Asset } from "../types";
+import { handleApiError } from "./client";
 import { apiClient } from "./index";
 
 export interface Script {
@@ -77,5 +79,19 @@ export const ScriptAPI = {
       context,
     });
     return { data: response.data };
+  },
+
+  /**
+   * Assist with visual references for a script line
+   */
+  async scriptAssist(projectId: string, scriptText: string): Promise<Asset[]> {
+    try {
+      const response = await apiClient.post<Asset[]>(`/projects/${projectId}/script-assist`, {
+        scriptText,
+      });
+      return response.data;
+    } catch (error) {
+      handleApiError(error);
+    }
   },
 };
