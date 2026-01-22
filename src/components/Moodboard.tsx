@@ -121,6 +121,15 @@ export const Moodboard: React.FC<MoodboardProps> = ({
     orientation?: string;
   }>({});
 
+  const selectedUnsplashItem = useMemo(
+    () =>
+      selectedUnsplashImage
+        ? unsplashResults.find((item) => item.id === selectedUnsplashImage) ??
+          null
+        : null,
+    [selectedUnsplashImage, unsplashResults]
+  );
+
   React.useEffect(() => {
     const trimmed = searchQuery.trim();
     if (!trimmed) {
@@ -141,6 +150,12 @@ export const Moodboard: React.FC<MoodboardProps> = ({
       setFilteredItems(filterByTags(searchResults, selectedTags));
     }
   }, [items, searchQuery, selectedTags, onSemanticSearch, searchResults]);
+
+  React.useEffect(() => {
+    if (selectedUnsplashImage && !selectedUnsplashItem) {
+      setSelectedUnsplashImage(null);
+    }
+  }, [selectedUnsplashImage, selectedUnsplashItem]);
 
   // Load recent searches on mount and when tab changes to Unsplash
   React.useEffect(() => {
@@ -890,31 +905,30 @@ export const Moodboard: React.FC<MoodboardProps> = ({
               >
                 <X size={20} />
               </button>
-              {selectedUnsplashData && (
+              {selectedUnsplashItem && (
                 <div>
                   <img
-                    src={selectedUnsplashData.urls.regular}
+                    src={selectedUnsplashItem.urls.regular}
                     alt={
-                      selectedUnsplashData.alt_description ||
-                      "Unsplash image"
+                      selectedUnsplashItem.alt_description || "Unsplash image"
                     }
                     className="w-full rounded-[24px] mb-6"
                   />
                   <div>
                     <h3 className="text-lg font-bold text-ink-primary mb-2">
-                      {selectedUnsplashData.description ||
-                        selectedUnsplashData.alt_description ||
+                      {selectedUnsplashItem.description ||
+                        selectedUnsplashItem.alt_description ||
                         "Untitled"}
                     </h3>
                     <p className="text-sm text-ink-secondary mb-4">
                       Photo by{" "}
                       <a
-                        href={selectedUnsplashData.user.links.html}
+                        href={selectedUnsplashItem.user.links.html}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-primary hover:underline"
                       >
-                        {selectedUnsplashData.user.name}
+                        {selectedUnsplashItem.user.name}
                       </a>{" "}
                       on{" "}
                       <a
@@ -928,8 +942,8 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                     </p>
                     <Button
                       onClick={() => {
-                        if (selectedUnsplashData) {
-                          handleAddUnsplashImage(selectedUnsplashData);
+                        if (selectedUnsplashItem) {
+                          handleAddUnsplashImage(selectedUnsplashItem);
                           setSelectedUnsplashImage(null);
                         }
                       }}
