@@ -2,7 +2,8 @@
 import { Body, Controller, DefaultValuePipe, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateProjectDto, UpdateProjectDto } from './dto/project.dto.js';
-import { ProjectInput, ProjectsService, type MulterFile } from './projects.service.js';
+import { ProjectsService } from './projects.service.js';
+import type { MulterFile, ProjectInput } from './projects-import.types.js';
 
 @Controller({ path: 'projects', version: '1' })
 export class ProjectsController {
