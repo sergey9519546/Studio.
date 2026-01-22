@@ -152,6 +152,7 @@ chmod +x deploy.sh
 ## 📚 Documentation
 
 - **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Production deployment guide
+- **[docs/README.md](./docs/README.md)** - Documentation index (status, reports, TODOs)
 - **[.env.example](./.env.example)** - Environment template
 - **[walkthrough.md](./.gemini/antigravity/brain/.../walkthrough.md)** - Complete implementation details
 
