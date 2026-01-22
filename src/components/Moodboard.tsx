@@ -195,50 +195,70 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   };
 
   // Unsplash search handler
-  const runUnsplashSearch = async (page = 1) => {
-    if (!unsplashQuery.trim()) return;
+  const runUnsplashSearch = React.useCallback(
+    async (page = 1) => {
+      const trimmedQuery = unsplashQuery.trim();
+      if (!trimmedQuery) return;
 
-    if (!isUnsplashConfigured()) {
-      const message =
-        "Unsplash search is disabled: add VITE_UNSPLASH_ACCESS_KEY to your environment.";
-      setUnsplashError(message);
-      addToast(message);
-      return;
+      if (!isUnsplashConfigured()) {
+        const message =
+          "Unsplash search is disabled: add VITE_UNSPLASH_ACCESS_KEY to your environment.";
+        setUnsplashError(message);
+        addToast(message);
+        return;
+      }
+
+      setIsLoadingUnsplash(true);
+      setUnsplashError(null);
+      try {
+        const results = await searchSimilarImages(
+          trimmedQuery,
+          unsplashMeta.per_page,
+          page,
+          unsplashFilters.color,
+          unsplashFilters.orientation
+        );
+        setUnsplashResults(results.results);
+        setUnsplashMeta({
+          total: results.total,
+          total_pages: results.total_pages,
+          page,
+          per_page: unsplashMeta.per_page,
+        });
+
+        // Add to recent searches
+        addRecentSearch(trimmedQuery);
+        setRecentSearches(getRecentSearches());
+      } catch (error: unknown) {
+        const message =
+          error instanceof Error
+            ? error.message
+            : "Unsplash search failed. Check API key or network.";
+        console.error("Unsplash search failed:", error);
+        setUnsplashError(message);
+        addToast(message);
+      } finally {
+        setIsLoadingUnsplash(false);
+      }
+    },
+    [
+      addToast,
+      unsplashFilters.color,
+      unsplashFilters.orientation,
+      unsplashMeta.per_page,
+      unsplashQuery,
+    ]
+  );
+
+  const previousUnsplashFilters = React.useRef(unsplashFilters);
+
+  React.useEffect(() => {
+    const filtersChanged = previousUnsplashFilters.current !== unsplashFilters;
+    if (filtersChanged && unsplashQuery.trim()) {
+      void runUnsplashSearch(1);
     }
-
-    setIsLoadingUnsplash(true);
-    setUnsplashError(null);
-    try {
-      const results = await searchSimilarImages(
-        unsplashQuery,
-        unsplashMeta.per_page,
-        page,
-        unsplashFilters.color,
-        unsplashFilters.orientation
-      );
-      setUnsplashResults(results.results);
-      setUnsplashMeta({
-        total: results.total,
-        total_pages: results.total_pages,
-        page,
-        per_page: unsplashMeta.per_page,
-      });
-
-      // Add to recent searches
-      addRecentSearch(unsplashQuery);
-      setRecentSearches(getRecentSearches());
-    } catch (error: unknown) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : "Unsplash search failed. Check API key or network.";
-      console.error("Unsplash search failed:", error);
-      setUnsplashError(message);
-      addToast(message);
-    } finally {
-      setIsLoadingUnsplash(false);
-    }
-  };
+    previousUnsplashFilters.current = unsplashFilters;
+  }, [runUnsplashSearch, unsplashFilters, unsplashQuery]);
 
   const handleUnsplashSearch = async (e: React.FormEvent) => {
     e.preventDefault();
