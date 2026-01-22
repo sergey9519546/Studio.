@@ -1,6 +1,36 @@
 import { io, Socket } from 'socket.io-client';
 
-const SOCKET_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const DEFAULT_LOCAL_API_ORIGIN = 'http://localhost:3001';
+
+const resolveOrigin = (value: string, baseOrigin: string) => {
+  try {
+    return new URL(value, baseOrigin).origin;
+  } catch {
+    return baseOrigin;
+  }
+};
+
+export const resolveSocketBaseUrl = (
+  socketUrl: string | undefined = import.meta.env.VITE_SOCKET_URL,
+  apiUrl: string | undefined = import.meta.env.VITE_API_URL,
+  windowOrigin: string | undefined = typeof window !== 'undefined' ? window.location.origin : undefined,
+) => {
+  if (socketUrl) {
+    return resolveOrigin(socketUrl, windowOrigin ?? DEFAULT_LOCAL_API_ORIGIN);
+  }
+
+  if (windowOrigin) {
+    return windowOrigin;
+  }
+
+  if (apiUrl) {
+    return resolveOrigin(apiUrl, DEFAULT_LOCAL_API_ORIGIN);
+  }
+
+  return DEFAULT_LOCAL_API_ORIGIN;
+};
+
+const SOCKET_BASE_URL = resolveSocketBaseUrl();
 
 export interface UserPresence {
   userId: string;
@@ -22,7 +52,7 @@ class CollaborationService {
   initialize(_userId: string, _userName: string) {
     if (this.socket) return;
 
-    this.socket = io(`${SOCKET_URL}/collaboration`, {
+    this.socket = io(`${SOCKET_BASE_URL}/collaboration`, {
       transports: ['websocket'],
       autoConnect: true,
     });
@@ -72,10 +102,3 @@ class CollaborationService {
 }
 
 export const liveEditingService = new CollaborationService();
-
-// Mock PresenceService to satisfy imports if needed, or we just fix imports
-export const presenceService = {
-  initialize: () => {},
-  trackActivity: () => {},
-  onUsersChange: (_cb: unknown) => { return () => {} },
-};

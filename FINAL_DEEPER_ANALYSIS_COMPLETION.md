@@ -89,7 +89,7 @@
 4. **Fully Implemented IntelligentContextEngine** (`services/IntelligentContextEngine.ts`)
 5. **Enhanced ConfluenceService** (`apps/api/src/modules/confluence/confluence.service.ts`)
 6. **Enhanced StreamingService** (`apps/api/src/modules/ai/streaming.service.ts`)
-7. **Accurate Progress Tracking** (`ACCURATE_TODO_LIST.md`)
+7. **Accurate Progress Tracking** (`docs/todos/ACCURATE_TODO_LIST.md`)
 
 ---
 
