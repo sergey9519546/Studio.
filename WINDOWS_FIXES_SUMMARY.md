@@ -21,7 +21,7 @@ Complete mapping of Unix to Windows PowerShell commands including:
 
 ### 3. Updated Project Documentation
 - **README.md**: Added Windows troubleshooting section
-- **COMMAND_LINE_FIXES_TODO.md**: Complete task tracking and progress
+- **docs/todos/COMMAND_LINE_FIXES_TODO.md**: Complete task tracking and progress
 
 ### 4. Verified Build Processes
 - ✅ `npm run build:client` - Works perfectly on Windows
@@ -33,7 +33,7 @@ Complete mapping of Unix to Windows PowerShell commands including:
 
 1. **WINDOWS_COMMAND_EQUIVALENTS.md** - Complete reference guide
 2. **fix-tail-head-commands.ps1** - PowerShell utility functions
-3. **COMMAND_LINE_FIXES_TODO.md** - Task tracking and progress
+3. **docs/todos/COMMAND_LINE_FIXES_TODO.md** - Task tracking and progress
 4. **README.md** - Updated with Windows troubleshooting
 5. **WINDOWS_FIXES_SUMMARY.md** - This summary document
 
