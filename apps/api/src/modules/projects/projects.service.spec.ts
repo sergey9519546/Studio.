@@ -5,6 +5,7 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { AssetsService } from '../assets/assets.service';
 import { GenAIService } from '../../common/ai/gen-ai.service';
 import { ZaiService } from '../../common/ai/zai.service';
+import { ConfigService } from '@nestjs/config';
 
 describe('ProjectsService', () => {
     let service: ProjectsService;
@@ -57,6 +58,12 @@ describe('ProjectsService', () => {
                         generateText: jest.fn(),
                     },
                 },
+                {
+                    provide: ConfigService,
+                    useValue: {
+                        get: jest.fn(),
+                    },
+                }
             ],
         }).compile();
 
