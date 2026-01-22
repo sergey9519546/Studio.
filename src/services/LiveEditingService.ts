@@ -72,10 +72,3 @@ class CollaborationService {
 }
 
 export const liveEditingService = new CollaborationService();
-
-// Mock PresenceService to satisfy imports if needed, or we just fix imports
-export const presenceService = {
-  initialize: () => {},
-  trackActivity: () => {},
-  onUsersChange: (_cb: unknown) => { return () => {} },
-};
