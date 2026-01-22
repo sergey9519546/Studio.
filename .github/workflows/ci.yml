@@ -48,6 +48,9 @@ jobs:
       - name: Generate Prisma client
         run: npx prisma generate
 
+      - name: Run migrations
+        run: npx prisma migrate deploy
+
       - name: Run backend unit tests
         run: npm run test -- --coverage
 

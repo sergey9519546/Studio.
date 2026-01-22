@@ -14,6 +14,7 @@ export default defineConfig({
         coverage: {
             provider: 'v8',
             reporter: ['text', 'json', 'html', 'lcov'],
+            include: ['src/**'],
             exclude: ['node_modules/', 'build/', '**/*.spec.ts', '**/*.test.tsx'],
             thresholds: {
                 branches: 80,
