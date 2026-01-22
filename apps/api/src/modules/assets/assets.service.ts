@@ -148,22 +148,7 @@ export class AssetsService {
     );
 
     // 3. Populate virtual URL field on list
-    return await Promise.all(allAssets.map(async (a) => {
-      // If we already have a functional URL (e.g. from memory or publicUrl), use it
-      if (a.url) return a;
-      if (a.publicUrl) return { ...a, url: a.publicUrl };
-
-      let url = '';
-      try {
-        // Only try signing if we have a key and no public url
-        if (a.storageKey && a.storageKey !== null) {
-          url = await this.storage.getSignedDownloadUrl(a.storageKey);
-        }
-      } catch {
-        // Storage might be down or misconfigured, return asset without URL
-      }
-      return { ...a, url };
-    }));
+    return this.enrichAssetsWithUrls(allAssets);
   }
 
   async findOne(id: string): Promise<AssetEntity> {
@@ -205,5 +190,90 @@ export class AssetsService {
       const err = error instanceof Error ? error : new Error(String(error));
       this.logger.warn(`Delete failed: ${err.message}`);
     }
+  }
+
+  async searchByKeywords(params: {
+    projectId?: string;
+    keywords: string[];
+    limit?: number;
+  }): Promise<AssetEntity[]> {
+    const normalizedKeywords = params.keywords
+      .map(keyword => keyword.trim().toLowerCase())
+      .filter(Boolean);
+
+    if (normalizedKeywords.length === 0) {
+      return [];
+    }
+
+    const limit = params.limit ?? 10;
+    const projectFilter = params.projectId ? { projectId: params.projectId } : undefined;
+
+    let dbAssets: AssetEntity[] = [];
+    try {
+      const records = await this.prisma.asset.findMany({
+        where: projectFilter,
+        orderBy: { createdAt: 'desc' },
+        take: 200,
+      });
+      dbAssets = records.map((a) => ({ ...a, isTransient: false })) as AssetEntity[];
+    } catch (e) {
+      this.logger.warn(`Failed to search assets from DB: ${e}`);
+    }
+
+    const memoryAssets = this.memoryStore.filter(asset =>
+      params.projectId ? asset.projectId === params.projectId : true
+    );
+
+    const merged = [...memoryAssets, ...dbAssets];
+    const scored = merged
+      .map(asset => {
+        const haystack = [
+          asset.title,
+          asset.fileName,
+          typeof asset.metadata?.title === 'string' ? asset.metadata.title : null,
+          typeof asset.metadata?.description === 'string' ? asset.metadata.description : null,
+        ]
+          .filter(Boolean)
+          .join(' ')
+          .toLowerCase();
+
+        const score = normalizedKeywords.reduce((acc, keyword) => {
+          return acc + (haystack.includes(keyword) ? 1 : 0);
+        }, 0);
+
+        return { asset, score };
+      })
+      .filter(entry => entry.score > 0)
+      .sort((a, b) => b.score - a.score);
+
+    const unique = new Map<string, AssetEntity>();
+    for (const entry of scored) {
+      if (!unique.has(entry.asset.id)) {
+        unique.set(entry.asset.id, entry.asset);
+      }
+      if (unique.size >= limit) break;
+    }
+
+    return this.enrichAssetsWithUrls(Array.from(unique.values()));
+  }
+
+  private async enrichAssetsWithUrls(assets: AssetEntity[]): Promise<AssetEntity[]> {
+    return Promise.all(
+      assets.map(async (asset) => {
+        if (asset.url) return asset;
+        if (asset.publicUrl) return { ...asset, url: asset.publicUrl };
+
+        let url = '';
+        try {
+          if (asset.storageKey && asset.storageKey !== null) {
+            url = await this.storage.getSignedDownloadUrl(asset.storageKey);
+          }
+        } catch {
+          // Storage might be down or misconfigured, return asset without URL
+        }
+
+        return { ...asset, url };
+      })
+    );
   }
 }
