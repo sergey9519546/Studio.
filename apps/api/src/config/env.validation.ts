@@ -84,6 +84,22 @@ class EnvironmentVariables {
   @IsString()
   SUPADATA_API_URL?: string;
 
+  @IsOptional()
+  @IsString()
+  ZHIPU_API_KEY?: string;
+
+  @IsOptional()
+  @IsString()
+  ZHIPU_API_SECRET?: string;
+
+  @IsOptional()
+  @IsString()
+  ZHIPU_API_ENDPOINT?: string;
+
+  @IsOptional()
+  @IsString()
+  ZHIPU_MODEL?: string;
+
   // PORT is optional - Cloud Run sets this to 8080
   @IsOptional()
   @IsNumber()
