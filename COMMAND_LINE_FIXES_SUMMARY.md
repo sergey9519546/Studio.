@@ -53,7 +53,7 @@ pwd
 
 ### 3. Comprehensive Documentation
 - `WINDOWS_COMMAND_EQUIVALENTS.md` - Complete command reference table
-- `COMMAND_LINE_FIXES_TODO.md` - Implementation checklist
+- `docs/todos/COMMAND_LINE_FIXES_TODO.md` - Implementation checklist
 - `unix-helpers.ps1` - Ready-to-use helper functions
 - `test-commands-fixed.ps1` - Verification script
 
@@ -105,7 +105,7 @@ All commands tested and working:
 
 ## Files Created
 
-1. **COMMAND_LINE_FIXES_TODO.md** - Task planning and progress
+1. **docs/todos/COMMAND_LINE_FIXES_TODO.md** - Task planning and progress
 2. **WINDOWS_COMMAND_EQUIVALENTS.md** - Complete command reference
 3. **unix-helpers.ps1** - Unix-like command functions for PowerShell
 4. **test-commands-fixed.ps1** - Verification and demonstration script

@@ -111,6 +111,8 @@ export const Moodboard: React.FC<MoodboardProps> = ({
     page: number;
     per_page: number;
   }>({ total: 0, total_pages: 0, page: 1, per_page: 24 });
+  const latestSearchRequestId = React.useRef(0);
+  const searchDebounceTimeout = React.useRef<number | null>(null);
 
   // Recent searches state
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
@@ -121,12 +123,73 @@ export const Moodboard: React.FC<MoodboardProps> = ({
     orientation?: string;
   }>({});
 
+  const selectedUnsplashItem = useMemo(
+    () =>
+      selectedUnsplashImage
+        ? unsplashResults.find((item) => item.id === selectedUnsplashImage) ??
+          null
+        : null,
+    [selectedUnsplashImage, unsplashResults]
+  );
+
   React.useEffect(() => {
-    if (!searchQuery.trim()) {
+    const trimmed = searchQuery.trim();
+    if (!trimmed) {
+      latestSearchRequestId.current += 1;
+      if (searchDebounceTimeout.current !== null) {
+        window.clearTimeout(searchDebounceTimeout.current);
+        searchDebounceTimeout.current = null;
+      }
+      setIsSearching(false);
       setSearchResults(null);
       setFilteredItems(filterByTags(items, selectedTags));
+      return;
     }
-  }, [items, searchQuery, selectedTags]);
+
+    setIsSearching(true);
+    if (searchDebounceTimeout.current !== null) {
+      window.clearTimeout(searchDebounceTimeout.current);
+    }
+
+    searchDebounceTimeout.current = window.setTimeout(() => {
+      const requestId = latestSearchRequestId.current + 1;
+      latestSearchRequestId.current = requestId;
+
+      const runSearch = async () => {
+        try {
+          const baseResults = onSemanticSearch
+            ? await onSemanticSearch(trimmed)
+            : filterByQuery(items, trimmed);
+          if (requestId !== latestSearchRequestId.current) {
+            return;
+          }
+          setSearchResults(baseResults);
+          setFilteredItems(filterByTags(baseResults, selectedTags));
+        } catch (error) {
+          if (requestId !== latestSearchRequestId.current) {
+            return;
+          }
+          const message =
+            error instanceof Error ? error.message : "Search failed. Try again.";
+          addToast(message);
+          setFilteredItems(filterByTags(items, selectedTags));
+        } finally {
+          if (requestId === latestSearchRequestId.current) {
+            setIsSearching(false);
+          }
+        }
+      };
+
+      void runSearch();
+    }, 300);
+
+    return () => {
+      if (searchDebounceTimeout.current !== null) {
+        window.clearTimeout(searchDebounceTimeout.current);
+        searchDebounceTimeout.current = null;
+      }
+    };
+  }, [addToast, items, onSemanticSearch, searchQuery, selectedTags]);
 
   // Load recent searches on mount and when tab changes to Unsplash
   React.useEffect(() => {
@@ -134,6 +197,29 @@ export const Moodboard: React.FC<MoodboardProps> = ({
       setRecentSearches(getRecentSearches());
     }
   }, [activeTab]);
+
+  const selectedItemData = useMemo(
+    () => filteredItems.find((item) => item.id === selectedItem),
+    [filteredItems, selectedItem]
+  );
+
+  const selectedUnsplashData = useMemo(
+    () =>
+      unsplashResults.find((image) => image.id === selectedUnsplashImage),
+    [unsplashResults, selectedUnsplashImage]
+  );
+
+  React.useEffect(() => {
+    if (selectedItem && !selectedItemData) {
+      setSelectedItem(null);
+    }
+  }, [selectedItem, selectedItemData]);
+
+  React.useEffect(() => {
+    if (selectedUnsplashImage && !selectedUnsplashData) {
+      setSelectedUnsplashImage(null);
+    }
+  }, [selectedUnsplashImage, selectedUnsplashData]);
 
   // Extract all unique tags from items
   const allTags = useMemo(() => {
@@ -147,28 +233,6 @@ export const Moodboard: React.FC<MoodboardProps> = ({
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
-    const trimmed = query.trim();
-    if (!trimmed) {
-      setSearchResults(null);
-      setFilteredItems(filterByTags(items, selectedTags));
-      return;
-    }
-
-    setIsSearching(true);
-    try {
-      const baseResults = onSemanticSearch
-        ? await onSemanticSearch(trimmed)
-        : filterByQuery(items, trimmed);
-      setSearchResults(baseResults);
-      setFilteredItems(filterByTags(baseResults, selectedTags));
-    } catch (error) {
-      const message =
-        error instanceof Error ? error.message : "Search failed. Try again.";
-      addToast(message);
-      setFilteredItems(filterByTags(items, selectedTags));
-    } finally {
-      setIsSearching(false);
-    }
   };
 
   const toggleTag = (tag: string) => {
@@ -181,50 +245,70 @@ export const Moodboard: React.FC<MoodboardProps> = ({
   };
 
   // Unsplash search handler
-  const runUnsplashSearch = async (page = 1) => {
-    if (!unsplashQuery.trim()) return;
+  const runUnsplashSearch = React.useCallback(
+    async (page = 1) => {
+      const trimmedQuery = unsplashQuery.trim();
+      if (!trimmedQuery) return;
 
-    if (!isUnsplashConfigured()) {
-      const message =
-        "Unsplash search is disabled: add VITE_UNSPLASH_ACCESS_KEY to your environment.";
-      setUnsplashError(message);
-      addToast(message);
-      return;
+      if (!isUnsplashConfigured()) {
+        const message =
+          "Unsplash search is disabled: add VITE_UNSPLASH_ACCESS_KEY to your environment.";
+        setUnsplashError(message);
+        addToast(message);
+        return;
+      }
+
+      setIsLoadingUnsplash(true);
+      setUnsplashError(null);
+      try {
+        const results = await searchSimilarImages(
+          trimmedQuery,
+          unsplashMeta.per_page,
+          page,
+          unsplashFilters.color,
+          unsplashFilters.orientation
+        );
+        setUnsplashResults(results.results);
+        setUnsplashMeta({
+          total: results.total,
+          total_pages: results.total_pages,
+          page,
+          per_page: unsplashMeta.per_page,
+        });
+
+        // Add to recent searches
+        addRecentSearch(trimmedQuery);
+        setRecentSearches(getRecentSearches());
+      } catch (error: unknown) {
+        const message =
+          error instanceof Error
+            ? error.message
+            : "Unsplash search failed. Check API key or network.";
+        console.error("Unsplash search failed:", error);
+        setUnsplashError(message);
+        addToast(message);
+      } finally {
+        setIsLoadingUnsplash(false);
+      }
+    },
+    [
+      addToast,
+      unsplashFilters.color,
+      unsplashFilters.orientation,
+      unsplashMeta.per_page,
+      unsplashQuery,
+    ]
+  );
+
+  const previousUnsplashFilters = React.useRef(unsplashFilters);
+
+  React.useEffect(() => {
+    const filtersChanged = previousUnsplashFilters.current !== unsplashFilters;
+    if (filtersChanged && unsplashQuery.trim()) {
+      void runUnsplashSearch(1);
     }
-
-    setIsLoadingUnsplash(true);
-    setUnsplashError(null);
-    try {
-      const results = await searchSimilarImages(
-        unsplashQuery,
-        unsplashMeta.per_page,
-        page,
-        unsplashFilters.color,
-        unsplashFilters.orientation
-      );
-      setUnsplashResults(results.results);
-      setUnsplashMeta({
-        total: results.total,
-        total_pages: results.total_pages,
-        page,
-        per_page: unsplashMeta.per_page,
-      });
-
-      // Add to recent searches
-      addRecentSearch(unsplashQuery);
-      setRecentSearches(getRecentSearches());
-    } catch (error: unknown) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : "Unsplash search failed. Check API key or network.";
-      console.error("Unsplash search failed:", error);
-      setUnsplashError(message);
-      addToast(message);
-    } finally {
-      setIsLoadingUnsplash(false);
-    }
-  };
+    previousUnsplashFilters.current = unsplashFilters;
+  }, [runUnsplashSearch, unsplashFilters, unsplashQuery]);
 
   const handleUnsplashSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -786,10 +870,10 @@ export const Moodboard: React.FC<MoodboardProps> = ({
               >
                 <X size={20} />
               </button>
-              {filteredItems.find((i) => i.id === selectedItem) && (
+              {selectedItemData && (
                 <div>
                   <img
-                    src={filteredItems.find((i) => i.id === selectedItem)?.url}
+                    src={selectedItemData.url}
                     alt="Detail"
                     className="w-full rounded-[24px] mb-6"
                   />
@@ -803,16 +887,14 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                           Visual Tags
                         </h4>
                         <div className="flex flex-wrap gap-2">
-                          {filteredItems
-                            .find((i) => i.id === selectedItem)
-                            ?.tags.map((tag) => (
+                          {selectedItemData.tags.map((tag) => (
                               <span
                                 key={tag}
                                 className="px-3 py-1 rounded-[12px] bg-primary-tint text-primary text-xs font-medium"
                               >
                                 {tag}
                               </span>
-                            ))}
+                          ))}
                         </div>
                       </div>
                       <div>
@@ -820,16 +902,14 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                           Moods
                         </h4>
                         <div className="flex flex-wrap gap-2">
-                          {filteredItems
-                            .find((i) => i.id === selectedItem)
-                            ?.moods.map((mood) => (
+                          {selectedItemData.moods.map((mood) => (
                               <span
                                 key={mood}
                                 className="px-3 py-1 rounded-[12px] bg-edge-teal/20 text-edge-teal text-xs font-medium"
                               >
                                 {mood}
                               </span>
-                            ))}
+                          ))}
                         </div>
                       </div>
                     </div>
@@ -857,48 +937,30 @@ export const Moodboard: React.FC<MoodboardProps> = ({
               >
                 <X size={20} />
               </button>
-              {unsplashResults.find((i) => i.id === selectedUnsplashImage) && (
+              {selectedUnsplashItem && (
                 <div>
                   <img
-                    src={
-                      unsplashResults.find(
-                        (i) => i.id === selectedUnsplashImage
-                      )?.urls.regular
-                    }
+                    src={selectedUnsplashItem.urls.regular}
                     alt={
-                      unsplashResults.find(
-                        (i) => i.id === selectedUnsplashImage
-                      )?.alt_description || "Unsplash image"
+                      selectedUnsplashItem.alt_description || "Unsplash image"
                     }
                     className="w-full rounded-[24px] mb-6"
                   />
                   <div>
                     <h3 className="text-lg font-bold text-ink-primary mb-2">
-                      {unsplashResults.find(
-                        (i) => i.id === selectedUnsplashImage
-                      )?.description ||
-                        unsplashResults.find(
-                          (i) => i.id === selectedUnsplashImage
-                        )?.alt_description ||
+                      {selectedUnsplashItem.description ||
+                        selectedUnsplashItem.alt_description ||
                         "Untitled"}
                     </h3>
                     <p className="text-sm text-ink-secondary mb-4">
                       Photo by{" "}
                       <a
-                        href={
-                          unsplashResults.find(
-                            (i) => i.id === selectedUnsplashImage
-                          )?.user.links.html
-                        }
+                        href={selectedUnsplashItem.user.links.html}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-primary hover:underline"
                       >
-                        {
-                          unsplashResults.find(
-                            (i) => i.id === selectedUnsplashImage
-                          )?.user.name
-                        }
+                        {selectedUnsplashItem.user.name}
                       </a>{" "}
                       on{" "}
                       <a
@@ -912,11 +974,8 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                     </p>
                     <Button
                       onClick={() => {
-                        const img = unsplashResults.find(
-                          (i) => i.id === selectedUnsplashImage
-                        );
-                        if (img) {
-                          handleAddUnsplashImage(img);
+                        if (selectedUnsplashItem) {
+                          handleAddUnsplashImage(selectedUnsplashItem);
                           setSelectedUnsplashImage(null);
                         }
                       }}
