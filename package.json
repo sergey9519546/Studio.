@@ -49,6 +49,7 @@
     "cache-manager": "^7.2.5",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "csv-parse": "^5.6.0",
     "dotenv": "^17.2.3",
     "firebase": "^12.7.0",
     "firebase-admin": "^13.0.1",
@@ -71,6 +72,7 @@
     "socket.io-client": "^4.8.3",
     "unsplash-js": "^7.0.20",
     "winston": "^3.18.3",
+    "xlsx": "^0.18.5",
     "zod": "^3.25.76"
   },
   "devDependencies": {
