@@ -258,6 +258,56 @@ Return the data as a JSON object.`;
   }
 
   /**
+   * Map import headers to supported project fields using AI.
+   */
+  async mapImportHeaders(params: {
+    headers: string[];
+    rows: Record<string, unknown>[];
+    targetFields: string[];
+  }): Promise<Record<string, string>> {
+    const { headers, rows, targetFields } = params;
+    const systemInstruction =
+      'You are a data mapping assistant. Map input headers to the provided target fields. Return only valid JSON with keys as original headers and values as target fields.';
+
+    const prompt = `Map these headers to the closest matching target fields.
+
+Target fields: ${targetFields.join(', ')}
+Headers: ${JSON.stringify(headers)}
+Sample rows (JSON): ${JSON.stringify(rows)}
+
+Return ONLY a JSON object mapping original headers to target fields.`;
+
+    try {
+      const response = await this.generateText(prompt, systemInstruction, { temperature: 0, maxTokens: 400 });
+      const jsonMatch = response.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) {
+        throw new Error('AI mapping response did not include a JSON object');
+      }
+
+      const parsed = JSON.parse(jsonMatch[0]);
+      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+        throw new Error('AI mapping response was not a JSON object');
+      }
+
+      const mapping: Record<string, string> = {};
+      for (const [header, field] of Object.entries(parsed)) {
+        if (typeof field === 'string' && targetFields.includes(field)) {
+          mapping[header] = field;
+        }
+      }
+
+      if (Object.keys(mapping).length === 0) {
+        throw new Error('AI mapping response contained no usable mappings');
+      }
+
+      return mapping;
+    } catch (error) {
+      this.logger.error('Failed to map import headers with AI', error);
+      throw error;
+    }
+  }
+
+  /**
    * Parse resume/CV to extract candidate information
    */
   async parseResume(

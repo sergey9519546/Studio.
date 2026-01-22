@@ -1,5 +1,5 @@
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, Logger } from '@nestjs/common';
 import { Prisma, ProjectStatus } from '@prisma/client';
 import type { Cache } from 'cache-manager';
 import { PrismaService } from '../../prisma/prisma.service';
@@ -121,6 +121,7 @@ export interface ProjectDto {
 export class ProjectsService {
   private readonly CACHE_KEY = 'projects:list';
   private readonly CACHE_TTL = 2 * 60 * 60; // 2 hours in seconds
+  private readonly logger = new Logger(ProjectsService.name);
 
   constructor(
     private prisma: PrismaService,
@@ -296,19 +297,22 @@ export class ProjectsService {
   async importBatch(items: Record<string, unknown>[]) {
     let created = 0;
     const errors: { item: Record<string, unknown>; error: string }[] = [];
+    const { mapping, mappingErrors } = await this.resolveImportMapping(items);
 
     for (const item of items) {
       try {
+        const mappedItem = this.applyImportMapping(item, mapping);
+        const sanitized = this.sanitizeImportedRow(mappedItem);
         // Map import fields to expected DTO format
         const projectData = {
-          title: (item.name || item.title) as string,
-          description: item.description as string | undefined,
-          client: (item.clientName || item.client) as string | undefined,
-          status: this.normalizeStatus(item.status as string | undefined),
-          budget: item.budget as number | undefined,
-          startDate: item.startDate as string | Date | undefined,
-          endDate: (item.dueDate || item.endDate) as string | Date | undefined,
-          roleRequirements: item.roleRequirements as { role: string; count?: number; skills: string[] }[] | undefined
+          title: (sanitized.name || sanitized.title) as string,
+          description: sanitized.description as string | undefined,
+          client: (sanitized.clientName || sanitized.client) as string | undefined,
+          status: this.normalizeStatus(sanitized.status as string | undefined),
+          budget: sanitized.budget as number | undefined,
+          startDate: sanitized.startDate as string | Date | undefined,
+          endDate: (sanitized.dueDate || sanitized.endDate) as string | Date | undefined,
+          roleRequirements: sanitized.roleRequirements as { role: string; count?: number; skills: string[] }[] | undefined
         };
         await this.create(projectData);
         created++;
@@ -317,7 +321,10 @@ export class ProjectsService {
         errors.push({ item, error: message });
       }
     }
-    return { created, updated: 0, errors };
+    if (mappingErrors.length > 0) {
+      this.logger.warn(`Import mapping completed with ${mappingErrors.length} warnings`);
+    }
+    return { created, updated: 0, errors, mapping, mappingErrors };
   }
 
   /**
@@ -505,5 +512,126 @@ export class ProjectsService {
       }
     }
     return [];
+  }
+
+  private async resolveImportMapping(items: Record<string, unknown>[]) {
+    const headers = Array.from(new Set(items.flatMap(item => Object.keys(item))));
+    const sampleRows = items.slice(0, 3);
+    const targetFields = ['title', 'name', 'client', 'clientName', 'description', 'status', 'budget', 'startDate', 'endDate', 'dueDate', 'roleRequirements'];
+    const errors: string[] = [];
+
+    const fallbackMapping = this.getHeuristicMapping(headers);
+
+    if (headers.length === 0) {
+      errors.push('No headers found to map from import data.');
+      return { mapping: fallbackMapping, mappingErrors: errors };
+    }
+
+    try {
+      const aiMapping = await this.zaiService.mapImportHeaders({
+        headers,
+        rows: sampleRows,
+        targetFields,
+      });
+      return {
+        mapping: { ...fallbackMapping, ...aiMapping },
+        mappingErrors: errors,
+      };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unknown AI mapping error';
+      errors.push(`AI mapping failed: ${message}`);
+      this.logger.warn(`AI mapping failed, using heuristic mapping. ${message}`);
+      return { mapping: fallbackMapping, mappingErrors: errors };
+    }
+  }
+
+  private getHeuristicMapping(headers: string[]) {
+    const synonyms: Record<string, string[]> = {
+      title: ['project name', 'project title', 'title', 'name', 'project'],
+      client: ['client', 'client name', 'customer', 'customer name', 'account'],
+      description: ['description', 'brief', 'summary', 'overview', 'details'],
+      status: ['status', 'state', 'phase'],
+      budget: ['budget', 'cost', 'price', 'amount', 'estimate'],
+      startDate: ['start date', 'start', 'kickoff', 'begin date', 'begin'],
+      endDate: ['end date', 'end', 'due date', 'deadline', 'delivery date', 'finish date'],
+      roleRequirements: ['roles', 'role requirements', 'requirements', 'deliverables', 'team'],
+    };
+
+    const mapping: Record<string, string> = {};
+    for (const header of headers) {
+      const normalized = this.normalizeHeader(header);
+      for (const [field, patterns] of Object.entries(synonyms)) {
+        if (patterns.some(pattern => normalized === this.normalizeHeader(pattern))) {
+          mapping[header] = field;
+          break;
+        }
+      }
+    }
+
+    return mapping;
+  }
+
+  private normalizeHeader(header: string) {
+    return header.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  }
+
+  private applyImportMapping(item: Record<string, unknown>, mapping: Record<string, string>) {
+    const mapped: Record<string, unknown> = {};
+    for (const [key, value] of Object.entries(item)) {
+      const target = mapping[key];
+      if (target) {
+        mapped[target] = value;
+      } else {
+        mapped[key] = value;
+      }
+    }
+    return mapped;
+  }
+
+  private sanitizeImportedRow(row: Record<string, unknown>) {
+    const sanitized = { ...row };
+    if (sanitized.budget !== undefined) {
+      sanitized.budget = this.parseBudget(sanitized.budget);
+    }
+    if (sanitized.startDate) {
+      sanitized.startDate = this.parseDate(sanitized.startDate);
+    }
+    if (sanitized.endDate) {
+      sanitized.endDate = this.parseDate(sanitized.endDate);
+    }
+    if (sanitized.dueDate) {
+      sanitized.dueDate = this.parseDate(sanitized.dueDate);
+    }
+    return sanitized;
+  }
+
+  private parseBudget(value: unknown): number | undefined {
+    if (value === null || value === undefined || value === '') {
+      return undefined;
+    }
+    if (typeof value === 'number') {
+      return value;
+    }
+    if (typeof value === 'string') {
+      const numeric = parseFloat(value.replace(/[^0-9.-]+/g, ''));
+      return Number.isNaN(numeric) ? undefined : numeric;
+    }
+    return undefined;
+  }
+
+  private parseDate(value: unknown): string | Date | undefined {
+    if (!value) {
+      return undefined;
+    }
+    if (value instanceof Date) {
+      return value;
+    }
+    if (typeof value === 'string' || typeof value === 'number') {
+      const parsed = new Date(value);
+      if (!Number.isNaN(parsed.getTime())) {
+        return parsed;
+      }
+    }
+    return undefined;
   }
 }
