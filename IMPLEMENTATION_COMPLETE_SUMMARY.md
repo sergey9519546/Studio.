@@ -36,7 +36,7 @@ I have successfully implemented a comprehensive dependency update automation sys
 
 ### ✅ Documentation & Support
 - **`DEPENDENCY_AUTOMATION_DOCUMENTATION.md`** - Complete system documentation
-- **`DEPENDENCY_UPDATE_AUTOMATION_TODO.md`** - Implementation tracking
+- **`docs/todos/DEPENDENCY_UPDATE_AUTOMATION_TODO.md`** - Implementation tracking
 - **Troubleshooting guides** and best practices
 - **Usage examples** and command reference
 

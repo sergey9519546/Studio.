@@ -1,31 +1,51 @@
 import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '@prisma/client';
+import Database from 'better-sqlite3';
 import { Pool } from 'pg';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
   private readonly logger: Logger;
   private readonly _pool?: Pool;
+  private readonly _db?: Database.Database;
 
   constructor() {
     const databaseUrl = process.env.DATABASE_URL;
-    const isPostgres = databaseUrl?.startsWith('postgresql://') || databaseUrl?.includes('postgres');
-    const pool = isPostgres && databaseUrl ? new Pool({ connectionString: databaseUrl }) : undefined;
-    const adapter = pool ? new PrismaPg(pool) : undefined;
+    if (!databaseUrl) {
+      throw new Error("DATABASE_URL is not set");
+    }
 
-    super(
-      adapter
-        ? {
-            adapter,
-            log: ['query', 'info', 'warn', 'error'],
-          }
-        : {
-            log: ['query', 'info', 'warn', 'error'],
-          },
-    );
+    const isPostgres = databaseUrl.startsWith('postgresql://') || databaseUrl.includes('postgres');
+    const isSqlite = databaseUrl.startsWith('file:');
+
+    let adapter;
+    let pool;
+    let db;
+
+    if (isPostgres) {
+      pool = new Pool({ connectionString: databaseUrl });
+      adapter = new PrismaPg(pool);
+    } else if (isSqlite) {
+      const dbPath = databaseUrl.replace('file:', '');
+      db = new Database(dbPath);
+      adapter = new PrismaBetterSqlite3(db);
+    }
+
+    super({
+      adapter,
+      log: ['query', 'info', 'warn', 'error'],
+      datasources: {
+        db: {
+          url: databaseUrl,
+        },
+      },
+    });
+
     this.logger = new Logger(PrismaService.name);
     this._pool = pool;
+    this._db = db;
   }
 
   async onModuleInit() {
@@ -43,6 +63,9 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
     await this.$disconnect();
     if (this._pool) {
       await this._pool.end();
+    }
+    if (this._db) {
+      this._db.close();
     }
   }
 }

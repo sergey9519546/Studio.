@@ -51,7 +51,7 @@ The Studio Roster application has been thoroughly prepared for Firebase producti
 
 ### 6. **Documentation & Resources**
 - **Deployment Guide:** ✅ `FIREBASE_PRODUCTION_DEPLOYMENT_GUIDE.md`
-- **Production Checklist:** ✅ `FIREBASE_PRODUCTION_PREP_TODO.md`
+- **Production Checklist:** ✅ `docs/todos/FIREBASE_PRODUCTION_PREP_TODO.md`
 - **Environment Reference:** ✅ All variables documented with examples
 
 ## 🚀 Ready for Deployment

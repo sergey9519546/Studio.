@@ -1,6 +1,6 @@
 import { Box } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
-import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation, useNavigate, useParams, Outlet } from "react-router-dom";
 
 import { Moodboard } from "./components/Moodboard";
 import { ProjectDashboard } from "./components/ProjectDashboard";
@@ -22,6 +22,7 @@ import { useApiData } from "./hooks/useApiData";
 import { getProjectStatusMeta } from "./utils/status";
 import DashboardHome from "./views/DashboardHome";
 import GuardianRoom from "./views/GuardianRoom";
+import FutureEditor from "./views/FutureEditor";
 import ProjectsView from "./views/ProjectsView";
 import FutureEditor from "./views/FutureEditor";
 import Aura from "./views/Aura";
@@ -483,7 +484,9 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="app-shell">
       <Sidebar />
-      <div className="app-main">{children}</div>
+      <div className="app-main">
+        <Outlet />
+      </div>
       <CommandBar />
     </div>
   );

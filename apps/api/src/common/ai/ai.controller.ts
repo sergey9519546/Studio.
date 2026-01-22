@@ -1,8 +1,14 @@
 import { Body, Controller, Post, BadRequestException } from '@nestjs/common';
 import { ZaiService } from './zai.service.js';
+import { IsString, IsOptional, IsEnum, IsNotEmpty } from 'class-validator';
 
-interface GenerateImageDto {
-  prompt: string;
+class GenerateImageDto {
+  @IsString()
+  @IsNotEmpty()
+  prompt!: string;
+
+  @IsOptional()
+  @IsEnum(['1024x1024', '1280x1280', '512x512'])
   size?: '1024x1024' | '1280x1280' | '512x512';
 }
 

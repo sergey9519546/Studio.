@@ -45,7 +45,7 @@ async function bootstrap() {
             "'self'",
             // Allow inline scripts and external CDNs for development (React/Vite requirement)
             ...(process.env.NODE_ENV !== 'production'
-              ? ["'unsafe-inline'", "'unsafe-eval'", 'https://cdn.tailwindcss.com']
+              ? ["'unsafe-inline'", "'unsafe-eval'"]
               : []),
           ],
           imgSrc: [
@@ -96,28 +96,11 @@ async function bootstrap() {
         : []
       : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:8080'];
 
-  const allowedHostPatterns = [/\.web\.app$/i, /\.firebaseapp\.com$/i, /\.hosted\.app$/i];
-
-  const isOriginAllowed = (origin?: string): boolean => {
-    if (!origin) {
-      return true;
-    }
-    if (corsOrigins.includes(origin)) {
-      return true;
-    }
-    try {
-      const { hostname } = new URL(origin);
-      return allowedHostPatterns.some((pattern) => pattern.test(hostname));
-    } catch {
-      return false;
-    }
-  };
-
   app.enableCors({
     origin:
       process.env.NODE_ENV === 'production'
         ? (origin, callback) => {
-            if (isOriginAllowed(origin)) {
+            if (corsOrigins.includes(origin)) {
               callback(null, true);
             } else {
               callback(new Error(`CORS blocked for origin: ${origin ?? 'unknown'}`));

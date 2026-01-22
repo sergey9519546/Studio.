@@ -2,6 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { FreelancersService } from './freelancers.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { ZaiService } from '../../common/ai/zai.service';
+import { ConfigService } from '@nestjs/config';
 
 describe('FreelancersService', () => {
     let service: FreelancersService;
@@ -35,6 +37,19 @@ describe('FreelancersService', () => {
                         del: jest.fn(),
                     },
                 },
+                {
+                    provide: ZaiService,
+                    useValue: {
+                        generateEmbedding: jest.fn(),
+                        generateText: jest.fn(),
+                    },
+                },
+                {
+                    provide: ConfigService,
+                    useValue: {
+                        get: jest.fn(),
+                    },
+                }
             ],
         }).compile();
 

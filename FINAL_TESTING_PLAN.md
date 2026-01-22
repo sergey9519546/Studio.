@@ -465,4 +465,4 @@ describe('Moodboard - Unsplash', () => {
 2. ⏳ **Test all implemented functionality** - IN PROGRESS
 3. ⏳ **Update final status documentation** - PENDING
 
-**Final Documentation Update**: Update ACCURATE_TODO_LIST.md to reflect 100% completion status after successful testing.
+**Final Documentation Update**: Update docs/todos/ACCURATE_TODO_LIST.md to reflect 100% completion status after successful testing.

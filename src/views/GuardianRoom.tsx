@@ -50,7 +50,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
   const genAIService = GenAIService.getInstance();
   const { addToast } = useToast();
 
-  const buildProjectContext = () => {
+  const buildProjectContext = React.useCallback(() => {
     if (!project) return undefined;
     const contextParts = [
       project.title ? `Project: ${project.title}` : null,
@@ -59,7 +59,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
     ];
     const context = contextParts.filter(Boolean).join("\n");
     return context || undefined;
-  };
+  }, [project]);
 
   const sendMessage = React.useCallback(
     async (overrideText?: string) => {
@@ -101,7 +101,7 @@ const GuardianRoom: React.FC<GuardianRoomProps> = ({
         setIsLoading(false);
       }
     },
-    [input, isLoading, messages, project, genAIService]
+    [input, isLoading, messages, project, genAIService, buildProjectContext]
   );
 
   const handleVisualize = async () => {

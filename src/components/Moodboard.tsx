@@ -121,12 +121,41 @@ export const Moodboard: React.FC<MoodboardProps> = ({
     orientation?: string;
   }>({});
 
+  const selectedUnsplashItem = useMemo(
+    () =>
+      selectedUnsplashImage
+        ? unsplashResults.find((item) => item.id === selectedUnsplashImage) ??
+          null
+        : null,
+    [selectedUnsplashImage, unsplashResults]
+  );
+
   React.useEffect(() => {
-    if (!searchQuery.trim()) {
+    const trimmed = searchQuery.trim();
+    if (!trimmed) {
       setSearchResults(null);
       setFilteredItems(filterByTags(items, selectedTags));
+      return;
     }
-  }, [items, searchQuery, selectedTags]);
+
+    if (!onSemanticSearch) {
+      const baseResults = filterByQuery(items, trimmed);
+      setSearchResults(baseResults);
+      setFilteredItems(filterByTags(baseResults, selectedTags));
+      return;
+    }
+
+    if (searchResults) {
+      // Semantic results are kept stable; we only re-apply tag filters when items change.
+      setFilteredItems(filterByTags(searchResults, selectedTags));
+    }
+  }, [items, searchQuery, selectedTags, onSemanticSearch, searchResults]);
+
+  React.useEffect(() => {
+    if (selectedUnsplashImage && !selectedUnsplashItem) {
+      setSelectedUnsplashImage(null);
+    }
+  }, [selectedUnsplashImage, selectedUnsplashItem]);
 
   // Load recent searches on mount and when tab changes to Unsplash
   React.useEffect(() => {
@@ -134,6 +163,29 @@ export const Moodboard: React.FC<MoodboardProps> = ({
       setRecentSearches(getRecentSearches());
     }
   }, [activeTab]);
+
+  const selectedItemData = useMemo(
+    () => filteredItems.find((item) => item.id === selectedItem),
+    [filteredItems, selectedItem]
+  );
+
+  const selectedUnsplashData = useMemo(
+    () =>
+      unsplashResults.find((image) => image.id === selectedUnsplashImage),
+    [unsplashResults, selectedUnsplashImage]
+  );
+
+  React.useEffect(() => {
+    if (selectedItem && !selectedItemData) {
+      setSelectedItem(null);
+    }
+  }, [selectedItem, selectedItemData]);
+
+  React.useEffect(() => {
+    if (selectedUnsplashImage && !selectedUnsplashData) {
+      setSelectedUnsplashImage(null);
+    }
+  }, [selectedUnsplashImage, selectedUnsplashData]);
 
   // Extract all unique tags from items
   const allTags = useMemo(() => {
@@ -786,10 +838,10 @@ export const Moodboard: React.FC<MoodboardProps> = ({
               >
                 <X size={20} />
               </button>
-              {filteredItems.find((i) => i.id === selectedItem) && (
+              {selectedItemData && (
                 <div>
                   <img
-                    src={filteredItems.find((i) => i.id === selectedItem)?.url}
+                    src={selectedItemData.url}
                     alt="Detail"
                     className="w-full rounded-[24px] mb-6"
                   />
@@ -803,16 +855,14 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                           Visual Tags
                         </h4>
                         <div className="flex flex-wrap gap-2">
-                          {filteredItems
-                            .find((i) => i.id === selectedItem)
-                            ?.tags.map((tag) => (
+                          {selectedItemData.tags.map((tag) => (
                               <span
                                 key={tag}
                                 className="px-3 py-1 rounded-[12px] bg-primary-tint text-primary text-xs font-medium"
                               >
                                 {tag}
                               </span>
-                            ))}
+                          ))}
                         </div>
                       </div>
                       <div>
@@ -820,16 +870,14 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                           Moods
                         </h4>
                         <div className="flex flex-wrap gap-2">
-                          {filteredItems
-                            .find((i) => i.id === selectedItem)
-                            ?.moods.map((mood) => (
+                          {selectedItemData.moods.map((mood) => (
                               <span
                                 key={mood}
                                 className="px-3 py-1 rounded-[12px] bg-edge-teal/20 text-edge-teal text-xs font-medium"
                               >
                                 {mood}
                               </span>
-                            ))}
+                          ))}
                         </div>
                       </div>
                     </div>
@@ -857,48 +905,30 @@ export const Moodboard: React.FC<MoodboardProps> = ({
               >
                 <X size={20} />
               </button>
-              {unsplashResults.find((i) => i.id === selectedUnsplashImage) && (
+              {selectedUnsplashItem && (
                 <div>
                   <img
-                    src={
-                      unsplashResults.find(
-                        (i) => i.id === selectedUnsplashImage
-                      )?.urls.regular
-                    }
+                    src={selectedUnsplashItem.urls.regular}
                     alt={
-                      unsplashResults.find(
-                        (i) => i.id === selectedUnsplashImage
-                      )?.alt_description || "Unsplash image"
+                      selectedUnsplashItem.alt_description || "Unsplash image"
                     }
                     className="w-full rounded-[24px] mb-6"
                   />
                   <div>
                     <h3 className="text-lg font-bold text-ink-primary mb-2">
-                      {unsplashResults.find(
-                        (i) => i.id === selectedUnsplashImage
-                      )?.description ||
-                        unsplashResults.find(
-                          (i) => i.id === selectedUnsplashImage
-                        )?.alt_description ||
+                      {selectedUnsplashItem.description ||
+                        selectedUnsplashItem.alt_description ||
                         "Untitled"}
                     </h3>
                     <p className="text-sm text-ink-secondary mb-4">
                       Photo by{" "}
                       <a
-                        href={
-                          unsplashResults.find(
-                            (i) => i.id === selectedUnsplashImage
-                          )?.user.links.html
-                        }
+                        href={selectedUnsplashItem.user.links.html}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-primary hover:underline"
                       >
-                        {
-                          unsplashResults.find(
-                            (i) => i.id === selectedUnsplashImage
-                          )?.user.name
-                        }
+                        {selectedUnsplashItem.user.name}
                       </a>{" "}
                       on{" "}
                       <a
@@ -912,11 +942,8 @@ export const Moodboard: React.FC<MoodboardProps> = ({
                     </p>
                     <Button
                       onClick={() => {
-                        const img = unsplashResults.find(
-                          (i) => i.id === selectedUnsplashImage
-                        );
-                        if (img) {
-                          handleAddUnsplashImage(img);
+                        if (selectedUnsplashItem) {
+                          handleAddUnsplashImage(selectedUnsplashItem);
                           setSelectedUnsplashImage(null);
                         }
                       }}
@@ -936,7 +963,7 @@ export const Moodboard: React.FC<MoodboardProps> = ({
       {/* AI Image Generator Modal */}
       {showAIGenerator && (
         <AIImageGenerator
-          onImageGenerated={async (imageUrl) => {
+          onImageGenerated={async (_imageUrl) => {
             // Add the generated image to the moodboard
             addToast("Image generated successfully! You can now add it to your moodboard.");
             setShowAIGenerator(false);

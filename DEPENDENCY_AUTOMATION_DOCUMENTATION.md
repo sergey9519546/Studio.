@@ -19,7 +19,7 @@ Dependency Update Automation System
 │       └── dependency-updates-fixed.yml  # Automated GitHub Actions workflow
 └── Documentation
     ├── DEPENDENCY_AUTOMATION_DOCUMENTATION.md
-    └── DEPENDENCY_UPDATE_AUTOMATION_TODO.md
+    └── docs/todos/DEPENDENCY_UPDATE_AUTOMATION_TODO.md
 ```
 
 ## 🚀 Quick Start
