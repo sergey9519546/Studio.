@@ -15,6 +15,7 @@ import { HealthModule } from "./health/health.module.js";
 import { FreelancersModule } from "./modules/freelancers/freelancers.module.js";
 import { MoodboardModule } from "./modules/moodboard/moodboard.module.js";
 import { ProjectsModule } from "./modules/projects/projects.module.js";
+import { ScriptsModule } from "./modules/scripts/scripts.module.js";
 import { StorageModule } from "./modules/storage/storage.module.js";
 import { CollaborationModule } from "./modules/collaboration/collaboration.module.js";
 import { PrismaModule } from "./prisma/prisma.module.js";
@@ -92,6 +93,7 @@ if (!staticRoot && process.env.NODE_ENV === "production") {
     StorageModule,
     HealthModule,
     ProjectsModule,
+    ScriptsModule,
     FreelancersModule,
     MoodboardModule,
     CollaborationModule,
