@@ -3,8 +3,8 @@ import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '@prisma/client';
 import Database from 'better-sqlite3';
-import * as fs from 'fs';
 import * as path from 'path';
+import * as fs from 'fs';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
@@ -19,6 +19,9 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
     if (!fs.existsSync(dbDir)) {
       fs.mkdirSync(dbDir, { recursive: true });
     }
+    const db = new Database(dbPath);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const adapter = new PrismaBetterSqlite3(db as any);
 
     super({
       adapter,
