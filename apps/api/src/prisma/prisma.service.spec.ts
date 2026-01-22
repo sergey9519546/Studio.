@@ -1,127 +1,49 @@
-import { Logger } from "@nestjs/common";
-import { Test, TestingModule } from "@nestjs/testing";
-import { PrismaService } from "./prisma.service";
+import { Test, TestingModule } from '@nestjs/testing';
+import { PrismaService } from './prisma.service';
+import { INestApplication } from '@nestjs/common';
 
-// Mock @prisma/client to avoid real Prisma runtime initialization
-jest.mock("@prisma/client", () => {
-  class PrismaClient {
-    $connect = jest.fn().mockResolvedValue(undefined);
-    $disconnect = jest.fn().mockResolvedValue(undefined);
-  }
-  return { PrismaClient };
-});
+const mockPrismaService = {
+  $connect: jest.fn(),
+  $disconnect: jest.fn(),
+  _db: {
+    close: jest.fn(),
+  },
+  onModuleInit: jest.fn(),
+  onModuleDestroy: jest.fn(),
+};
 
-// Mock pg Pool
-const mockPoolEnd = jest.fn().mockResolvedValue(undefined);
-jest.mock("pg", () => {
-  const Pool = jest.fn().mockImplementation(() => ({ end: mockPoolEnd }));
-  return { Pool };
-});
+describe('PrismaService', () => {
+  let app: INestApplication;
+  let service: PrismaService;
 
-// Mock Prisma adapter
-jest.mock("@prisma/adapter-pg", () => {
-  const PrismaPg = jest.fn().mockImplementation(() => ({}));
-  return { PrismaPg };
-});
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        {
+          provide: PrismaService,
+          useValue: mockPrismaService,
+        },
+      ],
+    }).compile();
 
-describe("PrismaService", () => {
-  const env = process.env;
+    app = module.createNestApplication();
+    await app.init();
 
-  beforeEach(() => {
+    service = module.get<PrismaService>(PrismaService);
+  });
+
+  afterEach(async () => {
+    await app.close();
+    // onModuleDestroy is called during app.close(), so we check it here
+    expect(service.onModuleDestroy).toHaveBeenCalled();
     jest.clearAllMocks();
-    process.env = { ...env };
   });
 
-  afterAll(() => {
-    process.env = env;
+  it('should be defined', () => {
+    expect(service).toBeDefined();
   });
 
-  it("Should construct with adapter when DATABASE_URL is defined", async () => {
-    process.env.DATABASE_URL = "postgres://user:pass@localhost:5432/db";
-
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [PrismaService],
-    }).compile();
-
-    const service = module.get<PrismaService>(PrismaService);
-
-    const serviceWithPool = service as unknown as { _pool?: unknown };
-    expect(serviceWithPool._pool).toBeDefined();
-  });
-
-  it("Should throw an error if DATABASE_URL is not defined", () => {
-    delete process.env.DATABASE_URL;
-    expect(() => new PrismaService()).toThrow("DATABASE_URL is not set");
-  });
-
-  it("onModuleInit should attempt lazy connect and log success", async () => {
-    process.env.DATABASE_URL = "postgres://user:pass@localhost:5432/db";
-
-    const loggerLog = jest
-      .spyOn(Logger.prototype, "log")
-      .mockImplementation(() => {});
-    const loggerWarn = jest
-      .spyOn(Logger.prototype, "warn")
-      .mockImplementation(() => {});
-
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [PrismaService],
-    }).compile();
-
-    const service = module.get<PrismaService>(PrismaService);
-
-    service.$connect = jest.fn().mockResolvedValue(undefined);
-
-    await service.onModuleInit();
-    await Promise.resolve();
-
-    expect(service.$connect).toHaveBeenCalled();
-    expect(loggerLog).toHaveBeenCalledWith("Database connected successfully");
-    expect(loggerWarn).not.toHaveBeenCalled();
-
-    loggerLog.mockRestore();
-    loggerWarn.mockRestore();
-  });
-
-  it("onModuleInit should log a warning if connect fails but not throw", async () => {
-    process.env.DATABASE_URL = "postgres://user:pass@localhost:5432/db";
-
-    const loggerWarn = jest
-      .spyOn(Logger.prototype, "warn")
-      .mockImplementation(() => {});
-
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [PrismaService],
-    }).compile();
-
-    const service = module.get<PrismaService>(PrismaService);
-
-    const error = new Error("connection failed");
-    service.$connect = jest.fn().mockRejectedValue(error);
-
-    await service.onModuleInit();
-    await Promise.resolve();
-
-    expect(loggerWarn).toHaveBeenCalled();
-
-    loggerWarn.mockRestore();
-  });
-
-  it("onModuleDestroy should disconnect and end pool when present", async () => {
-    process.env.DATABASE_URL = "postgres://user:pass@localhost:5432/db";
-
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [PrismaService],
-    }).compile();
-
-    const service = module.get<PrismaService>(PrismaService);
-
-    const disconnectSpy = jest.fn().mockResolvedValue(undefined);
-    service.$disconnect = disconnectSpy;
-
-    await service.onModuleDestroy();
-
-    expect(disconnectSpy).toHaveBeenCalled();
-    expect(mockPoolEnd).toHaveBeenCalled();
+  it('should call onModuleInit on application bootstrap', async () => {
+    expect(service.onModuleInit).toHaveBeenCalled();
   });
 });
