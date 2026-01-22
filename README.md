@@ -24,6 +24,9 @@ GCP_PROJECT_ID="your-project-id"
 STORAGE_BUCKET="your-project-assets"
 # Optional: only needed when the API is on a different host/port than the SPA
 VITE_API_URL="http://localhost:3001/api/v1"
+# Optional: socket base URL (origin only). If unset, sockets use window.location.origin
+# and strip REST paths like /api/v1 so sockets connect to {origin}/collaboration.
+VITE_SOCKET_URL="http://localhost:3001"
 ```
 
 ### 3. Initialize Database & Run
@@ -141,6 +144,7 @@ chmod +x deploy.sh
 | `STORAGE_BUCKET` | GCS bucket name  | -             |
 | `LOG_LEVEL`      | Logging level    | `info`        |
 | `VITE_API_URL`   | API base URL for SPA (set when API served from another host) | `http://localhost:3001/api/v1` |
+| `VITE_SOCKET_URL` | Socket base URL (origin only; defaults to window.location.origin and strips REST paths like `/api/v1`) | `http://localhost:3001` |
 | `SUPADATA_API_URL` | Supadata API base (optional override) | `https://api.supadata.ai` |
 
 ---
