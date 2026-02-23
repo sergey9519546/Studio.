@@ -294,9 +294,7 @@ export class ProjectContextService {
     const store = (this.cacheManager as Cache & { store?: CacheStoreWithKeys }).store;
     const keysResult = store?.keys ? await store.keys(pattern) : [];
     const keys = Array.isArray(keysResult) ? keysResult : [];
-    for (const key of keys) {
-      await this.cacheManager.del(key);
-    }
+    await Promise.all(keys.map((key) => this.cacheManager.del(key)));
   }
 
   private async logProjectAuditEvent(event: {
